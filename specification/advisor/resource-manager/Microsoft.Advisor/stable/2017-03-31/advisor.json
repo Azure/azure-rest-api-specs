@@ -1,667 +1,668 @@
 {
-	"swagger": "2.0",
-	"info": {
-		"version": "2017-03-31",
-		"title": "AdvisorManagementClient",
-		"description": "REST APIs for Azure Advisor"
-	},
-	"host": "management.azure.com",
-	"schemes": [
-		"https"
-	],
-	"consumes": [
-		"application/json"
-	],
-	"produces": [
-		"application/json"
-	],
-	"paths": {
-		"/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/generateRecommendations": {
-			"post": {
-				"tags": [
-					"GenerateRecommendations"
-				],
-				"description": "Initiates the recommendation generation or computation process for a subscription. This operation is asynchronous. The generated recommendations are stored in a cache in the Advisor service.",
-				"operationId": "Recommendations_Generate",
-				"parameters": [
-					{
-						"$ref": "#/parameters/subscriptionIdParameter"
-					},
-					{
-						"$ref": "#/parameters/apiVersionParameter"
-					}
-				],
-				"responses": {
-					"202": {
-						"description": "Accepted. Recommendation generation has been accepted.",
-						"headers": {
-							"Location": {
-								"description": "The URL where the status of the asynchronous operation can be checked.",
-								"type": "string"
-							},
-							"Retry-After": {
-								"description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-								"type": "string"
-							}
-						}
-					}
-				},
-				"deprecated": false,
-				"x-ms-examples": {
-					"GenerateRecommendations": {
-						"$ref": "./examples/GenerateRecommendations.json"
-					}
-				}
-			}
-		},
-		"/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/generateRecommendations/{operationId}": {
-			"get": {
-				"tags": [
-					"GenerateRecommendations"
-				],
-				"description": "Retrieves the status of the recommendation computation or generation process. Invoke this API after calling the generation recommendation. The URI of this API is returned in the Location field of the response header.",
-				"operationId": "Recommendations_GetGenerateStatus",
-				"parameters": [
-					{
-						"$ref": "#/parameters/subscriptionIdParameter"
-					},
-					{
-						"name": "operationId",
-						"in": "path",
-						"description": "The operation ID, which can be found from the Location field in the generate recommendation response header.",
-						"required": true,
-						"type": "string",
-						"format": "uuid"
-					},
-					{
-						"$ref": "#/parameters/apiVersionParameter"
-					}
-				],
-				"responses": {
-					"202": {
-						"description": "Accepted. Recommendation generation is in progress."
-					},
-					"204": {
-						"description": "NoContent. Recommendation generation has been completed."
-					}
-				},
-				"deprecated": false
-			}
-		},
-		"/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/recommendations": {
-			"get": {
-				"tags": [
-					"GetRecommendations"
-				],
-				"description": "Obtains cached recommendations for a subscription. The recommendations are generated or computed by invoking generateRecommendations.",
-				"operationId": "Recommendations_List",
-				"parameters": [
-					{
-						"$ref": "#/parameters/subscriptionIdParameter"
-					},
-					{
-						"$ref": "#/parameters/apiVersionParameter"
-					},
-					{
-						"name": "$filter",
-						"in": "query",
-						"description": "The filter to apply to the recommendations.",
-						"required": false,
-						"type": "string"
-					},
-					{
-						"name": "$top",
-						"in": "query",
-						"description": "The number of recommendations per page if a paged version of this API is being used.",
-						"required": false,
-						"type": "integer"
-					},
-					{
-						"name": "$skipToken",
-						"in": "query",
-						"description": "The page-continuation token to use with a paged version of this API.",
-						"required": false,
-						"type": "string"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK. Successfully obtained cached recommendations.",
-						"schema": {
-							"$ref": "#/definitions/ResourceRecommendationBaseListResult"
-						}
-					}
-				},
-				"deprecated": false,
-				"x-ms-pageable": {
-					"nextLinkName": "nextLink"
-				},
-				"x-ms-examples": {
-					"ListRecommendations": {
-						"$ref": "./examples/ListRecommendations.json"
-					}
-				}
-			}
-		},
-		"/providers/Microsoft.Advisor/operations": {
-			"get": {
-				"tags": [
-					"Operations"
-				],
-				"description": "Lists all the available Advisor REST API operations.",
-				"operationId": "Operations_List",
-				"parameters": [
-					{
-						"$ref": "#/parameters/apiVersionParameter"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK. Successfully retrieved operation list.",
-						"schema": {
-							"$ref": "#/definitions/OperationEntityListResult"
-						}
-					}
-				},
-				"deprecated": false,
-				"x-ms-pageable": {
-					"nextLinkName": "nextLink"
-				}
-			}
-		},
-		"/{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}/suppressions/{name}": {
-			"get": {
-				"tags": [
-					"Suppressions"
-				],
-				"description": "Obtains the details of a suppression.",
-				"operationId": "Suppressions_Get",
-				"parameters": [
-					{
-						"name": "resourceUri",
-						"in": "path",
-						"description": "The fully qualified Azure Resource Manager identifier of the resource to which the recommendation applies.",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "recommendationId",
-						"in": "path",
-						"description": "The recommendation ID.",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "name",
-						"in": "path",
-						"description": "The name of the suppression.",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"$ref": "#/parameters/apiVersionParameter"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK. Successfully got suppression detail.",
-						"schema": {
-							"$ref": "#/definitions/SuppressionContract"
-						}
-					}
-				},
-				"deprecated": false,
-				"x-ms-examples": {
-					"GetSuppressionDetail": {
-						"$ref": "./examples/GetSuppressionDetail.json"
-					}
-				}
-			},
-			"put": {
-				"tags": [
-					"Suppressions"
-				],
-				"description": "Enables the snoozed or dismissed attribute of a recommendation. The snoozed or dismissed attribute is referred to as a suppression. Use this API to create or update the snoozed or dismissed status of a recommendation.",
-				"operationId": "Suppressions_Create",
-				"parameters": [
-					{
-						"name": "resourceUri",
-						"in": "path",
-						"description": "The fully qualified Azure Resource Manager identifier of the resource to which the recommendation applies.",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "recommendationId",
-						"in": "path",
-						"description": "The recommendation ID.",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "name",
-						"in": "path",
-						"description": "The name of the suppression.",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "suppressionContract",
-						"in": "body",
-						"description": "The snoozed or dismissed attribute; for example, the snooze duration.",
-						"required": true,
-						"schema": {
-							"$ref": "#/definitions/SuppressionContract"
-						}
-					},
-					{
-						"$ref": "#/parameters/apiVersionParameter"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK. Successfully created suppression.",
-						"schema": {
-							"$ref": "#/definitions/SuppressionContract"
-						}
-					}
-				},
-				"deprecated": false,
-				"x-ms-examples": {
-					"CreateSuppression": {
-						"$ref": "./examples/CreateSuppression.json"
-					}
-				}
-			},
-			"delete": {
-				"tags": [
-					"Suppressions"
-				],
-				"description": "Enables the activation of a snoozed or dismissed recommendation. The snoozed or dismissed attribute of a recommendation is referred to as a suppression.",
-				"operationId": "Suppressions_Delete",
-				"parameters": [
-					{
-						"name": "resourceUri",
-						"in": "path",
-						"description": "The fully qualified Azure Resource Manager identifier of the resource to which the recommendation applies.",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "recommendationId",
-						"in": "path",
-						"description": "The recommendation ID.",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "name",
-						"in": "path",
-						"description": "The name of the suppression.",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"$ref": "#/parameters/apiVersionParameter"
-					}
-				],
-				"responses": {
-					"204": {
-						"description": "NoContent. The recommendation has been activated."
-					}
-				},
-				"deprecated": false,
-				"x-ms-examples": {
-					"DeleteSuppression": {
-						"$ref": "./examples/DeleteSuppression.json"
-					}
-				}
-			}
-		},
-		"/{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}": {
-			"get": {
-				"tags": [
-					"GetRecommendations"
-				],
-				"description": "Obtains details of a cached recommendation.",
-				"operationId": "Recommendations_Get",
-				"parameters": [
-					{
-						"name": "resourceUri",
-						"in": "path",
-						"description": "The fully qualified Azure Resource Manager identifier of the resource to which the recommendation applies.",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "recommendationId",
-						"in": "path",
-						"description": "The recommendation ID.",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"$ref": "#/parameters/apiVersionParameter"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK. Successfully got recommendation detail.",
-						"schema": {
-							"$ref": "#/definitions/ResourceRecommendationBase"
-						}
-					}
-				},
-				"deprecated": false,
-				"x-ms-examples": {
-					"GetRecommendationDetail": {
-						"$ref": "./examples/GetRecommendationDetail.json"
-					}
-				}
-			}
-		},
-		"/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/suppressions": {
-			"get": {
-				"tags": [
-					"Suppressions"
-				],
-				"description": "Retrieves the list of snoozed or dismissed suppressions for a subscription. The snoozed or dismissed attribute of a recommendation is referred to as a suppression.",
-				"operationId": "Suppressions_List",
-				"parameters": [
-					{
-						"$ref": "#/parameters/subscriptionIdParameter"
-					},
-					{
-						"$ref": "#/parameters/apiVersionParameter"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK. Successfully got all suppressions in a subscription.",
-						"schema": {
-							"type": "array",
-							"items": {
-								"$ref": "#/definitions/SuppressionContract"
-							}
-						}
-					}
-				},
-				"deprecated": false,
-				"x-ms-examples": {
-					"ListSuppressions": {
-						"$ref": "./examples/ListSuppressions.json"
-					}
-				}
-			}
-		}
-	},
-	"definitions": {
-		"ResourceRecommendationBaseListResult": {
-			"description": "The list of Advisor recommendations.",
-			"type": "object",
-			"properties": {
-				"nextLink": {
-					"description": "The link used to get the next page of recommendations.",
-					"type": "string"
-				},
-				"value": {
-					"description": "The list of recommendations.",
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/ResourceRecommendationBase"
-					}
-				}
-			}
-		},
-		"ResourceRecommendationBase": {
-			"description": "Advisor Recommendation.",
-			"type": "object",
-			"allOf": [
-				{
-					"$ref": "#/definitions/Resource"
-				}
-			],
-			"properties": {
-				"properties": {
-					"$ref": "#/definitions/RecommendationProperties",
-					"description": "The properties of the recommendation.",
-					"x-ms-client-flatten": true
-				}
-			}
-		},
-		"RecommendationProperties": {
-			"description": "The properties of the recommendation.",
-			"type": "object",
-			"properties": {
-				"category": {
-					"description": "The category of the recommendation.",
-					"enum": [
-						"HighAvailability",
-						"Security",
-						"Performance",
-						"Cost"
-					],
-					"type": "string",
-					"x-ms-enum": {
-						"name": "category",
-						"modelAsString": true
-					}
-				},
-				"impact": {
-					"description": "The business impact of the recommendation.",
-					"enum": [
-						"High",
-						"Medium",
-						"Low"
-					],
-					"type": "string",
-					"x-ms-enum": {
-						"name": "impact",
-						"modelAsString": true
-					}
-				},
-				"impactedField": {
-					"description": "The resource type identified by Advisor.",
-					"type": "string"
-				},
-				"impactedValue": {
-					"description": "The resource identified by Advisor.",
-					"type": "string"
-				},
-				"lastUpdated": {
-					"format": "date-time",
-					"description": "The most recent time that Advisor checked the validity of the recommendation.",
-					"type": "string"
-				},
-				"metadata": {
-					"description": "The recommendation metadata.",
-					"type": "object",
-					"additionalProperties": {
-						"type": "object"
-					}
-				},
-				"recommendationTypeId": {
-					"description": "The recommendation-type GUID.",
-					"type": "string"
-				},
-				"risk": {
-					"description": "The potential risk of not implementing the recommendation.",
-					"enum": [
-						"Error",
-						"Warning",
-						"None"
-					],
-					"type": "string",
-					"x-ms-enum": {
-						"name": "risk",
-						"modelAsString": true
-					}
-				},
-				"shortDescription": {
-					"$ref": "#/definitions/ShortDescription",
-					"description": "A summary of the recommendation."
-				},
-				"suppressionIds": {
-					"description": "The list of snoozed and dismissed rules for the recommendation.",
-					"type": "array",
-					"items": {
-						"format": "uuid",
-						"type": "string"
-					}
-				}
-			}
-		},
-		"Resource": {
-			"description": "An Azure resource.",
-			"properties": {
-				"id": {
-					"description": "The resource ID.",
-					"type": "string",
-					"readOnly": true
-				},
-				"name": {
-					"description": "The name of the resource.",
-					"type": "string",
-					"readOnly": true
-				},
-				"type": {
-					"description": "The type of the resource.",
-					"type": "string",
-					"readOnly": true
-				}
-			},
-			"x-ms-azure-resource": true
-		},
-		"ShortDescription": {
-			"description": "A summary of the recommendation.",
-			"type": "object",
-			"properties": {
-				"problem": {
-					"description": "The issue or opportunity identified by the recommendation.",
-					"type": "string"
-				},
-				"solution": {
-					"description": "The remediation action suggested by the recommendation.",
-					"type": "string"
-				}
-			}
-		},
-		"OperationEntityListResult": {
-			"description": "The list of Advisor operations.",
-			"type": "object",
-			"properties": {
-				"nextLink": {
-					"description": "The link used to get the next page of operations.",
-					"type": "string"
-				},
-				"value": {
-					"description": "The list of operations.",
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/OperationEntity"
-					}
-				}
-			}
-		},
-		"OperationEntity": {
-			"description": "The operation supported by Advisor.",
-			"type": "object",
-			"properties": {
-				"name": {
-					"description": "Operation name: {provider}/{resource}/{operation}.",
-					"type": "string"
-				},
-				"display": {
-					"$ref": "#/definitions/OperationDisplayInfo",
-					"description": "The operation supported by Advisor."
-				}
-			}
-		},
-		"OperationDisplayInfo": {
-			"description": "The operation supported by Advisor.",
-			"type": "object",
-			"properties": {
-				"description": {
-					"description": "The description of the operation.",
-					"type": "string"
-				},
-				"operation": {
-					"description": "The action that users can perform, based on their permission level.",
-					"type": "string"
-				},
-				"provider": {
-					"description": "Service provider: Microsoft Advisor.",
-					"type": "string"
-				},
-				"resource": {
-					"description": "Resource on which the operation is performed.",
-					"type": "string"
-				}
-			}
-		},
-		"SuppressionContract": {
-			"description": "The details of the snoozed or dismissed rule; for example, the duration, name, and GUID associated with the rule.",
-			"type": "object",
-			"allOf": [
-				{
-					"$ref": "#/definitions/Resource"
-				}
-			],
-			"properties": {
-				"properties": {
-					"$ref": "#/definitions/SuppressionProperties",
-					"description": "The properties of the suppression.",
-					"x-ms-client-flatten": true
-				}
-			}
-		},
-		"SuppressionProperties": {
-			"description": "The properties of the suppression.",
-			"type": "object",
-			"properties": {
-				"suppressionId": {
-					"description": "The GUID of the suppression.",
-					"type": "string"
-				},
-				"ttl": {
-					"description": "The duration for which the suppression is valid.",
-					"type": "string"
-				}
-			}
-		}
-	},
-	"parameters": {
-		"subscriptionIdParameter": {
-			"name": "subscriptionId",
-			"in": "path",
-			"description": "The Azure subscription ID.",
-			"required": true,
-			"type": "string"
-		},
-		"apiVersionParameter": {
-			"name": "api-version",
-			"in": "query",
-			"description": "The version of the API to be used with the client request.",
-			"required": true,
-			"type": "string"
-		}
-	},
-	"securityDefinitions": {
-		"azure_auth": {
-			"type": "oauth2",
-			"description": "Azure Active Directory OAuth2 Flow.",
-			"flow": "implicit",
-			"authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-			"scopes": {
-				"user_impersonation": "impersonate your user account"
-			}
-		}
-	},
-	"security": [
-		{
-			"azure_auth": [
-				"user_impersonation"
-			]
-		}
-	]
+  "swagger": "2.0",
+  "info": {
+    "version": "2017-03-31",
+    "title": "AdvisorManagementClient",
+    "description": "REST APIs for Azure Advisor"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/generateRecommendations": {
+      "post": {
+        "tags": [
+          "GenerateRecommendations"
+        ],
+        "description": "Initiates the recommendation generation or computation process for a subscription. This operation is asynchronous. The generated recommendations are stored in a cache in the Advisor service.",
+        "operationId": "Recommendations_Generate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. Recommendation generation has been accepted.",
+            "headers": {
+              "Location": {
+                "description": "The URL where the status of the asynchronous operation can be checked.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "GenerateRecommendations": {
+            "$ref": "./examples/GenerateRecommendations.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/generateRecommendations/{operationId}": {
+      "get": {
+        "tags": [
+          "GenerateRecommendations"
+        ],
+        "description": "Retrieves the status of the recommendation computation or generation process. Invoke this API after calling the generation recommendation. The URI of this API is returned in the Location field of the response header.",
+        "operationId": "Recommendations_GetGenerateStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The operation ID, which can be found from the Location field in the generate recommendation response header.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. Recommendation generation is in progress."
+          },
+          "204": {
+            "description": "NoContent. Recommendation generation has been completed."
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/recommendations": {
+      "get": {
+        "tags": [
+          "GetRecommendations"
+        ],
+        "description": "Obtains cached recommendations for a subscription. The recommendations are generated or computed by invoking generateRecommendations.",
+        "operationId": "Recommendations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply to the recommendations.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of recommendations per page if a paged version of this API is being used.",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "The page-continuation token to use with a paged version of this API.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully obtained cached recommendations.",
+            "schema": {
+              "$ref": "#/definitions/ResourceRecommendationBaseListResult"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListRecommendations": {
+            "$ref": "./examples/ListRecommendations.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Advisor/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all the available Advisor REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully retrieved operation list.",
+            "schema": {
+              "$ref": "#/definitions/OperationEntityListResult"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}/suppressions/{name}": {
+      "get": {
+        "tags": [
+          "Suppressions"
+        ],
+        "description": "Obtains the details of a suppression.",
+        "operationId": "Suppressions_Get",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "description": "The fully qualified Azure Resource Manager identifier of the resource to which the recommendation applies.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "recommendationId",
+            "in": "path",
+            "description": "The recommendation ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the suppression.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully got suppression detail.",
+            "schema": {
+              "$ref": "#/definitions/SuppressionContract"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "GetSuppressionDetail": {
+            "$ref": "./examples/GetSuppressionDetail.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Suppressions"
+        ],
+        "description": "Enables the snoozed or dismissed attribute of a recommendation. The snoozed or dismissed attribute is referred to as a suppression. Use this API to create or update the snoozed or dismissed status of a recommendation.",
+        "operationId": "Suppressions_Create",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "description": "The fully qualified Azure Resource Manager identifier of the resource to which the recommendation applies.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "recommendationId",
+            "in": "path",
+            "description": "The recommendation ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the suppression.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "suppressionContract",
+            "in": "body",
+            "description": "The snoozed or dismissed attribute; for example, the snooze duration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SuppressionContract"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully created suppression.",
+            "schema": {
+              "$ref": "#/definitions/SuppressionContract"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "CreateSuppression": {
+            "$ref": "./examples/CreateSuppression.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Suppressions"
+        ],
+        "description": "Enables the activation of a snoozed or dismissed recommendation. The snoozed or dismissed attribute of a recommendation is referred to as a suppression.",
+        "operationId": "Suppressions_Delete",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "description": "The fully qualified Azure Resource Manager identifier of the resource to which the recommendation applies.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "recommendationId",
+            "in": "path",
+            "description": "The recommendation ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the suppression.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NoContent. The recommendation has been activated."
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "DeleteSuppression": {
+            "$ref": "./examples/DeleteSuppression.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}": {
+      "get": {
+        "tags": [
+          "GetRecommendations"
+        ],
+        "description": "Obtains details of a cached recommendation.",
+        "operationId": "Recommendations_Get",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "description": "The fully qualified Azure Resource Manager identifier of the resource to which the recommendation applies.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "recommendationId",
+            "in": "path",
+            "description": "The recommendation ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully got recommendation detail.",
+            "schema": {
+              "$ref": "#/definitions/ResourceRecommendationBase"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "GetRecommendationDetail": {
+            "$ref": "./examples/GetRecommendationDetail.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/suppressions": {
+      "get": {
+        "tags": [
+          "Suppressions"
+        ],
+        "description": "Retrieves the list of snoozed or dismissed suppressions for a subscription. The snoozed or dismissed attribute of a recommendation is referred to as a suppression.",
+        "operationId": "Suppressions_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully got all suppressions in a subscription.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SuppressionContract"
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "ListSuppressions": {
+            "$ref": "./examples/ListSuppressions.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ResourceRecommendationBaseListResult": {
+      "description": "The list of Advisor recommendations.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of recommendations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of recommendations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceRecommendationBase"
+          }
+        }
+      }
+    },
+    "ResourceRecommendationBase": {
+      "description": "Advisor Recommendation.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecommendationProperties",
+          "description": "The properties of the recommendation.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RecommendationProperties": {
+      "description": "The properties of the recommendation.",
+      "type": "object",
+      "properties": {
+        "category": {
+          "description": "The category of the recommendation.",
+          "enum": [
+            "HighAvailability",
+            "Security",
+            "Performance",
+            "Cost",
+            "OperationalExcellence"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "category",
+            "modelAsString": true
+          }
+        },
+        "impact": {
+          "description": "The business impact of the recommendation.",
+          "enum": [
+            "High",
+            "Medium",
+            "Low"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "impact",
+            "modelAsString": true
+          }
+        },
+        "impactedField": {
+          "description": "The resource type identified by Advisor.",
+          "type": "string"
+        },
+        "impactedValue": {
+          "description": "The resource identified by Advisor.",
+          "type": "string"
+        },
+        "lastUpdated": {
+          "format": "date-time",
+          "description": "The most recent time that Advisor checked the validity of the recommendation.",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "The recommendation metadata.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "recommendationTypeId": {
+          "description": "The recommendation-type GUID.",
+          "type": "string"
+        },
+        "risk": {
+          "description": "The potential risk of not implementing the recommendation.",
+          "enum": [
+            "Error",
+            "Warning",
+            "None"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "risk",
+            "modelAsString": true
+          }
+        },
+        "shortDescription": {
+          "$ref": "#/definitions/ShortDescription",
+          "description": "A summary of the recommendation."
+        },
+        "suppressionIds": {
+          "description": "The list of snoozed and dismissed rules for the recommendation.",
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Resource": {
+      "description": "An Azure resource.",
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ShortDescription": {
+      "description": "A summary of the recommendation.",
+      "type": "object",
+      "properties": {
+        "problem": {
+          "description": "The issue or opportunity identified by the recommendation.",
+          "type": "string"
+        },
+        "solution": {
+          "description": "The remediation action suggested by the recommendation.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationEntityListResult": {
+      "description": "The list of Advisor operations.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationEntity"
+          }
+        }
+      }
+    },
+    "OperationEntity": {
+      "description": "The operation supported by Advisor.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplayInfo",
+          "description": "The operation supported by Advisor."
+        }
+      }
+    },
+    "OperationDisplayInfo": {
+      "description": "The operation supported by Advisor.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The description of the operation.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "The action that users can perform, based on their permission level.",
+          "type": "string"
+        },
+        "provider": {
+          "description": "Service provider: Microsoft Advisor.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource on which the operation is performed.",
+          "type": "string"
+        }
+      }
+    },
+    "SuppressionContract": {
+      "description": "The details of the snoozed or dismissed rule; for example, the duration, name, and GUID associated with the rule.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SuppressionProperties",
+          "description": "The properties of the suppression.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SuppressionProperties": {
+      "description": "The properties of the suppression.",
+      "type": "object",
+      "properties": {
+        "suppressionId": {
+          "description": "The GUID of the suppression.",
+          "type": "string"
+        },
+        "ttl": {
+          "description": "The duration for which the suppression is valid.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The Azure subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The version of the API to be used with the client request.",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }

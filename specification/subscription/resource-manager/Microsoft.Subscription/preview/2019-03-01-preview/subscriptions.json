@@ -1,0 +1,266 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-03-01-preview",
+    "title": "SubscriptionClient",
+    "description": "Subscription client provides an interface to create and manage Azure subscriptions programmatically."
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/cancel": {
+      "post": {
+        "operationId": "Subscriptions_Cancel",
+        "x-ms-examples": {
+          "cancelSubscription": {
+            "$ref": "./examples/cancelSubscription.json"
+          }
+        },
+        "description": "The operation to cancel a subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CanceledSubscriptionId"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/rename": {
+      "post": {
+        "operationId": "Subscriptions_Rename",
+        "x-ms-examples": {
+          "renameSubscription": {
+            "$ref": "./examples/renameSubscription.json"
+          }
+        },
+        "description": "The operation to rename a subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RenamedSubscriptionId"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/enable": {
+      "post": {
+        "operationId": "Subscriptions_Enable",
+        "x-ms-examples": {
+          "enableSubscription": {
+            "$ref": "./examples/enableSubscription.json"
+          }
+        },
+        "description": "The operation to enable a subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnabledSubscriptionId"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "CanceledSubscriptionId": {
+      "description": "The ID of the canceled subscription",
+      "properties": {
+        "value": {
+          "description": "The ID of the canceled subscription",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RenamedSubscriptionId": {
+      "description": "The ID of the subscriptions that is being renamed",
+      "properties": {
+        "value": {
+          "description": "The ID of the subscriptions that is being renamed",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EnabledSubscriptionId": {
+      "description": "The ID of the subscriptions that is being enabled",
+      "properties": {
+        "value": {
+          "description": "The ID of the subscriptions that is being enabled",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SubscriptionName": {
+      "type": "object",
+      "description": "The new name of the subscription.",
+      "properties": {
+        "subscriptionName": {
+          "type": "string",
+          "description": "New subscription name"
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of operations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "Operation": {
+      "description": "REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Subscription",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request. Current version is 2019-03-01-preview"
+    },
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription Id."
+    },
+    "subscriptionNameParameter": {
+      "name": "body",
+      "x-ms-parameter-location": "method",
+      "in": "body",
+      "required": true,
+      "description": "Subscription Name",
+      "schema": {
+        "$ref": "#/definitions/SubscriptionName"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

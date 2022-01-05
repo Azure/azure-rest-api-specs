@@ -1,0 +1,58 @@
+{
+  "operationId": "Service_List",
+  "description": "This example shows how to list all services of a given application.",
+  "parameters": {
+    "api-version": "2018-09-01-privatepreview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "sbz_demo",
+    "applicationResourceName": "sampleApplication"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "helloWorldService",
+            "type": "Microsoft.ServiceFabricMesh/services",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sbz_demo/providers/Microsoft.ServiceFabricMesh/applications/sampleApplication/services/helloWorldService",
+            "properties": {
+              "description": "SeaBreeze Hello World Service.",
+              "osType": "Linux",
+              "codePackages": [
+                {
+                  "name": "helloWorldCode",
+                  "image": "seabreeze/sbz-helloworld:1.0-alpine",
+                  "endpoints": [
+                    {
+                      "name": "helloWorldListener",
+                      "port": 80
+                    }
+                  ],
+                  "resources": {
+                    "requests": {
+                      "memoryInGB": 1,
+                      "cpu": 1
+                    }
+                  }
+                }
+              ],
+              "networkRefs": [
+                {
+                  "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sbz_demo/providers/Microsoft.ServiceFabricMesh/networks/sampleNetwork",
+                  "endpointRefs": [
+                    {
+                      "name": "helloWorldListener"
+                    }
+                  ]
+                }
+              ],
+              "replicaCount": 1,
+              "healthState": "Ok",
+              "status": "Ready"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

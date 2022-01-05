@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "api-version": "2018-01-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/buffered111",
+            "type": "Microsoft.ApiManagement/service/loggers",
+            "name": "buffered111",
+            "properties": {
+              "loggerType": "azureEventHub",
+              "description": "Sample description",
+              "credentials": {
+                "connectionString": "Endpoint=sb://apimaccounts.servicebus.windows.net/;SharedAccessKeyName=Send;SharedAccessKey=*******************h=****"
+              },
+              "isBuffered": true
+            }
+          },
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/loggerId",
+            "type": "Microsoft.ApiManagement/service/loggers",
+            "name": "loggerId",
+            "properties": {
+              "loggerType": "azureEventHub",
+              "description": "adding a new logger",
+              "credentials": {
+                "name": "hydraeventhub",
+                "connectionString": "{{Logger-Credentials-59544ef2e4bbd50d9468c618}}"
+              },
+              "isBuffered": true
+            }
+          }
+        ],
+        "nextLink": ""
+      }
+    }
+  }
+}

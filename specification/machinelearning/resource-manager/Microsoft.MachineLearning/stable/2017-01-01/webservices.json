@@ -20,9 +20,11 @@
       "get": {
         "description": "Lists all the available REST API operations.",
         "operationId": "Operations_List",
-        "parameters": [{
-          "$ref": "#/parameters/APIVersionParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
         "x-ms-pageable": {
           "nextLinkName": null
         },
@@ -63,7 +65,7 @@
             "schema": {
               "$ref": "#/definitions/WebService"
             }
-          },                
+          },
           {
             "$ref": "#/parameters/APIVersionParameter"
           },
@@ -111,7 +113,7 @@
             "type": "string",
             "description": "The region for which encrypted credential parameters are valid.",
             "required": false
-          },        
+          },
           {
             "$ref": "#/parameters/APIVersionParameter"
           },
@@ -152,7 +154,7 @@
             "description": "The payload to use to patch the web service.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/WebService"
+              "$ref": "#/definitions/PatchedWebService"
             }
           },
           {
@@ -192,7 +194,7 @@
           },
           {
             "$ref": "#/parameters/APIVersionParameter"
-          },        
+          },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           }
@@ -208,7 +210,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/webServices/{webServiceName}/CreateRegionalBlob":{
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/webServices/{webServiceName}/CreateRegionalBlob": {
       "post": {
         "tags": [
           "WebServices"
@@ -233,7 +235,7 @@
             "type": "string",
             "description": "The region for which encrypted credential parameters are created.",
             "required": true
-          },        
+          },
           {
             "$ref": "#/parameters/APIVersionParameter"
           },
@@ -373,7 +375,7 @@
           }
         }
       }
-    }    
+    }
   },
   "parameters": {
     "SubscriptionIdParameter": {
@@ -443,6 +445,39 @@
         }
       }
     },
+    "PatchedResource": {
+      "description": "Azure resource.",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "description": "Specifies the resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Specifies the name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Specifies the location of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Specifies the type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tags": {
+          "description": "Contains resource tags defined as key/value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "WebService": {
       "type": "object",
       "description": "Instance of an Azure ML web service resource.",
@@ -460,6 +495,21 @@
       "required": [
         "properties"
       ]
+    },
+    "PatchedWebService": {
+      "type": "object",
+      "description": "Instance of an Patched Azure ML web service resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PatchedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WebServiceProperties",
+          "description": "Contains the property payload that describes the web service."
+        }
+      }
     },
     "WebServiceProperties": {
       "type": "object",
@@ -506,7 +556,7 @@
         },
         "keys": {
           "$ref": "#/definitions/WebServiceKeys",
-          "description":  "Contains the web service provisioning keys. If you do not specify provisioning keys, the Azure Machine Learning system generates them for you. Note: The keys are not returned from calls to GET operations."
+          "description": "Contains the web service provisioning keys. If you do not specify provisioning keys, the Azure Machine Learning system generates them for you. Note: The keys are not returned from calls to GET operations."
         },
         "readOnly": {
           "type": "boolean",
@@ -518,8 +568,8 @@
           "readOnly": true
         },
         "exposeSampleData": {
-            "type": "boolean",
-            "description": "When set to true, sample data is included in the web service's swagger definition. The default value is true."
+          "type": "boolean",
+          "description": "When set to true, sample data is included in the web service's swagger definition. The default value is true."
         },
         "realtimeConfiguration": {
           "$ref": "#/definitions/RealtimeConfiguration",
@@ -572,7 +622,7 @@
           "description": "Specifies the package type. Valid values are Graph (Specifies a web service published through the Machine Learning Studio) and Code (Specifies a web service published using code such as Python). Note: Code is not supported at this time.",
           "enum": [
             "Graph"
-          ]        
+          ]
         },
         "payloadsInBlobStorage": {
           "type": "boolean",
@@ -580,7 +630,7 @@
         },
         "payloadsLocation": {
           "$ref": "#/definitions/BlobLocation",
-          "description": "The URI of the payload blob. This paramater contains a value only if the payloadsInBlobStorage parameter is set to true. Otherwise is set to null."
+          "description": "The URI of the payload blob. This parameter contains a value only if the payloadsInBlobStorage parameter is set to true. Otherwise is set to null."
         }
       }
     },
@@ -706,7 +756,7 @@
         }
       },
       "required": [
-        "id"        
+        "id"
       ]
     },
     "ServiceInputOutputSpecification": {

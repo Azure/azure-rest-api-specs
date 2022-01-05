@@ -1,0 +1,246 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2019-01-01",
+    "subscriptionId": "subid",
+    "parameters": {
+      "location": "Central US",
+      "sku": {
+        "name": "Premium",
+        "capacity": 1
+      },
+      "properties": {
+        "publisherEmail": "admin@live.com",
+        "publisherName": "contoso",
+        "additionalLocations": [
+          {
+            "location": "North Europe",
+            "sku": {
+              "name": "Premium",
+              "capacity": 1
+            },
+            "virtualNetworkConfiguration": {
+              "subnetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/westUsVirtualNetwork/subnets/apimSubnet"
+            }
+          }
+        ],
+        "hostnameConfigurations": [
+          {
+            "type": "Proxy",
+            "hostName": "proxyhostname1.contoso.com",
+            "encodedCertificate": "************Base 64 Encoded Pfx Certificate************************",
+            "certificatePassword": "**************Password of the Certificate************************************************"
+          },
+          {
+            "type": "Proxy",
+            "hostName": "proxyhostname2.contoso.com",
+            "encodedCertificate": "************Base 64 Encoded Pfx Certificate************************",
+            "certificatePassword": "**************Password of the Certificate************************************************",
+            "negotiateClientCertificate": true
+          },
+          {
+            "type": "Portal",
+            "hostName": "portalhostname1.contoso.com",
+            "encodedCertificate": "************Base 64 Encoded Pfx Certificate************************",
+            "certificatePassword": "**************Password of the Certificate************************************************"
+          }
+        ],
+        "virtualNetworkConfiguration": {
+          "subnetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/centralUsVirtualNetwork/subnets/apimSubnet"
+        },
+        "virtualNetworkType": "External"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/bXVsdGlob3N0bmFtZW11bHRpcmVnaW9uc2VydmljZV9BY3RfZjFiOTZhMjc=?api-version=2019-01-01"
+      },
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
+        "name": "apimService1",
+        "type": "Microsoft.ApiManagement/service",
+        "tags": {},
+        "location": "Central US",
+        "etag": "AAAAAAAXXpw=",
+        "properties": {
+          "publisherEmail": "admin@live.com",
+          "publisherName": "contoso",
+          "provisioningState": "Created",
+          "targetProvisioningState": "Activating",
+          "createdAtUtc": "2019-04-11T08:25:38.5086594Z",
+          "hostnameConfigurations": [
+            {
+              "type": "Proxy",
+              "hostName": "apimService1.azure-api.net",
+              "negotiateClientCertificate": false,
+              "defaultSslBinding": true
+            },
+            {
+              "type": "Proxy",
+              "hostName": "proxyhostname1.contoso.com",
+              "negotiateClientCertificate": false,
+              "certificate": {
+                "expiry": "2018-03-17T21:55:07+00:00",
+                "thumbprint": "918D7785B926AC5AEE66322778A147BCE7237CF3",
+                "subject": "CN=proxyhostname1.contoso.com"
+              }
+            },
+            {
+              "type": "Proxy",
+              "hostName": "proxyhostname2.contoso.com",
+              "negotiateClientCertificate": true,
+              "certificate": {
+                "expiry": "2018-03-17T21:55:07+00:00",
+                "thumbprint": "918D7785B926AC5AEE66322778A147BCE7237CF3",
+                "subject": "CN=proxyhostname2.contoso.com"
+              }
+            },
+            {
+              "type": "Portal",
+              "hostName": "portalhostname1.contoso.com",
+              "negotiateClientCertificate": false,
+              "certificate": {
+                "expiry": "2018-03-17T21:55:07+00:00",
+                "thumbprint": "918D7785B926AC5AEE66322778A147BCE7237CF3",
+                "subject": "CN=portalhostname1.contoso.com"
+              }
+            }
+          ],
+          "publicIPAddresses": [],
+          "additionalLocations": [
+            {
+              "location": "North Europe",
+              "sku": {
+                "name": "Premium",
+                "capacity": 1
+              },
+              "publicIPAddresses": [],
+              "virtualNetworkConfiguration": {
+                "subnetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/westUsVirtualNetwork/subnets/apimSubnet"
+              }
+            }
+          ],
+          "virtualNetworkConfiguration": {
+            "subnetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/centralUsVirtualNetwork/subnets/apimSubnet"
+          },
+          "virtualNetworkType": "External"
+        },
+        "sku": {
+          "name": "Premium",
+          "capacity": 1
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
+        "name": "apimService1",
+        "type": "Microsoft.ApiManagement/service",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2",
+          "tag3": "value3"
+        },
+        "location": "Central US",
+        "etag": "AAAAAAFzTM0=",
+        "properties": {
+          "publisherEmail": "admin@live.com",
+          "publisherName": "contoso",
+          "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
+          "provisioningState": "Succeeded",
+          "targetProvisioningState": "",
+          "createdAtUtc": "2019-04-11T08:25:38.5086594Z",
+          "gatewayUrl": "https://apimService1.azure-api.net",
+          "gatewayRegionalUrl": "https://apimService1-centralus-01.regional.azure-api.net",
+          "portalUrl": "https://apimService1.portal.azure-api.net",
+          "managementApiUrl": "https://apimService1.management.azure-api.net",
+          "scmUrl": "https://apimService1.scm.azure-api.net",
+          "hostnameConfigurations": [
+            {
+              "type": "Proxy",
+              "hostName": "apimService1.azure-api.net",
+              "negotiateClientCertificate": false,
+              "defaultSslBinding": true
+            },
+            {
+              "type": "Proxy",
+              "hostName": "proxyhostname1.contoso.com",
+              "negotiateClientCertificate": false,
+              "certificate": {
+                "expiry": "2018-03-17T21:55:07+00:00",
+                "thumbprint": "918D7785B926AC5AEE66322778A147BCE7237CF3",
+                "subject": "CN=proxyhostname1.contoso.com"
+              }
+            },
+            {
+              "type": "Proxy",
+              "hostName": "proxyhostname2.contoso.com",
+              "negotiateClientCertificate": true,
+              "certificate": {
+                "expiry": "2018-03-17T21:55:07+00:00",
+                "thumbprint": "918D7785B926AC5AEE66322778A147BCE7237CF3",
+                "subject": "CN=proxyhostname2.contoso.com"
+              }
+            },
+            {
+              "type": "Portal",
+              "hostName": "portalhostname1.contoso.com",
+              "negotiateClientCertificate": false,
+              "certificate": {
+                "expiry": "2018-03-17T21:55:07+00:00",
+                "thumbprint": "918D7785B926AC5AEE66322778A147BCE7237CF3",
+                "subject": "CN=portalhostname1.contoso.com"
+              }
+            }
+          ],
+          "publicIPAddresses": [
+            "104.43.XXX.72"
+          ],
+          "privateIPAddresses": null,
+          "additionalLocations": [
+            {
+              "location": "North Europe",
+              "sku": {
+                "name": "Premium",
+                "capacity": 1
+              },
+              "publicIPAddresses": [
+                "52.XXX.197.222"
+              ],
+              "gatewayRegionalUrl": "https://apimService1-northeurope-01.regional.azure-api.net",
+              "virtualNetworkConfiguration": {
+                "subnetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/westUsVirtualNetwork/subnets/apimSubnet"
+              }
+            }
+          ],
+          "customProperties": {
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TripleDes168": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2": "False"
+          },
+          "virtualNetworkConfiguration": {
+            "subnetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/centralUsVirtualNetwork/subnets/apimSubnet"
+          },
+          "virtualNetworkType": "External"
+        },
+        "sku": {
+          "name": "Premium",
+          "capacity": 1
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/bXVsdGlob3N0bmFtZW11bHRpcmVnaW9uc2VydmljZV9BY3RfZjFiOTZhMjc=?api-version=2019-01-01"
+      }
+    }
+  }
+}

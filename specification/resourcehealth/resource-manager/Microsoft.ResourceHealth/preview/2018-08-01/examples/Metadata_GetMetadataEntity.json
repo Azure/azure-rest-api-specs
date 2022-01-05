@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "name": "types",
+    "api-version": "2017-07-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "providers/Microsoft.ResourceHealth/metadata/status",
+        "name": "types",
+        "type": "Microsoft.ResourceHealth/metadata",
+        "properties": {
+          "displayName": "<Localized string>",
+          "applicableScenarios": [
+            "Alerts"
+          ],
+          "supportedValues": [
+            {
+              "id": "Active",
+              "displayName": "Active"
+            },
+            {
+              "id": "Resolved",
+              "displayName": "Resolved"
+            },
+            {
+              "id": "InProgress",
+              "displayName": "InProgress"
+            },
+            {
+              "id": "Updated",
+              "displayName": "Updated"
+            }
+          ]
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "code": "NotFound",
+        "message": "Unknown metadata name"
+      }
+    }
+  }
+}

@@ -110,7 +110,7 @@
           }
         ],
         "responses": {
-           "204": {
+          "204": {
             "description": "All the quota counter periods were successfully updated."
           },
           "default": {
@@ -195,7 +195,7 @@
               "$ref": "#/definitions/QuotaCounterValueContract"
             },
             "description": "The value of the Quota counter to be applied on the specified period."
-          },          
+          },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
@@ -204,7 +204,7 @@
           }
         ],
         "responses": {
-           "204": {
+          "204": {
             "description": "The quota counter value was successfully updated."
           },
           "default": {
@@ -218,95 +218,95 @@
     }
   },
   "definitions": {
-		"QuotaCounterCollection": {
-		  "properties": {
-			"value": {
-			  "type": "array",
-			  "items": {
-				"$ref": "#/definitions/QuotaCounterContract"
-			  },
-			  "description": "Quota counter values."
-			},
-			"count": {
-			  "type": "integer",
-			  "format": "int64",
-			  "description": "Total record count number across all pages."
-			},
-			"nextLink": {
-			  "type": "string",
-			  "description": "Next page link if any."
-			}
-		  },
-		  "description": "Paged Quota Counter list representation."
-		},
-		"QuotaCounterContract": {
-		  "properties": {
-			"counterKey": {
-			  "type": "string",
-			  "description": "The Key value of the Counter. Must not be empty.",
-			  "minLength": 1
-			},
-			"periodKey": {
-			  "type": "string",
-			  "description": "Identifier of the Period for which the counter was collected. Must not be empty.",
-			  "minLength": 1
-			},
-			"periodStartTime": {
-			  "type": "string",
-			  "format": "date-time",
-			  "description": "The date of the start of Counter Period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
-			},
-			"periodEndTime": {
-			  "type": "string",
-			  "format": "date-time",
-			  "description": "The date of the end of Counter Period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
-			}
-		  },
-		  "allOf": [
-			{
-			  "$ref": "#/definitions/QuotaCounterValueContract"
-			}
-		  ],
-		  "required": [
-			"counterKey",
-			"periodKey",
-			"periodStartTime",
-			"periodEndTime"
-		  ],
-		  "description": "Quota counter details."
-		},
-		"QuotaCounterValueContract": {
-		  "properties": {
-			"callsCount": {
-			  "type": "integer",
-			  "format": "int32",
-			  "description": "Number of times Counter was called."
-			},
-			"kbTransferred": {
-			  "type": "number",
-			  "format": "double",
-			  "description": "Data Transferred in KiloBytes."
-			}
-		  },
-		  "description": "Quota counter value details."
-		}
+    "QuotaCounterCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QuotaCounterContract"
+          },
+          "description": "Quota counter values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Quota Counter list representation."
+    },
+    "QuotaCounterContract": {
+      "properties": {
+        "counterKey": {
+          "type": "string",
+          "description": "The Key value of the Counter. Must not be empty.",
+          "minLength": 1
+        },
+        "periodKey": {
+          "type": "string",
+          "description": "Identifier of the Period for which the counter was collected. Must not be empty.",
+          "minLength": 1
+        },
+        "periodStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date of the start of Counter Period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "periodEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date of the end of Counter Period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/QuotaCounterValueContract"
+        }
+      ],
+      "required": [
+        "counterKey",
+        "periodKey",
+        "periodStartTime",
+        "periodEndTime"
+      ],
+      "description": "Quota counter details."
+    },
+    "QuotaCounterValueContract": {
+      "properties": {
+        "callsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of times Counter was called."
+        },
+        "kbTransferred": {
+          "type": "number",
+          "format": "double",
+          "description": "Data Transferred in KiloBytes."
+        }
+      },
+      "description": "Quota counter value details."
+    }
   },
   "parameters": {
-		"QuotaCounterKeyParameter": {
-		  "name": "quotaCounterKey",
-		  "in": "path",
-		  "required": true,
-		  "type": "string",
-		  "description": "Quota counter key identifier.",
-		  "x-ms-parameter-location": "method"
-		},
-		"QuotaPeriodKeyParameter": {
-		  "name": "quotaPeriodKey",
-		  "in": "path",
-		  "required": true,
-		  "type": "string",
-		  "description": "Quota period key identifier.",
-		  "x-ms-parameter-location": "method"
-		}
+    "QuotaCounterKeyParameter": {
+      "name": "quotaCounterKey",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Quota counter key identifier.",
+      "x-ms-parameter-location": "method"
+    },
+    "QuotaPeriodKeyParameter": {
+      "name": "quotaPeriodKey",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Quota period key identifier.",
+      "x-ms-parameter-location": "method"
+    }
   }
 }

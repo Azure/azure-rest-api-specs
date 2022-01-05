@@ -1,21 +1,21 @@
 {
+  "parameters": {
+    "clusterName": "cluster1",
+    "resourceGroupName": "rg1",
+    "api-version": "2015-03-01-preview",
+    "subscriptionId": "subid",
+    "configurationName": "gateway",
     "parameters": {
-        "clusterName": "cluster1",
-        "resourceGroupName": "rg1",
-        "api-version": "2015-03-01-preview",
-        "subscriptionId": "subid",
-        "configurationName": "gateway",
-        "parameters": {
-            "restAuthCredential.isEnabled": "false"
-        }
-    },
-    "responses": {
-        "202": {
-            "headers": {
-                "location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.HDInsight/pathToOperationResult"
-            }
-        },
-        "200": {},
-        "204": {}
+      "restAuthCredential.isEnabled": "false"
     }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.HDInsight/pathToOperationResult"
+      }
+    },
+    "200": {},
+    "204": {}
+  }
 }

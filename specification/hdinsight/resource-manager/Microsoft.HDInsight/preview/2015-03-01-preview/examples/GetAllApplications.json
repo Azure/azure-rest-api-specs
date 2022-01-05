@@ -1,89 +1,118 @@
 {
-    "parameters": {
-        "clusterName": "cluster1",
-        "resourceGroupName": "rg1",
-        "api-version": "2015-03-01-preview",
-        "subscriptionId": "subid"
-    },
-    "responses": {
-        "200": {
-            "body": {
-                "value": [{
-                    "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/applications/app",
-                    "name": "app",
-                    "type": "Microsoft.HDInsight/clusters/applications",
-                    "etag": "CF938302-6B4D-44A0-A6D2-C0D67E847AEC",
-                    "tags": { "key1": "val1" },
-                    "properties": {
-                        "computeProfile": {
-                            "roles": [{
-                                "name": "edgenode",
-                                "targetInstanceCount": 1,
-                                "hardwareProfile": {
-                                    "vmSize": "Standard_D12_v2"
-                                }
-                            }]
-                        },
-                        "installScriptActions": [{
-                            "name": "app-install-app",
-                            "uri": "http://testurl.com/public/hdi-app/20170301/hdinsight-app-install.sh",
-                            "roles": ["edgenode"]
-                        }],
-                        "uninstallScriptActions": [],
-                        "httpsEndpoints": [{
-                            "accessModes": ["WebPage"],
-                            "location": "https://cluster1-app.apps.azurehdinsight.net:443",
-                            "destinationPort": 20000,
-                            "publicPort": 443
-                        }],
-                        "sshEndpoints": [{
-                            "location": "app.cluster1-ssh.azurehdinsight.net:22",
-                            "destinationPort": 22,
-                            "publicPort": 22
-                        }],
-                        "provisioningState": "Succeeded",
-                        "applicationState": "Running",
-                        "createdDate": "2017-03-22T21:34:39.293",
-                        "applicationType": "CustomApplication",
-                        "marketplaceIdentifier": "app-on-hdiapp-on-hdi.1.0.3"
+  "parameters": {
+    "clusterName": "cluster1",
+    "resourceGroupName": "rg1",
+    "api-version": "2015-03-01-preview",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/applications/app",
+            "name": "app",
+            "type": "Microsoft.HDInsight/clusters/applications",
+            "etag": "CF938302-6B4D-44A0-A6D2-C0D67E847AEC",
+            "tags": {
+              "key1": "val1"
+            },
+            "properties": {
+              "computeProfile": {
+                "roles": [
+                  {
+                    "name": "edgenode",
+                    "targetInstanceCount": 1,
+                    "hardwareProfile": {
+                      "vmSize": "Standard_D12_v2"
                     }
-                }, {
-                    "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/applications/app2",
-                    "name": "app2",
-                    "type": "Microsoft.HDInsight/clusters/applications",
-                    "etag": "2C128F8E-BB26-4637-99E4-18EBC39FD51F",
-                    "tags": { "key1": "val1" },
-                    "properties": {
-                        "computeProfile": {
-                            "roles": [{
-                                "name": "edgenode",
-                                "targetInstanceCount": 1,
-                                "hardwareProfile": {
-                                    "vmSize": "Standard_D3"
-                                }
-                            }]
-                        },
-                        "installScriptActions": [{
-                            "name": "app2-Install",
-                            "uri": "https://app2url.com/azure/2.4.0.0/app2_install.sh",
-                            "roles": ["edgenode"]
-                        }],
-                        "uninstallScriptActions": [],
-                        "httpsEndpoints": [{
-                            "accessModes": ["WebPage"],
-                            "location": "location",
-                            "destinationPort": 18630,
-                            "publicPort": 443
-                        }],
-                        "sshEndpoints": [],
-                        "provisioningState": "InProgress",
-                        "applicationState": "AzureVMConfiguration",
-                        "createdDate": "2017-03-28T02:01:25.107",
-                        "applicationType": "CustomApplication",
-                        "marketplaceIdentifier": "app2-hdinsightsmall.1.0.8"
-                    }
-                }]
+                  }
+                ]
+              },
+              "installScriptActions": [
+                {
+                  "name": "app-install-app",
+                  "uri": "http://testurl.com/public/hdi-app/20170301/hdinsight-app-install.sh",
+                  "roles": [
+                    "edgenode"
+                  ]
+                }
+              ],
+              "uninstallScriptActions": [],
+              "httpsEndpoints": [
+                {
+                  "accessModes": [
+                    "WebPage"
+                  ],
+                  "location": "https://cluster1-app.apps.azurehdinsight.net:443",
+                  "destinationPort": 20000,
+                  "publicPort": 443
+                }
+              ],
+              "sshEndpoints": [
+                {
+                  "location": "app.cluster1-ssh.azurehdinsight.net:22",
+                  "destinationPort": 22,
+                  "publicPort": 22
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "applicationState": "Running",
+              "createdDate": "2017-03-22T21:34:39.293",
+              "applicationType": "CustomApplication",
+              "marketplaceIdentifier": "app-on-hdiapp-on-hdi.1.0.3"
             }
-        }
+          },
+          {
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/applications/app2",
+            "name": "app2",
+            "type": "Microsoft.HDInsight/clusters/applications",
+            "etag": "2C128F8E-BB26-4637-99E4-18EBC39FD51F",
+            "tags": {
+              "key1": "val1"
+            },
+            "properties": {
+              "computeProfile": {
+                "roles": [
+                  {
+                    "name": "edgenode",
+                    "targetInstanceCount": 1,
+                    "hardwareProfile": {
+                      "vmSize": "Standard_D3"
+                    }
+                  }
+                ]
+              },
+              "installScriptActions": [
+                {
+                  "name": "app2-Install",
+                  "uri": "https://app2url.com/azure/2.4.0.0/app2_install.sh",
+                  "roles": [
+                    "edgenode"
+                  ]
+                }
+              ],
+              "uninstallScriptActions": [],
+              "httpsEndpoints": [
+                {
+                  "accessModes": [
+                    "WebPage"
+                  ],
+                  "location": "location",
+                  "destinationPort": 18630,
+                  "publicPort": 443
+                }
+              ],
+              "sshEndpoints": [],
+              "provisioningState": "InProgress",
+              "applicationState": "AzureVMConfiguration",
+              "createdDate": "2017-03-28T02:01:25.107",
+              "applicationType": "CustomApplication",
+              "marketplaceIdentifier": "app2-hdinsightsmall.1.0.8"
+            }
+          }
+        ]
+      }
     }
+  }
 }

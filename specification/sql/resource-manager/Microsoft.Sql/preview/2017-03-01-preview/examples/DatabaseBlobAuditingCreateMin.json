@@ -5,12 +5,12 @@
     "serverName": "blobauditingtest-6440",
     "databaseName": "testdb",
     "blobAuditingPolicyName": "default",
-    "api-version": "2017-03-01-preview",
+    "api-version": "2015-05-01-preview",
     "parameters": {
       "properties": {
-          "state": "Enabled",
-          "storageAccountAccessKey": "sdlfkjabc+sdlfkjsdlkfsjdfLDKFTERLKFDFKLjsdfksjdflsdkfD2342309432849328476458/3RSD==",
-          "storageEndpoint": "https://mystorage.blob.core.windows.net"
+        "state": "Enabled",
+        "storageAccountAccessKey": "sdlfkjabc+sdlfkjsdlkfsjdfLDKFTERLKFDFKLjsdfksjdflsdkfD2342309432849328476458/3RSD==",
+        "storageEndpoint": "https://mystorage.blob.core.windows.net"
       }
     }
   },
@@ -21,14 +21,18 @@
         "name": "default",
         "type": "Microsoft.Sql/servers/databases/auditingSettings",
         "kind": "V12",
-          "properties": {
-            "state":"Enabled",
-            "storageEndpoint": "https://mystorage.blob.core.windows.net",
-            "storageAccountAccessKey": "",
-            "retentionDays": 0,
-            "storageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000",
-            "isStorageSecondaryKeyInUse": false,
-            "auditActionsAndGroups":["SUCCESSFUL_DATABASE_AUTHENTICATION_GROUP","FAILED_DATABASE_AUTHENTICATION_GROUP","BATCH_COMPLETED_GROUP"]
+        "properties": {
+          "state": "Enabled",
+          "storageEndpoint": "https://mystorage.blob.core.windows.net",
+          "retentionDays": 0,
+          "storageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000",
+          "isStorageSecondaryKeyInUse": false,
+          "auditActionsAndGroups": [
+            "SUCCESSFUL_DATABASE_AUTHENTICATION_GROUP",
+            "FAILED_DATABASE_AUTHENTICATION_GROUP",
+            "BATCH_COMPLETED_GROUP"
+          ],
+          "isAzureMonitorTargetEnabled": false
         }
       }
     },
@@ -38,14 +42,18 @@
         "name": "default",
         "type": "Microsoft.Sql/servers/databases/auditingSettings",
         "kind": "V12",
-          "properties": {
-            "state":"Enabled",
-            "storageEndpoint": "https://mystorage.blob.core.windows.net",
-            "storageAccountAccessKey": "",
-            "retentionDays": 0,
-            "storageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000",
-            "isStorageSecondaryKeyInUse": false,
-            "auditActionsAndGroups":["SUCCESSFUL_DATABASE_AUTHENTICATION_GROUP","FAILED_DATABASE_AUTHENTICATION_GROUP","BATCH_COMPLETED_GROUP"]
+        "properties": {
+          "state": "Enabled",
+          "storageEndpoint": "https://mystorage.blob.core.windows.net",
+          "retentionDays": 0,
+          "storageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000",
+          "isStorageSecondaryKeyInUse": false,
+          "auditActionsAndGroups": [
+            "SUCCESSFUL_DATABASE_AUTHENTICATION_GROUP",
+            "FAILED_DATABASE_AUTHENTICATION_GROUP",
+            "BATCH_COMPLETED_GROUP"
+          ],
+          "isAzureMonitorTargetEnabled": false
         }
       }
     }

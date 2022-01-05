@@ -34,6 +34,31 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.Solutions/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "ListOperations",
+        "description": "Lists all of the available Microsoft.Solutions REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/appliances/{applianceName}": {
       "get": {
         "tags": [
@@ -889,10 +914,6 @@
           "pattern": "^[-\\w\\._,\\(\\)]+$"
         }
       },
-      "required": [
-        "properties",
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/GenericResource"
@@ -1307,7 +1328,7 @@
         },
         "type": {
           "$ref": "#/definitions/ApplianceArtifactType",
-          "description": "The the appliance artifact type."
+          "description": "The appliance artifact type."
         }
       },
       "description": "Appliance artifact."
@@ -1330,7 +1351,7 @@
       "description": "The appliance provider authorization."
     },
     "ErrorResponse": {
-      "description": "Error reponse indicates ARM appliance is not able to process the incoming request. The reason is provided in the error message.",
+      "description": "Error response indicates ARM appliance is not able to process the incoming request. The reason is provided in the error message.",
       "type": "object",
       "properties": {
         "httpStatus": {
@@ -1344,6 +1365,49 @@
         "errorMessage": {
           "description": "Error message indicating why the operation failed.",
           "type": "string"
+        }
+      }
+    },
+    "Operation": {
+      "description": "Microsoft.Solutions operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Solutions",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list Microsoft.Solutions operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Microsoft.Solutions operations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
         }
       }
     }

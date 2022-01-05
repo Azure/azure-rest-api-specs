@@ -45,7 +45,9 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "enum": [ "default" ],
+            "enum": [
+              "default"
+            ],
             "description": "The type of HeatMap for the Traffic Manager profile."
           },
           {
@@ -128,7 +130,7 @@
           "200": {
             "description": "The subscription-level Traffic Manager Real User Metrics key.",
             "schema": {
-              "$ref": "#/definitions/TrafficManagerUserMetricsKeyModel" 
+              "$ref": "#/definitions/TrafficManagerUserMetricsKeyModel"
             }
           },
           "default": {
@@ -162,8 +164,8 @@
           "201": {
             "description": "A new subscription-level key has been created for Real User Metrics collection.",
             "schema": {
-              "$ref": "#/definitions/TrafficManagerUserMetricsKeyModel" 
-            }            
+              "$ref": "#/definitions/TrafficManagerUserMetricsKeyModel"
+            }
           },
           "default": {
             "description": "Default response. It will be deserialized as per the Error definition.",
@@ -242,7 +244,7 @@
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "The type of the resource. Ex- Microsoft.Network/trafficmanagerProfiles."
+          "description": "The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles."
         }
       },
       "x-ms-azure-resource": true
@@ -366,19 +368,19 @@
     },
     "QueryExperience": {
       "properties": {
-          "endpointId": {
-            "type": "integer",
-            "description": "The id of the endpoint from the 'endpoints' array which these queries were routed to."
-          },
-          "queryCount": {
-            "type": "integer",
-            "description": "The number of queries originating from this location."
-          },
-          "latency": {
-            "type": "number",
-            "format": "double",
-            "description": "The latency experienced by queries originating from this location."
-          }
+        "endpointId": {
+          "type": "integer",
+          "description": "The id of the endpoint from the 'endpoints' array which these queries were routed to."
+        },
+        "queryCount": {
+          "type": "integer",
+          "description": "The number of queries originating from this location."
+        },
+        "latency": {
+          "type": "number",
+          "format": "double",
+          "description": "The latency experienced by queries originating from this location."
+        }
       },
       "required": [
         "endpointId",
@@ -388,27 +390,27 @@
     },
     "TrafficFlow": {
       "properties": {
-          "sourceIp": {
-              "type": "string",
-              "description": "The IP address that this query experience originated from."
-          },
-          "latitude": {
-            "type": "number",
-            "format": "double",
-            "description": "The approximate latitude that these queries originated from."
-          },
-          "longitude": {
-            "type": "number",
-            "format": "double",
-            "description": "The approximate longitude that these queries originated from."
-          },
-          "queryExperiences": {
-            "type": "array",
-            "description": "The query experiences produced in this HeatMap calculation.",
-            "items": {
-              "$ref": "#/definitions/QueryExperience"
-            }
+        "sourceIp": {
+          "type": "string",
+          "description": "The IP address that this query experience originated from."
+        },
+        "latitude": {
+          "type": "number",
+          "format": "double",
+          "description": "The approximate latitude that these queries originated from."
+        },
+        "longitude": {
+          "type": "number",
+          "format": "double",
+          "description": "The approximate longitude that these queries originated from."
+        },
+        "queryExperiences": {
+          "type": "array",
+          "description": "The query experiences produced in this HeatMap calculation.",
+          "items": {
+            "$ref": "#/definitions/QueryExperience"
           }
+        }
       },
       "description": "Class representing a Traffic Manager HeatMap traffic flow properties."
     },
@@ -430,19 +432,19 @@
     "TrafficManagerUserMetricsKeyModel": {
       "properties": {
         "id": {
-          "type" : "string",
+          "type": "string",
           "description": "Fully qualified resource Id for the resource. Ex - /providers/Microsoft.Network/trafficManagerUserMetricsKeys"
         },
         "name": {
-          "type" : "string",
+          "type": "string",
           "description": "The word default."
         },
         "type": {
-          "type" : "string",
+          "type": "string",
           "description": "The type of the resource. Ex- Microsoft.Network/trafficManagerUserMetricsKeys."
         },
         "key": {
-          "type" : "string",
+          "type": "string",
           "description": "The key returned by the Real User Metrics operation."
         }
       },

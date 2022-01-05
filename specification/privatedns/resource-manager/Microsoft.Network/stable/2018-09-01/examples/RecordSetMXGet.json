@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "resourceGroupName": "resourceGroup1",
+    "privateZoneName": "privatezone1.com",
+    "recordType": "MX",
+    "relativeRecordSetName": "recordMX",
+    "api-version": "2018-09-01",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/MX/recordmx",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "name": "recordmx",
+        "type": "Microsoft.Network/privateDnsZones/MX",
+        "properties": {
+          "metadata": {
+            "key1": "value1"
+          },
+          "ttl": 3600,
+          "fqdn": "recordmx.privatezone1.com.",
+          "isAutoRegistered": false,
+          "mxRecords": [
+            {
+              "preference": 0,
+              "exchange": "mail.privatezone1.com"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

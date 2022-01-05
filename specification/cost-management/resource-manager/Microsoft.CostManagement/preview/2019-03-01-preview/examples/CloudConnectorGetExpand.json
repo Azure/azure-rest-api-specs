@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2019-03-01-preview",
+    "connectorName": "aws-123456789012",
+    "$expand": "collectionInfo"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "kind": "aws",
+        "id": "/providers/Microsoft.CostManagement/cloudConnectors/aws-123456789012",
+        "name": "aws-123456789012",
+        "type": "Microsoft.CostManagement/cloudConnectors",
+        "properties": {
+          "displayName": "AWS-Consolidated-1",
+          "providerBillingAccountId": "123456789012",
+          "providerBillingAccountDisplayName": "MyCompany Consolidated",
+          "credentialsKey": "arn:aws:iam::123456789012:role/AzureCostManagementRole",
+          "reportId": "HourlyWithResources",
+          "createdOn": "2018-05-15T13:25:48Z",
+          "modifiedOn": "2018-05-23T09:21:11Z",
+          "status": "warning",
+          "externalBillingAccountId": "/providers/Microsoft.CostManagement/externalBillingAccounts/aws-123456789012",
+          "defaultManagementGroupId": "/providers/Microsoft.Management/managementGroups/XYZ",
+          "subscriptionId": "22222222-3333-4444-1111-777777777777",
+          "billingModel": "autoUpgrade",
+          "daysTrialRemaining": 62,
+          "collectionInfo": {
+            "lastChecked": "2018-06-15T03:21:08Z",
+            "sourceLastUpdated": "2018-06-12T16:41:28Z",
+            "lastUpdated": "2018-06-12T17:25:28Z",
+            "error": {
+              "errorCode": "FailedToAssumeRole",
+              "errorMessage": "Failed to assume role",
+              "errorInnerMessage": "Insufficient access to assume role arn:aws:iam::123456789012:role/AzureCostManagementRole",
+              "errorStartTime": "2018-06-12T21:41:03Z"
+            }
+          }
+        }
+      }
+    }
+  }
+}

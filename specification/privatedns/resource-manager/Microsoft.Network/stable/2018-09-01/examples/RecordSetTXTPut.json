@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "resourceGroupName": "resourceGroup1",
+    "privateZoneName": "privatezone1.com",
+    "recordType": "TXT",
+    "relativeRecordSetName": "recordTXT",
+    "api-version": "2018-09-01",
+    "subscriptionId": "subscriptionId",
+    "parameters": {
+      "properties": {
+        "metadata": {
+          "key1": "value1"
+        },
+        "ttl": 3600,
+        "txtRecords": [
+          {
+            "value": [
+              "string1",
+              "string2"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/TXT/recordtxt",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "name": "recordtxt",
+        "type": "Microsoft.Network/privateDnsZones/TXT",
+        "properties": {
+          "metadata": {
+            "key1": "value1"
+          },
+          "ttl": 3600,
+          "fqdn": "recordtxt.privatezone1.com.",
+          "isAutoRegistered": false,
+          "txtRecords": [
+            {
+              "value": [
+                "string1",
+                "string2"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/TXT/recordtxt",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "name": "recordtxt",
+        "type": "Microsoft.Network/privateDnsZones/TXT",
+        "properties": {
+          "metadata": {
+            "key1": "value1"
+          },
+          "ttl": 3600,
+          "fqdn": "recordtxt.privatezone1.com.",
+          "isAutoRegistered": false,
+          "txtRecords": [
+            {
+              "value": [
+                "string1",
+                "string2"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

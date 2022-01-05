@@ -1,84 +1,53 @@
 {
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testrg123",
+    "workspaceName": "workspaces123",
+    "computeName": "compute123",
+    "api-version": "2018-03-01-preview",
     "parameters": {
-        "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-        "resourceGroupName": "testrg123",
-        "workspaceName": "workspaces123",
-        "computeName": "compute123",
-        "api-version": "2018-03-01-preview",
-        "parameters": {
-            "id": "compute123",
-            "location": "eastus",
-            "properties": {
-                "description": "some compute",
-                "resourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/Microsoft.ContainerService/managedClusters/compute123-56826-c9b00420020b2",
-                "computeType": "AKS",
-                "properties": {
-                    "agentCount": 4
-                }
-            }
+      "location": "eastus",
+      "properties": {
+        "description": "some compute",
+        "resourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/Microsoft.ContainerService/managedClusters/compute123-56826-c9b00420020b2",
+        "computeType": "AKS",
+        "properties": {
+          "agentCount": 4
         }
-    },
-    "responses": {
-        "200": {
-            "body": {
-                "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123",
-                "type": "Microsoft.MachineLearningServices/workspaces/computes",
-                "name": "compute123",
-                "location": "eastus",
-                "properties": {
-                    "description": "some compute",
-                    "resourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/Microsoft.ContainerService/managedClusters/compute123-56826-c9b00420020b2",
-                    "computeType": "AKS",
-                    "provisioningState": "Succeeded",
-                    "properties": {
-                        "clusterFqdn": "compute123-56826-c9b00420020b2-6a3f9fd6.hcp.eastus.azmk8s.io",
-                        "systemServices": [
-                            {
-                            "systemServiceType": "ScoringFrontEnd",
-                            "publicIpAddress": "1.1.1.1",
-                            "version": "prod/1.20180420.3/v1.0.preview/c8aeb0be7644c2107855662bcc5471ab2b2d5521"
-                            }
-                        ],
-                        "agentCount": 4,
-                        "agentVmSize": "Standard_D3_v2",
-                        "sslConfiguration": {
-                            "status": "Disabled"
-                        }
-                    }
-                }
-            }
-        },
-        "201": {
-            "body": {
-                "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123",
-                "type": "Microsoft.MachineLearningServices/workspaces/computes",
-                "name": "compute123",
-                "location": "eastus",
-                "properties": {
-                    "description": "some compute",
-                    "resourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/Microsoft.ContainerService/managedClusters/compute123-56826-c9b00420020b2",
-                    "computeType": "AKS",
-                    "provisioningState": "Updating",
-                    "properties": {
-                        "clusterFqdn": "compute123-56826-c9b00420020b2-6a3f9fd6.hcp.eastus.azmk8s.io",
-                        "systemServices": [
-                            {
-                            "systemServiceType": "ScoringFrontEnd",
-                            "publicIpAddress": "1.1.1.1",
-                            "version": "prod/1.20180420.3/v1.0.preview/c8aeb0be7644c2107855662bcc5471ab2b2d5521"
-                            }
-                        ],
-                        "agentCount": 4,
-                        "agentVmSize": "Standard_D3_v2",
-                        "sslConfiguration": {
-                            "status": "Disabled"
-                        }
-                    }
-                }
-            },
-            "headers": {
-                "Azure-AsyncOperation": "https://management.azure.com/subscriptions/...pathToOperationStatus..."
-            }
-        }
+      }
     }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123",
+        "type": "Microsoft.MachineLearningServices/workspaces/computes",
+        "name": "compute123",
+        "location": "eastus",
+        "properties": {
+          "description": "some compute",
+          "resourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/Microsoft.ContainerService/managedClusters/compute123-56826-c9b00420020b2",
+          "computeType": "AKS",
+          "provisioningState": "Updating"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123",
+        "type": "Microsoft.MachineLearningServices/workspaces/computes",
+        "name": "compute123",
+        "location": "eastus",
+        "properties": {
+          "description": "some compute",
+          "resourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/Microsoft.ContainerService/managedClusters/compute123-56826-c9b00420020b2",
+          "computeType": "AKS",
+          "provisioningState": "Updating"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/...pathToOperationStatus..."
+      }
+    }
+  }
 }

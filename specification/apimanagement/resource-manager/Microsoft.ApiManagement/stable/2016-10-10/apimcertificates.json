@@ -121,11 +121,11 @@
             "schema": {
               "$ref": "#/definitions/CertificateContract"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           },
           "default": {
@@ -183,7 +183,7 @@
           "201": {
             "description": "The new certificate was successfully added."
           },
-          "204":{
+          "204": {
             "description": "The certificate details were successfully updated."
           },
           "default": {
@@ -240,83 +240,83 @@
   },
   "definitions": {
     "CertificateCollection": {
-		  "properties": {
-			"value": {
-			  "type": "array",
-			  "items": {
-				"$ref": "#/definitions/CertificateContract"
-			  },
-			  "description": "Page values."
-			},
-			"count": {
-			  "type": "integer",
-			  "format": "int64",
-			  "description": "Total record count number across all pages."
-			},
-			"nextLink": {
-			  "type": "string",
-			  "description": "Next page link if any."
-			}
-		  },
-		  "description": "Paged Certificates list representation."
-		},
-		"CertificateContract": {
-		  "properties": {
-			"id": {
-			  "type": "string",
-			  "description": "Certificate identifier path: /certificates/{certificateId}",
-			  "readOnly": true
-			},
-			"subject": {
-			  "type": "string",
-			  "description": "Subject attribute of the certificate."
-			},
-			"thumbprint": {
-			  "type": "string",
-			  "description": "Thumbprint of the certificate."
-			},
-			"expirationDate": {
-			  "type": "string",
-			  "format": "date-time",
-			  "description": "Expiration date of the certificate. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
-			}
-		  },
-		  "required": [
-			"subject",
-			"thumbprint",
-			"expirationDate"
-		  ],
-		  "description": "Certificate details."
-		},
-		"CertificateCreateOrUpdateParameters": {
-		  "properties": {
-			"data": {
-			  "type": "string",
-			  "description": "Base 64 encoded certificate using the application/x-pkcs12 representation."
-			},
-			"password": {
-			  "type": "string",
-			  "description": "Password for the Certificate"
-			}
-		  },
-		  "required": [
-			"data",
-			"password"
-		  ],
-		  "description": "Parameters supplied to the CreateOrUpdate certificate operation."
-		}
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CertificateContract"
+          },
+          "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Certificates list representation."
+    },
+    "CertificateContract": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Certificate identifier path: /certificates/{certificateId}",
+          "readOnly": true
+        },
+        "subject": {
+          "type": "string",
+          "description": "Subject attribute of the certificate."
+        },
+        "thumbprint": {
+          "type": "string",
+          "description": "Thumbprint of the certificate."
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiration date of the certificate. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        }
+      },
+      "required": [
+        "subject",
+        "thumbprint",
+        "expirationDate"
+      ],
+      "description": "Certificate details."
+    },
+    "CertificateCreateOrUpdateParameters": {
+      "properties": {
+        "data": {
+          "type": "string",
+          "description": "Base 64 encoded certificate using the application/x-pkcs12 representation."
+        },
+        "password": {
+          "type": "string",
+          "description": "Password for the Certificate"
+        }
+      },
+      "required": [
+        "data",
+        "password"
+      ],
+      "description": "Parameters supplied to the CreateOrUpdate certificate operation."
+    }
   },
   "parameters": {
-		"CertificateIdParameter": {
-		  "name": "certificateId",
-		  "in": "path",
-		  "required": true,
-		  "type": "string",
-		  "description": "Identifier of the certificate entity. Must be unique in the current API Management service instance.",
-		  "minLength": 1,
-		  "maxLength": 256,
-		  "pattern": "^[^*#&+:<>?]+$",
-		  "x-ms-parameter-location": "method"
-		}
+    "CertificateIdParameter": {
+      "name": "certificateId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Identifier of the certificate entity. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    }
   }
 }

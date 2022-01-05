@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contoso",
+    "accountName": "contosomedia",
+    "filterName": "accountFilterWithTimeWindowAndTrack",
+    "api-version": "2018-07-01",
+    "parameters": {
+      "properties": {
+        "presentationTimeRange": {
+          "startTimestamp": 10,
+          "endTimestamp": 170000000,
+          "presentationWindowDuration": 9223372036854775807,
+          "liveBackoffDuration": 0,
+          "timescale": 10000000,
+          "forceEndTimestamp": false
+        },
+        "firstQuality": {
+          "bitrate": 128000
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "accountFilterWithTimeWindowAndTrack",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Media/mediaservices/contosomedia/accountFilters/accountFilterWithTimeWindowAndTrack",
+        "type": "Microsoft.Media/mediaservices/accountFilters",
+        "properties": {
+          "presentationTimeRange": {
+            "startTimestamp": 10,
+            "endTimestamp": 170000000,
+            "presentationWindowDuration": 9223372036854775807,
+            "liveBackoffDuration": 0,
+            "timescale": 10000000,
+            "forceEndTimestamp": false
+          },
+          "firstQuality": {
+            "bitrate": 128000
+          },
+          "tracks": [
+            {
+              "trackSelections": [
+                {
+                  "property": "Type",
+                  "value": "Audio",
+                  "operation": "Equal"
+                },
+                {
+                  "property": "Language",
+                  "value": "en",
+                  "operation": "NotEqual"
+                },
+                {
+                  "property": "FourCC",
+                  "value": "EC-3",
+                  "operation": "NotEqual"
+                }
+              ]
+            },
+            {
+              "trackSelections": [
+                {
+                  "property": "Type",
+                  "value": "Video",
+                  "operation": "Equal"
+                },
+                {
+                  "property": "Bitrate",
+                  "value": "3000000-5000000",
+                  "operation": "Equal"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

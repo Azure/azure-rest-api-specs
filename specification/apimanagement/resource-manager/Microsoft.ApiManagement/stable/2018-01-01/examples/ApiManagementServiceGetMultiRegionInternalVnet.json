@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2018-01-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimservice1",
+        "name": "apimservice1",
+        "type": "Microsoft.ApiManagement/service",
+        "tags": {},
+        "location": "West US",
+        "etag": "AAAAAADqC0c=",
+        "properties": {
+          "publisherEmail": "abcs@contoso.com",
+          "publisherName": "contoso publisher",
+          "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
+          "provisioningState": "Succeeded",
+          "targetProvisioningState": "",
+          "createdAtUtc": "2018-02-02T01:42:09.1268424Z",
+          "gatewayUrl": "https://apimservice1.azure-api.net",
+          "gatewayRegionalUrl": "https://apimservice1-westus-01.regional.azure-api.net",
+          "portalUrl": "https://apimservice1.portal.azure-api.net",
+          "managementApiUrl": "https://apimservice1.management.azure-api.net",
+          "scmUrl": "https://apimservice1.scm.azure-api.net",
+          "hostnameConfigurations": [
+            {
+              "type": "Proxy",
+              "hostName": "apimgatewaytest.preview.net",
+              "negotiateClientCertificate": false,
+              "certificate": {
+                "expiry": "2019-08-16T16:51:34+00:00",
+                "thumbprint": "B4330123DBAXXXXXXXXX1F35E84493476",
+                "subject": "CN=*.preview.net"
+              },
+              "defaultSslBinding": true
+            }
+          ],
+          "publicIPAddresses": [
+            "137.XXX.11.74"
+          ],
+          "privateIPAddresses": [
+            "172.XX.0.5"
+          ],
+          "additionalLocations": [
+            {
+              "location": "West US 2",
+              "sku": {
+                "name": "Premium",
+                "capacity": 1
+              },
+              "publicIPAddresses": [
+                "40.XXX.79.187"
+              ],
+              "privateIPAddresses": [
+                "10.0.X.6"
+              ],
+              "virtualNetworkConfiguration": {
+                "subnetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/APIMVNet/subnets/apim-internal-sub"
+              },
+              "gatewayRegionalUrl": "https://apimservice1-westus2-01.regional.azure-api.net"
+            }
+          ],
+          "virtualNetworkConfiguration": {
+            "subnetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/apim-appGateway-vnet/subnets/apim-subnet"
+          },
+          "customProperties": {
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TripleDes168": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30": "False"
+          },
+          "virtualNetworkType": "Internal"
+        },
+        "sku": {
+          "name": "Premium",
+          "capacity": 1
+        }
+      }
+    }
+  }
+}

@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Visual Search API",
-    "description": "Visual Search API lets you discover insights about an image such as visually similar images, shopping sources, and related searches. The API can also perform text recognition, identify entities (people, places, things), return other topical content for the user to explore, and more. For more information, see [Visual Search Overview](https://docs.microsoft.com/azure/cognitive-services/bing-visual-search/overview).",
+    "title": "Visual Search Client",
+    "description": "Visual Search API lets you discover insights about an image such as visually similar images, shopping sources, and related searches. The API can also perform text recognition, identify entities (people, places, things), return other topical content for the user to explore, and more. For more information, see [Visual Search Overview](https://docs.microsoft.com/azure/cognitive-services/bing-visual-search/overview).  **NOTE:** To comply with the new EU Copyright Directive in France, the Bing Visual Search API must omit some content from certain EU News sources for French users. The removed content may include thumbnail images and videos, video previews, and snippets which accompany search results from these sources. As a consequence, the Bing APIs may serve fewer results with thumbnail images and videos, video previews, and snippets to French users.",
     "version": "1.0"
   },
   "parameters": {
@@ -21,6 +21,15 @@
         "true"
       ]
     }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "../../../Common/Parameters.json#/parameters/GlobalEndpoint"
+      }
+    ]
   },
   "host": "api.cognitive.microsoft.com",
   "basePath": "/bing/v7.0",
@@ -284,7 +293,7 @@
           "type": "string"
         },
         "insightsMetadata": {
-          "description": "A count of the number of websites where you can shop or perform other actions related to the image. For example, if the image is of an apple pie, this object includes a count of the number of websites where you can buy an apple pie. To indicate the number of offers in your UX, include badging such as a shopping cart icon that contains the count. When the user clicks on the icon, use imageInisghtsToken in a subsequent Visual Search API call to get the list of shopping websites.",
+          "description": "A count of the number of websites where you can shop or perform other actions related to the image. For example, if the image is of an apple pie, this object includes a count of the number of websites where you can buy an apple pie. To indicate the number of offers in your UX, include badging such as a shopping cart icon that contains the count. When the user clicks on the icon, use imageInsightsToken in a subsequent Visual Search API call to get the list of shopping websites.",
           "$ref": "#/definitions/ImagesImageMetadata",
           "readOnly": true
         },
@@ -299,7 +308,7 @@
           "type": "string"
         },
         "visualWords": {
-          "description": "For interal use only.",
+          "description": "For internal use only.",
           "readOnly": true,
           "type": "string"
         }
@@ -488,7 +497,7 @@
           "type": "string"
         },
         "encodingFormat": {
-          "description": "Encoding format (e.g., mp3, mp4, jpeg, etc).",
+          "description": "Encoding format (e.g., png, gif, jpeg, etc).",
           "readOnly": true,
           "type": "string"
         },

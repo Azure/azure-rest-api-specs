@@ -1,0 +1,61 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-01-01",
+    "title": "Schema of Azure SignalR Service events published to Azure Event Grid",
+    "description": "Describes the schema of the Azure SignalR Service events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
+  },
+  "paths": {},
+  "definitions": {
+    "SignalRServiceClientConnectionConnectedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.SignalRService.ClientConnectionConnected event.",
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "description": "The time at which the event occurred.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "hubName": {
+          "description": "The hub of connected client connection.",
+          "type": "string"
+        },
+        "connectionId": {
+          "description": "The connection Id of connected client connection.",
+          "type": "string"
+        },
+        "userId": {
+          "description": "The user Id of connected client connection.",
+          "type": "string"
+        }
+      }
+    },
+    "SignalRServiceClientConnectionDisconnectedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.SignalRService.ClientConnectionDisconnected event.",
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "description": "The time at which the event occurred.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "hubName": {
+          "description": "The hub of connected client connection.",
+          "type": "string"
+        },
+        "connectionId": {
+          "description": "The connection Id of connected client connection.",
+          "type": "string"
+        },
+        "userId": {
+          "description": "The user Id of connected client connection.",
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "The message of error that cause the client connection disconnected.",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

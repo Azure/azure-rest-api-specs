@@ -9,88 +9,82 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforPostgreSQL/servers/testserver",
-            "name": "testserver",
-            "type": "Microsoft.DBforPostgreSQL/servers",
-            "location": "onebox",
-            "tags": {
-              "elasticServer": "1"
-            },
             "sku": {
-              "capacity": 2,
+              "name": "B_Gen4_1",
+              "tier": "Basic",
               "family": "Gen4",
-              "name": "PGSQL_B_Gen4_2",
-              "size": null,
-              "tier": "Basic"
+              "capacity": 1
             },
             "properties": {
+              "administratorLogin": "testuser",
               "storageProfile": {
-                "storageMB": 128000,
-                "backupRetentionDays": 7,
-                "geoRedundantBackup": "Enabled"
+                "storageMB": 5120,
+                "backupRetentionDays": 10,
+                "geoRedundantBackup": "Disabled"
               },
-              "administratorLogin": "cloudsa",
+              "version": "9.5",
               "sslEnforcement": "Enabled",
               "userVisibleState": "Ready",
-              "fullyQualifiedDomainName": "testserver.test-vm1.onebox.xdb.mscds.com",
-              "version": "9.6"
-            }
+              "fullyQualifiedDomainName": "pgtestsvc1.postgres.database.azure.com",
+              "earliestRestoreDate": "2018-03-04T21:01:55.1498475+00:00"
+            },
+            "location": "westus",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/servers/pgtestsvc1",
+            "name": "pgtestsvc1",
+            "type": "Microsoft.DBforPostgreSQL/servers"
           },
           {
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforPostgreSQL/servers/testserver1",
-            "name": "testserver1",
-            "type": "Microsoft.DBforPostgreSQL/servers",
-            "location": "onebox",
-            "tags": {
-              "elasticServer": "1"
-            },
             "sku": {
-              "capacity": 2,
+              "name": "GP_Gen4_2",
+              "tier": "GeneralPurpose",
               "family": "Gen4",
-              "name": "PGSQL_B_Gen4_2",
-              "size": null,
-              "tier": "Basic"
+              "capacity": 2
             },
             "properties": {
+              "administratorLogin": "testuser",
               "storageProfile": {
-                "storageMB": 128000,
+                "storageMB": 5120,
                 "backupRetentionDays": 7,
-                "geoRedundantBackup": "Enabled"
+                "geoRedundantBackup": "Disabled"
               },
-              "administratorLogin": "cloudsa",
+              "version": "9.6",
               "sslEnforcement": "Enabled",
               "userVisibleState": "Ready",
-              "fullyQualifiedDomainName": "testserver.test-vm1.onebox.xdb.mscds.com",
-              "version": "9.6"
-            }
+              "fullyQualifiedDomainName": "pgtestsvc2.postgres.database.azure.com",
+              "earliestRestoreDate": "2018-03-07T21:01:55.1498475+00:00"
+            },
+            "location": "westus",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/servers/pgtestsvc2",
+            "name": "pgtestsvc2",
+            "type": "Microsoft.DBforPostgreSQL/servers"
           },
           {
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforPostgreSQL/servers/testserver2",
-            "name": "testserver2",
-            "type": "Microsoft.DBforPostgreSQL/servers",
-            "location": "onebox",
-            "tags": {
-              "elasticServer": "1"
-            },
             "sku": {
-              "capacity": 2,
+              "name": "B_Gen4_2",
+              "tier": "Basic",
               "family": "Gen4",
-              "name": "PGSQL_B_Gen4_2",
-              "size": null,
-              "tier": "Basic"
+              "capacity": 2
             },
             "properties": {
+              "administratorLogin": "cloudsa",
               "storageProfile": {
                 "storageMB": 128000,
                 "backupRetentionDays": 7,
-                "geoRedundantBackup": "Enabled"
+                "geoRedundantBackup": "Disabled"
               },
-              "administratorLogin": "cloudsa",
+              "version": "9.6",
               "sslEnforcement": "Enabled",
               "userVisibleState": "Ready",
-              "fullyQualifiedDomainName": "testserver.test-vm1.onebox.xdb.mscds.com",
-              "version": "9.6"
-            }
+              "fullyQualifiedDomainName": "pgtestsvc4.postgres.database.azure.com",
+              "earliestRestoreDate": "2018-03-14T21:08:24.637+00:00"
+            },
+            "location": "westus",
+            "tags": {
+              "ElasticServer": "1"
+            },
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/servers/pgtestsvc4",
+            "name": "pgtestsvc4",
+            "type": "Microsoft.DBforPostgreSQL/servers"
           }
         ]
       }

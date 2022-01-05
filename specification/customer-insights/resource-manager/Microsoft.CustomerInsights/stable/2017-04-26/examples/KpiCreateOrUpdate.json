@@ -1,74 +1,80 @@
 {
-	"parameters": {
-		"hubName": "sdkTestHub",
-		"resourceGroupName": "TestHubRG",
-		"kpiName": "kpiTest45453647",
-		"api-version": "2016-01-01",
-		"subscriptionId": "subid",
-		"parameters": {
-			"properties": {
-				"entityType": "Profile",
-				"entityTypeName": "testProfile2327128",
-				"displayName": {
-					"en-us": "Kpi DisplayName"
-				},
-				"description": {
-					"en-us": "Kpi Description"
-				},
-				"calculationWindow": "Day",
-				"function": "Sum",
-				"expression": "SavingAccountBalance",
-				"unit": "unit",
-				"groupBy": ["SavingAccountBalance"],
-				"thresHolds": {
-					"lowerLimit": 5.0,
-					"upperLimit": 50.0,
-					"increasingKpi": true
-				},
-				"aliases": [{
-					"aliasName": "alias",
-					"expression": "Id+4"
-				}]
-			}
-		}
-	},
-	"responses": {
-		"200": {
-			"body": {
-				"id": "/subscriptions/c909e979-ef71-4def-a970-bc7c154db8c5/resourceGroups/TestHubRG/providers/Microsoft.CustomerInsights/hubs/sdkTestHub/kpi/kpiTest45453647",
-				"name": "sdkTestHub/kpiTest45453647",
-				"properties": {
-					"aliases": [{
-						"aliasName": "alias",
-						"expression": "Id+4"
-					}],
-					"calculationWindow": "Day",
-					"description": {
-						"en-us": "Kpi Description"
-					},
-					"displayName": {
-						"en-us": "Kpi DisplayName"
-					},
-					"entityType": "Profile",
-					"entityTypeName": "testProfile2327128",
-					"expression": "SavingAccountBalance",
-					"function": "Sum",
-					"groupBy": ["SavingAccountBalance"],
-					"kpiName": "kpiTest45453647",
-					"provisioningState": "Provisioning",
-					"tenantId": "sdktesthub",
-					"thresHolds": {
-						"increasingKpi": true,
-						"lowerLimit": 5.0,
-						"upperLimit": 50.0
-					},
-					"unit": "unit"
-				},
-				"type": "Microsoft.CustomerInsights/hubs/kpi"
-			}
-		},
-		"202": {
-			
-		}
-	}
+  "parameters": {
+    "hubName": "sdkTestHub",
+    "resourceGroupName": "TestHubRG",
+    "kpiName": "kpiTest45453647",
+    "api-version": "2016-01-01",
+    "subscriptionId": "subid",
+    "parameters": {
+      "properties": {
+        "entityType": "Profile",
+        "entityTypeName": "testProfile2327128",
+        "displayName": {
+          "en-us": "Kpi DisplayName"
+        },
+        "description": {
+          "en-us": "Kpi Description"
+        },
+        "calculationWindow": "Day",
+        "function": "Sum",
+        "expression": "SavingAccountBalance",
+        "unit": "unit",
+        "groupBy": [
+          "SavingAccountBalance"
+        ],
+        "thresHolds": {
+          "lowerLimit": 5.0,
+          "upperLimit": 50.0,
+          "increasingKpi": true
+        },
+        "aliases": [
+          {
+            "aliasName": "alias",
+            "expression": "Id+4"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/c909e979-ef71-4def-a970-bc7c154db8c5/resourceGroups/TestHubRG/providers/Microsoft.CustomerInsights/hubs/sdkTestHub/kpi/kpiTest45453647",
+        "name": "sdkTestHub/kpiTest45453647",
+        "properties": {
+          "aliases": [
+            {
+              "aliasName": "alias",
+              "expression": "Id+4"
+            }
+          ],
+          "calculationWindow": "Day",
+          "description": {
+            "en-us": "Kpi Description"
+          },
+          "displayName": {
+            "en-us": "Kpi DisplayName"
+          },
+          "entityType": "Profile",
+          "entityTypeName": "testProfile2327128",
+          "expression": "SavingAccountBalance",
+          "function": "Sum",
+          "groupBy": [
+            "SavingAccountBalance"
+          ],
+          "kpiName": "kpiTest45453647",
+          "provisioningState": "Provisioning",
+          "tenantId": "sdktesthub",
+          "thresHolds": {
+            "increasingKpi": true,
+            "lowerLimit": 5.0,
+            "upperLimit": 50.0
+          },
+          "unit": "unit"
+        },
+        "type": "Microsoft.CustomerInsights/hubs/kpi"
+      }
+    },
+    "202": {}
+  }
 }

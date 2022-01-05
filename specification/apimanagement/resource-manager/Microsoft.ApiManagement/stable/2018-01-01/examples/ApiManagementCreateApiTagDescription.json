@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2018-01-01",
+    "subscriptionId": "subid",
+    "apiId": "5931a75ae4bbd512a88c680b",
+    "tagId": "tagId1",
+    "parameters": {
+      "properties": {
+        "description": "Some description that will be displayed for operation's tag if the tag is assigned to operation of the API",
+        "externalDocsUrl": "http://some.url/additionaldoc",
+        "externalDocsDescription": "Description of the external docs resource"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tags/tagId1",
+        "type": "Microsoft.ApiManagement/service/tags",
+        "name": "tagId1",
+        "properties": {
+          "displayName": "tag1",
+          "description": null,
+          "externalDocsDescription": "some additional info",
+          "externalDocsUrl": "http://some_url.com"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tags/tagId1",
+        "type": "Microsoft.ApiManagement/service/tags",
+        "name": "tagId1",
+        "properties": {
+          "displayName": "tag1",
+          "description": null,
+          "externalDocsDescription": "some additional info",
+          "externalDocsUrl": "http://some_url.com"
+        }
+      }
+    }
+  }
+}

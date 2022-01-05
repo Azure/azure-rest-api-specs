@@ -1,0 +1,30 @@
+{
+  "operationId": "Application_Get",
+  "description": "This example shows how to get a application resource. If the application resource exists, its description is returned along with an OK (200) status code. If the application resource does not exist, an error is returned with an appropriate status code.",
+  "parameters": {
+    "api-version": "2018-09-01-privatepreview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "sbz_demo",
+    "applicationResourceName": "sampleApplication"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.ServiceFabricMesh/applications",
+        "location": "EastUS",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sbz_demo/providers/Microsoft.ServiceFabricMesh/applications/sampleApplication",
+        "name": "sampleApplication",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "description": "Service Fabric Mesh sample application.",
+          "healthState": "Ok",
+          "serviceNames": [
+            "helloWorldService"
+          ],
+          "status": "Ready"
+        }
+      }
+    }
+  }
+}

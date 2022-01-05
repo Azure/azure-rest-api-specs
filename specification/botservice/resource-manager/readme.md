@@ -1,47 +1,13 @@
 # BotService
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for BotService.
 
-
-
 ---
 
-### Java multi-api
+## Getting Started
 
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2017-12-01
-  - tag: package-2018-07-12
-```
-
-### Tag: package-2018-07-12 and java
-
-These settings apply only when `--tag=package-2018-07-12 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-07-12' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.botservice.v2018-07-12
-  output-folder: $(azure-libraries-for-java-folder)/botservice/resource-manager/v2018-07-12
-regenerate-manager: true
-generate-interface: true
-```
-### Tag: package-2017-12-01 and java
-
-These settings apply only when `--tag=package-2017-12-01 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2017-12-01' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.botservice.v2017_12_01
-  output-folder: $(azure-libraries-for-java-folder)/botservice/resource-manager/v2017_12_01
-regenerate-manager: true
-generate-interface: true
-```
-
-## Getting Started 
 To build the SDK for BotService, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -49,18 +15,69 @@ To build the SDK for BotService, simply [Install AutoRest](https://aka.ms/autore
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
+### Basic Information
 
-
-### Basic Information 
 These are the global settings for the BotService API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-07-12
+tag: package-preview-2021-05
+```
+
+
+### Tag: package-preview-2021-05
+
+These settings apply only when `--tag=package-preview-2021-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-05'
+input-file:
+  - Microsoft.BotService/preview/2021-05-01-preview/botservice.json
+directive:
+  - suppress: R4009
+    from: botservice.json
+    reason: We don not yet support systemdata
+  - suppress: R3016
+    from: botservice.json
+    reason: app settings keys are case sensitive
+  - suppress: R3018
+    from: botservice.json
+    reason: app settings for ValidateAuthority needs to be boolean
+```
+### Tag: package-2021-03-01
+
+These settings apply only when `--tag=package-2021-03-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03-01'
+input-file:
+- Microsoft.BotService/stable/2021-03-01/botservice.json
+directive:
+  - suppress: R4009
+    from: botservice.json
+    reason: We don not yet support systemdata
+  - suppress: R3016
+    from: botservice.json
+    reason: app settings keys are case sensitive
+  - suppress: R3018
+    from: botservice.json
+    reason: app settings for ValidateAuthority needs to be boolean
+```
+
+### Tag: package-2020-06-02
+
+These settings apply only when `--tag=package-2020-06-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-06-02'
+input-file:
+- Microsoft.BotService/stable/2020-06-02/botservice.json
+directive:
+  - suppress: R4009
+    from: botservice.json
+    reason: We do not yet support systemdata.
 ```
 
 ### Tag: package-2018-07-12
@@ -106,7 +123,9 @@ directive:
     from: botservice.json
     reason: The path as-is is quite descriptive.
 ```
+
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -116,11 +135,26 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
+  - repo: azure-resource-manager-schemas
+  - repo: azure-sdk-for-js
 ```
 
-## C# 
+## Suppression
+
+``` 
+directive:
+  - suppress: SECRET_PROPERTY
+    from: botservice.json
+    where: $.definitions.FacebookChannelProperties.properties.verifyToken
+    reason: We do need to return verifyToken in FacebookChannelProperties.
+```
+
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -130,48 +164,18 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.BotService
-  output-folder: $(csharp-sdks-folder)/BotService/Microsoft.Azure.Management.BotService/Generated
+  output-folder: $(csharp-sdks-folder)/botservice/Microsoft.Azure.Management.BotService/src/Generated
   clear-output-folder: true
 ```
-
-## Python
-
-See readme.python.md file.
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
+See configuration in [readme.go.md](./readme.go.md)
 
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: botservice
-  clear-output-folder: true
-```
+## Java
 
-### Go multi-api
+See configuration in [readme.java.md](./readme.java.md)
 
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2017-12-01
-  - tag: package-2018-07-12
-```
+## Python
 
-### Tag: package-2018-07-12 and go
-
-These settings apply only when `--tag=package-2018-07-12 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-07-12' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/botservice/mgmt/2018-07-12/botservices
-```
-
-
-### Tag: package-2017-12-01 and go
-
-These settings apply only when `--tag=package-2017-12-01 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-12-01' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/botservice/mgmt/2017-12-01/botservices
-```
+See configuration in [readme.python.md](./readme.python.md)

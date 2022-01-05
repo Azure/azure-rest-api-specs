@@ -1,100 +1,100 @@
 {
-    "parameters": {
-      "subscriptionId": "subid",
-      "api-version": "2018-02-01-preview",
-      "resourceGroupName": "demoResource",
-      "containerGroupName": "demo1",
-      "Resource": {
-        "tags": {
-          "tag1key": "tag1Value",
-          "tag2key": "tag2Value"
-        }
+  "parameters": {
+    "subscriptionId": "subid",
+    "api-version": "2018-02-01-preview",
+    "resourceGroupName": "demoResource",
+    "containerGroupName": "demo1",
+    "Resource": {
+      "tags": {
+        "tag1key": "tag1Value",
+        "tag2key": "tag2Value"
       }
-    },
-    "responses": {
-      "200": {
-        "body": {
-          "id": "/subscriptions/subid/resourceGroups/demoResource/providers/Microsoft.ContainerInstance/containerGroups/demo1",
-          "location": "WestUs",
-          "name": "demo1",
-          "type": "Microsoft.ContainerInstance/containerGroups",
-          "properties": {
-            "tags": {
-              "tag1key": "tag1Value",
-              "tag2key": "tag2Value"
-            },
-            "containers": [
-              {
-                "name": "demo1",
-                "properties": {
-                  "command": [],
-                  "environmentVariables": [],
-                  "image": "nginx",
-                  "ports": [
-                    {
-                      "port": 80
-                    }
-                  ],
-                  "resources": {
-                    "requests": {
-                      "cpu": 1,
-                      "memoryInGB": 1.5
-                    }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/demoResource/providers/Microsoft.ContainerInstance/containerGroups/demo1",
+        "location": "WestUs",
+        "name": "demo1",
+        "type": "Microsoft.ContainerInstance/containerGroups",
+        "properties": {
+          "tags": {
+            "tag1key": "tag1Value",
+            "tag2key": "tag2Value"
+          },
+          "containers": [
+            {
+              "name": "demo1",
+              "properties": {
+                "command": [],
+                "environmentVariables": [],
+                "image": "nginx",
+                "ports": [
+                  {
+                    "port": 80
+                  }
+                ],
+                "resources": {
+                  "requests": {
+                    "cpu": 1,
+                    "memoryInGB": 1.5
+                  }
+                },
+                "volumeMounts": [
+                  {
+                    "name": "volume1",
+                    "mountPath": "/mnt/volume1",
+                    "readOnly": false
                   },
-                  "volumeMounts": [
-                    {
-                      "name": "volume1",
-                      "mountPath": "/mnt/volume1",
-                      "readOnly": false
-                    },
-                    {
-                      "name": "volume2",
-                      "mountPath": "/mnt/volume2",
-                      "readOnly": false
-                    },
-                    {
-                      "name": "volume3",
-                      "mountPath": "/mnt/volume3",
-                      "readOnly": true
-                    }
-                  ]
-                }
+                  {
+                    "name": "volume2",
+                    "mountPath": "/mnt/volume2",
+                    "readOnly": false
+                  },
+                  {
+                    "name": "volume3",
+                    "mountPath": "/mnt/volume3",
+                    "readOnly": true
+                  }
+                ]
+              }
+            }
+          ],
+          "imageRegistryCredentials": [],
+          "ipAddress": {
+            "ip": "10.0.0.1",
+            "ports": [
+              {
+                "port": 80,
+                "protocol": "TCP"
               }
             ],
-            "imageRegistryCredentials": [],
-            "ipAddress": {
-              "ip": "10.0.0.1",
-              "ports": [
-                {
-                  "port": 80,
-                  "protocol": "TCP"
-                }
-              ],
-              "type": "Public",
-              "dnsNameLabel": "dnsnamelabel1",
-              "fqdn": "dnsnamelabel1.azure-container.io"
-            },
-            "osType": "Linux",
-            "provisioningState": "Succeeded",
-            "volumes": [
-              {
-                "name": "volume1",
-                "azureFile": {
-                  "shareName": "shareName",
-                  "storageAccountName": "accountName"
-                }
-              },
-              {
-                "name": "volume2",
-                "emptyDir": {}
-              },
-              {
-                "name": "volume3",
-                "secret": {}
+            "type": "Public",
+            "dnsNameLabel": "dnsnamelabel1",
+            "fqdn": "dnsnamelabel1.azure-container.io"
+          },
+          "osType": "Linux",
+          "provisioningState": "Succeeded",
+          "volumes": [
+            {
+              "name": "volume1",
+              "azureFile": {
+                "shareName": "shareName",
+                "storageAccountName": "accountName"
               }
-            ]
-          }
+            },
+            {
+              "name": "volume2",
+              "emptyDir": {}
+            },
+            {
+              "name": "volume3",
+              "secret": {}
+            }
+          ]
         }
       }
     }
   }
+}

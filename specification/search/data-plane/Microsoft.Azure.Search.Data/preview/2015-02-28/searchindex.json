@@ -31,7 +31,9 @@
             "format": "uuid",
             "description": "Tracking ID sent with the request to help with debugging.",
             "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping":  { "name": "search-request-options" }
+            "x-ms-parameter-grouping": {
+              "name": "search-request-options"
+            }
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -71,7 +73,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "readOnly":  true,
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/IndexingResult"
           },
@@ -89,7 +91,9 @@
         "mergeOrUpload",
         "delete"
       ],
-      "x-ms-enum": { "name": "IndexActionType" },
+      "x-ms-enum": {
+        "name": "IndexActionType"
+      },
       "description": "Specifies the operation to perform on a document in an indexing batch."
     },
     "SearchMode": {
@@ -98,7 +102,9 @@
         "any",
         "all"
       ],
-      "x-ms-enum": { "name": "SearchMode" },
+      "x-ms-enum": {
+        "name": "SearchMode"
+      },
       "description": "Specifies whether any or all of the search terms must be matched in order to count the document as a match."
     },
     "QueryType": {
@@ -107,7 +113,9 @@
         "simple",
         "full"
       ],
-      "x-ms-enum": { "name": "QueryType" },
+      "x-ms-enum": {
+        "name": "QueryType"
+      },
       "description": "Specifies the syntax of the search query. The default is 'simple'. Use 'full' if your query uses the Lucene query syntax."
     },
     "SearchParameters": {

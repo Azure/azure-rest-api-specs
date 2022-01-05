@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "denyAssignmentId": "subscriptions/subId/resourcegroups/rgname/providers/Microsoft.Authorization/denyAssignments/daId",
+    "api-version": "2018-07-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "denyAssignmentName": "Deny assignment name",
+          "description": "Deny assignment description",
+          "permissions": [
+            {
+              "actions": [
+                "action"
+              ],
+              "notActions": [],
+              "dataActions": [],
+              "notDataActions": []
+            }
+          ],
+          "scope": "/subscriptions/subId/resourcegroups/rgname",
+          "doNotApplyToChildScopes": false,
+          "principals": [
+            {
+              "id": "principalId1",
+              "type": "principalType1"
+            }
+          ],
+          "excludePrincipals": [
+            {
+              "id": "principalId2",
+              "type": "principalType2"
+            }
+          ],
+          "isSystemProtected": true
+        },
+        "id": "/subscriptions/subId/resourcegroups/rgname/providers/Microsoft.Authorization/denyAssignments/daId",
+        "type": "Microsoft.Authorization/denyAssignments",
+        "name": "daId"
+      }
+    }
+  }
+}

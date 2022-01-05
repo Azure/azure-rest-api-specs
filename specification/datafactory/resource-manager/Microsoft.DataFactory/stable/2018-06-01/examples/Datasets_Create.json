@@ -52,6 +52,18 @@
         "type": "Microsoft.DataFactory/factories/datasets",
         "properties": {
           "type": "AzureBlob",
+          "schema": [
+            {
+              "name": "col1",
+              "type": "INT_32"
+            },
+            {
+              "name": "col2",
+              "type": "Decimal",
+              "precision": "38",
+              "scale": "2"
+            }
+          ],
           "typeProperties": {
             "folderPath": {
               "value": "@dataset().MyFolderPath",

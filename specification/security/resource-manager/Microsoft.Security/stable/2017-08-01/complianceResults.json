@@ -1,0 +1,203 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2017-08-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{scope}/providers/Microsoft.Security/complianceResults": {
+      "get": {
+        "x-ms-examples": {
+          "Get compliance results on subscription": {
+            "$ref": "./examples/ComplianceResults/ListComplianceResults_example.json"
+          }
+        },
+        "tags": [
+          "Compliance Results"
+        ],
+        "description": "Security compliance results in the subscription",
+        "operationId": "ComplianceResults_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/Scope"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ComplianceResultList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceId}/providers/Microsoft.Security/complianceResults/{complianceResultName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get compliance results on subscription": {
+            "$ref": "./examples/ComplianceResults/GetComplianceResults_example.json"
+          }
+        },
+        "tags": [
+          "Compliance Results"
+        ],
+        "description": "Security Compliance Result",
+        "operationId": "ComplianceResults_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceId"
+          },
+          {
+            "$ref": "#/parameters/ComplianceResultName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ComplianceResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ComplianceResultList": {
+      "description": "List of compliance results response",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of compliance results",
+          "items": {
+            "$ref": "#/definitions/ComplianceResult"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "ComplianceResult": {
+      "type": "object",
+      "description": "a compliance result",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Compliance result data",
+          "$ref": "#/definitions/ComplianceResultProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ComplianceResultProperties": {
+      "type": "object",
+      "description": "Compliance result data",
+      "properties": {
+        "resourceStatus": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The status of the resource regarding a single assessment",
+          "enum": [
+            "Healthy",
+            "NotApplicable",
+            "OffByPolicy",
+            "NotHealthy"
+          ],
+          "x-ms-enum": {
+            "name": "resourceStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Healthy",
+                "description": "This assessment on the resource is healthy"
+              },
+              {
+                "value": "NotApplicable",
+                "description": "This assessment is not applicable to this resource"
+              },
+              {
+                "value": "OffByPolicy",
+                "description": "This assessment is turned off by policy on this subscription"
+              },
+              {
+                "value": "NotHealthy",
+                "description": "This assessment on the resource is not healthy"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ComplianceResultName": {
+      "name": "complianceResultName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "name of the desired assessment compliance result",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

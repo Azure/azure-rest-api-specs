@@ -24,7 +24,9 @@
         "description": "Gets a database's threat detection policy.",
         "operationId": "DatabaseThreatDetectionPolicies_Get",
         "x-ms-examples": {
-          "Get database security alert policy": { "$ref": "./examples/DatabaseSecurityAlertGet.json" }
+          "Get database security alert policy": {
+            "$ref": "./examples/DatabaseSecurityAlertGet.json"
+          }
         },
         "parameters": [
           {
@@ -48,7 +50,9 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "enum": ["default"],
+            "enum": [
+              "default"
+            ],
             "description": "The name of the security alert policy.",
             "x-ms-enum": {
               "modelAsString": true,
@@ -78,8 +82,12 @@
         "description": "Creates or updates a database's threat detection policy.",
         "operationId": "DatabaseThreatDetectionPolicies_CreateOrUpdate",
         "x-ms-examples": {
-          "Create database security alert policy min": { "$ref": "./examples/DatabaseSecurityAlertCreateMin.json" },
-          "Create database security alert policy max": { "$ref": "./examples/DatabaseSecurityAlertCreateMax.json" }
+          "Create database security alert policy min": {
+            "$ref": "./examples/DatabaseSecurityAlertCreateMin.json"
+          },
+          "Create database security alert policy max": {
+            "$ref": "./examples/DatabaseSecurityAlertCreateMax.json"
+          }
         },
         "parameters": [
           {
@@ -103,7 +111,9 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "enum": ["default"],
+            "enum": [
+              "default"
+            ],
             "description": "The name of the security alert policy.",
             "x-ms-enum": {
               "modelAsString": true,
@@ -148,13 +158,13 @@
       "description": "Contains information about a database Threat Detection policy.",
       "type": "object",
       "properties": {
-        "location":{
-          "type":"string",
-          "x-ms-mutability":[
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
             "read",
             "create"
           ],
-          "description":"The geo-location where the resource lives"
+          "description": "The geo-location where the resource lives"
         },
         "kind": {
           "readOnly": true,
@@ -216,7 +226,8 @@
           "description": "Specifies the identifier key of the Threat Detection audit storage account. If state is Enabled, storageAccountAccessKey is required.",
           "type": "string",
           "x-ms-mutability": [
-            "create", "update"
+            "create",
+            "update"
           ]
         },
         "retentionDays": {
@@ -236,7 +247,9 @@
           }
         }
       },
-      "required": [ "state" ]
+      "required": [
+        "state"
+      ]
     }
   },
   "parameters": {

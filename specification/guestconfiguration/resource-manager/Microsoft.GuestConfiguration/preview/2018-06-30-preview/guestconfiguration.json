@@ -76,6 +76,12 @@
               "$ref": "#/definitions/GuestConfigurationAssignment"
             }
           },
+          "200": {
+            "description": "OK. The guest configuration assignment for the VM was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/GuestConfigurationAssignment"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -83,7 +89,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "produces": [
           "application/json"
         ],
@@ -111,7 +116,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The guest configuration assingment name."
+            "description": "The guest configuration assignment name."
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
@@ -129,6 +134,56 @@
             "schema": {
               "$ref": "#/definitions/GuestConfigurationAssignment"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "GuestConfigurationAssignments"
+        ],
+        "operationId": "GuestConfigurationAssignments_Delete",
+        "description": "Delete a guest configuration assignment",
+        "x-ms-examples": {
+          "Delete an guest configuration assignment": {
+            "$ref": "./examples/deleteGuestConfigurationAssignment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "guestConfigurationAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the guest configuration assignment"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/VmNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -217,7 +272,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The guest configuration assingment name."
+            "description": "The guest configuration assignment name."
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
@@ -397,7 +452,7 @@
           "enum": [
             "DSC"
           ]
-        }, 
+        },
         "name": {
           "type": "string",
           "description": "Name of the guest configuration."
@@ -448,7 +503,7 @@
       "properties": {
         "configurationMode": {
           "type": "string",
-          "readOnly": true,
+          "readOnly": false,
           "description": "Specifies how the LCM(Local Configuration Manager) actually applies the configuration to the target nodes. Possible values are ApplyOnly, ApplyAndMonitor, and ApplyAndAutoCorrect.",
           "x-ms-enum": {
             "name": "configurationMode",
@@ -458,23 +513,15 @@
             "ApplyOnly",
             "ApplyAndMonitor",
             "ApplyAndAutoCorrect"
-          ]     
+          ]
         },
         "allowModuleOverwrite": {
-          "type": "string",
-          "description": "If true - new configurations downloaded from the pull service are allowed to overwrite the old ones on the target node. Otherwise, false",
-          "x-ms-enum": {
-            "name": "allowModuleOverwrite",
-            "modelAsString": true
-          },
-          "enum": [
-            "True",
-            "False"
-          ]       
+          "type": "boolean",
+          "description": "If true - new configurations downloaded from the pull service are allowed to overwrite the old ones on the target node. Otherwise, false"
         },
         "actionAfterReboot": {
           "type": "string",
-          "readOnly": true,
+          "readOnly": false,
           "description": "Specifies what happens after a reboot during the application of a configuration. The possible values are ContinueConfiguration and StopConfiguration",
           "x-ms-enum": {
             "name": "actionAfterReboot",
@@ -483,31 +530,22 @@
           "enum": [
             "ContinueConfiguration",
             "StopConfiguration"
-          ]     
+          ]
         },
         "refreshFrequencyMins": {
           "type": "number",
-          "readOnly": true,
+          "readOnly": false,
           "default": 30,
           "description": "The time interval, in minutes, at which the LCM checks a pull service to get updated configurations. This value is ignored if the LCM is not configured in pull mode. The default value is 30."
         },
         "rebootIfNeeded": {
-          "type": "string",
-          "readOnly": true,
-          "default": "False",
-          "description": "Set this to true to automatically reboot the node after a configuration that requires reboot is applied. Otherwise, you will have to manually reboot the node for any configuration that requires it. The default value is false. To use this setting when a reboot condition is enacted by something other than DSC (such as Windows Installer), combine this setting with the xPendingReboot module.",
-          "x-ms-enum": {
-            "name": "rebootIfNeeded",
-            "modelAsString": true
-          },
-          "enum": [
-            "True",
-            "False"
-          ]     
+          "type": "boolean",
+          "readOnly": false,
+          "description": "Set this to true to automatically reboot the node after a configuration that requires reboot is applied. Otherwise, you will have to manually reboot the node for any configuration that requires it. The default value is false. To use this setting when a reboot condition is enacted by something other than DSC (such as Windows Installer), combine this setting with the xPendingReboot module."
         },
         "configurationModeFrequencyMins": {
           "type": "number",
-          "readOnly": true,
+          "readOnly": false,
           "default": 15,
           "description": "How often, in minutes, the current configuration is checked and applied. This property is ignored if the ConfigurationMode property is set to ApplyOnly. The default value is 15."
         }
@@ -537,6 +575,7 @@
         "lastComplianceStatusChecked": {
           "type": "string",
           "readOnly": true,
+          "format": "date-time",
           "description": "Date and time when last compliance status was checked.",
           "x-nullable": true
         },
@@ -566,7 +605,10 @@
             "modelAsString": true
           },
           "enum": [
-            "Succeeded"
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Created"
           ]
         }
       },
@@ -631,6 +673,18 @@
         "vm": {
           "$ref": "#/definitions/VMInfo",
           "description": "Information about the VM."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Start date and time of the guest configuration assignment compliance status check."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "End date and time of the guest configuration assignment compliance status check."
         },
         "details": {
           "$ref": "#/definitions/AssignmentReportDetails",
@@ -697,11 +751,13 @@
         "startTime": {
           "type": "string",
           "readOnly": true,
+          "format": "date-time",
           "description": "Start date and time of the guest configuration assignment compliance status check."
         },
         "endTime": {
           "type": "string",
           "readOnly": true,
+          "format": "date-time",
           "description": "End date and time of the guest configuration assignment compliance status check."
         },
         "jobId": {
@@ -758,7 +814,7 @@
         "properties": {
           "type": "object",
           "readOnly": true,
-          "description": "Properties of a guest configuation assignment resource."
+          "description": "Properties of a guest configuration assignment resource."
         }
       },
       "description": "The guest configuration assignment resource."
@@ -779,5 +835,5 @@
       "description": "Reason and code for the compliance of the guest configuration assignment resource."
     }
   },
-"parameters": {}
+  "parameters": {}
 }

@@ -1,0 +1,219 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Storage subsystem operation endpoints and objects.",
+    "title": "FabricAdminClient",
+    "version": "2018-10-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnits/{scaleUnit}/storageSubSystems/{storageSubSystem}": {
+      "get": {
+        "x-ms-examples": {
+          "Return the requested storage subsystem.": {
+            "$ref": "./examples/StorageSubSystem/Get.json"
+          }
+        },
+        "tags": [
+          "StorageSubSystems"
+        ],
+        "description": "Return the requested storage subsystem.",
+        "operationId": "StorageSubSystems_Get",
+        "parameters": [
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../2016-05-01/ScaleUnit.json#/parameters/ScaleUnitParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageSubSystemParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StorageSubSystem"
+            }
+          },
+          "404": {
+            "description": "NOT FOUND"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnits/{scaleUnit}/storageSubSystems": {
+      "get": {
+        "x-ms-examples": {
+          "Returns a list of all storage subsystems for a location.": {
+            "$ref": "./examples/StorageSubSystem/List.json"
+          }
+        },
+        "tags": [
+          "StorageSubSystems"
+        ],
+        "description": "Returns a list of all storage subsystems for a location.",
+        "operationId": "StorageSubSystems_List",
+        "parameters": [
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../2016-05-01/ScaleUnit.json#/parameters/ScaleUnitParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Common.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Common.json#/parameters/SkipParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StorageSubSystemList"
+            }
+          },
+          "404": {
+            "description": "NOT FOUND"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/StorageSubSystem"
+      }
+    }
+  },
+  "definitions": {
+    "StorageSubSystem": {
+      "description": "Representation of a storage system resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "All properties of a storage subsystem.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/StorageSubSystemModel"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../2016-05-01/Fabric.json#/definitions/Resource"
+        }
+      ]
+    },
+    "StorageSubSystemModel": {
+      "description": "All properties of a storage subsystem.",
+      "type": "object",
+      "properties": {
+        "totalCapacityGB": {
+          "description": "Total capacity in GB of the subsystem.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "remainingCapacityGB": {
+          "description": "Remaining capacity in GB of the subsystem.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "healthStatus": {
+          "description": "Health status of the subsystem.",
+          "type": "string"
+        },
+        "operationalStatus": {
+          "description": "Operational status of the subsystem.",
+          "type": "string"
+        },
+        "rebalanceStatus": {
+          "description": "Rebalance status of the subsystem.",
+          "type": "string"
+        }
+      }
+    },
+    "StorageSubSystemList": {
+      "description": "Pageable list of storage systems.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of storage systems.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageSubSystem"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client API Version.",
+      "required": true,
+      "type": "string",
+      "default": "2018-10-01"
+    },
+    "StorageSubSystemParameter": {
+      "name": "storageSubSystem",
+      "description": "Name of the storage system.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

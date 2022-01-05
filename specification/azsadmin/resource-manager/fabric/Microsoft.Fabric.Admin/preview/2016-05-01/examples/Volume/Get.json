@@ -1,29 +1,29 @@
 {
-    "parameters": {
-        "api-version": "2016-05-01",
-        "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
-        "resourceGroupName" : "System.local",
+  "parameters": {
+    "api-version": "2016-05-01",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "resourceGroupName": "System.local",
+    "location": "local",
+    "storageSubSystem": "S-Cluster.azurestack.local",
+    "storagePool": "SU1_Pool",
+    "volume": "28fbffa4"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/36e98cad-c8a5-4580-bef7-af878a237908/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/storageSubSystems/S-Cluster.azurestack.local/storagePools/SU1_Pool/volumes/05c1cbb7",
+        "name": "05c1cbb7",
+        "type": "Microsoft.Fabric.Admin/fabricLocations/storageSubSystems/storagePools/volumes",
         "location": "local",
-        "storageSubSystem": "S-Cluster.azurestack.local",
-        "storagePool": "SU1_Pool",
-        "volume": "28fbffa4"
+        "tags": {},
+        "properties": {
+          "fileSystem": "CSVFS_ReFS",
+          "remainingSizeGB": 2191,
+          "sizeGB": 2540,
+          "volumeLabel": "SU1_Volume"
+        }
+      }
     },
-    "responses": {
-        "200": {
-            "body": {
-                "id": "/subscriptions/36e98cad-c8a5-4580-bef7-af878a237908/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/storageSubSystems/S-Cluster.azurestack.local/storagePools/SU1_Pool/volumes/05c1cbb7",
-                "name": "05c1cbb7",
-                "type": "Microsoft.Fabric.Admin/fabricLocations/storageSubSystems/storagePools/volumes",
-                "location": "local",
-                "tags": {},
-                "properties": {
-                    "fileSystem": "CSVFS_ReFS",
-                    "remainingSizeGB": 2191,
-                    "sizeGB": 2540,
-                    "volumeLabel": "SU1_Volume"
-                }
-            }
-        },
-        "404": {}
-    }
+    "404": {}
+  }
 }

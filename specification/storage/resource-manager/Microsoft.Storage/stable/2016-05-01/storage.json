@@ -374,7 +374,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- current usage acount and limit retrieved and returned successfully.",
+            "description": "OK -- current usage account and limit retrieved and returned successfully.",
             "schema": {
               "$ref": "#/definitions/UsageListResult"
             }
@@ -486,14 +486,16 @@
         },
         "type": {
           "type": "string",
-          "enum": [ "Microsoft.Storage/storageAccounts" ]
+          "enum": [
+            "Microsoft.Storage/storageAccounts"
+          ]
         }
       },
       "required": [
         "name",
         "type"
       ],
-      "description": "The parameters used to check the availabity of the storage account name."
+      "description": "The parameters used to check the availability of the storage account name."
     },
     "CheckNameAvailabilityResult": {
       "properties": {
@@ -565,7 +567,7 @@
           "type": "string",
           "description": "Gets or sets the custom domain name assigned to the storage account. Name is the CNAME source."
         },
-        "useSubDomain": {
+        "useSubDomainName": {
           "type": "boolean",
           "description": "Indicates whether indirect CName validation is enabled. Default value is false. This should only be set on updates."
         }
@@ -608,10 +610,14 @@
         "keySource": {
           "type": "string",
           "description": "The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Storage",
-          "enum": [ "Microsoft.Storage" ]
+          "enum": [
+            "Microsoft.Storage"
+          ]
         }
       },
-      "required": [ "keySource" ],
+      "required": [
+        "keySource"
+      ],
       "description": "The encryption settings on the storage account."
     },
     "StorageAccountPropertiesCreateParameters": {
@@ -1140,7 +1146,7 @@
       "properties": {
         "canonicalizedResource": {
           "type": "string",
-          "description" : "The canonical path to the signed resource."
+          "description": "The canonical path to the signed resource."
         },
         "signedResource": {
           "type": "string",
@@ -1258,14 +1264,14 @@
         "canonicalizedResource",
         "signedResource"
       ],
-      "description": "The parameters to list service SAS credentials of a speicific resource."
+      "description": "The parameters to list service SAS credentials of a specific resource."
     },
     "ListServiceSasResponse": {
       "properties": {
         "serviceSasToken": {
           "readOnly": true,
           "type": "string",
-          "description": "List service SAS credentials of speicific resource."
+          "description": "List service SAS credentials of specific resource."
         }
       },
       "description": "The List service SAS credentials operation response."

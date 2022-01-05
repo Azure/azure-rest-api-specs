@@ -1,5 +1,5 @@
 # Databricks
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Databricks.
@@ -12,7 +12,21 @@ This is the AutoRest configuration file for Databricks.
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2021-04-01-preview
   - tag: package-2018-04-01
+```
+
+### Tag: package-2021-04-01-preview and java
+
+These settings apply only when `--tag=package-2021-04-01-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2021-04-01-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.databricks.v2021_04_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/databricks/mgmt-v2021_04_01_preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2018-04-01 and java
@@ -23,13 +37,13 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-04-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.databricks.v2018_04_01
-  output-folder: $(azure-libraries-for-java-folder)/databricks/resource-manager/v2018_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/databricks/mgmt-v2018_04_01
 regenerate-manager: true
 generate-interface: true
 ```
 
 
-## Getting Started 
+## Getting Started
 To build the SDK for Databricks, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -43,14 +57,15 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the Databricks API.
 
 ``` yaml
+title: AzureDatabricksManagementClient
+description: 'The Microsoft Azure management APIs allow end users to operate on Azure Databricks Workspace resources.'
 openapi-type: arm
-tag: package-2018-04-01
+tag: package-2021-04-01-preview
 ```
-
 
 ### Tag: package-2018-04-01
 
@@ -59,8 +74,33 @@ These settings apply only when `--tag=package-2018-04-01` is specified on the co
 ``` yaml $(tag) == 'package-2018-04-01'
 input-file:
 - Microsoft.Databricks/stable/2018-04-01/databricks.json
+- Microsoft.Databricks/stable/2018-04-01/vnetpeering.json
 ```
 
+### Tag: package-2021-04-01-preview
+
+These settings apply only when `--tag=package-2021-04-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04-01-preview'
+input-file:
+- Microsoft.Databricks/preview/2021-04-01-preview/databricks.json
+- Microsoft.Databricks/preview/2021-04-01-preview/vnetpeering.json
+```
+
+---
+# Suppressions
+
+``` yaml
+directive:
+  - suppress: R3016
+    from: databricks.json 
+    where: $.definitions.Encryption.properties.KeyName
+    reason: Response from service is not camel case
+  - suppress: RequiredReadOnlySystemData
+    reason: We do not yet support system data. Currently our system support system data inside property field.
+```
+
+---
 # Code Generation
 
 ## Swagger to SDK
@@ -70,32 +110,21 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-powershell
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
 ```
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
+See configuration in [readme.go.md](./readme.go.md)
 
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  clear-output-folder: true
-  namespace: databricks
-```
+## Python
 
-### Go multi-api
+See configuration in [readme.python.md](./readme.python.md)
 
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-04-01
-```
 
-### Tag: package-2018-04-01 and go
-
-These settings apply only when `--tag=package-2018-04-01 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2018-04-01' && $(go)
-output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2018-04-01/$(namespace)
-```

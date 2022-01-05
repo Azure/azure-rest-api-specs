@@ -1,193 +1,193 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "version": "2015-11-01",
-        "title": "SubscriptionClient",
-        "description": "The User Subscription Management Client."
-    },
-    "host": "management.local.azurestack.external",
-    "schemes": [
-        "https"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "paths": {
-        "/delegatedProviders/{delegatedProviderId}/offers": {
-            "get": {
-                "x-ms-examples": {
-                    "Get the list of offers.": {
-                        "$ref": "./examples/DelegatedProviderOffer/List.json"
-                    }
-                },
-                "description": "Get the list of offers for the specified delegated provider.",
-                "tags": [
-                    "DelegatedProviderOffers"
-                ],
-                "operationId": "DelegatedProviderOffers_List",
-                "parameters": [
-                    {
-                        "name": "delegatedProviderId",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "Id of the delegated provider."
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/OfferList"
-                        }
-                    }
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ],
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                }
-            }
+  "swagger": "2.0",
+  "info": {
+    "version": "2015-11-01",
+    "title": "SubscriptionClient",
+    "description": "The User Subscription Management Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/delegatedProviders/{delegatedProviderId}/offers": {
+      "get": {
+        "x-ms-examples": {
+          "Get the list of offers.": {
+            "$ref": "./examples/DelegatedProviderOffer/List.json"
+          }
         },
-        "/delegatedProviders/{delegatedProviderId}/offers/{offerName}": {
-            "get": {
-                "x-ms-examples": {
-                    "Get the specified offer name.": {
-                        "$ref": "./examples/DelegatedProviderOffer/Get.json"
-                    }
-                },
-                "description": "Get the specified offer for the delegated provider.",
-                "tags": [
-                    "DelegatedProviderOffers"
-                ],
-                "operationId": "DelegatedProviderOffers_Get",
-                "parameters": [
-                    {
-                        "name": "delegatedProviderId",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "Id of the delegated provider."
-                    },
-                    {
-                        "name": "offerName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "Name of the offer."
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/Offer"
-                        }
-                    }
-                }
+        "description": "Get the list of offers for the specified delegated provider.",
+        "tags": [
+          "DelegatedProviderOffers"
+        ],
+        "operationId": "DelegatedProviderOffers_List",
+        "parameters": [
+          {
+            "name": "delegatedProviderId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id of the delegated provider."
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OfferList"
             }
+          }
         },
-        "/offers": {
-            "get": {
-                "x-ms-examples": {
-                    "Get the list of public offers for the root provider.": {
-                        "$ref": "./examples/Offer/List.json"
-                    }
-                },
-                "description": "Get the list of public offers for the root provider.",
-                "tags": [
-                    "Offers"
-                ],
-                "operationId": "Offers_List",
-                "parameters": [
-                    {
-                        "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/OfferList"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                }
-            }
-        }   
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     },
-    "definitions": {
-        "Offer": {
-            "description": "Represents an offering of services against which a subscription can be created.",
-            "type": "object",
-            "properties": {
-                "displayName": {
-                    "description": "Display name of offer.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "Description of offer.",
-                    "type": "string"
-                },
-                "name": {
-                    "description": "The name of the offer.",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "The offer ID",
-                    "type": "string"
-                }
-            }
+    "/delegatedProviders/{delegatedProviderId}/offers/{offerName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get the specified offer name.": {
+            "$ref": "./examples/DelegatedProviderOffer/Get.json"
+          }
         },
-        "OfferList": {
-            "description": "List of public offers.",
-            "type": "object",
-            "properties": {
-                "value": {
-                    "description": "List of public offers.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Offer"
-                    }
-                },
-                "nextLink": {
-                    "type": "string",
-                    "description": "URI to next page."
-                }
+        "description": "Get the specified offer for the delegated provider.",
+        "tags": [
+          "DelegatedProviderOffers"
+        ],
+        "operationId": "DelegatedProviderOffers_Get",
+        "parameters": [
+          {
+            "name": "delegatedProviderId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id of the delegated provider."
+          },
+          {
+            "name": "offerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the offer."
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Offer"
             }
+          }
         }
+      }
     },
-    "securityDefinitions": {
-        "azure_auth": {
-            "type": "oauth2",
-            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-            "flow": "implicit",
-            "description": "Azure Active Directory OAuth2 flow",
-            "scopes": {
-                "user_impersonation": "impersonate your user account"
+    "/offers": {
+      "get": {
+        "x-ms-examples": {
+          "Get the list of public offers for the root provider.": {
+            "$ref": "./examples/Offer/List.json"
+          }
+        },
+        "description": "Get the list of public offers for the root provider.",
+        "tags": [
+          "Offers"
+        ],
+        "operationId": "Offers_List",
+        "parameters": [
+          {
+            "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OfferList"
             }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
+      }
+    }
+  },
+  "definitions": {
+    "Offer": {
+      "description": "Represents an offering of services against which a subscription can be created.",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "Display name of offer.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of offer.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the offer.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The offer ID",
+          "type": "string"
+        }
+      }
     },
-    "security": [
-        {
-            "azure_auth": [
-                "user_impersonation"
-            ]
+    "OfferList": {
+      "description": "List of public offers.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of public offers.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Offer"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URI to next page."
         }
-    ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }

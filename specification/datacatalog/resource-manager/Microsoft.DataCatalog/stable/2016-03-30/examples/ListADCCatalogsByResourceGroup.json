@@ -1,42 +1,48 @@
 {
-	"parameters": {
-		"subscriptionId": "12345678-1234-1234-12345678abc",
-		"resourceGroupName": "exampleResourceGroup",
-		"api-version": "2016-03-30"
-	},
-	"responses": {
-		"200": {
-			"headers": {
-				"Date": "Wed, 13 Sep 2017 17:55:54 GMT",
-				"x-ms-request-id": "a8bb197f-b00f-4add-a847-59f6aa0315ab",
-				"x-ms-correlation-request-id": "acdb3257-c6cb-44f1-8e14-afa3ebf471fa"
-			},
-			"body": {
-				"value": [{
-					"id": "/subscriptions/12345678-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataCatalog/catalogs/exampleCatalog",
-					"name": "exampleCatalog",
-					"type": "Microsoft.DataCatalog/catalogs",
-					"location": "North US",
-					"tags": {
-						"mykey": "myvalue",
-						"mykey2": "myvalue2"
-					},
-					"properties": {
-						"sku": "Standard",
-						"units": 1,
-						"admins": [{
-							"upn": "myupn@microsoft.com",
-							"objectId": "99999999-9999-9999-999999999999"
-						}],
-						"successfullyProvisioned": true,
-						"enableAutomaticUnitAdjustment": false,
-						"users": [{
-							"upn": "myupn@microsoft.com",
-							"objectId": "99999999-9999-9999-999999999999"
-						}]
-					}
-				}]
-			}
-		}
-	}
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-12345678abc",
+    "resourceGroupName": "exampleResourceGroup",
+    "api-version": "2016-03-30"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Date": "Wed, 13 Sep 2017 17:55:54 GMT",
+        "x-ms-request-id": "a8bb197f-b00f-4add-a847-59f6aa0315ab",
+        "x-ms-correlation-request-id": "acdb3257-c6cb-44f1-8e14-afa3ebf471fa"
+      },
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/12345678-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataCatalog/catalogs/exampleCatalog",
+            "name": "exampleCatalog",
+            "type": "Microsoft.DataCatalog/catalogs",
+            "location": "North US",
+            "tags": {
+              "mykey": "myvalue",
+              "mykey2": "myvalue2"
+            },
+            "properties": {
+              "sku": "Standard",
+              "units": 1,
+              "admins": [
+                {
+                  "upn": "myupn@microsoft.com",
+                  "objectId": "99999999-9999-9999-999999999999"
+                }
+              ],
+              "successfullyProvisioned": true,
+              "enableAutomaticUnitAdjustment": false,
+              "users": [
+                {
+                  "upn": "myupn@microsoft.com",
+                  "objectId": "99999999-9999-9999-999999999999"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
 }

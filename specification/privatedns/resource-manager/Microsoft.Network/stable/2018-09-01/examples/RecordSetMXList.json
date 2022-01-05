@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "resourceGroupName": "resourceGroup1",
+    "privateZoneName": "privatezone1.com",
+    "recordType": "MX",
+    "api-version": "2018-09-01",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/MX?api-version=2018-09-01&$skipToken=skipToken",
+        "value": [
+          {
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/MX/recordmx1",
+            "etag": "00000000-0000-0000-0000-000000000000",
+            "name": "recordmx1",
+            "type": "Microsoft.Network/privateDnsZones/MX",
+            "properties": {
+              "metadata": {
+                "key1": "value1"
+              },
+              "ttl": 3600,
+              "fqdn": "recordmx1.privatezone1.com.",
+              "isAutoRegistered": false,
+              "mxRecords": [
+                {
+                  "preference": 0,
+                  "exchange": "mail.contoso1.com"
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/MX/recordmx2",
+            "etag": "00000000-0000-0000-0000-000000000000",
+            "name": "recordmx2",
+            "type": "Microsoft.Network/privateDnsZones/MX",
+            "properties": {
+              "ttl": 3600,
+              "fqdn": "recordmx2.privatezone1.com.",
+              "isAutoRegistered": false,
+              "mxRecords": [
+                {
+                  "preference": 0,
+                  "exchange": "mail.contoso2.com"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

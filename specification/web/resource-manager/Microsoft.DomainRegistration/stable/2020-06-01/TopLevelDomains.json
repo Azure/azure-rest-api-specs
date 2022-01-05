@@ -1,0 +1,299 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-06-01",
+    "title": "TopLevelDomains API Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DomainRegistration/topLevelDomains": {
+      "get": {
+        "tags": [
+          "TopLevelDomains"
+        ],
+        "summary": "Get all top-level domains supported for registration.",
+        "description": "Description for Get all top-level domains supported for registration.",
+        "operationId": "TopLevelDomains_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TopLevelDomainCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2020-06-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Top Level Domains": {
+            "$ref": "./examples/ListTopLevelDomains.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DomainRegistration/topLevelDomains/{name}": {
+      "get": {
+        "tags": [
+          "TopLevelDomains"
+        ],
+        "summary": "Get details of a top-level domain.",
+        "description": "Description for Get details of a top-level domain.",
+        "operationId": "TopLevelDomains_Get",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the top-level domain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TopLevelDomain"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2020-06-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Top Level Domain": {
+            "$ref": "./examples/GetTopLevelDomain.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DomainRegistration/topLevelDomains/{name}/listAgreements": {
+      "post": {
+        "tags": [
+          "TopLevelDomains"
+        ],
+        "summary": "Gets all legal agreements that user needs to accept before purchasing a domain.",
+        "description": "Description for Gets all legal agreements that user needs to accept before purchasing a domain.",
+        "operationId": "TopLevelDomains_ListAgreements",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the top-level domain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "agreementOption",
+            "in": "body",
+            "description": "Domain agreement options.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TopLevelDomainAgreementOption"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TldLegalAgreementCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2020-06-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Top Level Domain Agreements": {
+            "$ref": "./examples/ListTopLevelDomainAgreements.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "TldLegalAgreement": {
+      "description": "Legal agreement for a top level domain.",
+      "required": [
+        "agreementKey",
+        "title",
+        "content"
+      ],
+      "type": "object",
+      "properties": {
+        "agreementKey": {
+          "description": "Unique identifier for the agreement.",
+          "type": "string"
+        },
+        "title": {
+          "description": "Agreement title.",
+          "type": "string"
+        },
+        "content": {
+          "description": "Agreement details.",
+          "type": "string"
+        },
+        "url": {
+          "description": "URL where a copy of the agreement details is hosted.",
+          "type": "string"
+        }
+      }
+    },
+    "TldLegalAgreementCollection": {
+      "description": "Collection of top-level domain legal agreements.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TldLegalAgreement"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TopLevelDomain": {
+      "description": "A top level domain object.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../Microsoft.Web/stable/2020-06-01/CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "TopLevelDomain resource specific properties",
+          "properties": {
+            "privacy": {
+              "description": "If <code>true</code>, then the top level domain supports domain privacy; otherwise, <code>false</code>.",
+              "type": "boolean"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "TopLevelDomainAgreementOption": {
+      "description": "Options for retrieving the list of top level domain legal agreements.",
+      "type": "object",
+      "properties": {
+        "includePrivacy": {
+          "description": "If <code>true</code>, then the list of agreements will include agreements for domain privacy as well; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "forTransfer": {
+          "description": "If <code>true</code>, then the list of agreements will include agreements for domain transfer as well; otherwise, <code>false</code>.",
+          "type": "boolean"
+        }
+      }
+    },
+    "TopLevelDomainCollection": {
+      "description": "Collection of Top-level domains.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TopLevelDomain"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Your Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+      "required": true,
+      "type": "string"
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "API Version",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

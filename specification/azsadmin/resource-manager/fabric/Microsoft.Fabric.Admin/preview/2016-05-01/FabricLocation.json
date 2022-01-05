@@ -1,205 +1,219 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "description": "Fabric location operation endpoints and objects.",
-        "title": "FabricAdminClient",
-        "version": "2016-05-01"
-    },
-    "host": "adminmanagement.local.azurestack.external",
-    "schemes": [
-        "https"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{fabricLocation}": {
-            "get": {
-                "x-ms-examples": {
-                    "Returns the requested fabric location.": {
-                        "$ref": "./examples/FabricLocation/Get.json"
-                    }
-                },
-                "tags": [
-                    "FabricLocations"
-                ],
-                "description": "Returns the requested fabric location.",
-                "operationId": "FabricLocations_Get",
-                "parameters": [
-                    {
-                        "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/FabricLocationParameter"
-                    },
-                    {
-                        "$ref": "Fabric.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/FabricLocation"
-                        }
-                    },
-                    "404": {
-                        "description": "NOT FOUND"
-                    }
-                }
-            }
+  "swagger": "2.0",
+  "info": {
+    "description": "Fabric location operation endpoints and objects.",
+    "title": "FabricAdminClient",
+    "version": "2016-05-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{fabricLocation}": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the requested fabric location.": {
+            "$ref": "./examples/FabricLocation/Get.json"
+          }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations": {
-            "get": {
-                "x-ms-examples": {
-                    "Returns a list of all fabric locations.": {
-                        "$ref": "./examples/FabricLocation/List.json"
-                    }
-                },
-                "tags": [
-                    "FabricLocations"
-                ],
-                "description": "Returns a list of all fabric locations.",
-                "operationId": "FabricLocations_List",
-                "parameters": [
-                    {
-                        "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "Fabric.json#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "Fabric.json#/parameters/FilterParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/FabricLocationList"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                },
-                "x-ms-odata": "#/definitions/FabricLocation"
-            },
-            "put": {
-                "x-ms-examples": {
-                    "Creates or updates a fabric location.  This will fail if called outside deployment.": {
-                        "$ref": "./examples/FabricLocation/Put.json"
-                    }
-                },
-                "tags": [
-                    "FabricLocations"
-                ],
-                "description": "Creates or updates a fabric location.  This will fail if called outside deployment.",
-                "operationId": "FabricLocations_Create",
-                "parameters": [
-                    {
-                        "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "Fabric.json#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/FabricLocationObjectParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/FabricLocation"
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "definitions": {
-        "FabricLocation": {
-            "description": "Place holder for fabric location.",
-            "type": "object",
-            "properties": {
-                "properties" : {
-                    "description" : "Empty object.",
-                    "type" : "object"
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "Fabric.json#/definitions/Resource"
-                }
-            ]
-        },
-        "FabricLocationList": {
-            "description": "Pageable list of fabric locations.",
-            "type": "object",
-            "properties": {
-                "value": {
-                    "description": "List of fabric locations.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/FabricLocation"
-                    }
-                },
-                "nextLink": {
-                    "description": "URI to the next page.",
-                    "type": "string"
-                }
-            }
-        }
-    },
-    "parameters": {
-        "FabricLocationParameter": {
-            "description": "Fabric location.",
-            "name": "fabricLocation",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "x-ms-parameter-location": "method"
-        },
-        "FabricLocationObjectParameter": {
-            "description": "Fabric location object.",
-            "name": "fabricObject",
+        "tags": [
+          "FabricLocations"
+        ],
+        "description": "Returns the requested fabric location.",
+        "operationId": "FabricLocations_Get",
+        "parameters": [
+          {
+            "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/FabricLocationParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
             "schema": {
-                "$ref": "#/definitions/FabricLocation"
-            },
-            "in": "body",
-            "required": true,
-            "x-ms-parameter-location": "method"
-        }
-    },
-    "securityDefinitions": {
-        "azure_auth": {
-            "type": "oauth2",
-            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-            "flow": "implicit",
-            "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
-            "scopes": {
-                "user_impersonation": "impersonate your user account"
+              "$ref": "#/definitions/FabricLocation"
             }
+          },
+          "404": {
+            "description": "NOT FOUND"
+          }
         }
+      }
     },
-    "security": [
-        {
-            "azure_auth": [
-                "user_impersonation"
-            ]
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations": {
+      "get": {
+        "x-ms-examples": {
+          "Returns a list of all fabric locations.": {
+            "$ref": "./examples/FabricLocation/List.json"
+          }
+        },
+        "tags": [
+          "FabricLocations"
+        ],
+        "description": "Returns a list of all fabric locations.",
+        "operationId": "FabricLocations_List",
+        "parameters": [
+          {
+            "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FabricLocationList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/FabricLocation"
+      }
+    }
+  },
+  "definitions": {
+    "FabricLocation": {
+      "description": "Fabric Location resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Properties of a FabricLocation.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FabricLocationModel"
         }
-    ]
+      },
+      "allOf": [
+        {
+          "$ref": "Fabric.json#/definitions/Resource"
+        }
+      ]
+    },
+    "FabricLocationModel": {
+      "description": "All properties of a fabric location resource.",
+      "type": "object",
+      "properties": {
+        "pepIpAddresses": {
+          "description": "The IP addresses of the privileged endpoints.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "timeServer": {
+          "description": "The IP address of the time server.",
+          "type": "string"
+        },
+        "stampInformationId": {
+          "description": "The deployment id of the stamp.",
+          "type": "string"
+        },
+        "externalDNSIPAddress01": {
+          "description": "First external IP address of the DNS server.",
+          "type": "string"
+        },
+        "externalDNSIPAddress02": {
+          "description": "Second external IP Address of the DNS server.",
+          "type": "string"
+        },
+        "exclusiveAdminOperationRunning": {
+          "description": "Value for whether an exclusive admin operation is running.",
+          "type": "boolean"
+        },
+        "exclusiveAdminOperationName": {
+          "description": "Name of the running exclusive admin operation.",
+          "type": "string"
+        },
+        "startUpActionPlanStartTime": {
+          "description": "Last known stamp start time for the start up action plan.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "startUpActionPlanEndTime": {
+          "description": "Last known stamp stop time for the start up action plan.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "shutDownActionPlanStartTime": {
+          "description": "Last known stamp start time for the shut down action plan",
+          "type": "string",
+          "format": "date-time"
+        },
+        "shutDownActionPlanEndTime": {
+          "description": "Last known stamp stop time for the shut down action plan.",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "FabricLocationList": {
+      "description": "Pageable list of fabric locations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of fabric locations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FabricLocation"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "FabricLocationParameter": {
+      "description": "Fabric location.",
+      "name": "fabricLocation",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }

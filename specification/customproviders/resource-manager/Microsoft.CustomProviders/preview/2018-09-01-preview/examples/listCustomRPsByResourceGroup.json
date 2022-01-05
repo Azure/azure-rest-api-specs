@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testRG",
+    "api-version": "2018-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "name": "newrp1",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.CustomProviders/resourceProviders/newrp1",
+            "type": "Microsoft.CustomProviders/resourceProviders",
+            "location": "East US",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "actions": [
+                {
+                  "name": "TestAction",
+                  "routingType": "Proxy",
+                  "endpoint": "https://mytestendpoint/"
+                }
+              ],
+              "resourceTypes": [
+                {
+                  "name": "TestResource",
+                  "routingType": "Proxy,Cache",
+                  "endpoint": "https://mytestendpoint2/"
+                }
+              ]
+            }
+          },
+          {
+            "name": "newrp2",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.CustomProviders/resourceProviders/newrp2",
+            "type": "Microsoft.CustomProviders/resourceProviders",
+            "location": "East US",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "actions": [
+                {
+                  "name": "TestAction",
+                  "routingType": "Proxy",
+                  "endpoint": "https://mytestendpoint/"
+                }
+              ],
+              "resourceTypes": [
+                {
+                  "name": "TestResource",
+                  "routingType": "Proxy,Cache",
+                  "endpoint": "https://mytestendpoint2/"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

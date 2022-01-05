@@ -158,6 +158,10 @@
           "type": "string",
           "description": "Error message"
         },
+        "actionableMessage": {
+          "type": "string",
+          "description": "Actionable steps for this exception"
+        },
         "filePath": {
           "readOnly": true,
           "type": "string",
@@ -237,7 +241,6 @@
     "ConnectionInfo": {
       "type": "object",
       "description": "Defines the connection properties of a server",
-      "x-ms-discriminator-value": "Unknown",
       "properties": {
         "type": {
           "type": "string",
@@ -252,7 +255,9 @@
           "description": "Password credential."
         }
       },
-      "required": [ "type" ],
+      "required": [
+        "type"
+      ],
       "discriminator": "type"
     },
     "AuthenticationType": {
@@ -301,20 +306,264 @@
           "type": "boolean",
           "description": "Whether to trust the server certificate",
           "default": false
+        },
+        "platform": {
+          "$ref": "#/definitions/SqlServerSourcePlatform",
+          "description": "Server platform type for connection"
         }
       },
-      "required": [ "dataSource" ]
+      "required": [
+        "dataSource"
+      ]
+    },
+    "SqlServerSourcePlatform": {
+      "type": "string",
+      "description": "An enumeration of source platform types",
+      "enum": [
+        "SqlOnPrem"
+      ],
+      "x-ms-enum": {
+        "name": "SqlSourcePlatform",
+        "modelAsString": true
+      }
+    },
+    "MySqlConnectionInfo": {
+      "x-ms-discriminator-value": "MySqlConnectionInfo",
+      "type": "object",
+      "description": "Information for connecting to MySQL server",
+      "properties": {
+        "serverName": {
+          "type": "string",
+          "description": "Name of the server"
+        },
+        "port": {
+          "type": "integer",
+          "description": "Port for Server"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionInfo"
+        }
+      ],
+      "required": [
+        "serverName",
+        "port"
+      ]
+    },
+    "PostgreSqlConnectionInfo": {
+      "x-ms-discriminator-value": "PostgreSqlConnectionInfo",
+      "type": "object",
+      "description": "Information for connecting to PostgreSQL server",
+      "properties": {
+        "serverName": {
+          "type": "string",
+          "description": "Name of the server"
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "Name of the database"
+        },
+        "port": {
+          "type": "integer",
+          "description": "Port for Server"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionInfo"
+        }
+      ],
+      "required": [
+        "serverName",
+        "port"
+      ]
+    },
+    "MySqlTargetPlatform": {
+      "type": "string",
+      "description": "An enumeration of possible target types when migrating from MySQL",
+      "enum": [
+        "SqlServer",
+        "AzureDbForMySQL"
+      ],
+      "x-ms-enum": {
+        "name": "MySqlTargetPlatformType",
+        "modelAsString": true
+      }
     },
     "ServerLevelPermissionsGroup": {
       "type": "string",
       "description": "Permission group for validations. These groups will run a set of permissions for validating user activity. Select the permission group for the activity that you are performing.",
       "enum": [
         "Default",
-        "MigrationFromSqlServerToAzureDB"
+        "MigrationFromSqlServerToAzureDB",
+        "MigrationFromSqlServerToAzureMI",
+        "MigrationFromMySQLToAzureDBForMySQL"
       ],
       "x-ms-enum": {
-        "name": "ServerLevelPermissionsGroup",
+        "name": "ServerLevelPermissionsGroup"
+      }
+    },
+    "AzureActiveDirectoryApp": {
+      "type": "object",
+      "description": "Azure Active Directory Application",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "Application ID of the Azure Active Directory Application"
+        },
+        "appKey": {
+          "type": "string",
+          "description": "Key used to authenticate to the Azure Active Directory Application"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant id of the customer"
+        }
+      },
+      "required": [
+        "applicationId",
+        "appKey",
+        "tenantId"
+      ]
+    },
+    "MiSqlConnectionInfo": {
+      "x-ms-discriminator-value": "MiSqlConnectionInfo",
+      "type": "object",
+      "description": "Properties required to create a connection to Azure SQL database Managed instance",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionInfo"
+        }
+      ],
+      "properties": {
+        "managedInstanceResourceId": {
+          "type": "string",
+          "description": "Resource id for Azure SQL database Managed instance"
+        }
+      },
+      "required": [
+        "managedInstanceResourceId"
+      ]
+    },
+    "BackupSetInfo": {
+      "type": "object",
+      "description": "Information of backup set",
+      "properties": {
+        "backupSetId": {
+          "type": "string",
+          "description": "Id for the set of backup files"
+        },
+        "firstLsn": {
+          "type": "string",
+          "description": "First log sequence number of the backup file"
+        },
+        "lastLsn": {
+          "type": "string",
+          "description": "Last log sequence number of the backup file"
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last modified time of the backup file in share location"
+        },
+        "backupType": {
+          "$ref": "#/definitions/BackupType",
+          "description": "Enum of the different backup types"
+        },
+        "listOfBackupFiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BackupFileInfo"
+          },
+          "description": "List of files in the backup set"
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "Name of the database to which the backup set belongs"
+        },
+        "backupStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time that the backup operation began"
+        },
+        "backupFinishedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time that the backup operation finished"
+        },
+        "isBackupRestored": {
+          "type": "boolean",
+          "description": "Whether the backup set is restored or not"
+        }
+      },
+      "readOnly": true
+    },
+    "BackupType": {
+      "type": "string",
+      "description": "Enum of the different backup types.",
+      "enum": [
+        "Database",
+        "TransactionLog",
+        "File",
+        "DifferentialDatabase",
+        "DifferentialFile",
+        "Partial",
+        "DifferentialPartial"
+      ],
+      "x-ms-enum": {
+        "name": "BackupType",
         "modelAsString": true
+      }
+    },
+    "BackupFileInfo": {
+      "type": "object",
+      "description": "Information of the backup file",
+      "properties": {
+        "fileLocation": {
+          "type": "string",
+          "description": "Location of the backup file in shared folder"
+        },
+        "familySequenceNumber": {
+          "type": "integer",
+          "description": "Sequence number of the backup file in the backup set"
+        },
+        "status": {
+          "$ref": "#/definitions/BackupFileStatus",
+          "description": "Status of the backup file during migration"
+        }
+      },
+      "readOnly": true
+    },
+    "BackupFileStatus": {
+      "type": "string",
+      "description": "An enumeration of Status of the log backup file.",
+      "enum": [
+        "Arrived",
+        "Queued",
+        "Uploading",
+        "Uploaded",
+        "Restoring",
+        "Restored",
+        "Cancelled"
+      ],
+      "x-ms-enum": {
+        "name": "BackupFileStatus",
+        "modelAsString": true
+      }
+    },
+    "OrphanedUserInfo": {
+      "type": "object",
+      "description": "Information of orphaned users on the SQL server database.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the orphaned user"
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "Parent database of the user"
+        }
       }
     }
   }

@@ -50,7 +50,12 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
 ```
 
 ## C#
@@ -63,7 +68,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DataCatalog
-  output-folder: $(csharp-sdks-folder)/DataCatalog/Management.DataCatalog/Generated
+  output-folder: $(csharp-sdks-folder)/datacatalog/Microsoft.Azure.Management.DataCatalog/src/Generated
   clear-output-folder: true
 ```
 
@@ -74,18 +79,18 @@ csharp:
 ``` yaml
 directive:
   - suppress: R3018  # EnumInsteadOfBoolean
-    where: 
+    where:
       - $.definitions.ADCCatalogProperties.properties.successfullyProvisioned
       - $.definitions.ADCCatalogProperties.properties.enableAutomaticUnitAdjustment
     from: datacatalog.json
     reason: Booleans are used to indicate binary states of the property, enum is not appropriate.
   - suppress: R3027  # TrackedResourceListByResourceGroup
-    where: 
+    where:
       - $.definitions.ADCCatalog
     from: datacatalog.json
     reason: Catalog is per tenant level resources.
   - suppress: R3028  # TrackedResourceListBySubscription
-    where: 
+    where:
       - $.definitions.ADCCatalog
     from: datacatalog.json
     reason: Catalog can only be listed by resource group.
@@ -93,31 +98,7 @@ directive:
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  clear-output-folder: true
-  namespace: datacatalog
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2016-03-30
-```
-
-### Tag: package-2016-03-30 and go
-
-These settings apply only when `--tag=package-2016-03-30 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2016-03-30' && $(go)
-output-folder: $(go-sdk-folder)/services/datacatalog/mgmt/2016-03-30/datacatalog
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -148,9 +129,12 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2016-03-30' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.datacatalog.v2016_03_30
-  output-folder: $(azure-libraries-for-java-folder)/datacatalog/resource-manager/v2016_03_30
+  output-folder: $(azure-libraries-for-java-folder)/sdk/datacatalog/mgmt-v2016_03_30
 regenerate-manager: true
 generate-interface: true
 ```
+
+
+
 
 

@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789098",
+    "resourceGroupName": "kustorptest",
+    "clusterName": "KustoClusterRPTest4",
+    "databaseName": "databaseName1",
+    "api-version": "2017-09-07-privatepreview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Some User",
+            "role": "Admin",
+            "type": "User",
+            "fqn": "aaduser=some_guid",
+            "email": "user@microsoft.com",
+            "appId": ""
+          },
+          {
+            "name": "Kusto",
+            "role": "Viewer",
+            "type": "Group",
+            "fqn": "aadgroup=some_guid",
+            "email": "kusto@microsoft.com",
+            "appId": ""
+          },
+          {
+            "name": "SomeApp",
+            "role": "Admin",
+            "type": "App",
+            "fqn": "aadapp=some_guid_app_id",
+            "email": "",
+            "appId": "some_guid_app_id"
+          }
+        ]
+      }
+    }
+  }
+}

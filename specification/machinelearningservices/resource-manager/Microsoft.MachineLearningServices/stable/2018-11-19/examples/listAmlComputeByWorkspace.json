@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "resourceGroupName": "demo_resource_group",
+    "workspaceName": "demo_workspace",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2018-11-19"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo_resource_group/providers/Microsoft.MachineLearningServices/workspace/demo_workspace/clusters/demo_cluster",
+            "name": "demo_cluster",
+            "type": "Microsoft.MachineLearningServices/workspaces/computes",
+            "properties": {
+              "createdOn": "2017-09-26T22:28:08.327Z",
+              "provisioningState": "Succeeded",
+              "properties": {
+                "allocationState": "Resizing",
+                "allocationStateTransitionTime": "2017-09-27T22:28:08.998Z",
+                "errors": null,
+                "vmSize": "STANDARD_NC6",
+                "vmPriority": "Dedicated",
+                "subnet": "test-subnet-resource-id",
+                "scaleSettings": {
+                  "maxNodeCount": 1,
+                  "minNodeCount": 0,
+                  "nodeIdleTimeBeforeScaleDown": "PT5M"
+                },
+                "currentNodeCount": 0,
+                "targetNodeCount": 1,
+                "nodeStateCounts": {
+                  "preparingNodeCount": 0,
+                  "runningNodeCount": 0,
+                  "idleNodeCount": 0,
+                  "unusableNodeCount": 0,
+                  "leavingNodeCount": 0,
+                  "preemptedNodeCount": 0
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

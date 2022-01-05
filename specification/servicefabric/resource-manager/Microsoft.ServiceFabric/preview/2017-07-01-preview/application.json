@@ -46,7 +46,7 @@
           {
             "name": "api-version",
             "in": "query",
-            "description": "The version of the Service Fabric resouce provider API",
+            "description": "The version of the Service Fabric resource provider API",
             "required": true,
             "type": "string"
           }
@@ -539,7 +539,7 @@
           }
         ],
         "x-ms-examples": {
-          "Put an application with mininum parameters": {
+          "Put an application with minimum parameters": {
             "$ref": "./examples/ApplicationPutOperation_example_min.json"
           },
           "Put an application with maximum parameters": {
@@ -606,7 +606,7 @@
           "202": {
             "description": "The request was accepted and the operation will complete asynchronously.",
             "schema": {
-              "$ref": "#/definitions/ApplicationResourceUpdate"
+              "$ref": "#/definitions/ApplicationResource"
             }
           },
           "default": {
@@ -792,7 +792,7 @@
           }
         ],
         "x-ms-examples": {
-          "Put a service with mininum parameters": {
+          "Put a service with minimum parameters": {
             "$ref": "./examples/ServicePutOperation_example_min.json"
           },
           "Put a service with maximum parameters": {
@@ -862,7 +862,7 @@
           "202": {
             "description": "The request was accepted and the operation will complete asynchronously.",
             "schema": {
-              "$ref": "#/definitions/ServiceResourceUpdate"
+              "$ref": "#/definitions/ServiceResource"
             }
           },
           "default": {
@@ -970,30 +970,6 @@
     }
   },
   "definitions": {
-    "ApplicationHealthPolicy": {
-      "type": "object",
-      "description": "Defines a health policy used to evaluate the health of an application or one of its children entities.\n",
-      "properties": {
-        "ConsiderWarningAsError": {
-          "type": "boolean",
-          "description": "Indicates whether warnings are treated with the same severity as errors.",
-          "default": false
-        },
-        "MaxPercentUnhealthyDeployedApplications": {
-          "type": "integer",
-          "description": "The maximum allowed percentage of unhealthy deployed applications. Allowed values are Byte values from zero to 100.\nThe percentage represents the maximum tolerated percentage of deployed applications that can be unhealthy before the application is considered in error.\nThis is calculated by dividing the number of unhealthy deployed applications over the number of nodes where the application is currently deployed on in the cluster.\nThe computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero.\n",
-          "default": 0
-        },
-        "DefaultServiceTypeHealthPolicy": {
-          "$ref": "#/definitions/ServiceTypeHealthPolicy",
-          "description": "The health policy used by default to evaluate the health of a service type."
-        },
-        "ServiceTypeHealthPolicyMap": {
-          "$ref": "#/definitions/ServiceTypeHealthPolicyMap",
-          "description": "The map with service type health policy per service type name. The map is empty by default."
-        }
-      }
-    },
     "ApplicationMetricDescription": {
       "type": "object",
       "description": "Describes capacity information for a custom resource balancing metric. This can be used to limit the total consumption of this metric by the services of this application.\n",
@@ -1063,12 +1039,6 @@
       "type": "string",
       "description": "The amount of time the overall upgrade has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.",
       "default": "P10675199DT02H48M05.4775807S"
-    },
-    "UpgradeReplicaSetCheckTimeout": {
-      "type": "integer",
-      "format": "int64",
-      "description": "The maximum amount of time to block processing of an upgrade domain and prevent loss of availability when there are unexpected issues. When this timeout expires, processing of the upgrade domain will proceed regardless of availability loss issues. The timeout is reset at the start of each upgrade domain. Valid values are between 0 and 42949672925 inclusive. (unsigned 32-bit integer).",
-      "default": 42949672925
     },
     "ServiceKind": {
       "type": "string",
@@ -1642,7 +1612,7 @@
       "description": "Describes the policy for a monitored application upgrade.",
       "properties": {
         "upgradeReplicaSetCheckTimeout": {
-          "$ref": "#/definitions/UpgradeReplicaSetCheckTimeout",
+          "type": "string",
           "description": "The maximum amount of time to block processing of an upgrade domain and prevent loss of availability when there are unexpected issues. When this timeout expires, processing of the upgrade domain will proceed regardless of availability loss issues. The timeout is reset at the start of each upgrade domain. Valid values are between 0 and 42949672925 inclusive. (unsigned 32-bit integer)."
         },
         "forceRestart": {
@@ -1650,12 +1620,36 @@
           "description": "If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data)."
         },
         "rollingUpgradeMonitoringPolicy": {
-          "$ref": "#/definitions/RollingUpgradeMonitoringPolicy",
+          "$ref": "#/definitions/ArmRollingUpgradeMonitoringPolicy",
           "description": "The policy used for monitoring the application upgrade"
         },
         "applicationHealthPolicy": {
-          "$ref": "#/definitions/ApplicationHealthPolicy",
+          "$ref": "#/definitions/ArmApplicationHealthPolicy",
           "description": "Defines a health policy used to evaluate the health of an application or one of its children entities.\n"
+        }
+      }
+    },
+    "ArmApplicationHealthPolicy": {
+      "type": "object",
+      "description": "Defines a health policy used to evaluate the health of an application or one of its children entities.\n",
+      "properties": {
+        "ConsiderWarningAsError": {
+          "type": "boolean",
+          "description": "Indicates whether warnings are treated with the same severity as errors.",
+          "default": false
+        },
+        "MaxPercentUnhealthyDeployedApplications": {
+          "type": "integer",
+          "description": "The maximum allowed percentage of unhealthy deployed applications. Allowed values are Byte values from zero to 100.\nThe percentage represents the maximum tolerated percentage of deployed applications that can be unhealthy before the application is considered in error.\nThis is calculated by dividing the number of unhealthy deployed applications over the number of nodes where the application is currently deployed on in the cluster.\nThe computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero.\n",
+          "default": 0
+        },
+        "DefaultServiceTypeHealthPolicy": {
+          "$ref": "#/definitions/ArmServiceTypeHealthPolicy",
+          "description": "The health policy used by default to evaluate the health of a service type."
+        },
+        "ServiceTypeHealthPolicyMap": {
+          "$ref": "#/definitions/ArmServiceTypeHealthPolicyMap",
+          "description": "The map with service type health policy per service type name. The map is empty by default."
         }
       }
     },
@@ -1747,9 +1741,31 @@
       "description": "The resource model definition for proxy-only resource.",
       "x-ms-azure-resource": true
     },
-    "RollingUpgradeMonitoringPolicy": {
+    "ArmRollingUpgradeMonitoringPolicy": {
       "description": "The policy used for monitoring the application upgrade",
       "properties": {
+        "failureAction": {
+          "type": "string",
+          "description": "The activation Mode of the service package",
+          "enum": [
+            "Rollback",
+            "Manual"
+          ],
+          "x-ms-enum": {
+            "name": "ArmUpgradeFailureAction",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Rollback",
+                "description": "Indicates that a rollback of the upgrade will be performed by Service Fabric if the upgrade fails."
+              },
+              {
+                "value": "Manual",
+                "description": "Indicates that a manual repair will need to be performed by the administrator if the upgrade fails. Service Fabric will not proceed to the next upgrade domain automatically."
+              }
+            ]
+          }
+        },
         "healthCheckWaitDuration": {
           "$ref": "#/definitions/HealthCheckWaitDuration",
           "description": "The amount of time to wait after completing an upgrade domain before applying health policies. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
@@ -2017,7 +2033,7 @@
       },
       "description": "The error details."
     },
-    "ServiceTypeHealthPolicy": {
+    "ArmServiceTypeHealthPolicy": {
       "type": "object",
       "description": "Represents the health policy used to evaluate the health of services belonging to a service type.\n",
       "properties": {
@@ -2027,14 +2043,28 @@
           "default": 0,
           "minimum": 0,
           "maximum": 100
+        },
+        "maxPercentUnhealthyPartitionsPerService": {
+          "type": "integer",
+          "description": "The maximum percentage of partitions per service allowed to be unhealthy before your application is considered in error.\n",
+          "default": 0,
+          "minimum": 0,
+          "maximum": 100
+        },
+        "maxPercentUnhealthyReplicasPerPartition": {
+          "type": "integer",
+          "description": "The maximum percentage of replicas per partition allowed to be unhealthy before your application is considered in error.\n",
+          "default": 0,
+          "minimum": 0,
+          "maximum": 100
         }
       }
     },
-    "ServiceTypeHealthPolicyMap": {
+    "ArmServiceTypeHealthPolicyMap": {
       "type": "object",
       "description": "Defines a ServiceTypeHealthPolicy per service type name.\n\nThe entries in the map replace the default service type health policy for each specified service type.\nFor example, in an application that contains both a stateless gateway service type and a stateful engine service type, the health policies for the stateless and stateful services can be configured differently.\nWith policy per service type, there's more granular control of the health of the service.\n\nIf no policy is specified for a service type name, the DefaultServiceTypeHealthPolicy is used for evaluation.\n",
       "additionalProperties": {
-        "$ref": "#/definitions/ServiceTypeHealthPolicy"
+        "$ref": "#/definitions/ArmServiceTypeHealthPolicy"
       }
     }
   },

@@ -1,0 +1,294 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Log Analytics",
+    "description": "Azure Log Analytics API reference",
+    "version": "2020-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/linkedServices/{linkedServiceName}": {
+      "put": {
+        "tags": [
+          "LinkedServices"
+        ],
+        "x-ms-examples": {
+          "LinkedServicesCreate": {
+            "$ref": "./examples/LinkedServicesCreate.json"
+          }
+        },
+        "operationId": "LinkedServices_CreateOrUpdate",
+        "description": "Create or update a linked service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "linkedServiceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the linkedServices resource"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkedService"
+            },
+            "description": "The parameters required to create or update a linked service."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/LinkedService"
+            }
+          },
+          "201": {
+            "description": "Created response definition.",
+            "schema": {
+              "$ref": "#/definitions/LinkedService"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "LinkedServices"
+        ],
+        "x-ms-examples": {
+          "LinkedServicesDelete": {
+            "$ref": "./examples/LinkedServicesDelete.json"
+          }
+        },
+        "operationId": "LinkedServices_Delete",
+        "description": "Deletes a linked service instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "linkedServiceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the linked service."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/LinkedService"
+            }
+          },
+          "204": {
+            "description": "NoContent response definition."
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "LinkedServices"
+        ],
+        "x-ms-examples": {
+          "LinkedServicesGet": {
+            "$ref": "./examples/LinkedServicesGet.json"
+          }
+        },
+        "operationId": "LinkedServices_Get",
+        "description": "Gets a linked service instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "linkedServiceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the linked service."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/LinkedService"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/linkedServices": {
+      "get": {
+        "tags": [
+          "LinkedServices"
+        ],
+        "x-ms-examples": {
+          "LinkedServicesListByWorkspace": {
+            "$ref": "./examples/LinkedServicesListByWorkspace.json"
+          }
+        },
+        "operationId": "LinkedServices_ListByWorkspace",
+        "description": "Gets the linked services instances in a workspace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/LinkedServiceListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LinkedServiceProperties": {
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The resource id of the resource that will be linked to the workspace. This should be used for linking resources which require read access"
+        },
+        "writeAccessResourceId": {
+          "type": "string",
+          "description": "The resource id of the resource that will be linked to the workspace. This should be used for linking resources which require write access"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the linked service.",
+          "enum": [
+            "Succeeded",
+            "Deleting",
+            "ProvisioningAccount",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "LinkedServiceEntityStatus",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Linked service properties."
+    },
+    "LinkedService": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LinkedServiceProperties",
+          "description": "The properties of the linked service."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "The top level Linked service resource container."
+    },
+    "LinkedServiceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkedService"
+          },
+          "description": "The list of linked service instances"
+        }
+      },
+      "description": "The list linked service operation response."
+    }
+  },
+  "parameters": {}
+}

@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2019-03-01",
+    "galleryName": "myGalleryName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "description": "This is the gallery application description.",
+              "eula": "This is the gallery application EULA.",
+              "privacyStatementUri": "myPrivacyStatementUri}",
+              "releaseNoteUri": "myReleaseNoteUri",
+              "supportedOSType": "Windows"
+            },
+            "location": "West US",
+            "name": "myGalleryApplicationName"
+          }
+        ],
+        "nextLink": "http://svchost:99/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName/applications?$skiptoken={token}/Subscriptions/{subscriptionId}/ResourceGroups/myResourceGroup/galleries/myGalleryName/applications/myGalleryApplicationName"
+      }
+    }
+  }
+}

@@ -1,0 +1,699 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2017-03-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/currentSensitivityLabels": {
+      "get": {
+        "tags": [
+          "SensitivityLabels"
+        ],
+        "description": "Gets the sensitivity labels of a given database",
+        "operationId": "SensitivityLabels_ListCurrentByDatabase",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that filters elements in the collection.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the sensitivity labels.",
+            "schema": {
+              "$ref": "#/definitions/SensitivityLabelListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 SensitivityLabelsInvalidODataQuery - The specified OData query is either not valid or not supported\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance."
+          }
+        },
+        "x-ms-odata": "#/definitions/SensitivityLabel",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets the current sensitivity labels of a given database": {
+            "$ref": "./examples/SensitivityLabelsListByDatabaseWithSourceCurrent.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/recommendedSensitivityLabels": {
+      "get": {
+        "tags": [
+          "SensitivityLabels"
+        ],
+        "description": "Gets the sensitivity labels of a given database",
+        "operationId": "SensitivityLabels_ListRecommendedByDatabase",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "includeDisabledRecommendations",
+            "in": "query",
+            "description": "Specifies whether to include disabled recommendations or not.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that filters elements in the collection.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the sensitivity labels.",
+            "schema": {
+              "$ref": "#/definitions/SensitivityLabelListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 SensitivityLabelsInvalidODataQuery - The specified OData query is either not valid or not supported\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance."
+          }
+        },
+        "x-ms-odata": "#/definitions/SensitivityLabel",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets the recommended sensitivity labels of a given database": {
+            "$ref": "./examples/SensitivityLabelsListByDatabaseWithSourceRecommended.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/enable": {
+      "post": {
+        "tags": [
+          "SensitivityLabels"
+        ],
+        "description": "Enables sensitivity recommendations on a given column (recommendations are enabled by default on all columns)",
+        "operationId": "SensitivityLabels_EnableRecommendation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the schema.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "description": "The name of the table.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "columnName",
+            "in": "path",
+            "description": "The name of the column.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sensitivityLabelSource",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "recommended"
+            ],
+            "x-ms-enum": {
+              "name": "SensitivityLabelSource",
+              "modelAsString": false
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully enabled the sensitivity recommendations on the given column."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 404 SensitivityLabelsColumnNotFound - The specified column could not be found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance."
+          }
+        },
+        "x-ms-examples": {
+          "Enables sensitivity recommendations on a given column": {
+            "$ref": "./examples/RecommendedColumnSensitivityLabelEnable.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/disable": {
+      "post": {
+        "tags": [
+          "SensitivityLabels"
+        ],
+        "description": "Disables sensitivity recommendations on a given column",
+        "operationId": "SensitivityLabels_DisableRecommendation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the schema.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "description": "The name of the table.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "columnName",
+            "in": "path",
+            "description": "The name of the column.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sensitivityLabelSource",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "recommended"
+            ],
+            "x-ms-enum": {
+              "name": "SensitivityLabelSource",
+              "modelAsString": false
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully disabled the sensitivity recommendation on the given column."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 404 SensitivityLabelsColumnNotFound - The specified column could not be found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance."
+          }
+        },
+        "x-ms-examples": {
+          "Disables sensitivity recommendations on a given column": {
+            "$ref": "./examples/RecommendedColumnSensitivityLabelDisable.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}": {
+      "get": {
+        "tags": [
+          "SensitivityLabels"
+        ],
+        "description": "Gets the sensitivity label of a given column",
+        "operationId": "SensitivityLabels_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the schema.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "description": "The name of the table.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "columnName",
+            "in": "path",
+            "description": "The name of the column.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sensitivityLabelSource",
+            "in": "path",
+            "description": "The source of the sensitivity label.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "current",
+              "recommended"
+            ],
+            "x-ms-enum": {
+              "name": "SensitivityLabelSource",
+              "modelAsString": false
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the sensitivity label.",
+            "schema": {
+              "$ref": "#/definitions/SensitivityLabel"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 SensitivityLabelSourceNameNotSupported - The specified sensitivity label source is not valid\n\n * 404 SensitivityLabelsColumnNotFound - The specified schema/table/column could not be found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SensitivityLabelsLabelNotFound - The specified sensitivity label could not be found\n\n * 501 SensitivityLabelRecommendedSourceNameNotSupported - 'Recommended' sensitivity label source is not supported yet"
+          }
+        },
+        "x-ms-examples": {
+          "Gets the sensitivity label of a given column": {
+            "$ref": "./examples/ColumnSensitivityLabelGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SensitivityLabels"
+        ],
+        "description": "Creates or updates the sensitivity label of a given column",
+        "operationId": "SensitivityLabels_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the schema.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "description": "The name of the table.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "columnName",
+            "in": "path",
+            "description": "The name of the column.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sensitivityLabelSource",
+            "in": "path",
+            "description": "The source of the sensitivity label.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "current"
+            ],
+            "x-ms-enum": {
+              "name": "WritableSensitivityLabelSource",
+              "modelAsString": false
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The column sensitivity label resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SensitivityLabel"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the sensitivity label.",
+            "schema": {
+              "$ref": "#/definitions/SensitivityLabel"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 SensitivityLabelSourceNameNotSupported - The specified sensitivity label source is not valid\n\n * 400 InvalidSensitivityLabelResource - The specified sensitivity label resource is not valid\n\n * 400 SensitivityLabelLabelNameAndInfoTypeNotProvided - At least one of LabelName and InformationType must be specified\n\n * 400 LabelNameTooLong - Label name cannot exceed {0} characters\n\n * 400 InformationTypeTooLong - Information type cannot exceed {0} characters\n\n * 400 LabelIdMustBeGuid - Label ID must be a GUID\n\n * 400 InformationTypeIdMustBeGuid - Information type ID must be a GUID\n\n * 400 LabelMissing - Label is missing\n\n * 400 InformationTypeMissing - Information Type is missing\n\n * 404 SensitivityLabelsColumnNotFound - The specified schema/table/column could not be found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SensitivityLabelsLabelNotFound - The specified sensitivity label could not be found\n\n * 501 SensitivityLabelRecommendedSourceNameNotSupported - 'Recommended' sensitivity label source is not supported yet"
+          },
+          "201": {
+            "description": "Successfully created the sensitivity label.",
+            "schema": {
+              "$ref": "#/definitions/SensitivityLabel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates the sensitivity label of a given column with all parameters": {
+            "$ref": "./examples/ColumnSensitivityLabelCreateMax.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SensitivityLabels"
+        ],
+        "description": "Deletes the sensitivity label of a given column",
+        "operationId": "SensitivityLabels_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the schema.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "description": "The name of the table.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "columnName",
+            "in": "path",
+            "description": "The name of the column.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sensitivityLabelSource",
+            "in": "path",
+            "description": "The source of the sensitivity label.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "current"
+            ],
+            "x-ms-enum": {
+              "name": "WritableSensitivityLabelSource",
+              "modelAsString": false
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the sensitivity label."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 SensitivityLabelSourceNameNotSupported - The specified sensitivity label source is not valid\n\n * 404 SensitivityLabelsColumnNotFound - The specified schema/table/column could not be found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SensitivityLabelsLabelNotFound - The specified sensitivity label could not be found\n\n * 501 SensitivityLabelRecommendedSourceNameNotSupported - 'Recommended' sensitivity label source is not supported yet"
+          }
+        },
+        "x-ms-examples": {
+          "Deletes the sensitivity label of a given column": {
+            "$ref": "./examples/ColumnSensitivityLabelDelete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SensitivityLabelProperties": {
+      "description": "Properties of a sensitivity label.",
+      "type": "object",
+      "properties": {
+        "labelName": {
+          "description": "The label name.",
+          "type": "string"
+        },
+        "labelId": {
+          "description": "The label ID.",
+          "type": "string"
+        },
+        "informationType": {
+          "description": "The information type.",
+          "type": "string"
+        },
+        "informationTypeId": {
+          "description": "The information type ID.",
+          "type": "string"
+        },
+        "isDisabled": {
+          "description": "Is sensitivity recommendation disabled. Applicable for recommended sensitivity label only. Specifies whether the sensitivity recommendation on this column is disabled (dismissed) or not.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "rank": {
+          "enum": [
+            "None",
+            "Low",
+            "Medium",
+            "High",
+            "Critical"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SensitivityLabelRank",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "SensitivityLabel": {
+      "description": "A sensitivity label.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SensitivityLabelProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SensitivityLabelListResult": {
+      "description": "A list of sensitivity labels.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SensitivityLabel"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription ID that identifies an Azure subscription.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for the request.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ManagedInstanceNameParameter": {
+      "name": "managedInstanceName",
+      "in": "path",
+      "description": "The name of the managed instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "BlobAuditingPolicyNameParameter": {
+      "name": "blobAuditingPolicyName",
+      "in": "path",
+      "description": "The name of the blob auditing policy.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "default"
+      ],
+      "x-ms-parameter-location": "method"
+    },
+    "SqlVirtualMachineInstanceNameParameter": {
+      "name": "sqlVirtualMachineInstanceName",
+      "in": "path",
+      "description": "The name of the SqlVirtualMachineInstance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SqlVirtualMachineContainerNameParameter": {
+      "name": "sqlVirtualMachineContainerName",
+      "in": "path",
+      "description": "The name of the SqlVirtualMachineContainer.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "VirtualClusterNameParameter": {
+      "name": "virtualClusterName",
+      "in": "path",
+      "description": "The name of the virtual cluster.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

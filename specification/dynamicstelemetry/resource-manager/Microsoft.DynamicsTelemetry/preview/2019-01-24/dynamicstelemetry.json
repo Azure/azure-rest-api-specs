@@ -1,0 +1,142 @@
+{
+  "swagger": "2.0",
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "info": {
+    "title": "Dynamics Telemetry",
+    "version": "2019-01-24"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/providers/Microsoft.DynamicsTelemetry/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "List Operations": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OperationList": {
+      "type": "array",
+      "description": "List of supported operations.",
+      "items": {
+        "$ref": "#/definitions/Operation"
+      }
+    },
+    "Operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "isDataAction"
+      ],
+      "properties": {
+        "origin": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/Display"
+        },
+        "properties": {
+          "$ref": "#/definitions/Properties"
+        },
+        "isDataAction": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Display": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "resource": {
+          "type": "string"
+        },
+        "operation": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "publisher": {
+          "type": "string"
+        }
+      }
+    },
+    "Properties": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification"
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "logSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          }
+        }
+      }
+    },
+    "LogSpecification": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "blobDuration": {
+          "type": "string",
+          "format": "duration"
+        }
+      }
+    }
+  }
+}

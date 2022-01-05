@@ -1,42 +1,44 @@
 {
-    "parameters": {
-        "api-version": "2016-11-01",
-        "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-        "resourceGroupName": "contosorg",
-        "accountName": "contosoadla"
-    },
-    "responses": {
-        "200": {
-            "body": {
-                "value": [{
-                    "name": "test_policy",
-                    "properties": {
-                        "objectId": "776b9091-8916-4638-87f7-9c989a38da98",
-                        "objectType": "User",
-                        "maxDegreeOfParallelismPerJob": 10,
-                        "minPriorityPerJob": 30
-                    }
-                },
-                {
-                    "name": "test_policy1",
-                    "properties": {
-                        "objectId": "776b9091-8916-4638-87f7-9c989a38da99",
-                        "objectType": "Group",
-                        "maxDegreeOfParallelismPerJob": 5,
-                        "minPriorityPerJob": 15
-                    }
-                },
-                {
-                    "name": "test_policy2",
-                    "properties": {
-                        "objectId": "776b9091-8916-4638-87f7-9c989a38da97",
-                        "objectType": "ServicePrincipal",
-                        "maxDegreeOfParallelismPerJob": 20,
-                        "minPriorityPerJob": 60
-                    }
-                }],
-                "nextLink": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/contosorg/providers/Microsoft.DataLakeAnalytics/accounts/contosoadla/jobPolicies?api-version=2016-11-01&%24skiptoken=<token>"
+  "parameters": {
+    "api-version": "2016-11-01",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "contosorg",
+    "accountName": "contosoadla"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "test_policy",
+            "properties": {
+              "objectId": "776b9091-8916-4638-87f7-9c989a38da98",
+              "objectType": "User",
+              "maxDegreeOfParallelismPerJob": 10,
+              "minPriorityPerJob": 30
             }
-        }
+          },
+          {
+            "name": "test_policy1",
+            "properties": {
+              "objectId": "776b9091-8916-4638-87f7-9c989a38da99",
+              "objectType": "Group",
+              "maxDegreeOfParallelismPerJob": 5,
+              "minPriorityPerJob": 15
+            }
+          },
+          {
+            "name": "test_policy2",
+            "properties": {
+              "objectId": "776b9091-8916-4638-87f7-9c989a38da97",
+              "objectType": "ServicePrincipal",
+              "maxDegreeOfParallelismPerJob": 20,
+              "minPriorityPerJob": 60
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/contosorg/providers/Microsoft.DataLakeAnalytics/accounts/contosoadla/jobPolicies?api-version=2016-11-01&%24skiptoken=<token>"
+      }
     }
+  }
 }

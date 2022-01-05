@@ -1,0 +1,54 @@
+{
+  "operationId": "Network_Create",
+  "description": "This example shows how to create or update a network resource.",
+  "parameters": {
+    "api-version": "2018-09-01-privatepreview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "sbz_demo",
+    "networkResourceName": "sampleNetwork",
+    "networkResourceDescription": {
+      "properties": {
+        "kind": "Local",
+        "description": "Service Fabric Mesh sample network.",
+        "networkAddressPrefix": "2.0.0.0/16"
+      },
+      "tags": {},
+      "location": "EastUS"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.ServiceFabricMesh/networks",
+        "location": "EastUS",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sbz_demo/providers/Microsoft.ServiceFabricMesh/networks/sampleNetwork",
+        "name": "sampleNetwork",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "kind": "Local",
+          "description": "Service Fabric Mesh sample network.",
+          "networkAddressPrefix": "2.0.0.0/16",
+          "status": "Ready"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "type": "Microsoft.ServiceFabricMesh/networks",
+        "location": "EastUS",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sbz_demo/providers/Microsoft.ServiceFabricMesh/networks/sampleNetwork",
+        "name": "sampleNetwork",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Updating",
+          "kind": "Local",
+          "description": "Service Fabric Mesh sample network.",
+          "networkAddressPrefix": "2.0.0.0/16",
+          "status": "Creating"
+        }
+      }
+    },
+    "202": {}
+  }
+}

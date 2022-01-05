@@ -8,88 +8,82 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testserver",
-            "name": "testserver",
-            "type": "Microsoft.DBforMySQL/servers",
-            "location": "onebox",
-            "tags": {
-              "elasticServer": "1"
-            },
             "sku": {
-              "capacity": 2,
-              "family": "Gen4",
               "name": "B_Gen4_2",
-              "size": null,
-              "tier": "Basic"
+              "tier": "Basic",
+              "family": "Gen4",
+              "capacity": 2
             },
             "properties": {
+              "administratorLogin": "testuser",
               "storageProfile": {
-                "storageMB": 128000,
+                "storageMB": 5120,
                 "backupRetentionDays": 7,
-                "geoRedundantBackup": "Enabled"
+                "geoRedundantBackup": "Disabled"
               },
-              "administratorLogin": "cloudsa",
+              "version": "5.7",
               "sslEnforcement": "Enabled",
+              "minimalTlsVersion": "TLS1_2",
               "userVisibleState": "Ready",
-              "fullyQualifiedDomainName": "testserver.test-vm1.onebox.xdb.mscds.com",
-              "version": "5.6"
-            }
+              "fullyQualifiedDomainName": "mysqltestsvc1.mysql.database.azure.com",
+              "earliestRestoreDate": "2018-02-28T23:56:02.627+00:00"
+            },
+            "location": "westus",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltestsvc1",
+            "name": "mysqltestsvc1",
+            "type": "Microsoft.DBforMySQL/servers"
           },
           {
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testserver1",
-            "name": "testserver1",
-            "type": "Microsoft.DBforMySQL/servers",
-            "location": "onebox",
-            "tags": {
-              "elasticServer": "1"
-            },
             "sku": {
-              "capacity": 2,
+              "name": "GP_Gen4_2",
+              "tier": "GeneralPurpose",
               "family": "Gen4",
-              "name": "B_Gen4_2",
-              "size": null,
-              "tier": "Basic"
+              "capacity": 2
             },
             "properties": {
+              "administratorLogin": "testuser",
               "storageProfile": {
-                "storageMB": 128000,
+                "storageMB": 5120,
                 "backupRetentionDays": 7,
-                "geoRedundantBackup": "Enabled"
+                "geoRedundantBackup": "Disabled"
               },
-              "administratorLogin": "cloudsa",
+              "version": "5.7",
               "sslEnforcement": "Enabled",
+              "minimalTlsVersion": "TLS1_1",
               "userVisibleState": "Ready",
-              "fullyQualifiedDomainName": "testserver.test-vm1.onebox.xdb.mscds.com",
-              "version": "5.6"
-            }
+              "fullyQualifiedDomainName": "mysqltstsvc2.mysql.database.azure.com",
+              "earliestRestoreDate": "2018-02-28T23:56:54.3+00:00"
+            },
+            "location": "westus",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/mysqltstsvc2",
+            "name": "mysqltstsvc2",
+            "type": "Microsoft.DBforMySQL/servers"
           },
           {
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testserver2",
-            "name": "testserver2",
-            "type": "Microsoft.DBforMySQL/servers",
-            "location": "onebox",
-            "tags": {
-              "elasticServer": "1"
-            },
             "sku": {
-              "capacity": 2,
+              "name": "GP_Gen4_4",
+              "tier": "GeneralPurpose",
               "family": "Gen4",
-              "name": "B_Gen4_2",
-              "size": null,
-              "tier": "Basic"
+              "capacity": 4
             },
             "properties": {
+              "administratorLogin": "testuser",
               "storageProfile": {
-                "storageMB": 128000,
-                "backupRetentionDays": 7,
+                "storageMB": 102400,
+                "backupRetentionDays": 35,
                 "geoRedundantBackup": "Enabled"
               },
-              "administratorLogin": "cloudsa",
+              "version": "5.7",
               "sslEnforcement": "Enabled",
+              "minimalTlsVersion": "TLS1_0",
               "userVisibleState": "Ready",
-              "fullyQualifiedDomainName": "testserver.test-vm1.onebox.xdb.mscds.com",
-              "version": "5.6"
-            }
+              "fullyQualifiedDomainName": "mysqltestsvc3.mysql.database.azure.com",
+              "earliestRestoreDate": "2018-02-28T23:59:44.847+00:00"
+            },
+            "location": "westus",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg1/providers/Microsoft.DBforMySQL/servers/mysqltestsvc3",
+            "name": "mysqltestsvc3",
+            "type": "Microsoft.DBforMySQL/servers"
           }
         ]
       }

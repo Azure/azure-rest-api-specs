@@ -16,15 +16,17 @@
     "application/json"
   ],
   "paths": {
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/serviceObjectives/{serviceObjectiveName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/serviceObjectives/{serviceObjectiveName}": {
       "get": {
         "tags": [
           "ServiceObjectives"
         ],
         "operationId": "ServiceObjectives_Get",
         "description": "Gets a database service objective.",
-        "x-ms-examples":{
-          "Get a service objective": { "$ref": "./examples/ServiceObjectiveGet.json" }
+        "x-ms-examples": {
+          "Get a service objective": {
+            "$ref": "./examples/ServiceObjectiveGet.json"
+          }
         },
         "parameters": [
           {
@@ -64,8 +66,10 @@
         ],
         "operationId": "ServiceObjectives_ListByServer",
         "description": "Returns database service objectives.",
-        "x-ms-examples":{
-          "List service objectives": { "$ref": "./examples/ServiceObjectiveList.json" }
+        "x-ms-examples": {
+          "List service objectives": {
+            "$ref": "./examples/ServiceObjectiveList.json"
+          }
         },
         "parameters": [
           {
@@ -154,7 +158,9 @@
           "description": "The list of database service objectives."
         }
       },
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "description": "Represents the response to a get database service objectives request."
     }
   },

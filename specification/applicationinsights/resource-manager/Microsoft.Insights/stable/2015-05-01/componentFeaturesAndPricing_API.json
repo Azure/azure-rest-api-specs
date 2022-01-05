@@ -40,13 +40,13 @@
         "operationId": "ComponentCurrentBillingFeatures_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -71,13 +71,13 @@
         "operationId": "ComponentCurrentBillingFeatures_Update",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -113,13 +113,13 @@
         "operationId": "ComponentQuotaStatus_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -142,17 +142,17 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/featurecapabilities": {
       "get": {
-        "description": "Returns feature capabilites of the application insights component.",
+        "description": "Returns feature capabilities of the application insights component.",
         "operationId": "ComponentFeatureCapabilities_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -179,13 +179,13 @@
         "operationId": "ComponentAvailableFeatures_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -213,7 +213,7 @@
       "description": "An Application Insights component billing features",
       "properties": {
         "DataVolumeCap": {
-          "description": "An Application Insights component daily data volumne cap",
+          "description": "An Application Insights component daily data volume cap",
           "$ref": "#/definitions/ApplicationInsightsComponentDataVolumeCap"
         },
         "CurrentBillingFeatures": {
@@ -227,7 +227,7 @@
     },
     "ApplicationInsightsComponentDataVolumeCap": {
       "type": "object",
-      "description": "An Application Insights component daily data volumne cap",
+      "description": "An Application Insights component daily data volume cap",
       "properties": {
         "Cap": {
           "type": "number",
@@ -345,7 +345,7 @@
         "TrackingType": {
           "type": "string",
           "readOnly": true,
-          "description": "The applciation insights component used tracking type."
+          "description": "The application insights component used tracking type."
         },
         "DailyCap": {
           "type": "number",
@@ -364,7 +364,7 @@
         }
       }
     },
-    "ApplicationInsightsComponentAvailableFeatures":{
+    "ApplicationInsightsComponentAvailableFeatures": {
       "type": "object",
       "description": "An Application Insights component available features.",
       "properties": {
@@ -375,52 +375,52 @@
             "$ref": "#/definitions/ApplicationInsightsComponentFeature"
           },
           "readOnly": true,
-          "description": "A list of Application Insigths component feature."
+          "description": "A list of Application Insights component feature."
         }
       }
     },
-    "ApplicationInsightsComponentFeature":{
+    "ApplicationInsightsComponentFeature": {
       "type": "object",
       "description": "An Application Insights component daily data volume cap status",
       "properties": {
-        "FeatureName":{
+        "FeatureName": {
           "type": "string",
           "readOnly": true,
           "description": "The pricing feature name."
         },
-        "MeterId":{
+        "MeterId": {
           "type": "string",
           "readOnly": true,
           "description": "The meter id used for the feature."
         },
-        "MeterRateFrequency":{
+        "MeterRateFrequency": {
           "type": "string",
           "readOnly": true,
-          "description": "The meter meter rate for the feature's meter."
+          "description": "The meter rate for the feature's meter."
         },
-        "ResouceId":{
+        "ResouceId": {
           "type": "string",
           "readOnly": true,
           "description": "Reserved, not used now."
         },
-        "IsHidden":{
+        "IsHidden": {
           "type": "boolean",
           "readOnly": true,
           "description": "Reserved, not used now."
         },
-        "Capabilities":{
+        "Capabilities": {
           "type": "array",
           "items": {
             "type": "object",
             "$ref": "#/definitions/ApplicationInsightsComponentFeatureCapability"
           },
           "readOnly": true,
-          "description": "A list of Application Insigths component feature capability."
+          "description": "A list of Application Insights component feature capability."
         },
         "Title": {
           "type": "string",
           "readOnly": true,
-          "description": "Desplay name of the feature."
+          "description": "Display name of the feature."
         },
         "IsMainFeature": {
           "type": "boolean",
@@ -431,69 +431,47 @@
           "type": "string",
           "readOnly": true,
           "description": "The add on features on main feature."
-        }   
+        }
       }
     },
     "ApplicationInsightsComponentFeatureCapability": {
       "type": "object",
       "description": "An Application Insights component feature capability",
       "properties": {
-        "Name":{
+        "Name": {
           "type": "string",
           "readOnly": true,
           "description": "The name of the capability."
         },
-        "Description":{
+        "Description": {
           "type": "string",
           "readOnly": true,
           "description": "The description of the capability."
         },
-        "Value":{
+        "Value": {
           "type": "string",
           "readOnly": true,
-          "description": "The vaule of the capability."
+          "description": "The value of the capability."
         },
-        "Unit":{
+        "Unit": {
           "type": "string",
           "readOnly": true,
           "description": "The unit of the capability."
         },
-        "MeterId":{
+        "MeterId": {
           "type": "string",
           "readOnly": true,
           "description": "The meter used for the capability."
         },
-        "MeterRateFrequency":{
+        "MeterRateFrequency": {
           "type": "string",
           "readOnly": true,
           "description": "The meter rate of the meter."
         }
       }
-    }    
+    }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The Azure subscription ID."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
     "ResourceNameParameter": {
       "name": "resourceName",
       "in": "path",

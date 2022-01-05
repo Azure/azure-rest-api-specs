@@ -1,115 +1,115 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "version": "2017-02-01-preview",
-        "title": "KeyVaultManagementClient",
-        "description": "The Admin KeyVault Management Client."
-    },
-    "host": "management.local.azurestack.external",
-    "schemes": [
-        "https"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "paths": {
-        "/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault.Admin/locations/{location}/quotas": {
-            "get": {
-                "x-ms-examples": {
-                    "Get a list of all quota objects for KeyVault at a location.": {
-                        "$ref": "./examples/Quota/List.json"
-                    }
-                },
-                "description": "Get a list of all quota objects for KeyVault at a location.",
-                "tags": [
-                    "KeyVault"
-                ],
-                "operationId": "Quotas_List",
-                "parameters": [
-                    {
-                        "$ref": "KeyVault.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "KeyVault.json#/parameters/LocationParameter"
-                    },
-                    {
-                        "$ref": "KeyVault.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/QuotaList"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": null
-                }
-            }
-        }
-    },
-    "definitions": {
-        "Quota": {
-            "description": "KeyVault Quota.",
-            "type": "object",
-            "properties": {
-                "properties": {
-                    "x-ms-client-flatten": true,
-                    "description": "Properties for keyvault quotas.",
-                    "$ref": "#/definitions/QuotaProperties"
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "KeyVault.json#/definitions/Resource"
-                }
-            ]
+  "swagger": "2.0",
+  "info": {
+    "version": "2017-02-01-preview",
+    "title": "KeyVaultManagementClient",
+    "description": "The Admin KeyVault Management Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault.Admin/locations/{location}/quotas": {
+      "get": {
+        "x-ms-examples": {
+          "Get a list of all quota objects for KeyVault at a location.": {
+            "$ref": "./examples/Quota/List.json"
+          }
         },
-        "QuotaProperties": {
-            "description": "Properties for keyvault quotas.",
-            "type": "object",
-            "properties": {}
+        "description": "Get a list of all quota objects for KeyVault at a location.",
+        "tags": [
+          "KeyVault"
+        ],
+        "operationId": "Quotas_List",
+        "parameters": [
+          {
+            "$ref": "KeyVault.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "KeyVault.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "KeyVault.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/QuotaList"
+            }
+          }
         },
-        "QuotaList": {
-            "description": "List of keyvault quotas.",
-            "type": "object",
-            "properties": {
-                "value": {
-                    "description": "List of keyvault quotas.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Quota"
-                    }
-                },
-                "nextLink": {
-                    "type": "string",
-                    "description": "URI to the next page."
-                }
-            }
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
-    },
-    "parameters": {},
-    "securityDefinitions": {
-        "azure_auth": {
-            "type": "oauth2",
-            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-            "flow": "implicit",
-            "description": "Azure Active Directory OAuth2 Flow",
-            "scopes": {
-                "user_impersonation": "impersonate your user account"
-            }
+      }
+    }
+  },
+  "definitions": {
+    "Quota": {
+      "description": "KeyVault Quota.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties for keyvault quotas.",
+          "$ref": "#/definitions/QuotaProperties"
         }
-    },
-    "security": [
+      },
+      "allOf": [
         {
-            "azure_auth": [
-                "user_impersonation"
-            ]
+          "$ref": "KeyVault.json#/definitions/Resource"
         }
-    ]
+      ]
+    },
+    "QuotaProperties": {
+      "description": "Properties for keyvault quotas.",
+      "type": "object",
+      "properties": {}
+    },
+    "QuotaList": {
+      "description": "List of keyvault quotas.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of keyvault quotas.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Quota"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URI to the next page."
+        }
+      }
+    }
+  },
+  "parameters": {},
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }

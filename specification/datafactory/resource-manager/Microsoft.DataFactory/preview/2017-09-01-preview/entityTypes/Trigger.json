@@ -219,7 +219,7 @@
       "additionalProperties": {
         "type": "object"
       },
-      "description": "The recurrence schedule occurence."
+      "description": "The recurrence schedule occurrence."
     },
     "DayOfWeek": {
       "type": "string",
@@ -239,7 +239,7 @@
       "description": "The days of the week."
     },
     "BlobTrigger": {
-      "description": "Trigger that runs everytime the selected Blob container changes.",
+      "description": "Trigger that runs every time the selected Blob container changes.",
       "type": "object",
       "allOf": [
         {
@@ -275,9 +275,8 @@
         "typeProperties"
       ]
     },
-    "BlobEventsTrigger":
-    {
-      "description": "Trigger that runs everytime a Blob event occurs.",
+    "BlobEventsTrigger": {
+      "description": "Trigger that runs every time a Blob event occurs.",
       "type": "object",
       "allOf": [
         {
@@ -285,8 +284,7 @@
         }
       ],
       "properties": {
-        "typeProperties":
-        {
+        "typeProperties": {
           "description": "Blob Events Trigger properties.",
           "x-ms-client-flatten": true,
           "properties": {
@@ -297,6 +295,10 @@
             "blobPathEndsWith": {
               "description": "The blob path must end with the pattern provided for trigger to fire. For example, 'december/boxes.csv' will only fire the trigger for blobs named boxes in a december folder. At least one of these must be provided: blobPathBeginsWith, blobPathEndsWith.",
               "type": "string"
+            },
+            "ignoreEmptyBlobs": {
+              "description": "If set to true, blobs with zero bytes will be ignored.",
+              "type": "boolean"
             },
             "events": {
               "description": "The type of events that cause this trigger to fire.",
@@ -350,7 +352,7 @@
           "x-ms-client-flatten": true,
           "properties": {
             "frequency": {
-              "$ref": "#/definitions/TumblingWindowFrequency", 
+              "$ref": "#/definitions/TumblingWindowFrequency",
               "description": "The frequency of the time windows."
             },
             "interval": {

@@ -33,7 +33,7 @@
     }
   },
   "paths": {
-      "/providers/Microsoft.StreamAnalytics/operations": {
+    "/providers/Microsoft.StreamAnalytics/operations": {
       "get": {
         "tags": [
           "Operations"
@@ -41,7 +41,9 @@
         "operationId": "Operations_List",
         "description": "Lists all of the available Stream Analytics related operations.",
         "x-ms-examples": {
-          "List available operations for the Stream Analytics resource provider": { "$ref": "./examples/Operation_List.json" }
+          "List available operations for the Stream Analytics resource provider": {
+            "$ref": "./examples/Operation_List.json"
+          }
         },
         "parameters": [
           {
@@ -53,6 +55,12 @@
             "description": "Successfully listed the available operations.",
             "schema": {
               "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
             }
           }
         },
@@ -69,8 +77,12 @@
         "operationId": "StreamingJobs_CreateOrReplace",
         "description": "Creates a streaming job or replaces an already existing streaming job.",
         "x-ms-examples": {
-          "Create a streaming job shell (a streaming job with no inputs, outputs, transformation, or functions)": { "$ref": "./examples/StreamingJob_Create_JobShell.json" },
-          "Create a complete streaming job (a streaming job with a transformation, at least 1 input and at least 1 output)": { "$ref": "./examples/StreamingJob_Create_CompleteJob.json" }
+          "Create a streaming job shell (a streaming job with no inputs, outputs, transformation, or functions)": {
+            "$ref": "./examples/StreamingJob_Create_JobShell.json"
+          },
+          "Create a complete streaming job (a streaming job with a transformation, at least 1 input and at least 1 output)": {
+            "$ref": "./examples/StreamingJob_Create_CompleteJob.json"
+          }
         },
         "parameters": [
           {
@@ -88,7 +100,7 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "IfMatch",
-            "description": "The ETag of the streaming job. Omit this value to always overwrite the current record set. Specify the last-seen ETag value to prevent accidentally overwritting concurrent changes."
+            "description": "The ETag of the streaming job. Omit this value to always overwrite the current record set. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes."
           },
           {
             "name": "If-None-Match",
@@ -135,6 +147,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -146,7 +164,9 @@
         "operationId": "StreamingJobs_Update",
         "description": "Updates an existing streaming job. This can be used to partially update (ie. update one or two properties) a streaming job without affecting the rest the job definition.",
         "x-ms-examples": {
-          "Update a streaming job": { "$ref": "./examples/StreamingJob_Update.json" }
+          "Update a streaming job": {
+            "$ref": "./examples/StreamingJob_Update.json"
+          }
         },
         "parameters": [
           {
@@ -164,7 +184,7 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "IfMatch",
-            "description": "The ETag of the streaming job. Omit this value to always overwrite the current record set. Specify the last-seen ETag value to prevent accidentally overwritting concurrent changes."
+            "description": "The ETag of the streaming job. Omit this value to always overwrite the current record set. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -191,6 +211,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         }
       },
@@ -201,7 +227,9 @@
         "operationId": "StreamingJobs_Delete",
         "description": "Deletes a streaming job.",
         "x-ms-examples": {
-          "Delete a streaming job": { "$ref": "./examples/StreamingJob_Delete.json" }
+          "Delete a streaming job": {
+            "$ref": "./examples/StreamingJob_Delete.json"
+          }
         },
         "parameters": [
           {
@@ -226,6 +254,12 @@
           },
           "204": {
             "description": "The streaming job does not exist."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -237,8 +271,12 @@
         "operationId": "StreamingJobs_Get",
         "description": "Gets details about the specified streaming job.",
         "x-ms-examples": {
-          "Get a streaming job and do not use the $expand OData query parameter": { "$ref": "./examples/StreamingJob_Get_NoExpand.json" },
-          "Get a streaming job and use the $expand OData query parameter to expand inputs, outputs, transformation, and functions": { "$ref": "./examples/StreamingJob_Get_Expand.json" }
+          "Get a streaming job and do not use the $expand OData query parameter": {
+            "$ref": "./examples/StreamingJob_Get_NoExpand.json"
+          },
+          "Get a streaming job and use the $expand OData query parameter to expand inputs, outputs, transformation, and functions": {
+            "$ref": "./examples/StreamingJob_Get_Expand.json"
+          }
         },
         "parameters": [
           {
@@ -273,6 +311,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         }
       }
@@ -285,8 +329,12 @@
         "operationId": "StreamingJobs_ListByResourceGroup",
         "description": "Lists all of the streaming jobs in the specified resource group.",
         "x-ms-examples": {
-          "List all streaming jobs in a resource group and do not use the $expand OData query parameter": { "$ref": "./examples/StreamingJob_List_ByResourceGroup_NoExpand.json" },
-          "List all streaming jobs in a resource group and use the $expand OData query parameter to expand inputs, outputs, transformation, and functions": { "$ref": "./examples/StreamingJob_List_ByResourceGroup_Expand.json" }
+          "List all streaming jobs in a resource group and do not use the $expand OData query parameter": {
+            "$ref": "./examples/StreamingJob_List_ByResourceGroup_NoExpand.json"
+          },
+          "List all streaming jobs in a resource group and use the $expand OData query parameter to expand inputs, outputs, transformation, and functions": {
+            "$ref": "./examples/StreamingJob_List_ByResourceGroup_Expand.json"
+          }
         },
         "parameters": [
           {
@@ -312,6 +360,12 @@
             "schema": {
               "$ref": "#/definitions/StreamingJobListResult"
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         },
         "x-ms-pageable": {
@@ -327,8 +381,12 @@
         "operationId": "StreamingJobs_List",
         "description": "Lists all of the streaming jobs in the given subscription.",
         "x-ms-examples": {
-          "List all streaming jobs in a subscription and do not use the $expand OData query parameter": { "$ref": "./examples/StreamingJob_List_BySubscription_NoExpand.json" },
-          "List all streaming jobs in a subscription and use the $expand OData query parameter to expand inputs, outputs, transformation, and functions": { "$ref": "./examples/StreamingJob_List_BySubscription_Expand.json" }
+          "List all streaming jobs in a subscription and do not use the $expand OData query parameter": {
+            "$ref": "./examples/StreamingJob_List_BySubscription_NoExpand.json"
+          },
+          "List all streaming jobs in a subscription and use the $expand OData query parameter to expand inputs, outputs, transformation, and functions": {
+            "$ref": "./examples/StreamingJob_List_BySubscription_Expand.json"
+          }
         },
         "parameters": [
           {
@@ -351,6 +409,12 @@
             "schema": {
               "$ref": "#/definitions/StreamingJobListResult"
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         },
         "x-ms-pageable": {
@@ -366,9 +430,15 @@
         "operationId": "StreamingJobs_Start",
         "description": "Starts a streaming job. Once a job is started it will start processing input events and produce output.",
         "x-ms-examples": {
-          "Start a streaming job with CustomTime output start mode": { "$ref": "./examples/StreamingJob_Start_CustomTime.json" },
-          "Start a streaming job with JobStartTime output start mode": { "$ref": "./examples/StreamingJob_Start_JobStartTime.json" },
-          "Start a streaming job with LastOutputEventTime output start mode": { "$ref": "./examples/StreamingJob_Start_LastOutputEventTime.json" }
+          "Start a streaming job with CustomTime output start mode": {
+            "$ref": "./examples/StreamingJob_Start_CustomTime.json"
+          },
+          "Start a streaming job with JobStartTime output start mode": {
+            "$ref": "./examples/StreamingJob_Start_JobStartTime.json"
+          },
+          "Start a streaming job with LastOutputEventTime output start mode": {
+            "$ref": "./examples/StreamingJob_Start_LastOutputEventTime.json"
+          }
         },
         "parameters": [
           {
@@ -399,6 +469,12 @@
           },
           "202": {
             "description": "The start streaming job request was successfully initiated."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -412,7 +488,9 @@
         "operationId": "StreamingJobs_Stop",
         "description": "Stops a running streaming job. This will cause a running streaming job to stop processing input events and producing output.",
         "x-ms-examples": {
-          "Stop a streaming job": { "$ref": "./examples/StreamingJob_Stop.json" }
+          "Stop a streaming job": {
+            "$ref": "./examples/StreamingJob_Stop.json"
+          }
         },
         "parameters": [
           {
@@ -434,6 +512,12 @@
           },
           "202": {
             "description": "The stop streaming job request was successfully initiated."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -497,10 +581,10 @@
       }
     },
     "StreamingJob": {
-      "description": "A streamng job object, containing all information associated with the named streaming job.",
+      "description": "A streaming job object, containing all information associated with the named streaming job.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -589,7 +673,7 @@
         },
         "transformation": {
           "$ref": "./transformations.json#/definitions/Transformation",
-          "description": "Indicates the query and the number of streaming units to use for the streaming job. The name property of the transformation is required when specifying this property in a PUT request. This property cannot be modify via a PATCH operation. You must use the PATCH API available for the individual tranformation."
+          "description": "Indicates the query and the number of streaming units to use for the streaming job. The name property of the transformation is required when specifying this property in a PUT request. This property cannot be modify via a PATCH operation. You must use the PATCH API available for the individual transformation."
         },
         "outputs": {
           "type": "array",
@@ -617,7 +701,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the SKU. Required on PUT (CreateOrReplace) requests.",          
+          "description": "The name of the SKU. Required on PUT (CreateOrReplace) requests.",
           "enum": [
             "Standard"
           ],
@@ -709,36 +793,65 @@
       }
     },
     "Resource": {
-      "description": "The base resource model definition.",
+      "type": "object",
+      "description": "The base resource definition",
       "properties": {
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource Id"
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
         },
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource name"
+          "description": "The name of the resource"
         },
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location. Required on PUT (CreateOrReplace) requests."
-        },
+          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResource": {
+      "type": "object",
+      "description": "The resource model definition for a ARM tracked top level resource",
+      "properties": {
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Resource tags"
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
         }
       },
-      "x-ms-azure-resource": true
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ProxyResource": {
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     }
   },
   "parameters": {

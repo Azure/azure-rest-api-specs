@@ -1,0 +1,142 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2015-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations": {
+      "get": {
+        "x-ms-examples": {
+          "Get security data locations": {
+            "$ref": "./examples/Locations/GetLocations_example.json"
+          }
+        },
+        "tags": [
+          "Locations"
+        ],
+        "description": "The location of the responsible ASC of the specific subscription (home region). For each subscription there is only one responsible location. The location in the response should be used to read or write other resources in ASC according to their ID.",
+        "operationId": "Locations_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/AscLocationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}": {
+      "get": {
+        "x-ms-examples": {
+          "Get security data location": {
+            "$ref": "./examples/Locations/GetLocation_example.json"
+          }
+        },
+        "tags": [
+          "Locations"
+        ],
+        "description": "Details of a specific location",
+        "operationId": "Locations_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/AscLocation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ExtendedResourceProvider": {
+      "name": "extendedResourceProvider",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Resource provider name of the base resource",
+      "x-ms-parameter-location": "method"
+    },
+    "ExtendedResourceType": {
+      "name": "extendedResourceType",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Type of the base resource",
+      "x-ms-parameter-location": "method"
+    },
+    "ExtendedResourceName": {
+      "name": "extendedResourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the base resource",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

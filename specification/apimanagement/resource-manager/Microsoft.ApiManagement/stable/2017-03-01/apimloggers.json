@@ -129,10 +129,10 @@
           "200": {
             "description": "Specified logger entity exists and current entity state version is present in the ETag header.",
             "headers": {
-               "ETag": {
-                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                 "type": "string"
-               }
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -143,7 +143,7 @@
           }
         }
       },
-	  "get": {
+      "get": {
         "tags": [
           "Loggers"
         ],
@@ -439,8 +439,8 @@
           "type": "boolean",
           "description": "Whether records are buffered in the logger before publishing. Default is assumed to be true."
         },
-        "sampling" : {
-          "$ref" : "#/definitions/LoggerSamplingContract",
+        "sampling": {
+          "$ref": "#/definitions/LoggerSamplingContract",
           "description": "Sampling settings for an ApplicationInsights logger.",
           "example": {
             "sampling": {
@@ -516,7 +516,7 @@
           "description": "Sampling settings entity contract properties."
         }
       },
-      "description": "Sampling settigs contract."
+      "description": "Sampling settings contract."
     },
     "LoggerSamplingProperties": {
       "properties": {
@@ -543,14 +543,14 @@
           }
         },
         "percentage": {
-					"type": "number",
-					"format": "double",
-					"description": "Rate of sampling for fixed-rate sampling."
+          "type": "number",
+          "format": "double",
+          "description": "Rate of sampling for fixed-rate sampling."
         },
         "maxTelemetryItemsPerSecond": {
-					"type": "integer",
-					"format": "int32",
-					"description": "Target rate of telemetry items per second."
+          "type": "integer",
+          "format": "int32",
+          "description": "Target rate of telemetry items per second."
         },
         "evaluationInterval": {
           "type": "string",
@@ -574,24 +574,24 @@
           "maxLength": 2000
         },
         "minPercentage": {
-					"type": "number",
-					"format": "double",
-					"description": "Minimum allowed rate of sampling."
+          "type": "number",
+          "format": "double",
+          "description": "Minimum allowed rate of sampling."
         },
         "maxPercentage": {
-					"type": "number",
-					"format": "double",
-					"description": "Maximum allowed rate of sampling."
+          "type": "number",
+          "format": "double",
+          "description": "Maximum allowed rate of sampling."
         },
         "movingAverageRatio": {
-					"type": "number",
-					"format": "double",
-					"description": "Moving average ration assigned to most recent value."
+          "type": "number",
+          "format": "double",
+          "description": "Moving average ration assigned to most recent value."
         },
         "initialPercentage": {
-					"type": "number",
-					"format": "double",
-					"description": "Initial sampling rate."
+          "type": "number",
+          "format": "double",
+          "description": "Initial sampling rate."
         }
       },
       "description": "Sampling settings for an ApplicationInsights logger."

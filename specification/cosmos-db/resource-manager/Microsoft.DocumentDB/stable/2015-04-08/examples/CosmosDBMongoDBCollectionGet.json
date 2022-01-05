@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2015-04-08",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rgName",
+    "accountName": "ddb1",
+    "databaseName": "databaseName",
+    "collectionName": "collectionName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "collectionName",
+        "name": "collectionName",
+        "type": "Microsoft.DocumentDB/databaseAccounts/apis/databases/collections",
+        "properties": {
+          "id": "testcoll",
+          "indexes": [
+            {
+              "key": {
+                "keys": [
+                  "testKey"
+                ]
+              },
+              "options": {
+                "expireAfterSeconds": 100,
+                "unique": true
+              }
+            }
+          ],
+          "shardKey": {
+            "testKey": "Hash"
+          }
+        }
+      }
+    }
+  }
+}

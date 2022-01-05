@@ -41,7 +41,7 @@
         ],
         "operationId": "Certificate_ListByService",
         "description": "Lists a collection of all certificates in the specified service instance.",
-         "x-ms-examples": {
+        "x-ms-examples": {
           "ApiManagementListCertificates": {
             "$ref": "./examples/ApiManagementListCertificates.json"
           }
@@ -126,10 +126,10 @@
           "200": {
             "description": "Specified certificate entity exists and current entity state version is present in the ETag header.",
             "headers": {
-               "ETag": {
-                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                 "type": "string"
-               }
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -140,7 +140,7 @@
           }
         }
       },
-	  "get": {
+      "get": {
         "tags": [
           "Certificates"
         ],
@@ -362,8 +362,8 @@
       ],
       "description": "Properties of the Certificate contract."
     },
-    "CertificateCreateOrUpdateParameters":{
-       "properties": {
+    "CertificateCreateOrUpdateParameters": {
+      "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/CertificateCreateOrUpdateProperties",

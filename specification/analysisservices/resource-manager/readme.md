@@ -77,11 +77,15 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_analysis_services']
+  - repo: azure-resource-manager-schemas
 ```
 
 
@@ -95,68 +99,13 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Analysis
-  output-folder: $(csharp-sdks-folder)/AnalysisServices/Management.Analysis/Generated
+  output-folder: $(csharp-sdks-folder)/analysisservices/Microsoft.Azure.Management.AnalysisServices/src/Generated
   clear-output-folder: true
 ```
-
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: analysisservices
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2017-08
-  - tag: package-2017-08-beta
-  - tag: package-2017-07
-  - tag: package-2016-05
-```
-
-### Tag: package-2017-08 and go
-
-These settings apply only when `--tag=package-2017-08 --go` is specifined on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-08' && $(go)
-output-folder: $(go-sdk-folder)/services/analysisservices/mgmt/2017-08-01/analysisservices
-```
-
-### Tag: package-2017-08-beta and go
-
-These settings apply only when `--tag=package-2017-08-beta --go` is specifined on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-08-beta' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/analysisservices/preview/mgmt/2017-08-01-beta/analysisservices
-```
-
-### Tag: package-2017-07 and go
-
-These settings apply only when `--tag=package-2017-07 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-07' && $(go)
-output-folder: $(go-sdk-folder)/services/analysisservices/mgmt/2017-07-14/analysisservices
-```
-
-### Tag: package-2016-05 and go
-
-These settings apply only when `--tag=package-2016-05 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2016-05' && $(go)
-output-folder: $(go-sdk-folder)/services/analysisservices/mgmt/2016-05-16/analysisservices
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -190,7 +139,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2016-05' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.analysisservices.v2016_05_16
-  output-folder: $(azure-libraries-for-java-folder)/analysisservices/resource-manager/v2016_05_16
+  output-folder: $(azure-libraries-for-java-folder)/sdk/analysisservices/mgmt-v2016_05_16
 regenerate-manager: true
 generate-interface: true
 ```
@@ -203,7 +152,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-07' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.analysisservices.v2017_07_14
-  output-folder: $(azure-libraries-for-java-folder)/analysisservices/resource-manager/v2017_07_14
+  output-folder: $(azure-libraries-for-java-folder)/sdk/analysisservices/mgmt-v2017_07_14
 regenerate-manager: true
 generate-interface: true
 ```
@@ -216,7 +165,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-08' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.analysisservices.v2017_08_01
-  output-folder: $(azure-libraries-for-java-folder)/analysisservices/resource-manager/v2017_08_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/analysisservices/mgmt-v2017_08_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -229,9 +178,12 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-08-beta' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.analysisservices.v2017_08_01_beta
-  output-folder: $(azure-libraries-for-java-folder)/analysisservices/resource-manager/v2017_08_01_beta
+  output-folder: $(azure-libraries-for-java-folder)/sdk/analysisservices/mgmt-v2017_08_01_beta
 regenerate-manager: true
 generate-interface: true
 ```
+
+
+
 
 

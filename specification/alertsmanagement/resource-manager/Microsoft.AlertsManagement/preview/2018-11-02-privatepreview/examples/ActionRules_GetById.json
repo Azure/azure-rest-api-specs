@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2018-11-02-privatepreview",
+    "subscriptionId": "1e3ff1c0-771a-4119-a03b-be82a51e232d",
+    "resourceGroup": "alertscorrelationrg",
+    "actionRuleName": "DailySuppression"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "scope": {
+            "type": "ResourceGroup",
+            "values": [
+              "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg"
+            ]
+          },
+          "conditions": {
+            "severity": {
+              "operator": "Equals",
+              "values": [
+                "Sev0",
+                "Sev2"
+              ]
+            },
+            "monitorService": {
+              "operator": "Equals",
+              "values": [
+                "Platform",
+                "Application Insights"
+              ]
+            },
+            "monitorCondition": {
+              "operator": "Equals",
+              "values": [
+                "Fired"
+              ]
+            },
+            "targetResourceType": {
+              "operator": "NotEquals",
+              "values": [
+                "Microsoft.Compute/VirtualMachines"
+              ]
+            }
+          },
+          "suppressionConfig": {
+            "recurrenceType": "Daily",
+            "schedule": {
+              "startDate": "12/09/2018",
+              "endDate": "12/18/2018",
+              "startTime": "06:00:00",
+              "endTime": "14:00:00"
+            }
+          },
+          "description": "Action rule on resource group for daily suppression",
+          "resourceGroup": "alertscorrelationrg",
+          "status": "enabled",
+          "createdAt": "2018-06-12T22:05:09Z",
+          "lastModifiedAt": "2018-06-12T22:05:09Z",
+          "createdBy": "abc@microsoft.com",
+          "lastModifiedBy": "xyz@microsoft.com"
+        },
+        "id": "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/DailySuppression",
+        "type": "Microsoft.AlertsManagement/actionRules",
+        "name": "DailySuppression",
+        "location": "Global",
+        "tags": {}
+      }
+    }
+  }
+}

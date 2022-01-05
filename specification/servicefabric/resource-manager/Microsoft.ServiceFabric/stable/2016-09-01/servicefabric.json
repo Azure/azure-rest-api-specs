@@ -43,7 +43,7 @@
         "description": "Update cluster configuration",
         "x-ms-examples": {
           "Patch a cluster": {
-            "$ref": "./examples/ClusterPatchOperation_exmaple.json"
+            "$ref": "./examples/ClusterPatchOperation_example.json"
           }
         },
         "produces": [
@@ -145,10 +145,10 @@
         "description": "Create cluster resource",
         "x-ms-examples": {
           "Put a cluster with min parameter": {
-            "$ref": "./examples/ClusterPutOperation_exmaple_min.json"
+            "$ref": "./examples/ClusterPutOperation_example_min.json"
           },
           "Put a cluster with max parameter": {
-            "$ref": "./examples/ClusterPutOperation_exmaple_max.json"
+            "$ref": "./examples/ClusterPutOperation_example_max.json"
           }
         },
         "produces": [
@@ -248,7 +248,7 @@
         "description": "List cluster resource by resource group",
         "x-ms-examples": {
           "List cluster by resource group": {
-            "$ref": "./examples/ClusterListByResourceGroupOperation_exmaple.json"
+            "$ref": "./examples/ClusterListByResourceGroupOperation_example.json"
           }
         },
         "produces": [
@@ -681,7 +681,7 @@
           "type": "integer"
         },
         "durabilityLevel": {
-          "description": "Nodetype durability Level",
+          "description": "Node type durability Level",
           "type": "string",
           "enum": [
             "Bronze",
@@ -694,7 +694,7 @@
           "$ref": "#/definitions/EndpointRangeDescription"
         },
         "ephemeralPorts": {
-          "description": "System assgined application ports",
+          "description": "System assigned application ports",
           "$ref": "#/definitions/EndpointRangeDescription"
         },
         "isPrimary": {
@@ -745,7 +745,7 @@
           "description": "Is this certificate used for admin access from the client, if false , it is used or query only access"
         },
         "certificateCommonName": {
-          "description": "Certificate common name to be granted access; be carefull using wild card common names",
+          "description": "Certificate common name to be granted access; be careful using wild card common names",
           "type": "string"
         },
         "certificateIssuerThumbprint": {
@@ -940,7 +940,7 @@
           "type": "string"
         },
         "certificate": {
-          "description": "This primay certificate will be used as cluster node to node security, SSL certificate for cluster management endpoint and default admin client, the certificate should exist in the virtual machine scale sets or Azure key vault, before you add it. It will override original value",
+          "description": "This primary certificate will be used as cluster node to node security, SSL certificate for cluster management endpoint and default admin client, the certificate should exist in the virtual machine scale sets or Azure key vault, before you add it. It will override original value",
           "$ref": "#/definitions/CertificateDescription"
         },
         "clientCertificateThumbprints": {
@@ -969,7 +969,7 @@
           "$ref": "#/definitions/CertificateDescription"
         },
         "nodeTypes": {
-          "description": "The list of nodetypes that make up the cluster, it will override",
+          "description": "The list of node types that make up the cluster, it will override",
           "type": "array",
           "items": {
             "$ref": "#/definitions/NodeTypeDescription"
@@ -1024,7 +1024,7 @@
           "type": "string"
         },
         "certificate": {
-          "description": "This primay certificate will be used as cluster node to node security, SSL certificate for cluster management endpoint and default admin client",
+          "description": "This primary certificate will be used as cluster node to node security, SSL certificate for cluster management endpoint and default admin client",
           "$ref": "#/definitions/CertificateDescription"
         },
         "reliabilityLevel": {
@@ -1075,7 +1075,7 @@
           "type": "string"
         },
         "nodeTypes": {
-          "description": "The list of nodetypes that make up the cluster",
+          "description": "The list of node types that make up the cluster",
           "type": "array",
           "items": {
             "$ref": "#/definitions/NodeTypeDescription"
@@ -1192,7 +1192,7 @@
           "type": "string"
         },
         "display": {
-          "description": "Dispaly of the result",
+          "description": "Display of the result",
           "$ref": "#/definitions/AvailableOperationDisplay"
         },
         "origin": {
@@ -1288,7 +1288,7 @@
     "api-version": {
       "type": "string",
       "name": "api-version",
-      "description": "The version of the ServiceFabric resouce provider api",
+      "description": "The version of the ServiceFabric resource provider api",
       "in": "query",
       "required": true
     },

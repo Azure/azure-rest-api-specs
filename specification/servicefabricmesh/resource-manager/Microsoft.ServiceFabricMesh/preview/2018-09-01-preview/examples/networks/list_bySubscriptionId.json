@@ -1,0 +1,30 @@
+{
+  "operationId": "Network_ListBySubscriptionId",
+  "description": "This example shows how to list all network resources for a specified subscription.",
+  "parameters": {
+    "api-version": "2018-09-01-privatepreview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "type": "Microsoft.ServiceFabricMesh/networks",
+            "location": "EastUS",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sbz_demo/providers/Microsoft.ServiceFabricMesh/networks/sampleNetwork",
+            "name": "sampleNetwork",
+            "tags": {},
+            "properties": {
+              "provisioningState": "Succeeded",
+              "kind": "Local",
+              "description": "Service Fabric Mesh sample network.",
+              "networkAddressPrefix": "2.0.0.0/16",
+              "status": "Ready"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

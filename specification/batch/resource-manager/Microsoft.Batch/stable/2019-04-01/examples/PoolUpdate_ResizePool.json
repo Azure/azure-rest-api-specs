@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "accountName": "sampleacct",
+    "poolName": "testpool",
+    "api-version": "2019-04-01",
+    "parameters": {
+      "properties": {
+        "scaleSettings": {
+          "fixedScale": {
+            "targetDedicatedNodes": 5,
+            "targetLowPriorityNodes": 0,
+            "resizeTimeout": "PT8M",
+            "nodeDeallocationOption": "TaskCompletion"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "W/\"0x8D4EDFEBFADF4AB\""
+      },
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool",
+        "name": "testpool",
+        "type": "Microsoft.Batch/batchAccounts/pools",
+        "etag": "W/\"0x8D4EDFEBFADF4AB\"",
+        "properties": {
+          "lastModified": "2017-08-29T10:22:55.9407275Z",
+          "creationTime": "2017-08-28T10:22:55.9407275Z",
+          "provisioningState": "Succeeded",
+          "provisioningStateTransitionTime": "2017-08-28T10:22:55.9407275Z",
+          "allocationState": "Resizing",
+          "allocationStateTransitionTime": "2017-08-29T10:22:55.9407275Z",
+          "vmSize": "STANDARD_D4",
+          "interNodeCommunication": "Disabled",
+          "maxTasksPerNode": 1,
+          "taskSchedulingPolicy": {
+            "nodeFillType": "Spread"
+          },
+          "deploymentConfiguration": {
+            "cloudServiceConfiguration": {
+              "osFamily": "5",
+              "osVersion": "*"
+            }
+          },
+          "scaleSettings": {
+            "fixedScale": {
+              "targetDedicatedNodes": 1,
+              "targetLowPriorityNodes": 0,
+              "resizeTimeout": "PT8M",
+              "nodeDeallocationOption": "TaskCompletion"
+            }
+          },
+          "autoScaleRun": {
+            "evaluationTime": "2017-08-29T10:22:55.9407275Z",
+            "results": "$TargetDedicatedNodes=34;NodeDeallocationOption=requeue"
+          },
+          "currentDedicatedNodes": 12,
+          "currentLowPriorityNodes": 0,
+          "resizeOperationStatus": {
+            "startTime": "2017-08-29T10:22:55.9407275Z",
+            "targetDedicatedNodes": 8,
+            "nodeDeallocationOption": "TaskCompletion",
+            "resizeTimeout": "PT8M"
+          }
+        }
+      }
+    }
+  }
+}

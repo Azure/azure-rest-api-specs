@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for StorageImportExport.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for StorageImportExport, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,13 +15,13 @@ To build the SDK for StorageImportExport, simply [Install AutoRest](https://aka.
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the StorageImportExport API.
 
 ``` yaml
@@ -29,7 +29,22 @@ openapi-type: arm
 tag: package-2016-11
 ```
 
+or
 
+``` yaml
+openapi-type: arm
+tag: package-preview-2021-01
+```
+
+
+### Tag: package-preview-2021-01
+
+These settings apply only when `--tag=package-preview-2021-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-01'
+input-file:
+  - Microsoft.ImportExport/preview/2021-01-01/storageimportexport.json
+```
 ### Tag: package-2016-11
 
 These settings apply only when `--tag=package-2016-11` is specified on the command line.
@@ -39,8 +54,17 @@ input-file:
 - Microsoft.ImportExport/stable/2016-11-01/storageimportexport.json
 ```
 
+### Tag: package-2020-08
+
+These settings apply only when `--tag=package-2020-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-08'
+input-file:
+- Microsoft.ImportExport/stable/2020-08-01/storageimportexport.json
+```
 
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -50,37 +74,19 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-powershell
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
+  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-js
+  - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
 ```
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: storageimportexport
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2016-11
-```
-
-### Tag: package-2016-11 and go
-
-These settings apply only when `--tag=package-2016-11 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2016-11' && $(go)
-output-folder: $(go-sdk-folder)/services/storageimportexport/mgmt/2016-11-01/storageimportexport
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -103,6 +109,13 @@ batch:
   - tag: package-2016-11
 ```
 
+or
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2020-08
+```
+
 ### Tag: package-2016-11 and java
 
 These settings apply only when `--tag=package-2016-11 --java` is specified on the command line.
@@ -111,7 +124,20 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2016-11' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.storageimportexport.v2016_11_01
-  output-folder: $(azure-libraries-for-java-folder)/storageimportexport/resource-manager/v2016_11_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/storageimportexport/mgmt-v2016_11_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2020-08 and java
+
+These settings apply only when `--tag=package-2020-08 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-08' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.storageimportexport.v2020_08_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/storageimportexport/mgmt-v2020_08_01
 regenerate-manager: true
 generate-interface: true
 ```

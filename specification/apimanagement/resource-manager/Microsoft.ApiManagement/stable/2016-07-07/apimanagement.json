@@ -73,7 +73,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Paged Result reponse of Apis.",
+            "description": "Paged Result response of Apis.",
             "schema": {
               "$ref": "#/definitions/ApiCollection"
             }
@@ -83,7 +83,7 @@
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
             }
-          }      
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -127,11 +127,11 @@
             "schema": {
               "$ref": "#/definitions/ApiContract"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           },
           "default": {
@@ -185,7 +185,7 @@
           "201": {
             "description": "API was successfully created."
           },
-          "204":{
+          "204": {
             "description": "API was successfully updated."
           },
           "default": {
@@ -380,11 +380,11 @@
             "schema": {
               "$ref": "#/definitions/OperationContract"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           },
           "default": {
@@ -434,7 +434,7 @@
           "201": {
             "description": "Operation was successfully created."
           },
-          "204":{
+          "204": {
             "description": "Operation was successfully updated."
           },
           "default": {
@@ -533,7 +533,7 @@
           }
         ],
         "responses": {
-           "204": {
+          "204": {
             "description": "The operation was successfully deleted."
           },
           "default": {
@@ -693,11 +693,11 @@
             "schema": {
               "$ref": "#/definitions/SubscriptionContract"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           },
           "default": {
@@ -767,7 +767,7 @@
           "Subscriptions"
         ],
         "operationId": "Subscriptions_Update",
-        "description": "Updates the details of a subscription specificied by its identifier.",
+        "description": "Updates the details of a subscription specified by its identifier.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -806,7 +806,7 @@
           }
         ],
         "responses": {
-           "204": {
+          "204": {
             "description": "The subscription details were successfully updated."
           },
           "default": {
@@ -852,7 +852,7 @@
           }
         ],
         "responses": {
-           "204": {
+          "204": {
             "description": "The subscription details were successfully deleted."
           },
           "default": {
@@ -934,7 +934,7 @@
           }
         ],
         "responses": {
-           "204": {
+          "204": {
             "description": "The secondary key was successfully regenerated."
           },
           "default": {
@@ -1040,11 +1040,11 @@
             "schema": {
               "$ref": "#/definitions/ProductContract"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           },
           "default": {
@@ -1143,7 +1143,7 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content in case of Update Successfull."
+            "description": "No Content in case of Update Successful."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1473,7 +1473,7 @@
           "400": {
             "description": "Request validation failed.This is typically caused by an invalid product or group id.",
             "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"              
+              "$ref": "#/definitions/ErrorBodyContract"
             }
           },
           "default": {
@@ -1566,11 +1566,11 @@
             "schema": {
               "$ref": "#/definitions/GroupContract"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           },
           "default": {
@@ -1615,7 +1615,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Group was created succesfully."
+            "description": "Group was created successfully."
           },
           "204": {
             "description": "Group already exists."
@@ -1675,7 +1675,6 @@
             "description": "The specified group cannot be updated because it is a built-in group.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           },
           "default": {
@@ -1724,7 +1723,6 @@
             "description": "The specified group cannot be updated because it is a built-in group.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           },
           "default": {
@@ -1785,7 +1783,7 @@
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
             }
-          }        
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -1830,7 +1828,7 @@
           "405": {
             "description": "Attempt was made to add a user to a built-in group. Built-in group membership is managed by the system.",
             "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"              
+              "$ref": "#/definitions/ErrorBodyContract"
             }
           },
           "default": {
@@ -1868,14 +1866,13 @@
           }
         ],
         "responses": {
-           "204": {
+          "204": {
             "description": "The user was successfully removed from the group.."
           },
           "405": {
             "description": "Attempt was made to add a user to a built-in group. Built-in group membership is managed by the system.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           },
           "default": {
@@ -1978,11 +1975,11 @@
             "schema": {
               "$ref": "#/definitions/CertificateContract"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           },
           "default": {
@@ -2047,7 +2044,7 @@
           "201": {
             "description": "The new certificate was successfully added."
           },
-          "204":{
+          "204": {
             "description": "The certificate details were successfully updated."
           },
           "default": {
@@ -2301,11 +2298,11 @@
             "schema": {
               "$ref": "#/definitions/UserContract"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           },
           "default": {
@@ -2349,10 +2346,10 @@
           }
         ],
         "responses": {
-         "201": {
+          "201": {
             "description": "User was successfully created."
           },
-          "204":{
+          "204": {
             "description": "User was successfully updated."
           },
           "default": {
@@ -2464,7 +2461,7 @@
           "405": {
             "description": "Administrator user cannot be modified.",
             "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"              
+              "$ref": "#/definitions/ErrorBodyContract"
             }
           },
           "default": {
@@ -2653,7 +2650,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "| Field | Supported operators    | Supported functions                         |\n|-------|------------------------|---------------------------------------------|\n| id    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"            
+            "description": "| Field | Supported operators    | Supported functions                         |\n|-------|------------------------|---------------------------------------------|\n| id    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
           },
           {
             "$ref": "#/parameters/TopQueryParameter"
@@ -2674,7 +2671,7 @@
             "schema": {
               "$ref": "#/definitions/AuthorizationServerCollection"
             }
-          }         
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -2696,7 +2693,7 @@
           {
             "$ref": "#/parameters/ServiceNameParameter"
           },
-           {
+          {
             "name": "authsid",
             "in": "path",
             "required": true,
@@ -2718,11 +2715,11 @@
             "schema": {
               "$ref": "#/definitions/OAuth2AuthorizationServerContract"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           },
           "default": {
@@ -3017,7 +3014,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "By time interval. This value is only applicable to ByTime aggregation. Interval must be multiple of 15 minutes and may not be zero. The value should be in ISO  8601 format (http://en.wikipedia.org/wiki/ISO_8601#Durations).This code can be used to convert TimSpan to a valid interval string: XmlConvert.ToString(new TimeSpan(hours, minutes, secconds))"
+            "description": "By time interval. This value is only applicable to ByTime aggregation. Interval must be multiple of 15 minutes and may not be zero. The value should be in ISO  8601 format (http://en.wikipedia.org/wiki/ISO_8601#Durations).This code can be used to convert TimSpan to a valid interval string: XmlConvert.ToString(new TimeSpan(hours, minutes, seconds))"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -3067,11 +3064,11 @@
             "schema": {
               "$ref": "#/definitions/AccessInformationContract"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           }
         }
@@ -3113,7 +3110,7 @@
           }
         ],
         "responses": {
-           "201": {
+          "201": {
             "description": "Tenant's access information updated successfully."
           },
           "default": {
@@ -3181,7 +3178,7 @@
           }
         ],
         "responses": {
-           "204": {
+          "204": {
             "description": "The secondary key was successfully regenerated."
           },
           "default": {
@@ -3284,11 +3281,11 @@
             "schema": {
               "$ref": "#/definitions/LoggerResponse"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           },
           "default": {
@@ -3396,7 +3393,7 @@
           }
         ],
         "responses": {
-           "204": {
+          "204": {
             "description": "The existing logger was successfully updated."
           },
           "default": {
@@ -3539,11 +3536,11 @@
             "schema": {
               "$ref": "#/definitions/PropertyContract"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           },
           "default": {
@@ -3593,8 +3590,8 @@
           }
         ],
         "responses": {
-           "201": {
-            "description": "Property was successfully created."            
+          "201": {
+            "description": "Property was successfully created."
           },
           "204": {
             "description": "Property was successfully updated."
@@ -3667,7 +3664,7 @@
           "Property"
         ],
         "operationId": "Property_Delete",
-        "description": "Deletes specific property from the the API Management service instance.",
+        "description": "Deletes specific property from the API Management service instance.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -3703,7 +3700,7 @@
           "405": {
             "description": "The specified property cannot be deleted because it is in use in a policy. You must remove all references to this property before it can be deleted.",
             "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"              
+              "$ref": "#/definitions/ErrorBodyContract"
             }
           },
           "default": {
@@ -3797,11 +3794,11 @@
             "schema": {
               "$ref": "#/definitions/OpenidConnectProviderContract"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           },
           "default": {
@@ -3809,7 +3806,7 @@
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
             }
-          }      
+          }
         }
       },
       "put": {
@@ -3832,7 +3829,7 @@
             "type": "string",
             "description": "Identifier of the OpenID Connect Provider.",
             "maxLength": 256,
-			      "pattern": "^[^*#&+:<>?]+$"
+            "pattern": "^[^*#&+:<>?]+$"
           },
           {
             "name": "parameters",
@@ -3852,7 +3849,7 @@
         ],
         "responses": {
           "201": {
-            "description": "OpenIdConnect Provider was successfully created."            
+            "description": "OpenIdConnect Provider was successfully created."
           },
           "204": {
             "description": "OpenIdConnect Provider was successfully updated."
@@ -3961,7 +3958,7 @@
           "405": {
             "description": "The specified OpenIdConnect Provider cannot be deleted because it is in use in a policy. You must remove all references to this property before it can be deleted.",
             "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"              
+              "$ref": "#/definitions/ErrorBodyContract"
             }
           },
           "default": {
@@ -4000,11 +3997,11 @@
             "schema": {
               "$ref": "#/definitions/AccessInformationContract"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           },
           "default": {
@@ -4120,7 +4117,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Result of appplying changes from Git branch to database.",
+            "description": "Result of applying changes from Git branch to database.",
             "schema": {
               "$ref": "#/definitions/OperationResultContract"
             }
@@ -4351,11 +4348,11 @@
             "schema": {
               "$ref": "#/definitions/BackendResponse"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           },
           "default": {
@@ -4453,7 +4450,7 @@
           }
         ],
         "responses": {
-           "204": {
+          "204": {
             "description": "The existing backend was successfully updated."
           },
           "default": {
@@ -4526,7 +4523,7 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          }          
+          }
         ],
         "responses": {
           "200": {
@@ -4574,11 +4571,11 @@
             "schema": {
               "$ref": "#/definitions/IdentityProviderContract"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           },
           "default": {
@@ -4676,7 +4673,7 @@
           }
         ],
         "responses": {
-           "204": {
+          "204": {
             "description": "The existing identity provider configuration was successfully updated."
           },
           "default": {
@@ -4806,7 +4803,7 @@
           }
         ],
         "responses": {
-           "204": {
+          "204": {
             "description": "All the quota counter periods were successfully updated."
           },
           "default": {
@@ -4891,7 +4888,7 @@
               "$ref": "#/definitions/QuotaCounterValueContract"
             },
             "description": "The value of the Quota counter to be applied on the specified period."
-          },          
+          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -4900,7 +4897,7 @@
           }
         ],
         "responses": {
-           "204": {
+          "204": {
             "description": "The quota counter value was successfully updated."
           },
           "default": {
@@ -4914,7 +4911,7 @@
     }
   },
   "x-ms-paths": {
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}?export=true": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}?export=true": {
       "get": {
         "tags": [
           "Apis"
@@ -4922,7 +4919,7 @@
         "operationId": "Apis_Export",
         "description": "Gets the details of the API specified by its identifier.",
         "parameters": [
-           {
+          {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -4955,7 +4952,7 @@
       }
     }
   },
-  "definitions": {    
+  "definitions": {
     "OAuth2AuthenticationSettingsContract": {
       "properties": {
         "authorizationServerId": {
@@ -4990,7 +4987,7 @@
       },
       "description": "Subscription key parameter names details.",
       "example": {
-        "subscriptionKeyParameterNames" : {
+        "subscriptionKeyParameterNames": {
           "query": "customQueryParameterName",
           "header": "customHeaderParameterName"
         }
@@ -5067,7 +5064,7 @@
         "path",
         "protocols"
       ],
-      "description": "API details."      
+      "description": "API details."
     },
     "ApiCollection": {
       "properties": {
@@ -5112,12 +5109,12 @@
         "statusCode": {
           "type": "string",
           "enum": [
-            "Continue",            
+            "Continue",
             "OK",
             "Created",
-            "Accepted",            
-            "NotFound",            
-            "Conflict"                        
+            "Accepted",
+            "NotFound",
+            "Conflict"
           ],
           "x-ms-enum": {
             "name": "HttpStatusCode",
@@ -5219,7 +5216,7 @@
           "format": "int32",
           "description": "Operation response HTTP status code.",
           "minimum": 100,
-          "maximum": 599          
+          "maximum": 599
         },
         "description": {
           "type": "string",
@@ -5257,7 +5254,7 @@
           "externalDocs": {
             "description": "As defined by RFC.",
             "url": "http://www.rfc-editor.org/rfc/rfc7230.txt"
-          }          
+          }
         },
         "urlTemplate": {
           "type": "string",
@@ -5347,12 +5344,12 @@
         },
         "approvalRequired": {
           "type": "boolean",
-          "description": "whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of false."
+          "description": "whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of true."
         },
         "subscriptionsLimit": {
           "type": "integer",
           "format": "int32",
-          "description": "Whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false."
+          "description": "Whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of true."
         },
         "state": {
           "type": "string",
@@ -5495,7 +5492,7 @@
           "description": "Next page link if any."
         }
       },
-      "description": "Paged Subsctions list representation."
+      "description": "Paged Subscriptions list representation."
     },
     "SubscriptionCreateParameters": {
       "properties": {
@@ -5505,7 +5502,7 @@
         },
         "productId": {
           "type": "string",
-          "description": "Product (product id path) for which subscription is being created in form /products/{productid}"
+          "description": "Product (product id path) for which subscription is being created in form /products/{productId}"
         },
         "name": {
           "type": "string",
@@ -5571,13 +5568,13 @@
         "primaryKey": {
           "type": "string",
           "description": "Primary subscription key.",
-		      "minLength": 1,
+          "minLength": 1,
           "maxLength": 256
         },
         "secondaryKey": {
           "type": "string",
           "description": "Secondary subscription key.",
-		      "minLength": 1,
+          "minLength": 1,
           "maxLength": 256
         },
         "state": {
@@ -5627,12 +5624,12 @@
         },
         "approvalRequired": {
           "type": "boolean",
-          "description": "whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of false."
+          "description": "whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of true."
         },
         "subscriptionsLimit": {
           "type": "integer",
           "format": "int32",
-          "description": "whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false."
+          "description": "whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of true."
         },
         "state": {
           "type": "string",
@@ -5653,7 +5650,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Uniquely identifies the group within the current API Management service instance. The value is a valid relative URL in the format of /groups/{groupid} where {groupid} is a group identifier.",
+          "description": "Uniquely identifies the group within the current API Management service instance. The value is a valid relative URL in the format of /groups/{groupId} where {groupId} is a group identifier.",
           "readOnly": true
         },
         "name": {
@@ -6093,7 +6090,7 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Uniquely identifies the authorization server within the current API Management service instance. The value is a valid relative URL in the format of /authorizationServers/{authsid} where {authsid} is an authorization server identifier."          
+          "description": "Uniquely identifies the authorization server within the current API Management service instance. The value is a valid relative URL in the format of /authorizationServers/{authsid} where {authsid} is an authorization server identifier."
         },
         "name": {
           "type": "string",
@@ -6164,7 +6161,7 @@
           }
         },
         "supportState": {
-          "type": "boolean",          
+          "type": "boolean",
           "description": "If true, authorization server will include state parameter from the authorization request to its response. Client may use state parameter to raise protocol security.",
           "externalDocs": {
             "url": "http://tools.ietf.org/html/rfc6749#section-3.1"
@@ -6241,31 +6238,31 @@
       ],
       "description": "External OAuth authorization server settings.",
       "example": {
-          "id": "/authorizationServers/554be23d0fce600674232c33",
-          "name": "AAD OAuth A/S",
-          "description": null,
-          "clientRegistrationEndpoint": "https://contoso.com/",
-          "authorizationEndpoint": "https://login.microsoftonline.com/55abb68a-8ews-4565-8675-927722a8a005/oauth2/authorize?api-version=1.0",
-          "authorizationMethods": [
-              "GET"
-          ],
-          "clientAuthenticationMethod": [
-              "Body"
-          ],
-          "tokenBodyParameters": [],
-          "tokenEndpoint": "https://login.microsoftonline.com/55abb68a-8ews-4565-8675-927722a8a005/oauth2/token?api-version=1.0",
-          "supportState": false,
-          "defaultScope": null,
-          "grantTypes": [
-            "authorizationCode"
-          ],
-          "bearerTokenSendingMethods": [
-            "authorizationHeader"
-          ],
-          "clientId": "demo",
-          "clientSecret": "demo",
-          "resourceOwnerUsername": null,
-          "resourceOwnerPassword": null       
+        "id": "/authorizationServers/554be23d0fce600674232c33",
+        "name": "AAD OAuth A/S",
+        "description": null,
+        "clientRegistrationEndpoint": "https://contoso.com/",
+        "authorizationEndpoint": "https://login.microsoftonline.com/55abb68a-8ews-4565-8675-927722a8a005/oauth2/authorize?api-version=1.0",
+        "authorizationMethods": [
+          "GET"
+        ],
+        "clientAuthenticationMethod": [
+          "Body"
+        ],
+        "tokenBodyParameters": [],
+        "tokenEndpoint": "https://login.microsoftonline.com/55abb68a-8ews-4565-8675-927722a8a005/oauth2/token?api-version=1.0",
+        "supportState": false,
+        "defaultScope": null,
+        "grantTypes": [
+          "authorizationCode"
+        ],
+        "bearerTokenSendingMethods": [
+          "authorizationHeader"
+        ],
+        "clientId": "demo",
+        "clientSecret": "demo",
+        "resourceOwnerUsername": null,
+        "resourceOwnerPassword": null
       }
     },
     "AuthorizationServerCollection": {
@@ -6288,9 +6285,9 @@
         }
       },
       "description": "Paged OAuth2 Authorization Servers list representation."
-    },    
+    },
     "OAuth2AuthorizationServerUpdateContract": {
-      "properties": {        
+      "properties": {
         "name": {
           "type": "string",
           "description": "User-friendly authorization server name.",
@@ -6360,7 +6357,7 @@
           }
         },
         "supportState": {
-          "type": "boolean",          
+          "type": "boolean",
           "description": "If true, authorization server will include state parameter from the authorization request to its response. Client may use state parameter to raise protocol security.",
           "externalDocs": {
             "url": "http://tools.ietf.org/html/rfc6749#section-3.1"
@@ -6428,8 +6425,8 @@
           "description": "Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner password."
         }
       },
-      "description": "External OAuth authorization server Update settings contract."     
-    },    
+      "description": "External OAuth authorization server Update settings contract."
+    },
     "RegionContract": {
       "properties": {
         "name": {
@@ -6473,7 +6470,7 @@
         "interval": {
           "type": "integer",
           "format": "int64",
-          "description": "Length of agregation period."
+          "description": "Length of aggregation period."
         },
         "country": {
           "type": "string",
@@ -6516,7 +6513,7 @@
         "callCountSuccess": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of succesful calls."
+          "description": "Number of successful calls."
         },
         "callCountBlocked": {
           "type": "integer",
@@ -6669,15 +6666,15 @@
             "type": "string"
           },
           "description": "The name and SendRule connection string of the event hub.",
-          "example":{
-            "name" : "apim",
-            "connectionString" : "Endpoint=sb://contoso-ns.servicebus.windows.net/;SharedAccessKeyName=Sender;SharedAccessKey=..."
-          }         
+          "example": {
+            "name": "apim",
+            "connectionString": "Endpoint=sb://contoso-ns.servicebus.windows.net/;SharedAccessKeyName=Sender;SharedAccessKey=..."
+          }
         },
         "isBuffered": {
           "type": "boolean",
           "description": "Whether records are buffered in the logger before publishing. Default is assumed to be true.",
-          "default": true          
+          "default": true
         }
       },
       "required": [
@@ -6730,9 +6727,9 @@
             "type": "string"
           },
           "description": "The name and SendRule connection string of the event hub.",
-          "example":{
-            "name" : "Event hub name. This is optional.",
-            "connectionString" : "Endpoint=endpoint and key from Azure classic portal. This property in credentials is must."
+          "example": {
+            "name": "Event hub name. This is optional.",
+            "connectionString": "Endpoint=endpoint and key from Azure classic portal. This property in credentials is must."
           }
         },
         "isBuffered": {
@@ -6779,7 +6776,7 @@
         "type"
       ],
       "description": "Parameters supplied to the Update Logger operation."
-    },    
+    },
     "BackendResponse": {
       "properties": {
         "id": {
@@ -6816,7 +6813,7 @@
       },
       "description": "Paged Backend list representation."
     },
-    "BackendContract": {      
+    "BackendContract": {
       "properties": {
         "host": {
           "type": "string",
@@ -6827,7 +6824,7 @@
         "skipCertificateChainValidation": {
           "type": "boolean",
           "description": "Flag indicating whether SSL certificate chain validation should be skipped when using self-signed certificates for this backend host.",
-          "default": false          
+          "default": false
         }
       },
       "required": [
@@ -6846,7 +6843,7 @@
         "skipCertificateChainValidation": {
           "type": "boolean",
           "description": "Flag indicating whether SSL certificate chain validation should be skipped when using self-signed certificates for this backend host.",
-          "default": false          
+          "default": false
         }
       },
       "description": "Parameters supplied to the Update Backend operation."
@@ -6887,14 +6884,14 @@
             "twitter",
             "aad"
           ],
-         "x-ms-enum": {
-           "name": "IdentityProviderNameType",
-           "modelAsString": true
+          "x-ms-enum": {
+            "name": "IdentityProviderNameType",
+            "modelAsString": true
           },
-         "description": "Identity Provider Type identifier."
+          "description": "Identity Provider Type identifier."
         },
         "allowedTenants": {
-         "type": "array",
+          "type": "array",
           "items": {
             "type": "string"
           },
@@ -6910,7 +6907,7 @@
     },
     "IdentityProviderUpdateParameters": {
       "properties": {
-       "clientId": {
+        "clientId": {
           "type": "string",
           "description": "Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.",
           "minLength": 1
@@ -6921,7 +6918,7 @@
           "minLength": 1
         },
         "allowedTenants": {
-         "type": "array",
+          "type": "array",
           "items": {
             "type": "string"
           },
@@ -7027,7 +7024,7 @@
     },
     "PropertyUpdateParameters": {
       "properties": {
-         "name": {
+        "name": {
           "type": "string",
           "description": "Unique name of Property. It may contain only letters, digits, period, dash, and underscore characters.",
           "minLength": 1,
@@ -7211,12 +7208,12 @@
         "statusCode": {
           "type": "string",
           "enum": [
-            "Continue",            
+            "Continue",
             "OK",
             "Created",
-            "Accepted",            
-            "NotFound",            
-            "Conflict"                        
+            "Accepted",
+            "NotFound",
+            "Conflict"
           ],
           "x-ms-enum": {
             "name": "HttpStatusCode",
@@ -7378,7 +7375,7 @@
       },
       "description": "Paged Quota Counter list representation."
     },
-    "QuotaCounterContract": {      
+    "QuotaCounterContract": {
       "properties": {
         "counterKey": {
           "type": "string",
@@ -7414,7 +7411,7 @@
       ],
       "description": "Quota counter details."
     },
-    "QuotaCounterValueContract": {      
+    "QuotaCounterValueContract": {
       "properties": {
         "callsCount": {
           "type": "integer",
@@ -7474,7 +7471,7 @@
       "maxLength": 256,
       "pattern": "^[^*#&+:<>?]+$",
       "x-ms-parameter-location": "method"
-    },    
+    },
     "OperationIdParameter": {
       "name": "operationId",
       "in": "path",
@@ -7573,16 +7570,16 @@
       "name": "quotaCounterKey",
       "in": "path",
       "required": true,
-      "type": "string",      
-      "description": "Quota counter key identifier.",      
+      "type": "string",
+      "description": "Quota counter key identifier.",
       "x-ms-parameter-location": "method"
     },
     "QuotaPeriodKeyParameter": {
       "name": "quotaPeriodKey",
       "in": "path",
       "required": true,
-      "type": "string",      
-      "description": "Quota period key identifier.",      
+      "type": "string",
+      "description": "Quota period key identifier.",
       "x-ms-parameter-location": "method"
     }
   }

@@ -1,11 +1,11 @@
 # Subscriptions Admin
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Subscriptions Admin.
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for Subscriptions Admin, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -17,7 +17,7 @@ To see additional help and options, run:
 
 ## Configuration
 
-### Basic Information 
+### Basic Information
 These are the global settings for the Subscriptions API.
 
 ``` yaml
@@ -34,6 +34,9 @@ directive:
     reason: Subscription is not modelled as ARM resource in azure for legacy reasons. In Azure stack as well, Subscription is not modelled as ARM resource for azure consistency
     where:
       - $.paths["/subscriptions/{subscriptionId}"].put
+
+  - suppress: R3023
+    reason: No operations endpoint as not ARM resource provider.
 
   - suppress: SubscriptionIdParameterInOperations
     reason: Subscription is the main resource in the API spec and it should not be masked in global parameters.
@@ -67,7 +70,7 @@ input-file:
 ---
 # Code Generation
 
-## C# 
+## C#
 
 ``` yaml $(csharp)
 csharp:
@@ -77,6 +80,31 @@ csharp:
   payload-flattening-threshold: 1
   output-folder: $(csharp-sdks-folder)/Generated
   clear-output-folder: true
+```
+
+## Multi-API/Profile support for AutoRest v3 generators
+
+AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
+
+This block is updated by an automatic script. Edits may be lost!
+
+``` yaml
+# include the azure profile definitions from the standard location
+require: $(this-folder)/../../../../profiles/readme.md
+
+# all the input files across all versions
+input-file:
+  - $(this-folder)/Microsoft.Subscriptions/preview/2015-11-01/Subscriptions.json
+  - $(this-folder)/Microsoft.Subscriptions/preview/2015-11-01/Offer.json
+
+```
+
+If there are files that should not be in the `all-api-versions` set, 
+uncomment the  `exclude-file` section below and add the file paths.
+
+``` yaml $(tag) == 'all-api-versions'
+#exclude-file: 
+#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
 
 ## Python

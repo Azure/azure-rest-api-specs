@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2019-01-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "billingPeriodName": "201803",
+    "$apply": "groupby((tags))"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Billing/billingPeriods/20180301/providers/Microsoft.Consumption/usageDetails/usageDetailsId1",
+            "name": "usageDetailsId1",
+            "type": "Microsoft.Consumption/usageDetails",
+            "tags": {
+              "description": "Azure VCAP STA - RDS Server"
+            },
+            "properties": {
+              "billingPeriodId": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Billing/billingPeriods/20180301",
+              "usageQuantity": 11.11111,
+              "pretaxCost": 0,
+              "currency": "USD"
+            }
+          },
+          {
+            "id": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Billing/billingPeriods/20180301/providers/Microsoft.Consumption/usageDetails/usageDetailsId1",
+            "name": "usageDetailsId1",
+            "type": "Microsoft.Consumption/usageDetails",
+            "tags": {
+              "description": "Domain controller - STA"
+            },
+            "properties": {
+              "billingPeriodId": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Billing/billingPeriods/20180301",
+              "usageQuantity": 111.11111111111,
+              "pretaxCost": 0,
+              "currency": "USD"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

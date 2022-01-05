@@ -79,7 +79,10 @@
             "$ref": "./examples/NetworkProfileDelete.json"
           }
         },
-        "x-ms-long-running-operation": false
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "get": {
         "tags": [
@@ -100,7 +103,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the PublicIPPrefx."
+            "description": "The name of the Public IP Prefix."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -268,7 +271,7 @@
           }
         },
         "x-ms-examples": {
-          "List all network profilees": {
+          "List all network profiles": {
             "$ref": "./examples/NetworkProfileListAll.json"
           }
         },
@@ -308,7 +311,7 @@
           }
         },
         "x-ms-examples": {
-          "List resource group network profilees": {
+          "List resource group network profiles": {
             "$ref": "./examples/NetworkProfileList.json"
           }
         },
@@ -391,7 +394,7 @@
         },
         "container": {
           "$ref": "#/definitions/Container",
-          "description": "Reference to the conatinaer to which this container network interface is attached."
+          "description": "Reference to the container to which this container network interface is attached."
         },
         "ipConfigurations": {
           "type": "array",
@@ -485,13 +488,13 @@
           "$ref": "./network.json#/definitions/SubResource"
         }
       ],
-      "description": "Container network interface configruation child resource."
+      "description": "Container network interface configuration child resource."
     },
     "IPConfigurationProfilePropertiesFormat": {
       "properties": {
         "subnet": {
           "$ref": "./virtualNetwork.json#/definitions/Subnet",
-          "description": "The reference of the subnet resource to create a contatainer network interface ip configruation."
+          "description": "The reference of the subnet resource to create a container network interface ip configuration."
         },
         "provisioningState": {
           "readOnly": true,
@@ -499,7 +502,7 @@
           "description": "The provisioning state of the resource."
         }
       },
-      "description": "IP configruation profile properties."
+      "description": "IP configuration profile properties."
     },
     "IPConfigurationProfile": {
       "properties": {
@@ -530,7 +533,7 @@
       "description": "IP configuration profile child resource."
     },
     "Container": {
-      "properties": { },
+      "properties": {},
       "allOf": [
         {
           "$ref": "./network.json#/definitions/SubResource"
@@ -555,7 +558,7 @@
           "$ref": "#/definitions/ContainerNetworkInterfaceIpConfigurationPropertiesFormat",
           "description": "Properties of the container network interface IP configuration."
         },
-        "name": {   
+        "name": {
           "type": "string",
           "description": "The name of the resource. This name can be used to access the resource."
         },

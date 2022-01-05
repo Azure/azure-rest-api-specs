@@ -1,55 +1,55 @@
 {
-    "parameters": {
-        "scope": "subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampletopic2",
-        "eventSubscriptionName": "examplesubscription1",
-        "api-version": "2017-06-15-preview",
-        "eventSubscriptionUpdateParameters": {
-            "destination": {
-                "endpointType": "WebHook",
-                "properties": {
-                    "endpointUrl": "https://requestb.in/15ksip71"
-                }
-            },
-            "filter": {
-                "isSubjectCaseSensitive": true,
-                "subjectBeginsWith": "existingPrefix",
-                "subjectEndsWith": "newSuffix"
-            },
-            "labels": [
-                "label1",
-                "label2"
-            ]
+  "parameters": {
+    "scope": "subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampletopic2",
+    "eventSubscriptionName": "examplesubscription1",
+    "api-version": "2017-06-15-preview",
+    "eventSubscriptionUpdateParameters": {
+      "destination": {
+        "endpointType": "WebHook",
+        "properties": {
+          "endpointUrl": "https://requestb.in/15ksip71"
         }
-    },
-    "responses": {
-        "201": {
-            "body": {
-                "properties": {
-                    "destination": {
-                        "properties": {
-                            "endpointBaseUrl": "https://requestb.in/15ksip71"
-                        },
-                        "endpointType": "WebHook"
-                    },
-                    "filter": {
-                        "includedEventTypes": [
-                            "All"
-                        ],
-                        "isSubjectCaseSensitive": true,
-                        "subjectBeginsWith": "existingPrefix",
-                        "subjectEndsWith": "newSuffix"
-                    },
-                    "labels": [
-                        "label1",
-                        "label2"
-                    ],
-                    "provisioningState": "Succeeded",
-                    "topic": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/microsoft.eventgrid/topics/exampletopic2"
-                },
-                "id": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampletopic2/providers/Microsoft.EventGrid/eventSubscriptions/examplesubscription1",
-                "name": "examplesubscription1",
-                "type": "Microsoft.EventGrid/eventSubscriptions"
-            }
-        }
+      },
+      "filter": {
+        "isSubjectCaseSensitive": true,
+        "subjectBeginsWith": "existingPrefix",
+        "subjectEndsWith": "newSuffix"
+      },
+      "labels": [
+        "label1",
+        "label2"
+      ]
     }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "properties": {
+          "destination": {
+            "properties": {
+              "endpointBaseUrl": "https://requestb.in/15ksip71"
+            },
+            "endpointType": "WebHook"
+          },
+          "filter": {
+            "includedEventTypes": [
+              "All"
+            ],
+            "isSubjectCaseSensitive": true,
+            "subjectBeginsWith": "existingPrefix",
+            "subjectEndsWith": "newSuffix"
+          },
+          "labels": [
+            "label1",
+            "label2"
+          ],
+          "provisioningState": "Succeeded",
+          "topic": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/microsoft.eventgrid/topics/exampletopic2"
+        },
+        "id": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampletopic2/providers/Microsoft.EventGrid/eventSubscriptions/examplesubscription1",
+        "name": "examplesubscription1",
+        "type": "Microsoft.EventGrid/eventSubscriptions"
+      }
+    }
+  }
 }

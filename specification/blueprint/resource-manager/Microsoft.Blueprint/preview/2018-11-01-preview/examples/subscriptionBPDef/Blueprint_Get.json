@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "resourceScope": "subscriptions/00000000-0000-0000-0000-000000000000",
+    "blueprintName": "simpleBlueprint"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "description": "blueprint contains all artifact kinds {'template', 'rbac', 'policy'}",
+          "parameters": {
+            "storageAccountType": {
+              "type": "string",
+              "metadata": {
+                "displayName": "storage account type."
+              }
+            },
+            "costCenter": {
+              "type": "string",
+              "metadata": {
+                "displayName": "force cost center tag for all resources under given subscription."
+              }
+            },
+            "owners": {
+              "type": "array",
+              "metadata": {
+                "displayName": "assign owners to subscription along with blueprint assignment."
+              }
+            }
+          },
+          "resourceGroups": {
+            "storageRG": {
+              "metadata": {
+                "displayName": "storage resource group",
+                "description": "Contains storageAccounts that collect all shoebox logs."
+              }
+            }
+          },
+          "targetScope": "subscription",
+          "status": null
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint",
+        "type": "Microsoft.Blueprint/blueprints",
+        "name": "simpleBlueprint"
+      }
+    }
+  }
+}

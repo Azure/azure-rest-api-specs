@@ -1,0 +1,236 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApplicationInsightsManagementClient",
+    "description": "Azure Application Insights client for selecting pricing plans and options.",
+    "version": "2017-10-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/pricingPlans/current": {
+      "get": {
+        "description": "Returns the current pricing plan setting for an Application Insights component.",
+        "operationId": "ComponentCurrentPricingPlan_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An Application Insights component pricing plan definition.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentPricingPlan"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ComponentCurrentPricingPlanGet": {
+            "$ref": "./examples/CurrentPricingPlanGet.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Replace current pricing plan for an Application Insights component.",
+        "operationId": "ComponentCurrentPricingPlan_CreateAndUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "PricingPlanProperties",
+            "description": "Properties that need to be specified to update current pricing plan for an Application Insights component.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentPricingPlan"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request when updating billing features for an Application Insights component. The updated current billing features are returned.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentPricingPlan"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ComponentCurrentPricingPlanUpdate": {
+            "$ref": "./examples/CurrentPricingPlanCreateAndUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Update current pricing plan for an Application Insights component.",
+        "operationId": "ComponentCurrentPricingPlan_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "PricingPlanProperties",
+            "description": "Properties that need to be specified to update current pricing plan for an Application Insights component.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentPricingPlan"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request when updating billing features for an Application Insights component. The updated current billing features are returned.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentPricingPlan"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ComponentCurrentPricingPlanUpdate": {
+            "$ref": "./examples/CurrentPricingPlanUpdate.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "description": "An Azure resource.",
+      "properties": {
+        "id": {
+          "description": "Azure resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Azure resource name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Azure resource type.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ApplicationInsightsComponentPricingPlan": {
+      "description": "An Application Insights component pricing plan",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PricingPlanProperties",
+          "description": "The properties of the suppression.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PricingPlanProperties": {
+      "type": "object",
+      "description": "An Application Insights component daily data volume cap",
+      "properties": {
+        "planType": {
+          "type": "string",
+          "description": "Pricing Plan Type Name."
+        },
+        "cap": {
+          "type": "number",
+          "description": "Daily data volume cap in GB."
+        },
+        "resetHour": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Daily data volume cap UTC reset hour."
+        },
+        "warningThreshold": {
+          "type": "integer",
+          "description": "Reserved, not used for now."
+        },
+        "stopSendNotificationWhenHitThreshold": {
+          "type": "boolean",
+          "description": "Reserved, not used for now."
+        },
+        "stopSendNotificationWhenHitCap": {
+          "type": "boolean",
+          "description": "Do not send a notification email when the daily data volume cap is met."
+        },
+        "maxHistoryCap": {
+          "type": "number",
+          "readOnly": true,
+          "description": "Maximum daily data volume cap that the user can set for this component."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ResourceNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Application Insights component resource.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -6,7 +6,7 @@
     "$from": "2018-02-05T18:00:00Z",
     "$filter": "IsCompliant eq false and (PolicyDefinitionAction eq 'audit' or PolicyDefinitionAction eq 'deny')",
     "$apply": "groupby((PolicyAssignmentId, PolicyDefinitionId, PolicyDefinitionAction, ResourceId), aggregate($count as NumAuditDenyNonComplianceRecords))",
-    "$orderby": "NumAuditDenyNonComplianceRecords desc", 
+    "$orderby": "NumAuditDenyNonComplianceRecords desc",
     "$top": 2
   },
   "responses": {

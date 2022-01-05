@@ -14,17 +14,20 @@
         "isVirtualNetworkFilterEnabled": true,
         "virtualNetworkRules": [
           {
-            "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"
+            "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+            "ignoreMissingVNetServiceEndpoint": false
           }
         ],
         "locations": [
           {
             "failoverPriority": 0,
-            "locationName": "southcentralus"
+            "locationName": "southcentralus",
+            "isZoneRedundant": false
           },
           {
             "failoverPriority": 1,
-            "locationName": "eastus"
+            "locationName": "eastus",
+            "isZoneRedundant": false
           }
         ],
         "consistencyPolicy": {
@@ -36,7 +39,7 @@
     }
   },
   "responses": {
-    "200": { 
+    "200": {
       "body": {
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1",
         "name": "ddb1",
@@ -59,7 +62,8 @@
               "id": "ddb1-southcentralus",
               "locationName": "South Central US",
               "provisioningState": "Initializing",
-              "failoverPriority": 0
+              "failoverPriority": 0,
+              "isZoneRedundant": false
             }
           ],
           "readLocations": [
@@ -67,13 +71,15 @@
               "id": "ddb1-southcentralus",
               "locationName": "South Central US",
               "provisioningState": "Initializing",
-              "failoverPriority": 0
+              "failoverPriority": 0,
+              "isZoneRedundant": false
             },
             {
               "id": "ddb1-eastus",
               "locationName": "East US",
               "provisioningState": "Initializing",
-              "failoverPriority": 1
+              "failoverPriority": 1,
+              "isZoneRedundant": false
             }
           ],
           "failoverPolicies": [

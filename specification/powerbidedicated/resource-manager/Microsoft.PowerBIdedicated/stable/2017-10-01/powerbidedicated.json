@@ -9,7 +9,9 @@
     }
   },
   "host": "management.azure.com",
-  "schemes": [ "https" ],
+  "schemes": [
+    "https"
+  ],
   "consumes": [
     "application/json"
   ],
@@ -39,9 +41,13 @@
       "get": {
         "description": "Gets details about the specified dedicated capacity.",
         "x-ms-examples": {
-          "Get details of a capacity": { "$ref": "./examples/getCapacity.json" }
+          "Get details of a capacity": {
+            "$ref": "./examples/getCapacity.json"
+          }
         },
-        "tags": [ "Capacities" ],
+        "tags": [
+          "Capacities"
+        ],
         "operationId": "Capacities_GetDetails",
         "parameters": [
           {
@@ -67,16 +73,28 @@
         "responses": {
           "200": {
             "description": "OK. The operation was successful.",
-            "schema": { "$ref": "#/definitions/DedicatedCapacity" }
+            "schema": {
+              "$ref": "#/definitions/DedicatedCapacity"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
       "put": {
         "description": "Provisions the specified Dedicated capacity based on the configuration specified in the request.",
         "x-ms-examples": {
-          "Create capacity": { "$ref": "./examples/createCapacity.json" }
+          "Create capacity": {
+            "$ref": "./examples/createCapacity.json"
+          }
         },
-        "tags": [ "Capacities" ],
+        "tags": [
+          "Capacities"
+        ],
         "operationId": "Capacities_Create",
         "parameters": [
           {
@@ -96,7 +114,9 @@
             "name": "capacityParameters",
             "in": "body",
             "required": true,
-            "schema": { "$ref": "#/definitions/DedicatedCapacity" },
+            "schema": {
+              "$ref": "#/definitions/DedicatedCapacity"
+            },
             "description": "Contains the information used to provision the Dedicated capacity."
           },
           {
@@ -105,16 +125,25 @@
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           }
-
         ],
         "responses": {
           "200": {
             "description": "OK. The operation completed successfully.",
-            "schema": { "$ref": "#/definitions/DedicatedCapacity" }
+            "schema": {
+              "$ref": "#/definitions/DedicatedCapacity"
+            }
           },
           "201": {
             "description": "InProgress. The operation is still in progress.",
-            "schema": { "$ref": "#/definitions/DedicatedCapacity" }
+            "schema": {
+              "$ref": "#/definitions/DedicatedCapacity"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -122,9 +151,13 @@
       "delete": {
         "description": "Deletes the specified Dedicated capacity.",
         "x-ms-examples": {
-          "Get details of a capacity": { "$ref": "./examples/deleteCapacity.json" }
+          "Get details of a capacity": {
+            "$ref": "./examples/deleteCapacity.json"
+          }
         },
-        "tags": [ "Capacities" ],
+        "tags": [
+          "Capacities"
+        ],
         "operationId": "Capacities_Delete",
         "parameters": [
           {
@@ -156,6 +189,12 @@
           },
           "202": {
             "description": "Accepted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -163,9 +202,13 @@
       "patch": {
         "description": "Updates the current state of the specified Dedicated capacity.",
         "x-ms-examples": {
-          "Update capacity parameters": { "$ref": "./examples/updateCapacity.json" }
+          "Update capacity parameters": {
+            "$ref": "./examples/updateCapacity.json"
+          }
         },
-        "tags": [ "Capacities" ],
+        "tags": [
+          "Capacities"
+        ],
         "operationId": "Capacities_Update",
         "parameters": [
           {
@@ -185,7 +228,9 @@
             "name": "capacityUpdateParameters",
             "in": "body",
             "required": true,
-            "schema": { "$ref": "#/definitions/DedicatedCapacityUpdateParameters" },
+            "schema": {
+              "$ref": "#/definitions/DedicatedCapacityUpdateParameters"
+            },
             "description": "Request object that contains the updated information for the capacity."
           },
           {
@@ -198,11 +243,21 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/DedicatedCapacity" }
+            "schema": {
+              "$ref": "#/definitions/DedicatedCapacity"
+            }
           },
           "202": {
             "description": "Accepted",
-            "schema": { "$ref": "#/definitions/DedicatedCapacity" }
+            "schema": {
+              "$ref": "#/definitions/DedicatedCapacity"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -212,9 +267,13 @@
       "post": {
         "description": "Suspends operation of the specified dedicated capacity instance.",
         "x-ms-examples": {
-          "Suspend capacity": { "$ref": "./examples/suspendCapacity.json" }
+          "Suspend capacity": {
+            "$ref": "./examples/suspendCapacity.json"
+          }
         },
-        "tags": [ "Capacities" ],
+        "tags": [
+          "Capacities"
+        ],
         "operationId": "Capacities_Suspend",
         "parameters": [
           {
@@ -243,6 +302,12 @@
           },
           "202": {
             "description": "Accepted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -252,9 +317,13 @@
       "post": {
         "description": "Resumes operation of the specified Dedicated capacity instance.",
         "x-ms-examples": {
-          "Get details of a capacity": { "$ref": "./examples/resumeCapacity.json" }
+          "Get details of a capacity": {
+            "$ref": "./examples/resumeCapacity.json"
+          }
         },
-        "tags": [ "Capacities" ],
+        "tags": [
+          "Capacities"
+        ],
         "operationId": "Capacities_Resume",
         "parameters": [
           {
@@ -283,6 +352,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -292,9 +367,13 @@
       "get": {
         "description": "Gets all the Dedicated capacities for the given resource group.",
         "x-ms-examples": {
-          "List capacities in resource group": { "$ref": "./examples/listCapacitiesInResourceGroup.json" }
+          "List capacities in resource group": {
+            "$ref": "./examples/listCapacitiesInResourceGroup.json"
+          }
         },
-        "tags": [ "Capacities" ],
+        "tags": [
+          "Capacities"
+        ],
         "operationId": "Capacities_ListByResourceGroup",
         "parameters": [
           {
@@ -310,7 +389,15 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/DedicatedCapacities" }
+            "schema": {
+              "$ref": "#/definitions/DedicatedCapacities"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -322,9 +409,13 @@
       "get": {
         "description": "Lists all the Dedicated capacities for the given subscription.",
         "x-ms-examples": {
-          "Get details of a capacity": { "$ref": "./examples/listCapacitiesInSubscription.json" }
+          "Get details of a capacity": {
+            "$ref": "./examples/listCapacitiesInSubscription.json"
+          }
         },
-        "tags": [ "Capacities" ],
+        "tags": [
+          "Capacities"
+        ],
         "operationId": "Capacities_List",
         "parameters": [
           {
@@ -337,7 +428,15 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/DedicatedCapacities" }
+            "schema": {
+              "$ref": "#/definitions/DedicatedCapacities"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -349,7 +448,9 @@
       "get": {
         "description": "Lists eligible SKUs for PowerBI Dedicated resource provider.",
         "x-ms-examples": {
-          "List eligible SKUs for a new capacity": { "$ref": "./examples/listSKUsForNew.json" }
+          "List eligible SKUs for a new capacity": {
+            "$ref": "./examples/listSKUsForNew.json"
+          }
         },
         "operationId": "Capacities_ListSkus",
         "parameters": [
@@ -363,7 +464,15 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/SkuEnumerationForNewResourceResult" }
+            "schema": {
+              "$ref": "#/definitions/SkuEnumerationForNewResourceResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -372,9 +481,13 @@
       "get": {
         "description": "Lists eligible SKUs for a PowerBI Dedicated resource.",
         "x-ms-examples": {
-          "List eligible SKUs for an existing capacity": { "$ref": "./examples/listSKUsForExisting.json" }
+          "List eligible SKUs for an existing capacity": {
+            "$ref": "./examples/listSKUsForExisting.json"
+          }
         },
-        "tags": [ "Capacities" ],
+        "tags": [
+          "Capacities"
+        ],
         "operationId": "Capacities_ListSkusForCapacity",
         "parameters": [
           {
@@ -400,7 +513,15 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/SkuEnumerationForExistingResourceResult" }
+            "schema": {
+              "$ref": "#/definitions/SkuEnumerationForExistingResourceResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -437,51 +558,58 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.PowerBIDedicated/locations/{location}/checkNameAvailability": {
-     "post": {
-       "x-ms-examples": {
-        "Check name availability of a capacity": { "$ref": "./examples/checkNameAvailability.json" }
-      },
-      "tags": [
-        "Capacities"
-      ],
-      "operationId": "Capacities_CheckNameAvailability",
-      "description": "Check the name availability in the target location.",
-      "parameters": [
-        {
-          "name": "location",
-          "in": "path",
-          "required": true,
-          "type": "string",
-          "description": "The region name which the operation will lookup into."
+      "post": {
+        "x-ms-examples": {
+          "Check name availability of a capacity": {
+            "$ref": "./examples/checkNameAvailability.json"
+          }
         },
-        {
-          "name": "capacityParameters",
-          "in": "body",
-          "required": true,
-          "schema":
-          { 
-            "$ref": "#/definitions/CheckCapacityNameAvailabilityParameters"
+        "tags": [
+          "Capacities"
+        ],
+        "operationId": "Capacities_CheckNameAvailability",
+        "description": "Check the name availability in the target location.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The region name which the operation will lookup into."
           },
-          "description": "The name of the capacity."
-        },
-        {
-          "$ref": "#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "OK. The request has succeeded.",
-          "schema": {
-            "$ref": "#/definitions/CheckCapacityNameAvailabilityResult"
+          {
+            "name": "capacityParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckCapacityNameAvailabilityParameters"
+            },
+            "description": "The name of the capacity."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CheckCapacityNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
     }
-   }
-  },   
+  },
   "definitions": {
     "OperationListResult": {
       "description": "Result listing capacities. It contains a list of operations and a URL link to get the next set of results.",
@@ -527,6 +655,25 @@
               "description": "Operation type: create, update, delete, etc.",
               "type": "string",
               "readOnly": true
+            },
+            "description": {
+              "type": "string",
+              "description": "Localized description of the operation."
+            }
+          }
+        },
+        "origin": {
+          "type": "string",
+          "description": "Executor of the operation.",
+          "readOnly": true
+        },
+        "properties": {
+          "type": "object",
+          "description": "Additional properties to expose performance metrics to shoebox.",
+          "properties": {
+            "serviceSpecification": {
+              "$ref": "#/definitions/ServiceSpecification",
+              "description": "Service specification for exposing performance metrics to shoebox."
             }
           }
         }
@@ -561,7 +708,9 @@
         },
         "tags": {
           "type": "object",
-          "additionalProperties": { "type": "string" },
+          "additionalProperties": {
+            "type": "string"
+          },
           "description": "Key-value pairs of additional resource provisioning properties."
         }
       },
@@ -593,7 +742,9 @@
       "properties": {
         "value": {
           "type": "array",
-          "items": { "$ref": "#/definitions/DedicatedCapacity" },
+          "items": {
+            "$ref": "#/definitions/DedicatedCapacity"
+          },
           "description": "An array of Dedicated capacities resources."
         }
       },
@@ -611,7 +762,9 @@
         },
         "tags": {
           "type": "object",
-          "additionalProperties": { "type": "string" },
+          "additionalProperties": {
+            "type": "string"
+          },
           "description": "Key-value pairs of additional provisioning properties."
         },
         "properties": {
@@ -669,7 +822,7 @@
             "modelAsString": true
           },
           "readOnly": true,
-          "description": "The current deployment state of PowerBI Dedicatedresource. The provisioningState is to indicate states for resource provisioning."
+          "description": "The current deployment state of PowerBI Dedicated resource. The provisioningState is to indicate states for resource provisioning."
         }
       },
       "allOf": [
@@ -696,6 +849,11 @@
             "modelAsString": true
           },
           "description": "The name of the Azure pricing tier to which the SKU applies."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The capacity of the SKU."
         }
       },
       "required": [
@@ -709,6 +867,21 @@
         "administration": {
           "$ref": "#/definitions/DedicatedCapacityAdministrators",
           "description": "A collection of Dedicated capacity administrators"
+        },
+        "mode": {
+          "description": "The capacity mode.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID for the capacity. Used for creating Pro Plus capacity.",
+          "readOnly": true
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Capacity name",
+          "readOnly": true
         }
       }
     },
@@ -732,7 +905,9 @@
       "properties": {
         "value": {
           "type": "array",
-          "items": { "$ref": "#/definitions/ResourceSku" },
+          "items": {
+            "$ref": "#/definitions/ResourceSku"
+          },
           "description": "The collection of available SKUs for new resources"
         }
       }
@@ -743,7 +918,9 @@
       "properties": {
         "value": {
           "type": "array",
-          "items": { "$ref": "#/definitions/SkuDetailsForExistingResource" },
+          "items": {
+            "$ref": "#/definitions/SkuDetailsForExistingResource"
+          },
           "description": "The collection of available SKUs for existing resources"
         }
       }
@@ -752,6 +929,10 @@
       "description": "An object that represents SKU details for existing resources",
       "type": "object",
       "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type"
+        },
         "sku": {
           "$ref": "#/definitions/ResourceSku",
           "description": "The SKU in SKU details for existing resources."
@@ -759,16 +940,21 @@
       }
     },
     "ErrorResponse": {
-      "description": "Describes the format of Error response.",
       "type": "object",
+      "description": "Describes the format of Error response.",
       "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
+        "error": {
+          "description": "The error object",
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Error code"
+            },
+            "message": {
+              "type": "string",
+              "description": "Error message indicating why the operation failed."
+            }
+          }
         }
       }
     },
@@ -786,17 +972,17 @@
         "type": {
           "type": "string",
           "default": "Microsoft.PowerBIDedicated/capacities",
-          "description": "The resource type of powerbi dedicated."
+          "description": "The resource type of PowerBI dedicated."
         }
       }
     },
     "CheckCapacityNameAvailabilityResult": {
-      "description": "The checking result of capacity name availibility.",
+      "description": "The checking result of capacity name availability.",
       "type": "object",
       "properties": {
         "nameAvailable": {
           "type": "boolean",
-          "description": "Indicator of availablity of the capacity name."
+          "description": "Indicator of availability of the capacity name."
         },
         "reason": {
           "type": "string",
@@ -805,6 +991,98 @@
         "message": {
           "type": "string",
           "description": "The detailed message of the request unavailability."
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "type": "object",
+      "description": "Service specification for exposing performance metrics to shoebox.",
+      "properties": {
+        "metricSpecifications": {
+          "type": "array",
+          "description": "Metric specifications for exposing performance metrics to shoebox.",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          }
+        },
+        "logSpecifications": {
+          "type": "array",
+          "description": "Log specifications for exposing diagnostic logs to shoebox.",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          }
+        }
+      }
+    },
+    "MetricSpecification": {
+      "type": "object",
+      "description": "Metric specification for exposing performance metrics to shoebox.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Metric name",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localizable metric name"
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Localizable description of metric"
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit for the metric",
+          "readOnly": true
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "Aggregation type for the metric",
+          "readOnly": true
+        },
+        "metricFilterPattern": {
+          "type": "string",
+          "description": "Pattern used to filter the metric",
+          "readOnly": true
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "For describing multi dimensional metrics",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Dimension of the metric",
+                "readOnly": true
+              },
+              "displayName": {
+                "type": "string",
+                "description": "Localizable dimension of the metric"
+              }
+            }
+          }
+        }
+      }
+    },
+    "LogSpecification": {
+      "description": "Log specification for exposing diagnostic logs to shoebox.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the log",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localizable name of the log"
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "Blob duration for the log",
+          "readOnly": true
         }
       }
     }

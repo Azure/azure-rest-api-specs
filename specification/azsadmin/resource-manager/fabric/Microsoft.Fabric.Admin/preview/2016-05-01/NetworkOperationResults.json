@@ -1,0 +1,188 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Network operation results.",
+    "title": "FabricAdminClient",
+    "version": "2016-05-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/networkOperationResults/{operation}": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the status of the operation.": {
+            "$ref": "./examples/NetworkOperationResult/Get.json"
+          }
+        },
+        "tags": [
+          "NetworkOperationResults"
+        ],
+        "description": "Returns the status of a network operation.",
+        "operationId": "NetworkOperationResults_Get",
+        "parameters": [
+          {
+            "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NetworkOperationResult"
+            }
+          },
+          "404": {
+            "description": "NOT FOUND"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/networkOperationResults": {
+      "get": {
+        "x-ms-examples": {
+          "Returns a list of all network operation results at a location.": {
+            "$ref": "./examples/NetworkOperationResult/List.json"
+          }
+        },
+        "tags": [
+          "NetworkOperationResults"
+        ],
+        "description": "Returns a list of all network operation results at a location.",
+        "operationId": "NetworkOperationResults_List",
+        "parameters": [
+          {
+            "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NetworkOperationResultList"
+            }
+          },
+          "404": {
+            "description": "NOT FOUND"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/NetworkOperationResult"
+      }
+    }
+  },
+  "definitions": {
+    "NetworkOperationResult": {
+      "description": "Network operation result description.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Network operation result properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NetworkOperationResultModel"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Fabric.json#/definitions/Resource"
+        }
+      ]
+    },
+    "NetworkOperationResultModel": {
+      "description": "Network operation result properties.",
+      "type": "object",
+      "properties": {
+        "instances": {
+          "description": "List of operation result instances.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "description": "Success or failure of operation.",
+          "type": "string"
+        }
+      }
+    },
+    "NetworkOperationResultList": {
+      "description": "Pageable list of network operation results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of network operation results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkOperationResult"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "OperationParameter": {
+      "name": "operation",
+      "description": "Operation identifier.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

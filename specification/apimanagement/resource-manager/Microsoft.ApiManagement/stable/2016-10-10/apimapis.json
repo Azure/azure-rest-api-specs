@@ -73,7 +73,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Paged Result reponse of Apis.",
+            "description": "Paged Result response of Apis.",
             "schema": {
               "$ref": "#/definitions/ApiCollection"
             }
@@ -83,7 +83,7 @@
             "schema": {
               "$ref": "./apimanagement.json#/definitions/ErrorBodyContract"
             }
-          }      
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -127,11 +127,11 @@
             "schema": {
               "$ref": "#/definitions/ApiContract"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           },
           "default": {
@@ -185,7 +185,7 @@
           "201": {
             "description": "API was successfully created."
           },
-          "204":{
+          "204": {
             "description": "API was successfully updated."
           },
           "default": {
@@ -380,11 +380,11 @@
             "schema": {
               "$ref": "#/definitions/OperationContract"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           },
           "default": {
@@ -434,7 +434,7 @@
           "201": {
             "description": "Operation was successfully created."
           },
-          "204":{
+          "204": {
             "description": "Operation was successfully updated."
           },
           "default": {
@@ -533,7 +533,7 @@
           }
         ],
         "responses": {
-           "204": {
+          "204": {
             "description": "The operation was successfully deleted."
           },
           "default": {
@@ -576,16 +576,16 @@
           }
         ],
         "responses": {
-          "200": {            
+          "200": {
             "description": "Api Operation Policy information.",
             "schema": {
               "type": "file"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           }
         }
@@ -640,7 +640,7 @@
           "201": {
             "description": "Api Operation policy configuration was successfully created."
           },
-          "204":{
+          "204": {
             "description": "Api Operation policy configuration of the tenant was successfully updated."
           },
           "default": {
@@ -650,7 +650,7 @@
             }
           }
         }
-      },      
+      },
       "delete": {
         "tags": [
           "ApiOperationsPolicy"
@@ -685,7 +685,7 @@
           }
         ],
         "responses": {
-           "204": {
+          "204": {
             "description": "Successfully deleted the policy configuration at the API Operation level."
           },
           "default": {
@@ -782,16 +782,16 @@
           }
         ],
         "responses": {
-          "200": {            
+          "200": {
             "description": "Api Policy information.",
             "schema": {
               "type": "file"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           }
         }
@@ -843,7 +843,7 @@
           "201": {
             "description": "Api policy configuration was successfully created."
           },
-          "204":{
+          "204": {
             "description": "Api policy configuration of the tenant was successfully updated."
           },
           "default": {
@@ -853,7 +853,7 @@
             }
           }
         }
-      },      
+      },
       "delete": {
         "tags": [
           "ApiPolicy"
@@ -885,7 +885,7 @@
           }
         ],
         "responses": {
-           "204": {
+          "204": {
             "description": "Successfully deleted the policy configuration at the API level."
           },
           "default": {
@@ -899,7 +899,7 @@
     }
   },
   "x-ms-paths": {
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}?export=true": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}?export=true": {
       "get": {
         "tags": [
           "Apis"
@@ -907,7 +907,7 @@
         "operationId": "ApiExport_Get",
         "description": "Gets the details of the API specified by its identifier.",
         "parameters": [
-           {
+          {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -940,7 +940,7 @@
       }
     }
   },
-  "definitions": {    
+  "definitions": {
     "ApiCollection": {
       "properties": {
         "value": {
@@ -1395,27 +1395,27 @@
     }
   },
   "parameters": {
-		"ApiIdParameter": {
-		  "name": "apiId",
-		  "in": "path",
-		  "required": true,
-		  "type": "string",
-		  "description": "API identifier. Must be unique in the current API Management service instance.",
-		  "minLength": 1,
-		  "maxLength": 256,
-		  "pattern": "^[^*#&+:<>?]+$",
-		  "x-ms-parameter-location": "method"
-		},
-		"OperationIdParameter": {
-		  "name": "operationId",
-		  "in": "path",
-		  "required": true,
-		  "type": "string",
-		  "description": "Operation identifier within an API. Must be unique in the current API Management service instance.",
-		  "minLength": 1,
-		  "maxLength": 256,
-		  "pattern": "^[^*#&+:<>?]+$",
-		  "x-ms-parameter-location": "method"
-		}
+    "ApiIdParameter": {
+      "name": "apiId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "API identifier. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Operation identifier within an API. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    }
   }
 }

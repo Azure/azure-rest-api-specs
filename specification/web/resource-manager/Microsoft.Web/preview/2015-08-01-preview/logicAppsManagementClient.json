@@ -5,7 +5,9 @@
     "version": "2015-08-01-preview"
   },
   "host": "management.azure.com",
-  "schemes": [ "https" ],
+  "schemes": [
+    "https"
+  ],
   "consumes": [
     "application/json",
     "text/json"
@@ -17,7 +19,9 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/managedApis": {
       "get": {
-        "tags": [ "Managed Apis" ],
+        "tags": [
+          "Managed Apis"
+        ],
         "summary": "List managed Apis",
         "operationId": "ManagedApis_List",
         "description": "Gets a list of managed APIs.",
@@ -52,8 +56,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/managedApis/{apiName}": {
       "get": {
-        "tags": [ "Managed Apis" ],
-        "summary": "Get managed Api",
+        "tags": [
+          "Managed Apis"
+        ],
+        "summary": "Get managed API",
         "operationId": "ManagedApis_Get",
         "description": "Gets a managed API.",
         "parameters": [
@@ -97,7 +103,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connections": {
       "get": {
-        "tags": [ "Connections" ],
+        "tags": [
+          "Connections"
+        ],
         "summary": "Get Connections",
         "operationId": "Connections_List",
         "description": "Gets a list of connections.",
@@ -147,7 +155,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connections/{connectionName}": {
       "get": {
-        "tags": [ "Connections" ],
+        "tags": [
+          "Connections"
+        ],
         "operationId": "Connections_Get",
         "description": "Gets a connection.",
         "parameters": [
@@ -182,7 +192,9 @@
         }
       },
       "put": {
-        "tags": [ "Connections" ],
+        "tags": [
+          "Connections"
+        ],
         "operationId": "Connections_CreateOrUpdate",
         "description": "Creates or updates a connection.",
         "parameters": [
@@ -232,7 +244,9 @@
         }
       },
       "delete": {
-        "tags": [ "Connections" ],
+        "tags": [
+          "Connections"
+        ],
         "operationId": "Connections_Delete",
         "description": "Deletes a connection.",
         "parameters": [
@@ -269,7 +283,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connections/{connectionName}/listConsentLinks": {
       "post": {
-        "tags": [ "Connections" ],
+        "tags": [
+          "Connections"
+        ],
         "operationId": "Connections_ListConsentLinks",
         "description": "Lists consent links of a connection.",
         "parameters": [
@@ -315,7 +331,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connections/{connectionName}/confirmConsentCode": {
       "post": {
-        "tags": [ "Connections" ],
+        "tags": [
+          "Connections"
+        ],
         "operationId": "Connections_ConfirmConsentCode",
         "description": "Confirms consent code of a connection.",
         "parameters": [
@@ -361,7 +379,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connections/{connectionName}/listConnectionKeys": {
       "post": {
-        "tags": [ "Connections" ],
+        "tags": [
+          "Connections"
+        ],
         "operationId": "Connections_ListConnectionKeys",
         "description": "Lists connection keys.",
         "parameters": [
@@ -463,14 +483,14 @@
             },
             "policies": {
               "$ref": "#/definitions/ApiPolicies",
-              "description": "Api polcies"
+              "description": "API policies"
             },
             "backendService": {
               "$ref": "#/definitions/BackendServiceDefinition",
               "description": "Backend service definition"
             },
             "apiDefinitionUrl": {
-              "description": "Api definition Url - url where the swagger can be downloaded from",
+              "description": "API definition Url - url where the swagger can be downloaded from",
               "type": "string"
             },
             "metadata": {
@@ -547,7 +567,7 @@
       }
     },
     "ApiPolicies": {
-      "description": "Api policies",
+      "description": "API policies",
       "type": "object",
       "allOf": [
         {
@@ -595,9 +615,7 @@
     },
     "Object": {
       "type": "object",
-      "properties": {
-
-      }
+      "properties": {}
     },
     "ConnectionParameter": {
       "description": "connection provider parameters",
@@ -653,13 +671,13 @@
           "type": "string"
         },
         "useInternalRouting": {
-          "description": "When the backend url is in same ASE, for performance reason this flag can be set to true\r\n            If WebApp.DisableHostNames is also set it improves the security by making the back end accesible only \r\n            via API calls\r\n            Note: calls will fail if this option is used but back end is not on the same ASE",
+          "description": "When the backend url is in same ASE, for performance reason this flag can be set to true\r\n            If WebApp.DisableHostNames is also set it improves the security by making the back end accessible only \r\n            via API calls\r\n            Note: calls will fail if this option is used but back end is not on the same ASE",
           "type": "boolean"
         }
       }
     },
     "ApiOAuthSettings": {
-      "description": "OAuth settings for the conenction provider",
+      "description": "OAuth settings for the connection provider",
       "type": "object",
       "properties": {
         "identityProvider": {
@@ -717,7 +735,7 @@
       }
     },
     "ConnectionCollection": {
-      "description": "Collection of conenctions",
+      "description": "Collection of connections",
       "type": "object",
       "properties": {
         "value": {
@@ -734,7 +752,7 @@
       }
     },
     "Connection": {
-      "description": "Api Connection",
+      "description": "API Connection",
       "type": "object",
       "allOf": [
         {
@@ -1033,7 +1051,7 @@
       }
     },
     "ConsentLinkInput": {
-      "description": "Connection Constent Link payload",
+      "description": "Connection Consent Link payload",
       "type": "object",
       "allOf": [
         {
@@ -1213,7 +1231,9 @@
       }
     },
     "Resource": {
-      "required": [ "location" ],
+      "required": [
+        "location"
+      ],
       "properties": {
         "id": {
           "description": "Resource Id",
@@ -1275,7 +1295,9 @@
   },
   "security": [
     {
-      "azure_auth": [ "user_impersonation" ]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ]
 }

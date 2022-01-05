@@ -539,6 +539,56 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/inboundNetworkDependenciesEndpoints": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get the network endpoints of all inbound dependencies of an App Service Environment.",
+        "description": "Get the network endpoints of all inbound dependencies of an App Service Environment.",
+        "operationId": "AppServiceEnvironments_GetInboundNetworkDependenciesEndpoints",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/InboundEnvironmentEndpointCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Inbound Network Dependencies Endpoints": {
+            "$ref": "./examples/GetInboundNetworkDependenciesEndpoints.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/metricdefinitions": {
       "get": {
         "tags": [
@@ -1206,6 +1256,56 @@
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/outboundNetworkDependenciesEndpoints": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get the network endpoints of all outbound dependencies of an App Service Environment.",
+        "description": "Get the network endpoints of all outbound dependencies of an App Service Environment.",
+        "operationId": "AppServiceEnvironments_GetOutboundNetworkDependenciesEndpoints",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OutboundEnvironmentEndpointCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Outbound Network Dependencies Endpoints": {
+            "$ref": "./examples/GetOutboundNetworkDependenciesEndpoints.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2132,7 +2232,7 @@
       }
     },
     "AppServiceEnvironmentPatchResource": {
-      "description": "ARM resource for a app service enviroment.",
+      "description": "ARM resource for a app service environment.",
       "type": "object",
       "allOf": [
         {
@@ -2163,6 +2263,47 @@
         }
       }
     },
+    "EndpointDependency": {
+      "description": "A domain name that a service is reached at, including details of the current connection status.",
+      "type": "object",
+      "properties": {
+        "domainName": {
+          "description": "The domain name of the dependency.",
+          "type": "string"
+        },
+        "endpointDetails": {
+          "description": "The IP Addresses and Ports used when connecting to DomainName.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EndpointDetail"
+          }
+        }
+      }
+    },
+    "EndpointDetail": {
+      "description": "Current TCP connectivity information from the App Service Environment to a single endpoint.",
+      "type": "object",
+      "properties": {
+        "ipAddress": {
+          "description": "An IP Address that Domain Name currently resolves to.",
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "description": "The port an endpoint is connected to.",
+          "type": "integer"
+        },
+        "latency": {
+          "format": "double",
+          "description": "The time in milliseconds it takes for a TCP connection to be created from the App Service Environment to this IpAddress at this Port.",
+          "type": "number"
+        },
+        "isAccessable": {
+          "description": "Whether it is possible to create a TCP connection from the App Service Environment to this IpAddress at this Port.",
+          "type": "boolean"
+        }
+      }
+    },
     "HostingEnvironmentDiagnostics": {
       "description": "Diagnostics for an App Service Environment.",
       "type": "object",
@@ -2174,6 +2315,51 @@
         "diagnosicsOutput": {
           "description": "Diagnostics output.",
           "type": "string"
+        }
+      }
+    },
+    "InboundEnvironmentEndpoint": {
+      "description": "The IP Addresses and Ports that require inbound network access to and within the subnet of the App Service Environment.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Short text describing the purpose of the network traffic.",
+          "type": "string"
+        },
+        "endpoints": {
+          "description": "The IP addresses that network traffic will originate from in cidr notation.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ports": {
+          "description": "The ports that network traffic will arrive to the App Service Environment at.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "InboundEnvironmentEndpointCollection": {
+      "description": "Collection of Inbound Environment Endpoints",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InboundEnvironmentEndpoint"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -2228,6 +2414,44 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OutboundEnvironmentEndpoint": {
+      "description": "Endpoints accessed for a common purpose that the App Service Environment requires outbound network access to.",
+      "type": "object",
+      "properties": {
+        "category": {
+          "description": "The type of service accessed by the App Service Environment, e.g., Azure Storage, Azure SQL Database, and Azure Active Directory.",
+          "type": "string"
+        },
+        "endpoints": {
+          "description": "The endpoints that the App Service Environment reaches the service at.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EndpointDependency"
+          }
+        }
+      }
+    },
+    "OutboundEnvironmentEndpointCollection": {
+      "description": "Collection of Outbound Environment Endpoints",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OutboundEnvironmentEndpoint"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },

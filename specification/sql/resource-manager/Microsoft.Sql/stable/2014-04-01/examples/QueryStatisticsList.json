@@ -1,57 +1,59 @@
 {
-  "parameters":{
-    "subscriptionId":"00000000-1111-2222-3333-444444444444",
-    "resourceGroupName":"group1",
-    "serverName":"sqlcrudtest",
-    "databaseName":"db1",
-    "queryId":"19",
-    "api-version":"2014-04-01"
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "group1",
+    "serverName": "sqlcrudtest",
+    "databaseName": "db1",
+    "queryId": "19",
+    "api-version": "2014-04-01"
   },
-  "responses":{
-    "200":{
-      "value":[
-        {
-          "queryId":"19",
-          "intervals":[
-            {
-              "intervalStartTime":"2017-07-11T16:00:00",
-              "executionCount":12,
-              "metrics":[
-                {
-                  "name":"cpu",
-                  "displayName":"Cpu",
-                  "unit":"percentage",
-                  "value":0.000763888888888889
-                },
-                {
-                  "name":"io",
-                  "displayName":"Physical Io Reads",
-                  "unit":"percentage",
-                  "value":0.0
-                },
-                {
-                  "name":"logIo",
-                  "displayName":"Log Writes",
-                  "unit":"percentage",
-                  "value":0.0
-                },
-                {
-                  "name":"memory",
-                  "displayName":"Memory consumption",
-                  "unit":"KB",
-                  "value":0.0
-                },
-                {
-                  "name":"duration",
-                  "displayName":"Query duration",
-                  "unit":"microseconds",
-                  "value":3308.0
-                }
-              ]
-            }
-          ]
-        }
-      ]
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "queryId": "19",
+            "intervals": [
+              {
+                "intervalStartTime": "2017-07-11T16:00:00",
+                "executionCount": 12,
+                "metrics": [
+                  {
+                    "name": "cpu",
+                    "displayName": "Cpu",
+                    "unit": "percentage",
+                    "value": 0.000763888888888889
+                  },
+                  {
+                    "name": "io",
+                    "displayName": "Physical Io Reads",
+                    "unit": "percentage",
+                    "value": 0.0
+                  },
+                  {
+                    "name": "logIo",
+                    "displayName": "Log Writes",
+                    "unit": "percentage",
+                    "value": 0.0
+                  },
+                  {
+                    "name": "memory",
+                    "displayName": "Memory consumption",
+                    "unit": "KB",
+                    "value": 0.0
+                  },
+                  {
+                    "name": "duration",
+                    "displayName": "Query duration",
+                    "unit": "microseconds",
+                    "value": 3308.0
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
     }
   }
 }

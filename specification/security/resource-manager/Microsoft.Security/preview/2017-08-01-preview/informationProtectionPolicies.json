@@ -1,0 +1,358 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2017-08-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{scope}/providers/Microsoft.Security/informationProtectionPolicies/{informationProtectionPolicyName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get the customized information protection policy for a management group": {
+            "$ref": "./examples/InformationProtectionPolicies/GetCustomInformationProtectionPolicy_example.json"
+          },
+          "Get the effective information protection policy for a management group": {
+            "$ref": "./examples/InformationProtectionPolicies/GetEffectiveInformationProtectionPolicy_example.json"
+          }
+        },
+        "tags": [
+          "InformationProtectionPolicies"
+        ],
+        "description": "Details of the information protection policy.",
+        "operationId": "InformationProtectionPolicies_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/Scope"
+          },
+          {
+            "$ref": "#/parameters/InformationProtectionPolicyName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/InformationProtectionPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create or update an information protection policy for a management group": {
+            "$ref": "./examples/InformationProtectionPolicies/CreateOrUpdateInformationProtectionPolicy_example.json"
+          }
+        },
+        "tags": [
+          "InformationProtectionPolicies"
+        ],
+        "description": "Details of the information protection policy.",
+        "operationId": "InformationProtectionPolicies_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/Scope"
+          },
+          {
+            "$ref": "#/parameters/InformationProtectionPolicyName"
+          },
+          {
+            "$ref": "#/parameters/InformationProtectionPolicy"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/InformationProtectionPolicy"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/InformationProtectionPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Security/informationProtectionPolicies": {
+      "get": {
+        "x-ms-examples": {
+          "Get information protection policies": {
+            "$ref": "./examples/InformationProtectionPolicies/ListInformationProtectionPolicies_example.json"
+          }
+        },
+        "tags": [
+          "InformationProtectionPolicies"
+        ],
+        "description": "Information protection policies of a specific management group.",
+        "operationId": "InformationProtectionPolicies_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/Scope"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/InformationProtectionPolicyList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "InformationProtectionPolicyList": {
+      "type": "object",
+      "readOnly": true,
+      "description": "Information protection policies response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of information protection policies.",
+          "items": {
+            "$ref": "#/definitions/InformationProtectionPolicy"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "InformationProtectionPolicy": {
+      "type": "object",
+      "description": "Information protection policy.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Information protection policy data",
+          "$ref": "#/definitions/InformationProtectionPolicyProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "InformationProtectionPolicyProperties": {
+      "type": "object",
+      "description": "describes properties of an information protection policy.",
+      "properties": {
+        "lastModifiedUtc": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Describes the last UTC time the policy was modified."
+        },
+        "version": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Describes the version of the policy."
+        },
+        "labels": {
+          "type": "object",
+          "description": "Dictionary of sensitivity labels.",
+          "additionalProperties": {
+            "type": "object",
+            "$ref": "#/definitions/SensitivityLabel"
+          }
+        },
+        "informationTypes": {
+          "type": "object",
+          "description": "The sensitivity information types.",
+          "additionalProperties": {
+            "type": "object",
+            "$ref": "#/definitions/InformationType"
+          }
+        }
+      }
+    },
+    "SensitivityLabel": {
+      "type": "object",
+      "description": "The sensitivity label.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The name of the sensitivity label."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the sensitivity label."
+        },
+        "rank": {
+          "type": "string",
+          "description": "The rank of the sensitivity label.",
+          "enum": [
+            "None",
+            "Low",
+            "Medium",
+            "High",
+            "Critical"
+          ],
+          "x-ms-enum": {
+            "name": "rank",
+            "modelAsString": false
+          }
+        },
+        "order": {
+          "format": "int32",
+          "description": "The order of the sensitivity label.",
+          "type": "integer"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether the label is enabled or not."
+        }
+      }
+    },
+    "InformationType": {
+      "type": "object",
+      "description": "The information type.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The name of the information type."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the information type."
+        },
+        "order": {
+          "format": "int32",
+          "description": "The order of the information type.",
+          "type": "integer"
+        },
+        "recommendedLabelId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The recommended label id to be associated with this information type."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether the information type is enabled or not."
+        },
+        "custom": {
+          "type": "boolean",
+          "description": "Indicates whether the information type is custom or not."
+        },
+        "keywords": {
+          "type": "array",
+          "description": "The information type keywords.",
+          "items": {
+            "$ref": "#/definitions/InformationProtectionKeyword"
+          }
+        }
+      }
+    },
+    "InformationProtectionKeyword": {
+      "type": "object",
+      "description": "The information type keyword.",
+      "properties": {
+        "pattern": {
+          "type": "string",
+          "description": "The keyword pattern."
+        },
+        "custom": {
+          "type": "boolean",
+          "description": "Indicates whether the keyword is custom or not."
+        },
+        "canBeNumeric": {
+          "type": "boolean",
+          "description": "Indicates whether the keyword can be applied on numeric types or not."
+        },
+        "excluded": {
+          "type": "boolean",
+          "description": "Indicates whether the keyword is excluded or not."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "InformationProtectionPolicyName": {
+      "name": "informationProtectionPolicyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "effective",
+        "custom"
+      ],
+      "description": "Name of the information protection policy.",
+      "x-ms-parameter-location": "method"
+    },
+    "InformationProtectionPolicy": {
+      "name": "informationProtectionPolicy",
+      "in": "body",
+      "required": true,
+      "description": "Information protection policy.",
+      "schema": {
+        "$ref": "#/definitions/InformationProtectionPolicy"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

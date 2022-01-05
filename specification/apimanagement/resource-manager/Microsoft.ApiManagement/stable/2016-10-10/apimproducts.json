@@ -128,11 +128,11 @@
             "schema": {
               "$ref": "#/definitions/ProductContract"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           },
           "default": {
@@ -231,7 +231,7 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content in case of Update Successfull."
+            "description": "No Content in case of Update Successful."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -561,7 +561,7 @@
           "400": {
             "description": "Request validation failed.This is typically caused by an invalid product or group id.",
             "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorBodyContract"              
+              "$ref": "./apimanagement.json#/definitions/ErrorBodyContract"
             }
           },
           "default": {
@@ -629,7 +629,7 @@
         },
         "x-ms-odata": "./apimsubscriptions.json#/definitions/SubscriptionContract"
       }
-    },    
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/policy": {
       "get": {
         "tags": [
@@ -658,16 +658,16 @@
           }
         ],
         "responses": {
-          "200": {            
+          "200": {
             "description": "Product Policy information.",
             "schema": {
               "type": "file"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           }
         }
@@ -687,7 +687,7 @@
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-          },          
+          },
           {
             "$ref": "#/parameters/ProductIdParameter"
           },
@@ -719,7 +719,7 @@
           "201": {
             "description": "Product policy configuration was successfully created."
           },
-          "204":{
+          "204": {
             "description": "Product policy configuration of the tenant was successfully updated."
           },
           "default": {
@@ -729,7 +729,7 @@
             }
           }
         }
-      },      
+      },
       "delete": {
         "tags": [
           "ProductPolicy"
@@ -742,7 +742,7 @@
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-          },          
+          },
           {
             "$ref": "#/parameters/ProductIdParameter"
           },
@@ -761,7 +761,7 @@
           }
         ],
         "responses": {
-           "204": {
+          "204": {
             "description": "Successfully deleted the policy configuration at the Product level."
           },
           "default": {
@@ -775,141 +775,141 @@
     }
   },
   "definitions": {
-		"ProductCollection": {
-		  "properties": {
-			"value": {
-			  "type": "array",
-			  "items": {
-				"$ref": "#/definitions/ProductContract"
-			  },
-			  "description": "Page values."
-			},
-			"count": {
-			  "type": "integer",
-			  "format": "int64",
-			  "description": "Total record count number across all pages."
-			},
-			"nextLink": {
-			  "type": "string",
-			  "description": "Next page link if any."
-			}
-		  },
-		  "description": "Paged Products list representation."
-		},
-		"ProductContract": {
-		  "properties": {
-			"id": {
-			  "type": "string",
-			  "description": "Uniquely identifies the product within the current API Management service instance. The value is a valid relative URL in the format of /products/{productId} where {productId} is a product identifier.",
-			  "readOnly": true
-			},
-			"name": {
-			  "type": "string",
-			  "description": "Product name.",
-			  "minLength": 1,
-			  "maxLength": 300
-			},
-			"description": {
-			  "type": "string",
-			  "description": "Product description. May include HTML formatting tags.",
-			  "minLength": 1,
-			  "maxLength": 1000
-			},
-			"terms": {
-			  "type": "string",
-			  "description": "Product terms of use. Developers trying to subscribe to the product will be presented and required to accept these terms before they can complete the subscription process."
-			},
-			"subscriptionRequired": {
-			  "type": "boolean",
-			  "description": "Whether a product subscription is required for accessing APIs included in this product. If true, the product is referred to as \"protected\" and a valid subscription key is required for a request to an API included in the product to succeed. If false, the product is referred to as \"open\" and requests to an API included in the product can be made without a subscription key. If property is omitted when creating a new product it's value is assumed to be true.",
-			  "default": true
-			},
-			"approvalRequired": {
-			  "type": "boolean",
-			  "description": "whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of false."
-			},
-			"subscriptionsLimit": {
-			  "type": "integer",
-			  "format": "int32",
-			  "description": "Whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false."
-			},
-			"state": {
-			  "type": "string",
-			  "description": "whether product is published or not. Published products are discoverable by users of developer portal. Non published products are visible only to administrators. Default state of Product is NotPublished.",
-			  "enum": [
-				"NotPublished",
-				"Published"
-			  ],
-			  "default": "NotPublished",
-			  "x-ms-enum": {
-				"name": "ProductStateContract",
-				"modelAsString": false
-			  }
-			}
-		  },
-		  "required": [
-			"name"
-		  ],
-		  "description": "Product profile."
-		},
-		"ProductUpdateParameters": {
-		  "properties": {
-			"name": {
-			  "type": "string",
-			  "description": "Product name.",
-			  "maxLength": 300,
-			  "minLength": 1
-			},
-			"description": {
-			  "type": "string",
-			  "description": "Product description.",
-			  "maxLength": 500,
-			  "minLength": 1
-			},
-			"terms": {
-			  "type": "string",
-			  "description": "Product terms and conditions. Developer will have to accept these terms before he's allowed to call product API."
-			},
-			"subscriptionRequired": {
-			  "type": "boolean",
-			  "description": "whether a product subscription is required for accessing APIs included in this product. If true, the product is referred to as \"protected\" and a valid subscription key is required for a request to an API included in the product to succeed. If false, the product is referred to as \"open\" and requests to an API included in the product can be made without a subscription key. If property is omitted when creating a new product it's value is assumed to be true."
-			},
-			"approvalRequired": {
-			  "type": "boolean",
-			  "description": "whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of false."
-			},
-			"subscriptionsLimit": {
-			  "type": "integer",
-			  "format": "int32",
-			  "description": "whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false."
-			},
-			"state": {
-			  "type": "string",
-			  "description": "whether product is published or not. Published products are discoverable by users of developer portal. Non published products are visible only to administrators.",
-			  "enum": [
-				"NotPublished",
-				"Published"
-			  ],
-			  "x-ms-enum": {
-				"name": "ProductStateContract",
-				"modelAsString": false
-			  }
-			}
-		  },
-		  "description": "Parameters supplied to the CreateOrUpdate Product operation."
-		}
+    "ProductCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductContract"
+          },
+          "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Products list representation."
+    },
+    "ProductContract": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Uniquely identifies the product within the current API Management service instance. The value is a valid relative URL in the format of /products/{productId} where {productId} is a product identifier.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Product name.",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "description": {
+          "type": "string",
+          "description": "Product description. May include HTML formatting tags.",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "terms": {
+          "type": "string",
+          "description": "Product terms of use. Developers trying to subscribe to the product will be presented and required to accept these terms before they can complete the subscription process."
+        },
+        "subscriptionRequired": {
+          "type": "boolean",
+          "description": "Whether a product subscription is required for accessing APIs included in this product. If true, the product is referred to as \"protected\" and a valid subscription key is required for a request to an API included in the product to succeed. If false, the product is referred to as \"open\" and requests to an API included in the product can be made without a subscription key. If property is omitted when creating a new product it's value is assumed to be true.",
+          "default": true
+        },
+        "approvalRequired": {
+          "type": "boolean",
+          "description": "whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of true."
+        },
+        "subscriptionsLimit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of true."
+        },
+        "state": {
+          "type": "string",
+          "description": "whether product is published or not. Published products are discoverable by users of developer portal. Non published products are visible only to administrators. Default state of Product is NotPublished.",
+          "enum": [
+            "NotPublished",
+            "Published"
+          ],
+          "default": "NotPublished",
+          "x-ms-enum": {
+            "name": "ProductStateContract",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Product profile."
+    },
+    "ProductUpdateParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Product name.",
+          "maxLength": 300,
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "description": "Product description.",
+          "maxLength": 500,
+          "minLength": 1
+        },
+        "terms": {
+          "type": "string",
+          "description": "Product terms and conditions. Developer will have to accept these terms before he's allowed to call product API."
+        },
+        "subscriptionRequired": {
+          "type": "boolean",
+          "description": "whether a product subscription is required for accessing APIs included in this product. If true, the product is referred to as \"protected\" and a valid subscription key is required for a request to an API included in the product to succeed. If false, the product is referred to as \"open\" and requests to an API included in the product can be made without a subscription key. If property is omitted when creating a new product it's value is assumed to be true."
+        },
+        "approvalRequired": {
+          "type": "boolean",
+          "description": "whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of true."
+        },
+        "subscriptionsLimit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of true."
+        },
+        "state": {
+          "type": "string",
+          "description": "whether product is published or not. Published products are discoverable by users of developer portal. Non published products are visible only to administrators.",
+          "enum": [
+            "NotPublished",
+            "Published"
+          ],
+          "x-ms-enum": {
+            "name": "ProductStateContract",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Parameters supplied to the CreateOrUpdate Product operation."
+    }
   },
   "parameters": {
-		"ProductIdParameter": {
-		  "name": "productId",
-		  "in": "path",
-		  "required": true,
-		  "type": "string",
-		  "description": "Product identifier. Must be unique in the current API Management service instance.",
-		  "minLength": 1,
-		  "maxLength": 256,
-		  "pattern": "^[^*#&+:<>?]+$",
-		  "x-ms-parameter-location": "method"
-		}
+    "ProductIdParameter": {
+      "name": "productId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Product identifier. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    }
   }
 }

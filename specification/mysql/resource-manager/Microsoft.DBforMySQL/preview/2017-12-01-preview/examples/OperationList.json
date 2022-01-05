@@ -9,43 +9,7 @@
           {
             "name": "Microsoft.DBforMySQL/locations/performanceTiers/read",
             "display": {
-              "provider": "Microsoft DB for PostgreSQL",
-              "resource": "Performance Tiers",
-              "operation": "List Performance Tiers",
-              "description": "Returns the list of Performance Tiers available."
-            }
-          },
-          {
-            "name": "Microsoft.DBforMySQL/servers/read",
-            "display": {
-              "provider": "Microsoft DB for PostgreSQL",
-              "resource": "PostgreSQL Server",
-              "operation": "List/Get PostgreSQL Servers",
-              "description": "Return the list of servers or gets the properties for the specified server."
-            }
-          },
-          {
-            "name": "Microsoft.DBforMySQL/servers/write",
-            "display": {
-              "provider": "Microsoft DB for PostgreSQL",
-              "resource": "PostgreSQL Server",
-              "operation": "Create/Update PostgreSQL Server",
-              "description": "Creates a server with the specified parameters or update the properties or tags for the specified server."
-            }
-          },
-          {
-            "name": "Microsoft.DBforMySQL/servers/delete",
-            "display": {
-              "provider": "Microsoft DB for PostgreSQL",
-              "resource": "PostgreSQL Server",
-              "operation": "Delete PostgreSQL Server",
-              "description": "Deletes an existing server."
-            }
-          },
-          {
-            "name": "Microsoft.DBforMySQL/performanceTiers/read",
-            "display": {
-              "provider": "Microsoft DB for PostgreSQL",
+              "provider": "Microsoft DB for MySQL",
               "resource": "Performance Tiers",
               "operation": "List Performance Tiers",
               "description": "Returns the list of Performance Tiers available."
@@ -54,7 +18,7 @@
           {
             "name": "Microsoft.DBforMySQL/servers/firewallRules/read",
             "display": {
-              "provider": "Microsoft DB for PostgreSQL",
+              "provider": "Microsoft DB for MySQL",
               "resource": "Firewall Rules",
               "operation": "List/Get Firewall Rules",
               "description": "Return the list of firewall rules for a server or gets the properties for the specified firewall rule."
@@ -63,7 +27,7 @@
           {
             "name": "Microsoft.DBforMySQL/servers/firewallRules/write",
             "display": {
-              "provider": "Microsoft DB for PostgreSQL",
+              "provider": "Microsoft DB for MySQL",
               "resource": "Firewall Rules",
               "operation": "Create/Update Firewall Rule",
               "description": "Creates a firewall rule with the specified parameters or update an existing rule."
@@ -72,16 +36,61 @@
           {
             "name": "Microsoft.DBforMySQL/servers/firewallRules/delete",
             "display": {
-              "provider": "Microsoft DB for PostgreSQL",
+              "provider": "Microsoft DB for MySQL",
               "resource": "Firewall Rules",
               "operation": "Delete Firewall Rule",
               "description": "Deletes an existing firewall rule."
             }
           },
           {
+            "name": "Microsoft.DBforMySQL/servers/read",
+            "display": {
+              "provider": "Microsoft DB for MySQL",
+              "resource": "MySQL Server",
+              "operation": "List/Get MySQL Servers",
+              "description": "Return the list of servers or gets the properties for the specified server."
+            }
+          },
+          {
+            "name": "Microsoft.DBforMySQL/servers/write",
+            "display": {
+              "provider": "Microsoft DB for MySQL",
+              "resource": "MySQL Server",
+              "operation": "Create/Update MySQL Server",
+              "description": "Creates a server with the specified parameters or update the properties or tags for the specified server."
+            }
+          },
+          {
+            "name": "Microsoft.DBforMySQL/servers/delete",
+            "display": {
+              "provider": "Microsoft DB for MySQL",
+              "resource": "MySQL Server",
+              "operation": "Delete MySQL Server",
+              "description": "Deletes an existing server."
+            }
+          },
+          {
+            "name": "Microsoft.DBforMySQL/performanceTiers/read",
+            "display": {
+              "provider": "Microsoft DB for MySQL",
+              "resource": "Performance Tiers",
+              "operation": "List Performance Tiers",
+              "description": "Returns the list of Performance Tiers available."
+            }
+          },
+          {
+            "name": "Microsoft.DBforMySQL/servers/recoverableServers/read",
+            "display": {
+              "provider": "Microsoft DB for MySQL",
+              "resource": "Recoverable MySQL Server",
+              "operation": "Get Recoverable MySQL Server info",
+              "description": "Return the recoverable MySQL Server info"
+            }
+          },
+          {
             "name": "Microsoft.DBforMySQL/servers/providers/Microsoft.Insights/metricDefinitions/read",
             "display": {
-              "provider": "Microsoft DB for PostgreSQL",
+              "provider": "Microsoft DB for MySQL",
               "resource": "Database Metric Definition",
               "operation": "Get database metric definitions",
               "description": "Return types of metrics that are available for databases"
@@ -93,21 +102,6 @@
                     "name": "cpu_percent",
                     "displayName": "CPU percent",
                     "displayDescription": "CPU percent",
-                    "unit": "Percent",
-                    "aggregationType": "Average",
-                    "fillGapWithZero": true
-                  },
-                  {
-                    "name": "compute_limit",
-                    "displayName": "Compute Unit limit",
-                    "displayDescription": "Compute Unit limit",
-                    "unit": "Count",
-                    "aggregationType": "Average"
-                  },
-                  {
-                    "name": "compute_consumption_percent",
-                    "displayName": "Compute Unit percentage",
-                    "displayDescription": "Compute Unit percentage",
                     "unit": "Percent",
                     "aggregationType": "Average",
                     "fillGapWithZero": true
@@ -150,6 +144,27 @@
                     "aggregationType": "Average"
                   },
                   {
+                    "name": "serverlog_storage_percent",
+                    "displayName": "Server Log storage percent",
+                    "displayDescription": "Server Log storage percent",
+                    "unit": "Percent",
+                    "aggregationType": "Average"
+                  },
+                  {
+                    "name": "serverlog_storage_usage",
+                    "displayName": "Server Log storage used",
+                    "displayDescription": "Server Log storage used",
+                    "unit": "Bytes",
+                    "aggregationType": "Average"
+                  },
+                  {
+                    "name": "serverlog_storage_limit",
+                    "displayName": "Server Log storage limit",
+                    "displayDescription": "Server Log storage limit",
+                    "unit": "Bytes",
+                    "aggregationType": "Average"
+                  },
+                  {
                     "name": "active_connections",
                     "displayName": "Total active connections",
                     "displayDescription": "Total active connections",
@@ -164,6 +179,14 @@
                     "unit": "Count",
                     "aggregationType": "Average",
                     "fillGapWithZero": true
+                  },
+                  {
+                    "name": "seconds_behind_master",
+                    "displayName": "Replication lag in seconds",
+                    "displayDescription": "Replication lag in seconds",
+                    "unit": "Count",
+                    "aggregationType": "Average",
+                    "fillGapWithZero": true
                   }
                 ]
               }
@@ -172,7 +195,7 @@
           {
             "name": "Microsoft.DBforMySQL/servers/providers/Microsoft.Insights/diagnosticSettings/read",
             "display": {
-              "provider": "Microsoft DB for PostgreSQL",
+              "provider": "Microsoft DB for MySQL",
               "resource": "Database Metric Definition",
               "operation": "Read diagnostic setting",
               "description": "Gets the disagnostic setting for the resource"
@@ -181,7 +204,7 @@
           {
             "name": "Microsoft.DBforMySQL/servers/providers/Microsoft.Insights/diagnosticSettings/write",
             "display": {
-              "provider": "Microsoft DB for PostgreSQL",
+              "provider": "Microsoft DB for MySQL",
               "resource": "Database Metric Definition",
               "operation": "Write diagnostic setting",
               "description": "Creates or updates the diagnostic setting for the resource"

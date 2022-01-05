@@ -1,67 +1,71 @@
 {
-	"parameters": {
-		"hubName": "sdkTestHub",
-		"resourceGroupName": "TestHubRG",
-		"connectorName": "testConnector8858",
-		"api-version": "2016-01-01",
-		"subscriptionId": "subid"
-	},
-	"responses": {
-		"200": {
-			"body": {
-				"value": [{
-					"id": "/subscriptions/c909e979-ef71-4def-a970-bc7c154db8c5/resourceGroups/TestHubRG/providers/Microsoft.CustomerInsights/hubs/sdkTestHub/connectors/testConnector8858/mappings/testMapping12491",
-					"name": "sdkTestHub/testConnector8858/testMapping12491",
-					"properties": {
-						"connectorMappingName": "testMapping12491",
-						"connectorName": "testConnector8858",
-						"connectorType": "AzureBlob",
-						"dataFormatId": "4619d4e7e8a64c1e9bc34907f9f46505",
-						"description": "Test mapping",
-						"displayName": "testMapping12491",
-						"entityType": "Interaction",
-						"entityTypeName": "TestInteractionType2967",
-						"mappingProperties": {
-							"availability": {
-								"frequency": "Hour",
-								"interval": 5
-							},
-							"completeOperation": {
-								"completionOperationType": "DeleteFile",
-								"destinationFolder": "fakePath"
-							},
-							"errorManagement": {
-								"errorLimit": 10,
-								"errorManagementType": "StopImport"
-							},
-							"fileFilter": "unknown",
-							"folderPath": "http://sample.dne/file",
-							"format": {
-								"columnDelimiter": "|",
-								"acceptLanguage": "",
-								"quoteCharacter": "\\\"",
-								"quoteEscapeCharacter": "\\\"",
-								"formatType": "TextFormat",
-								"arraySeparator": ";"
-							},
-							"hasHeader": false,
-							"structure": [{
-								"columnName": "unknown1",
-								"isEncrypted": false,
-								"propertyName": "unknwon1"
-							},
-							{
-								"columnName": "unknown2",
-								"isEncrypted": true,
-								"propertyName": "unknwon2"
-							}]
-						},
-						"state": "Created",
-						"tenantId": "sdktesthub"
-					},
-					"type": "Microsoft.CustomerInsights/hubs/connectors/mappings"
-				}]
-			}
-		}
-	}
+  "parameters": {
+    "hubName": "sdkTestHub",
+    "resourceGroupName": "TestHubRG",
+    "connectorName": "testConnector8858",
+    "api-version": "2016-01-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/c909e979-ef71-4def-a970-bc7c154db8c5/resourceGroups/TestHubRG/providers/Microsoft.CustomerInsights/hubs/sdkTestHub/connectors/testConnector8858/mappings/testMapping12491",
+            "name": "sdkTestHub/testConnector8858/testMapping12491",
+            "properties": {
+              "connectorMappingName": "testMapping12491",
+              "connectorName": "testConnector8858",
+              "connectorType": "AzureBlob",
+              "dataFormatId": "4619d4e7e8a64c1e9bc34907f9f46505",
+              "description": "Test mapping",
+              "displayName": "testMapping12491",
+              "entityType": "Interaction",
+              "entityTypeName": "TestInteractionType2967",
+              "mappingProperties": {
+                "availability": {
+                  "frequency": "Hour",
+                  "interval": 5
+                },
+                "completeOperation": {
+                  "completionOperationType": "DeleteFile",
+                  "destinationFolder": "fakePath"
+                },
+                "errorManagement": {
+                  "errorLimit": 10,
+                  "errorManagementType": "StopImport"
+                },
+                "fileFilter": "unknown",
+                "folderPath": "http://sample.dne/file",
+                "format": {
+                  "columnDelimiter": "|",
+                  "acceptLanguage": "",
+                  "quoteCharacter": "\\\"",
+                  "quoteEscapeCharacter": "\\\"",
+                  "formatType": "TextFormat",
+                  "arraySeparator": ";"
+                },
+                "hasHeader": false,
+                "structure": [
+                  {
+                    "columnName": "unknown1",
+                    "isEncrypted": false,
+                    "propertyName": "unknwon1"
+                  },
+                  {
+                    "columnName": "unknown2",
+                    "isEncrypted": true,
+                    "propertyName": "unknwon2"
+                  }
+                ]
+              },
+              "state": "Created",
+              "tenantId": "sdktesthub"
+            },
+            "type": "Microsoft.CustomerInsights/hubs/connectors/mappings"
+          }
+        ]
+      }
+    }
+  }
 }

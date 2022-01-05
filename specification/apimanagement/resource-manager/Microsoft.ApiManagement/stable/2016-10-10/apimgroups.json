@@ -115,11 +115,11 @@
             "schema": {
               "$ref": "#/definitions/GroupContract"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           },
           "default": {
@@ -164,7 +164,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Group was created succesfully."
+            "description": "Group was created successfully."
           },
           "204": {
             "description": "Group already exists."
@@ -224,7 +224,6 @@
             "description": "The specified group cannot be updated because it is a built-in group.",
             "schema": {
               "$ref": "./apimanagement.json#/definitions/ErrorBodyContract"
-              
             }
           },
           "default": {
@@ -273,7 +272,6 @@
             "description": "The specified group cannot be updated because it is a built-in group.",
             "schema": {
               "$ref": "./apimanagement.json#/definitions/ErrorBodyContract"
-              
             }
           },
           "default": {
@@ -334,7 +332,7 @@
             "schema": {
               "$ref": "./apimanagement.json#/definitions/ErrorBodyContract"
             }
-          }        
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -379,7 +377,7 @@
           "405": {
             "description": "Attempt was made to add a user to a built-in group. Built-in group membership is managed by the system.",
             "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorBodyContract"              
+              "$ref": "./apimanagement.json#/definitions/ErrorBodyContract"
             }
           },
           "default": {
@@ -417,14 +415,13 @@
           }
         ],
         "responses": {
-           "204": {
+          "204": {
             "description": "The user was successfully removed from the group."
           },
           "405": {
             "description": "Attempt was made to delete a user from a built-in group. Built-in group membership is managed by the API Management service.",
             "schema": {
               "$ref": "./apimanagement.json#/definitions/ErrorBodyContract"
-              
             }
           },
           "default": {
@@ -438,153 +435,154 @@
     }
   },
   "definitions": {
-		"GroupCollection": {
-		  "properties": {
-			"value": {
-			  "type": "array",
-			  "items": {
-				"$ref": "#/definitions/GroupContract"
-			  },
-			  "description": "Page values."
-			},
-			"count": {
-			  "type": "integer",
-			  "format": "int64",
-			  "description": "Total record count number across all pages."
-			},
-			"nextLink": {
-			  "type": "string",
-			  "description": "Next page link if any."
-			}
-		  },
-		  "description": "Paged Group list representation."
-		},
-		"GroupContract": {
-		  "properties": {
-			"id": {
-			  "type": "string",
-			  "description": "Uniquely identifies the group within the current API Management service instance. The value is a valid relative URL in the format of /groups/{groupid} where {groupid} is a group identifier.",
-			  "readOnly": true
-			},
-			"name": {
-			  "type": "string",
-			  "description": "Group name.",
-			  "maxLength": 300,
-			  "minLength": 1
-			},
-			"description": {
-			  "type": "string",
-			  "description": "Group description. Can contain HTML formatting tags.",
-			  "maxLength": 1000
-			},
-			"builtIn": {
-			  "readOnly": true,
-			  "type": "boolean",
-			  "description": "true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false."
-			},
-			"type": {
-			  "type": "string",
-			  "description": "Group type.",
-			  "readOnly": true,
-			  "enum": [
-				"Custom",
-				"System",
-				"External"
-			  ],
-			  "x-ms-enum": {
-				"name": "GroupTypeContract",
-				"modelAsString": false
-			  }
-			},
-			"externalId": {
-			  "type": "string",
-			  "description": "For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.",
-			  "readOnly": true
-			 }
-		  },
-		  "required": [
-			"name"
-		  ],
-		  "description": "Developer group."
-		},
-		"GroupCreateParameters": {
-		  "properties": {
-			"name": {
-			  "type": "string",
-			  "description": "Group name.",
-			  "maxLength": 300,
-			  "minLength": 1
-			},
-			"description": {
-			  "type": "string",
-			  "description": "Group description."
-			},
-			"type": {
-			  "type": "string",
-			  "description": "Group type.",
-			  "enum": [
-				"Custom",
-				"System",
-				"External"
-			  ],
-			  "x-ms-enum": {
-				"name": "GroupTypeContract",
-				"modelAsString": false
-			  }
-			},
-			"externalId": {
-			  "type": "string",
-			  "description": "Identifier of the external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null."
-		 	   }
-		  },
-		  "required": [
-			"name"
-		  ],
-		  "description": "Parameters supplied to the Create Group operation."
-		},
-		"GroupUpdateParameters": {
-		  "properties": {
-			"name": {
-			  "type": "string",
-			  "description": "Group name.",
-			  "maxLength": 300,
-			  "minLength": 1
-			},
-			"description": {
-			  "type": "string",
-			  "description": "Group description."
-			},
-			"type": {
-			  "type": "string",
-			  "description": "Group type.",
-			  "enum": [
-				"Custom",
-				"System",
-				"External"
-			  ],
-			  "x-ms-enum": {
-				"name": "GroupTypeContract",
-				"modelAsString": false
-			  }
-			},
-			"externalId": {
-			  "type": "string",
-			  "description": "Identifier of the external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null."			}
-		  },
-		  "description": "Parameters supplied to the Update Group operation."
-		}
+    "GroupCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupContract"
+          },
+          "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Group list representation."
+    },
+    "GroupContract": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Uniquely identifies the group within the current API Management service instance. The value is a valid relative URL in the format of /groups/{groupId} where {groupId} is a group identifier.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Group name.",
+          "maxLength": 300,
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "description": "Group description. Can contain HTML formatting tags.",
+          "maxLength": 1000
+        },
+        "builtIn": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false."
+        },
+        "type": {
+          "type": "string",
+          "description": "Group type.",
+          "readOnly": true,
+          "enum": [
+            "Custom",
+            "System",
+            "External"
+          ],
+          "x-ms-enum": {
+            "name": "GroupTypeContract",
+            "modelAsString": false
+          }
+        },
+        "externalId": {
+          "type": "string",
+          "description": "For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Developer group."
+    },
+    "GroupCreateParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Group name.",
+          "maxLength": 300,
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "description": "Group description."
+        },
+        "type": {
+          "type": "string",
+          "description": "Group type.",
+          "enum": [
+            "Custom",
+            "System",
+            "External"
+          ],
+          "x-ms-enum": {
+            "name": "GroupTypeContract",
+            "modelAsString": false
+          }
+        },
+        "externalId": {
+          "type": "string",
+          "description": "Identifier of the external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Parameters supplied to the Create Group operation."
+    },
+    "GroupUpdateParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Group name.",
+          "maxLength": 300,
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "description": "Group description."
+        },
+        "type": {
+          "type": "string",
+          "description": "Group type.",
+          "enum": [
+            "Custom",
+            "System",
+            "External"
+          ],
+          "x-ms-enum": {
+            "name": "GroupTypeContract",
+            "modelAsString": false
+          }
+        },
+        "externalId": {
+          "type": "string",
+          "description": "Identifier of the external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null."
+        }
+      },
+      "description": "Parameters supplied to the Update Group operation."
+    }
   },
   "parameters": {
-		"GroupIdParameter": {
-		  "name": "groupId",
-		  "in": "path",
-		  "required": true,
-		  "type": "string",
-		  "description": "Group identifier. Must be unique in the current API Management service instance.",
-		  "minLength": 1,
-		  "maxLength": 256,
-		  "pattern": "^[^*#&+:<>?]+$",
-		  "x-ms-parameter-location": "method"
-		}
+    "GroupIdParameter": {
+      "name": "groupId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Group identifier. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    }
   }
 }

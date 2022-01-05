@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testRG",
+    "resourceProviderName": "newrp",
+    "api-version": "2018-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "name": "newrp",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.CustomProviders/resourceProviders/newrp",
+        "type": "Microsoft.CustomProviders/resourceProviders",
+        "location": "East US",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "actions": [
+            {
+              "name": "TestAction",
+              "routingType": "Proxy",
+              "endpoint": "https://mytestendpoint/"
+            }
+          ],
+          "resourceTypes": [
+            {
+              "name": "TestResource",
+              "routingType": "Proxy,Cache",
+              "endpoint": "https://mytestendpoint2/"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,234 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "resourceGroup-1234",
+    "workspaceName": "testworkspace",
+    "api-version": "2021-03-01-preview",
+    "endpointName": "testBatchEndpoint",
+    "deploymentName": "testBatchDeployment",
+    "body": {
+      "tags": {
+        "additionalProp1": "string",
+        "additionalProp2": "string",
+        "additionalProp3": "string"
+      },
+      "location": "string",
+      "kind": "string",
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myuseridentity": {
+            "principalId": "string",
+            "clientId": "string"
+          }
+        }
+      },
+      "properties": {
+        "compute": {
+          "target": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/computes/testcompute",
+          "instanceCount": 0,
+          "isLocal": false,
+          "location": "string",
+          "instanceType": "string",
+          "properties": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          }
+        },
+        "errorThreshold": 0,
+        "retrySettings": {
+          "maxRetries": 0,
+          "timeout": "string"
+        },
+        "partitionKeys": [
+          "string"
+        ],
+        "miniBatchSize": 0,
+        "loggingLevel": "Info",
+        "outputConfiguration": {
+          "outputAction": "SummaryOnly",
+          "appendRowFileName": "string"
+        },
+        "description": "string",
+        "properties": {
+          "additionalProp1": "string",
+          "additionalProp2": "string",
+          "additionalProp3": "string"
+        },
+        "model": {
+          "referenceType": "Id",
+          "assetId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/models/testmodel/versions/1"
+        },
+        "codeConfiguration": {
+          "codeId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/codes/testcode/versions/1",
+          "scoringScript": "score.py"
+        },
+        "environmentId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/environments/myenv",
+        "environmentVariables": {
+          "additionalProp1": "string",
+          "additionalProp2": "string",
+          "additionalProp3": "string"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/batchEndpoints/testBatchEndpoint/deployments/testBatchDeployment",
+        "name": "testBatchDeployment",
+        "type": "Microsoft.MachineLearningServices/workspaces/batchEndpoints/deployments",
+        "tags": {
+          "additionalProp1": "string",
+          "additionalProp2": "string",
+          "additionalProp3": "string"
+        },
+        "location": "string",
+        "kind": "string",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myuseridentity": {
+              "clientId": "string"
+            }
+          }
+        },
+        "properties": {
+          "compute": {
+            "target": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/computes/testcompute",
+            "instanceCount": 0,
+            "isLocal": false,
+            "location": "string",
+            "instanceType": "string",
+            "properties": {
+              "additionalProp1": "string",
+              "additionalProp2": "string",
+              "additionalProp3": "string"
+            }
+          },
+          "errorThreshold": 0,
+          "retrySettings": {
+            "maxRetries": 0,
+            "timeout": "string"
+          },
+          "partitionKeys": [
+            "string"
+          ],
+          "miniBatchSize": 0,
+          "loggingLevel": "Info",
+          "outputConfiguration": {
+            "outputAction": "SummaryOnly",
+            "appendRowFileName": "string"
+          },
+          "description": "string",
+          "properties": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "model": {
+            "referenceType": "Id",
+            "assetId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/models/testmodel/versions/1"
+          },
+          "codeConfiguration": {
+            "codeId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/codes/testcode/versions/1",
+            "scoringScript": "score.py"
+          },
+          "environmentId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/environments/myenv",
+          "environmentVariables": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          }
+        },
+        "systemData": {
+          "createdAt": "2021-03-25T20:46:47.062Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-03-25T20:46:47.062Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/batchEndpoints/testBatchEndpoint/deployments/testBatchDeployment",
+        "name": "testBatchDeployment",
+        "type": "Microsoft.MachineLearningServices/workspaces/batchEndpoints/deployments",
+        "tags": {
+          "additionalProp1": "string",
+          "additionalProp2": "string",
+          "additionalProp3": "string"
+        },
+        "location": "string",
+        "kind": "string",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myuseridentity": {
+              "clientId": "string"
+            }
+          }
+        },
+        "properties": {
+          "compute": {
+            "target": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/computes/testcompute",
+            "instanceCount": 0,
+            "isLocal": false,
+            "location": "string",
+            "instanceType": "string",
+            "properties": {
+              "additionalProp1": "string",
+              "additionalProp2": "string",
+              "additionalProp3": "string"
+            }
+          },
+          "errorThreshold": 0,
+          "retrySettings": {
+            "maxRetries": 0,
+            "timeout": "string"
+          },
+          "partitionKeys": [
+            "string"
+          ],
+          "miniBatchSize": 0,
+          "loggingLevel": "Info",
+          "outputConfiguration": {
+            "outputAction": "SummaryOnly",
+            "appendRowFileName": "string"
+          },
+          "description": "string",
+          "properties": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "model": {
+            "referenceType": "Id",
+            "assetId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/models/testmodel/versions/1"
+          },
+          "codeConfiguration": {
+            "codeId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/codes/testcode/versions/1",
+            "scoringScript": "score.py"
+          },
+          "environmentId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/environments/myenv",
+          "environmentVariables": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          }
+        },
+        "systemData": {
+          "createdAt": "2021-03-25T20:46:47.062Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-03-25T20:46:47.062Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  }
+}

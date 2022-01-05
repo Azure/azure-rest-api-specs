@@ -1147,7 +1147,7 @@
             "default": 30,
             "description": "Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.",
             "x-ms-parameter-grouping": {
-              "postfix": "Options" 
+              "postfix": "Options"
             }
           },
           {
@@ -8554,7 +8554,7 @@
                 "description": "Gets the OData id of the resource to which the request applied.",
                 "type": "string"
               }
-           },
+            },
             "description": ""
           },
           "default": {
@@ -9183,7 +9183,15 @@
           "description": "Gets or sets the cross data center network egress in GiB from the pool during this interval."
         }
       },
-      "required": ["poolId","startTime","endTime","vmSize","totalCoreHours","dataIngressGiB","dataEgressGiB"],
+      "required": [
+        "poolId",
+        "startTime",
+        "endTime",
+        "vmSize",
+        "totalCoreHours",
+        "dataIngressGiB",
+        "dataEgressGiB"
+      ],
       "description": "Usage metrics for a pool across an aggregation interval."
     },
     "PoolListPoolUsageMetricsResult": {
@@ -9220,7 +9228,11 @@
           "description": "Gets or sets the aggregated wall-clock time of the dedicated compute node cores being part of the pool."
         }
       },
-      "required": ["startTime","lastUpdateTime","dedicatedCoreTime"],
+      "required": [
+        "startTime",
+        "lastUpdateTime",
+        "dedicatedCoreTime"
+      ],
       "description": "Statistics related to pool usage information."
     },
     "ResourceStatistics": {
@@ -9291,7 +9303,21 @@
           "description": "Gets or sets the total amount of data in GiB of network writes across all nodes in the pool."
         }
       },
-      "required": ["startTime","lastUpdateTime","avgCPUPercentage","avgMemoryGiB","peakMemoryGiB","avgDiskGiB","peakDiskGiB","diskReadIOps","diskWriteIOps","diskReadGiB","diskWriteGiB","networkReadGiB","networkWriteGiB"],
+      "required": [
+        "startTime",
+        "lastUpdateTime",
+        "avgCPUPercentage",
+        "avgMemoryGiB",
+        "peakMemoryGiB",
+        "avgDiskGiB",
+        "peakDiskGiB",
+        "diskReadIOps",
+        "diskWriteIOps",
+        "diskReadGiB",
+        "diskWriteGiB",
+        "networkReadGiB",
+        "networkWriteGiB"
+      ],
       "description": "Statistics related to resource consumption by compute nodes in a pool."
     },
     "PoolStatistics": {
@@ -9319,7 +9345,11 @@
           "description": "Gets or sets statistics related to resource consumption by compute nodes in the pool."
         }
       },
-      "required": ["url","startTime","lastUpdateTime"],
+      "required": [
+        "url",
+        "startTime",
+        "lastUpdateTime"
+      ],
       "description": "Contains utilization and resource usage statistics for the lifetime of a pool."
     },
     "JobStatistics": {
@@ -9394,7 +9424,22 @@
           "description": "Gets or sets the total wait time of all the tasks in the job.  The wait time for a task is defined as the elapsed time between the creation of the task creation and the start of task execution.  This value is reported only in the account lifetime statistics; it is not included in individual job statistics."
         }
       },
-      "required": ["url","startTime","lastUpdateTime","userCPUTime","kernelCPUTime","wallClockTime","readIOps","writeIOps","readIOGiB","writeIOGiB","numSucceededTasks","numFailedTasks","numTaskRetries","waitTime"],
+      "required": [
+        "url",
+        "startTime",
+        "lastUpdateTime",
+        "userCPUTime",
+        "kernelCPUTime",
+        "wallClockTime",
+        "readIOps",
+        "writeIOps",
+        "readIOGiB",
+        "writeIOGiB",
+        "numSucceededTasks",
+        "numFailedTasks",
+        "numTaskRetries",
+        "waitTime"
+      ],
       "description": "Resource usage statistics for a job."
     },
     "NameValuePair": {
@@ -9452,7 +9497,10 @@
             "deleting",
             "deletefailed"
           ],
-          "x-ms-enum": {"name": "CertificateState", "modelAsString": false }
+          "x-ms-enum": {
+            "name": "CertificateState",
+            "modelAsString": false
+          }
         },
         "stateTransitionTime": {
           "type": "string",
@@ -9467,7 +9515,10 @@
             "deleting",
             "deletefailed"
           ],
-          "x-ms-enum": { "name": "CertificateState", "modelAsString": false }
+          "x-ms-enum": {
+            "name": "CertificateState",
+            "modelAsString": false
+          }
         },
         "previousStateTransitionTime": {
           "type": "string",
@@ -9496,7 +9547,9 @@
           "description": "Gets or sets the application package version. If not specified, the default is used."
         }
       },
-      "required": ["applicationId"],
+      "required": [
+        "applicationId"
+      ],
       "description": "A reference to an application package to be installed on compute nodes in a pool."
     },
     "ApplicationSummary": {
@@ -9516,7 +9569,11 @@
           }
         }
       },
-      "required": ["id", "displayName", "versions"],
+      "required": [
+        "id",
+        "displayName",
+        "versions"
+      ],
       "description": "Contains information about an application in an Azure Batch account."
     },
     "CertificateAddParameter": {
@@ -9541,14 +9598,21 @@
             "cer",
             "unmapped"
           ],
-          "x-ms-enum": { "name": "CertificateFormat", "modelAsString": false }
+          "x-ms-enum": {
+            "name": "CertificateFormat",
+            "modelAsString": false
+          }
         },
         "password": {
           "type": "string",
           "description": "Gets or sets the password to access the certificate's private key. This property is not populated by the Get Certificate operation."
         }
       },
-      "required": ["thumbprint", "thumbprintAlgorithm", "data"],
+      "required": [
+        "thumbprint",
+        "thumbprintAlgorithm",
+        "data"
+      ],
       "description": "A certificate that can be installed on compute nodes and can be used to authenticate operations on the machine."
     },
     "CertificateListResult": {
@@ -9589,7 +9653,10 @@
           "description": "Gets or sets the content type of the file."
         }
       },
-      "required": ["lastModified","contentLength"],
+      "required": [
+        "lastModified",
+        "contentLength"
+      ],
       "description": "The properties of a file on a compute node."
     },
     "NodeFile": {
@@ -9856,10 +9923,15 @@
             "pack",
             "unmapped"
           ],
-          "x-ms-enum": { "name": "ComputeNodeFillType", "modelAsString": false }
+          "x-ms-enum": {
+            "name": "ComputeNodeFillType",
+            "modelAsString": false
+          }
         }
       },
-      "required": ["nodeFillType"],
+      "required": [
+        "nodeFillType"
+      ],
       "description": "Specifies how tasks should be distributed across compute nodes."
     },
     "StartTask": {
@@ -9916,7 +9988,10 @@
             "localmachine",
             "unmapped"
           ],
-          "x-ms-enum": { "name": "CertificateStoreLocation", "modelAsString": false }
+          "x-ms-enum": {
+            "name": "CertificateStoreLocation",
+            "modelAsString": false
+          }
         },
         "storeName": {
           "type": "string",
@@ -9927,7 +10002,10 @@
           "description": "Gets or sets which user accounts on the compute node should have access to the private data of the certificate. This may be any subset of the values 'starttask', 'task' and 'rdp', separated by commas. The default is all accounts, corresponding to the string 'starttask,task,rdp'."
         }
       },
-      "required": ["thumbprint", "thumbprintAlgorithm"],
+      "required": [
+        "thumbprint",
+        "thumbprintAlgorithm"
+      ],
       "description": "A reference to a certificate to be installed on compute nodes in a pool."
     },
     "MetadataItem": {
@@ -10039,7 +10117,10 @@
             "job",
             "unmapped"
           ],
-          "x-ms-enum": { "name": "PoolLifetimeOption", "modelAsString": false }
+          "x-ms-enum": {
+            "name": "PoolLifetimeOption",
+            "modelAsString": false
+          }
         },
         "keepAlive": {
           "type": "boolean",
@@ -10050,7 +10131,9 @@
           "description": "Gets or sets the pool specification for the auto pool."
         }
       },
-      "required": ["poolLifetimeOption"],
+      "required": [
+        "poolLifetimeOption"
+      ],
       "description": "Specifies characteristics for a temporary 'auto pool'. The Batch service will create this auto pool, run all the tasks for the job on it, and will delete the pool once the job has completed."
     },
     "PoolInformation": {
@@ -10222,7 +10305,22 @@
           "description": "Gets or sets the total wait time of all the tasks in jobs created under the schedule."
         }
       },
-      "required": ["url","startTime","lastUpdateTime","userCPUTime","kernelCPUTime","wallClockTime","readIOps","writeIOps","readIOGiB","writeIOGiB","numSucceededTasks","numFailedTasks","numTaskRetries", "waitTime"],
+      "required": [
+        "url",
+        "startTime",
+        "lastUpdateTime",
+        "userCPUTime",
+        "kernelCPUTime",
+        "wallClockTime",
+        "readIOps",
+        "writeIOps",
+        "readIOGiB",
+        "writeIOGiB",
+        "numSucceededTasks",
+        "numFailedTasks",
+        "numTaskRetries",
+        "waitTime"
+      ],
       "description": "The lifetime resource usage statistics for a job schedule."
     },
     "CloudJobSchedule": {
@@ -10263,7 +10361,10 @@
             "terminating",
             "deleting"
           ],
-          "x-ms-enum": { "name": "JobScheduleState", "modelAsString": false }
+          "x-ms-enum": {
+            "name": "JobScheduleState",
+            "modelAsString": false
+          }
         },
         "stateTransitionTime": {
           "type": "string",
@@ -10280,7 +10381,10 @@
             "terminating",
             "deleting"
           ],
-          "x-ms-enum": { "name": "JobScheduleState", "modelAsString": false }
+          "x-ms-enum": {
+            "name": "JobScheduleState",
+            "modelAsString": false
+          }
         },
         "previousStateTransitionTime": {
           "type": "string",
@@ -10339,7 +10443,11 @@
           "description": "Gets or sets a list of name-value pairs associated with the schedule as metadata."
         }
       },
-      "required": ["id", "schedule", "jobSpecification"],
+      "required": [
+        "id",
+        "schedule",
+        "jobSpecification"
+      ],
       "description": "A job schedule that allows recurring jobs by specifying when to run jobs and a specification used to create each job."
     },
     "CloudJobScheduleListResult": {
@@ -10368,7 +10476,10 @@
             "servererror",
             "unmapped"
           ],
-          "x-ms-enum": { "name": "SchedulingErrorCategory", "modelAsString": false }
+          "x-ms-enum": {
+            "name": "SchedulingErrorCategory",
+            "modelAsString": false
+          }
         },
         "code": {
           "type": "string",
@@ -10386,7 +10497,9 @@
           "description": "Gets or sets a list of additional error details related to the scheduling error."
         }
       },
-      "required": ["category"],
+      "required": [
+        "category"
+      ],
       "description": "An error encountered by the Batch service when scheduling a job."
     },
     "JobExecutionInformation": {
@@ -10414,7 +10527,9 @@
           "description": "Gets or sets a string describing the reason the job ended."
         }
       },
-      "required": ["startTime"],
+      "required": [
+        "startTime"
+      ],
       "description": "Contains information about the execution of a job in the Azure Batch service."
     },
     "CloudJob": {
@@ -10461,7 +10576,10 @@
             "completed",
             "deleting"
           ],
-          "x-ms-enum": { "name": "JobState", "modelAsString": false }
+          "x-ms-enum": {
+            "name": "JobState",
+            "modelAsString": false
+          }
         },
         "stateTransitionTime": {
           "type": "string",
@@ -10480,7 +10598,10 @@
             "completed",
             "deleting"
           ],
-          "x-ms-enum": { "name": "JobState", "modelAsString": false }
+          "x-ms-enum": {
+            "name": "JobState",
+            "modelAsString": false
+          }
         },
         "previousStateTransitionTime": {
           "type": "string",
@@ -10591,7 +10712,10 @@
           "description": "Gets or sets the flag that determines if this job will use tasks with dependencies."
         }
       },
-      "required": ["id", "poolInfo"],
+      "required": [
+        "id",
+        "poolInfo"
+      ],
       "description": "An Azure Batch job to add."
     },
     "CloudJobListResult": {
@@ -10620,7 +10744,10 @@
             "servererror",
             "unmapped"
           ],
-          "x-ms-enum": { "name": "SchedulingErrorCategory", "modelAsString": false }
+          "x-ms-enum": {
+            "name": "SchedulingErrorCategory",
+            "modelAsString": false
+          }
         },
         "code": {
           "type": "string",
@@ -10638,7 +10765,9 @@
           "description": "Gets or sets the list of additional error details related to the scheduling error."
         }
       },
-      "required": ["category"],
+      "required": [
+        "category"
+      ],
       "description": "Information about an error when scheduling a task."
     },
     "JobPreparationTaskExecutionInformation": {
@@ -10660,7 +10789,10 @@
             "running",
             "completed"
           ],
-          "x-ms-enum": { "name": "JobPreparationTaskState", "modelAsString": false }
+          "x-ms-enum": {
+            "name": "JobPreparationTaskState",
+            "modelAsString": false
+          }
         },
         "taskRootDirectory": {
           "type": "string",
@@ -10690,7 +10822,11 @@
           "description": "Gets or sets the most recent time at which a retry of the Job Preparation task started running. This property is set only if the task was retried (i.e. retryCount is nonzero)."
         }
       },
-      "required": ["startTime","retryCount","state"],
+      "required": [
+        "startTime",
+        "retryCount",
+        "state"
+      ],
       "description": "Contains information about the execution of a Job Preparation task on a compute node."
     },
     "JobReleaseTaskExecutionInformation": {
@@ -10712,7 +10848,10 @@
             "running",
             "completed"
           ],
-          "x-ms-enum": { "name": "JobReleaseTaskState", "modelAsString": false }
+          "x-ms-enum": {
+            "name": "JobReleaseTaskState",
+            "modelAsString": false
+          }
         },
         "taskRootDirectory": {
           "type": "string",
@@ -10732,7 +10871,10 @@
           "description": "Gets or sets any error starting the Job Release task."
         }
       },
-      "required": ["startTime","state"],
+      "required": [
+        "startTime",
+        "state"
+      ],
       "description": "Contains information about the execution of a Job Release task on a compute node."
     },
     "JobPreparationAndReleaseTaskExecutionInformation": {
@@ -10812,7 +10954,9 @@
           "description": "Gets or sets details of the error encountered evaluating the autoscale formula on the pool, if the evaluation was unsuccessful."
         }
       },
-      "required": ["timestamp"],
+      "required": [
+        "timestamp"
+      ],
       "description": "The results and errors from an execution of a pool autoscale formula."
     },
     "ResizeError": {
@@ -10871,7 +11015,10 @@
             "deleting",
             "upgrading"
           ],
-          "x-ms-enum": { "name": "PoolState", "modelAsString": false }
+          "x-ms-enum": {
+            "name": "PoolState",
+            "modelAsString": false
+          }
         },
         "stateTransitionTime": {
           "type": "string",
@@ -10886,7 +11033,10 @@
             "resizing",
             "stopping"
           ],
-          "x-ms-enum": { "name": "AllocationState", "modelAsString": false }
+          "x-ms-enum": {
+            "name": "AllocationState",
+            "modelAsString": false
+          }
         },
         "allocationStateTransitionTime": {
           "type": "string",
@@ -11074,7 +11224,11 @@
           "description": "Gets or sets a list of name-value pairs associated with the pool as metadata."
         }
       },
-      "required": ["id", "vmSize", "osFamily"],
+      "required": [
+        "id",
+        "vmSize",
+        "osFamily"
+      ],
       "description": "A pool in the Azure Batch service to add."
     },
     "ApplicationListResult": {
@@ -11160,7 +11314,10 @@
           "description": "Gets or sets the most recent time at which the task has been requeued by the Batch service as the result of a user request."
         }
       },
-      "required": ["requeueCount","retryCount"],
+      "required": [
+        "requeueCount",
+        "retryCount"
+      ],
       "description": "Information about the execution of a task."
     },
     "ComputeNodeInformation": {
@@ -11211,7 +11368,9 @@
           "description": "Gets or sets a list of files that Batch will download on all subtasks."
         }
       },
-      "required": ["numberOfInstances"],
+      "required": [
+        "numberOfInstances"
+      ],
       "description": "Information about the settings required for multi-instance task."
     },
     "TaskStatistics": {
@@ -11271,7 +11430,19 @@
           "description": "Gets or sets the elapsed time between the creation of the task and the start of task execution."
         }
       },
-      "required": ["url","startTime","lastUpdateTime","userCPUTime","kernelCPUTime","wallClockTime","readIOps","writeIOps","readIOGiB","writeIOGiB","waitTime"],
+      "required": [
+        "url",
+        "startTime",
+        "lastUpdateTime",
+        "userCPUTime",
+        "kernelCPUTime",
+        "wallClockTime",
+        "readIOps",
+        "writeIOps",
+        "readIOGiB",
+        "writeIOGiB",
+        "waitTime"
+      ],
       "description": "Resource usage statistics for a task."
     },
     "TaskDependencies": {
@@ -11306,7 +11477,10 @@
           "description": "Gets or sets the last task id in the range."
         }
       },
-      "required": ["start", "end"]
+      "required": [
+        "start",
+        "end"
+      ]
     },
     "CloudTask": {
       "properties": {
@@ -11345,7 +11519,10 @@
             "running",
             "completed"
           ],
-          "x-ms-enum": { "name": "TaskState", "modelAsString": false }
+          "x-ms-enum": {
+            "name": "TaskState",
+            "modelAsString": false
+          }
         },
         "stateTransitionTime": {
           "type": "string",
@@ -11361,7 +11538,10 @@
             "running",
             "completed"
           ],
-          "x-ms-enum": { "name": "TaskState", "modelAsString": false }
+          "x-ms-enum": {
+            "name": "TaskState",
+            "modelAsString": false
+          }
         },
         "previousStateTransitionTime": {
           "type": "string",
@@ -11370,7 +11550,7 @@
         },
         "commandLine": {
           "type": "string",
-          "description": "Gets or sets the command line of the task. For multi-instance tasks, the command line is executed on the primary subtask after all the subtasks have finished executing the coordianation command line."
+          "description": "Gets or sets the command line of the task. For multi-instance tasks, the command line is executed on the primary subtask after all the subtasks have finished executing the coordination command line."
         },
         "resourceFiles": {
           "type": "array",
@@ -11433,7 +11613,7 @@
         },
         "commandLine": {
           "type": "string",
-          "description": "Gets or sets the command line of the task. For multi-instance tasks, the command line is executed on the primary subtask after all the subtasks have finished executing the coordianation command line."
+          "description": "Gets or sets the command line of the task. For multi-instance tasks, the command line is executed on the primary subtask after all the subtasks have finished executing the coordination command line."
         },
         "resourceFiles": {
           "type": "array",
@@ -11470,7 +11650,10 @@
           "description": "Gets or sets any dependencies this task has."
         }
       },
-      "required": ["id", "commandLine"],
+      "required": [
+        "id",
+        "commandLine"
+      ],
       "description": "An Azure Batch task to add."
     },
     "SubtaskInformation": {
@@ -11512,7 +11695,10 @@
             "running",
             "completed"
           ],
-          "x-ms-enum": { "name": "TaskState", "modelAsString": false }
+          "x-ms-enum": {
+            "name": "TaskState",
+            "modelAsString": false
+          }
         },
         "stateTransitionTime": {
           "type": "string",
@@ -11528,7 +11714,10 @@
             "running",
             "completed"
           ],
-          "x-ms-enum": { "name": "TaskState", "modelAsString": false }
+          "x-ms-enum": {
+            "name": "TaskState",
+            "modelAsString": false
+          }
         },
         "previousStateTransitionTime": {
           "type": "string",
@@ -11594,14 +11783,19 @@
             "running",
             "completed"
           ],
-          "x-ms-enum": { "name": "TaskState", "modelAsString": false }
+          "x-ms-enum": {
+            "name": "TaskState",
+            "modelAsString": false
+          }
         },
         "executionInfo": {
           "$ref": "#/definitions/TaskExecutionInformation",
           "description": "Gets or sets information about the execution of the task."
         }
       },
-      "required": ["taskState"],
+      "required": [
+        "taskState"
+      ],
       "description": "Information about a task running on a compute node."
     },
     "StartTaskInformation": {
@@ -11613,7 +11807,10 @@
             "running",
             "completed"
           ],
-          "x-ms-enum": { "name": "StartTaskState", "modelAsString": false }
+          "x-ms-enum": {
+            "name": "StartTaskState",
+            "modelAsString": false
+          }
         },
         "startTime": {
           "type": "string",
@@ -11645,7 +11842,11 @@
           "description": "Gets or sets the most recent time at which a retry of the task started running."
         }
       },
-      "required": ["state","startTime","retryCount"],
+      "required": [
+        "state",
+        "startTime",
+        "retryCount"
+      ],
       "description": "Information about a start task running on a compute node."
     },
     "ComputeNodeError": {
@@ -11695,7 +11896,10 @@
             "leavingpool",
             "offline"
           ],
-          "x-ms-enum": { "name": "ComputeNodeState", "modelAsString": false }
+          "x-ms-enum": {
+            "name": "ComputeNodeState",
+            "modelAsString": false
+          }
         },
         "schedulingState": {
           "type": "string",
@@ -11704,7 +11908,10 @@
             "enabled",
             "disabled"
           ],
-        "x-ms-enum": { "name": "SchedulingState", "modelAsString": false }
+          "x-ms-enum": {
+            "name": "SchedulingState",
+            "modelAsString": false
+          }
         },
         "stateTransitionTime": {
           "type": "string",
@@ -11806,7 +12013,10 @@
           "description": "Gets or sets the password of the account."
         }
       },
-      "required": ["name", "password"],
+      "required": [
+        "name",
+        "password"
+      ],
       "description": "An user account on a compute node."
     },
     "JobSchedulePatchParameter": {
@@ -11847,7 +12057,10 @@
           "description": "Sets a list of name-value pairs associated with the job schedule as metadata. If you do not specify this element, it takes the default value of an empty list; in effect, any existing metadata is deleted."
         }
       },
-      "required": ["schedule", "jobSpecification"],
+      "required": [
+        "schedule",
+        "jobSpecification"
+      ],
       "description": "Parameters for a CloudJobScheduleOperations.Update request."
     },
     "JobDisableParameter": {
@@ -11860,10 +12073,15 @@
             "terminate",
             "wait"
           ],
-          "x-ms-enum": { "name": "DisableJobOption", "modelAsString": false }
+          "x-ms-enum": {
+            "name": "DisableJobOption",
+            "modelAsString": false
+          }
         }
       },
-      "required": ["disableTasks"],
+      "required": [
+        "disableTasks"
+      ],
       "description": "Parameters for a CloudJobOperations.Disable request."
     },
     "JobTerminateParameter": {
@@ -11923,7 +12141,9 @@
           "description": "Sets a list of name-value pairs associated with the job as metadata. If omitted, the existing job metadata is left unchanged."
         }
       },
-      "required": ["poolInfo"],
+      "required": [
+        "poolInfo"
+      ],
       "description": "Parameters for a CloudJobOperations.Update request."
     },
     "PoolEnableAutoScaleParameter": {
@@ -11947,7 +12167,9 @@
           "description": "Sets a formula for the desired number of compute nodes in the pool."
         }
       },
-      "required": ["autoScaleFormula"],
+      "required": [
+        "autoScaleFormula"
+      ],
       "description": "Parameters for a CloudJobOperations.EvaluateAutoScale request."
     },
     "PoolResizeParameter": {
@@ -11971,10 +12193,15 @@
             "taskcompletion",
             "retaineddata"
           ],
-          "x-ms-enum": { "name": "ComputeNodeDeallocationOption", "modelAsString": false }
+          "x-ms-enum": {
+            "name": "ComputeNodeDeallocationOption",
+            "modelAsString": false
+          }
         }
       },
-      "required": ["targetDedicated"],
+      "required": [
+        "targetDedicated"
+      ],
       "description": "Parameters for a CloudPoolOperations.Resize request."
     },
     "PoolUpdatePropertiesParameter": {
@@ -12005,7 +12232,11 @@
           "description": "Sets a list of name-value pairs associated with the pool as metadata. If you specify an empty collection, any existing metadata is removed from the pool."
         }
       },
-      "required": ["certificateReferences", "metadata", "applicationPackageReferences"],
+      "required": [
+        "certificateReferences",
+        "metadata",
+        "applicationPackageReferences"
+      ],
       "description": "Parameters for a CloudPoolOperations.UpdateProperties request."
     },
     "PoolUpgradeOSParameter": {
@@ -12015,7 +12246,9 @@
           "description": "Sets the Azure Guest OS version to be installed on the virtual machines in the pool."
         }
       },
-      "required": ["targetOSVersion"],
+      "required": [
+        "targetOSVersion"
+      ],
       "description": "Parameters for a CloudPoolOperations.UpgradeOS request."
     },
     "PoolPatchParameter": {
@@ -12069,7 +12302,9 @@
           "description": "Sets the time at which the account should expire. If omitted, the default is 1 day from the current time."
         }
       },
-      "required": ["password"],
+      "required": [
+        "password"
+      ],
       "description": "Parameters for a ComputeNodeOperations.UpdateUser request."
     },
     "NodeRebootParameter": {
@@ -12083,7 +12318,10 @@
             "taskcompletion",
             "retaineddata"
           ],
-          "x-ms-enum": { "name": "ComputeNodeRebootOption", "modelAsString": false }
+          "x-ms-enum": {
+            "name": "ComputeNodeRebootOption",
+            "modelAsString": false
+          }
         }
       },
       "description": "Parameters for a ComputeNodeOperations.Reboot request."
@@ -12099,7 +12337,10 @@
             "taskcompletion",
             "retaineddata"
           ],
-          "x-ms-enum": { "name": "ComputeNodeReimageOption", "modelAsString": false }
+          "x-ms-enum": {
+            "name": "ComputeNodeReimageOption",
+            "modelAsString": false
+          }
         }
       },
       "description": "Parameters for a ComputeNodeOperations.Reimage request."
@@ -12114,7 +12355,10 @@
             "terminate",
             "taskcompletion"
           ],
-          "x-ms-enum": { "name": "DisableComputeNodeSchedulingOption", "modelAsString": false }
+          "x-ms-enum": {
+            "name": "DisableComputeNodeSchedulingOption",
+            "modelAsString": false
+          }
         }
       },
       "description": "Parameters for a ComputeNodeOperations.DisableScheduling request."
@@ -12142,10 +12386,15 @@
             "taskcompletion",
             "retaineddata"
           ],
-          "x-ms-enum": { "name": "ComputeNodeDeallocationOption", "modelAsString": false }
+          "x-ms-enum": {
+            "name": "ComputeNodeDeallocationOption",
+            "modelAsString": false
+          }
         }
       },
-      "required": ["nodeList"],
+      "required": [
+        "nodeList"
+      ],
       "description": "Parameters for a ComputeNodeOperations.Remove request."
     },
     "ErrorMessage": {

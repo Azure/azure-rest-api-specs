@@ -393,6 +393,7 @@
         },
         "frequency": {
           "type": "string",
+          "description": "Gets or sets the frequency of the schedule.",
           "$ref": "#/definitions/scheduleFrequency"
         },
         "timeZone": {
@@ -418,11 +419,33 @@
         "Day",
         "Hour",
         "Week",
-        "Month"
+        "Month",
+        "Minute"
       ],
       "x-ms-enum": {
         "name": "ScheduleFrequency",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "OneTime"
+          },
+          {
+            "value": "Day"
+          },
+          {
+            "value": "Hour"
+          },
+          {
+            "value": "Week"
+          },
+          {
+            "value": "Month"
+          },
+          {
+            "value": "Minute",
+            "description": "The minimum allowed interval for Minute schedules is 15 minutes."
+          }
+        ]
       }
     },
     "ScheduleCreateOrUpdateParameters": {
@@ -508,17 +531,7 @@
         "frequency": {
           "type": "string",
           "description": "Gets or sets the frequency of the schedule.",
-          "enum": [
-            "OneTime",
-            "Day",
-            "Hour",
-            "Week",
-            "Month"
-          ],
-          "x-ms-enum": {
-            "name": "ScheduleFrequency",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/scheduleFrequency"
         },
         "timeZone": {
           "type": "string",

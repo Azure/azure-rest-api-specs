@@ -54,11 +54,14 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_stor_simple1200_series']
+  - repo: azure-resource-manager-schemas
 ```
 
 
@@ -72,38 +75,13 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.StorSimple1200Series
-  output-folder: $(csharp-sdks-folder)/StorSimple1200Series/Management.StorSimple1200Series/Generated
+  output-folder: $(csharp-sdks-folder)/storsimple1200series/Microsoft.Azure.Management.StorSimple1200Series/src/Generated
   clear-output-folder: true
 ```
-
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: storsimple
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2016-10
-```
-
-### Tag: package-2016-10 and go
-
-These settings apply only when `--tag=package-2016-10 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2016-10' && $(go)
-output-folder: $(go-sdk-folder)/services/storsimple1200series/mgmt/2016-10-01/storsimple
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -119,3 +97,6 @@ java:
   payload-flattening-threshold: 1
   output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-storsimple1200series
 ```
+
+
+

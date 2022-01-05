@@ -1,0 +1,103 @@
+{
+  "parameters": {
+    "api-version": "2018-08-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "policyName": "Policy1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "Policy1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/FrontDoorWebApplicationFirewallPolicies/Policy1",
+        "type": "Microsoft.Network/frontdoorwebapplicationfirewallpolicies",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "location": "WestUs",
+        "properties": {
+          "resourceState": "Enabled",
+          "provisioningState": "Succeeded",
+          "policySettings": {
+            "enabledState": "Enabled",
+            "mode": "Prevention"
+          },
+          "customRules": {
+            "rules": [
+              {
+                "name": "Rule1",
+                "priority": 1,
+                "ruleType": "RateLimitRule",
+                "rateLimitDurationInMinutes": 0,
+                "rateLimitThreshold": 1000,
+                "matchConditions": [
+                  {
+                    "matchVariable": "RemoteAddr",
+                    "selector": null,
+                    "operator": "IPMatch",
+                    "negateCondition": false,
+                    "matchValue": [
+                      "192.168.1.0/24",
+                      "10.0.0.0/24"
+                    ]
+                  }
+                ],
+                "action": "Block",
+                "transforms": []
+              },
+              {
+                "name": "Rule2",
+                "priority": 2,
+                "ruleType": "MatchRule",
+                "rateLimitDurationInMinutes": 0,
+                "rateLimitThreshold": 0,
+                "matchConditions": [
+                  {
+                    "matchVariable": "RemoteAddr",
+                    "selector": null,
+                    "operator": "GeoMatch",
+                    "negateCondition": false,
+                    "matchValue": [
+                      "CH"
+                    ]
+                  },
+                  {
+                    "matchVariable": "RequestHeader",
+                    "selector": "UserAgent",
+                    "operator": "Contains",
+                    "negateCondition": false,
+                    "matchValue": [
+                      "Windows"
+                    ]
+                  }
+                ],
+                "action": "Block",
+                "transforms": []
+              }
+            ]
+          },
+          "managedRules": {
+            "ruleSets": [
+              {
+                "priority": 1,
+                "version": 0,
+                "ruleSetType": "AzureManagedRuleSet",
+                "ruleGroupOverrides": [
+                  {
+                    "ruleGroupOverride": "SqlInjection",
+                    "action": "Block"
+                  },
+                  {
+                    "ruleGroupOverride": "XSS",
+                    "action": "Log"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

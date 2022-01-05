@@ -1,20 +1,20 @@
 {
-    "parameters": {
-        "subscriptionId": "subscription-id",
-        "resourceGroupName": "OneResourceGroupName",
-        "api-version": "2017-01-01",
-        "webServiceName": "TargetWebServiceName"
+  "parameters": {
+    "subscriptionId": "subscription-id",
+    "resourceGroupName": "OneResourceGroupName",
+    "api-version": "2017-01-01",
+    "webServiceName": "TargetWebServiceName"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "http://azure.async.operation/status"
+      }
     },
-    "responses": {
-        "202": {
-            "headers": {
-                "azure-asyncoperation": "http://azure.async.operation/status"
-            }
-        },
-        "204": {
-            "headers": {
-                "azure-asyncoperation": "http://azure.async.operation/status"
-            }
-        }
+    "204": {
+      "headers": {
+        "azure-asyncoperation": "http://azure.async.operation/status"
+      }
     }
+  }
 }

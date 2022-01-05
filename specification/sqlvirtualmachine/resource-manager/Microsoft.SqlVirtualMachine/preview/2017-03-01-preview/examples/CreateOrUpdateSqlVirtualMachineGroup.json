@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "sqlVirtualMachineGroupName": "testvmgroup",
+    "api-version": "2017-03-01-preview",
+    "parameters": {
+      "location": "northeurope",
+      "tags": {
+        "mytag": "myval"
+      },
+      "properties": {
+        "sqlImageOffer": "SQL2016-WS2016",
+        "sqlImageSku": "Enterprise",
+        "wsfcDomainProfile": {
+          "domainFqdn": "testdomain.com",
+          "ouPath": "OU=WSCluster,DC=testdomain,DC=com",
+          "clusterBootstrapAccount": "testrpadmin",
+          "clusterOperatorAccount": "testrp@testdomain.com",
+          "sqlServiceAccount": "sqlservice@testdomain.com",
+          "storageAccountUrl": "https://storgact.blob.core.windows.net/",
+          "storageAccountPrimaryKey": "<primary storage access key>"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "UpdatingDomainful",
+          "sqlImageOffer": "SQL2016-WS2016",
+          "sqlImageSku": "Enterprise",
+          "wsfcDomainProfile": {
+            "storageAccountUrl": "https://storgact.blob.core.windows.net/"
+          }
+        },
+        "location": "northeurope",
+        "tags": {
+          "mytag": "myval"
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups/testvmgroup",
+        "name": "testvmgroup",
+        "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "provisioningState": "ProvisioningDomainful",
+          "sqlImageOffer": "SQL2016-WS2016",
+          "sqlImageSku": "Enterprise",
+          "wsfcDomainProfile": {
+            "storageAccountUrl": "https://storgact.blob.core.windows.net/"
+          }
+        },
+        "location": "northeurope",
+        "tags": {
+          "mytag": "myval"
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups/testvmgroup",
+        "name": "testvmgroup",
+        "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups"
+      }
+    }
+  }
+}

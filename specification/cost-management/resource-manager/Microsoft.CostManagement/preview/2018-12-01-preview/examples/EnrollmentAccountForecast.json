@@ -1,0 +1,116 @@
+{
+  "parameters": {
+    "api-version": "2018-12-01-preview",
+    "billingAccountId": "70664866",
+    "enrollmentAccountId": "456",
+    "parameters": {
+      "type": "Usage",
+      "timeframe": "Custom",
+      "timePeriod": {
+        "from": "2018-08-01T00:00:00.000Z",
+        "to": "2018-10-31T00:00:00.000Z"
+      },
+      "dataset": {
+        "granularity": "Daily",
+        "filter": {
+          "or": [
+            {
+              "dimension": {
+                "name": "SubscriptionName",
+                "operator": "In",
+                "values": [
+                  "Azure Dev Subscription",
+                  "Azure Prod Subscription",
+                  "Azure PPE Subscription"
+                ]
+              }
+            },
+            {
+              "tag": {
+                "name": "Environment",
+                "operator": "In",
+                "values": [
+                  "Dev",
+                  "PPE",
+                  "Prod"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "providers/Microsoft.Billing/billingAccounts/70664866/enrollmentAccounts/456/providers/Microsoft.CostManagement/Forecast/ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
+            "name": "ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
+            "type": "microsoft.costmanagement/Forecast",
+            "properties": {
+              "nextLink": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/70664866/enrollmentAccounts/456/providers/Microsoft.CostManagement/Forecast?api-version=2018-12-01-preview&$skiptoken=AQAAAA%3D%3D",
+              "columns": [
+                {
+                  "name": "PreTaxCost",
+                  "type": "Number"
+                },
+                {
+                  "name": "UsageDate",
+                  "type": "Number"
+                },
+                {
+                  "name": "CostStatus",
+                  "type": "String"
+                },
+                {
+                  "name": "Currency",
+                  "type": "String"
+                }
+              ],
+              "rows": [
+                [
+                  168.545323467227622,
+                  20180826,
+                  "Actual",
+                  "USD"
+                ],
+                [
+                  169.41979241290344,
+                  20180927,
+                  "Actual",
+                  "USD"
+                ],
+                [
+                  170.359416562338452,
+                  20181028,
+                  "Actual",
+                  "USD"
+                ],
+                [
+                  172.545363234276512,
+                  20180829,
+                  "Forecast",
+                  "USD"
+                ],
+                [
+                  173.41979241290323,
+                  20180930,
+                  "Forecast",
+                  "USD"
+                ],
+                [
+                  174.359416562625452,
+                  20181031,
+                  "Forecast",
+                  "USD"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

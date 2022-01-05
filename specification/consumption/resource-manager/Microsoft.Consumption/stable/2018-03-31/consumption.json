@@ -94,7 +94,7 @@
             "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart)",
             "in": "query",
             "required": false,
-            "type": "string",            
+            "type": "string",
             "x-ms-parameter-location": "method",
             "x-ms-parameter-grouping": {
               "name": "QueryOptions"
@@ -171,7 +171,7 @@
             "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart) for specified billing period",
             "in": "query",
             "required": false,
-            "type": "string",            
+            "type": "string",
             "x-ms-parameter-location": "method",
             "x-ms-parameter-grouping": {
               "name": "QueryOptions"
@@ -271,7 +271,7 @@
             "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart)",
             "in": "query",
             "required": false,
-            "type": "string",            
+            "type": "string",
             "x-ms-parameter-location": "method",
             "x-ms-parameter-grouping": {
               "name": "QueryOptions"
@@ -387,7 +387,7 @@
           "nextLinkName": "nextLink"
         }
       }
-  },
+    },
     "/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.Consumption/usageDetails": {
       "get": {
         "tags": [
@@ -442,7 +442,7 @@
             "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart)",
             "in": "query",
             "required": false,
-            "type": "string",            
+            "type": "string",
             "x-ms-parameter-location": "method",
             "x-ms-parameter-grouping": {
               "name": "QueryOptions"
@@ -473,7 +473,7 @@
       }
     },
     "/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/usageDetails": {
-"get": {
+      "get": {
         "tags": [
           "UsageDetails"
         ],
@@ -513,7 +513,7 @@
             "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart) for specified billing period",
             "in": "query",
             "required": false,
-            "type": "string",            
+            "type": "string",
             "x-ms-parameter-location": "method",
             "x-ms-parameter-grouping": {
               "name": "QueryOptions"
@@ -558,7 +558,7 @@
           "nextLinkName": "nextLink"
         }
       }
-  },
+    },
     "/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.Consumption/usageDetails": {
       "get": {
         "tags": [
@@ -613,7 +613,7 @@
             "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart)",
             "in": "query",
             "required": false,
-            "type": "string",            
+            "type": "string",
             "x-ms-parameter-location": "method",
             "x-ms-parameter-grouping": {
               "name": "QueryOptions"
@@ -644,7 +644,7 @@
       }
     },
     "/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/usageDetails": {
-"get": {
+      "get": {
         "tags": [
           "UsageDetails"
         ],
@@ -684,7 +684,7 @@
             "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart) for specified billing period",
             "in": "query",
             "required": false,
-            "type": "string",            
+            "type": "string",
             "x-ms-parameter-location": "method",
             "x-ms-parameter-grouping": {
               "name": "QueryOptions"
@@ -729,7 +729,7 @@
           "nextLinkName": "nextLink"
         }
       }
-  },
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/marketplaces": {
       "get": {
         "tags": [
@@ -803,7 +803,7 @@
         ],
         "x-ms-odata": "#/definitions/Marketplace",
         "operationId": "Marketplaces_ListByBillingPeriod",
-        "description": "Lists the marketplaces for a scope by billing period and subscripotionId. Marketplaces are available via this API only for May 1, 2014 or later.",
+        "description": "Lists the marketplaces for a scope by billing period and subscriptionId. Marketplaces are available via this API only for May 1, 2014 or later.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -1351,7 +1351,7 @@
         }
       }
     },
-	"/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/providers/Microsoft.Consumption/reservationSummaries": {
+    "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/providers/Microsoft.Consumption/reservationSummaries": {
       "get": {
         "tags": [
           "ReservedInstances"
@@ -1571,7 +1571,7 @@
           "ReservationRecommendations"
         ],
         "operationId": "ReservationRecommendations_List",
-        "description": "List of recomendations for purchasing reserved instances.",
+        "description": "List of recommendations for purchasing reserved instances.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -1583,7 +1583,7 @@
             "$ref": "./examples/ReservationRecommendationsFilterByScopeLookBackPeriod.json"
           }
         },
-        "parameters": [          
+        "parameters": [
           {
             "name": "$filter",
             "description": "May be used to filter reservationRecommendations by properties/scope and properties/lookBackPeriod.",
@@ -2066,7 +2066,7 @@
             }
           },
           "default": {
-          "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -2184,7 +2184,7 @@
         "tags": [
           "CostTags"
         ],
-        "description": "The operation to create or update cost tags assiciated with a billing account. Update operation requires latest eTag to be set in the request mandatorily. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
+        "description": "The operation to create or update cost tags associated with a billing account. Update operation requires latest eTag to be set in the request mandatorily. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
         "operationId": "CostTags_CreateOrUpdate",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -2421,7 +2421,7 @@
         "meterId": {
           "description": "The meter id (GUID).",
           "type": "string",
-          "format":"uuid",
+          "format": "uuid",
           "readOnly": true
         },
         "meterDetails": {
@@ -2432,7 +2432,7 @@
         "subscriptionGuid": {
           "description": "Subscription guid.",
           "type": "string",
-          "format":"uuid",
+          "format": "uuid",
           "readOnly": true
         },
         "subscriptionName": {
@@ -2589,13 +2589,13 @@
         "meterId": {
           "description": "The meter id (GUID).",
           "type": "string",
-          "format":"uuid",
+          "format": "uuid",
           "readOnly": true
         },
         "subscriptionGuid": {
           "description": "Subscription guid.",
           "type": "string",
-          "format":"uuid",
+          "format": "uuid",
           "readOnly": true
         },
         "subscriptionName": {
@@ -2686,37 +2686,37 @@
         "adjustments": {
           "description": "Total adjustment amount.",
           "type": "number",
-		  "format": "decimal",
+          "format": "decimal",
           "readOnly": true
         },
         "utilized": {
           "description": "Total Commitment usage.",
           "type": "number",
-		  "format": "decimal",
+          "format": "decimal",
           "readOnly": true
         },
         "serviceOverage": {
           "description": "Overage for Azure services.",
           "type": "number",
-		  "format": "decimal",
+          "format": "decimal",
           "readOnly": true
         },
         "chargesBilledSeparately": {
           "description": "Charges Billed separately.",
           "type": "number",
-		  "format": "decimal",
+          "format": "decimal",
           "readOnly": true
         },
         "totalOverage": {
           "description": "serviceOverage + chargesBilledSeparately.",
           "type": "number",
-		  "format": "decimal",
+          "format": "decimal",
           "readOnly": true
         },
         "totalUsage": {
           "description": "Azure service commitment + total Overage.",
           "type": "number",
-		  "format": "decimal",
+          "format": "decimal",
           "readOnly": true
         },
         "azureMarketplaceServiceCharges": {
@@ -2727,7 +2727,7 @@
         },
         "billingFrequency": {
           "description": "The billing frequency.",
-		  "type": "string",
+          "type": "string",
           "enum": [
             "Month",
             "Quarter",
@@ -2737,7 +2737,7 @@
             "name": "BillingFrequency",
             "modelAsString": true
           }
-          },
+        },
         "priceHidden": {
           "description": "Price is hidden or not.",
           "type": "boolean",
@@ -2746,48 +2746,48 @@
         "newPurchasesDetails": {
           "description": "List of new purchases.",
           "type": "array",
-		  "items": {
-			"type" : "object",
-			"properties" : {
-				"name" : {
-			      "description": "the name of new purchase.",
-				  "type": "string",
-                  "readOnly": true
-				},
-				"value": {
-				  "description": "the value of new purchase.",
-				  "type": "number",
-			      "format": "decimal",
-				  "readOnly": true
-				}
-			}
-		  },
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "description": "the name of new purchase.",
+                "type": "string",
+                "readOnly": true
+              },
+              "value": {
+                "description": "the value of new purchase.",
+                "type": "number",
+                "format": "decimal",
+                "readOnly": true
+              }
+            }
+          },
           "readOnly": true
         },
         "adjustmentDetails": {
           "description": "List of Adjustments (Promo credit, SIE credit etc.).",
           "type": "array",
-		  "items": {
-			"type" : "object",
-			"properties" : {
-				"name" : {
-			      "description": "the name of new adjustment.",
-				  "type": "string",
-                  "readOnly": true
-				},
-				"value": {
-				  "description": "the value of new adjustment.",
-				  "type": "number",
-				  "format": "decimal",
-				  "readOnly": true
-				}
-			}
-		  },
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "description": "the name of new adjustment.",
+                "type": "string",
+                "readOnly": true
+              },
+              "value": {
+                "description": "the value of new adjustment.",
+                "type": "number",
+                "format": "decimal",
+                "readOnly": true
+              }
+            }
+          },
           "readOnly": true
         }
       }
     },
-	"ReservationSummaries": {
+    "ReservationSummaries": {
       "description": "reservation summaries resource.",
       "type": "object",
       "allOf": [
@@ -2835,7 +2835,7 @@
           "readOnly": true
         },
         "skuName": {
-          "description": "This is the ARM Sku name. It can be used to join with the servicetype field in additoinalinfo in usage records.",
+          "description": "This is the ARM Sku name. It can be used to join with the serviceType field in additional info in usage records.",
           "type": "string",
           "readOnly": true
         },
@@ -2922,7 +2922,7 @@
         "meterId": {
           "description": "The meter id (GUID)",
           "type": "string",
-          "format":"uuid",
+          "format": "uuid",
           "readOnly": true
         },
         "term": {
@@ -2937,7 +2937,7 @@
           "readOnly": true
         },
         "recommendedQuantity": {
-          "description": "Recomended quality for reserved instances.",
+          "description": "Recommended quality for reserved instances.",
           "type": "number",
           "format": "decimal",
           "readOnly": true
@@ -2953,13 +2953,13 @@
           "type": "number",
           "format": "decimal",
           "readOnly": true
-        },        
+        },
         "firstUsageDate": {
           "description": "The usage date for looking back.",
           "type": "string",
           "format": "date-time",
           "readOnly": true
-        },        
+        },
         "scope": {
           "description": "Shared or single recommendation.",
           "type": "string",
@@ -3018,7 +3018,7 @@
           "readOnly": true
         },
         "skuName": {
-          "description": "This is the ARM Sku name. It can be used to join with the servicetype field in additoinalinfo in usage records.",
+          "description": "This is the ARM Sku name. It can be used to join with the serviceType field in additional info in usage records.",
           "type": "string",
           "readOnly": true
         },
@@ -3046,7 +3046,7 @@
           "readOnly": true
         },
         "totalReservedQuantity": {
-          "description": "This is the total count of instances that are reserved for the reservationid.",
+          "description": "This is the total count of instances that are reserved for the reservationId.",
           "type": "number",
           "format": "decimal",
           "readOnly": true
@@ -3158,7 +3158,7 @@
           }
         },
         "timePeriod": {
-          "description": "Has start and end date of the budget. The start date must be first of the month and should be less than the end date. Budget start date must be on or after June 1, 2017. Future start date should not be more than three months. Past start date should  be selected within the timegrain preiod. There are no restrictions on the end date.",
+          "description": "Has start and end date of the budget. The start date must be first of the month and should be less than the end date. Budget start date must be on or after June 1, 2017. Future start date should not be more than three months. Past start date should  be selected within the timegrain period. There are no restrictions on the end date.",
           "$ref": "#/definitions/BudgetTimePeriod"
         },
         "filters": {
@@ -3232,12 +3232,12 @@
           "type": "array",
           "items": {
             "type": "string",
-            "format":"uuid"
+            "format": "uuid"
           },
           "minItems": 0,
           "maxItems": 10
         },
-        "tags": {      
+        "tags": {
           "type": "object",
           "description": "The dictionary of filters on tags.",
           "additionalProperties": {
@@ -3500,7 +3500,7 @@
         },
         "eTag": {
           "type": "string",
-          "description": "eTag of the resource. To handle concurrent update scenarion, this field will be used to determine whether the user is updating the latest version or not."
+          "description": "eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not."
         }
       },
       "x-ms-azure-resource": true
@@ -3550,7 +3550,7 @@
         "meterId": {
           "description": "The meter id (GUID)",
           "type": "string",
-          "format":"uuid",
+          "format": "uuid",
           "readOnly": true
         },
         "meterDetails": {
@@ -3584,8 +3584,8 @@
           "description": "Currency Code",
           "type": "string",
           "readOnly": true
-		    }
-	    }
+        }
+      }
     }
   },
   "parameters": {
