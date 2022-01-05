@@ -228,7 +228,6 @@ These settings apply only when `--tag=package-2021-11-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-11-01'
 input-file:
-  - Microsoft.Insights/stable/2015-05-01/aiOperations_API.json
   - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
   - Microsoft.Insights/stable/2015-05-01/componentApiKeys_API.json
   - Microsoft.Insights/stable/2015-05-01/componentContinuousExport_API.json
