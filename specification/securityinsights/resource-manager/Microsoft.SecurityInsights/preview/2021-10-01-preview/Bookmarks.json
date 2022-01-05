@@ -702,6 +702,48 @@
         }
       },
       "type": "object"
+    },
+    "EntityMappingsList": {
+      "description": "Describes the entity mappings of the bookmark",
+      "items": {
+        "$ref": "#/definitions/EntityMappings"
+      },
+      "type": "array"
+    },
+    "EntityMappings": {
+      "description": "Describes the entity mappings of a single entity",
+      "properties": {
+        "entityType": {
+          "description": "The entity type",
+          "type": "string"
+        },
+        "fieldMappings": {
+          "description": "Array of fields mapping for that entity type",
+          "items": {
+            "$ref": "#/definitions/EntityFieldMapping"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "EntityFieldMapping": {
+      "description": "Map identifiers of a single entity",
+      "properties": {
+        "identifier": {
+          "description": "Alert V3 identifier",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value of the identifier",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AttackTechnique": {
+      "description": "Mitre technique (https://attack.mitre.org/matrices/enterprise/)",
+      "type": "string"
     }
   }
 }
