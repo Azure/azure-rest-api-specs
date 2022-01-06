@@ -1894,6 +1894,9 @@
           "List protection policies with backupManagementType filter as AzureIaasVm": {
             "$ref": "./examples/AzureIaasVm/BackupPolicies_List.json"
           },
+          "List protection policies with backupManagementType filter as AzureIaasVm with both V1 and V2 policies": {
+            "$ref": ".examples/AzureIaasVm/V2Policy/v2-List-Policies.json"
+          },
           "List protection policies with backupManagementType filter as AzureWorkload": {
             "$ref": "./examples/AzureWorkload/BackupPolicies_List.json"
           }
@@ -1948,6 +1951,9 @@
         "x-ms-examples": {
           "Get Azure IaasVm Protection Policy Details": {
             "$ref": "./examples/AzureIaasVm/ProtectionPolicies_Get.json"
+          },
+          "Get Azure IaasVm Enhanced Protection Policy Details": {
+            "$ref": ".examples/AzureIaasVm/V2Policy/v2-Get-Policy.json"
           }
         }
       },
@@ -2013,6 +2019,12 @@
           },
           "Create or Update Full Azure Vm Protection Policy": {
             "$ref": "./examples/AzureIaasVm/ProtectionPolicies_CreateOrUpdate_Complex.json"
+          },
+          "Create or Update Enhanced Azure Vm Protection Policy with Hourly backup": {
+            "$ref": ".examples/AzureIaasVm/V2Policy/IaaS_v2_hourly.json"
+          },
+          "Create or Update Enhanced Azure Vm Protection Policy with daily backup": {
+            "$ref": ".examples/AzureIaasVm/V2Policy/IaaS_v2_daily.json"
           },
           "Create or Update Full Azure Workload Protection Policy": {
             "$ref": "./examples/AzureWorkload/ProtectionPolicies_CreateOrUpdate_Complex.json"
@@ -5481,6 +5493,18 @@
         "timeZone": {
           "description": "TimeZone optional input as string. For example: TimeZone = \"Pacific Standard Time\".",
           "type": "string"
+        },
+        "policyType": {
+          "enum": [
+            "Invalid",
+            "V1",
+            "V2"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IAASVMPolicyType",
+            "modelAsString": true
+          }
         }
       },
       "x-ms-discriminator-value": "AzureIaasVM"
@@ -6936,6 +6960,52 @@
           "format": "int32",
           "description": "To specify duration of the backup window",
           "type": "integer"
+        }
+      }
+    },
+    "DailySchedule": {
+      "type": "object",
+      "properties": {
+        "scheduleRunTimes": {
+          "description": "List of times of day this schedule has to be run.",
+          "type": "array",
+          "items": {
+            "format": "date-time",
+            "type": "string"
+          }
+        }
+      }
+    }
+    ,
+    "WeeklySchedule": {
+      "type": "object",
+      "properties": {
+        "scheduleRunDays": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "Sunday",
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "DayOfWeek",
+              "modelAsString": false
+            }
+          }
+        },
+        "scheduleRunTimes": {
+          "description": "List of times of day this schedule has to be run.",
+          "type": "array",
+          "items": {
+            "format": "date-time",
+            "type": "string"
+          }
         }
       }
     },
@@ -8866,6 +8936,44 @@
         }
       },
       "x-ms-discriminator-value": "SimpleSchedulePolicy"
+    },
+    "SimpleSchedulePolicyV2": {
+      "description": "The V2 policy schedule for IaaS that supports hourly backups.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SchedulePolicy"
+        }
+      ],
+      "properties": {
+        "scheduleRunFrequency": {
+          "description": "Frequency of the schedule operation of this policy.",
+          "enum": [
+            "Invalid",
+            "Daily",
+            "Weekly",
+            "Hourly"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ScheduleRunType",
+            "modelAsString": true
+          }
+        },
+        "hourlySchedule": {
+          "$ref": "#/definitions/HourlySchedule",
+          "description": "hourly schedule of this policy"
+        },
+        "dailySchedule": {
+          "$ref": "#/definitions/DailySchedule",
+          "description": "Daily schedule of this policy"
+        },
+        "weeklySchedule": {
+          "$ref": "#/definitions/WeeklySchedule",
+          "description": "Weekly schedule of this policy"
+        }
+      },
+      "x-ms-discriminator-value": "SimpleSchedulePolicyV2"
     },
     "SubProtectionPolicy": {
       "description": "Sub-protection policy which includes schedule and retention",
