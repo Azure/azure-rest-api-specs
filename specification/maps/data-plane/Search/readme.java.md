@@ -66,5 +66,5 @@ java:
     polling: {}
     models-subpackage: implementation.models
     custom-types-subpackage: models
-    custom-types: BatchRequest,BatchResultSummary,DataSource,ErrorDetail,ErrorResponseException,ElectricVehicleConnector,EntryPointType,GeographicEntityType,JsonFormat,LocalizedMapView,OperatingHoursRange,MatchType,PointOfInterestCategoryTreeResult,PointOfInterestExtendedPostalCodes,RoadUseType,SearchIndexes,ErrorResponse
+    custom-types: BatchRequest,BatchResultSummary,DataSource,ErrorAdditionalInfo,ErrorDetail,ErrorResponseException,ElectricVehicleConnector,EntryPointType,GeographicEntityType,JsonFormat,LocalizedMapView,OperatingHoursRange,MatchType,PointOfInterestCategoryTreeResult,PointOfInterestExtendedPostalCodes,RoadUseType,SearchIndexes,ErrorResponse
 ```
