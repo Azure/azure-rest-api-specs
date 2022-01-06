@@ -4587,6 +4587,9 @@
           },
           {
             "$ref": "#/parameters/LeaseIdOptional"
+          },
+          {
+            "$ref": "#/parameters/FileLastWriteTime"
           }
         ],
         "responses": {
@@ -4626,6 +4629,12 @@
                 "x-ms-client-name": "IsServerEncrypted",
                 "type": "boolean",
                 "description": "The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise."
+              },
+              "x-ms-file-last-write-time": {
+                "x-ms-client-name": "FileLastWriteTime",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "Last write time for the file."
               }
             }
           },
@@ -4708,6 +4717,9 @@
           },
           {
             "$ref": "#/parameters/CopySourceAuthorization"
+          },
+          {
+            "$ref": "#/parameters/FileLastWriteTime"
           }
         ],
         "responses": {
@@ -4747,6 +4759,12 @@
                 "x-ms-client-name": "IsServerEncrypted",
                 "type": "boolean",
                 "description": "The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise."
+              },
+              "x-ms-file-last-write-time": {
+                "x-ms-client-name": "FileLastWriteTime",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "Last write time for the file."
               }
             }
           },
@@ -6610,7 +6628,7 @@
       "x-ms-client-name": "FileCreationTime",
       "in": "header",
       "description": "Creation time for the file/directory. Default value: Now.",
-      "required": true,
+      "required": false,
       "type": "string",
       "format": "date-time-rfc1123",
       "x-ms-parameter-location": "method"
@@ -6620,7 +6638,7 @@
       "x-ms-client-name": "FileLastWriteTime",
       "in": "header",
       "description": "Last write time for the file/directory. Default value: Now.",
-      "required": true,
+      "required": false,
       "type": "string",
       "format": "date-time-rfc1123",
       "x-ms-parameter-location": "method"
