@@ -8,6 +8,12 @@
         "ResourceGroup"
       ]
     },
+    "swaggers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "variables": {
       "$ref": "#/definitions/Variables"
     },
@@ -35,6 +41,7 @@
     }
   },
   "required": [
+    "swaggers",
     "scenarios"
   ],
   "additionalProperties": false,
@@ -91,6 +98,12 @@
           "type": "string",
           "description": "A long description of the scenario"
         },
+        "swaggers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "variables": {
           "$ref": "#/definitions/Variables"
         },
@@ -114,31 +127,29 @@
     "Step": {
       "oneOf": [
         {
-          "$ref": "#/definitions/StepRestCall"
+          "$ref": "#/definitions/StepOperation"
         },
         {
-          "$ref": "#/definitions/StepRestOperation"
+          "$ref": "#/definitions/StepExample"
         },
         {
           "$ref": "#/definitions/StepArmTemplate"
         },
         {
           "$ref": "#/definitions/StepArmDeploymentScript"
-        },
-        {
-          "$ref": "#/definitions/StepRawCall"
         }
       ]
     },
     "StepBase": {
+      "type": "object",
       "properties": {
         "step": {
           "$ref": "#/definitions/Name",
-          "description": "Name of the step"
+          "description": "The name of the step that uniquely identifies it"
         },
         "description": {
           "type": "string",
-          "description": "A long description of the step"
+          "description": "A brief explanation about the step"
         },
         "variables": {
           "$ref": "#/definitions/Variables"
@@ -149,7 +160,6 @@
             "$ref": "#/definitions/Name"
           },
           "additionalProperties": {
-            "type": "object",
             "properties": {
               "type": {
                 "type": "string",
@@ -159,21 +169,56 @@
                 ],
                 "default": "string"
               },
+              "fromRequest": {
+                "$ref": "#/definitions/JsonPointer"
+              },
               "fromResponse": {
-                "type": "string"
+                "$ref": "#/definitions/JsonPointer"
               }
             }
           }
         }
       }
     },
-    "StepRestBase": {
+    "StepOperation": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/StepBase"
         }
       ],
       "properties": {
+        "operationId": {
+          "type": "string"
+        },
+        "swagger": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "step": true,
+        "description": true,
+        "variables": true,
+        "outputVariables": true
+      },
+      "required": [
+        "operationId"
+      ],
+      "additionalProperties": false
+    },
+    "StepExample": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StepBase"
+        }
+      ],
+      "properties": {
+        "exampleFile": {
+          "type": "string"
+        },
         "resourceUpdate": {
           "type": "array",
           "description": "Update resource properties in body for both request and expected response",
@@ -198,54 +243,15 @@
           },
           "minItems": 1
         },
-        "statusCode": {
-          "type": "integer",
-          "description": "Expected response code",
-          "default": 200
-        }
-      }
-    },
-    "StepRestCall": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/StepRestBase"
-        }
-      ],
-      "properties": {
-        "exampleFile": {
-          "type": "string"
-        },
-        "resourceName": {
-          "$ref": "#/definitions/Name",
-          "description": "Name a resource for tracking"
-        }
+        "step": true,
+        "description": true,
+        "variables": true,
+        "outputVariables": true
       },
       "required": [
         "exampleFile"
-      ]
-    },
-    "StepRestOperation": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/StepRestBase"
-        }
       ],
-      "properties": {
-        "operationId": {
-          "type": "string",
-          "description": "The operationId to perform on a tracking resource"
-        },
-        "resourceName": {
-          "$ref": "#/definitions/Name",
-          "description": "Reference a tracking resource"
-        }
-      },
-      "required": [
-        "operationId",
-        "resourceName"
-      ]
+      "additionalProperties": false
     },
     "StepArmTemplate": {
       "type": "object",
@@ -257,11 +263,16 @@
       "properties": {
         "armTemplate": {
           "type": "string"
-        }
+        },
+        "step": true,
+        "description": true,
+        "variables": true,
+        "outputVariables": true
       },
       "required": [
         "armTemplate"
-      ]
+      ],
+      "additionalProperties": false
     },
     "StepArmDeploymentScript": {
       "type": "object",
@@ -289,55 +300,21 @@
                 "type": "string"
               }
             },
-            "required": ["name", "value"]
-          }
-        }
-      },
-      "required": ["armDeploymentScript"]
-    },
-    "StepRawCall": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/StepBase"
-        }
-      ],
-      "properties": {
-        "method": {
-          "type": "string",
-          "enum": [
-            "GET",
-            "PUT",
-            "PATCH",
-            "POST",
-            "DELETE",
-            "OPTIONS",
-            "HEAD"
-          ]
-        },
-        "url": {
-          "type": "string"
-        },
-        "requestHeaders": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
+            "required": [
+              "name",
+              "value"
+            ]
           }
         },
-        "requestBody": {},
-        "statusCode": {
-          "type": "integer",
-          "description": "Expected response code",
-          "default": 200
-        },
-        "expectedResponse": {}
+        "step": true,
+        "description": true,
+        "variables": true,
+        "outputVariables": true
       },
       "required": [
-        "method",
-        "url",
-        "requestHeaders",
-        "requestBody"
-      ]
+        "armDeploymentScript"
+      ],
+      "additionalProperties": false
     },
     "JsonPatchOp": {
       "type": "object",
