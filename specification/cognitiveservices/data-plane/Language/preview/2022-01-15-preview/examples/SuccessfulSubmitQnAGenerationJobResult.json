@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "Content-Type": "application/json",
+    "api-version": "2022-01-15-preview",
+    "jobId": "job1"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "Documents": [ 
+          {
+            "Id": "1",
+            "Content": "This feature generates the Question Answer pairs from the text extracted from a user provided document. This feature will help the teachers and instructors to easily create an evaluation exams or Quiz on a specific document and easily share it with the students.",
+            "Language":"en",
+            "QnAGenerationParameters":
+            {
+              "FetchRawContent":true,
+              "MaxQnAs":0
+            }
+          }
+        ],
+        "Questions": [
+          {
+            "Question":"What is the source of the Question Answer pairs?",
+            "Answer":"user provided document",
+            "DocumentId":"1"
+          },
+          {
+            "Question":"What do you get the Question Answer pairs from?",
+            "Answer":"user provided document",
+            "DocumentId":"1"
+          },
+          {
+            "Question":"What is the source of the question answer answer?",
+            "Answer":"user provided document",
+            "DocumentId":"1"
+          }
+        ]
+      }
+    }
+  }
+}

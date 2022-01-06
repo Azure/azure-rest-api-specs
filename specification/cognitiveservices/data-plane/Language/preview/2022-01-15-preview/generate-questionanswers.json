@@ -1,0 +1,299 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Cognitive Language Service - Generate Question and Answer pairs ",
+    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection, question answering and qna generation. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview</a>.",
+    "version": "2021-07-15-preview"
+  },
+  "securityDefinitions": {
+    "apim_key": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apim_key": []
+    }
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/language",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "common.json#/parameters/Endpoint"
+      }
+    ]
+  },
+  "paths": {
+    "/generate-questionanswers": {
+      "put": {
+        "summary": "Generate Question and Answers from a set of documents.",
+        "operationId": "GenerateQuestionAnswers_SubmitJob",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/QnAGenerationRequestBody"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "202": {
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/generate-questionanswers/SuccessfulSubmitQnAGenerationJob.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/generate-questionanswers/{jobId}": {
+      "get": {
+        "summary": "Gets the status of a QnA generation job.",
+        "operationId": "GenerateQuestionAnswers_GetJobStatus",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/JobIdParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "QnA generation job status.",
+            "schema": {
+              "$ref": "#/definitions/JobState"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/generate-questionanswers/SuccessfulJobStatus.json"
+          }
+        }
+      },
+      "/generate-questionanswers/{jobId}/result": {
+        "get": {
+          "summary": "Gets the result of a QnA generation job.",
+          "operationId": "GenerateQuestionAnswers_GetJobResult",
+          "parameters": [
+            {
+              "$ref": "common.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/JobIdParameter"
+            }
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "QnA generation job result.",
+              "schema": {
+                "$ref": "#/definitions/QnAGenerationResult"
+              }
+            },
+            "default": {
+              "description": "Error response.",
+              "schema": {
+                "$ref": "common.json#/definitions/ErrorResponse"
+              }
+            }
+          },
+          "x-ms-examples": {
+            "Successful query": {
+              "$ref": "./examples/generate-questionanswers/SuccessfulJobResult.json"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "QnAGenerationRequestBody": {
+      "name": "qnaGenerationRequestBody",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/QnAGenerationRequestBody"
+      },
+      "x-nullable": true,
+      "description": "Post body of the request.",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "QnAGenerationRequestBody": {
+      "type": "object",
+      "description": "QnA Generation job with documents and qnagenparameters.",
+      "additionalProperties": false,
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "The set of documents to process as part of qna generation job.",
+          "items": {
+            "$ref": "#/definitions/QnAGenDocument"
+          }
+        },
+        "qnaGenParameters": {
+          "description": "Parameters that define max number of QnAs to be generated, fetch raw documents or not, etc.",
+          "$ref": "#/definitions/QnAGenParameters"         
+        }
+      }
+    },
+    "QnAGenerationResult": {
+      "type": "object",
+      "description": "QnA Generation job with documents and questions generated.",
+      "additionalProperties": false,
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "The set of documents with processed raw contents.",
+          "items": {
+            "$ref": "#/definitions/QnAGenDocument"
+          }
+        },
+        "questions": {
+          "type": "array",
+          "description": "The set of questions generated in the qna generation job.",
+          "items": {
+            "$ref": "#/definitions/QnAGenQuestion"
+          }      
+        }
+      }
+    },
+    "QnAGenDocument": {
+      "type": "object",
+      "required": [
+        "content",
+        "documentType"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique, non-empty document identifier."
+        },
+        "content": {
+          "type": "string",
+          "description": "The input text to process."
+        },
+        "documentType": {
+          "type": "string",
+          "$ref": "#/definitions/QnAGenDocumentType"
+        },
+        "language": {
+          "type": "string",
+          "description": "(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default."
+        },
+        "qnaGenParameters": {
+          "description": "Parameters that define max number of QnAs to be generated, fetch raw documents or not, etc.",
+          "$ref": "#/definitions/QnAGenParameters"         
+        }
+      },
+      "description": "Contains an input document to be analyzed by the service."
+    },
+    "QnAGenDocumentType": {
+      "type": "string",
+      "description": "QnA Gen Document type.",      
+      "enum": [
+        "Raw",
+        "URL",
+        "HTML"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "qnaGenDocumentType",
+        "values": [
+          {
+            "value": "Raw",
+            "description": "Raw text which can have entity markers."
+          },
+          {
+            "value": "URL",
+            "description": "Content is a URL, whose page needs to be extracted and used for QnA generation."
+          },
+          {
+            "value": "HTML",
+            "description": "HTML markup text which can have entity markers."
+          }
+        ]
+      }
+    },
+    "QnAGenParameters": {
+      "type": "object",
+      "description": "Parameters that define max number of QnAs to be generated, fetch raw documents or not, etc.",
+      "additionalProperties": false,
+      "properties": {
+        "fetchRawContent": {
+          "type": "boolean",
+          "description": "Enable to fetch raw contents of document in the result."
+        },
+        "maxQnAs": {
+          "type": "integer",
+          "description": "Number of QnAs to be generated.",
+          "format": "int32",
+          "maximum": 100,
+          "minimum": 1
+        }
+      }   
+    },
+    "QnAGenQuestion": {
+      "type": "object",
+      "properties": {
+        "question": {
+          "type": "string",
+          "description": "A question generated from the given set of documents in the job."
+        },
+        "answer": {
+          "type": "string",
+          "description": "Entity or phrase which is the answer to the generated question from a particular document in the job."
+        },
+        "documentId": {
+          "type": "string",
+          "description": "A unique, non-empty document identifier, GUID will be assigned if user had not provided Id in job request."
+        }
+      },
+      "description": "Contains question generated by the service."
+    }
+  }  
+}
+
