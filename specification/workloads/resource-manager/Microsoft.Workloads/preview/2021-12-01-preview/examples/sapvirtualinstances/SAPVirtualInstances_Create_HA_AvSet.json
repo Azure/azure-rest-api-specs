@@ -8,8 +8,8 @@
       "tags": {},
       "location": "westcentralus",
       "properties": {
-        "environment": "Non-Prod",
-        "sapProduct": "ECC",
+        "environment": "NonProd",
+        "sapProduct": "S4HANA",
         "configuration": {
           "configurationType": "Deployment",
           "appLocation": "eastus",
@@ -35,7 +35,7 @@
                     "ssh": {
                       "publicKeys": [
                         {
-                          "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCeClRAk2ipUs/l5voIsDC5q9RI+YSRd1Bvd/O+axgY4WiBzG+4FwJWZm/mLLe5DoOdHQwmU2FrKXZSW4w2sYE70KeWnrFViCOX5MTVvJgPE8ClugNl8RWth/tU849DvM9sT7vFgfVSHcAS2yDRyDlueii+8nF2ym8XWAPltFVCyLHRsyBp5YPqK8JFYIa1eybKsY3hEAxRCA+/7bq8et+Gj3coOsuRmrehav7rE6N12Pb80I6ofa6SM5XNYq4Xk0iYNx7R3kdz0Jj9XgZYWjAHjJmT0gTRoOnt6upOuxK7xI/ykWrllgpXrCPu3Ymz+c+ujaqcxDopnAl2lmf69/J1"
+                          "keyData": "ssh-rsa public key"
                         }
                       ]
                     }
@@ -63,7 +63,7 @@
                     "ssh": {
                       "publicKeys": [
                         {
-                          "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCeClRAk2ipUs/l5voIsDC5q9RI+YSRd1Bvd/O+axgY4WiBzG+4FwJWZm/mLLe5DoOdHQwmU2FrKXZSW4w2sYE70KeWnrFViCOX5MTVvJgPE8ClugNl8RWth/tU849DvM9sT7vFgfVSHcAS2yDRyDlueii+8nF2ym8XWAPltFVCyLHRsyBp5YPqK8JFYIa1eybKsY3hEAxRCA+/7bq8et+Gj3coOsuRmrehav7rE6N12Pb80I6ofa6SM5XNYq4Xk0iYNx7R3kdz0Jj9XgZYWjAHjJmT0gTRoOnt6upOuxK7xI/ykWrllgpXrCPu3Ymz+c+ujaqcxDopnAl2lmf69/J1"
+                          "keyData": "ssh-rsa public key"
                         }
                       ]
                     }
@@ -91,7 +91,7 @@
                     "ssh": {
                       "publicKeys": [
                         {
-                          "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCeClRAk2ipUs/l5voIsDC5q9RI+YSRd1Bvd/O+axgY4WiBzG+4FwJWZm/mLLe5DoOdHQwmU2FrKXZSW4w2sYE70KeWnrFViCOX5MTVvJgPE8ClugNl8RWth/tU849DvM9sT7vFgfVSHcAS2yDRyDlueii+8nF2ym8XWAPltFVCyLHRsyBp5YPqK8JFYIa1eybKsY3hEAxRCA+/7bq8et+Gj3coOsuRmrehav7rE6N12Pb80I6ofa6SM5XNYq4Xk0iYNx7R3kdz0Jj9XgZYWjAHjJmT0gTRoOnt6upOuxK7xI/ykWrllgpXrCPu3Ymz+c+ujaqcxDopnAl2lmf69/J1"
+                          "keyData": "ssh-rsa public key"
                         }
                       ]
                     }
@@ -99,10 +99,18 @@
                 }
               },
               "instanceCount": 1
+            },
+            "highAvailabilityConfig": {
+              "highAvailabilityType": "AvailabilitySet"
             }
           },
           "softwareConfiguration": {
-            "bomUrl": "https://myaccount.blob.core.windows.net/mycontainer/myblob"
+            "softwareInstallationType": "ServiceInitiated",
+            "sapFqdn": "sapsystem.contoso.net",
+            "sapBitsStorageAccountId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/ajgupt-test/providers/Microsoft.Storage/storageAccounts/ajguptsavnet",
+            "bomUrl": "https://myaccount.blob.core.windows.net/mycontainer/myblob",
+            "softwareVersion": "SAP S/4HANA 2020 FPS01",
+            "sshPrivateKey": "<sshPrivateKey>"
           }
         }
       }
@@ -151,7 +159,7 @@
                       "ssh": {
                         "publicKeys": [
                           {
-                            "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCeClRAk2ipUs/l5voIsDC5q9RI+YSRd1Bvd/O+axgY4WiBzG+4FwJWZm/mLLe5DoOdHQwmU2FrKXZSW4w2sYE70KeWnrFViCOX5MTVvJgPE8ClugNl8RWth/tU849DvM9sT7vFgfVSHcAS2yDRyDlueii+8nF2ym8XWAPltFVCyLHRsyBp5YPqK8JFYIa1eybKsY3hEAxRCA+/7bq8et+Gj3coOsuRmrehav7rE6N12Pb80I6ofa6SM5XNYq4Xk0iYNx7R3kdz0Jj9XgZYWjAHjJmT0gTRoOnt6upOuxK7xI/ykWrllgpXrCPu3Ymz+c+ujaqcxDopnAl2lmf69/J1"
+                            "keyData": "ssh-rsa public key"
                           }
                         ]
                       }
@@ -178,7 +186,7 @@
                       "ssh": {
                         "publicKeys": [
                           {
-                            "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCeClRAk2ipUs/l5voIsDC5q9RI+YSRd1Bvd/O+axgY4WiBzG+4FwJWZm/mLLe5DoOdHQwmU2FrKXZSW4w2sYE70KeWnrFViCOX5MTVvJgPE8ClugNl8RWth/tU849DvM9sT7vFgfVSHcAS2yDRyDlueii+8nF2ym8XWAPltFVCyLHRsyBp5YPqK8JFYIa1eybKsY3hEAxRCA+/7bq8et+Gj3coOsuRmrehav7rE6N12Pb80I6ofa6SM5XNYq4Xk0iYNx7R3kdz0Jj9XgZYWjAHjJmT0gTRoOnt6upOuxK7xI/ykWrllgpXrCPu3Ymz+c+ujaqcxDopnAl2lmf69/J1"
+                            "keyData": "ssh-rsa public key"
                           }
                         ]
                       }
@@ -205,7 +213,7 @@
                       "ssh": {
                         "publicKeys": [
                           {
-                            "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCeClRAk2ipUs/l5voIsDC5q9RI+YSRd1Bvd/O+axgY4WiBzG+4FwJWZm/mLLe5DoOdHQwmU2FrKXZSW4w2sYE70KeWnrFViCOX5MTVvJgPE8ClugNl8RWth/tU849DvM9sT7vFgfVSHcAS2yDRyDlueii+8nF2ym8XWAPltFVCyLHRsyBp5YPqK8JFYIa1eybKsY3hEAxRCA+/7bq8et+Gj3coOsuRmrehav7rE6N12Pb80I6ofa6SM5XNYq4Xk0iYNx7R3kdz0Jj9XgZYWjAHjJmT0gTRoOnt6upOuxK7xI/ykWrllgpXrCPu3Ymz+c+ujaqcxDopnAl2lmf69/J1"
+                            "keyData": "ssh-rsa public key"
                           }
                         ]
                       }
@@ -216,7 +224,11 @@
               }
             },
             "softwareConfiguration": {
-              "bomUrl": "https://myaccount.blob.core.windows.net/mycontainer/myblob"
+              "softwareInstallationType": "ServiceInitiated",
+              "sapFqdn": "sapsystem.contoso.net",
+              "sapBitsStorageAccountId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/ajgupt-test/providers/Microsoft.Storage/storageAccounts/ajguptsavnet",
+              "bomUrl": "https://myaccount.blob.core.windows.net/mycontainer/myblob",
+              "softwareVersion": "SAP S/4HANA 2020 FPS01"
             }
           },
           "status": "Running",
@@ -242,7 +254,7 @@
           "lastModifiedAt": "2021-08-19T15:10:46.196Z"
         },
         "properties": {
-          "environment": "Non-Prod",
+          "environment": "NonProd",
           "sapProduct": "ECC",
           "configuration": {
             "configurationType": "Deployment",
@@ -268,7 +280,7 @@
                       "ssh": {
                         "publicKeys": [
                           {
-                            "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCeClRAk2ipUs/l5voIsDC5q9RI+YSRd1Bvd/O+axgY4WiBzG+4FwJWZm/mLLe5DoOdHQwmU2FrKXZSW4w2sYE70KeWnrFViCOX5MTVvJgPE8ClugNl8RWth/tU849DvM9sT7vFgfVSHcAS2yDRyDlueii+8nF2ym8XWAPltFVCyLHRsyBp5YPqK8JFYIa1eybKsY3hEAxRCA+/7bq8et+Gj3coOsuRmrehav7rE6N12Pb80I6ofa6SM5XNYq4Xk0iYNx7R3kdz0Jj9XgZYWjAHjJmT0gTRoOnt6upOuxK7xI/ykWrllgpXrCPu3Ymz+c+ujaqcxDopnAl2lmf69/J1"
+                            "keyData": "ssh-rsa public key"
                           }
                         ]
                       }
@@ -295,7 +307,7 @@
                       "ssh": {
                         "publicKeys": [
                           {
-                            "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCeClRAk2ipUs/l5voIsDC5q9RI+YSRd1Bvd/O+axgY4WiBzG+4FwJWZm/mLLe5DoOdHQwmU2FrKXZSW4w2sYE70KeWnrFViCOX5MTVvJgPE8ClugNl8RWth/tU849DvM9sT7vFgfVSHcAS2yDRyDlueii+8nF2ym8XWAPltFVCyLHRsyBp5YPqK8JFYIa1eybKsY3hEAxRCA+/7bq8et+Gj3coOsuRmrehav7rE6N12Pb80I6ofa6SM5XNYq4Xk0iYNx7R3kdz0Jj9XgZYWjAHjJmT0gTRoOnt6upOuxK7xI/ykWrllgpXrCPu3Ymz+c+ujaqcxDopnAl2lmf69/J1"
+                            "keyData": "ssh-rsa public key"
                           }
                         ]
                       }
@@ -322,7 +334,7 @@
                       "ssh": {
                         "publicKeys": [
                           {
-                            "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCeClRAk2ipUs/l5voIsDC5q9RI+YSRd1Bvd/O+axgY4WiBzG+4FwJWZm/mLLe5DoOdHQwmU2FrKXZSW4w2sYE70KeWnrFViCOX5MTVvJgPE8ClugNl8RWth/tU849DvM9sT7vFgfVSHcAS2yDRyDlueii+8nF2ym8XWAPltFVCyLHRsyBp5YPqK8JFYIa1eybKsY3hEAxRCA+/7bq8et+Gj3coOsuRmrehav7rE6N12Pb80I6ofa6SM5XNYq4Xk0iYNx7R3kdz0Jj9XgZYWjAHjJmT0gTRoOnt6upOuxK7xI/ykWrllgpXrCPu3Ymz+c+ujaqcxDopnAl2lmf69/J1"
+                            "keyData": "ssh-rsa public key"
                           }
                         ]
                       }
@@ -333,7 +345,11 @@
               }
             },
             "softwareConfiguration": {
-              "bomUrl": "https://myaccount.blob.core.windows.net/mycontainer/myblob"
+              "softwareInstallationType": "ServiceInitiated",
+              "sapFqdn": "sapsystem.contoso.net",
+              "sapBitsStorageAccountId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/ajgupt-test/providers/Microsoft.Storage/storageAccounts/ajguptsavnet",
+              "bomUrl": "https://myaccount.blob.core.windows.net/mycontainer/myblob",
+              "softwareVersion": "SAP S/4HANA 2020 FPS01"
             }
           },
           "status": "Unknown",

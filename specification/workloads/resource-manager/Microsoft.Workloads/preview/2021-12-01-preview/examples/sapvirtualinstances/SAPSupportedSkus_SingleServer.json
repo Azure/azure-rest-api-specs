@@ -4,10 +4,11 @@
     "location": "centralus",
     "api-version": "2021-12-01-preview",
     "body": {
-      "appLocation": "westcentralus",
-      "sapProduct": "ECC",
-      "environment": "Prod",
-      "databaseType": "HANA"
+      "appLocation": "eastus",
+      "sapProduct": "S4HANA",
+      "environment": "NonProd",
+      "databaseType": "HANA",
+      "deploymentType": "SingleServer"
     }
   },
   "responses": {
@@ -15,24 +16,24 @@
       "body": {
         "supportedSkus": [
           {
-            "vmSku": "Standard_D8s_v3",
             "isAppServerCertified": true,
-            "isDatabaseCertified": true
+            "isDatabaseCertified": false,
+            "vmSku": "Standard_E32ds_v4"
           },
           {
-            "vmSku": "Standard_D4s_v3",
             "isAppServerCertified": true,
-            "isDatabaseCertified": true
+            "isDatabaseCertified": false,
+            "vmSku": "Standard_E48ds_v4"
           },
           {
-            "vmSku": "Standard_D3s_v3",
             "isAppServerCertified": true,
-            "isDatabaseCertified": true
+            "isDatabaseCertified": false,
+            "vmSku": "Standard_E64ds_v4"
           },
           {
-            "vmSku": "Standard_E8s_v3",
             "isAppServerCertified": true,
-            "isDatabaseCertified": true
+            "isDatabaseCertified": true,
+            "vmSku": "Standard_M32ts"
           }
         ]
       }

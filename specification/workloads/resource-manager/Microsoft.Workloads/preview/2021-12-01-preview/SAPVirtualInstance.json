@@ -75,8 +75,17 @@
           }
         },
         "x-ms-examples": {
-          "SAPSizingRecommendations": {
-            "$ref": "./examples/sapvirtualinstances/SAPSizingRecommendations.json"
+          "SAPSizingRecommendations_S4HANA_Distributed": {
+            "$ref": "./examples/sapvirtualinstances/SAPSizingRecommendations_S4HANA_Distributed.json"
+          },
+          "SAPSizingRecommendations_S4HANA_SingleServer": {
+            "$ref": "./examples/sapvirtualinstances/SAPSizingRecommendations_S4HANA_SingleServer.json"
+          },
+          "SAPSizingRecommendations_S4HANA_DistributedHA_AvSet": {
+            "$ref": "./examples/sapvirtualinstances/SAPSizingRecommendations_S4HANA_HA_AvSet.json"
+          },
+          "SAPSizingRecommendations_S4HANA_DistributedHA_AvZone": {
+            "$ref": "./examples/sapvirtualinstances/SAPSizingRecommendations_S4HANA_HA_AvZone.json"
           }
         }
       }
@@ -122,8 +131,17 @@
           }
         },
         "x-ms-examples": {
-          "SAPSupportedSku": {
-            "$ref": "./examples/sapvirtualinstances/SAPSupportedSkus.json"
+          "SAPSupportedSkus_Distributed": {
+            "$ref": "./examples/sapvirtualinstances/SAPSupportedSkus_Distributed.json"
+          },
+          "SAPSupportedSkus_SingleServer": {
+            "$ref": "./examples/sapvirtualinstances/SAPSupportedSkus_SingleServer.json"
+          },
+          "SAPSupportedSkus_DistributedHA_AvSet": {
+            "$ref": "./examples/sapvirtualinstances/SAPSupportedSkus_DistributedHA_AvSet.json"
+          },
+          "SAPSupportedSkus_DistributedHA_AvZone": {
+            "$ref": "./examples/sapvirtualinstances/SAPSupportedSkus_DistributedHA_AvZone.json"
           }
         }
       }
@@ -142,8 +160,17 @@
           "application/json"
         ],
         "x-ms-examples": {
-          "SAPVirtualInstances_Create": {
-            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create.json"
+          "SAPVirtualInstances_Create_Distributed": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Distributed.json"
+          },
+          "SAPVirtualInstances_Create_HA_AvSet": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_HA_AvSet.json"
+          },
+          "SAPVirtualInstances_Create_HA_AvZone": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_HA_AvZone.json"
+          },
+          "SAPVirtualInstances_Create_SingleServer": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_SingleServer.json"
           }
         },
         "description": "Creates an SAP Virtual Instance.",
@@ -1386,6 +1413,21 @@
         "read"
       ]
     },
+    "SAPSoftwareInstallationType": {
+      "description": "The SAP software installation Type.",
+      "enum": [
+        "ServiceInitiated"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "SAPSoftwareInstallationType",
+        "modelAsString": true
+      },
+      "x-ms-mutability": [
+        "create",
+        "read"
+      ]
+    },
     "HighAvailabilityType": {
       "description": "The high availability Type. AvailabilitySet guarantees 99.95% availability. Availability Zone guarantees 99.99% availability.",
       "enum": [
@@ -1837,6 +1879,10 @@
         "dbScaleMethod": {
           "description": "The DB scale method.",
           "$ref": "#/definitions/DatabaseScaleMethod"
+        },
+        "highAvailabilityType": {
+          "description": "The high availability type.",
+          "$ref": "#/definitions/HighAvailabilityType"
         }
       },
       "required": [
@@ -1876,16 +1922,25 @@
         "sapProduct": {
           "$ref": "#/definitions/SAPProductType"
         },
+        "deploymentType": {
+          "description": "The deployment type. Eg: SingleServer/ThreeTier",
+          "$ref": "#/definitions/DeploymentType"
+        },
         "databaseType": {
           "description": "The database type. Eg: HANA, DB2, etc",
           "$ref": "#/definitions/SAPDatabaseType"
+        },
+        "highAvailabilityType": {
+          "description": "The high availability type.",
+          "$ref": "#/definitions/HighAvailabilityType"
         }
       },
       "required": [
         "appLocation",
         "environment",
         "sapProduct",
-        "databaseType"
+        "databaseType",
+        "deploymentType"
       ]
     },
     "SAPSupportedSku": {
@@ -2107,11 +2162,55 @@
       "description": "The SAP Software configuration Input.",
       "type": "object",
       "properties": {
+        "softwareInstallationType": {
+          "$ref": "#/definitions/SAPSoftwareInstallationType"
+        }
+      },
+      "required": [
+        "softwareInstallationType"
+      ],
+      "discriminator": "softwareInstallationType"
+    },
+    "ServiceInitiatedSoftwareConfiguration": {
+      "description": "The SAP Software configuration Input when the software is to be installed by service.",
+      "type": "object",
+      "x-ms-discriminator-value": "ServiceInitiated",
+      "x-ms-client-flatten": true,
+      "allOf": [
+        {
+          "$ref": "#/definitions/SoftwareConfiguration"
+        }
+      ],
+      "properties": {
         "bomUrl": {
           "type": "string",
-          "description": "The URL to the SAP BOM."
+          "description": "The URL to the SAP Build of Materials(BOM) file."
+        },
+        "softwareVersion": {
+          "type": "string",
+          "description": "The software version to install."
+        },
+        "sapBitsStorageAccountId": {
+          "type": "string",
+          "description": "The SAP bits storage account id."
+        },
+        "sapFqdn": {
+          "type": "string",
+          "description": "The FQDN to set for the SAP system during install."
+        },
+        "sshPrivateKey": {
+          "type": "string",
+          "x-ms-secret": true,
+          "description": "The SSH private key."
         }
-      }
+      },
+      "required": [
+        "bomUrl",
+        "softwareVersion",
+        "sapBitsStorageAccountId",
+        "sapFqdn",
+        "sshPrivateKey"
+      ]
     },
     "StartRequest": {
       "description": "Start SAP Request.",
@@ -2230,6 +2329,16 @@
         }
       }
     },
+    "ManagedRGConfiguration": {
+      "description": "Managed resource group configuration",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Managed resource group name"
+        }
+      }
+    },
     "SAPVirtualInstanceProperties": {
       "description": "Defines the SAP Virtual Instance properties.",
       "type": "object",
@@ -2255,6 +2364,10 @@
         "configuration": {
           "description": "The SAP Deployment or discovery configuration",
           "$ref": "#/definitions/SAPConfiguration"
+        },
+        "managedResourceGroupConfiguration": {
+          "description": "Managed resource group configuration",
+          "$ref": "#/definitions/ManagedRGConfiguration"
         },
         "status": {
           "$ref": "#/definitions/SAPVirtualInstanceStatus",
@@ -2386,11 +2499,9 @@
       "type": "object",
       "properties": {
         "instanceNo": {
-          "type": "integer",
-          "format": "int64",
+          "type": "string",
           "description": "The application server instance id.",
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "subnet": {
           "type": "string",
@@ -2553,6 +2664,27 @@
         }
       }
     },
+    "EnqueueReplicationServerProperties": {
+      "description": "Defines the SAP enqueue replication server properties.",
+      "type": "object",
+      "properties": {
+        "instanceNo": {
+          "type": "string",
+          "description": "The enqueue replication server instance number.",
+          "readOnly": true
+        },
+        "hostname": {
+          "type": "string",
+          "description": "The enqueue replication server SAP host name.",
+          "readOnly": true
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "The enqueue replication server IP Address.",
+          "readOnly": true
+        }
+      }
+    },
     "GatewayServerProperties": {
       "description": "Defines the SAP Gateway Server properties.",
       "type": "object",
@@ -2571,11 +2703,9 @@
       "type": "object",
       "properties": {
         "instanceNo": {
-          "type": "integer",
-          "format": "int64",
+          "type": "string",
           "description": "The central server instance id.",
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "subnet": {
           "type": "string",
@@ -2587,6 +2717,9 @@
         },
         "enqueueServerProperties": {
           "$ref": "#/definitions/EnqueueServerProperties"
+        },
+        "enqueueReplicationServerProperties": {
+          "$ref": "#/definitions/EnqueueReplicationServerProperties"
         },
         "gatewayServerProperties": {
           "$ref": "#/definitions/GatewayServerProperties"

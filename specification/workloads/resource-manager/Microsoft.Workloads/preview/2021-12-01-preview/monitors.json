@@ -665,6 +665,16 @@
         }
       }
     },
+    "ManagedRGConfiguration": {
+      "description": "Managed resource group configuration",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Managed resource group name"
+        }
+      }
+    },
     "Tags": {
       "type": "object",
       "properties": {
@@ -761,6 +771,10 @@
             "name": "RoutingPreference",
             "modelAsString": true
           }
+        },
+        "managedResourceGroupConfiguration": {
+          "description": "Managed resource group configuration",
+          "$ref": "#/definitions/ManagedRGConfiguration"
         },
         "managedResourceGroupId": {
           "type": "string",

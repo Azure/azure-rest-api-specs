@@ -611,6 +611,14 @@
             "read"
           ]
         },
+        "appLocation": {
+          "type": "string",
+          "description": "The infra resources for PHP workload will be created in this region."
+        },
+        "managedResourceGroupConfiguration": {
+          "description": "Managed resource group configuration",
+          "$ref": "#/definitions/ManagedRGConfiguration"
+        },
         "adminUserProfile": {
           "description": "User profile used for VMs and VMSS",
           "$ref": "#/definitions/userProfile"
@@ -676,6 +684,7 @@
       },
       "required": [
         "infraResourceGroup",
+        "appLocation",
         "adminUserProfile",
         "webNodesProfile",
         "controllerProfile",
@@ -1367,6 +1376,16 @@
       "required": [
         "backupEnabled"
       ]
+    },
+    "ManagedRGConfiguration": {
+      "type": "object",
+      "description": "Managed resource group configuration",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Managed resource group name"
+        }
+      }
     },
     "PatchResourceRequestBody": {
       "description": "Resource patch request body.",
