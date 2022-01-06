@@ -103,12 +103,24 @@
       "in": "query",
       "description": "Defines the type of input file for a style to be created from.",
       "required": false,
-      "schema": {
-        "type": "string",
-        "default": "mapbox",
-        "enum": [
-          "mapbox",
-          "azureMapsStyleRecipe"
+      "type": "string",
+      "default": "JSON",
+      "enum": [
+        "JSON",
+        "ZIP"
+      ],
+      "x-ms-enum": {
+        "name": "StyleFormatType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "JSON",
+            "description": "JSON style format."
+          },
+          {
+            "value": "ZIP",
+            "description": "ZIP style format."
+          }
         ]
       }
     },
@@ -117,12 +129,24 @@
       "in": "query",
       "description": " Defines the type of JSON object that is imported.",
       "required": false,
-      "schema": {
-        "type": "string",
-        "default": "JSON",
-        "enum": [
-          "JSON",
-          "ZIP"
+      "type": "string",
+      "default": "mapbox",
+      "enum": [
+        "mapbox",
+        "azureMapsStyleRecipe"
+      ],
+      "x-ms-enum": {
+        "name": "DataFormatType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "mapbox",
+            "description": "mapbox style data format."
+          },
+          {
+            "value": "azureMapsStyleRecipe",
+            "description": "Azure Maps style recipe data format."
+          }
         ]
       }
     }

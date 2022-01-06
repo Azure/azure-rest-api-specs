@@ -40,13 +40,7 @@ These settings apply only when `--tag=package-preview-2022-01` is specified on t
 
 ```yaml $(tag) == 'package-preview-2022-01'
 input-file:
-  - preview/2022-01-01-preview/alias.json
-  - preview/2022-01-01-preview/data.json
-  - preview/2022-01-01-preview/dataset.json
-  - preview/2022-01-01-preview/dwgconversion.json
-  - preview/2022-01-01-preview/featurestate.json
   - preview/2022-01-01-preview/tileset.json
-  - preview/2022-01-01-preview/wfs.json
   - preview/2022-01-01-preview/stylerecipe.json
   - preview/2022-01-01-preview/styleset.json
 ```
