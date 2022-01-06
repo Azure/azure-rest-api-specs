@@ -1,9 +1,9 @@
 {
   "parameters": {
     "Ocp-Apim-Subscription-Key": "{API key}",
-    "api-version": "2021-11-01-preview",
+    "api-version": "2022-02-01-preview",
     "Endpoint": "{Endpoint}",
-    "jobId": "{Job ID}"
+    "jobId": "c0f2a446-05d9-48fc-ba8f-3ef4af8d0b18"
   },
   "responses": {
     "200": {
@@ -20,9 +20,10 @@
           "failed": 0,
           "inProgress": 0,
           "total": 2,
-          "entityRecognitionTasks": [
+          "items": [
             {
-              "taskName": "Recognize Entities",
+              "kind": "EntityRecognition",
+              "taskId": "Recognize Entities",
               "lastUpdateDateTime": "2020-10-01T15:01:03Z",
               "status": "succeeded",
               "results": {
@@ -81,6 +82,45 @@
                 ],
                 "errors": [],
                 "modelVersion": "2020-04-01"
+              }
+            },
+            {
+              "kind": "CustomEntityRecognition",
+              "taskId": "Recognize US Regions",
+              "lastUpdateDateTime": "2020-10-01T15:01:03Z",
+              "status": "succeeded",
+              "results": {
+                "documents": [
+                  {
+                    "entities": [
+                      {
+                        "category": "USRegion",
+                        "confidenceScore": 0.85,
+                        "length": 17,
+                        "offset": 45,
+                        "text": "Pacific Northwest"
+                      }
+                    ],
+                    "id": "1",
+                    "warnings": []
+                  },
+                  {
+                    "entities": [
+                      {
+                        "category": "USRegion",
+                        "confidenceScore": 0.88,
+                        "length": 10,
+                        "offset": 63,
+                        "text": "East Coast"
+                      }
+                    ],
+                    "id": "2",
+                    "warnings": []
+                  }
+                ],
+                "errors": [],
+                "projectName": "MyProject",
+                "deploymentName": "MyDeployment"
               }
             }
           ]

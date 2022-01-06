@@ -1,7 +1,7 @@
 {
   "parameters": {
     "Ocp-Apim-Subscription-Key": "{API key}",
-    "api-version": "2021-11-01-preview",
+    "api-version": "2022-02-01-preview",
     "Endpoint": "{Endpoint}",
     "jobId": "{Job ID}",
     "input": {
@@ -20,16 +20,23 @@
           }
         ]
       },
-      "tasks": {
-        "entityRecognitionTasks": [
-          {
-            "taskName": "Recognize Entities",
-            "parameters": {
-              "model-version": "latest"
-            }
+      "tasks": [
+        {
+          "kind": "EntityRecognition",
+          "taskId": "Recognize Entities",
+          "parameters": {
+            "model-version": "latest"
           }
-        ]
-      }
+        },
+        {
+          "kind": "CustomEntityRecognition",
+          "taskId": "Recognize US Regions",
+          "parameters": {
+            "projectName": "MyProject",
+            "deploymentName": "MyDeployment"
+          }
+        }
+      ]
     }
   },
   "responses": {

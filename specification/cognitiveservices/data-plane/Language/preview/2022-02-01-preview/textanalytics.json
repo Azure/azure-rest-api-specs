@@ -8,6 +8,7 @@
     "securityDefinitions": {
         "apim_key": {
             "type": "apiKey",
+            "description": "A subscription key for a Language service resource.",
             "name": "Ocp-Apim-Subscription-Key",
             "in": "header"
         }
@@ -30,7 +31,7 @@
         "/:analyze-text": {
             "post": {
                 "summary": "Request text analysis over a collection of documents.",
-                "description": "",
+                "description": "Submit a collection of text documents for analysis.  Specify a single unique task to be executed immediately.",
                 "operationId": "AnalyzeText",
                 "consumes": [
                     "application/json",
@@ -60,7 +61,7 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/AnalyzeTextTaskResult"
+                            "$ref": "#/definitions/AnalyzeTextResult"
                         }
                     },
                     "default": {
@@ -71,6 +72,21 @@
                     }
                 },
                 "x-ms-examples": {
+                    "Successful Entity Linking Request": {
+                        "$ref": "./examples/SuccessfulEntityLinkingRequest.json"
+                    },
+                    "Successful Entity Recognition Request": {
+                        "$ref": "./examples/SuccessfulEntityRecognitionRequest.json"
+                    },
+                    "Successful Key Phrase Extraction Request": {
+                        "$ref": "./examples/SuccessfulKeyPhraseExtractionRequest.json"
+                    },
+                    "Successful PII Entity Recognition Request": {
+                        "$ref": "./examples/SuccessfulPiiEntityRecognitionRequest.json"
+                    },
+                    "Successful Language Detection Request": {
+                        "$ref": "./examples/SuccessfulLanguageDetectionRequest.json"
+                    },
                     "Successful Sentiment Analysis Request": {
                         "$ref": "./examples/SuccessfulSentimentAnalysisRequest.json"
                     }
@@ -85,7 +101,7 @@
               "produces": [
                 "application/json"
               ],
-              "description": "Submit a collection of text documents for analysis. Specify one or more unique tasks to be executed.",
+              "description": "Submit a collection of text documents for analysis. Specify one or more unique tasks to be executed as a long-running operation.",
               "operationId": "AnalyzeText_SubmitJob",
               "summary": "Submit text analysis job",
               "parameters": [
@@ -181,45 +197,8 @@
                 "Successful Get Text Analysis Job Status Request": {
                   "$ref": "./examples/SuccessfulAnalyzeTextJobStatusRequest.json"
                 }
-              },
-              "deprecated": false
-            },
-            "delete": {
-                "produces": [
-                  "application/json",
-                  "text/json"
-                ],
-                "description": "Cancel analysis job.",
-                "operationId": "AnalyzeText_CancelJob",
-                "summary": "Cancel analysis job",
-                "parameters": [
-                  {
-                    "$ref": "#/parameters/JobId"
-                  }
-                ],
-                "responses": {
-                  "202": {
-                    "description": "Cancel Job request has been received.",
-                    "headers": {
-                      "Operation-Location": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "default": {
-                    "description": "Unexpected error",
-                    "schema": {
-                      "$ref": "#/definitions/ErrorResponse"
-                    }
-                  }
-                },
-                "x-ms-examples": {
-                  "Successful Delete Text Analysis Job Request": {
-                    "$ref": "./examples/SuccessfulAnalyzeTextJobDeleteRequest.json"
-                  }
-                },
-                "x-ms-long-running-operation": true
               }
+            }
           }
     },
     "definitions": {
@@ -242,23 +221,25 @@
                 "modelAsString": true
             }
         },
-        "AnalyzeTextInput": {
+        "MultiLanguageAnalysisInput": {
             "properties": {
-                "analysisInput": {
-                    "$ref": "#/definitions/AnalysisInput"
-                },
-                "parameters": {
-                    "$ref": 
+                "documents": {
+                    "type": "object",
+                    "items": {
+                        "$ref": "#/definitions/MultiLanguageInput"
+                      }
                 }
-            },
-            "allOf": [
-                {
-                    "$ref": "#/definitions/AnalyzeTextTask"
+            }
+        },
+        "LanguageDetectionAnalysisInput": {
+            "properties": {
+                "documents": {
+                    "type": "object",
+                    "items": {
+                        "$ref": "#/definitions/LanguageInput"
+                      }
                 }
-            ],
-            "required": [
-                "analysisInput"
-            ]
+            }
         },
         "AnalyzeTextTask": {
             "discriminator": "kind",
@@ -271,28 +252,115 @@
                 }
             }
         },
-        "AnalyzeTextTaskResult": {
-            "discriminator": "kind",
-            "required": [
-                "kind"
-            ],
-            "properties": {
-                "kind": {
-                    "$ref": "#/definitions/AnalyzeTextTaskKind"
+        "AnalyzeTextInput": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AnalyzeTextTask"
                 }
-            }
+            ]
         },
-        "AnalysisInput": {
-            "type": "object",
-            "description": "Input for the analysis to be performed.",
-            "properties": {
-                "documents": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/MultiLanguageInput"
-                    }
+        "AnalyzeTextResult": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AnalyzeTextTask"
                 }
-            }
+            ]
+        },
+        "AnalyzeTextEntityLinkingInput": {
+            "properties": {
+                "analysisInput": {
+                    "$ref": "#/definitions/MultiLanguageAnalysisInput"
+                },
+                "parameters": {
+                    "$ref": "#/definitions/EntityLinkingTaskParameters"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AnalyzeTextInput"
+                }
+            ],
+            "x-ms-discriminator-value": "EntityLinking"
+        },
+        "AnalyzeTextEntityRecognitionInput": {
+            "properties": {
+                "analysisInput": {
+                    "$ref": "#/definitions/MultiLanguageAnalysisInput"
+                },
+                "parameters": {
+                    "$ref": "#/definitions/EntitiesTaskParameters"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AnalyzeTextInput"
+                }
+            ],
+            "x-ms-discriminator-value": "EntityRecognition"
+        },
+        "AnalyzeTextKeyPhraseExtractionInput": {
+            "properties": {
+                "analysisInput": {
+                    "$ref": "#/definitions/MultiLanguageAnalysisInput"
+                },
+                "parameters": {
+                    "$ref": "#/definitions/PreBuiltTaskParameters"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AnalyzeTextInput"
+                }
+            ],
+            "x-ms-discriminator-value": "KeyPhraseExtraction"
+        },
+        "AnalyzeTextPiiEntitiesRecognitionInput": {
+            "properties": {
+                "analysisInput": {
+                    "$ref": "#/definitions/MultiLanguageAnalysisInput"
+                },
+                "parameters": {
+                    "$ref": "#/definitions/PiiTaskParameters"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AnalyzeTextInput"
+                }
+            ],
+            "x-ms-discriminator-value": "PiiEntityRecognition"
+        },
+        "AnalyzeTextLanguageDetectionInput": {
+            "properties": {
+                "analysisInput": {
+                    "$ref": "#/definitions/LanguageDetectionAnalysisInput"
+                },
+                "parameters": {
+                    "$ref": "#/definitions/LanguageDetectionTaskParameters"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AnalyzeTextInput"
+                }
+            ],
+            "x-ms-discriminator-value": "LanguageDetection"
+        },
+        "AnalyzeTextSentimentAnalysisInput": {
+            "properties": {
+                "analysisInput": {
+                    "$ref": "#/definitions/MultiLanguageAnalysisInput"
+                },
+                "parameters": {
+                    "$ref": "#/definitions/SentimentAnalysisTaskParameters"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AnalyzeTextInput"
+                }
+            ],
+            "x-ms-discriminator-value": "SentimentAnalysis"
         },
         "AnalyzeTextJobsInput": {
             "properties": {
@@ -301,7 +369,7 @@
                     "type": "string"
                 },
                 "analysisInput": {
-                    "$ref": "#/definitions/AnalysisInput"
+                    "$ref": "#/definitions/MultiLanguageAnalysisInput"
                 },
                 "tasks": {
                     "description": "The set of tasks to execute on the input documents.",
@@ -422,7 +490,7 @@
         },
         "CustomEntitiesTask": {
             "type": "object",
-            "description": "TODO",
+            "description": "Use custom models to ease the process of information extraction from unstructured documents like contracts or financial documents",
             "properties": {
                 "parameters": {
                     "allOf": [
@@ -488,6 +556,7 @@
         },
         "CustomSingleClassificationTask": {
             "type": "object",
+            "description": "Use custom models to classify text into single label taxonomy",
             "properties": {
                 "parameters": {
                     "allOf": [
@@ -584,6 +653,7 @@
         },
         "CustomMultiClassificationTask": {
             "type": "object",
+            "description": "Use custom models to classify text into multi label taxonomy",
             "properties": {
                 "parameters": {
                     "allOf": [
@@ -1008,6 +1078,7 @@
         },
         "SentimentAnalysisTask": {
             "type": "object",
+            "description": "An object representing the task definition for a Sentiment Analysis task.",
             "properties": {
                 "parameters": {
                     "allOf": [
@@ -1039,7 +1110,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "#/definitions/AnalyzeTextTaskResult"
+                    "$ref": "#/definitions/AnalyzeTextResult"
                 }
             ],
             "required": [
@@ -1347,6 +1418,7 @@
         },
         "EntitiesTask": {
             "type": "object",
+            "description": "An object representing the task definition for an Entities Recognition task.",
             "properties": {
                 "parameters": {
                     "allOf": [
@@ -1378,7 +1450,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "#/definitions/AnalyzeTextTaskResult"
+                    "$ref": "#/definitions/AnalyzeTextResult"
                 }
             ],
             "x-ms-discriminator-value": "EntityRecognition"
@@ -1480,7 +1552,7 @@
         },
         "EntityLinkingTask": {
             "type": "object",
-            "description": "TODO",
+            "description": "An object representing the task definition for an Entity Linking task.",
             "properties": {
                 "parameters": {
                     "allOf": [
@@ -1512,7 +1584,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "#/definitions/AnalyzeTextTaskResult"
+                    "$ref": "#/definitions/AnalyzeTextResult"
                 }
             ],
             "x-ms-discriminator-value": "EntityLinking"
@@ -1659,7 +1731,7 @@
         },
         "PiiTask": {
             "type": "object",
-            "description": "TODO",
+            "description": "An object representing the task definition for a PII Entities Recognition task.",
             "properties": {
                 "parameters": {
                     "allOf": [
@@ -1691,7 +1763,7 @@
             },
             "allOf":[
                 {
-                    "$ref": "#/definitions/AnalyzeTextTaskResult"
+                    "$ref": "#/definitions/AnalyzeTextResult"
                 }
             ],
             "x-ms-discriminator-value": "PiiEntityRecognition"
@@ -1958,6 +2030,7 @@
         },
         "ExtractiveSummarizationTask": {
             "type": "object",
+            "description": "An object representing the task definition for an Extractive Summarization task.",
             "properties": {
                 "parameters": {
                     "allOf": [
@@ -1989,7 +2062,7 @@
             },
             "allOf":[
                 {
-                    "$ref": "#/definitions/AnalyzeTextTaskResult"
+                    "$ref": "#/definitions/AnalyzeTextResult"
                 }
             ],
             "x-ms-discriminator-value": "ExtractiveSummarization"
@@ -2073,6 +2146,7 @@
         },
         "KeyPhraseTask": {
             "type": "object",
+            "description": "An object representing the task definition for a Key Phrase Extraction task.",
             "properties": {
                 "parameters": {
                     "allOf": [
@@ -2101,7 +2175,7 @@
             },
             "allOf":[
                 {
-                    "$ref": "#/definitions/AnalyzeTextTaskResult"
+                    "$ref": "#/definitions/AnalyzeTextResult"
                 }
             ],
             "x-ms-discriminator-value": "KeyPhraseExtraction"
@@ -2194,7 +2268,7 @@
             },
             "allOf":[
                 {
-                    "$ref": "#/definitions/AnalyzeTextTaskResult"
+                    "$ref": "#/definitions/AnalyzeTextResult"
                 }
             ],
             "x-ms-discriminator-value": "LanguageDetection"
@@ -2434,7 +2508,10 @@
                     "$ref": "#/definitions/TaskState"
                 },
                 {
-                    "$ref": "#/definitions/AnalyzeTextTaskResult"
+                    "$ref": "#/definitions/TaskIdentifier"
+                },
+                {
+                    "$ref": "#/definitions/AnalyzeTextResult"
                 }
             ]
         },
@@ -2648,6 +2725,39 @@
                     "type": "string",
                     "description": "(Optional) A 2 leter ISO 639-1 representation of a language to be used as a default value when the \"language\" property is set to \"auto\". The default value will be used as a fallback if a language cannot be automatically detected."
                 }
+            }
+        },
+        "LanguageBatchInput": {
+            "type": "object",
+            "required": [
+              "documents"
+            ],
+            "properties": {
+              "documents": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/LanguageInput"
+                }
+              }
+            }
+          },
+        "LanguageInput": {
+            "type": "object",
+            "required": [
+              "id",
+              "text"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique, non-empty document identifier."
+              },
+              "text": {
+                "type": "string"
+              },
+              "countryHint": {
+                "type": "string"
+              }
             }
         },
         "ErrorResponse": {
