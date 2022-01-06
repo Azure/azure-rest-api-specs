@@ -45,6 +45,12 @@ directive:
   - rename-model:
       from: ReverseSearchAddressBatchItem
       to: ReverseSearchAddressBatchItemPrivate
+  - rename-model:
+      from: BoundingBox
+      to: BoundingBoxPrivate
+  - rename-model:
+      from: Polygon
+      to: PolygonPrivate
 
 java:
     namespace: com.azure.maps.search
@@ -60,5 +66,5 @@ java:
     polling: {}
     models-subpackage: implementation.models
     custom-types-subpackage: models
-    custom-types: BatchRequest,BatchResultSummary,DataSource,ErrorDetail,ErrorResponseException,ElectricVehicleConnector,EntryPointType,GeographicEntityType,GeoJsonObject,GeoJsonLineString,JsonFormat,LocalizedMapView,OperatingHoursRange,MatchType,PointOfInterestCategoryTreeResult,PointOfInterestExtendedPostalCodes,Polygon,ReverseSearchAddressBatchProcessResult,RoadUseType,SearchIndexes,ErrorResponse                 
+    custom-types: BatchRequest,BatchResultSummary,DataSource,ErrorDetail,ErrorResponseException,ElectricVehicleConnector,EntryPointType,GeographicEntityType,JsonFormat,LocalizedMapView,OperatingHoursRange,MatchType,PointOfInterestCategoryTreeResult,PointOfInterestExtendedPostalCodes,RoadUseType,SearchIndexes,ErrorResponse
 ```
