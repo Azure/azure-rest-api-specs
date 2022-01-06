@@ -83,14 +83,6 @@
       "required": true,
       "x-ms-parameter-location": "method"
     },
-    "TilesetId": {
-      "name": "tilesetId",
-      "description": "The Tileset Id",
-      "type": "string",
-      "in": "path",
-      "required": false,
-      "x-ms-parameter-location": "method"
-    },
     "DescriptionStyleSet": {
       "name": "description",
       "description": "User provided description of the styleSet.",
@@ -376,6 +368,37 @@
         }
       }
     },
+    "LayerObject": {
+      "description": "A layer object.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The unique id for the layer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the layer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "source-layer": {
+          "description": "The source layer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "layout": {
+          "description": "The layout of the layer.",
+          "type": "object",
+          "readOnly": true
+        }, 
+        "paint": {
+          "description": "The paint configuration of the layer.",
+          "type": "object",
+          "readOnly": true
+        }
+      }
+    },
     "StyleSetListItem": {
       "description": "Detail information for the data.",
       "type": "object",
@@ -406,10 +429,12 @@
           "readOnly": true
         },
         "styles": {
-          "description": "The creation date and time of this styleSet.",
+          "description": "The available styles for the styleset.",
           "type": "array",
           "readOnly": true,
-          "items": "object"
+          "items": {
+            "$ref": "#/definitions/LayerObject"
+          }
         }
       }
     },
