@@ -20,5 +20,4 @@ directive:
 ``` yaml $(typescript) && !$(profile-content)
   package-name: "@azure/arm-hybridcompute"
   output-folder: "$(typescript-sdks-folder)/sdk/hybridcompute/arm-hybridcompute"
-  clear-output-folder: true
 ```
