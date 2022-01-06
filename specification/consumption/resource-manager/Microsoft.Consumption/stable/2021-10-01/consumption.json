@@ -152,6 +152,9 @@
               "$ref": "#/definitions/UsageDetailsListResult"
             }
           },
+          "204": {
+            "description": "No Content. The request has succeeded but returned no results."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -2126,6 +2129,16 @@
           "description": "Retail price for the resource.",
           "type": "number",
           "format": "decimal",
+          "readOnly": true
+        },
+        "benefitId": {
+          "description": "Unique identifier for the applicable benefit.",
+          "type": "string",
+          "readOnly": true
+        },
+        "benefitName": {
+          "description": "Name of the applicable benefit.",
+          "type": "string",
           "readOnly": true
         },
         "pricingModel": {
