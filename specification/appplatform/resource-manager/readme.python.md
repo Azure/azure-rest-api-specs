@@ -9,7 +9,7 @@ python-mode: create
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-appplatform
-package-version: 1.0.0b1
+package-version: 6.1.0
 clear-output-folder: true
 no-namespace-folders: true
 ```
