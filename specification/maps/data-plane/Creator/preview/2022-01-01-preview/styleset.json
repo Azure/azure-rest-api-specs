@@ -309,7 +309,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Get composed styleSet style request completed successfully. The response body contains a single style."
+            "description": "Get composed styleSet style request completed successfully. The response body contains a single style.",
+            "schema": {
+              "type": "object"
+            }
           },
           "default": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
@@ -368,32 +371,32 @@
         }
       }
     },
-    "LayerObject": {
-      "description": "A layer object.",
+    "StyleObject": {
+      "description": "A style object.",
       "type": "object",
       "properties": {
-        "id": {
-          "description": "The unique id for the layer.",
+        "name": {
+          "description": "The name for the style.",
           "type": "string",
           "readOnly": true
         },
-        "type": {
-          "description": "The type of the layer.",
+        "displayName": {
+          "description": "The display name for the style.",
           "type": "string",
           "readOnly": true
         },
-        "source-layer": {
-          "description": "The source layer.",
+        "theme": {
+          "description": "The theme for the style.",
           "type": "string",
           "readOnly": true
         },
-        "layout": {
-          "description": "The layout of the layer.",
+        "thumbnail": {
+          "description": "The thumbnail for the style.",
           "type": "object",
           "readOnly": true
         }, 
-        "paint": {
-          "description": "The paint configuration of the layer.",
+        "path": {
+          "description": "The path for the style.",
           "type": "object",
           "readOnly": true
         }
@@ -433,7 +436,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/LayerObject"
+            "$ref": "#/definitions/StyleObject"
           }
         }
       }
