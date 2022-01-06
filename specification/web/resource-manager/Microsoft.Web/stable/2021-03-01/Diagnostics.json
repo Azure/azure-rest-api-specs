@@ -1,0 +1,2129 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-03-01",
+    "title": "Diagnostics API Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/detectors": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "List Hosting Environment Detector Responses",
+        "description": "Description for List Hosting Environment Detector Responses",
+        "operationId": "Diagnostics_ListHostingEnvironmentDetectorResponses",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DetectorResponseCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get App Service Environment Detector Responses": {
+            "$ref": "./examples/Diagnostics_ListHostingEnvironmentDetectorResponses.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/detectors/{detectorName}": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "Get Hosting Environment Detector Response",
+        "description": "Description for Get Hosting Environment Detector Response",
+        "operationId": "Diagnostics_GetHostingEnvironmentDetectorResponse",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "App Service Environment Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "detectorName",
+            "in": "path",
+            "description": "Detector Resource Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "Start Time",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "End Time",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "timeGrain",
+            "in": "query",
+            "description": "Time Grain",
+            "type": "string",
+            "pattern": "PT[1-9][0-9]+[SMH]"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DetectorResponse"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get App Service Environment Detector Responses": {
+            "$ref": "./examples/Diagnostics_GetHostingEnvironmentDetectorResponse.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/detectors": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "List Site Detector Responses",
+        "description": "Description for List Site Detector Responses",
+        "operationId": "Diagnostics_ListSiteDetectorResponses",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DetectorResponseCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get App Detector Responses": {
+            "$ref": "./examples/Diagnostics_ListSiteDetectorResponses.json"
+          },
+          "Get App Slot Detector Responses": {
+            "$ref": "./examples/Diagnostics_ListSiteDetectorResponsesSlot.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/detectors/{detectorName}": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "Get site detector response",
+        "description": "Description for Get site detector response",
+        "operationId": "Diagnostics_GetSiteDetectorResponse",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "detectorName",
+            "in": "path",
+            "description": "Detector Resource Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "Start Time",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "End Time",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "timeGrain",
+            "in": "query",
+            "description": "Time Grain",
+            "type": "string",
+            "pattern": "PT[1-9][0-9]+[SMH]"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DetectorResponse"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get App Detector Response": {
+            "$ref": "./examples/Diagnostics_GetSiteDetectorResponse.json"
+          },
+          "Get App Slot Detector Response": {
+            "$ref": "./examples/Diagnostics_GetSiteDetectorResponseSlot.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/diagnostics": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "Get Diagnostics Categories",
+        "description": "Description for Get Diagnostics Categories",
+        "operationId": "Diagnostics_ListSiteDiagnosticCategories",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticCategoryCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List App Diagnostic Categories": {
+            "$ref": "./examples/Diagnostics_ListSiteDiagnosticCategories.json"
+          },
+          "List App Slot Diagnostic Categories": {
+            "$ref": "./examples/Diagnostics_ListSiteDiagnosticCategoriesSlot.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/diagnostics/{diagnosticCategory}": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "Get Diagnostics Category",
+        "description": "Description for Get Diagnostics Category",
+        "operationId": "Diagnostics_GetSiteDiagnosticCategory",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "diagnosticCategory",
+            "in": "path",
+            "description": "Diagnostic Category",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticCategory"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get App Diagnostic Category": {
+            "$ref": "./examples/Diagnostics_GetSiteDiagnosticCategory.json"
+          },
+          "Get App Slot Diagnostic Category": {
+            "$ref": "./examples/Diagnostics_GetSiteDiagnosticCategorySlot.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/diagnostics/{diagnosticCategory}/analyses": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "Get Site Analyses",
+        "description": "Description for Get Site Analyses",
+        "operationId": "Diagnostics_ListSiteAnalyses",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "diagnosticCategory",
+            "in": "path",
+            "description": "Diagnostic Category",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticAnalysisCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List App Analyses": {
+            "$ref": "./examples/Diagnostics_ListSiteAnalyses.json"
+          },
+          "List App Slot Analyses": {
+            "$ref": "./examples/Diagnostics_ListSiteAnalysesSlot.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/diagnostics/{diagnosticCategory}/analyses/{analysisName}": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "Get Site Analysis",
+        "description": "Description for Get Site Analysis",
+        "operationId": "Diagnostics_GetSiteAnalysis",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "diagnosticCategory",
+            "in": "path",
+            "description": "Diagnostic Category",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "analysisName",
+            "in": "path",
+            "description": "Analysis Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AnalysisDefinition"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get App Analysis": {
+            "$ref": "./examples/Diagnostics_GetSiteAnalysis.json"
+          },
+          "Get App Slot Analysis": {
+            "$ref": "./examples/Diagnostics_GetSiteAnalysisSlot.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/diagnostics/{diagnosticCategory}/analyses/{analysisName}/execute": {
+      "post": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "Execute Analysis",
+        "description": "Description for Execute Analysis",
+        "operationId": "Diagnostics_ExecuteSiteAnalysis",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "diagnosticCategory",
+            "in": "path",
+            "description": "Category Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "analysisName",
+            "in": "path",
+            "description": "Analysis Resource Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "Start Time",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "End Time",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "timeGrain",
+            "in": "query",
+            "description": "Time Grain",
+            "type": "string",
+            "pattern": "PT[1-9][0-9]+[SMH]"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticAnalysis"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Execute site slot analysis": {
+            "$ref": "./examples/Diagnostics_ExecuteSiteAnalysisSlot.json"
+          },
+          "Execute site analysis": {
+            "$ref": "./examples/Diagnostics_ExecuteSiteAnalysis.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/diagnostics/{diagnosticCategory}/detectors": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "Get Detectors",
+        "description": "Description for Get Detectors",
+        "operationId": "Diagnostics_ListSiteDetectors",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "diagnosticCategory",
+            "in": "path",
+            "description": "Diagnostic Category",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticDetectorCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List App Detectors": {
+            "$ref": "./examples/Diagnostics_ListSiteDetectors.json"
+          },
+          "List App Slot Detectors": {
+            "$ref": "./examples/Diagnostics_ListSiteDetectorsSlot.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/diagnostics/{diagnosticCategory}/detectors/{detectorName}": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "Get Detector",
+        "description": "Description for Get Detector",
+        "operationId": "Diagnostics_GetSiteDetector",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "diagnosticCategory",
+            "in": "path",
+            "description": "Diagnostic Category",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "detectorName",
+            "in": "path",
+            "description": "Detector Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DetectorDefinitionResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get App Detector": {
+            "$ref": "./examples/Diagnostics_GetSiteDetector.json"
+          },
+          "Get App Slot Detector": {
+            "$ref": "./examples/Diagnostics_GetSiteDetectorSlot.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/diagnostics/{diagnosticCategory}/detectors/{detectorName}/execute": {
+      "post": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "Execute Detector",
+        "description": "Description for Execute Detector",
+        "operationId": "Diagnostics_ExecuteSiteDetector",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "detectorName",
+            "in": "path",
+            "description": "Detector Resource Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "diagnosticCategory",
+            "in": "path",
+            "description": "Category Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "Start Time",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "End Time",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "timeGrain",
+            "in": "query",
+            "description": "Time Grain",
+            "type": "string",
+            "pattern": "PT[1-9][0-9]+[SMH]"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticDetectorResponse"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Execute site detector": {
+            "$ref": "./examples/Diagnostics_ExecuteSiteDetector.json"
+          },
+          "Execute site slot detector": {
+            "$ref": "./examples/Diagnostics_ExecuteSiteDetectorSlot.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/detectors": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "List Site Detector Responses",
+        "description": "Description for List Site Detector Responses",
+        "operationId": "Diagnostics_ListSiteDetectorResponsesSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Slot Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DetectorResponseCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get App Detector Responses": {
+            "$ref": "./examples/Diagnostics_ListSiteDetectorResponses.json"
+          },
+          "Get App Slot Detector Responses": {
+            "$ref": "./examples/Diagnostics_ListSiteDetectorResponsesSlot.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/detectors/{detectorName}": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "Get site detector response",
+        "description": "Description for Get site detector response",
+        "operationId": "Diagnostics_GetSiteDetectorResponseSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "detectorName",
+            "in": "path",
+            "description": "Detector Resource Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Slot Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "Start Time",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "End Time",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "timeGrain",
+            "in": "query",
+            "description": "Time Grain",
+            "type": "string",
+            "pattern": "PT[1-9][0-9]+[SMH]"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DetectorResponse"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get App Detector Response": {
+            "$ref": "./examples/Diagnostics_GetSiteDetectorResponse.json"
+          },
+          "Get App Slot Detector Response": {
+            "$ref": "./examples/Diagnostics_GetSiteDetectorResponseSlot.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/diagnostics": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "Get Diagnostics Categories",
+        "description": "Description for Get Diagnostics Categories",
+        "operationId": "Diagnostics_ListSiteDiagnosticCategoriesSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Slot Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticCategoryCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List App Diagnostic Categories": {
+            "$ref": "./examples/Diagnostics_ListSiteDiagnosticCategories.json"
+          },
+          "List App Slot Diagnostic Categories": {
+            "$ref": "./examples/Diagnostics_ListSiteDiagnosticCategoriesSlot.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/diagnostics/{diagnosticCategory}": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "Get Diagnostics Category",
+        "description": "Description for Get Diagnostics Category",
+        "operationId": "Diagnostics_GetSiteDiagnosticCategorySlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "diagnosticCategory",
+            "in": "path",
+            "description": "Diagnostic Category",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Slot Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticCategory"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get App Diagnostic Category": {
+            "$ref": "./examples/Diagnostics_GetSiteDiagnosticCategory.json"
+          },
+          "Get App Slot Diagnostic Category": {
+            "$ref": "./examples/Diagnostics_GetSiteDiagnosticCategorySlot.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/diagnostics/{diagnosticCategory}/analyses": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "Get Site Analyses",
+        "description": "Description for Get Site Analyses",
+        "operationId": "Diagnostics_ListSiteAnalysesSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "diagnosticCategory",
+            "in": "path",
+            "description": "Diagnostic Category",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Slot Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticAnalysisCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List App Analyses": {
+            "$ref": "./examples/Diagnostics_ListSiteAnalyses.json"
+          },
+          "List App Slot Analyses": {
+            "$ref": "./examples/Diagnostics_ListSiteAnalysesSlot.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/diagnostics/{diagnosticCategory}/analyses/{analysisName}": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "Get Site Analysis",
+        "description": "Description for Get Site Analysis",
+        "operationId": "Diagnostics_GetSiteAnalysisSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "diagnosticCategory",
+            "in": "path",
+            "description": "Diagnostic Category",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "analysisName",
+            "in": "path",
+            "description": "Analysis Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Slot - optional",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AnalysisDefinition"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get App Analysis": {
+            "$ref": "./examples/Diagnostics_GetSiteAnalysis.json"
+          },
+          "Get App Slot Analysis": {
+            "$ref": "./examples/Diagnostics_GetSiteAnalysisSlot.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/diagnostics/{diagnosticCategory}/analyses/{analysisName}/execute": {
+      "post": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "Execute Analysis",
+        "description": "Description for Execute Analysis",
+        "operationId": "Diagnostics_ExecuteSiteAnalysisSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "diagnosticCategory",
+            "in": "path",
+            "description": "Category Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "analysisName",
+            "in": "path",
+            "description": "Analysis Resource Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Slot Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "Start Time",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "End Time",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "timeGrain",
+            "in": "query",
+            "description": "Time Grain",
+            "type": "string",
+            "pattern": "PT[1-9][0-9]+[SMH]"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticAnalysis"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Execute site slot analysis": {
+            "$ref": "./examples/Diagnostics_ExecuteSiteAnalysisSlot.json"
+          },
+          "Execute site analysis": {
+            "$ref": "./examples/Diagnostics_ExecuteSiteAnalysis.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/diagnostics/{diagnosticCategory}/detectors": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "Get Detectors",
+        "description": "Description for Get Detectors",
+        "operationId": "Diagnostics_ListSiteDetectorsSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "diagnosticCategory",
+            "in": "path",
+            "description": "Diagnostic Category",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Slot Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticDetectorCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List App Detectors": {
+            "$ref": "./examples/Diagnostics_ListSiteDetectors.json"
+          },
+          "List App Slot Detectors": {
+            "$ref": "./examples/Diagnostics_ListSiteDetectorsSlot.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/diagnostics/{diagnosticCategory}/detectors/{detectorName}": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "Get Detector",
+        "description": "Description for Get Detector",
+        "operationId": "Diagnostics_GetSiteDetectorSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "diagnosticCategory",
+            "in": "path",
+            "description": "Diagnostic Category",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "detectorName",
+            "in": "path",
+            "description": "Detector Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Slot Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DetectorDefinitionResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get App Detector": {
+            "$ref": "./examples/Diagnostics_GetSiteDetector.json"
+          },
+          "Get App Slot Detector": {
+            "$ref": "./examples/Diagnostics_GetSiteDetectorSlot.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/diagnostics/{diagnosticCategory}/detectors/{detectorName}/execute": {
+      "post": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "Execute Detector",
+        "description": "Description for Execute Detector",
+        "operationId": "Diagnostics_ExecuteSiteDetectorSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "detectorName",
+            "in": "path",
+            "description": "Detector Resource Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "diagnosticCategory",
+            "in": "path",
+            "description": "Category Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Slot Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "Start Time",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "End Time",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "timeGrain",
+            "in": "query",
+            "description": "Time Grain",
+            "type": "string",
+            "pattern": "PT[1-9][0-9]+[SMH]"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticDetectorResponse"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Execute site detector": {
+            "$ref": "./examples/Diagnostics_ExecuteSiteDetector.json"
+          },
+          "Execute site slot detector": {
+            "$ref": "./examples/Diagnostics_ExecuteSiteDetectorSlot.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AbnormalTimePeriod": {
+      "description": "Class representing Abnormal Time Period identified in diagnosis",
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "format": "date-time",
+          "description": "Start time of the downtime",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "End time of the downtime",
+          "type": "string"
+        },
+        "events": {
+          "description": "List of Possible Cause of downtime",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DetectorAbnormalTimePeriod"
+          }
+        },
+        "solutions": {
+          "description": "List of proposed solutions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Solution"
+          }
+        }
+      }
+    },
+    "AnalysisData": {
+      "description": "Class Representing Detector Evidence used for analysis",
+      "type": "object",
+      "properties": {
+        "source": {
+          "description": "Name of the Detector",
+          "type": "string"
+        },
+        "detectorDefinition": {
+          "$ref": "#/definitions/DetectorDefinition",
+          "description": "Detector Definition"
+        },
+        "metrics": {
+          "description": "Source Metrics",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiagnosticMetricSet"
+          }
+        },
+        "data": {
+          "description": "Additional Source Data",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "./CommonDefinitions.json#/definitions/NameValuePair"
+            }
+          }
+        },
+        "detectorMetaData": {
+          "$ref": "#/definitions/ResponseMetaData",
+          "description": "Detector Meta Data"
+        }
+      }
+    },
+    "AnalysisDefinition": {
+      "description": "Definition of Analysis",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "AnalysisDefinition resource specific properties",
+          "type": "object",
+          "properties": {
+            "description": {
+              "description": "Description of the Analysis",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DataSource": {
+      "description": "Class representing data source used by the detectors",
+      "type": "object",
+      "properties": {
+        "instructions": {
+          "description": "Instructions if any for the data source",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dataSourceUri": {
+          "description": "Datasource Uri Links",
+          "type": "array",
+          "items": {
+            "$ref": "./CommonDefinitions.json#/definitions/NameValuePair"
+          }
+        }
+      }
+    },
+    "DetectorAbnormalTimePeriod": {
+      "description": "Class representing Abnormal Time Period detected.",
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "format": "date-time",
+          "description": "Start time of the correlated event",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "End time of the correlated event",
+          "type": "string"
+        },
+        "message": {
+          "description": "Message describing the event",
+          "type": "string"
+        },
+        "source": {
+          "description": "Represents the name of the Detector",
+          "type": "string"
+        },
+        "priority": {
+          "format": "double",
+          "description": "Represents the rank of the Detector",
+          "type": "number"
+        },
+        "metaData": {
+          "description": "Downtime metadata",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "./CommonDefinitions.json#/definitions/NameValuePair"
+            }
+          }
+        },
+        "type": {
+          "description": "Represents the type of the Detector",
+          "enum": [
+            "ServiceIncident",
+            "AppDeployment",
+            "AppCrash",
+            "RuntimeIssueDetected",
+            "AseDeployment",
+            "UserIssue",
+            "PlatformIssue",
+            "Other"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IssueType",
+            "modelAsString": false
+          }
+        },
+        "solutions": {
+          "description": "List of proposed solutions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Solution"
+          }
+        }
+      }
+    },
+    "DetectorDefinition": {
+      "description": "Class representing detector definition",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "Display name of the detector",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "Description of the detector",
+          "type": "string",
+          "readOnly": true
+        },
+        "rank": {
+          "format": "double",
+          "description": "Detector Rank",
+          "type": "number",
+          "readOnly": true
+        },
+        "isEnabled": {
+          "description": "Flag representing whether detector is enabled or not.",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "DetectorDefinitionResource": {
+      "description": "ARM resource for a detector definition",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DetectorDefinition",
+          "description": "Core resource properties",
+          "type": "object",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DiagnosticAnalysis": {
+      "description": "Class representing a diagnostic analysis done on an application",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "DiagnosticAnalysis resource specific properties",
+          "type": "object",
+          "properties": {
+            "startTime": {
+              "format": "date-time",
+              "description": "Start time of the period",
+              "type": "string"
+            },
+            "endTime": {
+              "format": "date-time",
+              "description": "End time of the period",
+              "type": "string"
+            },
+            "abnormalTimePeriods": {
+              "description": "List of time periods.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AbnormalTimePeriod"
+              }
+            },
+            "payload": {
+              "description": "Data by each detector",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AnalysisData"
+              }
+            },
+            "nonCorrelatedDetectors": {
+              "description": "Data by each detector for detectors that did not corelate",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DetectorDefinition"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DiagnosticAnalysisCollection": {
+      "description": "Collection of Diagnostic Analyses",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnalysisDefinition"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DiagnosticCategory": {
+      "description": "Class representing detector definition",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "DiagnosticCategory resource specific properties",
+          "type": "object",
+          "properties": {
+            "description": {
+              "description": "Description of the diagnostic category",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DiagnosticCategoryCollection": {
+      "description": "Collection of Diagnostic Categories",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiagnosticCategory"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DiagnosticDetectorCollection": {
+      "description": "Collection of Diagnostic Detectors",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DetectorDefinitionResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DiagnosticDetectorResponse": {
+      "description": "Class representing Response from Diagnostic Detectors",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "DiagnosticDetectorResponse resource specific properties",
+          "type": "object",
+          "properties": {
+            "startTime": {
+              "format": "date-time",
+              "description": "Start time of the period",
+              "type": "string"
+            },
+            "endTime": {
+              "format": "date-time",
+              "description": "End time of the period",
+              "type": "string"
+            },
+            "issueDetected": {
+              "description": "Flag representing Issue was detected.",
+              "type": "boolean"
+            },
+            "detectorDefinition": {
+              "$ref": "#/definitions/DetectorDefinition",
+              "description": "Detector's definition"
+            },
+            "metrics": {
+              "description": "Metrics provided by the detector",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DiagnosticMetricSet"
+              }
+            },
+            "abnormalTimePeriods": {
+              "description": "List of Correlated events found by the detector",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DetectorAbnormalTimePeriod"
+              }
+            },
+            "data": {
+              "description": "Additional Data that detector wants to send.",
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "./CommonDefinitions.json#/definitions/NameValuePair"
+                }
+              }
+            },
+            "responseMetaData": {
+              "$ref": "#/definitions/ResponseMetaData",
+              "description": "Meta Data"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DiagnosticMetricSample": {
+      "description": "Class representing Diagnostic Metric",
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "format": "date-time",
+          "description": "Time at which metric is measured",
+          "type": "string"
+        },
+        "roleInstance": {
+          "description": "Role Instance. Null if this counter is not per instance \nThis is returned and should be whichever instance name we desire to be returned\ni.e. CPU and Memory return RDWORKERNAME (LargeDed..._IN_0) \nwhere RDWORKERNAME is Machine name below and RoleInstance name in parenthesis",
+          "type": "string"
+        },
+        "total": {
+          "format": "double",
+          "description": "Total value of the metric. If multiple measurements are made this will have sum of all.",
+          "type": "number"
+        },
+        "maximum": {
+          "format": "double",
+          "description": "Maximum of the metric sampled during the time period",
+          "type": "number"
+        },
+        "minimum": {
+          "format": "double",
+          "description": "Minimum of the metric sampled during the time period",
+          "type": "number"
+        },
+        "isAggregated": {
+          "description": "Whether the values are aggregates across all workers or not",
+          "type": "boolean"
+        }
+      }
+    },
+    "DiagnosticMetricSet": {
+      "description": "Class representing Diagnostic Metric information",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the metric",
+          "type": "string"
+        },
+        "unit": {
+          "description": "Metric's unit",
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "Start time of the period",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "End time of the period",
+          "type": "string"
+        },
+        "timeGrain": {
+          "description": "Presented time grain. Supported grains at the moment are PT1M, PT1H, P1D",
+          "type": "string"
+        },
+        "values": {
+          "description": "Collection of metric values for the selected period based on the {Microsoft.Web.Hosting.Administration.DiagnosticMetricSet.TimeGrain}",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiagnosticMetricSample"
+          }
+        }
+      }
+    },
+    "ResponseMetaData": {
+      "type": "object",
+      "properties": {
+        "dataSource": {
+          "$ref": "#/definitions/DataSource",
+          "description": "Source of the Data"
+        }
+      }
+    },
+    "Solution": {
+      "description": "Class Representing Solution for problems detected.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "double",
+          "description": "Solution Id.",
+          "type": "number"
+        },
+        "displayName": {
+          "description": "Display Name of the solution",
+          "type": "string"
+        },
+        "order": {
+          "format": "double",
+          "description": "Order of the solution.",
+          "type": "number"
+        },
+        "description": {
+          "description": "Description of the solution",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of Solution",
+          "enum": [
+            "QuickSolution",
+            "DeepInvestigation",
+            "BestPractices"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SolutionType",
+            "modelAsString": false
+          }
+        },
+        "data": {
+          "description": "Solution Data.",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "./CommonDefinitions.json#/definitions/NameValuePair"
+            }
+          }
+        },
+        "metadata": {
+          "description": "Solution Metadata.",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "./CommonDefinitions.json#/definitions/NameValuePair"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Your Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+      "required": true,
+      "type": "string"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "Name of the resource group to which the resource belongs.",
+      "required": true,
+      "type": "string",
+      "maxLength": 90,
+      "minLength": 1,
+      "pattern": "^[-\\w\\._\\(\\)]+[^\\.]$",
+      "x-ms-parameter-location": "method"
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "API Version",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
