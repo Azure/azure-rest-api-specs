@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-purview"
   output-folder: "$(typescript-sdks-folder)/sdk/purview/arm-purview"
-  clear-output-folder: true
   generate-metadata: true
 ```

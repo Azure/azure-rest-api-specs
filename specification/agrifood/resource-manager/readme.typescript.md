@@ -10,6 +10,5 @@ typescript:
   package-name: "@azure/arm-agrifood"
   output-folder: "$(typescript-sdks-folder)/sdk/agrifood/arm-agrifood"
   payload-flattening-threshold: 1
-  clear-output-folder: true
   generate-metadata: true
 ```

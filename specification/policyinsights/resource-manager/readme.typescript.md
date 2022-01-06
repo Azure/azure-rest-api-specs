@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-policyinsights"
   output-folder: "$(typescript-sdks-folder)/sdk/policyinsights/arm-policyinsights"
-  clear-output-folder: true
   generate-metadata: true
 ```

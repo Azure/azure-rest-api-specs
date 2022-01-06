@@ -8,7 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-cosmosdb"
   output-folder: "$(typescript-sdks-folder)/sdk/cosmosdb/arm-cosmosdb"
-  clear-output-folder: true
   override-client-name: CosmosDBManagementClient
   generate-metadata: true
 ```

@@ -9,6 +9,5 @@ typescript:
   package-name: "@azure/arm-servicelinker"
   output-folder: "$(typescript-sdks-folder)/sdk/servicelinker/arm-servicelinker"
   payload-flattening-threshold: 1
-  clear-output-folder: true
   generate-metadata: true
 ```

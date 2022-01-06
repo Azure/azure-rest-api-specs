@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-relay"
   output-folder: "$(typescript-sdks-folder)/sdk/relay/arm-relay"
-  clear-output-folder: true
   generate-metadata: true
 ```
