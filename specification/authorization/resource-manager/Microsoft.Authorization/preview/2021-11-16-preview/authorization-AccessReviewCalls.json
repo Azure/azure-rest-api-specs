@@ -70,7 +70,7 @@
         ],
         "operationId": "AccessReviewHistoryDefinitions_List",
         "x-ms-examples": {
-          "GetAccessReviews": {
+          "GetAccessReviewHistoryDefinitions": {
             "$ref": "./examples/GetAccessReviewHistoryDefinitions.json"
           }
         },
@@ -112,7 +112,7 @@
         ],
         "operationId": "AccessReviewHistoryDefinitions_GetById",
         "x-ms-examples": {
-          "GetAccessReviews": {
+          "GetAccessReviewHistoryDefinitions": {
             "$ref": "./examples/GetAccessReviewHistoryDefinition.json"
           }
         },
@@ -153,7 +153,7 @@
         ],
         "operationId": "AccessReviewHistoryDefinition_Create",
         "x-ms-examples": {
-          "GetAccessReviews": {
+          "PutAccessReviewHistoryDefinition": {
             "$ref": "./examples/PutAccessReviewHistoryDefinition.json"
           }
         },
@@ -194,7 +194,7 @@
         ],
         "operationId": "AccessReviewHistoryDefinition_GenerateDownloadUri",
         "x-ms-examples": {
-          "GetAccessReviews": {
+          "PatchAccessReviewHistoryDefinition": {
             "$ref": "./examples/PatchAccessReviewHistoryDefinition.json"
           }
         },
@@ -237,9 +237,12 @@
         ],
         "operationId": "AccessReviewHistoryDefinitionInstances_GetById",
         "x-ms-examples": {
-          "GetAccessReviews": {
+          "GetAccessReviewHistoryDefinitionInstances": {
             "$ref": "./examples/GetAccessReviewHistoryDefinitionInstances.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "description": "Get access review history definition instances by definition Id",
         "parameters": [
@@ -280,7 +283,7 @@
         ],
         "operationId": "AccessReviewScheduleDefinitions_List",
         "x-ms-examples": {
-          "GetAccessReviews": {
+          "GetAccessReviewScheduleDefinitions": {
             "$ref": "./examples/GetAccessReviewScheduleDefinitions.json"
           }
         },
@@ -322,7 +325,7 @@
         ],
         "operationId": "AccessReviewScheduleDefinitions_GetById",
         "x-ms-examples": {
-          "GetAccessReview": {
+          "GetAccessReviewScheduleDefinition": {
             "$ref": "./examples/GetAccessReviewScheduleDefinition.json"
           }
         },
@@ -496,7 +499,7 @@
         ],
         "operationId": "AccessReviewInstances_List",
         "x-ms-examples": {
-          "GetAccessReviews": {
+          "GetAccessReviewInstances": {
             "$ref": "./examples/GetAccessReviewInstances.json"
           }
         },
@@ -545,7 +548,7 @@
         ],
         "operationId": "AccessReviewInstances_GetById",
         "x-ms-examples": {
-          "GetAccessReviews": {
+          "GetAccessReviewInstance": {
             "$ref": "./examples/GetAccessReviewInstance.json"
           }
         },
@@ -593,7 +596,7 @@
         ],
         "operationId": "AccessReviewInstances_Create",
         "x-ms-examples": {
-          "GetAccessReviews": {
+          "PutAccessReviewInstance": {
             "$ref": "./examples/PutAccessReviewInstance.json"
           }
         },
@@ -840,7 +843,7 @@
         ],
         "operationId": "AccessReviewInstanceDecisions_List",
         "x-ms-examples": {
-          "GetAccessReviews": {
+          "GetAccessReviewInstanceDecisions": {
             "$ref": "./examples/GetAccessReviewInstanceDecisions.json"
           }
         },
@@ -896,7 +899,7 @@
         ],
         "operationId": "AccessReviewInstanceContactedReviewers_List",
         "x-ms-examples": {
-          "GetAccessReviews": {
+          "GetAccessReviewInstanceContactedReviewers": {
             "$ref": "./examples/GetAccessReviewInstanceContactedReviewers.json"
           }
         },
@@ -1028,7 +1031,7 @@
         ],
         "operationId": "AccessReviewScheduleDefinitionsAssignedForMyApproval_List",
         "x-ms-examples": {
-          "GetAccessReviews": {
+          "GetAccessReviewScheduleDefinitionsAssignedForMyApproval": {
             "$ref": "./examples/GetAccessReviewScheduleDefinitionsAssignedForMyApproval.json"
           }
         },
@@ -1067,7 +1070,7 @@
         ],
         "operationId": "AccessReviewInstancesAssignedForMyApproval_List",
         "x-ms-examples": {
-          "GetAccessReviews": {
+          "GetAccessReviewInstancesAssignedForMyApproval": {
             "$ref": "./examples/GetAccessReviewInstancesAssignedForMyApproval.json"
           }
         },
@@ -1113,7 +1116,7 @@
         ],
         "operationId": "AccessReviewInstancesAssignedForMyApproval_GetById",
         "x-ms-examples": {
-          "GetAccessReviews": {
+          "GetAccessReviewInstance": {
             "$ref": "./examples/GetAccessReviewInstanceAssignedForMyApproval.json"
           }
         },
@@ -1204,7 +1207,7 @@
         ],
         "operationId": "AccessReviewInstanceMyDecisions_List",
         "x-ms-examples": {
-          "GetAccessReviews": {
+          "GetAccessReviewMyInstanceDecisions": {
             "$ref": "./examples/GetAccessReviewInstanceMyDecisions.json"
           }
         },
@@ -1257,7 +1260,7 @@
         ],
         "operationId": "TenantLevelAccessReviewInstanceContactedReviewers_List",
         "x-ms-examples": {
-          "GetAccessReviews": {
+          "TenantLevelGetAccessReviewInstanceContactedReviewers": {
             "$ref": "./examples/TenantLevelGetAccessReviewInstanceContactedReviewers.json"
           }
         },
@@ -1307,7 +1310,7 @@
         ],
         "operationId": "AccessReviewInstanceMyDecisions_GetById",
         "x-ms-examples": {
-          "GetAccessReviews": {
+          "GetAccessReviewMyInstanceDecision": {
             "$ref": "./examples/GetAccessReviewInstanceMyDecisionById.json"
           }
         },
@@ -1359,7 +1362,7 @@
         ],
         "operationId": "AccessReviewInstanceMyDecisions_Patch",
         "x-ms-examples": {
-          "GetAccessReviews": {
+          "PatchAccessReviewMyInstanceDecision": {
             "$ref": "./examples/PatchAccessReviewInstanceMyDecisionById.json"
           }
         },
@@ -1843,7 +1846,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "description": "",
+            "description": "Represents a reviewer's decision for a given review",
             "enum": [
               "Approve",
               "Deny",
