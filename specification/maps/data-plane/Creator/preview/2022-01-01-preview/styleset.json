@@ -106,20 +106,7 @@
       "required": true,
       "x-ms-parameter-location": "method"
     },
-    "DataFormat": {
-      "name": "dataFormat",
-      "in": "query",
-      "description": "Defines the type of input file for a style set to be created from",
-      "required": false,
-      "schema": {
-        "type": "string",
-        "default": "JSON",
-        "enum": [
-          "JSON",
-          "ZIP"
-        ]
-      }
-    },
+   
     "StyleFormat": {
       "name": "styleFormat",
       "in": "query",
@@ -130,6 +117,54 @@
         "default": "mapbox",
         "enum": [
           "mapbox"
+        ]
+      }
+    },
+    "DataFormat": {
+      "name": "dataFormat",
+      "in": "query",
+      "description": "Defines the type of input file for a style set to be created from.",
+      "required": false,
+      "type": "string",
+      "default": "JSON",
+      "enum": [
+        "JSON",
+        "ZIP"
+      ],
+      "x-ms-enum": {
+        "name": "DataFormatType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "JSON",
+            "description": "JSON style format."
+          },
+          {
+            "value": "ZIP",
+            "description": "ZIP style format."
+          }
+        ]
+      }
+    },
+    "StyleFormat": {
+      "name": "styleFormat",
+      "in": "query",
+      "description": " Defines the type of JSON object that is exported.",
+      "required": false,
+      "type": "string",
+      "default": "mapbox",
+      "enum": [
+        "mapbox",
+        "azureMapsStyleRecipe"
+      ],
+      "x-ms-enum": {
+        "name": "StyleFormatType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "mapbox",
+            "description": "mapbox style data format."
+          }
         ]
       }
     }

@@ -110,7 +110,7 @@
         "ZIP"
       ],
       "x-ms-enum": {
-        "name": "StyleFormatType",
+        "name": "DataFormatType",
         "modelAsString": true,
         "values": [
           {
@@ -136,7 +136,7 @@
         "azureMapsStyleRecipe"
       ],
       "x-ms-enum": {
-        "name": "DataFormatType",
+        "name": "StyleFormatType",
         "modelAsString": true,
         "values": [
           {
@@ -372,6 +372,37 @@
         }
       }
     },
+    "LayerObject": {
+      "description": "A layer object.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The unique id for the layer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the layer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "source-layer": {
+          "description": "The source layer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "layout": {
+          "description": "The layout of the layer.",
+          "type": "object",
+          "readOnly": true
+        }, 
+        "paint": {
+          "description": "The paint configuration of the layer.",
+          "type": "object",
+          "readOnly": true
+        }
+      }
+    },
     "StyleRecipe": {
       "description": "Detail information for the data.",
       "type": "object",
@@ -410,7 +441,9 @@
           "description": "A style's layers property lists all the layers available in that style",
           "type": "array",
           "readOnly": true,
-          "items": "object"
+          "items": {
+            "$ref": "#/definitions/LayerObject"
+          }
         }
       }
     }
