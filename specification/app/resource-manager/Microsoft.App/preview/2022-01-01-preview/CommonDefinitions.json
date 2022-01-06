@@ -256,18 +256,28 @@
       }
     },
     "ExtendedLocation": {
-      "description": "Extended Location.",
       "type": "object",
+      "description": "The complex type of the extended location.",
       "properties": {
         "name": {
-          "description": "Name of extended location.",
-          "type": "string"
+          "type": "string",
+          "description": "The name of the extended location."
         },
         "type": {
-          "description": "Type of extended location.",
-          "type": "string",
-          "readOnly": true
+          "$ref": "#/definitions/ExtendedLocationType",
+          "description": "The type of the extended location."
         }
+      }
+    },
+    "ExtendedLocationType": {
+      "type": "string",
+      "description": "The type of extendedLocation.",
+      "enum": [
+        "CustomLocation"
+      ],
+      "x-ms-enum": {
+        "name": "ExtendedLocationTypes",
+        "modelAsString": true
       }
     },
     "HttpScaleRule": {
