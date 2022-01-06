@@ -401,6 +401,11 @@
           "description": "The storage limit for the database elastic pool in bytes.",
           "type": "integer"
         },
+        "minCapacity": {
+          "format": "double",
+          "description": "Minimal capacity that serverless pool will not shrink below, if not paused",
+          "type": "number"
+        },
         "perDatabaseSettings": {
           "$ref": "#/definitions/ElasticPoolPerDatabaseSettings",
           "description": "The per database settings for the elastic pool."
@@ -427,7 +432,7 @@
         },
         "highAvailabilityReplicaCount": {
           "format": "int32",
-          "description": "The number of secondary replicas associated with the elastic pool that are used to provide high availability.",
+          "description": "The number of secondary replicas associated with the elastic pool that are used to provide high availability. Applicable only to Hyperscale elastic pools.",
           "type": "integer"
         }
       }
@@ -506,6 +511,11 @@
           "description": "The storage limit for the database elastic pool in bytes.",
           "type": "integer"
         },
+        "minCapacity": {
+          "format": "double",
+          "description": "Minimal capacity that serverless pool will not shrink below, if not paused",
+          "type": "number"
+        },
         "perDatabaseSettings": {
           "$ref": "#/definitions/ElasticPoolPerDatabaseSettings",
           "description": "The per database settings for the elastic pool."
@@ -532,7 +542,7 @@
         },
         "highAvailabilityReplicaCount": {
           "format": "int32",
-          "description": "The number of secondary replicas associated with the elastic pool that are used to provide high availability.",
+          "description": "The number of secondary replicas associated with the elastic pool that are used to provide high availability. Applicable only to Hyperscale elastic pools.",
           "type": "integer"
         }
       }
