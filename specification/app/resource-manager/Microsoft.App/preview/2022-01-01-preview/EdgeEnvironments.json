@@ -15,7 +15,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.App/EdgeEnvironments": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.App/edgeEnvironments": {
       "get": {
         "tags": [
           "EdgeEnvironments"
@@ -248,6 +248,51 @@
         "x-ms-examples": {
           "Delete edge environment by name": {
             "$ref": "./examples/EdgeEnvironments_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "EdgeEnvironments"
+        ],
+        "summary": "Update Edge Environment's properties.",
+        "description": "Patches a Managed Environment. Only patching of tags is supported currently",
+        "operationId": "EdgeEnvironments_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the EdgeEnvironment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EdgeEnvironment"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch Managed Environment": {
+            "$ref": "./examples/EdgeEnvironments_Patch.json"
           }
         }
       }
