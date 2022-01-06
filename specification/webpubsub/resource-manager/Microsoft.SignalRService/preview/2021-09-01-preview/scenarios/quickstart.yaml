@@ -1,14 +1,20 @@
 # yaml-language-server: $schema=/home/me/workspace/azure-rest-api-specs/documentation/api-scenario/references/v1.1/schema.json
 scope: ResourceGroup
 
+swaggers:
+  - ../webpubsub.json
+
 variables:
   api-version: '2021-09-01-preview'
   location: eastus
   resourceNamePrefix: myWebPubSubService
 
 scenarios:
-  - steps:
-    - operationId: WebPubSub_CheckNameAvailability
+  - scenario: quickStart
+    description: Quick start to use WebPubSub service
+    steps:
+    - step: checkNameAvailability # default to $(operationId)_$(stepIndex)
+      operationId: WebPubSub_CheckNameAvailability
       parameters:
         parameters:
           type: Microsoft.SignalRService/WebPubSub
@@ -23,9 +29,16 @@ scenarios:
           type: string
     - operationId: WebPubSub_CreateOrUpdate
       parameters:
-        resourceName: $(resourceName)
+        resourceName: $(resourceName) # can be omitted by convention
         parameters:
           sku: Free
       # responses:
       #   200:
-          
+    - operationId: WebPubSub_Get
+      swagger: ../swagger/swagger.json
+      parameters:
+        resourceName: $(resourceName)
+      # responses:
+      #   200:
+      #     headers:
+      #     body:
