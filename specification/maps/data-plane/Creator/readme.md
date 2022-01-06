@@ -47,7 +47,7 @@ input-file:
   - preview/2022-01-01-preview/featurestate.json
   - preview/2022-01-01-preview/tileset.json
   - preview/2022-01-01-preview/wfs.json
-  - preview/2022-01-01-preview/style.json
+  - preview/2022-01-01-preview/stylerecipe.json
   - preview/2022-01-01-preview/styleset.json
 ```
 ### Tag: 2.0-preview

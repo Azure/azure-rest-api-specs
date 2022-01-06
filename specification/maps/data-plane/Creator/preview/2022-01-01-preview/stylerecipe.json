@@ -32,7 +32,7 @@
     },
     "SharedKey": {
       "type": "apiKey",
-      "description": "This is a shared key that is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.\n\n For publicly exposed applications, our recommendation is to use server-to-server access of Azure Maps REST APIs where this key can be securely stored.",
+      "description": "This is a shared key that is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.\n\n For publicly exposed applications, our recommendation is to use server-to-server access of Azure Maps REST APIs where this key can be securely stored.",
       "name": "subscription-key",
       "in": "query"
     },
@@ -130,7 +130,7 @@
   "paths": {
     "/styles/styleRecipes": {
       "post": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n [This](https://docs.microsoft.com/en-us/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe Style Import API allows the caller to import a style recipe from a their style json file.\n\n## Submit Import Request\n\nTo import your style recipe you will make a `POST` request with an azure maps style or mapbox style. \n\nThe Import Style Recipe API is a \n[long-running request](https://aka.ms/am-creator-lrt-v2).",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n [This](https://docs.microsoft.com/en-us/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe Style Import API allows the caller to import a style recipe from their style json file.\n\n## Submit Import Request\n\nTo import your style recipe you will make a `POST` request with an azure maps style or mapbox style. \n\nThe Import Style Recipe API is a \n[long-running request](https://aka.ms/am-creator-lrt-v2).",
         "operationId": "StyleRecipe_Import",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -156,6 +156,15 @@
           },
           {
             "$ref": "#/parameters/DescriptionStyle"
+          },
+          {
+            "name": "ImportContent",
+            "in": "body",
+            "description": "The style recipe content to be imported.",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
           }
         ],
         "responses": {
@@ -205,7 +214,7 @@
     },
     "/styles/styleRecipes/{styleRecipeId}": {
       "get": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a style.",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to export a style recipe.",
         "operationId": "StyleRecipe_Export",
         "x-ms-examples": {
           "Exports the details for a single style recipe": {
@@ -239,10 +248,10 @@
         }
       },
       "delete": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to delete a imported style.<br>    \nYou can use this API if a style is no longer needed. \n\n### Submit Delete Request\n\nTo delete your content you will issue a `DELETE` request where the path will contain the `styleId` of the style to delete.<br>    \n\n#### Delete request \"Successful\"\n\nThe Style Delete API returns a HTTP `204 No Content` response with an empty body, if the style was deleted successfully.<br>    \n\n#### Delete request \"Failed\"\n\nA HTTP `400 Bad Request` error response will be returned if the style with the passed-in `styleId` is not found. \n\nHere is a sample error response:\n\n<br>\n\n```json\n{\n  \"error\": {\n      \"code\": \"400 BadRequest\",\n      \"message\": \"Bad request - Style Id: d85b5b27-5fc4-4599-8b50-47160e90f8ce does not exist.\"\n  }\n}\n```",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to delete an imported style recipe.<br>    \nYou can use this API if a style recipe is no longer needed. \n\n### Submit Delete Request\n\nTo delete your content you will issue a `DELETE` request where the path will contain the `styleRecipeId` of the style recipe to delete.<br>    \n\n#### Delete request \"Successful\"\n\nThe Style Recipe Delete API returns a HTTP `204 No Content` response with an empty body, if the style recipe was deleted successfully.<br>    \n\n#### Delete request \"Failed\"\n\nA HTTP `400 Bad Request` error response will be returned if the style recipe with the passed-in `styleRecipeId` is not found. \n\nHere is a sample error response:\n\n<br>\n\n```json\n{\n  \"error\": {\n      \"code\": \"400 BadRequest\",\n      \"message\": \"Bad request - StyleRecipe Id: d85b5b27-5fc4-4599-8b50-47160e90f8ce does not exist.\"\n  }\n}\n```",
         "operationId": "StyleRecipe_Delete",
         "x-ms-examples": {
-          "Delete a imported style recipe": {
+          "Delete an imported style recipe": {
             "$ref": "./examples/stylerecipe/StyleRecipe_Delete.json"
           }
         },
