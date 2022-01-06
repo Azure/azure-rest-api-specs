@@ -2665,6 +2665,11 @@
           "description": "The flag that indicates whether or not the connection is used for peering service.",
           "type": "boolean"
         },
+        "microsoftTrackingId": {
+          "description": "The ID used within Microsoft's peering provisioning system to track the connection",
+          "type": "string",
+          "readOnly": true
+        },
         "peeringDBFacilityId": {
           "format": "int32",
           "description": "The PeeringDB.com ID of the facility at which the connection has to be set up.",
@@ -3044,6 +3049,13 @@
           "format": "int32",
           "description": "The Autonomous System Number (ASN) of the peer.",
           "type": "integer"
+        },
+        "peerContactDetail": {
+          "description": "The contact details of the peer.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContactDetail"
+          }
         },
         "peerName": {
           "description": "The name of the peer.",
@@ -3767,6 +3779,10 @@
           },
           "readOnly": true
         },
+        "peeringServicePrefixKey": {
+          "description": "The peering service prefix key",
+          "type": "string"
+        },
         "provisioningState": {
           "description": "The provisioning state of the resource.",
           "enum": [
@@ -3895,6 +3911,10 @@
         }
       ],
       "properties": {
+        "sku": {
+          "$ref": "#/definitions/PeeringServiceSku",
+          "description": "The SKU that defines the type of the peering service."
+        },
         "properties": {
           "$ref": "#/definitions/PeeringServiceProperties",
           "description": "The properties that define a peering service.",
@@ -3953,6 +3973,18 @@
             "name": "provisioningState",
             "modelAsString": true
           }
+        },
+        "providerPrimaryPeeringLocation": {
+          "description": "The primary peering (Microsoft/service provider) location to be used for customer traffic.",
+          "type": "string"
+        },
+        "providerBackupPeeringLocation": {
+          "description": "The backup peering (Microsoft/service provider) location to be used for customer traffic.",
+          "type": "string"
+        },
+        "logAnalyticsWorkspaceProperties": {
+          "$ref": "#/definitions/LogAnalyticsWorkspaceProperties",
+          "description": "The Log Analytics Workspace Properties"
         }
       }
     },
