@@ -174,8 +174,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Successful update",
+          "200": {
+            "description": "Successful add or update",
             "schema": {
               "$ref": "#/definitions/AccessReviewHistoryDefinition"
             }
@@ -215,7 +215,7 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "Successful uri creation",
             "schema": {
               "$ref": "#/definitions/AccessReviewHistoryInstance"
@@ -1832,7 +1832,7 @@
           "x-nullable": true,
           "readOnly": true
         },
-        "reviewHistoryPeriodEndDate": {
+        "reviewHistoryPeriodEndDateTime": {
           "type": "string",
           "format": "date-time",
           "description": "Date time used when selecting review data, all reviews included in data end on or before this date. For use only with one-time/non-recurring reports.",
