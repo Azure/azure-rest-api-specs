@@ -4,6 +4,12 @@ These settings apply only when `--ruby` is specified on the command line.
 
 ``` yaml
 package-name: azure_mgmt_peering
+package-version: "2022-01-01"
+azure-arm: true
+```
+or
+``` yaml
+package-name: azure_mgmt_peering
 package-version: "2021-06-01"
 azure-arm: true
 ```
