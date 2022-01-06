@@ -4,7 +4,7 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "monitorName": "myMonitor",
-    "subAccountName": "SubAccount1",
+    "metricsSourceName": "MetricsSource1",
     "ruleSetName": "default"
   },
   "responses": {
@@ -14,23 +14,24 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Logz/monitors/myMonitor/tagRules/default",
         "type": "Microsoft.Logz/monitors/tagRules",
         "properties": {
-          "logRules": {
-            "sendAadLogs": false,
-            "sendSubscriptionLogs": true,
-            "sendActivityLogs": true,
-            "filteringTags": [
-              {
-                "name": "Environment",
-                "value": "Prod",
-                "action": "Include"
-              },
-              {
-                "name": "Environment",
-                "value": "Dev",
-                "action": "Exclude"
-              }
-            ]
-          }
+          "sendMetrics": true,
+          "metricRules": [
+            {
+              "subscriptionId": "00000000-0000-0000-0000-000000000000",
+              "filteringTags": [
+                {
+                  "name": "Environment",
+                  "value": "Prod",
+                  "action": "Include"
+                },
+                {
+                  "name": "Environment",
+                  "value": "Dev",
+                  "action": "Exclude"
+                }
+              ]
+            }
+          ]
         }
       }
     }
