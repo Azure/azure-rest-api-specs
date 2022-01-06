@@ -2946,7 +2946,13 @@
     "OperationProperties": {
       "description": "The properties of the operation.",
       "type": "object",
-      "properties": {}
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "Service specification payload.",
+          "readOnly": true
+        }
+      }
     },
     "ServiceSpecification": {
       "description": "Service specification payload.",
@@ -4032,7 +4038,12 @@
     "ErrorResponse": {
       "description": "The error response that indicates why an operation has failed.",
       "type": "object",
-      "properties": {}
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDetail",
+          "description": "The error detail that describes why an operation has failed."
+        }
+      }
     },
     "ErrorDetail": {
       "description": "The error detail that describes why an operation has failed.",
