@@ -1,4 +1,8 @@
+# yaml-language-server: $schema=/home/me/workspace/azure-rest-api-specs/documentation/api-scenario/references/v1.2/schema.json
 scope: ResourceGroup
+
+swaggers:
+  - ../appplatform.json
 
 variables:
   serviceName: test-scenario-instance
@@ -56,11 +60,9 @@ scenarios:
 
       - step: Services_Get
         exampleFile: ../examples/Services_Get.json
-        resourceName: myservice
 
       - step: Services_Update
-        resourceName: myservice
-        operationId: Services_Update
+        exampleFile: ../examples/Services_Update.json
         resourceUpdate:
           - replace: /tags
             value:
@@ -135,14 +137,12 @@ scenarios:
               traceEnabled: true
               appInsightsInstrumentationKey: "$(insightsInstrumentationKey)"
               appInsightsSamplingRate: 50.0
-        resourceName: monitorSetting
 
       - step: MonitoringSettings_Get
         exampleFile: ../examples/MonitoringSettings_Get.json
 
       - step: MonitoringSettings_UpdatePatch
-        resourceName: monitorSetting
-        operationId: MonitoringSettings_UpdatePatch
+        exampleFile: ../examples/MonitoringSettings_UpdatePatch.json
         resourceUpdate:
           - replace: /properties/appInsightsSamplingRate
             value: 100
@@ -158,7 +158,6 @@ scenarios:
 
       - step: Apps_Get
         exampleFile: ../examples/Apps_Get.json
-        resourceName: app01
 
       - step: Deployments_CreateOrUpdate_Default
         exampleFile: ../examples/Deployments_CreateOrUpdate.json
@@ -174,18 +173,15 @@ scenarios:
         exampleFile: ../examples/Deployments_Get.json
         variables:
           deploymentName: default
-        resourceName: default
 
       - step: Apps_Update_ActiveDeployment # PATCH
-        resourceName: app01
-        operationId: Apps_Update
+        exampleFile: ../examples/Apps_Update.json
         resourceUpdate:
           - replace: /properties/activeDeploymentName
             value: default
 
       - step: Apps_Update_Disk # PATCH
-        resourceName: app01
-        operationId: Apps_Update
+        exampleFile: ../examples/Apps_Update.json
         resourceUpdate:
           - replace: /properties/temporaryDisk
             value: { "sizeInGB": 3, "mountPath": "/tmpdisk" }
@@ -286,7 +282,6 @@ scenarios:
         exampleFile: ../examples/Deployments_CreateOrUpdate.json
         variables:
           deploymentName: blue
-        resourceName: deploymentBlue
         resourceUpdate:
           - replace: /sku/capacity
             value: 2
@@ -296,8 +291,7 @@ scenarios:
             value: $(relativePath)
 
       - step: Apps_Update # PATCH
-        resourceName: app01
-        operationId: Apps_Update
+        exampleFile: ../examples/Apps_Update.json
         resourceUpdate:
           - replace: /properties/activeDeploymentName
             value: blue
