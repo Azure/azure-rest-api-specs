@@ -61,6 +61,12 @@
             "schema": {
               "$ref": "#/definitions/LocationListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
           }
         },
         "x-ms-pageable": {
@@ -94,6 +100,12 @@
             "schema": {
               "$ref": "#/definitions/Subscription"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
           }
         }
       }
@@ -120,6 +132,12 @@
             "description": "OK - Returns an array of subscriptions.",
             "schema": {
               "$ref": "#/definitions/SubscriptionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         },
@@ -151,6 +169,12 @@
             "schema": {
               "$ref": "#/definitions/TenantListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
           }
         },
         "x-ms-pageable": {
@@ -161,6 +185,7 @@
   },
   "definitions": {
     "Location": {
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -196,6 +221,7 @@
       "description": "Location information."
     },
     "LocationListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -208,6 +234,7 @@
       "description": "Location list operation response."
     },
     "Subscription": {
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -252,6 +279,7 @@
       "description": "Subscription information."
     },
     "SubscriptionPolicies": {
+      "type": "object",
       "properties": {
         "locationPlacementId": {
           "readOnly": true,
@@ -281,6 +309,7 @@
       "description": "Subscription policies."
     },
     "SubscriptionListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -300,6 +329,7 @@
       "description": "Subscription list operation response."
     },
     "TenantIdDescription": {
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -315,6 +345,7 @@
       "description": "Tenant Id information."
     },
     "TenantListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -332,6 +363,38 @@
         "nextLink"
       ],
       "description": "Tenant Ids information."
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponseBody": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorResponse"
+        },
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
