@@ -1,0 +1,292 @@
+# yaml-language-server: $schema=/home/me/workspace/azure-rest-api-specs/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+swaggers:
+  - ../appplatform.json
+
+variables:
+  serviceName: test-scenario-instance
+  ascDomainName: .azuremicroservices.io
+  dnsCname: asc
+  customDomainName:
+    type: string
+  mysqlKey:
+    type: secureString
+  dnsSubscriptionId:
+    type: string
+  dnsResourceGroup:
+    type: string
+  blobUrl:
+    type: secureString
+  userAssignedIdentity:
+    type: string
+  resource:
+    type: object
+    value:
+      properties:
+      sku:
+        name: S0
+        tier: Standard
+      location: eastus
+      tags:
+        key1: value1
+  certificateName: asc-certificate
+  certificateResource:
+    type: object
+    value:
+      properties:
+        vaultUri: https://myvault.vault.azure.net
+        keyVaultCertName: mycert
+        certVersion: 08a219d06d874795a96db47e06fbb01e
+  appName: app01
+  appResource:
+    type: object
+    value:
+      properties:
+        public: false
+        activeDeploymentName: mydeployment1
+        fqdn: myapp.mydomain.com
+        httpsOnly: false
+        enableEndToEndTLS: false
+      identity: null
+      location: eastus
+  deploymentName: default
+  deploymentResource:
+    type: object
+    value:
+      properties:
+        source:
+          type: Jar
+          relativePath: <default>
+          version: "1.0"
+          artifactSelector: sub-module-1
+        deploymentSettings:
+          cpu: 1
+          memoryInGB: 3
+          jvmOptions: "-Xms1G -Xmx3G"
+          environmentVariables:
+            env: test
+          runtimeVersion: Java_8
+        instances: null
+      sku:
+        name: S0
+        tier: Standard
+        capacity: 1
+  bindingName: mysql-binding
+  bindingResource:
+    type: object
+    value:
+      properties:
+        resourceId: /subscriptions/b46590cb-a111-4b84-935f-c305aaf1f424/resourceGroups/mary-west/providers/Microsoft.DBforMySQL/servers/fake-sql
+        key: $(mysqlKey)
+        bindingParameters:
+          databaseName: mysqldb
+          username: test
+  domainName: $(dnsCname).$(customDomainName)
+  domainResource:
+    type: object
+    value:
+      properties:
+        thumbprint: 934367bf1c97033f877db0f15cb1b586957d3133
+        certName: asc-certificate
+
+prepareSteps:
+  - step: Generate_Unique_ServiceName
+    armTemplate: templates/generate_service_name.json
+
+  - step: Create_Application_Insight_Instance
+    armTemplate: templates/create_application_insights_instance.json
+
+  - step: Add_Dns_Cname_Record
+    armDeploymentScript: ./templates/create_cname_record.ps1
+    environmentVariables:
+      - name: resourceGroupName
+        value: $(dnsResourceGroup)
+      - name: dnsZoneName
+        value: $(customDomainName)
+      - name: dnsCname
+        value: $(dnsCname)
+      - name: dnsCnameAlias
+        value: $(serviceName)$(ascDomainName)
+    variables:
+      subscriptionId: $(dnsSubscriptionId)
+      resourceGroupName: $(dnsResourceGroup)
+
+scenarios:
+  - steps:
+      - operationId: Services_CheckNameAvailability
+        parameters:
+          availabilityParameters:
+            type: Microsoft.AppPlatform/Spring
+            name: $(serviceName)
+
+      # Services
+      - operationId: Services_CreateOrUpdate
+      - operationId: Services_Get
+      - operationId: Services_Update
+        parameters:
+          resource:
+            tags:
+              hello: world
+              created-by: api-test
+      - operationId: Services_DisableTestEndpoint
+      - operationId: Services_EnableTestEndpoint
+      - operationId: Services_RegenerateTestKey
+        parameters:
+          regenerateTestKeyRequest:
+            keyType: Primary
+      - operationId: Services_ListTestKeys
+      - operationId: Certificates_CreateOrUpdate
+      - operationId: Certificates_Get
+      - operationId: Certificates_List
+
+      # ConfigServers
+      - operationId: ConfigServers_Validate
+        parameters:
+          configServerSettings:
+            gitProperty:
+              uri: https://github.com/VSChina/asc-config-server-test-public.git
+              label: master
+              searchPaths:
+                - "/"
+      - operationId: ConfigServers_UpdatePut
+        parameters:
+          configServerResource:
+            properties:
+              configServer:
+                gitProperty:
+                  uri: https://github.com/VSChina/asc-config-server-test-public.git
+                  label: master
+                  searchPaths:
+                    - "/"
+      - operationId: ConfigServers_UpdatePatch
+        parameters:
+          configServerResource:
+            properties:
+              gitProperty:
+                uri: https://github.com/azure-samples/spring-petclinic-microservices-config
+      - operationId: ConfigServers_Get
+
+      # Monitoring
+      - operationId: MonitoringSettings_UpdatePut
+        parameters:
+          monitoringSettingResource:
+            properties:
+              traceEnabled: true
+              appInsightsInstrumentationKey: $(appInsightsInstrumentationKey)
+              appInsightsSamplingRate: 50.0
+      - operationId: MonitoringSettings_Get
+      - operationId: MonitoringSettings_UpdatePatch
+        parameters:
+          monitoringSettingResource:
+            properties:
+              appInsightsSamplingRate: 100
+
+      # Apps
+      - operationId: Apps_CreateOrUpdate
+      - operationId: Apps_Get
+      - operationId: Deployments_CreateOrUpdate
+      - operationId: Deployments_Get
+      - operationId: Apps_Update
+        parameters:
+          appResource:
+            properties:
+              activeDeploymentName: $(deploymentName)
+      - operationId: Apps_Update
+        parameters:
+          appResource:
+            properties:
+              temporaryDisk:
+                sizeInGB: 3
+                mountPath: /tmpdisk
+              persistentDisk:
+                sizeInGB: 10
+                mountPath: /data
+              public: true
+      - operationId: Apps_List
+
+      # Bindings
+      - operationId: Bindings_CreateOrUpdate
+      - operationId: Bindings_Update
+        parameters:
+          bindingResource:
+            properties:
+              key: $(mysqlKey)
+              bindingParameters:
+                databaseName: mysqldb2
+                username: test2
+      - operationId: Bindings_Get
+      - operationId: Bindings_List
+      - operationId: Bindings_Delete
+
+      # CustomDomains
+      - operationId: CustomDomains_CreateOrUpdate
+      # - operationId: CustomDomains_Update # TODO: use another cert
+      - operationId: CustomDomains_Get
+      - operationId: CustomDomains_List
+
+      # Deployments
+      - operationId: Apps_GetResourceUploadUrl
+        outputVariables:
+          uploadUrl:
+            type: secureString
+            fromResponse: /uploadUrl
+          relativePath:
+            type: string
+            fromResponse: /relativePath
+
+      - armDeploymentScript: ./templates/uploadJar.ps1
+        environmentVariables:
+          - name: uploadUrl
+            value: $(uploadUrl)
+          - name: blobUrl
+            value: $(blobUrl)
+      - operationId: Deployments_CreateOrUpdate
+        parameters:
+          deploymentName: blue
+        variables:
+          deploymentResource:
+            type: object
+            patches:
+              - replace: /sku/capacity
+                value: 2
+              - replace: /properties/source/relativePath
+                value: $(relativePath)
+        outputVariables:
+          deploymentName:
+            type: string
+            fromRequest: /deploymentName
+      - operationId: Apps_Update
+        parameters:
+          appResource:
+            properties:
+              activeDeploymentName: $(deploymentName)
+      - operationId: Deployments_Restart
+      - operationId: Deployments_Stop
+      - operationId: Deployments_Start
+      - operationId: Deployments_GetLogFileUrl
+      - operationId: Deployments_List
+      - operationId: Deployments_ListForCluster
+      - operationId: Services_List
+      - operationId: Services_ListBySubscription
+      - operationId: Deployments_Delete
+      - operationId: CustomDomains_Delete
+      - operationId: Apps_Delete
+      - operationId: Certificates_Delete
+      - operationId: Services_Delete
+      - operationId: Skus_List
+      # - operationId: RuntimeVersions_ListRuntimeVersions
+      - operationId: Operations_List
+
+cleanUpSteps:
+  - armDeploymentScript: ./templates/delete_cname_record.ps1
+    environmentVariables:
+      - name: resourceGroupName
+        value: $(dnsResourceGroup)
+      - name: dnsCname
+        value: $(dnsCname)
+      - name: dnsZoneName
+        value: $(customDomainName)
+    variables:
+      subscriptionId: $(dnsSubscriptionId)
+      resourceGroupName: $(dnsResourceGroup)
