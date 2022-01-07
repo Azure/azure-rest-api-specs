@@ -543,7 +543,7 @@
           "$ref": "#/definitions/AnalyzeTextTask"
         }
       ],
-      "x-ms-discriminator-value": "CustomEntityRecognition"
+      "x-ms-discriminator-value": "CustomEntityRecognitionResults"
     },
     "CustomEntitiesResult": {
       "type": "object",
@@ -606,7 +606,7 @@
           "$ref": "#/definitions/AnalyzeTextTask"
         }
       ],
-      "x-ms-discriminator-value": "CustomSingleClassification"
+      "x-ms-discriminator-value": "CustomSingleClassificationResults"
     },
     "CustomSingleClassificationResult": {
       "type": "object",
@@ -703,7 +703,7 @@
           "$ref": "#/definitions/AnalyzeTextTask"
         }
       ],
-      "x-ms-discriminator-value": "CustomMultiClassification"
+      "x-ms-discriminator-value": "CustomMultiClassificationResults"
     },
     "CustomMultiClassificationResult": {
       "type": "object",
@@ -796,7 +796,7 @@
           "$ref": "#/definitions/AnalyzeTextTask"
         }
       ],
-      "x-ms-discriminator-value": "Healthcare"
+      "x-ms-discriminator-value": "HealthcareResults"
     },
     "HealthcareResult": {
       "type": "object",
@@ -1469,7 +1469,7 @@
           "$ref": "#/definitions/AnalyzeTextTaskResult"
         }
       ],
-      "x-ms-discriminator-value": "EntityRecognition"
+      "x-ms-discriminator-value": "EntityRecognitionResults"
     },
     "EntitiesResult": {
       "type": "object",
@@ -1603,7 +1603,7 @@
           "$ref": "#/definitions/AnalyzeTextTaskResult"
         }
       ],
-      "x-ms-discriminator-value": "EntityLinking"
+      "x-ms-discriminator-value": "EntityLinkingResults"
     },
     "EntityLinkingResult": {
       "type": "object",
@@ -1782,7 +1782,7 @@
           "$ref": "#/definitions/AnalyzeTextTaskResult"
         }
       ],
-      "x-ms-discriminator-value": "PiiEntityRecognition"
+      "x-ms-discriminator-value": "PiiEntityRecognitionResults"
     },
     "PiiResult": {
       "type": "object",
@@ -2081,7 +2081,7 @@
           "$ref": "#/definitions/AnalyzeTextTaskResult"
         }
       ],
-      "x-ms-discriminator-value": "ExtractiveSummarization"
+      "x-ms-discriminator-value": "ExtractiveSummarizationResults"
     },
     "ExtractiveSummarizationResult": {
       "type": "object",
@@ -2194,7 +2194,7 @@
           "$ref": "#/definitions/AnalyzeTextTaskResult"
         }
       ],
-      "x-ms-discriminator-value": "KeyPhraseExtraction"
+      "x-ms-discriminator-value": "KeyPhraseExtractionResults"
     },
     "KeyPhraseResult": {
       "type": "object",
@@ -2288,7 +2288,7 @@
           "$ref": "#/definitions/AnalyzeTextTaskResult"
         }
       ],
-      "x-ms-discriminator-value": "LanguageDetection"
+      "x-ms-discriminator-value": "LanguageDetectionResults"
     },
     "LanguageDetectionResult": {
       "type": "object",
@@ -2534,8 +2534,7 @@
         {
           "$ref": "#/definitions/EntitiesTaskResult"
         }
-      ],
-      "x-ms-discriminator-value": "EntityRecognitionResults"
+      ]
     },
     "CustomEntityRecognitionLROResult": {
       "allOf": [
@@ -2545,8 +2544,7 @@
         {
           "$ref": "#/definitions/CustomEntitiesTaskResult"
         }
-      ],
-      "x-ms-discriminator-value": "CustomEntityRecognitionResults"
+      ]
     },
     "CustomSingleClassificationLROResult": {
       "allOf": [
@@ -2556,8 +2554,7 @@
         {
           "$ref": "#/definitions/CustomSingleClassificationTaskResult"
         }
-      ],
-      "x-ms-discriminator-value": "CustomSingleClassificationResults"
+      ]
     },
     "CustomMultiClassificationLROResult": {
       "allOf": [
@@ -2567,8 +2564,7 @@
         {
           "$ref": "#/definitions/CustomMultiClassificationTaskResult"
         }
-      ],
-      "x-ms-discriminator-value": "CustomMultiClassificationResults"
+      ]
     },
     "EntityLinkingLROResult": {
       "allOf": [
@@ -2578,8 +2574,7 @@
         {
           "$ref": "#/definitions/EntityLinkingTaskResult"
         }
-      ],
-      "x-ms-discriminator-value": "EntityLinkingResults"
+      ]
     },
     "PiiEntityRecognitionLROResult": {
       "allOf": [
@@ -2589,8 +2584,7 @@
         {
           "$ref": "#/definitions/PiiTaskResult"
         }
-      ],
-      "x-ms-discriminator-value": "PiiEntityRecognitionResults"
+      ]
     },
     "ExtractiveSummarizationLROResult": {
       "allOf": [
@@ -2600,8 +2594,7 @@
         {
           "$ref": "#/definitions/ExtractiveSummarizationTaskResult"
         }
-      ],
-      "x-ms-discriminator-value": "ExtractiveSummarizationResults"
+      ]
     },
     "HealthcareLROResult": {
       "allOf": [
@@ -2611,8 +2604,7 @@
         {
           "$ref": "#/definitions/HealthcareTaskResult"
         }
-      ],
-      "x-ms-discriminator-value": "HealthcareResults"
+      ]
     },
     "SentimentLROResult": {
       "allOf": [
@@ -2622,10 +2614,9 @@
         {
           "$ref": "#/definitions/SentimentTaskResult"
         }
-      ],
-      "x-ms-discriminator-value": "SentimentAnalysisResults"
+      ]
     },
-    "KeyPhraseExtractionLROTaskResult": {
+    "KeyPhraseExtractionLROResult": {
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeTextLROResult"
@@ -2633,8 +2624,7 @@
         {
           "$ref": "#/definitions/KeyPhraseTaskResult"
         }
-      ],
-      "x-ms-discriminator-value": "KeyPhraseExtractionResults"
+      ]
     },
     "StringIndexType": {
       "type": "string",
