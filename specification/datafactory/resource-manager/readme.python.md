@@ -42,16 +42,4 @@ directive:
     where: $.definitions.ScriptAction.properties.roles
     transform: >
         $['type'] = 'string';
-  - from: swagger-document
-    where: $.definitions.DataFlow
-    transform: >
-        $['required'] = ['type'];  
-  - from: swagger-document
-    where: $.definitions.ManagedPrivateEndpoint
-    transform: >
-        $['required'] = ['type'];  
-  - from: swagger-document
-    where: $.definitions.ManagedVirtualNetwork
-    transform: >
-        $['required'] = ['type'];  
 ```

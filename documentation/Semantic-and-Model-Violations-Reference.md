@@ -9,6 +9,9 @@ This document lists the set of automated rules that can be validated against swa
 | [CIRCULAR_INHERITANCE](#CIRCULAR_INHERITANCE) | |
 | [DUPLICATE_PARAMETER](#DUPLICATE_PARAMETER) | |
 | [EMPTY_PATH_PARAMETER_DECLARATION](#EMPTY_PATH_PARAMETER_DECLARATION) | |
+| [EQUIVALENT_PATH](#EQUIVALENT_PATH) | |
+| [OBJECT_MISSING_REQUIRED_PROPERTY_DEFINITION](#OBJECT_MISSING_REQUIRED_PROPERTY_DEFINITION) | |
+| [OBJECT_MISSING_REQUIRED_PROPERTY_SCHEMA](#OBJECT_MISSING_REQUIRED_PROPERTY_SCHEMA) | |
 | [DUPLICATE_OPERATIONID](#DUPLICATE_OPERATIONID) | |
 | [MULTIPLE_BODY_PARAMETERS](#MULTIPLE_BODY_PARAMETERS) | |
 | [INVALID_PARAMETER_COMBINATION](#INVALID_PARAMETER_COMBINATION) | |
@@ -63,6 +66,7 @@ This document lists the set of automated rules that can be validated against swa
 | [READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST](#READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST) | |
 | [SCHEMA_VALIDATION_FAILED](#SCHEMA_VALIDATION_FAILED) | |
 | [SECRET_PROPERTY](#SECRET_PROPERTY) |  |
+| [WRITEONLY_PROPERTY_NOT_ALLOWED_IN_RESPONSE](#WRITEONLY_PROPERTY_NOT_ALLOWED_IN_RESPONSE) |  |
 | [DISCRIMINATOR_VALUE_NOT_FOUND](#DISCRIMINATOR_VALUE_NOT_FOUND) |  |
 | [INVALID_XMS_DISCRIMINATOR_VALUE](#INVALID_XMS_DISCRIMINATOR_VALUE) | [OAV133](#INVALID_XMS_DISCRIMINATOR_VALUE) |
 | [DISCRIMINATOR_PROPERTY_NOT_FOUND](#DISCRIMINATOR_PROPERTY_NOT_FOUND) | [OAV134](#DISCRIMINATOR_PROPERTY_NOT_FOUND) |
@@ -83,7 +87,7 @@ This document lists the set of automated rules that can be validated against swa
 | [RESPONSE_SCHEMA_NOT_IN_SPEC](#RESPONSE_SCHEMA_NOT_IN_SPEC) | [OAV113](#RESPONSE_SCHEMA_NOT_IN_SPEC) |
 | [RESPONSE_STATUS_CODE_NOT_IN_SPEC](#RESPONSE_STATUS_CODE_NOT_IN_SPEC) | [OAV112](#RESPONSE_STATUS_CODE_NOT_IN_SPEC) |
 | [RESPONSE_VALIDATION_ERROR](#RESPONSE_VALIDATION_ERROR) | [OAV108](#RESPONSE_VALIDATION_ERROR) |
-| [X-MS-EXAMPLE_NOTFOUND_ERROR](#X-MS-EXAMPLE_NOTFOUND_ERROR) | [OAV107](#X-MS-EXAMPLE_NOTFOUND_ERROR) |
+| [XMS_EXAMPLE_NOTFOUND_ERROR](#XMS_EXAMPLE_NOTFOUND_ERROR) | [OAV107](#XMS_EXAMPLE_NOTFOUND_ERROR) |
 | [ERROR_IN_PREPARING_REQUEST](#ERROR_IN_PREPARING_REQUEST) | [OAV106](#ERROR_IN_PREPARING_REQUEST) |
 | [REQUIRED_PARAMETER_EXAMPLE_NOT_FOUND](#REQUIRED_PARAMETER_EXAMPLE_NOT_FOUND) | [OAV105](#REQUIRED_PARAMETER_EXAMPLE_NOT_FOUND) |
 | [JSON_PARSING_ERROR](#JSON_PARSING_ERROR) | [OAV104](#JSON_PARSING_ERROR) |
@@ -97,6 +101,7 @@ This document lists the set of automated rules that can be validated against swa
 | [LRO_RESPONSE_CODE](#LRO_RESPONSE_CODE) | |
 | [LRO_RESPONSE_HEADER](#LRO_RESPONSE_HEADER) | |
 | [MISSING_RESOURCE_ID](#MISSING_RESOURCE_ID) | |
+| [INVALID_RESPONSE_HEADER](#INVALID_RESPONSE_HEADER) | |
 
 
 ### Validation Warnings
@@ -171,6 +176,22 @@ This document lists the set of automated rules that can be validated against swa
 **Description**: There're equivalent paths defined.
 
 **How to fix the violation**: Remove one of the equivalent paths or rename it.
+
+### <a name="OBJECT_MISSING_REQUIRED_PROPERTY_DEFINITION" />OBJECT_MISSING_REQUIRED_PROPERTY_DEFINITION
+
+**Output Message**: Missing required property definition: {0}.
+
+**Description**: Property indicated as required in "required" array for the model is missing its definition.
+
+**How to fix the violation**: Verify that the properties included in the "required" array have all been defined in swagger.
+
+### <a name="OBJECT_MISSING_REQUIRED_PROPERTY_SCHEMA" />OBJECT_MISSING_REQUIRED_PROPERTY_SCHEMA
+
+**Output Message**: Missing required property: {0}.
+
+**Description**: Property indicated as required according to [OpenAPI 2.0 specification](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/2.0.md) for this schema.
+
+**How to fix the violation**: Adding this property to schema in swagger.
 
 ### <a name="EMPTY_PATH_PARAMETER_DECLARATION" />EMPTY_PATH_PARAMETER_DECLARATION
 
@@ -769,14 +790,6 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: See inner details for the violations and fix.
 
-### <a name="X-MS-EXAMPLE_NOTFOUND_ERROR" />X-MS-EXAMPLE_NOTFOUND_ERROR
-
-**Output Message**: x-ms-example not found in {0}.
-
-**Description**: Each operation should have example defined.
-
-**How to fix the violation**: Add `x-ms-example` declaration for this operation.
-
 ### <a name="ERROR_IN_PREPARING_REQUEST" />ERROR_IN_PREPARING_REQUEST
 
 **Description**: Error when preparing the request for validation.
@@ -818,7 +831,15 @@ This document lists the set of automated rules that can be validated against swa
 
 **Description**: The secret is not allowed to return in response when it's annotated with x-ms-secret:true.
 
-**How to fix the violation**: Remove this secret value from the response.
+**How to fix the violation**: Remove this secret value from the response in example or in traffic payload.
+
+### <a name="WRITEONLY_PROPERTY_NOT_ALLOWED_IN_RESPONSE" />WRITEONLY_PROPERTY_NOT_ALLOWED_IN_RESPONSE
+
+**Output Message**: Write-only property {0} is not allowed in the response.
+
+**Description**: Write only property is not allowed to return in response when it's annotated with "x-ms-mutability": ["create", "update"].
+
+**How to fix the violation**: Remove this property from the response in example or in traffic payload.
 
 
 ### <a name="ROUNDTRIP_INCONSISTENT_PROPERTY" />ROUNDTRIP_INCONSISTENT_PROPERTY
@@ -861,9 +882,9 @@ This document lists the set of automated rules that can be validated against swa
 
 **Output Message**: Respond to the initial request of a long running operation, Patch/Post call must return 201 or 202, Delete call must return 202 or 204, Put call must return 202 or 201 or 200, but {statusCode} being returned.
 
-**Description**: Long running operation must return specific response code as per http method type when this operation is annotated with x-ms-long-running-operation:true. See [RPC - Asynchronous Operations](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations) for more details.
+**Description**: Long running operation must return specific response code as per http method type in example or in traffic payload when this operation is annotated with x-ms-long-running-operation:true. See [RPC - Asynchronous Operations](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations) for more details.
 
-**How to fix the violation**: Correct the response code per the guidance or remove annotation of x-ms-long-running-operation.
+**How to fix the violation**: Correct the response code per the guidance or remove annotation of x-ms-long-running-operation in example or in traffic payload.
 
 ### <a name="LRO_RESPONSE_HEADER" />LRO_RESPONSE_HEADER
 
@@ -871,7 +892,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **Description**: Long running operation must return location header or azure-AsyncOperation header in response when this operation is annotated with x-ms-long-running-operation:true.
 
-**How to fix the violation**: Adding one of these headers to the response.
+**How to fix the violation**: Adding one of these headers to the response in example or in traffic payload.
 
 ### <a name="MISSING_RESOURCE_ID" />MISSING_RESOURCE_ID
 
@@ -879,4 +900,20 @@ This document lists the set of automated rules that can be validated against swa
 
 **Description**: `id` is a required field of azure resource to return in response body of each GET or PUT call when this resource is annotated as x-ms-azure-resource: true. This field is important to the platform because it is used as the identifier for references on other objects. e.g. "id": "/subscriptions/{id}/resourceGroups/{group}/providers/{rpns}/{type}/{name}".
 
-**How to fix the violation**: Adding id to the response body.
+**How to fix the violation**: Adding id to the response body in example or in traffic payload.
+
+### <a name="XMS_EXAMPLE_NOTFOUND_ERROR" />XMS_EXAMPLE_NOTFOUND_ERROR
+
+**Output Message**: "x-ms-example" not found in {"operationId"} operation.
+
+**Description**: Example is required to provide for each operation and it's annotated by "x-ms-example". Example is important because it is displayed in rest API document. See [x-ms-examples](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/x-ms-examples.md) for details.
+
+**How to fix the violation**: Adding separated example JSON file and reference it with "x-ms-examples" annotation in swagger.
+
+### <a name="INVALID_RESPONSE_HEADER" />INVALID_RESPONSE_HEADER
+
+**Output Message**: Header {header} is required in response but not provided.
+
+**Description**: {header} is declared in response schema in swagger but it's not provided in response in example or in traffic payload.
+
+**How to fix the violation**: Adding this {header} to the response in example or in traffic payload.
