@@ -53,7 +53,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/AnalyzeTextInput"
+              "$ref": "#/definitions/AnalyzeTextTask"
             }
           }
         ],
@@ -61,7 +61,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/AnalyzeTextResult"
+              "$ref": "#/definitions/AnalyzeTextTaskResult"
             }
           },
           "default": {
@@ -222,6 +222,26 @@
         "modelAsString": true
       }
     },
+    "AnalyzeTextTaskResultsKind": {
+      "type": "string",
+      "description": "Enumeration of supported Text Analysis task results.",
+      "enum": [
+        "SentimentAnalysisResults",
+        "EntityRecognitionResults",
+        "PiiEntityRecognitionResults",
+        "KeyPhraseExtractionResults",
+        "LanguageDetectionResults",
+        "EntityLinkingResults",
+        "HealthcareResults",
+        "ExtractiveSummarizationResults",
+        "CustomEntityRecognitionResults",
+        "CustomSingleClassificationResults",
+        "CustomMultiClassificationResults"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true
+      }
+    },
     "MultiLanguageAnalysisInput": {
       "properties": {
         "documents": {
@@ -253,19 +273,16 @@
         }
       }
     },
-    "AnalyzeTextInput": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextTask"
+    "AnalyzeTextTaskResult": {
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AnalyzeTextTaskResultsKind"
         }
-      ]
-    },
-    "AnalyzeTextResult": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextTask"
-        }
-      ]
+      }
     },
     "AnalyzeTextEntityLinkingInput": {
       "properties": {
@@ -278,7 +295,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextInput"
+          "$ref": "#/definitions/AnalyzeTextTask"
         }
       ],
       "x-ms-discriminator-value": "EntityLinking"
@@ -294,7 +311,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextInput"
+          "$ref": "#/definitions/AnalyzeTextTask"
         }
       ],
       "x-ms-discriminator-value": "EntityRecognition"
@@ -310,7 +327,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextInput"
+          "$ref": "#/definitions/AnalyzeTextTask"
         }
       ],
       "x-ms-discriminator-value": "KeyPhraseExtraction"
@@ -326,7 +343,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextInput"
+          "$ref": "#/definitions/AnalyzeTextTask"
         }
       ],
       "x-ms-discriminator-value": "PiiEntityRecognition"
@@ -342,7 +359,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextInput"
+          "$ref": "#/definitions/AnalyzeTextTask"
         }
       ],
       "x-ms-discriminator-value": "LanguageDetection"
@@ -358,7 +375,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextInput"
+          "$ref": "#/definitions/AnalyzeTextTask"
         }
       ],
       "x-ms-discriminator-value": "SentimentAnalysis"
@@ -1109,13 +1126,13 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextResult"
+          "$ref": "#/definitions/AnalyzeTextTaskResult"
         }
       ],
       "required": [
         "results"
       ],
-      "x-ms-discriminator-value": "SentimentAnalysis"
+      "x-ms-discriminator-value": "SentimentAnalysisResults"
     },
     "SentimentResponse": {
       "type": "object",
@@ -1449,7 +1466,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextResult"
+          "$ref": "#/definitions/AnalyzeTextTaskResult"
         }
       ],
       "x-ms-discriminator-value": "EntityRecognition"
@@ -1583,7 +1600,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextResult"
+          "$ref": "#/definitions/AnalyzeTextTaskResult"
         }
       ],
       "x-ms-discriminator-value": "EntityLinking"
@@ -1762,7 +1779,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextResult"
+          "$ref": "#/definitions/AnalyzeTextTaskResult"
         }
       ],
       "x-ms-discriminator-value": "PiiEntityRecognition"
@@ -2061,7 +2078,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextResult"
+          "$ref": "#/definitions/AnalyzeTextTaskResult"
         }
       ],
       "x-ms-discriminator-value": "ExtractiveSummarization"
@@ -2174,7 +2191,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextResult"
+          "$ref": "#/definitions/AnalyzeTextTaskResult"
         }
       ],
       "x-ms-discriminator-value": "KeyPhraseExtraction"
@@ -2268,7 +2285,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextResult"
+          "$ref": "#/definitions/AnalyzeTextTaskResult"
         }
       ],
       "x-ms-discriminator-value": "LanguageDetection"
@@ -2505,119 +2522,119 @@
           "$ref": "#/definitions/TaskIdentifier"
         },
         {
-          "$ref": "#/definitions/AnalyzeTextTask"
+          "$ref": "#/definitions/AnalyzeTextTaskResult"
         }
       ]
     },
     "EntityRecognitionLROResult": {
-        "allOf": [
-            {
-                "$ref": "#/definitions/AnalyzeTextLROResult"
-            },
-            {
-                "$ref": "#/definitions/EntitiesTaskResult"
-            }
-        ],
-        "x-ms-discriminator-value": "EntityRecognition"
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
+        },
+        {
+          "$ref": "#/definitions/EntitiesTaskResult"
+        }
+      ],
+      "x-ms-discriminator-value": "EntityRecognitionResults"
     },
     "CustomEntityRecognitionLROResult": {
-        "allOf": [
-            {
-                "$ref": "#/definitions/AnalyzeTextLROResult"
-            },
-            {
-                "$ref": "#/definitions/CustomEntitiesTaskResult"
-            }
-        ],
-        "x-ms-discriminator-value": "CustomEntityRecognition"
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
+        },
+        {
+          "$ref": "#/definitions/CustomEntitiesTaskResult"
+        }
+      ],
+      "x-ms-discriminator-value": "CustomEntityRecognitionResults"
     },
     "CustomSingleClassificationLROResult": {
-        "allOf": [
-            {
-                "$ref": "#/definitions/AnalyzeTextLROResult"
-            },
-            {
-                "$ref": "#/definitions/CustomSingleClassificationTaskResult"
-            }
-        ],
-        "x-ms-discriminator-value": "CustomSingleClassification"
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
+        },
+        {
+          "$ref": "#/definitions/CustomSingleClassificationTaskResult"
+        }
+      ],
+      "x-ms-discriminator-value": "CustomSingleClassificationResults"
     },
     "CustomMultiClassificationLROResult": {
-        "allOf": [
-            {
-                "$ref": "#/definitions/AnalyzeTextLROResult"
-            },
-            {
-                "$ref": "#/definitions/CustomMultiClassificationTaskResult"
-            }
-        ],
-        "x-ms-discriminator-value": "CustomMultiClassification"
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
+        },
+        {
+          "$ref": "#/definitions/CustomMultiClassificationTaskResult"
+        }
+      ],
+      "x-ms-discriminator-value": "CustomMultiClassificationResults"
     },
     "EntityLinkingLROResult": {
-        "allOf": [
-            {
-                "$ref": "#/definitions/AnalyzeTextLROResult"
-            },
-            {
-                "$ref": "#/definitions/EntityLinkingTaskResult"
-            }
-        ],
-        "x-ms-discriminator-value": "EntityLinking"
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
+        },
+        {
+          "$ref": "#/definitions/EntityLinkingTaskResult"
+        }
+      ],
+      "x-ms-discriminator-value": "EntityLinkingResults"
     },
     "PiiEntityRecognitionLROResult": {
-        "allOf": [
-            {
-                "$ref": "#/definitions/AnalyzeTextLROResult"
-            },
-            {
-                "$ref": "#/definitions/PiiTaskResult"
-            }
-        ],
-        "x-ms-discriminator-value": "PiiEntityRecognition"
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
+        },
+        {
+          "$ref": "#/definitions/PiiTaskResult"
+        }
+      ],
+      "x-ms-discriminator-value": "PiiEntityRecognitionResults"
     },
     "ExtractiveSummarizationLROResult": {
-        "allOf": [
-            {
-                "$ref": "#/definitions/AnalyzeTextLROResult"
-            },
-            {
-                "$ref": "#/definitions/ExtractiveSummarizationTaskResult"
-            }
-        ],
-        "x-ms-discriminator-value": "ExtractiveSummarization"
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
+        },
+        {
+          "$ref": "#/definitions/ExtractiveSummarizationTaskResult"
+        }
+      ],
+      "x-ms-discriminator-value": "ExtractiveSummarizationResults"
     },
     "HealthcareLROResult": {
-        "allOf": [
-            {
-                "$ref": "#/definitions/AnalyzeTextLROResult"
-            },
-            {
-                "$ref": "#/definitions/HealthcareTaskResult"
-            }
-        ],
-        "x-ms-discriminator-value": "Healthcare"
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
+        },
+        {
+          "$ref": "#/definitions/HealthcareTaskResult"
+        }
+      ],
+      "x-ms-discriminator-value": "HealthcareResults"
     },
     "SentimentLROResult": {
-        "allOf": [
-            {
-                "$ref": "#/definitions/AnalyzeTextLROResult"
-            },
-            {
-                "$ref": "#/definitions/SentimentTaskResult"
-            }
-        ],
-        "x-ms-discriminator-value": "SentimentAnalysis"
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
+        },
+        {
+          "$ref": "#/definitions/SentimentTaskResult"
+        }
+      ],
+      "x-ms-discriminator-value": "SentimentAnalysisResults"
     },
     "KeyPhraseExtractionLROTaskResult": {
-        "allOf": [
-            {
-                "$ref": "#/definitions/AnalyzeTextLROResult"
-            },
-            {
-                "$ref": "#/definitions/KeyPhraseTaskResult"
-            }
-        ],
-        "x-ms-discriminator-value": "KeyPhraseExtraction"
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
+        },
+        {
+          "$ref": "#/definitions/KeyPhraseTaskResult"
+        }
+      ],
+      "x-ms-discriminator-value": "KeyPhraseExtractionResults"
     },
     "StringIndexType": {
       "type": "string",
