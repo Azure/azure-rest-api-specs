@@ -28,6 +28,7 @@ These are the global settings for the Storage API.
 openapi-type: arm
 tag: package-2021-08
 ```
+
 ### Tag: package-2021-08
 
 These settings apply only when `--tag=package-2021-08` is specified on the command line.
@@ -81,10 +82,6 @@ directive:
     suppress: R4009
 ```
 
-``` yaml
-openapi-type: arm
-tag: package-2021-06
-```
 ### Tag: package-2021-06
 
 These settings apply only when `--tag=package-2021-06` is specified on the command line.
