@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-10-01",
+    "version": "2021-11-01",
     "title": "SiteRecoveryManagementClient",
     "x-ms-code-generation-settings": {
       "header": "MICROSOFT_MIT_NO_VERSION"
@@ -201,6 +201,57 @@
         "x-ms-examples": {
           "Configures email notifications for this vault.": {
             "$ref": "./examples/ReplicationAlertSettings_Create.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationAppliances": {
+      "get": {
+        "tags": [
+          "ReplicationAppliances"
+        ],
+        "summary": "Gets the list of appliances.",
+        "description": "Gets the list of Azure Site Recovery appliances for the vault.",
+        "operationId": "ReplicationAppliances_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter options.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApplianceCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/ApplianceQueryParameter",
+        "x-ms-examples": {
+          "Gets the list of appliances.": {
+            "$ref": "./examples/ReplicationAppliances_List.json"
           }
         }
       }
@@ -3799,6 +3850,83 @@
         "x-ms-examples": {
           "Resolve health errors.": {
             "$ref": "./examples/ReplicationProtectedItems_ResolveHealthErrors.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicatedProtectedItemName}/switchProvider": {
+      "post": {
+        "tags": [
+          "ReplicationProtectedItems"
+        ],
+        "summary": "Execute switch provider.",
+        "description": "Operation to initiate a switch provider of the replication protected item.",
+        "operationId": "ReplicationProtectedItems_SwitchProvider",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Unique fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "Protection container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "replicatedProtectedItemName",
+            "in": "path",
+            "description": "Replication protected item name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "switchProviderInput",
+            "in": "body",
+            "description": "Switch provider input.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SwitchProviderInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicationProtectedItem"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Execute switch provider.": {
+            "$ref": "./examples/ReplicationProtectedItems_SwitchProvider.json"
           }
         }
       }
@@ -8236,6 +8364,10 @@
           "description": "The recovery availability zone.",
           "type": "string"
         },
+        "recoveryExtendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The recovery extended location."
+        },
         "recoveryAzureNetworkId": {
           "description": "The recovery Azure virtual network ARM id.",
           "type": "string"
@@ -8791,6 +8923,14 @@
           "type": "string",
           "readOnly": true
         },
+        "initialPrimaryExtendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The initial primary extended location."
+        },
+        "initialRecoveryExtendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The initial recovery extended location."
+        },
         "initialRecoveryFabricLocation": {
           "description": "The initial recovery fabric location.",
           "type": "string",
@@ -8970,6 +9110,14 @@
         "recoveryAvailabilityZone": {
           "description": "The recovery availability zone.",
           "type": "string"
+        },
+        "primaryExtendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The primary Extended Location."
+        },
+        "recoveryExtendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The recovery Extended Location."
         },
         "vmEncryptionType": {
           "description": "The encryption type of the VM.",
@@ -9765,6 +9913,47 @@
           "type": "string"
         }
       }
+    },
+    "ApplianceCollection": {
+      "description": "Collection of appliance details.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The appliance details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReplicationAppliance"
+          }
+        },
+        "nextLink": {
+          "description": "The value of next link.",
+          "type": "string"
+        }
+      }
+    },
+    "ApplianceQueryParameter": {
+      "description": "Query parameter to get appliance.",
+      "type": "object",
+      "properties": {
+        "providerType": {
+          "description": "The providerType to be used for fetching appliance details.",
+          "type": "string"
+        }
+      }
+    },
+    "ApplianceSpecificDetails": {
+      "description": "Appliance specific details.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "Gets the class type. Overridden in derived classes.",
+          "type": "string"
+        }
+      },
+      "discriminator": "instanceType",
+      "required": [
+        "instanceType"
+      ]
     },
     "ApplyRecoveryPointInput": {
       "description": "Input to apply recovery point.",
@@ -11060,6 +11249,31 @@
         }
       },
       "x-ms-discriminator-value": "ExportJobDetails"
+    },
+    "ExtendedLocation": {
+      "description": "Extended location of the resource.",
+      "required": [
+        "name",
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the extended location.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The extended location type.",
+          "enum": [
+            "EdgeZone"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ExtendedLocationType",
+            "modelAsString": true
+          }
+        }
+      }
     },
     "Fabric": {
       "description": "Fabric definition.",
@@ -13461,6 +13675,11 @@
         "progressStatus": {
           "description": "The Progress Status.",
           "type": "string"
+        },
+        "secondsToTakeSwitchProvider": {
+          "format": "int64",
+          "description": "The seconds to take for switch provider.",
+          "type": "integer"
         }
       }
     },
@@ -13791,6 +14010,17 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "switchProviderBlockingErrorDetails": {
+          "description": "The switch provider blocking error information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InMageAzureV2SwitchProviderBlockingErrorDetails"
+          }
+        },
+        "switchProviderDetails": {
+          "$ref": "#/definitions/InMageAzureV2SwitchProviderDetails",
+          "description": "The switch provider blocking error information."
         }
       },
       "x-ms-discriminator-value": "InMageAzureV2"
@@ -13834,6 +14064,103 @@
           "items": {
             "type": "string"
           }
+        }
+      },
+      "x-ms-discriminator-value": "InMageAzureV2"
+    },
+    "InMageAzureV2SwitchProviderBlockingErrorDetails": {
+      "description": "InMageAzureV2 switch provider blocking error details.",
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "description": "The error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "possibleCauses": {
+          "description": "The possible causes.",
+          "type": "string",
+          "readOnly": true
+        },
+        "recommendedAction": {
+          "description": "The recommended action.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessageParameters": {
+          "description": "The error message parameters.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "errorTags": {
+          "description": "The error tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "InMageAzureV2SwitchProviderDetails": {
+      "description": "InMageAzureV2 switch provider details.",
+      "type": "object",
+      "properties": {
+        "targetVaultId": {
+          "description": "The target vault Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "targetResourceId": {
+          "description": "The target resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "targetFabricId": {
+          "description": "The target fabric Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "targetApplianceId": {
+          "description": "The target appliance Id.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "InMageAzureV2SwitchProviderProviderInput": {
+      "description": "Provider specific input for InMageAzureV2 switch provider.",
+      "required": [
+        "targetVaultID",
+        "targetFabricID",
+        "targetApplianceID"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SwitchProviderProviderSpecificInput"
+        }
+      ],
+      "properties": {
+        "targetVaultID": {
+          "description": "The target vault Id.",
+          "type": "string"
+        },
+        "targetFabricID": {
+          "description": "The target fabric Id.",
+          "type": "string"
+        },
+        "targetApplianceID": {
+          "description": "The target appliance Id.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "InMageAzureV2"
@@ -14119,6 +14446,48 @@
       },
       "x-ms-discriminator-value": "InMage"
     },
+    "InMageFabricSwitchProviderBlockingErrorDetails": {
+      "description": "InMageFabric switch provider blocking error details.",
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "description": "The error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "possibleCauses": {
+          "description": "The possible causes.",
+          "type": "string",
+          "readOnly": true
+        },
+        "recommendedAction": {
+          "description": "The recommended action.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessageParameters": {
+          "description": "The error message parameters.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "errorTags": {
+          "description": "The error tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
     "InMagePolicyDetails": {
       "description": "InMage specific protection profile details.",
       "type": "object",
@@ -14341,6 +14710,90 @@
           "readOnly": true
         }
       }
+    },
+    "InMageRcmApplianceDetails": {
+      "description": "InMageRcm appliance details.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The appliance Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The appliance name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "fabricArmId": {
+          "description": "The fabric ARM Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "processServer": {
+          "$ref": "#/definitions/ProcessServerDetails",
+          "description": "The process server.",
+          "readOnly": true
+        },
+        "rcmProxy": {
+          "$ref": "#/definitions/RcmProxyDetails",
+          "description": "The of RCM proxy.",
+          "readOnly": true
+        },
+        "pushInstaller": {
+          "$ref": "#/definitions/PushInstallerDetails",
+          "description": "The push installer.",
+          "readOnly": true
+        },
+        "replicationAgent": {
+          "$ref": "#/definitions/ReplicationAgentDetails",
+          "description": "The replication agent.",
+          "readOnly": true
+        },
+        "reprotectAgent": {
+          "$ref": "#/definitions/ReprotectAgentDetails",
+          "description": "The reprotect agent.",
+          "readOnly": true
+        },
+        "marsAgent": {
+          "$ref": "#/definitions/MarsAgentDetails",
+          "description": "The Mars agent.",
+          "readOnly": true
+        },
+        "dra": {
+          "$ref": "#/definitions/DraDetails",
+          "description": "The DRA.",
+          "readOnly": true
+        },
+        "switchProviderBlockingErrorDetails": {
+          "description": "The switch provider blocking error information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InMageRcmFabricSwitchProviderBlockingErrorDetails"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "InMageRcmApplianceSpecificDetails": {
+      "description": "InMageRcm appliance specific details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApplianceSpecificDetails"
+        }
+      ],
+      "properties": {
+        "appliances": {
+          "description": "The list of appliances.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InMageRcmApplianceDetails"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "InMageRcm"
     },
     "InMageRcmApplyRecoveryPointInput": {
       "description": "ApplyRecoveryPoint input specific to InMageRcm provider.",
@@ -14801,6 +15254,48 @@
         }
       },
       "x-ms-discriminator-value": "InMageRcm"
+    },
+    "InMageRcmFabricSwitchProviderBlockingErrorDetails": {
+      "description": "InMageRcmFabric switch provider blocking error details.",
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "description": "The error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "possibleCauses": {
+          "description": "The possible causes.",
+          "type": "string",
+          "readOnly": true
+        },
+        "recommendedAction": {
+          "description": "The recommended action.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessageParameters": {
+          "description": "The error message parameters.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "errorTags": {
+          "description": "The error tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
     },
     "InMageRcmFailbackDiscoveredProtectedVmDetails": {
       "description": "InMageRcmFailback discovered VM details.",
@@ -19150,6 +19645,14 @@
         "recoveryZone": {
           "description": "The recovery zone.",
           "type": "string"
+        },
+        "primaryExtendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The primary extended location."
+        },
+        "recoveryExtendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The recovery extended location."
         }
       },
       "x-ms-discriminator-value": "A2A"
@@ -20285,6 +20788,26 @@
         }
       }
     },
+    "ReplicationAppliance": {
+      "description": "Replication appliance definition.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ReplicationApplianceProperties",
+          "description": "Appliance related data."
+        }
+      }
+    },
+    "ReplicationApplianceProperties": {
+      "description": "Replication appliance properties.",
+      "type": "object",
+      "properties": {
+        "providerSpecificDetails": {
+          "$ref": "#/definitions/ApplianceSpecificDetails",
+          "description": "Provider specific settings."
+        }
+      }
+    },
     "ReplicationEligibilityResults": {
       "description": "Replication eligibility results response model.",
       "type": "object",
@@ -20476,6 +20999,14 @@
         },
         "testFailoverStateDescription": {
           "description": "The Test failover state description.",
+          "type": "string"
+        },
+        "switchProviderState": {
+          "description": "The switch provider state.",
+          "type": "string"
+        },
+        "switchProviderStateDescription": {
+          "description": "The switch provider state description.",
           "type": "string"
         },
         "allowedOperations": {
@@ -21432,6 +21963,44 @@
       "properties": {
         "instanceType": {
           "description": "Gets the Instance type.",
+          "type": "string"
+        }
+      },
+      "discriminator": "instanceType"
+    },
+    "SwitchProviderInput": {
+      "description": "Input definition for switch provider.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SwitchProviderInputProperties",
+          "description": "Switch provider input properties."
+        }
+      }
+    },
+    "SwitchProviderInputProperties": {
+      "description": "Input definition for switch provider input properties.",
+      "type": "object",
+      "properties": {
+        "targetInstanceType": {
+          "description": "Target provider type.",
+          "type": "string"
+        },
+        "providerSpecificDetails": {
+          "$ref": "#/definitions/SwitchProviderProviderSpecificInput",
+          "description": "Provider specific settings."
+        }
+      }
+    },
+    "SwitchProviderProviderSpecificInput": {
+      "description": "Provider specific switch provider input.",
+      "required": [
+        "instanceType"
+      ],
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "The class type.",
           "type": "string"
         }
       },
@@ -23685,6 +24254,13 @@
         "agentVersionDetails": {
           "$ref": "#/definitions/VersionDetails",
           "description": "The agent version details."
+        },
+        "switchProviderBlockingErrorDetails": {
+          "description": "The switch provider blocking error information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InMageFabricSwitchProviderBlockingErrorDetails"
+          }
         }
       },
       "x-ms-discriminator-value": "VMware"
