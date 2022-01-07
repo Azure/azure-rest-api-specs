@@ -2490,11 +2490,6 @@
           }
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TaskIdentifier"
-        }
-      ],
       "required": [
         "status",
         "lastUpdateDateTime"
@@ -2510,9 +2505,119 @@
           "$ref": "#/definitions/TaskIdentifier"
         },
         {
-          "$ref": "#/definitions/AnalyzeTextResult"
+          "$ref": "#/definitions/AnalyzeTextTask"
         }
       ]
+    },
+    "EntityRecognitionLROResult": {
+        "allOf": [
+            {
+                "$ref": "#/definitions/AnalyzeTextLROResult"
+            },
+            {
+                "$ref": "#/definitions/EntitiesTaskResult"
+            }
+        ],
+        "x-ms-discriminator-value": "EntityRecognition"
+    },
+    "CustomEntityRecognitionLROResult": {
+        "allOf": [
+            {
+                "$ref": "#/definitions/AnalyzeTextLROResult"
+            },
+            {
+                "$ref": "#/definitions/CustomEntitiesTaskResult"
+            }
+        ],
+        "x-ms-discriminator-value": "CustomEntityRecognition"
+    },
+    "CustomSingleClassificationLROResult": {
+        "allOf": [
+            {
+                "$ref": "#/definitions/AnalyzeTextLROResult"
+            },
+            {
+                "$ref": "#/definitions/CustomSingleClassificationTaskResult"
+            }
+        ],
+        "x-ms-discriminator-value": "CustomSingleClassification"
+    },
+    "CustomMultiClassificationLROResult": {
+        "allOf": [
+            {
+                "$ref": "#/definitions/AnalyzeTextLROResult"
+            },
+            {
+                "$ref": "#/definitions/CustomMultiClassificationTaskResult"
+            }
+        ],
+        "x-ms-discriminator-value": "CustomMultiClassification"
+    },
+    "EntityLinkingLROResult": {
+        "allOf": [
+            {
+                "$ref": "#/definitions/AnalyzeTextLROResult"
+            },
+            {
+                "$ref": "#/definitions/EntityLinkingTaskResult"
+            }
+        ],
+        "x-ms-discriminator-value": "EntityLinking"
+    },
+    "PiiEntityRecognitionLROResult": {
+        "allOf": [
+            {
+                "$ref": "#/definitions/AnalyzeTextLROResult"
+            },
+            {
+                "$ref": "#/definitions/PiiTaskResult"
+            }
+        ],
+        "x-ms-discriminator-value": "PiiEntityRecognition"
+    },
+    "ExtractiveSummarizationLROResult": {
+        "allOf": [
+            {
+                "$ref": "#/definitions/AnalyzeTextLROResult"
+            },
+            {
+                "$ref": "#/definitions/ExtractiveSummarizationTaskResult"
+            }
+        ],
+        "x-ms-discriminator-value": "ExtractiveSummarization"
+    },
+    "HealthcareLROResult": {
+        "allOf": [
+            {
+                "$ref": "#/definitions/AnalyzeTextLROResult"
+            },
+            {
+                "$ref": "#/definitions/HealthcareTaskResult"
+            }
+        ],
+        "x-ms-discriminator-value": "Healthcare"
+    },
+    "SentimentLROResult": {
+        "allOf": [
+            {
+                "$ref": "#/definitions/AnalyzeTextLROResult"
+            },
+            {
+                "$ref": "#/definitions/SentimentTaskResult"
+            }
+        ],
+        "x-ms-discriminator-value": "SentimentAnalysis"
+    },
+    "KeyPhraseExtractionLROTaskResult": {
+        "allOf": [
+            {
+                "$ref": "#/definitions/AnalyzeTextLROResult"
+            },
+            {
+                "$ref": "#/definitions/KeyPhraseTaskResult"
+            }
+        ],
+        "x-ms-discriminator-value": "KeyPhraseExtraction"
     },
     "StringIndexType": {
       "type": "string",
@@ -2567,10 +2672,6 @@
         "statistics": {
           "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
           "$ref": "#/definitions/DocumentStatistics"
-        },
-        "detectedLanguage": {
-          "type": "string",
-          "description": "(Optional) This is the 2 letter ISO 639-1 representation of the language used for processing this document. This property will only be used if automatic language detection was enabled for the input document."
         }
       }
     },
@@ -2760,7 +2861,7 @@
     "ErrorResponse": {
       "type": "object",
       "description": "Error response.",
-      "additionalProperties": false,
+      "additionalProperties": true,
       "properties": {
         "error": {
           "description": "The error object.",
@@ -2771,7 +2872,7 @@
     "Error": {
       "type": "object",
       "description": "The error object.",
-      "additionalProperties": false,
+      "additionalProperties": true,
       "required": [
         "code",
         "message"
@@ -2805,7 +2906,7 @@
     "InnerErrorModel": {
       "type": "object",
       "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-      "additionalProperties": false,
+      "additionalProperties": true,
       "required": [
         "code",
         "message"
