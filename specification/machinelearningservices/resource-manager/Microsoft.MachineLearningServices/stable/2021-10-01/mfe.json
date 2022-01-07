@@ -5218,10 +5218,6 @@
     },
     "AzureBlobDatastore": {
       "description": "Azure Blob datastore configuration.",
-      "required": [
-        "accountName",
-        "containerName"
-      ],
       "type": "object",
       "allOf": [
         {
@@ -5231,21 +5227,21 @@
       "properties": {
         "accountName": {
           "description": "Storage account name.",
-          "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "containerName": {
           "description": "Storage account container name.",
-          "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "endpoint": {
           "description": "Azure cloud endpoint for the storage account.",
