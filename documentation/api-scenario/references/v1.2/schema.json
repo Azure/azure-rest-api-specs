@@ -63,8 +63,7 @@
       "additionalProperties": {
         "oneOf": [
           {
-            "type": "string",
-            "description": "Default value of the variable"
+            "type": "string"
           },
           {
             "type": "object",
@@ -72,16 +71,114 @@
               "type": {
                 "type": "string",
                 "enum": [
-                  "string",
-                  "secureString"
+                  "array",
+                  "bool",
+                  "int",
+                  "object",
+                  "secureString",
+                  "secureObject",
+                  "string"
                 ],
                 "default": "string"
               },
-              "defaultValue": {
-                "type": "string",
-                "description": "Default value of the variable"
+              "value": true,
+              "patches": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/JsonPatchOp"
+                }
               }
             },
+            "required": [
+              "type"
+            ],
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "type": {
+                      "enum": ["string", "secureString"]
+                    }
+                  }
+                },
+                "then": {
+                  "properties": {
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "type": {
+                      "enum": ["object", "secureObject"]
+                    }
+                  },
+                  "required": ["type"]
+                },
+                "then": {
+                  "properties": {
+                    "value": {
+                      "type": "object"
+                    }
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "type": {
+                      "const": "array"
+                    }
+                  },
+                  "required": ["type"]
+                },
+                "then": {
+                  "properties": {
+                    "value": {
+                      "type": "array",
+                      "items": true
+                    }
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "type": {
+                      "const": "bool"
+                    }
+                  },
+                  "required": ["type"]
+                },
+                "then": {
+                  "properties": {
+                    "value": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "type": {
+                      "const": "int"
+                    }
+                  },
+                  "required": ["type"]
+                },
+                "then": {
+                  "properties": {
+                    "value": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            ],
             "additionalProperties": false
           }
         ]
