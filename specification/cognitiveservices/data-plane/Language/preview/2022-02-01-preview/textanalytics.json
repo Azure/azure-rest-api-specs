@@ -49,7 +49,7 @@
             "$ref": "#/parameters/ShowStats"
           },
           {
-            "description": "",
+            "description": "Collection of documents to analyze and a single task to execute.",
             "in": "body",
             "name": "body",
             "schema": {
@@ -109,7 +109,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "description": "Collection of documents to analyze and tasks to execute.",
+            "description": "Collection of documents to analyze and one or more tasks to execute.",
             "in": "body",
             "name": "body",
             "schema": {
@@ -219,6 +219,7 @@
         "CustomMultiClassification"
       ],
       "x-ms-enum": {
+        "name": "AnalyzeTextTaskKind",
         "modelAsString": true
       }
     },
@@ -234,6 +235,7 @@
         "EntityLinkingResults"
       ],
       "x-ms-enum": {
+        "name": "AnalyzeTextTaskResultsKind",
         "modelAsString": true
       }
     },
@@ -254,6 +256,7 @@
         "CustomMultiClassificationLROResults"
       ],
       "x-ms-enum": {
+        "name": "AnalyzeTextLROResultsKind",
         "modelAsString": true
       }
     },
@@ -1689,12 +1692,7 @@
       "description": "Parameters object for a PII Entities Recognition task.",
       "properties": {
         "domain": {
-          "type": "string",
-          "default": "none",
-          "enum": [
-            "phi",
-            "none"
-          ]
+          "$ref": "#/definitions/PiiDomain"
         },
         "piiCategories": {
           "$ref": "#/definitions/PiiCategories"
@@ -1769,6 +1767,31 @@
       "required": [
         "documents"
       ]
+    },
+    "PiiDomain": {
+      "type": "string",
+      "description": "The PII domain used for PII Entity Recognition.",
+      "default": "none",
+      "enum": [
+        "phi",
+        "none"
+      ],
+      "x-ms-enum": {
+        "name": "PiiDomain",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "phi",
+            "description": "Indicates that entities in the Personal Health Information domain should be redacted.",
+            "value": "phi"
+          },
+          {
+            "name": "none",
+            "description": "Indicates that no domain is specified.",
+            "value": "none"
+          }
+        ]
+      }
     },
     "PiiEntitiesDocumentResult": {
       "type": "object",
@@ -1991,12 +2014,7 @@
           "default": 3
         },
         "sortBy": {
-          "type": "string",
-          "default": "Offset",
-          "enum": [
-            "Offset",
-            "Rank"
-          ]
+          "$ref": "#/definitions/ExtractiveSummarizationSortingCriteria"
         },
         "stringIndexType": {
           "$ref": "#/definitions/StringIndexType"
@@ -2054,6 +2072,31 @@
       "required": [
         "documents"
       ]
+    },
+    "ExtractiveSummarizationSortingCriteria": {
+      "type": "string",
+      "default": "Offset",
+      "description": "The sorting criteria to use for the results of Extractive Summarization.",
+      "enum": [
+        "Offset",
+        "Rank"
+      ],
+      "x-ms-enum": {
+        "name": "ExtractiveSummarizationSortingCriteria",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Offset",
+            "description": "Indicates that results should be sorted in order of appearance in the text.",
+            "value": "Offset"
+          },
+          {
+            "name": "Rank",
+            "description": "Indicates that results should be sorted in order of importance (i.e. rank score) according to the model.",
+            "value": "Rank"
+          }
+        ]
+      }
     },
     "ExtractedSummaryDocumentResult": {
       "type": "object",
@@ -2850,7 +2893,7 @@
         },
         "defaultLanguage": {
           "type": "string",
-          "description": "(Optional) A 2 leter ISO 639-1 representation of a language to be used as a default value when the \"language\" property is set to \"auto\". The default value will be used as a fallback if a language cannot be automatically detected."
+          "description": "(Optional) A 2 letter ISO 639-1 representation of a language to be used as a default value when the \"language\" property is set to \"auto\". The default value will be used as a fallback if a language cannot be automatically detected."
         }
       }
     },
