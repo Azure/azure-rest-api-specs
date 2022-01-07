@@ -5,9 +5,7 @@
 This is the AutoRest configuration file for Peering.
 
 ---
-
-## Getting Started
-
+## Getting Started 
 To build the SDK for Peering, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,14 +13,21 @@ To build the SDK for Peering, simply [Install AutoRest](https://aka.ms/autorest/
 To see additional help and options, run:
 
 > `autorest --help`
-
 ---
 
 ## Configuration
 
-### Basic Information
 
+
+### Basic Information 
 These are the global settings for the Peering API.
+
+``` yaml
+title: PeeringManagementClient
+description: Peering Client
+openapi-type: arm
+tag: package-2022-01-01
+```
 
 ``` yaml
 title: PeeringManagementClient
@@ -30,7 +35,6 @@ description: Peering Client
 openapi-type: arm
 tag: package-2021-06-01
 ```
-
 or
 
 ``` yaml
@@ -39,7 +43,6 @@ description: Peering Client
 openapi-type: arm
 tag: package-2021-01-01
 ```
-
 or
 
 ``` yaml
@@ -48,7 +51,6 @@ description: Peering Client
 openapi-type: arm
 tag: package-2020-10-01
 ```
-
 or
 
 ``` yaml
@@ -57,43 +59,37 @@ description: Peering Client
 openapi-type: arm
 tag: package-2020-04-01
 ```
-
 or
-
 ``` yaml
 title: PeeringManagementClient
 description: Peering Client
 openapi-type: arm
 tag: package-2020-01-01-preview
 ```
-
 or
-
 ``` yaml
 title: PeeringManagementClient
 description: Peering Client
 openapi-type: arm
 tag: package-2019-09-01-preview
 ```
-
 or
-
 ``` yaml
 title: PeeringManagementClient
 description: Peering Client
 openapi-type: arm
-tag: package-2022-01
+tag: package-2019-08-01-preview
+
 ```
+### Tag: package-2022-01-01
 
+These settings apply only when `--tag=package-2022-01-01` is specified on the command line.
 
-### Tag: package-2022-01
-
-These settings apply only when `--tag=package-2022-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2022-01'
+``` yaml $(tag) == 'package-2022-01-01'
 input-file:
-  - Microsoft.Peering/stable/2022-01-01/peering.json
+- Microsoft.Peering/stable/2022-01-01/peering.json
 ```
+
 ### Tag: package-2021-06-01
 
 These settings apply only when `--tag=package-2021-06-01` is specified on the command line.
@@ -157,6 +153,7 @@ input-file:
 - Microsoft.Peering/preview/2019-08-01-preview/peering.json
 ```
 
+
 # Code Generation
 
 ## Swagger to SDK
@@ -179,11 +176,11 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
 ```
 
-## Python
+## Python 
 
 See configuration in [readme.python.md](./readme.python.md)
 
-## C#
+## C# 
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
 
@@ -194,3 +191,6 @@ See configuration in [readme.go.md](./readme.go.md)
 ## CLI
 
 See configuration in [readme.cli.md](./readme.cli.md)
+
+
+
