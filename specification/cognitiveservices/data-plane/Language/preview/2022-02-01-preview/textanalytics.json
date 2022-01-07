@@ -135,7 +135,7 @@
         },
         "x-ms-examples": {
           "Successful Submit Analysis Job Request": {
-            "$ref": "./examples/SuccessfulAnalyzeTextJobSubmitRequest.json"
+            "$ref": "./examples/SuccessfulAnalyzeTextJobsMultipleTaskSubmitRequest.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -195,7 +195,7 @@
         },
         "x-ms-examples": {
           "Successful Get Text Analysis Job Status Request": {
-            "$ref": "./examples/SuccessfulAnalyzeTextJobStatusRequest.json"
+            "$ref": "./examples/SuccessfulAnalyzeTextJobsMultipleTaskStatusRequest.json"
           }
         }
       }
@@ -231,12 +231,27 @@
         "PiiEntityRecognitionResults",
         "KeyPhraseExtractionResults",
         "LanguageDetectionResults",
-        "EntityLinkingResults",
-        "HealthcareResults",
-        "ExtractiveSummarizationResults",
-        "CustomEntityRecognitionResults",
-        "CustomSingleClassificationResults",
-        "CustomMultiClassificationResults"
+        "EntityLinkingResults"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true
+      }
+    },
+    "AnalyzeTextLROResultsKind": {
+      "type": "string",
+      "description": "Enumeration of supported Text Analysis long-running operation task results.",
+      "enum": [
+        "SentimentAnalysisLROResults",
+        "EntityRecognitionLROResults",
+        "PiiEntityRecognitionLROResults",
+        "KeyPhraseExtractionLROResults",
+        "LanguageDetectionLROResults",
+        "EntityLinkingLROResults",
+        "HealthcareLROResults",
+        "ExtractiveSummarizationLROResults",
+        "CustomEntityRecognitionLROResults",
+        "CustomSingleClassificationLROResults",
+        "CustomMultiClassificationLROResults"
       ],
       "x-ms-enum": {
         "modelAsString": true
@@ -531,20 +546,6 @@
       ],
       "x-ms-discriminator-value": "CustomEntityRecognition"
     },
-    "CustomEntitiesTaskResult": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/CustomEntitiesResult"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextTaskResult"
-        }
-      ],
-      "x-ms-discriminator-value": "CustomEntityRecognitionResults"
-    },
     "CustomEntitiesResult": {
       "type": "object",
       "properties": {
@@ -593,20 +594,6 @@
         }
       ],
       "x-ms-discriminator-value": "CustomSingleClassification"
-    },
-    "CustomSingleClassificationTaskResult": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/CustomSingleClassificationResult"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextTaskResult"
-        }
-      ],
-      "x-ms-discriminator-value": "CustomSingleClassificationResults"
     },
     "CustomSingleClassificationResult": {
       "type": "object",
@@ -691,20 +678,6 @@
       ],
       "x-ms-discriminator-value": "CustomMultiClassification"
     },
-    "CustomMultiClassificationTaskResult": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/CustomMultiClassificationResult"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextTaskResult"
-        }
-      ],
-      "x-ms-discriminator-value": "CustomMultiClassificationResults"
-    },
     "CustomMultiClassificationResult": {
       "type": "object",
       "properties": {
@@ -783,20 +756,6 @@
         }
       ],
       "x-ms-discriminator-value": "Healthcare"
-    },
-    "HealthcareTaskResult": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/HealthcareResult"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextTaskResult"
-        }
-      ],
-      "x-ms-discriminator-value": "HealthcareResults"
     },
     "HealthcareResult": {
       "type": "object",
@@ -2069,20 +2028,6 @@
       ],
       "x-ms-discriminator-value": "ExtractiveSummarization"
     },
-    "ExtractiveSummarizationTaskResult": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/ExtractiveSummarizationResult"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextTaskResult"
-        }
-      ],
-      "x-ms-discriminator-value": "ExtractiveSummarizationResults"
-    },
     "ExtractiveSummarizationResult": {
       "type": "object",
       "properties": {
@@ -2514,117 +2459,194 @@
       "type": "object"
     },
     "AnalyzeTextLROResult": {
+      "type": "object",
+      "discriminator": "kind",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AnalyzeTextLROResultsKind"
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/TaskState"
         },
         {
           "$ref": "#/definitions/TaskIdentifier"
-        },
-        {
-          "$ref": "#/definitions/AnalyzeTextTaskResult"
         }
+      ],
+      "required": [
+        "kind"
       ]
     },
     "EntityRecognitionLROResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/EntitiesResult"
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeTextLROResult"
-        },
-        {
-          "$ref": "#/definitions/EntitiesTaskResult"
         }
-      ]
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "EntityRecognitionLROResults"
     },
     "CustomEntityRecognitionLROResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/CustomEntitiesResult"
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeTextLROResult"
-        },
-        {
-          "$ref": "#/definitions/CustomEntitiesTaskResult"
         }
-      ]
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "CustomEntityRecognitionLROResults"
     },
     "CustomSingleClassificationLROResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/CustomSingleClassificationResult"
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeTextLROResult"
-        },
-        {
-          "$ref": "#/definitions/CustomSingleClassificationTaskResult"
         }
-      ]
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "CustomSingleClassificationLROResults"
     },
     "CustomMultiClassificationLROResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/CustomMultiClassificationResult"
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeTextLROResult"
-        },
-        {
-          "$ref": "#/definitions/CustomMultiClassificationTaskResult"
         }
-      ]
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "CustomMultiClassificationLROResults"
     },
     "EntityLinkingLROResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/EntityLinkingResult"
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeTextLROResult"
-        },
-        {
-          "$ref": "#/definitions/EntityLinkingTaskResult"
         }
-      ]
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "EntityLinkingLROResults"
     },
     "PiiEntityRecognitionLROResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/PiiResult"
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeTextLROResult"
-        },
-        {
-          "$ref": "#/definitions/PiiTaskResult"
         }
-      ]
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "PiiEntityRecognitionLROResults"
     },
     "ExtractiveSummarizationLROResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/ExtractiveSummarizationResult"
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeTextLROResult"
-        },
-        {
-          "$ref": "#/definitions/ExtractiveSummarizationTaskResult"
         }
-      ]
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "ExtractiveSummarizationLROResults"
     },
     "HealthcareLROResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/HealthcareResult"
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeTextLROResult"
-        },
-        {
-          "$ref": "#/definitions/HealthcareTaskResult"
         }
-      ]
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "HealthcareLROResults"
     },
     "SentimentLROResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/SentimentResponse"
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeTextLROResult"
-        },
-        {
-          "$ref": "#/definitions/SentimentTaskResult"
         }
-      ]
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "SentimentAnalysisLROResults"
     },
     "KeyPhraseExtractionLROResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/KeyPhraseResult"
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeTextLROResult"
-        },
-        {
-          "$ref": "#/definitions/KeyPhraseTaskResult"
         }
-      ]
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "KeyPhraseExtractionLROResults"
     },
     "StringIndexType": {
       "type": "string",
