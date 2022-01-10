@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft NetApp",
     "description": "Microsoft NetApp Azure Resource Provider specification",
-    "version": "2021-08-01",
+    "version": "2021-10-01",
     "x-ms-code-generation-settings": {
       "name": "AzureNetAppFilesManagementClient"
     }
@@ -1060,6 +1060,13 @@
             "$ref": "#/parameters/VolumeName"
           },
           {
+            "in": "query",
+            "name": "forceDelete",
+            "type": "boolean",
+            "description": "An option to force delete the volume. Will cleanup resources connected to the particular volume",
+            "required": false
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -1245,6 +1252,52 @@
         "x-ms-examples": {
           "Volumes_ReplicationStatus": {
             "$ref": "examples/Volumes_ReplicationStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/listReplications": {
+      "get": {
+        "tags": [
+          "Volumes Replication"
+        ],
+        "summary": "List replications for volume",
+        "description": "List all replications for a specified volume",
+        "operationId": "Volumes_ListReplications",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/listReplications"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_ListReplications": {
+            "$ref": "examples/Volumes_ListReplications.json"
           }
         }
       }
@@ -1513,6 +1566,147 @@
         "x-ms-examples": {
           "Volumes_AuthorizeReplication": {
             "$ref": "examples/Volumes_PoolChange.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/relocateVolume": {
+      "post": {
+        "tags": [
+          "Volumes Relocation"
+        ],
+        "summary": "Relocate volume",
+        "description": "Relocates volume to a new stamp",
+        "operationId": "Volumes_Relocate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - terminal state"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Volumes_RelocateVolume": {
+            "$ref": "examples/Volumes_RelocateVolume.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/finalizeRelocation": {
+      "post": {
+        "tags": [
+          "Volumes Relocation"
+        ],
+        "summary": "Finalize volume relocation",
+        "description": "Finalizes the relocation of the volume and cleans up the old volume.",
+        "operationId": "Volumes_FinalizeRelocation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - terminal state"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Volumes_FinalizeRelocation": {
+            "$ref": "examples/Volumes_FinalizeRelocation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/revertRelocation": {
+      "post": {
+        "tags": [
+          "Volumes Relocation"
+        ],
+        "summary": "Revert volume relocation",
+        "description": "Reverts the volume relocation process, cleans up the new volume and starts using the former-existing volume.",
+        "operationId": "Volumes_RevertRelocation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - terminal state"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Volumes_RevertRelocation": {
+            "$ref": "examples/Volumes_RevertRelocation.json"
           }
         }
       }
@@ -3677,6 +3871,34 @@
         "encryptDCConnections": {
           "type": "boolean",
           "description": "If enabled, Traffic between the SMB server to Domain Controller (DC) will be encrypted."
+        },
+        "ldapSearchScope": {
+          "description": "LDAP Search scope options",
+          "$ref": "#/definitions/ldapSearchScopeOpt"
+        }
+      }
+    },
+    "ldapSearchScopeOpt": {
+      "type": "object",
+      "description": "LDAP search scope ",
+      "properties": {
+        "userDN": {
+          "type": "string",
+          "description": "This specifies the user DN, which overrides the base DN for user lookups.",
+          "maxLength": 255,
+          "example": "OU=fin,OU=hr,dc=domain,dc=com"
+        },
+        "groupDN": {
+          "type": "string",
+          "description": "This specifies the group DN, which overrides the base DN for group lookups.",
+          "maxLength": 255,
+          "example": "OU=fin,OU=hr,dc=domain,dc=com"
+        },
+        "groupMembershipFilter": {
+          "type": "string",
+          "description": "This specifies the custom LDAP search filter to be used when looking up group membership from LDAP server.",
+          "maxLength": 255,
+          "example": "cn=*99"
         }
       }
     },
@@ -3777,9 +3999,8 @@
           "title": "size",
           "type": "integer",
           "format": "int64",
-          "description": "Provisioned size of the pool (in bytes). Allowed values are in 4TiB chunks (value must be multiply of 4398046511104).",
-          "minimum": 4398046511104,
-          "maximum": 549755813888000
+          "description": "Provisioned size of the pool (in bytes). Allowed values are in 1TiB chunks (value must be multiply of 4398046511104).",
+          "default": 4398046511104
         },
         "serviceLevel": {
           "title": "serviceLevel",
@@ -3908,9 +4129,7 @@
           "title": "size",
           "type": "integer",
           "format": "int64",
-          "description": "Provisioned size of the pool (in bytes). Allowed values are in 4TiB chunks (value must be multiply of 4398046511104).",
-          "minimum": 4398046511104,
-          "maximum": 549755813888000,
+          "description": "Provisioned size of the pool (in bytes). Allowed values are in 1TiB chunks (value must be multiply of 4398046511104).",
           "default": 4398046511104
         },
         "qosType": {
@@ -3997,6 +4216,20 @@
         "tags": {
           "description": "Resource tags",
           "$ref": "#/definitions/resourceTags"
+        },
+        "zones": {
+          "type": "array",
+          "description": "Availability Zone",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "items": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1,
+            "example": "1"
+          }
         },
         "properties": {
           "description": "Volume properties",
@@ -4234,6 +4467,12 @@
               "title": "Snapshot",
               "description": "Snapshot properties.",
               "$ref": "#/definitions/volumeSnapshotProperties"
+            },
+            "volumeRelocation": {
+              "title": "VolumeRelocation",
+              "description": "VolumeRelocation properties",
+              "type": "object",
+              "$ref": "#/definitions/volumeRelocationProperties"
             }
           }
         },
@@ -4368,6 +4607,13 @@
           "description": "Default group quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies.",
           "example": 4,
           "default": 0
+        },
+        "maximumNumberOfFiles": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "Maximum number of files allowed. Needs a service request in order to be changed. Only allowed to be changed if volume quota is more than 4TiB.",
+          "example": 100000000
         },
         "volumeGroupName": {
           "type": "string",
@@ -4562,6 +4808,24 @@
         }
       }
     },
+    "volumeRelocationProperties": {
+      "description": "Volume relocation properties",
+      "type": "object",
+      "properties": {
+        "oldVolumeId": {
+          "type": "string",
+          "description": "The id of the old volume that is being relocated"
+        },
+        "oldBareMetalTenantId": {
+          "type": "string",
+          "description": "The id of the bare metal tenant owned by the existing volume"
+        },
+        "relocationRequested": {
+          "type": "boolean",
+          "description": "Has relocation been requested for this volume"
+        }
+      }
+    },
     "volumeSnapshotProperties": {
       "description": "Volume Snapshot Properties",
       "type": "object",
@@ -4612,6 +4876,19 @@
         "errorMessage": {
           "type": "string",
           "description": "Displays error message if the replication is in an error state"
+        }
+      }
+    },
+    "listReplications": {
+      "description": "List Replications",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of replications",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/replicationObject"
+          }
         }
       }
     },
