@@ -3059,7 +3059,8 @@
         },
         "computeLocation": {
           "description": "Location for the underlying compute",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "provisioningState": {
           "type": "string",
@@ -3509,6 +3510,43 @@
           "description": "The last operation on ComputeInstance.",
           "$ref": "#/definitions/ComputeInstanceLastOperation",
           "readOnly": true
+        },
+        "schedules": {
+          "description": "The list of schedules to be applied on the computes.",
+          "$ref": "#/definitions/ComputeInstanceSchedules",
+          "readOnly": true
+        },
+        "enableNodePublicIp": {
+          "type": "boolean",
+          "title": "Enable node public IP.",
+          "description": "Enable or disable node public IP address provisioning. Possible values are: Possible values are: true - Indicates that the compute nodes will have public IPs provisioned. false - Indicates that the compute nodes will have a private endpoint and no public IPs."
+        },
+        "containers": {
+          "type": "array",
+          "description": "Describes informations of containers on this ComputeInstance.",
+          "items": {
+            "$ref": "#/definitions/ComputeInstanceContainer"
+          }
+        },
+        "dataDisks": {
+          "type": "array",
+          "readOnly": true,
+          "description": "Describes informations of dataDisks on this ComputeInstance.",
+          "items": {
+            "$ref": "#/definitions/ComputeInstanceDataDisk"
+          }
+        },
+        "dataMounts": {
+          "type": "array",
+          "description": "Describes informations of dataMounts on this ComputeInstance.",
+          "items": {
+            "$ref": "#/definitions/ComputeInstanceDataMount"
+          }
+        },
+        "versions": {
+          "description": "ComputeInstance version.",
+          "$ref": "#/definitions/ComputeInstanceVersion",
+          "readOnly": true
         }
       }
     },
@@ -3549,6 +3587,11 @@
                 },
                 "sshPort": {
                   "description": "Port open for ssh connections.",
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "notebookServerPort": {
+                  "description": "Notebook server port open for ssh connections.",
                   "type": "integer",
                   "format": "int32"
                 },
@@ -4540,6 +4583,356 @@
             "name": "OperationStatus",
             "modelAsString": true
           }
+        },
+        "operationTrigger": {
+          "type": "string",
+          "description": "Trigger of operation.",
+          "enum": [
+            "User",
+            "Schedule",
+            "IdleShutdown"
+          ],
+          "x-ms-enum": {
+            "name": "operationTrigger",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ComputeInstanceVersion": {
+      "type": "object",
+      "description": "Version of computeInstance.",
+      "properties": {
+        "runtime": {
+          "type": "string",
+          "description": "Runtime of compute instance."
+        }
+      }
+    },
+    "ComputeInstanceSchedules": {
+      "type": "object",
+      "description": "The list of schedules to be applied on the computes.",
+      "properties": {
+        "computeStartStop": {
+          "type": "array",
+          "description": "The list of compute start stop schedules to be applied.",
+          "items": {
+            "$ref": "#/definitions/ComputeInstanceStartStopSchedule"
+          }
+        }
+      }
+    },
+    "ComputeInstanceStartStopSchedule": {
+      "type": "object",
+      "description": "Compute start stop schedule properties",
+      "properties": {
+        "triggerType": {
+          "type": "string",
+          "description": "The schedule trigger type.",
+          "enum": [
+            "Recurrence",
+            "Cron"
+          ],
+          "x-ms-enum": {
+            "name": "triggerType",
+            "modelAsString": true
+          }
+        },
+        "recurrence": {
+          "description": "The workflow trigger recurrence for ComputeStartStop schedule type.",
+          "$ref": "#/definitions/ComputeInstanceScheduleRecurrence"
+        },
+        "cron": {
+          "description": "The workflow trigger cron for ComputeStartStop schedule type.",
+          "$ref": "#/definitions/ComputeInstanceScheduleCron"
+        },
+        "action": {
+          "type": "string",
+          "description": "The compute power action.",
+          "enum": [
+            "Start",
+            "Stop"
+          ],
+          "x-ms-enum": {
+            "name": "action",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ComputeInstanceDataMount": {
+      "type": "object",
+      "description": "Defines an Aml Instance DataMount.",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "Source of the ComputeInstance data mount."
+        },
+        "sourceType": {
+          "description": "Data source type.",
+          "type": "string",
+          "enum": [
+            "Dataset",
+            "Datastore",
+            "URI"
+          ],
+          "x-ms-enum": {
+            "name": "sourceType",
+            "modelAsString": true
+          }
+        },
+        "mountName": {
+          "type": "string",
+          "description": "name of the ComputeInstance data mount."
+        },
+        "mountAction": {
+          "description": "Mount Action.",
+          "type": "string",
+          "enum": [
+            "Mount",
+            "Unmount"
+          ],
+          "x-ms-enum": {
+            "name": "mountAction",
+            "modelAsString": true
+          }
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "who this data mount created by."
+        },
+        "mountPath": {
+          "type": "string",
+          "description": "Path of this data mount."
+        },
+        "mountState": {
+          "description": "Mount state.",
+          "type": "string",
+          "enum": [
+            "MountRequested",
+            "Mounted",
+            "MountFailed",
+            "UnmountRequested",
+            "UnmountFailed",
+            "Unmounted"
+          ],
+          "x-ms-enum": {
+            "name": "mountState",
+            "modelAsString": true
+          }
+        },
+        "mountedOn": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Mounted time.",
+          "description": "The time when the disk mounted."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error of this data mount."
+        }
+      }
+    },
+    "ComputeInstanceScheduleCron": {
+      "type": "object",
+      "description": "The workflow trigger cron for ComputeStartStop schedule type.",
+      "properties": {
+        "expression": {
+          "type": "string",
+          "description": "Expression of cron."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "Start time of cron."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "Time zone of cron."
+        }
+      }
+    },
+    "ComputeInstanceScheduleRecurrence": {
+      "type": "object",
+      "description": "The workflow trigger recurrence for ComputeStartStop schedule type.",
+      "properties": {
+        "frequency": {
+          "description": "Frequency of this schedule.",
+          "type": "string",
+          "enum": [
+            "Month",
+            "Week",
+            "Day",
+            "Hour",
+            "Minute"
+          ],
+          "x-ms-enum": {
+            "name": "frequency",
+            "modelAsString": true
+          }
+        },
+        "interval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The interval."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The start time."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The time zone."
+        },
+        "schedule": {
+          "description": "The recurrence schedule.",
+          "$ref": "#/definitions/ComputeInstanceRecurrenceSchedule"
+        }
+      }
+    },
+    "ComputeInstanceRecurrenceSchedule": {
+      "type": "object",
+      "description": "The recurrence schedule.",
+      "properties": {
+        "hours": {
+          "description": "hours of recurrence schedule.",
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "minutes": {
+          "description": "minutes of recurrence schedule.",
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "weekDays": {
+          "description": "The days of the week.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ]
+          }
+        }
+      }
+    },
+    "ComputeInstanceDataDisk": {
+      "type": "object",
+      "description": "Defines an Aml Instance DataDisk.",
+      "properties": {
+        "caching": {
+          "description": "Caching type of Data Disk.",
+          "type": "string",
+          "enum": [
+            "None",
+            "ReadOnly",
+            "ReadWrite"
+          ],
+          "x-ms-enum": {
+            "name": "caching",
+            "modelAsString": true
+          }
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The initial disk size in gigabytes.",
+          "description": "The initial disk size in gigabytes."
+        },
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The logical unit number.",
+          "description": "The lun is used to uniquely identify each data disk. If attaching multiple disks, each should have a distinct lun."
+        },
+        "storageAccountType": {
+          "description": "type of this storage account.",
+          "type": "string",
+          "default": "Standard_LRS",
+          "enum": [
+            "Standard_LRS",
+            "Premium_LRS"
+          ],
+          "x-ms-enum": {
+            "name": "storageAccountType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ComputeInstanceContainer": {
+      "type": "object",
+      "description": "Defines an Aml Instance container.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the ComputeInstance container."
+        },
+        "autosave": {
+          "description": "Auto save settings.",
+          "type": "string",
+          "enum": [
+            "None",
+            "Local",
+            "Remote"
+          ],
+          "x-ms-enum": {
+            "name": "autosave",
+            "modelAsString": true
+          }
+        },
+        "gpu": {
+          "type": "string",
+          "description": "Information of GPU."
+        },
+        "network": {
+          "description": "network of this container.",
+          "type": "string",
+          "enum": [
+            "Bridge",
+            "Host"
+          ],
+          "x-ms-enum": {
+            "name": "network",
+            "modelAsString": true
+          }
+        },
+        "environment": {
+          "description": "Enviroment information of this container.",
+          "$ref": "#/definitions/ComputeInstanceEnviromentInfo"
+        },
+        "services": {
+          "type": "array",
+          "readOnly": true,
+          "description": "services of this containers.",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "ComputeInstanceEnviromentInfo": {
+      "type": "object",
+      "description": "Enviroment infomation",
+      "properties": {
+        "name": {
+          "description": "name of enviroment.",
+          "type": "string"
+        },
+        "version": {
+          "description": "version of enviroment.",
+          "type": "string"
         }
       }
     },
