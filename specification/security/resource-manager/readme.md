@@ -56,6 +56,10 @@ directive:
     where: $.paths
     from: standards.json
     reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
+  - suppress: OperationsAPIImplementation
+    where: $.paths
+    from: scanners.json
+    reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
 ```
 
 ### Basic Information
@@ -66,7 +70,7 @@ These are the global settings for the Security API.
 title: SecurityCenter
 description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: package-preview-2021-08
+tag: package-composite-v3
 ```
 
 ### Composite packages
@@ -84,7 +88,19 @@ input-file:
 
 override-info:
   title: SecurityCenter
-```
+``` 
+
+### Tag: package-preview-2021-12
+
+These settings apply only when `--tag=package-preview-2021-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-12'
+input-file:
+  - Microsoft.Security/preview/2021-12-01-preview/scanners.json
+
+override-info:
+  title: SecurityCenter
+``` 
 
 ### Tag: package-composite-v1
 
@@ -92,6 +108,8 @@ These settings apply only when `--tag=package-composite-v1` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v1'
 input-file:
+- Microsoft.Security/preview/2021-07-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2021-10-01-preview/mdeOnboardings.json
 - Microsoft.Security/preview/2021-07-01-preview/customAssessmentAutomation.json
 - Microsoft.Security/preview/2021-07-01-preview/customEntityStoreAssignment.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
@@ -137,6 +155,8 @@ These settings apply only when `--tag=package-composite-v2` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v2'
 input-file:
+- Microsoft.Security/preview/2021-07-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2021-10-01-preview/mdeOnboardings.json
 - Microsoft.Security/preview/2021-07-01-preview/customAssessmentAutomation.json
 - Microsoft.Security/preview/2021-07-01-preview/customEntityStoreAssignment.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
@@ -184,6 +204,7 @@ These settings apply only when `--tag=package-composite-v3` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v3'
 input-file:
+- Microsoft.Security/preview/2021-10-01-preview/mdeOnboardings.json
 - Microsoft.Security/preview/2021-07-01-preview/customAssessmentAutomation.json
 - Microsoft.Security/preview/2021-07-01-preview/customEntityStoreAssignment.json
 - Microsoft.Security/stable/2017-08-01/complianceResults.json
@@ -225,6 +246,7 @@ input-file:
 - Microsoft.Security/stable/2021-07-01/settings.json
 - Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
+- Microsoft.Security/preview/2021-07-01-preview/securityConnectors.json
 
 # Needed when there is more than one input file
 override-info:
@@ -454,10 +476,19 @@ input-file:
   - Microsoft.Security/preview/2021-07-01-preview/customEntityStoreAssignment.json
 ```
 
+### Tag: package-preview-2021-10
+
+These settings apply only when `--tag=package-2021-10-preview-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-10-preview-only'
+input-file:
+  - Microsoft.Security/preview/2021-10-01-preview/mdeOnboardings.json
+```
+
 # Needed when there is more than one input file
 override-info:
-  title: SecurityCenter
-```
+ title: SecurityCenter
+``` 
 
 ### Tag: package-2021-06-only
 
@@ -469,6 +500,18 @@ input-file:
 - Microsoft.Security/stable/2021-06-01/assessmentMetadata.json
 - Microsoft.Security/stable/2021-06-01/assessments.json
 
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
+### Tag: package-preview-2021-07-preview-only
+
+These settings apply only when `--tag=package-preview-2021-07-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-07-preview-only'
+input-file:
+  - Microsoft.Security/preview/2021-07-01-preview/securityConnectors.json
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter

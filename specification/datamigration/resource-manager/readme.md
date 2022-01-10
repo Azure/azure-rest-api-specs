@@ -30,15 +30,81 @@ These are the global settings for the Database Migration Service API.
 title: DataMigrationManagementClient
 description: Data Migration Client
 openapi-type: arm
-tag: package-2021-06
+tag: package-preview-2021-10
 ```
 
 
+### Tag: package-preview-2021-10
+
+These settings apply only when `--tag=package-preview-2021-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-10'
+input-file:
+  - Microsoft.DataMigration/preview/2021-10-30-preview/sqlmigration.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/datamigration.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/Commands.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/Common.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/ConnectToSourceMySqlTask.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/ConnectToSourceSqlServerTask.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/ConnectToSourcePostgreSqlSyncTask.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/ConnectToTargetAzureDbForMySqlTask.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/ConnectToTargetSqlDbTask.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/ConnectToTargetSqlMiSyncTask.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/ConnectToTargetSqlMITask.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/ConnectToTargetSqlSqlDbSyncTask.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/ConnectToTargetAzureDbForPostgreSqlSyncTask.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/GetUserTablesMySqlTask.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/Files.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/GetTdeCertificatesSqlTask.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/GetUserTablesSqlSyncTask.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/GetUserTablesSqlTask.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/MigrateSchemaSqlServerSqlDbTask.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/MigrateMySqlAzureDbForMySqlSyncTask.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/MigratePostgreSqlAzureDbForPostgreSqlSyncTask.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/MigrateSqlServerSqlDbSyncTask.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/MigrateSqlServerSqlDbTask.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/MigrateSqlServerSqlMiSyncTask.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/MigrateSqlServerSqlMITask.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/MigrateSsisTask.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/MigrationValidation.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/MongoDbTasks.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/OracleAzureDbPostgreSqlSyncTask.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/Projects.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/ResourceSkus.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/ServiceFeatureOCITask.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/Services.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/ServiceTasks.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/Tasks.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/TasksCommon.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/ValidateMigrationInputSqlServerSqlMITask.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/ValidateMigrationInputSqlServerSqlMiSyncTask.json
+  - Microsoft.DataMigration/preview/2021-10-30-preview/definitions/ValidateSyncMigrationInputSqlServerTask.json
+directive:
+  - suppress: R4009
+  - suppress: R4013
+  - suppress: R4037
+  - suppress: R4017
+    from: Microsoft.DataMigration/preview/2021-10-30-preview/sqlmigration.json
+    where: $.definitions.DatabaseMigrationSqlMi
+    reason: DatabaseMigration does not support list by subscription. DatabaseMigration is an extension resource type. To get the DatabaseMigration, we should have a subscription as well as a resource group and a migration target SQL Managed Instance.
+  - suppress: R4017
+    from: Microsoft.DataMigration/preview/2021-10-30-preview/sqlmigration.json
+    where: $.definitions.DatabaseMigrationSqlVm
+    reason: DatabaseMigration does not support list by subscription. DatabaseMigration is an extension resource type. To get the DatabaseMigration, we should have a subscription as well as a resource group and a migration target SQL Virtual Machine.
+  - suppress: R4016
+    from: Microsoft.DataMigration/preview/2021-10-30-preview/sqlmigration.json
+    where: $.definitions.DatabaseMigrationSqlMi
+    reason: DatabaseMigration does not support list by resource group. DatabaseMigration is an extension resource type. To get the DatabaseMigration, we should have a subscription as well as a resource group and a migration target SQL Managed Instance.
+  - suppress: R4016
+    from: Microsoft.DataMigration/preview/2021-10-30-preview/sqlmigration.json
+    where: $.definitions.DatabaseMigrationSqlVm
+    reason: DatabaseMigration does not support list by resource group. DatabaseMigration is an extension resource type. To get the DatabaseMigration, we should have a subscription as well as a resource group and a migration target SQL Virtual Machine.
+```
 ### Tag: package-2021-06
 
 These settings apply only when `--tag=package-2021-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-06'
+``` yaml $(tag) == 'package-2021-06'
 input-file:
 - Microsoft.DataMigration/stable/2021-06-30/datamigration.json
 - Microsoft.DataMigration/stable/2021-06-30/definitions/Commands.json
@@ -265,3 +331,18 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: SECRET_PROPERTY
+    from:
+      - Microsoft.DataMigration/preview/2021-10-30-preview/sqlmigration.json
+    where:
+      - $.definitions.RegenAuthKeys.properties.authKey1
+      - $.definitions.RegenAuthKeys.properties.authKey2
+      - $.definitions.AuthenticationKeys.properties.authKey1
+      - $.definitions.AuthenticationKeys.properties.authKey2
+    reason: Secrets are OK to return in a POST response.
+```

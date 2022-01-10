@@ -45,6 +45,12 @@
             "schema": {
               "$ref": "#/definitions/operationsList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -72,6 +78,12 @@
             "description": "OK. Successfully listed alert meta data.",
             "schema": {
               "$ref": "#/definitions/alertsMetaData"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
             }
           }
         },
@@ -579,6 +591,7 @@
       "description": "Determines number of alerts returned per page in response. Permissible value is between 1 to 250. When the \"includeContent\"  filter is selected, maximum value allowed is 25. Default value is 25.",
       "name": "pageCount",
       "type": "integer",
+      "format": "int64",
       "in": "query",
       "required": false,
       "x-ms-parameter-location": "method"
@@ -768,6 +781,7 @@
       }
     },
     "alert": {
+      "type": "object",
       "description": "An alert created in alert management service.",
       "allOf": [
         {
@@ -781,6 +795,7 @@
       }
     },
     "alertsList": {
+      "type": "object",
       "description": "List the alerts.",
       "properties": {
         "nextLink": {
@@ -969,6 +984,7 @@
       }
     },
     "alertModification": {
+      "type": "object",
       "description": "Alert Modification details",
       "allOf": [
         {
@@ -1000,6 +1016,7 @@
       }
     },
     "alertModificationItem": {
+      "type": "object",
       "description": "Alert modification item.",
       "properties": {
         "modificationEvent": {
@@ -1047,6 +1064,7 @@
       }
     },
     "alertsSummary": {
+      "type": "object",
       "description": "Summary of alerts based on the input filters and 'groupby' parameters.",
       "allOf": [
         {
@@ -1065,10 +1083,12 @@
       "properties": {
         "total": {
           "type": "integer",
+          "format": "int64",
           "description": "Total count of the result set."
         },
         "smartGroupsCount": {
           "type": "integer",
+          "format": "int64",
           "description": "Total count of the smart groups."
         },
         "groupedby": {
@@ -1094,6 +1114,7 @@
         },
         "count": {
           "type": "integer",
+          "format": "int64",
           "description": "Count of the aggregated field"
         },
         "groupedby": {
@@ -1110,6 +1131,7 @@
       }
     },
     "alertsMetaData": {
+      "type": "object",
       "description": "alert meta data information.",
       "properties": {
         "properties": {
@@ -1118,6 +1140,7 @@
       }
     },
     "alertsMetaDataProperties": {
+      "type": "object",
       "description": "alert meta data property bag",
       "discriminator": "metadataIdentifier",
       "required": [
@@ -1138,6 +1161,7 @@
       }
     },
     "MonitorServiceList": {
+      "type": "object",
       "title": "Monitor service details",
       "description": "Monitor service details",
       "required": [
@@ -1162,6 +1186,7 @@
       }
     },
     "MonitorServiceDetails": {
+      "type": "object",
       "description": "Details of a monitor service",
       "properties": {
         "name": {
