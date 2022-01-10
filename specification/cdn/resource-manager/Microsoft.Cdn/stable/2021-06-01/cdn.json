@@ -2521,6 +2521,8 @@
           "description": "Type of managed service identity.",
           "enum": [
             "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
             "None"
           ],
           "type": "string",
@@ -2536,6 +2538,29 @@
         },
         "principalId": {
           "description": "Principal Id of managed service identity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "userAssignedIdentities": {
+          "description": "The list of user assigned identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/userAssignedIdentity"
+          }
+        }
+      }
+    },
+    "userAssignedIdentity": {
+      "description": "User Assigned identity.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "Principal Id of user assigned identity",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientId": {
+          "description": "Client Id of user assigned identity",
           "type": "string",
           "readOnly": true
         }
