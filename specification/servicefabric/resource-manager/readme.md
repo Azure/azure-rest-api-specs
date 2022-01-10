@@ -59,14 +59,14 @@ directive:
     reason: There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.
 ```
 
-### Tag: package-2021-09-privatepreview
+### Tag: package-2021-09-preview
 
-These settings apply only when `--tag=package-2021-09-privatepreview` is specified on the command line.
+These settings apply only when `--tag=package-2021-09-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-09-privatepreview'
+``` yaml $(tag) == 'package-2021-09-preview'
 input-file:
-- Microsoft.ServiceFabric/preview/2021-09-01-privatepreview/cluster.json
-- Microsoft.ServiceFabric/preview/2021-09-01-privatepreview/application.json
+- Microsoft.ServiceFabric/preview/2021-09-01-preview/cluster.json
+- Microsoft.ServiceFabric/preview/2021-09-01-preview/application.json
 ```
 
 ### Tag: package-2021-06
