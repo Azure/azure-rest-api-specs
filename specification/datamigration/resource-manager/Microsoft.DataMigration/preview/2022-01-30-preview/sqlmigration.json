@@ -21,7 +21,7 @@
         "tags": [
           "DatabaseMigrations"
         ],
-        "description": "Retrieve the Database Migration resource.",
+        "description": "Retrieve the specified database migration for a given SQL Managed Instance.",
         "operationId": "DatabaseMigrationsSqlMi_Get",
         "parameters": [
           {
@@ -79,7 +79,7 @@
         "tags": [
           "DatabaseMigrations"
         ],
-        "description": "Create or Update Database Migration resource.",
+        "description": "Create a new database migration to a given SQL Managed Instance.",
         "operationId": "DatabaseMigrationsSqlMi_CreateOrUpdate",
         "parameters": [
           {
@@ -143,7 +143,7 @@
         "tags": [
           "DatabaseMigrations"
         ],
-        "description": "Stop migrations in progress for the database",
+        "description": "Stop in-progress database migration to SQL Managed Instance.",
         "operationId": "DatabaseMigrationsSqlMi_cancel",
         "parameters": [
           {
@@ -198,7 +198,7 @@
         "tags": [
           "DatabaseMigrations"
         ],
-        "description": "Initiate cutover for online migration in progress for the database.",
+        "description": "Initiate cutover for in-progress online database migration to SQL Managed Instance.",
         "operationId": "DatabaseMigrationsSqlMi_cutover",
         "parameters": [
           {
@@ -253,7 +253,7 @@
         "tags": [
           "DatabaseMigrations"
         ],
-        "description": "Retrieve the Database Migration resource.",
+        "description": "Retrieve the specified database migration for a given SQL VM.",
         "operationId": "DatabaseMigrationsSqlVm_Get",
         "parameters": [
           {
@@ -311,7 +311,7 @@
         "tags": [
           "DatabaseMigrations"
         ],
-        "description": "Create or Update Database Migration resource.",
+        "description": "Create a new database migration to a given SQL VM.",
         "operationId": "DatabaseMigrationsSqlVm_CreateOrUpdate",
         "parameters": [
           {
@@ -375,7 +375,7 @@
         "tags": [
           "DatabaseMigrations"
         ],
-        "description": "Stop ongoing migration for the database.",
+        "description": "Stop in-progress database migration to SQL VM.",
         "operationId": "DatabaseMigrationsSqlVm_cancel",
         "parameters": [
           {
@@ -429,7 +429,7 @@
         "tags": [
           "DatabaseMigrations"
         ],
-        "description": "Cutover online migration operation for the database.",
+        "description": "Initiate cutover for in-progress online database migration to SQL VM.",
         "operationId": "DatabaseMigrationsSqlVm_cutover",
         "parameters": [
           {
@@ -516,7 +516,7 @@
         "tags": [
           "SqlMigrationServices"
         ],
-        "description": "Retrieve the Migration Service.",
+        "description": "Retrieve the Database Migration Service",
         "operationId": "SqlMigrationServices_Get",
         "parameters": [
           {
@@ -553,7 +553,7 @@
         "tags": [
           "SqlMigrationServices"
         ],
-        "description": "Create or Update SQL Migration Service.",
+        "description": "Create or Update Database Migration Service.",
         "operationId": "SqlMigrationServices_CreateOrUpdate",
         "parameters": [
           {
@@ -609,7 +609,7 @@
         "tags": [
           "SqlMigrationServices"
         ],
-        "description": "Delete SQL Migration Service.",
+        "description": "Delete Database Migration Service.",
         "operationId": "SqlMigrationServices_Delete",
         "parameters": [
           {
@@ -650,7 +650,7 @@
         "tags": [
           "SqlMigrationServices"
         ],
-        "description": "Update SQL Migration Service.",
+        "description": "Update Database Migration Service.",
         "operationId": "SqlMigrationServices_Update",
         "parameters": [
           {
@@ -921,7 +921,7 @@
         "tags": [
           "SqlMigrationServices"
         ],
-        "description": "Retrieve the Monitoring Data.",
+        "description": "Retrieve the registered Integration Runtime nodes and their monitoring data for a given Database Migration Service.",
         "operationId": "SqlMigrationServices_listMonitoringData",
         "parameters": [
           {
@@ -1012,7 +1012,7 @@
           }
         },
         "scope": {
-          "description": "Scope of the database.",
+          "description": "Resource Id of the target resource (SQL VM or SQL Managed Instance).",
           "type": "string",
           "x-ms-mutability": [
             "read",
