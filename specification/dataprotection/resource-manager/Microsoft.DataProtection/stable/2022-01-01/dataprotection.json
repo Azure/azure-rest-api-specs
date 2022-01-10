@@ -1116,6 +1116,19 @@
               "$ref": "#/definitions/BackupInstanceResource"
             }
           },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1351,6 +1364,60 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/operationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "BackupInstances"
+        ],
+        "description": "Get result of backup instance creation operation",
+        "operationId": "BackupInstances_GetBackupInstanceOperationResult",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "backupInstanceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupInstanceResource"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-examples": {
+          "Get BackupInstanceOperationResult": {
+            "$ref": "./examples/BackupInstanceOperations/GetBackupInstanceOperationResult.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/recoveryPoints": {
