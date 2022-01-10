@@ -1573,147 +1573,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/relocate": {
-      "post": {
-        "tags": [
-          "Volumes Relocation"
-        ],
-        "summary": "Relocate volume",
-        "description": "Relocates volume to a new stamp",
-        "operationId": "Volumes_Relocate",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/PoolName"
-          },
-          {
-            "$ref": "#/parameters/VolumeName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - terminal state"
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed."
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Volumes_RelocateVolume": {
-            "$ref": "examples/Volumes_RelocateVolume.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/finalizeRelocation": {
-      "post": {
-        "tags": [
-          "Volumes Relocation"
-        ],
-        "summary": "Finalize volume relocation",
-        "description": "Finalizes the relocation of the volume and cleans up the old volume.",
-        "operationId": "Volumes_FinalizeRelocation",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/PoolName"
-          },
-          {
-            "$ref": "#/parameters/VolumeName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - terminal state"
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed."
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Volumes_FinalizeRelocation": {
-            "$ref": "examples/Volumes_FinalizeRelocation.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/revertRelocation": {
-      "post": {
-        "tags": [
-          "Volumes Relocation"
-        ],
-        "summary": "Revert volume relocation",
-        "description": "Reverts the volume relocation process, cleans up the new volume and starts using the former-existing volume.",
-        "operationId": "Volumes_RevertRelocation",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/PoolName"
-          },
-          {
-            "$ref": "#/parameters/VolumeName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - terminal state"
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed."
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Volumes_RevertRelocation": {
-            "$ref": "examples/Volumes_RevertRelocation.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/snapshots": {
       "get": {
         "tags": [
@@ -4470,12 +4329,6 @@
               "title": "Snapshot",
               "description": "Snapshot properties.",
               "$ref": "#/definitions/volumeSnapshotProperties"
-            },
-            "volumeRelocation": {
-              "title": "VolumeRelocation",
-              "description": "VolumeRelocation properties",
-              "type": "object",
-              "$ref": "#/definitions/volumeRelocationProperties"
             }
           }
         },
@@ -4808,24 +4661,6 @@
         "remoteVolumeRegion": {
           "type": "string",
           "description": "The remote region for the other end of the Volume Replication."
-        }
-      }
-    },
-    "volumeRelocationProperties": {
-      "description": "Volume relocation properties",
-      "type": "object",
-      "properties": {
-        "oldVolumeId": {
-          "type": "string",
-          "description": "The id of the old volume that is being relocated"
-        },
-        "oldBareMetalTenantId": {
-          "type": "string",
-          "description": "The id of the bare metal tenant owned by the existing volume"
-        },
-        "relocationRequested": {
-          "type": "boolean",
-          "description": "Has relocation been requested for this volume"
         }
       }
     },
