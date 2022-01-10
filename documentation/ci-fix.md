@@ -111,7 +111,7 @@ Refer to [Avocado Readme](https://github.com/Azure/avocado/blob/master/README.md
 
 ## ApiReadinessCheck
 
-ApiReadinessCheck is to check whether Azure resource provider is deployed on Azure by calling operations list rest api. Generally Azure service should be ready before swagger PR merged into main branch.
+When your PR is to create a new api version, ApiReadinessCheck is  to check whether Azure resource provider is deployed on Azure by calling operations list rest api. Generally Azure service should be ready before swagger PR merged into main branch.
 
 If service is deployed before PR merge, this check is passed. otherwise, it will report error.
 
