@@ -112,7 +112,7 @@
         ],
         "operationId": "AccessReviewHistoryDefinitions_GetById",
         "x-ms-examples": {
-          "GetAccessReviewHistoryDefinitions": {
+          "GetAccessReviewHistoryDefinition": {
             "$ref": "./examples/GetAccessReviewHistoryDefinition.json"
           }
         },
@@ -235,7 +235,7 @@
         "tags": [
           "GetAccessReviewHistoryDefinitionInstances"
         ],
-        "operationId": "AccessReviewHistoryDefinitionInstances_GetById",
+        "operationId": "AccessReviewHistoryDefinitionInstances_List",
         "x-ms-examples": {
           "GetAccessReviewHistoryDefinitionInstances": {
             "$ref": "./examples/GetAccessReviewHistoryDefinitionInstances.json"
@@ -270,6 +270,9 @@
               "$ref": "#/definitions/ErrorDefinition"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -983,7 +986,7 @@
         ],
         "operationId": "AccessReviewDefaultSettings_Put",
         "x-ms-examples": {
-          "GetAccessReviewDefaultSettings": {
+          "PutAccessReviewDefaultSettings": {
             "$ref": "./examples/PutAccessReviewDefaultSettings.json"
           }
         },
@@ -1113,7 +1116,7 @@
         ],
         "operationId": "AccessReviewInstancesAssignedForMyApproval_GetById",
         "x-ms-examples": {
-          "GetAccessReviewInstance": {
+          "GetAccessReviewInstanceAssignedForMyApproval": {
             "$ref": "./examples/GetAccessReviewInstanceAssignedForMyApproval.json"
           }
         },
@@ -1510,7 +1513,8 @@
           "items": {
             "$ref": "#/definitions/AccessReviewReviewer"
           },
-          "description": "This is the collection of backup reviewers."
+          "description": "This is the collection of backup reviewers.",
+          "x-ms-identifiers": []
         },
         "reviewersType": {
           "type": "string",
@@ -1605,14 +1609,16 @@
           "items": {
             "$ref": "#/definitions/AccessReviewReviewer"
           },
-          "description": "This is the collection of reviewers."
+          "description": "This is the collection of reviewers.",
+          "x-ms-identifiers": []
         },
         "backupReviewers": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/AccessReviewReviewer"
           },
-          "description": "This is the collection of backup reviewers."
+          "description": "This is the collection of backup reviewers.",
+          "x-ms-identifiers": []
         },
         "reviewersType": {
           "type": "string",
@@ -1894,7 +1900,8 @@
           "items": {
             "$ref": "#/definitions/AccessReviewScope"
           },
-          "description": "A collection of scopes used when selecting review history data"
+          "description": "A collection of scopes used when selecting review history data",
+          "x-ms-identifiers": []
         },
         "settings": {
           "x-ms-client-flatten": true,
@@ -2225,7 +2232,7 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "The type of resource",
+          "description": "The type of resource: azureRole",
           "enum": [
             "azureRole"
           ],
@@ -2239,6 +2246,27 @@
           "readOnly": true,
           "description": "The id of resource associated with a decision record."
         },
+        "displayName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The display name of resource associated with a decision record."
+        }
+      },
+      "description": "Target of the decision."
+    },
+    "AccessReviewDecisionResourceAzureRole": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AccessReviewDecisionResource"
+        },
+        {
+          "type": "object",
+          "description": "AccessReviewDecisionResource"
+        }
+      ],
+      "x-ms-discriminator-value": "azureRole",
+      "properties": {
         "displayName": {
           "type": "string",
           "readOnly": true,
