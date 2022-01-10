@@ -48,7 +48,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -64,11 +64,13 @@
           "items": {
             "$ref": "#/definitions/VirtualNetworkGatewayConnection"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [],
+          "readOnly": true
         },
         "nextLink": {
           "description": "URI to the next page.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -104,6 +106,16 @@
         "provisioningState": {
           "description": "Provisioning State of the Virtual Network Gateway Connection.",
           "type": "string",
+          "enum": [
+            "Succeeded",
+            "Updating",
+            "Deleting",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "VirtualNetworkGatewayConnectionProvisioningState"
+          },
           "readOnly": true
         },
         "subscriptionId": {
@@ -191,7 +203,8 @@
         },
         "connectionError": {
           "description": "List of connection errors associated with the resource.",
-          "$ref": "#/definitions/VirtualNetworkGatewayConnectionConfigurationStatus"
+          "$ref": "#/definitions/VirtualNetworkGatewayConnectionConfigurationStatus",
+          "readOnly": true
         }
       }
     },
