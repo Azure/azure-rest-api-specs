@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Maps Weather Service",
-    "version": "2.0"
+    "version": "1.1"
   },
   "host": "atlas.microsoft.com",
   "schemes": [
@@ -887,12 +887,12 @@
         }
       }
     },
-    "/weather/airQuality/forecast/daily/{format}": {
+    "/weather/airQuality/forecasts/daily/{format}": {
       "get": {
-        "description": "**Get Air Quality Daily Forecast**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nGet detailed information about the concentration of pollutants and overall status of forecasted daily air quality. The service can provide forecasted daily air quality information for the upcoming 1 to 7 days. Information includes, pollution levels, air quality index values, the dominant pollutant, and a brief statement summarizing risk level and suggested precautions.",
-        "operationId": "Weather_GetAirQualityDailyForecast",
+        "description": "**Get Air Quality Daily Forecasts**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nGet detailed information about the concentration of pollutants and overall status of forecasted daily air quality. The service can provide forecasted daily air quality information for the upcoming 1 to 7 days. Information includes, pollution levels, air quality index values, the dominant pollutant, and a brief statement summarizing risk level and suggested precautions.",
+        "operationId": "Weather_GetAirQualityDailyForecasts",
         "x-ms-examples": {
-          "Get Daily Air Quality Forecast": {
+          "Get Daily Air Quality Forecasts": {
             "$ref": "./examples/GetDailyAirQuality.json"
           }
         },
@@ -918,8 +918,57 @@
             "default": 1,
             "in": "query",
             "type": "integer",
-            "minimum": 1,
-            "maximum": 7
+            "format": "int32",
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "x-ms-enum": {
+              "name": "DailyDuration",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "OneDay",
+                  "value": 1,
+                  "description": "1 day"
+                },
+                {
+                  "name": "TwoDays",
+                  "value": 2,
+                  "description": "2 days"
+                },
+                {
+                  "name": "ThreeDays",
+                  "value": 3,
+                  "description": "3 days"
+                },
+                {
+                  "name": "FourDays",
+                  "value": 4,
+                  "description": "4 days"
+                },
+                {
+                  "name": "FiveDays",
+                  "value": 5,
+                  "description": "5 days"
+                },
+                {
+                  "name": "SixDays",
+                  "value": 6,
+                  "description": "6 days"
+                },
+                {
+                  "name": "SevenDays",
+                  "value": 7,
+                  "description": "7 days"
+                }
+              ]
+            }
           }
         ],
         "responses": {
@@ -935,12 +984,12 @@
         }
       }
     },
-    "/weather/airQuality/forecast/hourly/{format}": {
+    "/weather/airQuality/forecasts/hourly/{format}": {
       "get": {
-        "description": "**Get Air Quality Hourly Forecast**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nGet detailed information about the concentration of pollutants and overall status for forecasted upcoming hourly air quality. The service can provide forecasted hourly air quality information for the upcoming time spans of 1, 12, 24, 48, 72, and 96 hours. Information includes, pollution levels, air quality index values, the dominant pollutant, and a brief statement summarizing risk level and suggested precautions.",
-        "operationId": "Weather_GetAirQualityHourlyForecast",
+        "description": "**Get Air Quality Hourly Forecasts**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nGet detailed information about the concentration of pollutants and overall status for forecasted upcoming hourly air quality. The service can provide forecasted hourly air quality information for the upcoming time spans of 1, 12, 24, 48, 72, and 96 hours. Information includes, pollution levels, air quality index values, the dominant pollutant, and a brief statement summarizing risk level and suggested precautions.",
+        "operationId": "Weather_GetAirQualityHourlyForecasts",
         "x-ms-examples": {
-          "Get Hourly Air Quality Forecast": {
+          "Get Hourly Air Quality Forecasts": {
             "$ref": "./examples/GetHourlyAirQuality.json"
           }
         },
@@ -3105,6 +3154,9 @@
             "$ref": "#/definitions/ActiveStorm"
           },
           "description": "All government-issued active storms"
+        },
+        "nextLink": {
+          "$ref": "#/definitions/NextLink"
         }
       }
     },
@@ -3197,6 +3249,9 @@
             "$ref": "#/definitions/StormSearchResultItem"
           },
           "description": "Search government-issued storms"
+        },
+        "nextLink": {
+          "$ref": "#/definitions/NextLink"
         }
       }
     },
@@ -3246,6 +3301,9 @@
             "$ref": "#/definitions/StormForecast"
           },
           "description": "The list of Government-issued forecasts"
+        },
+        "nextLink": {
+          "$ref": "#/definitions/NextLink"
         }
       }
     },
@@ -3393,6 +3451,9 @@
             "$ref": "#/definitions/StormLocation"
           },
           "description": "Locations for an individual government-issued storm"
+        },
+        "nextLink": {
+          "$ref": "#/definitions/NextLink"
         }
       }
     },
@@ -3462,6 +3523,9 @@
             "$ref": "#/definitions/AirQuality"
           },
           "description": "A list of all air quality results for the queried location."
+        },
+        "nextLink": {
+          "$ref": "#/definitions/NextLink"
         }
       }
     },
@@ -3476,6 +3540,9 @@
             "$ref": "#/definitions/DailyAirQuality"
           },
           "description": "A list of all daily air quality forecasts for the queried location."
+        },
+        "nextLink": {
+          "$ref": "#/definitions/NextLink"
         }
       }
     },
@@ -3684,6 +3751,9 @@
           "items": {
             "$ref": "#/definitions/DailyHistoricalActuals"
           }
+        },
+        "nextLink": {
+          "$ref": "#/definitions/NextLink"
         }
       }
     },
@@ -3728,6 +3798,9 @@
           "items": {
             "$ref": "#/definitions/DailyHistoricalRecords"
           }
+        },
+        "nextLink": {
+          "$ref": "#/definitions/NextLink"
         }
       }
     },
@@ -3764,6 +3837,9 @@
           "items": {
             "$ref": "#/definitions/DailyHistoricalNormals"
           }
+        },
+        "nextLink": {
+          "$ref": "#/definitions/NextLink"
         }
       }
     },
@@ -3863,6 +3939,10 @@
           "description": "Year the value occurred."
         }
       }
+    },
+    "NextLink": {
+      "type": "string",
+      "description": "The is the link to the next page of the features returned. If it's the last page, no this field."
     }
   }
 }
