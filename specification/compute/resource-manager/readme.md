@@ -233,6 +233,10 @@ directive:
       - $.definitions.SubResourceWithColocationStatus
     suppress:
       - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.VirtualMachineResource.properties
+    suppress:
+      - BodyTopLevelProperties
 ```
 
 ### Tag: package-2021-11-01
