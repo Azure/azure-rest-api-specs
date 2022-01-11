@@ -194,57 +194,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/listPendingNetworkManagerConnections": {
-      "post": {
-        "parameters": [
-          {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "./networkManager.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
-          },
-          {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "./networkManagerGroup.json#/definitions/QueryRequestOptions"
-            },
-            "description": "Parameters supplied to list correct page."
-          }
-        ],
-        "tags": [
-          "ScopeConnections"
-        ],
-        "operationId": "PendingNetworkManagerConnection_List",
-        "description": "List all pending network manager connections sent from a subscription or management group.",
-        "responses": {
-          "200": {
-            "description": "OK - Returns a list of the network manager connections sent from a subscription or management group.",
-            "schema": {
-              "$ref": "./networkManagerConnection.json#/definitions/PendingNetworkManagerConnectionListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Pending Network Manager Connections Sent From A Subscription or Management Group": {
-            "$ref": "./examples/NetworkManagerPendingConnectionList.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -312,49 +261,6 @@
         }
       },
       "description": "List of scope connections."
-    },
-    "PendingScopeConnection": {
-      "type": "object",
-      "properties": {
-        "tenantId": {
-          "type": "string",
-          "description": "Tenant ID."
-        },
-        "networkManagerId": {
-          "type": "string",
-          "description": "Network Manager Id."
-        },
-        "resourceId": {
-          "type": "string",
-          "description": "Resource ID."
-        },
-        "connectionState": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ConnectionState",
-          "description": "Connection State"
-        },
-        "description": {
-          "type": "string",
-          "description": "A description of the scope connection."
-        }
-      },
-      "description": "Pending Scope Connection"
-    },
-    "PendingScopeConnectionListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PendingScopeConnection"
-          }
-        },
-        "skipToken": {
-          "type": "string",
-          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data."
-        }
-      },
-      "description": "List of pending scope connections"
     },
     "ConnectionState": {
       "type": "string",
