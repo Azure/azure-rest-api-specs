@@ -298,6 +298,11 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/HanaInstanceProperties",
           "description": "HANA instance properties"
+        },
+        "systemData": {
+          "$ref": "#/definitions/systemData",
+          "description": "The system metadata relating to this resource.",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -474,33 +479,6 @@
       },
       "description": "Specifies the disk information for the HANA instance"
     },
-    "SAPSystemID": {
-      "type": "object",
-      "properties": {
-        "gid": {
-          "type": "string",
-          "description": "Group ID of the HANA database user."
-        },
-        "memoryAllocation": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Percent of memory to allocate to this SID."
-        },
-        "sid": {
-          "type": "string",
-          "description": "SAP system ID as database identifier."
-        },
-        "username": {
-          "type": "string",
-          "description": "Name of the HANA database user."
-        },
-        "uid": {
-          "type": "string",
-          "description": "User ID of the HANA database user."
-        }
-      },
-      "description": "Specifies information related to a SAP system ID"
-    },
     "StorageProfile": {
       "properties": {
         "nfsIpAddress": {
@@ -672,36 +650,6 @@
         }
       },
       "description": "Tags field of the HANA instance."
-    },
-    "MonitoringDetails": {
-      "type": "object",
-      "properties": {
-        "hanaSubnet": {
-          "type": "string",
-          "description": "ARM ID of an Azure Subnet with access to the HANA instance."
-        },
-        "hanaHostname": {
-          "type": "string",
-          "description": "Hostname of the HANA Instance blade."
-        },
-        "hanaDbName": {
-          "type": "string",
-          "description": "Name of the database itself."
-        },
-        "hanaDbSqlPort": {
-          "type": "integer",
-          "description": "The port number of the tenant DB. Used to connect to the DB."
-        },
-        "hanaDbUsername": {
-          "type": "string",
-          "description": "Username for the HANA database to login to for monitoring"
-        },
-        "hanaDbPassword": {
-          "type": "string",
-          "description": "Password for the HANA database to login for monitoring"
-        }
-      },
-      "description": "Details needed to monitor a Hana Instance"
     }
   },
   "parameters": {
@@ -743,16 +691,6 @@
         "$ref": "#/definitions/Tags"
       },
       "description": "Request body that only contains the new Tags field",
-      "x-ms-parameter-location": "method"
-    },
-    "MonitoringParameter": {
-      "name": "monitoringParameter",
-      "in": "body",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/MonitoringDetails"
-      },
-      "description": "Request body that only contains monitoring attributes",
       "x-ms-parameter-location": "method"
     },
     "HanaInstanceParameter": {
