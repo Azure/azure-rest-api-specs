@@ -237,6 +237,14 @@ directive:
       - $.definitions.VirtualMachineResource.properties
     suppress:
       - BodyTopLevelProperties
+  - where:
+      - $.definitions.VirtualMachineResource
+    suppress:
+      - TrackedResourcePatchOperation
+  - where:
+      - $.definitions.VirtualMachineResource
+    suppress:
+      - TrackedResourcePatchOperation
 ```
 
 ### Tag: package-2021-11-01

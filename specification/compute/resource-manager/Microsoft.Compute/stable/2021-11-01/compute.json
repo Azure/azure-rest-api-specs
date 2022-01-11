@@ -11250,7 +11250,18 @@
       "description": "Describes a Virtual Machine Extension."
     },
     "VirtualMachineExtensionResource": {
+      "type": "object",
       "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/VirtualMachineExtensionProperties"
@@ -13844,6 +13855,7 @@
       "description": "Describes a Virtual Machine."
     },
     "VirtualMachineResource": {
+      "type": "object",
       "properties": {
         "plan": {
           "$ref": "#/definitions/Plan",
