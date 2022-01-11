@@ -240,7 +240,7 @@ directive:
   - where:
       - $.definitions.VirtualMachineResource
     suppress:
-      - TrackedResourcePatchOperation
+      - TrackedResourceGetOperation
   - where:
       - $.definitions.VirtualMachineResource
     suppress:
