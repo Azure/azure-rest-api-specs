@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "SecurityUserConfiguration",
-    "version": "2021-02-01-preview"
+    "version": "2021-05-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -555,6 +555,7 @@
   },
   "definitions": {
     "BaseUserRule": {
+      "type": "object",
       "properties": {
         "kind": {
           "type": "string",
@@ -586,6 +587,7 @@
       "description": "Network base rule."
     },
     "UserRuleListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -602,6 +604,7 @@
       "description": "security user rule list result."
     },
     "UserRule": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/UserRulePropertiesFormat",
@@ -680,6 +683,7 @@
       "description": "Security rule resource."
     },
     "DefaultUserRule": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/DefaultUserRulePropertiesFormat",

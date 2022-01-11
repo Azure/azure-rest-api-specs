@@ -3,7 +3,7 @@
   "info": {
     "title": "NetworkManager",
     "description": "The Microsoft Azure Virtual Network Manager API provides a RESTful set of web services that interact with Microsoft Azure Network Manager service to manage your network resources.",
-    "version": "2021-02-01-preview"
+    "version": "2021-05-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -148,17 +148,17 @@
         "tags": [
           "NetworkManagers"
         ],
-        "operationId": "NetworkManagers_PatchTags",
-        "description": "Patch a NetworkManager Tags.",
+        "operationId": "NetworkManagers_Patch",
+        "description": "Patch NetworkManager.",
         "parameters": [
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./network.json#/definitions/TagsObject"
+              "$ref": "#/definitions/PatchObject"
             },
-            "description": "Parameters supplied to update network manager tags."
+            "description": "Parameters supplied to specify which network manager is."
           }
         ],
         "responses": {
@@ -441,6 +441,7 @@
   },
   "definitions": {
     "NetworkManager": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -466,6 +467,7 @@
       "description": "The Managed Network resource"
     },
     "NetworkManagerListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -493,6 +495,7 @@
           "description": "A description of the network manager."
         },
         "networkManagerScopes": {
+          "type": "object",
           "properties": {
             "managementGroups": {
               "type": "array",
@@ -507,6 +510,14 @@
                 "type": "string"
               },
               "description": "List of subscriptions."
+            },
+            "crossTenantScopes": {
+              "readOnly": true,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CrossTenantScopes"
+              },
+              "description": "List of cross tenant scopes."
             }
           },
           "description": "Scope of Network Manager."
@@ -525,9 +536,41 @@
           "description": "The provisioning state of the scope assignment resource."
         }
       },
+      "required": [
+        "networkManagerScopes",
+        "networkManagerScopeAccesses"
+      ],
       "description": "Properties of Managed Network"
     },
+    "CrossTenantScopes": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Tenant ID."
+        },
+        "managementGroups": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "List of management groups."
+        },
+        "subscriptions": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "List of subscriptions."
+        }
+      },
+      "description": "Cross tenant scopes."
+    },
     "NetworkManagerCommit": {
+      "type": "object",
       "properties": {
         "commitId": {
           "type": "string",
@@ -554,9 +597,26 @@
           "description": "Commit Type."
         }
       },
+      "required": [
+        "targetLocations"
+      ],
       "description": "Network Manager Commit."
     },
+    "PatchObject": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "description": "Object for patch operations."
+    },
     "NetworkManagerDeploymentStatusParameter": {
+      "type": "object",
       "properties": {
         "regions": {
           "type": "array",
@@ -580,6 +640,7 @@
       "description": "Network Manager Deployment Status Parameter."
     },
     "NetworkManagerDeploymentStatusListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -596,6 +657,7 @@
       "description": "A list of Network Manager Deployment Status"
     },
     "NetworkManagerDeploymentStatus": {
+      "type": "object",
       "properties": {
         "commitTime": {
           "type": "string",
@@ -652,6 +714,7 @@
       "description": "Configuration Deployment Type."
     },
     "EffectiveVirtualNetworksParameter": {
+      "type": "object",
       "properties": {
         "conditionalMembers": {
           "type": "string",

@@ -3,7 +3,7 @@
   "info": {
     "title": "ConnectivityConfiguration",
     "description": "The Microsoft Azure Virtual Network Manager Connectivity Configuration API provides a RESTful set of web services that interact with Microsoft Azure Network Manager service to manage your network resources.",
-    "version": "2021-02-01-preview"
+    "version": "2021-05-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -202,6 +202,7 @@
   },
   "definitions": {
     "ConnectivityConfigurationListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -218,6 +219,7 @@
       "description": "Result of the request to list network manager connectivity configurations. It contains a list of configurations and a link to get the next set of results."
     },
     "ConnectivityConfiguration": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -238,6 +240,7 @@
       "description": "The network manager connectivity configuration resource"
     },
     "ConnectivityConfigurationProperties": {
+      "type": "object",
       "properties": {
         "displayName": {
           "type": "string",
@@ -304,7 +307,8 @@
         }
       },
       "required": [
-        "connectivityTopology"
+        "connectivityTopology",
+        "appliesToGroups"
       ],
       "description": "Properties of network manager connectivity configuration"
     },
@@ -365,7 +369,11 @@
           },
           "description": "Group connectivity type."
         }
-      }
+      },
+      "required": [
+        "networkGroupId",
+        "groupConnectivity"
+      ]
     }
   },
   "parameters": {

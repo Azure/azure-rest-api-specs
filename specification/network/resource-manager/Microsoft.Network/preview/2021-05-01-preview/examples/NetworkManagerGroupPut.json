@@ -1,22 +1,16 @@
 {
   "title": "Create/Update Azure Virtual Network Manager Network Group",
   "parameters": {
-    "api-version": "2021-02-01-preview",
+    "api-version": "2021-05-01-preview",
     "subscriptionId": "subscriptionC",
     "resourceGroupName": "rg1",
     "networkManagerName": "testNetworkManager",
-    "networkGroupName": "TestNetworkGroup",
+    "networkGroupName": "testNetworkGroup",
     "parameters": {
       "properties": {
         "displayName": "My Network Group",
         "description": "A sample group",
-        "memberType": "VirtualNetwork",
-        "groupMembers": [
-          {
-            "resourceId": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/virtualnetworks/vnet1"
-          }
-        ],
-        "conditionalMembership": ""
+        "memberType": "VirtualNetwork"
       }
     }
   },
@@ -26,8 +20,8 @@
         "ETag": "be3cfaa2-3d02-4624-92d7-a26766306c8b"
       },
       "body": {
-        "name": "TestNetworkGroup",
-        "id": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/TestNetworkGroup",
+        "name": "testNetworkGroup",
+        "id": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/testNetworkGroup",
         "type": "Microsoft.Network/networkManagers/networkGroups",
         "systemData": {
           "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
@@ -41,12 +35,6 @@
           "displayName": "My Network Group",
           "description": "A sample group",
           "memberType": "VirtualNetwork",
-          "groupMembers": [
-            {
-              "resourceId": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/virtualnetworks/vnet1"
-            }
-          ],
-          "conditionalMembership": "",
           "provisioningState": "Succeeded"
         }
       }
@@ -56,8 +44,8 @@
         "ETag": "be3cfaa2-3d02-4624-92d7-a26766306c8b"
       },
       "body": {
-        "name": "TestNetworkGroup",
-        "id": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/TestNetworkGroup",
+        "name": "testNetworkGroup",
+        "id": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/testNetworkGroup",
         "type": "Microsoft.Network/networkManagers/networkGroups",
         "systemData": {
           "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
@@ -71,12 +59,6 @@
           "displayName": "My Network Group",
           "description": "A sample group",
           "memberType": "VirtualNetwork",
-          "groupMembers": [
-            {
-              "resourceId": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/virtualnetwork/vnet1"
-            }
-          ],
-          "conditionalMembership": "",
           "provisioningState": "Succeeded"
         }
       }

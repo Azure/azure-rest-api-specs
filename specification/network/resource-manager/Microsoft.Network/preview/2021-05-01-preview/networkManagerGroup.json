@@ -3,7 +3,7 @@
   "info": {
     "title": "NetworkGroup",
     "description": "The Microsoft Azure Network Group API provides a RESTful set of web services that interact with Microsoft Azure Network Manager service to manage your network resources.",
-    "version": "2021-02-01-preview"
+    "version": "2021-05-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -272,10 +272,182 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/networkGroups/{networkGroupName}/staticMembers/{staticMemberName}": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/StaticMemberNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "StaticMembers"
+        ],
+        "operationId": "StaticMembers_Get",
+        "description": "Gets the specified static member.",
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the static member.",
+            "schema": {
+              "$ref": "#/definitions/StaticMember"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StaticMembersGet": {
+            "$ref": "./examples/NetworkManagerStaticMemberGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "StaticMembers"
+        ],
+        "operationId": "StaticMembers_CreateOrUpdate",
+        "description": "Creates or updates a static member.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StaticMember"
+            },
+            "description": "Parameters supplied to the specify the static member to create"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Returns information about the static member.",
+            "schema": {
+              "$ref": "#/definitions/StaticMember"
+            }
+          },
+          "201": {
+            "description": "Created - Returns information about the static member.",
+            "schema": {
+              "$ref": "#/definitions/StaticMember"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StaticMemberPut": {
+            "$ref": "./examples/NetworkManagerStaticMemberPut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "StaticMembers"
+        ],
+        "operationId": "StaticMembers_Delete",
+        "description": "Deletes a static member.",
+        "responses": {
+          "200": {
+            "description": "Delete Succeed."
+          },
+          "204": {
+            "description": "Request successful. The resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StaticMembersDelete": {
+            "$ref": "./examples/NetworkManagerStaticMemberDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/networkGroups/{networkGroupName}/staticMembers": {
+      "get": {
+        "tags": [
+          "StaticMembers"
+        ],
+        "operationId": "StaticMembers_List",
+        "description": "Lists the specified static member.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkManagerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkGroupNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ListTopParameter"
+          },
+          {
+            "$ref": "#/parameters/ListSkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the static member.",
+            "schema": {
+              "$ref": "#/definitions/StaticMemberListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StaticMembersList": {
+            "$ref": "./examples/NetworkManagerStaticMemberList.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
     "NetworkGroup": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -296,6 +468,7 @@
       "description": "The network group resource"
     },
     "NetworkGroupListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -326,26 +499,56 @@
           "type": "string",
           "description": "Group member type."
         },
-        "groupMembers": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/groupMembersItem"
-          },
-          "description": "Group members of network group."
-        },
-        "conditionalMembership": {
-          "type": "string",
-          "description": "Network group conditional filter."
-        },
         "provisioningState": {
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the scope assignment resource."
         }
       },
+      "required": [
+        "memberType"
+      ],
       "description": "Properties of network group"
     },
-    "groupMembersItem": {
+    "StaticMember": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/StaticMemberProperties",
+          "description": "The Static Member properties"
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system metadata related to this resource.",
+          "$ref": "./network.json#/definitions/SystemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "StaticMember Item."
+    },
+    "StaticMemberListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StaticMember"
+          },
+          "description": "Gets a page of StaticMember"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next set of results."
+        }
+      },
+      "description": "Result of the request to list StaticMember. It contains a list of groups and a URL link to get the next set of results."
+    },
+    "StaticMemberProperties": {
       "type": "object",
       "properties": {
         "resourceId": {
@@ -353,9 +556,10 @@
           "description": "Resource Id."
         }
       },
-      "description": "GroupMembers Item."
+      "description": "Properties of static member."
     },
     "QueryRequestOptions": {
+      "type": "object",
       "properties": {
         "skipToken": {
           "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.",
@@ -365,6 +569,7 @@
       "description": "Query Request Options"
     },
     "EffectiveVirtualNetworksListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -429,7 +634,15 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the network group to get.",
+      "description": "The name of the network group.",
+      "x-ms-parameter-location": "method"
+    },
+    "StaticMemberNameParameter": {
+      "name": "staticMemberName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the static member.",
       "x-ms-parameter-location": "method"
     },
     "ListTopParameter": {

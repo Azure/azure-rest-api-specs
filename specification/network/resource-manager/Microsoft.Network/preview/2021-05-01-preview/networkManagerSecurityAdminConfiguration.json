@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "SecurityAdminConfiguration",
-    "version": "2021-02-01-preview"
+    "version": "2021-05-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -555,6 +555,7 @@
   },
   "definitions": {
     "SecurityConfiguration": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -575,6 +576,7 @@
       "description": "Defines the security configuration"
     },
     "SecurityConfigurationPropertiesFormat": {
+      "type": "object",
       "properties": {
         "displayName": {
           "type": "string",
@@ -595,6 +597,13 @@
             "name": "SecurityType",
             "modelAsString": true
           }
+        },
+        "applyOnNetworkIntentPolicyBasedServices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkIntentPolicyBasedService"
+          },
+          "description": "Enum list of network intent policy based services."
         },
         "deleteExistingNSGs": {
           "type": "string",
@@ -617,6 +626,7 @@
       "description": "Defines the security Configuration properties."
     },
     "SecurityConfigurationListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -633,6 +643,7 @@
       "description": "A list of network manager security configurations"
     },
     "AdminRuleListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -649,6 +660,7 @@
       "description": "security configuration admin rule list result."
     },
     "RuleCollectionListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -665,6 +677,7 @@
       "description": "Security configuration rule collection list result."
     },
     "RuleCollection": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -685,6 +698,7 @@
       "description": "Defines the rule collection."
     },
     "RuleCollectionPropertiesFormat": {
+      "type": "object",
       "properties": {
         "displayName": {
           "type": "string",
@@ -707,9 +721,13 @@
           "description": "The provisioning state of the resource."
         }
       },
+      "required": [
+        "appliesToGroups"
+      ],
       "description": "Defines the rule collection properties."
     },
     "BaseAdminRule": {
+      "type": "object",
       "properties": {
         "kind": {
           "type": "string",
@@ -741,6 +759,7 @@
       "description": "Network base admin rule."
     },
     "AdminRule": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/AdminPropertiesFormat",
@@ -757,6 +776,7 @@
       "x-ms-discriminator-value": "Custom"
     },
     "AdminPropertiesFormat": {
+      "type": "object",
       "properties": {
         "displayName": {
           "type": "string",
@@ -825,11 +845,13 @@
       "required": [
         "protocol",
         "access",
-        "direction"
+        "direction",
+        "priority"
       ],
       "description": "Security admin rule resource."
     },
     "DefaultAdminRule": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/DefaultAdminPropertiesFormat",
@@ -975,6 +997,9 @@
           "description": "Network manager group Id."
         }
       },
+      "required": [
+        "networkGroupId"
+      ],
       "description": "Network manager security group item."
     },
     "AddressPrefixItem": {
@@ -998,6 +1023,18 @@
         }
       },
       "description": "Address prefix item."
+    },
+    "NetworkIntentPolicyBasedService": {
+      "type": "string",
+      "description": "Network intent policy based services.",
+      "enum": [
+        "None",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkIntentPolicyBasedService",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {
