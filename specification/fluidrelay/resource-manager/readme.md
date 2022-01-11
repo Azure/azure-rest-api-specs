@@ -49,6 +49,24 @@ input-file:
   - Microsoft.FluidRelay/preview/2021-06-15-preview/fluidrelay.json
 ```
 
+### Tag: package-2021-08-30-preview
+
+These settings apply only when `--tag=package-2021-08-30-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-08-30-preview'
+input-file:
+  - Microsoft.FluidRelay/preview/2021-08-30-preview/fluidrelay.json
+```
+
+### Tag: package-2021-09-10-preview
+
+These settings apply only when `--tag=package-2021-09-10-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-09-10-preview'
+input-file:
+  - Microsoft.FluidRelay/preview/2021-09-10-preview/fluidrelay.json
+```
+
 ---
 
 # Code Generation
