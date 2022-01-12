@@ -211,6 +211,21 @@
         "PiiEntityRecognition",
         "KeyPhraseExtraction",
         "LanguageDetection",
+        "EntityLinking"
+      ],
+      "x-ms-enum": {
+        "name": "AnalyzeTextTaskKind",
+        "modelAsString": true
+      }
+    },
+    "AnalyzeTextLROTaskKind": {
+      "type": "string",
+      "description": "Enumeration of supported long-running Text Analysis tasks.",
+      "enum": [
+        "SentimentAnalysis",
+        "EntityRecognition",
+        "PiiEntityRecognition",
+        "KeyPhraseExtraction",
         "EntityLinking",
         "Healthcare",
         "ExtractiveSummarization",
@@ -219,7 +234,7 @@
         "CustomMultiClassification"
       ],
       "x-ms-enum": {
-        "name": "AnalyzeTextTaskKind",
+        "name": "AnalyzeTextLROTaskKind",
         "modelAsString": true
       }
     },
@@ -288,6 +303,17 @@
       "properties": {
         "kind": {
           "$ref": "#/definitions/AnalyzeTextTaskKind"
+        }
+      }
+    },
+    "AnalyzeTextLROTask": {
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AnalyzeTextLROTaskKind"
         }
       }
     },
@@ -416,7 +442,7 @@
                 "$ref": "#/definitions/TaskIdentifier"
               },
               {
-                "$ref": "#/definitions/AnalyzeTextTask"
+                "$ref": "#/definitions/AnalyzeTextLROTask"
               }
             ]
           }
@@ -492,6 +518,7 @@
           "type": "string"
         }
       },
+
       "required": [
         "projectName",
         "deploymentName"
@@ -524,27 +551,32 @@
         "deploymentName"
       ]
     },
-    "CustomEntitiesTask": {
+    "CustomEntitiesTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for a Custom Entities task.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskParameters"
+        },
+        {
+          "$ref": "#/definitions/CustomTaskParameters"
+        },
+        {
+          "$ref": "#/definitions/EntitiesTaskParameters"
+        }
+      ]
+    },
+    "CustomEntitiesLROTask": {
       "type": "object",
       "description": "Use custom models to ease the process of information extraction from unstructured documents like contracts or financial documents",
       "properties": {
         "parameters": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/TaskParameters"
-            },
-            {
-              "$ref": "#/definitions/CustomTaskParameters"
-            },
-            {
-              "$ref": "#/definitions/EntitiesTaskParameters"
-            }
-          ]
+          "$ref": "#/definitions/CustomEntitiesTaskParameters"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextTask"
+          "$ref": "#/definitions/AnalyzeTextLROTask"
         }
       ],
       "x-ms-discriminator-value": "CustomEntityRecognition"
@@ -559,9 +591,6 @@
             "allOf": [
               {
                 "$ref": "#/definitions/EntitiesDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -576,24 +605,29 @@
         "documents"
       ]
     },
-    "CustomSingleClassificationTask": {
+    "CustomSingleClassificationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for a Custom Single Classification task.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskParameters"
+        },
+        {
+          "$ref": "#/definitions/CustomTaskParameters"
+        }
+      ]
+    },
+    "CustomSingleClassificationLROTask": {
       "type": "object",
       "description": "Use custom models to classify text into single label taxonomy",
       "properties": {
         "parameters": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/TaskParameters"
-            },
-            {
-              "$ref": "#/definitions/CustomTaskParameters"
-            }
-          ]
+          "$ref": "#/definitions/CustomSingleClassificationTaskParameters"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextTask"
+          "$ref": "#/definitions/AnalyzeTextLROTask"
         }
       ],
       "x-ms-discriminator-value": "CustomSingleClassification"
@@ -608,9 +642,6 @@
             "allOf": [
               {
                 "$ref": "#/definitions/SingleClassificationDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -659,24 +690,29 @@
         }
       }
     },
-    "CustomMultiClassificationTask": {
+    "CustomMultiClassificationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for a Custom Multi Classification task.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskParameters"
+        },
+        {
+          "$ref": "#/definitions/CustomTaskParameters"
+        }
+      ]
+    },
+    "CustomMultiClassificationLROTask": {
       "type": "object",
       "description": "Use custom models to classify text into multi label taxonomy",
       "properties": {
         "parameters": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/TaskParameters"
-            },
-            {
-              "$ref": "#/definitions/CustomTaskParameters"
-            }
-          ]
+          "$ref": "#/definitions/CustomMultiClassificationTaskParameters"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextTask"
+          "$ref": "#/definitions/AnalyzeTextLROTask"
         }
       ],
       "x-ms-discriminator-value": "CustomMultiClassification"
@@ -691,9 +727,6 @@
             "allOf": [
               {
                 "$ref": "#/definitions/MultiClassificationDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -729,33 +762,31 @@
     },
     "HealthcareTaskParameters": {
       "type": "object",
-      "description": "Parameters object for a Healthcare task.",
+      "description": "Supported parameters for a Healthcare task.",
       "properties": {
         "stringIndexType": {
           "$ref": "#/definitions/StringIndexType"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskParameters"
+        },
+        {
+          "$ref": "#/definitions/PreBuiltTaskParameters"
+        }
+      ]
     },
-    "HealthcareTask": {
+    "HealthcareLROTask": {
       "type": "object",
       "properties": {
         "parameters": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/TaskParameters"
-            },
-            {
-              "$ref": "#/definitions/PreBuiltTaskParameters"
-            },
-            {
-              "$ref": "#/definitions/HealthcareTaskParameters"
-            }
-          ]
+          "$ref": "#/definitions/HealthcareTaskParameters"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextTask"
+          "$ref": "#/definitions/AnalyzeTextLROTask"
         }
       ],
       "x-ms-discriminator-value": "Healthcare"
@@ -769,9 +800,6 @@
             "allOf": [
               {
                 "$ref": "#/definitions/HealthcareEntitiesDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -1043,7 +1071,7 @@
     },
     "SentimentAnalysisTaskParameters": {
       "type": "object",
-      "description": "Parameters object for a Sentiment Analysis task.",
+      "description": "Supported parameters for a Sentiment Analysis task.",
       "properties": {
         "opinionMining": {
           "type": "boolean",
@@ -1052,29 +1080,27 @@
         "stringIndexType": {
           "$ref": "#/definitions/StringIndexType"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskParameters"
+        },
+        {
+          "$ref": "#/definitions/PreBuiltTaskParameters"
+        }
+      ]
     },
-    "SentimentAnalysisTask": {
+    "SentimentAnalysisLROTask": {
       "type": "object",
       "description": "An object representing the task definition for a Sentiment Analysis task.",
       "properties": {
         "parameters": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/TaskParameters"
-            },
-            {
-              "$ref": "#/definitions/PreBuiltTaskParameters"
-            },
-            {
-              "$ref": "#/definitions/SentimentAnalysisTaskParameters"
-            }
-          ]
+          "$ref": "#/definitions/SentimentAnalysisTaskParameters"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextTask"
+          "$ref": "#/definitions/AnalyzeTextLROTask"
         }
       ],
       "x-ms-discriminator-value": "SentimentAnalysis"
@@ -1106,9 +1132,6 @@
             "allOf": [
               {
                 "$ref": "#/definitions/SentimentDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -1387,34 +1410,32 @@
     },
     "EntitiesTaskParameters": {
       "type": "object",
-      "description": "Parameters object for a Sentiment Analysis task.",
+      "description": "Supported parameters for an Entity Recognition task.",
       "properties": {
         "stringIndexType": {
           "$ref": "#/definitions/StringIndexType"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskParameters"
+        },
+        {
+          "$ref": "#/definitions/PreBuiltTaskParameters"
+        }
+      ]
     },
-    "EntitiesTask": {
+    "EntitiesLROTask": {
       "type": "object",
       "description": "An object representing the task definition for an Entities Recognition task.",
       "properties": {
         "parameters": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/TaskParameters"
-            },
-            {
-              "$ref": "#/definitions/PreBuiltTaskParameters"
-            },
-            {
-              "$ref": "#/definitions/EntitiesTaskParameters"
-            }
-          ]
+          "$ref": "#/definitions/EntitiesTaskParameters"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextTask"
+          "$ref": "#/definitions/AnalyzeTextLROTask"
         }
       ],
       "x-ms-discriminator-value": "EntityRecognition"
@@ -1443,9 +1464,6 @@
             "allOf": [
               {
                 "$ref": "#/definitions/EntitiesDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -1521,34 +1539,32 @@
     },
     "EntityLinkingTaskParameters": {
       "type": "object",
-      "description": "Parameters object for a Sentiment Analysis task.",
+      "description": "Supported parameters for an Entity Linking task.",
       "properties": {
         "stringIndexType": {
           "$ref": "#/definitions/StringIndexType"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskParameters"
+        },
+        {
+          "$ref": "#/definitions/PreBuiltTaskParameters"
+        }
+      ]
     },
-    "EntityLinkingTask": {
+    "EntityLinkingLROTask": {
       "type": "object",
       "description": "An object representing the task definition for an Entity Linking task.",
       "properties": {
         "parameters": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/TaskParameters"
-            },
-            {
-              "$ref": "#/definitions/PreBuiltTaskParameters"
-            },
-            {
-              "$ref": "#/definitions/EntityLinkingTaskParameters"
-            }
-          ]
+          "$ref": "#/definitions/EntityLinkingTaskParameters"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextTask"
+          "$ref": "#/definitions/AnalyzeTextLROTask"
         }
       ],
       "x-ms-discriminator-value": "EntityLinking"
@@ -1575,9 +1591,6 @@
           "description": "Response by document",
           "items": {
             "allOf": [
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
-              },
               {
                 "$ref": "#/definitions/LinkedEntitiesDocumentResult"
               }
@@ -1689,7 +1702,7 @@
     },
     "PiiTaskParameters": {
       "type": "object",
-      "description": "Parameters object for a PII Entities Recognition task.",
+      "description": "Supported parameters for a PII Entities Recognition task.",
       "properties": {
         "domain": {
           "$ref": "#/definitions/PiiDomain"
@@ -1700,29 +1713,27 @@
         "stringIndexType": {
           "$ref": "#/definitions/StringIndexType"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskParameters"
+        },
+        {
+          "$ref": "#/definitions/PreBuiltTaskParameters"
+        }
+      ]
     },
-    "PiiTask": {
+    "PiiLROTask": {
       "type": "object",
       "description": "An object representing the task definition for a PII Entities Recognition task.",
       "properties": {
         "parameters": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/TaskParameters"
-            },
-            {
-              "$ref": "#/definitions/PreBuiltTaskParameters"
-            },
-            {
-              "$ref": "#/definitions/PiiTaskParameters"
-            }
-          ]
+          "$ref": "#/definitions/PiiTaskParameters"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextTask"
+          "$ref": "#/definitions/AnalyzeTextLROTask"
         }
       ],
       "x-ms-discriminator-value": "PiiEntityRecognition"
@@ -1749,9 +1760,6 @@
           "description": "Response by document",
           "items": {
             "allOf": [
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
-              },
               {
                 "$ref": "#/definitions/PiiEntitiesDocumentResult"
               }
@@ -2007,7 +2015,7 @@
     },
     "ExtractiveSummarizationTaskParameters": {
       "type": "object",
-      "description": "Parameters object for an Extractive Summarization task.",
+      "description": "Supported parameters for an Extractive Summarization task.",
       "properties": {
         "sentenceCount": {
           "type": "integer",
@@ -2019,29 +2027,27 @@
         "stringIndexType": {
           "$ref": "#/definitions/StringIndexType"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskParameters"
+        },
+        {
+          "$ref": "#/definitions/PreBuiltTaskParameters"
+        }
+      ]
     },
-    "ExtractiveSummarizationTask": {
+    "ExtractiveSummarizationLROTask": {
       "type": "object",
       "description": "An object representing the task definition for an Extractive Summarization task.",
       "properties": {
         "parameters": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/TaskParameters"
-            },
-            {
-              "$ref": "#/definitions/PreBuiltTaskParameters"
-            },
-            {
-              "$ref": "#/definitions/ExtractiveSummarizationTaskParameters"
-            }
-          ]
+          "$ref": "#/definitions/ExtractiveSummarizationTaskParameters"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextTask"
+          "$ref": "#/definitions/AnalyzeTextLROTask"
         }
       ],
       "x-ms-discriminator-value": "ExtractiveSummarization"
@@ -2056,9 +2062,6 @@
             "allOf": [
               {
                 "$ref": "#/definitions/ExtractedSummaryDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -2148,24 +2151,29 @@
         }
       }
     },
-    "KeyPhraseTask": {
+    "KeyPhraseTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for a Key Phrase Extraction task.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskParameters"
+        },
+        {
+          "$ref": "#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
+    "KeyPhraseLROTask": {
       "type": "object",
       "description": "An object representing the task definition for a Key Phrase Extraction task.",
       "properties": {
         "parameters": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/TaskParameters"
-            },
-            {
-              "$ref": "#/definitions/PreBuiltTaskParameters"
-            }
-          ]
+          "$ref": "#/definitions/KeyPhraseTaskParameters"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextTask"
+          "$ref": "#/definitions/AnalyzeTextLROTask"
         }
       ],
       "x-ms-discriminator-value": "KeyPhraseExtraction"
@@ -2194,9 +2202,6 @@
             "allOf": [
               {
                 "$ref": "#/definitions/KeyPhrasesDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -2233,36 +2238,15 @@
     },
     "LanguageDetectionTaskParameters": {
       "type": "object",
-      "description": "Parameters object for a Language Detection task.",
-      "properties": {
-        "regionHint": {
-          "type": "string"
-        }
-      }
-    },
-    "LanguageDetectionTask": {
-      "type": "object",
-      "properties": {
-        "parameters": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/TaskParameters"
-            },
-            {
-              "$ref": "#/definitions/PreBuiltTaskParameters"
-            },
-            {
-              "$ref": "#/definitions/LanguageDetectionTaskParameters"
-            }
-          ]
-        }
-      },
+      "description": "Supported parameters for a Language Detection task.",
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextTask"
+          "$ref": "#/definitions/TaskParameters"
+        },
+        {
+          "$ref": "#/definitions/PreBuiltTaskParameters"
         }
-      ],
-      "x-ms-discriminator-value": "LanguageDetection"
+      ]
     },
     "LanguageDetectionTaskResult": {
       "type": "object",
@@ -2747,15 +2731,6 @@
         }
       }
     },
-    "DocumentDetectedLanguage": {
-      "type": "object",
-      "properties": {
-        "detectedLanguage": {
-          "type": "string",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
-        }
-      }
-    },
     "DocumentError": {
       "type": "object",
       "required": [
@@ -2855,22 +2830,6 @@
       },
       "description": "if showStats=true was specified in the request this field will contain information about the request payload."
     },
-    "MultiLanguageBatchInput": {
-      "type": "object",
-      "description": "Contains a set of input documents to be analyzed by the service.",
-      "required": [
-        "documents"
-      ],
-      "properties": {
-        "documents": {
-          "type": "array",
-          "description": "The set of documents to process as part of this batch.",
-          "items": {
-            "$ref": "#/definitions/MultiLanguageInput"
-          }
-        }
-      }
-    },
     "MultiLanguageInput": {
       "type": "object",
       "description": "Contains an input document to be analyzed by the service.",
@@ -2889,25 +2848,7 @@
         },
         "language": {
           "type": "string",
-          "description": "(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default. Use \"auto\" for automatic language detection."
-        },
-        "defaultLanguage": {
-          "type": "string",
-          "description": "(Optional) A 2 letter ISO 639-1 representation of a language to be used as a default value when the \"language\" property is set to \"auto\". The default value will be used as a fallback if a language cannot be automatically detected."
-        }
-      }
-    },
-    "LanguageBatchInput": {
-      "type": "object",
-      "required": [
-        "documents"
-      ],
-      "properties": {
-        "documents": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LanguageInput"
-          }
+          "description": "(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default."
         }
       }
     },
