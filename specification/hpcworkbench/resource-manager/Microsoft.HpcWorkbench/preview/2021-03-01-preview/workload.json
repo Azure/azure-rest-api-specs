@@ -81,6 +81,9 @@
           "200": {
             "description": "Success"
           },
+          "202": {
+            "description": "Accepted"
+          },
           "default": {
             "description": "",
             "schema": {
@@ -89,6 +92,7 @@
             "x-ms-error-response": true
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Workloads Start": {
             "$ref": "./examples/WorkloadsStart.json"
@@ -143,6 +147,9 @@
           "200": {
             "description": "Success"
           },
+          "202": {
+            "description": "Accepted"
+          },
           "default": {
             "description": "",
             "schema": {
@@ -151,8 +158,9 @@
             "x-ms-error-response": true
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Workloads Start": {
+          "Workloads Stop": {
             "$ref": "./examples/WorkloadsStop.json"
           }
         }
@@ -205,6 +213,9 @@
           "200": {
             "description": "Success"
           },
+          "202": {
+            "description": "Accepted"
+          },
           "default": {
             "description": "",
             "schema": {
@@ -213,8 +224,9 @@
             "x-ms-error-response": true
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Workloads Start": {
+          "Workloads Restart": {
             "$ref": "./examples/WorkloadsRestart.json"
           }
         }
@@ -628,7 +640,7 @@
           "type": "string",
           "enum": [
             "Cadence",
-            "Mentor",
+            "Siemens",
             "Synopsys",
             "Ansys",
             "Common"

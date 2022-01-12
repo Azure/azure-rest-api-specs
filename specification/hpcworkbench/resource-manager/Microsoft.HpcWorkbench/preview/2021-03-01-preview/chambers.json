@@ -80,7 +80,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GetUploadUri"
+            }
+          },
+          "202": {
+            "description": "Accepted"
           },
           "default": {
             "description": "",
@@ -90,6 +96,7 @@
             "x-ms-error-response": true
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Chambers get upload Uri": {
             "$ref": "./examples/ChambersGetUploadUri.json"
@@ -137,6 +144,9 @@
           "200": {
             "description": "Success"
           },
+          "202": {
+            "description": "Accepted"
+          },
           "default": {
             "description": "",
             "schema": {
@@ -145,6 +155,7 @@
             "x-ms-error-response": true
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Chambers start": {
             "$ref": "./examples/ChambersStart.json"
@@ -192,6 +203,9 @@
           "200": {
             "description": "Success"
           },
+          "202": {
+            "description": "Accepted"
+          },
           "default": {
             "description": "",
             "schema": {
@@ -200,6 +214,7 @@
             "x-ms-error-response": true
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Chambers stop": {
             "$ref": "./examples/ChambersStop.json"
@@ -247,6 +262,9 @@
           "200": {
             "description": "Success"
           },
+          "202": {
+            "description": "Accepted"
+          },
           "default": {
             "description": "",
             "schema": {
@@ -255,6 +273,7 @@
             "x-ms-error-response": true
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Chambers Restart": {
             "$ref": "./examples/ChambersRestart.json"
@@ -310,6 +329,9 @@
           "200": {
             "description": "Success"
           },
+          "202": {
+            "description": "Accepted"
+          },
           "default": {
             "description": "",
             "schema": {
@@ -318,6 +340,7 @@
             "x-ms-error-response": true
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Update chamber license": {
             "$ref": "./examples/ChambersLicenseUpdate.json"
@@ -362,20 +385,20 @@
           },
           {
             "in": "body",
-            "name": "licenseServices",
-            "description": "the license services name.",
+            "name": "licenseService",
+            "description": "the license service name.",
             "required": true,
             "schema": {
               "type": "string",
               "enum": [
                 "ansys",
                 "cadence",
-                "mentor",
+                "siemens",
                 "synopsys",
                 "all"
               ],
               "x-ms-enum": {
-                "name": "LicenseServices",
+                "name": "LicenseService",
                 "modelAsString": true
               }
             }
@@ -385,6 +408,9 @@
           "200": {
             "description": "Success"
           },
+          "202": {
+            "description": "Accepted"
+          },
           "default": {
             "description": "",
             "schema": {
@@ -393,6 +419,7 @@
             "x-ms-error-response": true
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Chamber License Restart": {
             "$ref": "./examples/ChambersLicenseRestart.json"
@@ -756,21 +783,31 @@
         }
       }
     },
+    "GetUploadUri": {
+      "description": "Datasync file upload SAS token",
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "string",
+          "description": "Datasync file upload SAS token"
+        }
+      }
+    },
     "UpdateLicenseParameters": {
       "description": "File Upload Parameters DTO.",
       "type": "object",
       "properties": {
-        "licenseServices": {
-          "description": "Gets or sets the size of the file being uploaded.",
+        "licenseService": {
+          "description": "Gets or sets the license service to update.",
           "type": "string",
           "enum": [
             "ansys",
             "cadence",
-            "mentor",
+            "siemens",
             "synopsys"
           ],
           "x-ms-enum": {
-            "name": "LicenseServices",
+            "name": "LicenseService",
             "modelAsString": true
           }
         },
@@ -833,9 +870,9 @@
         }
       }
     },
-    "Mentor": {
+    "Siemens": {
       "type": "object",
-      "description": "Mentor Standard Licensing.",
+      "description": "Siemens Standard Licensing.",
       "properties": {
         "enable": {
           "type": "boolean",
@@ -890,9 +927,9 @@
               "$ref": "#/definitions/Ansys",
               "description": "Gets or sets the ansys properties."
             },
-            "mentor": {
-              "$ref": "#/definitions/Mentor",
-              "description": "Gets or sets the mentor properties."
+            "siemens": {
+              "$ref": "#/definitions/Siemens",
+              "description": "Gets or sets the siemens properties."
             },
             "synopsys": {
               "$ref": "#/definitions/Synopsys",
