@@ -558,3 +558,8 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 namespace: azure.mgmt.resource.templatespecs.v2021_05_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/templatespecs/v2021_05_01
 ```
+
+``` yaml $(python) && $(track2)
+modelerfour:
+  lenient-model-deduplication: true
+```
