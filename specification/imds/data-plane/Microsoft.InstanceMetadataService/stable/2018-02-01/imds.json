@@ -322,18 +322,6 @@
           "type": "string",
           "description": "This is the placement group of your Virtual Machine Scale Set."
         },
-        "plan": {
-          "type": "object",
-          "description": "This contains the data about the plan.",
-          "$ref": "#/definitions/PlanProperties"
-        },
-        "publicKeys": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PublicKeysProperties"
-          },
-          "description": "This is information about the SSH certificate"
-        },
         "platformFaultDomain": {
           "type": "string",
           "description": "This is the fault domain in which the VM."
@@ -445,38 +433,6 @@
         "macAddress": {
           "type": "string",
           "description": "This is the MAC address of the interface."
-        }
-      }
-    },
-    "PlanProperties": {
-      "type": "object",
-      "description": "This contains the data about the plan.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "This is the Plan ID."
-        },
-        "publisher": {
-          "type": "string",
-          "description": "This is the publisher ID."
-        },
-        "product": {
-          "type": "string",
-          "description": "This is the product of the image from the Marketplace."
-        }
-      }
-    },
-    "PublicKeysProperties": {
-      "type": "object",
-      "description": "This contains the data about the public key.",
-      "properties": {
-        "path": {
-          "type": "string",
-          "description": "This specifies the full path on the VM where the SSH public key is stored."
-        },
-        "keyData": {
-          "type": "string",
-          "description": "This is the SSH public key certificate used to authenticate with the VM."
         }
       }
     },
