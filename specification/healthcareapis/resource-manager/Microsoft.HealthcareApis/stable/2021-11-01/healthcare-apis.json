@@ -3688,21 +3688,21 @@
           "$ref": "#/definitions/ResourceEventState"
         },
         "resourceVersionPolicyConfiguration": {
-            "description": "Determines tracking of history for resources.",
-            "$ref": "#/definitions/ResourceVersionPolicyConfiguration"
+          "description": "Determines tracking of history for resources.",
+          "$ref": "#/definitions/ResourceVersionPolicyConfiguration"
         }
       }
     },
-    "ResourceVersionPolicyConfiguration" :{
+    "ResourceVersionPolicyConfiguration": {
       "description": "The settings for history tracking for FHIR resources.",
       "type": "object",
       "properties": {
-        "default" : {
+        "default": {
           "description": "The default value for tracking history across all resources.",
-          "$ref" : "#/definitions/FhirResourceVersionPolicy"
+          "$ref": "#/definitions/FhirResourceVersionPolicy"
         },
-        "resourceTypeOverrides" :{
-          "type" : "object",
+        "resourceTypeOverrides": {
+          "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/FhirResourceVersionPolicy"
           }
