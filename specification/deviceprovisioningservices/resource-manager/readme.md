@@ -26,7 +26,7 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-03
+tag: package-2021-10
 ```
 
 ### Tag: package-preview-2020-09
@@ -107,7 +107,6 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-go-track2
