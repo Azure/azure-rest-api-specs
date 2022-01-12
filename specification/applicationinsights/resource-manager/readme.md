@@ -18,6 +18,16 @@ To see additional help and options, run:
 
 ---
 
+### Before adding a new tag
+
+Please familiarize yourself with the following before adding a new tag:
+
+- Discussion on negative impact of multiple _api-version_'s within a tag: [Azure/azure-sdk-for-rust#563](https://github.com/Azure/azure-sdk-for-rust/issues/563)
+- [API Spec & SDK Package Versioning Considerations](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/481/API-Spec-SDK-Package-Versioning-Considerations)
+- [Manual Process: Adding new API version](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/83/Manual-Process-Adding-new-API-version)
+
+---
+
 ## Configuration
 
 ### Basic Information
@@ -28,7 +38,7 @@ These are the global settings for the ApplicationInsights API.
 title: ApplicationInsightsManagementClient
 description: Composite Swagger for Application Insights Management Client
 openapi-type: arm
-tag: package-2021-11-01
+tag: package-2022-01-11
 ```
 
 ### Suppression
