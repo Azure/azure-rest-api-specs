@@ -36,6 +36,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/portalsettings": {
       "get": {
+        "deprecated": true,
         "tags": [
           "PortalSettings"
         ],
@@ -78,6 +79,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/portalsettings/signin": {
       "head": {
+        "deprecated": true,
         "tags": [
           "SignInSettings"
         ],
@@ -121,6 +123,7 @@
         }
       },
       "get": {
+        "deprecated": true,
         "tags": [
           "SignInSettings"
         ],
@@ -167,6 +170,7 @@
         }
       },
       "patch": {
+        "deprecated": true,
         "tags": [
           "SignInSettings"
         ],
@@ -216,6 +220,7 @@
         }
       },
       "put": {
+        "deprecated": true,
         "tags": [
           "SignInSettings"
         ],
@@ -270,6 +275,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/portalsettings/signup": {
       "head": {
+        "deprecated": true,
         "tags": [
           "SignUpSettings"
         ],
@@ -313,6 +319,7 @@
         }
       },
       "get": {
+        "deprecated": true,
         "tags": [
           "SignUpSettings"
         ],
@@ -359,6 +366,7 @@
         }
       },
       "patch": {
+        "deprecated": true,
         "tags": [
           "SignUpSettings"
         ],
@@ -408,6 +416,7 @@
         }
       },
       "put": {
+        "deprecated": true,
         "tags": [
           "SignUpSettings"
         ],
@@ -462,6 +471,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/portalsettings/delegation": {
       "head": {
+        "deprecated": true,
         "tags": [
           "DelegationSettings"
         ],
@@ -505,6 +515,7 @@
         }
       },
       "get": {
+        "deprecated": true,
         "tags": [
           "DelegationSettings"
         ],
@@ -551,6 +562,7 @@
         }
       },
       "patch": {
+        "deprecated": true,
         "tags": [
           "DelegationSettings"
         ],
@@ -600,6 +612,7 @@
         }
       },
       "put": {
+        "deprecated": true,
         "tags": [
           "DelegationSettings"
         ],
@@ -654,6 +667,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/portalsettings/delegation/listSecrets": {
       "post": {
+        "deprecated": true,
         "tags": [
           "DelegationSettings"
         ],
@@ -683,390 +697,6 @@
             "description": "The response body contains the validation key.",
             "schema": {
               "$ref": "./definitions.json#/definitions/PortalSettingValidationKeyContract"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/portalsettings/csp": {
-      "head": {
-        "tags": [
-          "PortalSettingsCsp"
-        ],
-        "operationId": "PortalSettingsCsp_GetEntityTag",
-        "description": "Get the entity state (Etag) version of the Content Security Policy (CSP) settings for the developer portal.",
-        "x-ms-examples": {
-          "ApiManagementPortalSettingsCspHead": {
-            "$ref": "./examples/ApiManagementPortalSettingsCspHead.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Operation completed successfully.",
-            "headers": {
-              "ETag": {
-                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "PortalSettingsCsp"
-        ],
-        "operationId": "PortalSettingsCsp_Get",
-        "description": "Get the Content Security Policy (CSP) settings for the developer portal.",
-        "x-ms-examples": {
-          "ApiManagementPortalSettingsCspGet": {
-            "$ref": "./examples/ApiManagementPortalSettingsCspGet.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The developer portal Content Security Policy (CSP) settings.",
-            "schema": {
-              "$ref": "./definitions.json#/definitions/PortalSettingsCspContract"
-            },
-            "headers": {
-              "ETag": {
-                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "PortalSettingsCsp"
-        ],
-        "operationId": "PortalSettingsCsp_Update",
-        "description": "Update the Content Security Policy (CSP) settings for the developer portal.",
-        "x-ms-examples": {
-          "ApiManagementPortalSettingsCspPatch": {
-            "$ref": "./examples/ApiManagementPortalSettingsCspPatch.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "./definitions.json#/definitions/PortalSettingsCspContract"
-            },
-            "description": "Update the Content Security Policy (CSP) settings for the developer portal."
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "The settings were successfully updated."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "PortalSettingsCsp"
-        ],
-        "operationId": "PortalSettingsCsp_CreateOrUpdate",
-        "description": "Create or update Content Security Policy (CSP) settings for the developer portal.",
-        "x-ms-examples": {
-          "PortalSettingsCspPut": {
-            "$ref": "./examples/ApiManagementPortalSettingsCspPut.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "./definitions.json#/definitions/PortalSettingsCspContract"
-            },
-            "description": "Create or update parameters."
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The settings were successfully updated.",
-            "schema": {
-              "$ref": "./definitions.json#/definitions/PortalSettingsCspContract"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/portalsettings/cors": {
-      "head": {
-        "tags": [
-          "PortalSettingsCors"
-        ],
-        "operationId": "PortalSettingsCors_GetEntityTag",
-        "description": "Get the entity state (Etag) version of the Cross-Origin Resource Sharing (CORS) settings for the developer portal.",
-        "x-ms-examples": {
-          "ApiManagementPortalSettingsCorsHead": {
-            "$ref": "./examples/ApiManagementPortalSettingsCorsHead.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Operation completed successfully.",
-            "headers": {
-              "ETag": {
-                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "PortalSettingsCors"
-        ],
-        "operationId": "PortalSettingsCors_Get",
-        "description": "Get the Cross-Origin Resource Sharing (CORS) settings for the developer portal.",
-        "x-ms-examples": {
-          "ApiManagementPortalSettingsCorsGet": {
-            "$ref": "./examples/ApiManagementPortalSettingsCorsGet.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The developer portal Cross-Origin Resource Sharing (CORS) settings.",
-            "schema": {
-              "$ref": "./definitions.json#/definitions/PortalSettingsCorsContract"
-            },
-            "headers": {
-              "ETag": {
-                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "PortalSettingsCors"
-        ],
-        "operationId": "PortalSettingsCors_Update",
-        "description": "Update the Cross-Origin Resource Sharing (CORS) settings for the developer portal.",
-        "x-ms-examples": {
-          "ApiManagementPortalSettingsCorsPatch": {
-            "$ref": "./examples/ApiManagementPortalSettingsCorsPatch.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "./definitions.json#/definitions/PortalSettingsCorsContract"
-            },
-            "description": "Update the Cross-Origin Resource Sharing (CORS) settings for the developer portal."
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "The settings were successfully updated."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "PortalSettingsCors"
-        ],
-        "operationId": "PortalSettingsCors_CreateOrUpdate",
-        "description": "Create or update the Cross-Origin Resource Sharing (CORS) settings for the developer portal.",
-        "x-ms-examples": {
-          "ApiManagementPortalSettingsCorsPut": {
-            "$ref": "./examples/ApiManagementPortalSettingsCorsPut.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "./definitions.json#/definitions/PortalSettingsCorsContract"
-            },
-            "description": "Create or update parameters."
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The settings were successfully updated.",
-            "schema": {
-              "$ref": "./definitions.json#/definitions/PortalSettingsCorsContract"
             }
           },
           "default": {

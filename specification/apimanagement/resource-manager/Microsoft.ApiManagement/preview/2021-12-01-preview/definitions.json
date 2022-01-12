@@ -3908,12 +3908,73 @@
       },
       "description": "Descriptions of APIM policies."
     },
-    "PortalDelegationSettings": {
+    "PortalConfigProperties": {
+      "properties": {
+        "type": "object",
+        "enableBasicAuth": {
+          "type": "boolean",
+          "description": "Enable or disable Basic authentication method."
+        },
+        "signin": {
+          "type": "object",
+          "properties": {
+            "require": {
+              "type": "boolean",
+              "description": "Redirect anonymous users to the sign-in page."
+            }
+          }
+        },
+        "signup": {
+          "type": "object",
+          "properties": {
+            "termsOfService": {
+              "type": "object",
+              "$ref": "#/definitions/TermsOfServiceProperties",
+              "description": "Terms of service contract properties."
+            }
+          }
+        },
+        "delegation": {
+          "type": "object",
+          "properties": {
+            "delegateRegistration": {
+              "type": "boolean",
+              "description": "Enable or disable delegation for user registration."
+            },
+            "delegateSubscription": {
+              "type": "boolean",
+              "description": "Enable or disable delegation for product subscriptions."
+            },
+            "delegationUrl": {
+              "type": "string",
+              "description": "A delegation endpoint URL."
+            },
+            "validationKey": {
+              "x-ms-secret": true,
+              "type": "string",
+              "description": "A base64-encoded validation key to validate, that a request is coming from Azure API Management."
+            }
+          }
+        },
+        "cors": {
+          "type": "object",
+          "$ref": "#/definitions/PortalConfigCorsProperties",
+          "description": "The developer portal Cross-Origin Resource Sharing (CORS) settings."
+        },
+        "csp": {
+          "type": "object",
+          "$ref": "#/definitions/PortalConfigCspProperties",
+          "description": "The developer portal Content Security Policy (CSP) settings."
+        }
+      },
+      "description": "The developer portal configuration contract properties."
+    },
+    "PortalConfig": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PortalDelegationSettingsProperties",
-          "description": "Delegation settings contract properties."
+          "$ref": "#/definitions/PortalConfigProperties",
+          "description": "The developer portal configuration contract properties."
         }
       },
       "allOf": [
@@ -3921,46 +3982,9 @@
           "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
-      "description": "Delegation settings for a developer portal."
+      "description": "The developer portal configuration contract."
     },
-    "PortalDelegationSettingsProperties": {
-      "properties": {
-        "url": {
-          "type": "string",
-          "description": "A delegation Url."
-        },
-        "validationKey": {
-          "x-ms-secret": true,
-          "type": "string",
-          "description": "A base64-encoded validation key to validate, that a request is coming from Azure API Management."
-        },
-        "subscriptions": {
-          "$ref": "#/definitions/SubscriptionsDelegationSettingsProperties",
-          "description": "Subscriptions delegation settings."
-        },
-        "userRegistration": {
-          "$ref": "#/definitions/RegistrationDelegationSettingsProperties",
-          "description": "User registration delegation settings."
-        }
-      },
-      "description": "Delegation settings contract properties."
-    },
-    "PortalSettingsCorsContract": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PortalSettingsCorsPropertiesContract",
-          "description": "The developer portal Cross-Origin Resource Sharing (CORS) settings contract properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
-        }
-      ],
-      "description": "The developer portal Cross-Origin Resource Sharing (CORS) settings."
-    },
-    "PortalSettingsCorsPropertiesContract": {
+    "PortalConfigCorsProperties": {
       "properties": {
         "allowedOrigins": {
           "type": "array",
@@ -3970,25 +3994,11 @@
           "description": "Allowed origins, e.g. `https://trusted.com`."
         }
       },
-      "description": "The developer portal Cross-Origin Resource Sharing (CORS) settings contract properties."
+      "description": "The developer portal Cross-Origin Resource Sharing (CORS) settings."
     },
-    "PortalSettingsCspContract": {
+    "PortalConfigCspProperties": {
       "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PortalSettingsCspPropertiesContract",
-          "description": "The developer portal Content Security Policy (CSP) settings contract properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
-        }
-      ],
-      "description": "The developer portal Content Security Policy (CSP) settings."
-    },
-    "PortalSettingsCspPropertiesContract": {
-      "properties": {
+        "type": "object",
         "mode": {
           "type": "string",
           "description": "The mode of the developer portal Content Security Policy (CSP).",
@@ -4028,7 +4038,46 @@
           "description": "Allowed sources, e.g. `*.trusted.com`, `trusted.com`, `https://`."
         }
       },
-      "description": "The developer portal Content Security Policy (CSP) settings contract properties."
+      "description": "The developer portal Content Security Policy (CSP) settings."
+    },
+    "PortalDelegationSettings": {
+      "deprecated": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PortalDelegationSettingsProperties",
+          "description": "Delegation settings contract properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "Delegation settings for a developer portal."
+    },
+    "PortalDelegationSettingsProperties": {
+      "deprecated": true,
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "A delegation Url."
+        },
+        "validationKey": {
+          "x-ms-secret": true,
+          "type": "string",
+          "description": "A base64-encoded validation key to validate, that a request is coming from Azure API Management."
+        },
+        "subscriptions": {
+          "$ref": "#/definitions/SubscriptionsDelegationSettingsProperties",
+          "description": "Subscriptions delegation settings."
+        },
+        "userRegistration": {
+          "$ref": "#/definitions/RegistrationDelegationSettingsProperties",
+          "description": "User registration delegation settings."
+        }
+      },
+      "description": "Delegation settings contract properties."
     },
     "PortalSettingsCollection": {
       "properties": {
