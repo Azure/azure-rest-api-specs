@@ -11,10 +11,14 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/AutomationRules/{automationRuleResourceName}": {
       "get": {
-        "tags": ["AutomationRules"],
+        "tags": [
+          "AutomationRules"
+        ],
         "description": "Gets the automation rule.",
         "operationId": "AutomationRules_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -57,11 +61,17 @@
         }
       },
       "put": {
-        "tags": ["AutomationRules"],
+        "tags": [
+          "AutomationRules"
+        ],
         "description": "Creates or updates the automation rule.",
         "operationId": "AutomationRules_CreateOrUpdate",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -118,10 +128,14 @@
         }
       },
       "delete": {
-        "tags": ["AutomationRules"],
+        "tags": [
+          "AutomationRules"
+        ],
         "description": "Delete the automation rule.",
         "operationId": "AutomationRules_Delete",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -165,10 +179,14 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/AutomationRules": {
       "get": {
-        "tags": ["AutomationRules"],
+        "tags": [
+          "AutomationRules"
+        ],
         "description": "Gets all automation rules.",
         "operationId": "AutomationRules_List",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -221,11 +239,17 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/Incidents/{incidentIdentifier}/runPlaybook": {
       "post": {
-        "tags": ["ManualTrigger"],
+        "tags": [
+          "ManualTrigger"
+        ],
         "description": "Creates or updates the automation rule.",
         "operationId": "AutomationRules_ManualTriggerPlaybook",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -275,7 +299,10 @@
   "definitions": {
     "ActionType": {
       "description": "The type of the automation rule action",
-      "enum": ["ModifyProperties", "RunPlaybook"],
+      "enum": [
+        "ModifyProperties",
+        "RunPlaybook"
+      ],
       "type": "string",
       "example": "ModifyProperties",
       "x-ms-enum": {
@@ -292,7 +319,9 @@
       }
     },
     "AutomationRule": {
-      "required": ["properties"],
+      "required": [
+        "properties"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -309,7 +338,10 @@
     },
     "AutomationRuleAction": {
       "description": "Describes an automation rule action",
-      "required": ["actionType", "order"],
+      "required": [
+        "actionType",
+        "order"
+      ],
       "type": "object",
       "properties": {
         "order": {
@@ -324,7 +356,9 @@
     },
     "AutomationRuleCondition": {
       "description": "Describes an automation rule condition",
-      "required": ["conditionType"],
+      "required": [
+        "conditionType"
+      ],
       "type": "object",
       "properties": {
         "conditionType": {
@@ -352,7 +386,12 @@
     },
     "AutomationRuleProperties": {
       "description": "Automation rule properties",
-      "required": ["actions", "displayName", "order", "triggeringLogic"],
+      "required": [
+        "actions",
+        "displayName",
+        "order",
+        "triggeringLogic"
+      ],
       "type": "object",
       "properties": {
         "displayName": {
@@ -719,7 +758,11 @@
     },
     "AutomationRuleTriggeringLogic": {
       "description": "Describes automation rule triggering logic",
-      "required": ["isEnabled", "triggersOn", "triggersWhen"],
+      "required": [
+        "isEnabled",
+        "triggersOn",
+        "triggersWhen"
+      ],
       "type": "object",
       "properties": {
         "isEnabled": {
@@ -764,7 +807,9 @@
       }
     },
     "ConditionType": {
-      "enum": ["Property"],
+      "enum": [
+        "Property"
+      ],
       "type": "string",
       "example": "Property",
       "x-ms-enum": {
@@ -834,7 +879,10 @@
       }
     },
     "IncidentLabelType": {
-      "enum": ["User", "AutoAssigned"],
+      "enum": [
+        "User",
+        "AutoAssigned"
+      ],
       "type": "string",
       "example": "User",
       "x-ms-enum": {
@@ -851,7 +899,11 @@
       }
     },
     "IncidentOwnerType": {
-      "enum": ["Unknown", "User", "Group"],
+      "enum": [
+        "Unknown",
+        "User",
+        "Group"
+      ],
       "type": "string",
       "example": "Unknown",
       "x-ms-enum": {
@@ -933,7 +985,12 @@
       }
     },
     "IncidentSeverity": {
-      "enum": ["Informational", "Low", "Medium", "High"],
+      "enum": [
+        "Informational",
+        "Low",
+        "Medium",
+        "High"
+      ],
       "type": "string",
       "example": "Informational",
       "x-ms-enum": {
@@ -956,7 +1013,11 @@
       }
     },
     "IncidentStatus": {
-      "enum": ["New", "Active", "Closed"],
+      "enum": [
+        "New",
+        "Active",
+        "Closed"
+      ],
       "type": "string",
       "example": "New",
       "x-ms-enum": {
@@ -1002,7 +1063,9 @@
       }
     },
     "triggersOn": {
-      "enum": ["Incidents"],
+      "enum": [
+        "Incidents"
+      ],
       "type": "string",
       "example": "Incidents",
       "x-ms-enum": {
@@ -1016,7 +1079,9 @@
       }
     },
     "triggersWhen": {
-      "enum": ["Created"],
+      "enum": [
+        "Created"
+      ],
       "type": "string",
       "example": "Created",
       "x-ms-enum": {
@@ -1063,7 +1128,9 @@
   },
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "tags": [
@@ -1073,7 +1140,13 @@
     }
   ],
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "produces": ["application/json"],
-  "consumes": ["application/json"]
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ]
 }
