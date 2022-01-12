@@ -3017,13 +3017,7 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         },
         {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "description": "Compute properties",
-              "$ref": "#/definitions/Compute"
-            }
-          }
+          "$ref": "#/definitions/ComputeResourceSchema"
         }
       ],
       "properties": {
@@ -3045,6 +3039,15 @@
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
           "description": "The sku of the workspace."
+        }
+      }
+    },
+    "ComputeResourceSchema": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Compute properties",
+          "$ref": "#/definitions/Compute"
         }
       }
     },
@@ -3129,79 +3132,82 @@
           "$ref": "#/definitions/Compute"
         },
         {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "type": "object",
-              "description": "AKS properties",
-              "properties": {
-                "clusterFqdn": {
-                  "description": "Cluster full qualified domain name",
-                  "type": "string"
-                },
-                "systemServices": {
-                  "type": "array",
-                  "description": "System services",
-                  "items": {
-                    "$ref": "#/definitions/SystemService"
-                  },
-                  "readOnly": true
-                },
-                "agentCount": {
-                  "description": "Number of agents",
-                  "type": "integer",
-                  "format": "int32",
-                  "minimum": 0
-                },
-                "agentVmSize": {
-                  "description": "Agent virtual machine size",
-                  "type": "string"
-                },
-                "clusterPurpose": {
-                  "description": "Intended usage of the cluster",
-                  "type": "string",
-                  "default": "FastProd",
-                  "enum": [
-                    "FastProd",
-                    "DenseProd",
-                    "DevTest"
-                  ],
-                  "x-ms-enum": {
-                    "name": "ClusterPurpose",
-                    "modelAsString": true
-                  }
-                },
-                "sslConfiguration": {
-                  "description": "SSL configuration",
-                  "$ref": "#/definitions/SslConfiguration"
-                },
-                "aksNetworkingConfiguration": {
-                  "description": "AKS networking configuration for vnet",
-                  "$ref": "#/definitions/AksNetworkingConfiguration"
-                },
-                "loadBalancerType": {
-                  "description": "Load Balancer Type",
-                  "type": "string",
-                  "default": "PublicIp",
-                  "enum": [
-                    "PublicIp",
-                    "InternalLoadBalancer"
-                  ],
-                  "x-ms-enum": {
-                    "name": "LoadBalancerType",
-                    "modelAsString": true
-                  }
-                },
-                "loadBalancerSubnet": {
-                  "description": "Load Balancer Subnet",
-                  "type": "string"
-                }
-              }
-            }
-          }
+          "$ref": "#/definitions/AKSSchema"
         }
       ],
       "x-ms-discriminator-value": "AKS"
+    },
+    "AKSSchema": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "AKS properties",
+          "properties": {
+            "clusterFqdn": {
+              "description": "Cluster full qualified domain name",
+              "type": "string"
+            },
+            "systemServices": {
+              "type": "array",
+              "description": "System services",
+              "items": {
+                "$ref": "#/definitions/SystemService"
+              },
+              "readOnly": true
+            },
+            "agentCount": {
+              "description": "Number of agents",
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0
+            },
+            "agentVmSize": {
+              "description": "Agent virtual machine size",
+              "type": "string"
+            },
+            "clusterPurpose": {
+              "description": "Intended usage of the cluster",
+              "type": "string",
+              "default": "FastProd",
+              "enum": [
+                "FastProd",
+                "DenseProd",
+                "DevTest"
+              ],
+              "x-ms-enum": {
+                "name": "ClusterPurpose",
+                "modelAsString": true
+              }
+            },
+            "sslConfiguration": {
+              "description": "SSL configuration",
+              "$ref": "#/definitions/SslConfiguration"
+            },
+            "aksNetworkingConfiguration": {
+              "description": "AKS networking configuration for vnet",
+              "$ref": "#/definitions/AksNetworkingConfiguration"
+            },
+            "loadBalancerType": {
+              "description": "Load Balancer Type",
+              "type": "string",
+              "default": "PublicIp",
+              "enum": [
+                "PublicIp",
+                "InternalLoadBalancer"
+              ],
+              "x-ms-enum": {
+                "name": "LoadBalancerType",
+                "modelAsString": true
+              }
+            },
+            "loadBalancerSubnet": {
+              "description": "Load Balancer Subnet",
+              "type": "string"
+            }
+          }
+        }
+      }
     },
     "Kubernetes": {
       "description": "A Machine Learning compute based on Kubernetes Compute.",
@@ -3409,23 +3415,27 @@
           "$ref": "#/definitions/Compute"
         },
         {
-          "type": "object",
-          "description": "Properties(top level) of AmlCompute",
-          "properties": {
-            "properties": {
-              "description": "Properties of AmlCompute",
-              "$ref": "#/definitions/AmlComputeProperties"
-            }
-          }
+          "$ref": "#/definitions/AmlComputeSchema"
         }
       ],
       "x-ms-discriminator-value": "AmlCompute"
+    },
+    "AmlComputeSchema": {
+      "type": "object",
+      "description": "Properties(top level) of AmlCompute",
+      "properties": {
+        "properties": {
+          "description": "Properties of AmlCompute",
+          "$ref": "#/definitions/AmlComputeProperties"
+        }
+      }
     },
     "ComputeInstanceProperties": {
       "description": "Compute Instance properties",
       "type": "object",
       "properties": {
         "vmSize": {
+          "readOnly": true,
           "description": "Virtual Machine Size",
           "type": "string"
         },
@@ -3523,6 +3533,7 @@
         },
         "containers": {
           "type": "array",
+          "readOnly": true,
           "description": "Describes informations of containers on this ComputeInstance.",
           "items": {
             "$ref": "#/definitions/ComputeInstanceContainer"
@@ -3538,6 +3549,7 @@
         },
         "dataMounts": {
           "type": "array",
+          "readOnly": true,
           "description": "Describes informations of dataMounts on this ComputeInstance.",
           "items": {
             "$ref": "#/definitions/ComputeInstanceDataMount"
@@ -3557,17 +3569,20 @@
           "$ref": "#/definitions/Compute"
         },
         {
-          "type": "object",
-          "description": "Properties(top level) of ComputeInstance",
-          "properties": {
-            "properties": {
-              "description": "Properties of ComputeInstance",
-              "$ref": "#/definitions/ComputeInstanceProperties"
-            }
-          }
+          "$ref": "#/definitions/ComputeInstanceSchema"
         }
       ],
       "x-ms-discriminator-value": "ComputeInstance"
+    },
+    "ComputeInstanceSchema": {
+      "type": "object",
+      "description": "Properties(top level) of ComputeInstance",
+      "properties": {
+        "properties": {
+          "description": "Properties of ComputeInstance",
+          "$ref": "#/definitions/ComputeInstanceProperties"
+        }
+      }
     },
     "VirtualMachine": {
       "description": "A Machine Learning compute based on Azure Virtual Machines.",
@@ -3576,43 +3591,46 @@
           "$ref": "#/definitions/Compute"
         },
         {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "type": "object",
-              "properties": {
-                "virtualMachineSize": {
-                  "description": "Virtual Machine size",
-                  "type": "string"
-                },
-                "sshPort": {
-                  "description": "Port open for ssh connections.",
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "notebookServerPort": {
-                  "description": "Notebook server port open for ssh connections.",
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "address": {
-                  "description": "Public IP address of the virtual machine.",
-                  "type": "string"
-                },
-                "administratorAccount": {
-                  "description": "Admin credentials for virtual machine",
-                  "$ref": "#/definitions/VirtualMachineSshCredentials"
-                },
-                "isNotebookInstanceCompute": {
-                  "description": "Indicates whether this compute will be used for running notebooks.",
-                  "type": "boolean"
-                }
-              }
-            }
-          }
+          "$ref": "#/definitions/VirtualMachineSchema"
         }
       ],
       "x-ms-discriminator-value": "VirtualMachine"
+    },
+    "VirtualMachineSchema": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "virtualMachineSize": {
+              "description": "Virtual Machine size",
+              "type": "string"
+            },
+            "sshPort": {
+              "description": "Port open for ssh connections.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "notebookServerPort": {
+              "description": "Notebook server port open for ssh connections.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "address": {
+              "description": "Public IP address of the virtual machine.",
+              "type": "string"
+            },
+            "administratorAccount": {
+              "description": "Admin credentials for virtual machine",
+              "$ref": "#/definitions/VirtualMachineSshCredentials"
+            },
+            "isNotebookInstanceCompute": {
+              "description": "Indicates whether this compute will be used for running notebooks.",
+              "type": "boolean"
+            }
+          }
+        }
+      }
     },
     "HDInsightProperties": {
       "type": "object",
@@ -3640,15 +3658,18 @@
           "$ref": "#/definitions/Compute"
         },
         {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/HDInsightProperties"
-            }
-          }
+          "$ref": "#/definitions/HDInsightSchema"
         }
       ],
       "x-ms-discriminator-value": "HDInsight"
+    },
+    "HDInsightSchema": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HDInsightProperties"
+        }
+      }
     },
     "DataFactory": {
       "description": "A DataFactory compute.",
@@ -3680,15 +3701,18 @@
           "$ref": "#/definitions/Compute"
         },
         {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/DatabricksProperties"
-            }
-          }
+          "$ref": "#/definitions/DatabricksSchema"
         }
       ],
       "x-ms-discriminator-value": "Databricks"
+    },
+    "DatabricksSchema": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabricksProperties"
+        }
+      }
     },
     "DataLakeAnalytics": {
       "description": "A DataLakeAnalytics compute.",
@@ -3697,21 +3721,24 @@
           "$ref": "#/definitions/Compute"
         },
         {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "type": "object",
-              "properties": {
-                "dataLakeStoreAccountName": {
-                  "description": "DataLake Store Account Name",
-                  "type": "string"
-                }
-              }
-            }
-          }
+          "$ref": "#/definitions/DataLakeAnalyticsSchema"
         }
       ],
       "x-ms-discriminator-value": "DataLakeAnalytics"
+    },
+    "DataLakeAnalyticsSchema": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "dataLakeStoreAccountName": {
+              "description": "DataLake Store Account Name",
+              "type": "string"
+            }
+          }
+        }
+      }
     },
     "SynapseSpark": {
       "type": "object",
@@ -4134,16 +4161,19 @@
           "$ref": "#/definitions/ComputeSecrets"
         },
         {
-          "type": "object",
-          "properties": {
-            "administratorAccount": {
-              "description": "Admin credentials for virtual machine.",
-              "$ref": "#/definitions/VirtualMachineSshCredentials"
-            }
-          }
+          "$ref": "#/definitions/VirtualMachineSecretsSchema"
         }
       ],
       "x-ms-discriminator-value": "VirtualMachine"
+    },
+    "VirtualMachineSecretsSchema": {
+      "type": "object",
+      "properties": {
+        "administratorAccount": {
+          "description": "Admin credentials for virtual machine.",
+          "$ref": "#/definitions/VirtualMachineSshCredentials"
+        }
+      }
     },
     "DatabricksComputeSecretsProperties": {
       "type": "object",
@@ -4822,7 +4852,11 @@
               "Friday",
               "Saturday",
               "Sunday"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "DaysOfWeek",
+              "modelAsString": true
+            }
           }
         }
       }
