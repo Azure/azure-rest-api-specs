@@ -3908,6 +3908,38 @@
       },
       "description": "Descriptions of APIM policies."
     },
+    "PortalConfigCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PortalConfigContract"
+          },
+          "description": "The developer portal configurations."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        }
+      },
+      "description": "The collection of the developer portal configurations."
+    },
+    "PortalConfigContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PortalConfigProperties",
+          "description": "The developer portal configuration contract properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "The developer portal configuration contract."
+    },
     "PortalConfigProperties": {
       "properties": {
         "type": "object",
@@ -3968,21 +4000,6 @@
         }
       },
       "description": "The developer portal configuration contract properties."
-    },
-    "PortalConfig": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PortalConfigProperties",
-          "description": "The developer portal configuration contract properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
-        }
-      ],
-      "description": "The developer portal configuration contract."
     },
     "PortalConfigCorsProperties": {
       "properties": {
