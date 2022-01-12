@@ -9601,6 +9601,16 @@
     },
     "VirtualMachineExtension": {
       "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the extension."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/VirtualMachineExtensionProperties"
@@ -9608,7 +9618,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/SubResourceReadOnly"
         }
       ],
       "description": "Describes a Virtual Machine Extension."
