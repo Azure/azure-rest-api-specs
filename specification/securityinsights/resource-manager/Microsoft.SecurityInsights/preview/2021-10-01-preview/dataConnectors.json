@@ -1672,6 +1672,102 @@
       "description": "OfficeATP (Office 365 Advanced Threat Protection) data connector properties.",
       "type": "object"
     },
+    "Office365ProjectDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents Office Microsoft Project data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Office365ProjectDataConnectorProperties",
+          "description": "Office Microsoft Project data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Office365Project"
+    },
+    "Office365ProjectConnectorDataTypes": {
+      "description": "The available data types for Office Microsoft Project data connector.",
+      "properties": {
+        "logs": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Logs data type.",
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "required": [
+        "logs"
+      ]
+    },
+    "Office365ProjectDataConnectorProperties": {
+      "description": "Office Microsoft Project data connector properties.",
+      "properties": {
+        "dataTypes": {
+          "$ref": "#/definitions/Office365ProjectDataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object",
+      "required": [
+        "dataTypes"
+      ]
+    },
+    "OfficePowerBIDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents Office Microsoft PowerBI data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OfficePowerBIDataConnectorProperties",
+          "description": "Office Microsoft PowerBI data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "OfficePowerBI"
+    },
+    "OfficePowerBIConnectorDataTypes": {
+      "description": "The available data types for Office Microsoft PowerBI data connector.",
+      "properties": {
+        "logs": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Logs data type.",
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "required": [
+        "logs"
+      ]
+    },
+    "OfficePowerBIDataConnectorProperties": {
+      "description": "Office Microsoft PowerBI data connector properties.",
+      "properties": {
+        "dataTypes": {
+          "$ref": "#/definitions/OfficePowerBIDataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object",
+      "required": [
+        "dataTypes"
+      ]
+    },
     "OfficeIRMDataConnector": {
       "allOf": [
         {
