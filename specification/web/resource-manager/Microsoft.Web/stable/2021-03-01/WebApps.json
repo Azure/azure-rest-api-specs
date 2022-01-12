@@ -21484,164 +21484,164 @@
           }
         }
       }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows": {
-    "get": {
-      "tags": [
-        "WebApps"
-      ],
-      "summary": "List the workflows for a web site, or a deployment slot.",
-      "operationId": "WebApps_ListWorkflows",
-      "parameters": [
-        {
-          "$ref": "#/parameters/resourceGroupNameParameter"
-        },
-        {
-          "name": "name",
-          "in": "path",
-          "description": "Site name.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "$ref": "#/parameters/subscriptionIdParameter"
-        },
-        {
-          "$ref": "#/parameters/apiVersionParameter"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Workflow information returned.",
-          "schema": {
-            "$ref": "#/definitions/WorkflowEnvelopeCollection"
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List the workflows for a web site, or a deployment slot.",
+        "operationId": "WebApps_ListWorkflows",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workflow information returned.",
+            "schema": {
+              "$ref": "#/definitions/WorkflowEnvelopeCollection"
+            }
+          },
+          "404": {
+            "description": "Workflow with an ID of {workflowName} is not running.",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
           }
         },
-        "404": {
-          "description": "Workflow with an ID of {workflowName} is not running.",
-          "x-ms-error-response": true
-        },
-        "default": {
-          "description": "App Service error response.",
-          "schema": {
-            "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-          }
-        }
-      },
-      "x-ms-examples": {
-        "List the workflows": {
-          "$ref": "./examples/ListWorkflows.json"
-        }
-      },
-      "x-ms-pageable": {
-        "nextLinkName": "nextLink"
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows/{workflowName}": {
-    "get": {
-      "tags": [
-        "WebApps"
-      ],
-      "summary": "Get workflow information by its ID for web site, or a deployment slot.",
-      "operationId": "WebApps_GetWorkflow",
-      "parameters": [
-        {
-          "$ref": "#/parameters/resourceGroupNameParameter"
-        },
-        {
-          "name": "name",
-          "in": "path",
-          "description": "Site name.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "workflowName",
-          "in": "path",
-          "description": "Workflow name.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "$ref": "#/parameters/subscriptionIdParameter"
-        },
-        {
-          "$ref": "#/parameters/apiVersionParameter"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Workflow information returned.",
-          "schema": {
-            "$ref": "#/definitions/WorkflowEnvelope"
+        "x-ms-examples": {
+          "List the workflows": {
+            "$ref": "./examples/ListWorkflows.json"
           }
         },
-        "404": {
-          "description": "Workflow with a name of {workflowName} does not exist.",
-          "x-ms-error-response": true
-        },
-        "default": {
-          "description": "App Service error response.",
-          "schema": {
-            "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-          }
-        }
-      },
-      "x-ms-examples": {
-        "GET a workflow": {
-          "$ref": "./examples/GetWorkflow.json"
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflowsconfiguration/connections": {
-    "get": {
-      "tags": [
-        "WebApps"
-      ],
-      "summary": "Get workflow app's configurations conections information by its ID for web site, or a deployment slot.",
-      "operationId": "WebApps_ListWorkflowsConfiguration",
-      "parameters": [
-        {
-          "$ref": "#/parameters/resourceGroupNameParameter"
-        },
-        {
-          "name": "name",
-          "in": "path",
-          "description": "Site name.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "$ref": "#/parameters/subscriptionIdParameter"
-        },
-        {
-          "$ref": "#/parameters/apiVersionParameter"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Connections information returned.",
-          "schema": {
-            "$ref": "#/definitions/WorkflowEnvelope"
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows/{workflowName}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get workflow information by its ID for web site, or a deployment slot.",
+        "operationId": "WebApps_GetWorkflow",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "in": "path",
+            "description": "Workflow name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workflow information returned.",
+            "schema": {
+              "$ref": "#/definitions/WorkflowEnvelope"
+            }
+          },
+          "404": {
+            "description": "Workflow with a name of {workflowName} does not exist.",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
           }
         },
-        "404": {
-          "description": "Error retrieving connections.",
-          "x-ms-error-response": true
-        },
-        "default": {
-          "description": "App Service error response.",
-          "schema": {
-            "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+        "x-ms-examples": {
+          "GET a workflow": {
+            "$ref": "./examples/GetWorkflow.json"
           }
         }
-      },
-      "x-ms-examples": {
-        "List the ListInstanceWorkflowsConfigurationConnections": {
-          "$ref": "./examples/ListWorkflowsConfigurationConnections.json"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflowsconfiguration/connections": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get workflow app's configurations conections information by its ID for web site, or a deployment slot.",
+        "operationId": "WebApps_ListWorkflowsConfiguration",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Connections information returned.",
+            "schema": {
+              "$ref": "#/definitions/WorkflowEnvelope"
+            }
+          },
+          "404": {
+            "description": "Error retrieving connections.",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the ListInstanceWorkflowsConfigurationConnections": {
+            "$ref": "./examples/ListWorkflowsConfigurationConnections.json"
+          }
         }
       }
     }
