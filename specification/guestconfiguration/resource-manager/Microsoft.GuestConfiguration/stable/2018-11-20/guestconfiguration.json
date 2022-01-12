@@ -968,7 +968,7 @@
       "properties": {
         "configurationMode": {
           "type": "string",
-          "readOnly": true,
+          "readOnly": false,
           "description": "Specifies how the LCM(Local Configuration Manager) actually applies the configuration to the target nodes. Possible values are ApplyOnly, ApplyAndMonitor, and ApplyAndAutoCorrect.",
           "x-ms-enum": {
             "name": "configurationMode",
@@ -981,7 +981,7 @@
           ]
         },
         "allowModuleOverwrite": {
-          "type": "boolean",
+          "type": "boolean",          
           "description": "If true - new configurations downloaded from the pull service are allowed to overwrite the old ones on the target node. Otherwise, false"
         },
         "actionAfterReboot": {
@@ -1057,6 +1057,12 @@
             "$ref": "#/definitions/VMSSVMInfo"
           },
           "description": "The list of VM Compliance data for VMSS"
+        },
+        "resourceType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Type of the resource - VMSS / VM",
+          "x-nullable": true
         },
         "parameterHash": {
           "type": "string",
@@ -1170,7 +1176,7 @@
           "description": "Details of the assignment report.",
           "x-nullable": true
         },
-        "vmssResourceId": {
+        "VMSSResourceId": {
           "type": "string",
           "readOnly": true,
           "description": "Azure resource Id of the VMSS."
