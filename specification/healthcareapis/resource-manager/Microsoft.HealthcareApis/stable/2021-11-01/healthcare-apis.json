@@ -3686,7 +3686,40 @@
         "eventState": {
           "description": "Fhir Service event support status.",
           "$ref": "#/definitions/ResourceEventState"
+        },
+        "resourceVersionPolicyConfiguration": {
+            "description": "Determines tracking of history for resources.",
+            "$ref": "#/definitions/ResourceVersionPolicyConfiguration"
         }
+      }
+    },
+    "ResourceVersionPolicyConfiguration" :{
+      "description": "The settings for history tracking for FHIR resources.",
+      "type": "object",
+      "properties": {
+        "default" : {
+          "description": "The default value for tracking history across all resources.",
+          "$ref" : "#/definitions/FhirResourceVersionPolicy"
+        },
+        "resourceTypeOverrides" :{
+          "type" : "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/FhirResourceVersionPolicy"
+          }
+        }
+      }
+    },
+    "FhirResourceVersionPolicy": {
+      "type": "string",
+      "description": "Controls how resources are versioned on the FHIR service",
+      "enum": [
+        "no-version",
+        "versioned",
+        "versioned-update"
+      ],
+      "x-ms-enum": {
+        "name": "FhirResourceVersionPolicy",
+        "modelAsString": true
       }
     },
     "FhirServiceAccessPolicies": {
