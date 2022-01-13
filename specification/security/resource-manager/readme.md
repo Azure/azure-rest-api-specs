@@ -66,7 +66,7 @@ These are the global settings for the Security API.
 title: SecurityCenter
 description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: package-preview-2022-01
+tag: package-composite-v3
 ```
 
 ### Composite packages
@@ -74,15 +74,7 @@ tag: package-preview-2022-01
 The following packages may be composed from multiple api-versions.
 
 
-### Tag: package-preview-2022-01
 
-These settings apply only when `--tag=package-preview-2022-01` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2022-01'
-input-file:
-  - Microsoft.Security/preview/2022-01-01-preview/assignments.json
-  - Microsoft.Security/preview/2022-01-01-preview/standards.json
-```
 ### Tag: package-preview-2021-08
 
 These settings apply only when `--tag=package-preview-2021-08` is specified on the command line.
@@ -137,6 +129,7 @@ input-file:
 - Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
 - Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
 - Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
+- Microsoft.Security/preview/2022-01-01-preview/ServerVulnerabilityAssessmentsSettings.json
 
 # Needed when there is more than one input file
 override-info:
@@ -186,6 +179,7 @@ input-file:
 - Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
 - Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
 - Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
+- Microsoft.Security/preview/2022-01-01-preview/ServerVulnerabilityAssessmentsSettings.json
 
 # Needed when there is more than one input file
 override-info:
@@ -241,6 +235,7 @@ input-file:
 - Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
 - Microsoft.Security/preview/2021-07-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2022-01-01-preview/ServerVulnerabilityAssessmentsSettings.json
 
 # Needed when there is more than one input file
 override-info:
@@ -477,6 +472,15 @@ These settings apply only when `--tag=package-2021-10-preview-only` is specified
 ``` yaml $(tag) == 'package-2021-10-preview-only'
 input-file:
   - Microsoft.Security/preview/2021-10-01-preview/mdeOnboardings.json
+```
+
+### Tag: package-2022-01-preview-only
+
+These settings apply only when `--tag=package-2022-01-preview-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-01-preview-only'
+input-file:
+  - Microsoft.Security/preview/2022-01-01-preview/ServerVulnerabilityAssessmentsSettings.json
 ```
 
 # Needed when there is more than one input file
