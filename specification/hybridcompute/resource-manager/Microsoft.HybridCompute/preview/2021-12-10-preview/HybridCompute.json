@@ -777,6 +777,32 @@
       },
       "description": "Specifies the patch settings."
     },
+    "AgentConfiguration": {
+      "type": "object",
+      "properties": {
+        "proxy.url": {
+          "type": "string",
+          "readonly": true,
+          "description": "Specifies the URL of the proxy to be used."
+        },
+        "incomingconnections.ports": {
+          "type": "array",
+          "readonly": true,
+          "description": "Specifies the list of ports that the agent will be able to listen on.",
+          "items": "string"
+        },
+        "info.lastupdatedtimestamp": {
+          "type": "string",
+          "readonly": true,
+          "description": "Specifies timestamp (UTC milliseconds since epoch) when the config was last updated."
+        },
+        "info.lastupdatedby": {
+          "type": "string",
+          "readonly": true,
+          "description": "Specifies how the configuration settings were last changed."
+        }
+      }
+    },
     "CloudMetadata": {
       "type": "object",
       "properties": {
@@ -829,6 +855,10 @@
       "properties": {
         "locationData": {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/locationData"
+        },
+        "agentConfiguration": {
+          "$ref": "#/definitions/AgentConfiguration",
+          "description": "Configurable properties that the user can set locally via the azcmagent config command, or remotely via ARM."
         },
         "cloudMetadata": {
           "$ref": "#/definitions/CloudMetadata",
@@ -1108,12 +1138,28 @@
           "description": "Specifies the version of the script handler."
         },
         "enableAutomaticUpgrade": {
-          "type": "boolean",
-          "description": "Indicates whether the extension should be automatically upgraded by the platform if there is a newer version available."
+          "type": "string",
+          "description": "Indicates whether the extension should be automatically upgraded by the platform if there is a newer version available.",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum":{
+            "name": "enableAutomaticUpgradeType",
+            "modelAsString": true
+          }
         },
         "autoUpgradeMinorVersion": {
-          "type": "boolean",
-          "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
+          "type": "string",
+          "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true.",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum":{
+            "name": "autoUpgradeMinorVersionType",
+            "modelAsString": true
+          }
         },
         "settings": {
           "type": "object",
@@ -1154,8 +1200,16 @@
           "description": "Specifies the version of the script handler."
         },
         "autoUpgradeMinorVersion": {
-          "type": "boolean",
-          "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
+          "type": "string",
+          "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true.",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum":{
+            "name": "autoUpgradeMinorVersionType",
+            "modelAsString": true
+          }
         },
         "settings": {
           "type": "object",
