@@ -15,6 +15,10 @@ module-name: sdk/resourcemanager/guestconfiguration/armguestconfiguration
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
+directive:
+- rename-model:
+    from: 'AssignmentReport'
+    to: 'AssignmentReportModel'
 ```
 
 ### Go multi-api

@@ -15,6 +15,16 @@ module-name: sdk/resourcemanager/databox/armdatabox
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
+directive:
+- rename-model:
+    from: 'JobDetails'
+    to: 'JobDetailsModel'
+- rename-model:
+    from: 'JobSecrets'
+    to: 'JobSecretsModel'
+- rename-model:
+    from: 'ScheduleAvailabilityRequest'
+    to: 'ScheduleAvailabilityRequestModel'
 ```
 
 ### Go multi-api
