@@ -18,7 +18,7 @@ azure-arm: true
 directive:
 - rename-model:
     from: 'LabServicesSku'
-    to: 'LabSKU'
+    to: 'SkuForLabServices'
 ```
 
 ### Go multi-api

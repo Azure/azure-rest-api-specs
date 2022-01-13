@@ -18,7 +18,7 @@ azure-arm: true
 directive:
 - rename-model:
     from: 'DataBoxEdgeSku'
-    to: 'EdgeSKU'
+    to: 'SkuForDataBoxEdge'
 ```
 
 ### Go multi-api
