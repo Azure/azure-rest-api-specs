@@ -9,7 +9,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/automationRules/{automationRuleResourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/automationRules/{automationRuleId}": {
       "get": {
         "tags": [
           "automationRules"
@@ -33,11 +33,7 @@
             "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
           },
           {
-            "in": "path",
-            "name": "automationRuleResourceName",
-            "description": "Automation rule ID",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/AutomationRuleId"
           }
         ],
         "responses": {
@@ -86,11 +82,7 @@
             "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
           },
           {
-            "in": "path",
-            "name": "automationRuleResourceName",
-            "description": "Automation rule ID",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/AutomationRuleId"
           },
           {
             "in": "body",
@@ -150,10 +142,7 @@
             "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
           },
           {
-            "in": "path",
-            "name": "automationRuleResourceName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/AutomationRuleId"
           }
         ],
         "responses": {
@@ -279,7 +268,7 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "Success"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -310,10 +299,12 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "ModifyProperties"
+            "value": "ModifyProperties",
+            "description": "Modify an object's properties"
           },
           {
-            "value": "RunPlaybook"
+            "value": "RunPlaybook",
+            "description": "Run a playbook on an object"
           }
         ]
       }
@@ -449,28 +440,36 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "Equals"
+            "value": "Equals",
+            "description": "Evaluates if the property equals at least one of the condition values"
           },
           {
-            "value": "NotEquals"
+            "value": "NotEquals",
+            "description": "Evaluates if the property does not equal any of the condition values"
           },
           {
-            "value": "Contains"
+            "value": "Contains",
+            "description": "Evaluates if the property contains at least one of the condition values"
           },
           {
-            "value": "NotContains"
+            "value": "NotContains",
+            "description": "Evaluates if the property does not contain any of the condition values"
           },
           {
-            "value": "StartsWith"
+            "value": "StartsWith",
+            "description": "Evaluates if the property starts with any of the condition values"
           },
           {
-            "value": "NotStartsWith"
+            "value": "NotStartsWith",
+            "description": "Evaluates if the property does not start with any of the condition values"
           },
           {
-            "value": "EndsWith"
+            "value": "EndsWith",
+            "description": "Evaluates if the property ends with any of the condition values"
           },
           {
-            "value": "NotEndsWith"
+            "value": "NotEndsWith",
+            "description": "Evaluates if the property does not end with any of the condition values"
           }
         ]
       }
@@ -541,169 +540,224 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "IncidentTitle"
+            "value": "IncidentTitle",
+            "description": "The title of the incident"
           },
           {
-            "value": "IncidentDescription"
+            "value": "IncidentDescription",
+            "description": "The description of the incident"
           },
           {
-            "value": "IncidentSeverity"
+            "value": "IncidentSeverity",
+            "description": "The severity of the incident"
           },
           {
-            "value": "IncidentStatus"
+            "value": "IncidentStatus",
+            "description": "The status of the incident"
           },
           {
-            "value": "IncidentRelatedAnalyticRuleIds"
+            "value": "IncidentRelatedAnalyticRuleIds",
+            "description": "The related Analytic rule ids of the incident"
           },
           {
-            "value": "IncidentTactics"
+            "value": "IncidentTactics",
+            "description": "The tactics of the incident"
           },
           {
-            "value": "IncidentLabel"
+            "value": "IncidentLabel",
+            "description": "The labels of the incident"
           },
           {
-            "value": "IncidentProviderName"
+            "value": "IncidentProviderName",
+            "description": "The provider name of the incident"
           },
           {
-            "value": "IncidentOwner"
+            "value": "IncidentOwner",
+            "description": "The owner of the incident"
           },
           {
-            "value": "AccountAadTenantId"
+            "value": "AccountAadTenantId",
+            "description": "The account Azure Active Directory tenant id"
           },
           {
-            "value": "AccountAadUserId"
+            "value": "AccountAadUserId",
+            "description": "The account Azure Active Directory user id"
           },
           {
-            "value": "AccountName"
+            "value": "AccountName",
+            "description": "The account name"
           },
           {
-            "value": "AccountNTDomain"
+            "value": "AccountNTDomain",
+            "description": "The account NetBIOS domain name"
           },
           {
-            "value": "AccountPUID"
+            "value": "AccountPUID",
+            "description": "The account Azure Active Directory Passport User ID"
           },
           {
-            "value": "AccountSid"
+            "value": "AccountSid",
+            "description": "The account security identifier"
           },
           {
-            "value": "AccountObjectGuid"
+            "value": "AccountObjectGuid",
+            "description": "The account unique identifier"
           },
           {
-            "value": "AccountUPNSuffix"
+            "value": "AccountUPNSuffix",
+            "description": "The account user principal name suffix"
           },
           {
-            "value": "AlertProductNames"
+            "value": "AlertProductNames",
+            "description": "The name of the product of the alert"
           },
           {
-            "value": "AzureResourceResourceId"
+            "value": "AzureResourceResourceId",
+            "description": "The Azure resource id"
           },
           {
-            "value": "AzureResourceSubscriptionId"
+            "value": "AzureResourceSubscriptionId",
+            "description": "The Azure resource subscription id"
           },
           {
-            "value": "CloudApplicationAppId"
+            "value": "CloudApplicationAppId",
+            "description": "The cloud application identifier"
           },
           {
-            "value": "CloudApplicationAppName"
+            "value": "CloudApplicationAppName",
+            "description": "The cloud application name"
           },
           {
-            "value": "DNSDomainName"
+            "value": "DNSDomainName",
+            "description": "The dns record domain name"
           },
           {
-            "value": "FileDirectory"
+            "value": "FileDirectory",
+            "description": "The file directory full path"
           },
           {
-            "value": "FileName"
+            "value": "FileName",
+            "description": "The file name without path"
           },
           {
-            "value": "FileHashValue"
+            "value": "FileHashValue",
+            "description": "The file hash value"
           },
           {
-            "value": "HostAzureID"
+            "value": "HostAzureID",
+            "description": "The host Azure resource id"
           },
           {
-            "value": "HostName"
+            "value": "HostName",
+            "description": "The host name without domain"
           },
           {
-            "value": "HostNetBiosName"
+            "value": "HostNetBiosName",
+            "description": "The host NetBIOS name"
           },
           {
-            "value": "HostNTDomain"
+            "value": "HostNTDomain",
+            "description": "The host NT domain"
           },
           {
-            "value": "HostOSVersion"
+            "value": "HostOSVersion",
+            "description": "The host operating system"
           },
           {
-            "value": "IoTDeviceId"
+            "value": "IoTDeviceId",
+            "description": "\"The IoT device id"
           },
           {
-            "value": "IoTDeviceName"
+            "value": "IoTDeviceName",
+            "description": "The IoT device name"
           },
           {
-            "value": "IoTDeviceType"
+            "value": "IoTDeviceType",
+            "description": "The IoT device type"
           },
           {
-            "value": "IoTDeviceVendor"
+            "value": "IoTDeviceVendor",
+            "description": "The IoT device vendor"
           },
           {
-            "value": "IoTDeviceModel"
+            "value": "IoTDeviceModel",
+            "description": "The IoT device model"
           },
           {
-            "value": "IoTDeviceOperatingSystem"
+            "value": "IoTDeviceOperatingSystem",
+            "description": "The IoT device operating system"
           },
           {
-            "value": "IPAddress"
+            "value": "IPAddress",
+            "description": "The IP address"
           },
           {
-            "value": "MailboxDisplayName"
+            "value": "MailboxDisplayName",
+            "description": "The mailbox display name"
           },
           {
-            "value": "MailboxPrimaryAddress"
+            "value": "MailboxPrimaryAddress",
+            "description": "The mailbox primary address"
           },
           {
-            "value": "MailboxUPN"
+            "value": "MailboxUPN",
+            "description": "The mailbox user principal name"
           },
           {
-            "value": "MailMessageDeliveryAction"
+            "value": "MailMessageDeliveryAction",
+            "description": "The mail message delivery action"
           },
           {
-            "value": "MailMessageDeliveryLocation"
+            "value": "MailMessageDeliveryLocation",
+            "description": "The mail message delivery location"
           },
           {
-            "value": "MailMessageRecipient"
+            "value": "MailMessageRecipient",
+            "description": "The mail message recipient"
           },
           {
-            "value": "MailMessageSenderIP"
+            "value": "MailMessageSenderIP",
+            "description": "The mail message sender IP address"
           },
           {
-            "value": "MailMessageSubject"
+            "value": "MailMessageSubject",
+            "description": "The mail message subject"
           },
           {
-            "value": "MailMessageP1Sender"
+            "value": "MailMessageP1Sender",
+            "description": "The mail message P1 sender"
           },
           {
-            "value": "MailMessageP2Sender"
+            "value": "MailMessageP2Sender",
+            "description": "The mail message P2 sender"
           },
           {
-            "value": "MalwareCategory"
+            "value": "MalwareCategory",
+            "description": "The malware category"
           },
           {
-            "value": "MalwareName"
+            "value": "MalwareName",
+            "description": "The malware name"
           },
           {
-            "value": "ProcessCommandLine"
+            "value": "ProcessCommandLine",
+            "description": "The process execution command line"
           },
           {
-            "value": "ProcessId"
+            "value": "ProcessId",
+            "description": "The process id"
           },
           {
-            "value": "RegistryKey"
+            "value": "RegistryKey",
+            "description": "The registry key path"
           },
           {
-            "value": "RegistryValueData"
+            "value": "RegistryValueData",
+            "description": "The registry key value in string formatted representation"
           },
           {
-            "value": "Url"
+            "value": "Url",
+            "description": "The url"
           }
         ]
       }
@@ -817,7 +871,8 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "Property"
+            "value": "Property",
+            "description": "Evaluate an object property value"
           }
         ]
       }
@@ -1090,7 +1145,8 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "Incidents"
+            "value": "Incidents",
+            "description": "Trigger on Incidents"
           }
         ]
       }
@@ -1106,7 +1162,8 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "Created"
+            "value": "Created",
+            "description": "Trigger on created objects"
           }
         ]
       }
