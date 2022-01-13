@@ -1851,6 +1851,65 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/snapshots/{snapshotName}/restoreFiles": {
+      "post": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_RestoreFiles",
+        "summary": "Create a new Snapshot Restore Files request",
+        "description": "Restore the specified files from the specified snapshot to the active filesystem",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Restore payload supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/snapshotRestoreFiles"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/SnapshotName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - terminal state"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Snapshots_SingleFileRestore": {
+            "$ref": "examples/Snapshots_SingleFileRestore.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/snapshotPolicies": {
       "parameters": [
         {
@@ -6176,6 +6235,36 @@
           "type": "string",
           "description": "Value for an application specific parameter for the placement of volumes in the volume group",
           "example": "value1"
+        }
+      }
+    },
+    "snapshotRestoreFiles": {
+      "description": "Restore payload for Single File Snapshot Restore",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "required": [
+        "filePaths"
+      ],
+      "properties": {
+        "filePaths": {
+          "description": "List of files to be restored",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "type": "string",
+            "maxLength": 1024,
+            "minLength": 1
+          },
+          "example": [
+            "/dir1/customer1.db",
+            "/dir1/customer2.db"
+          ]
+        },
+        "destinationPath": {
+          "description": "Destination folder where the files will be restored",
+          "type": "string",
+          "example": "/AVSdataStore"
         }
       }
     }
