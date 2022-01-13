@@ -1044,10 +1044,6 @@
           "type": "string",
           "readOnly": true,
           "description": "The mobile network resource identifier"
-        },
-        "spectrumAccessProvider": {
-          "type": "string",
-          "description": "The spectrum access provider for the mobile network."
         }
       },
       "required": [
@@ -1111,13 +1107,13 @@
           "$ref": "./common.json#/definitions/ActivationState",
           "description": "The activation state of the sim resource."
         },
-        "simType": {
-          "$ref": "./common.json#/definitions/SimType",
-          "description": "The type of the sim."
-        },
         "internationalMobileSubscriberIdentity": {
           "type": "string",
           "pattern": "^[0-9]{5,15}$",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
           "description": "The International Mobile Subscriber Identity (IMSI) for the sim."
         },
         "integratedCircuitCardIdentifier": {
@@ -1130,7 +1126,8 @@
           "pattern": "^[0-9a-fA-F]{32}$",
           "x-ms-secret": true,
           "x-ms-mutability": [
-            "create"
+            "create",
+            "update"
           ],
           "description": "The ki value for the sim."
         },
@@ -1139,7 +1136,8 @@
           "pattern": "^[0-9a-fA-F]{32}$",
           "x-ms-secret": true,
           "x-ms-mutability": [
-            "create"
+            "create",
+            "update"
           ],
           "description": "The Opc value for the sim."
         },

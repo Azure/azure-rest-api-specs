@@ -324,45 +324,9 @@
           "$ref": "./common.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the packet core data plane resource."
         },
-        "customLocation": {
-          "$ref": "./common.json#/definitions/CustomLocationResourceId",
-          "description": "Azure ARC custom location where the packet core is deployed."
-        },
-        "coreNetworkTechnology": {
-          "$ref": "./ts29571.json#/definitions/CoreNetworkType",
-          "description": "The core network technology generation."
-        },
-        "version": {
-          "$ref": "./common.json#/definitions/SemVer2Version",
-          "description": "The version of the packet core software that is deployed."
-        },
-        "pduSessionType": {
-          "$ref": "./ts29571.json#/definitions/PduSessionType",
-          "description": "The PDU session type supported by the packet core data plane resource."
-        },
         "n3Interface": {
           "$ref": "./common.json#/definitions/InterfaceProperties",
           "description": "Interface configuration for N3 reference point."
-        },
-        "accessControlList": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AccessControlRule"
-          },
-          "uniqueItems": true,
-          "description": "Access control list."
-        },
-        "slices": {
-          "type": "array",
-          "items": {
-            "$ref": "./common.json#/definitions/SliceResourceId"
-          },
-          "uniqueItems": true,
-          "description": "List of supported network slices."
-        },
-        "vpnGateway": {
-          "$ref": "./common.json#/definitions/SubResource",
-          "description": "The VPN Gateway used to connect the N6 interface."
         }
       },
       "required": [
@@ -386,68 +350,6 @@
         }
       },
       "description": "Response for packet core data planes API service call."
-    },
-    "AccessControlRule": {
-      "description": "An access control list entry, manages blocking or allowing data plane traffic. Access control can be applied in four places. Source address matches are evaluated on ingress. Destination address matches are evaluated on egress.",
-      "type": "object",
-      "properties": {
-        "action": {
-          "$ref": "#/definitions/AccessControlAction",
-          "description": "Whether network traffic is to be allowed or denied."
-        },
-        "direction": {
-          "$ref": "#/definitions/AccessControlDirection",
-          "description": "Direction of flow of data plane traffic."
-        },
-        "sourceAddressPrefixes": {
-          "type": "array",
-          "items": {
-            "$ref": "./ts29571.json#/definitions/Ipv4AddrMask"
-          },
-          "uniqueItems": true,
-          "description": "The CIDR or source IP ranges."
-        },
-        "destinationAddressPrefixes": {
-          "type": "array",
-          "items": {
-            "$ref": "./ts29571.json#/definitions/Ipv4AddrMask"
-          },
-          "uniqueItems": true,
-          "description": "The CIDR or source IP ranges."
-        },
-        "description": {
-          "type": "string",
-          "description": "Optional descriptive name of the access control rule."
-        }
-      },
-      "required": [
-        "action",
-        "direction"
-      ]
-    },
-    "AccessControlAction": {
-      "type": "string",
-      "description": "Whether the access control specifies network traffic to be allowed or denied.",
-      "enum": [
-        "Allow",
-        "Deny"
-      ],
-      "x-ms-enum": {
-        "name": "AccessControlAction",
-        "modelAsString": true
-      }
-    },
-    "AccessControlDirection": {
-      "type": "string",
-      "description": "Direction of flow of data plane traffic.",
-      "enum": [
-        "Uplink",
-        "Downlink"
-      ],
-      "x-ms-enum": {
-        "name": "AccessControlDirection",
-        "modelAsString": true
-      }
     }
   }
 }
