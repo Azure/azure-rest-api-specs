@@ -2458,6 +2458,11 @@
           "description": "The pricing tier (defines Azure Front Door Standard or Premium or a CDN provider, feature list and rate) of the profile.",
           "$ref": "#/definitions/Sku"
         },
+        "kind": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Kind of the profile. Used by portal to differentiate traditional CDN profile and new AFD profile."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ProfileProperties"
@@ -2498,11 +2503,6 @@
           "readOnly": true,
           "type": "string",
           "description": "The Id of the frontdoor."
-        },
-        "kind": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Kind of the profile. Used by portal to differentiate traditional CDN profile and new AFD profile."
         },
         "originResponseTimeoutSeconds": {
           "description": "Send and receive timeout on forwarding request to the origin. When timeout is reached, the request fails and returns.",
@@ -3960,6 +3960,13 @@
               "Desktop"
             ]
           }
+        },
+        "transforms": {
+          "description": "List of transforms",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transform"
+          }
         }
       }
     },
@@ -3998,6 +4005,13 @@
           "type": "array",
           "items": {
             "type": "string"
+          }
+        },
+        "transforms": {
+          "description": "List of transforms",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transform"
           }
         }
       }
@@ -4046,6 +4060,13 @@
           "items": {
             "type": "string"
           }
+        },
+        "transforms": {
+          "description": "List of transforms",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transform"
+          }
         }
       }
     },
@@ -4092,6 +4113,13 @@
           "type": "array",
           "items": {
             "type": "string"
+          }
+        },
+        "transforms": {
+          "description": "List of transforms",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transform"
           }
         }
       }
@@ -4184,6 +4212,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SslProtocol"
+          }
+        },
+        "transforms": {
+          "description": "List of transforms",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transform"
           }
         }
       }
