@@ -43,7 +43,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -72,6 +72,13 @@
           },
           {
             "in": "query",
+            "name": "top",
+            "description": "For paging, the total number of items to request",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
             "name": "maxpagesize",
             "description": "The maximum number of items in one page",
             "type": "integer",
@@ -80,7 +87,7 @@
           {
             "in": "query",
             "name": "`filter`",
-            "description": "The filter expression that selects the resources to be retunres, currently contains(displayName, 'our filter name’) is supported",
+            "description": "The filter expression filters out the resources to be returned, currently contains(displayName, 'our filter name’) is supported",
             "type": "string"
           }
         ],
@@ -94,7 +101,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -138,7 +145,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -174,7 +181,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -224,7 +231,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -273,6 +280,12 @@
             "name": "partitionIdentity",
             "description": "Partition identity of the data to be deleted",
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "`filter`",
+            "description": "The filter expression filters out the resources to be returned, currently 3 kinds of operation are supported. They are startDateTime eq 'your time', endDateTime eq 'your time, partitionIdentity eq 'identity'.",
+            "type": "string"
           }
         ],
         "responses": {
@@ -282,7 +295,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -312,28 +325,15 @@
           },
           {
             "in": "query",
-            "name": "startDateTime",
-            "description": "Start time of data",
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "in": "query",
-            "name": "endDateTime",
-            "description": "End time of data",
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "in": "query",
-            "name": "partitionIdentity",
-            "description": "Partition identity of data",
-            "type": "string"
-          },
-          {
-            "in": "query",
             "name": "skip",
             "description": "For paging, skipped number",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "For paging, the total number of items to request",
             "type": "integer",
             "format": "int32"
           },
@@ -347,7 +347,7 @@
           {
             "in": "query",
             "name": "`filter`",
-            "description": "The filter expression that selects the resources to be retunres, currently contains(displayName, 'our filter name’) is supported",
+            "description": "The filter expression filters out the resources to be returned, currently 3 kinds of operation are supported. They are startDateTime eq 'your time', endDateTime eq 'your time, partitionIdentity eq 'identity'.",
             "type": "string"
           }
         ],
@@ -361,7 +361,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -412,7 +412,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -441,6 +441,13 @@
           },
           {
             "in": "query",
+            "name": "top",
+            "description": "For paging, the total number of items to request",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
             "name": "maxpagesize",
             "description": "The maximum number of items in one page",
             "type": "integer",
@@ -449,7 +456,7 @@
           {
             "in": "query",
             "name": "`filter`",
-            "description": "The filter expression that selects the resources to be retunres, currently contains(displayName, 'our filter name’) is supported",
+            "description": "The filter expression filters out the resources to be returned, currently contains(displayName, 'our filter name’) is supported",
             "type": "string"
           }
         ],
@@ -463,7 +470,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -507,7 +514,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -543,7 +550,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -598,7 +605,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -635,6 +642,13 @@
           },
           {
             "in": "query",
+            "name": "top",
+            "description": "For paging, the total number of items to request",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
             "name": "maxpagesize",
             "description": "The maximum number of items in one page",
             "type": "integer",
@@ -643,7 +657,7 @@
           {
             "in": "query",
             "name": "`filter`",
-            "description": "The filter expression that selects the resources to be retunres, currently contains(displayName, 'our filter name’) is supported",
+            "description": "The filter expression filters out the resources to be returned, currently contains(displayName, 'our filter name’) is supported",
             "type": "string"
           }
         ],
@@ -657,7 +671,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -706,7 +720,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -720,7 +734,7 @@
         "tags": [
           "RootCauseAnalysisModel"
         ],
-        "summary": "Query an training task state for root cause analysis",
+        "summary": "Query a training task state for root cause analysis",
         "operationId": "GetRootCauseAnalysisTrainingState",
         "produces": [
           "application/json"
@@ -753,12 +767,12 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
         "x-ms-examples": {
-          "Query an training task state for root cause analysis": {
+          "Query a training task state for root cause analysis": {
             "$ref": "./examples/GetRootCauseAnalysisTrainingState.json"
           }
         }
@@ -817,7 +831,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -874,7 +888,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -1012,7 +1026,7 @@
       },
       "x-ms-discriminator-value": "multidimensional"
     },
-    "ErrorCode": {
+    "ErrorDetail": {
       "type": "object",
       "properties": {
         "message": {
@@ -1846,7 +1860,10 @@
           "type": "string"
         },
         "error": {
-          "$ref": "#/definitions/ErrorCode"
+          "$ref": "#/definitions/ErrorDetail"
+        },
+        "taskInfo": {
+          "$ref": "#/definitions/MultiDimRCATrainingTaskInfo"
         }
       },
       "discriminator": "kind"
@@ -1864,9 +1881,6 @@
       "properties": {
         "parameter": {
           "$ref": "#/definitions/MultiDimRCATrainingParameter"
-        },
-        "taskInfo": {
-          "$ref": "#/definitions/MultiDimRCATrainingTaskInfo"
         }
       },
       "x-ms-discriminator-value": "multidimensional"
@@ -2101,7 +2115,10 @@
           "type": "string"
         },
         "error": {
-          "$ref": "#/definitions/ErrorCode"
+          "$ref": "#/definitions/ErrorDetail"
+        },
+        "result": {
+          "$ref": "#/definitions/MultiDimRCAInferenceResult"
         }
       },
       "discriminator": "kind"
@@ -2119,9 +2136,6 @@
       "properties": {
         "parameter": {
           "$ref": "#/definitions/MultiDimRCAInferenceParameter"
-        },
-        "result": {
-          "$ref": "#/definitions/MultiDimRCAInferenceResult"
         }
       },
       "x-ms-discriminator-value": "multidimensional"
