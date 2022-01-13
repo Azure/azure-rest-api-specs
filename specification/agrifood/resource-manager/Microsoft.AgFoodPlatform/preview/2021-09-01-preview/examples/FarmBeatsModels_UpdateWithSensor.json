@@ -8,11 +8,19 @@
       "tags": {
         "key1": "value1",
         "key2": "value2"
+      },
+      "identity":{
+        "type": "None"
+      },
+      "properties": {
+        "sensorIntegration": {
+          "enabled" : true
+        }
       }
     }
   },
   "responses": {
-    "200": {
+    "202": {
       "body": {
         "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/examples-rg/Microsoft.AgFoodPlatform/farmBeats/examples-farmbeatsResourceName",
         "name": "examples-farmBeatsResourceName",
@@ -21,6 +29,10 @@
         "tags": {
           "key1": "value1",
           "key2": "value2"
+        },
+        "identity": {
+          "type": "None",
+          "tenantId": "abcdefgh-86f1-41af-91ab-2d7cd011db47"
         },
         "systemData": {
           "createdBy": "string",
@@ -32,13 +44,12 @@
         },
         "properties": {
           "instanceUri": "https://examples-farmbeatsResourceName.eastus2.farmbeats.azure.net",
-          "provisioningState": "Succeeded"
+          "provisioningState": "Succeeded",
+          "sensorIntegration": {
+            "enabled" : true,
+            "provisioningState" : "Creating"
+          }
         }
-      }
-    },
-    "202": {
-      "headers": {
-        "location": "http://azure.async.operation/status"
       }
     }
   }

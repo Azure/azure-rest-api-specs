@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure AgriFood RP Service",
-    "description": "APIs documentation for Azure AgriFood Resource Provider Service.",
+    "title": "Azure AgFoodPlatform RP Service",
+    "description": "APIs documentation for Azure AgFoodPlatform Resource Provider Service.",
     "version": "2021-09-01-preview"
   },
   "paths": {
@@ -573,6 +573,9 @@
         "x-ms-examples": {
           "FarmBeatsModels_Update": {
             "$ref": "./examples/FarmBeatsModels_Update.json"
+          },
+          "FarmBeatsModels_UpdateWithSensor": {
+            "$ref": "./examples/FarmBeatsModels_UpdateWithSensor.json"
           }
         }
       },
@@ -1407,26 +1410,6 @@
         }
       }
     },
-    "ResourceIdentity": {
-      "description": "Identity for the resource.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "The identity type. Typically one of: SystemAssigned, None.",
-          "type": "string"
-        },
-        "principalId": {
-          "description": "The principal ID of resource identity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "tenantId": {
-          "description": "The Tenant ID of resource.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "SensorIntegration": {
       "description": "Sensor integration request model.",
       "type": "object",
@@ -1516,7 +1499,7 @@
       ],
       "properties": {
         "identity": {
-          "$ref": "#/definitions/ResourceIdentity"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Identity"
         },
         "properties": {
           "$ref": "#/definitions/FarmBeatsProperties",
@@ -1546,7 +1529,7 @@
           "type": "string"
         },
         "identity": {
-          "$ref": "#/definitions/ResourceIdentity"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Identity"
         },
         "properties": {
           "$ref": "#/definitions/FarmBeatsUpdateProperties"
