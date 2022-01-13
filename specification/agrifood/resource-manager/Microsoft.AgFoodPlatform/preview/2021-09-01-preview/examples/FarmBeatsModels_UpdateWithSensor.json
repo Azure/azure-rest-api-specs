@@ -9,18 +9,18 @@
         "key1": "value1",
         "key2": "value2"
       },
-      "identity":{
-        "type": "None"
+      "identity": {
+        "type": "SystemAssigned"
       },
       "properties": {
         "sensorIntegration": {
-          "enabled" : true
+          "enabled": true
         }
       }
     }
   },
   "responses": {
-    "202": {
+    "200": {
       "body": {
         "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/examples-rg/Microsoft.AgFoodPlatform/farmBeats/examples-farmbeatsResourceName",
         "name": "examples-farmBeatsResourceName",
@@ -46,10 +46,15 @@
           "instanceUri": "https://examples-farmbeatsResourceName.eastus2.farmbeats.azure.net",
           "provisioningState": "Succeeded",
           "sensorIntegration": {
-            "enabled" : true,
-            "provisioningState" : "Creating"
+            "enabled": true,
+            "provisioningState": "Creating"
           }
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "http://azure.async.operation/status"
       }
     }
   }
