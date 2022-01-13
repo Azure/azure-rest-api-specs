@@ -361,7 +361,7 @@
     },
     "PrometheusRuleGroupAction": {
       "type": "object",
-      "description": "An alert action.",
+      "description": "An alert action. Only relevant for alerts.",
       "properties": {
         "actionGroupId": {
           "type": "string",
@@ -489,36 +489,36 @@
         "severity": {
           "type": "integer",
           "format": "int32",
-          "description": "the severity of the alerts fired by the rule."
+          "description": "the severity of the alerts fired by the rule. Only relevant for alerts."
         },
         "for": {
           "type": "string",
-          "description": "the amount of time alert must be active before firing."
+          "description": "the amount of time alert must be active before firing. Only relevant for alerts."
         },
         "labels": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "labels for rule group"
+          "description": "labels for rule group. Only relevant for alerts."
         },
         "annotations": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "annotations for rule group"
+          "description": "annotations for rule group. Only relevant for alerts."
         },
         "actions": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrometheusRuleGroupAction"
           },
-          "description": "the array of actions that are performed when the alert rule becomes active, and when an alert condition is resolved."
+          "description": "The array of actions that are performed when the alert rule becomes active, and when an alert condition is resolved. Only relevant for alerts."
         },
         "resolveConfiguration": {
           "$ref": "#/definitions/PrometheusRuleResolveConfiguration",
-          "description": "defines the configuration for resolving fired alerts."
+          "description": "defines the configuration for resolving fired alerts. Only relevant for alerts."
         }
       }
     },
