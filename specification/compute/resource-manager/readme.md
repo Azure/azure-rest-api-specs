@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2021-07-01
+tag: package-2021-08-01
 
 directive:
   - where:
@@ -65,8 +65,7 @@ directive:
       - $.definitions.RestorePointCreate.properties
     suppress:
       - BodyTopLevelProperties
-    reason:
-      - CRP has already been using existing ‘RestorePoint’ model definition with these properties as top level properties for many years now.
+    reason: CRP has already been using existing ‘RestorePoint’ model definition with these properties as top level properties for many years now.
   - where:
       - $.definitions.RestorePoint.properties
     suppress:
@@ -215,8 +214,7 @@ directive:
       - $.definitions.ContainerService
     suppress:
       - TrackedResourcePatchOperation
-    reason:
-      - ACS service is deprecated so a PATCH endpoint won't be implemented
+    reason: ACS service is deprecated so a PATCH endpoint won't be implemented
   - where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/remoteDesktopFile"].get
     suppress:
@@ -228,6 +226,39 @@ directive:
       - NestedResourcesMustHaveListOperation
     reason:
       - CRP supports the list /restorePoint operation by allowing customers to call Get RestorePointCollection with $expand=RestorePoints
+  - where:
+      - $.definitions.SubResourceWithColocationStatus.properties
+    suppress:
+      - BodyTopLevelProperties
+  - where:
+      - $.definitions.SubResourceWithColocationStatus
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+```
+
+### Tag: package-2021-08-01-only
+
+These settings apply only when `--tag=package-2021-08-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-08-01-only'
+input-file:
+- Microsoft.Compute/stable/2021-08-01/disk.json
+```
+
+### Tag: package-2021-08-01
+
+These settings apply only when `--tag=package-2021-08-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-08-01'
+input-file:
+- Microsoft.Compute/stable/2021-07-01/compute.json
+- Microsoft.Compute/stable/2021-07-01/runCommands.json
+- Microsoft.Compute/stable/2021-07-01/skus.json
+- Microsoft.Compute/stable/2021-08-01/disk.json
+- Microsoft.Compute/stable/2021-07-01/gallery.json
+- Microsoft.Compute/stable/2021-07-01/sharedGallery.json
+- Microsoft.Compute/stable/2021-07-01/communityGallery.json
+- Microsoft.Compute/stable/2021-03-01/cloudService.json
 ```
 
 ### Tag: package-2021-07-01
