@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Language Authoring CLU APIs",
-    "version": "2022-02-01-preview"
+    "version": "2022-03-01-preview"
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{Endpoint}/language/analyze-conversations",
@@ -80,7 +80,7 @@
         "description": "Creates a new or update a project.",
         "operationId": "Projects_CreateOrUpdateProject",
         "consumes": [
-          "application/json"
+          "application/merge-patch+json"
         ],
         "produces": [
           "application/json"
@@ -213,9 +213,6 @@
       "post": {
         "description": "Triggers a job to export project data in JSON format.",
         "operationId": "Projects_TriggerExportProjectJob",
-        "consumes": [
-          "application/json"
-        ],
         "parameters": [
           {
             "in": "path",
@@ -225,20 +222,16 @@
             "type": "string"
           },
           {
-            "in": "header",
+            "in": "query",
             "name": "format",
-            "description": "The format of the project to export. The currently supported format is `JSON`.",
-            "required": true,
+            "description": "The format of the project to export. The currently supported format is `clu`.",
             "type": "string"
           },
           {
-            "in": "body",
-            "name": "ProjectFileExportObject",
-            "description": "The export job create object.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ProjectFileExport"
-            }
+            "in": "query",
+            "name": "assetKind",
+            "description": "Kind of asset to export.",
+            "type": "string"
           }
         ],
         "responses": {
@@ -285,10 +278,9 @@
             "type": "string"
           },
           {
-            "in": "header",
+            "in": "query",
             "name": "format",
-            "description": "The format of the project to import. The currently supported format is json format.",
-            "required": true,
+            "description": "The format of the project to import.",
             "type": "string"
           },
           {
@@ -527,7 +519,7 @@
           "200": {
             "description": "The Deployment info.",
             "schema": {
-              "$ref": "#/definitions/DeploymentJobResultObject"
+              "$ref": "#/definitions/DeploymentObject"
             }
           },
           "400": {
@@ -935,7 +927,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Trianed model info",
+            "description": "Trained model info",
             "schema": {
               "$ref": "#/definitions/TrainedModelObject"
             }
@@ -998,10 +990,76 @@
         }
       }
     },
-    "/projects/{projectName}/models/{trainedModelName}/evaluation": {
+    "/projects/{projectName}/models/{trainedModelName}/evaluation/predictions": {
       "get": {
-        "description": "Get trained model evaluation report.",
-        "operationId": "Models_GetTrainedModelEvaluation",
+        "description": "Get trained model evaluation predictions.",
+        "operationId": "Models_GetTrainedModelEvaluationPredictions",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectName",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "trainedModelName",
+            "description": "The trained model name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "The number of utterances to be returned.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "The offset in the response.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "maxpagesize",
+            "description": "The maximum number of utterances per page.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of the evaluation predictions.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationPredictionsList"
+            }
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "404": {
+            "description": "The project does not exist."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/models/{trainedModelName}/evaluation/summary": {
+      "get": {
+        "description": "Get trained model evaluation summary.",
+        "operationId": "Models_GetTrainedModelEvaluationSummary",
         "produces": [
           "application/json"
         ],
@@ -1025,55 +1083,7 @@
           "200": {
             "description": "List of all evaluation results.",
             "schema": {
-              "$ref": "#/definitions/EvaluationResultObject"
-            }
-          },
-          "400": {
-            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
-          },
-          "401": {
-            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
-          },
-          "403": {
-            "description": "Total monthly key quota limit exceeded."
-          },
-          "404": {
-            "description": "The project does not exist."
-          },
-          "429": {
-            "description": "Rate limit is exceeded."
-          }
-        }
-      }
-    },
-    "/projects/{projectName}/models/{trainedModelName}/verification": {
-      "get": {
-        "description": "Get trained model verification report.",
-        "operationId": "Models_GetTrainedModelVerification",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "projectName",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "trainedModelName",
-            "description": "The trained model name.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List of all verification results.",
-            "schema": {
-              "$ref": "#/definitions/VerificationResultsObject"
+              "$ref": "#/definitions/EvaluationSummaryObject"
             }
           },
           "400": {
@@ -1201,7 +1211,49 @@
         }
       }
     },
-    "/projects/deletion/jobs/{jobId}": {
+    "/projects/{projectName}/train/jobs/{jobId}/:cancel": {
+      "post": {
+        "description": "Cancels a running training job.",
+        "operationId": "Training_CancelJob",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectName",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The job was succesfully canceled."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "404": {
+            "description": "The project or the job does not exist."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      }
+    },
+    "/projects/global/deletion-jobs/{jobId}": {
       "get": {
         "description": "Get project deletion job status and result details.",
         "operationId": "Projects_GetProjectDeletionJobStatus",
@@ -1242,7 +1294,7 @@
         }
       }
     },
-    "/projects/languages": {
+    "/projects/global/languages": {
       "get": {
         "description": "Get List of Supported languages.",
         "operationId": "Projects_GetSupportedCultures",
@@ -1252,10 +1304,14 @@
         "parameters": [
           {
             "in": "query",
-            "name": "projectType",
-            "description": "The CLU project type to get the supported languages for.",
+            "name": "projectKind",
+            "description": "The project kind to get the supported languages for.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "conversation",
+              "workflow"
+            ]
           }
         ],
         "responses": {
@@ -1283,9 +1339,9 @@
         }
       }
     },
-    "/projects/prebuilts": {
+    "/projects/global/prebuiltEntities": {
       "get": {
-        "description": "Get list of Supported prebuilts for conversational projects.",
+        "description": "Get list of supported prebuilt entities for conversational projects.",
         "operationId": "CLU_Projects_GetSupportedPrebuilts",
         "produces": [
           "application/json"
@@ -1303,6 +1359,38 @@
             "description": "The list of supported prebuilts.",
             "schema": {
               "$ref": "#/definitions/PrebuiltsGetObject"
+            }
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "404": {
+            "description": "The project does not exist."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      }
+    },
+    "/projects/global/trainingConfigVersions": {
+      "get": {
+        "description": "List all training config versions.",
+        "operationId": "Models_GetTrainingConfigVersions",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of the supported training config versions.",
+            "schema": {
+              "$ref": "#/definitions/TrainingConfigVersionsList"
             }
           },
           "400": {
@@ -1351,36 +1439,7 @@
       "type": "object",
       "properties": {
         "trainedModelLabel": {
-          "description": "Represents the trained model name.",
-          "type": "string"
-        }
-      }
-    },
-    "DeploymentJobResultObject": {
-      "required": [
-        "name",
-        "modelId",
-        "lastTrainedDateTime",
-        "lastDeployedDateTime"
-      ],
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Gets or sets the deployment name.",
-          "type": "string"
-        },
-        "modelId": {
-          "description": "Gets or sets the deployment modelId.",
-          "type": "string"
-        },
-        "lastTrainedDateTime": {
-          "format": "date-time",
-          "description": "Gets or sets the deployment last trained time.",
-          "type": "string"
-        },
-        "lastDeployedDateTime": {
-          "format": "date-time",
-          "description": "Gets or sets the deployment last deployed time.",
+          "description": "Represents the trained model label.",
           "type": "string"
         }
       }
@@ -1391,13 +1450,12 @@
         "createdDateTime",
         "lastUpdatedDateTime",
         "expirationDateTime",
-        "status",
-        "errors"
+        "status"
       ],
       "type": "object",
       "properties": {
         "jobId": {
-          "description": "Gets or sets the jobId.",
+          "description": "Gets or sets the job id.",
           "type": "string"
         },
         "createdDateTime": {
@@ -1429,12 +1487,54 @@
           ],
           "type": "string"
         },
+        "warnings": {
+          "description": "Gets or sets the warnings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobError"
+          }
+        },
         "errors": {
           "description": "Gets or sets the errors.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/JobError"
           }
+        }
+      }
+    },
+    "DeploymentObject": {
+      "required": [
+        "deploymentName",
+        "modelId",
+        "lastTrainedDateTime",
+        "lastDeployedDateTime",
+        "modelExpirationDate"
+      ],
+      "type": "object",
+      "properties": {
+        "deploymentName": {
+          "description": "Gets or sets the deployment name.",
+          "type": "string"
+        },
+        "modelId": {
+          "description": "Gets or sets the deployment modelId.",
+          "type": "string"
+        },
+        "lastTrainedDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the deployment last trained time.",
+          "type": "string"
+        },
+        "lastDeployedDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the deployment last deployed time.",
+          "type": "string"
+        },
+        "modelExpirationDate": {
+          "format": "date-time",
+          "description": "Gets or sets the model expiration date in the tuntime.",
+          "type": "string"
         }
       }
     },
@@ -1449,7 +1549,7 @@
           "description": "Gets or sets the deployments.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeploymentJobResultObject"
+            "$ref": "#/definitions/DeploymentObject"
           }
         },
         "nextLink": {
@@ -1458,33 +1558,7 @@
         }
       }
     },
-    "EvaluationOptions": {
-      "type": "object",
-      "properties": {
-        "runEvaluation": {
-          "description": "Represents the option to run evaluations. By default, evaluations are turned on.",
-          "type": "boolean"
-        },
-        "type": {
-          "enum": [
-            "percentage",
-            "set"
-          ],
-          "type": "string"
-        },
-        "trainingSplitPercentage": {
-          "format": "int32",
-          "description": "Represents the training dataset split percentage. Only needed in case  is .",
-          "type": "integer"
-        },
-        "testingSplitPercentage": {
-          "format": "int32",
-          "description": "Represents the testing dataset split percentage. Only needed in case  is .",
-          "type": "integer"
-        }
-      }
-    },
-    "EvaluationResultEntityObject": {
+    "EntitiesEvaluationObject": {
       "required": [
         "confusionMatrix",
         "entities",
@@ -1511,7 +1585,7 @@
           "description": "Represents the entities evaluation",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/EvaluationResultIntentAndEntityObject"
+            "$ref": "#/definitions/EntityEvaluationObject"
           }
         },
         "microF1": {
@@ -1546,7 +1620,7 @@
         }
       }
     },
-    "EvaluationResultIntentAndEntityObject": {
+    "EntityEvaluationObject": {
       "required": [
         "f1",
         "precision",
@@ -1595,7 +1669,123 @@
         }
       }
     },
-    "EvaluationResultIntentObject": {
+    "EvaluationOptions": {
+      "type": "object",
+      "properties": {
+        "runEvaluation": {
+          "description": "Represents the option to run evaluations. By default, evaluations are turned on.",
+          "type": "boolean"
+        },
+        "kind": {
+          "description": "Represents the evaluation kind. By default, the evaluation kind is set to percentage.",
+          "enum": [
+            "percentage",
+            "set"
+          ],
+          "type": "string"
+        },
+        "trainingSplitPercentage": {
+          "format": "int32",
+          "description": "Represents the training dataset split percentage. Only needed in case the evaluation kind is percentage.",
+          "type": "integer"
+        },
+        "testingSplitPercentage": {
+          "format": "int32",
+          "description": "Represents the testing dataset split percentage. Only needed in case the evaluation kind is percentage.",
+          "type": "integer"
+        }
+      }
+    },
+    "EvaluationPredictionsList": {
+      "required": [
+        "value",
+        "nextLink"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the utterances predictions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UtteranceEvaluationPrediction"
+          }
+        },
+        "nextLink": {
+          "description": "Gets or sets the next page link.",
+          "type": "string"
+        }
+      }
+    },
+    "EvaluationSummaryObject": {
+      "required": [
+        "entitiesEvaluation",
+        "intentsEvaluation"
+      ],
+      "type": "object",
+      "properties": {
+        "entitiesEvaluation": {
+          "description": "Contains the data related to entities evaluation.",
+          "$ref": "#/definitions/EntitiesEvaluationObject"
+        },
+        "intentsEvaluation": {
+          "description": "Contains the data related to intents evaluation.",
+          "$ref": "#/definitions/IntentsEvaluationObject"
+        },
+        "evaluationOptions": {
+          "$ref": "#/definitions/EvaluationOptions"
+        }
+      }
+    },
+    "IntentEvaluationObject": {
+      "required": [
+        "f1",
+        "precision",
+        "recall",
+        "truePositivesCount",
+        "trueNegativesCount",
+        "falsePositivesCount",
+        "falseNegativesCount"
+      ],
+      "type": "object",
+      "properties": {
+        "f1": {
+          "format": "double",
+          "description": "Represents the model precision",
+          "type": "number"
+        },
+        "precision": {
+          "format": "double",
+          "description": "Represents the model recall",
+          "type": "number"
+        },
+        "recall": {
+          "format": "double",
+          "description": "Represents the model F1 score",
+          "type": "number"
+        },
+        "truePositivesCount": {
+          "format": "int32",
+          "description": "Represents the count of true positives",
+          "type": "integer"
+        },
+        "trueNegativesCount": {
+          "format": "int32",
+          "description": "Represents the count of true negatives",
+          "type": "integer"
+        },
+        "falsePositivesCount": {
+          "format": "int32",
+          "description": "Represents the count of false positives",
+          "type": "integer"
+        },
+        "falseNegativesCount": {
+          "format": "int32",
+          "description": "Represents the count of false negatives",
+          "type": "integer"
+        }
+      }
+    },
+    "IntentsEvaluationObject": {
       "required": [
         "confusionMatrix",
         "intents",
@@ -1622,7 +1812,7 @@
           "description": "Represents the intents evaluation.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/EvaluationResultIntentAndEntityObject"
+            "$ref": "#/definitions/IntentEvaluationObject"
           }
         },
         "microF1": {
@@ -1657,23 +1847,6 @@
         }
       }
     },
-    "EvaluationResultObject": {
-      "required": [
-        "entityEvaluation",
-        "intentEvaluation"
-      ],
-      "type": "object",
-      "properties": {
-        "entityEvaluation": {
-          "description": "Contains the data related to entity evaluation.",
-          "$ref": "#/definitions/EvaluationResultEntityObject"
-        },
-        "intentEvaluation": {
-          "description": "Contains the data related to intent evaluation.",
-          "$ref": "#/definitions/EvaluationResultIntentObject"
-        }
-      }
-    },
     "JobError": {
       "required": [
         "code",
@@ -1691,7 +1864,7 @@
           "type": "string"
         },
         "message": {
-          "description": "Gets or sets the Error Message.",
+          "description": "Gets or sets the error message.",
           "type": "string"
         }
       }
@@ -1710,7 +1883,7 @@
     "JsonEntity": {
       "type": "object",
       "properties": {
-        "name": {
+        "category": {
           "type": "string"
         },
         "compositionSetting": {
@@ -1736,7 +1909,7 @@
     "JsonEntityLabel": {
       "type": "object",
       "properties": {
-        "entityName": {
+        "category": {
           "type": "string"
         },
         "offset": {
@@ -1749,34 +1922,10 @@
         }
       }
     },
-    "JsonExample": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string"
-        },
-        "language": {
-          "type": "string"
-        },
-        "intent": {
-          "type": "string"
-        },
-        "entities": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JsonEntityLabel"
-          }
-        },
-        "dataset": {
-          "description": "The dataset for this example. Allowed values are 'Train' and 'Test'.",
-          "type": "string"
-        }
-      }
-    },
     "JsonIntent": {
       "type": "object",
       "properties": {
-        "name": {
+        "category": {
           "type": "string"
         },
         "orchestration": {
@@ -1814,11 +1963,11 @@
     "JsonOrchestration": {
       "type": "object",
       "properties": {
-        "type": {
+        "kind": {
           "enum": [
-            "Luis",
-            "Clu",
-            "Qna"
+            "luis",
+            "clu",
+            "qna"
           ],
           "type": "string"
         },
@@ -1836,7 +1985,7 @@
     "JsonPrebuiltEntity": {
       "type": "object",
       "properties": {
-        "name": {
+        "category": {
           "type": "string"
         }
       }
@@ -1875,25 +2024,25 @@
             "$ref": "#/definitions/JsonEntity"
           }
         },
-        "examples": {
+        "utterances": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JsonExample"
+            "$ref": "#/definitions/JsonUtterance"
           }
         }
       }
     },
     "JsonProjectMetadata": {
       "required": [
-        "type",
+        "kind",
         "settings",
-        "name",
+        "projectName",
         "language"
       ],
       "type": "object",
       "properties": {
-        "type": {
-          "description": "Represents the project type.",
+        "kind": {
+          "description": "Represents the project kind.",
           "enum": [
             "conversation",
             "workflow"
@@ -1904,7 +2053,7 @@
           "description": "Gets or sets the project settings.",
           "$ref": "#/definitions/ProjectSettings"
         },
-        "name": {
+        "projectName": {
           "description": "Gets or sets the new project name.",
           "type": "string"
         },
@@ -1958,14 +2107,38 @@
         }
       }
     },
+    "JsonUtterance": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "intent": {
+          "type": "string"
+        },
+        "entities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonEntityLabel"
+          }
+        },
+        "dataset": {
+          "description": "The dataset for this utterance. Allowed values are 'Train' and 'Test'.",
+          "type": "string"
+        }
+      }
+    },
     "LanguageGetObject": {
       "required": [
-        "name",
+        "languageName",
         "languageCode"
       ],
       "type": "object",
       "properties": {
-        "name": {
+        "languageName": {
           "description": "Gets or sets the language name.",
           "type": "string"
         },
@@ -1977,11 +2150,11 @@
     },
     "LanguagesGetObject": {
       "required": [
-        "value"
+        "languages"
       ],
       "type": "object",
       "properties": {
-        "value": {
+        "languages": {
           "description": "Gets or sets the languages.",
           "type": "array",
           "items": {
@@ -1992,14 +2165,14 @@
     },
     "PrebuiltGetObject": {
       "required": [
-        "name",
+        "category",
         "description",
         "examples"
       ],
       "type": "object",
       "properties": {
-        "name": {
-          "description": "The display name.",
+        "category": {
+          "description": "The prebuilt entity category.",
           "type": "string"
         },
         "description": {
@@ -2014,11 +2187,11 @@
     },
     "PrebuiltsGetObject": {
       "required": [
-        "prebuiltsPerLanguage"
+        "prebuiltEntitiesPerLanguage"
       ],
       "type": "object",
       "properties": {
-        "prebuiltsPerLanguage": {
+        "prebuiltEntitiesPerLanguage": {
           "description": "The prebuilts per language.",
           "type": "array",
           "items": {
@@ -2030,7 +2203,7 @@
     "PrebuiltsPerLanguageGetObject": {
       "required": [
         "language",
-        "prebuilts"
+        "prebuiltEntities"
       ],
       "type": "object",
       "properties": {
@@ -2038,7 +2211,7 @@
           "description": "The language.",
           "type": "string"
         },
-        "prebuilts": {
+        "prebuiltEntities": {
           "description": "The prebuilts.",
           "type": "array",
           "items": {
@@ -2049,15 +2222,15 @@
     },
     "ProjectCreateObject": {
       "required": [
-        "type",
+        "kind",
         "settings",
-        "name",
+        "projectName",
         "language"
       ],
       "type": "object",
       "properties": {
-        "type": {
-          "description": "Represents the project type.",
+        "kind": {
+          "description": "Represents the project kind.",
           "enum": [
             "conversation",
             "workflow"
@@ -2068,7 +2241,7 @@
           "description": "Gets or sets the project settings.",
           "$ref": "#/definitions/ProjectSettings"
         },
-        "name": {
+        "projectName": {
           "description": "Gets or sets the new project name.",
           "type": "string"
         },
@@ -2092,13 +2265,12 @@
         "createdDateTime",
         "lastUpdatedDateTime",
         "expirationDateTime",
-        "status",
-        "errors"
+        "status"
       ],
       "type": "object",
       "properties": {
         "jobId": {
-          "description": "Gets or sets the jobId.",
+          "description": "Gets or sets the job id.",
           "type": "string"
         },
         "createdDateTime": {
@@ -2129,6 +2301,13 @@
             "partiallyCompleted"
           ],
           "type": "string"
+        },
+        "warnings": {
+          "description": "Gets or sets the warnings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobError"
+          }
         },
         "errors": {
           "description": "Gets or sets the errors.",
@@ -2139,29 +2318,13 @@
         }
       }
     },
-    "ProjectFileExport": {
-      "required": [
-        "assetsToExport"
-      ],
-      "type": "object",
-      "properties": {
-        "assetsToExport": {
-          "description": "Gets or sets the assets to export.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "ProjectFileExportJobStatus": {
       "required": [
         "jobId",
         "createdDateTime",
         "lastUpdatedDateTime",
         "expirationDateTime",
-        "status",
-        "errors"
+        "status"
       ],
       "type": "object",
       "properties": {
@@ -2169,7 +2332,7 @@
           "type": "string"
         },
         "jobId": {
-          "description": "Gets or sets the jobId.",
+          "description": "Gets or sets the job id.",
           "type": "string"
         },
         "createdDateTime": {
@@ -2200,6 +2363,13 @@
             "partiallyCompleted"
           ],
           "type": "string"
+        },
+        "warnings": {
+          "description": "Gets or sets the warnings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobError"
+          }
         },
         "errors": {
           "description": "Gets or sets the errors.",
@@ -2216,13 +2386,12 @@
         "createdDateTime",
         "lastUpdatedDateTime",
         "expirationDateTime",
-        "status",
-        "errors"
+        "status"
       ],
       "type": "object",
       "properties": {
         "jobId": {
-          "description": "Gets or sets the jobId.",
+          "description": "Gets or sets the job id.",
           "type": "string"
         },
         "createdDateTime": {
@@ -2254,6 +2423,13 @@
           ],
           "type": "string"
         },
+        "warnings": {
+          "description": "Gets or sets the warnings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobError"
+          }
+        },
         "errors": {
           "description": "Gets or sets the errors.",
           "type": "array",
@@ -2269,9 +2445,9 @@
         "lastModifiedDateTime",
         "lastTrainedDateTime",
         "lastDeployedDateTime",
-        "type",
+        "kind",
         "settings",
-        "name",
+        "projectName",
         "language"
       ],
       "type": "object",
@@ -2296,8 +2472,8 @@
           "description": "Represents the project last deployed datetime.",
           "type": "string"
         },
-        "type": {
-          "description": "Represents the project type.",
+        "kind": {
+          "description": "Represents the project kind.",
           "enum": [
             "conversation",
             "workflow"
@@ -2308,7 +2484,7 @@
           "description": "Gets or sets the project settings.",
           "$ref": "#/definitions/ProjectSettings"
         },
-        "name": {
+        "projectName": {
           "description": "Gets or sets the new project name.",
           "type": "string"
         },
@@ -2388,7 +2564,7 @@
           "type": "string"
         },
         "modelId": {
-          "description": "Represents the Id of this model. The model Id has the format \"{version}-{yyyyMMddThhmmss}-{Guid.NewGuid()}\". This is used almost as a thumbprint for the model and isn't consumed in any of the APIs.",
+          "description": "Represents the Id of this model. The model Id has the format \"{version}-{yyyyMMddThhmmss}-{Guid.NewGuid()}\".",
           "type": "string"
         },
         "lastTrainedDateTime": {
@@ -2418,18 +2594,64 @@
         }
       }
     },
+    "TrainingConfigVersionDetails": {
+      "required": [
+        "trainingConfigVersion",
+        "expirationDate"
+      ],
+      "type": "object",
+      "properties": {
+        "trainingConfigVersion": {
+          "description": "Represents the training config version.",
+          "type": "string"
+        },
+        "expirationDate": {
+          "format": "date-time",
+          "description": "Represents the training config version expiration date in the format of (\"yyyy-MM-dd\").",
+          "type": "string"
+        }
+      }
+    },
+    "TrainingConfigVersionsList": {
+      "required": [
+        "trainingConfigVersions"
+      ],
+      "type": "object",
+      "properties": {
+        "trainingConfigVersions": {
+          "description": "Gets or sets the training config versions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrainingConfigVersionDetails"
+          }
+        }
+      }
+    },
     "TrainingJobCreate": {
       "required": [
-        "modelLabel"
+        "modelLabel",
+        "trainingConfigVersion"
       ],
       "type": "object",
       "properties": {
         "modelLabel": {
-          "description": "Represents Training Model Name.",
+          "description": "Represents training model label.",
+          "type": "string"
+        },
+        "trainingConfigVersion": {
+          "description": "Represents training config version.",
+          "type": "string"
+        },
+        "trainingMode": {
+          "description": "Represents the training mode of the training operation.",
+          "enum": [
+            "standard",
+            "advanced"
+          ],
           "type": "string"
         },
         "evaluationOptions": {
-          "description": "Represents the evaluation options. By default, \"type\" is set to \"percentage\", with \"trainingSplitPercentage\" as 80, and \"testingSplitPercentage\" as 20.",
+          "description": "Represents the evaluation options. By default, the evaluation kind is percentage, with training split percentage as 80, and testing split percentage as 20.",
           "$ref": "#/definitions/EvaluationOptions"
         }
       }
@@ -2441,17 +2663,16 @@
         "createdDateTime",
         "lastUpdatedDateTime",
         "expirationDateTime",
-        "status",
-        "errors"
+        "status"
       ],
       "type": "object",
       "properties": {
         "result": {
-          "description": "Represents Training Tasks Detailed Result.",
+          "description": "Represents training tasks detailed result.",
           "$ref": "#/definitions/TrainingJobStatusResult"
         },
         "jobId": {
-          "description": "Gets or sets the jobId.",
+          "description": "Gets or sets the job id.",
           "type": "string"
         },
         "createdDateTime": {
@@ -2482,6 +2703,13 @@
             "partiallyCompleted"
           ],
           "type": "string"
+        },
+        "warnings": {
+          "description": "Gets or sets the warnings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobError"
+          }
         },
         "errors": {
           "description": "Gets or sets the errors.",
@@ -2514,16 +2742,29 @@
     },
     "TrainingJobStatusResult": {
       "required": [
-        "trainedModelLabel",
-        "trainStatus"
+        "modelLabel",
+        "trainingConfigVersion",
+        "trainingStatus"
       ],
       "type": "object",
       "properties": {
-        "trainedModelLabel": {
+        "modelLabel": {
           "description": "Represents trained model label.",
           "type": "string"
         },
-        "trainStatus": {
+        "trainingConfigVersion": {
+          "description": "Represents training config version.",
+          "type": "string"
+        },
+        "trainingMode": {
+          "description": "Represents the training mode of the training operation.",
+          "enum": [
+            "standard",
+            "advanced"
+          ],
+          "type": "string"
+        },
+        "trainingStatus": {
           "description": "Represents model train status.",
           "$ref": "#/definitions/TrainingJobStatusResultStatus"
         },
@@ -2551,56 +2792,39 @@
         }
       }
     },
-    "VerificationResultEntityExampleObject": {
+    "UtteranceEntitiesEvaluationPrediction": {
       "required": [
-        "entities",
-        "text",
-        "language"
+        "labeledEntities",
+        "predictedEntities"
       ],
       "type": "object",
       "properties": {
-        "entities": {
-          "description": "Represents the entity labelled examples.",
+        "labeledEntities": {
+          "description": "Represents the entity labels.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/VerificationResultExampleEntityObject"
+            "$ref": "#/definitions/UtteranceEntityLabelEvaluationPrediction"
           }
         },
-        "text": {
-          "description": "Represents the example text.",
-          "type": "string"
-        },
-        "language": {
-          "description": "Represents the example language.",
-          "type": "string"
-        }
-      }
-    },
-    "VerificationResultEntityObject": {
-      "required": [
-        "examples"
-      ],
-      "type": "object",
-      "properties": {
-        "examples": {
-          "description": "Represents the entity verification result for a list of examples.",
+        "predictedEntities": {
+          "description": "Represents the predicted entity labels.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/VerificationResultEntityExampleObject"
+            "$ref": "#/definitions/UtteranceEntityLabelEvaluationPrediction"
           }
         }
       }
     },
-    "VerificationResultExampleEntityLabelObject": {
+    "UtteranceEntityLabelEvaluationPrediction": {
       "required": [
-        "entityName",
+        "category",
         "offset",
         "length"
       ],
       "type": "object",
       "properties": {
-        "entityName": {
-          "description": "Represents the entity name.",
+        "category": {
+          "description": "Represents the entity category.",
           "type": "string"
         },
         "offset": {
@@ -2615,115 +2839,47 @@
         }
       }
     },
-    "VerificationResultExampleEntityObject": {
+    "UtteranceEvaluationPrediction": {
       "required": [
-        "labeledEntities",
-        "predictedEntities",
-        "regionOffset",
-        "regionLength"
-      ],
-      "type": "object",
-      "properties": {
-        "labeledEntities": {
-          "description": "Represents the entity labels.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VerificationResultExampleEntityLabelObject"
-          }
-        },
-        "predictedEntities": {
-          "description": "Represents the predicted entity labels.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VerificationResultExampleEntityLabelObject"
-          }
-        },
-        "regionOffset": {
-          "format": "int32",
-          "description": "Represents the region offset.",
-          "type": "integer"
-        },
-        "regionLength": {
-          "format": "int32",
-          "description": "Represents the region length.",
-          "type": "integer"
-        }
-      }
-    },
-    "VerificationResultExampleIntentObject": {
-      "required": [
-        "labeledIntents",
-        "predictedIntents"
-      ],
-      "type": "object",
-      "properties": {
-        "labeledIntents": {
-          "description": "Represents the intent names.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "predictedIntents": {
-          "description": "Represents the predicted intent names.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "VerificationResultIntentExampleObject": {
-      "required": [
-        "intents",
         "text",
-        "language"
+        "language",
+        "entitiesResult",
+        "intentsResult"
       ],
       "type": "object",
       "properties": {
-        "intents": {
-          "description": "Represents the intent labeled examples.",
-          "$ref": "#/definitions/VerificationResultExampleIntentObject"
-        },
         "text": {
-          "description": "Represents the example text.",
+          "description": "Represents the utterance text.",
           "type": "string"
         },
         "language": {
-          "description": "Represents the example language.",
+          "description": "Represents the utterance language.",
           "type": "string"
-        }
-      }
-    },
-    "VerificationResultIntentObject": {
-      "required": [
-        "examples"
-      ],
-      "type": "object",
-      "properties": {
-        "examples": {
-          "description": "Represents the intent verification results for a list of examples.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VerificationResultIntentExampleObject"
-          }
-        }
-      }
-    },
-    "VerificationResultsObject": {
-      "required": [
-        "entityVerification",
-        "intentVerification"
-      ],
-      "type": "object",
-      "properties": {
-        "entityVerification": {
-          "description": "Represents the verification result for entity extraction for a list of examples.",
-          "$ref": "#/definitions/VerificationResultEntityObject"
         },
-        "intentVerification": {
-          "description": "Represents the verification result for intent classification for a list of examples.",
-          "$ref": "#/definitions/VerificationResultIntentObject"
+        "entitiesResult": {
+          "description": "Represents the entities results for the utterance.",
+          "$ref": "#/definitions/UtteranceEntitiesEvaluationPrediction"
+        },
+        "intentsResult": {
+          "description": "Represents the intents results for the utterance.",
+          "$ref": "#/definitions/UtteranceIntentsEvaluationPrediction"
+        }
+      }
+    },
+    "UtteranceIntentsEvaluationPrediction": {
+      "required": [
+        "labeledIntent",
+        "predictedIntent"
+      ],
+      "type": "object",
+      "properties": {
+        "labeledIntent": {
+          "description": "Represents the utterance's labeled intent.",
+          "type": "string"
+        },
+        "predictedIntent": {
+          "description": "Represents the utterance's predicted intent.",
+          "type": "string"
         }
       }
     }
