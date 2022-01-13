@@ -15,6 +15,18 @@ module-name: sdk/resourcemanager/videoanalyzer/armvideoanalyzer
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
+directive:
+- rename-model:
+    from: 'Properties'
+    to: 'MetricProperties'
+- from: swagger-document
+  where: '$.paths.*[?(@.operationId.startsWith("VideoAnalyzerOperationStatuses_"))]'
+  transform: >
+    $["operationId"] = $["operationId"].replace("VideoAnalyzerOperationStatuses_", "OperationStatusesForVideoAnalyzer_")
+- from: swagger-document
+  where: '$.paths.*[?(@.operationId.startsWith("VideoAnalyzerOperationResults_"))]'
+  transform: >
+    $["operationId"] = $["operationId"].replace("VideoAnalyzerOperationResults_", "OperationResultsForVideoAnalyzer_")
 ```
 
 ### Go multi-api
