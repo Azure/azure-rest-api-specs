@@ -105,9 +105,6 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "List root cause analysis data set": {
             "$ref": "./examples/ListRootCauseAnalysisDataSet.json"
@@ -263,28 +260,8 @@
           },
           {
             "in": "query",
-            "name": "startDateTime",
-            "description": "Start time of data to be deleted",
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "in": "query",
-            "name": "endDateTime",
-            "description": "End time of data to be deleted",
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "in": "query",
-            "name": "partitionIdentity",
-            "description": "Partition identity of the data to be deleted",
-            "type": "string"
-          },
-          {
-            "in": "query",
             "name": "`filter`",
-            "description": "The filter expression filters out the resources to be returned, currently 3 kinds of operation are supported. They are startDateTime eq 'your time', endDateTime eq 'your time, partitionIdentity eq 'identity'.",
+            "description": "The filter expression filters out the resources, currently 3 kinds of operation are supported. They are startDateTime eq 'your time', endDateTime eq 'your time, partitionIdentity eq 'identity'.",
             "type": "string"
           }
         ],
@@ -347,7 +324,7 @@
           {
             "in": "query",
             "name": "`filter`",
-            "description": "The filter expression filters out the resources to be returned, currently 3 kinds of operation are supported. They are startDateTime eq 'your time', endDateTime eq 'your time, partitionIdentity eq 'identity'.",
+            "description": "The filter expression filters out the resources, currently 3 kinds of operation are supported. They are startDateTime eq 'your time', endDateTime eq 'your time, partitionIdentity eq 'identity'.",
             "type": "string"
           }
         ],
@@ -364,9 +341,6 @@
               "$ref": "#/definitions/ErrorDetail"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List root cause analysis data in a specified data set": {
@@ -473,9 +447,6 @@
               "$ref": "#/definitions/ErrorDetail"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Get instance list for root cause analysis": {
@@ -674,9 +645,6 @@
               "$ref": "#/definitions/ErrorDetail"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Query training task state list for root cause analysis": {
