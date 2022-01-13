@@ -321,6 +321,17 @@
     }
   },
   "responses": {
-    "204": {}
+    "204": {},
+    "404": {
+      "headers": {
+        "x-ms-error-code": "errorcode"
+      },
+      "body": {
+        "error": {
+          "message": "DataSet doesn't exist",
+          "code": "DatasetNotFound"
+        }
+      }
+    }
   }
 }

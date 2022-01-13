@@ -40,10 +40,26 @@
               }
             }
           },
-          "default": {
-            "description": "Client error or server error (4xx or 5xx)",
+          "400": {
+            "description": "Bad Request",
             "schema": {
-              "$ref": "#/definitions/ErrorDetail"
+              "enum": [
+                "DisplayNameAlreadyExist",
+                "InvalidGranularityNone",
+                "SizeLimitExceeded",
+                "InvalidRequestSchema"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "MultiDimRCACreateDataSetErrorCode",
+                "modelAsString": true
+              }
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String identical to error code.",
+                "type": "string"
+              }
             }
           }
         },
@@ -98,10 +114,16 @@
               "$ref": "#/definitions/RootCauseAnalysisDataSetList"
             }
           },
-          "default": {
-            "description": "Client error or server error (4xx or 5xx)",
+          "400": {
+            "description": "Bad Request",
             "schema": {
-              "$ref": "#/definitions/ErrorDetail"
+              "$ref": "#/definitions/MultiDimRCAListDataSetErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String identical to error code.",
+                "type": "string"
+              }
             }
           }
         },
@@ -139,10 +161,16 @@
               "$ref": "#/definitions/RootCauseAnalysisDataSet"
             }
           },
-          "default": {
-            "description": "Client error or server error (4xx or 5xx)",
+          "404": {
+            "description": "Not Found",
             "schema": {
-              "$ref": "#/definitions/ErrorDetail"
+              "$ref": "#/definitions/MultiDimRCAGetDataSetErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String identical to error code.",
+                "type": "string"
+              }
             }
           }
         },
@@ -158,9 +186,6 @@
         ],
         "summary": "Delete a root cause analysis data set",
         "operationId": "DeleteRootCauseAnalysisADataSet",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "in": "path",
@@ -174,12 +199,6 @@
         "responses": {
           "204": {
             "description": "The resource is deleted successfully or does not exist."
-          },
-          "default": {
-            "description": "Client error or server error (4xx or 5xx)",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetail"
-            }
           }
         },
         "x-ms-examples": {
@@ -225,10 +244,16 @@
           "204": {
             "description": "Success"
           },
-          "default": {
-            "description": "Client error or server error (4xx or 5xx)",
+          "404": {
+            "description": "Not Found",
             "schema": {
-              "$ref": "#/definitions/ErrorDetail"
+              "$ref": "#/definitions/MultiDimRCAGetDataSetErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String identical to error code.",
+                "type": "string"
+              }
             }
           }
         },
@@ -246,9 +271,6 @@
         ],
         "summary": "Delete root cause analysis data",
         "operationId": "DeleteRootCauseAnalysisData",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "in": "path",
@@ -268,12 +290,6 @@
         "responses": {
           "204": {
             "description": "The resource is deleted successfully or does not exist."
-          },
-          "default": {
-            "description": "Client error or server error (4xx or 5xx)",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetail"
-            }
           }
         },
         "x-ms-examples": {
@@ -334,12 +350,6 @@
             "schema": {
               "$ref": "#/definitions/RootCauseAnalysisDataMetaListResponse"
             }
-          },
-          "default": {
-            "description": "Client error or server error (4xx or 5xx)",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetail"
-            }
           }
         },
         "x-ms-examples": {
@@ -357,9 +367,6 @@
         "summary": "Create an instance for root cause analysis",
         "operationId": "CreateRootCauseAnalysisInstance",
         "consumes": [
-          "application/json"
-        ],
-        "produces": [
           "application/json"
         ],
         "parameters": [
@@ -381,12 +388,6 @@
                 "description": "Location of the newly created resource.",
                 "type": "string"
               }
-            }
-          },
-          "default": {
-            "description": "Client error or server error (4xx or 5xx)",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -440,12 +441,6 @@
             "schema": {
               "$ref": "#/definitions/RootCauseAnalysisInstanceResponseList"
             }
-          },
-          "default": {
-            "description": "Client error or server error (4xx or 5xx)",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetail"
-            }
           }
         },
         "x-ms-examples": {
@@ -481,12 +476,6 @@
             "schema": {
               "$ref": "#/definitions/RootCauseAnalysisInstance"
             }
-          },
-          "default": {
-            "description": "Client error or server error (4xx or 5xx)",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetail"
-            }
           }
         },
         "x-ms-examples": {
@@ -501,9 +490,6 @@
         ],
         "summary": "Delete an instance for root cause analysis",
         "operationId": "DeleteRootCauseAnalysisInstance",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "in": "path",
@@ -517,12 +503,6 @@
         "responses": {
           "204": {
             "description": "The resource is deleted successfully or does not exist."
-          },
-          "default": {
-            "description": "Client error or server error (4xx or 5xx)",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetail"
-            }
           }
         },
         "x-ms-examples": {
@@ -540,9 +520,6 @@
         "summary": "Trigger a model training task for root cause analysis",
         "operationId": "CreateRootCauseAnalysisTrainingTask",
         "consumes": [
-          "application/json"
-        ],
-        "produces": [
           "application/json"
         ],
         "parameters": [
@@ -571,12 +548,6 @@
                 "description": "Location of the newly created resource.",
                 "type": "string"
               }
-            }
-          },
-          "default": {
-            "description": "Client error or server error (4xx or 5xx)",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -638,12 +609,6 @@
             "schema": {
               "$ref": "#/definitions/RootCauseAnalysisTrainingResponseList"
             }
-          },
-          "default": {
-            "description": "Client error or server error (4xx or 5xx)",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetail"
-            }
           }
         },
         "x-ms-examples": {
@@ -660,9 +625,6 @@
         ],
         "summary": "Delete a model for root cause analysis",
         "operationId": "DeleteRootCauseAnalysisModel",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "in": "path",
@@ -684,12 +646,6 @@
         "responses": {
           "204": {
             "description": "The resource is deleted successfully or does not exist."
-          },
-          "default": {
-            "description": "Client error or server error (4xx or 5xx)",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetail"
-            }
           }
         },
         "x-ms-examples": {
@@ -731,12 +687,6 @@
             "schema": {
               "$ref": "#/definitions/RootCauseAnalysisTrainingResponse"
             }
-          },
-          "default": {
-            "description": "Client error or server error (4xx or 5xx)",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetail"
-            }
           }
         },
         "x-ms-examples": {
@@ -754,9 +704,6 @@
         "summary": "Trigger an inference task for root cause analysis",
         "operationId": "CreateRootCauseAnalysisInferenceTask",
         "consumes": [
-          "application/json"
-        ],
-        "produces": [
           "application/json"
         ],
         "parameters": [
@@ -794,12 +741,6 @@
                 "description": "Location of the newly created resource.",
                 "type": "string"
               }
-            }
-          },
-          "default": {
-            "description": "Client error or server error (4xx or 5xx)",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -851,12 +792,6 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/RootCauseAnalysisInferenceResponse"
-            }
-          },
-          "default": {
-            "description": "Client error or server error (4xx or 5xx)",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -994,19 +929,6 @@
       },
       "x-ms-discriminator-value": "multidimensional"
     },
-    "ErrorDetail": {
-      "type": "object",
-      "properties": {
-        "message": {
-          "description": "Human-readable error message",
-          "type": "string"
-        },
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        }
-      }
-    },
     "RootCauseAnalysisDataSetList": {
       "required": [
         "value"
@@ -1023,6 +945,62 @@
           "items": {
             "$ref": "#/definitions/RootCauseAnalysisDataSet"
           }
+        }
+      }
+    },
+    "MultiDimRCAListDataSetErrorDetail": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "Human-readable error message",
+          "type": "string"
+        },
+        "code": {
+          "description": "Error code",
+          "enum": [
+            "InvalidFilter"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MultiDimRCAListDataSetErrorCode",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "MultiDimRCAListDataSetErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/MultiDimRCAListDataSetErrorDetail"
+        }
+      }
+    },
+    "MultiDimRCAGetDataSetErrorDetail": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "Human-readable error message",
+          "type": "string"
+        },
+        "code": {
+          "description": "Error code",
+          "enum": [
+            "DatasetNotFound"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MultiDimRCAGetDataSetErrorCode",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "MultiDimRCAGetDataSetErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/MultiDimRCAGetDataSetErrorDetail"
         }
       }
     },
@@ -1608,8 +1586,7 @@
       "properties": {
         "nextLink": {
           "description": "Link of next page, only provided when there are next pages",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "value": {
           "description": "Response values",
@@ -1759,6 +1736,29 @@
         }
       }
     },
+    "MultiDimRCACreateDataSetErrorDetail": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "Human-readable error message",
+          "type": "string"
+        },
+        "code": {
+          "description": "Error code",
+          "enum": [
+            "DisplayNameAlreadyExist",
+            "InvalidGranularityNone",
+            "SizeLimitExceeded",
+            "InvalidRequestSchema"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MultiDimRCACreateDataSetErrorCode",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "RootCauseAnalysisTrainingResponse": {
       "required": [
         "createdDateTime",
@@ -1828,7 +1828,7 @@
           "type": "string"
         },
         "error": {
-          "$ref": "#/definitions/ErrorDetail"
+          "$ref": "#/definitions/MultiDimRCACreateDataSetErrorDetail"
         },
         "taskInfo": {
           "$ref": "#/definitions/MultiDimRCATrainingTaskInfo"
@@ -1861,8 +1861,7 @@
       "properties": {
         "nextLink": {
           "description": "Link of next page, only provided when there are next pages",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "value": {
           "description": "Response values",
@@ -2083,7 +2082,7 @@
           "type": "string"
         },
         "error": {
-          "$ref": "#/definitions/ErrorDetail"
+          "$ref": "#/definitions/MultiDimRCACreateDataSetErrorDetail"
         },
         "result": {
           "$ref": "#/definitions/MultiDimRCAInferenceResult"
