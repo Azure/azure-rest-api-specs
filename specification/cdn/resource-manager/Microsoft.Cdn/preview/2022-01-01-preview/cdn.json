@@ -2377,78 +2377,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/policies/{policyName}/applyPolicy": {
-      "post": {
-        "tags": [
-          "Policies"
-        ],
-        "description": "Applies given policy to the edges. Note: This is an internal API and not available for external customers",
-        "operationId": "Policies_ApplyPolicy",
-        "x-ms-examples": {
-          "Policies_ApplyPolicy": {
-            "$ref": "./examples/Policies_ApplyPolicy.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the CDN profile which is unique within the resource group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "policyName",
-            "in": "path",
-            "description": "Name of the policy under the profile which is unique globally.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "applyPolicyInput",
-            "in": "body",
-            "description": "Custom policy to be applied.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ApplyPolicyInput"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ApplyPolicyOutput"
-            }
-          },
-          "202": {
-            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/ApplyPolicyOutput"
-            }
-          },
-          "default": {
-            "description": "CDN error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
-      }
-    },
     "/providers/Microsoft.Cdn/checkNameAvailability": {
       "post": {
         "tags": [
@@ -6629,54 +6557,6 @@
       },
       "description": "The resource management error additional info."
     },
-    "ApplyPolicyInput": {
-      "description": "Input of ApplyPolicy API.",
-      "type": "object",
-      "required": [
-        "customerConfig"
-      ],
-      "properties": {
-        "customerConfig": {
-          "description": "Json blob containing config",
-          "type": "string"
-        }
-      },
-      "additionalProperties": false
-    },
-    "ApplyPolicyOutput": {
-      "description": "Output of ApplyPolicy API",
-      "type": "object",
-      "properties": {
-        "deploymentStatusId": {
-          "description": "Status ID of the Policy deployment",
-          "type": "integer",
-          "format": "int64"
-        },
-        "status": {
-          "description": "Status of the Policy deployment",
-          "readOnly": true,
-          "enum": [
-            "NotStarted",
-            "InRollout",
-            "InRollback",
-            "RolledBack",
-            "Committing",
-            "Committed"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PolicyDeploymentState",
-            "modelAsString": true
-          }
-        },
-        "creationTime": {
-          "description": "Creation time of the deployment",
-          "type": "string",
-          "format": "date-time"
-        }
-      },
-      "additionalProperties": false
-    },
     "Policy": {
       "description": "A policy is a logical grouping of policies",
       "type": "object",
@@ -6706,6 +6586,14 @@
       "properties": {
         "ServiceType": {
           "description": "Service type of the policy",
+          "type": "string"
+        },
+        "CustomerConfig":{
+          "description": "Policy to be applied",
+          "type": "string"
+        },
+        "SchemaVersion":{
+          "description": "Schema version of the policy",
           "type": "string"
         }
       }
