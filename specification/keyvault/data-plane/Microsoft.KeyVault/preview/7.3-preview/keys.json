@@ -1324,9 +1324,7 @@
             "RSA",
             "RSA-HSM",
             "oct",
-            "oct-HSM",
-            "OKP",
-            "OKP-HSM"
+            "oct-HSM"
           ],
           "x-ms-enum": {
             "name": "JsonWebKeyType",
@@ -1355,14 +1353,6 @@
               {
                 "value": "oct-HSM",
                 "description": "Octet sequence (used to represent symmetric keys) which is stored the HSM."
-              },
-              {
-                "value": "OKP",
-                "description": "Octet key pair (https://tools.ietf.org/html/rfc8037)"
-              },
-              {
-                "value": "OKP-HSM",
-                "description": "Octet key pair (https://tools.ietf.org/html/rfc8037) with a private key which is stored in the HSM."
               }
             ]
           }
@@ -1387,7 +1377,7 @@
         "d": {
           "type": "string",
           "format": "base64url",
-          "description": "RSA private exponent, or the D component of an EC or OKP private key."
+          "description": "RSA private exponent, or the D component of an EC private key."
         },
         "dp": {
           "x-ms-client-name": "DP",
@@ -1435,8 +1425,7 @@
             "P-256",
             "P-384",
             "P-521",
-            "P-256K",
-            "Ed25519"
+            "P-256K"
           ],
           "x-ms-enum": {
             "name": "JsonWebKeyCurveName",
@@ -1457,10 +1446,6 @@
               {
                 "value": "P-256K",
                 "description": "The SECG SECP256K1 elliptic curve."
-              },
-              {
-                "value": "Ed25519",
-                "description": "The Ed25519 Edwards curve."
               }
             ]
           }
@@ -1468,7 +1453,7 @@
         "x": {
           "type": "string",
           "format": "base64url",
-          "description": "X component of an EC or OKP public key."
+          "description": "X component of an EC public key."
         },
         "y": {
           "type": "string",
@@ -1670,9 +1655,7 @@
             "RSA",
             "RSA-HSM",
             "oct",
-            "oct-HSM",
-            "OKP",
-            "OKP-HSM"
+            "oct-HSM"
           ],
           "x-ms-enum": {
             "name": "JsonWebKeyType",
@@ -1696,8 +1679,7 @@
             "P-256",
             "P-384",
             "P-521",
-            "P-256K",
-            "Ed25519"
+            "P-256K"
           ],
           "x-ms-enum": {
             "name": "JsonWebKeyCurveName",
@@ -1719,9 +1701,7 @@
             "RSA",
             "RSA-HSM",
             "oct",
-            "oct-HSM",
-            "OKP",
-            "OKP-HSM"
+            "oct-HSM"
           ],
           "x-ms-enum": {
             "name": "JsonWebKeyType",
@@ -1778,8 +1758,7 @@
             "P-256",
             "P-384",
             "P-521",
-            "P-256K",
-            "Ed25519"
+            "P-256K"
           ],
           "x-ms-enum": {
             "name": "JsonWebKeyCurveName",
@@ -1962,8 +1941,7 @@
             "ES256",
             "ES384",
             "ES512",
-            "ES256K",
-            "EdDSA"
+            "ES256K"
           ],
           "x-ms-enum": {
             "name": "JsonWebKeySignatureAlgorithm",
@@ -2012,10 +1990,6 @@
               {
                 "value": "ES256K",
                 "description": "ECDSA using P-256K and SHA-256, as described in https://tools.ietf.org/html/rfc7518"
-              },
-              {
-                "value": "EdDSA",
-                "description": "Edwards-curve Digital Signature Algorithm, as described in https://tools.ietf.org/html/rfc8032."
               }
             ]
           }
@@ -2049,8 +2023,7 @@
             "ES256",
             "ES384",
             "ES512",
-            "ES256K",
-            "EdDSA"
+            "ES256K"
           ],
           "x-ms-enum": {
             "name": "JsonWebKeySignatureAlgorithm",
