@@ -33,6 +33,48 @@
     "resourceName": "mySignalRService"
   },
   "responses": {
+    "200": {
+      "body": {
+        "sku": {
+          "name": "Standard_S1",
+          "tier": "Standard",
+          "size": "S1",
+          "capacity": 1
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "externalIP": "10.0.0.1",
+          "hostName": "mysignalrservice.service.signalr.net",
+          "publicPort": 443,
+          "serverPort": 443,
+          "version": "1.0",
+          "hostNamePrefix": null,
+          "features": [
+            {
+              "flag": "ServiceMode",
+              "value": "Serverless",
+              "properties": {}
+            }
+          ],
+          "cors": {
+            "allowedOrigins": [
+              "https://foo.com",
+              "https://bar.com"
+            ]
+          }
+        },
+        "location": "eastus",
+        "tags": {
+          "key1": "value1"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService",
+        "name": "mySignalRService",
+        "type": "Microsoft.SignalRService/SignalR"
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult..."
+      }
+    },
     "201": {
       "body": {
         "sku": {
