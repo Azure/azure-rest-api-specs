@@ -187,6 +187,47 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "DeleteAccessReviewHistoryDefinition"
+        ],
+        "operationId": "AccessReviewHistoryDefinition_DeleteById",
+        "x-ms-examples": {
+          "DeleteAccessReview": {
+            "$ref": "./examples/DeleteAccessReviewHistoryDefinition.json"
+          }
+        },
+        "description": "Delete an access review history definition",
+        "parameters": [
+          {
+            "name": "historyDefinitionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the access review history definition."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Request is well formed but the resource does not exist"
+          },
+          "200": {
+            "description": "Resource deleted successfully"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/accessReviewHistoryDefinitions/{historyDefinitionId}/generateDownloadUri": {
