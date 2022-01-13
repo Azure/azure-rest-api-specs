@@ -1911,26 +1911,26 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/snapshotPolicies": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/SubscriptionId"
-        },
-        {
-          "$ref": "#/parameters/ResourceGroup"
-        },
-        {
-          "$ref": "#/parameters/AccountName"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-        }
-      ],
       "get": {
+        "operationId": "SnapshotPolicies_List",
+        "description": "List snapshot policy",
         "tags": [
           "Snapshot Policy"
         ],
-        "operationId": "SnapshotPolicies_List",
-        "description": "List snapshot policy",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
         "x-ms-pageable": {
           "nextLinkName": null
         },
@@ -1953,29 +1953,29 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/snapshotPolicies/{snapshotPolicyName}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/SubscriptionId"
-        },
-        {
-          "$ref": "#/parameters/ResourceGroup"
-        },
-        {
-          "$ref": "#/parameters/AccountName"
-        },
-        {
-          "$ref": "#/parameters/SnapshotPolicyName"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-        }
-      ],
       "get": {
+        "operationId": "SnapshotPolicies_Get",
+        "description": "Get a snapshot Policy",
         "tags": [
           "Snapshot Policy"
         ],
-        "operationId": "SnapshotPolicies_Get",
-        "description": "Get a snapshot Policy",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/SnapshotPolicyName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -1994,11 +1994,11 @@
         }
       },
       "put": {
+        "operationId": "SnapshotPolicies_Create",
+        "description": "Create a snapshot policy",
         "tags": [
           "Snapshot Policy"
         ],
-        "operationId": "SnapshotPolicies_Create",
-        "description": "Create a snapshot policy",
         "parameters": [
           {
             "name": "body",
@@ -2008,6 +2008,21 @@
             "schema": {
               "$ref": "#/definitions/snapshotPolicy"
             }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/SnapshotPolicyName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -2049,6 +2064,21 @@
             "schema": {
               "$ref": "#/definitions/snapshotPolicyPatch"
             }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/SnapshotPolicyName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -2079,11 +2109,28 @@
         }
       },
       "delete": {
+        "operationId": "SnapshotPolicies_Delete",
+        "description": "Delete snapshot policy",
         "tags": [
           "Snapshot Policy"
         ],
-        "operationId": "SnapshotPolicies_Delete",
-        "description": "Delete snapshot policy",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/SnapshotPolicyName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -3895,6 +3942,11 @@
           "description": "Capacity pool properties",
           "$ref": "#/definitions/poolProperties",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
@@ -4142,6 +4194,11 @@
           "description": "Volume properties",
           "$ref": "#/definitions/volumeProperties",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
@@ -5149,6 +5206,11 @@
           "description": "Snapshot policy Properties",
           "$ref": "#/definitions/snapshotPolicyProperties",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
@@ -5651,6 +5713,11 @@
           "description": "Backup policy Properties",
           "$ref": "#/definitions/backupPolicyProperties",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
