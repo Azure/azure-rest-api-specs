@@ -167,6 +167,15 @@
             "description": "The id of the access review history definition."
           },
           {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccessReviewHistoryDefinitionProperties"
+            },
+            "description": "Access review history definition properties."
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -230,15 +239,15 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/accessReviewHistoryDefinitions/{historyDefinitionId}/generateDownloadUri": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/accessReviewHistoryDefinitions/{historyDefinitionId}/instances/{instanceId}/generateDownloadUri": {
       "post": {
         "tags": [
-          "PostAccessReviewHistoryDefinition"
+          "PostAccessReviewHistoryDefinitionInstance"
         ],
-        "operationId": "AccessReviewHistoryDefinition_GenerateDownloadUri",
+        "operationId": "AccessReviewHistoryDefinitionInstance_GenerateDownloadUri",
         "x-ms-examples": {
-          "PostAccessReviewHistoryDefinition": {
-            "$ref": "./examples/PostAccessReviewHistoryDefinition.json"
+          "PostAccessReviewHistoryDefinitionInstance": {
+            "$ref": "./examples/PostAccessReviewHistoryDefinitionInstance.json"
           }
         },
         "description": "Generates a uri which can be used to retrieve review history data. This URI has a TTL of 1 day and can be retrieved by fetching the accessReviewHistoryDefinition object.",
@@ -249,6 +258,13 @@
             "required": true,
             "type": "string",
             "description": "The id of the access review history definition."
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the access review history definition instance to generate a URI for."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
