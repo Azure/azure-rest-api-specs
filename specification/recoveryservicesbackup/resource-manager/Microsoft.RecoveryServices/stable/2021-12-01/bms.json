@@ -5454,6 +5454,21 @@
           "description": "The oldest backup copy available for this backup item.",
           "type": "string"
         },
+        "oldestRecoveryPointInVault": {
+          "format": "date-time",
+          "description": "The oldest backup copy available for this backup item in vault tier",
+          "type": "string"
+        },
+        "oldestRecoveryPointInArchive": {
+          "format": "date-time",
+          "description": "The oldest backup copy available for this backup item in archive tier",
+          "type": "string"
+        },
+        "newestRecoveryPointInArchive": {
+          "format": "date-time",
+          "description": "The latest backup copy available for this backup item in archive tier",
+          "type": "string"
+        },
         "recoveryPointCount": {
           "format": "int32",
           "description": "Number of backup copies available for this backup item.",
@@ -5484,6 +5499,13 @@
         "retentionPolicy": {
           "$ref": "#/definitions/RetentionPolicy",
           "description": "Retention policy with the details on backup copy retention ranges."
+        },
+        "tieringPolicy": {
+          "description": "Tiering policy to automatically move RPs to another tier\r\nKey is Target Tier, defined in RecoveryPointTierType enum.\r\nTiering policy specifies the criteria to move RP to the target tier.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/TieringPolicy"
+          }
         },
         "instantRpRetentionRangeInDays": {
           "format": "int32",
@@ -5805,6 +5827,21 @@
         "oldestRecoveryPoint": {
           "format": "date-time",
           "description": "The oldest backup copy available for this backup item.",
+          "type": "string"
+        },
+        "oldestRecoveryPointInVault": {
+          "format": "date-time",
+          "description": "The oldest backup copy available for this backup item in vault tier",
+          "type": "string"
+        },
+        "oldestRecoveryPointInArchive": {
+          "format": "date-time",
+          "description": "The oldest backup copy available for this backup item in archive tier",
+          "type": "string"
+        },
+        "newestRecoveryPointInArchive": {
+          "format": "date-time",
+          "description": "The latest backup copy available for this backup item in archive tier",
           "type": "string"
         },
         "recoveryPointCount": {
@@ -9001,6 +9038,13 @@
         "retentionPolicy": {
           "$ref": "#/definitions/RetentionPolicy",
           "description": "Retention policy with the details on backup copy retention ranges."
+        },
+        "tieringPolicy": {
+          "description": "Tiering policy to automatically move RPs to another tier.\r\nKey is Target Tier, defined in RecoveryPointTierType enum.\r\nTiering policy specifies the criteria to move RP to the target tier.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/TieringPolicy"
+          }
         }
       }
     },
@@ -12431,6 +12475,41 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceGuardProxyBaseResource"
+          }
+        }
+      }
+    },
+    "TieringPolicy": {
+      "description": "Tiering Policy.",
+      "type": "object",
+      "properties": {
+        "tieringMode": {
+          "enum": [
+            "Invalid",
+            "TierRecommended",
+            "TierAfter",
+            "DoNotTier"
+          ],
+          "type": "string"
+        },
+        "duration": {
+          "format": "int32",
+          "description": "Number of days/weeks/months/years to retain backups in current tier before tiering.",
+          "type": "integer"
+        },
+        "durationType": {
+          "description": "Retention duration type: days/weeks/months/years",
+          "enum": [
+            "Invalid",
+            "Days",
+            "Weeks",
+            "Months",
+            "Years"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RetentionDurationType",
+            "modelAsString": true
           }
         }
       }
