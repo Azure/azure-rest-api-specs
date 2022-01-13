@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-quota"
   output-folder: "$(typescript-sdks-folder)/sdk/quota/arm-quota"
-  clear-output-folder: true
   generate-metadata: true
 ```
