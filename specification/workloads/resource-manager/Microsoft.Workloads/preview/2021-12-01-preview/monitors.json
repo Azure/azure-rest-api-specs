@@ -363,8 +363,11 @@
         },
         "description": "Gets properties of a provider instance for the specified subscription, resource group, Monitor name, and resource name.",
         "x-ms-examples": {
-          "Get properties of a SAP monitor provider": {
+          "Get properties of a SAP monitor Hana provider": {
             "$ref": "./examples/sapworkloads/ProviderInstances_Get.json"
+          },
+          "Get properties of a SAP monitor NetWeaver provider": {
+            "$ref": "./examples/sapworkloads/NetWeaverProviderInstances_Get.json"
           }
         },
         "produces": [
@@ -414,8 +417,11 @@
         "summary": "Creates a provider instance.",
         "description": "Creates a provider instance for the specified subscription, resource group, Monitor name, and resource name.",
         "x-ms-examples": {
-          "Create a SAP Monitor provider": {
+          "Create a SAP Monitor Hana provider": {
             "$ref": "./examples/sapworkloads/ProviderInstances_Create.json"
+          },
+          "Create a SAP Monitor NetWeaver provider": {
+            "$ref": "./examples/sapworkloads/NetWeaverProviderInstances_Create.json"
           }
         },
         "parameters": [
@@ -865,6 +871,37 @@
         }
       },
       "x-ms-discriminator-value": "SapHana"
+    },
+    "SapNetWeaverProviderInstanceProperties": {
+      "description": "Gets or sets the provider properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProviderSpecificProperties"
+        }
+      ],
+      "properties": {
+        "sapSid": {
+          "description": "Gets or sets the SAP System Identifier",
+          "type": "string"
+        },
+        "sapHostname": {
+          "description": "Gets or sets the target virtual machine IP Address/FQDN.",
+          "type": "string"
+        },
+        "sapInstanceNr": {
+          "description": "Gets or sets the instance number of SAP NetWeaver.",
+          "type": "string"
+        },
+        "sapHostFileEntries": {
+          "description": "Gets or sets the list of HostFile Entries",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "SapNetWeaver"
     },
     "ProviderSpecificProperties": {
       "description": "Gets or sets the provider specific properties.",
