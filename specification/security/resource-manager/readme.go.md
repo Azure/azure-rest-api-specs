@@ -15,6 +15,11 @@ module-name: sdk/resourcemanager/security/armsecurity
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
+directive:
+- from: swagger-document
+  where: '$.paths.*[?(@.operationId.startsWith("SecurityConnectors_"))]'
+  transform: >
+    $["operationId"] = $["operationId"].replace("SecurityConnectors_", "ConnectorsForSecurity_");
 ```
 
 ### Common Go settings
