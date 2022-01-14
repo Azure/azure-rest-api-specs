@@ -492,6 +492,12 @@
             "schema": {
               "$ref": "#/definitions/ListUsagesResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -532,6 +538,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineSizeListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1470,6 +1482,12 @@
             "schema": {
               "$ref": "#/definitions/PrivateLinkResourceListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1982,6 +2000,10 @@
               "type": "string"
             }
           }
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation applies to data-plane",
+          "type": "boolean"
         }
       }
     },
@@ -5181,23 +5203,13 @@
     "WorkspaceConnection": {
       "x-ms-azure-resource": true,
       "description": "Workspace connection.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "ResourceId of the workspace connection.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Friendly name of the workspace connection.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type of workspace connection.",
-          "readOnly": true
-        },
         "properties": {
           "type": "object",
           "description": "Properties of workspace connection.",
