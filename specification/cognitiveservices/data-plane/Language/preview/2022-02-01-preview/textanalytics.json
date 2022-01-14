@@ -370,7 +370,7 @@
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
         },
         "parameters": {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
+          "$ref": "#/definitions/KeyPhraseTaskParameters"
         }
       },
       "allOf": [
@@ -441,11 +441,7 @@
           "description": "The set of tasks to execute on the input documents.",
           "type": "array",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/AnalyzeTextLROTask"
-              }
-            ]
+            "$ref": "#/definitions/AnalyzeTextLROTask"
           }
         }
       },
@@ -2471,7 +2467,6 @@
             "running",
             "succeeded",
             "failed",
-            "rejected",
             "cancelled",
             "cancelling"
           ],
