@@ -6047,27 +6047,9 @@
         "preferredRoutingGateway": {
           "$ref": "#/definitions/PreferredRoutingGateway",
           "description": "The preferred gateway to route on-prem traffic"
-        },
-        "hubRoutingPreference": {
-          "$ref": "#/definitions/HubRoutingPreference",
-          "description": "The routing preference in virtual router"
         }
       },
       "description": "Parameters for VirtualHub."
-    },
-    "HubRoutingPreference": {
-      "type": "string",
-      "description": "The hub routing preference types",
-      "enum": [
-        "ExpressRoute",
-        "VpnGateway",
-        "None",
-        "ASPath"
-      ],
-      "x-ms-enum": {
-        "name": "HubRoutingPreference",
-        "modelAsString": true
-      }
     },
     "PreferredRoutingGateway": {
       "type": "string",
