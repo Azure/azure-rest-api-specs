@@ -802,7 +802,8 @@
           "type": "string",
           "readOnly": true,
           "description": "Specifies how the configuration settings were last changed."
-        }
+        },
+        "description": "Configurable properties that the user can set locally via the azcmagent config command, or remotely via ARM." 
       }
     },
     "CloudMetadata": {
@@ -813,7 +814,8 @@
           "readOnly": true,
           "description": "Specifies the cloud provider (Azure/AWS/GCP...)."
         }
-      }
+      },
+      "description": "The metadata of the cloud environment (Azure/GCP/AWS/OCI...)."
     },
     "OSProfile": {
       "properties": {
@@ -1143,8 +1145,8 @@
           "type": "string",
           "description": "Indicates whether the extension should be automatically upgraded by the platform if there is a newer version available.",
           "enum": [
-            "True",
-            "False"
+            "true",
+            "false"
           ],
           "x-ms-enum": {
             "name": "enableAutomaticUpgradeType",
@@ -1155,8 +1157,8 @@
           "type": "string",
           "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true.",
           "enum": [
-            "True",
-            "False"
+            "true",
+            "false"
           ],
           "x-ms-enum": {
             "name": "autoUpgradeMinorVersionType",
@@ -1205,8 +1207,8 @@
           "type": "string",
           "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true.",
           "enum": [
-            "True",
-            "False"
+            "true",
+            "false"
           ],
           "x-ms-enum": {
             "name": "autoUpgradeMinorVersionType",
