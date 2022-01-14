@@ -2458,6 +2458,11 @@
           "description": "The pricing tier (defines Azure Front Door Standard or Premium or a CDN provider, feature list and rate) of the profile.",
           "$ref": "#/definitions/Sku"
         },
+        "kind": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Kind of the profile. Used by portal to differentiate traditional CDN profile and new AFD profile."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ProfileProperties"
@@ -2499,11 +2504,6 @@
           "type": "string",
           "description": "The Id of the frontdoor."
         },
-        "kind": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Kind of the profile. Used by portal to differentiate traditional CDN profile and new AFD profile."
-        },
         "originResponseTimeoutSeconds": {
           "description": "Send and receive timeout on forwarding request to the origin. When timeout is reached, the request fails and returns.",
           "type": "integer",
@@ -2521,6 +2521,8 @@
           "description": "Type of managed service identity.",
           "enum": [
             "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
             "None"
           ],
           "type": "string",
@@ -2536,6 +2538,29 @@
         },
         "principalId": {
           "description": "Principal Id of managed service identity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "userAssignedIdentities": {
+          "description": "The list of user assigned identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/userAssignedIdentity"
+          }
+        }
+      }
+    },
+    "userAssignedIdentity": {
+      "description": "User Assigned identity.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "Principal Id of user assigned identity",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientId": {
+          "description": "Client Id of user assigned identity",
           "type": "string",
           "readOnly": true
         }
@@ -3935,6 +3960,13 @@
               "Desktop"
             ]
           }
+        },
+        "transforms": {
+          "description": "List of transforms",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transform"
+          }
         }
       }
     },
@@ -3973,6 +4005,13 @@
           "type": "array",
           "items": {
             "type": "string"
+          }
+        },
+        "transforms": {
+          "description": "List of transforms",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transform"
           }
         }
       }
@@ -4021,6 +4060,13 @@
           "items": {
             "type": "string"
           }
+        },
+        "transforms": {
+          "description": "List of transforms",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transform"
+          }
         }
       }
     },
@@ -4067,6 +4113,13 @@
           "type": "array",
           "items": {
             "type": "string"
+          }
+        },
+        "transforms": {
+          "description": "List of transforms",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transform"
           }
         }
       }
@@ -4159,6 +4212,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SslProtocol"
+          }
+        },
+        "transforms": {
+          "description": "List of transforms",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transform"
           }
         }
       }
@@ -4732,8 +4792,7 @@
         },
         "cacheDuration": {
           "description": "The duration for which the content needs to be cached. Allowed format is [d.]hh:mm:ss",
-          "type": "string",
-          "format": "duration"
+          "type": "string"
         }
       }
     },
