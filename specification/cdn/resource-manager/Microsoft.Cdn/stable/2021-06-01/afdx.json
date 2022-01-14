@@ -2856,12 +2856,12 @@
             "type": "string"
           },
           {
-            "name": "securityPolicyProperties",
+            "name": "securityPolicyUpdateProperties",
             "in": "body",
             "description": "Security policy update properties",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SecurityPolicyProperties"
+              "$ref": "#/definitions/SecurityPolicyUpdateParameters"
             }
           },
           {
@@ -4228,6 +4228,7 @@
     },
     "SecurityPolicyProperties": {
       "description": "The json object that contains properties required to create a security policy",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AFDStateProperties"
@@ -4241,11 +4242,31 @@
         },
         "parameters": {
           "description": "object which contains security policy parameters",
-          "$ref": "#/definitions/SecurityPolicyParameters"
+          "$ref": "#/definitions/SecurityPolicyPropertiesParameters"
         }
       }
     },
-    "SecurityPolicyParameters": {
+    "SecurityPolicyUpdateParameters": {
+      "description": "The JSON object containing security policy update parameters.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SecurityPolicyUpdateProperties"
+        }
+      }
+    },
+    "SecurityPolicyUpdateProperties": {
+      "description": "The json object that contains properties required to update a security policy",
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "description": "object which contains security policy parameters",
+          "$ref": "#/definitions/SecurityPolicyPropertiesParameters"
+        }
+      }
+    },
+    "SecurityPolicyPropertiesParameters": {
       "description": "The json object containing security policy parameters",
       "discriminator": "type",
       "required": [
@@ -4272,7 +4293,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/SecurityPolicyParameters"
+          "$ref": "#/definitions/SecurityPolicyPropertiesParameters"
         }
       ],
       "properties": {
@@ -4414,14 +4435,6 @@
             "name": "EnabledState",
             "modelAsString": true
           }
-        },
-        "originResponseTimeoutSeconds": {
-          "description": "Send and receive timeout on forwarding request to the origin. When timeout is reached, the request fails and returns.",
-          "type": "integer",
-          "format": "int32",
-          "minimum": 16,
-          "maximum": 240,
-          "exclusiveMinimum": false
         }
       }
     },
