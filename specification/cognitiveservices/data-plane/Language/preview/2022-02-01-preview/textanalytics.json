@@ -262,7 +262,6 @@
         "EntityRecognitionLROResults",
         "PiiEntityRecognitionLROResults",
         "KeyPhraseExtractionLROResults",
-        "LanguageDetectionLROResults",
         "EntityLinkingLROResults",
         "HealthcareLROResults",
         "ExtractiveSummarizationLROResults",
@@ -278,7 +277,7 @@
     "MultiLanguageAnalysisInput": {
       "properties": {
         "documents": {
-          "type": "object",
+          "type": "array",
           "items": {
             "$ref": "#/definitions/MultiLanguageInput"
           }
@@ -315,7 +314,12 @@
         "kind": {
           "$ref": "#/definitions/AnalyzeTextLROTaskKind"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskIdentifier"
+        }
+      ]
     },
     "AnalyzeTextTaskResult": {
       "discriminator": "kind",
@@ -439,9 +443,6 @@
           "items": {
             "allOf": [
               {
-                "$ref": "#/definitions/TaskIdentifier"
-              },
-              {
                 "$ref": "#/definitions/AnalyzeTextLROTask"
               }
             ]
@@ -553,12 +554,17 @@
     "CustomEntitiesTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a Custom Entities task.",
+      "properties": {
+        "stringIndexType": {
+          "$ref": "#/definitions/StringIndexType"
+        }
+      },
       "allOf": [
         {
-          "$ref": "#/definitions/CustomTaskParameters"
+          "$ref": "#/definitions/TaskParameters"
         },
         {
-          "$ref": "#/definitions/EntitiesTaskParameters"
+          "$ref": "#/definitions/CustomTaskParameters"
         }
       ]
     },
