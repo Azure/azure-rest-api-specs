@@ -79,31 +79,44 @@
           "type": "string",
           "description": "Operation name: {provider}/{resource}/{operation}."
         },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
         "display": {
-          "readOnly": true,
-          "description": "The object that represents the operation.",
-          "properties": {
-            "provider": {
-              "type": "string",
-              "description": "Service provider: Microsoft.HybridNetwork."
-            },
-            "resource": {
-              "type": "string",
-              "description": "Resource on which the operation is performed: Registration definition, registration assignment, etc."
-            },
-            "operation": {
-              "type": "string",
-              "description": "Operation type: Read, write, delete, etc."
-            },
-            "description": {
-              "type": "string",
-              "description": "Description of the operation."
-            }
-          }
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
         }
       },
       "type": "object",
       "description": "Object that describes a single Microsoft.HybridNetwork operation."
+    },
+    "OperationDisplay": {
+      "description": "Operation display payload",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "provider": {
+          "description": "Resource provider of the operation",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource of the operation",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Localized friendly name for the operation",
+          "type": "string"
+        },
+        "description": {
+          "description": "Localized friendly description for the operation",
+          "type": "string"
+        }
+      }
     },
     "OperationList": {
       "properties": {

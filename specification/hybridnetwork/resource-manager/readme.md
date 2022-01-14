@@ -67,6 +67,7 @@ These settings apply only when `--tag=package-2021-06-01-privatepreview` is spec
 input-file:
   - Microsoft.HybridNetwork/preview/2021-06-01-privatepreview/common.json
   - Microsoft.HybridNetwork/preview/2021-06-01-privatepreview/networkFunction.json
+  - Microsoft.HybridNetwork/preview/2021-06-01-privatepreview/vendor.json
   - Microsoft.HybridNetwork/preview/2021-06-01-privatepreview/operation.json
 ```
 
