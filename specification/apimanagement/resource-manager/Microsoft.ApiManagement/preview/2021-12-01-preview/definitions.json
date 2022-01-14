@@ -3967,32 +3967,14 @@
           "properties": {
             "termsOfService": {
               "type": "object",
-              "$ref": "#/definitions/TermsOfServiceProperties",
+              "$ref": "#/definitions/PortalConfigTermsOfServiceProperties",
               "description": "Terms of service contract properties."
             }
           }
         },
         "delegation": {
           "type": "object",
-          "properties": {
-            "delegateRegistration": {
-              "type": "boolean",
-              "description": "Enable or disable delegation for user registration."
-            },
-            "delegateSubscription": {
-              "type": "boolean",
-              "description": "Enable or disable delegation for product subscriptions."
-            },
-            "delegationUrl": {
-              "type": "string",
-              "description": "A delegation endpoint URL."
-            },
-            "validationKey": {
-              "x-ms-secret": true,
-              "type": "string",
-              "description": "A base64-encoded validation key to validate, that a request is coming from Azure API Management."
-            }
-          }
+          "$ref": "#/definitions/PortalConfigDelegationProperties"
         },
         "cors": {
           "type": "object",
@@ -4006,6 +3988,42 @@
         }
       },
       "description": "The developer portal configuration contract properties."
+    },
+    "PortalConfigDelegationProperties":{
+      "type": "object",
+      "properties": {
+        "delegateRegistration": {
+          "type": "boolean",
+          "description": "Enable or disable delegation for user registration."
+        },
+        "delegateSubscription": {
+          "type": "boolean",
+          "description": "Enable or disable delegation for product subscriptions."
+        },
+        "delegationUrl": {
+          "type": "string",
+          "description": "A delegation endpoint URL."
+        },
+        "validationKey": {
+          "x-ms-secret": true,
+          "type": "string",
+          "description": "A base64-encoded validation key to validate, that a request is coming from Azure API Management."
+        }
+      }
+    },
+    "PortalConfigTermsOfServiceProperties": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "A terms of service text."
+        },
+        "requireConsent": {
+          "type": "boolean",
+          "description": "Ask user for consent to the terms of service."
+        }
+      },
+      "description": "Terms of service contract properties."
     },
     "PortalConfigCorsProperties": {
       "type": "object",
