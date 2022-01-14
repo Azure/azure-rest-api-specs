@@ -14,28 +14,6 @@ clear-output-folder: true
 no-namespace-folders: true
 ```
 
-### Python multi-api
-
-Generate all API versions currently shipped for this package
-
-```yaml $(python) && $(multiapi) && $(track2)
-batch:
-  - tag: package-2021-10
-  - tag: package-preview-2020-09
-  - tag: package-2020-03
-  - tag: package-2020-01
-  - tag: package-2018-01
-  - tag: package-2017-11
-  - tag: package-preview-2017-08
-  - multiapiscript: true
-```
-
-``` yaml $(multiapiscript)
-output-folder: $(python-sdks-folder)/iothub/azure-mgmt-iothubprovisioningservices/azure/mgmt/iothubprovisioningservices/
-clear-output-folder: false
-perform-load: false
-```
-
 ### Tag: package-2021-10 and python
 
 These settings apply only when `--tag=package-2021-10 --python` is specified on the command line.
