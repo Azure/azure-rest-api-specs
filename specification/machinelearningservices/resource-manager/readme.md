@@ -40,6 +40,14 @@ input-file:
   - Microsoft.MachineLearningServices/stable/2021-07-01/workspaceFeatures.json
   - Microsoft.MachineLearningServices/stable/2021-07-01/workspaceSkus.json
 ```
+## Suppression
+``` yaml
+directive:
+  - suppress: CollectionObjectPropertiesNaming
+    from: machineLearningService.json
+    where: $.definitions.AmlComputeNodesInformation
+    reason: The pageable itemName override is not considered by the LintDiff check correctly.
+```
 
 ### Tag: package-2021-04-01
 
