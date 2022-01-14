@@ -1655,7 +1655,8 @@
         },
         "cmekEncryptionStatus": {
           "type": "string",
-          "description": "The CMK encryption status"
+          "description": "The CMK encryption status",
+          "readOnly": true
         },
         "publicNetworkAccess": {
           "description": "Whether the bot is in an isolated network",
@@ -1672,11 +1673,13 @@
         },
         "isStreamingSupported": {
           "type": "boolean",
-          "description": "Whether the bot is streaming supported"
+          "description": "Whether the bot is streaming supported",
+          "default": false
         },
         "isDeveloperAppInsightsApiKeySet": {
           "type": "boolean",
-          "description": "Whether the bot is developerAppInsightsApiKey set"
+          "description": "Whether the bot is developerAppInsightsApiKey set",
+          "readOnly": true
         },
         "migrationToken": {
           "type": "string",
@@ -1761,6 +1764,18 @@
         "setting": {
           "$ref": "#/definitions/ChannelSettings",
           "description": "Channel settings"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the resource"
+        },
+        "entityTag": {
+          "type": "string",
+          "description": "Entity tag of the resource"
+        },
+        "changedTime": {
+          "type": "string",
+          "description": "Changed time of the resource"
         }
       }
     },
@@ -1835,7 +1850,8 @@
         },
         "etag": {
           "type": "string",
-          "description": "Entity Tag of the resource"
+          "description": "Entity Tag of the resource",
+          "x-nullable": true
         },
         "provisioningState": {
           "type": "string",
@@ -1844,7 +1860,8 @@
         },
         "location": {
           "description": "Specifies the location of the resource.",
-          "type": "string"
+          "type": "string",
+          "default": "global"
         }
       },
       "required": [
