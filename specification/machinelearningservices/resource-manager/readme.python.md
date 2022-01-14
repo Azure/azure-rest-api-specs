@@ -14,10 +14,10 @@ clear-output-folder: true
 
 ``` yaml $(python-mode) == 'update' && $(track2)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/machinelearningservices/azure-mgmt-machinelearningservices/azure/mgmt/machinelearningservices
+output-folder: $(python-sdks-folder)/machinelearning/azure-mgmt-machinelearningservices/azure/mgmt/machinelearningservices
 ```
 
 ``` yaml $(python-mode) == 'create' && $(track2)
 basic-setup-py: true
-output-folder: $(python-sdks-folder)/machinelearningservices/azure-mgmt-machinelearningservices
+output-folder: $(python-sdks-folder)/machinelearning/azure-mgmt-machinelearningservices
 ```
