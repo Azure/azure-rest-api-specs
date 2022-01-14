@@ -4798,7 +4798,7 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-           "readOnly": true
+          "readOnly": true
         }
       }
     },
@@ -5084,13 +5084,13 @@
     },
     "AmlComputeSchema": {
       "type": "object",
-          "description": "Properties(top level) of AmlCompute",
-          "properties": {
-            "properties": {
-              "description": "Properties of AmlCompute",
-              "$ref": "#/definitions/AmlComputeProperties"
-            }
-          }
+      "description": "Properties(top level) of AmlCompute",
+      "properties": {
+        "properties": {
+          "description": "Properties of AmlCompute",
+          "$ref": "#/definitions/AmlComputeProperties"
+        }
+      }
     },
     "ComputeInstanceSchema": {
       "type": "object",
@@ -5104,44 +5104,44 @@
     },
     "VirtualMachineSchema": {
       "type": "object",
+      "properties": {
         "properties": {
+          "type": "object",
           "properties": {
-            "type": "object",
-            "properties": {
-              "virtualMachineSize": {
-                "description": "Virtual Machine size",
-                "type": "string"
-              },
-              "sshPort": {
-                "description": "Port open for ssh connections.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "address": {
-                "description": "Public IP address of the virtual machine.",
-                "type": "string"
-              },
-              "administratorAccount": {
-                "description": "Admin credentials for virtual machine",
-                "$ref": "#/definitions/VirtualMachineSshCredentials"
-              },
-              "isNotebookInstanceCompute": {
-                "description": "Indicates whether this compute will be used for running notebooks.",
-                "type": "boolean"
-              }
+            "virtualMachineSize": {
+              "description": "Virtual Machine size",
+              "type": "string"
+            },
+            "sshPort": {
+              "description": "Port open for ssh connections.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "address": {
+              "description": "Public IP address of the virtual machine.",
+              "type": "string"
+            },
+            "administratorAccount": {
+              "description": "Admin credentials for virtual machine",
+              "$ref": "#/definitions/VirtualMachineSshCredentials"
+            },
+            "isNotebookInstanceCompute": {
+              "description": "Indicates whether this compute will be used for running notebooks.",
+              "type": "boolean"
             }
           }
         }
+      }
     },
     "HDInsightSchema": {
       "type": "object",
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/HDInsightProperties"
-            }
-          }
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HDInsightProperties"
+        }
+      }
     },
-    "DatabricksSchema":{
+    "DatabricksSchema": {
       "type": "object",
       "properties": {
         "properties": {
