@@ -416,12 +416,14 @@
         "lastModifiedTimeUtc": {
           "format": "date-time",
           "description": "The last time the automation rule was updated",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "createdTimeUtc": {
           "format": "date-time",
           "description": "The time the automation rule was created",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "lastModifiedBy": {
           "$ref": "#/definitions/ClientInfo"
@@ -1013,7 +1015,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/IncidentPropertiesActionLabelProperties"
-          }
+          },
+          "x-ms-identifiers": ["labelName"]
         }
       }
     },
