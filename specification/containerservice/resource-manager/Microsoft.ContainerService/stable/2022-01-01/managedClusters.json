@@ -308,6 +308,9 @@
           },
           {
             "$ref": "#/parameters/ServerFqdnParameter"
+          },
+          {
+            "$ref": "#/parameters/CredentialFormatParameter"
           }
         ],
         "responses": {
@@ -5632,7 +5635,7 @@
       "description": "server fqdn type for credentials to be returned",
       "x-ms-parameter-location": "method"
     },
-    "FormatParameter": {
+    "CredentialFormatParameter": {
       "name": "format",
       "in": "query",
       "required": false,
@@ -5646,11 +5649,11 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "exec",
+            "value": "azure",
             "description": "Return azure auth-provider kubeconfig. This format is deprecated in 1.22 and will be fully removed in 1.25."
           },
           {
-            "value": "azure",
+            "value": "exec",
             "description": "Return exec format kubeconfig. This format requires kubelogin binary in the path."
           }
         ]
