@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-dataprotectionplatform"
   output-folder: "$(typescript-sdks-folder)/sdk/dataprotectionplatform/arm-dataprotectionplatform"
+  clear-output-folder: true
   generate-metadata: true
 ```

@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-datadog"
   output-folder: "$(typescript-sdks-folder)/sdk/datadog/arm-datadog"
+  clear-output-folder: true
   generate-metadata: true
 ```

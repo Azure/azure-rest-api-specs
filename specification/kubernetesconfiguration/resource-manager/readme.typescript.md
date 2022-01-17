@@ -8,6 +8,7 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-kubernetesconfiguration"
   output-folder: "$(typescript-sdks-folder)/sdk/kubernetesconfiguration/arm-kubernetesconfiguration"
+  clear-output-folder: true
   override-client-name: SourceControlConfigurationClient
   generate-metadata: true
 ```

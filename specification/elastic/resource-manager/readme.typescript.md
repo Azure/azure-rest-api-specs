@@ -9,5 +9,6 @@ typescript:
   package-name: "@azure/arm-elastic"
   output-folder: "$(typescript-sdks-folder)/sdk/elastic/arm-elastic"
   payload-flattening-threshold: 1
+  clear-output-folder: true
   generate-metadata: true
 ```

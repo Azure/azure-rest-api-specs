@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-m365securityandcompliance"
   output-folder: "$(typescript-sdks-folder)/sdk/m365securityandcompliance/arm-m365securityandcompliance"
+  clear-output-folder: true
   generate-metadata: true
 ```

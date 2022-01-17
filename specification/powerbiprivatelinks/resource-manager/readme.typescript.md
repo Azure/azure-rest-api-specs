@@ -9,5 +9,6 @@ typescript:
   package-name: "@azure/arm-powerbiprivatelinks"
   output-folder: "$(typescript-sdks-folder)/sdk/powerbiprivatelinks/arm-powerbiprivatelinks"
   payload-flattening-threshold: 1
+  clear-output-folder: true
   generate-metadata: true
 ```

@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-softwareplan"
   output-folder: "$(typescript-sdks-folder)/sdk/softwareplan/arm-softwareplan"
+  clear-output-folder: true
   generate-metadata: true
 ```

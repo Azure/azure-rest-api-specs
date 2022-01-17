@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-databricks"
   output-folder: "$(typescript-sdks-folder)/sdk/databricks/arm-databricks"
+  clear-output-folder: true
   generate-metadata: true
 ```

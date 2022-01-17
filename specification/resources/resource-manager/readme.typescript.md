@@ -23,48 +23,56 @@ batch:
 typescript:
   package-name: "@azure/arm-features"
   output-folder: "$(typescript-sdks-folder)/sdk/features/arm-features"
+  clear-output-folder: true
 ```
 
 ```yaml $(typescript) && $(package-locks) && !$(profile-content)
 typescript:
   package-name: "@azure/arm-locks"
   output-folder: "$(typescript-sdks-folder)/sdk/locks/arm-locks"
+  clear-output-folder: true
 ```
 
 ```yaml $(typescript) && $(package-policy) && !$(profile-content)
 typescript:
   package-name: "@azure/arm-policy"
   output-folder: "$(typescript-sdks-folder)/sdk/policy/arm-policy"
+  clear-output-folder: true
 ```
 
 ```yaml $(typescript) && $(package-resources) && !$(profile-content)
 typescript:
   package-name: "@azure/arm-resources"
   output-folder: "$(typescript-sdks-folder)/sdk/resources/arm-resources"
+  clear-output-folder: true
 ```
 
 ```yaml $(typescript) && $(package-links) && !$(profile-content)
 typescript:
   package-name: "@azure/arm-links"
   output-folder: "$(typescript-sdks-folder)/sdk/links/arm-links"
+  clear-output-folder: true
 ```
 
 ```yaml $(typescript) && $(package-managedapplications) && !$(profile-content)
 typescript:
   package-name: "@azure/arm-managedapplications"
   output-folder: "$(typescript-sdks-folder)/sdk/managedapplications/arm-managedapplications"
+  clear-output-folder: true
 ```
 
 ```yaml $(typescript) && $(package-templatespecs) && !$(profile-content)
 typescript:
   package-name: "@azure/arm-templatespecs"
   output-folder: "$(typescript-sdks-folder)/sdk/templatespecs/arm-templatespecs"
+  clear-output-folder: true
 ```
 
 ```yaml $(typescript) && $(package-subscriptions) && !$(profile-content)
 typescript:
   package-name: "@azure/arm-resources-subscriptions"
   output-folder: "$(typescript-sdks-folder)/sdk/resources-subscriptions/arm-resources-subscriptions"
+  clear-output-folder: true
 ```
 
 ```yaml $(tag)=='package-resources-2018-05' && $(profile-content)=='profile-hybrid-2019-03-01'
@@ -73,6 +81,7 @@ typescript:
   generate-metadata: true
   package-name: "@azure/arm-resources-profile-2019-03-01-hybrid"
   output-folder: "$(typescript-sdks-folder)/sdk/resources/arm-resources-profile-2019-03-01-hybrid"
+  clear-output-folder: true
   batch:
     - tag: package-resources-2018-05
 ```
@@ -83,6 +92,7 @@ typescript:
   generate-metadata: true
   package-name: "@azure/arm-policy-profile-2019-03-01-hybrid"
   output-folder: "$(typescript-sdks-folder)/sdk/policy/arm-policy-profile-2019-03-01-hybrid"
+  clear-output-folder: true
   batch:
     - tag: package-policy-2016-12
 ```
@@ -93,6 +103,7 @@ typescript:
   generate-metadata: true
   package-name: "@azure/arm-locks-profile-2019-03-01-hybrid"
   output-folder: "$(typescript-sdks-folder)/sdk/locks/arm-locks-profile-2019-03-01-hybrid"
+  clear-output-folder: true
   batch:
     - tag: package-locks-2016-09
 ```
@@ -103,6 +114,7 @@ typescript:
   generate-metadata: true
   package-name: "@azure/arm-subscriptions-profile-2019-03-01-hybrid"
   output-folder: "$(typescript-sdks-folder)/sdk/subscription/arm-subscriptions-profile-2019-03-01-hybrid"
+  clear-output-folder: true
   batch:
     - tag: package-subscriptions-2016-06
 ```
@@ -113,6 +125,7 @@ typescript:
   generate-metadata: true
   package-name: "@azure/arm-resources-profile-2020-09-01-hybrid"
   output-folder: "$(typescript-sdks-folder)/sdk/resources/arm-resources-profile-2020-09-01-hybrid"
+  clear-output-folder: true
   batch:
     - tag: package-resources-2019-10
 ```
@@ -123,6 +136,7 @@ typescript:
   generate-metadata: true
   package-name: "@azure/arm-policy-profile-2020-09-01-hybrid"
   output-folder: "$(typescript-sdks-folder)/sdk/policy/arm-policy-profile-2020-09-01-hybrid"
+  clear-output-folder: true
   batch:
     - tag: package-policy-2016-12
 ```
@@ -133,6 +147,7 @@ typescript:
   generate-metadata: true
   package-name: "@azure/arm-locks-profile-2020-09-01-hybrid"
   output-folder: "$(typescript-sdks-folder)/sdk/locks/arm-locks-profile-2020-09-01-hybrid"
+  clear-output-folder: true
   batch:
     - tag: package-locks-2016-09
 ```
@@ -143,6 +158,7 @@ typescript:
   generate-metadata: true
   package-name: "@azure/arm-subscriptions-profile-2020-09-01-hybrid"
   output-folder: "$(typescript-sdks-folder)/sdk/subscription/arm-subscriptions-profile-2020-09-01-hybrid"
+  clear-output-folder: true
   batch:
     - tag: package-subscriptions-2016-06
 ```

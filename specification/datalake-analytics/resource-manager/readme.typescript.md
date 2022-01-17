@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-datalake-analytics"
   output-folder: "$(typescript-sdks-folder)/sdk/datalake-analytics/arm-datalake-analytics"
+  clear-output-folder: true
   generate-metadata: true
 ```
