@@ -28,51 +28,7 @@ description: Peering Client
 openapi-type: arm
 tag: package-2021-06-01
 ```
-or
 
-``` yaml
-title: PeeringManagementClient
-description: Peering Client
-openapi-type: arm
-tag: package-2021-01-01
-```
-or
-
-``` yaml
-title: PeeringManagementClient
-description: Peering Client
-openapi-type: arm
-tag: package-2020-10-01
-```
-or
-
-``` yaml
-title: PeeringManagementClient
-description: Peering Client
-openapi-type: arm
-tag: package-2020-04-01
-```
-or
-``` yaml
-title: PeeringManagementClient
-description: Peering Client
-openapi-type: arm
-tag: package-2020-01-01-preview
-```
-or
-``` yaml
-title: PeeringManagementClient
-description: Peering Client
-openapi-type: arm
-tag: package-2019-09-01-preview
-```
-or
-``` yaml
-title: PeeringManagementClient
-description: Peering Client
-openapi-type: arm
-tag: package-2019-08-01-preview
-```
 ### Tag: package-2021-06-01
 
 These settings apply only when `--tag=package-2021-06-01` is specified on the command line.
