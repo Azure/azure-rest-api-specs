@@ -414,10 +414,10 @@
           "readOnly": true
         },
         "lastModifiedBy": {
-          "$ref": "#/definitions/ClientInfo"
+          "$ref": "../../../common/2.0/types.json#/definitions/ClientInfo"
         },
         "createdBy": {
-          "$ref": "#/definitions/ClientInfo"
+          "$ref": "../../../common/2.0/types.json#/definitions/ClientInfo"
         }
       }
     },
@@ -842,23 +842,6 @@
         }
       }
     },
-    "ClientInfo": {
-      "type": "object",
-      "properties": {
-        "objectId": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "userPrincipalName": {
-          "type": "string"
-        }
-      }
-    },
     "ConditionType": {
       "enum": [
         "Property"
@@ -1003,8 +986,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/IncidentPropertiesActionLabelProperties"
-          },
-          "x-ms-identifiers": ["labelName"]
+          }
         }
       }
     },
