@@ -39,6 +39,15 @@ input-file:
   - Microsoft.ConnectedVMwarevSphere/preview/2020-10-01-preview/connectedvmware.json
 ```
 
+### Tag: package-2022-01-10-preview
+
+These settings apply only when `--tag=package-2022-01-10-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-01-10-preview'
+input-file:
+  - Microsoft.ConnectedVMwarevSphere/preview/2022-01-10-preview/connectedvmware.json
+```
+
 ---
 
 # Code Generation

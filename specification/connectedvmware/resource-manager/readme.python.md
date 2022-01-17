@@ -2,39 +2,21 @@
 
 These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
-```yaml $(python)
+```yaml $(python) && $(track2)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-connectedvmware
-package-version: 1.0.0b1
 no-namespace-folders: true
-```
-
-### Python multi-api
-
-Generate all API versions currently shipped for this package
-
-```yaml $(python) && $(multiapi)
+package-version: 1.0.0b1
 clear-output-folder: true
-batch:
-  - tag: package-2020-10-01-preview
-  - multiapiscript: true
 ```
 
-```yaml $(multiapiscript)
-output-folder: $(python-sdks-folder)/connectedvmware/azure-mgmt-vmware/azure/mgmt/vmware/
-clear-output-folder: false
-perform-load: false
+``` yaml $(python) && $(python-mode) == 'update' && $(track2)
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/connectedvmware/azure-mgmt-connectedvmware/azure/mgmt/connectedvmware
 ```
-
-### Tag: package-2020-10-01-preview and python
-
-These settings apply only when `--tag=package-2020-10-01-preview --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2020-10-01-preview' && $(python)
-namespace: azure.mgmt.vmware.v2020_10_01_preview
-output-folder: $(python-sdks-folder)/connectedvmware/azure-mgmt-vmware/azure/mgmt/vmware/v2020_10_01_preview
-```
-
+``` yaml $(python) && $(python-mode) == 'create' && $(track2)
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/connectedvmware/azure-mgmt-connectedvmware
