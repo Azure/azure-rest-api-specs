@@ -7,7 +7,6 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   clear-output-folder: true
-  client-side-validation: false
   namespace: Azure.Quantum.Jobs
   output-folder: $(csharp-sdks-folder)/quantum/Azure.Quantum.Jobs/src/Generated
 ```
