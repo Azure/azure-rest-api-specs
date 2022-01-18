@@ -857,84 +857,10 @@
       }
     },
     "IncidentClassification": {
-      "enum": [
-        "Undetermined",
-        "TruePositive",
-        "BenignPositive",
-        "FalsePositive"
-      ],
-      "type": "string",
-      "example": "Undetermined",
-      "x-ms-enum": {
-        "name": "IncidentClassification",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Undetermined"
-          },
-          {
-            "value": "TruePositive"
-          },
-          {
-            "value": "BenignPositive"
-          },
-          {
-            "value": "FalsePositive"
-          }
-        ]
-      }
+      "$ref": "./common/IncidentTypes.json#/definitions/IncidentClassificationEnum"
     },
     "IncidentClassificationReason": {
-      "enum": [
-        "SuspiciousActivity",
-        "SuspiciousButExpected",
-        "IncorrectAlertLogic",
-        "InaccurateData"
-      ],
-      "type": "string",
-      "example": "SuspiciousActivity",
-      "x-ms-enum": {
-        "name": "IncidentClassificationReason",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "SuspiciousActivity"
-          },
-          {
-            "value": "SuspiciousButExpected"
-          },
-          {
-            "value": "IncorrectAlertLogic"
-          },
-          {
-            "value": "InaccurateData"
-          }
-        ]
-      }
-    },
-    "IncidentOwnerType": {
-      "enum": [
-        "Unknown",
-        "User",
-        "Group"
-      ],
-      "type": "string",
-      "example": "Unknown",
-      "x-ms-enum": {
-        "name": "IncidentOwnerType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Unknown"
-          },
-          {
-            "value": "User"
-          },
-          {
-            "value": "Group"
-          }
-        ]
-      }
+      "$ref": "./common/IncidentTypes.json#/definitions/IncidentClassificationReasonEnum"
     },
     "IncidentPropertiesAction": {
       "type": "object",
@@ -962,7 +888,7 @@
           "description": "List of labels to add to the incident",
           "type": "array",
           "x-ms-identifiers": [
-            "/labelName"
+            "labelName"
           ],
           "items": {
             "$ref": "./common/IncidentTypes.json#/definitions/IncidentLabel"
@@ -971,76 +897,13 @@
       }
     },
     "IncidentPropertiesActionOwnerInfo": {
-      "type": "object",
-      "properties": {
-        "objectId": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        },
-        "assignedTo": {
-          "type": "string"
-        },
-        "userPrincipalName": {
-          "type": "string"
-        },
-        "ownerType": {
-          "$ref": "#/definitions/IncidentOwnerType"
-        }
-      }
+      "$ref": "./common/IncidentTypes.json#/definitions/IncidentOwnerInfo"
     },
     "IncidentSeverity": {
-      "enum": [
-        "Informational",
-        "Low",
-        "Medium",
-        "High"
-      ],
-      "type": "string",
-      "example": "Informational",
-      "x-ms-enum": {
-        "name": "IncidentSeverity",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Informational"
-          },
-          {
-            "value": "Low"
-          },
-          {
-            "value": "Medium"
-          },
-          {
-            "value": "High"
-          }
-        ]
-      }
+      "ref": "./common/IncidentTypes.json#/definitions/IncidentSeverityEnum"
     },
     "IncidentStatus": {
-      "enum": [
-        "New",
-        "Active",
-        "Closed"
-      ],
-      "type": "string",
-      "example": "New",
-      "x-ms-enum": {
-        "name": "IncidentStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "New"
-          },
-          {
-            "value": "Active"
-          },
-          {
-            "value": "Closed"
-          }
-        ]
-      }
+      "$ref": "./common/IncidentTypes.json#/definitions/IncidentStatusEnum"
     },
     "ManualTriggerRequestBody": {
       "type": "object",
