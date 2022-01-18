@@ -16,7 +16,6 @@ python:
   credential-scopes: ["https://quantum.microsoft.com/.default"]
   output-folder: $(python-sdks-folder)/quantum/azure-quantum
   basic-setup-py: true
-  payload-flattening-threshold: 1
 ```
 
 ```yaml $(python) && $(python-mode) == 'update'
