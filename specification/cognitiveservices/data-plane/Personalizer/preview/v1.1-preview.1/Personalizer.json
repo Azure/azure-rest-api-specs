@@ -1,15 +1,41 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Personalizer Base",
+    "title": "Personalizer",
     "description": "Personalizer Service is an Azure Cognitive Service that makes it easy to target content and experiences without complex pre-analysis or cleanup of past data. Given a context and featurized content, the Personalizer Service returns which content item to show to users in rewardActionId. As rewards are sent in response to the use of rewardActionId, the reinforcement learning algorithm will improve the model and improve performance of future rank calls.",
-    "version": "v1.1-preview.1"
+    "version": "1.1-preview.1"
   },
   "basePath": "/personalizer/v1.1-preview.1",
   "schemes": [
     "https"
   ],
   "paths": {
+    "/configurations/client": {
+      "post": {
+        "tags": [
+          "ConfigurationsV1Dot1Preview1"
+        ],
+        "summary": "Get Client Configuration.",
+        "description": "Get configuration settings used in distributed Personalizer deployments.",
+        "operationId": "ClientConfiguration_List",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ClientConfiguration"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful ClientConfiguration_List request": {
+            "$ref": "./examples/ClientConfiguration_List.json"
+          }
+        }
+      }
+    },
     "/configurations/service": {
       "put": {
         "tags": [
@@ -769,6 +795,62 @@
     }
   },
   "definitions": {
+    "ClientConfiguration": {
+      "type": "object",
+      "properties": {
+        "applicationID": {
+          "description": "Unique identifier for this Personalizer instance.",
+          "type": "string",
+          "readOnly": true
+        },
+        "eventHubInteractionConnectionString": {
+          "description": "Event hub connection string for sending interactions.",
+          "type": "string",
+          "readOnly": true
+        },
+        "eventHubObservationConnectionString": {
+          "description": "Event hub connection string for sending observations.",
+          "type": "string",
+          "readOnly": true
+        },
+        "modelBlobUri": {
+          "description": "SAS Uri for the inference model.",
+          "type": "string",
+          "readOnly": true
+        },
+        "initialExplorationEpsilon": {
+          "format": "float",
+          "description": "Exploration value used before downloading model in CB.",
+          "type": "number",
+          "readOnly": true
+        },
+        "learningMode": {
+          "description": "Learning Modes for Personalizer",
+          "enum": [
+            "Online",
+            "Apprentice",
+            "LoggingOnly"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "LearningMode",
+            "modelAsString": true
+          }
+        },
+        "initialCommandLine": {
+          "description": "Command line used for prediction before downloading model.",
+          "type": "string",
+          "readOnly": true
+        },
+        "protocolVersion": {
+          "format": "int32",
+          "description": "Version used by reinforcement learning client.",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
     "ServiceConfiguration": {
       "description": "The configuration of the service.",
       "required": [
@@ -896,12 +978,16 @@
             "InvalidEventIdToActivate",
             "InvalidRankRequest",
             "InvalidExportLogsRequest",
+            "InvalidRequest",
             "InvalidContainer",
             "InvalidModelMetadata",
             "ApprenticeModeNeverTurnedOn",
             "MissingAppId",
             "InvalidRewardWaitTime",
+            "InvalidLogRetentionDays",
             "InvalidMultiSlotApiAccess",
+            "PayloadSizeExceeded",
+            "InvalidApiAccess",
             "ModelFileAccessDenied",
             "ProblemTypeIncompatibleWithAutoOptimization",
             "ResourceNotFound",
@@ -977,6 +1063,10 @@
                 "description": "Invalid request."
               },
               {
+                "value": "InvalidRequest",
+                "description": "Invalid request."
+              },
+              {
                 "value": "InvalidContainer",
                 "description": "SAS Uri must be the Uri to a container that has write permissions."
               },
@@ -994,11 +1084,23 @@
               },
               {
                 "value": "InvalidRewardWaitTime",
-                "description": "Reward wait time should be between 5 seconds and 2 days"
+                "description": "Reward wait time should be either 10 minutes or 4 hours or 12 hours or 24 hours"
+              },
+              {
+                "value": "InvalidLogRetentionDays",
+                "description": "Log Rention Days must be -1 to store indefinitely or must be at least reward wait time plus 1 day (rounded up)"
               },
               {
                 "value": "InvalidMultiSlotApiAccess",
                 "description": "Multi-slot feature is currently disabled. Please follow multi-slot Personalizer documentation to update your loop settings to enable multi-slot functionality."
+              },
+              {
+                "value": "PayloadSizeExceeded",
+                "description": "Exceeds maximum allowed payload size."
+              },
+              {
+                "value": "InvalidApiAccess",
+                "description": "Api is currently disabled for the instance."
               },
               {
                 "value": "ModelFileAccessDenied",

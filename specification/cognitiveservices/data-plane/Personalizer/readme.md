@@ -4,10 +4,10 @@
 
 > see https://aka.ms/autorest
 
-The current release is `release_1_0`. A preview release release_1_1_preview.2 is also available
+The current release is `release_1_0`. A preview release release_1_0 is also available
 
 ``` yaml
-tag: release_1_1_preview.2
+tag: release_1_0
 add-credentials: true
 openapi-type: data-plane
 ```
@@ -29,20 +29,21 @@ input-file:
 ```
 
 ### Release 1.1-Preview.1
-These settings apply only when `--tag=release_1_1_preview.1` is specified on the command line.
+These settings apply only when `--tag=release_1_1_preview_1` is specified on the command line.
 
-``` yaml $(tag) == 'release_1_1_preview.1'
+``` yaml $(tag) == 'release_1_1_preview_1'
 input-file: 
   - preview/v1.1-preview.1/Personalizer.json
+namespace: Azure.AI.Personalizer
+public-clients: true
+security:
+  - AADToken
+  - AzureKey
+security-header-name: Ocp-Apim-Subscription-Key
+security-scopes: https://cognitiveservices.azure.com/.default
+license-header: MICROSOFT_MIT_NO_VERSION
 ```
-
-### Release 1.1-Preview.2
-These settings apply only when `--tag=release_1_1_preview.2` is specified on the command line.
-
-``` yaml $(tag) == 'release_1_1_preview.2'
-input-file: 
-  - preview/v1.1-preview.2/Personalizer.json
-```  
+ 
 
 ## Swagger to SDK
 
@@ -65,8 +66,8 @@ These settings apply only when `--csharp` is specified on the command line.
 csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
-  namespace: Microsoft.Azure.CognitiveServices.Personalizer
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/Personalizer/src/Generated
+  namespace: Microsoft.Azure.AI.Personalizer
+  output-folder: $(csharp-sdks-folder)/AI/Personalizer/src/Generated
   sync-methods: all
   clear-output-folder: true
 
@@ -94,6 +95,7 @@ require: $(this-folder)/../../../../profiles/readme.md
 input-file:
   - $(this-folder)/stable/v1.0/Personalizer.json
   - $(this-folder)/preview/v1.0/Personalizer.json
+  - $(this-folder)/preview/v1.1/Personalizer.json
 
 ```
 
