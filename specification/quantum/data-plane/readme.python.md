@@ -14,4 +14,5 @@ python:
   add-credentials: true
   credential-scopes: ["https://quantum.microsoft.com/.default"]
   output-folder: $(python-sdks-folder)/quantum/azure-quantum/azure/quantum/_client/
+  basic-setup-py: true
 ```
