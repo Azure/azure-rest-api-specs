@@ -48,7 +48,7 @@ input-file:
 directive:
   - suppress: CollectionObjectPropertiesNaming
     from: machineLearningService.json
-    where: $..operationId["Compute_ListNodes"]
+    where: $..paths[($..operationId["Compute_ListNodes"])]
     reason: The pageable itemName override is not considered by the LintDiff check correctly.
 ```
 
