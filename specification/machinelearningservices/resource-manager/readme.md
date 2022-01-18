@@ -28,7 +28,6 @@ These are the global settings for the Machine Learning Services API.
 ``` yaml
 openapi-type: arm
 tag: package-2021-07-01
-azure-validator: true
 ```
 
 ### Tag: package-2021-07-01
@@ -48,8 +47,11 @@ input-file:
 directive:
   - suppress: CollectionObjectPropertiesNaming
     from: machineLearningServices.json
-    where: $..paths[($..operationId["Compute_ListNodes"])]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/listNodes"].post
     reason: The pageable itemName override is not considered by the LintDiff check correctly.
+  - suppress: R4009
+    from: machineLearningServices.json
+    reason: SystemData will implement in next version.
 ```
 
 ### Tag: package-2021-04-01
