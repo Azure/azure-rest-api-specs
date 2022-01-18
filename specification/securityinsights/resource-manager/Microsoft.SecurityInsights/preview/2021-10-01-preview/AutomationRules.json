@@ -225,7 +225,7 @@
         "tags": [
           "manualTrigger"
         ],
-        "description": "Creates or updates the automation rule.",
+        "description": "Triggers playbook on a specific incident",
         "operationId": "AutomationRules_ManualTriggerPlaybook",
         "consumes": [
           "application/json"
@@ -414,9 +414,11 @@
           "readOnly": true
         },
         "lastModifiedBy": {
+          "readOnly": true,
           "$ref": "../../../common/2.0/types.json#/definitions/ClientInfo"
         },
         "createdBy": {
+          "readOnly": true,
           "$ref": "../../../common/2.0/types.json#/definitions/ClientInfo"
         }
       }
@@ -484,7 +486,6 @@
         "IncidentTactics",
         "IncidentLabel",
         "IncidentProviderName",
-        "IncidentOwner",
         "AccountAadTenantId",
         "AccountAadUserId",
         "AccountName",
@@ -569,10 +570,6 @@
           {
             "value": "IncidentProviderName",
             "description": "The provider name of the incident"
-          },
-          {
-            "value": "IncidentOwner",
-            "description": "The owner of the incident"
           },
           {
             "value": "AccountAadTenantId",
@@ -964,7 +961,7 @@
         "labels": {
           "description": "List of labels to add to the incident",
           "type": "array",
-          "x-ms-identifiers": [],
+          "x-ms-identifiers": ["/properties/labelName"],
           "items": {
             "$ref": "#/definitions/IncidentPropertiesActionLabelProperties"
           }
