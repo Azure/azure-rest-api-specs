@@ -60,7 +60,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-2022-01-02-preview' && $(go)
 namespace: containerservice
-output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2022-01-02-preview/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2022-01-02-preview/$(namespace)
 ```
 
 ### Tag: package-2021-10 and go
