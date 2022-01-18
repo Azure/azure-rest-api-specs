@@ -4,10 +4,10 @@
 
 > see https://aka.ms/autorest
 
-The current release is `release_1_0`. A preview release release_1_0 is also available
+The current release is `release_1_0`. A preview release release_1_1_preview.2 is also available
 
 ``` yaml
-tag: release_1_0
+tag: release_1_1_preview.2
 add-credentials: true
 openapi-type: data-plane
 ```
@@ -43,7 +43,14 @@ security-header-name: Ocp-Apim-Subscription-Key
 security-scopes: https://cognitiveservices.azure.com/.default
 license-header: MICROSOFT_MIT_NO_VERSION
 ```
- 
+
+### Release 1.1-Preview.2
+These settings apply only when `--tag=release_1_1_preview.2` is specified on the command line.
+
+``` yaml $(tag) == 'release_1_1_preview.2'
+input-file: 
+  - preview/v1.1-preview.2/Personalizer.json
+```   
 
 ## Swagger to SDK
 
