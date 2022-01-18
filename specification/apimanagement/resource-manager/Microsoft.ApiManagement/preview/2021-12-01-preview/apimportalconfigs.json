@@ -179,8 +179,8 @@
         "operationId": "PortalConfig_Update",
         "description": "Update the developer portal configuration.",
         "x-ms-examples": {
-          "ApiManagementPortalConfig": {
-            "$ref": "./examples/ApiManagementPortalConfig.json"
+          "ApiManagementUpdatePortalConfig": {
+            "$ref": "./examples/ApiManagementUpdatePortalConfig.json"
           }
         },
         "parameters": [
@@ -213,8 +213,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Operation completed successfully."
+          "200": {
+            "description": "Operation completed successfully.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/PortalConfigContract"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -231,8 +234,8 @@
         "operationId": "PortalConfig_CreateOrUpdate",
         "description": "Create or update the developer portal configuration.",
         "x-ms-examples": {
-          "ApiManagementPortalConfig": {
-            "$ref": "./examples/ApiManagementPortalConfig.json"
+          "ApiManagementUpdatePortalConfig": {
+            "$ref": "./examples/ApiManagementUpdatePortalConfig.json"
           }
         },
         "parameters": [
