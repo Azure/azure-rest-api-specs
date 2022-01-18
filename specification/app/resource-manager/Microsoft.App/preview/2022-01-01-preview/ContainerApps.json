@@ -536,11 +536,11 @@
             "revisionName"
           ]
         },
-        "hostNameSslStates": {
-          "description": "Hostname SSL states used to manage the SSL bindings for Container Apps' hostnames.",
+        "customDomains": {
+          "description": "custom domain bindings for Container Apps' hostnames.",
           "type": "array",
           "items": {
-            "$ref": "./CommonDefinitions.json#/definitions/HostNameSslState"
+            "$ref": "./CommonDefinitions.json#/definitions/CustomDomain"
           }
         },
         "allowInsecure": {
@@ -606,8 +606,8 @@
         }
       }
     },
-    "HostNameSslState": {
-      "description": "SSL-enabled hostname.",
+    "CustomDomain": {
+      "description": "Custom Domain of a Container App",
       "type": "object",
       "properties": {
         "name": {
@@ -615,11 +615,11 @@
           "type": "string"
         },
         "revisionName": {
-          "description": "Revision to which this hostname ssl state applies.",
+          "description": "Revision to which this Custom Domain applies.",
           "type": "string"
         },
-        "sslState": {
-          "description": "SSL type.",
+        "bindingType": {
+          "description": "Custom Domain binding type.",
           "enum": [
             "Disabled",
             "SniEnabled",
@@ -627,16 +627,16 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "SslState",
+            "name": "bindingType",
             "modelAsString": false
           }
         },
         "virtualIP": {
-          "description": "Virtual IP address assigned to the hostname if IP based SSL is enabled.",
+          "description": "Virtual IP address assigned to the hostname if IP based binding is enabled.",
           "type": "string"
         },
         "thumbprint": {
-          "description": "SSL certificate thumbprint.",
+          "description": "Certificate thumbprint.",
           "type": "string"
         },
         "certificateId": {
