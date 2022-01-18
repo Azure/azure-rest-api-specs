@@ -374,6 +374,11 @@
         ],
         "description": "Lists all of the supported REST API operations.",
         "operationId": "Operations_List",
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -401,6 +406,7 @@
   },
   "definitions": {
     "PlatformAccountCheckNameAvailabilityParameters": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -425,6 +431,7 @@
       "description": "Specifies the parameters used to check the availability of a given platform account name."
     },
     "CheckNameAvailabilityResult": {
+      "type": "object",
       "properties": {
         "nameAvailable": {
           "type": "boolean",
@@ -453,6 +460,7 @@
       "description": "Specifies the response indicating whether the platform account name is valid and available."
     },
     "Extension": {
+      "type": "object",
       "properties": {
         "resourceId": {
           "type": "string",
@@ -465,7 +473,13 @@
       "description": "Specifies the extension configuration."
     },
     "Analytics": {
+      "type": "object",
       "properties": {
+        "enablePrivateEndpointConnection": {
+          "type": "boolean",
+          "default": false,
+          "description": "Specifies whether the platform account should access the analytics storage account through a private endpoint connection."
+        },
         "storageAccountResourceId": {
           "type": "string",
           "description": "Specifies the ID of the storage account resource."
@@ -477,6 +491,7 @@
       "description": "Specifies the analytics configuration."
     },
     "ClaimsProvider": {
+      "type": "object",
       "properties": {
         "baseUrl": {
           "type": "string",
@@ -489,7 +504,12 @@
       "description": "Specifies the Claims Provider endpoint."
     },
     "PlatformAccountPropertiesUpdateParameters": {
+      "type": "object",
       "properties": {
+        "analytics": {
+          "$ref": "#/definitions/Analytics",
+          "description": "Specifies the analytics configuration."
+        },
         "extensions": {
           "type": "array",
           "items": {
@@ -505,6 +525,7 @@
       "description": "Specifies the properties of the platform account to update."
     },
     "PlatformAccountUpdateParameters": {
+      "type": "object",
       "properties": {
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Identity",
@@ -530,6 +551,7 @@
       "description": "Specifies the parameters used to update the properties of the platform account."
     },
     "PlatformAccountProperties": {
+      "type": "object",
       "properties": {
         "analytics": {
           "$ref": "#/definitions/Analytics",
@@ -576,6 +598,7 @@
       "description": "Specifies the properties of the platform account."
     },
     "PlatformAccount": {
+      "type": "object",
       "properties": {
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Identity",
@@ -607,6 +630,7 @@
       "description": "Specifies the platform account."
     },
     "PlatformAccountListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -625,6 +649,7 @@
       "description": "Specifies the response listing platform accounts."
     },
     "Operation": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -666,6 +691,7 @@
       "description": "Specifies an operation supported by the resource provider."
     },
     "OperationsListResult": {
+      "type": "object",
       "properties": {
         "nextLink": {
           "type": "string",
