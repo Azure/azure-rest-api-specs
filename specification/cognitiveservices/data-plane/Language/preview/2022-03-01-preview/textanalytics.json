@@ -198,6 +198,78 @@
             "$ref": "./examples/SuccessfulAnalyzeTextJobsMultipleTaskStatusRequest.json"
           }
         }
+      },
+      "delete": {
+        "produces": [
+          "application/json"
+        ],
+        "description": "Cancel Text Analysis job.",
+        "operationId": "AnalyzeText_CancelJob",
+        "summary": "Cancel Text Analysis job",
+        "parameters": [
+          {
+            "$ref": "#/parameters/JobId"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Cancel Job request has been received.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Job Delete Request": {
+            "$ref": ".//examples//SuccessfulJobCancelRequest.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/analyze-text/jobs/{jobId}/data": {
+      "delete": {
+        "produces": [
+          "application/json"
+        ],
+        "description": "Delete Text Analysis job and all of its data.",
+        "operationId": "AnalyzeText_DeleteJob",
+        "summary": "Delete Text Analysis job and all of its data",
+        "parameters": [
+          {
+            "$ref": "#/parameters/JobId"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Delete Job request has been received.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Job Delete Request": {
+            "$ref": ".//examples//SuccessfulJobDeleteRequest.json"
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
