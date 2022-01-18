@@ -9,7 +9,7 @@ typescript:
   generate-license-txt: true
   generate-package-json: false
   generate-readme-md: false
-  generate-metadata: false
+  generate-metadata: true
   package-name: "@azure/quantum-jobs"
   package-version: "1.0.0-beta.2"
   license-header: MICROSOFT_MIT_NO_VERSION
