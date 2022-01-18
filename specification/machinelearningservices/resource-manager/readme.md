@@ -47,7 +47,7 @@ input-file:
 ``` yaml
 directive:
   - suppress: CollectionObjectPropertiesNaming
-    from: machineLearningService.json
+    from: machineLearningServices.json
     where: $..paths[($..operationId["Compute_ListNodes"])]
     reason: The pageable itemName override is not considered by the LintDiff check correctly.
 ```
