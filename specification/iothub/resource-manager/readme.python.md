@@ -42,7 +42,7 @@ clear-output-folder: false
 perform-load: false
 
 ```
-### Tag: package-2021-07 and python
+### Tag: package-2021-07-02 and python
 
 These settings apply only when `--tag=package-2021-07-02 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
