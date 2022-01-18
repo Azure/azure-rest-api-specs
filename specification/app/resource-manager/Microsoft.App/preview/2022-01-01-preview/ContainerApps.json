@@ -309,6 +309,53 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{name}/analyzeCustomHostName": {
+      "get": {
+        "tags" : [
+          "ContainerApps"
+        ],
+        "summary" : "Analyzes a custom hostname for a Container App",
+        "operationId": "ContainerAppsRevisions_AnalyzeCustomHostName",
+        "parameters" :[
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostName",
+            "in": "query",
+            "description": "Custom hostname.",
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CustomHostnameAnalysisResult"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -489,6 +536,13 @@
             "revisionName"
           ]
         },
+        "hostNameSslStates": {
+          "description": "Hostname SSL states used to manage the SSL bindings for Container Apps' hostnames.",
+          "type": "array",
+          "items": {
+            "$ref": "./CommonDefinitions.json#/definitions/HostNameSslState"
+          }
+        },
         "allowInsecure": {
           "description": "Bool indicating if HTTP connections to is allowed. If set to false HTTP connections are automatically redirected to HTTPS connections",
           "type": "boolean"
@@ -549,6 +603,149 @@
           "description": "Indicates that the traffic weight belongs to a latest stable revision",
           "default": false,
           "type": "boolean"
+        }
+      }
+    },
+    "HostNameSslState": {
+      "description": "SSL-enabled hostname.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Hostname.",
+          "type": "string"
+        },
+        "revisionName": {
+          "description": "Revision to which this hostname ssl state applies.",
+          "type": "string"
+        },
+        "sslState": {
+          "description": "SSL type.",
+          "enum": [
+            "Disabled",
+            "SniEnabled",
+            "IpBasedEnabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SslState",
+            "modelAsString": false
+          }
+        },
+        "virtualIP": {
+          "description": "Virtual IP address assigned to the hostname if IP based SSL is enabled.",
+          "type": "string"
+        },
+        "thumbprint": {
+          "description": "SSL certificate thumbprint.",
+          "type": "string"
+        },
+        "certificateId": {
+          "description": "Resource Id of the Certificate",
+          "type": "string"
+        },
+        "hostType": {
+          "description": "Indicates whether the hostname is a standard or repository hostname.",
+          "enum": [
+            "Standard",
+            "Repository"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "HostType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "CustomHostnameAnalysisResult": {
+      "description": "Custom domain analysis.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "CustomHostnameAnalysisResult resource specific properties",
+          "type": "object",
+          "properties": {
+            "isHostnameAlreadyVerified": {
+              "description": "<code>true</code> if hostname is already verified; otherwise, <code>false</code>.",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "customDomainVerificationTest": {
+              "description": "DNS verification test result.",
+              "enum": [
+                "Passed",
+                "Failed",
+                "Skipped"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "DnsVerificationTestResult",
+                "modelAsString": false
+              }
+            },
+            "customDomainVerificationFailureInfo": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse",
+              "description": "Raw failure information if DNS verification fails.",
+              "readOnly": true
+            },
+            "hasConflictOnManagedEnvironment": {
+              "description": "<code>true</code> if there is a conflict on the Container App's managed environment; otherwise, <code>false</code>.",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "hasConflictAcrossSubscription": {
+              "description": "<code>true</code> if there is a conflict across subscriptions; otherwise, <code>false</code>.",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "conflictingAppResourceId": {
+              "description": "Name of the conflicting Container App on the Managed Environment if it's within the same subscription.",
+              "type": "string",
+              "readOnly": true
+            },
+            "cNameRecords": {
+              "description": "CName records visible for this hostname.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "txtRecords": {
+              "description": "TXT records visible for this hostname.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "aRecords": {
+              "description": "A records visible for this hostname.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "alternateCNameRecords": {
+              "description": "Alternate CName records visible for this hostname.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "alternateTxtRecords": {
+              "description": "Alternate TXT records visible for this hostname.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     }
