@@ -19,7 +19,7 @@ Generate all API versions currently shipped for this package
 ```yaml $(python) && $(multiapi) && $(track2)
 clear-output-folder: true
 batch:
-  - tag: package-2021-09
+  - tag: package-2021-09-only
   - tag: package-2021-08-preview-only
   - tag: package-2021-06-preview-only
   - tag: package-2020-11-preview-only
