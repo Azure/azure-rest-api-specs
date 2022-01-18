@@ -28,6 +28,7 @@ These are the global settings for the Machine Learning Services API.
 ``` yaml
 openapi-type: arm
 tag: package-2021-07-01
+azure-validator: true
 ```
 
 ### Tag: package-2021-07-01
@@ -40,7 +41,9 @@ input-file:
   - Microsoft.MachineLearningServices/stable/2021-07-01/workspaceFeatures.json
   - Microsoft.MachineLearningServices/stable/2021-07-01/workspaceSkus.json
 ```
+
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: CollectionObjectPropertiesNaming
