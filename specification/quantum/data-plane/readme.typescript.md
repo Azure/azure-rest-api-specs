@@ -5,16 +5,14 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 
 ```yaml $(typescript)
 typescript:
-  output-folder: "$(typescript-sdks-folder)/sdk/quantum/quantum-jobs"
-  generate-license-txt: true
+  azure-arm: false
   generate-package-json: false
   generate-readme-md: false
   generate-metadata: true
+  generate-license-txt: true
+  output-folder: "$(typescript-sdks-folder)/sdk/quantum/quantum-jobs"
   package-name: "@azure/quantum-jobs"
-  package-version: "1.0.0-beta.2"
   license-header: MICROSOFT_MIT_NO_VERSION
-  output-folder: ../
-  source-code-folder-path: ./src/
   add-credentials: true
   credential-scopes: ["https://quantum.microsoft.com/.default"]
   title: QuantumJobClient

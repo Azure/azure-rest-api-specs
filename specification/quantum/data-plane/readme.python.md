@@ -18,3 +18,13 @@ python:
   basic-setup-py: true
   payload-flattening-threshold: 1
 ```
+
+```yaml $(python) && $(python-mode) == 'update'
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/quantum/azure-quantum/azure/quantum/_client
+```
+
+```yaml $(python) && $(python-mode) == 'create'
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/quantum/azure-quantum
+```
