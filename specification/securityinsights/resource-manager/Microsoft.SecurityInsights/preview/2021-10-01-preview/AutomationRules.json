@@ -961,23 +961,9 @@
         "labels": {
           "description": "List of labels to add to the incident",
           "type": "array",
-          "x-ms-identifiers": [
-            "labelName"
-          ],
           "items": {
-            "$ref": "#/definitions/IncidentPropertiesActionLabelProperties"
+            "$ref": "./common/IncidentTypes.json#/definitions/IncidentLabel"
           }
-        }
-      }
-    },
-    "IncidentPropertiesActionLabelProperties": {
-      "type": "object",
-      "properties": {
-        "labelName": {
-          "type": "string"
-        },
-        "labelType": {
-          "$ref": "./common/IncidentTypes.json#/definitions/IncidentLabelType"
         }
       }
     },
