@@ -856,26 +856,20 @@
         ]
       }
     },
-    "IncidentClassification": {
-      "$ref": "./common/IncidentTypes.json#/definitions/IncidentClassificationEnum"
-    },
-    "IncidentClassificationReason": {
-      "$ref": "./common/IncidentTypes.json#/definitions/IncidentClassificationReasonEnum"
-    },
     "IncidentPropertiesAction": {
       "type": "object",
       "properties": {
         "severity": {
-          "$ref": "#/definitions/IncidentSeverity"
+          "$ref": "./common/IncidentTypes.json#/definitions/IncidentSeverityEnum"
         },
         "status": {
-          "$ref": "#/definitions/IncidentStatus"
+          "$ref": "./common/IncidentTypes.json#/definitions/IncidentStatusEnum"
         },
         "classification": {
-          "$ref": "#/definitions/IncidentClassification"
+          "$ref": "./common/IncidentTypes.json#/definitions/IncidentClassificationEnum"
         },
         "classificationReason": {
-          "$ref": "#/definitions/IncidentClassificationReason"
+          "$ref": "./common/IncidentTypes.json#/definitions/IncidentClassificationReasonEnum"
         },
         "classificationComment": {
           "description": "Describes the reason the incident was closed",
@@ -898,12 +892,6 @@
     },
     "IncidentPropertiesActionOwnerInfo": {
       "$ref": "./common/IncidentTypes.json#/definitions/IncidentOwnerInfo"
-    },
-    "IncidentSeverity": {
-      "ref": "./common/IncidentTypes.json#/definitions/IncidentSeverityEnum"
-    },
-    "IncidentStatus": {
-      "$ref": "./common/IncidentTypes.json#/definitions/IncidentStatusEnum"
     },
     "ManualTriggerRequestBody": {
       "type": "object",
