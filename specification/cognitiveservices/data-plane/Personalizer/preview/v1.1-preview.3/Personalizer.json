@@ -627,18 +627,10 @@
         "parameters": [
           {
             "in": "query",
-            "name": "modelFormat",
-            "description": "Format of the model",
-            "type": "string",
-            "default": "Unsigned",
-            "enum": [
-              "unsigned",
-              "signed"
-            ],
-            "x-ms-enum": {
-              "name": "ModelFormat",
-              "modelAsString": true
-            }
+            "name": "signed",
+            "description": "True if requesting signed model zip archive, false otherwise.",
+            "type": "boolean",
+            "default": false
           }
         ],
         "responses": {
@@ -669,20 +661,6 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "in": "query",
-            "name": "modelFormat",
-            "type": "string",
-            "default": "Unsigned",
-            "enum": [
-              "unsigned",
-              "signed"
-            ],
-            "x-ms-enum": {
-              "name": "ModelFormat",
-              "modelAsString": true
-            }
-          },
           {
             "in": "body",
             "name": "body",
@@ -1970,16 +1948,16 @@
       "description": "Manages event operations."
     },
     {
-      "name": "ModelV1Dot1Preview3",
-      "description": "Manages reinforcement learning configuration operations."
-    },
-    {
       "name": "Rank",
       "description": "Manages ranking operations."
     },
     {
       "name": "LogsV1Dot1Preview2",
       "description": "Manages reinforcement learning logs."
+    },
+    {
+      "name": "ModelV1Dot1Preview3",
+      "description": "Manages reinforcement learning configuration operations."
     }
   ],
   "x-ms-parameterized-host": {
