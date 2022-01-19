@@ -56,7 +56,7 @@
         "tags": [
           "ScopeConnections"
         ],
-        "operationId": "ScopeConnection_CreateOrUpdate",
+        "operationId": "ScopeConnections_CreateOrUpdate",
         "description": "Creates or updates scope connection from Network Manager",
         "parameters": [
           {
@@ -65,7 +65,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/ScopeConnection"
-            }
+            },
+            "description": "Scope connection to be created/updated."
           }
         ],
         "responses": {
@@ -98,7 +99,7 @@
         "tags": [
           "ScopeConnections"
         ],
-        "operationId": "ScopeConnection_Get",
+        "operationId": "ScopeConnections_Get",
         "description": "Get specified scope connection created by this Network Manager.",
         "responses": {
           "200": {
@@ -124,7 +125,7 @@
         "tags": [
           "ScopeConnections"
         ],
-        "operationId": "ScopeConnection_Delete",
+        "operationId": "ScopeConnections_Delete",
         "description": "Delete the pending scope connection created by this network manager.",
         "responses": {
           "200": {
@@ -152,7 +153,7 @@
         "tags": [
           "ScopeConnections"
         ],
-        "operationId": "ScopeConnection_List",
+        "operationId": "ScopeConnections_List",
         "description": "List all scope connections created by this network manager.",
         "parameters": [
           {
@@ -187,6 +188,9 @@
               "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List Network Manager Scope Connection": {
@@ -253,7 +257,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScopeConnection"
-          }
+          },
+          "description": "List of scope connections."
         },
         "nextLink": {
           "type": "string",
