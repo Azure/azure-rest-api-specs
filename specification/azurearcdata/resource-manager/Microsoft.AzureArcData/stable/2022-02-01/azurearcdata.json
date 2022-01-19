@@ -348,6 +348,63 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlManagedInstances/{sqlManagedInstanceName}/restore": {
+      "post": {
+        "tags": [
+          "SqlManagedInstances"
+        ],
+        "operationId": "SqlManagedInstancesRestore_Restore",
+        "description": "Performs a restore on a SQL Managed Instance",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlManagedInstanceName",
+            "description": "Name of SQL Managed Instance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "sqlManagedInstanceRestoreProperties",
+            "in": "body",
+            "description": "The information needed to restore a database using Point-in-time Restore.",
+            "required": true,
+            "schema": {
+              "$ref": "./sqlManagedInstances.json#/definitions/SqlManagedInstanceRestoreProperties"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Point-in-time database restore is in progress."
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Performs a restore on a SQL Managed Instance database.": {
+            "$ref": "./examples/CreateRestoreSqlManagedInstance.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureArcData/sqlServerInstances": {
       "get": {
         "tags": [

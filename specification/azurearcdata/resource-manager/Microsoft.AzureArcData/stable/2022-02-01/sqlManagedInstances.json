@@ -247,6 +247,62 @@
           "readOnly": true
         }
       }
+    },
+    "SqlManagedInstanceRestoreProperties": {
+      "type": "object",
+      "description": "The information needed to restore a database using Point-in-time Restore",
+      "properties": {
+        "source": {
+          "type": "object",
+          "description": "Details about source database and Azure Arc-enabled SQL managed instance.",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of the source Azure Arc-enabled SQL managed instance."
+            },
+            "database": {
+              "type": "string",
+              "description": "Name of the source database from where the backups should be retrieved."
+            }
+          },
+          "required": [
+            "name",
+            "database"
+          ]
+        },
+        "restorePoint": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The point in time of the source database that will be restored to create the new database."
+        },
+        "destination": {
+          "type": "object",
+          "description": "Details about restored database and Azure Arc-enabled SQL managed instance.",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of the destination Azure Arc-enabled SQL managed instance."
+            },
+            "database": {
+              "type": "string",
+              "description": "Name of the database that will be created as the restore destination."
+            }
+          },
+          "required": [
+            "name",
+            "database"
+          ]
+        },
+        "dryRun": {
+          "type": "boolean",
+          "description": "Validates if the restore operation can be successful or not by returning earliest and latest restore time window."
+        }
+      },
+      "required": [
+        "source",
+        "restorePoint",
+        "destination"
+      ]
     }
   }
 }
