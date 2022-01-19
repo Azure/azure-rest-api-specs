@@ -65,7 +65,7 @@ tag: package-templatespecs-2021-05
 ```
 
 ``` yaml $(package-deploymentstacks)
-tag: package-deploymentstacks-2021-05
+tag: package-deploymentstacks-2022-03
 ```
 
 ### Tag: package-policy-2021-06
