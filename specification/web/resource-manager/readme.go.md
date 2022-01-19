@@ -15,6 +15,16 @@ module-name: sdk/resourcemanager/appservice/armappservice
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
+directive: 
+- rename-model: 
+    from: 'AppServiceCertificate'
+    to: 'CertificateModel'
+- rename-model:
+    from: 'AppServiceCertificateCollection'
+    to: 'CertificateCollectionModel'
+- rename-model:
+    from: 'AppServiceCertificatePatchResource'
+    to: 'CertificatePatchResourceModel'
 ```
 
 ### Go multi-api
