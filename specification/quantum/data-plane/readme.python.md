@@ -8,7 +8,7 @@ python-mode: create
 python:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: azure.quantum._client
-  package-name: azure-quantum-client
+  package-name: azure-quantum
   clear-output-folder: true
   no-namespace-folders: true
   add-credentials: true
