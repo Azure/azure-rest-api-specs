@@ -26,15 +26,23 @@ These are the global settings for IotCentral.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-06
+tag: package-preview-2021-11
 ```
 
 
+### Tag: package-preview-2021-11
+
+These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-11'
+input-file:
+  - Microsoft.IoTCentral/preview/2021-11-01-preview/iotcentral.json
+```
 ### Tag: package-2021-06
 
 These settings apply only when `--tag=package-2021-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-06'
+``` yaml $(tag) == 'package-2021-06'
 input-file:
   - Microsoft.IoTCentral/stable/2021-06-01/iotcentral.json
 directive:
@@ -48,6 +56,7 @@ directive:
     from: iotcentral.json
     reason: We do not yet support isDataAction, display.description and display.resource.
 ```
+
 ### Tag: package-2018-09-01
 
 These settings apply only when `--tag=package-2018-09-01` is specified on the command line.
