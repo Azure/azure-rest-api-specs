@@ -168,6 +168,8 @@ input-file:
 - Microsoft.EventHub/preview/2022-01-01-preview/disasterRecoveryConfigs.json
 - Microsoft.EventHub/preview/2022-01-01-preview/operations.json
 - Microsoft.EventHub/preview/2022-01-01-preview/eventhubs.json
+- Microsoft.EventHub/preview/2022-01-01-preview/ApplicationGroups.json
+
 ```
 
 ### Tag: profile-hybrid-2020-09-01
