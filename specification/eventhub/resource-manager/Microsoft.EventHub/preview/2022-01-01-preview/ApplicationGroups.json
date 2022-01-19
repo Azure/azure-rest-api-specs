@@ -258,12 +258,12 @@
             },
             "isEnabled": {
               "type": "boolean",
-              "description": "Active connection status from client to Event hub"
+              "description": "Determines if the status of connection from client to namespace under this appgroup is enabled or disabled."
             },
             "appGroupIdentifier": {
               "readOnly": true,
               "type": "string",
-              "description": "The Application Group Identifier"
+              "description": "The Unique identifier for application group.Supports SAS(SasKeyName=KeyName) or AAD(AADAppID=Guid1)"
             },
             "name": {
               "readOnly": true,
@@ -277,7 +277,7 @@
                 "description": "The Application Group Policy",
                 "x-ms-client-flatten": true
               },
-              "description": "The policies associated with the Application Group."
+              "description": "List of group policies that define the behavior of application group. The policies can support resource governance scenarios such as limiting ingress or egress traffic."
             }
           },
           "allOf": [
@@ -301,16 +301,16 @@
         "policyName": {
           "readOnly": true,
           "type": "string",
-          "description": "The Application Group Name"
+          "description": "The Name of this policy"
         },
         "rateLimitThreshold": {
           "readOnly": true,
           "type": "int32",
-          "description": "The Application Group Name"
+          "description": "The Threshold limit above which the application group will be throttled.Rame limit is always per second."
         },
         "metricId": {
           "type": "string",
-          "description": "The policy metric Id",
+          "description": "Metric Id on which the throttle limit should be set, MetricId can be discovered by hovering over Metric in the Metrics section of Event Hub Namespace inside Azure Portal",
           "enum": [
             "IncomingBytes",
             "OutgoingBytes",
