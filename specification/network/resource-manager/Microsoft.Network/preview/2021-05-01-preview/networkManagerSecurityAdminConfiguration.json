@@ -177,6 +177,14 @@
         ],
         "description": "Deletes a network manager security admin configuration.",
         "operationId": "SecurityAdminConfigurations_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ForceDeleteParameter"
+          },
+          {
+            "$ref": "#/parameters/RecursiveDeleteParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -348,6 +356,14 @@
         ],
         "description": "Deletes an admin rule collection.",
         "operationId": "AdminRuleCollections_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ForceDeleteParameter"
+          },
+          {
+            "$ref": "#/parameters/RecursiveDeleteParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -531,6 +547,11 @@
         ],
         "description": "Deletes an admin rule.",
         "operationId": "AdminRules_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ForceDeleteParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -1111,6 +1132,20 @@
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "RecursiveDeleteParameter": {
+      "name": "recursive",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "description": "Deletes the resource recursively. When present in a security configuration delete, all rule collections and rules within the configuration will be deleted. When present in a rule collection delete, all rules within the collection will be deleted."
+    },
+    "ForceDeleteParameter": {
+      "name": "force",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "description": "Deletes the resource even if it is part of a deployed configuration. If the configuration has been deployed, the service will do a cleanup deployment in the background, prior to the delete."
     }
   }
 }
