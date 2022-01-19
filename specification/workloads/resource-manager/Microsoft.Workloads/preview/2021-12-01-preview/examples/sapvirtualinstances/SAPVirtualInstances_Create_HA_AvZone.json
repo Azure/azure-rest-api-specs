@@ -8,109 +8,98 @@
       "tags": {},
       "location": "westcentralus",
       "properties": {
-        "environment": "NonProd",
+        "environment": "Prod",
         "sapProduct": "S4HANA",
         "configuration": {
           "configurationType": "Deployment",
           "appLocation": "eastus",
           "infrastructureConfiguration": {
-            "deploymentType": "ThreeTier",
             "appResourceGroup": "X00-RG",
-            "centralServer": {
-              "subnetId": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Networks/virtualNetworks/vnet1/subnets/subnetId1",
-              "virtualMachineConfiguration": {
-                "vmSize": "Standard_D8s_v3",
-                "imageReference": {
-                  "sku": "16.04-LTS",
-                  "publisher": "Canonical",
-                  "version": "latest",
-                  "offer": "UbuntuServer"
-                },
-                "osProfile": {
-                  "adminUsername": "{your-username}",
-                  "adminPassword": "{your-password}",
-                  "osConfiguration": {
-                    "osType": "Linux",
-                    "disablePasswordAuthentication": true,
-                    "ssh": {
-                      "publicKeys": [
-                        {
-                          "keyData": "ssh-rsa public key"
-                        }
-                      ]
-                    }
-                  }
-                }
-              },
-              "instanceCount": 1
-            },
-            "applicationServer": {
-              "subnetId": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Networks/virtualNetworks/vnet1/subnets/subnetId3",
-              "virtualMachineConfiguration": {
-                "vmSize": "Standard_D8s_v3",
-                "imageReference": {
-                  "sku": "16.04-LTS",
-                  "publisher": "Canonical",
-                  "version": "latest",
-                  "offer": "UbuntuServer"
-                },
-                "osProfile": {
-                  "adminUsername": "{your-username}",
-                  "adminPassword": "{your-password}",
-                  "osConfiguration": {
-                    "osType": "Linux",
-                    "disablePasswordAuthentication": true,
-                    "ssh": {
-                      "publicKeys": [
-                        {
-                          "keyData": "ssh-rsa public key"
-                        }
-                      ]
-                    }
-                  }
-                }
-              },
-              "instanceCount": 10
-            },
-            "databaseServer": {
-              "subnetId": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Networks/virtualNetworks/vnet1/subnets/subnetId2",
-              "virtualMachineConfiguration": {
-                "vmSize": "Standard_D8s_v3",
-                "imageReference": {
-                  "sku": "16.04-LTS",
-                  "publisher": "Canonical",
-                  "version": "latest",
-                  "offer": "UbuntuServer"
-                },
-                "osProfile": {
-                  "adminUsername": "{your-username}",
-                  "adminPassword": "{your-password}",
-                  "osConfiguration": {
-                    "osType": "Linux",
-                    "disablePasswordAuthentication": true,
-                    "ssh": {
-                      "publicKeys": [
-                        {
-                          "keyData": "ssh-rsa public key"
-                        }
-                      ]
-                    }
-                  }
-                }
-              },
-              "instanceCount": 1
-            },
+            "deploymentType": "ThreeTier",
             "highAvailabilityConfig": {
               "highAvailabilityType": "AvailabilityZone"
+            },
+            "centralServer": {
+              "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/dindurkhya-e2etesting/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/appsubnet",
+              "virtualMachineConfiguration": {
+                "vmSize": "Standard_E16ds_v4",
+                "imageReference": {
+                  "sku": "7.4",
+                  "publisher": "RedHat",
+                  "version": "7.4.2019062505",
+                  "offer": "RHEL-SAP"
+                },
+                "osProfile": {
+                  "adminUsername": "{your-username}",
+                  "osConfiguration": {
+                    "osType": "Linux",
+                    "disablePasswordAuthentication": true,
+                    "ssh": {
+                      "publicKeys": [
+                        {
+                          "keyData": "ssh-rsa public key"
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "instanceCount": 2
+            },
+            "applicationServer": {
+              "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/dindurkhya-e2etesting/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/appsubnet",
+              "virtualMachineConfiguration": {
+                "vmSize": "Standard_E32ds_v4",
+                "imageReference": {
+                  "sku": "7.4",
+                  "publisher": "RedHat",
+                  "version": "7.4.2019062505",
+                  "offer": "RHEL-SAP"
+                },
+                "osProfile": {
+                  "adminUsername": "{your-username}",
+                  "osConfiguration": {
+                    "osType": "Linux",
+                    "disablePasswordAuthentication": true,
+                    "ssh": {
+                      "publicKeys": [
+                        {
+                          "keyData": "ssh-rsa public key"
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "instanceCount": 6
+            },
+            "databaseServer": {
+              "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/dindurkhya-e2etesting/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/dbsubnet",
+              "virtualMachineConfiguration": {
+                "vmSize": "Standard_M32ts",
+                "imageReference": {
+                  "sku": "7.4",
+                  "publisher": "RedHat",
+                  "version": "7.4.2019062505",
+                  "offer": "RHEL-SAP"
+                },
+                "osProfile": {
+                  "adminUsername": "{your-username}",
+                  "osConfiguration": {
+                    "osType": "Linux",
+                    "disablePasswordAuthentication": true,
+                    "ssh": {
+                      "publicKeys": [
+                        {
+                          "keyData": "ssh-rsa public key"
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "instanceCount": 2
             }
-          },
-          "softwareConfiguration": {
-            "softwareInstallationType": "ServiceInitiated",
-            "sapFqdn": "sapsystem.contoso.net",
-            "sapBitsStorageAccountId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/ajgupt-test/providers/Microsoft.Storage/storageAccounts/ajguptsavnet",
-            "bomUrl": "https://myaccount.blob.core.windows.net/mycontainer/myblob",
-            "softwareVersion": "SAP S/4HANA 2020 FPS01",
-            "sshPrivateKey": "<sshPrivateKey>"
           }
         }
       }
@@ -133,23 +122,26 @@
           "lastModifiedAt": "2021-08-19T15:10:46.196Z"
         },
         "properties": {
-          "environment": "NonProd",
-          "sapProduct": "ECC",
+          "environment": "Prod",
+          "sapProduct": "S4HANA",
           "configuration": {
             "configurationType": "Deployment",
             "appLocation": "eastus",
             "infrastructureConfiguration": {
-              "deploymentType": "ThreeTier",
               "appResourceGroup": "X00-RG",
+              "deploymentType": "ThreeTier",
+              "highAvailabilityConfig": {
+                "highAvailabilityType": "AvailabilityZone"
+              },
               "centralServer": {
-                "subnetId": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Networks/virtualNetworks/vnet1/subnets/subnetId1",
+                "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/dindurkhya-e2etesting/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/appsubnet",
                 "virtualMachineConfiguration": {
-                  "vmSize": "Standard_D8s_v3",
+                  "vmSize": "Standard_E16ds_v4",
                   "imageReference": {
-                    "sku": "16.04-LTS",
-                    "publisher": "Canonical",
-                    "version": "latest",
-                    "offer": "UbuntuServer"
+                    "sku": "7.4",
+                    "publisher": "RedHat",
+                    "version": "7.4.2019062505",
+                    "offer": "RHEL-SAP"
                   },
                   "osProfile": {
                     "adminUsername": "{your-username}",
@@ -166,17 +158,17 @@
                     }
                   }
                 },
-                "instanceCount": 1
+                "instanceCount": 2
               },
               "applicationServer": {
-                "subnetId": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Networks/virtualNetworks/vnet1/subnets/subnetId3",
+                "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/dindurkhya-e2etesting/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/appsubnet",
                 "virtualMachineConfiguration": {
-                  "vmSize": "Standard_D8s_v3",
+                  "vmSize": "Standard_E32ds_v4",
                   "imageReference": {
-                    "sku": "16.04-LTS",
-                    "publisher": "Canonical",
-                    "version": "latest",
-                    "offer": "UbuntuServer"
+                    "sku": "7.4",
+                    "publisher": "RedHat",
+                    "version": "7.4.2019062505",
+                    "offer": "RHEL-SAP"
                   },
                   "osProfile": {
                     "adminUsername": "{your-username}",
@@ -193,17 +185,17 @@
                     }
                   }
                 },
-                "instanceCount": 10
+                "instanceCount": 6
               },
               "databaseServer": {
-                "subnetId": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Networks/virtualNetworks/vnet1/subnets/subnetId2",
+                "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/dindurkhya-e2etesting/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/dbsubnet",
                 "virtualMachineConfiguration": {
-                  "vmSize": "Standard_D8s_v3",
+                  "vmSize": "Standard_M32ts",
                   "imageReference": {
-                    "sku": "16.04-LTS",
-                    "publisher": "Canonical",
-                    "version": "latest",
-                    "offer": "UbuntuServer"
+                    "sku": "7.4",
+                    "publisher": "RedHat",
+                    "version": "7.4.2019062505",
+                    "offer": "RHEL-SAP"
                   },
                   "osProfile": {
                     "adminUsername": "{your-username}",
@@ -220,20 +212,13 @@
                     }
                   }
                 },
-                "instanceCount": 1
+                "instanceCount": 2
               }
-            },
-            "softwareConfiguration": {
-              "softwareInstallationType": "ServiceInitiated",
-              "sapFqdn": "sapsystem.contoso.net",
-              "sapBitsStorageAccountId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/ajgupt-test/providers/Microsoft.Storage/storageAccounts/ajguptsavnet",
-              "bomUrl": "https://myaccount.blob.core.windows.net/mycontainer/myblob",
-              "softwareVersion": "SAP S/4HANA 2020 FPS01"
             }
           },
-          "status": "Running",
-          "health": "Healthy",
-          "state": "RegistrationComplete",
+          "status": "Unknown",
+          "health": "Unknown",
+          "state": "SoftwareInstallationPending",
           "provisioningState": "Succeeded"
         }
       }
@@ -254,23 +239,26 @@
           "lastModifiedAt": "2021-08-19T15:10:46.196Z"
         },
         "properties": {
-          "environment": "NonProd",
-          "sapProduct": "ECC",
+          "environment": "Prod",
+          "sapProduct": "S4HANA",
           "configuration": {
             "configurationType": "Deployment",
             "appLocation": "eastus",
             "infrastructureConfiguration": {
-              "deploymentType": "ThreeTier",
               "appResourceGroup": "X00-RG",
+              "deploymentType": "ThreeTier",
+              "highAvailabilityConfig": {
+                "highAvailabilityType": "AvailabilityZone"
+              },
               "centralServer": {
-                "subnetId": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Networks/virtualNetworks/vnet1/subnets/subnetId1",
+                "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/dindurkhya-e2etesting/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/appsubnet",
                 "virtualMachineConfiguration": {
-                  "vmSize": "Standard_D8s_v3",
+                  "vmSize": "Standard_E16ds_v4",
                   "imageReference": {
-                    "sku": "16.04-LTS",
-                    "publisher": "Canonical",
-                    "version": "latest",
-                    "offer": "UbuntuServer"
+                    "sku": "7.4",
+                    "publisher": "RedHat",
+                    "version": "7.4.2019062505",
+                    "offer": "RHEL-SAP"
                   },
                   "osProfile": {
                     "adminUsername": "{your-username}",
@@ -287,17 +275,17 @@
                     }
                   }
                 },
-                "instanceCount": 1
+                "instanceCount": 2
               },
               "applicationServer": {
-                "subnetId": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Networks/virtualNetworks/vnet1/subnets/subnetId3",
+                "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/dindurkhya-e2etesting/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/appsubnet",
                 "virtualMachineConfiguration": {
-                  "vmSize": "Standard_D8s_v3",
+                  "vmSize": "Standard_E32ds_v4",
                   "imageReference": {
-                    "sku": "16.04-LTS",
-                    "publisher": "Canonical",
-                    "version": "latest",
-                    "offer": "UbuntuServer"
+                    "sku": "7.4",
+                    "publisher": "RedHat",
+                    "version": "7.4.2019062505",
+                    "offer": "RHEL-SAP"
                   },
                   "osProfile": {
                     "adminUsername": "{your-username}",
@@ -314,17 +302,17 @@
                     }
                   }
                 },
-                "instanceCount": 10
+                "instanceCount": 6
               },
               "databaseServer": {
-                "subnetId": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Networks/virtualNetworks/vnet1/subnets/subnetId2",
+                "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/dindurkhya-e2etesting/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/dbsubnet",
                 "virtualMachineConfiguration": {
-                  "vmSize": "Standard_D8s_v3",
+                  "vmSize": "Standard_M32ts",
                   "imageReference": {
-                    "sku": "16.04-LTS",
-                    "publisher": "Canonical",
-                    "version": "latest",
-                    "offer": "UbuntuServer"
+                    "sku": "7.4",
+                    "publisher": "RedHat",
+                    "version": "7.4.2019062505",
+                    "offer": "RHEL-SAP"
                   },
                   "osProfile": {
                     "adminUsername": "{your-username}",
@@ -341,15 +329,8 @@
                     }
                   }
                 },
-                "instanceCount": 1
+                "instanceCount": 2
               }
-            },
-            "softwareConfiguration": {
-              "softwareInstallationType": "ServiceInitiated",
-              "sapFqdn": "sapsystem.contoso.net",
-              "sapBitsStorageAccountId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/ajgupt-test/providers/Microsoft.Storage/storageAccounts/ajguptsavnet",
-              "bomUrl": "https://myaccount.blob.core.windows.net/mycontainer/myblob",
-              "softwareVersion": "SAP S/4HANA 2020 FPS01"
             }
           },
           "status": "Unknown",

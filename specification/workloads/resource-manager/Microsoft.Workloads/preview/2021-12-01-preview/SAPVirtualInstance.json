@@ -2203,6 +2203,9 @@
           "type": "string",
           "x-ms-secret": true,
           "description": "The SSH private key."
+        },
+        "highAvailabilitySoftwareConfiguration": {
+          "$ref": "#/definitions/HighAvailabilitySoftwareConfiguration"
         }
       },
       "required": [
@@ -2211,6 +2214,24 @@
         "sapBitsStorageAccountId",
         "sapFqdn",
         "sshPrivateKey"
+      ]
+    },
+    "HighAvailabilitySoftwareConfiguration": {
+      "description": "Gets or sets the HA software configuration.",
+      "type": "object",
+      "properties": {
+        "fencingClientId": {
+          "description": "The fencing client id.",
+          "type": "string"
+        },
+        "fencingClientPassword": {
+          "description": "The fencing client id secret/password. The secret should never expire. This will be used pacemaker to start/stop the cluster VMs.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "fencingClientId",
+        "fencingClientPassword"
       ]
     },
     "StartRequest": {
@@ -2665,27 +2686,6 @@
         }
       }
     },
-    "EnqueueReplicationServerProperties": {
-      "description": "Defines the SAP enqueue replication server properties.",
-      "type": "object",
-      "properties": {
-        "instanceNo": {
-          "type": "string",
-          "description": "The enqueue replication server instance number.",
-          "readOnly": true
-        },
-        "hostname": {
-          "type": "string",
-          "description": "The enqueue replication server SAP host name.",
-          "readOnly": true
-        },
-        "ipAddress": {
-          "type": "string",
-          "description": "The enqueue replication server IP Address.",
-          "readOnly": true
-        }
-      }
-    },
     "GatewayServerProperties": {
       "description": "Defines the SAP Gateway Server properties.",
       "type": "object",
@@ -2718,9 +2718,6 @@
         },
         "enqueueServerProperties": {
           "$ref": "#/definitions/EnqueueServerProperties"
-        },
-        "enqueueReplicationServerProperties": {
-          "$ref": "#/definitions/EnqueueReplicationServerProperties"
         },
         "gatewayServerProperties": {
           "$ref": "#/definitions/GatewayServerProperties"
