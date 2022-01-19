@@ -41,6 +41,15 @@ input-file:
   - Microsoft.MachineLearningServices/stable/2021-10-01/workspaceFeatures.json
 ```
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: R3008
+    from: machineLearningServices.json
+    reason: The pageable itemName override is not considered by the LintDiff check correctly.
+```
+
 ### Tag: package-2022-01-01-preview
 
 These settings apply only when `--tag=package-2022-01-01-preview` is specified on the command line.
