@@ -7570,7 +7570,11 @@
         "mode": {
           "description": "Output Delivery Mode.",
           "default": "ReadWriteMount",
-          "$ref": "#/definitions/OutputDataDeliveryMode",
+          "allOf":[
+            {
+              "$ref": "#/definitions/OutputDataDeliveryMode"
+            }
+          ],
           "x-ms-mutability": [
             "create",
             "read"
@@ -7604,7 +7608,11 @@
       "properties": {
         "mode": {
           "description": "Output Delivery Mode.",
-          "$ref": "#/definitions/OutputDataDeliveryMode",
+          "allOf":[
+            {
+              "$ref": "#/definitions/OutputDataDeliveryMode"
+            }
+          ],
           "readOnly": true,
           "x-ms-mutability": [
             "read"
@@ -7612,7 +7620,11 @@
         },
         "uri": {
           "description": "Uri path.",
-          "$ref": "#/definitions/UriReference",
+          "allOf":[
+            {
+              "$ref": "#/definitions/UriReference"
+            }
+          ],
           "readOnly": true,
           "x-ms-mutability": [
             "read"
