@@ -27,14 +27,28 @@ These are the global settings for the azurearcdata.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2021-11-01
+tag: package-2022-02
 ```
 
+
+### Tag: package-2022-02
+
+These settings apply only when `--tag=package-2022-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-02'
+input-file:
+  - Microsoft.AzureArcData/stable/2022-02-01/azurearcdata.json
+  - Microsoft.AzureArcData/stable/2022-02-01/common.json
+  - Microsoft.AzureArcData/stable/2022-02-01/dataControllers.json
+  - Microsoft.AzureArcData/stable/2022-02-01/operations.json
+  - Microsoft.AzureArcData/stable/2022-02-01/sqlManagedInstances.json
+  - Microsoft.AzureArcData/stable/2022-02-01/sqlServerInstances.json
+```
 ### Tag: package-2021-11-01
 
 These settings apply only when `--tag=package-2021-11-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-11-01'
+``` yaml $(tag) == 'package-2021-11-01'
 input-file:
   - Microsoft.AzureArcData/stable/2021-11-01/azurearcdata.json
 ```
@@ -43,7 +57,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-08-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-08-01'
+``` yaml $(tag) == 'package-2021-08-01'
 input-file:
   - Microsoft.AzureArcData/stable/2021-08-01/azurearcdata.json
 ```
@@ -52,7 +66,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2021-07-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-07-01'
+``` yaml $(tag) == 'package-preview-2021-07-01'
 input-file:
   - Microsoft.AzureArcData/preview/2021-07-01-preview/azurearcdata.json
 ```
@@ -61,7 +75,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2021-06-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-06-01'
+``` yaml $(tag) == 'package-preview-2021-06-01'
 input-file:
   - Microsoft.AzureArcData/preview/2021-06-01-preview/azurearcdata.json
 ```
