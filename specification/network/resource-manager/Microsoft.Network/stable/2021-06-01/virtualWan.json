@@ -1144,7 +1144,7 @@
             "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "vpnServerConfigurationPolicyGroupParameters",
+            "name": "VpnServerConfigurationPolicyGroupParameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -1240,7 +1240,7 @@
       "get": {
         "operationId": "ConfigurationPolicyGroups_Get",
         "x-ms-examples": {
-          "VpnServerConfigurationGet": {
+          "ConfigurationPolicyGroupGet": {
             "$ref": "./examples/ConfigurationPolicyGroupGet.json"
           }
         },
@@ -7732,10 +7732,10 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/P2SConnectionConfiguration"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "List of references to P2SConnectionConfigurations."
-        },
+        },		
         "provisioningState": {
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
@@ -8020,7 +8020,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/VpnServerConfigurationPolicyGroup"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "List of Configuration Policy Groups that this P2SConnectionConfiguration is attached to."
         },
