@@ -7604,11 +7604,19 @@
       "properties": {
         "mode": {
           "description": "Output Delivery Mode.",
-          "$ref": "#/definitions/OutputDataDeliveryMode"
+          "$ref": "#/definitions/OutputDataDeliveryMode",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "uri": {
           "description": "Uri path.",
           "$ref": "#/definitions/UriReference",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
           "x-nullable": true
         }
       },
@@ -8287,11 +8295,7 @@
         "name": "OutputDataDeliveryMode",
         "modelAsString": true
       },
-      "additionalProperties": false,
-      "readOnly": true,
-      "x-ms-mutability": [
-        "read"
-      ]
+      "additionalProperties": false
     },
     "OutputPathAssetReference": {
       "description": "Reference to an asset via its path in a job output.",
@@ -9632,27 +9636,15 @@
         "file": {
           "description": "Single file uri path",
           "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
           "x-nullable": true
         },
         "folder": {
           "description": "Folder uri path",
           "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
           "x-nullable": true
         }
       },
-      "additionalProperties": false,
-      "readOnly": true,
-      "x-ms-mutability": [
-        "read"
-      ]
+      "additionalProperties": false
     },
     "UserAssignedIdentityMeta": {
       "description": "User assigned identities associated with a resource.",
