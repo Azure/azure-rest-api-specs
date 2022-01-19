@@ -1106,6 +1106,240 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnServerConfigurations/{vpnServerConfigurationName}/configurationPolicyGroups/{configurationPolicyGroupName}": {
+      "put": {
+        "operationId": "ConfigurationPolicyGroups_CreateOrUpdate",
+        "x-ms-examples": {
+          "ConfigurationPolicyGroupPut": {
+            "$ref": "./examples/ConfigurationPolicyGroupPut.json"
+          }
+        },
+        "description": "Creates a ConfigurationPolicyGroup if it doesn't exist else updates the existing one.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the ConfigurationPolicyGroup."
+          },
+          {
+            "name": "vpnServerConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VpnServerConfiguration."
+          },
+          {
+            "name": "configurationPolicyGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the ConfigurationPolicyGroup."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "vpnServerConfigurationPolicyGroupParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VpnServerConfigurationPolicyGroup"
+            },
+            "description": "Parameters supplied to create or update a VpnServerConfiguration PolicyGroup."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the VpnServerConfiguration PolicyGroup created or updated.",
+            "schema": {
+              "$ref": "#/definitions/VpnServerConfigurationPolicyGroup"
+            }
+          },
+          "201": {
+            "description": "Request successful. Returns the details of the VpnServerConfiguration PolicyGroup retrieved.",
+            "schema": {
+              "$ref": "#/definitions/VpnServerConfigurationPolicyGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "operationId": "ConfigurationPolicyGroups_Delete",
+        "x-ms-examples": {
+          "ConfigurationPolicyGroupDelete": {
+            "$ref": "./examples/ConfigurationPolicyGroupDelete.json"
+          }
+        },
+        "description": "Deletes a ConfigurationPolicyGroup.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the ConfigurationPolicyGroup."
+          },
+          {
+            "name": "vpnServerConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VpnServerConfiguration."
+          },
+          {
+            "name": "configurationPolicyGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the ConfigurationPolicyGroup."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. ConfigurationPolicyGroup deleted."
+          },
+          "202": {
+            "description": "Request received successfully. ConfigurationPolicyGroup deletion is in progress; follow the Location header to poll for final outcome."
+          },
+          "204": {
+            "description": "No ConfigurationPolicyGroup exist by the name provided."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "operationId": "ConfigurationPolicyGroups_Get",
+        "x-ms-examples": {
+          "VpnServerConfigurationGet": {
+            "$ref": "./examples/ConfigurationPolicyGroupGet.json"
+          }
+        },
+        "description": "Retrieves the details of a ConfigurationPolicyGroup.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnServerConfiguration."
+          },
+          {
+            "name": "vpnServerConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VpnServerConfiguration."
+          },
+          {
+            "name": "configurationPolicyGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the ConfigurationPolicyGroup being retrieved."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the ConfigurationPolicyGroup retrieved.",
+            "schema": {
+              "$ref": "#/definitions/VpnServerConfigurationPolicyGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnServerConfigurations/{vpnServerConfigurationName}/configurationPolicyGroups": {
+      "get": {
+        "operationId": "configurationPolicyGroups_ListByVpnServerConfiguration",
+        "x-ms-examples": {
+          "ConfigurationPolicyGroupListByVpnServerConfiguration": {
+            "$ref": "./examples/ConfigurationPolicyGroupListByVpnServerConfiguration.json"
+          }
+        },
+        "description": "Lists all the configurationPolicyGroups in a resource group for a vpnServerConfiguration.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnServerConfiguration."
+          },
+          {
+            "name": "vpnServerConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VpnServerConfiguration."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of all the VpnServerConfigurations in the resource group.",
+            "schema": {
+              "$ref": "#/definitions/ListVpnServerConfigurationPolicyGroupsResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/vpnServerConfigurations": {
       "get": {
         "operationId": "VpnServerConfigurations_List",
@@ -7392,6 +7626,13 @@
           },
           "description": "List of references to P2SVpnGateways."
         },
+        "configurationPolicyGroups": {
+          "type": "array",
+          "description": "List of all VpnServerConfigurationPolicyGroups.",
+          "items": {
+            "$ref": "#/definitions/VpnServerConfigurationPolicyGroup"
+          }
+        },
         "etag": {
           "readOnly": true,
           "type": "string",
@@ -7468,6 +7709,115 @@
         }
       },
       "description": "VpnClientConnectionHealth properties."
+    },
+    "VpnServerConfigurationPolicyGroupProperties": {
+      "properties": {
+        "isDefault": {
+          "type": "boolean",
+          "description": "Shows if this is a Default VpnServerConfigurationPolicyGroup or not."
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Priority for VpnServerConfigurationPolicyGroup."
+        },
+        "policyMembers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnServerConfigurationPolicyGroupMember"
+          },
+          "description": "Multiple PolicyMembers for VpnServerConfigurationPolicyGroup."
+        },
+        "p2SConnectionConfigurations": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/P2SConnectionConfiguration"
+          },
+          "description": "List of references to P2SConnectionConfigurations."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the VpnServerConfigurationPolicyGroup resource."
+        }
+      },
+      "description": "Parameters for VpnServerConfigurationPolicyGroup."
+    },
+    "VpnServerConfigurationPolicyGroup": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VpnServerConfigurationPolicyGroupProperties",
+          "description": "Properties of the VpnServerConfigurationPolicyGroup."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "VpnServerConfigurationPolicyGroup Resource."
+    },
+    "VpnServerConfigurationPolicyGroupMember": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the VpnServerConfigurationPolicyGroupMember."
+        },
+        "attributeType": {
+          "type": "string",
+          "description": "The Vpn Policy member attribute type.",
+          "enum": [
+            "CertificateGroupId",
+            "AADGroupId",
+            "RadiusAzureGroupId"
+          ],
+          "x-ms-enum": {
+            "name": "AttributeType",
+            "modelAsString": true
+          }
+        },
+        "attributeValue": {
+          "type": "string",
+          "description": "The value of Attribute used for this VpnServerConfigurationPolicyGroupMember."
+        }
+      },
+      "required": [
+        "name",
+        "attributeValue"
+      ],
+      "description": "VpnServerConfiguration PolicyGroup member"
+    },
+    "ListVpnServerConfigurationPolicyGroupsResult": {
+      "description": "Result of the request to list VpnServerConfigurationPolicyGroups. It contains a list of VpnServerConfigurationPolicyGroups and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnServerConfigurationPolicyGroup"
+          },
+          "description": "List of VpnServerConfigurationPolicyGroups."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
     },
     "P2SVpnGatewayProperties": {
       "properties": {
@@ -7665,6 +8015,22 @@
         "enableInternetSecurity": {
           "type": "boolean",
           "description": "Flag indicating whether the enable internet security flag is turned on for the P2S Connections or not."
+        },
+        "configurationPolicyGroupAssociations": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/VpnServerConfigurationPolicyGroup"
+          },
+          "description": "List of Configuration Policy Groups that this P2SConnectionConfiguration is attached to."
+        },
+        "previousConfigurationPolicyGroupAssociations": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/VpnServerConfigurationPolicyGroup"
+          },
+          "description": "List of previous Configuration Policy Groups that this P2SConnectionConfiguration was attached to."
         },
         "provisioningState": {
           "readOnly": true,

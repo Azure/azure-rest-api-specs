@@ -25,6 +25,55 @@
             "pfsGroup": "PFS14"
           }
         ],
+		"configurationPolicyGroups": [
+			{
+				"name": "policyGroup1",
+				"etag": "w/\\00000000-0000-0000-0000-000000000000\\",				
+				"groupName": "rg1",
+				"subscriptionId": "subid",
+				"fullName": [
+					"vpnServerConfiguration1",
+					"policyGroup1"
+				],
+				"properties": {
+					"isDefault": true,
+					"priority": 0,
+					"policyMembers": [
+						{
+							"name": "policy1",
+							"attributeType": "RadiusAzureGroupId",
+							"attributeValue": "6ad1bd08"
+						}
+					],
+					"p2SConnectionConfigurations": [
+						{
+							"id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/p2sVpnGateways/p2sVpnGateway1/p2sConnectionConfigurations/P2SConnectionConfig1"
+						}
+					]					
+				}
+			},
+			{
+				"name": "policyGroup2",
+				"etag": "w/\\00000000-0000-0000-0000-000000000000\\",				
+				"groupName": "rg1",
+				"subscriptionId": "subid",
+				"fullName": [
+					"vpnServerConfiguration1",
+					"policyGroup2"
+				],
+				"properties": {
+					"isDefault": true,
+					"priority": 0,
+					"policyMembers": [
+						{
+							"name": "policy2",
+							"attributeType": "CertificateGroupId",
+							"attributeValue": "red.com"
+						}
+					]
+				}
+			}
+		],
         "vpnClientRootCertificates": [
           {
             "name": "vpnServerConfigVpnClientRootCert1",
@@ -90,6 +139,54 @@
               "pfsGroup": "PFS14"
             }
           ],
+		  "configurationPolicyGroups": [
+			{
+				"name": "policyGroup1",
+				"etag": "w/\\00000000-0000-0000-0000-000000000000\\",				
+				"groupName": "rg1",
+				"subscriptionId": "subid",
+				"fullName": [
+					"vpnServerConfiguration1",
+					"policyGroup1"
+				],
+				"properties": {
+                    "provisioningState": "Succeeded",			
+					"isDefault": true,
+					"priority": 0,
+					"policyMembers": [
+						{
+							"name": "policy1",
+							"attributeType": "RadiusAzureGroupId",
+							"attributeValue": "6ad1bd08"
+						}
+					],
+					"p2SConnectionConfigurationProxies": []
+				}
+			},
+			{
+				"name": "policyGroup2",
+				"etag": "w/\\00000000-0000-0000-0000-000000000000\\",				
+				"groupName": "rg1",
+				"subscriptionId": "subid",
+				"fullName": [
+					"vpnServerConfiguration1",
+					"policyGroup2"
+				],
+				"properties": {
+                    "provisioningState": "Succeeded",					
+					"isDefault": true,
+					"priority": 0,
+					"policyMembers": [
+						{
+							"name": "policy2",
+							"attributeType": "CertificateGroupId",
+							"attributeValue": "red.com"
+						}
+					],
+					"p2SConnectionConfigurationProxies": []
+				}
+			}
+		  ],		  
           "vpnClientRootCertificates": [
             {
               "name": "vpnServerConfigVpnClientRootCert1",
@@ -153,6 +250,54 @@
               "pfsGroup": "PFS14"
             }
           ],
+		  "configurationPolicyGroups": [
+			{
+				"name": "policyGroup1",
+				"etag": "w/\\00000000-0000-0000-0000-000000000000\\",				
+				"groupName": "rg1",
+				"subscriptionId": "subid",
+				"fullName": [
+					"vpnServerConfiguration1",
+					"policyGroup1"
+				],
+				"properties": {
+                    "provisioningState": "Succeeded",			
+					"isDefault": true,
+					"priority": 0,
+					"policyMembers": [
+						{
+							"name": "policy1",
+							"attributeType": "RadiusAzureGroupId",
+							"attributeValue": "6ad1bd08"
+						}
+					],
+					"p2SConnectionConfigurationProxies": []
+				}
+			},
+			{
+				"name": "policyGroup2",
+				"etag": "w/\\00000000-0000-0000-0000-000000000000\\",				
+				"groupName": "rg1",
+				"subscriptionId": "subid",
+				"fullName": [
+					"vpnServerConfiguration1",
+					"policyGroup2"
+				],
+				"properties": {
+                    "provisioningState": "Succeeded",					
+					"isDefault": true,
+					"priority": 0,
+					"policyMembers": [
+						{
+							"name": "policy2",
+							"attributeType": "CertificateGroupId",
+							"attributeValue": "red.com"
+						}
+					],
+					"p2SConnectionConfigurationProxies": []
+				}
+			}
+		  ],		  
           "vpnClientRootCertificates": [
             {
               "name": "vpnServerConfigVpnClientRootCert1",
