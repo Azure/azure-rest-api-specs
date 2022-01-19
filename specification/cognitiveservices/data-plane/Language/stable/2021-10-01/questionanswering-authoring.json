@@ -456,6 +456,12 @@
           "application/json"
         ],
         "responses": {
+          "200": {
+            "description": "Deploy job state.",
+            "schema": {
+              "$ref": "#/definitions/JobState"
+            }
+          },
           "202": {
             "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
