@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-08-01-preview",
+    "version": "2021-12-01-preview",
     "title": "ContainerRegistryManagementClient"
   },
   "host": "management.azure.com",
@@ -346,6 +346,12 @@
             "schema": {
               "$ref": "#/definitions/ExportPipelineListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -387,6 +393,12 @@
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/ExportPipeline"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -440,6 +452,12 @@
             "schema": {
               "$ref": "#/definitions/ExportPipeline"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If any of the input parameters are invalid, 400 (Bad Request) is returned. If the request cannot be processed due to a conflict in the request, 409 (Conflict) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -481,6 +499,12 @@
           },
           "204": {
             "description": "The export pipeline does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -570,6 +594,12 @@
             "schema": {
               "$ref": "#/definitions/ImportPipelineListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -611,6 +641,12 @@
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/ImportPipeline"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -664,6 +700,12 @@
             "schema": {
               "$ref": "#/definitions/ImportPipeline"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -705,6 +747,12 @@
           },
           "204": {
             "description": "The import pipeline does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -814,6 +862,12 @@
             "schema": {
               "$ref": "#/definitions/PipelineRunListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -855,6 +909,12 @@
             "description": "The request was successful; the request was well - formed and received properly.",
             "schema": {
               "$ref": "#/definitions/PipelineRun"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -908,6 +968,12 @@
             "schema": {
               "$ref": "#/definitions/PipelineRun"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -952,6 +1018,12 @@
           },
           "204": {
             "description": "The pipeline run does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -1455,6 +1527,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/privateLinkResources/{groupName}": {
+      "get": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Gets a private link resource by a specified group name for a container registry.",
+        "operationId": "Registries_GetPrivateLinkResource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the private link resource was retrieved and returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegistryGetPrivateLinkResource": {
+            "$ref": "./examples/RegistryGetPrivateLinkResource.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/listCredentials": {
       "post": {
         "tags": [
@@ -1791,6 +1908,12 @@
             "schema": {
               "$ref": "#/definitions/ScopeMapListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -1832,6 +1955,12 @@
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/ScopeMap"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1885,6 +2014,12 @@
             "schema": {
               "$ref": "#/definitions/ScopeMap"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If any of the input parameters are invalid, 400 (Bad Request) is returned. If the request cannot be processed due to a conflict in the request, 409 (Conflict) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -1926,6 +2061,12 @@
           },
           "204": {
             "description": "The scopemap does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -1979,6 +2120,12 @@
             "schema": {
               "$ref": "#/definitions/ScopeMap"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If any of the input parameters are invalid, 400 (Bad Request) is returned. If the request cannot be processed due to a conflict in the request, 409 (Conflict) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -2015,6 +2162,12 @@
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/TokenListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -2057,6 +2210,12 @@
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/Token"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -2110,6 +2269,12 @@
             "schema": {
               "$ref": "#/definitions/Token"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If any of the input parameters are invalid, 400 (Bad Request) is returned. If the request cannot be processed due to a conflict in the request, 409 (Conflict) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -2151,6 +2316,12 @@
           },
           "204": {
             "description": "The token does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -2204,6 +2375,12 @@
             "schema": {
               "$ref": "#/definitions/Token"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If any of the input parameters are invalid, 400 (Bad Request) is returned. If the request cannot be processed due to a conflict in the request, 409 (Conflict) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -2253,6 +2430,12 @@
           },
           "202": {
             "description": "The request was successful; the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -5893,6 +6076,14 @@
       "name": "privateEndpointConnectionName",
       "in": "path",
       "description": "The name of the private endpoint connection.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "GroupNameParameter": {
+      "name": "groupName",
+      "in": "path",
+      "description": "The name of the private link resource.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
