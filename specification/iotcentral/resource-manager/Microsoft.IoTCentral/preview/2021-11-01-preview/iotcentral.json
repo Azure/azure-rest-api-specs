@@ -517,6 +517,99 @@
         "state": {
           "description": "The current state of the application.",
           "$ref": "#/definitions/AppState"
+        },
+        "publicNetworkAccess": {
+          "description": "Whether requests from the public network are allowed.",
+          "$ref": "#/definitions/PublicNetworkAccess"
+        },
+        "networkRuleSets": {
+          "description": "Network Rule Set Properties of this Iot Central application.",
+          "$ref": "#/definitions/NetworkRuleSets"
+        },
+        "privateEndpointConnections": {
+          "description": "Private endpoint connections created on this Iot Central application.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        }
+      }
+    },
+    "PublicNetworkAccess": {
+      "description": "Whether requests from the public network are allowed.",
+      "type": "string",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccess",
+        "modelAsString": true
+      }
+    },
+    "NetworkRuleSets": {
+      "description": "Network Rule Set Properties of this Iot Central application.",
+      "type": "object",
+      "properties": {
+        "applyToHub": {
+          "description": "Whether these rules apply to the internal IoT Hub.",
+          "type": "boolean"
+        },
+        "defaultAction": {
+          "description": "The default action to apply.",
+          "type": "string",
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkAction",
+            "modelAsString": true
+          }
+        },
+        "ipRules": {
+          "description": "List of IP rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkRuleSetIpRule"
+          }
+        }
+      }
+    },
+    "NetworkRuleSetIpRule": {
+      "description": "An object for an IP range that will be allowed access.",
+      "type": "object",
+      "properties": {
+        "filterName": {
+          "description": "The readable name of the IP rule.",
+          "type": "string"
+        },
+        "ipMask": {
+          "description": "The CIDR block defining the IP range.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource ID of IoT Central private endpoint connection.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Resource name of IoT Central private endpoint connection.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type information (i.e., Microsoft.IoTCentral/provisioningServices/PrivateEndpointConnections).",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "",
+          "type": "object"
         }
       }
     },
