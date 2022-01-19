@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "namespaceName": "sayan-ua-test-eh-system-1",
+    "resourceGroupName": "sayantest",
+    "api-version": "2022-01-01",
+    "subscriptionId": "e8baea74-64ce-459b-bee3-5aa4c47b3ae3"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/e8baea74-64ce-459b-bee3-5aa4c47b3ae3/resourceGroups/sayantest/providers/Microsoft.EventHub/namespaces/sayan-ua-test-eh-system-1/applicationgroups/appGroup1",
+            "name": "appGroup1",
+            "type": "Microsoft.EventHub/Namespaces/ApplicationGroups",
+            "location": "EAST US 2 EUAP",
+            "properties": {
+              "updatedAt": "2022-01-13T03:08:11.1671879Z",
+              "created": "2021-01-13T03:08:11.1671879Z",
+              "appGroupIdentifier": "SASKey=RootManageSharedKey",
+              "name": "appGroup1",
+              "policies": [
+                {
+                  "name": "ThrottlingPolicy",
+                  "metricId": "IncomingMessages",
+                  "rateLimitThreshold": 15
+                }
+              ],
+              "isEnabled": true
+            }
+          },
+          {
+            "id": "/subscriptions/e8baea74-64ce-459b-bee3-5aa4c47b3ae3/resourceGroups/sayantest/providers/Microsoft.EventHub/namespaces/sayan-ua-test-eh-system-1/applicationgroups/appGroup1",
+            "name": "appGroup2",
+            "type": "Microsoft.EventHub/Namespaces/ApplicationGroups",
+            "location": "EAST US 2 EUAP",
+            "properties": {
+              "updatedAt": "2022-01-13T04:08:11.1671879Z",
+              "created": "2022-01-13T04:08:11.1671879Z",
+              "appGroupIdentifier": "SASKey=RootManageSharedKey",
+              "name": "appGroup2",
+              "policies": [
+                {
+                  "name": "ThrottlingPolicy",
+                  "metricId": "OutgoingMessages",
+                  "rateLimitThreshold": 20
+                }
+              ],
+              "isEnabled": false
+            }
+          }
+        ]
+      }
+    }
+  }
+}
