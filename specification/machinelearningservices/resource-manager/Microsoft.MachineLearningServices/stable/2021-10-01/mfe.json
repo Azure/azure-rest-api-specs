@@ -5543,11 +5543,7 @@
         },
         "provisioningState": {
           "description": "Provisioning state for the endpoint deployment.",
-          "$ref": "#/definitions/DeploymentProvisioningState",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+          "$ref": "#/definitions/DeploymentProvisioningState"
         },
         "resources": {
           "description": "Indicates compute configuration for the job.\r\nIf not provided, will default to the defaults defined in ResourceConfiguration.",
@@ -5629,11 +5625,7 @@
         },
         "provisioningState": {
           "description": "Provisioning state for the endpoint.",
-          "$ref": "#/definitions/EndpointProvisioningState",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+          "$ref": "#/definitions/EndpointProvisioningState"
         }
       },
       "x-ms-client-name": "BatchEndpointDetails",
@@ -6707,7 +6699,11 @@
         "name": "DeploymentProvisioningState",
         "modelAsString": true
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "readOnly": true,
+      "x-ms-mutability": [
+        "read"
+      ]
     },
     "DistributionConfiguration": {
       "description": "Base definition for job distribution configuration.",
@@ -6974,7 +6970,11 @@
         "name": "EndpointProvisioningState",
         "modelAsString": true
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "readOnly": true,
+      "x-ms-mutability": [
+        "read"
+      ]
     },
     "EnvironmentContainer": {
       "description": "Container for environment specification versions.",
@@ -7036,7 +7036,11 @@
         "name": "EnvironmentType",
         "modelAsString": true
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "readOnly": true,
+      "x-ms-mutability": [
+        "read"
+      ]
     },
     "EnvironmentVersion": {
       "description": "Environment version details.",
@@ -7065,11 +7069,7 @@
         },
         "environmentType": {
           "description": "Environment type is either user managed or curated by the Azure ML service\r\n<see href=\"https://docs.microsoft.com/en-us/azure/machine-learning/resource-curated-environments\" />",
-          "$ref": "#/definitions/EnvironmentType",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+          "$ref": "#/definitions/EnvironmentType"
         },
         "image": {
           "description": "Name of the image that will be used for the environment.\r\n<seealso href=\"https://docs.microsoft.com/en-us/azure/machine-learning/how-to-deploy-custom-docker-image#use-a-custom-base-image\" />",
@@ -7330,11 +7330,7 @@
         },
         "status": {
           "description": "Status of the job.",
-          "$ref": "#/definitions/JobStatus",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+          "$ref": "#/definitions/JobStatus"
         }
       },
       "discriminator": "jobType",
@@ -7608,19 +7604,11 @@
       "properties": {
         "mode": {
           "description": "Output Delivery Mode.",
-          "$ref": "#/definitions/OutputDataDeliveryMode",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+          "$ref": "#/definitions/OutputDataDeliveryMode"
         },
         "uri": {
           "description": "Uri path.",
           "$ref": "#/definitions/UriReference",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
           "x-nullable": true
         }
       },
@@ -7712,7 +7700,11 @@
         "name": "JobStatus",
         "modelAsString": true
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "readOnly": true,
+      "x-ms-mutability": [
+        "read"
+      ]
     },
     "JobType": {
       "description": "Enum to determine the type of job.",
@@ -8061,11 +8053,7 @@
         },
         "provisioningState": {
           "description": "Provisioning state for the endpoint deployment.",
-          "$ref": "#/definitions/DeploymentProvisioningState",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+          "$ref": "#/definitions/DeploymentProvisioningState"
         },
         "readinessProbe": {
           "description": "Readiness probe validates if the container is ready to serve traffic. The properties and defaults are the same as liveness probe.",
@@ -8157,11 +8145,7 @@
         },
         "provisioningState": {
           "description": "Provisioning state for the endpoint.",
-          "$ref": "#/definitions/EndpointProvisioningState",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+          "$ref": "#/definitions/EndpointProvisioningState"
         },
         "traffic": {
           "description": "Percentage of traffic from endpoint to divert to each deployment. Traffic values need to sum to 100.",
@@ -8303,7 +8287,11 @@
         "name": "OutputDataDeliveryMode",
         "modelAsString": true
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "readOnly": true,
+      "x-ms-mutability": [
+        "read"
+      ]
     },
     "OutputPathAssetReference": {
       "description": "Reference to an asset via its path in a job output.",
@@ -9660,7 +9648,11 @@
           "x-nullable": true
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "readOnly": true,
+      "x-ms-mutability": [
+        "read"
+      ]
     },
     "UserAssignedIdentityMeta": {
       "description": "User assigned identities associated with a resource.",
