@@ -683,7 +683,7 @@
           "200": {
             "description": "List of default device groups created.",
             "schema": {
-              "$ref": "#/definitions/AzureSpherePage_DeviceGroupProperties"
+              "$ref": "#/definitions/AzureSpherePage_DeviceGroup"
             }
           },
           "default": {
@@ -3487,13 +3487,13 @@
       },
       "description": "Azure Sphere page of elements."
     },
-    "AzureSpherePage_DeviceGroupProperties": {
+    "AzureSpherePage_DeviceGroup": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeviceGroupProperties"
+            "$ref": "#/definitions/DeviceGroup"
           },
           "description": "List of elements",
           "readOnly": true
@@ -3884,6 +3884,24 @@
         }
       ]
     },
+    "ProductProperties": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the product"
+        }
+      },
+      "description": "Properties of the product",
+      "required": [
+        "description"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureSphereProperties"
+        }
+      ]
+    },
     "DeviceGroupProperties": {
       "type": "object",
       "properties": {
@@ -3905,24 +3923,6 @@
         }
       },
       "description": "Properties of the device group",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureSphereProperties"
-        }
-      ]
-    },
-    "ProductProperties": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Description of the product"
-        }
-      },
-      "description": "Properties of the product",
-      "required": [
-        "description"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/AzureSphereProperties"
