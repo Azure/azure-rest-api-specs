@@ -26,7 +26,7 @@ These are the global settings for the quantum.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2019-11-04-preview
+tag: package-2021-11-01-preview
 ```
 
 ### Tag: package-2019-11-04-preview
@@ -68,10 +68,9 @@ This is not used by Autorest itself.
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-node
 ```
 
 ## Python
@@ -84,13 +83,9 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 
 ## Java
 
-See configuration in [readme.go.md](./readme.java.md)
+See configuration in [readme.java.md](./readme.java.md)
 
 ## TypeScript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
 
-
-## Node.js
-
-See configuration in [readme.go.md](./readme.nodejs.md)
