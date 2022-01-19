@@ -40,7 +40,7 @@ These settings apply only when `--tag=release_2021_11_01_preview` is specified o
 
 ``` yaml $(tag) == 'release_2021_11_01_preview'
 input-file:
-- preview/2021-11-01-preview/analyzeconversations.json
+- preview/2021-11-01-preview/textanalytics.json
 title:
   Microsoft Cognitive Language Service
 modelerfour:
