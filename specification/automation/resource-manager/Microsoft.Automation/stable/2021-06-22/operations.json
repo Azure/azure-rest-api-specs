@@ -1,0 +1,208 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutomationManagement",
+    "version": "2021-06-22",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Automation/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available Automation REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/convertGraphRunbookContent": {
+      "post": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Post operation to serialize or deserialize GraphRunbookContent",
+        "operationId": "convertGraphRunbookContent",
+        "x-ms-examples": {
+          "Get Graphical raw runbook content from graphical runbook JSON object": {
+            "$ref": "./examples/serializeGraphRunbookContent.json"
+          },
+          "Get Graphical runbook content from raw content": {
+            "$ref": "./examples/deserializeGraphRunbookContent.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Input data describing the graphical runbook.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GraphicalRunbookContent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GraphicalRunbookContent"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OperationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Automation operations supported by the Automation resource provider."
+        }
+      },
+      "description": "The response model for the list of Automation operations"
+    },
+    "Operation": {
+      "description": "Automation REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Automation",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Runbooks, Jobs etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            }
+          },
+          "description": "Provider, Resource and Operation values"
+        }
+      }
+    },
+    "GraphicalRunbookContent": {
+      "type": "object",
+      "description": "Graphical Runbook Content",
+      "properties": {
+        "rawContent": {
+          "x-nullable": true,
+          "description": "Raw graphical Runbook content.",
+          "$ref": "#/definitions/RawGraphicalRunbookContent"
+        },
+        "graphRunbookJson": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "Graphical Runbook content as JSON"
+        }
+      }
+    },
+    "RawGraphicalRunbookContent": {
+      "type": "object",
+      "description": "Raw Graphical Runbook content",
+      "properties": {
+        "schemaVersion": {
+          "type": "string",
+          "description": "Schema version of the serializer."
+        },
+        "runbookDefinition": {
+          "type": "string",
+          "description": "Serialized Graphical runbook"
+        },
+        "runbookType": {
+          "type": "string",
+          "description": "Runbook Type",
+          "enum": [
+            "GraphPowerShell",
+            "GraphPowerShellWorkflow"
+          ],
+          "x-ms-enum": {
+            "name": "GraphRunbookType",
+            "modelAsString": true
+          }
+        }
+      }
+    }
+  }
+}

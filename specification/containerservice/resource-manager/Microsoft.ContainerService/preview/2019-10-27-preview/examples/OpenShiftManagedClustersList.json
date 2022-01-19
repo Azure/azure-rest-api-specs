@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "api-version": "2019-10-27-preview",
+    "subscriptionId": "subid1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid1/providers/Microsoft.ContainerService/openShiftManagedClusters",
+            "location": "location1",
+            "name": "clustername1",
+            "tags": {
+              "archv2": "",
+              "tier": "production"
+            },
+            "type": "Microsoft.ContainerService/OpenShiftManagedClusters",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "openShiftVersion": "v3.11",
+              "clusterVersion": "osa.1",
+              "fqdn": "df9337748a4b.location1.cloudapp.azure.com",
+              "publicHostname": "openshift.1225bdf9337748a4bd3a.location1.azmosa.io",
+              "networkProfile": {
+                "vnetCidr": "10.0.0.0/8",
+                "vnetId": "/subscriptions/subid1/resourceGroups/clusterrg/providers/Microsoft.Network/virtualNetworks/vnet"
+              },
+              "masterPoolProfile": {
+                "count": 3,
+                "vmSize": "Standard_D4s_v3",
+                "subnetCidr": "10.0.0.0/24",
+                "apiProperties": {
+                  "privateApiServer": false
+                }
+              },
+              "agentPoolProfiles": [
+                {
+                  "name": "infra",
+                  "role": "infra",
+                  "count": 3,
+                  "vmSize": "Standard_D4s_v3",
+                  "osType": "Linux",
+                  "subnetCidr": "10.0.0.0/24"
+                },
+                {
+                  "name": "compute",
+                  "role": "compute",
+                  "count": 4,
+                  "vmSize": "Standard_D4s_v3",
+                  "osType": "Linux",
+                  "subnetCidr": "10.0.0.0/24"
+                }
+              ],
+              "routerProfiles": [
+                {
+                  "name": "default",
+                  "fqdn": "osa2925bdf9337748f4bd3b.location1.cloudapp.azure.com",
+                  "publicSubdomain": "apps.bc309ee87c164153871c.location1.azmosa.io"
+                }
+              ],
+              "authProfile": {
+                "identityProviders": [
+                  {
+                    "name": "Azure AD",
+                    "provider": {
+                      "kind": "AADIdentityProvider",
+                      "clientId": "clientId",
+                      "tenantId": "tenantId",
+                      "customerAdminGroupId": "customerAdminGroupId"
+                    }
+                  }
+                ]
+              },
+              "monitorProfile": {
+                "enabled": true,
+                "workspaceResourceID": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.OperationalInsights/workspaces/workspacename1"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

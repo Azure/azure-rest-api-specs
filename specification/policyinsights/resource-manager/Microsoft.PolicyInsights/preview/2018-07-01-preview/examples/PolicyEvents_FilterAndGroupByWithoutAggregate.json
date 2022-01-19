@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "policyEventsResource": "default",
+    "subscriptionId": "fffedd8f-ffff-fffd-fffd-fffed2f84852",
+    "api-version": "2018-07-01-preview",
+    "$from": "2018-01-05T18:00:00Z",
+    "$filter": "PolicyDefinitionAction ne 'audit' and PolicyDefinitionAction ne 'append'",
+    "$apply": "groupby((PolicyAssignmentId, PolicyDefinitionId, PolicyDefinitionAction, ResourceId))",
+    "$top": 2
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyEvents/$metadata#default",
+        "@odata.count": 2,
+        "value": [
+          {
+            "@odata.id": null,
+            "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyEvents/$metadata#default/$entity",
+            "policyAssignmentId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourcegroups/5bc427ca-0089-4d0d-85bd-e98d1e40b3bf/providers/microsoft.authorization/policyassignments/storageaccountsku",
+            "policyDefinitionId": "/providers/microsoft.authorization/policydefinitions/7433c107-6db4-4ad1-b57a-a76dce0154a1",
+            "policyDefinitionAction": "deny",
+            "resourceId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourcegroups/5bc427ca-0089-4d0d-85bd-e98d1e40b3bf/providers/microsoft.storage/storageaccounts/7d528d3a"
+          },
+          {
+            "@odata.id": null,
+            "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyEvents/$metadata#default/$entity",
+            "policyAssignmentId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourcegroups/myResourceGroup/providers/microsoft.authorization/policyassignments/da43b50031bf4bce84584faa",
+            "policyDefinitionId": "/providers/microsoft.authorization/policydefinitions/1e30110a-5ceb-460c-a204-c1c3969c6d62",
+            "policyDefinitionAction": "deny",
+            "resourceId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourcegroups/myResourceGroup/providers/microsoft.storage/storageaccounts/mysa1"
+          }
+        ]
+      }
+    }
+  }
+}

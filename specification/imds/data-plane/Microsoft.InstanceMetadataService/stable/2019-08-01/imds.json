@@ -18,79 +18,6 @@
     "application/json"
   ],
   "paths": {
-    "/applications": {
-      "get": {
-        "operationId": "GalleryApplications_List",
-        "description": "Get list of the gallery applications.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/MetadataParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/GalleryApplications"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get list of the gallery applications": {
-            "$ref": "./examples/ListGalleryApplications.json"
-          }
-        }
-      }
-    },
-    "/applications/app": {
-      "get": {
-        "operationId": "GalleryApplication_Get",
-        "description": "Get application package.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/MetadataParameter"
-          },
-          {
-            "name": "incarnationId",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Incarnation Id of the gallery application"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ApplicationResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get gallery application package": {
-            "$ref": "./examples/GetGalleryApplication.json"
-          }
-        }
-      }
-    },
     "/instance": {
       "get": {
         "operationId": "Instances_GetMetadata",
@@ -373,6 +300,13 @@
           "type": "string",
           "description": "This is the list of tags for your VM."
         },
+        "tagsList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagsProperties"
+          },
+          "description": "This is the list of tags for your VM formatted as a JSON array for easier programmatic parsing."
+        },
         "version": {
           "type": "string",
           "description": "This is the version of the VM image."
@@ -491,6 +425,20 @@
         }
       }
     },
+    "TagsProperties": {
+      "type": "object",
+      "description": "This contains the properties of the tags in a tagsList.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "This is the name of the tag. It is equivalent to the key in the key-value pair format."
+        },
+        "value": {
+          "type": "string",
+          "description": "This is the value of the tag. It is, as expected, equivalent to the value in the key-value pair format."
+        }
+      }
+    },
     "Ipv4Properties": {
       "type": "object",
       "description": "This contains the IPv4 properties.",
@@ -586,7 +534,7 @@
       "properties": {
         "caching": {
           "type": "string",
-          "description": "This is the the caching requirements."
+          "description": "This is the caching requirements."
         },
         "createOption": {
           "type": "string",
@@ -641,7 +589,7 @@
       "properties": {
         "caching": {
           "type": "string",
-          "description": "This is the the caching requirements."
+          "description": "This is the caching requirements."
         },
         "createOption": {
           "type": "string",
@@ -737,61 +685,6 @@
     "ApplicationResponse": {
       "type": "string",
       "description": "This is a binary string containing the application."
-    },
-    "GalleryApplications": {
-      "type": "object",
-      "description": "This is the response from the GalleryApplications_List operation.",
-      "properties": {
-        "applications": {
-          "type": "array",
-          "description": "List of gallery applications",
-          "items": {
-            "type": "object",
-            "description": "This contains information about the gallery application.",
-            "$ref": "#/definitions/GalleryApplication"
-          }
-        }
-      }
-    },
-    "GalleryApplication": {
-      "type": "object",
-      "description": "This contains information about the gallery application.",
-      "properties": {
-        "tags": {
-          "type": "string",
-          "description": "Optional attribute to passthrough value for more generic context"
-        },
-        "enableHealthCheck": {
-          "type": "boolean",
-          "description": "It indicates if this application reports health status"
-        },
-        "packageFile": {
-          "$ref": "#/definitions/PackageFile",
-          "description": "Package properties of the gallery application"
-        }
-      }
-    },
-    "PackageFile": {
-      "type": "object",
-      "description": "Package properties of the gallery application.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource id of the gallery application"
-        },
-        "incarnationId": {
-          "type": "string",
-          "description": "Unique identifier for this particular application instance"
-        },
-        "fileName": {
-          "type": "string",
-          "description": "Application package file name"
-        },
-        "contentType": {
-          "type": "string",
-          "description": "Application package type"
-        }
-      }
     },
     "Instance": {
       "type": "object",

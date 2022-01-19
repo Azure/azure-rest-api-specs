@@ -1,0 +1,661 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-03-01",
+    "title": "Certificates API Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/certificates": {
+      "get": {
+        "tags": [
+          "Certificates"
+        ],
+        "summary": "Get all certificates for a subscription.",
+        "description": "Description for Get all certificates for a subscription.",
+        "operationId": "Certificates_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Return only information specified in the filter (using OData syntax). For example: $filter=KeyVaultId eq 'KeyVaultId'",
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CertificateCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Certificates for subscription": {
+            "$ref": "./examples/ListCertificates.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/certificates": {
+      "get": {
+        "tags": [
+          "Certificates"
+        ],
+        "summary": "Get all certificates in a resource group.",
+        "description": "Description for Get all certificates in a resource group.",
+        "operationId": "Certificates_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/CertificateCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Certificates by resource group": {
+            "$ref": "./examples/ListCertificatesByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/certificates/{name}": {
+      "get": {
+        "tags": [
+          "Certificates"
+        ],
+        "summary": "Get a certificate.",
+        "description": "Description for Get a certificate.",
+        "operationId": "Certificates_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the certificate.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Certificate"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Certificate": {
+            "$ref": "./examples/GetCertificate.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Certificates"
+        ],
+        "summary": "Create or update a certificate.",
+        "description": "Description for Create or update a certificate.",
+        "operationId": "Certificates_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the certificate.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateEnvelope",
+            "in": "body",
+            "description": "Details of certificate, if it exists already.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Certificate"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/Certificate"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Or Update Certificate": {
+            "$ref": "./examples/CreateOrUpdateCertificate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Certificates"
+        ],
+        "summary": "Delete a certificate.",
+        "description": "Description for Delete a certificate.",
+        "operationId": "Certificates_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the certificate.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted certificate."
+          },
+          "204": {
+            "description": "Certificate does not exist."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Certificate": {
+            "$ref": "./examples/DeleteCertificate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Certificates"
+        ],
+        "summary": "Create or update a certificate.",
+        "description": "Description for Create or update a certificate.",
+        "operationId": "Certificates_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the certificate.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateEnvelope",
+            "in": "body",
+            "description": "Details of certificate, if it exists already.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CertificatePatchResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/Certificate"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch Certificate": {
+            "$ref": "./examples/PatchCertificate.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Certificate": {
+      "description": "SSL certificate for an app.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Certificate resource specific properties",
+          "type": "object",
+          "properties": {
+            "password": {
+              "description": "Certificate password.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create"
+              ]
+            },
+            "friendlyName": {
+              "description": "Friendly name of the certificate.",
+              "type": "string",
+              "readOnly": true
+            },
+            "subjectName": {
+              "description": "Subject name of the certificate.",
+              "type": "string",
+              "readOnly": true
+            },
+            "hostNames": {
+              "description": "Host names the certificate applies to.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "pfxBlob": {
+              "format": "byte",
+              "description": "Pfx blob.",
+              "type": "string"
+            },
+            "siteName": {
+              "description": "App name.",
+              "type": "string",
+              "readOnly": true
+            },
+            "selfLink": {
+              "description": "Self link.",
+              "type": "string",
+              "readOnly": true
+            },
+            "issuer": {
+              "description": "Certificate issuer.",
+              "type": "string",
+              "readOnly": true
+            },
+            "issueDate": {
+              "format": "date-time",
+              "description": "Certificate issue Date.",
+              "type": "string",
+              "readOnly": true
+            },
+            "expirationDate": {
+              "format": "date-time",
+              "description": "Certificate expiration date.",
+              "type": "string",
+              "readOnly": true
+            },
+            "thumbprint": {
+              "description": "Certificate thumbprint.",
+              "type": "string",
+              "readOnly": true
+            },
+            "valid": {
+              "description": "Is the certificate valid?.",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "cerBlob": {
+              "format": "byte",
+              "description": "Raw bytes of .cer file",
+              "type": "string",
+              "readOnly": true
+            },
+            "publicKeyHash": {
+              "description": "Public key hash.",
+              "type": "string",
+              "readOnly": true
+            },
+            "hostingEnvironmentProfile": {
+              "$ref": "./CommonDefinitions.json#/definitions/HostingEnvironmentProfile",
+              "description": "Specification for the App Service Environment to use for the certificate.",
+              "readOnly": true
+            },
+            "keyVaultId": {
+              "description": "Key Vault Csm resource Id.",
+              "type": "string"
+            },
+            "keyVaultSecretName": {
+              "description": "Key Vault secret name.",
+              "type": "string"
+            },
+            "keyVaultSecretStatus": {
+              "description": "Status of the Key Vault secret.",
+              "enum": [
+                "Initialized",
+                "WaitingOnCertificateOrder",
+                "Succeeded",
+                "CertificateOrderFailed",
+                "OperationNotPermittedOnKeyVault",
+                "AzureServiceUnauthorizedToAccessKeyVault",
+                "KeyVaultDoesNotExist",
+                "KeyVaultSecretDoesNotExist",
+                "UnknownError",
+                "ExternalPrivateKey",
+                "Unknown"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "KeyVaultSecretStatus",
+                "modelAsString": false
+              }
+            },
+            "serverFarmId": {
+              "description": "Resource ID of the associated App Service plan, formatted as: \"/subscriptions/{subscriptionID}/resourceGroups/{groupName}/providers/Microsoft.Web/serverfarms/{appServicePlanName}\".",
+              "type": "string"
+            },
+            "canonicalName": {
+              "description": "CNAME of the certificate to be issued via free certificate",
+              "type": "string"
+            },
+            "domainValidationMethod": {
+              "description": "Method of domain validation for free cert",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CertificateCollection": {
+      "description": "Collection of certificates.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Certificate"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CertificatePatchResource": {
+      "description": "ARM resource for a certificate.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "CertificatePatchResource resource specific properties",
+          "type": "object",
+          "properties": {
+            "password": {
+              "description": "Certificate password.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create"
+              ]
+            },
+            "friendlyName": {
+              "description": "Friendly name of the certificate.",
+              "type": "string",
+              "readOnly": true
+            },
+            "subjectName": {
+              "description": "Subject name of the certificate.",
+              "type": "string",
+              "readOnly": true
+            },
+            "hostNames": {
+              "description": "Host names the certificate applies to.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "pfxBlob": {
+              "format": "byte",
+              "description": "Pfx blob.",
+              "type": "string"
+            },
+            "siteName": {
+              "description": "App name.",
+              "type": "string",
+              "readOnly": true
+            },
+            "selfLink": {
+              "description": "Self link.",
+              "type": "string",
+              "readOnly": true
+            },
+            "issuer": {
+              "description": "Certificate issuer.",
+              "type": "string",
+              "readOnly": true
+            },
+            "issueDate": {
+              "format": "date-time",
+              "description": "Certificate issue Date.",
+              "type": "string",
+              "readOnly": true
+            },
+            "expirationDate": {
+              "format": "date-time",
+              "description": "Certificate expiration date.",
+              "type": "string",
+              "readOnly": true
+            },
+            "thumbprint": {
+              "description": "Certificate thumbprint.",
+              "type": "string",
+              "readOnly": true
+            },
+            "valid": {
+              "description": "Is the certificate valid?.",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "cerBlob": {
+              "format": "byte",
+              "description": "Raw bytes of .cer file",
+              "type": "string",
+              "readOnly": true
+            },
+            "publicKeyHash": {
+              "description": "Public key hash.",
+              "type": "string",
+              "readOnly": true
+            },
+            "hostingEnvironmentProfile": {
+              "$ref": "./CommonDefinitions.json#/definitions/HostingEnvironmentProfile",
+              "description": "Specification for the App Service Environment to use for the certificate.",
+              "readOnly": true
+            },
+            "keyVaultId": {
+              "description": "Key Vault Csm resource Id.",
+              "type": "string"
+            },
+            "keyVaultSecretName": {
+              "description": "Key Vault secret name.",
+              "type": "string"
+            },
+            "keyVaultSecretStatus": {
+              "description": "Status of the Key Vault secret.",
+              "enum": [
+                "Initialized",
+                "WaitingOnCertificateOrder",
+                "Succeeded",
+                "CertificateOrderFailed",
+                "OperationNotPermittedOnKeyVault",
+                "AzureServiceUnauthorizedToAccessKeyVault",
+                "KeyVaultDoesNotExist",
+                "KeyVaultSecretDoesNotExist",
+                "UnknownError",
+                "ExternalPrivateKey",
+                "Unknown"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "KeyVaultSecretStatus",
+                "modelAsString": false
+              }
+            },
+            "serverFarmId": {
+              "description": "Resource ID of the associated App Service plan, formatted as: \"/subscriptions/{subscriptionID}/resourceGroups/{groupName}/providers/Microsoft.Web/serverfarms/{appServicePlanName}\".",
+              "type": "string"
+            },
+            "canonicalName": {
+              "description": "CNAME of the certificate to be issued via free certificate",
+              "type": "string"
+            },
+            "domainValidationMethod": {
+              "description": "Method of domain validation for free cert",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Your Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+      "required": true,
+      "type": "string"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "Name of the resource group to which the resource belongs.",
+      "required": true,
+      "type": "string",
+      "maxLength": 90,
+      "minLength": 1,
+      "pattern": "^[-\\w\\._\\(\\)]+[^\\.]$",
+      "x-ms-parameter-location": "method"
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "API Version",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
