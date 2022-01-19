@@ -1,0 +1,144 @@
+{
+  "x-generator": "NSwag v13.2.5.0 (NJsonSchema v10.1.7.0 (Newtonsoft.Json v12.0.0.0))",
+  "swagger": "2.0",
+  "info": {
+    "title": "OSCPControlPlaneServiceAPI",
+    "description": "REST APIs for OSCP Control Plane Service",
+    "version": "2021-12-01-preview"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.OpenLogisticsPlatform/shareInvites/": {
+      "get": {
+        "tags": [
+          "ShareInvite"
+        ],
+        "operationId": "ShareInvite_List",
+        "x-ms-examples": {
+          "Share_Invites_List": {
+            "$ref": "./examples/Share_Invites_List.json"
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ShareInviteList"
+            }
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ShareInvite": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "shareName": {
+              "type": "string",
+              "description": "Name of the share Invite",
+              "readOnly": true
+            },
+            "redeemableLocation": {
+              "description": "Location of the resource.",
+              "type": "string",
+              "readOnly": true
+            },
+            "description": {
+              "type": "string",
+              "readOnly": true
+            },
+            "sourceTenantId": {
+              "type": "string",
+              "readOnly": true
+            },
+            "shareId": {
+              "type": "string",
+              "readOnly": true
+            },
+            "shareState": {
+              "$ref": "./shares.json#/definitions/ShareState"
+            }
+          }
+        }
+      }
+    },
+    "ShareInviteList": {
+      "description": "The list of share Invites.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of share Invites.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of share Invites.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ShareInvite"
+          }
+        }
+      }
+    },
+    "UnavailableReason": {
+      "type": "string",
+      "enum": [
+        "None",
+        "InvalidName",
+        "SubscriptionIsDisabled",
+        "NameInUse",
+        "NameInLockdown",
+        "TooManyNamespaceInCurrentSubscription"
+      ],
+      "x-ms-enum": {
+        "name": "UnavailableReason",
+        "modelAsString": false
+      },
+      "description": "Specifies the reason for the unavailability of the service."
+    }
+  },
+  "parameters": {}
+}

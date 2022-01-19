@@ -111,6 +111,26 @@ input-file:
 override-info:
   title: LogisticsManagementClient
 ```
+
+### Tag: package-2021-12-01-preview
+
+These settings apply only when `--tag=package-2021-12-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-12-01-preview'
+input-file:
+  - Microsoft.OpenLogisticsPlatform/preview/2021-12-01-preview/workspaces.json
+  - Microsoft.OpenLogisticsPlatform/preview/2021-12-01-preview/applicationManagers.json
+  - Microsoft.OpenLogisticsPlatform/preview/2021-12-01-preview/operations.json
+  - Microsoft.OpenLogisticsPlatform/preview/2021-12-01-preview/shares.json
+  - Microsoft.OpenLogisticsPlatform/preview/2021-12-01-preview/shareSubscriptions.json
+  - Microsoft.OpenLogisticsPlatform/preview/2021-12-01-preview/shareInvites.json
+  - Microsoft.OpenLogisticsPlatform/preview/2021-12-01-preview/applications.json
+  - Microsoft.OpenLogisticsPlatform/preview/2021-12-01-preview/eventGridFilters.json
+  - Microsoft.OpenLogisticsPlatform/preview/2021-12-01-preview/applicationRegistrations.json
+# Needed when there is more than one input file
+override-info:
+  title: LogisticsManagementClient
+```
 ---
 
 

@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "subscriptionId": "6500a5f9-c9cf-446a-9039-3b8edebd9bb1",
+    "resourceGroupName": "UserRP-test",
+    "applicationManagerName": "contosoApplicationManager",
+    "api-version": "2021-12-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/51766542-3ed7-4a72-a187-0c8ab644ddab/resourceGroups/mygroup/providers/Microsoft.OpenLogisticsPlatform/applicationManagers/contosoApplicationManager/eventGridFilters/_default",
+            "name": "_default",
+            "type": "Microsoft.OpenLogisticsPlatform/applicationManagers/EventGridFilters",
+            "properties": {
+              "filter": {
+                "subjectBeginsWith": "",
+                "subjectEndsWith": "",
+                "includedEventTypes": [
+                  "All"
+                ]
+              },
+              "subscriberIdentityInfo": {
+                "clientPrincipalId": "clientPrincipleId",
+                "clientObjectId": "clientObjectId",
+                "clientTenantId": "clientTenantId",
+                "clientApplicationId": "clientApplicationId",
+                "clientAuthorizationSource": "clientAuthorizationSource"
+              },
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/51766542-3ed7-4a72-a187-0c8ab644ddab/resourceGroups/mygroup/providers/Microsoft.OpenLogisticsPlatform/applicationManagers/contosoApplicationManager/eventGridFilters/Filter2",
+            "name": "Filter2",
+            "type": "Microsoft.OpenLogisticsPlatform/applicationManagers/EventGridFilters",
+            "properties": {
+              "filter": {
+                "subjectBeginsWith": "/openlogisticsplatform/applicationManagers/c424c0eb-8818-4af3-81db-e8f8fdae7829/Item",
+                "subjectEndsWith": "10000000-0000-0000-0000-000000000001",
+                "includedEventTypes": [
+                  "Microsoft.OpenLogisticsPlatform.EventName21",
+                  "Microsoft.OpenLogisticsPlatform.EventName22"
+                ]
+              },
+              "subscriberIdentityInfo": {
+                "clientPrincipalId": "clientPrincipleId2",
+                "clientObjectId": "clientObjectId2",
+                "clientTenantId": "clientTenantId2",
+                "clientApplicationId": "clientApplicationId2",
+                "clientAuthorizationSource": "clientAuthorizationSource2"
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

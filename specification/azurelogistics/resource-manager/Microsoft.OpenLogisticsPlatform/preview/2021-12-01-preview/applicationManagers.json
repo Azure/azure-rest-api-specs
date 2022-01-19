@@ -1,0 +1,390 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "OSCPControlPlaneServiceAPI",
+    "description": "REST APIs for Azure Open Supply Chain Platform's Control Plane Service",
+    "version": "2021-12-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenLogisticsPlatform/applicationManagers/{applicationManagerName}": {
+      "get": {
+        "tags": [
+          "applicationManager"
+        ],
+        "description": "Gets an applicationManager.",
+        "operationId": "applicationManager_Get",
+        "x-ms-examples": {
+          "applicationManager Get": {
+            "$ref": "./examples/ApplicationManager_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationManagerNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/applicationManager"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "applicationManager"
+        ],
+        "description": "Creates or updates a applicationManager",
+        "operationId": "applicationManager_Put",
+        "x-ms-examples": {
+          "applicationManager Put": {
+            "$ref": "./examples/ApplicationManager_Put.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationManagerNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "applicationManager",
+            "in": "body",
+            "description": "The applicationManager's content to apply.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/applicationManager"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "Returned when the operation is successful.",
+            "schema": {
+              "$ref": "#/definitions/applicationManager"
+            }
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "applicationManager"
+        ],
+        "operationId": "applicationManager_Delete",
+        "x-ms-examples": {
+          "applicationManager Delete": {
+            "$ref": "./examples/ApplicationManager_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationManagerNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returned when the operation is successful."
+          },
+          "202": {
+            "description": "Returned when the operation is accepted."
+          },
+          "204": {
+            "description": "Returned when the operation returns no content."
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "applicationManager"
+        ],
+        "description": "Patches applicationManager properties.",
+        "operationId": "applicationManager_Update",
+        "x-ms-examples": {
+          "applicationManager Update": {
+            "$ref": "./examples/ApplicationManager_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationManagerNameParameter"
+          },
+          {
+            "name": "applicationManagerPatchResource",
+            "description": "applicationManager patch properties.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/applicationManagerPatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returned when the operation is successful.",
+            "schema": {
+              "$ref": "#/definitions/applicationManager"
+            }
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenLogisticsPlatform/applicationManagers": {
+      "get": {
+        "tags": [
+          "applicationManager"
+        ],
+        "description": "Lists a collection of applicationManagers under the given resource group.",
+        "operationId": "applicationManager_List",
+        "x-ms-examples": {
+          "applicationManager List": {
+            "$ref": "./examples/ApplicationManager_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "Returned when the operation is successful.",
+            "schema": {
+              "$ref": "#/definitions/applicationManagerList"
+            }
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OpenLogisticsPlatform/applicationManagers": {
+      "get": {
+        "tags": [
+          "applicationManager"
+        ],
+        "description": "Lists a collection of applicationManagers under the given Azure Subscription ID.",
+        "operationId": "applicationManager_ListAll",
+        "x-ms-examples": {
+          "applicationManager ListAll": {
+            "$ref": "./examples/ApplicationManager_ListAll.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "Returned when the operation is successful.",
+            "schema": {
+              "$ref": "#/definitions/applicationManagerList"
+            }
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "applicationManagerProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Accepted",
+        "Succeeded",
+        "Creating",
+        "Deleting",
+        "Failed"
+      ]
+    },
+    "applicationManager": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Etag."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "applicationManagerId": {
+              "type": "string",
+              "description": "applicationManager identifier.",
+              "readOnly": true
+            },
+            "provisioningState": {
+              "description": "Provisioning state of the applicationManager.",
+              "readOnly": true,
+              "$ref": "#/definitions/applicationManagerProvisioningState"
+            }
+          }
+        }
+      }
+    },
+    "applicationManagerPatchResource": {
+      "type": "object",
+      "description": "applicationManager patch properties",
+      "allOf": [
+        {
+          "$ref": "workspaces.json#/definitions/TrackedResourceUpdate"
+        }
+      ]
+    },
+    "applicationManagerList": {
+      "description": "The list of applicationManager resources.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of applicationManager resources list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of applicationManagers.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/applicationManager"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApplicationManagerNameParameter": {
+      "type": "string",
+      "name": "applicationManagerName",
+      "description": "The name of resource. This is the name of your Azure Supply Chain Service's applicationManager.",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

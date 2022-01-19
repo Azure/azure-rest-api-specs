@@ -1,0 +1,305 @@
+{
+  "x-generator": "NSwag v13.2.5.0 (NJsonSchema v10.1.7.0 (Newtonsoft.Json v12.0.0.0))",
+  "swagger": "2.0",
+  "info": {
+    "title": "OSCPControlPlaneServiceAPI",
+    "description": "REST APIs for OSCP Control Plane Service",
+    "version": "2021-12-01-preview"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenLogisticsPlatform/applicationManagers/{applicationManagerName}/applicationRegistrations": {
+      "get": {
+        "tags": [
+          "ApplicationRegistration"
+        ],
+        "operationId": "ApplicationRegistration_SubscriptionLevelList",
+        "x-ms-examples": {
+          "ApplicationRegistration Get": {
+            "$ref": "./examples/ApplicationRegistration_List_SubscriptionLevel.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "applicationManagers.json#/parameters/ApplicationManagerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationDefinitionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApplicationRegistrationList"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenLogisticsPlatform/applicationManagers/{applicationManagerName}/applicationRegistrations/{applicationRegistrationId}": {
+      "put": {
+        "tags": [
+          "ApplicationRegistration"
+        ],
+        "operationId": "ApplicationRegistration_SubscriptionLevelPut",
+        "x-ms-examples": {
+          "ApplicationRegistration Put": {
+            "$ref": "./examples/ApplicationRegistration_Put_SubscriptionLevel.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "applicationManagers.json#/parameters/ApplicationManagerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationRegistrationIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "ApplicationRegistration",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationRegistration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApplicationRegistration"
+            }
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false
+      },
+      "get": {
+        "tags": [
+          "ApplicationRegistration"
+        ],
+        "operationId": "ApplicationRegistration_SubscriptionLevelGet",
+        "x-ms-examples": {
+          "ApplicationRegistration Get": {
+            "$ref": "./examples/ApplicationRegistration_Get_SubscriptionLevel.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "applicationManagers.json#/parameters/ApplicationManagerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationRegistrationIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApplicationRegistration"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApplicationRegistration": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "displayName": {
+              "type": "string",
+              "description": "Name to display for application to register"
+            },
+            "applicationDefinitionId": {
+              "type": "string",
+              "description": "Definition id for application to register"
+            },
+            "parameters": {
+              "type": "object",
+              "description": "Parameters required by application to register, should match parameters in application manifest",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "resources": {
+              "type": "array",
+              "description": "List of resources required by application to register, e.g. share. should match resources in application manifest",
+              "items": {
+                "$ref": "#/definitions/ApplicationRegistrationResource"
+              }
+            },
+            "sourceWorkspaceId": {
+              "type": "string",
+              "description": "sourceWorkspaceId for application to register"
+            },
+            "provisioningState": {
+              "description": "The provisioning state of the resource.",
+              "readOnly": true,
+              "$ref": "#/definitions/ApplicationRegistrationProvisioningState"
+            },
+            "status": {
+              "type": "string",
+              "description": "ISV provided status on application"
+            }
+          }
+        }
+      }
+    },
+    "ApplicationRegistrationProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Accepted",
+        "Succeeded",
+        "Creating",
+        "Deleting",
+        "Failed"
+      ]
+    },
+    "ApplicationRegistrationResource": {
+      "type": "object",
+      "description": "A resources required by the application to register, e.g. share. should match resources in application manifest",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/ApplicationRegistrationResourceShareProperties"
+        }
+      }
+    },
+    "ApplicationRegistrationResourceShareProperties": {
+      "type": "object",
+      "description": "Application share resource information for application registration invite.",
+      "properties": {
+        "shareId": {
+          "type": "string"
+        }
+      }
+    },
+    "ApplicationRegistrationList": {
+      "description": "The list of ApplicationRegistration resources.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of ApplicationRegistration resources list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of ApplicationRegistrations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationRegistration"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApplicationDefinitionIdParameter": {
+      "type": "string",
+      "name": "application-definition-id",
+      "description": "The Id of your application definition (used part of queries).",
+      "in": "query",
+      "required": false,
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "ApplicationRegistrationIdParameter": {
+      "type": "string",
+      "name": "applicationRegistrationId",
+      "in": "path",
+      "description": "The Id of application registration invite.",
+      "required": true,
+      "x-nullable": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

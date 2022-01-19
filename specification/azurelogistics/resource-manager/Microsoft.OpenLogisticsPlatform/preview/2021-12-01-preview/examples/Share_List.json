@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "subscriptionId": "6500a5f9-c9cf-446a-9039-3b8edebd9bb1",
+    "resourceGroupName": "UserRP-test",
+    "workspaceName": "contosoworkspace",
+    "api-version": "2021-12-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/6500a5f9-c9cf-446a-9039-3b8edebd9bb1/resourceGroups/UserRP-test/providers/Microsoft.OpenLogisticsPlatform/workspaces/contosoworkspace/shares/shareName1",
+            "type": "Microsoft.OpenLogisticsPlatform/workspaces/shares",
+            "properties": {
+              "shareId": "0ffc4d8c-2e6a-4f7d-a153-13f4222bbbbc_sampleshare1",
+              "description": "testendtoendshare",
+              "targetTenantId": "f686d426-8d16-42db-81b7-ab578e110ccd",
+              "shareState": "Pending",
+              "accessAssignments": [
+                {
+                  "actionIds": [
+                    "Microsoft.OpenLogisticsPlatform/workspaces/items/write"
+                  ],
+                  "attributeConditions": [
+                    {
+                      "attributeName": "Microsoft.OLP/workspaces/items/labels",
+                      "values": [
+                        "spring",
+                        "apparel"
+                      ],
+                      "attributeMatchingScheme": "ANYOFANY"
+                    }
+                  ]
+                },
+                {
+                  "actionIds": [
+                    "Microsoft.OpenLogisticsPlatform/workspaces/items/read"
+                  ],
+                  "attributeConditions": [
+                    {
+                      "attributeName": "Microsoft.OLP/workspaces/items/labels",
+                      "values": [
+                        "spring",
+                        "apparel"
+                      ],
+                      "attributeMatchingScheme": "ANYOFANY"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/6500a5f9-c9cf-446a-9039-3b8edebd9bb1/resourceGroups/UserRP-test/providers/Microsoft.OpenLogisticsPlatform/workspaces/contosoworkspace/shares/shareName2",
+            "type": "Microsoft.OpenLogisticsPlatform/workspaces/shares",
+            "properties": {
+              "shareId": "0ffc4d8c-2e6a-4f7d-a153-13f4222bbbbc_sampleshare2",
+              "description": "testendtoendshare",
+              "targetTenantId": "f686d426-8d16-42db-81b7-ab578e110ccd",
+              "shareState": "Pending",
+              "accessAssignments": null
+            }
+          }
+        ]
+      }
+    },
+    "204": {}
+  }
+}
