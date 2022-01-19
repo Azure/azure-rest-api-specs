@@ -1,80 +1,80 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "version": "2021-12-01",
-      "title": "Schema of Azure HealthcareApis events published to Azure Event Grid.",
-      "description": "Describes the schema of the Azure HealthcareApis events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
-    },
-    "paths": {},
-    "definitions": {
-        "FhirResourceCreatedEventData": {
-            "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceCreated event.",
-            "type": "object",
-            "properties": {
-                "ResourceType": {
-                    "description": "Type of HL7 FHIR resource.",
-                    "type": "string"
-                },
-                "ResourceFhirAccount": {
-                    "description": "Domain name of FHIR account for this resource.",
-                    "type": "string"
-                },
-                "ResourceFhirId": {
-                    "description": "Id of HL7 FHIR resource.",
-                    "type": "string"
-                },
-                "ResourceVersionId": {
-                    "description": "VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted.",
-                    "type": "integer",
-                    "format": "int64"
-                }
-            }
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-12-01",
+    "title": "Schema of Azure HealthcareApis events published to Azure Event Grid.",
+    "description": "Describes the schema of the Azure HealthcareApis events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
+  },
+  "paths": {},
+  "definitions": {
+    "FhirResourceCreatedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceCreated event.",
+      "type": "object",
+      "properties": {
+        "ResourceType": {
+          "description": "Type of HL7 FHIR resource.",
+          "type": "string"
         },
-        "FhirResourceUpdatedEventData": {
-            "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceUpdated event.",
-            "type": "object",
-            "properties": {
-                "ResourceType": {
-                    "description": "Type of HL7 FHIR resource.",
-                    "type": "string"
-                },
-                "ResourceFhirAccount": {
-                    "description": "Domain name of FHIR account for this resource.",
-                    "type": "string"
-                },
-                "ResourceFhirId": {
-                    "description": "Id of HL7 FHIR resource.",
-                    "type": "string"
-                },
-                "ResourceVersionId": {
-                    "description": "VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted.",
-                    "type": "integer",
-                    "format": "int64"
-                }
-            }
+        "ResourceFhirAccount": {
+          "description": "Domain name of FHIR account for this resource.",
+          "type": "string"
         },
-        "FhirResourceDeletedEventData": {
-            "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceDeleted event.",
-            "type": "object",
-            "properties": {
-                "ResourceType": {
-                    "description": "Type of HL7 FHIR resource.",
-                    "type": "string"
-                },
-                "ResourceFhirAccount": {
-                    "description": "Domain name of FHIR account for this resource.",
-                    "type": "string"
-                },
-                "ResourceFhirId": {
-                    "description": "Id of HL7 FHIR resource.",
-                    "type": "string"
-                },
-                "ResourceVersionId": {
-                    "description": "VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted.",
-                    "type": "integer",
-                    "format": "int64"
-                }
-            }
+        "ResourceFhirId": {
+          "description": "Id of HL7 FHIR resource.",
+          "type": "string"
+        },
+        "ResourceVersionId": {
+          "description": "VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted.",
+          "type": "integer",
+          "format": "int64"
         }
+      }
+    },
+    "FhirResourceUpdatedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceUpdated event.",
+      "type": "object",
+      "properties": {
+        "ResourceType": {
+          "description": "Type of HL7 FHIR resource.",
+          "type": "string"
+        },
+        "ResourceFhirAccount": {
+          "description": "Domain name of FHIR account for this resource.",
+          "type": "string"
+        },
+        "ResourceFhirId": {
+          "description": "Id of HL7 FHIR resource.",
+          "type": "string"
+        },
+        "ResourceVersionId": {
+          "description": "VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "FhirResourceDeletedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceDeleted event.",
+      "type": "object",
+      "properties": {
+        "ResourceType": {
+          "description": "Type of HL7 FHIR resource.",
+          "type": "string"
+        },
+        "ResourceFhirAccount": {
+          "description": "Domain name of FHIR account for this resource.",
+          "type": "string"
+        },
+        "ResourceFhirId": {
+          "description": "Id of HL7 FHIR resource.",
+          "type": "string"
+        },
+        "ResourceVersionId": {
+          "description": "VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
     }
+  }
 }
