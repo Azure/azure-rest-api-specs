@@ -10,7 +10,6 @@ python:
   namespace: azure.quantum._client
   package-name: azure-quantum
   clear-output-folder: true
-  no-namespace-folders: true
   add-credentials: true
   credential-scopes: "https://quantum.microsoft.com/.default"
 ```
@@ -28,7 +27,9 @@ output-folder: $(python-sdks-folder)/quantum/azure-quantum
 
 ```yaml $(python) && $(python-mode) == 'cli'
 package-version: 0.0.0.1
+no-namespace-folders: true
 ```
 
 ```yaml $(python) && $(python-mode) == 'pythonSdk'
+no-namespace-folders: true
 ```
