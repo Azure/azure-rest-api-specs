@@ -275,6 +275,62 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTCentral/iotApps/{resourceName}/privateEndpointConnections/{privateEndpointName}": {
+      "get": {
+
+      },
+      "put": {
+
+      },
+      "delete": {
+
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTCentral/iotApps/{resourceName}/privateEndpointConnections": {
+      "get": {
+        "get": {
+          "tags": [
+            "PrivateEndpoints"
+          ],
+          "description": "Get all Private Endpoint Connections of a IoT Central Application.",
+          "operationId": "PrivateEndpoints_List",
+          "x-ms-examples": {
+            "Apps_ListBySubscription": {
+              "$ref": "./examples/PrivateEndpoints_List.json"
+            }
+          },
+          "parameters": [
+            {
+              "$ref": "#/parameters/api-version"
+            },
+            {
+              "$ref": "#/parameters/subscriptionId"
+            },
+            {
+              "$ref": "#/parameters/resourceGroupName"
+            },
+            {
+              "$ref": "#/parameters/resourceName"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the Private Endpoint Connections of the IoT Central Application.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
+              }
+            },
+            "default": {
+              "description": "DefaultErrorResponse",
+              "schema": {
+                "$ref": "#/definitions/CloudError"
+              }
+            }
+          },
+          "deprecated": false
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTCentral/iotApps": {
       "get": {
         "tags": [
@@ -530,7 +586,7 @@
           "description": "Private endpoint connections created on this Iot Central application.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
+            "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
           }
         }
       }
@@ -556,16 +612,8 @@
           "type": "boolean"
         },
         "defaultAction": {
-          "description": "The default action to apply.",
-          "type": "string",
-          "enum": [
-            "Allow",
-            "Deny"
-          ],
-          "x-ms-enum": {
-            "name": "NetworkAction",
-            "modelAsString": true
-          }
+          "description": "The default network action to apply.",
+          "$ref": "#/definitions/NetworkAction"
         },
         "ipRules": {
           "description": "List of IP rules.",
@@ -590,27 +638,16 @@
         }
       }
     },
-    "PrivateEndpointConnection": {
-      "description": "",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource ID of IoT Central private endpoint connection.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Resource name of IoT Central private endpoint connection.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Resource type information (i.e., Microsoft.IoTCentral/provisioningServices/PrivateEndpointConnections).",
-          "type": "string",
-          "readOnly": true
-        },
-        "properties": {
-          "description": "",
-          "type": "object"
-        }
+    "NetworkAction": {
+      "description": "Whether to allow or deny network traffic.",
+      "type": "string",
+      "enum": [
+        "Allow",
+        "Deny"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkAction",
+        "modelAsString": true
       }
     },
     "AppState": {

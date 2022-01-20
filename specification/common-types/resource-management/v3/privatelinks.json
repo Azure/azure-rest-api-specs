@@ -36,6 +36,14 @@
     "PrivateEndpointConnectionProperties": {
       "type": "object",
       "properties": {
+        "groupIds": {
+          "description": "The private endpoint resource group ids.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
         "privateEndpoint": {
           "$ref": "#/definitions/PrivateEndpoint",
           "description": "The resource of private end point."
