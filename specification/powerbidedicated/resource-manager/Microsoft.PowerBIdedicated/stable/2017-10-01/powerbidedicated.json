@@ -76,6 +76,12 @@
             "schema": {
               "$ref": "#/definitions/DedicatedCapacity"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -132,6 +138,12 @@
             "schema": {
               "$ref": "#/definitions/DedicatedCapacity"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -177,6 +189,12 @@
           },
           "202": {
             "description": "Accepted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -234,6 +252,12 @@
             "schema": {
               "$ref": "#/definitions/DedicatedCapacity"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -278,6 +302,12 @@
           },
           "202": {
             "description": "Accepted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -322,6 +352,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -356,6 +392,12 @@
             "schema": {
               "$ref": "#/definitions/DedicatedCapacities"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -389,6 +431,12 @@
             "schema": {
               "$ref": "#/definitions/DedicatedCapacities"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -418,6 +466,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/SkuEnumerationForNewResourceResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -461,6 +515,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/SkuEnumerationForExistingResourceResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -538,6 +598,12 @@
             "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/CheckCapacityNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -777,6 +843,11 @@
         "administration": {
           "$ref": "#/definitions/DedicatedCapacityAdministrators",
           "description": "A collection of Dedicated capacity administrators"
+        },
+        "mode": {
+          "description": "The capacity mode.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -831,16 +902,21 @@
       }
     },
     "ErrorResponse": {
-      "description": "Describes the format of Error response.",
       "type": "object",
+      "description": "Describes the format of Error response.",
       "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
+        "error": {
+          "description": "The error object",
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Error code"
+            },
+            "message": {
+              "type": "string",
+              "description": "Error message indicating why the operation failed."
+            }
+          }
         }
       }
     },

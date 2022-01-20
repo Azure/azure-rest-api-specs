@@ -1,0 +1,92 @@
+{
+  "parameters": {
+    "api-version": "2021-08-08-preview",
+    "subscriptionId": "1e3ff1c0-771a-4119-a03b-be82a51e232d",
+    "resourceGroupName": "alertscorrelationrg",
+    "actionRuleName": "WeeklySuppression",
+    "actionRulePatch": {
+      "tags": {
+        "key1": "value1",
+        "key2": "value2"
+      },
+      "properties": {
+        "enabled": false
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "systemData": {
+          "createdBy": "abc@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2018-06-12T22:05:09Z",
+          "lastModifiedBy": "xyz@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2018-06-12T22:05:09Z"
+        },
+        "properties": {
+          "scopes": [
+            "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg"
+          ],
+          "conditions": [
+            {
+              "field": "Severity",
+              "operator": "Equals",
+              "values": [
+                "Sev0",
+                "Sev2"
+              ]
+            },
+            {
+              "field": "MonitorService",
+              "operator": "Equals",
+              "values": [
+                "Platform",
+                "Application Insights"
+              ]
+            },
+            {
+              "field": "TargetResourceType",
+              "operator": "NotEquals",
+              "values": [
+                "Microsoft.Compute/VirtualMachines"
+              ]
+            }
+          ],
+          "schedule": {
+            "effectiveFrom": "2018-12-10T22:05:09",
+            "effectiveUntil": "2018-12-05T22:05:09",
+            "timeZone": "Pacific Standard Time",
+            "recurrences": [
+              {
+                "recurrenceType": "Weekly",
+                "startTime": "06:00:00",
+                "endTime": "14:00:00",
+                "daysOfWeek": [
+                  "Tuesday",
+                  "Friday"
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actionType": "removeAllActionGroups"
+            }
+          ],
+          "description": "Action rule on resource group for weekly suppression",
+          "enabled": false
+        },
+        "id": "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/WeeklySuppression",
+        "type": "Microsoft.AlertsManagement/actionRules",
+        "name": "WeeklySuppression",
+        "location": "Global",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        }
+      }
+    }
+  }
+}
