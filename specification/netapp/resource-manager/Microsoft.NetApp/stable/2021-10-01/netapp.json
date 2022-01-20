@@ -1217,7 +1217,7 @@
         ],
         "summary": "Get volume replication status",
         "description": "Get the status of the replication",
-        "operationId": "Volumes_ReplicationStatus",
+        "operationId": "Volumes_GetReplicationStatus",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -1256,7 +1256,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/listReplications": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/replications": {
       "get": {
         "tags": [
           "Volumes Replication"
@@ -1301,6 +1301,52 @@
         "x-ms-examples": {
           "Volumes_ListReplications": {
             "$ref": "examples/Volumes_ListReplications.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/replications/default": {
+      "get": {
+        "tags": [
+          "Volumes Replication"
+        ],
+        "summary": "Get default replication for a volume",
+        "description": "Get the default replication for a volume",
+        "operationId": "Volumes_GetReplicationsDefault",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/replicationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_ListReplications": {
+            "$ref": "examples/Volumes_GetReplication.json"
           }
         }
       }
@@ -4827,12 +4873,33 @@
           "description": "A list of replications",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/replicationObject"
+            "$ref": "#/definitions/replicationResponse"
           }
         },
         "nextLink": {
           "type": "string",
           "description": "URL to get the next set of results."
+        }
+      }
+    },
+    "replicationResponse": {
+      "description": "Information regarding Replication.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "SubscriptionQuotaItem properties",
+          "$ref": "#/definitions/replicationObject",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
