@@ -277,13 +277,150 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTCentral/iotApps/{resourceName}/privateEndpointConnections/{privateEndpointName}": {
       "get": {
-
+        "tags": [
+          "PrivateEndpoints"
+        ],
+        "description": "Get the metadata of a Private Endpoint Connection for the IoT Central Application.",
+        "operationId": "PrivateEndpoints_Get",
+        "x-ms-examples": {
+          "PrivateEndpoints_Get": {
+            "$ref": "./examples/PrivateEndpoints_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/privateEndpointName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The private endpoint connection for the IoT Central Application.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "deprecated": false
       },
       "put": {
-
+        "tags": [
+          "PrivateEndpoints"
+        ],
+        "description": "Create or update a Private Endpoint Connection.",
+        "operationId": "PrivateEndpoints_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "PrivateEndpoints_CreateOrUpdate": {
+            "$ref": "./examples/PrivateEndpoints_CreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/privateEndpointName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is returned as a response to the status polling request for the create or update operation. The body contains the resource representation that indicates a transitional provisioning state.",
+            "schema": {
+              "$ref": "#/definitions/App"
+            }
+          },
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "202": {
+            "description": "Accepted - Put request accepted; the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "deprecated": false
       },
       "delete": {
-
+        "tags": [
+          "PrivateEndpoints"
+        ],
+        "description": "Deletes a Private Endpoint Connection from the IoT Central Application.",
+        "operationId": "PrivateEndpoints_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "PrivateEndpoints_Delete": {
+            "$ref": "./examples/PrivateEndpoints_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/privateEndpointName"
+          }
+        ],
+        "responses": {
+          "200": { // !! status when deleting is "Creating"
+            "description": "This is returned as a response to the status polling request for the delete operation. The body contains status information for the operation."
+          },
+          "202": {
+            "description": "Accepted - Delete request accepted; the operation will complete asynchronously."
+          },
+          "404": { // resource returns 404 instead of the 204 returned by the resource
+            "description": "Once the long running delete operation completes successfully, a 404 Not Found status code is returned."
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "deprecated": false
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTCentral/iotApps/{resourceName}/privateEndpointConnections": {
@@ -295,7 +432,7 @@
           "description": "Get all Private Endpoint Connections of a IoT Central Application.",
           "operationId": "PrivateEndpoints_List",
           "x-ms-examples": {
-            "Apps_ListBySubscription": {
+            "PrivateEndpoints_List": {
               "$ref": "./examples/PrivateEndpoints_List.json"
             }
           },
@@ -587,7 +724,8 @@
           "type": "array",
           "items": {
             "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -1059,6 +1197,14 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "x-comment": "validation must match #/definitions/Resource"
+    },
+    "privateEndpointName": {
+      "name": "privateEndpointName",
+      "in": "path",
+      "description": "The private endpoint connection name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }
