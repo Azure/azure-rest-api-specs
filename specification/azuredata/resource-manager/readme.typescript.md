@@ -8,7 +8,6 @@ typescript:
   azure-arm: true
   package-name: "azuredata"
   output-folder: "$(typescript-sdks-folder)/packages/azuredata"
-  clear-output-folder: true
   payload-flattening-threshold: 1
   generate-metadata: true
 ```
