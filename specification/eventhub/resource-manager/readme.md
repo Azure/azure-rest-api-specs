@@ -168,7 +168,7 @@ input-file:
 - Microsoft.EventHub/preview/2022-01-01-preview/disasterRecoveryConfigs.json
 - Microsoft.EventHub/preview/2022-01-01-preview/operations.json
 - Microsoft.EventHub/preview/2022-01-01-preview/eventhubs.json
-- Microsoft.EventHub/preview/2022-01-01-preview//SchemaRegistry.json
+- Microsoft.EventHub/preview/2022-01-01-preview/SchemaRegistry.json
 - Microsoft.EventHub/preview/2022-01-01-preview/ApplicationGroups.json
 ```
 

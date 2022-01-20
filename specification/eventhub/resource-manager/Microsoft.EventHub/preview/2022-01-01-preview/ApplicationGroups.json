@@ -296,6 +296,7 @@
       "description": "Single item in List or Get Schema Group operation"
     },
     "ThrottlingPolicy": {
+      "type": "object",
       "description": "Properties of the throttling policy",
       "properties": {
         "policyName": {
@@ -304,8 +305,9 @@
           "description": "The Name of this policy"
         },
         "rateLimitThreshold": {
+          "format": "int64",
+          "type": "integer",
           "readOnly": true,
-          "type": "int32",
           "description": "The Threshold limit above which the application group will be throttled.Rate limit is always per second."
         },
         "metricId": {
