@@ -324,12 +324,12 @@
         "tags": [
           "PrivateEndpoints"
         ],
-        "description": "Create or update a Private Endpoint Connection.",
-        "operationId": "PrivateEndpoints_CreateOrUpdate",
+        "description": "Update a Private Endpoint Connection.",
+        "operationId": "PrivateEndpoints_Update",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "PrivateEndpoints_CreateOrUpdate": {
-            "$ref": "./examples/PrivateEndpoints_CreateOrUpdate.json"
+          "PrivateEndpoints_Update": {
+            "$ref": "./examples/PrivateEndpoints_Update.json"
           }
         },
         "parameters": [
@@ -351,10 +351,7 @@
         ],
         "responses": {
           "200": {
-            "description": "This is returned as a response to the status polling request for the create or update operation. The body contains the resource representation that indicates a transitional provisioning state.",
-            "schema": {
-              "$ref": "#/definitions/App"
-            }
+            "description": "This is returned as a response to the status polling request for the update operation. The body contains status information for the operation."
           },
           "201": {
             "description": "",
@@ -410,8 +407,8 @@
           "202": {
             "description": "Accepted - Delete request accepted; the operation will complete asynchronously."
           },
-          "404": {
-            "description": "Once the long running delete operation completes successfully, a 404 Not Found status code is returned."
+          "204": {
+            "description": "Once the long running delete operation completes successfully, a 404 No Content status code is returned."
           },
           "default": {
             "description": "DefaultErrorResponse",
