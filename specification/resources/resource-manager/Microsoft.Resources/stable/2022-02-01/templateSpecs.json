@@ -3,7 +3,7 @@
   "info": {
     "title": "TemplateSpecsClient",
     "description": "The APIs listed in this specification can be used to manage Template Spec resources through the Azure Resource Manager.",
-    "version": "2021-05-01"
+    "version": "2021-06-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -548,6 +548,162 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Resources/builtInTemplateSpecs/{templateSpecName}": {
+      "get": {
+        "tags": [
+          "TemplateSpecs"
+        ],
+        "operationId": "TemplateSpecs_GetBuiltIn",
+        "description": "Gets a built-in Template Spec with a given name.",
+        "x-ms-examples": {
+          "TemplateSpecs_GetBuiltIn": {
+            "$ref": "./examples/BuiltInTemplateSpecsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/TemplateSpecNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateSpecExpandParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the built-in Template Spec.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpec"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecsError"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Resources/builtInTemplateSpecs/": {
+      "get": {
+        "tags": [
+          "TemplateSpecs"
+        ],
+        "operationId": "TemplateSpecs_ListBuiltIns",
+        "description": "Lists built-in Template Specs.",
+        "x-ms-examples": {
+          "TemplateSpecs_ListBuiltIns": {
+            "$ref": "./examples/BuiltInTemplateSpecsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/TemplateSpecExpandParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of built-in Template Specs.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecsError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Resources/builtInTemplateSpecs/{templateSpecName}/versions": {
+      "get": {
+        "tags": [
+          "TemplateSpecVersions"
+        ],
+        "operationId": "TemplateSpecVersions_ListBuiltIns",
+        "description": "Lists all the Template Spec versions in the specified built-in Template Spec.",
+        "x-ms-examples": {
+          "TemplateSpecVersions_ListBuiltIns": {
+            "$ref": "./examples/BuiltInTemplateSpecVersionsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/TemplateSpecNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of built-in Template Spec versions.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecVersionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecsError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Resources/builtInTemplateSpecs/{templateSpecName}/versions/{templateSpecVersion}": {
+      "get": {
+        "tags": [
+          "TemplateSpecVersions"
+        ],
+        "operationId": "TemplateSpecVersions_GetBuiltIn",
+        "description": "Gets a Template Spec version from a specific built-in Template Spec.",
+        "x-ms-examples": {
+          "TemplateSpecVersions_GetBuiltIn": {
+            "$ref": "./examples/BuiltInTemplateSpecVersionsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/TemplateSpecNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateSpecVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the built-in Template Spec version.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecsError"
+            }
+          }
         }
       }
     }
