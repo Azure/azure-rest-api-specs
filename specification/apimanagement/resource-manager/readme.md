@@ -87,6 +87,7 @@ input-file:
   - Microsoft.ApiManagement/preview/2021-12-01-preview/definitions.json
 ```
 
+
 ### Tag: package-2021-08
 
 These settings apply only when `--tag=package-2021-08` is specified on the command line.
@@ -138,7 +139,6 @@ input-file:
   - Microsoft.ApiManagement/stable/2021-08-01/definitions.json
 tag: package-preview-2021-12
 ```
-
 
 ### Tag: package-preview-2021-04
 
