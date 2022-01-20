@@ -6,7 +6,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(python)
 python-mode: create
 python:
-  package-version: 0.0.0b1
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: azure.quantum._client
   package-name: azure-quantum
