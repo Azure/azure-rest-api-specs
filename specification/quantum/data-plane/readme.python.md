@@ -12,11 +12,8 @@ python:
   package-name: azure-quantum-_client
   clear-output-folder: true
   no-namespace-folders: false
-  add-credentials: true
-  credential-scopes: ["https://quantum.microsoft.com/.default"]
   output-folder: $(python-sdks-folder)/quantum/azure-quantum
   basic-setup-py: true
-  payload-flattening-threshold: 1
 ```
 
 ```yaml $(python) && $(python-mode) == 'update'
