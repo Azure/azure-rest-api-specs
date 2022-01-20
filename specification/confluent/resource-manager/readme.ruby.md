@@ -16,6 +16,7 @@ batch:
   - tag: package-2020-03-01-preview
   - tag: package-2021-03-01-preview
   - tag: package-2021-09-01-preview
+  - tag: package-2021-12-01
 ```
 
 ### Tag: package-2020-03-01 and ruby
@@ -55,5 +56,15 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ```yaml $(tag) == 'package-2021-09-01-preview' && $(ruby)
 namespace: "Azure::Confluent::Mgmt::V2021_09_01_preview"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_confluent/lib
+```
+
+### Tag: package-2021-12-01 and ruby
+
+These settings apply only when `--tag=package-2021-12-01 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+```yaml $(tag) == 'package-2021-12-01' && $(ruby)
+namespace: "Azure::Confluent::Mgmt::V2021_12_01"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_confluent/lib
 ```
