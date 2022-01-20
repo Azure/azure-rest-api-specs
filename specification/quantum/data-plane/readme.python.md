@@ -17,9 +17,13 @@ output-folder: $(python-sdks-folder)/quantum/azure-quantum/azure/quantum/_client
 ```
 
 ```yaml $(python) && $(python-mode) == 'create'
-package-version: 1.0.0b1
-basic-setup-py: true
+package-name: azure-quantum-_client
+package-version: 0.0.0b1
+no-namespace-folders: false
+add-credentials: true
+credential-scopes: ["https://quantum.microsoft.com/.default"]
 output-folder: $(python-sdks-folder)/quantum/azure-quantum
+basic-setup-py: true
 ```
 
 ```yaml $(python) && $(python-mode) == 'cli'
