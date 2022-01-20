@@ -28,36 +28,11 @@ basic-setup-py: true
 output-folder: $(python-sdks-folder)/quantum/azure-quantum
 ```
 
-``` yaml $(python1)
-python-mode: create
-python:
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: azure.quantum._client
-  package-name: azure-quantum
-  clear-output-folder: true
-  add-credentials: true
-  credential-scopes: "https://quantum.microsoft.com/.default"
-```
-
-```yaml $(python1) && $(python-mode) == 'update'
-no-namespace-folders: false
-namespace: azure.quantum.client
-output-folder: $(python-sdks-folder)/quantum/azure-quantum
-```
-
-```yaml $(python1) && $(python-mode) == 'create'
-package-version: 0.0.0.1
-basic-setup-py: true
-no-namespace-folders: false
-namespace: azure.quantum.client
-output-folder: $(python-sdks-folder)/quantum/azure-quantum
-```
-
-```yaml $(python1) && $(python-mode) == 'cli'
+```yaml $(python) && $(python-mode) == 'cli'
 package-version: 0.0.0.1
 no-namespace-folders: true
 ```
 
-```yaml $(python1) && $(python-mode) == 'pythonSdk'
+```yaml $(python) && $(python-mode) == 'pythonSdk'
 no-namespace-folders: true
 ```
