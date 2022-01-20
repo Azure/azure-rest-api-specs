@@ -18,8 +18,8 @@ python:
 
 ```yaml $(python) && $(python-mode) == 'update'
 python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/quantum/azure-quantum/azure/quantum/_client
+  basic-setup-py: true
+  output-folder: $(python-sdks-folder)/quantum/azure-quantum
 ```
 
 ```yaml $(python) && $(python-mode) == 'create'
