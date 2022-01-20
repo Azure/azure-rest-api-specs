@@ -48,13 +48,13 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/ScopeInPath"
+          },
+          {
             "$ref": "#/parameters/ResourceNameInParameters"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ScopeInPath"
           }
         ],
         "responses": {
@@ -138,13 +138,13 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/ScopeInPath"
+          },
+          {
             "$ref": "#/parameters/ResourceNameInParameters"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ScopeInPath"
           }
         ],
         "responses": {
@@ -188,13 +188,13 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/ScopeInPath"
+          },
+          {
             "$ref": "#/parameters/ResourceNameInParameters"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ScopeInPath"
           },
           {
             "name": "createQuotaRequest",
@@ -241,13 +241,13 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/ScopeInPath"
+          },
+          {
             "$ref": "#/parameters/ResourceNameInParameters"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ScopeInPath"
           },
           {
             "name": "createQuotaRequest",
@@ -343,13 +343,13 @@
         "operationId": "QuotaRequestStatus_Get",
         "parameters": [
           {
+            "$ref": "#/parameters/ScopeInPath"
+          },
+          {
             "$ref": "#/parameters/RequestIdInParameters"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ScopeInPath"
           }
         ],
         "responses": {
@@ -466,7 +466,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationResponse"
-          }
+          },
+          "x-ms-identifiers": ["name"]
         },
         "nextLink": {
           "type": "string",
@@ -1054,7 +1055,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubRequest"
-          }
+          },
+          "x-ms-identifiers": ["subRequestId"]
         }
       }
     },
