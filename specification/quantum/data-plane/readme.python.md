@@ -9,7 +9,7 @@ python:
   package-version: 0.0.0b1
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: azure.quantum._client
-  package-name: azure-quantum-_client
+  package-name: azure-quantum
   clear-output-folder: true
   no-namespace-folders: false
   add-credentials: true
