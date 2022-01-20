@@ -461,6 +461,9 @@
         "x-ms-examples": {
           "RedisEnterpriseDatabasesCreate": {
             "$ref": "./examples/RedisEnterpriseDatabasesCreate.json"
+          },
+          "RedisEnterpriseDatabasesCreate With Active Geo Replication": {
+            "$ref": "./examples/RedisEnterpriseDatabasesCreateWithGeoReplication.json"
           }
         },
         "parameters": [
@@ -1122,6 +1125,65 @@
           "nextLinkName": null
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/databases/{databaseName}/forceUnlink": {
+      "post": {
+        "tags": [
+          "RedisEnterprise",
+          "Databases"
+        ],
+        "operationId": "Databases_ForceUnlink",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "How to unlink a database during a regional outage": {
+            "$ref": "./examples/RedisEnterpriseDatabasesForceUnlink.json"
+          }
+        },
+        "description": "Forcibly removes the link to the specified database resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ForceUnlinkParameters"
+            },
+            "description": "Information identifying the database to be unlinked."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Force unlink operation succeeded. The unlinked database must be deleted before it can be recreated and linked again."
+          },
+          "202": {
+            "description": "Force unlink operation successfully enqueued; follow the Azure-AsyncOperation header to poll for final outcome."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1430,6 +1492,31 @@
             "read",
             "create"
           ]
+        },
+        "geoReplication": {
+          "type": "object",
+          "description": "Optional set of properties to configure geo replication for this database.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "properties": {
+            "groupNickname": {
+              "type": "string",
+              "description": "Name for the group of linked database resources",
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            },
+            "linkedDatabases": {
+              "type": "array",
+              "description": "List of database resources to link with this database",
+              "items": {
+                "$ref": "#/definitions/LinkedDatabase"
+              }
+            }
+          }
         }
       }
     },
@@ -1521,6 +1608,36 @@
       "required": [
         "name"
       ]
+    },
+    "LinkedDatabase": {
+      "title": "Linked Database",
+      "description": "Specifies details of a linked database resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "Resource ID of a database resource to link with this database."
+        },
+        "state": {
+          "type": "string",
+          "description": "State of the link between the database resources.",
+          "enum": [
+            "Linked",
+            "Linking",
+            "Unlinking",
+            "LinkFailed",
+            "UnlinkFailed"
+          ],
+          "x-ms-enum": {
+            "name": "LinkState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      }
     },
     "AccessKeys": {
       "title": "Access keys",
@@ -1623,6 +1740,22 @@
           "description": "Error response describing why the operation failed."
         }
       }
+    },
+    "ForceUnlinkParameters": {
+      "title": "Forcibly unlink another database from this database.",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The resource IDs of the database resources to be unlinked."
+        }
+      },
+      "required": [
+        "ids"
+      ],
+      "description": "Parameters for a Redis Enterprise Active Geo Replication Force Unlink operation."
     }
   },
   "parameters": {
