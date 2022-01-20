@@ -15,13 +15,16 @@ python:
 ```
 
 ```yaml $(python) && $(python-mode) == 'update'
-output-folder: $(python-sdks-folder)/quantum/azure-quantum/azure/quantum/_client
+no-namespace-folders: false
+namespace: azure.quantum.client
+output-folder: $(python-sdks-folder)/quantum/azure-quantum
 ```
 
 ```yaml $(python) && $(python-mode) == 'create'
 package-version: 0.0.0.1
 basic-setup-py: true
 no-namespace-folders: false
+namespace: azure.quantum.client
 output-folder: $(python-sdks-folder)/quantum/azure-quantum
 ```
 
