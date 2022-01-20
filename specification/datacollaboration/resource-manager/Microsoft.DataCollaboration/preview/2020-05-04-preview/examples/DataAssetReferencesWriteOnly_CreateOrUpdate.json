@@ -3,11 +3,15 @@
     "subscriptionId": "12345678-1234-1234-1234-567890abcdef",
     "resourceGroupName": "SampleResourceGroup",
     "workspaceName": "Workspace1",
-    "pipelineName": "Pipeline1",
+    "proposalName": "Proposal1",
+    "referenceName": "DataAssetReference1",
     "api-version": "2020-05-04-preview",
-    "pipeline": {
+    "dataAssetReference": {
       "properties": {
-        "description": "A pipeline"
+        "dataAssetId": "d164252e-2909-4718-a91e-315195c54b09",
+        "displayName": "name",
+        "description": "WriteOnly Reference to DataAsset1",
+        "dataAccessType": "WriteOnly"
       }
     }
   },
@@ -22,15 +26,11 @@
       },
       "body": {
         "properties": {
-          "description": "A pipeline",
-          "scriptParameters": [
-            {
-              "parameterType": "String",
-              "defaultValue": "some value",
-              "name": "p",
-              "description": "This is a parameter"
-            }
-          ]
+          "displayName": "name",
+          "dataAssetId": "d164252e-2909-4718-a91e-315195c54b09",
+          "description": "WriteOnly Reference to DataAsset1",
+          "ownerId": "fe7c006c-71d2-4501-90ed-ccf7204db79b",
+          "dataAccessType": "WriteOnly"
         },
         "systemData": {
           "createdBy": "John Smith",
@@ -40,9 +40,9 @@
           "lastModifiedByType": "User",
           "lastModifiedAt": "2018-11-14T04:47:52.9614956Z"
         },
-        "id": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/pipelines/Pipeline1",
-        "name": "Pipeline1",
-        "type": "Microsoft.DataCollaboration/workspaces/pipelines"
+        "id": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/proposals/Proposal1/dataAssetReferences/DataAssetReference1",
+        "name": "DataAssetReference1",
+        "type": "Microsoft.DataCollaboration/workspaces/proposals/dataAssetReferences"
       }
     },
     "201": {
@@ -55,15 +55,11 @@
       },
       "body": {
         "properties": {
-          "description": "A pipeline",
-          "scriptParameters": [
-            {
-              "parameterType": "String",
-              "defaultValue": "some value",
-              "name": "p",
-              "description": "This is a parameter"
-            }
-          ]
+          "displayName": "name",
+          "dataAssetId": "d164252e-2909-4718-a91e-315195c54b09",
+          "description": "WriteOnly Reference to DataAsset1",
+          "ownerId": "fe7c006c-71d2-4501-90ed-ccf7204db79b",
+          "dataAccessType": "WriteOnly"
         },
         "systemData": {
           "createdBy": "John Smith",
@@ -73,9 +69,9 @@
           "lastModifiedByType": "User",
           "lastModifiedAt": "2018-11-14T04:47:52.9614956Z"
         },
-        "id": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/pipelines/Pipeline1",
-        "name": "Pipeline1",
-        "type": "Microsoft.DataCollaboration/workspaces/pipelines"
+        "id": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/proposals/Proposal1/dataAssetReferences/DataAssetReference1",
+        "name": "DataAssetReference1",
+        "type": "Microsoft.DataCollaboration/workspaces/proposals/dataAssetReferences"
       }
     }
   }

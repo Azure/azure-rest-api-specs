@@ -3,6 +3,7 @@
     "subscriptionId": "12345678-1234-1234-1234-567890abcdef",
     "resourceGroupName": "SampleResourceGroup",
     "workspaceName": "Workspace1",
+    "managedPrivateEndpointName": "privateEndpoint1",
     "api-version": "2020-05-04-preview"
   },
   "responses": {
@@ -16,10 +17,14 @@
       },
       "body": {
         "properties": {
-          "userName": "John Smith",
           "provisioningState": "Succeeded",
-          "userEmail": "john.smith@microsoft.com",
-          "displayName": "Workspace1 display name"
+          "privateLinkResourceId": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.Storage/storageAccounts/exampleBlobStorage",
+          "groupId": "blob",
+          "connectionState": {
+            "privateEndpointStatus": "Pending",
+            "description": "",
+            "actionsRequired": "None"
+          }
         },
         "systemData": {
           "createdBy": "John Smith",
@@ -29,17 +34,9 @@
           "lastModifiedByType": "User",
           "lastModifiedAt": "2018-11-14T04:47:52.9614956Z"
         },
-        "location": "West US 2",
-        "tags": {
-          "tag1": "Red",
-          "tag2": "White"
-        },
-        "identity": {
-          "type": "SystemAssigned"
-        },
-        "id": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1",
-        "name": "Workspace1",
-        "type": "Microsoft.DataCollaboration/workspaces"
+        "id": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/managedPrivateEndpoints/PrivateEndpoint1",
+        "name": "PrivateEndpoint1",
+        "type": "Microsoft.DataCollaboration/workspaces/managedPrivateEndpoints"
       }
     }
   }

@@ -28,11 +28,94 @@
               "pipelineSubsteps": [
                 {
                   "kind": "DataMovement",
+                  "pipelineSubstepId": "9cbbdb34-6427-4de1-b2a7-23c24eb7ab3c",
+                  "executionStatus": "Succeeded",
                   "endTime": "2018-11-14T04:47:52.9614956Z",
                   "startTime": "2018-11-14T04:47:52.9614956Z",
                   "durationMs": 2000,
+                  "errorMessage": "",
+                  "dataMovementExecutionStage": "Input",
+                  "dataSetName": "DataAsset1",
+                  "dataSetCategory": "Production",
+                  "dataSetType": "Blob",
+                  "resourceId": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/proposals/Proposal1/dataAssetReferences/DataAssetReference1",
+                  "numberOfFiles": 10,
+                  "totalBytes": 45000,
+                  "source": {
+                    "kind": "ScriptExecution",
+                    "pipelineStepName": "7490ef67-8772-44ac-b4c9-e415bca7d771",
+                    "pipelineSubstepId": "b0bc3097-138a-4790-90e4-66393ad55d21",
+                    "outputBindingKey": "sink1"
+                  }
+                },
+                {
+                  "kind": "ScriptExecution",
+                  "pipelineSubstepId": "12769331-6f74-456e-bbcf-e1c237b16713",
                   "executionStatus": "Succeeded",
-                  "errorMessage": ""
+                  "endTime": "2018-11-14T04:47:52.9614956Z",
+                  "startTime": "2018-11-14T04:47:52.9614956Z",
+                  "durationMs": 2000,
+                  "errorMessage": "",
+                  "scriptExecutionInformation": {
+                    "name": "Script1",
+                    "revision": 1,
+                    "purpose": "Body",
+                    "resourceId": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/proposals/Proposal1/scriptReferences/Script1"
+                  },
+                  "sourceBindings": [
+                    {
+                      "bindingKey": "Source2",
+                      "adapter": {
+                        "name": "Script1",
+                        "revision": 1,
+                        "purpose": "InputAdapter",
+                        "resourceId": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/proposals/Proposal1/scriptReferences/Script2"
+                      },
+                      "sourceSubstepReference": {
+                        "kind": "DataMovement",
+                        "pipelineStepName": "7490ef67-8772-44ac-b4c9-e415bca7d771",
+                        "pipelineSubstepId": "b0bc3097-138a-4790-90e4-66393ad55d21"
+                      }
+                    }
+                  ],
+                  "sinkBindings": [
+                    {
+                      "bindingKey": "Sink1",
+                      "adapter": {
+                        "name": "Script3",
+                        "revision": 1,
+                        "purpose": "OutputAdapter",
+                        "resourceId": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/proposals/Proposal1/scriptReferences/Script3"
+                      }
+                    }
+                  ],
+                  "synapseSparkInformation": {
+                    "sparkPoolInformation": {
+                      "resourceId": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/constrainedResources/SynapseSparkPool1",
+                      "nodeSize": "Small",
+                      "nodeCount": 5
+                    },
+                    "sparkPoolExecutionInformation": {
+                      "executorNodeSize": "Small",
+                      "executorsCount": 2
+                    }
+                  }
+                },
+                {
+                  "kind": "DiagnosticsLog",
+                  "pipelineSubstepId": "31e4a414-aec7-4597-b2f9-e592260b9365",
+                  "executionStatus": "Succeeded",
+                  "endTime": "2018-11-14T04:47:52.9614956Z",
+                  "startTime": "2018-11-14T04:47:52.9614956Z",
+                  "durationMs": 2000,
+                  "errorMessage": "",
+                  "dataSetName": "DataAsset1",
+                  "dataSetCategory": "Production",
+                  "dataSetType": "Blob",
+                  "resourceId": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/proposals/Proposal1/dataAssetReferences/DataAssetReference1",
+                  "numberOfFiles": 10,
+                  "totalBytes": 45000,
+                  "diagnosticsLogType": "ConsoleLog"
                 }
               ]
             },
