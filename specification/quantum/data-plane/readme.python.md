@@ -14,8 +14,6 @@ python:
   credential-scopes: "https://quantum.microsoft.com/.default"
   clear-output-folder: true
   no-namespace-folders: false
-  output-folder: $(python-sdks-folder)/quantum/azure-quantum
-  basic-setup-py: true
 ```
 
 ```yaml $(python) && $(python-mode) == 'update'
