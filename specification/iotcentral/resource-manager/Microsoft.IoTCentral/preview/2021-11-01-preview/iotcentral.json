@@ -404,13 +404,13 @@
           }
         ],
         "responses": {
-          "200": { // !! status when deleting is "Creating"
+          "200": {
             "description": "This is returned as a response to the status polling request for the delete operation. The body contains status information for the operation."
           },
           "202": {
             "description": "Accepted - Delete request accepted; the operation will complete asynchronously."
           },
-          "404": { // resource returns 404 instead of the 204 returned by the resource
+          "404": {
             "description": "Once the long running delete operation completes successfully, a 404 Not Found status code is returned."
           },
           "default": {
