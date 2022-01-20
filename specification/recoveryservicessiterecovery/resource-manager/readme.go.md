@@ -21,6 +21,7 @@ azure-arm: true
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2021-12
   - tag: package-2021-11
   - tag: package-2021-10
   - tag: package-2021-08
@@ -29,6 +30,15 @@ batch:
   - tag: package-2018-07
   - tag: package-2018-01
   - tag: package-2016-08
+```
+
+### Tag: package-2021-12 and go
+
+These settings apply only when `--tag=package-2021-12 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2021-12' && $(go)
+output-folder: $(go-sdk-folder)/services/recoveryservices/mgmt/2021-12-01/$(namespace)
 ```
 
 ### Tag: package-2021-11 and go
