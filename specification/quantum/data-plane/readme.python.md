@@ -20,6 +20,7 @@ output-folder: $(python-sdks-folder)/quantum/azure-quantum/azure/quantum/_client
 ```
 
 ```yaml $(python) && $(python-mode) == 'create'
+package-version: 0.0.0.1
 basic-setup-py: true
 no-namespace-folders: false
 output-folder: $(python-sdks-folder)/quantum/azure-quantum
