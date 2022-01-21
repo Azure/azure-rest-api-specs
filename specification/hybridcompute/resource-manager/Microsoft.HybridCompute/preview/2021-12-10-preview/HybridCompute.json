@@ -707,6 +707,7 @@
   },
   "definitions": {
     "OperationListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -720,6 +721,7 @@
       "description": "The List Compute Operation operation response."
     },
     "OperationValue": {
+      "type": "object",
       "properties": {
         "origin": {
           "type": "string",
@@ -739,6 +741,7 @@
       "description": "Describes the properties of a Compute Operation value."
     },
     "OperationValueDisplay": {
+      "type": "object",
       "properties": {
         "operation": {
           "type": "string",
@@ -818,6 +821,7 @@
       "description": "The metadata of the cloud environment (Azure/GCP/AWS/OCI...)."
     },
     "OSProfile": {
+      "type": "object",
       "properties": {
         "computerName": {
           "type": "string",
@@ -856,6 +860,7 @@
       "description": "Detected properties from the machine."
     },
     "MachineProperties": {
+      "type": "object",
       "properties": {
         "locationData": {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/locationData"
@@ -998,6 +1003,7 @@
       "description": "Describes the properties of a hybrid machine."
     },
     "MachineUpdateProperties": {
+      "type": "object",
       "properties": {
         "locationData": {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/locationData"
@@ -1021,6 +1027,7 @@
       "description": "Describes the ARM updatable properties of a hybrid machine."
     },
     "Machine": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/MachineProperties",
@@ -1043,6 +1050,7 @@
       "description": "Describes a hybrid machine."
     },
     "MachineUpdate": {
+      "type": "object",
       "properties": {
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity"
@@ -1060,6 +1068,7 @@
       "description": "Describes a hybrid machine Update."
     },
     "MachineListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1079,6 +1088,7 @@
       "description": "The List hybrid machine operation response."
     },
     "ResourceUpdate": {
+      "type": "object",
       "description": "The Update Resource model definition.",
       "properties": {
         "tags": {
@@ -1091,6 +1101,7 @@
       }
     },
     "MachineExtension": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/MachineExtensionProperties",
@@ -1110,6 +1121,7 @@
       "description": "Describes a Machine Extension."
     },
     "MachineExtensionUpdate": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/MachineExtensionUpdateProperties",
@@ -1124,6 +1136,7 @@
       "description": "Describes a Machine Extension Update."
     },
     "MachineExtensionProperties": {
+      "type": "object",
       "properties": {
         "forceUpdateTag": {
           "type": "string",
@@ -1186,6 +1199,7 @@
       "description": "Describes the properties of a Machine Extension."
     },
     "MachineExtensionUpdateProperties": {
+      "type": "object",
       "properties": {
         "forceUpdateTag": {
           "type": "string",
@@ -1227,6 +1241,7 @@
       "description": "Describes the properties of a Machine Extension."
     },
     "MachineExtensionInstanceView": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1279,6 +1294,7 @@
       "description": "Describes the Machine Extension Instance View."
     },
     "MachineExtensionsListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1299,6 +1315,7 @@
       "description": "Extension Upgrade Target Version."
     },
     "ExtensionTargetProperties": {
+      "type": "object",
       "properties": {
         "targetVersion": {
           "type": "object",
@@ -1309,6 +1326,7 @@
       "description": "Describes the Machine Extension Target Version Properties"
     },
     "ExtensionTarget": {
+      "type": "object",
       "additionalProperties": {
         "type": "object",
         "$ref": "#/definitions/ExtensionTargetProperties"
@@ -1316,6 +1334,7 @@
       "description": "Describes the Machine Extension Target Properties"
     },
     "MachineExtensionUpgrade": {
+      "type": "object",
       "properties": {
         "extensionTargets": {
           "$ref": "#/definitions/ExtensionTarget",

@@ -668,6 +668,7 @@
   },
   "definitions": {
     "PrivateLinkScopesResource": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -706,6 +707,7 @@
       "description": "An azure resource object"
     },
     "TagsResource": {
+      "type": "object",
       "properties": {
         "tags": {
           "additionalProperties": {
@@ -717,6 +719,7 @@
       "description": "A container holding only the Tags for a resource, allowing the user to update the tags on a PrivateLinkScope instance."
     },
     "HybridComputePrivateLinkScope": {
+      "type": "object",
       "properties": {
         "properties": {
           "description": "Properties that define a Azure Arc PrivateLinkScope resource.",
@@ -736,6 +739,7 @@
       "description": "An Azure Arc PrivateLinkScope definition."
     },
     "PrivateLinkScopeValidationDetails": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -756,6 +760,7 @@
       }
     },
     "ConnectionDetail": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -785,6 +790,7 @@
       }
     },
     "HybridComputePrivateLinkScopeProperties": {
+      "type": "object",
       "description": "Properties that define a Azure Arc PrivateLinkScope resource.",
       "properties": {
         "publicNetworkAccess": {
@@ -812,6 +818,7 @@
       }
     },
     "HybridComputePrivateLinkScopeListResult": {
+      "type": "object",
       "description": "Describes the list of Azure Arc PrivateLinkScope resources.",
       "required": [
         "value"
@@ -831,8 +838,8 @@
       }
     },
     "PrivateLinkResourceListResult": {
-      "description": "A list of private link resources",
       "type": "object",
+      "description": "A list of private link resources",
       "properties": {
         "value": {
           "description": "Array of results.",
@@ -850,8 +857,8 @@
       }
     },
     "PrivateLinkResource": {
-      "description": "A private link resource",
       "type": "object",
+      "description": "A private link resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties",
@@ -870,8 +877,8 @@
       ]
     },
     "PrivateLinkResourceProperties": {
-      "description": "Properties of a private link resource.",
       "type": "object",
+      "description": "Properties of a private link resource.",
       "properties": {
         "groupId": {
           "description": "The private link resource group id.",
@@ -897,8 +904,8 @@
       }
     },
     "PrivateEndpointConnectionDataModel": {
-      "description": "The Data Model for a Private Endpoint Connection associated with a Private Link Scope",
       "type": "object",
+      "description": "The Data Model for a Private Endpoint Connection associated with a Private Link Scope",
       "properties": {
         "id": {
           "description": "The ARM Resource Id of the Private Endpoint.",
@@ -922,8 +929,8 @@
       }
     },
     "PrivateEndpointConnectionProperties": {
-      "description": "Properties of a private endpoint connection.",
       "type": "object",
+      "description": "Properties of a private endpoint connection.",
       "properties": {
         "privateEndpoint": {
           "$ref": "#/definitions/PrivateEndpointProperty",
@@ -941,8 +948,8 @@
       }
     },
     "PrivateEndpointProperty": {
-      "description": "Private endpoint which the connection belongs to.",
       "type": "object",
+      "description": "Private endpoint which the connection belongs to.",
       "properties": {
         "id": {
           "description": "Resource id of the private endpoint.",
@@ -951,8 +958,8 @@
       }
     },
     "PrivateLinkServiceConnectionStateProperty": {
-      "description": "State of the private endpoint connection.",
       "type": "object",
+      "description": "State of the private endpoint connection.",
       "required": [
         "status",
         "description"
@@ -974,8 +981,8 @@
       }
     },
     "PrivateEndpointConnection": {
-      "description": "A private endpoint connection",
       "type": "object",
+      "description": "A private endpoint connection",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
@@ -994,8 +1001,8 @@
       }
     },
     "PrivateEndpointConnectionListResult": {
-      "description": "A list of private endpoint connections.",
       "type": "object",
+      "description": "A list of private endpoint connections.",
       "properties": {
         "value": {
           "description": "Array of results.",
