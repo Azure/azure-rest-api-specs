@@ -36,44 +36,6 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.Insights/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "summary": "List available operations.",
-        "description": "List the available operations supported by the resource provider.",
-        "operationId": "Operations_List",
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OperationsListResult"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List.json"
-          }
-        }
-      }
-    },
     "/{resourceUri}/providers/Microsoft.Insights/generatelivetoken": {
       "post": {
         "tags": [
