@@ -23,7 +23,7 @@
     "useSchemePrefix": false,
     "parameters": [
       {
-        "$ref": "#/parameters/Endpoint"
+        "$ref": "common.json#/parameters/Endpoint"
       }
     ]
   },
@@ -43,7 +43,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ShowStats"
@@ -67,7 +67,7 @@
           "default": {
             "description": "Unexpected error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "common.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -106,7 +106,7 @@
         "summary": "Submit text analysis job",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
             "description": "Collection of documents to analyze and one or more tasks to execute.",
@@ -129,7 +129,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "common.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -151,7 +151,7 @@
         "summary": "Get analysis status and results",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/JobId"
@@ -189,7 +189,7 @@
           "default": {
             "description": "Unexpected error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "common.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -480,7 +480,12 @@
           "type": "string",
           "default": "latest"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskParameters"
+        }
+      ]
     },
     "PreBuiltResult": {
       "properties": {
@@ -515,6 +520,11 @@
           "type": "string"
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskParameters"
+        }
+      ],
       "required": [
         "projectName",
         "deploymentName"
@@ -556,9 +566,6 @@
         }
       },
       "allOf": [
-        {
-          "$ref": "#/definitions/TaskParameters"
-        },
         {
           "$ref": "#/definitions/CustomTaskParameters"
         }
@@ -607,9 +614,6 @@
       "type": "object",
       "description": "Supported parameters for a Custom Single Classification task.",
       "allOf": [
-        {
-          "$ref": "#/definitions/TaskParameters"
-        },
         {
           "$ref": "#/definitions/CustomTaskParameters"
         }
@@ -693,9 +697,6 @@
       "description": "Supported parameters for a Custom Multi Classification task.",
       "allOf": [
         {
-          "$ref": "#/definitions/TaskParameters"
-        },
-        {
           "$ref": "#/definitions/CustomTaskParameters"
         }
       ]
@@ -768,9 +769,6 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TaskParameters"
-        },
-        {
           "$ref": "#/definitions/PreBuiltTaskParameters"
         }
       ]
@@ -842,13 +840,88 @@
     },
     "HealthcareEntity": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/HealthcareEntityProperties"
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Entity text as appears in the request."
         },
-        {
-          "$ref": "#/definitions/HealthcareLinkingProperties"
+        "category": {
+          "x-ms-enum": {
+            "name": "healthcareEntityCategory",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Healthcare Entity Category.",
+          "enum": [
+            "BODY_STRUCTURE",
+            "AGE",
+            "GENDER",
+            "EXAMINATION_NAME",
+            "DATE",
+            "DIRECTION",
+            "FREQUENCY",
+            "MEASUREMENT_VALUE",
+            "MEASUREMENT_UNIT",
+            "RELATIONAL_OPERATOR",
+            "TIME",
+            "GENE_OR_PROTEIN",
+            "VARIANT",
+            "ADMINISTRATIVE_EVENT",
+            "CARE_ENVIRONMENT",
+            "HEALTHCARE_PROFESSION",
+            "DIAGNOSIS",
+            "SYMPTOM_OR_SIGN",
+            "CONDITION_QUALIFIER",
+            "MEDICATION_CLASS",
+            "MEDICATION_NAME",
+            "DOSAGE",
+            "MEDICATION_FORM",
+            "MEDICATION_ROUTE",
+            "FAMILY_RELATION",
+            "TREATMENT_NAME"
+          ]
+        },
+        "subcategory": {
+          "type": "string",
+          "description": "(Optional) Entity sub type."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Length for the entity text. Use of different 'stringIndexType' values can affect the length returned."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score between 0 and 1 of the extracted entity."
+        },
+        "assertion": {
+          "type": "object",
+          "$ref": "#/definitions/HealthcareAssertion"
+        },
+        "name": {
+          "description": "Preferred name for the entity. Example: 'histologically' would have a 'name' of 'histologic'.",
+          "type": "string"
+        },
+        "links": {
+          "description": "Entity references in known data sources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthcareEntityLink"
+          }
         }
+      },
+      "required": [
+        "text",
+        "category",
+        "offset",
+        "length",
+        "confidenceScore"
       ]
     },
     "HealthcareRelation": {
@@ -977,96 +1050,6 @@
         }
       }
     },
-    "HealthcareEntityProperties": {
-      "type": "object",
-      "required": [
-        "text",
-        "category",
-        "offset",
-        "length",
-        "confidenceScore"
-      ],
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "Entity text as appears in the request."
-        },
-        "category": {
-          "x-ms-enum": {
-            "name": "healthcareEntityCategory",
-            "modelAsString": true
-          },
-          "type": "string",
-          "description": "Healthcare Entity Category.",
-          "enum": [
-            "BODY_STRUCTURE",
-            "AGE",
-            "GENDER",
-            "EXAMINATION_NAME",
-            "DATE",
-            "DIRECTION",
-            "FREQUENCY",
-            "MEASUREMENT_VALUE",
-            "MEASUREMENT_UNIT",
-            "RELATIONAL_OPERATOR",
-            "TIME",
-            "GENE_OR_PROTEIN",
-            "VARIANT",
-            "ADMINISTRATIVE_EVENT",
-            "CARE_ENVIRONMENT",
-            "HEALTHCARE_PROFESSION",
-            "DIAGNOSIS",
-            "SYMPTOM_OR_SIGN",
-            "CONDITION_QUALIFIER",
-            "MEDICATION_CLASS",
-            "MEDICATION_NAME",
-            "DOSAGE",
-            "MEDICATION_FORM",
-            "MEDICATION_ROUTE",
-            "FAMILY_RELATION",
-            "TREATMENT_NAME"
-          ]
-        },
-        "subcategory": {
-          "type": "string",
-          "description": "(Optional) Entity sub type."
-        },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned."
-        },
-        "length": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Length for the entity text. Use of different 'stringIndexType' values can affect the length returned."
-        },
-        "confidenceScore": {
-          "type": "number",
-          "format": "double",
-          "description": "Confidence score between 0 and 1 of the extracted entity."
-        }
-      }
-    },
-    "HealthcareLinkingProperties": {
-      "properties": {
-        "assertion": {
-          "type": "object",
-          "$ref": "#/definitions/HealthcareAssertion"
-        },
-        "name": {
-          "description": "Preferred name for the entity. Example: 'histologically' would have a 'name' of 'histologic'.",
-          "type": "string"
-        },
-        "links": {
-          "description": "Entity references in known data sources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HealthcareEntityLink"
-          }
-        }
-      }
-    },
     "SentimentAnalysisTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a Sentiment Analysis task.",
@@ -1080,9 +1063,6 @@
         }
       },
       "allOf": [
-        {
-          "$ref": "#/definitions/TaskParameters"
-        },
         {
           "$ref": "#/definitions/PreBuiltTaskParameters"
         }
@@ -1416,9 +1396,6 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TaskParameters"
-        },
-        {
           "$ref": "#/definitions/PreBuiltTaskParameters"
         }
       ]
@@ -1544,9 +1521,6 @@
         }
       },
       "allOf": [
-        {
-          "$ref": "#/definitions/TaskParameters"
-        },
         {
           "$ref": "#/definitions/PreBuiltTaskParameters"
         }
@@ -1713,9 +1687,6 @@
         }
       },
       "allOf": [
-        {
-          "$ref": "#/definitions/TaskParameters"
-        },
         {
           "$ref": "#/definitions/PreBuiltTaskParameters"
         }
@@ -2028,9 +1999,6 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TaskParameters"
-        },
-        {
           "$ref": "#/definitions/PreBuiltTaskParameters"
         }
       ]
@@ -2154,9 +2122,6 @@
       "description": "Supported parameters for a Key Phrase Extraction task.",
       "allOf": [
         {
-          "$ref": "#/definitions/TaskParameters"
-        },
-        {
           "$ref": "#/definitions/PreBuiltTaskParameters"
         }
       ]
@@ -2238,9 +2203,6 @@
       "type": "object",
       "description": "Supported parameters for a Language Detection task.",
       "allOf": [
-        {
-          "$ref": "#/definitions/TaskParameters"
-        },
         {
           "$ref": "#/definitions/PreBuiltTaskParameters"
         }
@@ -2388,23 +2350,64 @@
       "type": "object"
     },
     "JobState": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobMetadata"
+      "properties": {
+        "displayName": {
+          "type": "string"
         },
-        {
-          "$ref": "#/definitions/JobErrors"
+        "createdDateTime": {
+          "format": "date-time",
+          "type": "string"
         },
-        {
-          "$ref": "#/definitions/Pagination"
+        "expirationDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "jobId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "lastUpdateDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "notStarted",
+            "running",
+            "succeeded",
+            "partiallySucceeded",
+            "failed",
+            "cancelled",
+            "cancelling"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "State"
+          }
+        },
+        "errors": {
+          "items": {
+            "$ref": "common.json#/definitions/Error"
+          },
+          "type": "array"
+        },
+        "nextLink": {
+          "type": "string"
         }
+      },
+      "required": [
+        "jobId",
+        "lastUpdateDateTime",
+        "createdDateTime",
+        "status"
       ]
     },
     "JobErrors": {
       "properties": {
         "errors": {
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "common.json#/definitions/Error"
           },
           "type": "array"
         }
@@ -2743,7 +2746,7 @@
         "error": {
           "type": "object",
           "description": "Document Error.",
-          "$ref": "#/definitions/Error"
+          "$ref": "common.json#/definitions/Error"
         }
       }
     },
@@ -2868,146 +2871,9 @@
           "type": "string"
         }
       }
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "description": "Error response.",
-      "additionalProperties": true,
-      "properties": {
-        "error": {
-          "description": "The error object.",
-          "$ref": "#/definitions/Error"
-        }
-      }
-    },
-    "Error": {
-      "type": "object",
-      "description": "The error object.",
-      "additionalProperties": true,
-      "required": [
-        "code",
-        "message"
-      ],
-      "properties": {
-        "code": {
-          "description": "One of a server-defined set of error codes.",
-          "$ref": "#/definitions/ErrorCode"
-        },
-        "message": {
-          "type": "string",
-          "description": "A human-readable representation of the error."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the error."
-        },
-        "details": {
-          "type": "array",
-          "description": "An array of details about specific errors that led to this reported error.",
-          "items": {
-            "$ref": "#/definitions/Error"
-          }
-        },
-        "innererror": {
-          "description": "An object containing more specific information than the current object about the error.",
-          "$ref": "#/definitions/InnerErrorModel"
-        }
-      }
-    },
-    "InnerErrorModel": {
-      "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-      "additionalProperties": true,
-      "required": [
-        "code",
-        "message"
-      ],
-      "properties": {
-        "code": {
-          "description": "One of a server-defined set of error codes.",
-          "$ref": "#/definitions/InnerErrorCode"
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message."
-        },
-        "details": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Error details."
-        },
-        "target": {
-          "type": "string",
-          "description": "Error target."
-        },
-        "innererror": {
-          "description": "An object containing more specific information than the current object about the error.",
-          "$ref": "#/definitions/InnerErrorModel"
-        }
-      }
-    },
-    "ErrorCode": {
-      "type": "string",
-      "description": "Human-readable error code.",
-      "x-ms-enum": {
-        "name": "ErrorCode",
-        "modelAsString": true
-      },
-      "enum": [
-        "InvalidRequest",
-        "InvalidArgument",
-        "Unauthorized",
-        "Forbidden",
-        "NotFound",
-        "TooManyRequests",
-        "InternalServerError",
-        "ServiceUnavailable"
-      ]
-    },
-    "InnerErrorCode": {
-      "type": "string",
-      "description": "Human-readable error code.",
-      "x-ms-enum": {
-        "name": "InnerErrorCode",
-        "modelAsString": true
-      },
-      "enum": [
-        "InvalidRequest",
-        "InvalidParameterValue",
-        "KnowledgeBaseNotFound",
-        "AzureCognitiveSearchNotFound",
-        "AzureCognitiveSearchThrottling",
-        "ExtractionFailure",
-        "InvalidRequestBodyFormat",
-        "EmptyRequest",
-        "MissingInputDocuments",
-        "InvalidDocument",
-        "ModelVersionIncorrect",
-        "InvalidDocumentBatch",
-        "UnsupportedLanguageCode",
-        "InvalidCountryHint"
-      ]
     }
   },
   "parameters": {
-    "Endpoint": {
-      "name": "Endpoint",
-      "description": "Supported Cognitive Services endpoint (e.g., https://<resource-name>.api.cognitiveservices.azure.com).",
-      "x-ms-parameter-location": "client",
-      "required": true,
-      "type": "string",
-      "in": "path",
-      "x-ms-skip-url-encoding": true
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client API version."
-    },
     "ShowStats": {
       "name": "showStats",
       "in": "query",
