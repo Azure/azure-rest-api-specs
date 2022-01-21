@@ -23,7 +23,7 @@ directive:
     from: 'CertificateCollection'
     to: 'AppCertificateCollection'
 - rename-model:
-    from: 'AppServiceCertificatePatchResource'
+    from: 'CertificatePatchResource'
     to: 'AppCertificatePatchResource'
 ```
 
