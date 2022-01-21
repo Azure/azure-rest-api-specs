@@ -17,9 +17,9 @@ output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
 directive:
 - from: swagger-document
-  where: '$.paths.*[?(@.operationId.startsWith("SecurityConnectors_"))]'
+  where: '$.paths.*[?(@.operationId.startsWith("Connectors_"))]'
   transform: >
-    $["operationId"] = $["operationId"].replace("SecurityConnectors_", "ConnectorsForSecurity_");
+    $["operationId"] = $["operationId"].replace("Connectors_", "AccountConnectors_");
 ```
 
 ### Common Go settings
