@@ -18,13 +18,13 @@ azure-arm: true
 directive:
 - rename-model:
     from: 'JobDetails'
-    to: 'JobDetailsModel'
+    to: 'CommonJobDetails'
 - rename-model:
     from: 'JobSecrets'
-    to: 'JobSecretsModel'
+    to: 'CommonJobSecrets'
 - rename-model:
     from: 'ScheduleAvailabilityRequest'
-    to: 'ScheduleAvailabilityRequestModel'
+    to: 'CommonScheduleAvailabilityRequest'
 ```
 
 ### Go multi-api
