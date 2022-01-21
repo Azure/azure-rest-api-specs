@@ -3952,6 +3952,20 @@
         "modelAsString": true
       }
     },
+    "InventoryItemDetails": {
+      "description": "Defines the resource properties.",
+      "type": "object",
+      "properties": {
+        "inventoryItemId": {
+          "description": "Gets or sets the inventory Item ID for the resource.",
+          "type": "string"
+        },
+        "inventoryItemName": {
+          "description": "Gets or sets the Managed Object name in VMM for the resource.",
+          "type": "string"
+        }
+      }
+    },
     "CloudInventoryItem": {
       "description": "The Cloud inventory item.",
       "type": "object",
@@ -3981,6 +3995,18 @@
         }
       ],
       "properties": {
+        "cpuCount": {
+          "type": "integer",
+          "description": "Gets or sets the desired number of vCPUs for the vm.",
+          "format": "int32",
+          "readOnly": true
+        },
+        "memoryMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "MemoryMB is the desired size of a virtual machine's memory, in MB.",
+          "readOnly": true
+        },
         "osType": {
           "description": "Gets or sets the type of the os.",
           "$ref": "#/definitions/OsType",
@@ -4024,6 +4050,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "cloud": {
+          "description": "Cloud inventory resource details where the VM is present.",
+          "$ref": "#/definitions/InventoryItemDetails"
         }
       },
       "x-ms-discriminator-value": "VirtualMachine"
