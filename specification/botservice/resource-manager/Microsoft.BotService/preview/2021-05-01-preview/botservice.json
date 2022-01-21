@@ -1556,7 +1556,8 @@
         },
         "endpoint": {
           "type": "string",
-          "description": "The bot's endpoint"
+          "description": "The bot's endpoint",
+          "x-nullable": true
         },
         "endpointVersion": {
           "type": "string",
@@ -1688,11 +1689,13 @@
         },
         "disableLocalAuth": {
           "type": "boolean",
-          "description": "Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication."
+          "description": "Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication.",
+          "x-nullable": true
         },
         "schemaTransformationVersion": {
           "type": "string",
-          "description": "The channel schema transformation version for the bot"
+          "description": "The channel schema transformation version for the bot",
+          "x-nullable": true
         },
         "storageResourceId": {
           "type": "string",
@@ -1827,7 +1830,8 @@
         },
         "botIconUrl": {
           "type": "string",
-          "description": "The bot icon url"
+          "description": "The bot icon url",
+          "x-nullable": true
         },
         "isEnabled": {
           "type": "boolean",
@@ -2056,12 +2060,13 @@
           "description": "Webhook for Microsoft Teams channel calls"
         },
         "deploymentEnvironment": {
-          "type": "string",
+          "type": "integer",
           "description": "Deployment environment for Microsoft Teams channel calls"
         },
         "acceptedTerms": {
           "type": "boolean",
-          "description": "Whether this channel accepted terms"
+          "description": "Whether this channel accepted terms",
+          "x-nullable": true
         }
       },
       "description": "The parameters to provide for the Microsoft Teams channel.",
@@ -2485,10 +2490,12 @@
       "properties": {
         "cognitiveServiceRegion": {
           "type": "string",
+          "x-nullable": true,
           "description": "The cognitive service region with this channel registration."
         },
         "cognitiveServiceSubscriptionKey": {
           "x-ms-secret": true,
+          "x-nullable": true,
           "type": "string",
           "description": "The cognitive service subscription key to use with this channel registration."
         },
@@ -2627,7 +2634,8 @@
         },
         "isBlockUserUploadEnabled": {
           "type": "boolean",
-          "description": "Whether this site is enabled for block user upload."
+          "description": "Whether this site is enabled for block user upload.",
+          "x-nullable": true
         },
         "trustedOrigins": {
           "type": "array",

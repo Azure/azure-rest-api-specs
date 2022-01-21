@@ -1280,7 +1280,8 @@
         },
         "endpoint": {
           "type": "string",
-          "description": "The bot's endpoint"
+          "description": "The bot's endpoint",
+          "x-nullable": true
         },
         "endpointVersion": {
           "type": "string",
@@ -1775,7 +1776,7 @@
           "description": "Webhook for Microsoft Teams channel calls"
         },
         "deploymentEnvironment": {
-          "type": "string",
+          "type": "integer",
           "description": "Deployment environment for Microsoft Teams channel calls",
           "x-nullable": true
         },
@@ -2098,7 +2099,7 @@
           "description": "Whether to register the settings before OAuth validation is performed. Recommended to True.",
           "readOnly": true
         },
-        "isValidated": {
+        "IsValidated": {
           "type": "boolean",
           "description": "Whether this channel is validated for the bot",
           "readOnly": true
@@ -2202,10 +2203,12 @@
       "properties": {
         "cognitiveServiceRegion": {
           "type": "string",
+          "x-nullable": true,
           "description": "The cognitive service region with this channel registration."
         },
         "cognitiveServiceSubscriptionKey": {
           "x-ms-secret": true,
+          "x-nullable": true,
           "type": "string",
           "description": "The cognitive service subscription key to use with this channel registration."
         },
