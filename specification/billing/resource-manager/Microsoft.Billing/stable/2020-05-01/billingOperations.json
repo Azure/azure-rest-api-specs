@@ -41,7 +41,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/OperationsErrorResponse"
             }
           }
         },
@@ -111,17 +111,17 @@
         }
       }
     },
-    "ErrorResponse": {
+    "OperationsErrorResponse": {
       "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
       "type": "object",
       "properties": {
         "error": {
           "description": "The details of the error.",
-          "$ref": "#/definitions/ErrorDetails"
+          "$ref": "#/definitions/OperationsErrorDetails"
         }
       }
     },
-    "ErrorDetails": {
+    "OperationsErrorDetails": {
       "description": "The details of the error.",
       "properties": {
         "code": {
