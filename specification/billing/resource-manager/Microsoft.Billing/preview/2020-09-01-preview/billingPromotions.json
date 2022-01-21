@@ -16,37 +16,6 @@
     "application/json"
   ],
   "paths": {
-    "/providers/Microsoft.Billing/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "operationId": "Operations_List",
-        "description": "Lists the available billing REST API operations.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/versionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/providers/Microsoft.Billing/promotions/{promotionId}": {
       "put": {
         "summary": "Activate promotion",
@@ -206,57 +175,6 @@
     }
   },
   "definitions": {
-    "OperationListResult": {
-      "description": "The list of billing operations and a URL link to get the next set of results.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of billing operations supported by the Microsoft.Billing resource provider.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Operation"
-          }
-        },
-        "nextLink": {
-          "description": "URL to get the next set of operation list results if there are any.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "Operation": {
-      "description": "A Billing REST API operation.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}.",
-          "type": "string",
-          "readOnly": true
-        },
-        "display": {
-          "description": "The object that represents the operation.",
-          "type": "object",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft.Billing.",
-              "type": "string",
-              "readOnly": true
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed such as invoice and billing subscription.",
-              "type": "string",
-              "readOnly": true
-            },
-            "operation": {
-              "description": "Operation type such as read, write and delete.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
-        }
-      }
-    },
     "PromotionCreateRequest": {
       "type": "object",
       "x-ms-azure-resource": true,
