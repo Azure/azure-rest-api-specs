@@ -96,4 +96,6 @@ Since this RP has no unique default package, iterate over all of them for valida
 ``` yaml $(validation)
 batch:
   - package-account: true
+  - package-catalog: true
+  - package-scanning: true
 ```
