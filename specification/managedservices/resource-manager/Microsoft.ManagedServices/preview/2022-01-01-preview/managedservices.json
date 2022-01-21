@@ -46,7 +46,7 @@
             "$ref": "#/parameters/ScopeParameter"
           },
           {
-            "$ref": "#/parameters/RegistrationDefinitionIdParameter"
+            "$ref": "#/parameters/registrationDefinitionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -80,7 +80,7 @@
         "description": "Deletes the registration definition.",
         "parameters": [
           {
-            "$ref": "#/parameters/RegistrationDefinitionIdParameter"
+            "$ref": "#/parameters/registrationDefinitionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -118,7 +118,7 @@
         "description": "Creates or updates a registration definition.",
         "parameters": [
           {
-            "$ref": "#/parameters/RegistrationDefinitionIdParameter"
+            "$ref": "#/parameters/registrationDefinitionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1239,37 +1239,7 @@
       }
     },
     "SystemData": {
-      "readOnly": true,
-      "type": "object",
-      "description": "The metadata associated with an Azure resource.",
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "A string identifier for the identity that created the resource."
-        },
-        "createdByType": {
-          "type": "string",
-          "description": "The type of identity that created the resource: user, application, managedIdentity."
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)."
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "A string identifier for the identity that last modified the resource."
-        },
-        "lastModifiedByType": {
-          "type": "string",
-          "description": "The type of identity that last modified the resource: user, application, managedIdentity."
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource last modification (UTC)."
-        }
-      }
+      "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
     }
   },
   "parameters": {
@@ -1305,7 +1275,7 @@
       "type": "string",
       "description": "The GUID of the registration assignment."
     },
-    "RegistrationDefinitionIdParameter": {
+    "registrationDefinitionIdParameter": {
       "name": "registrationDefinitionId",
       "in": "path",
       "required": true,
