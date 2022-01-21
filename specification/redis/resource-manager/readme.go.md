@@ -18,7 +18,7 @@ azure-arm: true
 directive:
 - rename-model:
    from: 'RedisResource'
-   to: 'ResourceModel'
+   to: 'ResourceInfo'
 ```
 
 ### Go multi-api
