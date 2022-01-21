@@ -18,7 +18,7 @@ azure-arm: true
 directive:
 - rename-model:
     from: 'CdnEndpoint'
-    to: 'EndpointModel'
+    to: 'LinkedEndpoint'
 ```
 
 ### Go multi-api

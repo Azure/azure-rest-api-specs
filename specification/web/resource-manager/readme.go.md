@@ -17,14 +17,14 @@ output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
 directive: 
 - rename-model: 
-    from: 'AppServiceCertificate'
-    to: 'CertificateModel'
+    from: 'Certificate'
+    to: 'AppCertificate'
 - rename-model:
-    from: 'AppServiceCertificateCollection'
-    to: 'CertificateCollectionModel'
+    from: 'CertificateCollection'
+    to: 'AppCertificateCollection'
 - rename-model:
-    from: 'AppServiceCertificatePatchResource'
-    to: 'CertificatePatchResourceModel'
+    from: 'CertificatePatchResource'
+    to: 'AppCertificatePatchResource'
 ```
 
 ### Go multi-api

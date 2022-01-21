@@ -20,13 +20,13 @@ directive:
     from: 'Properties'
     to: 'MetricProperties'
 - from: swagger-document
-  where: '$.paths.*[?(@.operationId.startsWith("VideoAnalyzerOperationStatuses_"))]'
+  where: '$.paths.*[?(@.operationId.startsWith("OperationStatuses_"))]'
   transform: >
-    $["operationId"] = $["operationId"].replace("VideoAnalyzerOperationStatuses_", "OperationStatusesForVideoAnalyzer_")
+    $["operationId"] = $["operationId"].replace("OperationStatuses_", "PrivateEndpointConnectionsOperationStatuses_")
 - from: swagger-document
-  where: '$.paths.*[?(@.operationId.startsWith("VideoAnalyzerOperationResults_"))]'
+  where: '$.paths.*[?(@.operationId.startsWith("OperationResults_"))]'
   transform: >
-    $["operationId"] = $["operationId"].replace("VideoAnalyzerOperationResults_", "OperationResultsForVideoAnalyzer_")
+    $["operationId"] = $["operationId"].replace("OperationResults_", "PrivateEndpointConnectionsOperationResults_")
 ```
 
 ### Go multi-api
