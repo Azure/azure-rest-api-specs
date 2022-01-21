@@ -83,13 +83,6 @@
             "properties": {
               "type": {
                 "$ref": "#/definitions/VariableType"
-              },
-              "value": {},
-              "patches": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/JsonPatchOp"
-                }
               }
             },
             "required": [
@@ -109,10 +102,12 @@
                 },
                 "then": {
                   "properties": {
+                    "type": {},
                     "value": {
                       "type": "string"
                     }
-                  }
+                  },
+                  "additionalProperties": false
                 }
               },
               {
@@ -130,11 +125,35 @@
                   ]
                 },
                 "then": {
-                  "properties": {
-                    "value": {
-                      "type": "object"
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "type": {},
+                        "value": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "value"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "properties": {
+                        "type": {},
+                        "patches": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/definitions/JsonPatchOp"
+                          }
+                        }
+                      },
+                      "required": [
+                        "patches"
+                      ],
+                      "additionalProperties": false
                     }
-                  }
+                  ]
                 }
               },
               {
@@ -149,12 +168,36 @@
                   ]
                 },
                 "then": {
-                  "properties": {
-                    "value": {
-                      "type": "array",
-                      "items": {}
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "type": {},
+                        "value": {
+                          "type": "array",
+                          "items": {}
+                        }
+                      },
+                      "required": [
+                        "value"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "properties": {
+                        "type": {},
+                        "patches": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/definitions/JsonPatchOp"
+                          }
+                        }
+                      },
+                      "required": [
+                        "patches"
+                      ],
+                      "additionalProperties": false
                     }
-                  }
+                  ]
                 }
               },
               {
@@ -170,10 +213,15 @@
                 },
                 "then": {
                   "properties": {
+                    "type": {},
                     "value": {
                       "type": "boolean"
                     }
-                  }
+                  },
+                  "required": [
+                    "value"
+                  ],
+                  "additionalProperties": false
                 }
               },
               {
@@ -189,14 +237,18 @@
                 },
                 "then": {
                   "properties": {
+                    "type": {},
                     "value": {
                       "type": "integer"
                     }
-                  }
+                  },
+                  "required": [
+                    "value"
+                  ],
+                  "additionalProperties": false
                 }
               }
-            ],
-            "additionalProperties": false
+            ]
           }
         ]
       }
