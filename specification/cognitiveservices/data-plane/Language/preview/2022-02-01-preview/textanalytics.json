@@ -549,7 +549,7 @@
       "description": "Supported parameters for a Custom Entities task.",
       "properties": {
         "stringIndexType": {
-          "$ref": "#/definitions/StringIndexType"
+          "$ref": "common.json#/definitions/StringIndexType"
         }
       },
       "allOf": [
@@ -751,7 +751,7 @@
       "description": "Supported parameters for a Healthcare task.",
       "properties": {
         "stringIndexType": {
-          "$ref": "#/definitions/StringIndexType"
+          "$ref": "common.json#/definitions/StringIndexType"
         }
       },
       "allOf": [
@@ -1046,7 +1046,7 @@
           "default": false
         },
         "stringIndexType": {
-          "$ref": "#/definitions/StringIndexType"
+          "$ref": "common.json#/definitions/StringIndexType"
         }
       },
       "allOf": [
@@ -1378,7 +1378,7 @@
       "description": "Supported parameters for an Entity Recognition task.",
       "properties": {
         "stringIndexType": {
-          "$ref": "#/definitions/StringIndexType"
+          "$ref": "common.json#/definitions/StringIndexType"
         }
       },
       "allOf": [
@@ -1504,7 +1504,7 @@
       "description": "Supported parameters for an Entity Linking task.",
       "properties": {
         "stringIndexType": {
-          "$ref": "#/definitions/StringIndexType"
+          "$ref": "common.json#/definitions/StringIndexType"
         }
       },
       "allOf": [
@@ -1670,7 +1670,7 @@
           "$ref": "#/definitions/PiiCategories"
         },
         "stringIndexType": {
-          "$ref": "#/definitions/StringIndexType"
+          "$ref": "common.json#/definitions/StringIndexType"
         }
       },
       "allOf": [
@@ -1981,7 +1981,7 @@
           "$ref": "#/definitions/ExtractiveSummarizationSortingCriteria"
         },
         "stringIndexType": {
-          "$ref": "#/definitions/StringIndexType"
+          "$ref": "common.json#/definitions/StringIndexType"
         }
       },
       "allOf": [
@@ -2662,34 +2662,6 @@
         "results"
       ],
       "x-ms-discriminator-value": "KeyPhraseExtractionLROResults"
-    },
-    "StringIndexType": {
-      "type": "string",
-      "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.",
-      "default": "TextElements_v8",
-      "enum": [
-        "TextElements_v8",
-        "UnicodeCodePoint",
-        "Utf16CodeUnit"
-      ],
-      "x-ms-enum": {
-        "name": "StringIndexType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "TextElements_v8",
-            "description": "Returned offset and length values will correspond to TextElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo."
-          },
-          {
-            "value": "UnicodeCodePoint",
-            "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that support Unicode, for example Python."
-          },
-          {
-            "value": "Utf16CodeUnit",
-            "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
-          }
-        ]
-      }
     },
     "DocumentResponse": {
       "type": "object",
