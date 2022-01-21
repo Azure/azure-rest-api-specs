@@ -431,47 +431,45 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTCentral/iotApps/{resourceName}/privateEndpointConnections": {
       "get": {
-        "get": {
-          "tags": [
-            "PrivateEndpoints"
-          ],
-          "description": "Get all Private Endpoint Connections of a IoT Central Application.",
-          "operationId": "PrivateEndpoints_List",
-          "x-ms-examples": {
-            "PrivateEndpoints_List": {
-              "$ref": "./examples/PrivateEndpoints_List.json"
+        "tags": [
+          "PrivateEndpoints"
+        ],
+        "description": "Get all Private Endpoint Connections of a IoT Central Application.",
+        "operationId": "PrivateEndpoints_List",
+        "x-ms-examples": {
+          "PrivateEndpoints_List": {
+            "$ref": "./examples/PrivateEndpoints_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the Private Endpoint Connections of the IoT Central Application.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
             }
           },
-          "parameters": [
-            {
-              "$ref": "#/parameters/api-version"
-            },
-            {
-              "$ref": "#/parameters/subscriptionId"
-            },
-            {
-              "$ref": "#/parameters/resourceGroupName"
-            },
-            {
-              "$ref": "#/parameters/resourceName"
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
-          ],
-          "responses": {
-            "200": {
-              "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the Private Endpoint Connections of the IoT Central Application.",
-              "schema": {
-                "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
-              }
-            },
-            "default": {
-              "description": "DefaultErrorResponse",
-              "schema": {
-                "$ref": "#/definitions/CloudError"
-              }
-            }
-          },
-          "deprecated": false
-        }
+          }
+        },
+        "deprecated": false
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTCentral/iotApps": {
