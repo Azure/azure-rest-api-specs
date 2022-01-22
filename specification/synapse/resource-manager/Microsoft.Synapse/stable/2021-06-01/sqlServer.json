@@ -1188,6 +1188,157 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/dedicatedSQLminimalTlsSettings/{dedicatedSQLminimalTlsSettingsName}": {
+      "patch": {
+        "operationId": "WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings_Update",
+        "description": "Updates dedicated sql server minimal tls settings.",
+        "tags": [
+          "WorkspaceManagedSqlServer, DedicatedSQLminimalTlsSettings"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "dedicatedSQLminimalTlsSettingsName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the dedicated sql minimal tls settings."
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/DedicatedSQLminimalTlsSettings"
+            },
+            "description": "Successfully updated dedicated sql minimal tls settings."
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": "Only MinimalTlsVersion is allowed to update on Worksapce SQL Server"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update tls version of the workspace managed sql server": {
+            "$ref": "./examples/UpdateWorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings_Get",
+        "summary": "Get Workspace dedicate sql minimal tls settings.",
+        "description": "Get Workspace dedicate sql minimal tls settings.",
+        "tags": [
+          "WorkspaceManagedSqlServer, DedicatedSQLminimalTlsSettings"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "dedicatedSQLminimalTlsSettingsName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the dedicated sql minimal tls settings."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved dedicated sql minimal tls settings.",
+            "schema": {
+              "$ref": "#/definitions/DedicatedSQLminimalTlsSettings"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Get workspace managed sql server dedicated sql minimal tls settings": {
+            "$ref": "./examples/GetWorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/dedicatedSQLminimalTlsSettings": {
+      "get": {
+        "operationId": "WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings_List",
+        "summary": "Lists the dedicated sql minimal tls settings associated with a server.",
+        "description": "Lists the dedicated sql minimal tls settings associated with a server.",
+        "tags": [
+          "WorkspaceManagedSqlServer, DedicatedSQLminimalTlsSettings"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved dedicated sql minimal tls settings.",
+            "schema": {
+              "$ref": "#/definitions/DedicatedSQLminimalTlsSettingsListResult"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List dedicated sql minimal tls settings of the workspace managed sql server": {
+            "$ref": "./examples/ListWorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1783,6 +1934,66 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RecoverableSqlPool"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DedicatedSQLminimalTlsSettingsProperties": {
+      "description": "Properties of a dedicated sql minimal tls settings.",
+      "properties": {
+        "administratorLogin": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The administrator login of the sql server."
+        },
+        "fullyQualifiedDomainName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The fully qualified domain name of the sql server."
+        },
+        "state": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The state of the sql server."
+        },
+        "minimalTlsVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The minimal tls version of the sql server."
+        }
+      }
+    },
+    "DedicatedSQLminimalTlsSettings": {
+      "description": "Dedicated Sql Minimal Tls Settings Info",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DedicatedSQLminimalTlsSettingsProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DedicatedSQLminimalTlsSettingsListResult": {
+      "description": "A list of the server's dedicated sql minimal tls settings.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DedicatedSQLminimalTlsSettings"
           },
           "readOnly": true
         },
