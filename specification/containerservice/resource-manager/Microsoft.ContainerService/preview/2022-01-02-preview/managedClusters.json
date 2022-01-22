@@ -581,6 +581,9 @@
           },
           "Associate Managed Cluster with Capacity Reservation Group": {
             "$ref": "./examples/ManagedClustersAssociate_CRG.json"
+          },
+          "Create Managed Cluster with Dedicated Host Group": {
+            "$ref": "./examples/ManagedClustersCreate_DedicatedHostGroup.json"
           }
         }
       },
@@ -1076,6 +1079,9 @@
           },
           "Associate Agent Pool with Capacity Reservation Group": {
             "$ref": "./examples/AgentPoolsAssociate_CRG.json"
+          },
+          "Create Agent Pool with Dedicated Host Group": {
+            "$ref": "./examples/AgentPoolsCreate_DedicatedHostGroup.json"
           }
         }
       },
@@ -2823,6 +2829,10 @@
         "capacityReservationGroupID": {
           "$ref": "#/definitions/CapacityReservationGroupID",
           "description": "AKS will associate the specified agent pool with the Capacity Reservation Group."
+        },
+        "hostGroupID": {
+          "$ref": "#/definitions/HostGroupID",
+          "description": "The ID for Dedicated Host Group."
         }
       },
       "description": "Properties for the container service agent pool profile."
@@ -4728,6 +4738,10 @@
     "ProximityPlacementGroupID": {
       "type": "string",
       "description": "The ID for Proximity Placement Group."
+    },
+    "HostGroupID": {
+      "type": "string",
+      "description": "The ID for Dedicated Host Group."
     },
     "CredentialResults": {
       "properties": {
