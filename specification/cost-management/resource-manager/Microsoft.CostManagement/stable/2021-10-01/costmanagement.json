@@ -2164,6 +2164,11 @@
       "description": "A Cost management REST API operation.",
       "type": "object",
       "properties": {
+        "id": {
+          "description": "Operation id: {provider}/{resource}/{operation}.",
+          "type": "string",
+          "readOnly": true
+        },
         "name": {
           "description": "Operation name: {provider}/{resource}/{operation}.",
           "type": "string",
@@ -2185,6 +2190,11 @@
             },
             "operation": {
               "description": "Operation type: Read, write, delete, etc.",
+              "type": "string",
+              "readOnly": true
+            },
+            "description": {
+              "description": "Operation description",
               "type": "string",
               "readOnly": true
             }
