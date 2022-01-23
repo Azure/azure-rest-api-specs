@@ -78,33 +78,36 @@
           "type": "string"
         },
         "labelType": {
-          "description": "The type of the label",
-          "enum": [
-            "User",
-            "System"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "IncidentLabelType",
-            "values": [
-              {
-                "description": "Label manually created by a user",
-                "value": "User"
-              },
-              {
-                "description": "Label automatically created by the system",
-                "value": "System"
-              }
-            ]
-          }
+          "$ref": "#/definitions/IncidentLabelType"
         }
       },
       "required": [
         "labelName"
       ],
       "type": "object"
+    },
+    "IncidentLabelType": {
+      "description": "The type of the label",
+      "enum": [
+        "User",
+        "System"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "IncidentLabelType",
+        "values": [
+          {
+            "description": "Label manually created by a user",
+            "value": "User"
+          },
+          {
+            "description": "Label automatically created by the system",
+            "value": "System"
+          }
+        ]
+      }
     },
     "IncidentSeverityEnum": {
       "description": "The severity of the incident",
