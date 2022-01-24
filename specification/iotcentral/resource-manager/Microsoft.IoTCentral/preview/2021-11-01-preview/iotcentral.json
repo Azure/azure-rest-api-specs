@@ -325,7 +325,7 @@
           "PrivateEndpoints"
         ],
         "description": "Update a Private Endpoint Connection.",
-        "operationId": "PrivateEndpoints_Update",
+        "operationId": "PrivateEndpoints_Create",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "PrivateEndpoints_Update": {
@@ -417,7 +417,7 @@
             "description": "Accepted - Delete request accepted; the operation will complete asynchronously."
           },
           "204": {
-            "description": "Once the long running delete operation completes successfully, a 404 No Content status code is returned."
+            "description": "Once the long running delete operation completes successfully, a 204 No Content status code is returned."
           },
           "default": {
             "description": "DefaultErrorResponse",
@@ -440,6 +440,9 @@
           "PrivateEndpoints_List": {
             "$ref": "./examples/PrivateEndpoints_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "parameters": [
           {
@@ -899,6 +902,7 @@
     },
     "CloudError": {
       "description": "Error details.",
+      "type": "object",
       "x-ms-external": true,
       "properties": {
         "error": {
