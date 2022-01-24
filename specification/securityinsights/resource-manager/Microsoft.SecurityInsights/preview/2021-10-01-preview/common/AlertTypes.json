@@ -5,6 +5,17 @@
     "title": "Common Alert types"
   },
   "paths": {},
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "definitions": {
     "AlertSeverityEnum": {
       "description": "The severity of the alert",
@@ -41,6 +52,8 @@
     "AttackTactic": {
       "description": "The severity for alerts created by this alert rule.",
       "enum": [
+        "Reconnaissance",
+        "ResourceDevelopment",
         "InitialAccess",
         "Execution",
         "Persistence",
@@ -53,7 +66,9 @@
         "Exfiltration",
         "CommandAndControl",
         "Impact",
-        "PreAttack"
+        "PreAttack",
+        "ImpairProcessControl",
+        "InhibitResponseFunction"
       ],
       "type": "string",
       "x-ms-enum": {

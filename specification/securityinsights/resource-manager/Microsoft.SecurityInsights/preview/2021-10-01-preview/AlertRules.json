@@ -143,6 +143,9 @@
           "Creates or updates a Fusion alert rule.": {
             "$ref": "./examples/alertRules/CreateFusionAlertRule.json"
           },
+          "Creates or updates a Fusion alert rule with scenario exclusion pattern.": {
+            "$ref": "./examples/alertRules/CreateFusionAlertRuleWithFusionScenarioExclusion.json"
+          },
           "Creates or updates a MicrosoftSecurityIncidentCreation rule.": {
             "$ref": "./examples/alertRules/CreateMicrosoftSecurityIncidentCreationAlertRule.json"
           }
@@ -696,6 +699,9 @@
           "items": {
             "$ref": "#/definitions/AlertRuleTemplateDataSource"
           },
+          "x-ms-identifiers": [
+            "connectorId"
+          ],
           "type": "array"
         },
         "status": {
@@ -728,6 +734,31 @@
       },
       "type": "object"
     },
+    "AlertRuleTemplateWithMitreProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
+        }
+      ],
+      "description": "Alert rule template with MITRE property bag.",
+      "properties": {
+        "tactics": {
+          "description": "The tactics of the alert rule",
+          "items": {
+            "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
+          },
+          "type": "array"
+        },
+        "techniques": {
+          "description": "The techniques of the alert rule",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "QueryBasedAlertRuleTemplateProperties": {
       "description": "Query based alert rule template base property bag.",
       "properties": {
@@ -738,13 +769,6 @@
         "severity": {
           "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
           "description": "The severity for alerts created by this alert rule."
-        },
-        "tactics": {
-          "description": "The tactics of the alert rule",
-          "items": {
-            "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
-          },
-          "type": "array"
         },
         "version": {
           "description": "The version of this template - in format <a.b.c>, where all are numbers. For example <1.0.2>.",
@@ -881,6 +905,14 @@
           },
           "readOnly": true,
           "type": "array"
+        },
+        "techniques": {
+          "description": "The techniques of the alert rule",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
         }
       },
       "required": [
@@ -900,7 +932,7 @@
         "properties": {
           "allOf": [
             {
-              "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
+              "$ref": "#/definitions/AlertRuleTemplateWithMitreProperties"
             }
           ],
           "description": "MLBehaviorAnalytics alert rule template properties.",
@@ -908,13 +940,6 @@
             "severity": {
               "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
               "description": "The severity for alerts created by this alert rule."
-            },
-            "tactics": {
-              "description": "The tactics of the alert rule template.",
-              "items": {
-                "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
-              },
-              "type": "array"
             }
           },
           "type": "object",
@@ -969,6 +994,21 @@
           "description": "Determines whether this alert rule is enabled or disabled.",
           "type": "boolean"
         },
+        "sourceSettings": {
+          "description": "Configuration for all supported source signals in fusion detection.",
+          "items": {
+            "$ref": "#/definitions/FusionSourceSettings"
+          },
+          "x-ms-identifiers": [],
+          "type": "array"
+        },
+        "scenarioExclusionPatterns": {
+          "description": "Configuration to exclude scenarios in fusion detection.",
+          "items": {
+            "$ref": "#/definitions/FusionScenarioExclusionPattern"
+          },
+          "type": "array"
+        },
         "lastModifiedUtc": {
           "description": "The last time that this alert has been modified.",
           "format": "date-time",
@@ -987,11 +1027,130 @@
           },
           "readOnly": true,
           "type": "array"
+        },
+        "techniques": {
+          "description": "The techniques of the alert rule",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
         }
       },
       "required": [
         "alertRuleTemplateName",
+        "enabled",
+        "sourceSettings"
+      ],
+      "type": "object"
+    },
+    "FusionSourceSettings": {
+      "description": "Represents a supported source signal configuration in Fusion detection.",
+      "properties": {
+        "enabled": {
+          "description": "Determines whether this source signal is enabled or disabled in Fusion detection.",
+          "type": "boolean"
+        },
+        "sourceName": {
+          "description": "Name of the Fusion source signal. Refer to Fusion alert rule template for supported values.",
+          "type": "string"
+        },
+        "sourceSubTypes": {
+          "description": "Configuration for all source subtypes under this source signal consumed in fusion detection.",
+          "items": {
+            "$ref": "#/definitions/FusionSourceSubTypeSetting"
+          },
+          "x-ms-identifiers": [],
+          "type": "array"
+        }
+      },
+      "required": [
+        "enabled",
+        "sourceName"
+      ],
+      "type": "object"
+    },
+    "FusionSourceSubTypeSetting": {
+      "description": "Represents a supported source subtype configuration under a source signal in Fusion detection.",
+      "properties": {
+        "enabled": {
+          "description": "Determines whether this source subtype under source signal is enabled or disabled in Fusion detection.",
+          "type": "boolean"
+        },
+        "sourceSubTypeName": {
+          "description": "The Name of the source subtype under a given source signal in Fusion detection. Refer to Fusion alert rule template for supported values.",
+          "type": "string"
+        },
+        "sourceSubTypeDisplayName": {
+          "description": "The display name of source subtype under a source signal consumed in Fusion detection.",
+          "type": "string",
+          "readOnly": true
+        },
+        "severityFilters": {
+          "description": "Severity configuration for a source subtype consumed in fusion detection.",
+          "$ref": "#/definitions/FusionSubTypeSeverityFilter",
+          "type": "object"
+        }
+      },
+      "required": [
+        "enabled",
+        "sourceSubTypeName",
+        "severityFilters"
+      ],
+      "type": "object"
+    },
+    "FusionSubTypeSeverityFilter": {
+      "description": "Represents severity configuration for a source subtype consumed in Fusion detection.",
+      "properties": {
+        "isSupported": {
+          "description": "Determines whether this source subtype supports severity configuration or not.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "filters": {
+          "description": "Individual Severity configuration settings for a given source subtype consumed in Fusion detection.",
+          "items": {
+            "$ref": "#/definitions/FusionSubTypeSeverityFiltersItem"
+          },
+          "x-ms-identifiers": [],
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "FusionSubTypeSeverityFiltersItem": {
+      "description": "Represents a Severity filter setting for a given source subtype consumed in Fusion detection.",
+      "properties": {
+        "severity": {
+          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
+          "description": "The Severity for a given source subtype consumed in Fusion detection."
+        },
+        "enabled": {
+          "description": "Determines whether this severity is enabled or disabled for this source subtype consumed in Fusion detection.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "severity",
         "enabled"
+      ],
+      "type": "object"
+    },
+    "FusionScenarioExclusionPattern": {
+      "description": "Represents a Fusion scenario exclusion patterns in Fusion detection.",
+      "properties": {
+        "exclusionPattern": {
+          "description": "Scenario exclusion pattern.",
+          "type": "string"
+        },
+        "dateAddedInUTC": {
+          "description": "DateTime when scenario exclusion pattern is added in UTC.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "exclusionPattern",
+        "dateAddedInUTC"
       ],
       "type": "object"
     },
@@ -1006,7 +1165,7 @@
         "properties": {
           "allOf": [
             {
-              "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
+              "$ref": "#/definitions/AlertRuleTemplateWithMitreProperties"
             }
           ],
           "description": "Fusion alert rule template properties",
@@ -1015,11 +1174,12 @@
               "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
               "description": "The severity for alerts created by this alert rule."
             },
-            "tactics": {
-              "description": "The tactics of the alert rule template",
+            "sourceSettings": {
+              "description": "All supported source signal configurations consumed in fusion detection.",
               "items": {
-                "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
+                "$ref": "#/definitions/FusionTemplateSourceSetting"
               },
+              "x-ms-identifiers": [],
               "type": "array"
             }
           },
@@ -1028,6 +1188,7 @@
             "description",
             "status",
             "severity",
+            "sourceSettings",
             "alertRulesCreatedByTemplateCount"
           ],
           "type": "object",
@@ -1036,6 +1197,72 @@
       },
       "type": "object",
       "x-ms-discriminator-value": "Fusion"
+    },
+    "FusionTemplateSourceSetting": {
+      "description": "Represents a source signal consumed in Fusion detection.",
+      "properties": {
+        "sourceName": {
+          "description": "The name of a source signal consumed in Fusion detection.",
+          "type": "string"
+        },
+        "sourceSubTypes": {
+          "description": "All supported source subtypes under this source signal consumed in fusion detection.",
+          "items": {
+            "$ref": "#/definitions/FusionTemplateSourceSubType"
+          },
+          "x-ms-identifiers": [],
+          "type": "array"
+        }
+      },
+      "required": [
+        "sourceName"
+      ],
+      "type": "object"
+    },
+    "FusionTemplateSourceSubType": {
+      "description": "Represents a source subtype under a source signal consumed in Fusion detection.",
+      "properties": {
+        "sourceSubTypeName": {
+          "description": "The name of source subtype under a source signal consumed in Fusion detection.",
+          "type": "string"
+        },
+        "sourceSubTypeDisplayName": {
+          "description": "The display name of source subtype under a source signal consumed in Fusion detection.",
+          "type": "string",
+          "readOnly": true
+        },
+        "severityFilter": {
+          "description": "Severity configuration available for a source subtype consumed in fusion detection.",
+          "$ref": "#/definitions/FusionTemplateSubTypeSeverityFilter",
+          "type": "object"
+        }
+      },
+      "required": [
+        "sourceSubTypeName",
+        "severityFilter"
+      ],
+      "type": "object"
+    },
+    "FusionTemplateSubTypeSeverityFilter": {
+      "description": "Represents severity configurations available for a source subtype consumed in Fusion detection.",
+      "properties": {
+        "isSupported": {
+          "description": "Determines whether severity configuration is supported for this source subtype consumed in Fusion detection.",
+          "type": "boolean"
+        },
+        "severityFilters": {
+          "description": "List of all supported severities for this source subtype consumed in Fusion detection.",
+          "items": {
+            "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum"
+          },
+          "x-ms-identifiers": [],
+          "type": "array"
+        }
+      },
+      "required": [
+        "isSupported"
+      ],
+      "type": "object"
     },
     "ThreatIntelligenceAlertRule": {
       "allOf": [
@@ -1093,6 +1320,14 @@
           },
           "readOnly": true,
           "type": "array"
+        },
+        "techniques": {
+          "description": "The techniques of the alert rule",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
         }
       },
       "required": [
@@ -1112,7 +1347,7 @@
         "properties": {
           "allOf": [
             {
-              "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
+              "$ref": "#/definitions/AlertRuleTemplateWithMitreProperties"
             }
           ],
           "description": "Threat Intelligence alert rule template properties",
@@ -1120,13 +1355,6 @@
             "severity": {
               "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
               "description": "The severity for alerts created by this alert rule."
-            },
-            "tactics": {
-              "description": "The tactics of the alert rule template",
-              "items": {
-                "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
-              },
-              "type": "array"
             }
           },
           "required": [
@@ -1296,6 +1524,20 @@
           "description": "The query that creates alerts for this rule.",
           "type": "string"
         },
+        "tactics": {
+          "description": "The tactics of the alert rule",
+          "items": {
+            "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
+          },
+          "type": "array"
+        },
+        "techniques": {
+          "description": "The techniques of the alert rule",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "displayName": {
           "description": "The display name for alerts created by this alert rule.",
           "type": "string"
@@ -1322,13 +1564,6 @@
         "severity": {
           "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
           "description": "The severity for alerts created by this alert rule."
-        },
-        "tactics": {
-          "description": "The tactics of the alert rule",
-          "items": {
-            "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
-          },
-          "type": "array"
         },
         "incidentConfiguration": {
           "$ref": "#/definitions/IncidentConfiguration",
@@ -1403,7 +1638,7 @@
         "properties": {
           "allOf": [
             {
-              "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
+              "$ref": "#/definitions/AlertRuleTemplateWithMitreProperties"
             },
             {
               "$ref": "#/definitions/QueryBasedAlertRuleTemplateProperties"
@@ -1413,15 +1648,6 @@
             }
           ],
           "description": "Scheduled alert rule template properties",
-          "properties": {
-            "tactics": {
-              "description": "The tactics of the alert rule template",
-              "items": {
-                "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
-              },
-              "type": "array"
-            }
-          },
           "required": [
             "displayName",
             "description",
@@ -1453,7 +1679,7 @@
         "properties": {
           "allOf": [
             {
-              "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
+              "$ref": "#/definitions/AlertRuleTemplateWithMitreProperties"
             },
             {
               "$ref": "#/definitions/QueryBasedAlertRuleTemplateProperties"
@@ -1565,7 +1791,8 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/EntityMapping"
-      }
+      },
+      "x-ms-identifiers": []
     },
     "EntityMapping": {
       "description": "Single entity mapping for the alert rule",
@@ -1578,7 +1805,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/FieldMapping"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "type": "object"
