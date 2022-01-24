@@ -241,6 +241,101 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/sapMonitors/{sapMonitorName}/providerInstances": {
+      "get": {
+        "tags": [
+          "HanaOnAzure"
+        ],
+        "operationId": "ProviderInstances_List",
+        "summary": "Gets a list of provider instances in the specified SAP monitor.",
+        "description": "Gets a list of provider instances in the specified SAP monitor. The operations returns various properties of each provider instances.",
+        "x-ms-examples": {
+          "List all SAP Monitors in a subscription": {
+            "$ref": "./examples/ProviderInstances_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SapMonitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProviderInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/sapMonitors/{sapMonitorName}/providerInstances/{providerInstanceName}": {
+      "get": {
+        "tags": [
+          "HanaOnAzure"
+        ],
+        "operationId": "ProviderInstances_Get",
+        "summary": "Gets properties of a provider instance.",
+        "description": "Gets properties of a provider instance for the specified subscription, resource group, SapMonitor name, and resource name.",
+        "x-ms-examples": {
+          "Get properties of a SAP monitor": {
+            "$ref": "./examples/ProviderInstances_Get.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SapMonitorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderInstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProviderInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -298,12 +393,12 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/HanaInstanceProperties",
           "description": "HANA instance properties"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
-          "description": "The system metadata relating to this resource.",
-          "readOnly": true
         }
+      },
+      "systemData": {
+        "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+        "description": "The system metadata relating to this resource.",
+        "readOnly": true
       },
       "allOf": [
         {
@@ -479,6 +574,33 @@
       },
       "description": "Specifies the disk information for the HANA instance"
     },
+    "SAPSystemID": {
+      "type": "object",
+      "properties": {
+        "gid": {
+          "type": "string",
+          "description": "Group ID of the HANA database user."
+        },
+        "memoryAllocation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Percent of memory to allocate to this SID."
+        },
+        "sid": {
+          "type": "string",
+          "description": "SAP system ID as database identifier."
+        },
+        "username": {
+          "type": "string",
+          "description": "Name of the HANA database user."
+        },
+        "uid": {
+          "type": "string",
+          "description": "User ID of the HANA database user."
+        }
+      },
+      "description": "Specifies information related to a SAP system ID"
+    },
     "StorageProfile": {
       "properties": {
         "nfsIpAddress": {
@@ -650,6 +772,102 @@
         }
       },
       "description": "Tags field of the HANA instance."
+    },
+    "MonitoringDetails": {
+      "type": "object",
+      "properties": {
+        "hanaSubnet": {
+          "type": "string",
+          "description": "ARM ID of an Azure Subnet with access to the HANA instance."
+        },
+        "hanaHostname": {
+          "type": "string",
+          "description": "Hostname of the HANA Instance blade."
+        },
+        "hanaDbName": {
+          "type": "string",
+          "description": "Name of the database itself."
+        },
+        "hanaDbSqlPort": {
+          "type": "integer",
+          "description": "The port number of the tenant DB. Used to connect to the DB."
+        },
+        "hanaDbUsername": {
+          "type": "string",
+          "description": "Username for the HANA database to login to for monitoring"
+        },
+        "hanaDbPassword": {
+          "type": "string",
+          "description": "Password for the HANA database to login for monitoring"
+        }
+      },
+      "description": "Details needed to monitor a Hana Instance"
+    },
+    "ProviderInstanceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProviderInstance"
+          },
+          "description": "The list of provider instances."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of provider instances."
+        }
+      },
+      "description": "The response from the List provider instances operation."
+    },
+    "ProviderInstance": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ProviderInstanceProperties",
+          "description": "Provider Instance properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "A provider instance associated with a SAP monitor."
+    },
+    "ProviderInstanceProperties": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of provider instance."
+        },
+        "properties": {
+          "type": "string",
+          "description": "A JSON string containing the properties of the provider instance."
+        },
+        "metadata": {
+          "type": "string",
+          "description": "A JSON string containing metadata of the provider instance."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "Creating",
+            "Updating",
+            "Failed",
+            "Succeeded",
+            "Deleting",
+            "Migrating"
+          ],
+          "x-ms-enum": {
+            "name": "HanaProvisioningStatesEnum",
+            "modelAsString": true
+          },
+          "description": "State of provisioning of the provider instance"
+        }
+      },
+      "description": "Describes the properties of a provider instance."
     }
   },
   "parameters": {
@@ -676,6 +894,14 @@
       "description": "Name of the SAP HANA on Azure instance.",
       "x-ms-parameter-location": "method"
     },
+    "ProviderInstanceNameParameter": {
+      "name": "providerInstanceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the provider instance.",
+      "x-ms-parameter-location": "method"
+    },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
@@ -693,6 +919,16 @@
       "description": "Request body that only contains the new Tags field",
       "x-ms-parameter-location": "method"
     },
+    "MonitoringParameter": {
+      "name": "monitoringParameter",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/MonitoringDetails"
+      },
+      "description": "Request body that only contains monitoring attributes",
+      "x-ms-parameter-location": "method"
+    },
     "HanaInstanceParameter": {
       "name": "hanaInstanceParameter",
       "in": "body",
@@ -701,6 +937,16 @@
         "$ref": "#/definitions/HanaInstance"
       },
       "description": "Request body representing a HanaInstance",
+      "x-ms-parameter-location": "method"
+    },
+    "ProviderInstanceParameter": {
+      "name": "providerInstanceParameter",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ProviderInstance"
+      },
+      "description": "Request body representing a provider instance",
       "x-ms-parameter-location": "method"
     }
   }
