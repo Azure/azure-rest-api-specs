@@ -26,7 +26,16 @@ These are the global settings for Azure Digital Twins.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2020-10-31
+tag: package-2021-06-30-preview
+```
+
+### Tag: package-2021-06-30-preview
+
+These settings apply only when `--tag=package-2021-06-30-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-06-30-preview'
+input-file:
+  - Microsoft.DigitalTwins/preview/2021-06-30-preview/digitaltwins.json
 ```
 
 ### Tag: package-2020-10-31
@@ -87,6 +96,10 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+### Java
+
+See configuration in [readme.java.md](./readme.java.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 

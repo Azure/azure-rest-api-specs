@@ -9,7 +9,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.netapp
 package-name: azure-mgmt-netapp
-package-version: 1.0.0b1
+package-version: 5.1.0
 clear-output-folder: true
 ```
 

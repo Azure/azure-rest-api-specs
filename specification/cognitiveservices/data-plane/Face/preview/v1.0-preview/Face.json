@@ -4652,7 +4652,8 @@
       "description": "Face list object.",
       "type": "object",
       "required": [
-        "faceListId"
+        "faceListId",
+        "name"
       ],
       "properties": {
         "faceListId": {
@@ -4661,16 +4662,25 @@
           "maxLength": 64,
           "pattern": "^[a-z0-9-_]+$"
         },
+        "name": {
+          "type": "string",
+          "description": "User defined name, maximum length is 128.",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "userData": {
+          "type": "string",
+          "description": "User specified data. Length should not exceed 16KB.",
+          "maxLength": 16384
+        },
+        "recognitionModel": {
+          "$ref": "#/definitions/RecognitionModel"
+        },
         "persistedFaces": {
           "description": "Persisted faces within the face list.",
           "$ref": "#/definitions/PersistedFaces"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/MetaDataContract"
-        }
-      ]
+      }
     },
     "FaceLists": {
       "type": "array",
@@ -4682,7 +4692,8 @@
     "PersonGroup": {
       "type": "object",
       "required": [
-        "personGroupId"
+        "personGroupId",
+        "name"
       ],
       "description": "Person group object.",
       "properties": {
@@ -4691,13 +4702,22 @@
           "type": "string",
           "maxLength": 64,
           "pattern": "^[a-z0-9-_]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "User defined name, maximum length is 128.",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "userData": {
+          "type": "string",
+          "description": "User specified data. Length should not exceed 16KB.",
+          "maxLength": 16384
+        },
+        "recognitionModel": {
+          "$ref": "#/definitions/RecognitionModel"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/MetaDataContract"
-        }
-      ]
+      }
     },
     "PersonGroups": {
       "type": "array",
@@ -4771,7 +4791,8 @@
       "description": "Large face list object.",
       "type": "object",
       "required": [
-        "largeFaceListId"
+        "largeFaceListId",
+        "name"
       ],
       "properties": {
         "largeFaceListId": {
@@ -4779,13 +4800,22 @@
           "description": "LargeFaceListId of the target large face list.",
           "maxLength": 64,
           "pattern": "^[a-z0-9-_]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "User defined name, maximum length is 128.",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "userData": {
+          "type": "string",
+          "description": "User specified data. Length should not exceed 16KB.",
+          "maxLength": 16384
+        },
+        "recognitionModel": {
+          "$ref": "#/definitions/RecognitionModel"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/MetaDataContract"
-        }
-      ]
+      }
     },
     "LargeFaceLists": {
       "type": "array",
@@ -4797,7 +4827,8 @@
     "LargePersonGroup": {
       "type": "object",
       "required": [
-        "largePersonGroupId"
+        "largePersonGroupId",
+        "name"
       ],
       "description": "Large person group object.",
       "properties": {
@@ -4806,13 +4837,22 @@
           "type": "string",
           "maxLength": 64,
           "pattern": "^[a-z0-9-_]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "User defined name, maximum length is 128.",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "userData": {
+          "type": "string",
+          "description": "User specified data. Length should not exceed 16KB.",
+          "maxLength": 16384
+        },
+        "recognitionModel": {
+          "$ref": "#/definitions/RecognitionModel"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/MetaDataContract"
-        }
-      ]
+      }
     },
     "LargePersonGroups": {
       "type": "array",
