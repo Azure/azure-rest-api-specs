@@ -3143,6 +3143,346 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/subvolumes": {
+      "get": {
+        "tags": [
+          "Subvolumes"
+        ],
+        "operationId": "Subvolumes_ListByVolume",
+        "summary": "List of all the subvolumes",
+        "description": "Returns a list of the subvolumes in the volume",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/subvolumesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Subvolumes_List": {
+            "$ref": "examples/Subvolumes_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/subvolumes/{subvolumeName}": {
+      "get": {
+        "tags": [
+          "Subvolumes"
+        ],
+        "summary": "Get the path associated with the subvolumeName",
+        "description": "Returns the path associated with the subvolumeName provided",
+        "operationId": "Subvolumes_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/SubvolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/subvolumeInfo"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Subvolumes_Get": {
+            "$ref": "examples/Subvolumes_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Subvolumes"
+        ],
+        "summary": "Create or clone a new subvolume",
+        "description": "Creates a subvolume in the path or clones the subvolume mentioned in the parentPath",
+        "operationId": "Subvolumes_Create",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Subvolume object supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/subvolumeInfo"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/SubvolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - updated",
+            "schema": {
+              "$ref": "#/definitions/subvolumeInfo"
+            }
+          },
+          "201": {
+            "description": "Subvolume created",
+            "schema": {
+              "$ref": "#/definitions/subvolumeInfo"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Create request accepted; operation will complete asynchronously"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Subvolumes_Create": {
+            "$ref": "examples/Subvolumes_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Subvolumes"
+        ],
+        "operationId": "Subvolumes_Update",
+        "summary": "Update a subvolume",
+        "description": "Patch a subvolume",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Subvolume object supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/subvolumePatchRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/SubvolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/subvolumeInfo"
+            },
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted -- Update request accepted; operation will complete asynchronously"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Subvolumes_Update": {
+            "$ref": "examples/Subvolumes_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Subvolumes"
+        ],
+        "operationId": "Subvolumes_Delete",
+        "summary": "Delete a subvolume",
+        "description": "Delete subvolume",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/SubvolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted -- Delete request accepted; operation will complete asynchronously"
+          },
+          "204": {
+            "description": "NoContent -- Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Subvolumes_Delete": {
+            "$ref": "examples/Subvolumes_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/subvolumes/{subvolumeName}/getMetadata": {
+      "post": {
+        "tags": [
+          "Subvolumes"
+        ],
+        "operationId": "Subvolumes_GetMetadata",
+        "summary": "Describe a subvolume",
+        "description": "Get details of the specified subvolume",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/SubvolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/subvolumeModel"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Subvolumes_Metadata": {
+            "$ref": "examples/Subvolumes_Metadata.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -4555,6 +4895,30 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/placementKeyValuePairs"
+          }
+        },
+        "enableSubvolumes": {
+          "type": "string",
+          "description": "Flag indicating whether subvolume operations are enabled on the volume",
+          "example": "Enabled",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "enableSubvolumes",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "subvolumes are enabled"
+              },
+              {
+                "value": "Disabled",
+                "description": "subvolumes are not enabled"
+              }
+            ]
           }
         }
       }
@@ -6268,6 +6632,206 @@
           "example": "/AVSdataStore"
         }
       }
+    },
+    "subvolumesList": {
+      "description": "List of Subvolumes",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of Subvolumes",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/subvolumeInfo"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
+        }
+      }
+    },
+    "subvolumeInfo": {
+      "description": "Subvolume Information properties",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Subvolume Properties",
+          "$ref": "#/definitions/subvolumeProperties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "subvolumePatchRequest": {
+      "description": "Subvolume Patch Request properties",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "description": "Subvolume Properties",
+          "$ref": "#/definitions/subvolumePatchParams",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "subvolumePatchParams": {
+      "description": "Parameters with which a subvolume can be updated",
+      "type": "object",
+      "properties": {
+        "size": {
+          "title": "size",
+          "type": "integer",
+          "x-nullable": true,
+          "format": "int64",
+          "description": "Truncate subvolume to the provided size in bytes",
+          "example": 5
+        },
+        "path": {
+          "title": "path",
+          "type": "string",
+          "description": "path to the subvolume",
+          "example": "/pathToSubvolume"
+        }
+      }
+    },
+    "subvolumeProperties": {
+      "description": "This represents path associated with the subvolume",
+      "type": "object",
+      "properties": {
+        "path": {
+          "title": "path",
+          "type": "string",
+          "description": "Path to the subvolume",
+          "example": "/subvolume1"
+        },
+        "size": {
+          "title": "size",
+          "type": "integer",
+          "x-nullable": true,
+          "format": "int64",
+          "description": "Truncate subvolume to the provided size in bytes",
+          "example": 5
+        },
+        "parentPath": {
+          "title": "name",
+          "x-nullable": true,
+          "type": "string",
+          "description": "parent path to the subvolume",
+          "example": "/parentPath"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Azure lifecycle management",
+          "readOnly": true,
+          "example": "Available"
+        }
+      }
+    },
+    "subvolumeModel": {
+      "description": "Result of the post subvolume and action is to get metadata of the subvolume.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
+        },
+        "properties": {
+          "description": "It represents the minimal properties of the subvolume.",
+          "$ref": "#/definitions/subvolumeModelProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "subvolumeModelProperties": {
+      "description": "Properties which represents actual subvolume model which is stored as a file in the system.",
+      "type": "object",
+      "properties": {
+        "path": {
+          "title": "path",
+          "type": "string",
+          "description": "Path to the subvolume",
+          "example": "/subvolume1"
+        },
+        "parentPath": {
+          "title": "parentpath",
+          "type": "string",
+          "description": "Path to the parent subvolume",
+          "example": "/parentPath"
+        },
+        "size": {
+          "title": "size",
+          "type": "integer",
+          "format": "int64",
+          "description": "Size of subvolume",
+          "example": 5
+        },
+        "bytesUsed": {
+          "title": "bytesUsed",
+          "type": "integer",
+          "format": "int64",
+          "description": "Bytes used",
+          "example": 5
+        },
+        "permissions": {
+          "title": "permissions",
+          "type": "string",
+          "description": "Permissions of the subvolume",
+          "example": "777"
+        },
+        "creationTimeStamp": {
+          "title": "creationTimeStamp",
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation time and date",
+          "example": "2017-08-15T13:23:33Z"
+        },
+        "accessedTimeStamp": {
+          "title": "accessedTimeStamp",
+          "type": "string",
+          "format": "date-time",
+          "description": "Most recent access time and date",
+          "example": "2017-08-15T13:23:33Z"
+        },
+        "modifiedTimeStamp": {
+          "title": "modifiedTimeStamp",
+          "type": "string",
+          "format": "date-time",
+          "description": "Most recent modification time and date",
+          "example": "2017-08-15T13:23:33Z"
+        },
+        "changedTimeStamp": {
+          "title": "changedTimeStamp",
+          "type": "string",
+          "format": "date-time",
+          "description": "Most recent change time and date",
+          "example": "2017-08-15T13:23:33Z"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Azure lifecycle management",
+          "example": "Available"
+        }
+      }
     }
   },
   "parameters": {
@@ -6384,6 +6948,17 @@
       "minLength": 1,
       "maxLength": 64,
       "description": "The name of the volumeGroup",
+      "x-ms-parameter-location": "method"
+    },
+    "SubvolumeName": {
+      "name": "subvolumeName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the subvolume.",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]{0,63}$",
+      "minLength": 1,
+      "maxLength": 64,
       "x-ms-parameter-location": "method"
     }
   }
