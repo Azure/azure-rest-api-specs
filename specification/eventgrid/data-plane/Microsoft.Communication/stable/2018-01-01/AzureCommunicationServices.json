@@ -459,6 +459,43 @@
           "format": "int64",
           "type": "integer"
         },
+        "recordingContentType": {
+          "type": "string",
+          "description": "The recording content type- AudioVideo, or Audio",
+          "enum": [
+            "AudioVideo",
+            "Audio"
+          ],
+          "x-ms-enum": {
+            "name": "recordingContentType",
+            "modelAsString": true
+          }
+        },
+        "recordingChannelType": {
+          "type": "string",
+          "description": "The recording  channel type - Mixed, Unmixed",
+          "enum": [
+            "Mixed",
+            "Unmixed"
+          ],
+          "x-ms-enum": {
+            "name": "recordingChannelType",
+            "modelAsString": true
+          }
+        },
+        "recordingFormatType": {
+          "type": "string",
+          "description": "The recording format type - Mp4, Mp3, Wav",
+          "enum": [
+            "Wav",
+            "Mp3",
+            "Mp4"
+          ],
+          "x-ms-enum": {
+            "name": "recordingFormatType",
+            "modelAsString": true
+          }
+        },
         "sessionEndReason": {
           "description": "The reason for ending recording session",
           "type": "string"
@@ -696,6 +733,10 @@
         },
         "contentLocation": {
           "description": "The location of the content for this chunk",
+          "type": "string"
+        },
+        "deleteLocation": {
+          "description": "The location to delete all chunk storage",
           "type": "string"
         }
       }

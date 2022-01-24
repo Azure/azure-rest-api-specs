@@ -38,7 +38,7 @@ input-file:
 ```
 
 
-These are the global settings for the Purview API.
+These are the global settings for the Purview Scanning API.
 
 ``` yaml
 openapi-type: data-plane
@@ -54,6 +54,15 @@ These settings apply only when `--tag=package-2018-12-01-preview` is specified o
 ``` yaml $(tag) == 'package-2018-12-01-preview'
 input-file:
 - Azure.Analytics.Purview.Scanning/preview/2018-12-01-preview/scanningService.json
+modelerfour:
+  lenient-model-deduplication: true
+```
+
+These settings apply only when `--tag=package-2021-10-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-10-01-preview'
+input-file:
+- Azure.Analytics.Purview.Scanning/preview/2021-10-01-preview/scanningService.json
 modelerfour:
   lenient-model-deduplication: true
 ```

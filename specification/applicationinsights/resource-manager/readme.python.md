@@ -25,6 +25,9 @@ batch:
   - tag: package-2020-02-02
   - tag: package-2020-03-01-preview
   - tag: package-preview-2020-06-only
+  - tag: package-2020-11-only
+  - tag: package-2021-03-08-only
+  - tag: package-2021-08
   - multiapiscript: true
 ```
 
@@ -105,6 +108,35 @@ These settings apply only when `--tag=package-preview-2020-06-only --python` is 
 namespace: azure.mgmt.applicationinsights.v2020_06_02_preview
 output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2020_06_02_preview
 ```
+
+### Tag: package-2020-11-only and python
+
+These settings apply only when `--tag=package-2020-11-only --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-11-only' && $(python) && $(track2)
+namespace: azure.mgmt.applicationinsights.v2020_11_20
+output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2020_11_20
+```
+
+### Tag: package-2021-03-08-only and python
+
+These settings apply only when `--tag=package-2021-03-08-only --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03-08-only' && $(python) && $(track2)
+namespace: azure.mgmt.applicationinsights.v2021_03_08
+output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2021_03_08
+```
+
+### Tag: package-2021-08 and python
+
+These settings apply only when `--tag=package-2021-08 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-08' && $(python) && $(track2)
+namespace: azure.mgmt.applicationinsights.v2021_08_01
+output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2021_08_01
+```
+
+
 ```yaml $(python) && $(track2)
 modelerfour:
   lenient-model-deduplication: true

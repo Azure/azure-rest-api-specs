@@ -63,13 +63,7 @@
           "type": "string"
         },
         "routeType": {
-          "description": "The routing methodology to where the ICE server will be located from the client.",
-          "type": "string",
-          "default": "any",
-          "enum": [
-            "any",
-            "nearest"
-          ]
+          "$ref": "#/definitions/RouteType"
         }
       }
     },
@@ -99,12 +93,7 @@
           "type": "string"
         },
         "routeType": {
-          "description": "The routing methodology to where the ICE server will be located from the client.",
-          "type": "string",
-          "enum": [
-            "any",
-            "nearest"
-          ]
+          "$ref": "#/definitions/RouteType"
         }
       }
     },
@@ -128,6 +117,18 @@
             "$ref": "#/definitions/CommunicationIceServer"
           }
         }
+      }
+    },
+    "RouteType": {
+      "description": "The routing methodology to where the ICE server will be located from the client.",
+      "enum": [
+        "any",
+        "nearest"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RouteType",
+        "modelAsString": true
       }
     }
   },
