@@ -19,7 +19,7 @@ Generate all API versions currently shipped for this package
 clear-output-folder: true
 batch:
   - tag: package-privatelinks-2020-05
-  - multiapiscript-features: true
+  - multiapiscript-privatelinks: true
   - tag: package-features-2021-07
   - tag: package-features-2015-12
   - multiapiscript-features: true
