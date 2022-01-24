@@ -417,7 +417,6 @@
         "IncidentStatus",
         "IncidentRelatedAnalyticRuleIds",
         "IncidentTactics",
-        "IncidentLabel",
         "IncidentProviderName",
         "AccountAadTenantId",
         "AccountAadUserId",
@@ -495,10 +494,6 @@
           {
             "value": "IncidentTactics",
             "description": "The tactics of the incident"
-          },
-          {
-            "value": "IncidentLabel",
-            "description": "The labels of the incident"
           },
           {
             "value": "IncidentProviderName",
@@ -790,33 +785,36 @@
       }
     },
     "IncidentPropertiesAction": {
-      "severity": {
-        "$ref": "./common/IncidentTypes.json#/definitions/IncidentSeverityEnum"
-      },
-      "status": {
-        "$ref": "./common/IncidentTypes.json#/definitions/IncidentStatusEnum"
-      },
-      "classification": {
-        "$ref": "./common/IncidentTypes.json#/definitions/IncidentClassificationEnum"
-      },
-      "classificationReason": {
-        "$ref": "./common/IncidentTypes.json#/definitions/IncidentClassificationReasonEnum"
-      },
-      "classificationComment": {
-        "description": "Describes the reason the incident was closed",
-        "type": "string"
-      },
-      "owner": {
-        "$ref": "#/definitions/IncidentPropertiesActionOwnerInfo"
-      },
-      "labels": {
-        "description": "List of labels to add to the incident",
-        "type": "array",
-        "x-ms-identifiers": [
-          "labelName"
-        ],
-        "items": {
-          "$ref": "./common/IncidentTypes.json#/definitions/IncidentLabel"
+      "type": "object",
+      "properties": {
+        "severity": {
+          "$ref": "./common/IncidentTypes.json#/definitions/IncidentSeverityEnum"
+        },
+        "status": {
+          "$ref": "./common/IncidentTypes.json#/definitions/IncidentStatusEnum"
+        },
+        "classification": {
+          "$ref": "./common/IncidentTypes.json#/definitions/IncidentClassificationEnum"
+        },
+        "classificationReason": {
+          "$ref": "./common/IncidentTypes.json#/definitions/IncidentClassificationReasonEnum"
+        },
+        "classificationComment": {
+          "description": "Describes the reason the incident was closed",
+          "type": "string"
+        },
+        "owner": {
+          "$ref": "#/definitions/IncidentPropertiesActionOwnerInfo"
+        },
+        "labels": {
+          "description": "List of labels to add to the incident",
+          "type": "array",
+          "x-ms-identifiers": [
+            "labelName"
+          ],
+          "items": {
+            "$ref": "./common/IncidentTypes.json#/definitions/IncidentLabel"
+          }
         }
       }
     },
