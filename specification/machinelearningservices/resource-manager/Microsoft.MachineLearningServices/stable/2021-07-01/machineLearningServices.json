@@ -4022,7 +4022,8 @@
         },
         "password": {
           "description": "Password of admin account",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "publicKeyData": {
           "description": "Public key data",
@@ -4030,7 +4031,8 @@
         },
         "privateKeyData": {
           "description": "Private key data",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         }
       }
     },
@@ -4064,7 +4066,8 @@
           "type": "string",
           "description": "Image registry pull secret."
         }
-      }
+      },
+      "x-ms-secret": true
     },
     "AksComputeSecrets": {
       "description": "Secrets related to a Machine Learning compute based on AKS.",
@@ -4096,7 +4099,8 @@
       "properties": {
         "databricksAccessToken": {
           "description": "access token for databricks account.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         }
       }
     },
