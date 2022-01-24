@@ -15,8 +15,7 @@ def print_exec(cmd: str):
 
 
 def get_repo_root_folder() -> str:
-    current_path = os.getcwd()
-    return str(Path(current_path.split('azure-rest-api-specs')[0]) / 'azure-rest-api-specs')
+    return str(Path(os.getcwd()) / 'azure-rest-api-specs')
 
 
 def git_clean():
