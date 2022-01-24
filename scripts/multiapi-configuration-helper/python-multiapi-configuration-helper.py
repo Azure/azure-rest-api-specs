@@ -47,7 +47,7 @@ class MultiApiConfigHelper:
         self.tag = tag.split(':')[-1].strip()
 
     @staticmethod
-    def checkout_main_branch(self):
+    def checkout_main_branch():
         git_clean()
         usr = 'Azure'
         branch = 'main'
