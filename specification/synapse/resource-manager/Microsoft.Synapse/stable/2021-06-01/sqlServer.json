@@ -1192,7 +1192,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/dedicatedSQLminimalTlsSettings/{dedicatedSQLminimalTlsSettingsName}": {
       "patch": {
         "operationId": "WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings_Update",
-        "description": "Updates dedicated sql server minimal tls settings.",
+        "summary": "Update server's tls settings.",
+        "description": "Update a workspace managed sql server's minimal tls settings.",
         "tags": [
           "WorkspaceManagedSqlServer, DedicatedSQLminimalTlsSettings"
         ],
@@ -1226,7 +1227,7 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             },
-            "description": "Only MinimalTlsVersion is allowed to update on Worksapce SQL Server"
+            "description": "Only MinimalTlsVersion is allowed to update on Workspace SQL Server"
           }
         },
         "consumes": [
@@ -1244,8 +1245,8 @@
       },
       "get": {
         "operationId": "WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings_Get",
-        "summary": "Get Workspace dedicate sql minimal tls settings.",
-        "description": "Get Workspace dedicate sql minimal tls settings.",
+        "summary": "Get server's minimal tls settings.",
+        "description": "Get workspace managed sql server's minimal tls settings.",
         "tags": [
           "WorkspaceManagedSqlServer, DedicatedSQLminimalTlsSettings"
         ],
@@ -1296,8 +1297,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/dedicatedSQLminimalTlsSettings": {
       "get": {
         "operationId": "WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings_List",
-        "summary": "Lists the dedicated sql minimal tls settings associated with a server.",
-        "description": "Lists the dedicated sql minimal tls settings associated with a server.",
+        "summary": "List workspace server's minimal tls settings.",
+        "description": "List workspace managed sql server's minimal tls settings.",
         "tags": [
           "WorkspaceManagedSqlServer, DedicatedSQLminimalTlsSettings"
         ],
@@ -1946,6 +1947,7 @@
     },
     "DedicatedSQLminimalTlsSettingsProperties": {
       "description": "Properties of a dedicated sql minimal tls settings.",
+      "type": "object",
       "properties": {
         "administratorLogin": {
           "readOnly": true,
