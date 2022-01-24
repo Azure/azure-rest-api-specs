@@ -34,7 +34,7 @@ class MultiApiConfigHelper:
         self.service_name = ''
         self.tag = ''
         self.tag_files = {}  # Dict[str, List(str)]
-        self.configured_files = {}  # Set[str]
+        self.configured_files = set()  # Set[str]
 
     def get_input(self):
         print('Please commit your code before execute this script!!!')
@@ -66,12 +66,12 @@ class MultiApiConfigHelper:
     @staticmethod
     def judge_tag(self, line: str) -> bool:
         # ``` yaml $(tag) == 'package-2021-11-01'
-        elements = ['```', '$(tag)', '==', 'package-']
+        elements = ['```', 'tag', '==', 'package-']
         result = [re.search(element, line) for element in elements]
         return all(result)
 
     @staticmethod
-    def extract_tag(self, line: str) -> str:
+    def get_tag(self, line: str) -> str:
         # extract 'package-2021-11-01' from "``` yaml $(tag) == 'package-2021-11-01'"
         result = re.search("[\'\"][^\'^\"]+[\'\"]", line)
         if not result:
@@ -79,7 +79,7 @@ class MultiApiConfigHelper:
         return result.group(0)[1:-1]
 
     @staticmethod
-    def extract_file_name(self, line: str) -> str:
+    def get_file_name(self, line: str) -> str:
         #   - Microsoft.Insights/stable/2015-05-01/aiOperations_API.json
         if '.json' in line and 'Microsoft.' in line:
             return line.strip('\n ').split('-')[-1].strip(' ')
@@ -90,13 +90,14 @@ class MultiApiConfigHelper:
         end_idx = start_idx
         for end_idx in range(start_idx + 1, len(content)):
             if '```' in content[end_idx]:
+                end_idx -= 1
                 break
 
-        files = set()
+        files = []
         for idx in range(start_idx + 1, end_idx):
             file_name = self.get_file_name(content[idx])
             if file_name:
-                files.add(file_name)
+                files.append(file_name)
         self.tag_files[tag_name] = files
         return end_idx + 1
 
@@ -122,7 +123,7 @@ class MultiApiConfigHelper:
             return ''
         return line.split('tag:')[-1].strip('\n ')
 
-    def get_configured_tags(self, content: List[str], start_idx: int, tags: Set[str]) -> Set[str]:
+    def get_configured_tags(self, content: List[str], start_idx: int, tags: List[str]):
         end_idx = start_idx
         for end_idx in range(start_idx + 1, len(content)):
             if '```' in content[end_idx]:
@@ -131,15 +132,14 @@ class MultiApiConfigHelper:
         for idx in range(start_idx + 1, end_idx - 1):
             tag_name = self.get_configured_tag_name(content[idx])
             if tag_name:
-                tags.add(tag_name)
-        return tags
+                tags.append(tag_name)
 
     def get_configured_files(self):
         with open('readme.python.md', 'r') as file_in:
             content = file_in.readlines()
 
         configured_files = []
-        configured_tags = set()
+        configured_tags = []
         for i in range(len(content)):
             if self.judge_config(content[i]):
                 self.get_configured_tags(content, i, configured_tags)
@@ -153,13 +153,15 @@ class MultiApiConfigHelper:
 
     def get_missing_files(self):
         missing_files = []
+        if self.tag not in self.tag_files:
+            raise Exception(f'Do not find {self.tag} in {self.service_name}/readme.md({str(self.tag_files.keys())})')
         for file_name in self.tag_files[self.tag]:
             if file_name not in self.configured_files:
                 missing_files.append('  - ' + file_name)
 
         print('Program done!')
         if missing_files:
-            print(f'There are {len(missing_files)} files that are not configured in readme.python.md')
+            print(f'There are {len(missing_files)} files that are not configured in readme.python.md:')
             for file_name in missing_files:
                 print(file_name)
         else:
@@ -173,7 +175,7 @@ class MultiApiConfigHelper:
 
     def run(self):
         self.get_input()
-        self.checkout_main_branch()
+        # self.checkout_main_branch()
         self.compare_tag()
 
 
