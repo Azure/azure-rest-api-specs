@@ -17,32 +17,30 @@ Generate all API versions currently shipped for this package
 ```yaml $(track2)
 clear-output-folder: true
 batch:
-  - tag: package-passivestamp-2018-12-20
-  - tag: package-2021-10
+  - tag: package-passivestamp-2021-11-15
+  - tag: package-2021-12
 ```
 
-### Tag: package-passivestamp-2018-12-20 and python
+### Tag: package-passivestamp-2021-11-15 and python
 
-These settings apply only when `--tag=package-passivestamp-2018-12-20 --python` is specified on the command line.
+These settings apply only when `--tag=package-passivestamp-2021-11-15 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-passivestamp-2018-12-20'
+``` yaml $(tag) == 'package-passivestamp-2021-11-15'
 title: Recovery Services Backup Passive Client
 namespace: azure.mgmt.recoveryservicesbackup.passivestamp
 output-folder: $(python-sdks-folder)/recoveryservices/azure-mgmt-recoveryservicesbackup/azure/mgmt/recoveryservicesbackup/passivestamp
 ```
 
-### Tag: package-2021-10 and python
+### Tag: package-2021-12 and python
 
-These settings apply only when `--tag=package-2021-10 --python` is specified on the command line.
+These settings apply only when `--tag=package-2021-12 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2021-10'
+``` yaml $(tag) == 'package-2021-12'
 namespace: azure.mgmt.recoveryservicesbackup.activestamp
 output-folder: $(python-sdks-folder)/recoveryservices/azure-mgmt-recoveryservicesbackup/azure/mgmt/recoveryservicesbackup/activestamp
 ```
-
-
 
 ``` yaml $(python) && $(track2)
 modelerfour:

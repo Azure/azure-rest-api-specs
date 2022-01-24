@@ -28,6 +28,7 @@ batch:
   - tag: package-2020-11-only
   - tag: package-2021-03-08-only
   - tag: package-2021-08
+  - tag: package-2021-10
   - multiapiscript: true
 ```
 
@@ -134,6 +135,15 @@ These settings apply only when `--tag=package-2021-08 --python` is specified on 
 ``` yaml $(tag) == 'package-2021-08' && $(python) && $(track2)
 namespace: azure.mgmt.applicationinsights.v2021_08_01
 output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2021_08_01
+```
+
+### Tag: package-2021-10 and python
+
+These settings apply only when `--tag=package-2021-10 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-08' && $(python) && $(track2)
+namespace: azure.mgmt.applicationinsights.v2021_10
+output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2021_10
 ```
 
 
