@@ -171,6 +171,7 @@ class MultiApiConfigHelper:
                 print(file_name)
         else:
             print('There are not missing files!!')
+        os.system("pause")
 
     def compare_tag(self):
         self.step_into_service_folder()
