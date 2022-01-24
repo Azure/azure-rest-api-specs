@@ -405,7 +405,10 @@
         ],
         "responses": {
           "200": {
-            "description": "This is returned as a response to the status polling request for the delete operation. The body contains the operation information that tracks the deletion status."
+            "description": "This is returned as a response to the status polling request for the delete operation. The body contains the operation information that tracks the deletion status.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
+            }
           },
           "202": {
             "description": "Accepted - Delete request accepted; the operation will complete asynchronously."
@@ -434,6 +437,9 @@
           "PrivateEndpoints_List": {
             "$ref": "./examples/PrivateEndpoints_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         },
         "parameters": [
           {
