@@ -278,7 +278,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTCentral/iotApps/{resourceName}/privateEndpointConnections/{privateEndpointName}": {
       "get": {
         "tags": [
-          "PrivateEndpoints"
+          "Networking"
         ],
         "description": "Get the metadata of a Private Endpoint Connection for the IoT Central Application.",
         "operationId": "PrivateEndpoints_Get",
@@ -322,7 +322,7 @@
       },
       "put": {
         "tags": [
-          "PrivateEndpoints"
+          "Networking"
         ],
         "description": "Update a Private Endpoint Connection.",
         "operationId": "PrivateEndpoints_Create",
@@ -376,7 +376,7 @@
       },
       "delete": {
         "tags": [
-          "PrivateEndpoints"
+          "Networking"
         ],
         "description": "Deletes a Private Endpoint Connection from the IoT Central Application.",
         "operationId": "PrivateEndpoints_Delete",
@@ -429,7 +429,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTCentral/iotApps/{resourceName}/privateEndpointConnections": {
       "get": {
         "tags": [
-          "PrivateEndpoints"
+          "Networking"
         ],
         "description": "Get all Private Endpoint Connections of a IoT Central Application.",
         "operationId": "PrivateEndpoints_List",
@@ -460,6 +460,52 @@
             "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the Private Endpoint Connections of the IoT Central Application.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTCentral/iotApps/{resourceName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "Networking"
+        ],
+        "description": "Get all Private Links of a IoT Central Application.",
+        "operationId": "PrivateLinks_List",
+        "x-ms-examples": {
+          "PrivateLinks_List": {
+            "$ref": "./examples/PrivateLinks_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the Private Endpoint Connections of the IoT Central Application.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateLinkResource"
             }
           },
           "default": {
