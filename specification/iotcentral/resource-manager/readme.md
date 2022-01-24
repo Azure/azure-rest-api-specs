@@ -37,6 +37,16 @@ These settings apply only when `--tag=package-preview-2021-11` is specified on t
 ```yaml $(tag) == 'package-preview-2021-11'
 input-file:
   - Microsoft.IoTCentral/preview/2021-11-01-preview/iotcentral.json
+directive:
+  - suppress: R4009
+    from: iotcentral.json
+    reason: We do not yet support systemdata.
+  - suppress: R3018
+    from: iotcentral.json
+    reason: resource name availability needs to be boolean (available or not)
+  - suppress: R4018
+    from: iotcentral.json
+    reason: We do not yet support isDataAction, display.description and display.resource.
 ```
 ### Tag: package-2021-06
 
