@@ -14,8 +14,8 @@ def print_exec(cmd: str):
     call(cmd, shell=True)
 
 
-def get_repo_root_folder() -> str:
-    return str(Path(os.getcwd()) / 'azure-rest-api-specs')
+def step_into_rest_repo():
+    os.chdir(str(Path(os.getcwd()) / 'azure-rest-api-specs'))
 
 
 def git_clean():
@@ -47,6 +47,7 @@ class MultiApiConfigHelper:
 
     @staticmethod
     def checkout_main_branch():
+        step_into_rest_repo()
         git_clean()
         usr = 'Azure'
         branch = 'main'
@@ -54,8 +55,8 @@ class MultiApiConfigHelper:
         print_check(f'git fetch {usr} {branch}')
         print_check(f'git checkout {usr}/{branch}')
 
-    def step_into_package_folder(self):
-        root_path = get_repo_root_folder()
+    def step_into_service_folder(self):
+        root_path = os.getcwd()
         target_service_info = f'{root_path}/specification/{self.service_name}/resource-manager'
         result = glob(target_service_info)
         if len(result) == 0:
@@ -172,7 +173,7 @@ class MultiApiConfigHelper:
             print('There are not missing files!!')
 
     def compare_tag(self):
-        self.step_into_package_folder()
+        self.step_into_service_folder()
         self.get_all_tag_files()
         self.get_configured_files()
         self.get_missing_files()
