@@ -19,7 +19,21 @@
               "internalLoadBalancerEnabled": false,
               "defaultDomain": "jlaw-demo1.k4apps.io",
               "staticIp": "20.42.33.145",
-              "appLogsConfiguration": null
+              "appLogsConfiguration": null,
+              "certificates": [
+                {
+                  "password":"private key password",
+                  "name":"certificate-firendly-name",
+                  "subjectName":"my.custom.subject.name.example",
+                  "value" :"PFX-or-PEM-blob"
+                },
+                {
+                  "password":"private key password",
+                  "name":"other-certificate-firendly-name",
+                  "subjectName":"my.custom..different.subject.name.example",
+                  "value" :"PFX-or-PEM-blob"
+                }
+              ]
             }
           },
           {
@@ -34,7 +48,8 @@
               "internalLoadBalancerEnabled": false,
               "defaultDomain": "demo1.k4apps.io",
               "staticIp": "52.142.21.61",
-              "appLogsConfiguration": null
+              "appLogsConfiguration": null,
+              "certificates": null
             }
           }
         ]

@@ -541,18 +541,11 @@
             "revisionName"
           ]
         },
-        "defaultCustomDomain": {
-          "description": "Custom domain to be used by default for the Active revision",
-          "type": "object",
-          "schema": {
-            "$ref": "#/definitions/CustomDomain"
-          }
-        },
         "customDomains": {
           "description": "custom domain bindings for Container Apps' hostnames.",
           "type": "array",
           "items": {
-            "$ref": "./CommonDefinitions.json#/definitions/CustomDomain"
+            "$ref": "#/definitions/CustomDomain"
           }
         },
         "allowInsecure": {
@@ -626,10 +619,6 @@
           "description": "Hostname.",
           "type": "string"
         },
-        "revisionName": {
-          "description": "Revision to which this Custom Domain applies.",
-          "type": "string"
-        },
         "bindingType": {
           "description": "Custom Domain binding type.",
           "enum": [
@@ -647,12 +636,8 @@
           "description": "Virtual IP address assigned to the hostname if IP based binding is enabled.",
           "type": "string"
         },
-        "thumbprint": {
-          "description": "Certificate thumbprint.",
-          "type": "string"
-        },
-        "certificateId": {
-          "description": "Resource Id of the Certificate",
+        "certificateName": {
+          "description": "Name of the Certificate to be bound to this hostname. Must exist in the Managed Environment.",
           "type": "string"
         },
         "hostType": {
