@@ -11,7 +11,19 @@
         "configuration": {
           "ingress": {
             "external": true,
-            "targetPort": 3000
+            "targetPort": 3000,
+            "customDomains": [
+              {
+                "name": "www.my-name.com",
+                "bindingType": "SniEnabled",
+                "certificateName": "my-certificate-for-my-name-dot-com"
+              },
+              {
+                "name": "www.my--other-name.com",
+                "bindingType": "SniEnabled",
+                "certificateName": "my-certificate-for-my-other-name-dot-com"
+              }
+            ]
           }
         },
         "template": {
