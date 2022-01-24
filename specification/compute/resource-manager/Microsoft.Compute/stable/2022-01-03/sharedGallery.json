@@ -3,7 +3,7 @@
   "info": {
     "title": "SharedGalleryServiceClient",
     "description": "Shared Gallery Service Client.",
-    "version": "2021-07-01"
+    "version": "2022-01-03"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -81,7 +81,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a gallery.": {
+          "List shared galleries.": {
             "$ref": "./examples/sharedGallery/ListSharedGalleries.json"
           }
         },
@@ -144,7 +144,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a gallery.": {
+          "List shared gallery images.": {
             "$ref": "./examples/sharedGallery/ListSharedGalleryImages.json"
           }
         },
@@ -214,7 +214,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a gallery.": {
+          "List gallery image versions.": {
             "$ref": "./examples/sharedGallery/ListSharedGalleryImageVersions.json"
           }
         },
@@ -263,7 +263,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a gallery.": {
+          "Get a shared gallery.": {
             "$ref": "./examples/sharedGallery/GetASharedGallery.json"
           }
         }
@@ -316,7 +316,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a gallery.": {
+          "Get a shared gallery image.": {
             "$ref": "./examples/sharedGallery/GetASharedGalleryImage.json"
           }
         }
@@ -376,7 +376,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a gallery.": {
+          "Get a shared gallery image version.": {
             "$ref": "./examples/sharedGallery/GetASharedGalleryImageVersion.json"
           }
         }
@@ -687,9 +687,82 @@
           "type": "string",
           "format": "date-time",
           "description": "The end of life date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable."
+        },
+        "excludeFromLatest": {
+          "type": "boolean",
+          "description": "If set to true, Virtual Machines deployed from the latest version of the Image Definition won't use this Image Version."
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/SharedGalleryImageVersionStorageProfile",
+          "description": "Describes the storage profile of the image version."
         }
       },
       "description": "Describes the properties of a gallery image version."
+    },
+    "SharedGalleryImageVersionStorageProfile": {
+      "properties": {
+        "osDiskImage": {
+          "$ref": "#/definitions/SharedGalleryOSDiskImage"
+        },
+        "dataDiskImages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SharedGalleryDataDiskImage"
+          },
+          "description": "A list of data disk images."
+        }
+      },
+      "description": "This is the storage profile of a Gallery Image Version."
+    },
+    "SharedGalleryOSDiskImage": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SharedGalleryDiskImage"
+        }
+      ],
+      "description": "This is the OS disk image."
+    },
+    "SharedGalleryDataDiskImage": {
+      "properties": {
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "description": "This property specifies the logical unit number of the data disk. This value is used to identify data disks within the Virtual Machine and therefore must be unique for each data disk attached to the Virtual Machine."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SharedGalleryDiskImage"
+        }
+      ],
+      "required": [
+        "lun"
+      ],
+      "description": "This is the data disk image."
+    },
+    "SharedGalleryDiskImage": {
+      "properties": {
+        "diskSizeGB": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "This property indicates the size of the VHD to be created."
+        },
+        "hostCaching": {
+          "type": "string",
+          "description": "The host caching of the disk. Valid values are 'None', 'ReadOnly', and 'ReadWrite'",
+          "enum": [
+            "None",
+            "ReadOnly",
+            "ReadWrite"
+          ],
+          "x-ms-enum": {
+            "name": "HostCaching",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "This is the disk image base class."
     },
     "CloudError": {
       "x-ms-external": true,
