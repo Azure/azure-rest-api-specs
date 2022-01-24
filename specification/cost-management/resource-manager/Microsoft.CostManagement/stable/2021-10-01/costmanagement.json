@@ -1175,7 +1175,7 @@
           "description": "Has time period for pulling data for the report.",
           "$ref": "#/definitions/ReportConfigTimePeriod"
         },
-        "dataset": {
+        "dataSet": {
           "description": "Has definition for data in this report config.",
           "$ref": "#/definitions/ReportConfigDataset"
         },
@@ -1361,11 +1361,11 @@
           "description": "The logical \"NOT\" expression.",
           "$ref": "#/definitions/ReportConfigFilter"
         },
-        "dimension": {
+        "dimensions": {
           "description": "Has comparison expression for a dimension",
           "$ref": "#/definitions/ReportConfigComparisonExpression"
         },
-        "tag": {
+        "tags": {
           "description": "Has comparison expression for a tag",
           "$ref": "#/definitions/ReportConfigComparisonExpression"
         }
@@ -2164,6 +2164,11 @@
       "description": "A Cost management REST API operation.",
       "type": "object",
       "properties": {
+        "id": {
+          "description": "Operation id: {provider}/{resource}/{operation}.",
+          "type": "string",
+          "readOnly": true
+        },
         "name": {
           "description": "Operation name: {provider}/{resource}/{operation}.",
           "type": "string",
@@ -2185,6 +2190,11 @@
             },
             "operation": {
               "description": "Operation type: Read, write, delete, etc.",
+              "type": "string",
+              "readOnly": true
+            },
+            "description": {
+              "description": "Operation description",
               "type": "string",
               "readOnly": true
             }
