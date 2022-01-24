@@ -1389,7 +1389,8 @@
       "enum": [
         "Unknown",
         "Healthy",
-        "Unhealthy"
+        "Unhealthy",
+        "Degraded"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -1481,8 +1482,9 @@
         "Starting",
         "Running",
         "Stopping",
-        "Stopped",
-        "Unknown"
+        "Offline",
+        "PartiallyRunning",
+        "Unavailable"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -1530,7 +1532,8 @@
       "description": "Defines the type of central server VM.",
       "enum": [
         "Primary",
-        "Secondary"
+        "Secondary",
+        "Unknown"
       ],
       "type": "string",
       "readOnly": true,
@@ -2661,6 +2664,10 @@
           "type": "string",
           "description": "The message server IP Address.",
           "readOnly": true
+        },
+        "health": {
+          "$ref": "#/definitions/HealthState",
+          "readOnly": true
         }
       }
     },
@@ -2684,6 +2691,10 @@
           "description": "The enqueue server Port.",
           "readOnly": true,
           "x-nullable": true
+        },
+        "health": {
+          "$ref": "#/definitions/HealthState",
+          "readOnly": true
         }
       }
     },
@@ -2697,6 +2708,10 @@
           "description": "The gateway Port.",
           "readOnly": true,
           "x-nullable": true
+        },
+        "health": {
+          "$ref": "#/definitions/HealthState",
+          "readOnly": true
         }
       }
     },
