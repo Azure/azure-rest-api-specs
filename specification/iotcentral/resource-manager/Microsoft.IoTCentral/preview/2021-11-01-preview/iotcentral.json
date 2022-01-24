@@ -404,6 +404,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "This is returned as a response to the status polling request for the delete operation. The body contains the operation information that tracks the deletion status."
+          },
           "202": {
             "description": "Accepted - Delete request accepted; the operation will complete asynchronously."
           },
@@ -822,21 +825,6 @@
       "description": "The IoT Central application.",
       "type": "object",
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "The resource location.",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "The resource tags."
-        },
         "properties": {
           "description": "The common properties of an IoT Central application.",
           "x-ms-client-flatten": true,
@@ -853,13 +841,12 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ],
       "x-ms-azure-resource": true,
       "required": [
-        "sku",
-        "location"
+        "sku"
       ]
     },
     "AppPatch": {
