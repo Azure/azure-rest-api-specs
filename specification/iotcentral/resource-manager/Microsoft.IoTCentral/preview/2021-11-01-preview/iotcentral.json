@@ -831,23 +831,6 @@
       "description": "The IoT Central application.",
       "type": "object",
       "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The ARM resource identifier."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The ARM resource name.",
-          "pattern": "^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{2,99}[a-zA-Z0-9]$",
-          "x-comment": "pattern must match #/parameters/resourceName"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource type."
-        },
         "location": {
           "type": "string",
           "description": "The resource location.",
@@ -877,6 +860,11 @@
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/SystemAssignedServiceIdentity"
         }
       },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
       "x-ms-azure-resource": true,
       "required": [
         "sku",
