@@ -41,6 +41,8 @@ class MultiApiConfigHelper:
         self.service_name = input('Please input your target service link(e.g. '
                                   '"https://github.com/Azure/azure-rest-api-specs/blob/main/specification/applicationinsights/resource-manager" '
                                   'or "applicationinsights"):\n')
+        if 'resource-manager' in self.service_name:
+            self.service_name = self.service_name.split('/')[-2]
         tag = input('Please input your target tag(e.g. "Readme Tag: package-2022-01-11" or "package-2022-01-11"):\n')
         self.tag = tag.split(':')[-1].strip()
 
@@ -64,33 +66,34 @@ class MultiApiConfigHelper:
         os.chdir(str(Path(result[0])))
 
     @staticmethod
-    def judge_tag(self, line: str) -> bool:
+    def judge_tag(line: str) -> bool:
         # ``` yaml $(tag) == 'package-2021-11-01'
         elements = ['```', 'tag', '==', 'package-']
         result = [re.search(element, line) for element in elements]
         return all(result)
 
     @staticmethod
-    def get_tag(self, line: str) -> str:
+    def get_tags(line: str) -> Set[str]:
         # extract 'package-2021-11-01' from "``` yaml $(tag) == 'package-2021-11-01'"
-        result = re.search("[\'\"][^\'^\"]+[\'\"]", line)
+        result = re.findall("[\'\"][^\'^\"]+[\'\"]", line)
         if not result:
             raise Exception(f'Can not find valid tag name in {line}')
-        return result.group(0)[1:-1]
+        return {item[1:-1] for item in result}
 
     @staticmethod
-    def get_file_name(self, line: str) -> str:
+    def get_file_name(line: str) -> str:
         #   - Microsoft.Insights/stable/2015-05-01/aiOperations_API.json
         if '.json' in line and 'Microsoft.' in line:
-            return line.strip('\n ').split('-')[-1].strip(' ')
+            line = line.strip('\n ')
+            line = line[1:] if line[0] == '-' else line
+            return line.strip()
         return ''
 
     def get_tag_and_file(self, content: List[str], start_idx: int) -> int:
-        tag_name = self.get_tag(content[start_idx])
+        tags_name = self.get_tags(content[start_idx])
         end_idx = start_idx
         for end_idx in range(start_idx + 1, len(content)):
             if '```' in content[end_idx]:
-                end_idx -= 1
                 break
 
         files = []
@@ -98,7 +101,8 @@ class MultiApiConfigHelper:
             file_name = self.get_file_name(content[idx])
             if file_name:
                 files.append(file_name)
-        self.tag_files[tag_name] = files
+        for tag_name in tags_name:
+            self.tag_files[tag_name] = files
         return end_idx + 1
 
     def get_all_tag_files(self):
@@ -113,11 +117,11 @@ class MultiApiConfigHelper:
                 i += 1
 
     @staticmethod
-    def judge_config(self, line: str) -> bool:
+    def judge_config(line: str) -> bool:
         return 'batch' in line
 
     @staticmethod
-    def get_configured_tag_name(self, line: str) -> str:
+    def get_configured_tag_name(line: str) -> str:
         # '  - tag: package-2017-10'
         if 'multiapiscript' in line:
             return ''
@@ -129,7 +133,7 @@ class MultiApiConfigHelper:
             if '```' in content[end_idx]:
                 break
 
-        for idx in range(start_idx + 1, end_idx - 1):
+        for idx in range(start_idx + 1, end_idx):
             tag_name = self.get_configured_tag_name(content[idx])
             if tag_name:
                 tags.append(tag_name)
@@ -154,7 +158,8 @@ class MultiApiConfigHelper:
     def get_missing_files(self):
         missing_files = []
         if self.tag not in self.tag_files:
-            raise Exception(f'Do not find {self.tag} in {self.service_name}/readme.md({str(self.tag_files.keys())})')
+            raise Exception(f'Do not find \"{self.tag}\" in \"{self.service_name}/readme.md\"'
+                            f'({str(self.tag_files.keys())})')
         for file_name in self.tag_files[self.tag]:
             if file_name not in self.configured_files:
                 missing_files.append('  - ' + file_name)
@@ -175,7 +180,7 @@ class MultiApiConfigHelper:
 
     def run(self):
         self.get_input()
-        # self.checkout_main_branch()
+        self.checkout_main_branch()
         self.compare_tag()
 
 
