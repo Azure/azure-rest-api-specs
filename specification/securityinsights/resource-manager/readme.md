@@ -44,6 +44,7 @@ input-file:
   - Microsoft.SecurityInsights/stable/2021-10-01/AlertRules.json
   - Microsoft.SecurityInsights/stable/2021-10-01/Bookmarks.json
   - Microsoft.SecurityInsights/stable/2021-10-01/DataConnectors.json
+  - Microsoft.SecurityInsights/stable/2021-10-01/AutomationRules.json
 ```
 
 ### Tag: package-2021-04-01-only
