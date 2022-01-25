@@ -1050,40 +1050,11 @@
       "type": "object"
     },
     "IncidentLabel": {
-      "description": "Represents an incident label",
-      "properties": {
-        "labelName": {
-          "description": "The name of the label",
-          "type": "string"
-        },
-        "labelType": {
-          "description": "The type of the label",
-          "enum": [
-            "User",
-            "System"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "IncidentLabelType",
-            "values": [
-              {
-                "description": "Label manually created by a user",
-                "value": "User"
-              },
-              {
-                "description": "Label automatically created by the system",
-                "value": "System"
-              }
-            ]
-          }
-        }
-      },
-      "required": [
-        "labelName"
-      ],
-      "type": "object"
+      "description": "List of labels to add to the incident",
+      "type": "array",
+      "items": {
+        "$ref": "./common/IncidentTypes.json#/definitions/IncidentLabel"
+      }
     },
     "IncidentList": {
       "description": "List all the incidents.",
