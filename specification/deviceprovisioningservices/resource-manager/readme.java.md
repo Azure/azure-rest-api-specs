@@ -26,6 +26,28 @@ directive:
     to: SharedAccessSignatureAuthorizationRule
 ```
 
+## Tag: package-2021-10 and java
+
+These settings apply only when `--tag=package-2021-10 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2021-10' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.deviceprovisioningservices.v2021_10_15
+  output-folder: $(azure-libraries-for-java-folder)/sdk/deviceprovisioningservices/mgmt-v2021_10_15
+```
+
+## Tag: package-preview-2020-09 and java
+
+These settings apply only when `--tag=package-preview-2020-09 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-preview-2020-09' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.deviceprovisioningservices.v2020_09_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/deviceprovisioningservices/mgmt-v2020_09_01_preview
+```
+
 ## Tag: package-2020-03 and java
 
 These settings apply only when `--tag=package-2020-03 --java` is specified on the command line.
@@ -59,12 +81,12 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/sdk/deviceprovisioningservices/mgmt-v2017_11_15
 ```
 
-## Tag: package-2017-08 and java
+## Tag: package-preview-2017-08 and java
 
-These settings apply only when `--tag=package-2017-08 --java` is specified on the command line.
+These settings apply only when `--tag=package-preview-2017-08 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2017-08' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-preview-2017-08' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.deviceprovisioningservices.v2017_08_21_preview
   output-folder: $(azure-libraries-for-java-folder)/sdk/deviceprovisioningservices/mgmt-v2017_08_21_preview
