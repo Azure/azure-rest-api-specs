@@ -488,113 +488,113 @@
           "readOnly": true
         }
       }
-    }
-  },
-  "Replica": {
-    "description": "Container App Revision Replica.",
-    "type": "object",
-    "allOf": [
-      {
-        "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-      }
-    ],
-    "properties": {
+    },
+    "Replica": {
+      "description": "Container App Revision Replica.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
-        "description": "Replica resource specific properties",
-        "type": "object",
         "properties": {
-          "name": {
-            "description": "The Name of the Replica",
-            "type": "string",
-            "readOnly": true
+          "description": "Replica resource specific properties",
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "The Name of the Replica",
+              "type": "string",
+              "readOnly": true
+            },
+            "createdTime": {
+              "type": "string",
+              "description": "Timestamp describing when the pod was created by controller",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "containers": {
+              "$ref": "#/definitions/ContainerCollection",
+              "description": "The containers collection under a replica"
+            }
           },
-          "createdTime": {
-            "type": "string",
-            "description": "Timestamp describing when the pod was created by controller",
-            "format": "date-time",
-            "readOnly": true
-          },
-          "containers": {
-            "$ref": "#/definitions/ContainerCollection",
-            "description": "The containers collection under a replica"
-          }
-        },
-        "x-ms-client-flatten": true
-      }
-    }
-  },
-  "ReplicaCollection": {
-    "description": "Container App Revision Replicas collection ARM resource.",
-    "required": [
-      "value"
-    ],
-    "type": "object",
-    "properties": {
-      "value": {
-        "description": "Collection of resources.",
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/Replica"
+          "x-ms-client-flatten": true
         }
       }
-    }
-  },
-  "Container": {
-    "description": "Container object under Container App Revision Replica.",
-    "type": "object",
-    "allOf": [
-      {
-        "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-      }
-    ],
-    "properties": {
+    },
+    "ReplicaCollection": {
+      "description": "Container App Revision Replicas collection ARM resource.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
       "properties": {
-        "description": "Container resource specific properties",
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "The Name of the Container",
-            "type": "string",
-            "readOnly": true
-          },
-          "containerId": {
-            "description": "The Id of the Container",
-            "type": "string",
-            "readOnly": true
-          },
-          "ready": {
-            "description": "The container ready status",
-            "type": "boolean",
-            "readOnly": true
-          },
-          "started": {
-            "description": "The container start status",
-            "type": "boolean",
-            "readOnly": true
-          },
-          "restartCount": {
-            "format": "int32",
-            "description": "The container restart count",
-            "type": "integer",
-            "readOnly": true
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Replica"
           }
-        },
-        "x-ms-client-flatten": true
+        }
       }
-    }
-  },
-  "ContainerCollection": {
-    "description": "Container App Revision Replicas Containers collection ARM resource.",
-    "required": [
-      "value"
-    ],
-    "type": "object",
-    "properties": {
-      "value": {
-        "description": "Collection of resources.",
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/Container"
+    },
+    "Container": {
+      "description": "Container object under Container App Revision Replica.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Container resource specific properties",
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "The Name of the Container",
+              "type": "string",
+              "readOnly": true
+            },
+            "containerId": {
+              "description": "The Id of the Container",
+              "type": "string",
+              "readOnly": true
+            },
+            "ready": {
+              "description": "The container ready status",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "started": {
+              "description": "The container start status",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "restartCount": {
+              "format": "int32",
+              "description": "The container restart count",
+              "type": "integer",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ContainerCollection": {
+      "description": "Container App Revision Replicas Containers collection ARM resource.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Container"
+          }
         }
       }
     }
