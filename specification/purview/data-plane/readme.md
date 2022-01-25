@@ -28,19 +28,24 @@ openapi-type: data-plane
 credential-scopes: "https://purview.azure.net/.default"
 ```
 
-``` yaml $(package-account)
+``` yaml $(package-administration-account)
 tag: package-account-2019-11-preview
-title: PurviewAccountClient
+title: PurviewAccount
+```
+
+``` yaml $(package-administration-metadata)
+tag: package-metadata-2021-07-preview
+title: PurviewMetadataPolicies
 ```
 
 ``` yaml $(package-catalog)
 tag: package-catalog-2021-05-preview
-title: PurviewCatalogClient
+title: PurviewCatalog
 ```
 
 ``` yaml $(package-scanning)
 tag: package-scanning-2018-12-preview
-title: PurviewScanningClient
+title: PurviewScanning
 ```
 
 ### Tag: package-account-2019-11-preview
@@ -49,6 +54,14 @@ These settings apply only when `--tag=package-account-2019-11-preview` is specif
 ``` yaml $(tag) == 'package-account-2019-11-preview'
 input-file:
 - Azure.Analytics.Purview.Account/preview/2019-11-01-preview/account.json
+```
+
+### Tag: package-metadata-2021-07-preview
+These settings apply only when `--tag=package-metadata-2021-07-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-metadata-2021-07-preview'
+input-file:
+- Azure.Analytics.Purview.MetadataPolicies/preview/2021-07-01-preview/purviewMetadataPolicy.json
 ```
 
 ### Tag: package-catalog-2021-05-preview
@@ -95,7 +108,7 @@ Since this RP has no unique default package, iterate over all of them for valida
 
 ``` yaml $(validation)
 batch:
-  - package-account: true
+  - package-administration-account: true
   - package-catalog: true
   - package-scanning: true
 ```

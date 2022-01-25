@@ -5,7 +5,10 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 
 ``` yaml $(typescript)
 batch:
-  - package-account: true
+  ## multi client: package-administration
+  - package-administration-account: true
+  - package-administration-metadata: true
+  ## single client
   - package-catalog: true
   - package-scanning: true
 
@@ -16,12 +19,20 @@ generate-metadata: false
 source-code-folder-path: "src"
 ```
 
-``` yaml $(package-account)
-package-name: "@azure-rest/purview-account"
+``` yaml $(package-administration-account)
+package-name: "@azure-rest/purview-administration"
 description: Purview Account Client
-output-folder: "$(typescript-sdks-folder)/sdk/purview/purview-account-rest"
+output-folder: "$(typescript-sdks-folder)/sdk/purview/purview-administration-rest"
+source-code-folder-path: ./src/account
 package-version: 1.0.0-beta.1
+```
 
+``` yaml $(package-administration-metadata)
+package-name: "@azure-rest/purview-administration"
+description: Purview Metadata Policies Client
+output-folder: "$(typescript-sdks-folder)/sdk/purview/purview-administration-rest"
+source-code-folder-path: ./src/metadataPolicies
+package-version: 1.0.0-beta.1
 ```
 
 ``` yaml $(package-catalog)
