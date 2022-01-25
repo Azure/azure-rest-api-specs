@@ -149,6 +149,13 @@
           }
         ]
       }
+    },
+    "Alias": {
+      "name": "alias",
+      "description": "The alias of the style recipe.",
+      "type": "string",
+      "in": "query",
+      "required": false
     }
   },
   "paths": {
@@ -180,6 +187,9 @@
           },
           {
             "$ref": "#/parameters/DescriptionStyle"
+          },
+          {
+            "$ref": "#/parameters/Alias"
           },
           {
             "name": "ImportContent",
@@ -254,6 +264,9 @@
           },
           {
             "$ref": "#/parameters/StyleRecipeId"
+          },
+          {
+            "$ref": "#/parameters/StyleFormat"
           },
           {
             "$ref": "#/parameters/TilesetId"
@@ -355,13 +368,18 @@
       "description": "Detail information for the data.",
       "type": "object",
       "properties": {
-        "styleId": {
+        "styleRecipeId": {
           "description": "The unique styleRecipe id for the style.",
           "type": "string",
           "readOnly": true
         },
         "description": {
           "description": "The description the caller provided when creating the style. Maximum length 1024 characters.",
+          "type": "string",
+          "readOnly": true
+        },
+        "alias": {
+          "description": "The alias of the style recipe.",
           "type": "string",
           "readOnly": true
         },
@@ -391,6 +409,11 @@
           "type": "string",
           "readOnly": true
         },
+        "source": {
+          "description": "The source.",
+          "type": "string",
+          "readOnly": true
+        },
         "layout": {
           "description": "The layout of the layer.",
           "type": "object",
@@ -414,7 +437,7 @@
         },
         "version": {
           "description": "The version of the style recipe.",
-          "type": "string",
+          "type": "number",
           "readOnly": true
         },
         "created": {

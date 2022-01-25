@@ -145,12 +145,19 @@
           }
         ]
       }
+    },
+    "Alias": {
+      "name": "alias",
+      "description": "The alias of the style set.",
+      "type": "string",
+      "in": "query",
+      "required": false
     }
   },
   "paths": {
     "/styles/stylesets": {
       "post": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n [This](https://docs.microsoft.com/en-us/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe StyleSet Create API allows the caller to create a styleSet from their styleSet configuration file.\n\n## Submit Create Request\n\nTo create your styleset you will make a `POST` request with a styleSet configration file. \n\nThe Create StyleSet API is a \n[long-running request](https://aka.ms/am-creator-lrt-v2).",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe StyleSet Create API allows the caller to create a styleSet from their styleSet configuration file.\n\n## Submit Create Request\n\nTo create your styleset you will make a `POST` request with a styleSet configration file. \n\nThe Create StyleSet API is a \n[long-running request](https://aka.ms/am-creator-lrt-v2).",
         "operationId": "StyleSet_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -170,6 +177,9 @@
           },
           {
             "$ref": "#/parameters/DataFormat"
+          },
+          {
+            "$ref": "#/parameters/Alias"
           },
           {
             "$ref": "#/parameters/DescriptionStyleSet"
@@ -286,7 +296,7 @@
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to export a composed style defined in the styleSet.",
         "operationId": "StyleSet_GetStyle",
         "x-ms-examples": {
-          "Gets the details for a single styleSet": {
+          "Gets the details for a single style in a styleSet": {
             "$ref": "./examples/styleset/StyleSet_GetStyle.json"
           }
         },
@@ -395,8 +405,8 @@
           "type": "object",
           "readOnly": true
         }, 
-        "path": {
-          "description": "The path for the style.",
+        "url": {
+          "description": "The url for the style.",
           "type": "object",
           "readOnly": true
         }
@@ -418,7 +428,7 @@
         },
         "version": {
           "description": "The version of the style set.",
-          "type": "string",
+          "type": "number",
           "readOnly": true
         },
         "description": {

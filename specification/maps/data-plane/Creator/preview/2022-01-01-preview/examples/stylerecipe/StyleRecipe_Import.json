@@ -4,6 +4,7 @@
     "api-version": "2022-01-01-preview",
     "styleFormat": "mapbox",
     "dataFormat": "JSON",
+    "alias": "test-alias",
     "ImportContent": {
       "id": "9c451b0a-6527-49a7-9154-1b3d9486487f",
       "version": 1,
@@ -15,9 +16,31 @@
           "id": "background",
           "type": "background",
           "source-layer": "bg-source",
-          "layout": {},
+          "minzoom": 18,
+          "maxzoom": 20,
+          "layout": {
+            "visibility": "none",
+            "symbol-placement": "point",
+            "symbol-avoid-edges": true,
+            "text-field": "{name}",
+            "text-keep-upright": true,
+            "text-font": ["SegoeUi-SemiBold"],
+            "text-letter-spacing": 0.1,
+            "text-size": {
+              "stops": [
+                [18.5, 6.5],
+                [19, 8],
+                [19.5, 9.5],
+                [20, 11]
+              ]
+            },
+            "text-anchor": "center"
+          },
           "paint": {
-            "background-color": []
+            "text-color": "rgb(0, 0, 0)",
+            "text-halo-color": "rgb(255, 255, 255)",
+            "text-halo-width": 1,
+            "text-halo-blur": 0.5
           }
         }
       ]

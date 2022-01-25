@@ -9,20 +9,35 @@
     "200": {
       "body": {
         "id": "9c451b0a-6527-49a7-9154-1b3d9486487f",
-        "version": "1",
+        "version": 8,
         "created": "2021-05-21T03:04:05.678Z",
         "description": "Some optional description",
-        "sources": "azuremaps://tilesets/d8fa86de-bb0f-4a02-a6ff-62ae7545dd84",
+        "sources": {
+          "dcda5d1b-c835-80cd-feee-3d6351e79eda": {
+              "type": "vector",
+              "tiles": [
+                  "https://{{azMapsDomain}}/map/tile?api-version=2.0&tilesetId=dcda5d1b-c835-80cd-feee-3d6351e79eda&zoom={z}&x={x}&y={y}"
+              ],
+              "maxzoom": 20.0,
+              "minzoom": 0.0
+          }
+        },
         "sprite": "azuremaps://sprite/e33700db-127e-4ed0-bfec-7a1830eca06d",
         "layers": [
           {
-            "id": "background",
-            "type": "background",
-            "source-layer": "bg-source",
-            "layout": {},
+            "id": "indoor_unit_store",
+            "type": "fill",
+            "layout": {
+              "visibility": "none"
+            },
             "paint": {
-              "background-color": []
-            }
+              "fill-antialias": true,
+              "fill-color": "rgba(230, 230, 230, 1)",
+              "fill-opacity": 1,
+              "fill-outline-color": "rgba(120, 120, 120, 1)"
+            },
+            "source": "dcda5d1b-c835-80cd-feee-3d6351e79eda",
+            "source-layer": "Indoor unit"
           }
         ]
       }
