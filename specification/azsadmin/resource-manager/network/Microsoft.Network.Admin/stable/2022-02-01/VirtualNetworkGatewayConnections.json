@@ -1,0 +1,288 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-02-01",
+    "title": "NetworkAdminManagementClient",
+    "description": "The Admin Network Management Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network.Admin/adminVirtualNetworkGatewayConnections": {
+      "get": {
+        "x-ms-examples": {
+          "Returns a list of all virtual network gateway connections.": {
+            "$ref": "./examples/VirtualNetworkGatewayConnections/List.json"
+          }
+        },
+        "tags": [
+          "VirtualNetworkGatewayConnections"
+        ],
+        "operationId": "VirtualNetworkGatewayConnections_List",
+        "description": "Returns a list of all Virtual Network Gateway Connections.",
+        "parameters": [
+          {
+            "$ref": "../../preview/2015-06-15/Network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- The list of virtual network gateway connections has been returned.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkGatewayConnectionsList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "VirtualNetworkGatewayConnectionsList": {
+      "description": "List of Virtual Network Gateway Connections.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of Virtual Network Gateway Connections.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkGatewayConnection"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualNetworkGatewayConnection": {
+      "description": "The Virtual Network Gateway Connection.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Virtual Network Gateway Connection properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualNetworkGatewayConnectionProperties"
+        },
+        "location": {
+          "description": "Name of Azure Stack",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../preview/2015-06-15/Network.json#/definitions/Resource"
+        }
+      ]
+    },
+    "VirtualNetworkGatewayConnectionProperties": {
+      "description": "Virtual Network Gateway Connection properties.",
+      "type": "object",
+      "properties": {
+        "connectionState": {
+          "description": "Virtual Network Gateway Connection State.",
+          "$ref": "#/definitions/VirtualNetworkGatewayConnectionState"
+        },
+        "provisioningState": {
+          "description": "Provisioning State of the Virtual Network Gateway Connection.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Updating",
+            "Deleting",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "VirtualNetworkGatewayConnectionProvisioningState"
+          },
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "description": "Subscription Id of the Virtual Network Gateway Connection.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceGroup": {
+          "description": "Resource Group of the Virtual Network Gateway Connection.",
+          "type": "string",
+          "readOnly": true
+        },
+        "localNetworkGatewayName": {
+          "description": "Name of the associated Local Network Gateway.",
+          "type": "string",
+          "readOnly": true
+        },
+        "localNetworkGatewayIPAddress": {
+          "description": "IP address of the associated Local Network Gateway.",
+          "type": "string",
+          "readOnly": true
+        },
+        "virtualNetworkGatewayName": {
+          "description": "Name of the associated Virtual Network Gateway.",
+          "type": "string",
+          "readOnly": true
+        },
+        "virtualNetworkGatewayIPAddress": {
+          "description": "IP address of the associated Virtual Network Gateway.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sku": {
+          "description": "SKU of the associated Virtual Network Gateway.",
+          "type": "string",
+          "enum": [
+            "Basic",
+            "Standard",
+            "HighPerformance",
+            "VpnGw1",
+            "VpnGw2",
+            "VpnGw3"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "VirtualNetworkGatewayConnectionSku"
+          },
+          "readOnly": true
+        },
+        "capacityReserved": {
+          "description": "Gateway capacity reserved by this connection.",
+          "type": "number",
+          "readOnly": true
+        },
+        "totalStampCapacity": {
+          "description": "Total amount of Gateway capacity that is available on this stamp.",
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualNetworkGatewayConnectionState": {
+      "description": "Virtual Network Gateway Connection state.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Virtual Network Gateway Connection status.",
+          "enum": [
+            "Connected",
+            "Disconnected",
+            "Uninitialized",
+            "Unknown"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "VirtualNetworkGatewayConnectionConnectionStateType"
+          }
+        },
+        "activeGateway": {
+          "description": "Active Gateway VM that the connection is configured on.",
+          "type": "string",
+          "readOnly": true
+        },
+        "connectionError": {
+          "description": "List of connection errors associated with the resource.",
+          "$ref": "#/definitions/VirtualNetworkGatewayConnectionConfigurationStatus",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualNetworkGatewayConnectionConfigurationStatus": {
+      "description": "Virtual Network Gateway Connection configuration status.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Virtual Network Gateway Connection configuration status.",
+          "enum": [
+            "Failure",
+            "Warning",
+            "Success",
+            "Uninitialized",
+            "InProgress",
+            "Unknown"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "VirtualNetworkGatewayConnectionConfigurationType"
+          },
+          "readOnly": true
+        },
+        "lastUpdatedTime": {
+          "description": "Last updated time for the configuration status.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "detailedInfo": {
+          "description": "List of connection errors associated with the resource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkGatewayConnectionConfigurationStateInfo"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "VirtualNetworkGatewayConnectionConfigurationStateInfo": {
+      "description": "Virtual network gateway connection state and error code.",
+      "type": "object",
+      "properties": {
+        "source": {
+          "description": "Source of the error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "code": {
+          "description": "Error code if the connection is disconnected and self-diagnosable.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Message associated with the error code.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
