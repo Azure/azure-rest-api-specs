@@ -152,6 +152,9 @@
               "$ref": "#/definitions/UsageDetailsListResult"
             }
           },
+          "204": {
+            "description": "No Content. The request has succeeded but returned no results."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -620,7 +623,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/balances": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/balances": {
       "get": {
         "tags": [
           "Balances"
@@ -2128,6 +2131,16 @@
           "format": "decimal",
           "readOnly": true
         },
+        "benefitId": {
+          "description": "Unique identifier for the applicable benefit.",
+          "type": "string",
+          "readOnly": true
+        },
+        "benefitName": {
+          "description": "Name of the applicable benefit.",
+          "type": "string",
+          "readOnly": true
+        },
         "pricingModel": {
           "description": "Identifier that indicates how the meter is priced.",
           "type": "string",
@@ -3391,6 +3404,8 @@
     },
     "LegacyReservationRecommendationProperties": {
       "description": "The properties of the reservation recommendation.",
+      "type": "object",
+      "discriminator": "scope",
       "properties": {
         "lookBackPeriod": {
           "description": "The number of days of usage to look back for recommendation.",
@@ -3465,8 +3480,7 @@
         },
         "scope": {
           "description": "Shared or single recommendation.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "skuProperties": {
           "description": "List of sku properties",
@@ -3476,7 +3490,38 @@
           },
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "scope"
+      ]
+    },
+    "LegacySingleScopeReservationRecommendationProperties": {
+      "description": "The properties of the legacy reservation recommendation for single scope.",
+      "type": "object",
+      "x-ms-discriminator-value": "Single",
+      "properties": {
+        "subscriptionId": {
+          "description": "Subscription id associated with single scoped recommendation.",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/LegacyReservationRecommendationProperties"
+        }
+      ]
+    },
+    "LegacySharedScopeReservationRecommendationProperties": {
+      "description": "The properties of the legacy reservation recommendation for shared scope.",
+      "type": "object",
+      "x-ms-discriminator-value": "Shared",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LegacyReservationRecommendationProperties"
+        }
+      ]
     },
     "SkuProperty": {
       "description": "The Sku property",
@@ -3858,6 +3903,24 @@
         "billingFrequency": {
           "description": "The billing frequency, which can be either one-time or recurring.",
           "type": "string",
+          "readOnly": true
+        },
+        "billingMonth": {
+          "description": "The billing month(yyyyMMdd), on which the event initiated.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "monetaryCommitment": {
+          "description": "The monetary commitment amount at the enrollment scope.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "overage": {
+          "description": "The overage amount at the enrollment scope.",
+          "type": "number",
+          "format": "decimal",
           "readOnly": true
         }
       }
@@ -4248,13 +4311,45 @@
           "description": "The type of threshold",
           "type": "string",
           "enum": [
-            "Actual"
+            "Actual",
+            "Forecasted"
           ],
           "x-ms-enum": {
             "name": "ThresholdType",
             "modelAsString": true
           },
           "default": "Actual"
+        },
+        "locale": {
+          "description": "Language in which the recipient will receive the notification",
+          "type": "string",
+          "enum": [
+            "en-us",
+            "ja-jp",
+            "zh-cn",
+            "de-de",
+            "es-es",
+            "fr-fr",
+            "it-it",
+            "ko-kr",
+            "pt-br",
+            "ru-ru",
+            "zh-tw",
+            "cs-cz",
+            "pl-pl",
+            "tr-tr",
+            "da-dk",
+            "en-gb",
+            "hu-hu",
+            "nb-no",
+            "nl-nl",
+            "pt-pt",
+            "sv-se"
+          ],
+          "x-ms-enum": {
+            "name": "CultureCode",
+            "modelAsString": true
+          }
         }
       },
       "required": [

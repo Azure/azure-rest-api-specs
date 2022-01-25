@@ -35,7 +35,7 @@ title: MonitorManagementClient
 ``` yaml
 description: Monitor Management Client
 openapi-type: arm
-tag: package-2021-04
+tag: package-2021-09
 
 directive:
   - suppress: Example Validations
@@ -67,10 +67,28 @@ input-file:
 - Microsoft.Insights/preview/2017-12-01-preview/metricNamespaces_API.json
 - Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
 - Microsoft.Insights/preview/2019-10-17-preview/privateLinkScopes_API.json
-- Microsoft.Insights/stable/2017-04-01/activityLogAlerts_API.json
+- Microsoft.Insights/stable/2020-10-01/activityLogAlerts_API.json
 - Microsoft.Insights/stable/2021-04-01/dataCollectionEndpoints_API.json
 - Microsoft.Insights/stable/2021-04-01/dataCollectionRuleAssociations_API.json
 - Microsoft.Insights/stable/2021-04-01/dataCollectionRules_API.json
+```
+
+### Tag: package-2021-09-01-only
+
+These settings apply only when `--tag=package-2021-09-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-09-01-only'
+input-file:
+- Microsoft.Insights/stable/2021-09-01/actionGroups_API.json
+```
+
+### Tag: package-2021-08
+
+These settings apply only when `--tag=package-2021-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-08'
+input-file:
+  - Microsoft.Insights/stable/2021-08-01/scheduledQueryRule_API.json
 ```
 
 ### Tag: package-2021-07
@@ -880,7 +898,9 @@ directive:
     reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
 ```
 
-``` yaml ($(go) && !$(track2) && $(tag) == 'package-2021-07') || $(csharp) || $(validation) || $(typescript)
+This section is a temporary solution to resolve the failure in those pipeline that is still using modeler v1. 
+
+``` yaml ($(go) && !$(track2) && ($(tag) == 'package-2021-07' || $(tag) == 'package-2021-09')) || $(csharp) || $(validation)
 directive:
 - from: activityLogAlerts_API.json
   where: $.definitions
@@ -898,50 +918,6 @@ directive:
   where: $.definitions
   transform: delete $["ActionGroup"]
   reason: Incompatible values (2020-10-01)
-```
-
-``` yaml !$(python) && !$(go) && !$(java) && ($(tag) == 'package-2021-04' || $(tag) == 'package-2021-07' || $(tag) == 'package-2021-09')
-directive:
-- from: scheduledQueryRule_API.json
-  where: $.parameters
-  transform: delete $["ResourceGroupNameParameter"]
-  reason: ResourceGroupNameParameter is taken from v2/types.json
-- from: activityLogAlerts_API.json
-  where: $.parameters
-  transform: delete $["ResourceGroupNameParameter"]
-  reason: ResourceGroupNameParameter is taken from v2/types.json
-- from: guestDiagnosticSettings_API.json
-  where: $.parameters
-  transform: delete $["ResourceGroupNameParameter"]
-  reason: ResourceGroupNameParameter is taken from v2/types.json
-- from: guestDiagnosticSettingsAssociation_API.json
-  where: $.parameters
-  transform: delete $["ResourceGroupNameParameter"]
-  reason: ResourceGroupNameParameter is taken from v2/types.json
-- from: privateLinkScopes_API.json
-  where: $.parameters
-  transform: delete $["ResourceGroupNameParameter"]
-  reason: ResourceGroupNameParameter is taken from v2/types.json
-- from: autoscale_API.json
-  where: $.parameters
-  transform: delete $["ResourceGroupNameParameter"]
-  reason: ResourceGroupNameParameter is taken from v2/types.json
-- from: alertRules_API.json
-  where: $.parameters
-  transform: delete $["ResourceGroupNameParameter"]
-  reason: ResourceGroupNameParameter is taken from v2/types.json
-- from: alertRulesIncidents_API.json
-  where: $.parameters
-  transform: delete $["ResourceGroupNameParameter"]
-  reason: ResourceGroupNameParameter is taken from v2/types.json
-- from: actionGroups_API.json
-  where: $.parameters
-  transform: delete $["ResourceGroupNameParameter"]
-  reason: ResourceGroupNameParameter is taken from v2/types.json
-- from: metricAlert_API.json
-  where: $.parameters
-  transform: delete $["ResourceGroupNameParameter"]
-  reason: ResourceGroupNameParameter is taken from v2/types.json
 ```
 
 ### Tag: profile-hybrid-2019-03-01

@@ -240,6 +240,15 @@
             }
           },
           {
+            "name": "semanticConfiguration",
+            "in": "query",
+            "type": "string",
+            "description": "The name of the semantic configuration that lists which fields should be used for semantic ranking, captions, highlights, and answers",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
             "name": "searchFields",
             "in": "query",
             "type": "array",
@@ -1524,7 +1533,77 @@
       "type": "string",
       "enum": [
         "none",
-        "en-us"
+        "en-us",
+        "en-gb",
+        "en-in",
+        "en-ca",
+        "en-au",
+        "fr-fr",
+        "fr-ca",
+        "de-de",
+        "es-es",
+        "es-mx",
+        "zh-cn",
+        "zh-tw",
+        "pt-br",
+        "pt-pt",
+        "it-it",
+        "ja-jp",
+        "ko-kr",
+        "ru-ru",
+        "cs-cz",
+        "nl-be",
+        "nl-nl",
+        "hu-hu",
+        "pl-pl",
+        "sv-se",
+        "tr-tr",
+        "hi-in",
+        "ar-sa",
+        "ar-eg",
+        "ar-ma",
+        "ar-kw",
+        "ar-jo",
+        "da-dk",
+        "no-no",
+        "bg-bg",
+        "hr-hr",
+        "hr-ba",
+        "ms-my",
+        "ms-bn",
+        "sl-sl",
+        "ta-in",
+        "vi-vn",
+        "el-gr",
+        "ro-ro",
+        "is-is",
+        "id-id",
+        "th-th",
+        "lt-lt",
+        "uk-ua",
+        "lv-lv",
+        "et-ee",
+        "ca-es",
+        "fi-fi",
+        "sr-ba",
+        "sr-me",
+        "sr-rs",
+        "sk-sk",
+        "nb-no",
+        "hy-am",
+        "bn-in",
+        "eu-es",
+        "gl-es",
+        "gu-in",
+        "he-il",
+        "ga-ie",
+        "kn-in",
+        "ml-in",
+        "mr-in",
+        "fa-ae",
+        "pa-in",
+        "te-in",
+        "ur-pk"
       ],
       "x-ms-enum": {
         "name": "QueryLanguage",
@@ -1538,7 +1617,357 @@
           {
             "value": "en-us",
             "name": "EnUs",
-            "description": "English"
+            "description": "Query language value for English (United States)."
+          },
+          {
+            "value": "en-gb",
+            "name": "EnGb",
+            "description": "Query language value for English (Great Britain)."
+          },
+          {
+            "value": "en-in",
+            "name": "EnIn",
+            "description": "Query language value for English (India)."
+          },
+          {
+            "value": "en-ca",
+            "name": "EnCa",
+            "description": "Query language value for English (Canada)."
+          },
+          {
+            "value": "en-au",
+            "name": "EnAu",
+            "description": "Query language value for English (Australia)."
+          },
+          {
+            "value": "fr-fr",
+            "name": "FrFr",
+            "description": "Query language value for French (France)."
+          },
+          {
+            "value": "fr-ca",
+            "name": "FrCa",
+            "description": "Query language value for French (Canada)."
+          },
+          {
+            "value": "de-de",
+            "name": "DeDe",
+            "description": "Query language value for German (Germany)."
+          },
+          {
+            "value": "es-es",
+            "name": "EsEs",
+            "description": "Query language value for Spanish (Spain)."
+          },
+          {
+            "value": "es-mx",
+            "name": "EsMx",
+            "description": "Query language value for Spanish (Mexico)."
+          },
+          {
+            "value": "zh-cn",
+            "name": "ZhCn",
+            "description": "Query language value for Chinese (China)."
+          },
+          {
+            "value": "zh-tw",
+            "name": "ZhTw",
+            "description": "Query language value for Chinese (Taiwan)."
+          },
+          {
+            "value": "pt-br",
+            "name": "PtBr",
+            "description": "Query language value for Portuguese (Brazil)."
+          },
+          {
+            "value": "pt-pt",
+            "name": "PtPt",
+            "description": "Query language value for Portuguese (Portugal)."
+          },
+          {
+            "value": "it-it",
+            "name": "ItIt",
+            "description": "Query language value for Italian (Italy)."
+          },
+          {
+            "value": "ja-jp",
+            "name": "JaJp",
+            "description": "Query language value for Japanese (Japan)."
+          },
+          {
+            "value": "ko-kr",
+            "name": "KoKr",
+            "description": "Query language value for Korean (Korea)."
+          },
+          {
+            "value": "ru-ru",
+            "name": "RuRu",
+            "description": "Query language value for Russian (Russia)."
+          },
+          {
+            "value": "cs-cz",
+            "name": "CsCz",
+            "description": "Query language value for Czech (Czech Republic)."
+          },
+          {
+            "value": "nl-be",
+            "name": "NlBe",
+            "description": "Query language value for Dutch (Belgium)."
+          },
+          {
+            "value": "nl-nl",
+            "name": "NlNl",
+            "description": "Query language value for Dutch (Netherlands)."
+          },
+          {
+            "value": "hu-hu",
+            "name": "HuHu",
+            "description": "Query language value for Hungarian (Hungary)."
+          },
+          {
+            "value": "pl-pl",
+            "name": "PlPl",
+            "description": "Query language value for Polish (Poland)."
+          },
+          {
+            "value": "sv-se",
+            "name": "SvSe",
+            "description": "Query language value for Swedish (Sweden)."
+          },
+          {
+            "value": "tr-tr",
+            "name": "TrTr",
+            "description": "Query language value for Turkish (Turkey)."
+          },
+          {
+            "value": "hi-in",
+            "name": "HiIn",
+            "description": "Query language value for Hindi (India)."
+          },
+          {
+            "value": "ar-sa",
+            "name": "ArSa",
+            "description": "Query language value for Arabic (Saudi Arabia)."
+          },
+          {
+            "value": "ar-eg",
+            "name": "ArEg",
+            "description": "Query language value for Arabic (Egypt)."
+          },
+          {
+            "value": "ar-ma",
+            "name": "ArMa",
+            "description": "Query language value for Arabic (Morocco)."
+          },
+          {
+            "value": "ar-kw",
+            "name": "ArKw",
+            "description": "Query language value for Arabic (Kuwait)."
+          },
+          {
+            "value": "ar-jo",
+            "name": "ArJo",
+            "description": "Query language value for Arabic (Jordan)."
+          },
+          {
+            "value": "da-dk",
+            "name": "DaDk",
+            "description": "Query language value for Danish (Denmark)."
+          },
+          {
+            "value": "no-no",
+            "name": "NoNo",
+            "description": "Query language value for Norwegian (Norway)."
+          },
+          {
+            "value": "bg-bg",
+            "name": "BgBg",
+            "description": "Query language value for Bulgarian (Bulgaria)."
+          },
+          {
+            "value": "hr-hr",
+            "name": "HrHr",
+            "description": "Query language value for Croatian (Croatia)."
+          },
+          {
+            "value": "hr-ba",
+            "name": "HrBa",
+            "description": "Query language value for Croatian (Bosnia and Herzegovina)."
+          },
+          {
+            "value": "ms-my",
+            "name": "MsMy",
+            "description": "Query language value for Malay (Malaysia)."
+          },
+          {
+            "value": "ms-bn",
+            "name": "MsBn",
+            "description": "Query language value for Malay (Brunei Darussalam)."
+          },
+          {
+            "value": "sl-sl",
+            "name": "SlSl",
+            "description": "Query language value for Slovenian (Slovenia)."
+          },
+          {
+            "value": "ta-in",
+            "name": "TaIn",
+            "description": "Query language value for Tamil (India)."
+          },
+          {
+            "value": "vi-vn",
+            "name": "ViVn",
+            "description": "Query language value for Vietnamese (Viet Nam)."
+          },
+          {
+            "value": "el-gr",
+            "name": "ElGr",
+            "description": "Query language value for Greek (Greece)."
+          },
+          {
+            "value": "ro-ro",
+            "name": "RoRo",
+            "description": "Query language value for Romanian (Romania)."
+          },
+          {
+            "value": "is-is",
+            "name": "IsIs",
+            "description": "Query language value for Icelandic (Iceland)."
+          },
+          {
+            "value": "id-id",
+            "name": "IdId",
+            "description": "Query language value for Indonesian (Indonesia)."
+          },
+          {
+            "value": "th-th",
+            "name": "ThTh",
+            "description": "Query language value for Thai (Thailand)."
+          },
+          {
+            "value": "lt-lt",
+            "name": "LtLt",
+            "description": "Query language value for Lithuanian (Lithuania)."
+          },
+          {
+            "value": "uk-ua",
+            "name": "UkUa",
+            "description": "Query language value for Ukrainian (Ukraine)."
+          },
+          {
+            "value": "lv-lv",
+            "name": "LvLv",
+            "description": "Query language value for Latvian (Latvia)."
+          },
+          {
+            "value": "et-ee",
+            "name": "EtEe",
+            "description": "Query language value for Estonian (Estonia)."
+          },
+          {
+            "value": "ca-es",
+            "name": "CaEs",
+            "description": "Query language value for Catalan (Spain)."
+          },
+          {
+            "value": "fi-fi",
+            "name": "FiFi",
+            "description": "Query language value for Finnish (Finland)."
+          },
+          {
+            "value": "sr-ba",
+            "name": "SrBa",
+            "description": "Query language value for Serbian (Bosnia and Herzegovina)."
+          },
+          {
+            "value": "sr-me",
+            "name": "SrMe",
+            "description": "Query language value for Serbian (Montenegro)."
+          },
+          {
+            "value": "sr-rs",
+            "name": "SrRs",
+            "description": "Query language value for Serbian (Serbia)."
+          },
+          {
+            "value": "sk-sk",
+            "name": "SkSk",
+            "description": "Query language value for Slovak (Slovakia)."
+          },
+          {
+            "value": "nb-no",
+            "name": "NbNo",
+            "description": "Query language value for Norwegian (Norway)."
+          },
+          {
+            "value": "hy-am",
+            "name": "HyAm",
+            "description": "Query language value for Armenian (Armenia)."
+          },
+          {
+            "value": "bn-in",
+            "name": "BnIn",
+            "description": "Query language value for Bengali (India)."
+          },
+          {
+            "value": "eu-es",
+            "name": "EuEs",
+            "description": "Query language value for Basque (Spain)."
+          },
+          {
+            "value": "gl-es",
+            "name": "GlEs",
+            "description": "Query language value for Galician (Spain)."
+          },
+          {
+            "value": "gu-in",
+            "name": "GuIn",
+            "description": "Query language value for Gujarati (India)."
+          },
+          {
+            "value": "he-il",
+            "name": "HeIl",
+            "description": "Query language value for Hebrew (Israel)."
+          },
+          {
+            "value": "ga-ie",
+            "name": "GaIe",
+            "description": "Query language value for Irish (Ireland)."
+          },
+          {
+            "value": "kn-in",
+            "name": "KnIn",
+            "description": "Query language value for Kannada (India)."
+          },
+          {
+            "value": "ml-in",
+            "name": "MlIn",
+            "description": "Query language value for Malayalam (India)."
+          },
+          {
+            "value": "mr-in",
+            "name": "MrIn",
+            "description": "Query language value for Marathi (India)."
+          },
+          {
+            "value": "fa-ae",
+            "name": "FaAe",
+            "description": "Query language value for Persian (U.A.E.)."
+          },
+          {
+            "value": "pa-in",
+            "name": "PaIn",
+            "description": "Query language value for Punjabi (India)."
+          },
+          {
+            "value": "te-in",
+            "name": "TeIn",
+            "description": "Query language value for Telugu (India)."
+          },
+          {
+            "value": "ur-pk",
+            "name": "UrPk",
+            "description": "Query language value for Urdu (Pakistan)."
           }
         ]
       },
@@ -1667,6 +2096,10 @@
         "scoringProfile": {
           "type": "string",
           "description": "The name of a scoring profile to evaluate match scores for matching documents in order to sort the results."
+        },
+        "semanticConfiguration": {
+          "type": "string",
+          "description": "The name of a semantic configuration that will be used when processing documents for queries of type semantic."
         },
         "search": {
           "type": "string",

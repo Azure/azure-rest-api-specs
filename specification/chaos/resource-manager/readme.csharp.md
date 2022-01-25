@@ -11,5 +11,5 @@ csharp:
   clear-output-folder: true
   client-side-validation: false
   namespace: Microsoft.Azure.Management.Chaos
-  output-folder: $(csharp-sdks-folder)/chaos/management/Microsoft.Chaos/GeneratedProtocol
+  output-folder: $(csharp-sdks-folder)/chaos/Microsoft.Azure.Management.Chaos/src/Generated
 ```
