@@ -514,8 +514,14 @@
               "readOnly": true
             },
             "containers": {
-              "$ref": "#/definitions/ContainerCollection",
-              "description": "The containers collection under a replica"
+              "description": "The containers collection under a replica.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Container"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
             }
           },
           "x-ms-client-flatten": true
@@ -579,22 +585,6 @@
             }
           },
           "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ContainerCollection": {
-      "description": "Container App Revision Replicas Containers collection ARM resource.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Container"
-          }
         }
       }
     }
