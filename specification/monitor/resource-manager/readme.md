@@ -387,8 +387,6 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
 - Microsoft.Insights/stable/2018-01-01/metricDefinitions_API.json
 - Microsoft.Insights/stable/2018-01-01/metrics_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/baseline_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/calculateBaseline_API.json
 - Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
 - Microsoft.Insights/stable/2018-04-16/scheduledQueryRule_API.json
 - Microsoft.Insights/preview/2017-12-01-preview/metricNamespaces_API.json
@@ -415,8 +413,6 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
 - Microsoft.Insights/stable/2018-01-01/metricDefinitions_API.json
 - Microsoft.Insights/stable/2018-01-01/metrics_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/baseline_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/calculateBaseline_API.json
 - Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
 - Microsoft.Insights/stable/2018-04-16/scheduledQueryRule_API.json
 - Microsoft.Insights/stable/2018-09-01/metricBaselines_API.json
@@ -442,8 +438,6 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
 - Microsoft.Insights/stable/2018-01-01/metricDefinitions_API.json
 - Microsoft.Insights/stable/2018-01-01/metrics_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/baseline_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/calculateBaseline_API.json
 - Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
 - Microsoft.Insights/stable/2018-04-16/scheduledQueryRule_API.json
 ```
@@ -468,8 +462,6 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
 - Microsoft.Insights/stable/2018-01-01/metricDefinitions_API.json
 - Microsoft.Insights/stable/2018-01-01/metrics_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/baseline_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/calculateBaseline_API.json
 ```
 
 ### Tag: package-2017-12
@@ -492,8 +484,6 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
 - Microsoft.Insights/preview/2017-05-01-preview/metricDefinitions_API.json
 - Microsoft.Insights/preview/2017-05-01-preview/metrics_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/baseline_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/calculateBaseline_API.json
 ```
 
 ### Tag: package-2017-09
@@ -516,8 +506,6 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
 - Microsoft.Insights/preview/2017-05-01-preview/metricDefinitions_API.json
 - Microsoft.Insights/preview/2017-05-01-preview/metrics_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/baseline_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/calculateBaseline_API.json
 ```
 
 ### Tag: package-2017-09-preview-only
@@ -593,8 +581,6 @@ These settings apply only when `--tag=package-2018-09-01-only` is specified on t
 ``` yaml $(tag) == 'package-2018-09-01-only'
 input-file:
 - Microsoft.Insights/stable/2018-09-01/actionGroups_API.json
-- Microsoft.Insights/stable/2018-09-01/baseline_API.json
-- Microsoft.Insights/stable/2018-09-01/calculateBaseline_API.json
 ```
 
 ### Tag: package-2018-06-01-preview-only
@@ -643,16 +629,6 @@ These settings apply only when `--tag=package-2017-12-01-preview-only` is specif
 ``` yaml $(tag) == 'package-2017-12-01-preview-only'
 input-file:
 - Microsoft.Insights/preview/2017-12-01-preview/metricNamespaces_API.json
-```
-
-### Tag: package-2017-11-01-preview-only
-
-These settings apply only when `--tag=package-2017-11-01-preview-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-11-01-preview-only'
-input-file:
-- Microsoft.Insights/preview/2017-11-01-preview/baseline_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/calculateBaseline_API.json
 ```
 
 ### Tag: package-2017-05-01-preview-only
