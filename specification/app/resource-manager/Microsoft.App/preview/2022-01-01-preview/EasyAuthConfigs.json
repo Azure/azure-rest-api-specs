@@ -233,7 +233,7 @@
   },
   "definitions": {
     "AuthConfig": {
-      "description": "Configuration settings for the Azure App Service Authentication / Authorization V2 feature.",
+      "description": "Configuration settings for the Azure ContainerApp Authentication / Authorization V2 feature.",
       "type": "object",
       "allOf": [
         {
@@ -251,19 +251,19 @@
             },
             "globalValidation": {
               "$ref": "#/definitions/GlobalValidation",
-              "description": "The configuration settings that determines the validation flow of users using App Service Authentication/Authorization."
+              "description": "The configuration settings that determines the validation flow of users using ContainerApp Authentication/Authorization."
             },
             "identityProviders": {
               "$ref": "#/definitions/IdentityProviders",
-              "description": "The configuration settings of each of the identity providers used to configure App Service Authentication/Authorization."
+              "description": "The configuration settings of each of the identity providers used to configure ContainerApp Authentication/Authorization."
             },
             "login": {
               "$ref": "#/definitions/Login",
-              "description": "The configuration settings of the login flow of users using App Service Authentication/Authorization."
+              "description": "The configuration settings of the login flow of users using ContainerApp Authentication/Authorization."
             },
             "httpSettings": {
               "$ref": "#/definitions/HttpSettings",
-              "description": "The configuration settings of the HTTP requests for authentication and authorization requests made against App Service Authentication/Authorization."
+              "description": "The configuration settings of the HTTP requests for authentication and authorization requests made against ContainerApp Authentication/Authorization."
             }
           },
           "x-ms-client-flatten": true
@@ -271,7 +271,7 @@
       }
     },
     "GlobalValidation": {
-      "description": "The configuration settings that determines the validation flow of users using App Service Authentication/Authorization.",
+      "description": "The configuration settings that determines the validation flow of users using ContainerApp Authentication/Authorization.",
       "type": "object",
       "properties": {
         "unauthenticatedClientAction": {
@@ -295,7 +295,7 @@
       }
     },
     "Login": {
-      "description": "The configuration settings of the login flow of users using App Service Authentication/Authorization.",
+      "description": "The configuration settings of the login flow of users using ContainerApp Authentication/Authorization.",
       "type": "object",
       "properties": {
         "routes": {
@@ -326,7 +326,7 @@
       }
     },
     "HttpSettings": {
-      "description": "The configuration settings of the HTTP requests for authentication and authorization requests made against App Service Authentication/Authorization.",
+      "description": "The configuration settings of the HTTP requests for authentication and authorization requests made against ContainerApp Authentication/Authorization.",
       "type": "object",
       "properties": {
         "requireHttps": {
@@ -350,7 +350,7 @@
       }
     },
     "IdentityProviders": {
-      "description": "The configuration settings of each of the identity providers used to configure App Service Authentication/Authorization.",
+      "description": "The configuration settings of each of the identity providers used to configure ContainerApp Authentication/Authorization.",
       "type": "object",
       "properties": {
         "azureActiveDirectory": {
