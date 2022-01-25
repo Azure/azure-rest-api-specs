@@ -1787,14 +1787,14 @@
         "type": {
           "type": "string",
           "enum": [
-            "Microsoft.Management/managementGroup"
+            "Microsoft.Management/managementGroups"
           ],
           "x-ms-enum": {
             "name": "Type",
             "modelAsString": false,
             "values": [
               {
-                "value": "Microsoft.Management/managementGroup"
+                "value": "Microsoft.Management/managementGroups"
               }
             ]
           },
@@ -1855,7 +1855,7 @@
       "schema": {
         "$ref": "#/definitions/CreateManagementGroupRequest"
       },
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "method"
     },
     "PatchGroupRequestParameter": {
       "name": "patchGroupRequest",
@@ -1865,7 +1865,7 @@
       "schema": {
         "$ref": "#/definitions/PatchManagementGroupRequest"
       },
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "method"
     },
     "FilterParameter": {
       "name": "$filter",
@@ -1922,19 +1922,7 @@
       "schema": {
         "$ref": "#/definitions/CreateOrUpdateSettingsRequest"
       },
-      "x-ms-parameter-location": "client"
-    },
-    "OperationResultIdParameter": {
-      "name": "operationResultId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "create",
-        "delete"
-      ],
-      "description": "The id of the operation result.",
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "method"
     },
     "CheckNameAvailabilityParameter": {
       "name": "checkNameAvailabilityRequest",
@@ -1944,7 +1932,7 @@
       "schema": {
         "$ref": "#/definitions/CheckNameAvailabilityRequest"
       },
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "method"
     },
     "SkipParameter": {
       "name": "$skip",
@@ -1952,7 +1940,7 @@
       "required": false,
       "type": "integer",
       "description": "Number of entities to skip over when retrieving results. Passing this in will override $skipToken.",
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "method"
     },
     "TopParameter": {
       "name": "$top",
@@ -1960,7 +1948,7 @@
       "required": false,
       "type": "integer",
       "description": "Number of elements to return when retrieving results. Passing this in will override $skipToken.",
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "method"
     },
     "SkipTokenParameter": {
       "name": "$skiptoken",
@@ -1968,7 +1956,7 @@
       "required": false,
       "type": "string",
       "description": "Page continuation token is only used if a previous operation returned a partial result. \nIf a previous response contains a nextLink element, the value of the nextLink element will include a token parameter that specifies a starting point to use for subsequent calls.\n",
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "method"
     },
     "CacheControlHeader": {
       "name": "Cache-Control",

@@ -9,6 +9,7 @@ fluent: true
 namespace: com.microsoft.azure.management.postgresql
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
+tag: package-2020-01-01
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-postgresql
 ```
 

@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.communications.azure.com",
+    "api-version": "2021-06-15-preview",
+    "callConnectionId": "18dea47f-b081-4107-9a5c-4300819d2c6c",
+    "request": {
+      "audioFileUri": "https://app.contoso.com/audio/message.wav",
+      "loop": false,
+      "operationContext": "31130c66-2f86-41b5-af61-23850243e093",
+      "audioFileId": "42922e2c-a204-4ac4-8d80-375ae2792389"
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "status": "running",
+        "operationContext": "31130c66-2f86-41b5-af61-23850243e093"
+      }
+    },
+    "400": {
+      "body": {
+        "error": {
+          "code": "400",
+          "message": "The request contains invalid data."
+        }
+      }
+    },
+    "401": {
+      "body": {
+        "error": {
+          "code": "401",
+          "message": "Request is not authorized."
+        }
+      }
+    },
+    "403": {
+      "body": {
+        "error": {
+          "code": "403",
+          "message": "User is not allowed to perform specified action."
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "404",
+          "message": "Resource not found on the server."
+        }
+      }
+    },
+    "500": {
+      "body": {
+        "error": {
+          "code": "500",
+          "message": "Internal server error."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "api-version": "2021-12-01",
+    "resourceName": "vault1",
+    "resourceGroupName": "resourceGroupPS1",
+    "subscriptionId": "c183865e-6077-46f2-a3b1-deb0f4f4650a",
+    "recoveryPlanName": "RPtest1",
+    "input": {
+      "properties": {
+        "failoverDirection": "PrimaryToRecovery",
+        "networkType": "VmNetworkAsInput",
+        "networkId": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/siterecoveryProd1/providers/Microsoft.Network/virtualNetworks/vnetavrai",
+        "providerSpecificDetails": [
+          {
+            "instanceType": "HyperVReplicaAzure"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationRecoveryPlans/RPtest1",
+        "name": "RPtest1",
+        "type": "Microsoft.RecoveryServices/vaults/replicationRecoveryPlans",
+        "properties": {
+          "friendlyName": "RPtest1",
+          "primaryFabricId": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/cloud1",
+          "primaryFabricFriendlyName": "cloud1",
+          "recoveryFabricId": "Microsoft Azure",
+          "recoveryFabricFriendlyName": "Microsoft Azure",
+          "failoverDeploymentModel": "ResourceManager",
+          "replicationProviders": [
+            "HyperVReplicaAzure"
+          ],
+          "allowedOperations": [
+            "TestFailoverCleanup"
+          ],
+          "currentScenario": {
+            "scenarioName": "TestFailover",
+            "jobId": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationJobs/d40bfb40-aaaa-4c0d-87d3-41b15439a84b",
+            "startTime": "2017-04-27T07:00:58.8191916Z"
+          },
+          "currentScenarioStatus": "Suspended",
+          "currentScenarioStatusDescription": "WaitingForStopTestFailover",
+          "groups": [
+            {
+              "groupType": "Shutdown",
+              "replicationProtectedItems": [],
+              "startGroupActions": [],
+              "endGroupActions": []
+            },
+            {
+              "groupType": "Failover",
+              "replicationProtectedItems": [],
+              "startGroupActions": [],
+              "endGroupActions": []
+            },
+            {
+              "groupType": "Boot",
+              "replicationProtectedItems": [
+                {
+                  "id": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/cloud1/replicationProtectionContainers/cloud_6d224fc6-f326-5d35-96de-fbf51efb3179/replicationProtectedItems/f8491e4f-817a-40dd-a90c-af773978c75b",
+                  "virtualMachineId": "f8491e4f-817a-40dd-a90c-af773978c75b"
+                }
+              ],
+              "startGroupActions": [],
+              "endGroupActions": []
+            },
+            {
+              "groupType": "Boot",
+              "replicationProtectedItems": [
+                {
+                  "id": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/cloud1/replicationProtectionContainers/cloud_6d224fc6-f326-5d35-96de-fbf51efb3179/replicationProtectedItems/c0c14913-3d7a-48ea-9531-cc99e0e686e6",
+                  "virtualMachineId": "c0c14913-3d7a-48ea-9531-cc99e0e686e6"
+                }
+              ],
+              "startGroupActions": [],
+              "endGroupActions": []
+            }
+          ]
+        }
+      }
+    },
+    "202": {}
+  }
+}

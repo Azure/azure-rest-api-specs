@@ -614,10 +614,6 @@
         "threatIntelMode": {
           "description": "The operation mode for Threat Intelligence.",
           "$ref": "./azureFirewall.json#/definitions/AzureFirewallThreatIntelMode"
-        },
-        "intrusionSystemMode": {
-          "description": "The operation mode for Intrusion system.",
-          "$ref": "#/definitions/FirewallPolicyIntrusionSystemMode"
         }
       },
       "description": "Firewall Policy definition."
@@ -1058,18 +1054,6 @@
         }
       },
       "description": "Response for ListFirewallPolicyRuleGroups API service call."
-    },
-    "FirewallPolicyIntrusionSystemMode": {
-      "type": "string",
-      "description": "The operation mode for Intrusion system mode.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "FirewallPolicyIntrusionSystemMode",
-        "modelAsString": true
-      }
     }
   }
 }

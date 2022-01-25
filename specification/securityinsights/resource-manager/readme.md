@@ -24,34 +24,117 @@ To see additional help and options, run:
 
 These are the global settings for the SecurityInsights API.
 
-```yaml
+``` yaml
 openapi-type: arm
-tag: package-composite-v1
-```
-
-### Tag: package-composite-v1
-
-These settings apply only when `--tag=package-composite-v1` is specified on the command line.
-
-```yaml $(tag) == 'package-composite-v1'
-input-file:
-- Microsoft.SecurityInsights/stable/2020-01-01/SecurityInsights.json
-directive:
-  - suppress: R2059
-    from: Microsoft.SecurityInsights/stable/2020-01-01/SecurityInsights.json
-    reason: it's not actually a resource path; the validator is confused because the LogAnalytics namespace is in the URI path.
-    approved-by: "@lirenhe"
+tag: package-preview-2021-09
 ```
 
 ---
 
-### Tag: package-2019-01-preview-only
+### Tag: package-preview-2021-09
 
-These settings apply only when `--tag=package-2019-01-preview-only` is specified on the command line.
+These settings apply only when `--tag=package-preview-2021-09` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-01-preview-only'
+``` yaml $(tag) == 'package-preview-2021-09'
 input-file:
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/AlertRules.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/AutomationRules.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/Bookmarks.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/Enrichment.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/EntityQueries.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/Entities.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/Incidents.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/Metadata.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/OnboardingStates.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/Settings.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/SourceControls.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/Watchlists.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/dataConnectors.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/ThreatIntelligence.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/operations.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/OfficeConsents.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/EntityQueryTemplates.json
+```
+
+---
+
+### Tag: package-2021-04-01-only
+
+These settings apply only when `--tag=package-2021-04-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04-01-only'
+input-file:
+- Microsoft.SecurityInsights/stable/2021-04-01/Incidents.json
+- Microsoft.SecurityInsights/stable/2021-04-01/operations.json
+- Microsoft.SecurityInsights/stable/2021-04-01/Watchlists.json
+- Microsoft.SecurityInsights/stable/2021-04-01/ThreatIntelligence.json
+```
+
+---
+
+### Tag: package-2020-01
+
+These settings apply only when `--tag=package-2020-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-01'
+input-file:
+- Microsoft.SecurityInsights/stable/2020-01-01/AlertRules.json
+- Microsoft.SecurityInsights/stable/2020-01-01/Bookmarks.json
+- Microsoft.SecurityInsights/stable/2020-01-01/DataConnectors.json
+- Microsoft.SecurityInsights/stable/2020-01-01/SecurityInsights.json
+```
+
+---
+
+### Tag: package-2021-03-preview-only
+
+These settings apply only when `--tag=package-2021-03-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03-preview-only'
+input-file:
+- Microsoft.SecurityInsights/preview/2021-03-01-preview/Incidents.json
+- Microsoft.SecurityInsights/preview/2021-03-01-preview/Settings.json
+- Microsoft.SecurityInsights/preview/2021-03-01-preview/OnboardingStates.json
+- Microsoft.SecurityInsights/preview/2021-03-01-preview/operations.json
+- Microsoft.SecurityInsights/preview/2021-03-01-preview/SourceControls.json
+- Microsoft.SecurityInsights/preview/2021-03-01-preview/dataConnectors.json
+- Microsoft.SecurityInsights/preview/2021-03-01-preview/Watchlists.json
+- Microsoft.SecurityInsights/preview/2021-03-01-preview/AlertRules.json
+- Microsoft.SecurityInsights/preview/2021-03-01-preview/EntityQueries.json
+- Microsoft.SecurityInsights/preview/2021-03-01-preview/EntityQueryTemplates.json
+- Microsoft.SecurityInsights/preview/2021-03-01-preview/Metadata.json
+```
+
+---
+
+### Tag: package-2019-01-preview
+
+These settings apply only when `--tag=package-2019-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-01-preview'
+input-file:
+- Microsoft.SecurityInsights/preview/2019-01-01-preview/Aggregations.json
+- Microsoft.SecurityInsights/preview/2019-01-01-preview/AutomationRules.json
+- Microsoft.SecurityInsights/preview/2019-01-01-preview/Bookmarks.json
+- Microsoft.SecurityInsights/preview/2019-01-01-preview/Cases.json
+- Microsoft.SecurityInsights/preview/2019-01-01-preview/DataConnectorsCheckRequirements.json
+- Microsoft.SecurityInsights/preview/2019-01-01-preview/Enrichment.json
+- Microsoft.SecurityInsights/preview/2019-01-01-preview/Entities.json
+- Microsoft.SecurityInsights/preview/2019-01-01-preview/OfficeConsents.json
 - Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
+- Microsoft.SecurityInsights/preview/2019-01-01-preview/ThreatIntelligence.json
+```
+
+---
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: R4017
+    reason: Our resources do not support list by subscription. They're not top-level resources. To get a SecurityInsights resource, we should have a subscription as well as a resource group and Log Analytics workspace.
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    reason: 'Caused by a duplicate Resource definition in our common directory that contains systemData. We were instructed to supress this by Swagger reviewr.'
 ```
 
 ---
@@ -63,14 +146,17 @@ input-file:
 This section describes what SDK should be generated by the automatic system.
 This is not used by Autorest itself.
 
-```yaml $(swagger-to-sdk)
+``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-go-track2
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-java
   - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
 ```
 
 ## C#
@@ -78,7 +164,7 @@ swagger-to-sdk:
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
-```yaml $(csharp)
+``` yaml $(csharp)
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
@@ -104,28 +190,6 @@ See configuration in [readme.nodejs.md](./readme.nodejs.md)
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Java
 
-AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
-
-This block is updated by an automatic script. Edits may be lost!
-
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
-# include the azure profile definitions from the standard location
-require: $(this-folder)/../../../profiles/readme.md
-
-# all the input files across all versions
-input-file:
-  - $(this-folder)/Microsoft.SecurityInsights/stable/2020-01-01/SecurityInsights.json
-  - $(this-folder)/Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
-
-```
-
-If there are files that should not be in the `all-api-versions` set, 
-uncomment the  `exclude-file` section below and add the file paths.
-
-``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
-```
-
+See configuration in [readme.java.md](./readme.java.md)
