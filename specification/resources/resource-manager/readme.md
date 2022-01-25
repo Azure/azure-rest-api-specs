@@ -68,6 +68,15 @@ tag: package-deploymentscripts-2020-10
 tag: package-templatespecs-2021-05
 ```
 
+### Tag: package-changes-2022-01
+
+These settings apply only when `--tag=package-changes-2022-01-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-changes-2022-01'
+input-file:
+- Microsoft.Resources/preview/2022-01-01-preview/changes.json
+```
+
 ### Tag: package-policy-2021-06
 
 These settings apply only when `--tag=package-policy-2021-06` is specified on the command line.
@@ -835,6 +844,12 @@ directive:
   - suppress: TopLevelResourcesListByResourceGroup
     from: privateLinks.json
     reason: The resource is managed in a management group level (instead of inside a resource group)
+  - suppress: TopLevelResourcesListBySubscription
+    from: changes.json
+    reason: We will be pushing customers to use Azure Resource Graph for those at scale scenarios. 
+  - suppress: OperationsAPIImplementation
+    from: changes.json
+    reason: 'Duplicate Operations API causes generation issues'
 ```
 
 ---
