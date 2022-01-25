@@ -28,6 +28,10 @@ These are the global settings for the Resource API.
 openapi-type: arm
 ```
 
+``` yaml $(package-privatelinks)
+tag: package-privatelinks-2020-05
+```
+
 ``` yaml $(package-features)
 tag: package-features-2021-07
 ```
