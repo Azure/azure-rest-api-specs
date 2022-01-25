@@ -19,12 +19,12 @@ cli:
         removed: true
       - select: 'operation'
         where:
-            operationGroup: 'APIkeys'
+            operationGroup: 'APIKeys'
             operation: 'create|delete'
         removed: true
       - select: 'operation'
         where:
-            operationGorup: 'components'
+            operationGroup: 'components'
             operation: 'updateTags'
         removed: true
       - select: 'operationGroup'
@@ -38,7 +38,7 @@ cli:
         hidden: true
       - select: 'operation'
         where:
-            operatoinGroup: 'APIKeys'
+            operationGroup: 'APIKeys'
             operation: 'get'
         hidden: true
 ```

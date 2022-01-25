@@ -75,20 +75,36 @@
       "x-ms-azure-resource": true
     },
     "ExtendedErrorInfo": {
-      "description": "Error information",
       "type": "object",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "type": "object",
+      "description": "Error definition.",
       "properties": {
         "code": {
-          "description": "Error Code",
-          "type": "string"
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
         },
         "message": {
-          "description": "Error Message",
-          "type": "string"
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
         },
         "details": {
-          "description": "Error message details",
-          "$ref": "#/definitions/ExtendedErrorInfo"
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
         }
       }
     },
@@ -186,6 +202,14 @@
       "name": "productId",
       "in": "path",
       "description": "The product identifier.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PackageIdParameter": {
+      "name": "packageId",
+      "in": "path",
+      "description": "The package identifier.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

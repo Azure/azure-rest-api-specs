@@ -1,0 +1,598 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-03-01",
+    "title": "ContainerApps API Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/containerApps": {
+      "get": {
+        "tags": [
+          "ContainerApps"
+        ],
+        "summary": "Get the Container Apps in a given subscription.",
+        "operationId": "ContainerApps_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Container Apps by resource group": {
+            "$ref": "./examples/ListContainerAppsBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/containerApps": {
+      "get": {
+        "tags": [
+          "ContainerApps"
+        ],
+        "summary": "Get the Container Apps in a given resource group.",
+        "operationId": "ContainerApps_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Container Apps by resource group": {
+            "$ref": "./examples/ListContainerAppsByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/containerApps/{name}": {
+      "get": {
+        "tags": [
+          "ContainerApps"
+        ],
+        "summary": "Get the properties of a Container App.",
+        "operationId": "ContainerApps_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ContainerApp"
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Container App": {
+            "$ref": "./examples/GetContainerApp.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ContainerApps"
+        ],
+        "summary": "Create or update a Container App.",
+        "description": "Description for Create or update a Container App.",
+        "operationId": "ContainerApps_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "containerAppEnvelope",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContainerApp"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No change performed on the Container App.",
+            "schema": {
+              "$ref": "#/definitions/ContainerApp"
+            }
+          },
+          "201": {
+            "description": "Container App create or update has been started.",
+            "schema": {
+              "$ref": "#/definitions/ContainerApp"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Container App": {
+            "$ref": "./examples/CreateOrUpdateContainerApp.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "ContainerApps"
+        ],
+        "summary": "Delete a Container App.",
+        "description": "Description for Delete a Container App.",
+        "operationId": "ContainerApps_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Container App deleted successfully."
+          },
+          "202": {
+            "description": "Delete operation is in progress."
+          },
+          "204": {
+            "description": "Container App does not exist."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Container App": {
+            "$ref": "./examples/DeleteContainerApp.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/containerApps/{name}/listSecrets": {
+      "post": {
+        "tags": [
+          "ContainerApps"
+        ],
+        "summary": "List secrets for a container app",
+        "operationId": "ContainerApps_ListSecrets",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecretsCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Container Apps Secrets": {
+            "$ref": "./examples/ListContainerAppSecrets.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Configuration": {
+      "description": "Non versioned Container App configuration properties that define the mutable settings of a Container app",
+      "type": "object",
+      "properties": {
+        "secrets": {
+          "description": "Collection of secrets used by a Container app",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Secret"
+          }
+        },
+        "activeRevisionsMode": {
+          "description": "ActiveRevisionsMode controls how active revisions are handled for the Container app:\n<list><item>Multiple: multiple revisions can be active. If no value if provided, this is the default</item><item>Single: Only one revision can be active at a time. Revision weights can not be used in this mode</item></list>",
+          "enum": [
+            "multiple",
+            "single"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ActiveRevisionsMode",
+            "modelAsString": true
+          }
+        },
+        "ingress": {
+          "$ref": "#/definitions/Ingress",
+          "description": "Ingress configurations."
+        },
+        "registries": {
+          "description": "Collection of private container registry credentials for containers used by the Container app",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegistryCredentials"
+          }
+        }
+      }
+    },
+    "ContainerApp": {
+      "description": "Container App.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "ContainerApp resource specific properties",
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "description": "Provisioning state of the Container App.",
+              "enum": [
+                "InProgress",
+                "Succeeded",
+                "Failed",
+                "Canceled"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "ContainerAppProvisioningState",
+                "modelAsString": true
+              }
+            },
+            "kubeEnvironmentId": {
+              "description": "Resource ID of the Container App's KubeEnvironment.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "latestRevisionName": {
+              "description": "Name of the latest revision of the Container App.",
+              "type": "string",
+              "readOnly": true
+            },
+            "latestRevisionFqdn": {
+              "description": "Fully Qualified Domain Name of the latest revision of the Container App.",
+              "type": "string",
+              "readOnly": true
+            },
+            "configuration": {
+              "$ref": "#/definitions/Configuration",
+              "description": "Non versioned Container App configuration properties."
+            },
+            "template": {
+              "$ref": "./CommonDefinitions.json#/definitions/Template",
+              "description": "Container App versioned application definition."
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ContainerAppCollection": {
+      "description": "Container App collection ARM resource.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContainerApp"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SecretsCollection": {
+      "description": "Container App Secrets Collection ARM resource.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContainerAppSecret"
+          }
+        }
+      }
+    },
+    "Ingress": {
+      "description": "Container App Ingress configuration.",
+      "type": "object",
+      "properties": {
+        "fqdn": {
+          "description": "Hostname.",
+          "type": "string",
+          "readOnly": true
+        },
+        "external": {
+          "description": "Bool indicating if app exposes an external http endpoint",
+          "default": false,
+          "type": "boolean"
+        },
+        "targetPort": {
+          "format": "int32",
+          "description": "Target Port in containers for traffic from ingress",
+          "type": "integer"
+        },
+        "transport": {
+          "description": "Ingress transport protocol",
+          "enum": [
+            "auto",
+            "http",
+            "http2"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IngressTransportMethod",
+            "modelAsString": true
+          }
+        },
+        "traffic": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrafficWeight"
+          }
+        },
+        "allowInsecure": {
+          "description": "Bool indicating if HTTP connections to is allowed. If set to false HTTP connections are automatically redirected to HTTPS connections",
+          "type": "boolean"
+        }
+      }
+    },
+    "RegistryCredentials": {
+      "description": "Container App Private Registry",
+      "type": "object",
+      "properties": {
+        "server": {
+          "description": "Container Registry Server",
+          "type": "string"
+        },
+        "username": {
+          "description": "Container Registry Username",
+          "type": "string"
+        },
+        "passwordSecretRef": {
+          "description": "The name of the Secret that contains the registry login password",
+          "type": "string"
+        }
+      }
+    },
+    "Secret": {
+      "description": "Container App Secret.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Secret Name.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Secret Value.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
+        }
+      }
+    },
+    "ContainerAppSecret": {
+      "description": "Container App Secret.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Secret Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "Secret Value.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TrafficWeight": {
+      "description": "Traffic weight assigned to a revision",
+      "type": "object",
+      "properties": {
+        "revisionName": {
+          "description": "Name of a revision",
+          "type": "string"
+        },
+        "weight": {
+          "format": "int32",
+          "description": "Traffic weight assigned to a revision",
+          "type": "integer"
+        },
+        "latestRevision": {
+          "description": "Indicates that the traffic weight belongs to a latest stable revision",
+          "default": false,
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Your Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+      "required": true,
+      "type": "string"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "Name of the resource group to which the resource belongs.",
+      "required": true,
+      "type": "string",
+      "maxLength": 90,
+      "minLength": 1,
+      "pattern": "^[-\\w\\._\\(\\)]+[^\\.]$",
+      "x-ms-parameter-location": "method"
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "API Version",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

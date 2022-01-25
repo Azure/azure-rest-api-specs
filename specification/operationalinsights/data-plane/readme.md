@@ -43,11 +43,24 @@ directive:
     remove-operation: Query_Get
 ```
 
+### Tag: 20171001
+
 ``` yaml $(tag) == '20171001'
 input-file:
 - Microsoft.OperationalInsights/preview/2017-10-01/swagger.json
 directive:
   - reason: Rename Query_Post to Query so that we don't get an IQuery interface with 1 operation
+    where-operation: Query_Post
+    transform: $.operationId = "Query"
+```
+
+### Tag: 20210519
+
+``` yaml $(tag) == '20210519'
+input-file:
+- Microsoft.OperationalInsights/preview/2021-05-19_Preview/OperationalInsights.json
+directive:
+  - reason: Include batch query and add prefer headers to query request
     where-operation: Query_Post
     transform: $.operationId = "Query"
 ```

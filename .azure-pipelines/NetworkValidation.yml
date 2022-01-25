@@ -18,7 +18,7 @@ jobs:
     displayName: Install Node.js
   - script: npm install autorest -g
     displayName: Install autorest
-  - script: git clone --depth 1 -- https://dev.azure.com/v-anevse/BuildScripts/_git/BuildScripts ..\BuildScripts
+  - script: git clone --depth 1 -- https://dev.azure.com/nrp-swagger/swagger-stack/_git/automation-scripts ..\BuildScripts
     displayName: Clone build tools
   - powershell: |
       $swgrPath = (Get-Item ".\").FullName
