@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2019-10-01",
+    "scope": "providers/Microsoft.Billing/billingAccounts/12345:2468/billingProfiles/13579",
+    "startDate": "2019-09-01",
+    "endDate": "2019-10-31",
+    "reservationId": "1c6b6358-709f-484c-85f1-72e862a0cf3b",
+    "reservationOrderId": "9f39ba10-794f-4dcb-8f4b-8d0cb47c27dc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/12345:2468/billingProfiles/13579/providers/Microsoft.Consumption/reservationDetails/reservationDetails_Id1",
+            "name": "reservationDetails_Id1",
+            "type": "Microsoft.Consumption/reservationDetails",
+            "tags": null,
+            "properties": {
+              "reservationOrderId": "9f39ba10-794f-4dcb-8f4b-8d0cb47c27dc",
+              "reservationId": "1c6b6358-709f-484c-85f1-72e862a0cf3b",
+              "usageDate": "2019-09-30T00:00:00-08:00",
+              "skuName": "Standard_D2s_v3",
+              "instanceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sqlh1/providers/microsoft.compute/virtualmachines/sqlh1",
+              "totalReservedQuantity": 0,
+              "reservedHours": 48,
+              "usedHours": 0.6,
+              "instanceFlexibilityGroup": "DSv3 Series",
+              "instanceFlexibilityRatio": "1"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

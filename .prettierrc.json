@@ -1,0 +1,30 @@
+{
+  "overrides": [
+    {
+      "files": [
+        "specification/**/*.json",
+        "documentation/swagger-bootstrap.json",
+        "documentation/samplefiles/**/*.json"
+      ],
+      "options": {
+        "plugins": [
+          "./scripts/prettier-swagger-plugin"
+        ],
+        "parser": "json-swagger",
+        "printWidth": 20
+      }
+    },
+    {
+      "files": [
+        "**/*.json"
+      ],
+      "options": {
+        "parser": "json",
+        "printWidth": 20
+      },
+      "excludeFiles": [
+        "specification/**/*.json"
+      ]
+    }
+  ]
+}

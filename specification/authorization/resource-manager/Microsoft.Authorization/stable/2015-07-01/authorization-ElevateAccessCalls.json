@@ -43,29 +43,27 @@
         "description": "Elevates access for a Global Administrator.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK - Returns an HttpResponseMessage with HttpStatusCode 200."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "GetConfigurations": {
+          "Elevate access global administrator": {
             "$ref": "./examples/ElevateAccess.json"
           }
         }
       }
     }
   },
-  "parameters": {
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to use for this operation."
-    }
-  }
+  "parameters": {}
 }

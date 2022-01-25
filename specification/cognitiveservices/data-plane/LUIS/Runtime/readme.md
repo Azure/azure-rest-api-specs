@@ -5,12 +5,12 @@
 Configuration for generating LUIS Runtime SDK.
 
 ``` yaml
-tag: runtime_3_0_preview
+tag: runtime_3_0
 add-credentials: true
 openapi-type: data-plane
 ```
 
-The current release for the Runtime Endpoint is `runtime_3_0_preview`.
+The current release for the Runtime Endpoint is `runtime_3_0`.
 
 # Releases
 
@@ -25,11 +25,11 @@ directive:
   remove-operation: Prediction_Resolve2
 ```
 
-## Runtime 3.0-preview
-These settings apply only when `--tag=runtime_3_0_preview` is specified on the command line.
+## Runtime 3.0
+These settings apply only when `--tag=runtime_3_0` is specified on the command line.
 
-``` yaml $(tag) == 'runtime_3_0_preview'
-input-file: preview/v3.0/LUIS-Runtime.json
+``` yaml $(tag) == 'runtime_3_0'
+input-file: stable/v3.0/LUIS-Runtime.json
 
 # remove the GET APIs from code-generation (since the POST and GET operations are functionally identical)
 directive:
@@ -110,7 +110,7 @@ require: $(this-folder)/../../../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/stable/v2.0/LUIS-Runtime.json
-  - $(this-folder)/preview/v3.0/LUIS-Runtime.json
+  - $(this-folder)/stable/v3.0/LUIS-Runtime.json
 
 ```
 
