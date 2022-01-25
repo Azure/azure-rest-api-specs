@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-08-01-preview",
+    "version": "2022-01-01",
     "title": "DataBoxManagementClient"
   },
   "host": "management.azure.com",
@@ -2363,6 +2363,132 @@
         }
       }
     },
+    "DataBoxDiskGranularCopyProgress": {
+      "description": "DataBox Disk Copy Progress",
+      "type": "object",
+      "properties": {
+        "serialNumber": {
+          "description": "The serial number of the disk",
+          "type": "string",
+          "readOnly": true
+        },
+        "bytesCopied": {
+          "format": "int64",
+          "description": "Bytes copied during the copy of disk.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "percentComplete": {
+          "format": "int32",
+          "description": "Indicates the percentage completed for the copy of the disk.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The Status of the copy",
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Completed",
+            "CompletedWithErrors",
+            "Failed",
+            "NotReturned",
+            "HardwareError",
+            "DeviceFormatted",
+            "DeviceMetadataModified",
+            "StorageAccountNotAccessible",
+            "UnsupportedData",
+            "DriveNotReceived",
+            "UnsupportedDrive",
+            "OtherServiceError",
+            "OtherUserError",
+            "DriveNotDetected",
+            "DriveCorrupted",
+            "MetadataFilesModifiedOrRemoved"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CopyStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "NotStarted",
+                "description": "Data copy hasn't started yet."
+              },
+              {
+                "value": "InProgress",
+                "description": "Data copy is in progress."
+              },
+              {
+                "value": "Completed",
+                "description": "Data copy completed."
+              },
+              {
+                "value": "CompletedWithErrors",
+                "description": "Data copy completed with errors."
+              },
+              {
+                "value": "Failed",
+                "description": "Data copy failed. No data was copied."
+              },
+              {
+                "value": "NotReturned",
+                "description": "No copy triggered as device was not returned."
+              },
+              {
+                "value": "HardwareError",
+                "description": "The Device has hit hardware issues."
+              },
+              {
+                "value": "DeviceFormatted",
+                "description": "Data copy failed. The Device was formatted by user."
+              },
+              {
+                "value": "DeviceMetadataModified",
+                "description": "Data copy failed. Device metadata was modified by user."
+              },
+              {
+                "value": "StorageAccountNotAccessible",
+                "description": "Data copy failed. Storage Account was not accessible during copy."
+              },
+              {
+                "value": "UnsupportedData",
+                "description": "Data copy failed. The Device data content is not supported."
+              },
+              {
+                "value": "DriveNotReceived",
+                "description": "No copy triggered as device was not received."
+              },
+              {
+                "value": "UnsupportedDrive",
+                "description": "No copy triggered as device type is not supported."
+              },
+              {
+                "value": "OtherServiceError",
+                "description": "Copy failed due to service error."
+              },
+              {
+                "value": "OtherUserError",
+                "description": "Copy failed due to user error."
+              },
+              {
+                "value": "DriveNotDetected",
+                "description": "Copy failed due to disk detection error."
+              },
+              {
+                "value": "DriveCorrupted",
+                "description": "Copy failed due to corrupted drive."
+              },
+              {
+                "value": "MetadataFilesModifiedOrRemoved",
+                "description": "Copy failed due to modified  or removed metadata files."
+              }
+            ]
+          }
+        }
+      }
+    },
     "DataBoxDiskJobDetails": {
       "description": "DataBox Disk Job Details.",
       "required": [
@@ -2389,6 +2515,14 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataBoxDiskCopyProgress"
+          },
+          "readOnly": true
+        },
+        "granularCopyProgress": {
+          "description": "Granular copy progress per disk.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataBoxDiskGranularCopyProgress"
           },
           "readOnly": true
         },
