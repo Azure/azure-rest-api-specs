@@ -863,6 +863,46 @@
           }
         }
       }
+    },
+	"/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/changeBilling": {
+      "post": {
+        "summary": "Change billing subsciption of the `ReservationOrder`.",
+        "description": "Change billing subscription of `ReservationOrder` to specified billing scope",
+        "operationId": "ReservationOrder_ChangeBilling",
+        "x-ms-examples": {
+          "ChangeDirectory": {
+            "$ref": "./examples/ChangeBillingReservationOrder.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ReservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ChangeBillingParameter"
+          }
+        ],
+        "tags": [
+          "ReservationOrder, ChangeBilling"
+        ],
+        "responses": {
+          "202": {
+            "description": "The request is accepted and is being processed",
+            "schema": {
+              "$ref": "#/definitions/ChangeBillingResponse"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
