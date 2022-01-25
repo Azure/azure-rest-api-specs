@@ -1000,6 +1000,18 @@
         }
       }
     },
+    "ResourceSku": {
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the SKU.",
+          "type": "string"
+        }
+      }
+    },
     "IdentityProperties": {
       "type": "object",
       "properties": {
@@ -1146,6 +1158,9 @@
             "type": "string"
           }
         },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku"
+        },
         "location": {
           "type": "string"
         },
@@ -1174,6 +1189,9 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku"
         },
         "location": {
           "type": "string"
