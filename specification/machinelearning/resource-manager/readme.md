@@ -62,6 +62,7 @@ input-file:
 directive:
   - suppress: R3008
     from: machineLearningServices.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/listNodes"].post
     reason: The pageable itemName override is not considered by the LintDiff check correctly.
 ```
 
