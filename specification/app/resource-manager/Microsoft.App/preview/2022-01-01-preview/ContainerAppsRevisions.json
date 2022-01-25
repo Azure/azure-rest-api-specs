@@ -517,7 +517,7 @@
               "description": "The containers collection under a replica.",
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Container"
+                "$ref": "#/definitions/ReplicaContainer"
               }
             }
           },
@@ -541,7 +541,7 @@
         }
       }
     },
-    "Container": {
+    "ReplicaContainer": {
       "description": "Container object under Container App Revision Replica.",
       "type": "object",
       "properties": {
@@ -551,32 +551,26 @@
           "properties": {
             "name": {
               "description": "The Name of the Container",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "containerId": {
               "description": "The Id of the Container",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "ready": {
               "description": "The container ready status",
-              "type": "boolean",
-              "readOnly": true
+              "type": "boolean"
             },
             "started": {
               "description": "The container start status",
-              "type": "boolean",
-              "readOnly": true
+              "type": "boolean"
             },
             "restartCount": {
               "format": "int32",
               "description": "The container restart count",
-              "type": "integer",
-              "readOnly": true
+              "type": "integer"
             }
-          },
-          "x-ms-client-flatten": true
+          }
         }
       }
     }
