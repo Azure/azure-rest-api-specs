@@ -217,6 +217,119 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/revisions/{revisionName}/replicas/{name}": {
+      "get": {
+        "tags": [
+          "ContainerAppsRevisionReplicas"
+        ],
+        "summary": "Get a replica for a Container App Revision.",
+        "operationId": "ContainerAppsRevisionReplicas_GetReplica",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "revisionName",
+            "in": "path",
+            "description": "Name of the Container App Revision.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the Container App Revision Replica.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Replica"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Container App's revision replica": {
+            "$ref": "./examples/Replicas_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/revisions/{revisionName}/replicas": {
+      "get": {
+        "tags": [
+          "ContainerAppsRevisionReplicas"
+        ],
+        "summary": "List replicas for a Container App Revision.",
+        "operationId": "ContainerAppsRevisionReplicas_ListReplicas",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "revisionName",
+            "in": "path",
+            "description": "Name of the Container App Revision.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicaCollection"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Container App's replicas": {
+            "$ref": "./examples/Replicas_List.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/revisions/{name}/restart": {
       "post": {
         "tags": [
@@ -373,6 +486,115 @@
           "description": "Link to next page of resources.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    }
+  },
+  "Replica": {
+    "description": "Container App Revision Replica.",
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+      }
+    ],
+    "properties": {
+      "properties": {
+        "description": "Replica resource specific properties",
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "The Name of the Replica",
+            "type": "string",
+            "readOnly": true
+          },
+          "createdTime": {
+            "type": "string",
+            "description": "Timestamp describing when the pod was created by controller",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "containers": {
+            "$ref": "#/definitions/ContainerCollection",
+            "description": "The containers collection under a replica"
+          }
+        },
+        "x-ms-client-flatten": true
+      }
+    }
+  },
+  "ReplicaCollection": {
+    "description": "Container App Revision Replicas collection ARM resource.",
+    "required": [
+      "value"
+    ],
+    "type": "object",
+    "properties": {
+      "value": {
+        "description": "Collection of resources.",
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Replica"
+        }
+      }
+    }
+  },
+  "Container": {
+    "description": "Container object under Container App Revision Replica.",
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+      }
+    ],
+    "properties": {
+      "properties": {
+        "description": "Container resource specific properties",
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "The Name of the Container",
+            "type": "string",
+            "readOnly": true
+          },
+          "containerId": {
+            "description": "The Id of the Container",
+            "type": "string",
+            "readOnly": true
+          },
+          "ready": {
+            "description": "The container ready status",
+            "type": "boolean",
+            "readOnly": true
+          },
+          "started": {
+            "description": "The container start status",
+            "type": "boolean",
+            "readOnly": true
+          },
+          "restartCount": {
+            "format": "int32",
+            "description": "The container restart count",
+            "type": "integer",
+            "readOnly": true
+          }
+        },
+        "x-ms-client-flatten": true
+      }
+    }
+  },
+  "ContainerCollection": {
+    "description": "Container App Revision Replicas Containers collection ARM resource.",
+    "required": [
+      "value"
+    ],
+    "type": "object",
+    "properties": {
+      "value": {
+        "description": "Collection of resources.",
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Container"
         }
       }
     }
