@@ -26,6 +26,7 @@ These are the global settings for the MachineLearning API.
 
 ``` yaml
 openapi-type: arm
+tag: package-2021-10-01
 ```
 
 ``` yaml $(package-webservices)
@@ -42,6 +43,26 @@ tag: package-workspaces-2016-04
 
 ``` yaml $(package-workspaces)
 tag: package-workspaces-2019-10
+```
+
+### Tag: package-2021-10-01
+
+These settings apply only when `--tag=package-2021-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-10-01'
+input-file:
+  - Microsoft.MachineLearning/stable/2021-10-01/machineLearningServices.json
+  - Microsoft.MachineLearning/stable/2021-10-01/mfe.json
+  - Microsoft.MachineLearning/stable/2021-10-01/workspaceFeatures.json
+```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: R3008
+    from: machineLearningServices.json
+    reason: The pageable itemName override is not considered by the LintDiff check correctly.
 ```
 
 ### Tag: package-webservices-2017-01
