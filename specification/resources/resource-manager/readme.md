@@ -68,13 +68,13 @@ tag: package-deploymentscripts-2020-10
 tag: package-templatespecs-2021-05
 ```
 
-### Tag: package-changes-2022-01
+### Tag: package-changes-2022-03
 
-These settings apply only when `--tag=package-changes-2022-01-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-changes-2022-03-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-changes-2022-01'
+``` yaml $(tag) == 'package-changes-2022-03'
 input-file:
-- Microsoft.Resources/preview/2022-01-01-preview/changes.json
+- Microsoft.Resources/preview/2022-03-01-preview/changes.json
 ```
 
 ### Tag: package-policy-2021-06
