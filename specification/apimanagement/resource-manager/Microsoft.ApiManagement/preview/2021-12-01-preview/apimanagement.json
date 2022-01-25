@@ -542,6 +542,44 @@
       },
       "x-ms-parameter-location": "method"
     },
+    "IdParameter": {
+      "name": "id",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "A resource identifier.",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)",
+      "x-ms-parameter-location": "method"
+    },
+    "PolicyFragmentContentFormat": {
+      "name": "format",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Policy fragment content format.",
+      "enum": [
+        "xml",
+        "rawxml"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyFragmentContentFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "xml",
+            "description": "The contents are inline and Content type is an XML document."
+          },
+          {
+            "value": "rawxml",
+            "description": "The contents are inline and Content type is a non XML encoded policy document."
+          }
+        ]
+      },
+      "default": "xml",
+      "x-ms-parameter-location": "method"
+    },
     "PortalRevisionIdParameter": {
       "name": "portalRevisionId",
       "in": "path",
@@ -605,17 +643,6 @@
       "required": true,
       "type": "string",
       "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
-    "SchemaIdParameter": {
-      "name": "schemaId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Schema identifier within an API. Must be unique in the current API Management service instance.",
-      "minLength": 1,
-      "maxLength": 80,
-      "pattern": "^[^*#&+:<>?]+$",
       "x-ms-parameter-location": "method"
     },
     "ServiceNameParameter": {
@@ -762,6 +789,16 @@
       "required": true,
       "type": "string",
       "description": "Content item identifier.",
+      "minLength": 1,
+      "maxLength": 80,
+      "x-ms-parameter-location": "method"
+    },
+    "SchemaIdParameter": {
+      "name": "schemaId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Schema id identifier. Must be unique in the current API Management service instance.",
       "minLength": 1,
       "maxLength": 80,
       "x-ms-parameter-location": "method"
