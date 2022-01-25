@@ -18,6 +18,16 @@ To see additional help and options, run:
 
 ---
 
+### Before adding a new tag
+
+Please familiarize yourself with the following before adding a new tag:
+
+- Discussion on negative impact of multiple _api-version_'s within a tag: [Azure/azure-sdk-for-rust#563](https://github.com/Azure/azure-sdk-for-rust/issues/563)
+- [API Spec & SDK Package Versioning Considerations](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/481/API-Spec-SDK-Package-Versioning-Considerations)
+- [Manual Process: Adding new API version](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/83/Manual-Process-Adding-new-API-version)
+
+---
+
 ## Configuration
 
 ### Basic Information
@@ -28,7 +38,7 @@ These are the global settings for the ApplicationInsights API.
 title: ApplicationInsightsManagementClient
 description: Composite Swagger for Application Insights Management Client
 openapi-type: arm
-tag: package-2021-11-01
+tag: package-2022-01-11
 ```
 
 ### Suppression
@@ -220,6 +230,31 @@ directive:
     reason: 'consistent with existing response schema | owned by another team'
   - suppress: RequiredReadOnlySystemData
   
+```
+
+### Tag: package-2022-01-11
+
+These settings apply only when `--tag=package-2022-01-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-01-11'
+input-file:
+  - Microsoft.Insights/stable/2015-05-01/aiOperations_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentApiKeys_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentContinuousExport_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentFeaturesAndPricing_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentProactiveDetection_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentWorkItemConfigs_API.json
+  - Microsoft.Insights/stable/2015-05-01/favorites_API.json
+  - Microsoft.Insights/stable/2015-05-01/webTestLocations_API.json
+  - Microsoft.Insights/stable/2015-05-01/webTests_API.json
+  - Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
+  - Microsoft.Insights/stable/2020-11-20/workbookTemplates_API.json
+  - Microsoft.Insights/stable/2021-03-08/myworkbooks_API.json
+  - Microsoft.Insights/stable/2021-08-01/workbooks_API.json
+  - Microsoft.Insights/stable/2020-02-02/components_API.json
+  - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
+  - Microsoft.Insights/stable/2021-10-14/livetoken_API.json
 ```
 
 ### Tag: package-2021-11-01

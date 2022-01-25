@@ -26,7 +26,7 @@ These are the global settings for the Hardware Security Modules API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-10
+tag: package-2021-11
 ```
 
 
@@ -39,7 +39,14 @@ input-file:
 - Microsoft.HardwareSecurityModules/preview/2018-10-31-preview/dedicatedhsm.json
 ```
 
+### Tag: package-2021-11
 
+These settings apply only when `--tag=package-2021-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-11'
+input-file:
+- Microsoft.HardwareSecurityModules/stable/2021-11-30/dedicatedhsm.json
+```
 
 
 
