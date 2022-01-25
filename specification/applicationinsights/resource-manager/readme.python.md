@@ -141,7 +141,7 @@ output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationi
 
 These settings apply only when `--tag=package-2021-10 --python` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-08' && $(python) && $(track2)
+``` yaml $(tag) == 'package-2021-10' && $(python) && $(track2)
 namespace: azure.mgmt.applicationinsights.v2021_10
 output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2021_10
 ```
