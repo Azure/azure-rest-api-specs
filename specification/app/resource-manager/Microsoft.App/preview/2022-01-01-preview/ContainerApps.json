@@ -309,6 +309,52 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{name}/listSecrets": {
+      "post": {
+        "tags": [
+          "ContainerApps"
+        ],
+        "summary": "List secrets for a container app",
+        "operationId": "ContainerApps_ListSecrets",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecretsCollection"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Container Apps Secrets": {
+            "$ref": "./examples/ListContainerAppSecrets.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -557,6 +603,38 @@
           "description": "Indicates that the traffic weight belongs to a latest stable revision",
           "default": false,
           "type": "boolean"
+        }
+      }
+    },
+    "SecretsCollection": {
+      "description": "Container App Secrets Collection ARM resource.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContainerAppSecret"
+          }
+        }
+      }
+    },
+    "ContainerAppSecret": {
+      "description": "Container App Secret.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Secret Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "Secret Value.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }
