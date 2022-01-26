@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft Cognitive Language Service - Analyze Conversations",
     "description": "This API accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversation, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service.",
-    "version": "2021-11-01-preview"
+    "version": "2022-03-01-preview"
   },
   "securityDefinitions": {
     "apim_key": {
@@ -365,7 +365,6 @@
         "confidenceScore": {
           "type": "number",
           "format": "double",
-          "x-ms-client-name": "confidence",
           "description": "The prediction score and it ranges from 0.0 to 1.0.",
           "minimum": 0,
           "maximum": 1
@@ -456,7 +455,6 @@
         },
         "confidenceScore": {
           "format": "float",
-          "x-ms-client-name": "confidence",
           "description": "The confidence score of the class from 0.0 to 1.0.",
           "type": "number",
           "minimum": 0,
@@ -495,19 +493,683 @@
         },
         "confidenceScore": {
           "format": "float",
-          "x-ms-client-name": "confidence",
           "description": "The entity confidence score.",
           "type": "number"
         },
-        "listKeys": {
+        "resolutions": {
           "type": "array",
-          "description": "List of keys.",
+          "items": {
+            "$ref": "#/definitions/BaseResolution"
+          }
+        },
+        "extraInformation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseExtraInformation"
+          }
+        }
+      }
+    },
+    "BaseExtraInformation": {
+      "type":"object",
+      "discriminator": "extraInformationKind",
+      "properties": {
+        "extraInformationKind":{
+          "type": "string",
+          "enum": [
+            "EntitySubtype",
+            "ListKeys"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "extraInformationKind"
+      ]
+    },
+    "EntitySubtype": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseExtraInformation"
+        }
+      ],
+      "type":"object",
+      "x-ms-discriminator-value": "EntitySubtype",
+      "properties": {
+        "value": {
+          "type":"string",
+          "description": "The Subtype of an extracted entity type."
+        }
+      }
+    },
+    "ListKeys":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseExtraInformation"
+        }
+      ],
+      "type":"object",
+      "x-ms-discriminator-value": "ListKeys",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "description": "A Collection of keys that the extracted entity was mapped to.",
           "items": {
             "type": "string"
           }
         }
       }
     },
+    "BaseResolution": {
+      "type":"object",
+      "discriminator": "resolutionKind",
+      "properties": {
+        "resolutionKind":{
+          "type": "string",
+          "enum": [
+            "Boolean",
+            "DateTime",
+            "Number",
+            "Ordinal",
+            "Speed",
+            "Weight",
+            "Length",
+            "Volume",
+            "Area",
+            "Age",
+            "Information",
+            "Temperature",
+            "Currency",
+            "NumericRange",
+            "TemporalSpan"
+          ],
+          "x-ms-enum": {
+            "name": "ResolutionKind",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "resolutionKind"
+      ]
+    },
+    "QuantityResolution":{
+      "description": "represents resolutions for quantities.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "The numeric value that the extracted text denotes."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AgeResolution":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/QuantityResolution"
+        }
+      ],
+      "type":"object",
+      "x-ms-discriminator-value": "Age",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "enum": [
+            "Year",
+            "Month",
+            "Week",
+            "Day",
+            "Unspecified"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          },
+          "description": "The Age Unit of measurement"
+        },
+        "duration":{
+          "type":"string",
+          "description": "A value formatted based on the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations), or the constant string 'Unspecified' if the age unit is not known."
+        }
+      },
+      "required": [
+        "unit"
+      ]
+    },
+    "VolumeResolution":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/QuantityResolution"
+        }
+      ],
+      "type":"object",
+      "x-ms-discriminator-value": "Volume",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "enum": [
+            "CubicMeter",
+            "CubicCentimeter",
+            "CubicMillimeter",
+            "Hectoliter",
+            "Decaliter",
+            "Liter",
+            "Centiliter",
+            "Milliliter",
+            "CubicYard",
+            "CubicInch",
+            "CubicFoot",
+            "CubicMile",
+            "FluidOunce",
+            "Teaspoon",
+            "Tablespoon",
+            "Pint",
+            "Quart",
+            "Cup",
+            "Gill",
+            "Pinch",
+            "FluidDram",
+            "Barrel",
+            "Minim",
+            "Cord",
+            "Peck",
+            "Bushel",
+            "Hogshead",
+            "Unspecified"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          },
+          "description": "The Volume Unit of measurement"
+        }
+      },
+      "required": [
+        "unit"
+      ]
+    },
+    "SpeedResolution":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/QuantityResolution"
+        }
+      ],
+      "type":"object",
+      "x-ms-discriminator-value": "Speed",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "enum": [
+            "MetersPerSecond",
+            "KilometersPerHour",
+            "KilometersPerMinute",
+            "KilometersPerSecond",
+            "MilesPerHour",
+            "Knot",
+            "FootPerSecond",
+            "FootPerMinute",
+            "YardsPerMinute",
+            "YardsPerSecond",
+            "MetersPerMillisecond",
+            "CentimetersPerMillisecond",
+            "KilometersPerMillisecond",
+            "Unspecified"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "unit"
+      ]
+    },
+    "AreaResolution":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/QuantityResolution"
+        }
+      ],
+      "type":"object",
+      "x-ms-discriminator-value": "Area",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "enum": [
+            "SquareKilometer",
+            "SquareHectometer",
+            "SquareDecameter",
+            "SquareDecimeter",
+            "SquareMeter",
+            "SquareCentimeter",
+            "SquareMillimeter",
+            "SquareInch",
+            "SquareFoot",
+            "SquareMile",
+            "SquareYard",
+            "Acre",
+            "Unspecified"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "unit"
+      ]
+    },
+    "LengthResolution":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/QuantityResolution"
+        }
+      ],
+      "type":"object",
+      "x-ms-discriminator-value": "Length",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "enum": [
+            "Kilometer",
+            "Hectometer",
+            "Decameter",
+            "Meter",
+            "Decimeter",
+            "Centimeter",
+            "Millimeter",
+            "Micrometer",
+            "Nanometer",
+            "Picometer",
+            "Mile",
+            "Yard",
+            "Inch",
+            "Foot",
+            "LightYear",
+            "Pt",
+            "Unspecified"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "unit"
+      ]
+    },
+    "InformationResolution":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/QuantityResolution"
+        }
+      ],
+      "type":"object",
+      "x-ms-discriminator-value": "Information",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "enum": [
+            "Bit",
+            "Kilobit",
+            "Megabit",
+            "Gigabit",
+            "Terabit",
+            "Petabit",
+            "Byte",
+            "Kilobyte",
+            "Megabyte",
+            "Gigabyte",
+            "Terabyte",
+            "Petabyte",
+            "Unspecified"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "unit"
+      ]
+    },
+    "TemperatureResolution":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/QuantityResolution"
+        }
+      ],
+      "type":"object",
+      "x-ms-discriminator-value": "Temperature",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "enum": [
+            "F",
+            "K",
+            "R",
+            "D",
+            "C",
+            "Unspecified"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "unit"
+      ]
+    },
+    "WeightResolution":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/QuantityResolution"
+        }
+      ],
+      "type":"object",
+      "x-ms-discriminator-value": "Weight",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "enum": [
+            "Kilogram",
+            "Gram",
+            "Milligram",
+            "Gallon",
+            "MetricTon",
+            "Ton",
+            "Pound",
+            "Ounce",
+            "Grain",
+            "PennyWeight",
+            "LongTonBritish",
+            "ShortTonUS",
+            "ShortHundredWeightUS",
+            "Stone",
+            "Dram",
+            "Unspecified"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "unit"
+      ]
+    },
+    "CurrencyResolution":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/QuantityResolution"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "Currency",
+      "properties": {
+        "ISO4217":{
+          "type": "string",
+          "description": "The alphabetic code based on another ISO standard, ISO 3166, which lists the codes for country names. The first two letters of the ISO 4217 three-letter code are the same as the code for the country name, and, where possible, the third letter corresponds to the first letter of the currency name."
+        },
+        "value": {
+            "type": "number",
+            "format": "double",
+            "description": "The money amount captured in the extracted entity"
+        },
+        "unit": {
+          "type": "string",
+          "description": "The unit of the amount captured in the extracted entity"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ]
+    },
+    "BooleanResolution":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        }
+      ],
+      "type":"object",
+      "x-ms-discriminator-value": "Boolean",
+      "properties":{
+        "value":{
+          "type":"boolean"
+        }
+      },
+      "description": "A resolution for boolean expressions",
+      "required": [
+        "value"
+      ]
+    },
+    "DateTimeResolution":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        }
+      ],
+      "type":"object",
+      "x-ms-discriminator-value": "DateTime",
+      "properties":{
+        "timex": {
+          "$ref": "#/definitions/TimeExpression"
+        },
+        "dateTimeSubKind": {
+          "type": "string",
+          "enum": [
+            "Time",
+            "Date",
+            "DateTime",
+            "Duration",
+            "Set"
+          ],
+          "x-ms-enum": {
+            "name": "DateTimeSubKind",
+            "modelAsString": false
+          },
+          "description": "The date time SubKind"
+        },
+        "value": {
+          "type": "string",
+          "description": "The actual time that the extracted text denote."
+        },
+        "modifier":{
+          "$ref": "#/definitions/TemporalModifier"
+        }
+      },
+      "required": [
+        "timex",
+        "dateTimeSubKind",
+        "value"
+      ]
+    },
+    "NumberResolution":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "Number",
+      "properties": {
+        "numberKind": {
+          "type": "string",
+          "enum": [
+            "Integer",
+            "Decimal",
+            "Power",
+            "Fraction",
+            "Percent",
+            "Unspecified"
+          ],
+          "x-ms-enum": {
+            "name": "NumberKind",
+            "modelAsString": false
+          },
+          "description": "The type of the extracted number entity."
+        },
+        "value": {
+          "type": "string",
+          "description": "A numeric representation of what the extracted text denotes."
+        }
+      },
+      "required": [
+        "numberKind",
+        "value"
+      ]
+    },
+    "OrdinalResolution":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "Ordinal",
+      "properties": {
+        "offset":{
+          "type": "string",
+          "description": "The offset With respect to the reference (e.g., offset = -1 in \"show me the second to last\""
+        },
+        "relativeTo":{
+          "type":"string",
+          "enum": [
+            "Current",
+            "End",
+            "Start"
+          ],
+          "x-ms-enum": {
+            "name": "RelativeTo",
+            "modelAsString": true
+          },
+          "description": "The reference point that the ordinal number denotes."
+        },
+        "value":{
+          "type": "string",
+          "description": "A simple arithmetic expression that the ordinal denotes."
+        }
+      },
+      "required": [
+        "offset",
+        "relativeTo",
+        "value"
+      ]
+    },
+    "TemporalSpanResolution": {
+      "allOf":[
+        {
+          "$ref": "#/definitions/BaseResolution"
+        }
+      ],
+      "type":"object",
+      "x-ms-discriminator-value": "TemporalSpan",
+      "properties": {
+        "begin":{
+          "$ref": "#/definitions/TimeExpression"
+        },
+        "end":{
+          "$ref": "#/definitions/TimeExpression"
+        },
+        "duration":{
+          "type":"string",
+          "description": "An optional duration value formatted based on the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)"
+        },
+        "modifier":{
+          "$ref": "#/definitions/TemporalModifier"
+        }
+      },
+      "description": "represents the resolution of a date and/or time span."
+    },
+    "NumericRangeResolution": {
+      "allOf":[
+        {
+          "$ref": "#/definitions/BaseResolution"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "NumericRange",
+      "properties": {
+        "minimum":{
+          "$ref": "#/definitions/NumberResolution",
+          "description": "The beginning value of  the interval."
+        },
+        "maximum":{
+          "$ref": "#/definitions/NumberResolution",
+          "description": "The ending value of the interval."
+        }
+      },
+      "required": [
+        "minimum",
+        "maximum"
+      ]
+    },
+    "TemporalModifier":{
+      "type": "string",
+      "description": "An optional modifier of a date/time instance.",
+      "enum": [
+        "AfterApprox",
+        "Before",
+        "BeforeStart",
+        "Approx",
+        "ReferenceUndefined",
+        "SinceEnd",
+        "AfterMid",
+        "Start",
+        "After",
+        "BeforeEnd",
+        "Until",
+        "End",
+        "Less",
+        "Since",
+        "AfterStart",
+        "BeforeApprox",
+        "Mid",
+        "More"
+      ],
+      "x-ms-enum": {
+        "name": "Modifier",
+        "modelAsString": true
+      }
+    },
+    "TimeExpression":{
+      "type": "string",
+      "description": "An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
+    },
+
     "LUISTargetIntentResult": {
       "type": "object",
       "description": "It is a wrap up of LUIS Generally Available response.",
