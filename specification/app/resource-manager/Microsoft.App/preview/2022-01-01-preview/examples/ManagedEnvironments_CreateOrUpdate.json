@@ -18,13 +18,11 @@
           {
             "password":"private key password",
             "name":"certificate-firendly-name",
-            "subjectName":"my.custom.subject.name.example",
             "value" :"PFX-or-PEM-blob"
           },
           {
             "password":"private key password",
             "name":"other-certificate-firendly-name",
-            "subjectName":"my.custom..different.subject.name.example",
             "value" :"PFX-or-PEM-blob"
           }
         ]
@@ -48,7 +46,29 @@
             "logAnalyticsConfiguration": {
               "customerId": "string"
             }
-          }
+          },
+          "certificates": [
+            {
+              "name":"certificate-firendly-name",
+              "provisioningState": "Succeeded",
+              "subjectName": "my-subject-name.company.country.net",
+              "issuer": "Issuer Name",
+              "issueDate" : "2021-11-06T04:00:00Z",
+              "expirationDate": "2022-11-06T04:00:00Z",
+              "thumbprint":"CERTIFICATE_THUMBPRINT",
+              "valid": "<code>true</code>"
+            },
+            {
+              "name":"other-certificate-firendly-name",
+              "provisioningState": "Succeeded",
+              "subjectName": "my-other-subject-name.company.country.net",
+              "issuer": "Other Issuer Name",
+              "issueDate" : "2021-12-10T04:00:00Z",
+              "expirationDate": "2022-12-10T04:00:00Z",
+              "thumbprint":"CERTIFICATE_THUMBPRINT",
+              "valid": "<code>true</code>"
+            }
+          ]
         }
       }
     },
@@ -68,7 +88,29 @@
             "logAnalyticsConfiguration": {
               "customerId": "string"
             }
-          }
+          },
+          "certificates": [
+            {
+              "name":"certificate-firendly-name",
+              "provisioningState": "Succeeded",
+              "subjectName": "my-subject-name.company.country.net",
+              "issuer": "Issuer Name",
+              "issueDate" : "2021-11-06T04:00:00Z",
+              "expirationDate": "2022-11-06T04:00:00Z",
+              "thumbprint":"CERTIFICATE_THUMBPRINT",
+              "valid": "<code>true</code>"
+            },
+            {
+              "name":"other-certificate-firendly-name",
+              "provisioningState": "Succeeded",
+              "subjectName": "my-other-subject-name.company.country.net",
+              "issuer": "Other Issuer Name",
+              "issueDate" : "2021-12-10T04:00:00Z",
+              "expirationDate": "2022-12-10T04:00:00Z",
+              "thumbprint":"CERTIFICATE_THUMBPRINT",
+              "valid": "<code>true</code>"
+            }
+          ]
         }
       }
     }
