@@ -2,8 +2,8 @@
   "parameters": {
     "subscriptionId": "12345678-1234-1234-1234-123456789098",
     "resourceGroupName": "kustorptest",
-    "clusterName": "kustoclusterrptest4",
-    "api-version": "2021-08-27",
+    "clusterName": "kustoCluster",
+    "api-version": "2022-02-01",
     "parameters": {
       "location": "westus",
       "sku": {
@@ -19,6 +19,7 @@
         "enablePurge": true,
         "enableDoubleEncryption": false,
         "enableAutoStop": true,
+        "publicIPType": "DualStack",
         "publicNetworkAccess": "Enabled",
         "allowedIpRangeList": [
           "0.0.0.0/0"
@@ -29,8 +30,8 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4",
-        "name": "KustoClusterRPTest4",
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster",
+        "name": "kustoCluster",
         "type": "Microsoft.Kusto/Clusters",
         "location": "westus",
         "properties": {
@@ -40,6 +41,7 @@
           "enablePurge": true,
           "enableDoubleEncryption": false,
           "enableAutoStop": true,
+          "publicIPType": "DualStack",
           "keyVaultProperties": {
             "keyVaultUri": "https://dummy.keyvault.com",
             "keyName": "keyName",
@@ -47,6 +49,7 @@
           },
           "engineType": "V3",
           "publicNetworkAccess": "Enabled",
+          "restrictOutboundNetworkAccess": "Disabled",
           "allowedIpRangeList": [
             "0.0.0.0/0"
           ]
@@ -67,8 +70,8 @@
     },
     "201": {
       "body": {
-        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4",
-        "name": "KustoClusterRPTest4",
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster",
+        "name": "kustoCluster",
         "type": "Microsoft.Kusto/Clusters",
         "location": "westus",
         "properties": {
@@ -78,6 +81,7 @@
           "enablePurge": true,
           "enableDoubleEncryption": false,
           "enableAutoStop": true,
+          "publicIPType": "DualStack",
           "keyVaultProperties": {
             "keyVaultUri": "https://dummy.keyvault.com",
             "keyName": "keyName",
@@ -85,6 +89,7 @@
           },
           "engineType": "V3",
           "publicNetworkAccess": "Enabled",
+          "restrictOutboundNetworkAccess": "Disabled",
           "allowedIpRangeList": [
             "0.0.0.0/0"
           ]

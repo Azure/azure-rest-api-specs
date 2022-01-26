@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "KustoManagementClient",
-    "version": "2021-08-27"
+    "version": "2022-02-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -180,12 +180,24 @@
           },
           "201": {
             "description": "Successfully updated the cluster.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Cluster"
             }
           },
           "202": {
             "description": "Successfully updated the cluster.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Cluster"
             }
@@ -1288,12 +1300,24 @@
           },
           "201": {
             "description": "Successfully updated the database.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Database"
             }
           },
           "202": {
             "description": "Accepted the update database request.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Database"
             }
@@ -1932,6 +1956,12 @@
           },
           "202": {
             "description": "Accepted the update request of the database script.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Script"
             }
@@ -2196,6 +2226,12 @@
           },
           "202": {
             "description": "Accepted the update request of the managed private endpoint.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ManagedPrivateEndpoint"
             }
@@ -2899,6 +2935,9 @@
         "x-ms-examples": {
           "KustoDataConnectionValidation": {
             "$ref": "./examples/KustoDataConnectionValidationAsync.json"
+          },
+          "KustoDataConnectionEventGridValidation": {
+            "$ref": "./examples/KustoDataConnectionEventGridValidationAsync.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -3069,6 +3108,9 @@
         "x-ms-examples": {
           "KustoDataConnectionsGet": {
             "$ref": "./examples/KustoDataConnectionsGet.json"
+          },
+          "KustoDataConnectionsEventGridGet": {
+            "$ref": "./examples/KustoDataConnectionsEventGridGet.json"
           }
         },
         "parameters": [
@@ -3115,6 +3157,9 @@
         "x-ms-examples": {
           "KustoDataConnectionsCreateOrUpdate": {
             "$ref": "./examples/KustoDataConnectionsCreateOrUpdate.json"
+          },
+          "KustoDataConnectionsEventGridCreateOrUpdate": {
+            "$ref": "./examples/KustoDataConnectionsEventGridCreateOrUpdate.json"
           }
         },
         "parameters": [
@@ -3183,6 +3228,9 @@
         "x-ms-examples": {
           "KustoDataConnectionsUpdate": {
             "$ref": "./examples/KustoDataConnectionsUpdate.json"
+          },
+          "KustoDataConnectionsEventGridUpdate": {
+            "$ref": "./examples/KustoDataConnectionsEventGridUpdate.json"
           }
         },
         "parameters": [
@@ -3223,12 +3271,24 @@
           },
           "201": {
             "description": "Successfully updated the data connection.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/DataConnection"
             }
           },
           "202": {
             "description": "Accepted the update data connection request.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/DataConnection"
             }
@@ -3521,6 +3581,50 @@
       }
     }
   },
+  "x-ms-paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Kusto/locations/{location}/operationresults/{operationId}?operationResultResponseType=Location": {
+      "get": {
+        "tags": [
+          "OperationResults"
+        ],
+        "description": "Returns operation results.",
+        "operationId": "OperationsResultsLocation_Get",
+        "x-ms-examples": {
+          "KustoOperationsResultsLocationGet": {
+            "$ref": "./examples/KustoOperationResultsOperationResultResponseTypeGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the operation result."
+          },
+          "202": {
+            "description": "Operation is still in progress."
+          },
+          "204": {
+            "description": "Successfully retrieved the operation result. No content."
+          },
+          "default": {
+            "description": "The long running operation failed."
+          }
+        }
+      }
+    }
+  },
   "definitions": {
     "ClusterProperties": {
       "properties": {
@@ -3667,7 +3771,8 @@
           "x-ms-enum": {
             "name": "ClusterNetworkAccessFlag",
             "modelAsString": true
-          }
+          },
+          "default": "Disabled"
         },
         "allowedFqdnList": {
           "description": "List of allowed FQDNs(Fully Qualified Domain Name) for egress from Cluster.",
@@ -3676,6 +3781,27 @@
             "description": "FQDN to be allowed for egress. Example: my-storageaccount.blob.core.windows.net",
             "type": "string"
           }
+        },
+        "publicIPType": {
+          "description": "Indicates what public IP type to create - IPv4 (default), or DualStack (both IPv4 and IPv6)",
+          "enum": [
+            "IPv4",
+            "DualStack"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "publicIPType",
+            "modelAsString": true
+          },
+          "default": "IPv4"
+        },
+        "virtualClusterGraduationProperties": {
+          "description": "Virtual Cluster graduation properties",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ],
+          "x-ms-secret": true
         }
       },
       "description": "Class representing the Kusto cluster properties."
@@ -3836,20 +3962,24 @@
           "description": "SKU name.",
           "type": "string",
           "enum": [
+            "Dev(No SLA)_Standard_D11_v2",
+            "Dev(No SLA)_Standard_E2a_v4",
+            "Standard_D11_v2",
+            "Standard_D12_v2",
+            "Standard_D13_v2",
+            "Standard_D14_v2",
+            "Standard_D32d_v4",
+            "Standard_D16d_v5",
+            "Standard_D32d_v5",
             "Standard_DS13_v2+1TB_PS",
             "Standard_DS13_v2+2TB_PS",
             "Standard_DS14_v2+3TB_PS",
             "Standard_DS14_v2+4TB_PS",
-            "Standard_D13_v2",
-            "Standard_D14_v2",
+            "Standard_L4s",
             "Standard_L8s",
             "Standard_L16s",
             "Standard_L8s_v2",
             "Standard_L16s_v2",
-            "Standard_D11_v2",
-            "Standard_D12_v2",
-            "Standard_L4s",
-            "Dev(No SLA)_Standard_D11_v2",
             "Standard_E64i_v3",
             "Standard_E80ids_v4",
             "Standard_E2a_v4",
@@ -3860,7 +3990,22 @@
             "Standard_E8as_v4+2TB_PS",
             "Standard_E16as_v4+3TB_PS",
             "Standard_E16as_v4+4TB_PS",
-            "Dev(No SLA)_Standard_E2a_v4"
+            "Standard_E8as_v5+1TB_PS",
+            "Standard_E8as_v5+2TB_PS",
+            "Standard_E16as_v5+3TB_PS",
+            "Standard_E16as_v5+4TB_PS",
+            "Standard_E2ads_v5",
+            "Standard_E4ads_v5",
+            "Standard_E8ads_v5",
+            "Standard_E16ads_v5",
+            "Standard_E8s_v4+1TB_PS",
+            "Standard_E8s_v4+2TB_PS",
+            "Standard_E16s_v4+3TB_PS",
+            "Standard_E16s_v4+4TB_PS",
+            "Standard_E8s_v5+1TB_PS",
+            "Standard_E8s_v5+2TB_PS",
+            "Standard_E16s_v5+3TB_PS",
+            "Standard_E16s_v5+4TB_PS"
           ],
           "x-ms-enum": {
             "name": "AzureSkuName",
@@ -4141,6 +4286,16 @@
         "managedIdentityResourceId": {
           "type": "string",
           "description": "The resource ID of a managed identity (system or user assigned) to be used to authenticate with event hub."
+        },
+        "managedIdentityObjectId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The object ID of the managedIdentityResourceId"
+        },
+        "allowMultiDatabase": {
+          "type": "boolean",
+          "default": false,
+          "description": "A Boolean value indicating if non-default database routing information from the data connection is allowed."
         }
       },
       "required": [
@@ -4181,6 +4336,11 @@
         "sharedAccessPolicyName": {
           "type": "string",
           "description": "The name of the share access policy"
+        },
+        "allowMultiDatabase": {
+          "type": "boolean",
+          "default": false,
+          "description": "A Boolean value indicating if non-default database routing information from the data connection is allowed."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -4304,6 +4464,10 @@
           "type": "string",
           "description": "The resource ID of the storage account where the data resides."
         },
+        "eventGridResourceId": {
+          "type": "string",
+          "description": "The resource ID of the event grid that is subscribed to the storage account events."
+        },
         "eventHubResourceId": {
           "type": "string",
           "description": "The resource ID where the event grid is configured to send events."
@@ -4331,6 +4495,20 @@
         "blobStorageEventType": {
           "$ref": "#/definitions/BlobStorageEventType",
           "description": "The name of blob storage event type to process."
+        },
+        "managedIdentityResourceId": {
+          "type": "string",
+          "description": "The resource ID of a managed identity (system or user assigned) to be used to authenticate with event hub and storage account."
+        },
+        "managedIdentityObjectId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The object ID of managedIdentityResourceId"
+        },
+        "allowMultiDatabase": {
+          "type": "boolean",
+          "default": false,
+          "description": "A Boolean value indicating if non-default database routing information from the data connection is allowed."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -4636,6 +4814,11 @@
           "$ref": "#/definitions/ProvisioningState",
           "readOnly": true,
           "description": "The provisioned state of the resource."
+        },
+        "aadObjectId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The service principal object id in AAD (Azure active directory)"
         }
       },
       "description": "A class representing database principal property."
@@ -4695,23 +4878,32 @@
           "$ref": "#/definitions/ProvisioningState",
           "readOnly": true,
           "description": "The provisioned state of the resource."
+        },
+        "aadObjectId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The service principal object id in AAD (Azure active directory)"
         }
       },
       "description": "A class representing cluster principal property."
     },
     "ScriptProperties": {
       "type": "object",
-      "required": [
-        "scriptUrl",
-        "scriptUrlSasToken"
-      ],
       "properties": {
         "scriptUrl": {
-          "description": "The url to the KQL script blob file.",
+          "description": "The url to the KQL script blob file. Must not be used together with scriptContent property",
           "type": "string"
         },
         "scriptUrlSasToken": {
-          "description": "The SaS token.",
+          "description": "The SaS token that provide read access to the file which contain the script. Must be provided when using scriptUrl property.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "scriptContent": {
+          "description": "The script content. This property should be used when the script is provide inline and not through file in a SA. Must not be used together with scriptUrl and scriptUrlSasToken properties.",
           "type": "string",
           "x-ms-mutability": [
             "create"
@@ -4760,8 +4952,8 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioned state of the resource.",
-          "readOnly": true
+          "readOnly": true,
+          "description": "The provisioned state of the resource."
         }
       },
       "description": "A class representing the properties of a managed private endpoint object."
@@ -5878,6 +6070,11 @@
         "operationKind": {
           "type": "string",
           "description": "The kind of the operation."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true,
+          "description": "The provisioned state of the resource."
         },
         "operationState": {
           "type": "string",

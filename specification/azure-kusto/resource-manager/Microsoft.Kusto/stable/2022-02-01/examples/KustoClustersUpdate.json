@@ -2,8 +2,8 @@
   "parameters": {
     "subscriptionId": "12345678-1234-1234-1234-123456789098",
     "resourceGroupName": "kustorptest",
-    "clusterName": "kustoclusterrptest4",
-    "api-version": "2021-08-27",
+    "clusterName": "kustoCluster2",
+    "api-version": "2022-02-01",
     "If-Match": "*",
     "parameters": {
       "location": "westus"
@@ -15,6 +15,7 @@
       "enableStreamingIngest": true,
       "enablePurge": true,
       "enableAutoStop": true,
+      "publicIPType": "IPv4",
       "keyVaultProperties": {
         "keyVaultUri": "https://dummy.keyvault.com",
         "keyName": "keyName",
@@ -27,8 +28,8 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4",
-        "name": "KustoClusterRPTest4",
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster2",
+        "name": "kustoCluster2",
         "type": "Microsoft.Kusto/Clusters",
         "location": "westus",
         "properties": {
@@ -37,6 +38,7 @@
           "enableStreamingIngest": true,
           "enablePurge": true,
           "enableAutoStop": true,
+          "publicIPType": "IPv4",
           "keyVaultProperties": {
             "keyVaultUri": "https://dummy.keyvault.com",
             "keyName": "keyName",
@@ -60,9 +62,12 @@
       }
     },
     "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789098/providers/Microsoft.Kusto/locations/westus/operationResults/742bef43-608b-4b58-ba96-6f7a32ec5f0f?api-version=2021-02-01"
+      },
       "body": {
-        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4",
-        "name": "KustoClusterRPTest4",
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster2",
+        "name": "kustoCluster2",
         "type": "Microsoft.Kusto/Clusters",
         "location": "westus",
         "properties": {
@@ -71,6 +76,7 @@
           "enableStreamingIngest": true,
           "enablePurge": true,
           "enableAutoStop": true,
+          "publicIPType": "IPv4",
           "keyVaultProperties": {
             "keyVaultUri": "https://dummy.keyvault.com",
             "keyName": "keyName",
@@ -94,9 +100,12 @@
       }
     },
     "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789098/providers/Microsoft.Kusto/locations/westus/operationResults/742bef43-608b-4b58-ba96-6f7a32ec5f0f?api-version=2021-02-01"
+      },
       "body": {
-        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4",
-        "name": "KustoClusterRPTest4",
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster2",
+        "name": "kustoCluster2",
         "type": "Microsoft.Kusto/Clusters",
         "location": "westus",
         "properties": {
@@ -105,6 +114,7 @@
           "enableStreamingIngest": true,
           "enablePurge": true,
           "enableAutoStop": true,
+          "publicIPType": "IPv4",
           "engineType": "V3",
           "restrictOutboundNetworkAccess": "Disabled"
         },

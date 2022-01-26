@@ -2,10 +2,10 @@
   "parameters": {
     "subscriptionId": "12345678-1234-1234-1234-123456789098",
     "resourceGroupName": "kustorptest",
-    "clusterName": "kustoclusterrptest4",
+    "clusterName": "kustoCluster",
     "databaseName": "KustoDatabase8",
-    "scriptName": "kustoScript1",
-    "api-version": "2021-08-27",
+    "scriptName": "kustoScript",
+    "api-version": "2022-02-01",
     "parameters": {
       "properties": {
         "scriptUrl": "https://mysa.blob.core.windows.net/container/script.txt",
@@ -18,8 +18,8 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4/Databases/KustoDatabase8/Scripts/kustoScript1",
-        "name": "KustoClusterRPTest4/KustoDatabase8/kustoScript1",
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster/Databases/KustoDatabase8/Scripts/kustoScript",
+        "name": "kustoCluster/KustoDatabase8/kustoScript",
         "type": "Microsoft.Kusto/Clusters/Databases/Scripts",
         "properties": {
           "scriptUrl": "https://mysa.blob.core.windows.net/container/script.txt",
@@ -37,9 +37,12 @@
       }
     },
     "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789098/providers/Microsoft.Kusto/locations/westus/operationResults/742bef43-608b-4b58-ba96-6f7a32ec5f0f?api-version=2021-02-01"
+      },
       "body": {
-        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4/Databases/KustoDatabase8/Scripts/kustoScript1",
-        "name": "KustoClusterRPTest4/KustoDatabase8/kustoScript1",
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster/Databases/KustoDatabase8/Scripts/kustoScript",
+        "name": "kustoCluster/KustoDatabase8/kustoScript",
         "type": "Microsoft.Kusto/Clusters/Databases/Scripts",
         "properties": {
           "scriptUrl": "https://mysa.blob.core.windows.net/container/script.txt",
