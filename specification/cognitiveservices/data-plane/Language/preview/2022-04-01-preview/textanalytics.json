@@ -503,17 +503,12 @@
       "type": "object",
       "required": [
         "offset",
-        "duration",
         "lexicalText"
       ],
       "properties": {
         "offset": {
           "type": "integer",
           "description": "Offset of the recognized speech in ticks."
-        },
-        "duration": {
-          "type": "integer",
-          "description": "Duration of speech recognition in ticks."
         },
         "displayText": {
           "type": "string",
@@ -530,10 +525,6 @@
         "maskedItnText": {
           "type": "string",
           "description": "The ITN form with profanity masking applied."
-        },
-        "confidenceScore": {
-          "type": "number",
-          "description": "Confidence score for the recognition."
         },
         "wordOffsets": {
           "type": "array",
@@ -621,7 +612,7 @@
       "type": "string",
       "description": "Enumeration of supported Conversation Analysis LRO tasks.",
       "enum": [
-        "TranscriptionPIIRedaction"
+        "TranscriptionPII"
       ],
       "x-ms-enum": {
         "name": "AnalyzeConversationLROTaskKind",
@@ -652,7 +643,7 @@
           "$ref": "#/definitions/AnalyzeConversationLROTask"
         }
       ],
-      "x-ms-discriminator-value": "TranscriptionPIIRedaction"
+      "x-ms-discriminator-value": "TranscriptionPII"
     },
     "TranscriptionPiiTurnResult": {
       "type": "object",
@@ -720,7 +711,7 @@
     },
     "TranscriptionPiiTaskParameters": {
       "type": "object",
-      "description": "Supported parameters for a Trancription PII task.",
+      "description": "Supported parameters for a Transcription PII task.",
       "properties": {
         "domain": {
           "$ref": "#/definitions/PiiDomain"

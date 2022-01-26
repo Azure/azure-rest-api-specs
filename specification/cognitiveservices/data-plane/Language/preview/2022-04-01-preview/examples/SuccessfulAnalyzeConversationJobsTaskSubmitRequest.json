@@ -1,39 +1,60 @@
 {
   "parameters": {
     "Ocp-Apim-Subscription-Key": "{API key}",
-    "api-version": "2022-03-01-preview",
+    "api-version": "2022-04-01-preview",
     "Endpoint": "{Endpoint}",
     "jobId": "{Job ID}",
     "input": {
-      "displayName": "Extracting Location & US Region",
+      "displayName": "Redacting Pii From transcribed audio",
       "analysisInput": {
-        "documents": [
-          {
-            "id": "1",
-            "language": "en",
-            "text": "I had a wonderful trip to Seattle last week."
-          },
-          {
-            "id": "2",
-            "language": "en",
-            "text": "I'm flying to NYC tomorrow. See you there."
-          }
-        ]
+        "conversation": {
+          "id": "string",
+          "language": "string",
+          "conversationItems": [
+            {
+              "kind": "TranscriptionTurn",
+              "participantId": "0",
+              "offset": 400000,
+              "lexicalText": "good morning john doe",
+              "itnText": "good morning john doe",
+              "displayText": "Good morning John Doe.",
+              "maskedItnText": "good morning john doe",
+              "confidence": 0.9889,
+              "wordOffsets": [
+                {
+                  "word": "Good",
+                  "offset": 500000,
+                  "duration": 2700000
+                },
+                {
+                  "word": "morning",
+                  "offset": 5300000,
+                  "duration": 900000
+                },
+                {
+                  "word": "John",
+                  "offset": 590000,
+                  "duration": 2700000
+                },
+                {
+                  "word": "Doe",
+                  "offset": 6300000,
+                  "duration": 920000
+                }
+              ]
+            }
+          ]
+        }
       },
       "tasks": [
         {
-          "kind": "EntityRecognition",
-          "taskId": "Recognize Entities",
+          "taskId": "Transcription PII",
+          "kind": "TranscriptionPII",
           "parameters": {
-            "model-version": "latest"
-          }
-        },
-        {
-          "kind": "CustomEntityRecognition",
-          "taskId": "Recognize US Regions",
-          "parameters": {
-            "projectName": "MyProject",
-            "deploymentName": "MyDeployment"
+            "model-version": "latest",
+            "piiCatgories": "All",
+            "includeAudioRedaction": true,
+            "showDetectedEntityTypes": true
           }
         }
       ]
@@ -42,7 +63,7 @@
   "responses": {
     "202": {
       "headers": {
-        "Operation-Location": "{Endpoint}/language/analyze-text/jobs/{jobId}?api-version=2022-03-01-preview"
+        "Operation-Location": "{Endpoint}/language/analyze-conversation/jobs/{jobId}?api-version=2022-04-01-preview"
       }
     }
   }
