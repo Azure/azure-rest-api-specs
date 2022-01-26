@@ -890,10 +890,7 @@
         ],
         "responses": {
           "202": {
-            "description": "The request is accepted and is being processed",
-            "schema": {
-              "$ref": "#/definitions/ChangeBillingResponse"
-            }
+            "description": "The request is accepted and is being processed"
           },
           "default": {
             "description": "Unexpected error",
@@ -2712,6 +2709,15 @@
       }
     }
   },
+  "ChangeBillingRequest": {
+      "type": "object",
+      "properties": {
+        "billingScopeId": {
+          "description": "Billing scope to which Reservation order to be updated to",
+          "type": "string"
+        }
+      }
+    },
   "parameters": {
     "CalculateExchangeRequestParameter": {
       "name": "body",
@@ -2845,6 +2851,15 @@
       "description": "Information needed to change directory of reservation order",
       "schema": {
         "$ref": "#/definitions/ChangeDirectoryRequest"
+      },
+	  "ChangeBillingParameter": {
+      "name": "body",
+      "x-ms-parameter-location": "method",
+      "in": "body",
+      "required": true,
+      "description": "Information needed to change billing scope of reservation order",
+      "schema": {
+        "$ref": "#/definitions/ChangeBillingRequest"
       }
     }
   }
