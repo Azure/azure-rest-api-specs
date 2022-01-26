@@ -68,6 +68,10 @@ tag: package-deploymentscripts-2020-10
 tag: package-templatespecs-2021-05
 ```
 
+``` yaml $(package-changes)
+tag: package-changes-2022-03
+```
+
 ### Tag: package-changes-2022-03
 
 These settings apply only when `--tag=package-changes-2022-03-01-preview` is specified on the command line.
