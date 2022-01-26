@@ -584,6 +584,9 @@
           },
           "Associate Managed Cluster with Capacity Reservation Group": {
             "$ref": "./examples/ManagedClustersAssociate_CRG.json"
+          },
+          "Create Managed Cluster with Dedicated Host Group": {
+            "$ref": "./examples/ManagedClustersCreate_DedicatedHostGroup.json"
           }
         }
       },
@@ -1079,6 +1082,9 @@
           },
           "Associate Agent Pool with Capacity Reservation Group": {
             "$ref": "./examples/AgentPoolsAssociate_CRG.json"
+          },
+          "Create Agent Pool with Dedicated Host Group": {
+            "$ref": "./examples/AgentPoolsCreate_DedicatedHostGroup.json"
           }
         }
       },
@@ -2826,6 +2832,11 @@
         "capacityReservationGroupID": {
           "$ref": "#/definitions/CapacityReservationGroupID",
           "description": "AKS will associate the specified agent pool with the Capacity Reservation Group."
+        },
+        "hostGroupID": {
+          "type": "string",
+          "title": "The fully qualified resource ID of the Dedicated Host Group to provision virtual machines from, used only in creation scenario and not allowed to changed once set.",
+          "description": "This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}. For more information see [Azure dedicated hosts](https://docs.microsoft.com/azure/virtual-machines/dedicated-hosts)."
         }
       },
       "description": "Properties for the container service agent pool profile."
