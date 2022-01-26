@@ -348,7 +348,8 @@
           "enum": [
             "Azure",
             "AWS",
-            "GCP"
+            "GCP",
+            "Github"
           ],
           "x-ms-enum": {
             "name": "cloudName",
@@ -382,7 +383,8 @@
           "description": "The type of the environment data.",
           "enum": [
             "AwsEnvironmentData",
-            "GcpProjectEnvironmentData"
+            "GcpProjectEnvironmentData",
+            "GithubScopeEnvironmentData"
           ],
           "x-ms-enum": {
             "name": "environmentType",
@@ -394,11 +396,6 @@
     "AWS": {
       "type": "object",
       "description": "The aws connector environment data",
-      "allOf": [
-        {
-          "$ref": "#/definitions/EnvironmentData"
-        }
-      ],
       "properties": {
         "environmentType": {
           "type": "string",
@@ -444,11 +441,6 @@
     "GcpProject": {
       "type": "object",
       "description": "The GCP project connector environment data",
-      "allOf": [
-        {
-          "$ref": "#/definitions/EnvironmentData"
-        }
-      ],
       "properties": {
         "environmentType": {
           "type": "string",
@@ -462,6 +454,17 @@
         "workloadIdentityFederationPoolId": {
           "type": "string",
           "description": "The GCP workload identity federation pool id"
+        }
+      }
+    },
+    "GithubScope": {
+      "type": "object",
+      "description": "The github scope connector's environment data",
+      "properties": {
+        "environmentType": {
+          "type": "string",
+          "description": "The environment type",
+          "x-ms-discriminator-value": "GithubScopeEnvironmentData"
         }
       }
     },
@@ -481,7 +484,8 @@
             "DefenderForContainersAws",
             "DefenderForServersAws",
             "InformationProtectionAws",
-            "CspmMonitorGcp"
+            "CspmMonitorGcp",
+            "CspmMonitorGithub"
           ],
           "x-ms-enum": {
             "name": "OfferingType",
@@ -497,13 +501,8 @@
     },
     "cspmMonitorAwsOffering": {
       "type": "object",
-      "description": "The CSPM monitoring for AWS offering configurations",
+      "description": "The CSPM monitoring for AWS offering",
       "x-ms-discriminator-value": "CspmMonitorAws",
-      "allOf": [
-        {
-          "$ref": "#/definitions/cloudOffering"
-        }
-      ],
       "properties": {
         "nativeCloudConnection": {
           "type": "object",
@@ -519,13 +518,8 @@
     },
     "defenderForContainersAwsOffering": {
       "type": "object",
-      "description": "The Defender for Containers AWS offering configurations",
+      "description": "The Defender for Containers AWS offering",
       "x-ms-discriminator-value": "DefenderForContainersAws",
-      "allOf": [
-        {
-          "$ref": "#/definitions/cloudOffering"
-        }
-      ],
       "properties": {
         "kubernetesService": {
           "type": "object",
@@ -571,13 +565,8 @@
     },
     "defenderForServersAwsOffering": {
       "type": "object",
-      "description": "The Defender for Servers AWS offering configurations",
+      "description": "The Defender for Servers AWS offering",
       "x-ms-discriminator-value": "DefenderForServersAws",
-      "allOf": [
-        {
-          "$ref": "#/definitions/cloudOffering"
-        }
-      ],
       "properties": {
         "defenderForServers": {
           "type": "object",
@@ -621,13 +610,8 @@
     },
     "informationProtectionAwsOffering": {
       "type": "object",
-      "description": "The information protection for AWS offering configurations",
+      "description": "The information protection for AWS offering",
       "x-ms-discriminator-value": "InformationProtectionAws",
-      "allOf": [
-        {
-          "$ref": "#/definitions/cloudOffering"
-        }
-      ],
       "properties": {
         "informationProtection": {
           "type": "object",
@@ -643,13 +627,8 @@
     },
     "cspmMonitorGcpOffering": {
       "type": "object",
-      "description": "The CSPM monitoring for GCP offering configurations",
+      "description": "The CSPM monitoring for GCP offering",
       "x-ms-discriminator-value": "CspmMonitorGcp",
-      "allOf": [
-        {
-          "$ref": "#/definitions/cloudOffering"
-        }
-      ],
       "properties": {
         "workloadIdentityProviderId": {
           "type": "string",
@@ -665,6 +644,13 @@
             }
           }
         }
+      }
+    },
+    "cspmMonitorGithubOffering": {
+      "type": "object",
+      "description": "The CSPM monitoring for github offering",
+      "x-ms-discriminator-value": "CspmMonitorGithub",
+      "properties": {
       }
     }
   },
