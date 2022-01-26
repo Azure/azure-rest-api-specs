@@ -1248,8 +1248,7 @@
         ],
         "produces": [
           "application/json"
-        ],
-        "x-ms-long-running-operation": true,
+        ],        
         "x-ms-examples": {
           "Update tls version of the workspace managed sql server": {
             "$ref": "./examples/UpdateWorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings.json"
@@ -1992,6 +1991,11 @@
         }
       ],
       "properties": {
+        "location": {
+          "description": "Resource location.",
+          "type": "string",
+          "readOnly": true
+        },
         "properties": {
           "$ref": "#/definitions/DedicatedSQLminimalTlsSettingsProperties",
           "description": "Resource properties.",
