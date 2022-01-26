@@ -1308,7 +1308,7 @@
         "tags": [
           "ComponentContainer"
         ],
-        "summary": "List containers.",
+        "summary": "List component containers.",
         "operationId": "ComponentContainers_List",
         "produces": [
           "application/json"
@@ -1319,6 +1319,22 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "in": "query",
+            "name": "listViewType",
+            "description": "View type for including/excluding (for example) archived entities.",
+            "type": "string",
+            "default": "ActiveOnly",
+            "enum": [
+              "ActiveOnly",
+              "ArchivedOnly",
+              "All"
+            ],
+            "x-ms-enum": {
+              "name": "ListViewType",
+              "modelAsString": true
+            }
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1530,7 +1546,7 @@
         "tags": [
           "ComponentVersion"
         ],
-        "summary": "List versions.",
+        "summary": "List component versions.",
         "operationId": "ComponentVersions_List",
         "produces": [
           "application/json"
@@ -1539,7 +1555,7 @@
           {
             "in": "path",
             "name": "name",
-            "description": "Container name.",
+            "description": "Component name.",
             "required": true,
             "type": "string"
           },
@@ -1561,6 +1577,22 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "in": "query",
+            "name": "listViewType",
+            "description": "View type for including/excluding (for example) archived entities.",
+            "type": "string",
+            "default": "ActiveOnly",
+            "enum": [
+              "ActiveOnly",
+              "ArchivedOnly",
+              "All"
+            ],
+            "x-ms-enum": {
+              "name": "ListViewType",
+              "modelAsString": true
+            }
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1793,7 +1825,7 @@
         "tags": [
           "DatasetContainer"
         ],
-        "summary": "List containers.",
+        "summary": "List dataset containers.",
         "operationId": "DatasetContainers_List",
         "produces": [
           "application/json"
@@ -1804,6 +1836,22 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "in": "query",
+            "name": "listViewType",
+            "description": "View type for including/excluding (for example) archived entities.",
+            "type": "string",
+            "default": "ActiveOnly",
+            "enum": [
+              "ActiveOnly",
+              "ArchivedOnly",
+              "All"
+            ],
+            "x-ms-enum": {
+              "name": "ListViewType",
+              "modelAsString": true
+            }
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -2052,6 +2100,22 @@
             "name": "$tags",
             "description": "Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2",
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "listViewType",
+            "description": "View type for including/excluding (for example) archived entities.",
+            "type": "string",
+            "default": "ActiveOnly",
+            "enum": [
+              "ActiveOnly",
+              "ArchivedOnly",
+              "All"
+            ],
+            "x-ms-enum": {
+              "name": "ListViewType",
+              "modelAsString": true
+            }
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -2617,7 +2681,7 @@
         "tags": [
           "EnvironmentContainer"
         ],
-        "summary": "List containers.",
+        "summary": "List environment containers.",
         "operationId": "EnvironmentContainers_List",
         "produces": [
           "application/json"
@@ -2628,6 +2692,22 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "in": "query",
+            "name": "listViewType",
+            "description": "View type for including/excluding (for example) archived entities.",
+            "type": "string",
+            "default": "ActiveOnly",
+            "enum": [
+              "ActiveOnly",
+              "ArchivedOnly",
+              "All"
+            ],
+            "x-ms-enum": {
+              "name": "ListViewType",
+              "modelAsString": true
+            }
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -2870,6 +2950,22 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "in": "query",
+            "name": "listViewType",
+            "description": "View type for including/excluding (for example) archived entities.",
+            "type": "string",
+            "default": "ActiveOnly",
+            "enum": [
+              "ActiveOnly",
+              "ArchivedOnly",
+              "All"
+            ],
+            "x-ms-enum": {
+              "name": "ListViewType",
+              "modelAsString": true
+            }
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -3125,6 +3221,22 @@
             "name": "tag",
             "description": "Jobs returned will have this tag key.",
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "listViewType",
+            "description": "View type for including/excluding (for example) archived entities.",
+            "type": "string",
+            "default": "ActiveOnly",
+            "enum": [
+              "ActiveOnly",
+              "ArchivedOnly",
+              "All"
+            ],
+            "x-ms-enum": {
+              "name": "ListViewType",
+              "modelAsString": true
+            }
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -3448,6 +3560,22 @@
             "format": "int32"
           },
           {
+            "in": "query",
+            "name": "listViewType",
+            "description": "View type for including/excluding (for example) archived entities.",
+            "type": "string",
+            "default": "ActiveOnly",
+            "enum": [
+              "ActiveOnly",
+              "ArchivedOnly",
+              "All"
+            ],
+            "x-ms-enum": {
+              "name": "ListViewType",
+              "modelAsString": true
+            }
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -3725,6 +3853,22 @@
             "name": "feed",
             "description": "Name of the feed.",
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "listViewType",
+            "description": "View type for including/excluding (for example) archived entities.",
+            "type": "string",
+            "default": "ActiveOnly",
+            "enum": [
+              "ActiveOnly",
+              "ArchivedOnly",
+              "All"
+            ],
+            "x-ms-enum": {
+              "name": "ListViewType",
+              "modelAsString": true
+            }
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -5169,6 +5313,16 @@
             "create",
             "read"
           ]
+        },
+        "isArchived": {
+          "description": "Is the asset archived?",
+          "default": false,
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
         }
       },
       "additionalProperties": false
@@ -5181,6 +5335,16 @@
         }
       ],
       "properties": {
+        "isArchived": {
+          "description": "Is the asset archived?",
+          "default": false,
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
+        },
         "latestVersion": {
           "description": "The latest version inside this container.",
           "type": "string",
@@ -7302,6 +7466,16 @@
           ],
           "x-nullable": true
         },
+        "isArchived": {
+          "description": "Is the asset archived?",
+          "default": false,
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
+        },
         "jobType": {
           "description": "Specifies the type of job.",
           "$ref": "#/definitions/JobType",
@@ -7311,7 +7485,7 @@
           ]
         },
         "parentJobName": {
-          "description": "TODO- Parent job name.",
+          "description": "TODO - Parent job name.",
           "type": "string",
           "readOnly": true,
           "x-ms-mutability": [
@@ -7757,6 +7931,19 @@
         }
       },
       "x-ms-discriminator-value": "Kubernetes",
+      "additionalProperties": false
+    },
+    "ListViewType": {
+      "enum": [
+        "ActiveOnly",
+        "ArchivedOnly",
+        "All"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ListViewType",
+        "modelAsString": true
+      },
       "additionalProperties": false
     },
     "ManagedIdentity": {
