@@ -288,7 +288,28 @@
           "enum": [
             "User",
             "System"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "ChangeCategory",
+            "modelAsString": "false",
+            "values": [
+              {
+                "value": "User",
+                "description": "User initiated change",
+                "name": "User"
+              },
+              {
+                "value": "System",
+                "description": "System initiated change",
+                "name": "System"
+              },
+              {
+                "value": "Create",
+                "description": "A newly created resource",
+                "name": "Create"
+              }
+            ]
+          }
         },
         "previousValue": {
           "description": "The target resource property value before the change",
