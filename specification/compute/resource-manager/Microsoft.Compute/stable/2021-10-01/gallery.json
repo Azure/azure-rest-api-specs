@@ -2318,13 +2318,6 @@
           },
           "description": "The target regions where the Image Version is going to be replicated to. This property is updatable."
         },
-        "targetExtendedLocations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/GalleryTargetExtendedLocation"
-          },
-          "description": "The target extended locations where the Image Version is going to be replicated to. This property is updatable."
-        },
         "replicaCount": {
           "type": "integer",
           "format": "int32",
@@ -2369,6 +2362,13 @@
             "name": "ReplicationMode",
             "modelAsString": true
           }
+        },
+        "targetExtendedLocations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GalleryTargetExtendedLocation"
+          },
+          "description": "The target extended locations where the Image Version is going to be replicated to. This property is updatable."
         }
       },
       "description": "Describes the basic gallery artifact publishing profile."
