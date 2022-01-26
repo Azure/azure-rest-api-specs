@@ -279,7 +279,28 @@
             "Insert",
             "Update",
             "Remove"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "PropertyChangeType",
+            "modelAsString": "false",
+            "values": [
+              {
+                "value": "Update",
+                "description": "An existing property underwent a change",
+                "name": "Update"
+              },
+              {
+                "value": "Insert",
+                "description": "A property was created",
+                "name": "Insert"
+              },
+              {
+                "value": "Remove",
+                "description": "An existing property was deleted",
+                "name": "Remove"
+              }
+            ]
+          }
         },
         "changeCategory": {
           "description": "The entity that made the change",
