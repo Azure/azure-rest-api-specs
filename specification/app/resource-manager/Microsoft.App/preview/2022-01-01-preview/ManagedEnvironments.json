@@ -378,7 +378,7 @@
             "type": "string"
           },
           {
-            "name": "certificates",
+            "name": "certificatesEnvelope",
             "in": "body",
             "description" : "List of Certificates",
             "schema": {
@@ -542,7 +542,7 @@
             "type": "string"
           },
           {
-            "name": "certificate",
+            "name": "certificateEnvelope",
             "in": "body",
             "description": "Certificate to be created or updated",
             "schema": {
@@ -832,6 +832,11 @@
     "Certificate": {
       "description": "Certificate used for Custom Domain bindings of Container Apps in a Managed Environment",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
       "properties": {
         "provisioningState": {
           "description": "Provisioning state of the Certificate.",
@@ -946,10 +951,12 @@
     },
     "CertificateCollection": {
       "description": "Certificate collection ARM resource.",
-      "required": [
-        "value"
-      ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
       "properties": {
         "value": {
           "description": "Collection of resources.",
@@ -964,23 +971,24 @@
           "readOnly": true
         }
       }
-  },
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "flow": "implicit",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
+    },
+    "securityDefinitions": {
+      "azure_auth": {
+        "type": "oauth2",
+        "description": "Azure Active Directory OAuth2 Flow",
+        "flow": "implicit",
+        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+        "scopes": {
+          "user_impersonation": "impersonate your user account"
+        }
       }
-    }
-  },
+    },
   "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    }
-  ]
+     {
+       "azure_auth": [
+         "user_impersonation"
+        ]
+      }
+    ]
+  }
 }

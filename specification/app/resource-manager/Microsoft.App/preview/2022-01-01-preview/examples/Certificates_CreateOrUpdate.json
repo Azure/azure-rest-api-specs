@@ -3,19 +3,22 @@
     "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "resourceGroupName": "examplerg",
     "managedEnvironmentName": "testcontainerenv",
-    "name": "certificate-firendly-name",
-    "certificates": [
-      {
-        "password":"private key password",
-        "name":"certificate-firendly-name",
-        "value" :"PFX-or-PEM-blob"
-      },
-      {
-        "password":"private key password",
-        "name":"other-certificate-firendly-name",
-        "value" :"PFX-or-PEM-blob"
-      }
-    ]
+    "api-version": "2022-01-01-preview",
+    "certificatesEnvelope": {
+      "location": "East US",
+      "certificates": [
+        {
+          "password":"private key password",
+          "name":"certificate-firendly-name",
+          "value" :"PFX-or-PEM-blob"
+        },
+        {
+          "password":"private key password",
+          "name":"other-certificate-firendly-name",
+          "value" :"PFX-or-PEM-blob"
+        }
+      ]
+    }
   },
   "responses": {
     "200" :{
