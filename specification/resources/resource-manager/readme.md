@@ -851,8 +851,9 @@ directive:
   - suppress: TopLevelResourcesListBySubscription
     from: changes.json
     reason: We will be pushing customers to use Azure Resource Graph for those at scale scenarios. 
-  - suppress: OperationsAPIImplementation
-    from: changes.json
+  - from: changes.json
+    suppress: OperationsAPIImplementation
+    where: $.paths
     reason: 'Duplicate Operations API causes generation issues'
   - suppress: RequiredReadOnlySystemData
     from: changes.json
