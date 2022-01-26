@@ -1193,7 +1193,7 @@
       "patch": {
         "operationId": "WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings_Update",
         "summary": "Update server's tls settings.",
-        "description": "Update a workspace managed sql server's minimal tls settings.",
+        "description": "Update workspace managed sql server's minimal tls settings.",
         "tags": [
           "WorkspaceManagedSqlServer, DedicatedSQLminimalTlsSettings"
         ],
@@ -1211,23 +1211,36 @@
           {
             "name": "dedicatedSQLminimalTlsSettingsName",
             "in": "path",
+            "description": "The name of the dedicated sql minimal tls settings.",
             "required": true,
             "type": "string",
-            "description": "The name of the dedicated sql minimal tls settings."
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "DedicatedSQLMinimalTlsSettingsName",
+              "modelAsString": true
+            }
+          },
+          {
+            "schema": {
+              "$ref": "#/definitions/DedicatedSQLminimalTlsSettingsPatchInfo"
+            },
+            "in": "body",
+            "name": "dedicatedSQLminimalTlsSettingsPatchInfo",
+            "description": "minimal tls settings",
+            "required": true
           }
         ],
         "responses": {
-          "200": {
-            "schema": {
-              "$ref": "#/definitions/DedicatedSQLminimalTlsSettings"
-            },
-            "description": "Successfully updated dedicated sql minimal tls settings."
+          "202": {
+            "description": "Accepted"
           },
           "default": {
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             },
-            "description": "Only MinimalTlsVersion is allowed to update on Workspace SQL Server"
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 500 InternalServerError - Something went wrong."
           }
         },
         "consumes": [
@@ -1279,7 +1292,7 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             },
-            "description": ""
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 500 InternalServerError - Something went wrong."
           }
         },
         "consumes": [],
@@ -1304,6 +1317,9 @@
         ],
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -1324,7 +1340,7 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             },
-            "description": ""
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 500 InternalServerError - Something went wrong."
           }
         },
         "consumes": [],
@@ -1941,25 +1957,21 @@
         }
       }
     },
+    "DedicatedSQLminimalTlsSettingsPatchInfo": {
+      "type": "object",
+      "title": "Dedicated SQL minimal tls settings patch info",
+      "description": "Dedicated SQL minimal tls settings patch info",
+      "properties": {
+        "minimalTlsVersion": {
+          "type": "string",
+          "description": "minimal tls version"
+        }
+      }
+    },
     "DedicatedSQLminimalTlsSettingsProperties": {
       "description": "Properties of a dedicated sql minimal tls settings.",
       "type": "object",
       "properties": {
-        "administratorLogin": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The administrator login of the sql server."
-        },
-        "fullyQualifiedDomainName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The fully qualified domain name of the sql server."
-        },
-        "state": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The state of the sql server."
-        },
         "minimalTlsVersion": {
           "readOnly": true,
           "type": "string",
