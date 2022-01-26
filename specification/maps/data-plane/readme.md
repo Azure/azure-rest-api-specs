@@ -47,12 +47,8 @@ These settings apply only when `--tag=package-preview-2.0` is specified on the c
 
 ```yaml $(tag) == 'package-preview-2.0'
 input-file:
-  - Microsoft.Maps/Alias/preview/2.0/alias.json
   - Microsoft.Maps/Data/preview/2.0/data.json
-  - Microsoft.Maps/Dataset/preview/2.0/dataset.json
   - Microsoft.Maps/DEM/preview/1.0/elevation.json
-  - Microsoft.Maps/DwgConversion/preview/2.0/dwgconversion.json
-  - Microsoft.Maps/FeatureState/preview/2.0/featurestate.json
   - Microsoft.Maps/Feedback/preview/1.0/feedback.json
   - Microsoft.Maps/Geolocation/preview/1.0/geolocation.json
   - Microsoft.Maps/Render/preview/1.0/render.json
@@ -60,11 +56,9 @@ input-file:
   - Microsoft.Maps/Route/preview/1.0/route.json
   - Microsoft.Maps/Search/preview/1.0/search.json
   - Microsoft.Maps/Spatial/preview/1.0/spatial.json
-  - Microsoft.Maps/Tileset/preview/2.0/tileset.json
   - Microsoft.Maps/Timezone/preview/1.0/timezone.json
   - Microsoft.Maps/Traffic/preview/1.0/traffic.json
   - Microsoft.Maps/Weather/preview/1.0/weather.json
-  - Microsoft.Maps/WFS/preview/2.0/wfs.json
 ```
 ### Tag: package-1.0-preview
 
