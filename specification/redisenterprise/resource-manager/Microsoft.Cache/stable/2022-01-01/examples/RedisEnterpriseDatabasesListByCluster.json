@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "clusterName": "cache1",
+    "resourceGroupName": "rg1",
+    "api-version": "2022-01-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/databases/default",
+            "name": "cache1/default",
+            "type": "Microsoft.Cache/redisEnterprise/databases",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "resourceState": "Running",
+              "clientProtocol": "Encrypted",
+              "clusteringPolicy": "OSSCluster",
+              "evictionPolicy": "AllKeysLRU",
+              "persistence": {
+                "rdbEnabled": true,
+                "rdbFrequency": "12h"
+              },
+              "port": 10000,
+              "modules": [
+                {
+                  "name": "RediSearch",
+                  "args": "",
+                  "version": "1.0.0"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

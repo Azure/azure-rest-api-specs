@@ -2954,6 +2954,74 @@
       },
       "description": "Class representing the Kusto database properties."
     },
+    "ReadOnlyFollowingDatabase": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The database properties.",
+          "$ref": "#/definitions/ReadOnlyFollowingDatabaseProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Database"
+        }
+      ],
+      "description": "Class representing a read only following database.",
+      "x-ms-discriminator-value": "ReadOnlyFollowing"
+    },
+    "ReadOnlyFollowingDatabaseProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "readOnly": true,
+          "description": "The provisioned state of the resource."
+        },
+        "softDeletePeriod": {
+          "type": "string",
+          "readOnly": true,
+          "format": "duration",
+          "description": "The time the data should be kept before it stops being accessible to queries in TimeSpan."
+        },
+        "hotCachePeriod": {
+          "type": "string",
+          "format": "duration",
+          "description": "The time the data should be kept in cache for fast queries in TimeSpan."
+        },
+        "statistics": {
+          "$ref": "#/definitions/DatabaseStatistics",
+          "readOnly": true,
+          "description": "The statistics of the database."
+        },
+        "leaderClusterResourceId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the leader cluster"
+        },
+        "attachedDatabaseConfigurationName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the attached database configuration cluster"
+        },
+        "principalsModificationKind": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Union",
+            "Replace",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "PrincipalsModificationKind",
+            "modelAsString": true
+          },
+          "description": "The principals modification kind of the database"
+        }
+      },
+      "description": "Class representing the Kusto database properties."
+    },
     "DatabaseStatistics": {
       "type": "object",
       "readOnly": true,

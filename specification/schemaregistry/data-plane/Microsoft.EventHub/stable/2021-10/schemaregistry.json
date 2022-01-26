@@ -169,13 +169,7 @@
             "type": "string"
           },
           {
-            "name": "schemaName",
-            "in": "path",
-            "description": "Name of schema being registered.",
-            "required": true,
-            "type": "string",
-            "maxLength": 50,
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+            "$ref": "#/parameters/SchemaName"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -228,13 +222,7 @@
             "type": "string"
           },
           {
-            "name": "schemaName",
-            "in": "path",
-            "description": "Name of requested schema.",
-            "required": true,
-            "type": "string",
-            "maxLength": 50,
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+            "$ref": "#/parameters/SchemaName"
           },
           {
             "name": "schemaContent",
@@ -281,7 +269,17 @@
             }
           },
           "415": {
-            "description": "Unsupported Media Type - Content type of the supplied schema is unsupported by schema group."
+            "description": "Unsupported Media Type - Content type of the supplied schema is unsupported by schema group.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "x-ms-error-response": true
           },
           "default": {
             "description": "An error response received from the Azure Schema Registry service.",
@@ -323,13 +321,7 @@
             "type": "string"
           },
           {
-            "name": "schemaName",
-            "in": "path",
-            "description": "Name of schema being registered.",
-            "required": true,
-            "type": "string",
-            "maxLength": 50,
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+            "$ref": "#/parameters/SchemaName"
           },
           {
             "name": "schemaContent",
@@ -376,7 +368,17 @@
             }
           },
           "415": {
-            "description": "Unsupported Media Type - Content type of the supplied schema is unsupported by schema group."
+            "description": "Unsupported Media Type - Content type of the supplied schema is unsupported by schema group.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "x-ms-error-response": true
           },
           "default": {
             "description": "An error response received from the Azure Schema Registry service.",
@@ -492,6 +494,16 @@
       "in": "path",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client"
+    },
+    "SchemaName": {
+      "name": "schemaName",
+      "in": "path",
+      "description": "Name of schema.",
+      "required": true,
+      "type": "string",
+      "maxLength": 50,
+      "pattern": "^[A-Za-z0-9][^\\\\/$:]*$",
+      "x-ms-parameter-location": "method"
     }
   }
 }

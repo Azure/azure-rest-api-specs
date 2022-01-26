@@ -5037,6 +5037,12 @@
           "description": "The link (url) to the next page of results.",
           "type": "string",
           "readOnly": true
+        },
+        "totalCount": {
+          "description": "Total number of records.",
+          "type": "number",
+          "format": "int32",
+          "readOnly": true
         }
       }
     },
@@ -5092,8 +5098,8 @@
           "$ref": "#/definitions/Amount"
         },
         "azurePrepaymentApplied": {
-          "description": "The amount of Azure prepayment applied to the charges. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.",
           "readOnly": true,
+          "description": "The amount of Azure prepayment applied to the charges. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.",
           "$ref": "#/definitions/Amount"
         },
         "billedAmount": {
@@ -6423,6 +6429,14 @@
             "modelAsString": true
           }
         },
+        "billingProfilesInfo": {
+          "type": "array",
+          "description": "The list of billing profiles associated with agreement and present only for specific agreements.",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/BillingProfileInfo"
+          }
+        },
         "effectiveDate": {
           "description": "The date from which the agreement is effective.",
           "type": "string",
@@ -6446,6 +6460,24 @@
           "description": "The current status of the agreement.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "BillingProfileInfo": {
+      "type": "object",
+      "description": "Details about billing profile associated with agreement and available only for specific agreements.",
+      "properties": {
+        "billingProfileId": {
+          "description": "The unique identifier for the billing profile.",
+          "type": "string"
+        },
+        "billingProfileDisplayName": {
+          "description": "The name of the billing profile",
+          "type": "string"
+        },
+        "indirectRelationshipOrganizationName": {
+          "description": "Billing account name. This property is available for a specific type of agreement.",
+          "type": "string"
         }
       }
     },
