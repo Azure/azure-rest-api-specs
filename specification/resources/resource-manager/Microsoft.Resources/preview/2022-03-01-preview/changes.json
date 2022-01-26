@@ -197,7 +197,28 @@
             "Update",
             "Delete",
             "Create"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "ChangeType",
+            "modelAsString": "false",
+            "values": [
+              {
+                "value": "Update",
+                "description": "An existing resource underwent a change",
+                "name": "Update"
+              },
+              {
+                "value": "Delete",
+                "description": "An existing resource was deleted",
+                "name": "Update"
+              },
+              {
+                "value": "Create",
+                "description": "A newly created resource",
+                "name": "Create"
+              }
+            ]
+          }
         },
         "changeAttributes": {
           "$ref": "#/definitions/ChangeAttributes"
