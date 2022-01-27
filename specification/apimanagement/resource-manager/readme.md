@@ -69,6 +69,7 @@ input-file:
   - Microsoft.ApiManagement/preview/2021-12-01-preview/apimoutbounddependency.json
   - Microsoft.ApiManagement/preview/2021-12-01-preview/apimpolicies.json
   - Microsoft.ApiManagement/preview/2021-12-01-preview/apimpolicydescriptions.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimpolicyfragments.json
   - Microsoft.ApiManagement/preview/2021-12-01-preview/apimportalrevisions.json
   - Microsoft.ApiManagement/preview/2021-12-01-preview/apimportalsettings.json
   - Microsoft.ApiManagement/preview/2021-12-01-preview/apimportalconfigs.json
@@ -784,4 +785,7 @@ directive:
   - suppress: R4009
     from: apimportalconfigs.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
+  - suppress: R4009
+    from: apimpolicyfragments.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version. 
 ```
