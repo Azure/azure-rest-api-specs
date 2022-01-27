@@ -1068,6 +1068,50 @@
           "description": "The provisioning state of the resource.",
           "$ref": "commonDefinitions.json#/definitions/ProvisioningState",
           "readOnly": true
+        },
+        "imageValidationStatus": {
+          "description": "Validation status of the configured image.",
+          "$ref": "#/definitions/ImageValidationStatus",
+          "readOnly": true
+        },
+        "imageValidationErrorDetails": {
+          "description": "Details for image validator error. Populated when the image validation is not successful.",
+          "$ref": "#/definitions/ImageValidationErrorDetails",
+          "readOnly": true
+        },
+        "activeImageReference": {
+          "$ref": "#/definitions/ImageReference",
+          "description": "Image reference information for the currently active image (only populated during updates).",
+          "readOnly": true
+        }
+      }
+    },
+    "ImageValidationStatus": {
+      "description": "Image validation status",
+      "enum": [
+        "Unknown",
+        "Pending",
+        "Succeeded",
+        "Failed",
+        "TimedOut"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ImageValidationStatus",
+        "modelAsString": true
+      }
+    },
+    "ImageValidationErrorDetails": {
+      "type": "object",
+      "description": "Image validation error details",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error."
         }
       }
     },
