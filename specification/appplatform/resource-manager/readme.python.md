@@ -32,7 +32,6 @@ batch:
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/appplatform/azure-mgmt-appplatform/azure/mgmt/appplatform/
-clear-output-folder: false
 perform-load: false
 ```
 
