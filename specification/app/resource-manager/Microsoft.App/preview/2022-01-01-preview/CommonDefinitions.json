@@ -130,66 +130,22 @@
           "description": "Dapr application identifier",
           "type": "string"
         },
+        "appProtocol": {
+          "description": "Tells Dapr which protocol your application is using. Valid options are http and grpc. Default is http",
+          "enum": [
+            "http",
+            "grpc"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "appProtocol",
+            "modelAsString": true
+          }
+        },
         "appPort": {
           "format": "int32",
-          "description": "Port on which the Dapr side car",
+          "description": "Tells Dapr which port your application is listening on",
           "type": "integer"
-        },
-        "components": {
-          "description": "Collection of Dapr components",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DaprComponent"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      }
-    },
-    "DaprComponent": {
-      "description": "Dapr component configuration",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Component name",
-          "type": "string"
-        },
-        "type": {
-          "description": "Component type",
-          "type": "string"
-        },
-        "version": {
-          "description": "Component version",
-          "type": "string"
-        },
-        "metadata": {
-          "description": "Component metadata",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DaprMetadata"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      }
-    },
-    "DaprMetadata": {
-      "description": "Container App Dapr component metadata.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Metadata property name.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Metadata property value.",
-          "type": "string"
-        },
-        "secretRef": {
-          "description": "Name of the Container App secret from which to pull the metadata property value.",
-          "type": "string"
         }
       }
     },
