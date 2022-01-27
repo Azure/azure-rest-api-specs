@@ -64,7 +64,6 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/DataWarehouseUserActivities.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/DeletedServers.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ElasticPoolOperations.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/ElasticPools.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/EncryptionProtectors.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/FailoverGroups.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/FirewallRules.json
@@ -156,6 +155,7 @@ input-file:
 - ./Microsoft.Sql/preview/2021-05-01-preview/ServerConnectionPolicies.json
 - ./Microsoft.Sql/preview/2021-05-01-preview/DistributedAvailabilityGroups.json
 - ./Microsoft.Sql/preview/2021-05-01-preview/ServerTrustCertificates.json
+- ./Microsoft.Sql/preview/2021-08-01-preview/ElasticPools.json
 
 
 # Needed when there is more than one input file
