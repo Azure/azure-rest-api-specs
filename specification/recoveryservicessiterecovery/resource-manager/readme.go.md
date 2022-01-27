@@ -40,6 +40,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-2022-01' && $(go)
 output-folder: $(go-sdk-folder)/services/recoveryservices/mgmt/2022-01-01/$(namespace)
+```
 
 ### Tag: package-2021-12 and go
 
