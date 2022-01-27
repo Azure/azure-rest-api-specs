@@ -312,7 +312,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{managedEnvironmentName}/certificates": {
       "get": {
         "tags": [
-          "ManagedEnvironments"
+          "ManagedEnvironments",
+          "Certificates"
         ],
         "summary": "Get the Certificates in a given managed environment.",
         "operationId": "Certificates_ListByManagedEnvironment",
@@ -357,65 +358,10 @@
           "nextLinkName": "nextLink"
         }
       },
-      "put": {
-        "tags": [
-          "ManagedEnvironments"
-        ],
-        "summary": "Creates pr updates the Certificates collection in a given managed environment.",
-        "operationId": "Certificates_CreateOrUpdate",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "managedEnvironmentName",
-            "in": "path",
-            "description": "Name of the Managed Environment.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "certificatesEnvelope",
-            "in": "body",
-            "description" : "List of Certificates",
-            "schema": {
-              "$ref": "#/definitions/CertificateCollection"
-            }
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/CertificateCollection"
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create or Update Certificates in Managed Environment": {
-            "$ref": "./examples/Certificates_CreateOrUpdate.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-
-      },
       "delete": {
         "tags": [
-          "ManagedEnvironments"
+          "ManagedEnvironments",
+          "Certificates"
         ],
         "summary": "Deletes all Certificates in a given managed environment.",
         "operationId": "Certificates_Delete",
@@ -462,7 +408,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{managedEnvironmentName}/certificates/{name}": {
       "get": {
         "tags": [
-          "ManagedEnvironments"
+          "ManagedEnvironments",
+          "Certificates"
         ],
         "summary": "Get the specified Certificate.",
         "operationId": "Certificate_GetByName",
@@ -516,7 +463,8 @@
       },
       "put": {
         "tags": [
-          "ManagedEnvironments"
+          "ManagedEnvironments",
+          "Certificates"
         ],
         "summary": "Create or Update a Certificate.",
         "operationId": "Certificate_CreateOrUpdate",
@@ -578,7 +526,8 @@
       },
       "delete": {
         "tags": [
-          "ManagedEnvironments"
+          "ManagedEnvironments",
+          "Certificates"
         ],
         "summary": "Deletes the specified Certificate.",
         "operationId": "Certificate_Delete",
@@ -763,13 +712,6 @@
             "appLogsConfiguration": {
               "$ref": "#/definitions/AppLogsConfiguration",
               "description": "Cluster configuration which enables the log daemon to export\napp logs to a destination. Currently only \"log-analytics\" is\nsupported"
-            },
-            "certificates": {
-              "description": "Hostname binding Certificates available to container apps in the Managed Environment",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Certificate"
-              }
             }
           },
           "x-ms-client-flatten": true
@@ -834,29 +776,17 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {
-        "provisioningState": {
-          "description": "Provisioning state of the Certificate.",
-          "enum": [
-            "Succeeded",
-            "Failed"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "CertificateProvisioningState",
-            "modelAsString": true
-          }
-        },
         "password": {
           "description": "Certificate password.",
           "type": "string",
           "x-ms-mutability": [
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "name": {
           "description": "Friendly name of the certificate.",
@@ -874,7 +804,8 @@
           "type": "string",
           "x-ms-mutability": [
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "issuer": {
           "description": "Certificate issuer.",
@@ -954,7 +885,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {

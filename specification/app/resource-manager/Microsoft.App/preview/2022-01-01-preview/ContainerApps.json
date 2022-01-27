@@ -311,7 +311,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{name}/analyzeCustomHostName": {
-      "get": {
+      "post": {
         "tags" : [
           "ContainerApps"
         ],
@@ -639,18 +639,6 @@
         "certificateName": {
           "description": "Name of the Certificate to be bound to this hostname. Must exist in the Managed Environment.",
           "type": "string"
-        },
-        "hostType": {
-          "description": "Indicates whether the hostname is a standard or repository hostname.",
-          "enum": [
-            "Standard",
-            "Repository"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "HostType",
-            "modelAsString": false
-          }
         }
       }
     },
