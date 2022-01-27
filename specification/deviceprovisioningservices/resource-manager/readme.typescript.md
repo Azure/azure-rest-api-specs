@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-deviceprovisioningservices"
   output-folder: "$(typescript-sdks-folder)/sdk/deviceprovisioningservices/arm-deviceprovisioningservices"
-  clear-output-folder: true
   generate-metadata: true
 ```

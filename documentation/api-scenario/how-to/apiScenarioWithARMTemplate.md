@@ -85,7 +85,7 @@ scenarios:
     description: Microsoft.SignalRService/signalR CRUD
     steps:
       - step: Generate_Unique_string
-        armTemplateDeployment: ./generate_unique_string.json
+        armTemplate: ./generate_unique_string.json
       - step: SignalR_checknameAvailability
         exampleFile: ../examples/SignalR_CheckNameAvailability.json
       - step: SignalR_CreateOrUpdate
