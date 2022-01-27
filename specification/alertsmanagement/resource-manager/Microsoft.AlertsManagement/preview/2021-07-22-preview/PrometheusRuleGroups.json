@@ -456,11 +456,6 @@
             "create",
             "read"
           ]
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PrometheusRuleGroupProperties",
-          "description": "The alert rule properties of the resource."
         }
       },
       "description": "The Prometheus rule group resource for patch operations."
@@ -480,6 +475,9 @@
     },
     "PrometheusRule": {
       "type": "object",
+      "required": [
+        "expression"
+      ],
       "properties": {
         "record": {
           "type": "string",
