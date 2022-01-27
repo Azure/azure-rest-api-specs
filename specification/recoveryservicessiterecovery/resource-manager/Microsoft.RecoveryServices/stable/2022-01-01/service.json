@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-12-01",
+    "version": "2022-01-01",
     "title": "SiteRecoveryManagementClient",
     "x-ms-code-generation-settings": {
       "header": "MICROSOFT_MIT_NO_VERSION"
@@ -23359,8 +23359,16 @@
           "description": "The target network ARM Id.",
           "type": "string"
         },
+        "testNetworkId": {
+          "description": "The selected test network ARM Id.",
+          "type": "string"
+        },
         "targetSubnetName": {
           "description": "The target subnet name.",
+          "type": "string"
+        },
+        "testSubnetName": {
+          "description": "The selected test subnet name.",
           "type": "string"
         },
         "targetAvailabilitySetId": {
@@ -23709,6 +23717,27 @@
           "description": "Target subnet name.",
           "type": "string"
         },
+        "testNetworkId": {
+          "description": "Source network Id.",
+          "type": "string"
+        },
+        "testSubnetName": {
+          "description": "Test subnet name.",
+          "type": "string"
+        },
+        "testIPAddress": {
+          "description": "The test IP address.",
+          "type": "string"
+        },
+        "testIPAddressType": {
+          "description": "The test IP address type.",
+          "enum": [ "Dynamic", "Static" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EthernetAddressType",
+            "modelAsString": true
+          }
+        },
         "targetNicName": {
           "description": "Target NIC name.",
           "type": "string"
@@ -23749,6 +23778,14 @@
         },
         "targetNicName": {
           "description": "Target NIC name.",
+          "type": "string"
+        },
+        "testSubnetName": {
+          "description": "The test subnet name.",
+          "type": "string"
+        },
+        "testStaticIPAddress": {
+          "description": "The test static IP address.",
           "type": "string"
         }
       }
@@ -23964,6 +24001,11 @@
         "networkId": {
           "description": "The test network Id.",
           "type": "string"
+        },
+        "vmNics": {
+          "description": "The list of NIC details.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/VMwareCbtNicInput" }
         }
       },
       "x-ms-discriminator-value": "VMwareCbt"
@@ -24024,6 +24066,10 @@
         },
         "targetNetworkId": {
           "description": "The target network ARM Id.",
+          "type": "string"
+        },
+        "testNetworkId": {
+          "description": "The test network ARM Id.",
           "type": "string"
         },
         "vmNics": {
