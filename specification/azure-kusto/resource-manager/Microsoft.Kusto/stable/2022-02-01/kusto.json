@@ -4292,10 +4292,18 @@
           "readOnly": true,
           "description": "The object ID of the managedIdentityResourceId"
         },
-        "allowMultiDatabase": {
-          "type": "boolean",
-          "default": false,
-          "description": "A Boolean value indicating if non-default database routing information from the data connection is allowed."
+        "databaseRouting": {
+          "type": "string",
+          "description": "Indication for database routing information from the data connection, by default only database routing information is allowed",
+          "enum": [
+            "Single",
+            "Multi"
+          ],
+          "x-ms-enum": {
+            "name": "DatabaseRouting",
+            "modelAsString": true
+          },
+          "default": "Single"
         }
       },
       "required": [
@@ -4337,10 +4345,18 @@
           "type": "string",
           "description": "The name of the share access policy"
         },
-        "allowMultiDatabase": {
-          "type": "boolean",
-          "default": false,
-          "description": "A Boolean value indicating if non-default database routing information from the data connection is allowed."
+        "databaseRouting": {
+          "type": "string",
+          "description": "Indication for database routing information from the data connection, by default only database routing information is allowed",
+          "enum": [
+            "Single",
+            "Multi"
+          ],
+          "x-ms-enum": {
+            "name": "DatabaseRouting",
+            "modelAsString": true
+          },
+          "default": "Single"
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -4505,10 +4521,18 @@
           "readOnly": true,
           "description": "The object ID of managedIdentityResourceId"
         },
-        "allowMultiDatabase": {
-          "type": "boolean",
-          "default": false,
-          "description": "A Boolean value indicating if non-default database routing information from the data connection is allowed."
+        "databaseRouting": {
+          "type": "string",
+          "description": "Indication for database routing information from the data connection, by default only database routing information is allowed",
+          "enum": [
+            "Single",
+            "Multi"
+          ],
+          "x-ms-enum": {
+            "name": "DatabaseRouting",
+            "modelAsString": true
+          },
+          "default": "Single"
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
