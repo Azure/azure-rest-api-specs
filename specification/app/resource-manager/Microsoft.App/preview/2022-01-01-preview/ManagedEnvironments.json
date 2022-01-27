@@ -838,44 +838,6 @@
           "description": "Public key hash.",
           "type": "string",
           "readOnly": true
-        },
-        "keyVaultId": {
-          "description": "Key Vault Csm resource Id.",
-          "type": "string"
-        },
-        "keyVaultSecretName": {
-          "description": "Key Vault secret name.",
-          "type": "string"
-        },
-        "keyVaultSecretStatus": {
-          "description": "Status of the Key Vault secret.",
-          "enum": [
-            "Initialized",
-            "WaitingOnCertificateOrder",
-            "Succeeded",
-            "CertificateOrderFailed",
-            "OperationNotPermittedOnKeyVault",
-            "AzureServiceUnauthorizedToAccessKeyVault",
-            "KeyVaultDoesNotExist",
-            "KeyVaultSecretDoesNotExist",
-            "UnknownError",
-            "ExternalPrivateKey",
-            "Unknown"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "KeyVaultSecretStatus",
-            "modelAsString": false
-          }
-        },
-        "canonicalName": {
-          "description": "CNAME of the certificate to be issued via free certificate",
-          "type": "string"
-        },
-        "domainValidationMethod": {
-          "description": "Method of domain validation for free cert",
-          "type": "string"
         }
       },
       "x-ms-client-flatten": true
