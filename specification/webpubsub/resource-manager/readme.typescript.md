@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-webpubsub"
   output-folder: "$(typescript-sdks-folder)/sdk/web-pubsub/arm-webpubsub"
-  clear-output-folder: true
   generate-metadata: true
 ```
