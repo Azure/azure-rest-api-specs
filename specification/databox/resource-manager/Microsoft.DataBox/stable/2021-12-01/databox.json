@@ -1482,6 +1482,33 @@
       },
       "discriminator": "copyLogDetailsType"
     },
+    "GranularCopyLogDetails": {
+      "description": "Granular Details for log generated during copy.",
+      "required": [
+        "copyLogDetailsType"
+      ],
+      "type": "object",
+      "properties": {
+        "copyLogDetailsType": {
+          "description": "Indicates the type of job details.",
+          "enum": [
+            "DataBoxDisk"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ClassDiscriminator",
+            "modelAsExtensible": false,
+            "values": [
+              {
+                "value": "DataBoxDisk",
+                "description": "Data Box Disk orders."
+              }
+            ]
+          }
+        }
+      },
+      "discriminator": "copyLogDetailsType"
+    },
     "DataBoxCustomerDiskCopyProgress": {
       "description": "DataBox CustomerDisk Copy Progress",
       "type": "object",
@@ -1594,7 +1621,7 @@
               },
               {
                 "value": "MetadataFilesModifiedOrRemoved",
-                "description": "Copy failed due to modified  or removed metadata files."
+                "description": "Copy failed due to modified or removed metadata files."
               }
             ]
           }
@@ -1603,6 +1630,133 @@
     },
     "CopyProgress": {
       "description": "Copy progress.",
+      "type": "object",
+      "properties": {
+        "storageAccountName": {
+          "description": "Name of the storage account. This will be empty for data account types other than storage account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "transferType": {
+          "description": "Transfer type of data",
+          "enum": [
+            "ImportToAzure",
+            "ExportFromAzure"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "TransferType",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "ImportToAzure",
+                "description": "Import data to azure."
+              },
+              {
+                "value": "ExportFromAzure",
+                "description": "Export data from azure."
+              }
+            ]
+          }
+        },
+        "dataAccountType": {
+          "description": "Data Account Type.",
+          "enum": [
+            "StorageAccount",
+            "ManagedDisk"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "DataAccountType",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "StorageAccount",
+                "description": "Storage Accounts ."
+              },
+              {
+                "value": "ManagedDisk",
+                "description": "Azure Managed disk storage."
+              }
+            ]
+          }
+        },
+        "accountId": {
+          "description": "Id of the account where the data needs to be uploaded.",
+          "type": "string",
+          "readOnly": true
+        },
+        "bytesProcessed": {
+          "format": "int64",
+          "description": "To indicate bytes transferred.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "totalBytesToProcess": {
+          "format": "int64",
+          "description": "Total amount of data to be processed by the job.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "filesProcessed": {
+          "format": "int64",
+          "description": "Number of files processed",
+          "type": "integer",
+          "readOnly": true
+        },
+        "totalFilesToProcess": {
+          "format": "int64",
+          "description": "Total files to process",
+          "type": "integer",
+          "readOnly": true
+        },
+        "invalidFilesProcessed": {
+          "format": "int64",
+          "description": "Number of files not adhering to azure naming conventions which were processed by automatic renaming",
+          "type": "integer",
+          "readOnly": true
+        },
+        "invalidFileBytesUploaded": {
+          "format": "int64",
+          "description": "Total amount of data not adhering to azure naming conventions which were processed by automatic renaming",
+          "type": "integer",
+          "readOnly": true
+        },
+        "renamedContainerCount": {
+          "format": "int64",
+          "description": "Number of folders not adhering to azure naming conventions which were processed by automatic renaming",
+          "type": "integer",
+          "readOnly": true
+        },
+        "filesErroredOut": {
+          "format": "int64",
+          "description": "Number of files which could not be copied",
+          "type": "integer",
+          "readOnly": true
+        },
+        "directoriesErroredOut": {
+          "format": "int64",
+          "description": "To indicate directories errored out in the job.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "invalidDirectoriesProcessed": {
+          "format": "int64",
+          "description": "To indicate directories renamed",
+          "type": "integer",
+          "readOnly": true
+        },
+        "isEnumerationInProgress": {
+          "description": "To indicate if enumeration of data is in progress. \r\nUntil this is true, the TotalBytesToProcess may not be valid.",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "GranularCopyProgress": {
+      "description": "Granular Copy progress.",
       "type": "object",
       "properties": {
         "storageAccountName": {
@@ -2236,6 +2390,41 @@
       },
       "x-ms-discriminator-value": "DataBoxDisk"
     },
+    "DataBoxDiskGranularCopyLogDetails": {
+      "description": "Granular Copy Log Details for customer disk",
+      "required": [
+        "copyLogDetailsType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GranularCopyLogDetails"
+        }
+      ],
+      "properties": {
+        "serialNumber": {
+          "description": "Disk Serial Number.",
+          "type": "string",
+          "readOnly": true
+        },
+        "accountName": {
+          "description": "Account name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorLogLink": {
+          "description": "Link for copy error logs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "verboseLogLink": {
+          "description": "Link for copy verbose logs.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "DataBoxCustomerDisk"
+    },
     "DataBoxDiskCopyProgress": {
       "description": "DataBox Disk Copy Progress",
       "type": "object",
@@ -2258,6 +2447,125 @@
           "readOnly": true
         },
         "status": {
+          "description": "The Status of the copy",
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Completed",
+            "CompletedWithErrors",
+            "Failed",
+            "NotReturned",
+            "HardwareError",
+            "DeviceFormatted",
+            "DeviceMetadataModified",
+            "StorageAccountNotAccessible",
+            "UnsupportedData",
+            "DriveNotReceived",
+            "UnsupportedDrive",
+            "OtherServiceError",
+            "OtherUserError",
+            "DriveNotDetected",
+            "DriveCorrupted",
+            "MetadataFilesModifiedOrRemoved"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CopyStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "NotStarted",
+                "description": "Data copy hasn't started yet."
+              },
+              {
+                "value": "InProgress",
+                "description": "Data copy is in progress."
+              },
+              {
+                "value": "Completed",
+                "description": "Data copy completed."
+              },
+              {
+                "value": "CompletedWithErrors",
+                "description": "Data copy completed with errors."
+              },
+              {
+                "value": "Failed",
+                "description": "Data copy failed. No data was copied."
+              },
+              {
+                "value": "NotReturned",
+                "description": "No copy triggered as device was not returned."
+              },
+              {
+                "value": "HardwareError",
+                "description": "The Device has hit hardware issues."
+              },
+              {
+                "value": "DeviceFormatted",
+                "description": "Data copy failed. The Device was formatted by user."
+              },
+              {
+                "value": "DeviceMetadataModified",
+                "description": "Data copy failed. Device metadata was modified by user."
+              },
+              {
+                "value": "StorageAccountNotAccessible",
+                "description": "Data copy failed. Storage Account was not accessible during copy."
+              },
+              {
+                "value": "UnsupportedData",
+                "description": "Data copy failed. The Device data content is not supported."
+              },
+              {
+                "value": "DriveNotReceived",
+                "description": "No copy triggered as device was not received."
+              },
+              {
+                "value": "UnsupportedDrive",
+                "description": "No copy triggered as device type is not supported."
+              },
+              {
+                "value": "OtherServiceError",
+                "description": "Copy failed due to service error."
+              },
+              {
+                "value": "OtherUserError",
+                "description": "Copy failed due to user error."
+              },
+              {
+                "value": "DriveNotDetected",
+                "description": "Copy failed due to disk detection error."
+              },
+              {
+                "value": "DriveCorrupted",
+                "description": "Copy failed due to corrupted drive."
+              },
+              {
+                "value": "MetadataFilesModifiedOrRemoved",
+                "description": "Copy failed due to modified  or removed metadata files."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "DataBoxDiskGranularCopyProgress": {
+      "description": "DataBox Disk Granular Copy Progress",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GranularCopyProgress"
+        }
+      ],
+      "properties": {
+        "serialNumber": {
+          "description": "Disk Serial Number.",
+          "type": "string",
+          "readOnly": true
+        },
+        "copyStatus": {
           "description": "The Status of the copy",
           "enum": [
             "NotStarted",
@@ -2388,6 +2696,14 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataBoxDiskCopyProgress"
+          },
+          "readOnly": true
+        },
+        "granularCopyProgress": {
+          "description": "Copy progress per disk.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataBoxDiskGranularCopyProgress"
           },
           "readOnly": true
         },
