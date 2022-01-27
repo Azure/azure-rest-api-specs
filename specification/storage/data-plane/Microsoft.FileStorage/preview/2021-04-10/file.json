@@ -258,6 +258,9 @@
           },
           {
             "$ref": "#/parameters/ShareRootSquash"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
           }
         ],
         "responses": {
@@ -1967,6 +1970,9 @@
           },
           {
             "$ref": "#/parameters/FileLastWriteTime"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
           }
         ],
         "responses": {
@@ -2071,6 +2077,9 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
           }
         ],
         "responses": {
@@ -2178,6 +2187,9 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
           }
         ],
         "responses": {
@@ -2262,6 +2274,9 @@
           },
           {
             "$ref": "#/parameters/FileLastWriteTime"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
           }
         ],
         "responses": {
@@ -2396,6 +2411,9 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
           }
         ],
         "responses": {
@@ -2502,6 +2520,9 @@
           },
           {
             "$ref": "#/parameters/ListFilesExtendedInfo"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
           }
         ],
         "responses": {
@@ -2603,6 +2624,9 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
           }
         ],
         "responses": {
@@ -2691,6 +2715,9 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
           }
         ],
         "responses": {
@@ -2990,6 +3017,9 @@
           },
           {
             "$ref": "#/parameters/LeaseIdOptional"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
           }
         ],
         "responses": {
@@ -3100,6 +3130,9 @@
           },
           {
             "$ref": "#/parameters/LeaseIdOptional"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
           }
         ],
         "responses": {
@@ -3553,6 +3586,9 @@
           },
           {
             "$ref": "#/parameters/LeaseIdOptional"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
           }
         ],
         "responses": {
@@ -3784,6 +3820,9 @@
           },
           {
             "$ref": "#/parameters/LeaseIdOptional"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
           }
         ],
         "responses": {
@@ -3891,6 +3930,9 @@
           },
           {
             "$ref": "#/parameters/LeaseIdOptional"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
           }
         ],
         "responses": {
@@ -4021,6 +4063,9 @@
           },
           {
             "$ref": "#/parameters/LeaseIdOptional"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
           }
         ],
         "responses": {
@@ -4111,6 +4156,9 @@
           },
           {
             "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
           }
         ],
         "responses": {
@@ -4224,6 +4272,9 @@
           },
           {
             "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
           }
         ],
         "responses": {
@@ -4335,6 +4386,9 @@
           },
           {
             "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
           }
         ],
         "responses": {
@@ -4448,6 +4502,9 @@
           },
           {
             "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
           }
         ],
         "responses": {
@@ -4595,6 +4652,9 @@
           },
           {
             "$ref": "#/parameters/LeaseIdOptional"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
           }
         ],
         "responses": {
@@ -4824,6 +4884,9 @@
           },
           {
             "$ref": "#/parameters/LeaseIdOptional"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
           }
         ],
         "responses": {
@@ -4947,6 +5010,9 @@
           },
           {
             "$ref": "#/parameters/LeaseIdOptional"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
           }
         ],
         "responses": {
@@ -5047,6 +5113,9 @@
           },
           {
             "$ref": "#/parameters/LeaseIdOptional"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
           }
         ],
         "responses": {
@@ -5128,6 +5197,9 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
           }
         ],
         "responses": {
@@ -5216,6 +5288,9 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
           }
         ],
         "responses": {
@@ -6682,6 +6757,22 @@
       "default": "update",
       "x-ms-enum": {
         "name": "FileRangeWriteFromUrlType",
+        "modelAsString": false
+      }
+    },
+    "FileRequestIntent": {
+      "name": "x-ms-file-request-intent",
+      "x-ms-client-name": "fileRequestIntent",
+      "in": "header",
+      "description": "Valid value is backup",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "none",
+        "backup"
+      ],
+      "x-ms-enum": {
+        "name": "ShareFileRequestIntent",
         "modelAsString": false
       }
     },
