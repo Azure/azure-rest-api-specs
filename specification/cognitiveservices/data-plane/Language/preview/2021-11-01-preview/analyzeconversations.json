@@ -34,16 +34,15 @@
         "description": "Analyzes the input conversation utterance.",
         "parameters": [
           {
-            "$ref": "common.json#/parameters/ProjectNameQueryParameter"
-          },
-          {
-            "$ref": "common.json#/parameters/DeploymentNameQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/ConversationAnalysisOptions"
-          },
-          {
             "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "description": "A single conversational task to execute.",
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeConversationTask"
+            }
           }
         ],
         "consumes": [
@@ -56,7 +55,7 @@
           "200": {
             "description": "The conversation analysis response.",
             "schema": {
-              "$ref": "#/definitions/AnalyzeConversationResult"
+              "$ref": "#/definitions/AnalyzeConversationTaskResult"
             }
           },
           "default": {
@@ -81,6 +80,107 @@
     }
   },
   "definitions": {
+    "AnalyzeConversationTaskKind":{
+      "type": "string",
+      "description": "Enumeration of supported Conversation tasks.",
+      "enum": [
+        "CustomConversation",
+        "PretrainedConversation"
+      ],
+      "x-ms-enum": {
+        "name": "AnalyzeConversationTaskKind",
+        "modelAsString": true
+      }
+    },
+    "AnalyzeConversationTaskResultsKind":{
+      "type": "string",
+      "description": "Enumeration of supported conversational task results",
+      "enum": [
+        "CustomConversationResult",
+        "PretrainedConversationResult"
+      ],
+      "x-ms-enum": {
+        "name": "AnalyzeConversationTaskResultsKind",
+        "modelAsString": true
+      }
+    },
+    "AnalyzeConversationTask": {
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+            "$ref": "#/definitions/AnalyzeConversationTaskKind"
+          }
+      }
+    },
+    "AnalyzeConversationTaskResult": {
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AnalyzeConversationTaskResultsKind"
+        }
+      }
+    },
+    "CustomConversationalTask":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeConversationTask"
+        }
+      ],
+      "properties": {
+        "analysisInput": {
+          "$ref": "#/definitions/ConversationAnalysisOptions"
+        },
+        "parameters": {
+          "$ref": "#/definitions/CustomConversationTaskParameters"
+        }
+      },
+      "x-ms-discriminator-value": "CustomConversation"
+    },
+    "CustomConversationTaskParameters":{
+      "type": "object",
+      "description": "Input parameters necessary for a Custom Conversation Task.",
+      "properties": {
+        "projectName":{
+          "type":"string",
+          "description": "The name of the project to use."
+        },
+        "deploymentName":{
+          "type":"string",
+          "description": "The name of the specific deployment of the project to use."
+        },
+        "verbose": {
+          "type": "boolean",
+          "description": "If true, the service will return more detailed information in the response."
+        }
+      },
+      "required": [
+        "projectName",
+        "deploymentName"
+      ]
+    },
+    "CustomConversationalTaskResult": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeConversationTaskResult"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/AnalyzeConversationResult"
+        }
+      },
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "CustomConversationResult"
+    },
     "ConversationAnalysisOptions": {
       "type": "object",
       "description": "The request body.",
@@ -99,10 +199,6 @@
         "language": {
           "type": "string",
           "description": "The language to use in this request. This will be the language setting when communicating with all other target projects."
-        },
-        "verbose": {
-          "type": "boolean",
-          "description": "If true, the service will return more detailed information in the response."
         },
         "isLoggingEnabled": {
           "description": "If true, the query will be kept by the service for customers to further review, to improve the model quality.",
@@ -351,7 +447,8 @@
           "enum": [
             "luis",
             "conversation",
-            "question_answering"
+            "question_answering",
+            "non_linked"
           ],
           "x-ms-enum": {
             "name": "targetKind",
@@ -365,6 +462,7 @@
         "confidenceScore": {
           "type": "number",
           "format": "double",
+          "x-ms-client-name": "confidence",
           "description": "The prediction score and it ranges from 0.0 to 1.0.",
           "minimum": 0,
           "maximum": 1
@@ -455,6 +553,7 @@
         },
         "confidenceScore": {
           "format": "float",
+          "x-ms-client-name": "confidence",
           "description": "The confidence score of the class from 0.0 to 1.0.",
           "type": "number",
           "minimum": 0,
@@ -493,6 +592,7 @@
         },
         "confidenceScore": {
           "format": "float",
+          "x-ms-client-name": "confidence",
           "description": "The entity confidence score.",
           "type": "number"
         },
