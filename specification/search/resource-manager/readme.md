@@ -63,6 +63,15 @@ input-file:
 - Microsoft.Search/stable/2015-02-28/search.json
 ```
 
+### Tag: package-2021-04-preview
+
+These settings apply only when `--tag=package-2021-04-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04-preview'
+input-file:
+- Microsoft.Search/preview/2021-04-01-preview/search.json
+```
+
 ### Tag: package-2020-08-preview
 
 These settings apply only when `--tag=package-2020-08-preview` is specified on the command line.
@@ -94,9 +103,10 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
@@ -123,6 +133,10 @@ csharp:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Java
 
@@ -199,7 +213,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-
-
-

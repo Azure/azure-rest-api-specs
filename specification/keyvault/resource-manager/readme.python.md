@@ -26,6 +26,7 @@ batch:
   - tag: package-2016-10
   - tag: package-preview-2020-04-full
   - tag: package-preview-2021-04
+  - tag: package-preview-2021-06
   - multiapiscript: true
 ```
 
@@ -34,6 +35,15 @@ output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/key
 clear-output-folder: false
 perform-load: false
 ```
+### Tag: package-preview-2021-06 and python
+
+These settings apply only when `--tag=package-preview-2021-06 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-06'
+namespace: azure.mgmt.keyvault.v2021_06_01_preview
+output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2021_06_01_preview
+```
+
 ### Tag: package-preview-2021-04 and python
 
 These settings apply only when `--tag=package-preview-2021-04 --python` is specified on the command line.

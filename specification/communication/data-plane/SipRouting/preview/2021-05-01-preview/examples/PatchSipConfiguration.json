@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "api-version": "2021-05-01-preview",
+    "body": {
+      "trunks": {
+        "vendor.xyz.biz": {
+          "sipSignalingPort": 5061
+        }
+      },
+      "routes": [
+        {
+          "name": "VendorXYZ",
+          "description": "External route XYZ",
+          "numberPattern": "^\\+?\\d+$",
+          "trunks": [
+            "vendor.xyz.biz"
+          ]
+        }
+      ]
+    },
+    "endpoint": "https://resourcename.communication.azure.com/"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "trunks": {
+          "vendor.xyz.biz": {
+            "sipSignalingPort": 5061
+          }
+        },
+        "routes": [
+          {
+            "name": "VendorXYZ",
+            "description": "External route XYZ",
+            "numberPattern": "^\\+?\\d+$",
+            "trunks": [
+              "vendor.xyz.biz"
+            ]
+          }
+        ]
+      }
+    },
+    "415": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "UnsupportedMediaType",
+          "message": "Unsupported Media Type."
+        }
+      }
+    },
+    "422": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "UnprocessableEntity",
+          "message": "One or more request inputs are not valid.",
+          "innererror": {
+            "code": "InvalidRegex",
+            "message": "Unsupported regex format provided."
+          }
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "InternalError",
+          "message": "The server encountered an internal error."
+        }
+      }
+    }
+  }
+}

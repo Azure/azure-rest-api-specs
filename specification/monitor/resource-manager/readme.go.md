@@ -2,11 +2,28 @@
 
 These settings apply only when `--go` is specified on the command line.
 
-``` yaml $(go)
+``` yaml $(go) && !$(track2)
 go:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: insights
   clear-output-folder: true
+```
+
+``` yaml $(go) && $(track2)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/resourcemanager/monitor/armmonitor
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
+
+directive:
+  - from: scheduledQueryRule_API.json # this is to resolve the duplicated schema issue in this swagger
+    where: "$.definitions.Resource"
+    transform: >
+      $["x-ms-client-name"] = "TrackedEntityResource";
+      
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ### Go multi-api
@@ -21,6 +38,8 @@ batch:
   - tag: package-2019-06
   - tag: package-2019-11
   - tag: package-2020-10-only
+  - tag: package-2021-07
+  - tag: package-2021-09
 ```
 
 ### Tag: package-2017-09 and go
@@ -93,4 +112,22 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2020-10-only' && $(go)
 output-folder: $(go-sdk-folder)/services/monitor/mgmt/2020-10-01/$(namespace)
+```
+
+### Tag: package-2021-07 and go
+
+These settings apply only when `--tag=package-2021-07 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2021-07' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2021-07-01-preview/$(namespace)
+```
+
+### Tag: package-2021-09 and go
+
+These settings apply only when `--tag=package-2021-09 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2021-09' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2021-09-01-preview/$(namespace)
 ```

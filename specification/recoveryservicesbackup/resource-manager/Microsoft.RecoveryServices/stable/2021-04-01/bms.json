@@ -18,6 +18,149 @@
     "application/json"
   ],
   "paths": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupstorageconfig/vaultstorageconfig": {
+      "get": {
+        "tags": [
+          "BackupResourceStorageConfigsNonCRR"
+        ],
+        "description": "Fetches resource storage config.",
+        "operationId": "BackupResourceStorageConfigsNonCRR_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupResourceConfigResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/NewErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Vault Storage Configuration": {
+            "$ref": "./examples/Common/BackupStorageConfig_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "BackupResourceStorageConfigsNonCRR"
+        ],
+        "description": "Updates vault storage model type.",
+        "operationId": "BackupResourceStorageConfigsNonCRR_Update",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Vault storage config request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupResourceConfigResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupResourceConfigResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/NewErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Vault Storage Configuration": {
+            "$ref": "./examples/Common/BackupStorageConfig_Put.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "BackupResourceStorageConfigsNonCRR"
+        ],
+        "description": "Updates vault storage model type.",
+        "operationId": "BackupResourceStorageConfigsNonCRR_patch",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Vault storage config request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupResourceConfigResource"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/NewErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Vault Storage Configuration": {
+            "$ref": "./examples/Common/BackupStorageConfig_Patch.json"
+          }
+        }
+      }
+    },
     "/Subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupPreValidateProtection": {
       "post": {
         "tags": [
@@ -5884,6 +6027,73 @@
         }
       },
       "x-ms-discriminator-value": "DpmJob"
+    },
+    "BackupResourceConfigResource": {
+      "description": "The resource storage details.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BackupResourceConfig",
+          "description": "BackupResourceConfigResource properties"
+        }
+      }
+    },
+    "BackupResourceConfig": {
+      "description": "The resource storage details.",
+      "type": "object",
+      "properties": {
+        "storageModelType": {
+          "description": "Storage type",
+          "enum": [
+            "Invalid",
+            "GeoRedundant",
+            "LocallyRedundant",
+            "ZoneRedundant",
+            "ReadAccessGeoZoneRedundant"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageType",
+            "modelAsString": true
+          }
+        },
+        "storageType": {
+          "description": "Storage type.",
+          "enum": [
+            "Invalid",
+            "GeoRedundant",
+            "LocallyRedundant",
+            "ZoneRedundant",
+            "ReadAccessGeoZoneRedundant"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageType",
+            "modelAsString": true
+          }
+        },
+        "storageTypeState": {
+          "description": "Locked or Unlocked. Once a machine is registered against a resource, the storageTypeState is always Locked.",
+          "enum": [
+            "Invalid",
+            "Locked",
+            "Unlocked"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageTypeState",
+            "modelAsString": true
+          }
+        },
+        "crossRegionRestoreFlag": {
+          "description": "Opt in details of Cross Region Restore feature.",
+          "type": "boolean"
+        }
+      }
     },
     "DpmJobExtendedInfo": {
       "description": "Additional information on the DPM workload-specific job.",

@@ -1,0 +1,90 @@
+{
+  "parameters": {
+    "resourceUri": "subscriptions/1f3fa6d2-851c-4a91-9087-1a050f3a9c38/resourceGroups/todking/providers/Microsoft.Storage/storageAccounts/tkfileserv/blobServices/default",
+    "timespan": "2017-04-14T02:20:00Z/2017-04-14T04:20:00Z",
+    "metric": "BlobCount",
+    "metricnamespace": "Microsoft.Storage/storageAccounts/blobServices",
+    "$filter": "Tier eq '*'",
+    "resulttype": "metadata",
+    "api-version": "2021-05-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "timespan": "2021-04-15T02:18:00Z/2021-04-22T02:18:00Z",
+        "interval": "PT1H",
+        "value": [
+          {
+            "id": "/subscriptions/1f3fa6d2-851c-4a91-9087-1a050f3a9c38/resourceGroups/todking/providers/Microsoft.Storage/storageAccounts/tkfileserv/blobServices/default/providers/Microsoft.Insights/metrics/BlobCount",
+            "type": "Microsoft.Insights/metrics",
+            "name": {
+              "value": "BlobCount",
+              "localizedValue": "Blob Count"
+            },
+            "displayDescription": "The number of blob objects stored in the storage account.",
+            "unit": "Count",
+            "timeseries": [
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "tier",
+                      "localizedValue": "tier"
+                    },
+                    "value": "Cool"
+                  }
+                ]
+              },
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "tier",
+                      "localizedValue": "tier"
+                    },
+                    "value": "Archive"
+                  }
+                ]
+              },
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "tier",
+                      "localizedValue": "tier"
+                    },
+                    "value": "Standard"
+                  }
+                ]
+              },
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "tier",
+                      "localizedValue": "tier"
+                    },
+                    "value": "Untiered"
+                  }
+                ]
+              },
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "tier",
+                      "localizedValue": "tier"
+                    },
+                    "value": "Hot"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "namespace": "microsoft.storage/storageaccounts/blobservices",
+        "resourceregion": "westus2"
+      }
+    }
+  }
+}

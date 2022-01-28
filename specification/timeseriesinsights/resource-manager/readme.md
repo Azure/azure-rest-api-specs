@@ -15,6 +15,7 @@ To build the SDK for TimeSeriesInsights, simply [Install AutoRest](https://aka.m
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
@@ -25,7 +26,25 @@ These are the global settings for the TimeSeriesInsights API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-05-15
+tag: package-preview-2021-03
+```
+
+
+### Tag: package-preview-2021-03
+
+These settings apply only when `--tag=package-preview-2021-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-03'
+input-file:
+  - Microsoft.TimeSeriesInsights/preview/2021-03-31-preview/timeseriesinsights.json
+```
+### Tag: package-preview-2021-06
+
+These settings apply only when `--tag=package-preview-2021-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-06'
+input-file:
+  - Microsoft.TimeSeriesInsights/preview/2021-06-30-preview/timeseriesinsights.json
 ```
 
 ### Tag: package-2020-05-15
@@ -98,11 +117,14 @@ directive:
       - $.definitions.Gen2EnvironmentResource
     from: timeseriesinsights.json
     reason: These violations are false positives. The EventSources_Update operation takes an EventSourceUpdateParameters as the body, and EventHubEventSourceUpdateParameters and IoTHubEventSourceUpdateParameters both inherit from EventSourceUpdateParameters. Similarly, the Environments_Update operation takes an EnvironmentUpdateParameters as the body, and both StandardEnvironmentUpdateParameters and LongTermEnvironmentUpdateParameters inherit from EnvironmentUpdateParameters. These definitions can be used to update mutable properties of the event source, including the Tags collection.
+  - suppress: R4009 # The response of operation:'PrivateEndpointConnections_CreateOrUpdate' is defined without 'systemData'. Consider adding the systemData to the response.
+    from: timeseriesinsights.json
+    reason: The systemData feature is not implemented in the Time Series Insights RP as of the publication of this api version.
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -115,7 +137,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
   - repo: azure-resource-manager-schemas
 ```
@@ -203,6 +224,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-
-

@@ -1220,6 +1220,18 @@
         "disableLocalAuth": {
           "type": "boolean",
           "description": "Disables all authentication methods other than AAD authentication."
+        },
+        "publicNetworkAccess": {
+          "description": "Control permission for data plane traffic coming from public networks while private endpoint is enabled.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
         }
       }
     },

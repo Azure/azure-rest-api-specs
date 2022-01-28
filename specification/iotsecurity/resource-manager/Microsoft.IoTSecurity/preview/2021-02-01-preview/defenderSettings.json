@@ -298,8 +298,8 @@
         "deviceQuota": {
           "type": "integer",
           "format": "int32",
-          "minimum": 1000,
-          "description": "Size of the device quota (as a opposed to a Pay as You Go billing model). Value is required to be in multiples of 1000."
+          "minimum": 0,
+          "description": "Size of the device quota. Value is required to be in multiples of 100."
         },
         "sentinelWorkspaceResourceIds": {
           "type": "array",
@@ -312,19 +312,49 @@
           "type": "string",
           "enum": [
             "Default",
-            "MigratedToAzure"
+            "MigratedToAzure",
+            "Evaluation",
+            "Purchased"
           ],
           "description": "The kind of onboarding for the subscription",
           "x-ms-enum": {
             "name": "OnboardingKind",
             "modelAsString": true
           }
+        },
+        "evaluationEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the evaluation period, if such exist",
+          "readOnly": true
+        },
+        "mdeIntegration": {
+          "type": "object",
+          "description": "MDE integration configuration",
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "Disabled",
+                "Enabled"
+              ],
+              "description": "Integration status",
+              "x-ms-enum": {
+                "name": "MdeIntegration",
+                "modelAsString": true
+              }
+            }
+          },
+          "required": [
+            "status"
+          ]
         }
       },
       "required": [
         "deviceQuota",
         "sentinelWorkspaceResourceIds",
-        "onboardingKind"
+        "onboardingKind",
+        "mdeIntegration"
       ]
     },
     "DownloadLink": {
