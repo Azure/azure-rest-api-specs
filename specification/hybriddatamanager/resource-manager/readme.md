@@ -56,13 +56,13 @@ directive:
     - R2062 #to suppress (XmsResourceInPutResponse/R2062/ARMViolation)
 ```
 
-### Tag: package-2022-01
+### Tag: package-2021-05
 
-These settings apply only when `--tag=package-2022-01` is specified on the command line.
+These settings apply only when `--tag=package-2021-05` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-01'
+``` yaml $(tag) == 'package-2021-05'
 input-file:
-- Microsoft.HybridData/stable/2022-01-10/hybriddata.json
+- Microsoft.HybridData/stable/2021-05-01/hybriddata.json
 directive:
   - suppress:
     - R1001 #to suppress (OperationIdNounVerb/R1001/SDKViolation)
@@ -82,7 +82,6 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
