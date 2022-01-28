@@ -421,31 +421,21 @@
           "description": "Volume name.",
           "type": "string"
         },
-        "azureFile": {
-          "description": "AzureFile represents an Azure File Service mount on the host and bind mount to the pod.",
-          "type": "object",
-          "properties": {
-            "accountName": {
-              "description": "Account name.",
-              "type": "string"
-            },
-            "shareName": {
-              "description": "Share name.",
-              "type": "string"
-            },
-            "accessKey": {
-              "description": "Access key.",
-              "type": "string"
-            },
-            "accessMode": {
-              "description": "ReadOnly here will force the ReadOnly setting in VolumeMounts. Read/Write will support both read and write.",
-              "type": "string"
-            }
+        "storageType": {
+          "description": "Storage type for the volume. If not provided, use EmptyDir.",
+          "enum": [
+            "AzureFile",
+            "EmptyDir"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageType",
+            "modelAsString": true
           }
         },
-        "emptyDir": {
-          "description": "Volume is EmptyDir type.",
-          "type": "object"
+        "storageName": {
+          "description": "Name of storage resource. No need to provide for EmptyDir.",
+          "type": "string"
         }
       }
     },
