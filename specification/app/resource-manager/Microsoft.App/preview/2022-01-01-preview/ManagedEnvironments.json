@@ -648,7 +648,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "Environment resource specific properties",
+          "description": "Managed environment resource specific properties",
           "type": "object",
           "properties": {
             "provisioningState": {
@@ -779,76 +779,78 @@
       ],
       "properties": {
         "properties": {
-          "password": {
-            "description": "Certificate password.",
-            "type": "string",
-            "x-ms-mutability": [
-              "create"
-            ],
-            "x-ms-secret": true
-          },
-          "name": {
-            "description": "Friendly name of the certificate.",
-            "type": "string"
-          },
-          "subjectName": {
-            "description": "Subject name of the certificate.",
-            "type": "string",
-            "readOnly": true
-          },
-          "value": {
-            "format": "byte",
-            "description": "PFX or PEM blob",
-            "type": "string",
-            "x-ms-mutability": [
-              "create"
-            ],
-            "x-ms-secret": true
-          },
-          "issuer": {
-            "description": "Certificate issuer.",
-            "type": "string",
-            "readOnly": true
-          },
-          "issueDate": {
-            "format": "date-time",
-            "description": "Certificate issue Date.",
-            "type": "string",
-            "readOnly": true
-          },
-          "expirationDate": {
-            "format": "date-time",
-            "description": "Certificate expiration date.",
-            "type": "string",
-            "readOnly": true
-          },
-          "thumbprint": {
-            "description": "Certificate thumbprint.",
-            "type": "string",
-            "readOnly": true
-          },
-          "valid": {
-            "description": "Is the certificate valid?.",
-            "type": "boolean",
-            "readOnly": true
-          },
-          "publicKeyHash": {
-            "description": "Public key hash.",
-            "type": "string",
-            "readOnly": true
+          "description": "Certificate resource specific properties",
+          "type": "object",
+          "properties": {
+            "password": {
+              "description": "Certificate password.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create"
+              ],
+              "x-ms-secret": true
+            },
+            "name": {
+              "description": "Friendly name of the certificate.",
+              "type": "string"
+            },
+            "subjectName": {
+              "description": "Subject name of the certificate.",
+              "type": "string",
+              "readOnly": true
+            },
+            "value": {
+              "format": "byte",
+              "description": "PFX or PEM blob",
+              "type": "string",
+              "x-ms-mutability": [
+                "create"
+              ],
+              "x-ms-secret": true
+            },
+            "issuer": {
+              "description": "Certificate issuer.",
+              "type": "string",
+              "readOnly": true
+            },
+            "issueDate": {
+              "format": "date-time",
+              "description": "Certificate issue Date.",
+              "type": "string",
+              "readOnly": true
+            },
+            "expirationDate": {
+              "format": "date-time",
+              "description": "Certificate expiration date.",
+              "type": "string",
+              "readOnly": true
+            },
+            "thumbprint": {
+              "description": "Certificate thumbprint.",
+              "type": "string",
+              "readOnly": true
+            },
+            "valid": {
+              "description": "Is the certificate valid?.",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "publicKeyHash": {
+              "description": "Public key hash.",
+              "type": "string",
+              "readOnly": true
+            }
           }
         }
       },
       "x-ms-client-flatten": true
     },
     "CertificateCollection": {
-      "description": "Certificate collection ARM resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
+      "description": "Collection of Certificates.",
+      "required": [
+        "value"
       ],
+      "type": "object",
       "properties": {
         "value": {
           "description": "Collection of resources.",
@@ -875,12 +877,10 @@
         }
       }
     },
-    "security": [
-      {
-        "azure_auth": [
-          "user_impersonation"
-        ]
-      }
-    ]
+    "security": {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
   }
 }
