@@ -4643,6 +4643,361 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerConfigurations/default": {
+      "get": {
+        "tags": [
+          "PartnerConfigurations"
+        ],
+        "summary": "Get a partner configuration.",
+        "description": "Get properties of a partner configuration.",
+        "operationId": "PartnerConfigurations_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PartnerConfiguration"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerConfigurations_Get": {
+            "$ref": "./examples/PartnerConfigurations_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PartnerConfigurations"
+        ],
+        "summary": "Create or update a partner configuration.",
+        "description": "Synchronously creates or updates a partner configuration with the specified parameters.",
+        "operationId": "PartnerConfigurations_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerConfigurationInfo",
+            "in": "body",
+            "description": "Partner configuration information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PartnerConfiguration"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PartnerConfiguration"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerConfigurations_CreateOrUpdate": {
+            "$ref": "./examples/PartnerConfigurations_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PartnerConfigurations"
+        ],
+        "summary": "Delete a partner configuration.",
+        "description": "Delete existing partner configuration.",
+        "operationId": "PartnerConfigurations_Delete",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 404 Not Found.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerConfigurations_Delete": {
+            "$ref": "./examples/PartnerConfigurations_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "PartnerConfigurations"
+        ],
+        "summary": "Update a partner configuration.",
+        "description": "Synchronously updates a partner configuration with the specified parameters.",
+        "operationId": "PartnerConfigurations_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerConfigurationUpdateParameters",
+            "in": "body",
+            "description": "Partner configuration update information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PartnerConfigurationUpdateParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PartnerConfiguration"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerConfigurations_Update": {
+            "$ref": "./examples/PartnerConfigurations_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EventGrid/partnerConfigurations": {
+      "get": {
+        "tags": [
+          "PartnerConfigurations"
+        ],
+        "summary": "List partner configurations under an Azure subscription.",
+        "description": "List all the partner configurations under an Azure subscription.",
+        "operationId": "PartnerConfigurations_ListBySubscription",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PartnerConfigurationsListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerConfigurations_ListBySubscription": {
+            "$ref": "./examples/PartnerConfigurations_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerConfigurations/defaul/Authorize": {
+      "post": {
+        "tags": [
+          "PartnerConfigurations"
+        ],
+        "summary": "Authorize a partner.",
+        "description": "Authorize a single partner either by partner registration immutable Id or by partner name.",
+        "operationId": "PartnerConfigurations_Authorize",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerInfo",
+            "in": "body",
+            "description": "The information of the partner to be authorized.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Partner"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PartnerConfiguration"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerConfigurations_Authorize": {
+            "$ref": "./examples/PartnerConfigurations_Authorize.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerConfigurations/defaul/Unauthorize": {
+      "post": {
+        "tags": [
+          "PartnerConfigurations"
+        ],
+        "summary": "Unauthorize a partner.",
+        "description": "Unauthorize a single partner either by partner registration immutable Id or by partner name.",
+        "operationId": "PartnerConfigurations_Authorize",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerInfo",
+            "in": "body",
+            "description": "The information of the partner to be unauthorized.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Partner"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PartnerConfiguration"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerConfigurations_Authorize": {
+            "$ref": "./examples/PartnerConfigurations_Authorize.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerDestinations/{partnerDestinationName}": {
       "get": {
         "tags": [
@@ -7593,6 +7948,95 @@
           "nextLinkName": null
         }
       }
+    },
+    "/providers/Microsoft.EventGrid/verifiedPartners/{verifiedPartnerName}": {
+      "get": {
+        "tags": [
+          "VerifiedPartners"
+        ],
+        "summary": "Get a verified partner.",
+        "description": "Get properties of a verified partner.",
+        "operationId": "VerifiedPartners_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "verifiedPartnerName",
+            "in": "path",
+            "description": "Name of the verified partner.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VerifiedPartner"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "VerifiedPartners_Get": {
+            "$ref": "./examples/VerifiedPartners_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.EventGrid/verifiedPartners": {
+      "get": {
+        "tags": [
+          "VerifiedPartners"
+        ],
+        "summary": "List all verified partners.",
+        "description": "List all verified partners.",
+        "operationId": "VerifiedPartners_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VerifiedPartnersListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "VerifiedPartners_List": {
+            "$ref": "./examples/VerifiedPartners_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -7781,22 +8225,6 @@
           "$ref": "#/definitions/WebhookPartnerDestinationProperties",
           "description": "WebHook Properties of the partner destination.",
           "x-ms-client-flatten": true
-        },
-        "azureSubscriptionId": {
-          "description": "Azure subscription ID of the subscriber. The partner destination associated with the channel will be\r\ncreated under this Azure subscription.",
-          "type": "string"
-        },
-        "resourceGroupName": {
-          "description": "Azure Resource Group of the subscriber. The partner destination associated with the channel will be\r\ncreated under this resource group.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Name of the partner destination associated with the channel.",
-          "type": "string"
-        },
-        "endpointServiceContext": {
-          "description": "Additional context of the partner destination endpoint.",
-          "type": "string"
         }
       },
       "x-ms-discriminator-value": "WebHook"
@@ -8360,6 +8788,18 @@
           "type": "object",
           "readOnly": true,
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "dataResidencyBoundary": {
+          "description": "Data Residency Boundary of the resource.",
+          "enum": [
+            "WithinGeopair",
+            "WithinRegion"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataResidencyBoundary",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -8386,6 +8826,18 @@
         "sku": {
           "$ref": "#/definitions/ResourceSku",
           "description": "The Sku pricing tier for the domain."
+        },
+        "dataResidencyBoundary": {
+          "description": "The data residency boundary for the domain.",
+          "enum": [
+            "WithinGeopair",
+            "WithinRegion"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataResidencyBoundary",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -9885,6 +10337,120 @@
         }
       }
     },
+    "PartnerConfigurationProperties": {
+      "description": "Properties of the partner configuration.",
+      "type": "object",
+      "properties": {
+        "partnerAuthorization": {
+          "$ref": "#/definitions/PartnerAuthorization",
+          "description": "The details of authorized partners."
+        }
+      }
+    },
+    "PartnerAuthorization": {
+      "description": "The partner authorization details.",
+      "type": "object",
+      "properties": {
+        "defaultMaximumExpirationTimeInDays": {
+          "format": "int32",
+          "description": "Time used to validate the authorization expiration time for each authorized partner. If DefaultMaximumExpirationTimeInDays is\r\nnot specified, the default is 7 days. Otherwise, allowed values are between 1 and 365 days.",
+          "type": "integer"
+        },
+        "authorizedPartnersList": {
+          "description": "The list of authorized partners.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Partner"
+          }
+        }
+      }
+    },
+    "Partner": {
+      "description": "Information about the partner.",
+      "type": "object",
+      "properties": {
+        "partnerRegistrationImmutableId": {
+          "format": "uuid",
+          "description": "The immutableId of the corresponding partner registration.",
+          "type": "string"
+        },
+        "partnerName": {
+          "description": "The partner name.",
+          "type": "string"
+        },
+        "authorizationExpirationTimeInUtc": {
+          "format": "date-time",
+          "description": "Expiration time of the partner authorization. If this timer expires, any request from this partner to create, update or delete resources in subscriber's\r\ncontext will fail. If not specified, default value is 7. Allowed values are between 1 to the value of defaultMaximumExpirationTimeInDays specified in PartnerConfiguration.",
+          "type": "string"
+        }
+      }
+    },
+    "PartnerConfiguration": {
+      "description": "Partner configuration information",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PartnerConfigurationProperties",
+          "description": "Properties of the partner configuration.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "description": "The system metadata relating to partner confiuration resource.",
+          "type": "object"
+        },
+        "location": {
+          "description": "Location of the resource.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Tags of the resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PartnerConfigurationUpdateParameters": {
+      "description": "Properties of the partner configration update.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Tags of the partner configration resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "defaultMaximumExpirationTimeInDays": {
+          "format": "int32",
+          "description": "The default time used to validate the maximum expiration time for each authorized partners in days. Allowed values ar between 1 and 365 days.",
+          "type": "integer"
+        }
+      }
+    },
+    "PartnerConfigurationsListResult": {
+      "description": "Result of the List partner configurations operation",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of partner configurations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PartnerConfiguration"
+          }
+        },
+        "nextLink": {
+          "description": "A link for the next page of partner configurations.",
+          "type": "string"
+        }
+      }
+    },
     "PartnerDestinationUpdateParameters": {
       "description": "Properties of the Partner Destination that can be updated.",
       "type": "object",
@@ -9902,6 +10468,11 @@
       "description": "Properties of the Partner Destination.",
       "type": "object",
       "properties": {
+        "partnerRegistrationImmutableId": {
+          "format": "uuid",
+          "description": "The immutableId of the corresponding partner registration.",
+          "type": "string"
+        },
         "endpointServiceContext": {
           "description": "Endpoint context associated with this partner destination.",
           "type": "string"
@@ -10199,6 +10770,11 @@
             "modelAsString": true
           }
         },
+        "partnerRegistrationImmutableId": {
+          "format": "uuid",
+          "description": "The immutableId of the corresponding partner registration.",
+          "type": "string"
+        },
         "partnerName": {
           "description": "Official name of the partner name. For example: \"Contoso\".",
           "type": "string"
@@ -10361,6 +10937,11 @@
       "description": "Properties of the Partner Topic.",
       "type": "object",
       "properties": {
+        "partnerRegistrationImmutableId": {
+          "format": "uuid",
+          "description": "The immutableId of the corresponding partner registration.",
+          "type": "string"
+        },
         "source": {
           "description": "Source associated with this partner topic. This represents a unique partner resource.",
           "type": "string"
@@ -10770,6 +11351,18 @@
           "type": "object",
           "readOnly": true,
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "dataResidencyBoundary": {
+          "description": "Data Residency Boundary of the resource.",
+          "enum": [
+            "WithinGeopair",
+            "WithinRegion"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataResidencyBoundary",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -10796,6 +11389,18 @@
         "sku": {
           "$ref": "#/definitions/ResourceSku",
           "description": "The Sku pricing tier for the topic."
+        },
+        "dataResidencyBoundary": {
+          "description": "The data residency boundary for the topic.",
+          "enum": [
+            "WithinGeopair",
+            "WithinRegion"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataResidencyBoundary",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -11054,6 +11659,88 @@
           "$ref": "#/definitions/TopicTypeProperties",
           "description": "Properties of the topic type info",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "VerifiedPartnerProperties": {
+      "description": "Properties of the verified partner.",
+      "type": "object",
+      "properties": {
+        "partnerRegistrationImmutableId": {
+          "format": "uuid",
+          "description": "ImmutableId of the corresponding partner registration.",
+          "type": "string"
+        },
+        "organizationName": {
+          "description": "Official name of the Partner.",
+          "type": "string"
+        },
+        "partnerDisplayName": {
+          "description": "Display name of the verified partner.",
+          "type": "string"
+        },
+        "partnerTopicScenario": {
+          "$ref": "#/definitions/PartnerScenario",
+          "description": "Details of the partner topic scenario."
+        },
+        "partnerDestinationDetails": {
+          "$ref": "#/definitions/PartnerScenario",
+          "description": "Details of the partner destination scenario."
+        }
+      }
+    },
+    "PartnerScenario": {
+      "description": "Information about the supported partner's scenario.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "This is short description about the partner's scenario. The length of this description should not exceed 256 characters.",
+          "type": "string"
+        },
+        "longDescription": {
+          "description": "Long description for the scenarios and integration.Length of this description should not exceed 2048 characters.",
+          "type": "string"
+        },
+        "setupUri": {
+          "description": "URI of the partner website that can be used by Azure customers to setup Event Grid\r\nintegration on an event source.",
+          "type": "string"
+        }
+      }
+    },
+    "VerifiedPartner": {
+      "description": "Verified partner information",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VerifiedPartnerProperties",
+          "description": "Properties of the verified partner.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "description": "The system metadata relating to Verified Partner resource.",
+          "type": "object"
+        }
+      }
+    },
+    "VerifiedPartnersListResult": {
+      "description": "Result of the List verified partners operation",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of verified partners.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VerifiedPartner"
+          }
+        },
+        "nextLink": {
+          "description": "A link for the next page of verified partners if any.",
+          "type": "string"
         }
       }
     }
