@@ -73,6 +73,16 @@
         "resources": {
           "$ref": "#/definitions/ContainerResources",
           "description": "Container resource requirements."
+        },
+        "volumeMounts": {
+          "description": "Container volume mounts.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VolumeMount"
+          },
+          "x-ms-identifiers": [
+            "volumeName"
+          ]
         }
       }
     },
@@ -346,6 +356,56 @@
         "dapr": {
           "$ref": "#/definitions/Dapr",
           "description": "Dapr configuration for the Container App."
+        },
+        "volumes": {
+          "description": "List of volume definitions for the Container App.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Volume"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "Volume": {
+      "description": "Volume definitions for the Container App.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Volume name.",
+          "type": "string"
+        },
+        "storageType": {
+          "description": "Storage type for the volume. If not provided, use EmptyDir.",
+          "enum": [
+            "AzureFile",
+            "EmptyDir"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageType",
+            "modelAsString": true
+          }
+        },
+        "storageName": {
+          "description": "Name of storage resource. No need to provide for EmptyDir.",
+          "type": "string"
+        }
+      }
+    },
+    "VolumeMount": {
+      "description": "Volume mount for the Container App.",
+      "type": "object",
+      "properties": {
+        "volumeName": {
+          "description": "This must match the Name of a Volume.",
+          "type": "string"
+        },
+        "mountPath": {
+          "description": "Path within the container at which the volume should be mounted.Must not contain ':'.",
+          "type": "string"
         }
       }
     }
