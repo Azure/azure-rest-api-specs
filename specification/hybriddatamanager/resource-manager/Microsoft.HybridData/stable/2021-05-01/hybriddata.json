@@ -124,6 +124,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "DataManagers_ListByResourceGroupGET31": {
+            "$ref": "./examples/DataManagers_ListByResourceGroup-GET-example-31.json"
+          }
         }
       }
     },
@@ -160,6 +165,11 @@
             "schema": {
               "$ref": "#/definitions/DataManager"
             }
+          }
+        },
+        "x-ms-examples": {
+          "DataManagers_GetGET41": {
+            "$ref": "./examples/DataManagers_Get-GET-example-41.json"
           }
         }
       },
@@ -209,7 +219,12 @@
             "description": "Accepted request for Create."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "DataManagers_CreatePUT41": {
+            "$ref": "./examples/DataManagers_Create-PUT-example-41.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -245,7 +260,12 @@
             "description": "Data Manager Resource deleted."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "DataManagers_DeleteDELETE41": {
+            "$ref": "./examples/DataManagers_Delete-DELETE-example-41.json"
+          }
+        }
       },
       "patch": {
         "tags": [
@@ -299,7 +319,12 @@
             "description": "Accepted request for Data Manager Update."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "DataManagers_UpdatePATCH43": {
+            "$ref": "./examples/DataManagers_Update-PATCH-example-43.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices": {
@@ -339,6 +364,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DataServices_ListByDataManagerGET51": {
+            "$ref": "./examples/DataServices_ListByDataManager-GET-example-51.json"
+          }
         }
       }
     },
@@ -382,6 +412,11 @@
             "schema": {
               "$ref": "#/definitions/DataService"
             }
+          }
+        },
+        "x-ms-examples": {
+          "DataServices_GetGET62": {
+            "$ref": "./examples/DataServices_Get-GET-example-62.json"
           }
         }
       }
@@ -438,6 +473,11 @@
         "x-ms-odata": "#/definitions/JobDefinitionFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "JobDefinitions_ListByDataServiceGET71": {
+            "$ref": "./examples/JobDefinitions_ListByDataService-GET-example-71.json"
+          }
         }
       }
     },
@@ -488,6 +528,11 @@
             "schema": {
               "$ref": "#/definitions/JobDefinition"
             }
+          }
+        },
+        "x-ms-examples": {
+          "JobDefinitions_GetGET81": {
+            "$ref": "./examples/JobDefinitions_Get-GET-example-81.json"
           }
         }
       },
@@ -551,7 +596,12 @@
             "description": "Accepted request for create/update."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "JobDefinitions_CreateOrUpdatePUT83": {
+            "$ref": "./examples/JobDefinitions_CreateOrUpdate-PUT-example-83.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -601,7 +651,12 @@
             "description": "Completed request for Delete JobDefinition."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "JobDefinitions_DeleteDELETE81": {
+            "$ref": "./examples/JobDefinitions_Delete-DELETE-example-81.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/jobs": {
@@ -663,6 +718,11 @@
         "x-ms-odata": "#/definitions/JobFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Jobs_ListByJobDefinitionGET91": {
+            "$ref": "./examples/Jobs_ListByJobDefinition-GET-example-91.json"
+          }
         }
       }
     },
@@ -728,6 +788,11 @@
               "$ref": "#/definitions/Job"
             }
           }
+        },
+        "x-ms-examples": {
+          "Jobs_GetGET101": {
+            "$ref": "./examples/Jobs_Get-GET-example-101.json"
+          }
         }
       }
     },
@@ -787,7 +852,12 @@
             "description": "Completed request for job Cancel."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Jobs_CancelPOST111": {
+            "$ref": "./examples/Jobs_Cancel-POST-example-111.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/jobs/{jobId}/resume": {
@@ -846,7 +916,12 @@
             "description": "Complete request for Job resume."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Jobs_ResumePOST121": {
+            "$ref": "./examples/Jobs_Resume-POST-example-121.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/run": {
@@ -907,7 +982,12 @@
             "description": "Completed request for Job run. Run has started."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "JobDefinitions_RunPOST132": {
+            "$ref": "./examples/JobDefinitions_Run-POST-example-132.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobs": {
@@ -962,6 +1042,11 @@
         "x-ms-odata": "#/definitions/JobFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Jobs_ListByDataServiceGET141": {
+            "$ref": "./examples/Jobs_ListByDataService-GET-example-141.json"
+          }
         }
       }
     },
@@ -1010,6 +1095,11 @@
         "x-ms-odata": "#/definitions/DataStoreFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DataStores_ListByDataManagerGET151": {
+            "$ref": "./examples/DataStores_ListByDataManager-GET-example-151.json"
+          }
         }
       }
     },
@@ -1053,6 +1143,14 @@
             "schema": {
               "$ref": "#/definitions/DataStore"
             }
+          }
+        },
+        "x-ms-examples": {
+          "DataStores_GetGET161": {
+            "$ref": "./examples/DataStores_Get-GET-example-161.json"
+          },
+          "DataStores_GetGET162": {
+            "$ref": "./examples/DataStores_Get-GET-example-162.json"
           }
         }
       },
@@ -1109,7 +1207,15 @@
             "description": "Accepted request for create/update."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "DataStores_CreateOrUpdate_DataSinkPUT162": {
+            "$ref": "./examples/DataStores_CreateOrUpdate_DataSink-PUT-example-162.json"
+          },
+          "DataStores_CreateOrUpdate_DataSourcePUT162": {
+            "$ref": "./examples/DataStores_CreateOrUpdate_DataSource-PUT-example-162.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -1152,7 +1258,15 @@
             "description": "Completed request for Delete Data Store."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "DataStores_Delete_DataSinkDELETE161": {
+            "$ref": "./examples/DataStores_Delete_DataSink-DELETE-example-161.json"
+          },
+          "DataStores_Delete_DataSourceDELETE161": {
+            "$ref": "./examples/DataStores_Delete_DataSource-DELETE-example-161.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataStoreTypes": {
@@ -1192,6 +1306,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DataStoreTypes_ListByDataManagerGET171": {
+            "$ref": "./examples/DataStoreTypes_ListByDataManager-GET-example-171.json"
+          }
         }
       }
     },
@@ -1235,6 +1354,14 @@
             "schema": {
               "$ref": "#/definitions/DataStoreType"
             }
+          }
+        },
+        "x-ms-examples": {
+          "DataStoreTypes_GetGET182": {
+            "$ref": "./examples/DataStoreTypes_Get-GET-example-182.json"
+          },
+          "DataStoreTypes_GetGET183": {
+            "$ref": "./examples/DataStoreTypes_Get-GET-example-183.json"
           }
         }
       }
@@ -1284,6 +1411,11 @@
         "x-ms-odata": "#/definitions/JobDefinitionFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "JobDefinitions_ListByDataManagerGET191": {
+            "$ref": "./examples/JobDefinitions_ListByDataManager-GET-example-191.json"
+          }
         }
       }
     },
@@ -1332,6 +1464,11 @@
         "x-ms-odata": "#/definitions/JobFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Jobs_ListByDataManagerGET201": {
+            "$ref": "./examples/Jobs_ListByDataManager-GET-example-201.json"
+          }
         }
       }
     },
@@ -1372,6 +1509,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "PublicKeys_ListByDataManagerGET211": {
+            "$ref": "./examples/PublicKeys_ListByDataManager-GET-example-211.json"
+          }
         }
       }
     },
@@ -1415,6 +1557,11 @@
             "schema": {
               "$ref": "#/definitions/PublicKey"
             }
+          }
+        },
+        "x-ms-examples": {
+          "PublicKeys_GetGET222": {
+            "$ref": "./examples/PublicKeys_Get-GET-example-222.json"
           }
         }
       }
