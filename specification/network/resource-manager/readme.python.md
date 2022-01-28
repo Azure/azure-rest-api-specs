@@ -47,16 +47,12 @@ batch:
   - tag: package-2017-10
   - tag: package-2017-06
   - tag: package-2017-03
-  - tag: package-2016-12
-  - tag: package-2016-09
-  - tag: package-2015-06split
   - multiapiscript: true
 
 ```
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/
-clear-output-folder: false
 perform-load: false
 ```
 
