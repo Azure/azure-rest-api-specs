@@ -28,7 +28,7 @@ These are the global settings for the ApiManagement API.
 title: ApiManagementClient
 description: ApiManagement Client
 openapi-type: arm
-tag: package-preview-2021-04
+tag: package-2021-08
 ```
 
 ``` yaml
