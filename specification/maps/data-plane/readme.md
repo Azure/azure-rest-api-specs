@@ -51,7 +51,6 @@ input-file:
   - Microsoft.Maps/DEM/preview/1.0/elevation.json
   - Microsoft.Maps/Feedback/preview/1.0/feedback.json
   - Microsoft.Maps/Geolocation/preview/1.0/geolocation.json
-  - Microsoft.Maps/Render/preview/1.0/render.json
   - Microsoft.Maps/Render/preview/2.0/render.json
   - Microsoft.Maps/Route/preview/1.0/route.json
   - Microsoft.Maps/Search/preview/1.0/search.json
@@ -59,6 +58,13 @@ input-file:
   - Microsoft.Maps/Timezone/preview/1.0/timezone.json
   - Microsoft.Maps/Traffic/preview/1.0/traffic.json
   - Microsoft.Maps/Weather/preview/1.0/weather.json
+  - Microsoft.MapsCreator/preview/2.0/alias.json
+  - Microsoft.MapsCreator/preview/2.0/data.json
+  - Microsoft.MapsCreator/preview/2.0/dataset.json
+  - Microsoft.MapsCreator/preview/2.0/dwgconversion.json
+  - Microsoft.MapsCreator/preview/2.0/featurestate.json
+  - Microsoft.MapsCreator/preview/2.0/tileset.json
+  - Microsoft.MapsCreator/preview/2.0/wfs.json
 ```
 ### Tag: package-1.0-preview
 
@@ -71,7 +77,6 @@ input-file:
   - Microsoft.Maps/Feedback/preview/1.0/feedback.json
   - Microsoft.Maps/Geolocation/preview/1.0/geolocation.json
   - Microsoft.Maps/Render/preview/1.0/render.json
-  - Microsoft.Maps/Render/preview/2.0/render.json
   - Microsoft.Maps/Route/preview/1.0/route.json
   - Microsoft.Maps/Search/preview/1.0/search.json
   - Microsoft.Maps/Spatial/preview/1.0/spatial.json
