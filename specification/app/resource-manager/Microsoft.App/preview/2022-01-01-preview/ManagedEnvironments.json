@@ -778,64 +778,65 @@
         }
       ],
       "properties": {
-        "password": {
-          "description": "Certificate password.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create"
-          ],
-          "x-ms-secret": true
-        },
-        "name": {
-          "description": "Friendly name of the certificate.",
-          "type": "string",
-          "readOnly": true
-        },
-        "subjectName": {
-          "description": "Subject name of the certificate.",
-          "type": "string",
-          "readOnly": true
-        },
-        "value": {
-          "format": "byte",
-          "description": "PFX or PEM blob",
-          "type": "string",
-          "x-ms-mutability": [
-            "create"
-          ],
-          "x-ms-secret": true
-        },
-        "issuer": {
-          "description": "Certificate issuer.",
-          "type": "string",
-          "readOnly": true
-        },
-        "issueDate": {
-          "format": "date-time",
-          "description": "Certificate issue Date.",
-          "type": "string",
-          "readOnly": true
-        },
-        "expirationDate": {
-          "format": "date-time",
-          "description": "Certificate expiration date.",
-          "type": "string",
-          "readOnly": true
-        },
-        "thumbprint": {
-          "description": "Certificate thumbprint.",
-          "type": "string",
-          "readOnly": true
-        },
-        "valid": {
-          "description": "Is the certificate valid?.",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "publicKeyHash": {
-          "description": "Public key hash.",
-          "type": "string",
-          "readOnly": true
+        "properties": {
+          "password": {
+            "description": "Certificate password.",
+            "type": "string",
+            "x-ms-mutability": [
+              "create"
+            ],
+            "x-ms-secret": true
+          },
+          "name": {
+            "description": "Friendly name of the certificate.",
+            "type": "string"
+          },
+          "subjectName": {
+            "description": "Subject name of the certificate.",
+            "type": "string",
+            "readOnly": true
+          },
+          "value": {
+            "format": "byte",
+            "description": "PFX or PEM blob",
+            "type": "string",
+            "x-ms-mutability": [
+              "create"
+            ],
+            "x-ms-secret": true
+          },
+          "issuer": {
+            "description": "Certificate issuer.",
+            "type": "string",
+            "readOnly": true
+          },
+          "issueDate": {
+            "format": "date-time",
+            "description": "Certificate issue Date.",
+            "type": "string",
+            "readOnly": true
+          },
+          "expirationDate": {
+            "format": "date-time",
+            "description": "Certificate expiration date.",
+            "type": "string",
+            "readOnly": true
+          },
+          "thumbprint": {
+            "description": "Certificate thumbprint.",
+            "type": "string",
+            "readOnly": true
+          },
+          "valid": {
+            "description": "Is the certificate valid?.",
+            "type": "boolean",
+            "readOnly": true
+          },
+          "publicKeyHash": {
+            "description": "Public key hash.",
+            "type": "string",
+            "readOnly": true
+          }
         }
       },
       "x-ms-client-flatten": true

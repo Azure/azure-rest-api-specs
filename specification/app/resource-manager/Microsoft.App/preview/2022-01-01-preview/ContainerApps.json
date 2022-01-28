@@ -310,7 +310,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{name}/analyzeCustomHostName": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/analyzeCustomHostName": {
       "post": {
         "tags": [
           "ContainerApps"
@@ -332,7 +332,7 @@
             "type": "string"
           },
           {
-            "name": "hostName",
+            "name": "customHostname",
             "in": "query",
             "description": "Custom hostname.",
             "type": "string"
@@ -655,6 +655,11 @@
           "description": "CustomHostnameAnalysisResult resource specific properties",
           "type": "object",
           "properties": {
+            "hostName": {
+              "description": "Host name that was analyzed",
+              "type": "string",
+              "readOnly": true
+            },
             "isHostnameAlreadyVerified": {
               "description": "<code>true</code> if hostname is already verified; otherwise, <code>false</code>.",
               "type": "boolean",
@@ -684,12 +689,7 @@
               "type": "boolean",
               "readOnly": true
             },
-            "hasConflictAcrossSubscription": {
-              "description": "<code>true</code> if there is a conflict across subscriptions; otherwise, <code>false</code>.",
-              "type": "boolean",
-              "readOnly": true
-            },
-            "conflictingAppResourceId": {
+            "conflictingContainerAppResourceId": {
               "description": "Name of the conflicting Container App on the Managed Environment if it's within the same subscription.",
               "type": "string",
               "readOnly": true
