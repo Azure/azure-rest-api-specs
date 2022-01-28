@@ -8,7 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-extendedlocation"
   output-folder: "$(typescript-sdks-folder)/sdk/extendedlocation/arm-extendedlocation"
-  clear-output-folder: true
   payload-flattening-threshold: 1
   generate-metadata: true
 ```
