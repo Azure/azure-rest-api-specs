@@ -1492,7 +1492,10 @@
         "copyLogDetailsType": {
           "description": "Indicates the type of job details.",
           "enum": [
-            "DataBoxDisk"
+            "DataBox",
+            "DataBoxDisk",
+            "DataBoxHeavy",
+            "DataBoxCustomerDisk"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1500,8 +1503,20 @@
             "modelAsExtensible": false,
             "values": [
               {
+                "value": "DataBox",
+                "description": "Data Box orders."
+              },
+              {
                 "value": "DataBoxDisk",
                 "description": "Data Box Disk orders."
+              },
+              {
+                "value": "DataBoxHeavy",
+                "description": "Data Box Heavy orders."
+              },
+              {
+                "value": "DataBoxCustomerDisk",
+                "description": "Data Box Customer Disk orders."
               }
             ]
           }
