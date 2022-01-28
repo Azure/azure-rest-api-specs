@@ -253,7 +253,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "description": "Conversation to analyze and one or more tasks to execute.",
+            "description": "The conversations to analyze and one or more tasks to execute on the conversations.",
             "in": "body",
             "name": "body",
             "schema": {
@@ -448,84 +448,92 @@
     },
     "MultiLanguageConversationAnalysisInput": {
       "properties": {
-        "conversation": {
-          "$ref": "#/definitions/ConversationInput"
+        "conversations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Conversation"
+          }
         }
       }
     },
-    "ConversationInput": {
+    "Conversation": {
       "required": [
         "id",
-        "language"
+        "language",
+        "modality"
       ],
       "properties": {
         "id": {
+          "description": "Identifier for the conversation",
           "type": "string"
         },
         "language": {
+          "description": "Default languages of the conversation item",
+          "type": "string"
+        },
+        "modality": {
+          "$ref": "#/definitions/Modality"
+        },
+        "domain": {
           "type": "string"
         },
         "conversationItems": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ConversationTurn"
+            "$ref": "#/definitions/ConversationItem"
           }
         }
       }
     },
-    "ConversationTurn": {
-      "discriminator": "kind",
-      "required": [
-        "kind",
-        "participantId"
-      ],
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/ConversationTurnKind"
-        },
-        "participantId": {
-          "type": "string"
-        }
-      }
-    },
-    "ConversationTurnKind": {
+    "Modality": {
       "type": "string",
-      "description": "Enumeration of supported Conversation Turn types.",
+      "description": "Enumeration of supported conversation genres (or modalities). Currently we will support chat and transcription",
       "enum": [
-        "TranscriptionTurn"
+        "Transcript",
+        "Chat"
       ],
       "x-ms-enum": {
-        "name": "ConversationTurnKind",
+        "name": "Modality",
         "modelAsString": true
       }
     },
-    "TranscriptionTurn": {
-      "type": "object",
+    "ConversationItem": {
       "required": [
-        "offset",
-        "lexicalText"
+        "participantId",
+        "utterances"
       ],
       "properties": {
-        "offset": {
-          "type": "integer",
-          "description": "Offset of the recognized speech in ticks."
+        "participantId": {
+          "type": "string"
         },
-        "displayText": {
+        "order": {
+          "description": "The order of the conversation item.",
+          "type": "integer"
+        },
+        "timestamp": {
+          "description": "The timestamp of the conversation item for ordering.",
           "type": "string",
-          "description": "The display form of the recognized text, with punctuation and capitalization added."
+          "format": "date-time"
         },
-        "lexicalText": {
-          "type": "string",
-          "description": "The lexical form of the recognized text."
+        "languages": {
+          "description": "Optional property to override the language of the conversation turn."
         },
-        "itnText": {
-          "type": "string",
-          "description": "The inverse-text-normalized (ITN) or canonical form of the recognized text, with phone numbers, numbers,abbreviations (\"doctor smith\" to \"dr smith\"), and other transformations applied."
+        "modality": {
+          "description": "Optional property to override the modality of the conversation turn."
         },
-        "maskedItnText": {
-          "type": "string",
-          "description": "The ITN form with profanity masking applied."
-        },
+        "utterances": {
+          "description": "The list of the utterance for the turn in various formats. Only one text for each format is allowed.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Utterance"
+          }
+        }
+      }
+    },
+    "TranscriptConversationItem": {
+      "type": "object",
+      "description": "Extra properties for supporting additional parameters for transcript conversation.",
+      "properties": {
         "wordOffsets": {
           "type": "array",
           "items": {
@@ -533,7 +541,39 @@
           }
         }
       },
-      "x-ms-discriminator-value": "TranscriptionConversationTurn"
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationItem"
+        }
+      ]
+    },
+    "Utterance": {
+      "required": [
+        "content",
+        "type"
+      ],
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/UtteranceType"
+        }
+      }
+    },
+    "UtteranceType": {
+      "type": "string",
+      "description": "Enumeration of supported utterance types.",
+      "enum": [
+        "text",
+        "lexical",
+        "itn",
+        "maskedItn"
+      ],
+      "x-ms-enum": {
+        "name": "UtteranceType",
+        "modelAsString": true
+      }
     },
     "WordLevelTiming": {
       "type": "object",
@@ -612,7 +652,7 @@
       "type": "string",
       "description": "Enumeration of supported Conversation Analysis LRO tasks.",
       "enum": [
-        "TranscriptionPII"
+        "TranscriptionPii"
       ],
       "x-ms-enum": {
         "name": "AnalyzeConversationLROTaskKind",
@@ -643,7 +683,7 @@
           "$ref": "#/definitions/AnalyzeConversationLROTask"
         }
       ],
-      "x-ms-discriminator-value": "TranscriptionPII"
+      "x-ms-discriminator-value": "TranscriptionPii"
     },
     "TranscriptionPiiTurnResult": {
       "type": "object",
@@ -713,9 +753,6 @@
       "type": "object",
       "description": "Supported parameters for a Transcription PII task.",
       "properties": {
-        "domain": {
-          "$ref": "#/definitions/PiiDomain"
-        },
         "piiCategories": {
           "$ref": "#/definitions/TranscriptionPiiCategories"
         },
@@ -2801,7 +2838,7 @@
           "$ref": "#/definitions/ConversationTasksState"
         },
         {
-          "$ref": "#/definitions/AnalyzeTextJobStatistics"
+          "$ref": "#/definitions/AnalyzeConversationJobStatistics"
         }
       ]
     },
@@ -2887,6 +2924,14 @@
       "properties": {
         "statistics": {
           "$ref": "#/definitions/RequestStatistics"
+        }
+      },
+      "type": "object"
+    },
+    "AnalyzeConversationJobStatistics": {
+      "properties": {
+        "statistics": {
+          "$ref": "#/definitions/ConversationRequestStatistics"
         }
       },
       "type": "object"
@@ -3324,6 +3369,38 @@
         }
       },
       "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+    },
+    "ConversationRequestStatistics": {
+      "type": "object",
+      "required": [
+        "conversationsCount",
+        "validConversationsCount",
+        "erroneousConversationsCount",
+        "transactionsCount"
+      ],
+      "properties": {
+        "conversationsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of conversations submitted in the request."
+        },
+        "validConversationsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of conversations documents. This excludes empty, over-size limit or non-supported languages documents."
+        },
+        "erroneousConversationsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents."
+        },
+        "transactionsCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of transactions for the request."
+        }
+      },
+      "description": "if showStats=true was specified in the request this field will contain information about the request payload."
     },
     "RequestStatistics": {
       "type": "object",

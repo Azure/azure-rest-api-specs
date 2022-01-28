@@ -7,44 +7,61 @@
     "input": {
       "displayName": "Redacting Pii From transcribed audio",
       "analysisInput": {
-        "conversation": {
-          "id": "string",
-          "language": "string",
-          "conversationItems": [
-            {
-              "kind": "TranscriptionTurn",
-              "participantId": "0",
-              "offset": 400000,
-              "lexicalText": "good morning john doe",
-              "itnText": "good morning john doe",
-              "displayText": "Good morning John Doe.",
-              "maskedItnText": "good morning john doe",
-              "confidence": 0.9889,
-              "wordOffsets": [
-                {
-                  "word": "Good",
-                  "offset": 500000,
-                  "duration": 2700000
-                },
-                {
-                  "word": "morning",
-                  "offset": 5300000,
-                  "duration": 900000
-                },
-                {
-                  "word": "John",
-                  "offset": 590000,
-                  "duration": 2700000
-                },
-                {
-                  "word": "Doe",
-                  "offset": 6300000,
-                  "duration": 920000
-                }
-              ]
-            }
-          ]
-        }
+        "conversations": [
+          {
+            "id": "string",
+            "language": "en-us",
+            "modality": "transcript",
+            "domain": "All",
+            "conversationItems": [
+              {
+                "kind": "TranscriptionTurn",
+                "participantId": "0",
+                "offset": 400000,
+                "utterances": [
+                  {
+                    "content": "Good morning John Doe.",
+                    "type": "text"
+                  },
+                  {
+                    "content": "good morning john doe",
+                    "type": "itn"
+                  },
+                  {
+                    "content": "good morning john doe",
+                    "type": "maskedItn"
+                  },
+                  {
+                    "content": "good morning john doe",
+                    "type": "lexical"
+                  }
+                ],
+                "wordOffsets": [
+                  {
+                    "word": "Good",
+                    "offset": 500000,
+                    "duration": 2700000
+                  },
+                  {
+                    "word": "morning",
+                    "offset": 5300000,
+                    "duration": 900000
+                  },
+                  {
+                    "word": "John",
+                    "offset": 590000,
+                    "duration": 2700000
+                  },
+                  {
+                    "word": "Doe",
+                    "offset": 6300000,
+                    "duration": 920000
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       },
       "tasks": [
         {
