@@ -331,6 +331,25 @@
         }
       }
     },
+    "Secret": {
+      "description": "Secret definition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Secret Name.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Secret Value.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
+        }
+      }
+    },
     "Template": {
       "description": "Container App versioned application definition.\nDefines the desired state of an immutable revision.\nAny changes to this section Will result in a new revision being created",
       "type": "object",

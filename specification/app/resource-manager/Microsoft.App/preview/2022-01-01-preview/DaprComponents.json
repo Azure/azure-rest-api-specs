@@ -288,7 +288,7 @@
               "description": "Collection of secrets used by a Dapr component",
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Secret"
+                "$ref": "./CommonDefinitions.json#/definitions/Secret"
               },
               "x-ms-identifiers": [
                 "name"
@@ -313,25 +313,6 @@
             }
           },
           "x-ms-client-flatten": true
-        }
-      }
-    },
-    "Secret": {
-      "description": "Dapr Component Secret.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Secret Name.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Secret Value.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ],
-          "x-ms-secret": true
         }
       }
     },
