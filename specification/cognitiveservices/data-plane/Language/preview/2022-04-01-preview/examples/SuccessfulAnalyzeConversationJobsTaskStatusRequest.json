@@ -27,33 +27,49 @@
               "lastUpdateDateTime": "2022-01-25T15:01:03Z",
               "status": "succeeded",
               "results": {
-                "conversation": [
+                "conversations": [
                   {
-                    "offset": "400000",
-                    "redactedLexicalText": "good morning *************",
-                    "redactedDisplayText": "Good morning *************.",
-                    "redactedItnText": "good morning *************",
-                    "redactedMaskedItnText": "",
-                    "entities": [
-                      {
-                        "category": "Name",
-                        "confidenceScore": 0.91,
-                        "length": 8,
-                        "offset": 13,
-                        "text": "john doe"
-                      }
-                    ],
-                    "redactedAudioOffsets": [
-                      {
-                        "offset": 590000,
-                        "duration": 2700000
-                      },
-                      {
-                        "offset": 6300000,
-                        "duration": 920000
-                      }
-                    ],
-                    "id": "1",
+                    "id": "conversationId",
+                    "conversationItems": {
+                      "order": "1",
+                      "redactedUtterances": [
+                        {
+                          "content": "Good morning *************.",
+                          "type": "text"
+                        },
+                        {
+                          "content": "good morning *************",
+                          "type": "itn"
+                        },
+                        {
+                          "content": "good morning *************",
+                          "type": "maskedItn"
+                        },
+                        {
+                          "content": "good morning *************",
+                          "type": "lexical"
+                        }
+                      ],
+                      "entities": [
+                        {
+                          "category": "Name",
+                          "confidenceScore": 0.91,
+                          "length": 8,
+                          "offset": 13,
+                          "text": "john doe"
+                        }
+                      ],
+                      "redactedAudioOffsets": [
+                        {
+                          "offset": 590000,
+                          "duration": 2700000
+                        },
+                        {
+                          "offset": 6300000,
+                          "duration": 920000
+                        }
+                      ]
+                    },
                     "warnings": []
                   }
                 ],

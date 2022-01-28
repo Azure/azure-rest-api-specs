@@ -534,7 +534,7 @@
       "type": "object",
       "description": "Extra properties for supporting additional parameters for transcript conversation.",
       "properties": {
-        "wordOffsets": {
+        "audioTimings": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/WordLevelTiming"
@@ -663,7 +663,8 @@
       "type": "string",
       "description": "Enumeration of supported Conversation Analysis task results.",
       "enum": [
-        "TranscriptionPiiResults"
+        "TranscriptionPiiResults",
+        "IssueDetectionResolutionResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeConversationLROResultsKind",
@@ -688,29 +689,23 @@
     "TranscriptionPiiTurnResult": {
       "type": "object",
       "required": [
-        "offset",
-        "redactedLexicalText"
+        "order",
+        "redactedUtterances"
       ],
       "properties": {
-        "offset": {
+        "order": {
           "type": "integer"
         },
-        "redactedDisplayText": {
-          "type": "string"
-        },
-        "redactedItnText": {
-          "type": "string"
-        },
-        "redactedLexicalText": {
-          "type": "string"
-        },
-        "redactedMaskedItnText": {
-          "type": "string"
+        "redactedUtterances": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Utterance"
+          }
         },
         "redactedAudioTimings": {
           "type": "array",
           "items": {
-            "$ref": "AudioTiming"
+            "$ref": "#/definitions/AudioTiming"
           }
         },
         "entities": {
@@ -734,20 +729,39 @@
     },
     "AnalyzeConversationTranscriptionPiiLROResult": {
       "type": "object",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/TranscriptionPiiTurnResult"
-        }
-      },
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeConversationLROResult"
         }
       ],
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TranscriptionPiiResult"
+          }
+        }
+      },
       "required": [
         "results"
       ],
       "x-ms-discriminator-value": "TranscriptionPiiResults"
+    },
+    "TranscriptionPiiResult": {
+      "required": [
+        "conversationItems"
+      ],
+      "properties": {
+        "conversationItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TranscriptionPiiTurnResult"
+          }
+        },
+        "allOf": {
+          "$ref": "#/definitions/ConversationResult"
+        }
+      }
     },
     "TranscriptionPiiTaskParameters": {
       "type": "object",
@@ -3369,6 +3383,95 @@
         }
       },
       "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+    },
+    "ConversationResult": {
+      "type": "object",
+      "required": [
+        "id",
+        "warnings"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty conversation identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/ConversationWarning"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/ConversationStatistics"
+        }
+      }
+    },
+    "ConversationError": {
+      "type": "object",
+      "required": [
+        "id",
+        "error"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Conversation Id."
+        },
+        "error": {
+          "type": "object",
+          "description": "Conversation Error.",
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "ConversationWarning": {
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "ConversationTruncated"
+          ],
+          "x-ms-enum": {
+            "name": "WarningCodeValue",
+            "modelAsString": true
+          },
+          "description": "Error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Warning message."
+        },
+        "targetRef": {
+          "type": "string",
+          "description": "A JSON pointer reference indicating the target object."
+        }
+      }
+    },
+    "ConversationStatistics": {
+      "type": "object",
+      "required": [
+        "charactersCount",
+        "transactionsCount"
+      ],
+      "properties": {
+        "charactersCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of text elements recognized in the conversation."
+        },
+        "transactionsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of transactions for the conversation."
+        }
+      },
+      "description": "if showStats=true was specified in the request this field will contain information about the conversation payload.      "
     },
     "ConversationRequestStatistics": {
       "type": "object",
