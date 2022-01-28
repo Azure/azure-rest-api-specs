@@ -515,7 +515,7 @@
           "type": "string",
           "format": "date-time"
         },
-        "languages": {
+        "language": {
           "description": "Optional property to override the language of the conversation turn."
         },
         "modality": {
@@ -652,7 +652,8 @@
       "type": "string",
       "description": "Enumeration of supported Conversation Analysis LRO tasks.",
       "enum": [
-        "TranscriptionPii"
+        "TranscriptionPii",
+        "IssueResolutionDetection"
       ],
       "x-ms-enum": {
         "name": "AnalyzeConversationLROTaskKind",
@@ -664,7 +665,7 @@
       "description": "Enumeration of supported Conversation Analysis task results.",
       "enum": [
         "TranscriptionPiiResults",
-        "IssueDetectionResolutionResults"
+        "IssueResolutionDetectionResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeConversationLROResultsKind",
@@ -789,6 +790,96 @@
         {
           "$ref": "#/definitions/PreBuiltTaskParameters"
         }
+      ]
+    },
+    "AnalyzeConversationIssueResolutionDetectionLROTask": {
+      "type": "object",
+      "description": "Task definition for Issue Resolution Detection in conversation.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/IssueResolutionDetectionTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeConversationLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "IssueResolutionDetectionTasks"
+    },
+    "IssueResolutionDetectionTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for an Issue Resolution Detection task.",
+      "properties": {
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskParameters"
+        },
+        {
+          "$ref": "#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
+    "AnalyzeConversationIssueResolutionDetectionLROResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/SummaryResult"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeConversationLROResult"
+        }
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "IssueResolutionDetectionResults"
+    },
+    "SummaryResult": {
+      "type": "object",
+      "required": [
+        "summary"
+      ],
+      "properties": {
+        "summary": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/Issue"
+              },
+              {
+                "$ref": "#/definitions/Resolution"
+              }
+            ]
+            }
+          }
+        }
+      }
+    },
+    "Issue": {
+      "type": "object",
+      "properties": {
+        "issue": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "issue"
+      ]
+    },
+    "Resolution": {
+      "type": "object",
+      "properties": {
+        "resolution": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "resolution"
       ]
     },
     "AnalyzeTextLROTask": {
@@ -3490,12 +3581,12 @@
         "validConversationsCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of conversations documents. This excludes empty, over-size limit or non-supported languages documents."
+          "description": "Number of valid conversations. This excludes empty, over-size limit or non-supported languages conversations."
         },
         "erroneousConversationsCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents."
+          "description": "Number of invalid conversations. This includes empty, over-size limit or non-supported languages conversations."
         },
         "transactionsCount": {
           "type": "integer",
