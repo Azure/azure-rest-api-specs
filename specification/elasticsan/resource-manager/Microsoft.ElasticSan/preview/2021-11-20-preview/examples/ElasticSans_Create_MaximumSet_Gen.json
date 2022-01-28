@@ -5,11 +5,19 @@
     "elasticSanName": "NH4e",
     "parameters": {
       "properties": {
-        "baseSizeTB": 5,
-        "extendedSizeTB": 29
+        "sku": {
+          "name": "Standard_LRS",
+          "tier": "Standard"
+        },
+        "availabilityZones": [
+          "aaaa"
+        ],
+        "baseSizeTB": 14,
+        "extendedSizeTB": 7
       },
+      "location": "aaaaaaaaaa",
       "tags": {
-        "key7795": "aaaaa"
+        "key6326": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
       }
     },
     "api-version": "2021-11-20-preview"
@@ -49,9 +57,41 @@
         }
       }
     },
-    "202": {
+    "201": {
       "headers": {
         "Azure-AsyncOperation": "https://foo.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "sku": {
+            "name": "Standard_LRS",
+            "tier": "Standard"
+          },
+          "availabilityZones": [
+            "aaaa"
+          ],
+          "provisioningState": "Invalid",
+          "baseSizeTB": 14,
+          "extendedSizeTB": 7,
+          "totalSizeTB": 3,
+          "provisionedIops": 2,
+          "provisionedMBps": 18
+        },
+        "systemData": {
+          "createdBy": "aaaaaaaaaaaaaaaaaaaa",
+          "createdByType": "User",
+          "createdAt": "2022-01-28T10:34:47.528Z",
+          "lastModifiedBy": "aaaaaaaaaaa",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-01-28T10:34:47.528Z"
+        },
+        "location": "aaaaaaaaaa",
+        "id": "aaaaaaaaaaaaaaaaaa",
+        "name": "aaaaaaaaaaaaaaaaaa",
+        "type": "aaaaaaaaaaaa",
+        "tags": {
+          "key6326": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
       }
     }
   }
