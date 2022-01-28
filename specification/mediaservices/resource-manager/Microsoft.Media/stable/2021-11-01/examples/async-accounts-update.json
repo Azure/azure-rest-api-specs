@@ -2,31 +2,30 @@
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "contoso",
-    "accountName": "contosotv",
-    "api-version": "2021-11-01"
+    "accountName": "contososports",
+    "api-version": "2021-11-01",
+    "parameters": {
+      "tags": {
+        "key1": "value3"
+      }
+    }
   },
   "responses": {
-    "200": {
+    "202": {
       "body": {
         "location": "South Central US",
         "tags": {
-          "key1": "value1",
-          "key2": "value2"
+          "key1": "value3"
         },
         "identity": {
           "type": "UserAssigned",
           "userAssignedIdentities": {
-            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
-              "principalId": "00000000-0000-0000-0000-000000000000",
-              "clientId": "00000000-0000-0000-0000-000000000000"
-            },
-            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2": {
-              "principalId": "00000000-0000-0000-0000-000000000000",
-              "clientId": "00000000-0000-0000-0000-000000000000"
-            }
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {},
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2": {}
           }
         },
         "properties": {
+          "provisioningState": "InProgress",
           "encryption": {
             "type": "CustomerKey",
             "keyVaultProperties": {
@@ -58,7 +57,7 @@
           "privateEndpointConnections": [
             {
               "name": "00000000-0000-0000-0000-000000000001",
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Media/mediaservices/contosotv/privateEndpointConnections/00000000-0000-0000-0000-000000000001",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Media/mediaservices/contososports/privateEndpointConnections/00000000-0000-0000-0000-000000000001",
               "type": "Microsoft.Media/mediaservices/privateEndpointConnections",
               "properties": {
                 "provisioningState": "Succeeded",
@@ -73,7 +72,7 @@
             },
             {
               "name": "00000000-0000-0000-0000-000000000002",
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Media/mediaservices/contosotv/privateEndpointConnections/00000000-0000-0000-0000-000000000002",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Media/mediaservices/contososports/privateEndpointConnections/00000000-0000-0000-0000-000000000002",
               "type": "Microsoft.Media/mediaservices/privateEndpointConnections",
               "properties": {
                 "provisioningState": "Succeeded",
