@@ -346,6 +346,10 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/CustomHostnameAnalysisResult"
+            },
+            "404": {
+              "description": "Not found.",
+              "x-ms-error-response": true
             }
           },
           "default": {
@@ -655,7 +659,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
