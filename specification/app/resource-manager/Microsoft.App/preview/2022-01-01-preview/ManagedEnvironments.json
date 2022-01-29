@@ -357,51 +357,6 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
-      },
-      "delete": {
-        "tags": [
-          "ManagedEnvironments",
-          "Certificates"
-        ],
-        "summary": "Deletes all Certificates in a given managed environment.",
-        "operationId": "Certificates_Delete",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "managedEnvironmentName",
-            "in": "path",
-            "description": "Name of the Managed Environment.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Delete operation completed"
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete Certificates by Managed Environment": {
-            "$ref": "./examples/Certificates_Delete.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{managedEnvironmentName}/certificates/{name}": {
@@ -455,9 +410,6 @@
           "Get Certificate": {
             "$ref": "./examples/Certificate_Get.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       },
       "put": {
@@ -518,9 +470,6 @@
           "Create or Update Certificate": {
             "$ref": "./examples/Certificate_CreateOrUpdate.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       },
       "delete": {
@@ -570,9 +519,6 @@
           "Delete Certificate": {
             "$ref": "./examples/Certificate_Delete.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     }
@@ -789,10 +735,6 @@
                 "create"
               ],
               "x-ms-secret": true
-            },
-            "name": {
-              "description": "Friendly name of the certificate.",
-              "type": "string"
             },
             "subjectName": {
               "description": "Subject name of the certificate.",
