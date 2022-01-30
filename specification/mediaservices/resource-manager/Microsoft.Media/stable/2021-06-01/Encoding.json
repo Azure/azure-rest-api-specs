@@ -126,12 +126,7 @@
       "description": "Describes Advanced Audio Codec (AAC) audio encoding settings."
     },
     "Layer": {
-      "discriminator": "@odata.type",
       "properties": {
-        "@odata.type": {
-          "type": "string",
-          "description": "The discriminator for derived types."
-        },
         "width": {
           "type": "string",
           "description": "The width of the output video for this layer. The value can be absolute (in pixels) or relative (in percentage). For example 50% means the output video has half as many pixels in width as the input."
@@ -146,13 +141,9 @@
         }
       },
       "type": "object",
-      "required": [
-        "@odata.type"
-      ],
       "description": "The encoder can be configured to produce video and/or images (thumbnails) at different resolutions, by specifying a layer for each desired resolution. A layer represents the properties for the video or image at a resolution."
     },
     "H265VideoLayer": {
-      "x-ms-discriminator-value": "#Microsoft.Media.H265VideoLayer",
       "allOf": [
         {
           "$ref": "#/definitions/Layer"
@@ -195,7 +186,6 @@
       "description": "Describes the settings to be used when encoding the input video into a desired output bitrate layer."
     },
     "H265Layer": {
-      "x-ms-discriminator-value": "#Microsoft.Media.H265Layer",
       "allOf": [
         {
           "$ref": "#/definitions/H265VideoLayer"
@@ -206,7 +196,8 @@
           "type": "string",
           "enum": [
             "Auto",
-            "Main"
+            "Main",
+            "Main10"
           ],
           "x-ms-enum": {
             "name": "H265VideoProfile",
@@ -218,6 +209,10 @@
               {
                 "value": "Main",
                 "description": "Main profile (https://x265.readthedocs.io/en/default/cli.html?highlight=profile#profile-level-tier)"
+              },
+              {
+                "description": "Main 10 profile (https://en.wikipedia.org/wiki/High_Efficiency_Video_Coding#Main_10)",
+                "value": "Main10"
               }
             ],
             "modelAsString": true
@@ -232,6 +227,11 @@
           "type": "string",
           "format": "duration",
           "description": "The VBV buffer window length. The value should be in ISO 8601 format. The value should be in the range [0.1-100] seconds. The default is 5 seconds (for example, PT5S)."
+        },
+        "crf": {
+          "description": "The value of CRF to be used when encoding this layer. This setting takes effect when RateControlMode of video codec is set at CRF mode. The range of CRF value is between 0 and 51, where lower values would result in better quality, at the expense of higher file sizes. Higher values mean more compression, but at some point quality degradation will be noticed. Default value is 28.",
+          "format": "float",
+          "type": "number"
         },
         "referenceFrames": {
           "type": "integer",
@@ -1044,7 +1044,6 @@
       "description": "Describes all the filtering operations, such as de-interlacing, rotation etc. that are to be applied to the input media before encoding."
     },
     "VideoLayer": {
-      "x-ms-discriminator-value": "#Microsoft.Media.VideoLayer",
       "allOf": [
         {
           "$ref": "#/definitions/Layer"
@@ -1087,7 +1086,6 @@
       "description": "Describes the settings to be used when encoding the input video into a desired output bitrate layer."
     },
     "H264Layer": {
-      "x-ms-discriminator-value": "#Microsoft.Media.H264Layer",
       "allOf": [
         {
           "$ref": "#/definitions/VideoLayer"
@@ -1145,6 +1143,11 @@
           "format": "duration",
           "description": "The VBV buffer window length. The value should be in ISO 8601 format. The value should be in the range [0.1-100] seconds. The default is 5 seconds (for example, PT5S)."
         },
+        "crf": {
+          "description": "The value of CRF to be used when encoding this layer. This setting takes effect when RateControlMode of video codec is set at CRF mode. The range of CRF value is between 0 and 51, where lower values would result in better quality, at the expense of higher file sizes. Higher values mean more compression, but at some point quality degradation will be noticed. Default value is 23.",
+          "format": "float",
+          "type": "number"
+        },
         "referenceFrames": {
           "type": "integer",
           "format": "int32",
@@ -1184,10 +1187,6 @@
         }
       ],
       "properties": {
-        "sceneChangeDetection": {
-          "type": "boolean",
-          "description": "Whether or not the encoder should insert key frames at scene changes. If not specified, the default is false. This flag should be set to true only when the encoder is being configured to produce a single output video."
-        },
         "complexity": {
           "type": "string",
           "enum": [
@@ -1221,6 +1220,37 @@
             "$ref": "#/definitions/H264Layer"
           },
           "description": "The collection of output H.264 layers to be produced by the encoder."
+        },
+        "rateControlMode": {
+          "description": "The video rate control mode",
+          "enum": [
+            "ABR",
+            "CBR",
+            "CRF"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "H264RateControlMode",
+            "values": [
+              {
+                "description": "Average Bitrate (ABR) mode that hits the target bitrate: Default mode.",
+                "value": "ABR"
+              },
+              {
+                "description": "Constant Bitrate (CBR) mode that tightens bitrate variations around target bitrate.",
+                "value": "CBR"
+              },
+              {
+                "description": "Constant Rate Factor (CRF) mode that targets at constant subjective quality.",
+                "value": "CRF"
+              }
+            ]
+          }
+        },
+        "sceneChangeDetection": {
+          "type": "boolean",
+          "description": "Whether or not the encoder should insert key frames at scene changes. If not specified, the default is false. This flag should be set to true only when the encoder is being configured to produce a single output video."
         }
       },
       "type": "object",
@@ -1251,7 +1281,6 @@
       "description": "Describes the properties for producing a series of JPEG images from the input video."
     },
     "JpgLayer": {
-      "x-ms-discriminator-value": "#Microsoft.Media.JpgLayer",
       "allOf": [
         {
           "$ref": "#/definitions/Layer"
@@ -1333,7 +1362,6 @@
       "description": "Describes the properties for producing a series of PNG images from the input video."
     },
     "PngLayer": {
-      "x-ms-discriminator-value": "#Microsoft.Media.PngLayer",
       "allOf": [
         {
           "$ref": "#/definitions/Layer"
@@ -1353,7 +1381,7 @@
       "properties": {
         "configurations": {
           "$ref": "#/definitions/PresetConfigurations",
-          "description": "PresetConfigurations are only supported for the ContentAwareEncoding and H265ContentAwareEncoding built-in presets. These settings will not affect other built-in or custom defined presets."
+          "description": "Optional configuration settings for encoder. Configurations is only supported for ContentAwareEncoding and H265ContentAwareEncoding BuiltInStandardEncoderPreset."
         },
         "presetName": {
           "type": "string",
@@ -2594,6 +2622,9 @@
               "$ref": "#/definitions/Transform"
             }
           },
+          "404": {
+            "description": "NotFound"
+          },
           "default": {
             "description": "Detailed error information.",
             "schema": {
@@ -2882,6 +2913,9 @@
             "schema": {
               "$ref": "#/definitions/Job"
             }
+          },
+          "404": {
+            "description": "NotFound"
           },
           "default": {
             "description": "Detailed error information.",
@@ -3180,7 +3214,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "The version of the API to be used with the client request."
+      "description": "The Version of the API to be used with the client request."
     }
   }
 }
