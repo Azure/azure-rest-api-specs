@@ -22,17 +22,17 @@
     "/offers/{id}": {
       "get": {
         "tags": [
-          "Public-Offers-Single"
+          "Public Offer/Product Single"
         ],
-        "summary": "Get a public offer by id",
-        "operationId": "PublicOffers_Get",
+        "summary": "Get a single public catalog item offer by id",
+        "operationId": "SinglePublicOffer_Get",
         "parameters": [
           {
             "type": "string",
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "Offer id",
+            "description": "Offer legacy or big id",
             "x-nullable": true
           },
           {
@@ -96,6 +96,160 @@
               "type": "string"
             }
           }
+        }
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "tags": [
+          "Public Offer/Product Single"
+        ],
+        "summary": "Get a single public catalog item offer by id",
+        "operationId": "SinglePublicOffer_Get2",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Offer legacy or big id",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "api-version",
+            "x-originalName": "apiVersion",
+            "in": "query",
+            "required": true,
+            "description": "API version",
+            "default": "2021-06-01",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "language",
+            "in": "query",
+            "description": "Offer language",
+            "default": "en",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "market",
+            "in": "query",
+            "description": "Offer market",
+            "default": "US",
+            "x-nullable": true
+          },
+          {
+            "type": "boolean",
+            "name": "includeStopSoldPlans",
+            "in": "query",
+            "description": "To include stop sold or hidden plans",
+            "default": false,
+            "x-nullable": false
+          },
+          {
+            "type": "array",
+            "name": "hideKeys",
+            "in": "query",
+            "description": "Add hide key to retrieve preview items",
+            "collectionFormat": "multi",
+            "x-nullable": true,
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "Returns a single public or preview offer",
+            "schema": {
+              "$ref": "#/definitions/CatalogItem"
+            }
+          },
+          "404": {
+            "x-nullable": false,
+            "description": "In case offer does not exist",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/offers": {
+      "get": {
+        "tags": [
+          "Public Offers/Products Listing"
+        ],
+        "summary": "Get a list of public available offers",
+        "operationId": "PublicOffers_Get",
+        "parameters": [
+          {
+            "type": "object",
+            "name": "odataQueryOptions",
+            "in": "query",
+            "description": "Allows to add Odata query options for filtering: supports Select, Expand, Filter, OrderBy, MaxTop, Count, and SkipToken - not available directly from swagger",
+            "x-schema": {
+              "$ref": "#/definitions/ODataQueryOptionsOfCatalogItem"
+            },
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "storefront",
+            "in": "query",
+            "description": "Relevant storefront",
+            "default": "azure",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "api-version",
+            "x-originalName": "apiVersion",
+            "in": "query",
+            "required": true,
+            "description": "API version",
+            "default": "2021-06-01",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "language",
+            "in": "query",
+            "description": "Offer language",
+            "default": "en",
+            "x-nullable": true
+          },
+          {
+            "type": "array",
+            "name": "hideKeys",
+            "in": "query",
+            "description": "Add hide key to retrieve preview items",
+            "collectionFormat": "multi",
+            "x-nullable": true,
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "Returns a list of public or preview offers",
+            "schema": {
+              "$ref": "#/definitions/PageResultOfCatalogItem"
+            }
+          },
+          "400": {
+            "x-nullable": false,
+            "description": "In case request malformed",
+            "schema": {
+              "type": "string"
+            }
+          }
         },
         "x-ms-examples": {
           "PublicOffers_Get": {
@@ -104,14 +258,32 @@
         }
       }
     },
-    "/offers": {
+    "/products": {
       "get": {
         "tags": [
-          "Public-Offers-Listing"
+          "Public Offers/Products Listing"
         ],
         "summary": "Get a list of public available offers",
-        "operationId": "PublicOffers_List",
+        "operationId": "PublicOffers_Get2",
         "parameters": [
+          {
+            "type": "object",
+            "name": "odataQueryOptions",
+            "in": "query",
+            "description": "Allows to add Odata query options for filtering: supports Select, Expand, Filter, OrderBy, MaxTop, Count, and SkipToken - not available directly from swagger",
+            "x-schema": {
+              "$ref": "#/definitions/ODataQueryOptionsOfCatalogItem"
+            },
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "storefront",
+            "in": "query",
+            "description": "Relevant storefront",
+            "default": "azure",
+            "x-nullable": true
+          },
           {
             "type": "string",
             "name": "api-version",
@@ -167,29 +339,6 @@
     }
   },
   "definitions": {
-    "PageResultOfCatalogItem": {
-      "type": "object",
-      "description": "Represents a feed of entities that includes additional information that OData formats support.",
-      "properties": {
-        "items": {
-          "type": "array",
-          "description": "Gets the collection of entities for this feed.",
-          "items": {
-            "$ref": "#/definitions/CatalogItem"
-          }
-        },
-        "nextPageLink": {
-          "type": "string",
-          "description": "Gets the link for the next page of items in the feed.",
-          "format": "uri"
-        },
-        "count": {
-          "type": "integer",
-          "description": "Gets the total count of items in the feed.",
-          "format": "int64"
-        }
-      }
-    },
     "CatalogItem": {
       "type": "object",
       "required": [
@@ -197,6 +346,7 @@
         "hasStandardContractAmendments",
         "offerId",
         "legacyId",
+        "standardContractAmendmentsRevisionId",
         "offerType",
         "isPrivate",
         "isPreview",
@@ -204,6 +354,7 @@
         "fulfillBeforeChargeEligible",
         "bigId",
         "legalTermsType",
+        "isDeleted",
         "isThirdParty",
         "popularity",
         "hasFreeTrials",
@@ -218,7 +369,10 @@
         "excludeFromBootstrap",
         "disableSendEmailOnPurchase",
         "hideFromSaasBlade",
-        "integratedWithMicrosoftGraphApi"
+        "integratedWithMicrosoftGraphApi",
+        "hasRIPlans",
+        "hideFromAdminPortal",
+        "_ts"
       ],
       "properties": {
         "language": {
@@ -268,6 +422,11 @@
             "$ref": "#/definitions/Store"
           }
         },
+        "standardContractAmendmentsRevisionId": {
+          "type": "string",
+          "description": "Standard contract amendments for this product",
+          "format": "guid"
+        },
         "summary": {
           "type": "string",
           "description": "Summary"
@@ -312,14 +471,14 @@
             }
           ]
         },
-        "markets": {
+        "Markets": {
           "type": "array",
           "description": "Markets for the item",
           "items": {
             "type": "string"
           }
         },
-        "isvContactDetails": {
+        "IsvContactDetails": {
           "type": "object",
           "description": "ISV contact details",
           "additionalProperties": {
@@ -373,6 +532,13 @@
         "categoryIds": {
           "type": "array",
           "description": "List of category IDs the marketplace item belongs to",
+          "items": {
+            "type": "string"
+          }
+        },
+        "operatingSystems": {
+          "type": "array",
+          "description": "List of operating systems the marketplace item supports",
           "items": {
             "type": "string"
           }
@@ -511,6 +677,13 @@
             }
           ]
         },
+        "properties": {
+          "type": "object",
+          "description": "Dictionary of properties provided for the item",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "images": {
           "type": "array",
           "description": "List of Images",
@@ -546,7 +719,7 @@
         },
         "additionalProperties": {
           "type": "object",
-          "description": "Properties provided for the item",
+          "description": "Dictionary of additional properties provided for the item",
           "additionalProperties": {
             "type": "string"
           }
@@ -558,6 +731,10 @@
               "$ref": "#/definitions/RestrictedAudience"
             }
           ]
+        },
+        "isDeleted": {
+          "type": "boolean",
+          "description": "A value indicating is the marketplace item deleted"
         },
         "isThirdParty": {
           "type": "boolean",
@@ -629,10 +806,10 @@
         },
         "isExcludedFromSearch": {
           "type": "boolean",
-          "description": "A value indicating whether the offer should excluded from search"
+          "description": "A value indicating whether the offer should be excluded from search"
         },
         "applicableStoreFronts": {
-          "description": "A value indicating what store fronts this offer should surface on",
+          "description": "A value indicating which storefront this offer should surface on",
           "allOf": [
             {
               "$ref": "#/definitions/StoreFrontOptions"
@@ -677,7 +854,7 @@
           "type": "boolean",
           "description": "A value indicating whether the offer should not be re-ingest during bootstrap session"
         },
-        "hydrationNotificationReceivedAt": {
+        "hydrationNotificationRecivedAt": {
           "type": "string",
           "description": "Notification creation time",
           "format": "date-time"
@@ -759,28 +936,80 @@
           "additionalProperties": {
             "$ref": "#/definitions/UIPricing"
           }
+        },
+        "hasRIPlans": {
+          "type": "boolean",
+          "description": "Has plans with reservations"
+        },
+        "enrichedData": {
+          "description": "Enriched offer data",
+          "allOf": [
+            {
+              "$ref": "#/definitions/EnrichedData"
+            }
+          ]
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "capabilities",
+          "items": {
+            "$ref": "#/definitions/OfficeCapabilityType"
+          }
+        },
+        "releaseDate": {
+          "type": "string",
+          "description": "release date",
+          "format": "date-time"
+        },
+        "hideFromAdminPortal": {
+          "type": "boolean",
+          "description": "the flag is used in embedded views"
+        },
+        "awards": {
+          "type": "array",
+          "description": "the flag is used in embedded views",
+          "items": {
+            "type": "string"
+          }
+        },
+        "id": {
+          "type": "string"
+        },
+        "partitionKey": {
+          "type": "string"
+        },
+        "_ts": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "searchScore": {
+          "type": "number",
+          "description": "Gets or sets the search relevance score when it is linked to a search score",
+          "format": "double"
         }
       }
     },
     "Store": {
       "type": "string",
-      "description": "enum type",
+      "description": "",
       "x-enumNames": [
         "Appsource",
         "AMP",
         "Ibiza",
-        "Cosell"
+        "Cosell",
+        "DakotaDownstream"
       ],
       "enum": [
         "Appsource",
         "AMP",
         "Ibiza",
-        "Cosell"
+        "Cosell",
+        "DakotaDownstream"
       ]
     },
     "OfferType": {
       "type": "string",
-      "description": "enum type",
+      "description": "",
       "x-enumNames": [
         "None",
         "DevService",
@@ -801,7 +1030,8 @@
         "ConsultingServices",
         "CosellOnly",
         "CoreVirtualMachine",
-        "PowerBIVisuals"
+        "PowerBIVisuals",
+        "Office365"
       ],
       "enum": [
         "None",
@@ -823,17 +1053,18 @@
         "ConsultingServices",
         "CosellOnly",
         "CoreVirtualMachine",
-        "PowerBIVisuals"
+        "PowerBIVisuals",
+        "Office365"
       ]
     },
     "MarketingMaterial": {
       "type": "object",
       "properties": {
-        "path": {
+        "Path": {
           "type": "string",
           "description": "Path to the marketing site"
         },
-        "learnUri": {
+        "LearnUri": {
           "type": "string",
           "description": "Path to the learn site"
         }
@@ -841,7 +1072,7 @@
     },
     "LegalTermsType": {
       "type": "string",
-      "description": "enum type",
+      "description": "",
       "x-enumNames": [
         "None",
         "EA"
@@ -888,16 +1119,18 @@
     },
     "ServiceDurationUnit": {
       "type": "string",
-      "description": "enum type",
+      "description": "",
       "x-enumNames": [
         "Days",
         "Hours",
-        "Weeks"
+        "Weeks",
+        "Months"
       ],
       "enum": [
         "Days",
         "Hours",
-        "Weeks"
+        "Weeks",
+        "Months"
       ]
     },
     "MarketPricingDetailsItem": {
@@ -968,7 +1201,7 @@
     },
     "CurrencyDecorator": {
       "type": "integer",
-      "description": "enum type",
+      "description": "0 = Fixed\n1 = Estimated",
       "x-enumNames": [
         "Fixed",
         "Estimated"
@@ -1010,7 +1243,7 @@
     },
     "IconKind": {
       "type": "integer",
-      "description": "enum type",
+      "description": "0 = Small\n1 = Medium\n2 = Large\n3 = Wide\n4 = Hero",
       "x-enumNames": [
         "Small",
         "Medium",
@@ -1052,7 +1285,7 @@
     },
     "ArtifactType": {
       "type": "string",
-      "description": "enum type",
+      "description": "",
       "x-enumNames": [
         "Template",
         "Fragment",
@@ -1230,7 +1463,8 @@
         "isPayg",
         "isStopSell",
         "cspState",
-        "isQuantifiable"
+        "isQuantifiable",
+        "hasRI"
       ],
       "properties": {
         "id": {
@@ -1269,7 +1503,7 @@
           "type": "string",
           "description": "Legacy plan Id which is obtained by combining Offer->LegacyId and PlanId with no separator in between"
         },
-        "keywords": {
+        "Keywords": {
           "type": "array",
           "description": "List of keywords",
           "items": {
@@ -1339,7 +1573,7 @@
         },
         "uiDefinitionUri": {
           "type": "string",
-          "description": "What blade to be opened when someone wants to create the marketplace item"
+          "description": "What blade to opne when someone wants to create a marketplace item"
         },
         "artifacts": {
           "type": "array",
@@ -1392,6 +1626,12 @@
           "type": "string",
           "description": "Stack type : Classic, Gen1, Gen2"
         },
+        "altArchitectureReference": {
+          "type": "string"
+        },
+        "architectureType": {
+          "type": "string"
+        },
         "cspState": {
           "description": "A value indicating whether the product is available for purchase through CSP channel",
           "allOf": [
@@ -1424,7 +1664,7 @@
         },
         "callToAction": {
           "type": "string",
-          "description": "Ahe action that can be performed on this plan on the storefronts"
+          "description": "The action that can be performed on this plan, on the storefronts"
         },
         "redirectUrl": {
           "type": "string",
@@ -1434,7 +1674,7 @@
           "type": "string",
           "description": "Service identifier"
         },
-        "vmSecurityType": {
+        "vmSecuritytype": {
           "description": "VM security type",
           "allOf": [
             {
@@ -1445,6 +1685,24 @@
         "displayRank": {
           "type": "string",
           "description": "Display rank"
+        },
+        "purchaseDurationDiscounts": {
+          "type": "array",
+          "description": "List of purchase duration discounts",
+          "items": {
+            "$ref": "#/definitions/PurchaseDurationDiscount"
+          }
+        },
+        "upns": {
+          "type": "array",
+          "description": "List of user principal names(UPNs)",
+          "items": {
+            "$ref": "#/definitions/TermUpn"
+          }
+        },
+        "hasRI": {
+          "type": "boolean",
+          "description": "A value indicating whether the plan supports reservations"
         }
       }
     },
@@ -1477,14 +1735,26 @@
     "AvailabilityEntity": {
       "type": "object",
       "required": [
+        "_ts",
         "isPIRequired",
         "pricingAudience",
         "isStopSell",
         "hasFreeTrials",
         "displayRank",
-        "remediationRequired"
+        "RemediationRequired"
       ],
       "properties": {
+        "id": {
+          "type": "string"
+        },
+        "partitionKey": {
+          "type": "string",
+          "description": "Partition key"
+        },
+        "_ts": {
+          "type": "integer",
+          "format": "int64"
+        },
         "actions": {
           "type": "array",
           "description": "List of allowed actions",
@@ -1567,15 +1837,11 @@
           "description": "Display rank",
           "format": "int32"
         },
-        "partitionKey": {
-          "type": "string",
-          "description": "Partition key"
-        },
-        "remediationRequired": {
+        "RemediationRequired": {
           "type": "boolean",
           "description": "A value indicating whether remediation is required to acquire availability"
         },
-        "remediations": {
+        "Remediations": {
           "type": "array",
           "description": "Remediation actions for acquiring availability if RemediationRequired is true",
           "items": {
@@ -1606,7 +1872,7 @@
       "properties": {
         "meterId": {
           "type": "string",
-          "description": "Meter id"
+          "description": "Metetr id"
         },
         "partNumber": {
           "type": "string",
@@ -1666,23 +1932,13 @@
       }
     },
     "IncludedQuantityProperty": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/IncludedQuantityProperty2"
-        },
-        {
-          "type": "object"
-        }
-      ]
-    },
-    "IncludedQuantityProperty2": {
       "type": "object",
       "properties": {
-        "termId": {
+        "TermId": {
           "type": "string",
           "description": "Term id"
         },
-        "quantity": {
+        "Quantity": {
           "type": "string",
           "description": "Quantity"
         }
@@ -1690,7 +1946,7 @@
     },
     "PricingAudience": {
       "type": "string",
-      "description": "enum type",
+      "description": "",
       "x-enumNames": [
         "None",
         "DirectCommercial",
@@ -1837,11 +2093,11 @@
     "Remediation": {
       "type": "object",
       "properties": {
-        "remediationId": {
+        "RemediationId": {
           "type": "string",
           "description": "Remediation identifier"
         },
-        "type": {
+        "Type": {
           "type": "string",
           "description": "Remediation type"
         }
@@ -1850,11 +2106,7 @@
     "OpenProperty": {
       "type": "object",
       "properties": {
-        "generation": {
-          "type": "string",
-          "description": "VM generation"
-        },
-        "properties": {
+        "Properties": {
           "type": "object",
           "additionalProperties": {}
         }
@@ -1879,7 +2131,7 @@
     },
     "CSPState": {
       "type": "string",
-      "description": "enum type",
+      "description": "",
       "x-enumNames": [
         "OptIn",
         "OptOut",
@@ -1895,7 +2147,7 @@
     },
     "VmSecurityType": {
       "type": "string",
-      "description": "enum type",
+      "description": "",
       "x-enumFlags": true,
       "x-enumNames": [
         "None",
@@ -1907,6 +2159,32 @@
         "Trusted",
         "Confidential"
       ]
+    },
+    "PurchaseDurationDiscount": {
+      "type": "object",
+      "required": [
+        "DiscountPercentage"
+      ],
+      "properties": {
+        "Duration": {
+          "type": "string"
+        },
+        "DiscountPercentage": {
+          "type": "number",
+          "format": "decimal"
+        }
+      }
+    },
+    "TermUpn": {
+      "type": "object",
+      "properties": {
+        "TermId": {
+          "type": "string"
+        },
+        "Upn": {
+          "type": "string"
+        }
+      }
     },
     "DefinitionTemplates": {
       "type": "object",
@@ -1937,7 +2215,7 @@
     },
     "StoreFrontOptions": {
       "type": "integer",
-      "description": "enum type",
+      "description": "0 = None\n1 = Azure\n2 = AMP\n4 = AppSource",
       "x-enumFlags": true,
       "x-enumNames": [
         "None",
@@ -1954,7 +2232,7 @@
     },
     "EnvironmentInfo": {
       "type": "integer",
-      "description": "enum type",
+      "description": "1 = DogFood\n2 = Canary\n3 = Production\n4 = FairFax\n5 = Unknown",
       "x-enumNames": [
         "DogFood",
         "Canary",
@@ -1996,7 +2274,7 @@
     },
     "CertificationType": {
       "type": "integer",
-      "description": "enum type",
+      "description": "0 = Undefined\n1 = None\n2 = SelfAttested\n3 = MicrosoftCertified",
       "x-enumNames": [
         "Undefined",
         "None",
@@ -2024,7 +2302,7 @@
             }
           ]
         },
-        "hasPrices": {
+        "HasPrices": {
           "type": "boolean",
           "description": "Has prices"
         }
@@ -2032,7 +2310,7 @@
     },
     "PricingOptions": {
       "type": "integer",
-      "description": "enum type",
+      "description": "0 = None\n1 = Free\n2 = FreeTrial\n4 = Paid\n8 = Byol",
       "x-enumFlags": true,
       "x-enumNames": [
         "None",
@@ -2048,6 +2326,2641 @@
         4,
         8
       ]
+    },
+    "EnrichedData": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "popularity": {
+          "$ref": "#/definitions/PopularityEnrichedData"
+        },
+        "rating": {
+          "$ref": "#/definitions/RatingEnrichedData"
+        }
+      }
+    },
+    "PopularityEnrichedData": {
+      "type": "object",
+      "required": [
+        "appSourceCs",
+        "appSourceApps",
+        "ampCs",
+        "ampApps",
+        "azurePortalApps"
+      ],
+      "properties": {
+        "appSourceCs": {
+          "type": "number",
+          "format": "double"
+        },
+        "appSourceApps": {
+          "type": "number",
+          "format": "double"
+        },
+        "ampCs": {
+          "type": "number",
+          "format": "double"
+        },
+        "ampApps": {
+          "type": "number",
+          "format": "double"
+        },
+        "azurePortalApps": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "RatingEnrichedData": {
+      "type": "object",
+      "required": [
+        "appSource",
+        "amp",
+        "azurePortal"
+      ],
+      "properties": {
+        "appSource": {
+          "type": "number",
+          "format": "double"
+        },
+        "amp": {
+          "type": "number",
+          "format": "double"
+        },
+        "azurePortal": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "OfficeCapabilityType": {
+      "type": "integer",
+      "description": "1 = Capability1\n2 = Capability2\n3 = Capability3\n4 = Capability4\n5 = Capability5\n6 = Capability6\n7 = Capability7\n8 = Capability8\n9 = Capability9\n10 = Capability10\n11 = Capability11",
+      "x-enumNames": [
+        "Capability1",
+        "Capability2",
+        "Capability3",
+        "Capability4",
+        "Capability5",
+        "Capability6",
+        "Capability7",
+        "Capability8",
+        "Capability9",
+        "Capability10",
+        "Capability11"
+      ],
+      "enum": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    "PageResultOfCatalogItem": {
+      "type": "object",
+      "description": "Represents a feed of entities that includes additional information that OData formats support.",
+      "properties": {
+        "NextPageLink": {
+          "type": "string",
+          "description": "Gets the link for the next page of items in the feed.",
+          "format": "uri"
+        },
+        "Count": {
+          "type": "integer",
+          "description": "Gets the total count of items in the feed.",
+          "format": "int64"
+        },
+        "Items": {
+          "type": "array",
+          "description": "Gets the collection of entities for this feed.",
+          "items": {
+            "$ref": "#/definitions/CatalogItem"
+          }
+        }
+      }
+    },
+    "ODataQueryOptionsOfCatalogItem": {
+      "type": "object",
+      "description": "This defines a composite OData query options that can be used to perform query composition.\nCurrently this only supports $filter, $orderby, $top, $skip.",
+      "properties": {
+        "Request": {
+          "description": "Gets the request message associated with this instance.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/HttpRequest"
+            }
+          ]
+        },
+        "Context": {
+          "description": "Gets the given ODataQueryContext\n            ",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ODataQueryContext"
+            }
+          ]
+        },
+        "RawValues": {
+          "description": "Gets the raw string of all the OData query options",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ODataRawQueryOptions"
+            }
+          ]
+        },
+        "SelectExpand": {
+          "description": "Gets the SelectExpandQueryOption.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SelectExpandQueryOption"
+            }
+          ]
+        },
+        "Apply": {
+          "description": "Gets the ApplyQueryOption.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ApplyQueryOption"
+            }
+          ]
+        },
+        "Filter": {
+          "description": "Gets the FilterQueryOption.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/FilterQueryOption"
+            }
+          ]
+        },
+        "OrderBy": {
+          "description": "Gets the OrderByQueryOption.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OrderByQueryOption"
+            }
+          ]
+        },
+        "Skip": {
+          "description": "Gets the SkipQueryOption.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SkipQueryOption"
+            }
+          ]
+        },
+        "SkipToken": {
+          "description": "Gets the SkipTokenQueryOption.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SkipTokenQueryOption"
+            }
+          ]
+        },
+        "Top": {
+          "description": "Gets the TopQueryOption.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/TopQueryOption"
+            }
+          ]
+        },
+        "Count": {
+          "description": "Gets the CountQueryOption.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CountQueryOption"
+            }
+          ]
+        },
+        "Validator": {
+          "description": "Gets or sets the query validator.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ODataQueryValidator"
+            }
+          ]
+        },
+        "IfMatch": {
+          "$ref": "#/definitions/ETagOfCatalogItem"
+        },
+        "IfNoneMatch": {
+          "$ref": "#/definitions/ETagOfCatalogItem"
+        }
+      }
+    },
+    "HttpRequest": {
+      "type": "object",
+      "required": [
+        "BodyReader",
+        "RouteValues"
+      ],
+      "properties": {
+        "BodyReader": {
+          "$ref": "#/definitions/PipeReader"
+        },
+        "RouteValues": {
+          "$ref": "#/definitions/RouteValueDictionary"
+        }
+      }
+    },
+    "PipeReader": {
+      "type": "object"
+    },
+    "RouteValueDictionary": {
+      "type": "object",
+      "required": [
+        "_arrayStorage",
+        "Comparer",
+        "Count",
+        "Keys",
+        "Values"
+      ],
+      "properties": {
+        "_arrayStorage": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyValuePairOfStringAndObject"
+          }
+        },
+        "_propertyStorage": {
+          "$ref": "#/definitions/PropertyStorage"
+        },
+        "Item": {},
+        "Comparer": {
+          "$ref": "#/definitions/IEqualityComparerOfString"
+        },
+        "Count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Keys": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Values": {
+          "type": "array",
+          "items": {}
+        }
+      }
+    },
+    "KeyValuePairOfStringAndObject": {
+      "type": "object",
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Value": {}
+      }
+    },
+    "PropertyStorage": {
+      "type": "object",
+      "required": [
+        "Value",
+        "Properties"
+      ],
+      "properties": {
+        "Value": {},
+        "Properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyHelper"
+          }
+        }
+      }
+    },
+    "PropertyHelper": {
+      "type": "object",
+      "required": [
+        "Property",
+        "Name",
+        "ValueGetter",
+        "ValueSetter"
+      ],
+      "properties": {
+        "Property": {
+          "$ref": "#/definitions/PropertyInfo"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "ValueGetter": {
+          "$ref": "#/definitions/FuncOfObjectAndObject"
+        },
+        "ValueSetter": {
+          "$ref": "#/definitions/ActionOfObjectAndObject"
+        }
+      }
+    },
+    "PropertyInfo": {
+      "type": "object",
+      "required": [
+        "Module",
+        "CustomAttributes",
+        "IsCollectible",
+        "MetadataToken",
+        "MemberType",
+        "IsSpecialName"
+      ],
+      "properties": {
+        "Module": {
+          "$ref": "#/definitions/Module"
+        },
+        "CustomAttributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomAttributeData"
+          }
+        },
+        "IsCollectible": {
+          "type": "boolean"
+        },
+        "MetadataToken": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "MemberType": {
+          "$ref": "#/definitions/MemberTypes"
+        },
+        "IsSpecialName": {
+          "type": "boolean"
+        },
+        "GetMethod": {
+          "$ref": "#/definitions/MethodInfo"
+        },
+        "SetMethod": {
+          "$ref": "#/definitions/MethodInfo"
+        }
+      }
+    },
+    "Module": {
+      "type": "object",
+      "required": [
+        "Assembly",
+        "FullyQualifiedName",
+        "Name",
+        "MDStreamVersion",
+        "ModuleVersionId",
+        "ScopeName",
+        "ModuleHandle",
+        "CustomAttributes",
+        "MetadataToken"
+      ],
+      "properties": {
+        "Assembly": {
+          "$ref": "#/definitions/Assembly"
+        },
+        "FullyQualifiedName": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "MDStreamVersion": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ModuleVersionId": {
+          "type": "string",
+          "format": "guid"
+        },
+        "ScopeName": {
+          "type": "string"
+        },
+        "ModuleHandle": {
+          "$ref": "#/definitions/ModuleHandle"
+        },
+        "CustomAttributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomAttributeData"
+          }
+        },
+        "MetadataToken": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Assembly": {
+      "type": "object",
+      "required": [
+        "DefinedTypes",
+        "ExportedTypes",
+        "ImageRuntimeVersion",
+        "IsDynamic",
+        "Location",
+        "ReflectionOnly",
+        "IsCollectible",
+        "IsFullyTrusted",
+        "CustomAttributes",
+        "EscapedCodeBase",
+        "ManifestModule",
+        "Modules",
+        "GlobalAssemblyCache",
+        "HostContext",
+        "SecurityRuleSet"
+      ],
+      "properties": {
+        "DefinedTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ExportedTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "CodeBase": {
+          "type": "string"
+        },
+        "EntryPoint": {
+          "$ref": "#/definitions/MethodInfo"
+        },
+        "FullName": {
+          "type": "string"
+        },
+        "ImageRuntimeVersion": {
+          "type": "string"
+        },
+        "IsDynamic": {
+          "type": "boolean"
+        },
+        "Location": {
+          "type": "string"
+        },
+        "ReflectionOnly": {
+          "type": "boolean"
+        },
+        "IsCollectible": {
+          "type": "boolean"
+        },
+        "IsFullyTrusted": {
+          "type": "boolean"
+        },
+        "CustomAttributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomAttributeData"
+          }
+        },
+        "EscapedCodeBase": {
+          "type": "string"
+        },
+        "ManifestModule": {
+          "$ref": "#/definitions/Module"
+        },
+        "Modules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Module"
+          }
+        },
+        "GlobalAssemblyCache": {
+          "type": "boolean",
+          "x-deprecated": true,
+          "x-deprecatedMessage": "The Global Assembly Cache is not supported."
+        },
+        "HostContext": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "SecurityRuleSet": {
+          "$ref": "#/definitions/SecurityRuleSet"
+        }
+      }
+    },
+    "MethodInfo": {
+      "type": "object",
+      "required": [
+        "MethodImplementationFlags",
+        "CallingConvention",
+        "IsAbstract",
+        "IsConstructor",
+        "IsFinal",
+        "IsHideBySig",
+        "IsSpecialName",
+        "IsStatic",
+        "IsVirtual",
+        "IsAssembly",
+        "IsFamily",
+        "IsFamilyAndAssembly",
+        "IsFamilyOrAssembly",
+        "IsPrivate",
+        "IsPublic",
+        "IsConstructedGenericMethod",
+        "IsGenericMethod",
+        "IsGenericMethodDefinition",
+        "ContainsGenericParameters",
+        "IsSecurityCritical",
+        "IsSecuritySafeCritical",
+        "IsSecurityTransparent",
+        "Module",
+        "CustomAttributes",
+        "IsCollectible",
+        "MetadataToken",
+        "MemberType",
+        "ReturnParameter",
+        "ReturnType"
+      ],
+      "properties": {
+        "MethodImplementationFlags": {
+          "$ref": "#/definitions/MethodImplAttributes"
+        },
+        "CallingConvention": {
+          "$ref": "#/definitions/CallingConventions"
+        },
+        "IsAbstract": {
+          "type": "boolean"
+        },
+        "IsConstructor": {
+          "type": "boolean"
+        },
+        "IsFinal": {
+          "type": "boolean"
+        },
+        "IsHideBySig": {
+          "type": "boolean"
+        },
+        "IsSpecialName": {
+          "type": "boolean"
+        },
+        "IsStatic": {
+          "type": "boolean"
+        },
+        "IsVirtual": {
+          "type": "boolean"
+        },
+        "IsAssembly": {
+          "type": "boolean"
+        },
+        "IsFamily": {
+          "type": "boolean"
+        },
+        "IsFamilyAndAssembly": {
+          "type": "boolean"
+        },
+        "IsFamilyOrAssembly": {
+          "type": "boolean"
+        },
+        "IsPrivate": {
+          "type": "boolean"
+        },
+        "IsPublic": {
+          "type": "boolean"
+        },
+        "IsConstructedGenericMethod": {
+          "type": "boolean"
+        },
+        "IsGenericMethod": {
+          "type": "boolean"
+        },
+        "IsGenericMethodDefinition": {
+          "type": "boolean"
+        },
+        "ContainsGenericParameters": {
+          "type": "boolean"
+        },
+        "IsSecurityCritical": {
+          "type": "boolean"
+        },
+        "IsSecuritySafeCritical": {
+          "type": "boolean"
+        },
+        "IsSecurityTransparent": {
+          "type": "boolean"
+        },
+        "Module": {
+          "$ref": "#/definitions/Module"
+        },
+        "CustomAttributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomAttributeData"
+          }
+        },
+        "IsCollectible": {
+          "type": "boolean"
+        },
+        "MetadataToken": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "MemberType": {
+          "$ref": "#/definitions/MemberTypes"
+        },
+        "ReturnParameter": {
+          "$ref": "#/definitions/ParameterInfo"
+        },
+        "ReturnType": {
+          "type": "string"
+        }
+      }
+    },
+    "MethodImplAttributes": {
+      "type": "integer",
+      "description": "0 = IL\n0 = Managed\n1 = Native\n2 = OPTIL\n3 = Runtime\n3 = CodeTypeMask\n4 = Unmanaged\n4 = ManagedMask\n8 = NoInlining\n16 = ForwardRef\n32 = Synchronized\n64 = NoOptimization\n128 = PreserveSig\n256 = AggressiveInlining\n512 = AggressiveOptimization\n4096 = InternalCall\n65535 = MaxMethodImplVal",
+      "x-enumNames": [
+        "IL",
+        "Managed",
+        "Native",
+        "OPTIL",
+        "Runtime",
+        "CodeTypeMask",
+        "Unmanaged",
+        "ManagedMask",
+        "NoInlining",
+        "ForwardRef",
+        "Synchronized",
+        "NoOptimization",
+        "PreserveSig",
+        "AggressiveInlining",
+        "AggressiveOptimization",
+        "InternalCall",
+        "MaxMethodImplVal"
+      ],
+      "enum": [
+        0,
+        0,
+        1,
+        2,
+        3,
+        3,
+        4,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        4096,
+        65535
+      ]
+    },
+    "CallingConventions": {
+      "type": "integer",
+      "description": "1 = Standard\n2 = VarArgs\n3 = Any\n32 = HasThis\n64 = ExplicitThis",
+      "x-enumFlags": true,
+      "x-enumNames": [
+        "Standard",
+        "VarArgs",
+        "Any",
+        "HasThis",
+        "ExplicitThis"
+      ],
+      "enum": [
+        1,
+        2,
+        3,
+        32,
+        64
+      ]
+    },
+    "CustomAttributeData": {
+      "type": "object",
+      "required": [
+        "AttributeType",
+        "Constructor",
+        "ConstructorArguments",
+        "NamedArguments"
+      ],
+      "properties": {
+        "AttributeType": {
+          "type": "string"
+        },
+        "Constructor": {
+          "$ref": "#/definitions/ConstructorInfo"
+        },
+        "ConstructorArguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomAttributeTypedArgument"
+          }
+        },
+        "NamedArguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomAttributeNamedArgument"
+          }
+        }
+      }
+    },
+    "ConstructorInfo": {
+      "type": "object",
+      "required": [
+        "MethodImplementationFlags",
+        "CallingConvention",
+        "IsAbstract",
+        "IsConstructor",
+        "IsFinal",
+        "IsHideBySig",
+        "IsSpecialName",
+        "IsStatic",
+        "IsVirtual",
+        "IsAssembly",
+        "IsFamily",
+        "IsFamilyAndAssembly",
+        "IsFamilyOrAssembly",
+        "IsPrivate",
+        "IsPublic",
+        "IsConstructedGenericMethod",
+        "IsGenericMethod",
+        "IsGenericMethodDefinition",
+        "ContainsGenericParameters",
+        "IsSecurityCritical",
+        "IsSecuritySafeCritical",
+        "IsSecurityTransparent",
+        "Module",
+        "CustomAttributes",
+        "IsCollectible",
+        "MetadataToken",
+        "MemberType"
+      ],
+      "properties": {
+        "MethodImplementationFlags": {
+          "$ref": "#/definitions/MethodImplAttributes"
+        },
+        "CallingConvention": {
+          "$ref": "#/definitions/CallingConventions"
+        },
+        "IsAbstract": {
+          "type": "boolean"
+        },
+        "IsConstructor": {
+          "type": "boolean"
+        },
+        "IsFinal": {
+          "type": "boolean"
+        },
+        "IsHideBySig": {
+          "type": "boolean"
+        },
+        "IsSpecialName": {
+          "type": "boolean"
+        },
+        "IsStatic": {
+          "type": "boolean"
+        },
+        "IsVirtual": {
+          "type": "boolean"
+        },
+        "IsAssembly": {
+          "type": "boolean"
+        },
+        "IsFamily": {
+          "type": "boolean"
+        },
+        "IsFamilyAndAssembly": {
+          "type": "boolean"
+        },
+        "IsFamilyOrAssembly": {
+          "type": "boolean"
+        },
+        "IsPrivate": {
+          "type": "boolean"
+        },
+        "IsPublic": {
+          "type": "boolean"
+        },
+        "IsConstructedGenericMethod": {
+          "type": "boolean"
+        },
+        "IsGenericMethod": {
+          "type": "boolean"
+        },
+        "IsGenericMethodDefinition": {
+          "type": "boolean"
+        },
+        "ContainsGenericParameters": {
+          "type": "boolean"
+        },
+        "IsSecurityCritical": {
+          "type": "boolean"
+        },
+        "IsSecuritySafeCritical": {
+          "type": "boolean"
+        },
+        "IsSecurityTransparent": {
+          "type": "boolean"
+        },
+        "Module": {
+          "$ref": "#/definitions/Module"
+        },
+        "CustomAttributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomAttributeData"
+          }
+        },
+        "IsCollectible": {
+          "type": "boolean"
+        },
+        "MetadataToken": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "MemberType": {
+          "$ref": "#/definitions/MemberTypes"
+        }
+      }
+    },
+    "MemberTypes": {
+      "type": "integer",
+      "description": "1 = Constructor\n2 = Event\n4 = Field\n8 = Method\n16 = Property\n32 = TypeInfo\n64 = Custom\n128 = NestedType\n191 = All",
+      "x-enumFlags": true,
+      "x-enumNames": [
+        "Constructor",
+        "Event",
+        "Field",
+        "Method",
+        "Property",
+        "TypeInfo",
+        "Custom",
+        "NestedType",
+        "All"
+      ],
+      "enum": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        191
+      ]
+    },
+    "CustomAttributeTypedArgument": {
+      "type": "object",
+      "required": [
+        "ArgumentType"
+      ],
+      "properties": {
+        "ArgumentType": {
+          "type": "string"
+        },
+        "Value": {}
+      }
+    },
+    "CustomAttributeNamedArgument": {
+      "type": "object",
+      "required": [
+        "MemberInfo",
+        "TypedValue",
+        "MemberName",
+        "IsField"
+      ],
+      "properties": {
+        "MemberInfo": {
+          "$ref": "#/definitions/MemberInfo"
+        },
+        "TypedValue": {
+          "$ref": "#/definitions/CustomAttributeTypedArgument"
+        },
+        "MemberName": {
+          "type": "string"
+        },
+        "IsField": {
+          "type": "boolean"
+        }
+      }
+    },
+    "MemberInfo": {
+      "type": "object",
+      "required": [
+        "Module",
+        "CustomAttributes",
+        "IsCollectible",
+        "MetadataToken"
+      ],
+      "properties": {
+        "Module": {
+          "$ref": "#/definitions/Module"
+        },
+        "CustomAttributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomAttributeData"
+          }
+        },
+        "IsCollectible": {
+          "type": "boolean"
+        },
+        "MetadataToken": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ParameterInfo": {
+      "type": "object",
+      "required": [
+        "Attributes",
+        "Member",
+        "ParameterType",
+        "Position",
+        "IsIn",
+        "IsLcid",
+        "IsOptional",
+        "IsOut",
+        "IsRetval",
+        "HasDefaultValue",
+        "CustomAttributes",
+        "MetadataToken"
+      ],
+      "properties": {
+        "Attributes": {
+          "$ref": "#/definitions/ParameterAttributes"
+        },
+        "Member": {
+          "$ref": "#/definitions/MemberInfo"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "ParameterType": {
+          "type": "string"
+        },
+        "Position": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "IsIn": {
+          "type": "boolean"
+        },
+        "IsLcid": {
+          "type": "boolean"
+        },
+        "IsOptional": {
+          "type": "boolean"
+        },
+        "IsOut": {
+          "type": "boolean"
+        },
+        "IsRetval": {
+          "type": "boolean"
+        },
+        "DefaultValue": {},
+        "RawDefaultValue": {},
+        "HasDefaultValue": {
+          "type": "boolean"
+        },
+        "CustomAttributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomAttributeData"
+          }
+        },
+        "MetadataToken": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ParameterAttributes": {
+      "type": "integer",
+      "description": "0 = None\n1 = In\n2 = Out\n4 = Lcid\n8 = Retval\n16 = Optional\n4096 = HasDefault\n8192 = HasFieldMarshal\n16384 = Reserved3\n32768 = Reserved4\n61440 = ReservedMask",
+      "x-enumFlags": true,
+      "x-enumNames": [
+        "None",
+        "In",
+        "Out",
+        "Lcid",
+        "Retval",
+        "Optional",
+        "HasDefault",
+        "HasFieldMarshal",
+        "Reserved3",
+        "Reserved4",
+        "ReservedMask"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        4096,
+        8192,
+        16384,
+        32768,
+        61440
+      ]
+    },
+    "SecurityRuleSet": {
+      "type": "integer",
+      "description": "0 = None\n1 = Level1\n2 = Level2",
+      "x-enumNames": [
+        "None",
+        "Level1",
+        "Level2"
+      ],
+      "enum": [
+        0,
+        1,
+        2
+      ]
+    },
+    "ModuleHandle": {
+      "type": "object",
+      "required": [
+        "MDStreamVersion"
+      ],
+      "properties": {
+        "MDStreamVersion": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "FuncOfObjectAndObject": {
+      "type": "object",
+      "required": [
+        "Method"
+      ],
+      "properties": {
+        "Target": {},
+        "Method": {
+          "$ref": "#/definitions/MethodInfo"
+        }
+      }
+    },
+    "ActionOfObjectAndObject": {
+      "type": "object",
+      "required": [
+        "Method"
+      ],
+      "properties": {
+        "Target": {},
+        "Method": {
+          "$ref": "#/definitions/MethodInfo"
+        }
+      }
+    },
+    "IEqualityComparerOfString": {
+      "type": "object"
+    },
+    "ODataQueryContext": {
+      "type": "object",
+      "description": "This defines some context information used to perform query composition.",
+      "properties": {
+        "DefaultQuerySettings": {
+          "description": "Gets the given DefaultQuerySettings.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DefaultQuerySettings"
+            }
+          ]
+        },
+        "Model": {
+          "description": "Gets the given IEdmModel that contains the EntitySet.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IEdmModel"
+            }
+          ]
+        },
+        "ElementType": {
+          "description": "Gets the IEdmType of the element.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IEdmType"
+            }
+          ]
+        },
+        "NavigationSource": {
+          "description": "Gets the IEdmNavigationSource that contains the element.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IEdmNavigationSource"
+            }
+          ]
+        },
+        "ElementClrType": {
+          "type": "string",
+          "description": "Gets the CLR type of the element."
+        },
+        "Path": {
+          "description": "Gets the ODataPath.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ODataPath"
+            }
+          ]
+        },
+        "RequestContainer": {
+          "description": "Gets the request container.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IServiceProvider"
+            }
+          ]
+        }
+      }
+    },
+    "DefaultQuerySettings": {
+      "type": "object",
+      "description": "This class describes the default settings to use during query composition.",
+      "required": [
+        "EnableExpand",
+        "EnableSelect",
+        "EnableCount",
+        "EnableOrderBy",
+        "EnableFilter",
+        "EnableSkipToken"
+      ],
+      "properties": {
+        "EnableExpand": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether navigation property can be expanded."
+        },
+        "EnableSelect": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether property can be selected."
+        },
+        "EnableCount": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether entity set and property can apply $count."
+        },
+        "EnableOrderBy": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether property can apply $orderby."
+        },
+        "EnableFilter": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether property can apply $filter."
+        },
+        "MaxTop": {
+          "type": "integer",
+          "description": "Gets or sets the max value of $top that a client can request.",
+          "format": "int32"
+        },
+        "EnableSkipToken": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether the service will use skiptoken or not."
+        }
+      }
+    },
+    "IEdmModel": {
+      "type": "object",
+      "description": "Semantic representation of an EDM model.",
+      "properties": {
+        "SchemaElements": {
+          "type": "array",
+          "description": "Gets the collection of schema elements that are contained in this model.",
+          "items": {
+            "$ref": "#/definitions/IEdmSchemaElement"
+          }
+        },
+        "VocabularyAnnotations": {
+          "type": "array",
+          "description": "Gets the collection of vocabulary annotations that are contained in this model.",
+          "items": {
+            "$ref": "#/definitions/IEdmVocabularyAnnotation"
+          }
+        },
+        "ReferencedModels": {
+          "type": "array",
+          "description": "Gets the collection of models referred to by this model (mainly by the this.References).",
+          "items": {
+            "$ref": "#/definitions/IEdmModel"
+          }
+        },
+        "DeclaredNamespaces": {
+          "type": "array",
+          "description": "Gets the collection of namespaces that schema elements use contained in this model.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "DirectValueAnnotationsManager": {
+          "description": "Gets the model's annotations manager.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IEdmDirectValueAnnotationsManager"
+            }
+          ]
+        },
+        "EntityContainer": {
+          "description": "Gets the only one entity container of the model.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IEdmEntityContainer"
+            }
+          ]
+        }
+      }
+    },
+    "IEdmSchemaElement": {
+      "type": "object",
+      "description": "Common base interface for all named children of EDM schema.",
+      "required": [
+        "SchemaElementKind"
+      ],
+      "properties": {
+        "SchemaElementKind": {
+          "description": "Gets the kind of this schema element.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/EdmSchemaElementKind"
+            }
+          ]
+        },
+        "Namespace": {
+          "type": "string",
+          "description": "Gets the namespace this schema element belongs to."
+        }
+      }
+    },
+    "EdmSchemaElementKind": {
+      "type": "integer",
+      "description": "Defines EDM schema element types.\n\n0 = None\n1 = TypeDefinition\n2 = Term\n3 = Action\n4 = EntityContainer\n5 = Function",
+      "x-enumNames": [
+        "None",
+        "TypeDefinition",
+        "Term",
+        "Action",
+        "EntityContainer",
+        "Function"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "IEdmVocabularyAnnotation": {
+      "type": "object",
+      "description": "Represents an EDM vocabulary annotation.",
+      "properties": {
+        "Qualifier": {
+          "type": "string",
+          "description": "Gets the qualifier used to discriminate between multiple bindings of the same property or type."
+        },
+        "Term": {
+          "description": "Gets the term bound by the annotation.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IEdmTerm"
+            }
+          ]
+        },
+        "Target": {
+          "description": "Gets the element the annotation applies to.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IEdmVocabularyAnnotatable"
+            }
+          ]
+        },
+        "Value": {
+          "description": "Gets the expression producing the value of the annotation.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IEdmExpression"
+            }
+          ]
+        }
+      }
+    },
+    "IEdmTerm": {
+      "type": "object",
+      "description": "Represents an EDM term.",
+      "properties": {
+        "Type": {
+          "description": "Gets the type of this term.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IEdmTypeReference"
+            }
+          ]
+        },
+        "AppliesTo": {
+          "type": "string",
+          "description": "Gets the AppliesTo of this term."
+        },
+        "DefaultValue": {
+          "type": "string",
+          "description": "Gets the DefaultValue of this term."
+        }
+      }
+    },
+    "IEdmTypeReference": {
+      "type": "object",
+      "description": "Represents a references to a type.",
+      "required": [
+        "IsNullable"
+      ],
+      "properties": {
+        "IsNullable": {
+          "type": "boolean",
+          "description": "Gets a value indicating whether this type is nullable."
+        },
+        "Definition": {
+          "description": "Gets the definition to which this type refers.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IEdmType"
+            }
+          ]
+        }
+      }
+    },
+    "IEdmType": {
+      "type": "object",
+      "description": "Represents the definition of an EDM type.",
+      "required": [
+        "TypeKind"
+      ],
+      "properties": {
+        "TypeKind": {
+          "description": "Gets the kind of this type.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/EdmTypeKind"
+            }
+          ]
+        }
+      }
+    },
+    "EdmTypeKind": {
+      "type": "integer",
+      "description": "Defines EDM metatypes.\n\n0 = None\n1 = Primitive\n2 = Entity\n3 = Complex\n4 = Collection\n5 = EntityReference\n6 = Enum\n7 = TypeDefinition\n8 = Untyped\n9 = Path",
+      "x-enumNames": [
+        "None",
+        "Primitive",
+        "Entity",
+        "Complex",
+        "Collection",
+        "EntityReference",
+        "Enum",
+        "TypeDefinition",
+        "Untyped",
+        "Path"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    "IEdmVocabularyAnnotatable": {
+      "type": "object",
+      "description": "Represents an element that can be targeted by Vocabulary Annotations"
+    },
+    "IEdmExpression": {
+      "type": "object",
+      "description": "Represents an EDM expression.",
+      "required": [
+        "ExpressionKind"
+      ],
+      "properties": {
+        "ExpressionKind": {
+          "description": "Gets the kind of this expression.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/EdmExpressionKind"
+            }
+          ]
+        }
+      }
+    },
+    "EdmExpressionKind": {
+      "type": "integer",
+      "description": "Defines EDM expression kinds.\n\n0 = None\n1 = BinaryConstant\n2 = BooleanConstant\n3 = DateTimeOffsetConstant\n4 = DecimalConstant\n5 = FloatingConstant\n6 = GuidConstant\n7 = IntegerConstant\n8 = StringConstant\n9 = DurationConstant\n10 = Null\n11 = Record\n12 = Collection\n13 = Path\n14 = If\n15 = Cast\n16 = IsType\n17 = FunctionApplication\n18 = LabeledExpressionReference\n19 = Labeled\n20 = PropertyPath\n21 = NavigationPropertyPath\n22 = DateConstant\n23 = TimeOfDayConstant\n24 = EnumMember\n25 = AnnotationPath",
+      "x-enumNames": [
+        "None",
+        "BinaryConstant",
+        "BooleanConstant",
+        "DateTimeOffsetConstant",
+        "DecimalConstant",
+        "FloatingConstant",
+        "GuidConstant",
+        "IntegerConstant",
+        "StringConstant",
+        "DurationConstant",
+        "Null",
+        "Record",
+        "Collection",
+        "Path",
+        "If",
+        "Cast",
+        "IsType",
+        "FunctionApplication",
+        "LabeledExpressionReference",
+        "Labeled",
+        "PropertyPath",
+        "NavigationPropertyPath",
+        "DateConstant",
+        "TimeOfDayConstant",
+        "EnumMember",
+        "AnnotationPath"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25
+      ]
+    },
+    "IEdmDirectValueAnnotationsManager": {
+      "type": "object",
+      "description": "Manages getting and setting direct annotations on EDM elements."
+    },
+    "IEdmEntityContainer": {
+      "type": "object",
+      "description": "Represents an EDM entity container.",
+      "properties": {
+        "Elements": {
+          "type": "array",
+          "description": "Gets a collection of the elements of this entity container.",
+          "items": {
+            "$ref": "#/definitions/IEdmEntityContainerElement"
+          }
+        }
+      }
+    },
+    "IEdmEntityContainerElement": {
+      "type": "object",
+      "description": "Represents the common elements of all EDM entity container elements.",
+      "required": [
+        "ContainerElementKind"
+      ],
+      "properties": {
+        "ContainerElementKind": {
+          "description": "Gets the kind of element of this container element.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/EdmContainerElementKind"
+            }
+          ]
+        },
+        "Container": {
+          "description": "Gets the container that contains this element.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IEdmEntityContainer"
+            }
+          ]
+        }
+      }
+    },
+    "EdmContainerElementKind": {
+      "type": "integer",
+      "description": "Defines EDM container element types.\n\n0 = None\n1 = EntitySet\n2 = ActionImport\n3 = FunctionImport\n4 = Singleton",
+      "x-enumNames": [
+        "None",
+        "EntitySet",
+        "ActionImport",
+        "FunctionImport",
+        "Singleton"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "IEdmNavigationSource": {
+      "type": "object",
+      "description": "Represents an EDM navigation source.",
+      "properties": {
+        "NavigationPropertyBindings": {
+          "type": "array",
+          "description": "Gets the navigation property bindings of this navigation source.",
+          "items": {
+            "$ref": "#/definitions/IEdmNavigationPropertyBinding"
+          }
+        },
+        "Path": {
+          "description": "Gets the path of this navigation source.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IEdmPathExpression"
+            }
+          ]
+        },
+        "Type": {
+          "description": "Gets the type of this navigation source.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IEdmType"
+            }
+          ]
+        }
+      }
+    },
+    "IEdmNavigationPropertyBinding": {
+      "type": "object",
+      "description": "Represents a binding from an EDM navigation property to a navigation source.",
+      "properties": {
+        "NavigationProperty": {
+          "description": "Gets the navigation property.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IEdmNavigationProperty"
+            }
+          ]
+        },
+        "Target": {
+          "description": "Gets the target navigation source.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IEdmNavigationSource"
+            }
+          ]
+        },
+        "Path": {
+          "description": "Get the path that a navigation property targets.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IEdmPathExpression"
+            }
+          ]
+        }
+      }
+    },
+    "IEdmNavigationProperty": {
+      "type": "object",
+      "description": "Represents an EDM navigation property.",
+      "required": [
+        "OnDelete",
+        "ContainsTarget"
+      ],
+      "properties": {
+        "Partner": {
+          "description": "Gets the partner of this navigation property.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IEdmNavigationProperty"
+            }
+          ]
+        },
+        "OnDelete": {
+          "description": "Gets the action to execute on the deletion of this end of a bidirectional association.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/EdmOnDeleteAction"
+            }
+          ]
+        },
+        "ContainsTarget": {
+          "type": "boolean",
+          "description": "Gets a value indicating whether the navigation target is contained inside the navigation source."
+        },
+        "ReferentialConstraint": {
+          "description": "Gets the referential constraint for this navigation, returning null if this is the principal end or if there is no referential constraint.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IEdmReferentialConstraint"
+            }
+          ]
+        }
+      }
+    },
+    "EdmOnDeleteAction": {
+      "type": "integer",
+      "description": "Enumerates the actions EDM can apply on deletes.\n\n0 = None\n1 = Cascade",
+      "x-enumNames": [
+        "None",
+        "Cascade"
+      ],
+      "enum": [
+        0,
+        1
+      ]
+    },
+    "IEdmReferentialConstraint": {
+      "type": "object",
+      "description": "Represents an EDM referential constraint on a navigation property.",
+      "properties": {
+        "PropertyPairs": {
+          "type": "array",
+          "description": "Gets the set of property pairs from the referential constraint. No particular ordering should be assumed.",
+          "items": {
+            "$ref": "#/definitions/EdmReferentialConstraintPropertyPair"
+          }
+        }
+      }
+    },
+    "EdmReferentialConstraintPropertyPair": {
+      "type": "object",
+      "description": "Represents a pair of properties as part of a referential constraint.",
+      "properties": {
+        "DependentProperty": {
+          "description": "The local or dependent property in the referential constraint property pair. Will never be null.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IEdmStructuralProperty"
+            }
+          ]
+        },
+        "PrincipalProperty": {
+          "description": "The foreign or principal property in the referential constraint property pair. Will never be null.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IEdmStructuralProperty"
+            }
+          ]
+        }
+      }
+    },
+    "IEdmStructuralProperty": {
+      "type": "object",
+      "description": "Represents an EDM structural (i.e. non-navigation) property.",
+      "properties": {
+        "DefaultValueString": {
+          "type": "string",
+          "description": "Gets the default value of this property."
+        }
+      }
+    },
+    "IEdmPathExpression": {
+      "type": "object",
+      "description": "Represents an EDM path expression.",
+      "properties": {
+        "PathSegments": {
+          "type": "array",
+          "description": "Gets the path segments as a decomposed qualified name. \"A.B/C/D.E\" is { \"A.B\", \"C\", \"D.E\" }.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Path": {
+          "type": "string",
+          "description": "Gets the path string, like \"A.B/C/D.E\"."
+        }
+      }
+    },
+    "ODataPath": {
+      "type": "object",
+      "description": "Provides an object representation for an OData path with additional information about the EDM type and entity set for the path.",
+      "properties": {
+        "EdmType": {
+          "description": "Gets the EDM type of the path.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IEdmType"
+            }
+          ]
+        },
+        "NavigationSource": {
+          "description": "Gets the navigation source of the path.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IEdmNavigationSource"
+            }
+          ]
+        },
+        "Segments": {
+          "type": "array",
+          "description": "Gets the path segments for the OData path.",
+          "items": {
+            "$ref": "#/definitions/ODataPathSegment"
+          }
+        },
+        "PathTemplate": {
+          "type": "string",
+          "description": "Gets the path template describing the types of segments in the path."
+        },
+        "Path": {
+          "type": "array",
+          "description": "Gets the ODL path.",
+          "items": {
+            "$ref": "#/definitions/ODataPathSegment"
+          }
+        }
+      }
+    },
+    "ODataPathSegment": {
+      "type": "object",
+      "description": "The semantic representation of a segment in a path.",
+      "properties": {
+        "Identifier": {
+          "type": "string",
+          "description": "Returns the identifier for this segment i.e. string part without the keys."
+        }
+      }
+    },
+    "IServiceProvider": {
+      "type": "object"
+    },
+    "ODataRawQueryOptions": {
+      "type": "object",
+      "description": "Represents the raw query values in the string format from the incoming request.",
+      "properties": {
+        "Filter": {
+          "type": "string",
+          "description": "Gets the raw $filter query value from the incoming request Uri if exists.\n            "
+        },
+        "Apply": {
+          "type": "string",
+          "description": "Gets the raw $apply query value from the incoming request Uri if exists.\n            "
+        },
+        "OrderBy": {
+          "type": "string",
+          "description": "Gets the raw $orderby query value from the incoming request Uri if exists.\n            "
+        },
+        "Top": {
+          "type": "string",
+          "description": "Gets the raw $top query value from the incoming request Uri if exists.\n            "
+        },
+        "Skip": {
+          "type": "string",
+          "description": "Gets the raw $skip query value from the incoming request Uri if exists.\n            "
+        },
+        "Select": {
+          "type": "string",
+          "description": "Gets the raw $select query value from the incoming request Uri if exists.\n            "
+        },
+        "Expand": {
+          "type": "string",
+          "description": "Gets the raw $expand query value from the incoming request Uri if exists.\n            "
+        },
+        "Count": {
+          "type": "string",
+          "description": "Gets the raw $count query value from the incoming request Uri if exists.\n            "
+        },
+        "Format": {
+          "type": "string",
+          "description": "Gets the raw $format query value from the incoming request Uri if exists.\n            "
+        },
+        "SkipToken": {
+          "type": "string",
+          "description": "Gets the raw $skiptoken query value from the incoming request Uri if exists.\n            "
+        },
+        "DeltaToken": {
+          "type": "string",
+          "description": "Gets the raw $deltatoken query value from the incoming request Uri if exists.\n            "
+        }
+      }
+    },
+    "SelectExpandQueryOption": {
+      "type": "object",
+      "description": "Represents the OData $select and $expand query options.",
+      "required": [
+        "LevelsMaxLiteralExpansionDepth"
+      ],
+      "properties": {
+        "Context": {
+          "description": "Gets the given ODataQueryContext.\n            ",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ODataQueryContext"
+            }
+          ]
+        },
+        "RawSelect": {
+          "type": "string",
+          "description": "Gets the raw $select value."
+        },
+        "RawExpand": {
+          "type": "string",
+          "description": "Gets the raw $expand value."
+        },
+        "Validator": {
+          "description": "Gets or sets the $select and $expand query validator.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SelectExpandQueryValidator"
+            }
+          ]
+        },
+        "SelectExpandClause": {
+          "description": "Gets the parsed SelectExpandClause for this query option.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SelectExpandClause"
+            }
+          ]
+        },
+        "LevelsMaxLiteralExpansionDepth": {
+          "type": "integer",
+          "description": "Gets or sets the number of levels that a top level $expand=NavigationProperty($levels=max)\nwill be expanded.\nThis value will decrease by one with each nesting level in the $expand clause.\nFor example, with a property value 5, the following query $expand=A($expand=B($expand=C($levels=max)))\nwill be interpreted as $expand=A($expand=B($expand=C($levels=3))).\nIf the query gets validated, the MaxExpansionDepth value\nmust be greater than or equal to this value.",
+          "format": "int32"
+        }
+      }
+    },
+    "SelectExpandQueryValidator": {
+      "type": "object",
+      "description": "Represents a validator used to validate a SelectExpandQueryOption based on the ODataValidationSettings."
+    },
+    "SelectExpandClause": {
+      "type": "object",
+      "description": "Class representing the combined semantic meaning of any select or expand clauses in the uri.",
+      "required": [
+        "AllSelected"
+      ],
+      "properties": {
+        "SelectedItems": {
+          "type": "array",
+          "description": "Gets the selected properties and operations.",
+          "items": {
+            "$ref": "#/definitions/SelectItem"
+          }
+        },
+        "AllSelected": {
+          "type": "boolean",
+          "description": "Gets a flag indicating that everything at this level has been selected."
+        }
+      }
+    },
+    "SelectItem": {
+      "type": "object",
+      "description": "An item that has been selected by the query at the current level of the tree."
+    },
+    "ApplyQueryOption": {
+      "type": "object",
+      "description": "This defines a $apply OData query option for querying.",
+      "properties": {
+        "Context": {
+          "description": "Gets the given ODataQueryContext.\n            ",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ODataQueryContext"
+            }
+          ]
+        },
+        "ResultClrType": {
+          "type": "string",
+          "description": "ClrType for result of transformations"
+        },
+        "ApplyClause": {
+          "description": "Gets the parsed ApplyClause for this query option.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ApplyClause"
+            }
+          ]
+        },
+        "RawValue": {
+          "type": "string",
+          "description": "Gets the raw $apply value.\n            "
+        }
+      }
+    },
+    "ApplyClause": {
+      "type": "object",
+      "description": "Represents the set of transformations to perform as part of $apply.",
+      "properties": {
+        "Transformations": {
+          "type": "array",
+          "description": "The collection of transformations to perform.",
+          "items": {
+            "$ref": "#/definitions/TransformationNode"
+          }
+        }
+      }
+    },
+    "TransformationNode": {
+      "type": "object",
+      "description": "Base class for all transformation nodes."
+    },
+    "FilterQueryOption": {
+      "type": "object",
+      "description": "This defines a $filter OData query option for querying.",
+      "properties": {
+        "Context": {
+          "description": "Gets the given ODataQueryContext.\n            ",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ODataQueryContext"
+            }
+          ]
+        },
+        "Validator": {
+          "description": "Gets or sets the Filter Query Validator",
+          "allOf": [
+            {
+              "$ref": "#/definitions/FilterQueryValidator"
+            }
+          ]
+        },
+        "FilterClause": {
+          "description": "Gets the parsed FilterClause for this query option.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/FilterClause"
+            }
+          ]
+        },
+        "RawValue": {
+          "type": "string",
+          "description": "Gets the raw $filter value.\n            "
+        }
+      }
+    },
+    "FilterQueryValidator": {
+      "type": "object",
+      "description": "Represents a validator used to validate a FilterQueryOption based on the ODataValidationSettings."
+    },
+    "FilterClause": {
+      "type": "object",
+      "description": "The result of parsing a $filter query option.",
+      "properties": {
+        "Expression": {
+          "description": "Gets the filter expression - this should evaluate to a single boolean value.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SingleValueNode"
+            }
+          ]
+        },
+        "RangeVariable": {
+          "description": "Gets the parameter for the expression which represents a single value from the collection.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/RangeVariable"
+            }
+          ]
+        },
+        "ItemType": {
+          "description": "Gets the type of item returned by this clause.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IEdmTypeReference"
+            }
+          ]
+        }
+      }
+    },
+    "SingleValueNode": {
+      "type": "object",
+      "description": "Base class for all semantic metadata bound nodes which represent a single composable value.",
+      "required": [
+        "Kind"
+      ],
+      "properties": {
+        "Kind": {
+          "description": "Gets the kind of this node.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/QueryNodeKind"
+            }
+          ]
+        }
+      }
+    },
+    "QueryNodeKind": {
+      "type": "integer",
+      "description": "Public enumeration of kinds of query nodes. A subset of InternalQueryNodeKind\n\n0 = None\n1 = Constant\n2 = Convert\n3 = NonResourceRangeVariableReference\n4 = BinaryOperator\n5 = UnaryOperator\n6 = SingleValuePropertyAccess\n7 = CollectionPropertyAccess\n8 = SingleValueFunctionCall\n9 = Any\n10 = CollectionNavigationNode\n11 = SingleNavigationNode\n12 = SingleValueOpenPropertyAccess\n13 = SingleResourceCast\n14 = All\n15 = CollectionResourceCast\n16 = ResourceRangeVariableReference\n17 = SingleResourceFunctionCall\n18 = CollectionFunctionCall\n19 = CollectionResourceFunctionCall\n20 = NamedFunctionParameter\n21 = ParameterAlias\n22 = EntitySet\n23 = KeyLookup\n24 = SearchTerm\n25 = CollectionOpenPropertyAccess\n26 = CollectionComplexNode\n27 = SingleComplexNode\n28 = Count\n29 = SingleValueCast\n30 = CollectionPropertyNode\n31 = AggregatedCollectionPropertyNode\n32 = In\n33 = CollectionConstant",
+      "x-enumNames": [
+        "None",
+        "Constant",
+        "Convert",
+        "NonResourceRangeVariableReference",
+        "BinaryOperator",
+        "UnaryOperator",
+        "SingleValuePropertyAccess",
+        "CollectionPropertyAccess",
+        "SingleValueFunctionCall",
+        "Any",
+        "CollectionNavigationNode",
+        "SingleNavigationNode",
+        "SingleValueOpenPropertyAccess",
+        "SingleResourceCast",
+        "All",
+        "CollectionResourceCast",
+        "ResourceRangeVariableReference",
+        "SingleResourceFunctionCall",
+        "CollectionFunctionCall",
+        "CollectionResourceFunctionCall",
+        "NamedFunctionParameter",
+        "ParameterAlias",
+        "EntitySet",
+        "KeyLookup",
+        "SearchTerm",
+        "CollectionOpenPropertyAccess",
+        "CollectionComplexNode",
+        "SingleComplexNode",
+        "Count",
+        "SingleValueCast",
+        "CollectionPropertyNode",
+        "AggregatedCollectionPropertyNode",
+        "In",
+        "CollectionConstant"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33
+      ]
+    },
+    "RangeVariable": {
+      "type": "object",
+      "description": "A RangeVariable, which represents an iterator variable either over a collection, either of entities or not.\nExists outside of the main SemanticAST, but hooked in via a RangeVariableReferenceNode (either Non-Entity or Entity)."
+    },
+    "OrderByQueryOption": {
+      "type": "object",
+      "description": "This defines a $orderby OData query option for querying.",
+      "properties": {
+        "Context": {
+          "description": "Gets the given ODataQueryContext.\n            ",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ODataQueryContext"
+            }
+          ]
+        },
+        "OrderByNodes": {
+          "type": "array",
+          "description": "Gets the mutable list of OrderByPropertyNode instances for this query option.",
+          "items": {
+            "$ref": "#/definitions/OrderByNode"
+          }
+        },
+        "RawValue": {
+          "type": "string",
+          "description": "Gets the raw $orderby value.\n            "
+        },
+        "Validator": {
+          "description": "Gets or sets the OrderBy Query Validator.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OrderByQueryValidator"
+            }
+          ]
+        },
+        "OrderByClause": {
+          "description": "Gets the parsed OrderByClause for this query option.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OrderByClause"
+            }
+          ]
+        }
+      }
+    },
+    "OrderByNode": {
+      "type": "object",
+      "description": "Represents a single order by expression in the $orderby clause.",
+      "required": [
+        "Direction"
+      ],
+      "properties": {
+        "Direction": {
+          "description": "Gets the OrderByDirection for the current node.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OrderByDirection"
+            }
+          ]
+        }
+      }
+    },
+    "OrderByDirection": {
+      "type": "integer",
+      "description": "Enumeration of order by directions.\n\n0 = Ascending\n1 = Descending",
+      "x-enumNames": [
+        "Ascending",
+        "Descending"
+      ],
+      "enum": [
+        0,
+        1
+      ]
+    },
+    "OrderByQueryValidator": {
+      "type": "object",
+      "description": "Represents a validator used to validate an OrderByQueryOption based on the ODataValidationSettings."
+    },
+    "OrderByClause": {
+      "type": "object",
+      "description": "Represents the result of parsing the $orderby query option.",
+      "required": [
+        "Direction"
+      ],
+      "properties": {
+        "ThenBy": {
+          "description": "Gets the next orderby to perform after performing this orderby, can be null in the case of only a single orderby expression.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OrderByClause"
+            }
+          ]
+        },
+        "Expression": {
+          "description": "Gets the order-by expression.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SingleValueNode"
+            }
+          ]
+        },
+        "Direction": {
+          "description": "Gets the direction to order.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OrderByDirection"
+            }
+          ]
+        },
+        "RangeVariable": {
+          "description": "Gets the rangeVariable for the expression which represents a single value from the collection we iterate over.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/RangeVariable"
+            }
+          ]
+        },
+        "ItemType": {
+          "description": "Gets the type of a single item from the collection returned after ordering.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IEdmTypeReference"
+            }
+          ]
+        }
+      }
+    },
+    "SkipQueryOption": {
+      "type": "object",
+      "description": "This defines a $skip OData query option for querying.",
+      "required": [
+        "Value"
+      ],
+      "properties": {
+        "Context": {
+          "description": "Gets the given ODataQueryContext.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ODataQueryContext"
+            }
+          ]
+        },
+        "RawValue": {
+          "type": "string",
+          "description": "Gets the raw $skip value."
+        },
+        "Value": {
+          "type": "integer",
+          "description": "Gets the value of the $skip as a parsed integer.",
+          "format": "int32"
+        },
+        "Validator": {
+          "description": "Gets or sets the Skip Query Validator.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SkipQueryValidator"
+            }
+          ]
+        }
+      }
+    },
+    "SkipQueryValidator": {
+      "type": "object",
+      "description": "Represents a validator used to validate a SkipQueryOption based on the ODataValidationSettings."
+    },
+    "SkipTokenQueryOption": {
+      "type": "object",
+      "description": "This defines a $skiptoken OData query option for querying.",
+      "properties": {
+        "RawValue": {
+          "type": "string",
+          "description": "Gets the raw $skiptoken value."
+        },
+        "Context": {
+          "description": "Gets and sets the given ODataQueryContext.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ODataQueryContext"
+            }
+          ]
+        },
+        "Validator": {
+          "description": "Gets or sets the SkipToken Query Validator.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SkipTokenQueryValidator"
+            }
+          ]
+        },
+        "QuerySettings": {
+          "description": "Gets or sets the query setting ",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ODataQuerySettings"
+            }
+          ]
+        },
+        "QueryOptions": {
+          "description": "Gets or sets the QueryOptions",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ODataQueryOptions"
+            }
+          ]
+        }
+      }
+    },
+    "SkipTokenQueryValidator": {
+      "type": "object",
+      "description": "Represents a validator used to validate a SkipTokenQueryOption based on the ODataValidationSettings."
+    },
+    "ODataQuerySettings": {
+      "type": "object",
+      "description": "This class describes the settings to use during query composition.",
+      "required": [
+        "EnsureStableOrdering",
+        "HandleNullPropagation",
+        "EnableConstantParameterization",
+        "EnableCorrelatedSubqueryBuffering",
+        "HandleReferenceNavigationPropertyExpandFilter"
+      ],
+      "properties": {
+        "EnsureStableOrdering": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether query composition should\nalter the original query when necessary to ensure a stable sort order."
+        },
+        "HandleNullPropagation": {
+          "description": "Gets or sets a value indicating how null propagation should\nbe handled during query composition.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/HandleNullPropagationOption"
+            }
+          ]
+        },
+        "EnableConstantParameterization": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether constants should be parameterized. Parameterizing constants\nwould result in better performance with Entity framework."
+        },
+        "EnableCorrelatedSubqueryBuffering": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether queries with expanded navigations should be formulated\nto encourage correlated subquery results to be buffered.\nBuffering correlated subquery results can reduce the number of queries from N + 1 to 2\nby buffering results from the subquery."
+        },
+        "PageSize": {
+          "type": "integer",
+          "description": "Gets or sets the maximum number of query results to return.",
+          "format": "int32"
+        },
+        "HandleReferenceNavigationPropertyExpandFilter": {
+          "type": "boolean",
+          "description": "Honor $filter inside $expand of non-collection navigation property.\nThe expanded property is only populated when the filter evaluates to true.\nThis setting is false by default."
+        }
+      }
+    },
+    "HandleNullPropagationOption": {
+      "type": "integer",
+      "description": "This enum defines how to handle null propagation in queryable support.\n\n0 = Default\n1 = True\n2 = False",
+      "x-enumNames": [
+        "Default",
+        "True",
+        "False"
+      ],
+      "enum": [
+        0,
+        1,
+        2
+      ]
+    },
+    "ODataQueryOptions": {
+      "type": "object",
+      "description": "This defines a composite OData query options that can be used to perform query composition.\nCurrently this only supports $filter, $orderby, $top, $skip, and $count.",
+      "properties": {
+        "Request": {
+          "description": "Gets the request message associated with this instance.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/HttpRequest"
+            }
+          ]
+        },
+        "Context": {
+          "description": "Gets the given ODataQueryContext\n            ",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ODataQueryContext"
+            }
+          ]
+        },
+        "RawValues": {
+          "description": "Gets the raw string of all the OData query options",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ODataRawQueryOptions"
+            }
+          ]
+        },
+        "SelectExpand": {
+          "description": "Gets the SelectExpandQueryOption.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SelectExpandQueryOption"
+            }
+          ]
+        },
+        "Apply": {
+          "description": "Gets the ApplyQueryOption.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ApplyQueryOption"
+            }
+          ]
+        },
+        "Filter": {
+          "description": "Gets the FilterQueryOption.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/FilterQueryOption"
+            }
+          ]
+        },
+        "OrderBy": {
+          "description": "Gets the OrderByQueryOption.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OrderByQueryOption"
+            }
+          ]
+        },
+        "Skip": {
+          "description": "Gets the SkipQueryOption.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SkipQueryOption"
+            }
+          ]
+        },
+        "SkipToken": {
+          "description": "Gets the SkipTokenQueryOption.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SkipTokenQueryOption"
+            }
+          ]
+        },
+        "Top": {
+          "description": "Gets the TopQueryOption.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/TopQueryOption"
+            }
+          ]
+        },
+        "Count": {
+          "description": "Gets the CountQueryOption.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CountQueryOption"
+            }
+          ]
+        },
+        "Validator": {
+          "description": "Gets or sets the query validator.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ODataQueryValidator"
+            }
+          ]
+        },
+        "IfMatch": {
+          "description": "Gets the ETag from IfMatch header.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ETag"
+            }
+          ]
+        },
+        "IfNoneMatch": {
+          "description": "Gets the ETag from IfNoneMatch header.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ETag"
+            }
+          ]
+        }
+      }
+    },
+    "TopQueryOption": {
+      "type": "object",
+      "description": "This defines a $top OData query option for querying.",
+      "required": [
+        "Value"
+      ],
+      "properties": {
+        "Context": {
+          "description": "Gets the given ODataQueryContext.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ODataQueryContext"
+            }
+          ]
+        },
+        "RawValue": {
+          "type": "string",
+          "description": "Gets the raw $top value."
+        },
+        "Value": {
+          "type": "integer",
+          "description": "Gets the value of the $top as a parsed integer.",
+          "format": "int32"
+        },
+        "Validator": {
+          "description": "Gets or sets the Top Query Validator.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/TopQueryValidator"
+            }
+          ]
+        }
+      }
+    },
+    "TopQueryValidator": {
+      "type": "object",
+      "description": "Represents a validator used to validate a TopQueryOption based on the ODataValidationSettings."
+    },
+    "CountQueryOption": {
+      "type": "object",
+      "description": "Represents the value of the $count query option and exposes a way to retrieve the number of entities that satisfy a query.",
+      "required": [
+        "Value"
+      ],
+      "properties": {
+        "Context": {
+          "description": "Gets the given ODataQueryContext.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ODataQueryContext"
+            }
+          ]
+        },
+        "RawValue": {
+          "type": "string",
+          "description": "Gets the raw $count value."
+        },
+        "Value": {
+          "type": "boolean",
+          "description": "Gets the value of the $count in a parsed form."
+        },
+        "Validator": {
+          "description": "Gets or sets the $count query validator.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CountQueryValidator"
+            }
+          ]
+        }
+      }
+    },
+    "CountQueryValidator": {
+      "type": "object",
+      "description": "Represents a validator used to validate a CountQueryOption \nbased on the ODataValidationSettings."
+    },
+    "ODataQueryValidator": {
+      "type": "object",
+      "description": "Represents a validator used to validate OData queries based on the ODataValidationSettings."
+    },
+    "ETag": {
+      "type": "object",
+      "description": "The ETag parsed from request.",
+      "required": [
+        "IsWellFormed",
+        "IsAny",
+        "IsIfNoneMatch"
+      ],
+      "properties": {
+        "Item": {},
+        "IsWellFormed": {
+          "type": "boolean",
+          "description": "Gets or sets whether the ETag is well-formed."
+        },
+        "EntityType": {
+          "type": "string",
+          "description": "Gets or sets an entity type of the ETag."
+        },
+        "IsAny": {
+          "type": "boolean",
+          "description": "Gets or sets whether the ETag is corresponding to \"*\"."
+        },
+        "IsIfNoneMatch": {
+          "type": "boolean",
+          "description": "Gets or sets whether If-None-Match set in the request header."
+        },
+        "ConcurrencyProperties": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "ETagOfCatalogItem": {
+      "type": "object",
+      "description": "OData ETag of an entity type .",
+      "required": [
+        "IsWellFormed",
+        "IsAny",
+        "IsIfNoneMatch"
+      ],
+      "properties": {
+        "Item": {},
+        "IsWellFormed": {
+          "type": "boolean",
+          "description": "Gets or sets whether the ETag is well-formed."
+        },
+        "EntityType": {
+          "type": "string",
+          "description": "Gets or sets an entity type of the ETag."
+        },
+        "IsAny": {
+          "type": "boolean",
+          "description": "Gets or sets whether the ETag is corresponding to \"*\"."
+        },
+        "IsIfNoneMatch": {
+          "type": "boolean",
+          "description": "Gets or sets whether If-None-Match set in the request header."
+        },
+        "ConcurrencyProperties": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
     }
   }
 }
