@@ -245,9 +245,17 @@
           "description": "Easy Auth configuration resource specific properties",
           "type": "object",
           "properties": {
-            "enabled": {
-              "description": "<code>true</code> if the Authentication / Authorization feature is enabled for the current app; otherwise, <code>false</code>.",
-              "type": "boolean"
+            "state": {
+              "description": "<code>Enabled</code> if the Authentication / Authorization feature is enabled for the current app; otherwise, <code>Disabled</code>.",
+              "type": "string",
+              "enum": [
+                "Enabled",
+                "Disabled"
+              ],
+              "x-ms-enum": {
+                "name": "EasyAuthState",
+                "modelAsString": true
+              }
             },
             "globalValidation": {
               "$ref": "#/definitions/GlobalValidation",
@@ -298,13 +306,21 @@
       "description": "The configuration settings of the login flow of users using ContainerApp Authentication/Authorization.",
       "type": "object",
       "properties": {
-        "routes": {
-          "$ref": "#/definitions/LoginRoutes",
-          "description": "The routes that specify the endpoints used for login and logout requests."
+        "route": {
+          "$ref": "#/definitions/LoginRoute",
+          "description": "The route that specify the endpoint used for login and logout requests."
         },
         "preserveUrlFragmentsForLogins": {
-          "description": "<code>true</code> if the fragments from the request are preserved after the login request is made; otherwise, <code>false</code>.",
-          "type": "boolean"
+          "description": "<code>True</code> if the fragments from the request are preserved after the login request is made; otherwise, <code>False</code>.",
+          "type": "string",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "PreserveUrlFragmentsForLoginsMode",
+            "modelAsString": true
+          }
         },
         "allowedExternalRedirectUrls": {
           "description": "External URLs that can be redirected to as part of logging in or logging out of the app. Note that the query string part of the URL is ignored.\nThis is an advanced setting typically only needed by Windows Store application backends.\nNote that URLs within the current domain are always implicitly allowed.",
@@ -315,8 +331,8 @@
         }
       }
     },
-    "LoginRoutes": {
-      "description": "The routes that specify the endpoints used for login and logout requests.",
+    "LoginRoute": {
+      "description": "The route that specify the endpoint used for login and logout requests.",
       "type": "object",
       "properties": {
         "logoutEndpoint": {
@@ -331,15 +347,23 @@
       "properties": {
         "requireHttps": {
           "description": "<code>false</code> if the authentication/authorization responses not having the HTTPS scheme are permissible; otherwise, <code>true</code>.",
-          "type": "boolean"
+          "type": "string",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "RequireHttpsMode",
+            "modelAsString": true
+          }
         },
-        "routes": {
-          "$ref": "#/definitions/HttpSettingsRoutes",
+        "route": {
+          "$ref": "#/definitions/HttpSettingsRoute",
           "description": "The configuration settings of the paths HTTP requests."
         }
       }
     },
-    "HttpSettingsRoutes": {
+    "HttpSettingsRoute": {
       "description": "The configuration settings of the paths HTTP requests.",
       "type": "object",
       "properties": {
@@ -387,9 +411,9 @@
       "description": "The configuration settings of the Azure Active directory provider.",
       "type": "object",
       "properties": {
-        "enabled": {
-          "description": "<code>false</code> if the Azure Active Directory provider should not be enabled despite the set registration; otherwise, <code>true</code>.",
-          "type": "boolean"
+        "state": {
+          "$ref": "#/definitions/IdentityProviderState",
+          "description": "<code>Disabled</code> if the Azure Active Directory provider should not be enabled despite the set registration; otherwise, <code>Enabled</code>."
         },
         "registration": {
           "$ref": "#/definitions/AzureActiveDirectoryRegistration",
@@ -448,7 +472,15 @@
         },
         "disableWwwAuthenticate": {
           "description": "<code>true</code> if the www-authenticate provider should be omitted from the request; otherwise, <code>false</code>.",
-          "type": "boolean"
+          "type": "string",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "DisableWwwAuthenticateMode",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -469,9 +501,9 @@
       "description": "The configuration settings of the Facebook provider.",
       "type": "object",
       "properties": {
-        "enabled": {
-          "description": "<code>false</code> if the Facebook provider should not be enabled despite the set registration; otherwise, <code>true</code>.",
-          "type": "boolean"
+        "state": {
+          "$ref": "#/definitions/IdentityProviderState",
+          "description": "<code>Disabled</code> if the Facebook provider should not be enabled despite the set registration; otherwise, <code>Enabled</code>."
         },
         "registration": {
           "$ref": "#/definitions/AppRegistration",
@@ -518,9 +550,9 @@
       "description": "The configuration settings of the GitHub provider.",
       "type": "object",
       "properties": {
-        "enabled": {
-          "description": "<code>false</code> if the GitHub provider should not be enabled despite the set registration; otherwise, <code>true</code>.",
-          "type": "boolean"
+        "state": {
+          "$ref": "#/definitions/IdentityProviderState",
+          "description": "<code>Disabled</code> if the GitHub provider should not be enabled despite the set registration; otherwise, <code>Enabled</code>."
         },
         "registration": {
           "$ref": "#/definitions/ClientRegistration",
@@ -550,9 +582,9 @@
       "description": "The configuration settings of the Google provider.",
       "type": "object",
       "properties": {
-        "enabled": {
-          "description": "<code>false</code> if the Google provider should not be enabled despite the set registration; otherwise, <code>true</code>.",
-          "type": "boolean"
+        "state": {
+          "$ref": "#/definitions/IdentityProviderState",
+          "description": "<code>Disabled</code> if the Google provider should not be enabled despite the set registration; otherwise, <code>Enabled</code>."
         },
         "registration": {
           "$ref": "#/definitions/ClientRegistration",
@@ -585,9 +617,9 @@
       "description": "The configuration settings of the Twitter provider.",
       "type": "object",
       "properties": {
-        "enabled": {
-          "description": "<code>false</code> if the Twitter provider should not be enabled despite the set registration; otherwise, <code>true</code>.",
-          "type": "boolean"
+        "state": {
+          "$ref": "#/definitions/IdentityProviderState",
+          "description": "<code>Disabled</code> if the Twitter provider should not be enabled despite the set registration; otherwise, <code>Enabled</code>."
         },
         "registration": {
           "$ref": "#/definitions/TwitterRegistration",
@@ -613,9 +645,9 @@
       "description": "The configuration settings of the legacy Microsoft Account provider.",
       "type": "object",
       "properties": {
-        "enabled": {
-          "description": "<code>false</code> if the legacy Microsoft Account provider should not be enabled despite the set registration; otherwise, <code>true</code>.",
-          "type": "boolean"
+        "state": {
+          "$ref": "#/definitions/IdentityProviderState",
+          "description": "<code>Disabled</code> if the legacy Microsoft Account provider should not be enabled despite the set registration; otherwise, <code>Enabled</code>."
         },
         "registration": {
           "$ref": "#/definitions/ClientRegistration",
@@ -635,9 +667,9 @@
       "description": "The configuration settings of the Apple provider.",
       "type": "object",
       "properties": {
-        "enabled": {
-          "description": "<code>false</code> if the Apple provider should not be enabled despite the set registration; otherwise, <code>true</code>.",
-          "type": "boolean"
+        "state": {
+          "$ref": "#/definitions/IdentityProviderState",
+          "description": "<code>Disabled</code> if the Apple provider should not be enabled despite the set registration; otherwise, <code>Enabled</code>."
         },
         "registration": {
           "$ref": "#/definitions/AppleRegistration",
@@ -683,6 +715,18 @@
           "readOnly": true
         }
       }
+    },
+    "IdentityProviderState": {
+      "type": "string",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityProviderState",
+        "modelAsString": true
+      },
+      "description": "Indicate whether identity provider is enabled or disabled."
     }
   },
   "securityDefinitions": {
