@@ -180,7 +180,7 @@
         "tags": [
           "GrafanaResource"
         ],
-        "summary": "Create a workspace for Grafana resource.",
+        "summary": "Create or update a workspace for Grafana resource. This API is idempotent, so user can either create a new grafana or update an existing grafana.",
         "operationId": "Grafana_Create",
         "consumes": [
           "application/json"
@@ -373,6 +373,7 @@
         },
         "details": {
           "type": "array",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/ErrorResponseBody"
           }
@@ -457,6 +458,18 @@
           "description": "The endpoint of the Grafana instance.",
           "type": "string",
           "readOnly": true
+        },
+        "zoneRedundancy": {
+          "$ref": "#/definitions/ZoneRedundancy"
+        }
+      }
+    },
+    "GrafanaResourcePropertiesUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "zoneRedundancy": {
+          "description": "The high availability mode of the grafana resource.",
+          "$ref": "#/definitions/ZoneRedundancy"
         }
       }
     },
@@ -476,7 +489,12 @@
           }
         },
         "location": {
+          "description": "The location of the grafana resource.",
           "type": "string"
+        },
+        "properties": {
+          "description": "Properties specific to the grafana resource.",
+          "$ref": "#/definitions/GrafanaResourcePropertiesUpdateParameters"
         }
       }
     },
@@ -560,6 +578,7 @@
         "value": {
           "description": "List of operations supported by the Microsoft.Dashboard provider.",
           "type": "array",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/OperationResult"
           }
@@ -648,6 +667,18 @@
           "format": "date-time",
           "type": "string"
         }
+      }
+    },
+    "ZoneRedundancy": {
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "default": "Disabled",
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ZoneRedundancy"
       }
     },
     "UserAssignedIdentity": {
