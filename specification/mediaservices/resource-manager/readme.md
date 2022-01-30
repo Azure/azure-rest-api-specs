@@ -38,6 +38,10 @@ directive:
     reason: Patch response is 202.
     suppress: LongRunningResponseStatusCode
 
+  - from: Accounts.json
+    reason: Patch response is 202.
+    suppress: LongRunningResponseStatusCode
+
   - suppress: R2016
     where: $.definitions.TrackedResource.required
     reason: location is a required property for our patch calls
