@@ -66,7 +66,7 @@ input-file:
   - Microsoft.Media/stable/2021-11-01/Accounts.json
   - Microsoft.Media/stable/2021-11-01/AssetsAndAssetFilters.json
   - Microsoft.Media/stable/2021-11-01/ContentKeyPolicies.json
-  - Microsoft.Media/stable/2021-06-01/Encoding.json
+  - Microsoft.Media/stable/2021-11-01/Encoding.json
   - Microsoft.Media/stable/2021-11-01/StreamingPoliciesAndStreamingLocators.json
   - Microsoft.Media/stable/2021-11-01/streamingservice.json
 ```
