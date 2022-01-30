@@ -126,12 +126,7 @@
       "description": "Describes Advanced Audio Codec (AAC) audio encoding settings."
     },
     "Layer": {
-      "discriminator": "@odata.type",
       "properties": {
-        "@odata.type": {
-          "type": "string",
-          "description": "The discriminator for derived types."
-        },
         "width": {
           "type": "string",
           "description": "The width of the output video for this layer. The value can be absolute (in pixels) or relative (in percentage). For example 50% means the output video has half as many pixels in width as the input."
@@ -146,13 +141,9 @@
         }
       },
       "type": "object",
-      "required": [
-        "@odata.type"
-      ],
       "description": "The encoder can be configured to produce video and/or images (thumbnails) at different resolutions, by specifying a layer for each desired resolution. A layer represents the properties for the video or image at a resolution."
     },
     "H265VideoLayer": {
-      "x-ms-discriminator-value": "#Microsoft.Media.H265VideoLayer",
       "allOf": [
         {
           "$ref": "#/definitions/Layer"
@@ -195,7 +186,6 @@
       "description": "Describes the settings to be used when encoding the input video into a desired output bitrate layer."
     },
     "H265Layer": {
-      "x-ms-discriminator-value": "#Microsoft.Media.H265Layer",
       "allOf": [
         {
           "$ref": "#/definitions/H265VideoLayer"
@@ -1044,7 +1034,6 @@
       "description": "Describes all the filtering operations, such as de-interlacing, rotation etc. that are to be applied to the input media before encoding."
     },
     "VideoLayer": {
-      "x-ms-discriminator-value": "#Microsoft.Media.VideoLayer",
       "allOf": [
         {
           "$ref": "#/definitions/Layer"
@@ -1087,7 +1076,6 @@
       "description": "Describes the settings to be used when encoding the input video into a desired output bitrate layer."
     },
     "H264Layer": {
-      "x-ms-discriminator-value": "#Microsoft.Media.H264Layer",
       "allOf": [
         {
           "$ref": "#/definitions/VideoLayer"
@@ -1251,7 +1239,6 @@
       "description": "Describes the properties for producing a series of JPEG images from the input video."
     },
     "JpgLayer": {
-      "x-ms-discriminator-value": "#Microsoft.Media.JpgLayer",
       "allOf": [
         {
           "$ref": "#/definitions/Layer"
@@ -1333,7 +1320,6 @@
       "description": "Describes the properties for producing a series of PNG images from the input video."
     },
     "PngLayer": {
-      "x-ms-discriminator-value": "#Microsoft.Media.PngLayer",
       "allOf": [
         {
           "$ref": "#/definitions/Layer"
