@@ -58,13 +58,7 @@ input-file:
   - Microsoft.Maps/Timezone/preview/1.0/timezone.json
   - Microsoft.Maps/Traffic/preview/1.0/traffic.json
   - Microsoft.Maps/Weather/preview/1.0/weather.json
-  - Microsoft.MapsCreator/preview/2.0/alias.json
-  - Microsoft.MapsCreator/preview/2.0/data.json
-  - Microsoft.MapsCreator/preview/2.0/dataset.json
-  - Microsoft.MapsCreator/preview/2.0/dwgconversion.json
-  - Microsoft.MapsCreator/preview/2.0/featurestate.json
-  - Microsoft.MapsCreator/preview/2.0/tileset.json
-  - Microsoft.MapsCreator/preview/2.0/wfs.json
+  - Microsoft.Maps/Alias/preview/2.0/alias.json
 ```
 ### Tag: package-1.0-preview
 
