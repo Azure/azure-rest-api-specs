@@ -529,28 +529,20 @@
       "x-ms-discriminator-value": "MiSqlConnectionInfo",
       "type": "object",
       "description": "Properties required to create a connection to Azure SQL database Managed instance",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionInfo"
+        }
+      ],
       "properties": {
         "managedInstanceResourceId": {
           "type": "string",
           "description": "Resource id for Azure SQL database Managed instance"
-        },
-        "type": {
-          "type": "string",
-          "description": "Type of connection info"
-        },
-        "userName": {
-          "type": "string",
-          "description": "User name"
-        },
-        "password": {
-          "type": "string",
-          "description": "Password credential."
         }
       },
       "required": [
         "managedInstanceResourceId"
-      ],
-      "discriminator": "type"
+      ]
     },
     "BackupSetInfo": {
       "type": "object",
