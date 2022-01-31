@@ -298,7 +298,8 @@
       "description": "The status of all Canonical support plans for a subscription.",
       "items": {
         "$ref": "#/definitions/CanonicalSupportPlanInfoDefinition"
-      }
+      },
+      "x-ms-identifiers": [ "canonicalSupportPlanInfoDefinitionId" ]
     },
     "CanonicalSupportPlanInfoDefinition": {
       "type": "object",
@@ -333,6 +334,10 @@
             "name": "OneTimeCharge",
             "modelAsString": true
           }
+        },
+        "canonicalSupportPlanInfoDefinitionId": {
+          "type": "string",
+          "description": "Canonical support plan info definition Id."
         }
       }
     },
@@ -350,7 +355,8 @@
       "description": "List of supported operations.",
       "items": {
         "$ref": "#/definitions/OperationsDefinition"
-      }
+      },
+      "x-ms-identifiers": [ "operationDefinitionId" ]
     },
     "OperationsDefinition": {
       "type": "object",
@@ -363,6 +369,10 @@
         "display": {
           "$ref": "#/definitions/OperationsDisplayDefinition",
           "description": "Display object with properties of the operation."
+        },
+        "operationDefinitionId": {
+          "type": "string",
+          "description": "Operation definition Id."
         }
       }
     },
