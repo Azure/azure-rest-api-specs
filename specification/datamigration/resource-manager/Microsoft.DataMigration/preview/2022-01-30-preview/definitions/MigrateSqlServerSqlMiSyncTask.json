@@ -20,6 +20,12 @@
     "MigrateSqlServerSqlMISyncTaskInput": {
       "type": "object",
       "description": "Input for task that migrates SQL Server databases to Azure SQL Database Managed Instance online scenario.",
+      "properties": {
+        "numberOfParallelDatabaseMigrations": {
+          "type": "number",
+          "description": "Number of database migrations to start in parallel"
+        }
+      },
       "allOf": [
         {
           "$ref": "TasksCommon.json#/definitions/SqlServerSqlMISyncTaskInput"
