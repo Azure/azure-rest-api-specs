@@ -2529,27 +2529,23 @@
         }
       }
     },
-    "Status": {
-      "description": "The status of the long running operation.",
-      "type": "string",
-      "enum": [
-        "Running",
-        "Completed",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "OperationStatusType",
-        "modelAsString": true
-      }
-    },
     "OperationStatus": {
       "description": "The status of the long running operation.",
       "type": "object",
       "properties": {
         "status": {
-          "description": "The status of the long running operation.",
-          "$ref": "#/definitions/Status"
-        },
+            "description": "The status of the long running operation.",
+            "type": "string",
+            "enum": [
+              "Running",
+              "Completed",
+              "Failed"
+            ],
+            "x-ms-enum": {
+              "name": "OperationStatusType",
+              "modelAsString": true
+            }
+          },
         "properties": {
           "x-ms-client-flatten": true,
           "type": "object",
