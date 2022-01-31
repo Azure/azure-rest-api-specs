@@ -847,12 +847,9 @@
         "summary": {
           "type": "array",
           "items": {
-            "anyOf": [
+            "allOf": [
               {
-                "$ref": "#/definitions/Issue"
-              },
-              {
-                "$ref": "#/definitions/Resolution"
+                "$ref": "#/definitions/SummaryResultItem"
               }
             ]
           }
@@ -864,6 +861,29 @@
         }
       ]
     },
+    "SummaryResultItem": {
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/SummaryKind"
+        }
+      }
+    },
+    "SummaryKind": {
+      "type": "string",
+      "description": "Enumeration of supported Summary types.",
+      "enum": [
+        "Issue",
+        "Resolution"
+      ],
+      "x-ms-enum": {
+        "name": "SummaryKind",
+        "modelAsString": true
+      }
+    },
     "Issue": {
       "type": "object",
       "properties": {
@@ -873,7 +893,8 @@
       },
       "required": [
         "issue"
-      ]
+      ],
+      "x-ms-discriminator-value": "Issue"
     },
     "Resolution": {
       "type": "object",
@@ -884,7 +905,8 @@
       },
       "required": [
         "resolution"
-      ]
+      ],
+      "x-ms-discriminator-value": "Resolution"
     },
     "AnalyzeTextLROTask": {
       "discriminator": "kind",
