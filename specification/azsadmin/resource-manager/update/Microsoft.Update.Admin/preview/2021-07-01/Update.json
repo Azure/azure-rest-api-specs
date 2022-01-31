@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2016-05-01",
+    "version": "2021-07-01",
     "title": "UpdateAdminClient",
     "description": "The Update Admin Management Client."
   },
@@ -83,6 +83,7 @@
     },
     "Operation": {
       "description": "Describes the supported REST operation.",
+      "type": "object",
       "properties": {
         "name": {
           "description": "The name of the operation being performed on this particular object. It should match the action name that appears in RBAC / the event service.",
@@ -96,6 +97,7 @@
     },
     "Display": {
       "description": "Contains the localized display information for this particular operation or action.",
+      "type": "object",
       "properties": {
         "provider": {
           "description": "The localized, friendly version of the resource provider name. The provider name is expected to include the name of the publisher or company responsible. The provider name format should use title case and begin with Microsoft for first-party services. For example, the provider name may be Microsoft Monitoring Insights or Microsoft Compute.",
@@ -117,6 +119,7 @@
     },
     "OperationList": {
       "description": "List of Operations",
+      "type": "object",
       "properties": {
         "value": {
           "description": "Array of operations",
@@ -128,6 +131,40 @@
         "nextLink": {
           "description": "URI to the next page of operations.",
           "type": "string"
+        }
+      }
+    },
+    "ExtendedErrorInfo": {
+      "type": "object",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "type": "object",
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
         }
       }
     }
@@ -146,7 +183,7 @@
       "description": "Client API Version.",
       "required": true,
       "type": "string",
-      "default": "2016-05-01"
+      "default": "2021-07-01"
     },
     "ResourceGroupParameter": {
       "description": "Resource group name.",

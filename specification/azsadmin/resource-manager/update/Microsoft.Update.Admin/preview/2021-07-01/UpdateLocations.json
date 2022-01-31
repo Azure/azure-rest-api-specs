@@ -3,7 +3,7 @@
   "info": {
     "description": "Update location operation endpoints and objects.",
     "title": "UpdateAdminClient",
-    "version": "2016-05-01"
+    "version": "2021-07-01"
   },
   "host": "adminmanagement.local.azurestack.external",
   "schemes": [
@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Update.Admin/updateLocations/": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Update.Admin/updateLocations/": {
       "get": {
         "x-ms-examples": {
           "Get the list of update locations.": {
@@ -52,7 +52,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Update.Admin/updateLocations/{updateLocation}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Update.Admin/updateLocations/{updateLocation}": {
       "get": {
         "x-ms-examples": {
           "Get an update location based on name.": {
@@ -110,16 +110,36 @@
       "description": "Model which holds information related to update location.",
       "type": "object",
       "properties": {
+        "oemFamily": {
+          "description": "OEM family of your Azure Stack Hub deployment.",
+          "type": "string"
+        },
+        "hardwareModel": {
+          "description": "Hardware model of your Azure Stack Hub deployment.",
+          "type": "string"
+        },
+        "packageVersions": {
+          "description": "Package map of your Azure Stack Hub deployment.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PackageVersionInfo"
+          }
+        },
         "currentVersion": {
-          "description": "Current version of your AzureStack deployment.",
+          "description": "Current version of your Azure Stack Hub deployment.",
           "type": "string"
         },
         "currentOemVersion": {
-          "description": "Current OEM version of your AzureStack deployment.",
+          "description": "Current OEM version of your Azure Stack Hub deployment.",
           "type": "string"
         },
         "lastUpdated": {
           "description": "Date of last update.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastChecked": {
+          "description": "Time of last successful check for new available updates.",
           "format": "date-time",
           "type": "string"
         },
@@ -129,15 +149,38 @@
         }
       }
     },
+    "PackageVersionInfo": {
+      "description": "Package information of your Azure Stack Hub deployment.",
+      "type": "object",
+      "properties": {
+        "packageType": {
+          "description": "Type of the update.",
+          "type": "string"
+        },
+        "version": {
+          "description": "Version of the update.",
+          "type": "string"
+        },
+        "lastUpdated": {
+          "description": "Date of last update.",
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
     "RegionUpdateState": {
       "description": "State of the region in regard to update.",
       "type": "string",
       "enum": [
         "Unknown",
+        "UpdateAvailable",
+        "PreparationInProgress",
+        "PreparationFailed",
         "AppliedSuccessfully",
         "AppliedUpdateAvailableSuccessfully",
         "UpdateInProgress",
-        "UpdateFailed"
+        "UpdateFailed",
+        "NeedsAttention"
       ],
       "x-ms-enum": {
         "name": "RegionUpdateState",
