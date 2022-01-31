@@ -2529,6 +2529,35 @@
         }
       }
     },
+    "OperationStatus": {
+      "description": "The status of the long running operation.",
+      "properties": {
+        "status": {
+          "description": "The status of the long running operation.",
+          "$ref": "#/definitions/Status"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "description": "The properties of the resource generated.",
+          "$ref": "#/definitions/ReportURL"
+        }
+      }
+    },
+    "ReportURL": {
+      "description": "The URL to download the generated report.",
+      "properties": {
+        "reportUrl": {
+          "description": "The URL to download the generated report.",
+          "type": "string"
+        },
+        "validUntil": {
+          "description": "The time at which report URL becomes invalid.",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "QueryDatasetConfiguration": {
       "description": "The configuration of dataset in the query.",
       "type": "object",
@@ -2737,10 +2766,42 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
+    "startDateParameter": {
+      "name": "startDate",
+      "in": "query",
+      "description": "Start Date",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "endDateParameter": {
+      "name": "endDate",
+      "in": "query",
+      "description": "End Date",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "enrollmentIdParameter": {
+      "name": "billingAccountId",
+      "in": "path",
+      "description": "Enrollment ID (Legacy BillingAccount ID)",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "billingAccountIdParameter": {
       "name": "billingAccountId",
       "in": "path",
       "description": "BillingAccount ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "billingProfileIdParameter": {
+      "name": "billingProfileId",
+      "in": "path",
+      "description": "BillingProfile ID",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
