@@ -4019,11 +4019,6 @@
           },
           "description": "The developer portal configurations."
         },
-        "count": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total record count number across all pages."
-        },
         "nextLink": {
           "type": "string",
           "description": "Next page link if any.",
@@ -4052,14 +4047,16 @@
       "properties": {
         "enableBasicAuth": {
           "type": "boolean",
-          "description": "Enable or disable Basic authentication method."
+          "description": "Enable or disable Basic authentication method.",
+          "default": true
         },
         "signin": {
           "type": "object",
           "properties": {
             "require": {
               "type": "boolean",
-              "description": "Redirect anonymous users to the sign-in page."
+              "description": "Redirect anonymous users to the sign-in page.",
+              "default": false
             }
           }
         },
@@ -4096,11 +4093,13 @@
       "properties": {
         "delegateRegistration": {
           "type": "boolean",
-          "description": "Enable or disable delegation for user registration."
+          "description": "Enable or disable delegation for user registration.",
+          "default": false
         },
         "delegateSubscription": {
           "type": "boolean",
-          "description": "Enable or disable delegation for product subscriptions."
+          "description": "Enable or disable delegation for product subscriptions.",
+          "default": false
         },
         "delegationUrl": {
           "type": "string",
@@ -4122,7 +4121,8 @@
         },
         "requireConsent": {
           "type": "boolean",
-          "description": "Ask user for consent to the terms of service."
+          "description": "Ask user for consent to the terms of service.",
+          "default": false
         }
       },
       "description": "Terms of service contract properties."
@@ -4151,6 +4151,7 @@
             "disabled",
             "reportOnly"
           ],
+          "default": "disabled",
           "x-ms-enum": {
             "modelAsString": true,
             "name": "PortalSettingsCspMode",
