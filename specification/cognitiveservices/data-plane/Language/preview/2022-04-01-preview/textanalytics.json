@@ -857,7 +857,12 @@
             ]
           }
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationResult"
+        }
+      ]
     },
     "Issue": {
       "type": "object",
@@ -3490,6 +3495,13 @@
           "description": "Warnings encountered while processing conversation.",
           "items": {
             "$ref": "#/definitions/ConversationWarning"
+          }
+        },
+        "errors": {
+          "type": "array",
+          "description": "Errors encountered while processing conversation.",
+          "items": {
+            "$ref": "#/definitions/ConversationError"
           }
         },
         "statistics": {
