@@ -618,7 +618,9 @@
             "DefenderForContainersAws",
             "DefenderForServersAws",
             "InformationProtectionAws",
+            "DefenderForDatabasesAws",
             "CspmMonitorGcp",
+            "DefenderForDatabasesGcp",
             "CspmMonitorGithub"
           ],
           "x-ms-enum": {
@@ -779,6 +781,28 @@
         }
       }
     },
+    "defenderForDatabasesAwsOffering": {
+      "type": "object",
+      "description": "The defender for databases for AWS offering",
+      "x-ms-discriminator-value": "DefenderForDatabasesAws",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {
+        "databasesOnVirtualMachines": {
+          "type": "object",
+          "description": "The base configuration for databases offering",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "is databases on virtual machines enabled"
+            }
+          }
+        }
+      }
+    },
     "cspmMonitorGcpOffering": {
       "type": "object",
       "description": "The CSPM monitoring for GCP offering",
@@ -800,6 +824,28 @@
             "serviceAccountEmailAddress": {
               "type": "string",
               "description": "The service account email address in GCP for this offering"
+            }
+          }
+        }
+      }
+    },
+    "defenderForDatabasesGcpOffering": {
+      "type": "object",
+      "description": "The defender for databases for GCP offering",
+      "x-ms-discriminator-value": "DefenderForDatabasesGcp",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {
+        "databasesOnVirtualMachines": {
+          "type": "object",
+          "description": "The base configuration for databases offering",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "is databases on virtual machines enabled"
             }
           }
         }
