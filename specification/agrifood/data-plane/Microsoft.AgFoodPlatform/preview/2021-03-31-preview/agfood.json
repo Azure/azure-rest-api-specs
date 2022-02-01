@@ -592,12 +592,6 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
           "200": {
             "description": "Success",
             "schema": {
@@ -608,6 +602,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/ApplicationData"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1101,13 +1101,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Attachment"
             }
           },
-          "200": {
+          "201": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Attachment"
@@ -2732,13 +2732,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/CropVariety"
             }
           },
-          "200": {
+          "201": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/CropVariety"
@@ -3017,13 +3017,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Farmer"
             }
           },
-          "200": {
+          "201": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Farmer"
@@ -3653,13 +3653,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Farm"
             }
           },
-          "200": {
+          "201": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Farm"
@@ -4216,13 +4216,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Field"
             }
           },
-          "200": {
+          "201": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Field"
@@ -5099,12 +5099,6 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
           "200": {
             "description": "Success",
             "schema": {
@@ -5115,6 +5109,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/HarvestData"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -5592,13 +5592,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/OAuthProvider"
             }
           },
-          "200": {
+          "201": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/OAuthProvider"
@@ -6651,12 +6651,6 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
           "200": {
             "description": "Success",
             "schema": {
@@ -6667,6 +6661,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/PlantingData"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -7711,13 +7711,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/SeasonalField"
             }
           },
-          "200": {
+          "201": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/SeasonalField"
@@ -8145,13 +8145,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Season"
             }
           },
-          "200": {
+          "201": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Season"
@@ -8799,12 +8799,6 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
           "200": {
             "description": "Success",
             "schema": {
@@ -8815,6 +8809,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/TillageData"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -9373,7 +9373,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationProductDetail"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "avgMaterial": {
           "$ref": "#/definitions/Measure"
@@ -9534,7 +9535,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Error"
-          }
+          },
+          "x-ms-identifiers": [
+            "message"
+          ]
         },
         "innererror": {
           "$ref": "#/definitions/InnerError"
@@ -10598,7 +10602,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/HarvestProductDetail"
-          }
+          },
+          "x-ms-identifiers": [
+            "productName",
+            "area"
+          ]
         },
         "area": {
           "$ref": "#/definitions/Measure"
@@ -11035,7 +11043,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OAuthToken"
-          }
+          },
+          "x-ms-identifiers": [
+            "authProviderId",
+            "farmerId"
+          ]
         },
         "$skipToken": {
           "description": "Token used in retrieving the next page. If null, there are no additional pages.",
@@ -11115,7 +11127,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PlantingProductDetail"
-          }
+          },
+          "x-ms-identifiers": [
+            "productName",
+            "area"
+          ]
         },
         "area": {
           "$ref": "#/definitions/Measure"
@@ -11295,7 +11311,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ImageFile"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "imageFormat": {
           "$ref": "#/definitions/ImageFormat"
