@@ -3769,7 +3769,8 @@
       "properties": {
         "value": {
           "type": "object",
-          "description": "Stored procedure parameter value. Type: string (or Expression with resultType string)."
+          "description": "Stored procedure parameter value. Type: string (or Expression with resultType string).",
+          "x-nullable": true
         },
         "type": {
           "description": "Stored procedure parameter type.",
@@ -3791,6 +3792,35 @@
       ],
       "x-ms-enum": {
         "name": "StoredProcedureParameterType",
+        "modelAsString": true
+      }
+    },
+    "NotebookParameter": {
+      "description": "Notebook parameter.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "object",
+          "description": "Notebook parameter value. Type: string (or Expression with resultType string).",
+          "x-nullable": true
+        },
+        "type": {
+          "description": "Notebook parameter type.",
+          "$ref": "#/definitions/NotebookParameterType"
+        }
+      }
+    },
+    "NotebookParameterType": {
+      "description": "Notebook parameter type.",
+      "type": "string",
+      "enum": [
+        "string",
+        "int",
+        "float",
+        "bool"
+      ],
+      "x-ms-enum": {
+        "name": "NotebookParameterType",
         "modelAsString": true
       }
     },
@@ -7180,7 +7210,10 @@
         },
         "parameters": {
           "description": "Notebook parameters.",
-          "$ref": "../artifacts.json#/definitions/ParameterValueSpecification"
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/NotebookParameter"
+          }
         }
       },
       "required": [

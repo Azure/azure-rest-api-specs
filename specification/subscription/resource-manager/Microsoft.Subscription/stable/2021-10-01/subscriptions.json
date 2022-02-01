@@ -291,7 +291,7 @@
         ]
       }
     },
-    "/providers/Microsoft.Subscription/{subscriptionId}/acceptOwnership": {
+    "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/acceptOwnership": {
       "post": {
         "description": "Accept subscription ownership.",
         "operationId": "Subscription_AcceptOwnership",
@@ -341,7 +341,7 @@
         ]
       }
     },
-    "/providers/Microsoft.Subscription/{subscriptionId}/acceptOwnershipStatus": {
+    "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/acceptOwnershipStatus": {
       "get": {
         "description": "Accept subscription ownership status.",
         "operationId": "Subscription_AcceptOwnershipStatus",
@@ -384,7 +384,7 @@
           }
         },
         "responses": {
-          "201": {
+          "200": {
             "description": "Subscription tenant policy has been successfully created/updated.",
             "schema": {
               "$ref": "#/definitions/GetTenantPolicyResponse"
@@ -544,7 +544,7 @@
       "description": "The ID of the canceled subscription",
       "type": "object",
       "properties": {
-        "value": {
+        "subscriptionId": {
           "description": "The ID of the canceled subscription",
           "type": "string",
           "readOnly": true
@@ -555,7 +555,7 @@
       "description": "The ID of the subscriptions that is being renamed",
       "type": "object",
       "properties": {
-        "value": {
+        "subscriptionId": {
           "description": "The ID of the subscriptions that is being renamed",
           "type": "string",
           "readOnly": true
@@ -566,7 +566,7 @@
       "description": "The ID of the subscriptions that is being enabled",
       "type": "object",
       "properties": {
-        "value": {
+        "subscriptionId": {
           "description": "The ID of the subscriptions that is being enabled",
           "type": "string",
           "readOnly": true
@@ -779,6 +779,10 @@
         },
         "managementGroupId": {
           "description": "The Management Group Id.",
+          "type": "string"
+        },
+        "createdTime": {
+          "description": "Created Time",
           "type": "string"
         },
         "tags": {
