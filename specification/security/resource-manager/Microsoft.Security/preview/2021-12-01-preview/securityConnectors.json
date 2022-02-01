@@ -397,9 +397,11 @@
       "type": "object",
       "description": "The aws connector environment data",
       "x-ms-discriminator-value": "AwsAccount",
-      "allOf": [{
-        "$ref": "#/definitions/EnvironmentData"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentData"
+        }
+      ],
       "properties": {
         "organizationalData": {
           "type": "object",
@@ -408,7 +410,7 @@
         }
       }
     },
-    "AwsOrganizationData":{
+    "AwsOrganizationData": {
       "type": "object",
       "description": "The awsOrganization data ",
       "discriminator": "organizationMembershipType",
@@ -430,13 +432,15 @@
         }
       }
     },
-    "AwsOrganizationDataParent":{
+    "AwsOrganizationDataParent": {
       "type": "object",
       "description": "The awsOrganization data for the parent account",
       "x-ms-discriminator-value": "Organization",
-      "allOf": [{
-        "$ref": "#/definitions/AwsOrganizationData"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AwsOrganizationData"
+        }
+      ],
       "properties": {
         "stacksetName": {
           "type": "string",
@@ -452,13 +456,15 @@
         }
       }
     },
-    "AwsOrganizationDataMember":{
+    "AwsOrganizationDataMember": {
       "type": "object",
       "description": "The awsOrganization data for the member account",
       "x-ms-discriminator-value": "Member",
-      "allOf": [{
-        "$ref": "#/definitions/AwsOrganizationData"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AwsOrganizationData"
+        }
+      ],
       "properties": {
         "parentHierarchyId": {
           "type": "string",
@@ -470,9 +476,11 @@
       "type": "object",
       "description": "The GCP project connector environment data",
       "x-ms-discriminator-value": "GcpProject",
-      "allOf": [{
-        "$ref": "#/definitions/EnvironmentData"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentData"
+        }
+      ],
       "properties": {
         "organizationalData": {
           "type": "object",
@@ -531,9 +539,11 @@
       "type": "object",
       "description": "The gcpOrganization data for the parent account",
       "x-ms-discriminator-value": "Organization",
-      "allOf": [{
-        "$ref": "#/definitions/GcpOrganizationData"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GcpOrganizationData"
+        }
+      ],
       "properties": {
         "excludedProjectNumbers": {
           "type": "array",
@@ -557,9 +567,11 @@
       "type": "object",
       "description": "The gcpOrganization data for the member account",
       "x-ms-discriminator-value": "Member",
-      "allOf": [{
-        "$ref": "#/definitions/GcpOrganizationData"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GcpOrganizationData"
+        }
+      ],
       "properties": {
         "excludedProjectNumbers": {
           "type": "array",
@@ -583,11 +595,12 @@
       "type": "object",
       "description": "The github scope connector's environment data",
       "x-ms-discriminator-value": "GithubScope",
-      "allOf": [{
-        "$ref": "#/definitions/EnvironmentData"
-      }],
-      "properties": {
-      }
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentData"
+        }
+      ],
+      "properties": {}
     },
     "cloudOffering": {
       "type": "object",
@@ -624,9 +637,11 @@
       "type": "object",
       "description": "The CSPM monitoring for AWS offering",
       "x-ms-discriminator-value": "CspmMonitorAws",
-      "allOf": [{
-        "$ref": "#/definitions/cloudOffering"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
       "properties": {
         "nativeCloudConnection": {
           "type": "object",
@@ -644,9 +659,11 @@
       "type": "object",
       "description": "The Defender for Containers AWS offering",
       "x-ms-discriminator-value": "DefenderForContainersAws",
-      "allOf": [{
-        "$ref": "#/definitions/cloudOffering"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
       "properties": {
         "kubernetesService": {
           "type": "object",
@@ -694,9 +711,11 @@
       "type": "object",
       "description": "The Defender for Servers AWS offering",
       "x-ms-discriminator-value": "DefenderForServersAws",
-      "allOf": [{
-        "$ref": "#/definitions/cloudOffering"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
       "properties": {
         "defenderForServers": {
           "type": "object",
@@ -742,9 +761,11 @@
       "type": "object",
       "description": "The information protection for AWS offering",
       "x-ms-discriminator-value": "InformationProtectionAws",
-      "allOf": [{
-        "$ref": "#/definitions/cloudOffering"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
       "properties": {
         "informationProtection": {
           "type": "object",
@@ -762,9 +783,11 @@
       "type": "object",
       "description": "The CSPM monitoring for GCP offering",
       "x-ms-discriminator-value": "CspmMonitorGcp",
-      "allOf": [{
-        "$ref": "#/definitions/cloudOffering"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
       "properties": {
         "workloadIdentityProviderId": {
           "type": "string",
@@ -786,11 +809,12 @@
       "type": "object",
       "description": "The CSPM monitoring for github offering",
       "x-ms-discriminator-value": "CspmMonitorGithub",
-      "allOf": [{
-        "$ref": "#/definitions/cloudOffering"
-      }],
-      "properties": {
-      }
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {}
     }
   },
   "parameters": {
