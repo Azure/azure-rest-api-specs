@@ -3670,7 +3670,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Item"
-          }
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
         },
         "totalCount": {
           "description": "The total count of configuration.",
@@ -3699,7 +3702,10 @@
           "type": "object",
           "items": {
             "$ref": "#/definitions/Item"
-          }
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
         },
         "hasProperties": {
           "description": "Indicates if properties are present or not.",
@@ -3779,7 +3785,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Item"
-          }
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
         },
         "disabled": {
           "description": "Indicates if the server is disabled or not. ",
@@ -3794,7 +3803,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Hotfix"
-          }
+          },
+          "x-ms-identifiers": [
+            "kbName"
+          ]
         },
         "lastDisabled": {
           "description": "The date and time , in UTC, when the server was last disabled.",
@@ -3829,14 +3841,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Item"
-          }
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
         },
         "monitoringConfigurationsCustomized": {
           "description": "The customized monitoring configuration of the server which determines what activities are monitored by Azure Active Directory Connect Health.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Item"
-          }
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
         },
         "osName": {
           "description": "The name of the operating system installed in the machine.",
@@ -3851,14 +3869,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Item"
-          }
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
         },
         "recommendedQfes": {
           "description": "The list of recommended hotfixes for the server.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Hotfix"
-          }
+          },
+          "x-ms-identifiers": [
+            "kbName"
+          ]
         },
         "resolvedAlerts": {
           "description": "The total count of alerts that are resolved for this server.",
@@ -3900,7 +3924,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AddsServiceMember"
-          }
+          },
+          "x-ms-identifiers": [
+            "machineId"
+          ]
         },
         "totalCount": {
           "description": "The total count of service members.",
@@ -3929,7 +3956,10 @@
           "type": "object",
           "items": {
             "$ref": "#/definitions/Credential"
-          }
+          },
+          "x-ms-identifiers": [
+            "identifier"
+          ]
         },
         "machineName": {
           "description": "The machine name.",
@@ -4008,7 +4038,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/HelpLink"
-          }
+          },
+          "x-ms-identifiers": [
+            "url"
+          ]
         },
         "scope": {
           "description": "The scope of the alert. Indicates if it is a service or a server related alert.",
@@ -4019,7 +4052,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AdditionalInformation"
-          }
+          },
+          "x-ms-identifiers": [
+            "titleName"
+          ]
         },
         "createdDate": {
           "description": "The date and time,in UTC,when the alert was created.",
@@ -4045,14 +4081,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Item"
-          }
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
         },
         "resolvedAlertProperties": {
           "description": "The resolved alert properties.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Item"
-          }
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
         },
         "tenantId": {
           "description": "The tenant Id.",
@@ -4107,6 +4149,10 @@
           "description": "The date and time,in UTC,when the alert was created.",
           "type": "string",
           "format": "date-time"
+        },
+        "id": {
+          "description": "The alert feedback id.",
+          "type": "string"
         }
       }
     },
@@ -4119,7 +4165,10 @@
           "description": "The value returned by the operation.",
           "items": {
             "$ref": "#/definitions/AlertFeedback"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },
@@ -4132,7 +4181,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Alert"
-          }
+          },
+          "x-ms-identifiers": [
+            "alertId"
+          ]
         },
         "nextLink": {
           "description": "The link used to get the next page of operations.",
@@ -4213,7 +4265,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ValueDelta"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "name": {
           "description": "The name of the attribute delta.",
@@ -4253,6 +4308,10 @@
         "multiValued": {
           "description": "Indicates if the attribute delta is multivalued or not.",
           "type": "boolean"
+        },
+        "id": {
+          "type": "string",
+          "description": "The Attribute delta id."
         }
       }
     },
@@ -4340,14 +4399,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AttributeDelta"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "attributes": {
           "description": "The attributes.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AttributeDelta"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "operationType": {
           "description": "The operation type.",
@@ -4397,14 +4462,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AttributeDelta"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "attributes": {
           "description": "The attributes.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AttributeDelta"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "dn": {
           "description": "The distinguished name.",
@@ -4572,7 +4643,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConnectorMetadataDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "connectorId"
+          ]
         },
         "runProfileNames": {
           "description": "The list of run profile names.",
@@ -4705,7 +4779,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Credential"
-          }
+          },
+          "x-ms-identifiers": [
+            "identifier"
+          ]
         }
       }
     },
@@ -4718,7 +4795,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Item"
-          }
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
         }
       }
     },
@@ -4746,7 +4826,10 @@
           "type": "object",
           "items": {
             "$ref": "#/definitions/Item"
-          }
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
         },
         "activeAlerts": {
           "description": "The count of alerts that are currently active for the service.",
@@ -4776,6 +4859,10 @@
         "type": {
           "description": "The service type for the services onboarded to Azure Active Directory Connect Health. Depending on whether the service is monitoring, ADFS, Sync or ADDS roles, the service type can either be AdFederationService or AadSyncService or AdDomainService.",
           "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "description": "The dimension id."
         }
       }
     },
@@ -4792,7 +4879,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Dimension"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "totalCount": {
           "description": "The total count of dimensions.",
@@ -4837,6 +4927,10 @@
         "truncated": {
           "description": "Indicates if the error count is truncated or not.",
           "type": "boolean"
+        },
+        "id": {
+          "type": "string",
+          "description": "The error cound id."
         }
       }
     },
@@ -4849,7 +4943,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorCount"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },
@@ -5073,6 +5170,10 @@
         "totalErrorAttempts": {
           "description": "The total count of specific error events.",
           "type": "integer"
+        },
+        "id": {
+          "type": "string",
+          "description": "The bad password login attempt id."
         }
       }
     },
@@ -5085,7 +5186,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorReportUsersEntry"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },
@@ -5127,7 +5231,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExportStatus"
-          }
+          },
+          "x-ms-identifiers": [
+            "runStepResultId"
+          ]
         },
         "totalCount": {
           "description": "The total count of service elements.",
@@ -5222,7 +5329,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Item"
-          }
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
         }
       }
     },
@@ -5235,7 +5345,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/GlobalConfiguration"
-          }
+          },
+          "x-ms-identifiers": [
+            "version"
+          ]
         }
       }
     },
@@ -5281,7 +5394,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Hotfix"
-          }
+          },
+          "x-ms-identifiers": [
+            "kbName"
+          ]
         }
       }
     },
@@ -5434,6 +5550,10 @@
         "additionalInfo": {
           "description": "The additional details.",
           "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "description": "The Inbound replication neighbor summary id."
         }
       }
     },
@@ -5446,7 +5566,10 @@
           "description": "The details of inbound replication neighbors.",
           "items": {
             "$ref": "#/definitions/InboundReplicationNeighbor"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },
@@ -5602,7 +5725,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Item"
-          }
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
         }
       }
     },
@@ -5735,6 +5861,10 @@
         "invisibleForUi": {
           "description": "indicates if the metric group is displayed in Azure Active Directory Connect Health UI.",
           "type": "boolean"
+        },
+        "id": {
+          "type": "string",
+          "description": "The Metric group id."
         }
       }
     },
@@ -5751,7 +5881,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Item"
-          }
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
         },
         "totalCount": {
           "description": "The total count of metrics.",
@@ -5780,7 +5913,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricGroup"
-          }
+          },
+          "x-ms-identifier": [
+            "id"
+          ]
         },
         "displayName": {
           "description": "The display name for the metric.",
@@ -5799,7 +5935,7 @@
           "type": "integer"
         },
         "kind": {
-          "description": "Indicates whether the dashboard to represent the metric is a line, bar,pie, area or donut chart.",
+          "description": "Indicates whether the dashboard to represent the metric is a line, bar, pie, area or donut chart.",
           "type": "string"
         },
         "isDefault": {
@@ -5813,6 +5949,10 @@
         "isDevOps": {
           "description": "Indicates if the metric is visible to DevOps or not.",
           "type": "boolean"
+        },
+        "id": {
+          "type": "string",
+          "description": "The Metric metadata id."
         }
       }
     },
@@ -5829,7 +5969,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricMetadata"
-          }
+          },
+          "x-ms-identifier": [
+            "id"
+          ]
         },
         "totalCount": {
           "description": "The total count of service elements.",
@@ -5855,6 +5998,10 @@
           "items": {
             "type": "integer"
           }
+        },
+        "id": {
+          "type": "string",
+          "description": "The Metric set id."
         }
       }
     },
@@ -5867,7 +6014,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricSet"
-          }
+          },
+          "x-ms-identifier": [
+            "id"
+          ]
         },
         "timeStamps": {
           "description": "The list of timestamps for each metric in the metric set.",
@@ -5897,6 +6047,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "id": {
+          "type": "string",
+          "description": "The Module configuration id."
         }
       }
     },
@@ -5909,7 +6063,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ModuleConfiguration"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },
@@ -6016,7 +6173,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "totalCount": {
           "description": "The total count of operations.",
@@ -6181,7 +6341,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ReplicationSummary"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "totalCount": {
           "description": "The total count of replication detail elements.",
@@ -6250,7 +6413,14 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/InboundReplicationNeighbor"
-          }
+          },
+          "x-ms-identifier": [
+            "id"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "description": "The Replication summary id."
         }
       }
     },
@@ -6263,7 +6433,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ReplicationSummary"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },
@@ -6306,6 +6479,10 @@
         "status": {
           "description": "Status of the Risky IP report generation.",
           "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "description": "The blob uri id."
         }
       }
     },
@@ -6318,7 +6495,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RiskyIPBlobUri"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },
@@ -6379,6 +6559,10 @@
         "timeout": {
           "description": "The operation timeout.",
           "type": "integer"
+        },
+        "id": {
+          "type": "string",
+          "description": "The run step id."
         }
       }
     },
@@ -6399,7 +6583,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RunStep"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },
@@ -6637,7 +6824,10 @@
           "type": "object",
           "items": {
             "$ref": "#/definitions/Item"
-          }
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
         },
         "disabled": {
           "description": "Indicates if the server is disabled or not. ",
@@ -6687,7 +6877,10 @@
           "type": "object",
           "items": {
             "$ref": "#/definitions/Item"
-          }
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
         },
         "monitoringConfigurationsCustomized": {
           "description": "The customized monitoring configuration of the server which determines what activities are monitored by Azure Active Directory Connect Health.",
@@ -6709,7 +6902,10 @@
           "type": "object",
           "items": {
             "$ref": "#/definitions/Item"
-          }
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
         },
         "recommendedQfes": {
           "description": "The list of recommended hotfixes for the server.",
@@ -6758,7 +6954,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ServiceMember"
-          }
+          },
+          "x-ms-identifiers": [
+            "machineId"
+          ]
         },
         "totalCount": {
           "description": "The total count of service elements.",
@@ -6940,6 +7139,10 @@
         "value": {
           "description": "The value of the delta.",
           "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "description": "The Value delta id."
         }
       }
     }
