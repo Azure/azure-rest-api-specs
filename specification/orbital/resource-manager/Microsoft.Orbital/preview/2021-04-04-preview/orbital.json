@@ -1289,6 +1289,10 @@
           },
           "description": "Auto track configuration."
         },
+        "eventHubUri": {
+          "type": "string",
+          "description": "The URI of the Event Hub used for telemetry"
+        },
         "links": {
           "type": "array",
           "items": {
@@ -1781,6 +1785,10 @@
         "EarthObservation",
         "Communication"
       ],
+      "x-ms-enum": {
+        "name": "CapabilityType",
+        "modelAsString": true
+      },
       "default": "EarthObservation",
       "description": "Ground Station Capability",
       "x-ms-parameter-location": "method"

@@ -14,7 +14,7 @@ variables:
   publicIpAddressName: pubipdns
 prepareSteps:
   - step: prepare_resources
-    armTemplateDeployment: ./dep-something.json
+    armTemplate: ./dep-something.json
 scenarios:
   - description: test_network_public_ip
     steps:
@@ -98,7 +98,8 @@ Should be one of the following:
 - [Step REST Call](#step-rest-call)
   - [REST Call](#rest-call)
   - [REST Call by ResourceName Tracking and Update](#rest-call-by-resourcename-tracking-and-update)
-- [Step ARM Template Deployment](#step-arm-template-deployment)
+- [Step ARM Template](#step-arm-template)
+- [Step ARM Deployment Script](#step-arm-deployment-script)
 
 All of the above definitions share the following fields:
 
@@ -109,28 +110,83 @@ All of the above definitions share the following fields:
   - **Type:** Required, String
   - Step name. Must be unique in the same file.
 
-## Step ARM Template Deployment
+## Step ARM Template
 
-See [Step ARM Template Deployment Schema](./v1.1/schema.json#L247).
+See [Step ARM Template Schema](./v1.1/schema.json#L250).
 
 Step to deploy ARM template to the scope. Template parameters and outputs will also interact with variables automatically, see [Variables](./Variables.md).
 
 **Example:**
 
 ```yaml
-step: prepare_resources
-armTemplateDeployment: ./dep-storage-account.json
+- step: prepare_resources
+  armTemplate: ./dep-storage-account.json
 ```
 
 **Fields:**
 
-- **armTemplateDeployment**
+- **armTemplate**
   - **Type:** Required, String
   - Path to ARM template json file. See [ARM Template](https://docs.microsoft.com/azure/templates/).
 
+
+## Step ARM Deployment Script
+
+See [Step ARM Deployment Script Schema](./v1.1/schema.json#L266).
+
+Step to deploy ARM deployment script to the scope. Template parameters and outputs will also interact with variables automatically, see [Variables](./Variables.md).
+
+**Example:**
+
+```yaml
+- step: Add_Dns_Cname_Record
+  armDeploymentScript: ./templates/create_cname_record.ps1
+  environmentVariables:
+    - name: resourceGroupName
+      value: $(dnsResourceGroup)
+    - name: dnsZoneName
+      value: $(customDomainName)
+    - name: dnsCname
+      value: $(dnsCname)
+    - name: dnsCnameAlias
+      value: $(serviceName).somedomain.com
+```
+
+**Fields:**
+
+- **armDeploymentScript**
+  - **Type:** Required, String
+  - Path to script file. See [ARM Deployment Script Template](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-script-template).
+- **arguments**
+  - **Type:** Optional, String
+  - Arguments for the script. Same as arguments in ARM Template. See [ARM Deployment Script Template](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-script-template).
+- **environmentVariables**
+  - **Type:** Optional, Array of [EnvironmentVariable](#EnvironmentVariable)
+  - Specify the environment variables to pass over to the script.
+
+### EnvironmentVariable
+
+**Example:**
+
+```yaml
+- name: dnsCname
+  value: asc
+- name: dnsCnameAlias
+  value: $(serviceName).somedomain.com
+```
+
+**Fields:**
+
+- **name**
+  - **Type:** Required, String
+  - Name of Variable.
+- **value**
+  - **Type:** Required, String
+  - See [Variables](./Variables.md).
+
 ## Step REST Call
 
-See [Step REST Call Schema](./v1.1/schema.json#L205)
+See [Step REST Call Schema](./v1.1/schema.json#L208)
 
 Step to run a swagger operation defined rest call. This may not be just one http call.
 
@@ -150,11 +206,11 @@ Rest call will have computed **requestParameter** and **responseExpected** after
 **Example:**
 
 ```yaml
-step: Create_publicIPAddresses_pubipdns
-resourceName: publicIPAddresses_pubipdns
-exampleFile: ../examples/Create_publicIPAddresses_pubipdns_Generated.json
-operationId: PublicIPAddresses_CreateOrUpdate
-statusCode: 200
+- step: Create_publicIPAddresses_pubipdns
+  resourceName: publicIPAddresses_pubipdns
+  exampleFile: ../examples/Create_publicIPAddresses_pubipdns_Generated.json
+  operationId: PublicIPAddresses_CreateOrUpdate
+  statusCode: 200
 ```
 
 **Fields:**
