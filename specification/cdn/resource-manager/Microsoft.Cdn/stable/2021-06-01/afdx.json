@@ -34,6 +34,54 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "CheckNameAvailabilityWithSubscriptionIdAndResourceGroupName"
+        ],
+        "description": "Check the availability of a resource name. This is needed for resources where name is globally unique, such as a afdx endpoint.",
+        "operationId": "CheckNameAvailabilityWithSubscriptionIdAndResourceGroupName",
+        "x-ms-examples": {
+          "CheckNameAvailabilityWithSubscriptionIdAndResourceGroupName": {
+            "$ref": "./examples/CheckNameAvailabilityWithSubscriptionIdAndResourceGroupName.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "checkNameAvailabilityInput",
+            "in": "body",
+            "description": "Input to check.",
+            "required": true,
+            "schema": {
+              "$ref": "./cdn.json#/definitions/CheckNameAvailabilityInput"
+            }
+          },
+          {
+            "$ref": "./cdn.json#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "./cdn.json#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "./cdn.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/cdn.json#/definitions/CheckNameAvailabilityOutput"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./cdn.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/usages": {
       "post": {
         "tags": [
