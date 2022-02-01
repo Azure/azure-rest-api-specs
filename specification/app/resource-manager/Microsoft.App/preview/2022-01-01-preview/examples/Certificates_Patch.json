@@ -6,10 +6,11 @@
     "name": "certificate-firendly-name",
     "api-version": "2022-01-01-preview",
     "certificateEnvelope": {
-      "location": "East US",
-      "properties": {
-        "password": "private key password",
-        "value": "PFX-or-PEM-blob"
+      "containerAppEnvelope": {
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        }
       }
     }
   },
@@ -20,6 +21,10 @@
         "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/certificate-firendly-name",
         "type": "Microsoft.App/ManagedEnvironments/Certificates",
         "location": "East US",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
         "properties": {
           "subjectName": "my-subject-name.company.country.net",
           "issuer": "Issuer Name",
