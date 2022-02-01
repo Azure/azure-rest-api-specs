@@ -53,16 +53,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/SmartDetectorErrorResponse"
-            }
-          },
           "200": {
             "description": "Successful request to list Smart Detector alert rules.",
             "schema": {
               "$ref": "#/definitions/AlertRulesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/SmartDetectorErrorResponse"
             }
           }
         },
@@ -98,16 +98,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/SmartDetectorErrorResponse"
-            }
-          },
           "200": {
             "description": "Successful request to list Smart Detector alert rules.",
             "schema": {
               "$ref": "#/definitions/AlertRulesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/SmartDetectorErrorResponse"
             }
           }
         },
@@ -146,16 +146,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/SmartDetectorErrorResponse"
-            }
-          },
           "200": {
             "description": "Successful request to get Smart Detector alert rule.",
             "schema": {
               "$ref": "#/definitions/AlertRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/SmartDetectorErrorResponse"
             }
           }
         },
@@ -195,12 +195,6 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/SmartDetectorErrorResponse"
-            }
-          },
           "200": {
             "description": "Successful request to update a Smart Detector alert rule.",
             "schema": {
@@ -211,6 +205,12 @@
             "description": "Successful request to create a Smart Detector alert rule.",
             "schema": {
               "$ref": "#/definitions/AlertRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/SmartDetectorErrorResponse"
             }
           }
         },
@@ -250,16 +250,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/SmartDetectorErrorResponse"
-            }
-          },
           "200": {
             "description": "Successful request to patch Smart Detector alert rule.",
             "schema": {
               "$ref": "#/definitions/AlertRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/SmartDetectorErrorResponse"
             }
           }
         },
@@ -290,17 +290,17 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/SmartDetectorErrorResponse"
-            }
-          },
           "200": {
             "description": "Successful request to delete a Smart Detector alert rule."
           },
           "204": {
             "description": "The Smart Detector alert rule does not exist. It may have already been deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/SmartDetectorErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -514,7 +514,10 @@
           "items": {
             "type": "object",
             "$ref": "#/definitions/DetectorParameterDefinition"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "supportedCadences": {
           "type": "array",
