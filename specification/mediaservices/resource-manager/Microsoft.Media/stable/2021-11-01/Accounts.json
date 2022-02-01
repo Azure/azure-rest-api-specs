@@ -517,14 +517,14 @@
           "description": "The resource properties.",
           "x-ms-client-flatten": true
         },
-        "identity": {
-          "$ref": "#/definitions/MediaServiceIdentity",
-          "description": "The Managed Identity for the Media Services account."
-        },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "The system metadata relating to this resource.",
           "readOnly": true
+        },
+        "identity": {
+          "$ref": "#/definitions/MediaServiceIdentity",
+          "description": "The Managed Identity for the Media Services account."
         }
       },
       "type": "object"
@@ -1230,7 +1230,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/listEdgePolicies": {
       "post": {
         "summary": "List the media edge policies associated with the Media Services account.",
-        "description": "List the media edge policies associated with the Media Services account.",
+        "description": "List all the media edge policies associated with the Media Services account.",
         "operationId": "Mediaservices_ListEdgePolicies",
         "responses": {
           "200": {
@@ -1283,7 +1283,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/privateLinkResources": {
       "get": {
         "summary": "Get list of group IDs.",
-        "description": "Get list of group IDs.",
+        "description": "List supported group IDs.",
         "operationId": "PrivateLinkResources_List",
         "responses": {
           "200": {
@@ -1327,7 +1327,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/privateLinkResources/{name}": {
       "get": {
         "summary": "Get group ID.",
-        "description": "Get group ID.",
+        "description": "Get details of a group ID.",
         "operationId": "PrivateLinkResources_Get",
         "responses": {
           "200": {
@@ -1376,8 +1376,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/privateEndpointConnections": {
       "get": {
-        "summary": "Get all private endpoint connections.",
-        "description": "Get all private endpoint connections.",
+        "summary": "List private endpoint connections.",
+        "description": "List all private endpoint connections.",
         "operationId": "PrivateEndpointConnections_List",
         "responses": {
           "200": {
@@ -1421,7 +1421,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/privateEndpointConnections/{name}": {
       "get": {
         "summary": "Get private endpoint connection.",
-        "description": "Get private endpoint connection.",
+        "description": "Get the details of a private endpoint connection.",
         "operationId": "PrivateEndpointConnections_Get",
         "responses": {
           "200": {
@@ -1468,8 +1468,8 @@
         }
       },
       "put": {
-        "summary": "Update private endpoint connection.",
-        "description": "Update private endpoint connection.",
+        "summary": "Update a private endpoint connection.",
+        "description": "Update an existing private endpoint connection.",
         "operationId": "PrivateEndpointConnections_CreateOrUpdate",
         "responses": {
           "200": {
@@ -1525,8 +1525,8 @@
         }
       },
       "delete": {
-        "summary": "Delete private endpoint connection.",
-        "description": "Delete private endpoint connection.",
+        "summary": "Delete a private endpoint connection.",
+        "description": "Deletes a private endpoint connection.",
         "operationId": "PrivateEndpointConnections_Delete",
         "responses": {
           "200": {
@@ -1601,7 +1601,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the location"
+            "description": "Location name."
           },
           {
             "name": "parameters",
@@ -1650,7 +1650,8 @@
             "name": "locationName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Location name."
           },
           {
             "name": "operationId",
@@ -1721,7 +1722,8 @@
             "name": "locationName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Location name."
           },
           {
             "name": "operationId",
