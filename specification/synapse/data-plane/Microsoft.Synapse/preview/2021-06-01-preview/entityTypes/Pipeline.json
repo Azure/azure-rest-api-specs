@@ -652,6 +652,10 @@
         "useBinaryTransfer": {
           "type": "boolean",
           "description": "Specify whether to use binary transfer mode for FTP stores."
+        },
+        "disableChunking": {
+          "type": "object",
+          "description": "If true, disable parallel reading within each file. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       }
     },
@@ -699,6 +703,10 @@
         "modifiedDatetimeEnd": {
           "type": "object",
           "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "disableChunking": {
+          "type": "object",
+          "description": "If true, disable parallel reading within each file. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       }
     },
@@ -1157,17 +1165,21 @@
       ],
       "properties": {
         "filePattern": {
-          "description": "File pattern of JSON. This setting controls the way a collection of JSON objects will be treated. The default value is 'setOfObjects'. It is case-sensitive.",
-          "type": "string",
-          "enum": [
-            "setOfObjects",
-            "arrayOfObjects"
-          ],
-          "x-ms-enum": {
-            "name": "JsonWriteFilePattern",
-            "modelAsString": true
-          }
+          "type": "object",
+          "description": "File pattern of JSON. This setting controls the way a collection of JSON objects will be treated. The default value is 'setOfObjects'. It is case-sensitive."
         }
+      }
+    },
+    "JsonWriteFilePattern": {
+      "description": "All available filePatterns.",
+      "type": "string",
+      "enum": [
+        "setOfObjects",
+        "arrayOfObjects"
+      ],
+      "x-ms-enum": {
+        "name": "JsonWriteFilePattern",
+        "modelAsString": true
       }
     },
     "AvroSource": {

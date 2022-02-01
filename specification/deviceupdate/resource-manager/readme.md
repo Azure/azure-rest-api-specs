@@ -47,6 +47,10 @@ directive:
     where: $.definitions.Identity.properties.type
     from: deviceupdate.json
     reason: Managed Identity type can be case in-sensitive
+  - suppress: BodyTopLevelProperties
+    from: deviceupdate.json
+    where: $.definitions.PrivateEndpointConnectionProxy
+    reason: Internal NRP resource, all properties are top level properties
 ```
 
 ---
@@ -63,6 +67,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_deviceupdate']
 ```
