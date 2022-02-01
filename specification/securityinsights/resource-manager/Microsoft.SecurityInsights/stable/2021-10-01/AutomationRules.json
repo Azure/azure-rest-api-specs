@@ -323,12 +323,15 @@
       "properties": {
         "displayName": {
           "description": "The display name of the automation rule",
-          "type": "string"
+          "type": "string",
+          "maxLength": 500
         },
         "order": {
           "format": "int32",
           "description": "The order of execution of the automation rule",
-          "type": "integer"
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
         },
         "triggeringLogic": {
           "$ref": "#/definitions/AutomationRuleTriggeringLogic"
@@ -339,7 +342,8 @@
           "items": {
             "$ref": "#/definitions/AutomationRuleAction"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [],
+          "maxItems": 20
         },
         "lastModifiedTimeUtc": {
           "format": "date-time",
@@ -830,6 +834,9 @@
     },
     "PlaybookActionProperties": {
       "type": "object",
+      "required": [
+        "logicAppResourceId"
+      ],
       "properties": {
         "logicAppResourceId": {
           "description": "The resource id of the playbook resource",
