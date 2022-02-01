@@ -4149,10 +4149,6 @@
           "description": "The date and time,in UTC,when the alert was created.",
           "type": "string",
           "format": "date-time"
-        },
-        "id": {
-          "description": "The alert feedback id.",
-          "type": "string"
         }
       }
     },
@@ -4167,7 +4163,8 @@
             "$ref": "#/definitions/AlertFeedback"
           },
           "x-ms-identifiers": [
-            "id"
+            "shortName",
+            "level"
           ]
         }
       }
@@ -4266,9 +4263,7 @@
           "items": {
             "$ref": "#/definitions/ValueDelta"
           },
-          "x-ms-identifiers": [
-            "id"
-          ]
+          "x-ms-identifiers": []
         },
         "name": {
           "description": "The name of the attribute delta.",
@@ -4308,10 +4303,6 @@
         "multiValued": {
           "description": "Indicates if the attribute delta is multivalued or not.",
           "type": "boolean"
-        },
-        "id": {
-          "type": "string",
-          "description": "The Attribute delta id."
         }
       }
     },
@@ -4401,7 +4392,7 @@
             "$ref": "#/definitions/AttributeDelta"
           },
           "x-ms-identifiers": [
-            "id"
+            "name"
           ]
         },
         "attributes": {
@@ -4411,7 +4402,7 @@
             "$ref": "#/definitions/AttributeDelta"
           },
           "x-ms-identifiers": [
-            "id"
+            "name"
           ]
         },
         "operationType": {
@@ -4464,7 +4455,7 @@
             "$ref": "#/definitions/AttributeDelta"
           },
           "x-ms-identifiers": [
-            "id"
+            "name"
           ]
         },
         "attributes": {
@@ -4474,7 +4465,7 @@
             "$ref": "#/definitions/AttributeDelta"
           },
           "x-ms-identifiers": [
-            "id"
+            "name"
           ]
         },
         "dn": {
@@ -4859,10 +4850,6 @@
         "type": {
           "description": "The service type for the services onboarded to Azure Active Directory Connect Health. Depending on whether the service is monitoring, ADFS, Sync or ADDS roles, the service type can either be AdFederationService or AadSyncService or AdDomainService.",
           "type": "string"
-        },
-        "id": {
-          "type": "string",
-          "description": "The dimension id."
         }
       }
     },
@@ -4881,7 +4868,8 @@
             "$ref": "#/definitions/Dimension"
           },
           "x-ms-identifiers": [
-            "id"
+            "displayName",
+            "type"
           ]
         },
         "totalCount": {
@@ -4927,10 +4915,6 @@
         "truncated": {
           "description": "Indicates if the error count is truncated or not.",
           "type": "boolean"
-        },
-        "id": {
-          "type": "string",
-          "description": "The error cound id."
         }
       }
     },
@@ -4944,9 +4928,7 @@
           "items": {
             "$ref": "#/definitions/ErrorCount"
           },
-          "x-ms-identifiers": [
-            "id"
-          ]
+          "x-ms-identifiers": []
         }
       }
     },
@@ -5170,10 +5152,6 @@
         "totalErrorAttempts": {
           "description": "The total count of specific error events.",
           "type": "integer"
-        },
-        "id": {
-          "type": "string",
-          "description": "The bad password login attempt id."
         }
       }
     },
@@ -5188,7 +5166,7 @@
             "$ref": "#/definitions/ErrorReportUsersEntry"
           },
           "x-ms-identifiers": [
-            "id"
+            "usedId"
           ]
         }
       }
@@ -5550,10 +5528,6 @@
         "additionalInfo": {
           "description": "The additional details.",
           "type": "string"
-        },
-        "id": {
-          "type": "string",
-          "description": "The Inbound replication neighbor summary id."
         }
       }
     },
@@ -5567,9 +5541,7 @@
           "items": {
             "$ref": "#/definitions/InboundReplicationNeighbor"
           },
-          "x-ms-identifiers": [
-            "id"
-          ]
+          "x-ms-identifiers": []
         }
       }
     },
@@ -5861,10 +5833,6 @@
         "invisibleForUi": {
           "description": "indicates if the metric group is displayed in Azure Active Directory Connect Health UI.",
           "type": "boolean"
-        },
-        "id": {
-          "type": "string",
-          "description": "The Metric group id."
         }
       }
     },
@@ -5915,7 +5883,7 @@
             "$ref": "#/definitions/MetricGroup"
           },
           "x-ms-identifier": [
-            "id"
+            "key"
           ]
         },
         "displayName": {
@@ -5949,10 +5917,6 @@
         "isDevOps": {
           "description": "Indicates if the metric is visible to DevOps or not.",
           "type": "boolean"
-        },
-        "id": {
-          "type": "string",
-          "description": "The Metric metadata id."
         }
       }
     },
@@ -5971,7 +5935,7 @@
             "$ref": "#/definitions/MetricMetadata"
           },
           "x-ms-identifier": [
-            "id"
+            "metricName"
           ]
         },
         "totalCount": {
@@ -5998,10 +5962,6 @@
           "items": {
             "type": "integer"
           }
-        },
-        "id": {
-          "type": "string",
-          "description": "The Metric set id."
         }
       }
     },
@@ -6016,7 +5976,7 @@
             "$ref": "#/definitions/MetricSet"
           },
           "x-ms-identifier": [
-            "id"
+            "setName"
           ]
         },
         "timeStamps": {
@@ -6047,10 +6007,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "id": {
-          "type": "string",
-          "description": "The Module configuration id."
         }
       }
     },
@@ -6065,7 +6021,7 @@
             "$ref": "#/definitions/ModuleConfiguration"
           },
           "x-ms-identifiers": [
-            "id"
+            "moduleName"
           ]
         }
       }
@@ -6343,7 +6299,7 @@
             "$ref": "#/definitions/ReplicationSummary"
           },
           "x-ms-identifiers": [
-            "id"
+            "targetServer"
           ]
         },
         "totalCount": {
@@ -6414,13 +6370,7 @@
           "items": {
             "$ref": "#/definitions/InboundReplicationNeighbor"
           },
-          "x-ms-identifier": [
-            "id"
-          ]
-        },
-        "id": {
-          "type": "string",
-          "description": "The Replication summary id."
+          "x-ms-identifier": []
         }
       }
     },
@@ -6435,7 +6385,7 @@
             "$ref": "#/definitions/ReplicationSummary"
           },
           "x-ms-identifiers": [
-            "id"
+            "targetServer"
           ]
         }
       }
@@ -6479,10 +6429,6 @@
         "status": {
           "description": "Status of the Risky IP report generation.",
           "type": "string"
-        },
-        "id": {
-          "type": "string",
-          "description": "The blob uri id."
         }
       }
     },
@@ -6496,9 +6442,7 @@
           "items": {
             "$ref": "#/definitions/RiskyIPBlobUri"
           },
-          "x-ms-identifiers": [
-            "id"
-          ]
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6559,10 +6503,6 @@
         "timeout": {
           "description": "The operation timeout.",
           "type": "integer"
-        },
-        "id": {
-          "type": "string",
-          "description": "The run step id."
         }
       }
     },
@@ -6584,9 +6524,7 @@
           "items": {
             "$ref": "#/definitions/RunStep"
           },
-          "x-ms-identifiers": [
-            "id"
-          ]
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6956,7 +6894,8 @@
             "$ref": "#/definitions/ServiceMember"
           },
           "x-ms-identifiers": [
-            "machineId"
+            "machineId",
+            "serviceMemberId"
           ]
         },
         "totalCount": {
@@ -7139,10 +7078,6 @@
         "value": {
           "description": "The value of the delta.",
           "type": "string"
-        },
-        "id": {
-          "type": "string",
-          "description": "The Value delta id."
         }
       }
     }
