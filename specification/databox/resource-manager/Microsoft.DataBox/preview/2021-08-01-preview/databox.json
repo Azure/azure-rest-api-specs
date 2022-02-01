@@ -3974,7 +3974,10 @@
         "identity": {
           "$ref": "#/definitions/ResourceIdentity",
           "description": "Msi identity of the resource"
-        }
+        },
+		"xtIdentity": {
+          "$ref": "#/definitions/XtResourceIdentity",
+          "description": "Msi identity of the passthrough resource"
       }
     },
     "JobSecrets": {
@@ -6125,6 +6128,25 @@
             "$ref": "#/definitions/ValidationInputResponse"
           },
           "readOnly": true
+        }
+      }
+    },
+	"XtResourceIdentity": {
+      "description": "Msi identity details of the resource",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Identity type",
+          "type": "string",
+          "default": "None"
+        },
+        "xtPrincipalId": {
+          "description": "Service Principal Id backing the XT Msi",
+          "type": "string",
+        },
+        "xtTenantId": {
+          "description": "Home Tenant Id",
+          "type": "string",
         }
       }
     }
