@@ -382,7 +382,7 @@
           "type": "string",
           "description": "The type of the environment data.",
           "enum": [
-            "AwsEnvironmentData",
+            "AwsAccount",
             "GcpProjectEnvironmentData",
             "GithubScopeEnvironmentData"
           ],
@@ -400,7 +400,7 @@
         "environmentType": {
           "type": "string",
           "description": "The environment type",
-          "x-ms-discriminator-value": "AwsEnvironmentData"
+          "x-ms-discriminator-value": "AwsAccount"
         },
         "organizationalData": {
           "type": "object",
@@ -410,6 +410,7 @@
       }
     },
     "AwsOrganizationData":{
+      "discriminator": "organizationMembershipType",
       "required": [
         "organizationMembershipType"
       ],
@@ -501,6 +502,7 @@
       }
     },
     "GcpOrganizationData": {
+      "discriminator": "organizationMembershipType",
       "required": [
         "organizationMembershipType"
       ],
