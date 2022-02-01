@@ -34,12 +34,10 @@
         "description": "Submit a collection of text documents for analysis.  Specify a single unique task to be executed immediately.",
         "operationId": "AnalyzeText",
         "consumes": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -54,7 +52,8 @@
             "name": "body",
             "schema": {
               "$ref": "#/definitions/AnalyzeTextTask"
-            }
+            },
+            "required": true
           }
         ],
         "responses": {
@@ -114,7 +113,8 @@
             "name": "body",
             "schema": {
               "$ref": "#/definitions/AnalyzeTextJobsInput"
-            }
+            },
+            "required": true
           }
         ],
         "responses": {
