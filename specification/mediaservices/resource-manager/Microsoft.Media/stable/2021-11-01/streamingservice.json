@@ -961,6 +961,52 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/streamingEndpoints/{streamingEndpointName}/Skus": {
+      "get": {
+        "tags": [
+          "StreamingEndpoints"
+        ],
+        "summary": "List StreamingEndpoint skus",
+        "description": "List streaming endpoint supported skus.",
+        "operationId": "StreamingEndpoints_Skus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/MediaServicesAccountName"
+          },
+          {
+            "$ref": "#/parameters/StreamingEndpointName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/StreamingEndpointSkuInfoListResult"
+            }
+          },
+          "default": {
+            "description": "The streaming error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List a streaming endpoint sku": {
+            "$ref": "examples/streamingendpoint-list-skus.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/streamingEndpoints/{streamingEndpointName}/start": {
       "post": {
         "tags": [
@@ -1659,7 +1705,8 @@
             "type": "string",
             "enum": [
               "Default",
-              "LowLatency"
+              "LowLatency",
+              "LowLatencyV2"
             ],
             "x-ms-enum": {
               "name": "StreamOptionsFlag",
@@ -1670,7 +1717,11 @@
                 },
                 {
                   "value": "LowLatency",
-                  "description": "The live event provides lower end to end latency by reducing its internal buffers. This could result in more client buffering during playback if network bandwidth is low."
+                  "description": "The live event provides lower end to end latency by reducing its internal buffers."
+                },
+                {
+                  "value": "LowLatencyV2",
+                  "description": "The live event is optimized for end to end latency. This option is only available for encoding live events with RTMP input. The outputs can be streamed using HLS or DASH formats. The outputs' archive or DVR rewind length is limited to 6 hours. Use \"LowLatency\" stream option for all other scenarios."
                 }
               ],
               "modelAsString": true
@@ -1936,6 +1987,10 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "The system metadata relating to this resource.",
           "readOnly": true
+        },
+        "sku": {
+          "$ref": "#/definitions/ArmStreamingEndpointCurrentSku",
+          "description": "The streaming endpoint sku."
         }
       },
       "allOf": [
@@ -1967,6 +2022,84 @@
       },
       "description": "The streaming endpoint list result.",
       "title": "StreamingEndpointListResult"
+    },
+    "ArmStreamingEndpointCurrentSku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The streaming endpoint sku name."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The streaming endpoint sku capacity."
+        }
+      },
+      "description": "The streaming endpoint current sku.",
+      "type": "object"
+    },
+    "ArmStreamingEndpointSku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The streaming endpoint sku name."
+        }
+      },
+      "description": "The streaming endpoint sku.",
+      "type": "object"
+    },
+    "ArmStreamingEndpointCapacity": {
+      "properties": {
+        "scaleType": {
+          "type": "string",
+          "readOnly": true
+        },
+        "default": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The streaming endpoint default capacity."
+        },
+        "minimum": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The streaming endpoint minimum capacity."
+        },
+        "maximum": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The streaming endpoint maximum capacity."
+        }
+      },
+      "description": "The streaming endpoint sku capacity.",
+      "type": "object"
+    },
+    "ArmStreamingEndpointSkuInfo": {
+      "properties": {
+        "resourceType": {
+          "type": "string"
+        },
+        "capacity": {
+          "$ref": "#/definitions/ArmStreamingEndpointCapacity"
+        },
+        "sku": {
+          "$ref": "#/definitions/ArmStreamingEndpointSku"
+        }
+      },
+      "type": "object"
+    },
+    "StreamingEndpointSkuInfoListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArmStreamingEndpointSkuInfo"
+          },
+          "description": "The result of the List StreamingEndpoint skus."
+        }
+      },
+      "type": "object"
     }
   },
   "parameters": {

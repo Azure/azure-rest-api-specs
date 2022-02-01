@@ -57,7 +57,18 @@ directive:
       - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/assets/{assetName}/tracks/{trackName}"].put'
       - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/assets/{assetName}/tracks/{trackName}"].get'
       - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/assets/{assetName}/tracks/{trackName}"].patch'
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/privateEndpointConnections/{privateEndpointConnection}"].get'
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/privateEndpointConnections/{privateEndpointConnection}"].get'
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/privateEndpointConnections/{privateEndpointConnection}"].get'
     from: AssetsAndAssetFilters.json
+
+  - suppress: RequiredReadOnlySystemData
+    reason: Per ARM Specs, only top level tracked resources return systemMetadata.
+    where:
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}"].get'
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}"].put'
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/privateLinkResources/{privateLinkResourceName}"].get'
+    from: Accounts.json
 ```
 
 ### Tag: package-2021-11

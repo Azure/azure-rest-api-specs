@@ -421,6 +421,222 @@
       "type": "object",
       "description": "An Asset Filter."
     },
+    "HlsSettings": {
+      "properties": {
+        "default": {
+          "type": "boolean",
+          "description": "The default for the HLS setting."
+        },
+        "forced": {
+          "type": "boolean",
+          "description": "The forced for the HLS setting."
+        },
+        "characteristics": {
+          "type": "string",
+          "description": "The characteristics for the HLS setting."
+        }
+      },
+      "type": "object",
+      "description": "The HLS setting for a text track."
+    },
+    "TrackBase": {
+      "discriminator": "@odata.type",
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "description": "The discriminator for derived types."
+        }
+      },
+      "type": "object",
+      "required": [
+        "@odata.type"
+      ],
+      "description": "Base type for concrete track types. A derived type must be used to represent the Track."
+    },
+    "AudioTrack": {
+      "x-ms-discriminator-value": "#Microsoft.Media.AudioTrack",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackBase"
+        }
+      ],
+      "properties": {},
+      "type": "object",
+      "description": "Represents an audio track in the asset."
+    },
+    "VideoTrack": {
+      "x-ms-discriminator-value": "#Microsoft.Media.VideoTrack",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackBase"
+        }
+      ],
+      "properties": {},
+      "type": "object",
+      "description": "Represents a video track in the asset."
+    },
+    "TextTrack": {
+      "x-ms-discriminator-value": "#Microsoft.Media.TextTrack",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackBase"
+        }
+      ],
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "description": "The file name to the source file. This file is located in the storage container of the asset."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the text track on a video player. In HLS, this maps to the NAME attribute of EXT-X-MEDIA."
+        },
+        "languageCode": {
+          "type": "string",
+          "description": "The RFC5646 language code for the text track.",
+          "readOnly": true
+        },
+        "playerVisibility": {
+          "type": "string",
+          "enum": [
+            "Hidden",
+            "Visible"
+          ],
+          "x-ms-enum": {
+            "name": "Visibility",
+            "values": [
+              {
+                "value": "Hidden",
+                "description": "The track is hidden to video player."
+              },
+              {
+                "value": "Visible",
+                "description": "The track is visible to video player."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "When PlayerVisibility is set to \"Visible\", the text track will be present in the DASH manifest or HLS playlist when requested by a client. When the PlayerVisibility is set to \"Hidden\", the text will not be available to the client. The default value is \"Visible\"."
+        },
+        "hlsSettings": {
+          "$ref": "#/definitions/HlsSettings",
+          "description": "The HLS specific setting for the text track."
+        }
+      },
+      "type": "object",
+      "description": "Represents a text track in an asset. A text track is usually used for sparse data related to the audio or video tracks."
+    },
+    "AssetTrackProperties": {
+      "properties": {
+        "track": {
+          "$ref": "#/definitions/TrackBase",
+          "description": "Detailed information about a track in the asset."
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Failed",
+            "InProgress",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "values": [
+              {
+                "value": "Failed",
+                "description": "Provisioning state failed."
+              },
+              {
+                "value": "InProgress",
+                "description": "Provisioning state in progress."
+              },
+              {
+                "value": "Succeeded",
+                "description": "Provisioning state succeeded."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Provisioning state of the asset track.",
+          "readOnly": true,
+          "x-nullable": false
+        }
+      },
+      "type": "object",
+      "description": "Properties of a video, audio or text track in the asset."
+    },
+    "AssetTrack": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AssetTrackProperties",
+          "description": "The resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "description": "An Asset Track resource."
+    },
+    "AssetTrackOperationStatus": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation identifier."
+        },
+        "id": {
+          "type": "string",
+          "description": "Operation resource ID."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Operation start time."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Operation end time."
+        },
+        "status": {
+          "type": "string",
+          "description": "Operation status."
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail",
+          "x-nullable": true
+        }
+      },
+      "type": "object",
+      "required": [
+        "name",
+        "status"
+      ],
+      "description": "Status of asset track operation."
+    },
+    "AssetTrackOperationResult": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/AssetTrackProperties"
+        }
+      },
+      "type": "object",
+      "required": [
+        "name"
+      ]
+    },
     "AssetCollection": {
       "properties": {
         "value": {
@@ -492,6 +708,19 @@
       },
       "type": "object",
       "description": "A collection of AssetFilter items."
+    },
+    "AssetTrackCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssetTrack"
+          },
+          "description": "A collection of AssetTrack items."
+        }
+      },
+      "type": "object",
+      "description": "A collection of AssetTrack items."
     }
   },
   "paths": {
@@ -1203,6 +1432,566 @@
         "x-ms-examples": {
           "Update an Asset Filter": {
             "$ref": "examples/assetFilters-update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/assets/{assetName}/tracks": {
+      "get": {
+        "summary": "List Tracks in the Asset",
+        "description": "Lists the Tracks in the asset",
+        "operationId": "Tracks_List",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AssetTrackCollection"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/MediaServicesAccountName"
+          },
+          {
+            "name": "assetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Asset name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "x-ms-examples": {
+          "Lists all Tracks": {
+            "$ref": "examples/assetTracks-list-all.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/assets/{assetName}/tracks/{trackName}": {
+      "get": {
+        "summary": "Get a Track",
+        "description": "Get the details of a Track in the Asset",
+        "operationId": "Tracks_Get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AssetTrack"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/MediaServicesAccountName"
+          },
+          {
+            "name": "assetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Asset name."
+          },
+          {
+            "name": "trackName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Asset Track name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "x-ms-examples": {
+          "Get a Track by name": {
+            "$ref": "examples/assetTracks-get-by-name.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Create or update a Track",
+        "description": "Create or update a Track in the asset",
+        "operationId": "Tracks_CreateOrUpdate",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/AssetTrack"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/AssetTrack"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/MediaServicesAccountName"
+          },
+          {
+            "name": "assetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Asset name."
+          },
+          {
+            "name": "trackName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Asset Track name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssetTrack"
+            },
+            "description": "The request parameters"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Creates a Track": {
+            "$ref": "examples/assetTracks-create.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a Track",
+        "description": "Deletes a Track in the asset",
+        "operationId": "Tracks_Delete",
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/MediaServicesAccountName"
+          },
+          {
+            "name": "assetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Asset name."
+          },
+          {
+            "name": "trackName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Asset Track name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a Track": {
+            "$ref": "examples/assetTracks-delete.json"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update an Track",
+        "description": "Updates an existing Track in the asset",
+        "operationId": "Tracks_Update",
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/AssetTrack"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/MediaServicesAccountName"
+          },
+          {
+            "name": "assetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Asset name."
+          },
+          {
+            "name": "trackName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Asset Track name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssetTrack"
+            },
+            "description": "The request parameters"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a Track": {
+            "$ref": "examples/assetTracks-update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/assets/{assetName}/tracks/{trackName}/updateTrackData": {
+      "post": {
+        "summary": "Update the track data",
+        "description": "Update the track data.",
+        "operationId": "Tracks_UpdateTrackData",
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/MediaServicesAccountName"
+          },
+          {
+            "name": "assetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Asset name."
+          },
+          {
+            "name": "trackName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Asset Track name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update the data for a tracks": {
+            "$ref": "examples/assetTracks-update-data.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/assets/{assetName}/tracks/{trackName}/operationStatuses/{operationId}": {
+      "get": {
+        "summary": "Get operation status.",
+        "description": "Get asset track operation status.",
+        "operationId": "OperationStatuses_Get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AssetTrackOperationStatus"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/MediaServicesAccountName"
+          },
+          {
+            "name": "assetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Asset name."
+          },
+          {
+            "name": "trackName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Asset Track name."
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Operation Id."
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "x-ms-examples": {
+          "Get status of asynchronous operation when it is completed.": {
+            "$ref": "examples/assetTracks-operation-status-by-id-terminal-state.json"
+          },
+          "Get status of asynchronous operation when it is ongoing.": {
+            "$ref": "examples/assetTracks-operation-status-by-id-non-terminal-state.json"
+          },
+          "Get status of asynchronous operation when it is completed with error.": {
+            "$ref": "examples/assetTracks-operation-status-by-id-terminal-state-failed.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/assets/{assetName}/tracks/{trackName}/operationResults/{operationId}": {
+      "get": {
+        "summary": "Get operation result.",
+        "description": "Get asset track operation result.",
+        "operationId": "OperationResults_Get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AssetTrackOperationResult"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/MediaServicesAccountName"
+          },
+          {
+            "name": "assetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Asset name."
+          },
+          {
+            "name": "trackName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Asset Track name."
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Operation Id."
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "x-ms-examples": {
+          "Get status of asynchronous operation.": {
+            "$ref": "examples/assetTracks-operation-result-by-id.json"
           }
         }
       }
