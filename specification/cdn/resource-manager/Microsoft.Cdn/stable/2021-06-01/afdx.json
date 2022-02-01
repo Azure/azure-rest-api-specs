@@ -57,26 +57,26 @@
             }
           },
           {
-            "$ref": "./cdn.json#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "./cdn.json#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "./cdn.json#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/cdn.json#/definitions/CheckNameAvailabilityOutput"
+              "$ref": "./cdn.json#/definitions/CheckNameAvailabilityOutput"
             }
           },
           "default": {
             "description": "CDN error response describing why the operation failed.",
             "schema": {
-              "$ref": "./cdn.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/AfdErrorResponse"
             }
           }
         }
