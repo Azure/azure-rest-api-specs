@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Monitor Data Collection Rules API",
     "description": "Provides operations for working with Azure Monitor data collection rules",
-    "version": "2021-04-01",
+    "version": "2021-09-01-preview",
     "x-ms-code-generation-settings": {
       "name": "MonitorManagementClient"
     }
@@ -310,6 +310,57 @@
     }
   },
   "definitions": {
+    "Metadata": {
+      "description": "Context information about the resource",
+      "type": "object",
+      "properties": {
+        "provisionedBy": {
+          "description": "Azure offering managing this resource on-behalf-of customer.",
+          "type": "string",
+          "example": "Azure Security Center"
+        }
+      }
+    },
+    "ColumnDefinition": {
+      "description": "Definition of custom data column.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the column.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the column data.",
+          "enum": [
+            "string",
+            "int",
+            "long",
+            "real",
+            "boolean",
+            "datetime",
+            "dynamic"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "KnownColumnDefinitionType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "StreamDeclaration": {
+      "description": "Declaration of a custom stream.",
+      "type": "object",
+      "properties": {
+        "columns": {
+          "description": "List of columns used by data in this stream.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ColumnDefinition"
+          }
+        }
+      }
+    },
     "PerfCounterDataSource": {
       "description": "Definition of which performance counters will be collected and how they will be collected by this data collection rule.\r\nCollected from both Windows and Linux machines where the counter is present.",
       "type": "object",
@@ -511,6 +562,127 @@
         }
       }
     },
+    "LogFileTextSettings": {
+      "description": "Settings for text log files",
+      "required": [
+        "recordStartTimestampFormat"
+      ],
+      "type": "object",
+      "properties": {
+        "recordStartTimestampFormat": {
+          "description": "One of the supported timestamp formats",
+          "enum": [
+            "ISO 8601",
+            "YYYY-MM-DD HH:MM:SS",
+            "M/D/YYYY HH:MM:SS AM/PM",
+            "Mon DD, YYYY HH:MM:SS",
+            "yyMMdd HH:mm:ss",
+            "ddMMyy HH:mm:ss",
+            "MMM d hh:mm:ss",
+            "dd/MMM/yyyy:HH:mm:ss zzz",
+            "yyyy-MM-ddTHH:mm:ssK"
+          ],
+          "type": "string",
+          "example": "ISO 8601, yyyy-MM-dd HH:mm:ss",
+          "x-ms-enum": {
+            "name": "KnownLogFileTextSettingsRecordStartTimestampFormat",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "LogFileSettings": {
+      "description": "Settings for different log file formats",
+      "type": "object",
+      "properties": {
+        "text": {
+          "description": "Text settings",
+          "allOf": [
+            {
+              "$ref": "#/definitions/LogFileTextSettings"
+            }
+          ]
+        }
+      }
+    },
+    "LogFilesDataSource": {
+      "description": "Definition of which custom log files will be collected by this data collection rule",
+      "required": [
+        "filePatterns",
+        "format",
+        "streams"
+      ],
+      "type": "object",
+      "properties": {
+        "streams": {
+          "description": "List of streams that this data source will be sent to.\r\nA stream indicates what schema will be used for this data source",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filePatterns": {
+          "description": "File Patterns where the log files are located",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "format": {
+          "description": "The data format of the log files",
+          "enum": [
+            "text"
+          ],
+          "type": "string",
+          "example": "text",
+          "x-ms-enum": {
+            "name": "KnownLogFilesDataSourceFormat",
+            "modelAsString": true
+          }
+        },
+        "settings": {
+          "description": "The log files specific settings.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/LogFileSettings"
+            }
+          ]
+        },
+        "name": {
+          "description": "A friendly name for the data source. \r\nThis name should be unique across all data sources (regardless of type) within the data collection rule.",
+          "type": "string",
+          "example": "myDataSource1"
+        }
+      }
+    },
+    "IisLogsDataSource": {
+      "description": "Enables IIS logs to be collected by this data collection rule.",
+      "required": [
+        "streams"
+      ],
+      "type": "object",
+      "properties": {
+        "streams": {
+          "description": "IIS streams",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "logDirectories": {
+          "description": "Absolute paths file location",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "description": "A friendly name for the data source. \r\nThis name should be unique across all data sources (regardless of type) within the data collection rule.",
+          "type": "string",
+          "example": "myDataSource1"
+        }
+      }
+    },
     "DataSourcesSpec": {
       "description": "Specification of data sources that will be collected.",
       "type": "object",
@@ -541,6 +713,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExtensionDataSource"
+          }
+        },
+        "logFiles": {
+          "description": "The list of Log files source configurations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogFilesDataSource"
+          }
+        },
+        "iisLogs": {
+          "description": "The list of IIS logs source configurations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IisLogsDataSource"
           }
         }
       }
@@ -630,6 +816,15 @@
           "items": {
             "type": "string"
           }
+        },
+        "transformKql": {
+          "description": "The KQL query to transform stream data.",
+          "type": "string"
+        },
+        "outputStream": {
+          "description": "The output stream of the transform. Only required if the transform changes data to a different stream.",
+          "type": "string",
+          "example": "\"Microsoft-SecurityEvent\""
         }
       }
     },
@@ -649,6 +844,26 @@
           "x-ms-mutability": [
             "read"
           ]
+        },
+        "dataCollectionEndpointId": {
+          "description": "The resource ID of the data collection endpoint that this rule can be used with.",
+          "type": "string",
+          "example": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Insights/dataCollectionEndpoints/myCollectionEndpoint"
+        },
+        "metadata": {
+          "description": "Context information about the resource",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Metadata"
+            }
+          ]
+        },
+        "streamDeclarations": {
+          "description": "Declaration of custom streams used in this rule.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StreamDeclaration"
+          }
         },
         "dataSources": {
           "description": "The specification of data sources. \r\nThis property is optional and can be omitted if the rule is meant to be used via direct calls to the provisioned endpoint.",

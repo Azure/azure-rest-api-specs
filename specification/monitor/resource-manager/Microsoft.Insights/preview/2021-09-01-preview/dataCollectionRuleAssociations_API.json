@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Monitor Data Collection Rule Associations API",
     "description": "Provides operations for working with Azure Monitor data collection rule associations",
-    "version": "2021-04-01",
+    "version": "2021-09-01-preview",
     "x-ms-code-generation-settings": {
       "name": "MonitorManagementClient"
     }
@@ -105,6 +105,54 @@
         "x-ms-examples": {
           "List associations for specified data collection rule": {
             "$ref": "./examples/DataCollectionRuleAssociationsListByRule.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/dataCollectionEndpoints/{dataCollectionEndpointName}/associations": {
+      "get": {
+        "tags": [
+          "DataCollectionRuleAssociations"
+        ],
+        "summary": "Lists associations for the specified data collection endpoint.",
+        "operationId": "DataCollectionRuleAssociations_ListByDataCollectionEndpoint",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataCollectionEndpointNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request completed successfully",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionRuleAssociationProxyOnlyResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./dataCollectionRules_API.json#/definitions/ErrorResponseCommonV2"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List associations for specified data collection endpoint": {
+            "$ref": "./examples/DataCollectionRuleAssociationsListByDataCollectionEndpoint.json"
           }
         }
       }
@@ -250,6 +298,17 @@
     }
   },
   "definitions": {
+    "Metadata": {
+      "description": "Context information about the resource",
+      "type": "object",
+      "properties": {
+        "provisionedBy": {
+          "description": "Azure offering managing this resource on-behalf-of customer.",
+          "type": "string",
+          "example": "Azure Security Center"
+        }
+      }
+    },
     "DataCollectionRuleAssociation": {
       "description": "Definition of association of a data collection rule with a monitored Azure resource.",
       "type": "object",
@@ -286,6 +345,14 @@
           },
           "x-ms-mutability": [
             "read"
+          ]
+        },
+        "metadata": {
+          "description": "Context information about the resource",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Metadata"
+            }
           ]
         }
       }
@@ -379,6 +446,14 @@
       "in": "path",
       "name": "associationName",
       "description": "The name of the association. The name is case insensitive.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DataCollectionEndpointNameParameter": {
+      "in": "path",
+      "name": "dataCollectionEndpointName",
+      "description": "The name of the data collection endpoint. The name is case insensitive.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
