@@ -4010,6 +4010,181 @@
       },
       "description": "A collection of resources."
     },
+    "PortalConfigCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PortalConfigContract"
+          },
+          "description": "The developer portal configurations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
+        }
+      },
+      "description": "The collection of the developer portal configurations."
+    },
+    "PortalConfigContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PortalConfigProperties",
+          "description": "The developer portal configuration contract properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "The developer portal configuration contract."
+    },
+    "PortalConfigProperties": {
+      "type": "object",
+      "properties": {
+        "enableBasicAuth": {
+          "type": "boolean",
+          "description": "Enable or disable Basic authentication method.",
+          "default": true
+        },
+        "signin": {
+          "type": "object",
+          "properties": {
+            "require": {
+              "type": "boolean",
+              "description": "Redirect anonymous users to the sign-in page.",
+              "default": false
+            }
+          }
+        },
+        "signup": {
+          "type": "object",
+          "properties": {
+            "termsOfService": {
+              "type": "object",
+              "$ref": "#/definitions/PortalConfigTermsOfServiceProperties",
+              "description": "Terms of service settings."
+            }
+          }
+        },
+        "delegation": {
+          "type": "object",
+          "$ref": "#/definitions/PortalConfigDelegationProperties",
+          "description": "The developer portal delegation settings."
+        },
+        "cors": {
+          "type": "object",
+          "$ref": "#/definitions/PortalConfigCorsProperties",
+          "description": "The developer portal Cross-Origin Resource Sharing (CORS) settings."
+        },
+        "csp": {
+          "type": "object",
+          "$ref": "#/definitions/PortalConfigCspProperties",
+          "description": "The developer portal Content Security Policy (CSP) settings."
+        }
+      },
+      "description": "The developer portal configuration contract properties."
+    },
+    "PortalConfigDelegationProperties": {
+      "type": "object",
+      "properties": {
+        "delegateRegistration": {
+          "type": "boolean",
+          "description": "Enable or disable delegation for user registration.",
+          "default": false
+        },
+        "delegateSubscription": {
+          "type": "boolean",
+          "description": "Enable or disable delegation for product subscriptions.",
+          "default": false
+        },
+        "delegationUrl": {
+          "type": "string",
+          "description": "A delegation endpoint URL."
+        },
+        "validationKey": {
+          "x-ms-secret": true,
+          "type": "string",
+          "description": "A base64-encoded validation key to ensure requests originate from Azure API Management service."
+        }
+      }
+    },
+    "PortalConfigTermsOfServiceProperties": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "A terms of service text."
+        },
+        "requireConsent": {
+          "type": "boolean",
+          "description": "Ask user for consent to the terms of service.",
+          "default": false
+        }
+      },
+      "description": "Terms of service contract properties."
+    },
+    "PortalConfigCorsProperties": {
+      "type": "object",
+      "properties": {
+        "allowedOrigins": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Allowed origins, e.g. `https://trusted.com`."
+        }
+      },
+      "description": "The developer portal Cross-Origin Resource Sharing (CORS) settings."
+    },
+    "PortalConfigCspProperties": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "description": "The mode of the developer portal Content Security Policy (CSP).",
+          "enum": [
+            "enabled",
+            "disabled",
+            "reportOnly"
+          ],
+          "default": "disabled",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "PortalSettingsCspMode",
+            "values": [
+              {
+                "value": "enabled",
+                "description": "The browser will block requests not matching allowed origins."
+              },
+              {
+                "value": "disabled",
+                "description": "The browser will not apply the origin restrictions."
+              },
+              {
+                "value": "reportOnly",
+                "description": "The browser will report requests not matching allowed origins without blocking them."
+              }
+            ]
+          }
+        },
+        "reportUri": {
+          "type": "string",
+          "description": "The URL used by the browser to report CSP violations."
+        },
+        "allowedSources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Allowed sources, e.g. `*.trusted.com`, `trusted.com`, `https://`."
+        }
+      },
+      "description": "The developer portal Content Security Policy (CSP) settings."
+    },
     "PortalDelegationSettings": {
       "properties": {
         "properties": {

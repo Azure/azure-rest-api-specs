@@ -72,6 +72,7 @@ input-file:
   - Microsoft.ApiManagement/preview/2021-12-01-preview/apimpolicyfragments.json
   - Microsoft.ApiManagement/preview/2021-12-01-preview/apimportalrevisions.json
   - Microsoft.ApiManagement/preview/2021-12-01-preview/apimportalsettings.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimportalconfigs.json
   - Microsoft.ApiManagement/preview/2021-12-01-preview/apimprivatelink.json
   - Microsoft.ApiManagement/preview/2021-12-01-preview/apimproducts.json
   - Microsoft.ApiManagement/preview/2021-12-01-preview/apimproductsByTags.json
@@ -779,7 +780,10 @@ directive:
     from: apimprivatelink.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
   - suppress: R4009
-    from: apimprivatelink.json
+    from: apimportalsettings.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
+  - suppress: R4009
+    from: apimportalconfigs.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
   - suppress: R4009
     from: apimpolicyfragments.json
