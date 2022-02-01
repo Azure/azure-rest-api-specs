@@ -383,8 +383,8 @@
           "description": "The type of the environment data.",
           "enum": [
             "AwsAccount",
-            "GcpProjectEnvironmentData",
-            "GithubScopeEnvironmentData"
+            "GcpProject",
+            "GithubScope"
           ],
           "x-ms-enum": {
             "name": "environmentType",
@@ -396,12 +396,11 @@
     "AWSEnvironmentData": {
       "type": "object",
       "description": "The aws connector environment data",
+      "x-ms-discriminator-value": "AwsAccount",
+      "allOf": [{
+        "$ref": "#/definitions/EnvironmentData"
+      }],
       "properties": {
-        "environmentType": {
-          "type": "string",
-          "description": "The environment type",
-          "x-ms-discriminator-value": "AwsAccount"
-        },
         "organizationalData": {
           "type": "object",
           "description": "The AWS account's organizational data",
@@ -410,6 +409,8 @@
       }
     },
     "AwsOrganizationData":{
+      "type": "object",
+      "description": "The awsOrganization data ",
       "discriminator": "organizationMembershipType",
       "required": [
         "organizationMembershipType"
@@ -430,12 +431,13 @@
       }
     },
     "AwsOrganizationDataParent":{
+      "type": "object",
+      "description": "The awsOrganization data for the parent account",
+      "x-ms-discriminator-value": "Organization",
+      "allOf": [{
+        "$ref": "#/definitions/AwsOrganizationData"
+      }],
       "properties": {
-        "organizationMembershipType": {
-          "type": "string",
-          "description": "The environment type",
-          "x-ms-discriminator-value": "Organization"
-        },
         "stacksetName": {
           "type": "string",
           "description": "If the multi cloud account is of membership type organization, this will be the name of the onboarding stackset"
@@ -451,12 +453,13 @@
       }
     },
     "AwsOrganizationDataMember":{
+      "type": "object",
+      "description": "The awsOrganization data for the member account",
+      "x-ms-discriminator-value": "Member",
+      "allOf": [{
+        "$ref": "#/definitions/AwsOrganizationData"
+      }],
       "properties": {
-        "organizationMembershipType": {
-          "type": "string",
-          "description": "The environment type",
-          "x-ms-discriminator-value": "Member"
-        },
         "parentHierarchyId": {
           "type": "string",
           "description": "If the multi cloud account is not of membership type organization, this will be the ID of the account's parent"
@@ -466,12 +469,11 @@
     "GcpProjectEnvironmentData": {
       "type": "object",
       "description": "The GCP project connector environment data",
+      "x-ms-discriminator-value": "GcpProject",
+      "allOf": [{
+        "$ref": "#/definitions/EnvironmentData"
+      }],
       "properties": {
-        "environmentType": {
-          "type": "string",
-          "description": "The environment type",
-          "x-ms-discriminator-value": "GcpProjectEnvironmentData"
-        },
         "organizationalData": {
           "type": "object",
           "description": "The Gcp project's organizational data",
@@ -485,6 +487,8 @@
       }
     },
     "GcpProjectDetails": {
+      "type": "object",
+      "description": "The details about the project represented by the security connector",
       "properties": {
         "projectNumber": {
           "type": "string",
@@ -502,6 +506,8 @@
       }
     },
     "GcpOrganizationData": {
+      "type": "object",
+      "description": "The gcpOrganization data",
       "discriminator": "organizationMembershipType",
       "required": [
         "organizationMembershipType"
@@ -522,12 +528,13 @@
       }
     },
     "GcpOrganizationDataParent": {
+      "type": "object",
+      "description": "The gcpOrganization data for the parent account",
+      "x-ms-discriminator-value": "Organization",
+      "allOf": [{
+        "$ref": "#/definitions/GcpOrganizationData"
+      }],
       "properties": {
-        "organizationMembershipType": {
-          "type": "string",
-          "description": "The organization data for parent security connector",
-          "x-ms-discriminator-value": "Organization"
-        },
         "excludedProjectNumbers": {
           "type": "array",
           "description": "If the multi cloud account is of membership type organization, list of accounts excluded from offering",
@@ -547,12 +554,13 @@
       }
     },
     "GcpOrganizationDataMember": {
+      "type": "object",
+      "description": "The gcpOrganization data for the member account",
+      "x-ms-discriminator-value": "Member",
+      "allOf": [{
+        "$ref": "#/definitions/GcpOrganizationData"
+      }],
       "properties": {
-        "organizationMembershipType": {
-          "type": "string",
-          "description": "The organization data for parent security connector",
-          "x-ms-discriminator-value": "Memberdd"
-        },
         "excludedProjectNumbers": {
           "type": "array",
           "description": "If the multi cloud account is of membership type organization, list of accounts excluded from offering",
@@ -574,12 +582,11 @@
     "GithubScopeEnvironmentData": {
       "type": "object",
       "description": "The github scope connector's environment data",
+      "x-ms-discriminator-value": "GithubScope",
+      "allOf": [{
+        "$ref": "#/definitions/EnvironmentData"
+      }],
       "properties": {
-        "environmentType": {
-          "type": "string",
-          "description": "The environment type",
-          "x-ms-discriminator-value": "GithubScopeEnvironmentData"
-        }
       }
     },
     "cloudOffering": {
@@ -616,12 +623,11 @@
     "cspmMonitorAwsOffering": {
       "type": "object",
       "description": "The CSPM monitoring for AWS offering",
+      "x-ms-discriminator-value": "CspmMonitorAws",
+      "allOf": [{
+        "$ref": "#/definitions/cloudOffering"
+      }],
       "properties": {
-        "offeringType": {
-          "type": "string",
-          "description": "The security offering details",
-          "x-ms-discriminator-value": "CspmMonitorAws"
-        },
         "nativeCloudConnection": {
           "type": "object",
           "description": "The native cloud connection configuration",
@@ -637,12 +643,11 @@
     "defenderForContainersAwsOffering": {
       "type": "object",
       "description": "The Defender for Containers AWS offering",
+      "x-ms-discriminator-value": "DefenderForContainersAws",
+      "allOf": [{
+        "$ref": "#/definitions/cloudOffering"
+      }],
       "properties": {
-        "offeringType": {
-          "type": "string",
-          "description": "The security offering details",
-          "x-ms-discriminator-value": "DefenderForContainersAws"
-        },
         "kubernetesService": {
           "type": "object",
           "description": "The kubernetes service connection configuration",
@@ -688,12 +693,11 @@
     "defenderForServersAwsOffering": {
       "type": "object",
       "description": "The Defender for Servers AWS offering",
+      "x-ms-discriminator-value": "DefenderForServersAws",
+      "allOf": [{
+        "$ref": "#/definitions/cloudOffering"
+      }],
       "properties": {
-        "offeringType": {
-          "type": "string",
-          "description": "The security offering details",
-          "x-ms-discriminator-value": "DefenderForServersAws"
-        },
         "defenderForServers": {
           "type": "object",
           "description": "The Defender for servers connection configuration",
@@ -737,12 +741,11 @@
     "informationProtectionAwsOffering": {
       "type": "object",
       "description": "The information protection for AWS offering",
+      "x-ms-discriminator-value": "InformationProtectionAws",
+      "allOf": [{
+        "$ref": "#/definitions/cloudOffering"
+      }],
       "properties": {
-        "offeringType": {
-          "type": "string",
-          "description": "The security offering details",
-          "x-ms-discriminator-value": "InformationProtectionAws"
-        },
         "informationProtection": {
           "type": "object",
           "description": "The native cloud connection configuration",
@@ -758,12 +761,11 @@
     "cspmMonitorGcpOffering": {
       "type": "object",
       "description": "The CSPM monitoring for GCP offering",
+      "x-ms-discriminator-value": "CspmMonitorGcp",
+      "allOf": [{
+        "$ref": "#/definitions/cloudOffering"
+      }],
       "properties": {
-        "offeringType": {
-          "type": "string",
-          "description": "The security offering details",
-          "x-ms-discriminator-value": "CspmMonitorGcp"
-        },
         "workloadIdentityProviderId": {
           "type": "string",
           "description": "The GCP workload identity provider id for the offering"
@@ -783,12 +785,11 @@
     "cspmMonitorGithubOffering": {
       "type": "object",
       "description": "The CSPM monitoring for github offering",
+      "x-ms-discriminator-value": "CspmMonitorGithub",
+      "allOf": [{
+        "$ref": "#/definitions/cloudOffering"
+      }],
       "properties": {
-        "offeringType": {
-          "type": "string",
-          "description": "The security offering details",
-          "x-ms-discriminator-value": "CspmMonitorGithub"
-        }
       }
     }
   },
