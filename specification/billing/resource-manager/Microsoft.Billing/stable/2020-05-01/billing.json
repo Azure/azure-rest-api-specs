@@ -237,7 +237,10 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/AddressDetails"
-            }
+            },
+            "x-ms-identifiers": [
+              "adressLine1"
+            ]
           }
         ],
         "responses": {
@@ -1307,6 +1310,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DownloadUrl"
+            }
+          },
           "202": {
             "description": "Accepted.",
             "headers": {
@@ -1318,12 +1327,6 @@
                 "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
                 "type": "string"
               }
-            }
-          },
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DownloadUrl"
             }
           },
           "default": {
@@ -1375,6 +1378,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DownloadUrl"
+            }
+          },
           "202": {
             "description": "Accepted.",
             "headers": {
@@ -1386,12 +1395,6 @@
                 "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
                 "type": "string"
               }
-            }
-          },
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DownloadUrl"
             }
           },
           "default": {
@@ -1581,6 +1584,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DownloadUrl"
+            }
+          },
           "202": {
             "description": "Accepted.",
             "headers": {
@@ -1592,12 +1601,6 @@
                 "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
                 "type": "string"
               }
-            }
-          },
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DownloadUrl"
             }
           },
           "default": {
@@ -1649,6 +1652,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DownloadUrl"
+            }
+          },
           "202": {
             "description": "Accepted.",
             "headers": {
@@ -1660,12 +1669,6 @@
                 "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
                 "type": "string"
               }
-            }
-          },
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DownloadUrl"
             }
           },
           "default": {
@@ -3763,7 +3766,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AzurePlan"
-          }
+          },
+          "x-ms-identifiers": [
+            "skuId"
+          ]
         },
         "resellers": {
           "description": "The list of resellers for which an Azure plan is enabled for the customer.",
@@ -3787,7 +3793,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AddressDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "adressLine1"
+          ]
         },
         "validationMessage": {
           "description": "Validation error message.",
@@ -4467,7 +4476,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AzurePlan"
-          }
+          },
+          "x-ms-identifiers": [
+            "skuId"
+          ]
         }
       }
     },
@@ -4798,7 +4810,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/InvoiceSectionWithCreateSubPermission"
-          }
+          },
+          "x-ms-identifiers": [
+            "invoiceSectionId"
+          ]
         },
         "nextLink": {
           "description": "The link (url) to the next page of results.",
@@ -4886,7 +4901,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AzurePlan"
-          }
+          },
+          "x-ms-identifiers": [
+            "skuId"
+          ]
         }
       }
     },
@@ -4952,7 +4970,8 @@
         "error": {
           "description": "The details of the error.",
           "$ref": "#/definitions/ErrorDetails"
-        }
+        },
+        "x-ms-identifiers": []
       }
     },
     "ErrorSubDetails": {
@@ -5170,7 +5189,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/Document"
-          }
+          },
+          "x-ms-identifiers": [
+            "url"
+          ]
         },
         "payments": {
           "description": "List of payments.",
@@ -5178,7 +5200,8 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/PaymentProperties"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "rebillDetails": {
           "description": "Rebill details for an invoice.",
@@ -6142,7 +6165,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "URL to get the next set of operation list results if there are any.",
@@ -6282,7 +6308,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/BillingPermissionsProperties"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "roleName": {
           "description": "The name of the role",
@@ -6300,7 +6327,8 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/BillingPermissionsProperties"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link (url) to the next page of results.",
@@ -6418,7 +6446,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Participants"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "status": {
           "description": "The current status of the agreement.",
@@ -6627,7 +6656,8 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/ReservationUtilizationAggregates"
-              }
+              },
+              "x-ms-identifiers": []
             }
           }
         }
