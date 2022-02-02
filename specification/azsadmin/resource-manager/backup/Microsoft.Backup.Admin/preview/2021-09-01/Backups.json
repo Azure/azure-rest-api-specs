@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2018-09-01",
+    "version": "2021-09-01",
     "title": "BackupManagementClient",
     "description": "The Admin Backup Management Client."
   },
@@ -30,22 +30,22 @@
         "operationId": "Backups_List",
         "parameters": [
           {
-            "$ref": "Backup.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../stable/2018-09-01/Backup.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "Backup.json#/parameters/ResourceGroupParameter"
+            "$ref": "../../stable/2018-09-01/Backup.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "BackupLocations.json#/parameters/BackupLocationParameter"
           },
           {
-            "$ref": "Backup.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "Backup.json#/parameters/TopParameter"
+            "$ref": "../../stable/2018-09-01/Backup.json#/parameters/TopParameter"
           },
           {
-            "$ref": "Backup.json#/parameters/SkipParameter"
+            "$ref": "../../stable/2018-09-01/Backup.json#/parameters/SkipParameter"
           }
         ],
         "responses": {
@@ -53,6 +53,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/BackupList"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -75,10 +81,10 @@
         "operationId": "Backups_Get",
         "parameters": [
           {
-            "$ref": "Backup.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../stable/2018-09-01/Backup.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "Backup.json#/parameters/ResourceGroupParameter"
+            "$ref": "../../stable/2018-09-01/Backup.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "BackupLocations.json#/parameters/BackupLocationParameter"
@@ -87,7 +93,7 @@
             "$ref": "#/parameters/BackupParameter"
           },
           {
-            "$ref": "Backup.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -95,6 +101,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Backup"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -117,19 +129,19 @@
         "operationId": "Backups_Restore",
         "parameters": [
           {
-            "$ref": "Backup.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../stable/2018-09-01/Backup.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "BackupLocations.json#/parameters/BackupLocationParameter"
           },
           {
-            "$ref": "Backup.json#/parameters/ResourceGroupParameter"
+            "$ref": "../../stable/2018-09-01/Backup.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/BackupParameter"
           },
           {
-            "$ref": "Backup.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/RestoreOptionsParameter"
@@ -141,6 +153,12 @@
           },
           "202": {
             "description": "ACCEPTED"
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -163,11 +181,12 @@
       },
       "allOf": [
         {
-          "$ref": "Backup.json#/definitions/Resource"
+          "$ref": "../../stable/2018-09-01/Backup.json#/definitions/Resource"
         }
       ]
     },
     "BackupModel": {
+      "type": "object",
       "description": "Properties for a backup.",
       "properties": {
         "backupInfo": {
@@ -243,6 +262,7 @@
         "Running",
         "Deleted",
         "Failed",
+        "Skipped",
         "PartialSucceeded",
         "Succeeded"
       ],
@@ -256,10 +276,7 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/RoleOperationStatus"
-      },
-      "x-ms-identifiers": [
-        "roleName"
-      ]
+      }
     },
     "RoleOperationStatus": {
       "description": "Backup status for a role.",
@@ -293,6 +310,7 @@
       }
     },
     "RestoreOptions": {
+      "type": "object",
       "description": "Properties for restore options.",
       "properties": {
         "roleName": {
@@ -311,6 +329,14 @@
     }
   },
   "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client API version.",
+      "required": true,
+      "type": "string",
+      "default": "2021-09-01"
+    },
     "BackupParameter": {
       "name": "backup",
       "in": "path",
