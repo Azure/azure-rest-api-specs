@@ -360,6 +360,12 @@
           "description": "source control properties",
           "$ref": "#/definitions/SourceControlProperties",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "description": "System data of Cluster resource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "x-ms-client-flatten": true,
+          "readOnly": true
         }
       },
       "type": "object"
@@ -367,7 +373,7 @@
     "SourceControlProperties": {
       "description": "Describes source control properties",
       "properties": {
-        "sourceControlId": {
+        "id": {
           "description": "The id (a Guid) of the source control",
           "type": "string"
         },
@@ -414,6 +420,14 @@
         },
         "branch": {
           "description": "Branch name of repository.",
+          "type": "string"
+        },
+        "displayUrl": {
+          "description": "Display url of repository.",
+          "type": "string"
+        },
+        "deploymentLogsUrl": {
+          "description": "Url to access repository action logs.",
           "type": "string"
         },
         "pathMapping": {
