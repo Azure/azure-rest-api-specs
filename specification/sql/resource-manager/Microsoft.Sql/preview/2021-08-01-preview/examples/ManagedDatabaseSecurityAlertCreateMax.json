@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "securityalert-4799",
+    "managedInstanceName": "securityalert-6440",
+    "databaseName": "testdb",
+    "securityAlertPolicyName": "default",
+    "api-version": "2021-08-01-preview",
+    "parameters": {
+      "properties": {
+        "state": "Enabled",
+        "emailAccountAdmins": true,
+        "emailAddresses": [
+          "test@contoso.com",
+          "user@contoso.com"
+        ],
+        "disabledAlerts": [
+          "Sql_Injection",
+          "Usage_Anomaly"
+        ],
+        "retentionDays": 6,
+        "storageAccountAccessKey": "sdlfkjabc+sdlfkjsdlkfsjdfLDKFTERLKFDFKLjsdfksjdflsdkfD2342309432849328476458/3RSD==",
+        "storageEndpoint": "https://mystorage.blob.core.windows.net"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/securityalert-4799/providers/Microsoft.Sql/managedInstances/securityalert-6440/databases/testdb",
+        "name": "default",
+        "type": "Microsoft.Sql/managedInstances/databases/securityAlertPolicies",
+        "properties": {
+          "state": "Enabled",
+          "emailAccountAdmins": true,
+          "emailAddresses": [
+            "test@contoso.com",
+            "user@contoso.com"
+          ],
+          "disabledAlerts": [
+            "Sql_Injection",
+            "Usage_Anomaly"
+          ],
+          "retentionDays": 6,
+          "storageAccountAccessKey": "",
+          "storageEndpoint": "https://mystorage.blob.core.windows.net"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/securityalert-4799/providers/Microsoft.Sql/managedInstances/securityalert-6440/databases/testdb",
+        "name": "default",
+        "type": "Microsoft.Sql/managedInstances/databases/securityAlertPolicies",
+        "properties": {
+          "state": "Enabled",
+          "emailAccountAdmins": true,
+          "emailAddresses": [
+            "test@contoso.com",
+            "user@contoso.com"
+          ],
+          "disabledAlerts": [
+            "Access_Anomaly",
+            "Usage_Anomaly"
+          ],
+          "retentionDays": 6,
+          "storageAccountAccessKey": "sdlfkjabc+sdlfkjsdlkfsjdfLDKFTERLKFDFKLjsdfksjdflsdkfD2342309432849328476458/3RSD==",
+          "storageEndpoint": "https://mystorage.blob.core.windows.net"
+        }
+      }
+    }
+  }
+}
