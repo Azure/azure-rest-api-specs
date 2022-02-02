@@ -71,6 +71,21 @@ input-file:
   - Microsoft.HybridNetwork/preview/2021-06-01-privatepreview/operation.json
 ```
 
+### Tag: package-2022-01-01-preview
+
+These settings apply only when `--tag=package-2022-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-01-01-preview'
+input-file:
+  - Microsoft.HybridNetwork/preview/2022-01-01-preview/common.json
+  - Microsoft.HybridNetwork/preview/2022-01-01-preview/networkFunction.json
+  - Microsoft.HybridNetwork/preview/2022-01-01-preview/device.json
+  - Microsoft.HybridNetwork/preview/2022-01-01-preview/operation.json
+  - Microsoft.HybridNetwork/preview/2022-01-01-preview/vendor.json
+  - Microsoft.HybridNetwork/preview/2022-01-01-preview/networkFunctionVendor.json
+  - Microsoft.HybridNetwork/preview/2022-01-01-preview/vendorNetworkFunction.json
+```
+
 ---
 
 # Code Generation
