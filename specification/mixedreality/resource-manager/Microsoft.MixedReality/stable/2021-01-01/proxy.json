@@ -256,6 +256,44 @@
           "description": "Only provide one value for this field. Valid values: Average, Minimum, Maximum, Total, Count.",
           "type": "string"
         },
+        "supportedAggregationTypes": {
+          "description": "Supported aggregation types. Valid values: Average, Minimum, Maximum, Total, Count.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AggregationType"
+          }
+        },
+        "supportedTimeGrainTypes": {
+          "description": "Supported time grains. Valid values: PT1M, PT5M, PT15M, PT30M, PT1H, PT6H, PT12H, P1D",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TimeGrainType"
+          }
+        },
+        "enableRegionalMdmAccount": {
+          "description": "Flag to indicate use of regional Mdm accounts",
+          "type": "boolean"
+        },
+        "sourceMdmAccount": {
+          "description": "Source mdm account",
+          "type": "string"
+        },
+        "sourceMdmNamespace": {
+          "description": "Source mdm namespace",
+          "type": "string"
+        },
+        "metricFilterPattern": {
+          "description": "Metric filter regex pattern",
+          "type": "string"
+        },
+        "fillGapWithZero": {
+          "description": "Flag to determine is Zero is returned for time duration where no metric is emitted",
+          "type": "boolean"
+        },
+        "category": {
+          "description": "Metric category",
+          "type": "string"
+        },
         "internalMetricName": {
           "description": "Internal metric name.",
           "type": "string"
@@ -267,8 +305,20 @@
           "items": {
             "$ref": "#/definitions/MetricDimension"
           }
+        },
+        "lockedAggregationType": {
+          "description": "Locked aggregation type of the metric",
+          "type": "string"
         }
       }
+    },
+    "AggregationType": {
+      "description": "Only provide one value for this field. Valid values: Average, Minimum, Maximum, Total, Count.",
+      "type": "string"
+    },
+    "TimeGrainType": {
+      "description": "The time grain of the metric",
+      "type": "string"
     },
     "MetricDimension": {
       "description": "Specifications of the Dimension of metrics",
