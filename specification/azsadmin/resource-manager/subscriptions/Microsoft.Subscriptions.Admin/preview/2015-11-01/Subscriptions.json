@@ -510,6 +510,7 @@
           "items": {
             "$ref": "#/definitions/ErrorDefinition"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         }
       }
@@ -574,7 +575,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [ "name" ]
         }
       }
     },
@@ -642,7 +644,8 @@
           "description": "Directory tenant health report.",
           "items": {
             "$ref": "#/definitions/DirectoryTenantHealthReport"
-          }
+          },
+          "x-ms-identifiers": [ "tenantId" ]
         },
         "nextLink": {
           "description": "URI to the next page.",
@@ -680,7 +683,8 @@
           "description": "A report of the health status of an identity applications.",
           "items": {
             "$ref": "#/definitions/ApplicationHealthReport"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "URI to the next page.",
@@ -726,7 +730,8 @@
           "description": "A report of the health status of an AppRoleAssignment.",
           "items": {
             "$ref": "#/definitions/AppRoleAssignmentHealthReport"
-          }
+          },
+          "x-ms-identifiers": [ "appRoleAssignment/resource" ]
         },
         "nextLink": {
           "description": "URI to the next page.",
@@ -774,7 +779,8 @@
           "description": "A report of the health status of an OAuth2PermissionGrant.",
           "items": {
             "$ref": "#/definitions/OAuth2PermissionGrantHealthReport"
-          }
+          },
+          "x-ms-identifiers": [ "oAuth2PermissionGrant/resource" ]
         },
         "nextLink": {
           "description": "URI to the next page.",
@@ -822,7 +828,8 @@
           "description": "A report of the health status of a tag on an identity application service principal.",
           "items": {
             "$ref": "#/definitions/ServicePrincipalTagHealthReport"
-          }
+          },
+          "x-ms-identifiers": [ "servicePrincipalTag" ]
         },
         "nextLink": {
           "description": "URI to the next page.",
@@ -1118,7 +1125,8 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/MetricValue"
-      }
+      },
+      "x-ms-identifiers": []
     },
     "MetricDefinition": {
       "description": "Metric Definition",
@@ -1251,7 +1259,8 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/MetricAvailability"
-      }
+      },
+      "x-ms-identifiers": []
     },
     "MetricList": {
       "description": "List of metrics.",
@@ -1261,7 +1270,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Metric"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
@@ -1277,7 +1287,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricDefinition"
-          }
+          },
+          "x-ms-identifiers": [ "name" ]
         },
         "nextLink": {
           "type": "string",
