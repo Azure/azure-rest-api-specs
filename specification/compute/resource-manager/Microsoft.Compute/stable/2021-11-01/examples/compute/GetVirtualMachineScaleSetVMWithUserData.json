@@ -1,0 +1,133 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmScaleSetName": "{vmss-name}",
+    "instanceId": "0",
+    "api-version": "2021-11-01",
+    "expand": "UserData"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{vmss-vm-name}",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}/virtualMachines/0",
+        "type": "Microsoft.Compute/virtualMachines",
+        "location": "westus",
+        "tags": {
+          "myTag1": "tagValue1"
+        },
+        "properties": {
+          "latestModelApplied": true,
+          "modelDefinitionApplied": "VirtualMachineScaleSet",
+          "networkProfileConfiguration": {
+            "networkInterfaceConfigurations": [
+              {
+                "name": "vmsstestnetconfig5415",
+                "properties": {
+                  "primary": true,
+                  "enableAcceleratedNetworking": false,
+                  "dnsSettings": {
+                    "dnsServers": []
+                  },
+                  "enableIPForwarding": false,
+                  "ipConfigurations": [
+                    {
+                      "name": "vmsstestnetconfig9693",
+                      "properties": {
+                        "subnet": {
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/vn4071/subnets/sn5503"
+                        },
+                        "privateIPAddressVersion": "IPv4"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "vmId": "42af9fdf-b906-4ad7-9905-8316209ff619",
+          "hardwareProfile": {},
+          "storageProfile": {
+            "imageReference": {
+              "publisher": "MicrosoftWindowsServer",
+              "offer": "WindowsServer",
+              "sku": "2012-R2-Datacenter",
+              "version": "4.127.20180315",
+              "exactVersion": "4.127.20180315"
+            },
+            "osDisk": {
+              "osType": "Windows",
+              "name": "vmss3176_vmss3176_0_OsDisk_1_6d72b805e50e4de6830303c5055077fc",
+              "createOption": "FromImage",
+              "caching": "None",
+              "managedDisk": {
+                "storageAccountType": "Standard_LRS",
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_0_OsDisk_1_6d72b805e50e4de6830303c5055077fc"
+              },
+              "diskSizeGB": 127
+            },
+            "dataDisks": [
+              {
+                "lun": 1,
+                "name": "vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d",
+                "createOption": "Empty",
+                "caching": "None",
+                "managedDisk": {
+                  "storageAccountType": "Standard_LRS",
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d"
+                },
+                "diskSizeGB": 128,
+                "toBeDetached": false
+              }
+            ]
+          },
+          "osProfile": {
+            "computerName": "test000000",
+            "adminUsername": "Foo12",
+            "windowsConfiguration": {
+              "provisionVMAgent": true,
+              "enableAutomaticUpdates": true
+            },
+            "secrets": [],
+            "allowExtensionOperations": true,
+            "requireGuestProvisionSignal": true
+          },
+          "userData": "RXhhbXBsZSBVc2VyRGF0YQ==",
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}/virtualMachines/0/networkInterfaces/vmsstestnetconfig5415"
+              }
+            ]
+          },
+          "diagnosticsProfile": {
+            "bootDiagnostics": {
+              "enabled": true
+            }
+          },
+          "provisioningState": "Succeeded"
+        },
+        "resources": [
+          {
+            "name": "CustomScriptExtension-DSC",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM/extensions/CustomScriptExtension-DSC",
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "location": "westus",
+            "tags": {
+              "displayName": "CustomScriptExtension-DSC"
+            },
+            "properties": {
+              "autoUpgradeMinorVersion": true,
+              "provisioningState": "Succeeded",
+              "publisher": "Microsoft.Compute",
+              "type": "CustomScriptExtension",
+              "typeHandlerVersion": "1.9",
+              "settings": {}
+            }
+          }
+        ]
+      }
+    }
+  }
+}

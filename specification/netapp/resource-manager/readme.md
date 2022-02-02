@@ -28,8 +28,18 @@ These are the global settings for the Azure NetApp Files API.
 title: NetAppManagementClient
 description: Microsoft NetApp Files Azure Resource Provider specification
 openapi-type: arm
-tag: package-netapp-2021-06-01
+tag: package-netapp-2021-08-01
 ```
+
+### Tag: package-netapp-2021-08-01
+
+These settings apply only when `--tag=package-netapp-2021-08-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-netapp-2021-08-01'
+input-file:
+- Microsoft.NetApp/stable/2021-08-01/netapp.json
+```
+
 ### Tag: package-netapp-2021-06-01
 
 These settings apply only when `--tag=package-netapp-2021-06-01` is specified on the command line.
@@ -226,6 +236,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-trenton  
   - repo: azure-resource-manager-schemas

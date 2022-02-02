@@ -1823,11 +1823,17 @@
           "Restore to New Azure IaasVm with IaasVMRestoreRequest": {
             "$ref": "./examples/AzureIaasVm/TriggerRestore_ALR_IaasVMRestoreRequest.json"
           },
+          "Restore to New Azure IaasVm with IaasVMRestoreRequest with identityBasedRestoreDetails": {
+            "$ref": "./examples/AzureIaasVm/TriggerRestore_ALR_IaasVMRestoreRequest_IdentityBasedRestoreDetails.json"
+          },
           "Restore to New Azure IaasVm with IaasVMRestoreWithRehydrationRequest": {
             "$ref": "./examples/AzureIaasVm/TriggerRestore_ALR_IaasVMRestoreWithRehydrationRequest.json"
           },
           "Restore Disks with IaasVMRestoreRequest": {
             "$ref": "./examples/AzureIaasVm/TriggerRestore_RestoreDisks_IaasVMRestoreRequest.json"
+          },
+          "Restore Disks with IaasVMRestoreRequest with IdentityBasedRestoreDetails": {
+            "$ref": "./examples/AzureIaasVm/TriggerRestore_RestoreDisks_IaasVMRestoreRequest_IdentityBasedRestoreDetails.json"
           },
           "Restore Disks with IaasVMRestoreWithRehydrationRequest": {
             "$ref": "./examples/AzureIaasVm/TriggerRestore_RestoreDisks_IaasVMRestoreWithRehydrationRequest.json"
@@ -2577,6 +2583,9 @@
         "x-ms-examples": {
           "Validate Operation": {
             "$ref": "./examples/AzureIaasVm/ValidateOperation_RestoreDisk.json"
+          },
+          "Validate Operation with identityBasedRestoreDetails": {
+            "$ref": "./examples/AzureIaasVm/ValidateOperation_RestoreDisk_IdentityBasedRestoreDetails.json"
           }
         }
       }
@@ -6647,6 +6656,20 @@
       },
       "x-ms-discriminator-value": "GenericProtectionPolicy"
     },
+    "IdentityBasedRestoreDetails": {
+      "description": "IaaS VM workload specific restore details for restores using managed identity",
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "description": "Gets the class type.",
+          "type": "string"
+        },
+        "targetStorageAccountId": {
+          "description": "Fully qualified ARM ID of the target storage account.",
+          "type": "string"
+        }
+      }
+    },
     "IdentityInfo": {
       "description": "Encapsulates Managed Identity related information",
       "type": "object",
@@ -6947,6 +6970,10 @@
         "identityInfo": {
           "$ref": "#/definitions/IdentityInfo",
           "description": "Managed Identity information required to access customer storage account."
+        },
+        "identityBasedRestoreDetails": {
+          "$ref": "#/definitions/IdentityBasedRestoreDetails",
+          "description": "IaaS VM workload specific restore details for restores using managed identity."
         }
       },
       "x-ms-discriminator-value": "IaasVMRestoreRequest"
