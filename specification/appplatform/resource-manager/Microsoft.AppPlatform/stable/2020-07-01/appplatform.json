@@ -87,14 +87,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created. The response describes the new Service and contains a Location header to query the\r\noperation result.",
+          "200": {
+            "description": "Success. The response describes the updated Service.",
             "schema": {
               "$ref": "#/definitions/ServiceResource"
             }
           },
-          "200": {
-            "description": "Success. The response describes the updated Service.",
+          "201": {
+            "description": "Created. The response describes the new Service and contains a Location header to query the\r\noperation result.",
             "schema": {
               "$ref": "#/definitions/ServiceResource"
             }
@@ -927,14 +927,14 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Success. The response indicates the resource doesn't exist."
-          },
           "200": {
             "description": "Success. The response indicates the resource is deleted."
           },
           "202": {
             "description": "Accepted. The response indicates the delete operation is performed in the background."
+          },
+          "204": {
+            "description": "Success. The response indicates the resource doesn't exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1251,14 +1251,14 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Success. The response indicates the resource doesn't exist."
+          "200": {
+            "description": "Success. The response indicates the resource is deleted."
           },
           "202": {
             "description": "Accepted. The response indicates the delete operation is performed in the background."
           },
-          "200": {
-            "description": "Success. The response indicates the resource is deleted."
+          "204": {
+            "description": "Success. The response indicates the resource doesn't exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2073,14 +2073,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created. The response describes the new Deployment and contains a Location header to query the\r\noperation result.",
+          "200": {
+            "description": "Success. The response describes the updated Deployment.",
             "schema": {
               "$ref": "#/definitions/DeploymentResource"
             }
           },
-          "200": {
-            "description": "Success. The response describes the updated Deployment.",
+          "201": {
+            "description": "Created. The response describes the new Deployment and contains a Location header to query the\r\noperation result.",
             "schema": {
               "$ref": "#/definitions/DeploymentResource"
             }
@@ -2138,11 +2138,11 @@
           "200": {
             "description": "Success. The response indicates the resource is deleted."
           },
-          "204": {
-            "description": "Success. The response indicates the resource doesn't exist."
-          },
           "202": {
             "description": "Accepted. The response indicates the delete operation is performed in the background."
+          },
+          "204": {
+            "description": "Success. The response indicates the resource doesn't exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2197,14 +2197,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted. The response indicates the exiting Deployment is now updating and contains a Location\r\nheader to query the operation result.",
+          "200": {
+            "description": "Success. The response describes the updated Deployment.",
             "schema": {
               "$ref": "#/definitions/DeploymentResource"
             }
           },
-          "200": {
-            "description": "Success. The response describes the updated Deployment.",
+          "202": {
+            "description": "Accepted. The response indicates the exiting Deployment is now updating and contains a Location\r\nheader to query the operation result.",
             "schema": {
               "$ref": "#/definitions/DeploymentResource"
             }
@@ -2907,7 +2907,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConfigServerSettingsErrorRecord"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -3092,7 +3095,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/RequiredTraffic"
-          }
+          },
+          "x-ms-identifiers": [
+            "port"
+          ]
         }
       }
     },
@@ -3179,7 +3185,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/GitPatternRepository"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "uri": {
           "description": "URI of the repository",
@@ -3434,8 +3443,8 @@
         "sizeInGB": {
           "format": "int32",
           "description": "Size of the temporary disk in GB",
-          "maximum": 5.0,
-          "minimum": 0.0,
+          "maximum": 5,
+          "minimum": 0,
           "type": "integer"
         },
         "mountPath": {
@@ -3452,15 +3461,15 @@
         "sizeInGB": {
           "format": "int32",
           "description": "Size of the persistent disk in GB",
-          "maximum": 50.0,
-          "minimum": 0.0,
+          "maximum": 50,
+          "minimum": 0,
           "type": "integer"
         },
         "usedInGB": {
           "format": "int32",
           "description": "Size of the used persistent disk in GB",
-          "maximum": 50.0,
-          "minimum": 0.0,
+          "maximum": 50,
+          "minimum": 0,
           "type": "integer",
           "readOnly": true
         },
@@ -3882,6 +3891,9 @@
           "items": {
             "$ref": "#/definitions/DeploymentInstance"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         }
       }
@@ -4054,7 +4066,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationDetail"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
@@ -4077,18 +4092,6 @@
         "display": {
           "$ref": "#/definitions/OperationDisplay",
           "description": "Display of the operation"
-        },
-        "actionType": {
-          "description": "Enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.",
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "Internal"
-          ],
-          "x-ms-enum": {
-            "name": "ActionType",
-            "modelAsString": true
-          }
         },
         "origin": {
           "description": "Origin of the operation",
@@ -4142,7 +4145,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/LogSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "metricSpecifications": {
           "description": "Specifications of the Metrics for Azure Monitoring",
@@ -4150,7 +4156,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -4226,11 +4235,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricDimension"
-          }
-        },
-        "sourceMdmNamespace": {
-          "description": "Name of the MDM namespace. Optional.",
-          "type": "string"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -4262,7 +4270,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceSku"
-          }
+          },
+          "x-ms-identifiers": [
+            "name",
+            "resourceType"
+          ]
         },
         "nextLink": {
           "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
@@ -4304,7 +4316,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceSkuLocationInfo"
-          }
+          },
+          "x-ms-identifiers": [
+            "location"
+          ]
         },
         "restrictions": {
           "description": "Gets the restrictions because of which SKU cannot be used. This is\r\nempty if there are no restrictions.",
@@ -4312,7 +4327,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceSkuRestrictions"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -4375,7 +4391,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceSkuZoneDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -4439,7 +4458,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceSkuCapabilities"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -4508,7 +4530,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
-          }
+          },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ]
         }
       },
       "x-ms-external": true
@@ -4523,6 +4549,9 @@
           "items": {
             "$ref": "#/definitions/SupportedRuntimeVersion"
           },
+          "x-ms-identifiers": [
+            "version"
+          ],
           "readOnly": true
         }
       },
