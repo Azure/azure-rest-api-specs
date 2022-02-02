@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "cassandra-prod-rg",
+    "api-version": "2021-10-15",
+    "clusterName": "cassandra-prod",
+    "body": {
+      "command": "nodetool status",
+      "host": "10.0.1.12"
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "commandOutput": "Datacenter: datacenter1\n=======================\n"
+      }
+    }
+  }
+}

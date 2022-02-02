@@ -1,0 +1,914 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PhoneNumbersClient",
+    "description": "The phone numbers client uses Azure Communication Services to purchase and manage phone numbers.",
+    "version": "2022-01-11-preview2"
+  },
+  "paths": {
+    "/availablePhoneNumbers/countries/{countryCode}/:search": {
+      "post": {
+        "tags": [
+          "Find and purchase available phone numbers"
+        ],
+        "summary": "Search for available phone numbers to purchase.",
+        "operationId": "PhoneNumbers_SearchAvailablePhoneNumbers",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "countryCode",
+            "description": "The ISO 3166-2 country code, e.g. US.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The phone number search request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PhoneNumberSearchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The service has accepted the request and will start processing later. It will return 'Accepted' immediately and include an 'Operation-Location' and 'Location' headers. Client side should further query the operation status using the URL specified in 'Operation-Location' header. When operation completes successfully query final result using URL specified in 'Location' header.",
+            "schema": {
+              "$ref": "#/definitions/PhoneNumberSearchResult"
+            },
+            "headers": {
+              "Location": {
+                "description": "URL to retrieve the final result after operation completes.",
+                "type": "string"
+              },
+              "Operation-Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "operation-id": {
+                "description": "The operation id.",
+                "type": "string"
+              },
+              "search-id": {
+                "description": "The search operation id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Search for phone numbers": {
+            "$ref": "./examples/SearchPhoneNumbers.json"
+          }
+        }
+      }
+    },
+    "/availablePhoneNumbers/searchResults/{searchId}": {
+      "get": {
+        "tags": [
+          "Find and purchase available phone numbers"
+        ],
+        "summary": "Gets a phone number search result by search id.",
+        "operationId": "PhoneNumbers_GetSearchResult",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "searchId",
+            "description": "The search Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PhoneNumberSearchResult"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get PhoneNumber Search Result": {
+            "$ref": "./examples/GetPhoneNumberSearchResult.json"
+          }
+        }
+      }
+    },
+    "/availablePhoneNumbers/:purchase": {
+      "post": {
+        "tags": [
+          "Find and purchase available phone numbers"
+        ],
+        "summary": "Purchases phone numbers.",
+        "operationId": "PhoneNumbers_PurchasePhoneNumbers",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The phone number purchase request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PhoneNumberPurchaseRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The service has accepted the request and will start processing later. It will return 'Accepted' immediately and include an 'Operation-Location' and 'Location' headers. Client side should further query the operation status using the URL specified in 'Operation-Location' header. When operation completes successfully query final result using URL specified in 'Location' header.",
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "operation-id": {
+                "description": "The operation id.",
+                "type": "string"
+              },
+              "purchase-id": {
+                "description": "The purchase operation id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Purchase phone numbers": {
+            "$ref": "./examples/PurchasePhoneNumbers.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/phoneNumbers/operations/{operationId}": {
+      "get": {
+        "tags": [
+          "Long running operations"
+        ],
+        "summary": "Gets an operation by its id.",
+        "operationId": "PhoneNumbers_GetOperation",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "operationId",
+            "description": "The id of the operation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "When the operation is completed, query the final result of the operation using the URL specified in the 'Location' attribute in the response header.",
+            "schema": {
+              "$ref": "#/definitions/PhoneNumberOperation"
+            },
+            "headers": {
+              "Location": {
+                "description": "Url to retrieve the final result after operation completes.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get long running operation status by operation id": {
+            "$ref": "./examples/GetOperation.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Long running operations"
+        ],
+        "summary": "Cancels an operation by its id.",
+        "operationId": "PhoneNumbers_CancelOperation",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "operationId",
+            "description": "The id of the operation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete long running operation with the given operation id": {
+            "$ref": "./examples/DeleteOperation.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/phoneNumbers/{phoneNumber}/capabilities": {
+      "patch": {
+        "tags": [
+          "Manage purchased phone numbers"
+        ],
+        "summary": "Updates the capabilities of a phone number.",
+        "operationId": "PhoneNumbers_UpdateCapabilities",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "phoneNumber",
+            "description": "The phone number id in E.164 format. The leading plus can be either + or encoded as %2B, e.g. +11234567890.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Defines the update capabilities request.",
+            "schema": {
+              "$ref": "#/definitions/PhoneNumberCapabilitiesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The service has accepted the request and will start processing later. It will return 'Accepted' immediately and include an 'Operation-Location' and 'Location' headers. Client side should further query the operation status using the URL specified in 'Operation-Location' header. When operation completes successfully query final result using URL specified in 'Location' header.",
+            "schema": {
+              "$ref": "#/definitions/PurchasedPhoneNumber"
+            },
+            "headers": {
+              "Location": {
+                "description": "URL to retrieve the final result after operation completes.",
+                "type": "string"
+              },
+              "Operation-Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "operation-id": {
+                "description": "The operation id.",
+                "type": "string"
+              },
+              "capabilities-id": {
+                "description": "The capabilities operation id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Update phoneNumber capabilities": {
+            "$ref": "./examples/UpdatePhoneNumberCapabilities.json"
+          }
+        }
+      }
+    },
+    "/phoneNumbers/{phoneNumber}": {
+      "get": {
+        "tags": [
+          "Manage purchased phone numbers"
+        ],
+        "summary": "Gets the details of the given purchased phone number.",
+        "operationId": "PhoneNumbers_GetByNumber",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "phoneNumber",
+            "description": "The purchased phone number whose details are to be fetched in E.164 format, e.g. +11234567890.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PurchasedPhoneNumber"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Fetch purchased phone number": {
+            "$ref": "./examples/GetPhoneNumber.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Manage purchased phone numbers"
+        ],
+        "summary": "Releases a purchased phone number.",
+        "operationId": "PhoneNumbers_ReleasePhoneNumber",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "phoneNumber",
+            "description": "Phone number to be released, e.g. +11234567890.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The service has accepted the request and will start processing later. It will return 'Accepted' immediately and include an 'Operation-Location' and 'Location' headers. Client side should further query the operation status using the URL specified in 'Operation-Location' header. When operation completes successfully query final result using URL specified in 'Location' header.",
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "operation-id": {
+                "description": "The operation id.",
+                "type": "string"
+              },
+              "release-id": {
+                "description": "The release operation id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Release phone number": {
+            "$ref": "./examples/ReleasePhoneNumber.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/phoneNumbers": {
+      "get": {
+        "tags": [
+          "Manage purchased phone numbers"
+        ],
+        "summary": "Gets the list of all purchased phone numbers.",
+        "operationId": "PhoneNumbers_ListPhoneNumbers",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "An optional parameter for how many entries to skip, for pagination purposes. The default value is 0.",
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "An optional parameter for how many entries to return, for pagination purposes. The default value is 100.",
+            "type": "integer",
+            "format": "int32",
+            "default": 100
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PurchasedPhoneNumbers"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "phoneNumbers"
+        },
+        "x-ms-examples": {
+          "List purchased phone numbers": {
+            "$ref": "./examples/GetPhoneNumbers.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PhoneNumberCapabilities": {
+      "description": "Capabilities of a phone number.",
+      "required": [
+        "calling",
+        "sms"
+      ],
+      "type": "object",
+      "properties": {
+        "calling": {
+          "description": "Capability value for calling.",
+          "enum": [
+            "none",
+            "inbound",
+            "outbound",
+            "inbound+outbound"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PhoneNumberCapabilityType",
+            "modelAsString": true
+          }
+        },
+        "sms": {
+          "description": "Capability value for SMS.",
+          "enum": [
+            "none",
+            "inbound",
+            "outbound",
+            "inbound+outbound"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PhoneNumberCapabilityType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PhoneNumberSearchRequest": {
+      "description": "Represents a phone number search request to find phone numbers. Found phone numbers are temporarily held for a following purchase.",
+      "required": [
+        "assignmentType",
+        "capabilities",
+        "phoneNumberType"
+      ],
+      "type": "object",
+      "properties": {
+        "phoneNumberType": {
+          "description": "The type of phone numbers to search for, e.g. geographic, or tollFree.",
+          "enum": [
+            "geographic",
+            "tollFree"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PhoneNumberType",
+            "modelAsString": true
+          }
+        },
+        "assignmentType": {
+          "description": "The assignment type of the phone numbers to search for. A phone number can be assigned to a person, or to an application.",
+          "enum": [
+            "person",
+            "application"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PhoneNumberAssignmentType",
+            "modelAsString": true
+          }
+        },
+        "capabilities": {
+          "$ref": "#/definitions/PhoneNumberCapabilities"
+        },
+        "areaCode": {
+          "description": "The area code of the desired phone number, e.g. 425.",
+          "type": "string"
+        },
+        "quantity": {
+          "format": "int32",
+          "description": "The quantity of desired phone numbers. The default value is 1.",
+          "default": 1,
+          "maximum": 2147483647,
+          "minimum": 1,
+          "type": "integer"
+        }
+      }
+    },
+    "PhoneNumberCost": {
+      "description": "The incurred cost for a single phone number.",
+      "required": [
+        "amount",
+        "billingFrequency",
+        "currencyCode"
+      ],
+      "type": "object",
+      "properties": {
+        "amount": {
+          "format": "double",
+          "description": "The cost amount.",
+          "type": "number"
+        },
+        "currencyCode": {
+          "description": "The ISO 4217 currency code for the cost amount, e.g. USD.",
+          "type": "string"
+        },
+        "billingFrequency": {
+          "description": "The frequency with which the cost gets billed.",
+          "enum": [
+            "monthly"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BillingFrequency",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PhoneNumberSearchResult": {
+      "description": "The result of a phone number search operation.",
+      "required": [
+        "assignmentType",
+        "capabilities",
+        "cost",
+        "phoneNumbers",
+        "phoneNumberType",
+        "searchExpiresBy",
+        "searchId"
+      ],
+      "type": "object",
+      "properties": {
+        "searchId": {
+          "description": "The search id.",
+          "type": "string"
+        },
+        "phoneNumbers": {
+          "description": "The phone numbers that are available. Can be fewer than the desired search quantity.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "phoneNumberType": {
+          "description": "The phone number's type, e.g. geographic, or tollFree.",
+          "enum": [
+            "geographic",
+            "tollFree"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PhoneNumberType",
+            "modelAsString": true
+          }
+        },
+        "assignmentType": {
+          "description": "Phone number's assignment type.",
+          "enum": [
+            "person",
+            "application"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PhoneNumberAssignmentType",
+            "modelAsString": true
+          }
+        },
+        "capabilities": {
+          "$ref": "#/definitions/PhoneNumberCapabilities"
+        },
+        "cost": {
+          "$ref": "#/definitions/PhoneNumberCost"
+        },
+        "searchExpiresBy": {
+          "format": "date-time",
+          "description": "The date that this search result expires and phone numbers are no longer on hold. A search result expires in less than 15min, e.g. 2020-11-19T16:31:49.048Z.",
+          "type": "string"
+        }
+      }
+    },
+    "PhoneNumberPurchaseRequest": {
+      "description": "The phone number search purchase request.",
+      "type": "object",
+      "properties": {
+        "searchId": {
+          "description": "The search id.",
+          "type": "string"
+        }
+      }
+    },
+    "PhoneNumberOperation": {
+      "description": "Long running operation.",
+      "required": [
+        "createdDateTime",
+        "id",
+        "operationType",
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Status of operation.",
+          "enum": [
+            "notStarted",
+            "running",
+            "succeeded",
+            "failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PhoneNumberOperationStatus",
+            "modelAsString": true
+          }
+        },
+        "resourceLocation": {
+          "description": "URL for retrieving the result of the operation, if any.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "The date that the operation was created.",
+          "type": "string"
+        },
+        "error": {
+          "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationError"
+        },
+        "id": {
+          "description": "Id of operation.",
+          "type": "string"
+        },
+        "operationType": {
+          "description": "The type of operation, e.g. Search",
+          "enum": [
+            "purchase",
+            "releasePhoneNumber",
+            "search",
+            "updatePhoneNumberCapabilities"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PhoneNumberOperationType",
+            "modelAsString": true
+          }
+        },
+        "lastActionDateTime": {
+          "format": "date-time",
+          "description": "The most recent date that the operation was changed.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PhoneNumberCapabilitiesRequest": {
+      "description": "Capabilities of a phone number.",
+      "type": "object",
+      "properties": {
+        "calling": {
+          "description": "Capability value for calling.",
+          "enum": [
+            "none",
+            "inbound",
+            "outbound",
+            "inbound+outbound"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PhoneNumberCapabilityType",
+            "modelAsString": true
+          }
+        },
+        "sms": {
+          "description": "Capability value for SMS.",
+          "enum": [
+            "none",
+            "inbound",
+            "outbound",
+            "inbound+outbound"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PhoneNumberCapabilityType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PurchasedPhoneNumber": {
+      "description": "Represents a purchased phone number.",
+      "required": [
+        "assignmentType",
+        "capabilities",
+        "cost",
+        "countryCode",
+        "id",
+        "phoneNumber",
+        "phoneNumberType",
+        "purchaseDate"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The id of the phone number, e.g. 11234567890.",
+          "type": "string"
+        },
+        "phoneNumber": {
+          "description": "String of the E.164 format of the phone number, e.g. +11234567890.",
+          "type": "string"
+        },
+        "countryCode": {
+          "description": "The ISO 3166-2 code of the phone number's country, e.g. US.",
+          "type": "string"
+        },
+        "phoneNumberType": {
+          "description": "The phone number's type, e.g. Geographic, TollFree.",
+          "enum": [
+            "geographic",
+            "tollFree"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PhoneNumberType",
+            "modelAsString": true
+          }
+        },
+        "capabilities": {
+          "$ref": "#/definitions/PhoneNumberCapabilities"
+        },
+        "assignmentType": {
+          "description": "The assignment type of the phone number. A phone number can be assigned to a person, or to an application.",
+          "enum": [
+            "person",
+            "application"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PhoneNumberAssignmentType",
+            "modelAsString": true
+          }
+        },
+        "purchaseDate": {
+          "format": "date-time",
+          "description": "The date and time that the phone number was purchased.",
+          "type": "string"
+        },
+        "cost": {
+          "$ref": "#/definitions/PhoneNumberCost"
+        }
+      }
+    },
+    "PurchasedPhoneNumbers": {
+      "description": "The list of purchased phone numbers.",
+      "required": [
+        "phoneNumbers"
+      ],
+      "type": "object",
+      "properties": {
+        "phoneNumbers": {
+          "description": "Represents a list of phone numbers.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PurchasedPhoneNumber"
+          }
+        },
+        "nextLink": {
+          "description": "Represents the URL link to the next page of phone number results.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "in": "query",
+      "name": "api-version",
+      "description": "Version of API to invoke.",
+      "required": true,
+      "type": "string"
+    },
+    "Endpoint": {
+      "in": "path",
+      "name": "endpoint",
+      "description": "The communication resource, for example https://resourcename.communication.azure.com.",
+      "required": true,
+      "type": "string",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  }
+}
