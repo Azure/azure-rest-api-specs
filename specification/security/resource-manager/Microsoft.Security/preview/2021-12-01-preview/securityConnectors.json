@@ -406,11 +406,11 @@
         "organizationalData": {
           "type": "object",
           "description": "The AWS account's organizational data",
-          "$ref": "#/definitions/AwsOrganizationData"
+          "$ref": "#/definitions/AwsOrganizationalData"
         }
       }
     },
-    "AwsOrganizationData": {
+    "AwsOrganizationalData": {
       "type": "object",
       "description": "The awsOrganization data ",
       "discriminator": "organizationMembershipType",
@@ -432,13 +432,13 @@
         }
       }
     },
-    "AwsOrganizationDataParent": {
+    "AwsOrganizationalDataMaster": {
       "type": "object",
-      "description": "The awsOrganization data for the parent account",
+      "description": "The awsOrganization data for the master account",
       "x-ms-discriminator-value": "Organization",
       "allOf": [
         {
-          "$ref": "#/definitions/AwsOrganizationData"
+          "$ref": "#/definitions/AwsOrganizationalData"
         }
       ],
       "properties": {
@@ -456,13 +456,13 @@
         }
       }
     },
-    "AwsOrganizationDataMember": {
+    "AwsOrganizationalDataMember": {
       "type": "object",
       "description": "The awsOrganization data for the member account",
       "x-ms-discriminator-value": "Member",
       "allOf": [
         {
-          "$ref": "#/definitions/AwsOrganizationData"
+          "$ref": "#/definitions/AwsOrganizationalData"
         }
       ],
       "properties": {
@@ -485,7 +485,7 @@
         "organizationalData": {
           "type": "object",
           "description": "The Gcp project's organizational data",
-          "$ref": "#/definitions/GcpOrganizationData"
+          "$ref": "#/definitions/GcpOrganizationalData"
         },
         "projectDetails": {
           "type": "object",
@@ -500,8 +500,7 @@
       "properties": {
         "projectNumber": {
           "type": "string",
-          "description": "The unique GCP Project number",
-          "readOnly": true
+          "description": "The unique GCP Project number"
         },
         "projectId": {
           "type": "string",
@@ -513,7 +512,7 @@
         }
       }
     },
-    "GcpOrganizationData": {
+    "GcpOrganizationalData": {
       "type": "object",
       "description": "The gcpOrganization data",
       "discriminator": "organizationMembershipType",
@@ -535,13 +534,13 @@
         }
       }
     },
-    "GcpOrganizationDataParent": {
+    "GcpOrganizationalDataOrganization": {
       "type": "object",
       "description": "The gcpOrganization data for the parent account",
       "x-ms-discriminator-value": "Organization",
       "allOf": [
         {
-          "$ref": "#/definitions/GcpOrganizationData"
+          "$ref": "#/definitions/GcpOrganizationalData"
         }
       ],
       "properties": {
@@ -563,31 +562,19 @@
         }
       }
     },
-    "GcpOrganizationDataMember": {
+    "GcpOrganizationalDataMember": {
       "type": "object",
       "description": "The gcpOrganization data for the member account",
       "x-ms-discriminator-value": "Member",
       "allOf": [
         {
-          "$ref": "#/definitions/GcpOrganizationData"
+          "$ref": "#/definitions/GcpOrganizationalData"
         }
       ],
       "properties": {
-        "excludedProjectNumbers": {
-          "type": "array",
-          "description": "If the multi cloud account is of membership type organization, list of accounts excluded from offering",
-          "items": {
-            "type": "string",
-            "description": "account IDs"
-          }
-        },
-        "serviceAccountEmailAddress": {
+        "parentHierarchyId": {
           "type": "string",
-          "description": "The service account email address which represents the organization level permissions container."
-        },
-        "workloadIdentityProviderId": {
-          "type": "string",
-          "description": "The GCP workload identity provider id which represents the permissions required to auto provision security connectors"
+          "description": "If the multi cloud account is not of membership type organization, this will be the ID of the project's parent"
         }
       }
     },
