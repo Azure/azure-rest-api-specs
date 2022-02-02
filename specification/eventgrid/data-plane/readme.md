@@ -132,6 +132,8 @@ input-file:
 - Microsoft.Communication/stable/2018-01-01/AzureCommunicationServices.json
 - Microsoft.PolicyInsights/stable/2018-01-01/PolicyInsights.json
 - Microsoft.ContainerService/stable/2018-01-01/ContainerService.json
+- Microsoft.ApiManagement/stable/2018-01-01/APIManagement.json
+
 ```
 
 ### Suppression
@@ -227,6 +229,7 @@ input-file:
   - $(this-folder)/Microsoft.Web/stable/2018-01-01/Web.json
   - $(this-folder)/Microsoft.Communication/stable/2018-01-01/AzureCommunicationServices.json
   - $(this-folder)/Microsoft.ContainerService/stable/2018-01-01/ContainerService.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2018-01-01/APIManagement.json
 
 ```
 
