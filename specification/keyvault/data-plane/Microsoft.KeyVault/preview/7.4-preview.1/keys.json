@@ -2231,7 +2231,7 @@
         "lifetimeActions": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/LifetimeActions"
+            "$ref": "common.json#/definitions/LifetimeActions"
           },
           "description": "Actions that will be performed by Key Vault over the lifetime of a key. For preview, lifetimeActions can only have two items at maximum: one for rotate, one for notify. Notification time would be default to 30 days before expiry and it is not configurable."
         },
@@ -2241,59 +2241,6 @@
         }
       },
       "description": "Management policy for a key."
-    },
-    "LifetimeActions": {
-      "properties": {
-        "trigger": {
-          "$ref": "#/definitions/LifetimeActionsTrigger",
-          "description": "The condition that will execute the action."
-        },
-        "action": {
-          "$ref": "#/definitions/LifetimeActionsType",
-          "description": "The action that will be executed."
-        }
-      },
-      "description": "Action and its trigger that will be performed by Key Vault over the lifetime of a key."
-    },
-    "LifetimeActionsTrigger": {
-      "properties": {
-        "timeAfterCreate": {
-          "type": "string",
-          "description": "Time after creation to attempt rotate. It will be in ISO 8601 format. Example: 90 days : \"P90D\" "
-        },
-        "timeBeforeExpiry": {
-          "type": "string",
-          "description": "Time before expiry to attempt rotate. It will be in ISO 8601 format. Example: 90 days : \"P90D\""
-        }
-      },
-      "description": "A condition to be satisfied for an action to be executed."
-    },
-    "LifetimeActionsType": {
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of the action.",
-          "enum": [
-            "rotate",
-            "notify"
-          ],
-          "x-ms-enum": {
-            "name": "ActionType",
-            "modelAsString": false,
-            "values": [
-              {
-                "value": "rotate",
-                "description": "Rotate the key based on the key policy."
-              },
-              {
-                "value": "notify",
-                "description": "Trigger event grid events. For preview, the notification time is not configurable and it is default to 30 days before expiry."
-              }
-            ]
-          }
-        }
-      },
-      "description": "The action that will be executed."
     },
     "KeyRotationPolicyAttributes": {
       "properties": {
