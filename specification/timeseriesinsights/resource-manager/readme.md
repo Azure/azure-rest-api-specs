@@ -26,18 +26,27 @@ These are the global settings for the TimeSeriesInsights API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2021-06
+tag: package-preview-2021-03
 ```
 
 
+### Tag: package-preview-2021-03
+
+These settings apply only when `--tag=package-preview-2021-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-03'
+input-file:
+  - Microsoft.TimeSeriesInsights/preview/2021-03-31-preview/timeseriesinsights.json
+```
 ### Tag: package-preview-2021-06
 
 These settings apply only when `--tag=package-preview-2021-06` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-06'
+``` yaml $(tag) == 'package-preview-2021-06'
 input-file:
   - Microsoft.TimeSeriesInsights/preview/2021-06-30-preview/timeseriesinsights.json
 ```
+
 ### Tag: package-2020-05-15
 
 These settings apply only when `--tag=package-2020-05-15` is specified on the command line.
@@ -108,6 +117,9 @@ directive:
       - $.definitions.Gen2EnvironmentResource
     from: timeseriesinsights.json
     reason: These violations are false positives. The EventSources_Update operation takes an EventSourceUpdateParameters as the body, and EventHubEventSourceUpdateParameters and IoTHubEventSourceUpdateParameters both inherit from EventSourceUpdateParameters. Similarly, the Environments_Update operation takes an EnvironmentUpdateParameters as the body, and both StandardEnvironmentUpdateParameters and LongTermEnvironmentUpdateParameters inherit from EnvironmentUpdateParameters. These definitions can be used to update mutable properties of the event source, including the Tags collection.
+  - suppress: R4009 # The response of operation:'PrivateEndpointConnections_CreateOrUpdate' is defined without 'systemData'. Consider adding the systemData to the response.
+    from: timeseriesinsights.json
+    reason: The systemData feature is not implemented in the Time Series Insights RP as of the publication of this api version.
 ```
 
 ---

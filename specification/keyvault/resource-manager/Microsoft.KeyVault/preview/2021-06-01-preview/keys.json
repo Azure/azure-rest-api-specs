@@ -383,7 +383,8 @@
               "verify",
               "wrapKey",
               "unwrapKey",
-              "import"
+              "import",
+              "release"
             ],
             "x-ms-enum": {
               "name": "JsonWebKeyOperation",
@@ -423,6 +424,10 @@
         "rotationPolicy": {
           "$ref": "#/definitions/RotationPolicy",
           "description": "Key rotation policy in response. It will be used for both output and input. Omitted if empty"
+        },
+        "release_policy": {
+          "$ref": "#/definitions/KeyReleasePolicy",
+          "description": "Key release policy in response. It will be used for both output and input. Omitted if empty"
         }
       },
       "description": "The properties of the key.",
@@ -473,6 +478,10 @@
           },
           "readOnly": true,
           "x-nullable": false
+        },
+        "exportable": {
+          "type": "boolean",
+          "description": "Indicates if the private key can be exported."
         }
       },
       "description": "The object attributes managed by the Azure Key Vault service.",
@@ -589,11 +598,11 @@
       "properties": {
         "timeAfterCreate": {
           "type": "string",
-          "description": "The time duration after key creation to rotate the key. It should be in ISO8601 format. Eg: 'P90D', 'P1Y'."
+          "description": "The time duration after key creation to rotate the key. It only applies to rotate. It will be in ISO 8601 duration format. Eg: 'P90D', 'P1Y'."
         },
         "timeBeforeExpiry": {
           "type": "string",
-          "description": "The time duration before key expiring to rotate the key. It should be in ISO8601 format. Eg: 'P90D', 'P1Y'."
+          "description": "The time duration before key expiring to rotate or notify. It will be in ISO 8601 duration format. Eg: 'P90D', 'P1Y'."
         }
       },
       "type": "object"
@@ -611,6 +620,21 @@
             "name": "KeyRotationPolicyActionType",
             "modelAsString": false
           }
+        }
+      },
+      "type": "object"
+    },
+    "KeyReleasePolicy": {
+      "properties": {
+        "contentType": {
+          "description": "Content type and version of key release policy",
+          "type": "string",
+          "default": "application/json; charset=utf-8"
+        },
+        "data": {
+          "description": "Blob encoding the policy rules under which the key can be released.",
+          "type": "string",
+          "format": "base64url"
         }
       },
       "type": "object"
