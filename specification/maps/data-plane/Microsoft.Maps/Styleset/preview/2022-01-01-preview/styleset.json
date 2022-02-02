@@ -1,0 +1,607 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Maps StyleSet Service",
+    "version": "2022-01-01-preview",
+    "description": "This is an extension of the Azure Maps Tileset API to serve custom styles. It will allow a client to create a list of map styling information which can be combined with tilesetIds to compose a Mapbox style that can be consumed directly by front-end services (map control web & mobile SDKs, styling tools like [Maputnik](https://maputnik.github.io/editor/)). StyleSet can be viewed as the backend representation for a style picker at frontend."
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{geography}.atlas.microsoft.com",
+    "parameters": [
+      {
+        "$ref": "../../../../Common/preview/1.0/common.json#/parameters/GeographicResourceLocation"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "AADToken": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0 or v2.0](https://docs.microsoft.com/azure/active-directory/develop/azure-ad-endpoint-comparison) supports Work, School, and Guests but does not support Personal accounts.",
+      "scopes": {
+        "https://atlas.microsoft.com/.default": "https://atlas.microsoft.com/.default"
+      }
+    },
+    "SharedKey": {
+      "type": "apiKey",
+      "description": "This is a shared key that is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.\n\n For publicly exposed applications, our recommendation is to use server-to-server access of Azure Maps REST APIs where this key can be securely stored.",
+      "name": "subscription-key",
+      "in": "query"
+    },
+    "SasToken": {
+      "type": "apiKey",
+      "description": "This is a shared access signature token is created from the List SAS operation on the [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this token, any application is authorized to access with Azure role-based access controls and fine-grain control to the expiration, rate, and region(s) of use for the particular token. In other words, the SAS Token can be used to allow applications to control access in a more secured way than the shared key.\n\n For publicly exposed applications, our recommendation is to configure a specific list of allowed origins on the [Map account resource](https://aka.ms/amauth) to limit rendering abuse and regularly renew the SAS Token.",
+      "name": "SAS Token",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "AADToken": [
+        "https://atlas.microsoft.com/.default"
+      ]
+    },
+    {
+      "SharedKey": []
+    },
+    {
+      "SasToken": []
+    }
+  ],
+  "responses": {
+    "400": {
+      "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "401": {
+      "description": "Access denied due to invalid subscription key or invalid Azure Active Directory (Azure AD) bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided Azure AD bearer token.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      },
+      "headers": {
+        "WWW-Authenticate": {
+          "type": "string",
+          "description": "Bearer realm=\"https://atlas.microsoft.com/\", error=\"invalid_token\", error_description=\"The access token expired\""
+        }
+      }
+    },
+    "403": {
+      "description": "Permission, capacity, or authentication issues.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "404": {
+      "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "500": {
+      "description": "An error occurred while processing the request. Please try again later.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "200Async": {
+      "description": "The operation is running or complete.  If the operation was successful, use the Resource-Location header to obtain the path to the result.",
+      "schema": {
+        "$ref": "#/definitions/LongRunningOperationResult"
+      },
+      "headers": {
+        "Resource-Location": {
+          "type": "string",
+          "description": "If successful, a URI where details on the newly created resource can be found."
+        }
+      }
+    },
+    "202Accepted": {
+      "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Operation-Location Header to obtain status.",
+      "headers": {
+        "Operation-Location": {
+          "type": "string",
+          "description": "New URL to check for the results of the long running process."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionKey": {
+      "name": "subscription-key",
+      "description": "One of the Azure Maps keys provided from an Azure Map Account. Please refer to this [article](https://docs.microsoft.com/azure/azure-maps/how-to-manage-authentication) for details on how to manage authentication.",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "description": "Version number of Azure Maps API.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "default": "2022-01-01-preview",
+      "x-ms-parameter-location": "client"
+    },
+    "StyleSetId": {
+      "name": "styleSetId",
+      "description": "The StyleSet Id.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "StyleName": {
+      "name": "styleName",
+      "description": "The StyleSet style name.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "DescriptionStyleSet": {
+      "name": "description",
+      "description": "User provided description of the styleSet.",
+      "type": "string",
+      "in": "query",
+      "x-ms-parameter-location": "method"
+    },
+    "StyleSetOperationId": {
+      "name": "operationId",
+      "type": "string",
+      "in": "path",
+      "description": "The ID to query the status for the styleSet create request.",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "DataFormat": {
+      "name": "dataFormat",
+      "in": "query",
+      "description": "Defines the type of input file for a style set to be created from.",
+      "required": false,
+      "type": "string",
+      "default": "JSON",
+      "enum": [
+        "JSON",
+        "ZIP"
+      ],
+      "x-ms-enum": {
+        "name": "DataFormatType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "JSON",
+            "description": "JSON style format."
+          },
+          {
+            "value": "ZIP",
+            "description": "ZIP style format."
+          }
+        ]
+      }
+    },
+    "StyleFormat": {
+      "name": "styleFormat",
+      "in": "query",
+      "description": " Defines the type of JSON object that is exported.",
+      "required": false,
+      "type": "string",
+      "default": "mapbox",
+      "enum": [
+        "mapbox",
+        "azureMapsStyleRecipe"
+      ],
+      "x-ms-enum": {
+        "name": "StyleFormatType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "mapbox",
+            "description": "mapbox style data format."
+          }
+        ]
+      }
+    },
+    "Alias": {
+      "name": "alias",
+      "description": "The alias of the style set.",
+      "type": "string",
+      "in": "query",
+      "required": false
+    }
+  },
+  "paths": {
+    "/styles/stylesets": {
+      "post": {
+        "x-publish": false,
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe StyleSet Create API allows the caller to create a styleSet from their styleSet configuration file.\n\n## Submit Create Request\n\nTo create your styleset you will make a `POST` request with a styleSet configration file. \n\nThe Create StyleSet API is a \n[long-running request](https://aka.ms/am-creator-lrt-v2).",
+        "operationId": "StyleSet_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Import Style by providing a azure maps or mapbox style json file": {
+            "$ref": "./examples/StyleSet_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/DataFormat"
+          },
+          {
+            "$ref": "#/parameters/Alias"
+          },
+          {
+            "$ref": "#/parameters/DescriptionStyleSet"
+          }
+        ],
+        "responses": {
+          "202": {
+            "$ref": "#/responses/202Accepted"
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      },
+      "get": {
+        "x-publish": false,
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a list of all styleSets created.   \n<br>",
+        "operationId": "StyleSet_List",
+        "x-ms-examples": {
+          "Get a list of all styleSets": {
+            "$ref": "./examples/StyleSet_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List styleSets request completed successfully. The response body contains a list of all styleSets.",
+            "schema": {
+              "$ref": "#/definitions/StyleSetListResult"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/styles/stylesets/{styleSetId}": {
+      "get": {
+        "x-publish": false,
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a styleSet.",
+        "operationId": "StyleSet_Get",
+        "x-ms-examples": {
+          "Gets the details for a single styleSet": {
+            "$ref": "./examples/StyleSet_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/StyleSetId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get styleSet request completed successfully. The response body contains a single styleSet.",
+            "schema": {
+              "$ref": "#/definitions/StyleSetListItem"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      },
+      "delete": {
+        "x-publish": false,
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to delete a created styleSet.<br>    \nYou can use this API if a style is no longer needed. \n\n### Submit Delete Request\n\nTo delete your content you will issue a `DELETE` request where the path will contain the `styleSetId` of the styleSet to delete.<br>    \n\n#### Delete request \"Successful\"\n\nThe StyleSet Delete API returns a HTTP `204 No Content` response with an empty body, if the style was deleted successfully.<br>    \n\n#### Delete request \"Failed\"\n\nA HTTP `400 Bad Request` error response will be returned if the styleSet with the passed-in `styleSetId` is not found. \n\nHere is a sample error response:\n\n<br>\n\n```json\n{\n  \"error\": {\n      \"code\": \"400 BadRequest\",\n      \"message\": \"Bad request - StyleSet Id: d85b5b27-5fc4-4599-8b50-47160e90f8ce does not exist.\"\n  }\n}\n```",
+        "operationId": "StyleSet_Delete",
+        "x-ms-examples": {
+          "Delete an imported style": {
+            "$ref": "./examples/StyleSet_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/StyleSetId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "StyleSet delete request completed successfully."
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/styles/stylesets/{styleSetId}/{styleName}": {
+      "get": {
+        "x-publish": false,
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to export a composed style defined in the styleSet.",
+        "operationId": "StyleSet_GetStyle",
+        "x-ms-examples": {
+          "Gets the details for a single style in a styleSet": {
+            "$ref": "./examples/StyleSet_GetStyle.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/StyleSetId"
+          },
+          {
+            "$ref": "#/parameters/StyleName"
+          },
+          {
+            "$ref": "#/parameters/StyleFormat"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get composed styleSet style request completed successfully. The response body contains a single style.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/styles/operations/{operationId}": {
+      "get": {
+        "x-publish": false,
+        "description": "This path will be obtained from a call to create a styleSet.  While in progress, an http200 will be returned with no extra headers -  followed by an http200 with Resource-Location header once successfully completed.",
+        "operationId": "StyleSet_GetOperation",
+        "x-ms-examples": {
+          "Get the status of an operation which is still running": {
+            "$ref": "./examples/StyleSet_GetOperationStillRunning.json"
+          },
+          "Get the status of an operation which has finished successfully": {
+            "$ref": "./examples/StyleSet_GetOperation.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/StyleSetOperationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/200Async"
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "StyleSetListResult": {
+      "description": "The response model for the StyleSet List API. Returns a list of all styleSets.",
+      "type": "object",
+      "properties": {
+        "styleSets": {
+          "description": "A list of all styleSets.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/StyleSetListItem"
+          }
+        },
+        "nextLink": {
+          "description": "If present, the location of the next page of data.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "StyleObject": {
+      "description": "A style object.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name for the style.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "The display name for the style.",
+          "type": "string",
+          "readOnly": true
+        },
+        "theme": {
+          "description": "The theme for the style.",
+          "type": "string",
+          "readOnly": true
+        },
+        "thumbnail": {
+          "description": "The thumbnail for the style.",
+          "type": "object",
+          "readOnly": true
+        },
+        "url": {
+          "description": "The url for the style.",
+          "type": "object",
+          "readOnly": true
+        }
+      }
+    },
+    "StyleSetListItem": {
+      "description": "Detail information for the data.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The unique styleSet id for the styleSet.",
+          "type": "string",
+          "readOnly": true
+        },
+        "defaultStyle": {
+          "description": "The default style used for the style set.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "The version of the style set.",
+          "type": "number",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The description the caller provided when creating the styleSet. Maximum length 1024 characters.",
+          "type": "string",
+          "readOnly": true
+        },
+        "created": {
+          "description": "The creation date and time of this styleSet.",
+          "type": "string",
+          "readOnly": true
+        },
+        "styles": {
+          "description": "The available styles for the styleset.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/StyleObject"
+          }
+        }
+      }
+    },
+    "StyleSet": {
+      "description": "Detail information for the data.",
+      "type": "object",
+      "properties": {
+        "styleSetId": {
+          "description": "The unique styleSet id for the styleSet.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The description the caller provided when creating the styleSet. Maximum length 1024 characters.",
+          "type": "string",
+          "readOnly": true
+        },
+        "created": {
+          "description": "The creation date and time of this styleSet.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  }
+}
