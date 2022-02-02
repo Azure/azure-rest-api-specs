@@ -481,6 +481,9 @@
           "items": {
             "$ref": "#/definitions/ResourceProviderOperationDefinition"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         },
         "nextLink": {
@@ -642,14 +645,18 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AADBasedSecurityPrincipal"
-          }
+          },
+          "x-ms-identifiers": [
+            "principalId"
+          ]
         },
         "certBasedSecurityPrincipals": {
           "description": "Array of all cert based Security Principals.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CertBasedSecurityPrincipal"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
