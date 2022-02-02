@@ -7,8 +7,8 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/serviceLimitsRequests/2B5C8515-37D8-4B6A-879B-CD641A2CF605",
-        "type": "Microsoft.Quota/serviceLimitsRequests",
+        "id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/quotaRequests/2B5C8515-37D8-4B6A-879B-CD641A2CF605",
+        "type": "Microsoft.Quota/quotaRequests",
         "name": "2B5C8515-37D8-4B6A-879B-CD641A2CF605",
         "properties": {
           "requestSubmitTime": "2019-08-19T19:23:17.904Z",
@@ -16,17 +16,11 @@
           "provisioningState": "Succeeded",
           "value": [
             {
-              "limit": 200,
-              "subRequestId": "AD07450A-DE86-4FD3-859B-107BEF218C4C",
-              "name": {
-                "value": "standardHCSFamily",
-                "localizedValue": "Standard HCS Family vCPUs"
+              "limit": {
+                "limitObjectType": "LimitValue",
+                "value": 50
               },
-              "message": "Request completed",
-              "provisioningState": "Succeeded"
-            },
-            {
-              "limit": 50,
+              "unit": "Count",
               "name": {
                 "value": "standardNCPromoFamily",
                 "localizedValue": "Standard NC Promo Family vCPUs"

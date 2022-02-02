@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "resourceGroupName": "scgroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2021-05-01",
+    "cacheName": "sc1",
+    "storageTargetName": "st1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "st1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/caches/sc1/storagetargets/st1",
+        "type": "Microsoft.StorageCache/Cache/StorageTarget",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "properties": {
+          "junctions": [
+            {
+              "namespacePath": "/path/on/cache",
+              "targetPath": "/path/on/exp1",
+              "nfsExport": "exp1",
+              "nfsAccessPolicy": "default"
+            },
+            {
+              "namespacePath": "/path2/on/cache",
+              "targetPath": "/path2/on/exp2",
+              "nfsExport": "exp2",
+              "nfsAccessPolicy": "default"
+            }
+          ],
+          "targetType": "nfs3",
+          "nfs3": {
+            "target": "10.0.44.44",
+            "usageModel": "READ_HEAVY_FREQ"
+          }
+        }
+      }
+    }
+  }
+}

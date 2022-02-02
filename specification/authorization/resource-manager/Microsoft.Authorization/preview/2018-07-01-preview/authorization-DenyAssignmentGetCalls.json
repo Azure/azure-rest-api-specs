@@ -349,6 +349,7 @@
           "description": "Return all deny assignments where the specified principal is listed either in the principals list or exclude principals list of deny assignments."
         }
       },
+      "type": "object",
       "description": "Deny Assignments filter"
     },
     "DenyAssignmentProperties": {
@@ -379,14 +380,14 @@
         "principals": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Principal"
+            "$ref": "../2020-10-01-preview/common-types.json#/definitions/Principal"
           },
           "description": "Array of principals to which the deny assignment applies."
         },
         "excludePrincipals": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Principal"
+            "$ref": "../2020-10-01-preview/common-types.json#/definitions/Principal"
           },
           "description": "Array of principals to which the deny assignment does not apply."
         },
@@ -395,6 +396,7 @@
           "description": "Specifies whether this deny assignment was created by Azure and cannot be edited or deleted."
         }
       },
+      "type": "object",
       "description": "Deny assignment properties."
     },
     "DenyAssignment": {
@@ -420,6 +422,7 @@
           "description": "Deny assignment properties."
         }
       },
+      "type": "object",
       "description": "Deny Assignment"
     },
     "DenyAssignmentListResult": {
@@ -436,6 +439,7 @@
           "description": "The URL to use for getting the next set of results."
         }
       },
+      "type": "object",
       "description": "Deny assignment list operation result."
     },
     "DenyAssignmentPermission": {
@@ -469,22 +473,8 @@
           "description": "Data actions to exclude from that the deny assignment does not grant access."
         }
       },
+      "type": "object",
       "description": "Deny assignment permissions."
-    },
-    "Principal": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Object ID of the Azure AD principal (user, group, or service principal) to which the deny assignment applies. An empty guid '00000000-0000-0000-0000-000000000000' as principal id and principal type as 'Everyone' represents all users, groups and service principals."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Type of object represented by principal id (user, group, or service principal). An empty guid '00000000-0000-0000-0000-000000000000' as principal id and principal type as 'Everyone' represents all users, groups and service principals."
-        }
-      },
-      "description": "Deny assignment principal."
     }
   },
   "parameters": {
@@ -494,6 +484,7 @@
       "required": true,
       "type": "string",
       "description": "The namespace of the resource provider.",
+      "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "method"
     },
     "FilterParameter": {
