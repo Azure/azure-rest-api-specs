@@ -1,0 +1,425 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-06-01-preview",
+    "title": "ArtifactsClient",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/sparkJobDefinitions": {
+      "get": {
+        "tags": [
+          "sparkJobDefinitions"
+        ],
+        "operationId": "SparkJobDefinition_GetSparkJobDefinitionsByWorkspace",
+        "x-ms-examples": {
+          "SparkJobDefinitions_ListByWorkspace": {
+            "$ref": "./examples/SparkJobDefinitions_ListByWorkspace.json"
+          }
+        },
+        "description": "Lists spark job definitions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SparkJobDefinitionsListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/sparkJobDefinitions/{sparkJobDefinitionName}": {
+      "put": {
+        "tags": [
+          "sparkJobDefinitions"
+        ],
+        "operationId": "SparkJobDefinition_CreateOrUpdateSparkJobDefinition",
+        "x-ms-examples": {
+          "SparkJobDefinitions_Create": {
+            "$ref": "./examples/SparkJobDefinitions_Create.json"
+          },
+          "SparkJobDefinitions_Update": {
+            "$ref": "./examples/SparkJobDefinitions_Update.json"
+          }
+        },
+        "description": "Creates or updates a Spark Job Definition.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/sparkJobDefinitionName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the Spark Job Definition entity.  Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "sparkJobDefinition",
+            "description": "Spark Job Definition resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SparkJobDefinitionResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SparkJobDefinitionResource"
+            }
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "sparkJobDefinitions"
+        ],
+        "operationId": "SparkJobDefinition_GetSparkJobDefinition",
+        "x-ms-examples": {
+          "SparkJobDefinitions_Get": {
+            "$ref": "./examples/SparkJobDefinitions_Get.json"
+          }
+        },
+        "description": "Gets a Spark Job Definition.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/sparkJobDefinitionName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the Spark Job Definition entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SparkJobDefinitionResource"
+            }
+          },
+          "304": {
+            "description": "Not modified."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "sparkJobDefinitions"
+        ],
+        "operationId": "SparkJobDefinition_DeleteSparkJobDefinition",
+        "x-ms-examples": {
+          "SparkJobDefinitions_Delete": {
+            "$ref": "./examples/SparkJobDefinitions_Delete.json"
+          }
+        },
+        "description": "Deletes a Spark Job Definition.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/sparkJobDefinitionName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/sparkJobDefinitions/{sparkJobDefinitionName}/execute": {
+      "post": {
+        "tags": [
+          "sparkJobDefinitions"
+        ],
+        "operationId": "SparkJobDefinition_ExecuteSparkJobDefinition",
+        "x-ms-examples": {
+          "SparkJobDefinitions_Execute": {
+            "$ref": "./examples/SparkJobDefinitions_Execute.json"
+          }
+        },
+        "description": "Executes the spark job definition.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/sparkJobDefinitionName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "schema": {
+              "$ref": "../2019-11-01-preview/sparkJob.json#/definitions/SparkBatchJob"
+            }
+          },
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "../2019-11-01-preview/sparkJob.json#/definitions/SparkBatchJob"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/sparkJobDefinitions/{sparkJobDefinitionName}/rename": {
+      "post": {
+        "tags": [
+          "sparkJobDefinitions"
+        ],
+        "operationId": "SparkJobDefinition_RenameSparkJobDefinition",
+        "x-ms-examples": {
+          "SparkJobDefinitions_Rename": {
+            "$ref": "./examples/SparkJobDefinitions_Rename.json"
+          }
+        },
+        "description": "Renames a sparkJobDefinition.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/sparkJobDefinitionName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "description": "proposed new name.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "artifacts.json#/definitions/ArtifactRenameRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/debugSparkJobDefinition": {
+      "post": {
+        "tags": [
+          "sparkJobDefinitions"
+        ],
+        "operationId": "SparkJobDefinition_DebugSparkJobDefinition",
+        "x-ms-examples": {
+          "SparkJobDefinitions_Debug": {
+            "$ref": "./examples/SparkJobDefinitions_Debug.json"
+          }
+        },
+        "description": "Debug the spark job definition.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "sparkJobDefinitionAzureResource",
+            "description": "Spark Job Definition resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SparkJobDefinitionResource"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "schema": {
+              "$ref": "../2019-11-01-preview/sparkJob.json#/definitions/SparkBatchJob"
+            }
+          },
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "../2019-11-01-preview/sparkJob.json#/definitions/SparkBatchJob"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SparkJobDefinitionsListResponse": {
+      "description": "A list of spark job definitions resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of spark job definitions.",
+          "items": {
+            "$ref": "#/definitions/SparkJobDefinitionResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "SparkJobDefinitionResource": {
+      "description": "Spark job definition resource type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "artifacts.json#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/SparkJobDefinition.json#/definitions/SparkJobDefinition",
+          "description": "Properties of spark job definition."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    }
+  },
+  "parameters": {
+    "workspaceName": {
+      "name": "workspaceName",
+      "description": "The workspace name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The Synapse client API Version."
+    },
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "The workspace development endpoint, for example https://myworkspace.dev.azuresynapse.net.",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
+    "sparkJobDefinitionName": {
+      "name": "sparkJobDefinitionName",
+      "description": "The spark job definition name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -30,10 +30,10 @@
         "description": "Returns a list of disks.",
         "parameters": [
           {
-            "$ref": "Disks.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../preview/2015-12-01-preview/Compute.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "Disks.json#/parameters/LocationParameter"
+            "$ref": "../../preview/2015-12-01-preview/Compute.json#/parameters/LocationParameter"
           },
           {
             "$ref": "Disks.json#/parameters/UserSubscriptionIdParameter"
@@ -57,7 +57,7 @@
             "$ref": "Disks.json#/parameters/DiskStartParameter"
           },
           {
-            "$ref": "Disks.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -93,10 +93,10 @@
         "description": "Returns the disk.",
         "parameters": [
           {
-            "$ref": "Disks.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../preview/2015-12-01-preview/Compute.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "Disks.json#/parameters/LocationParameter"
+            "$ref": "../../preview/2015-12-01-preview/Compute.json#/parameters/LocationParameter"
           },
           {
             "$ref": "Disks.json#/parameters/DiskIdParameter"
@@ -105,7 +105,7 @@
             "$ref": "Disks.json#/parameters/DiskSizeDetailParameter"
           },
           {
-            "$ref": "Disks.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -327,29 +327,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "Subscription credentials that uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
-      "required": true,
-      "type": "string"
-    },
-    "LocationParameter": {
-      "description": "Location of the resource.",
-      "name": "location",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "description": "Client API Version.",
-      "required": true,
-      "type": "string",
-      "default": "2021-04-01"
-    },
     "UserSubscriptionIdParameter": {
       "description": "User Subscription Id which the resource belongs to.",
       "name": "userSubscriptionId",

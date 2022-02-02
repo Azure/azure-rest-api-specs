@@ -1,0 +1,615 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-10-01-preview",
+    "title": "LabServicesClient",
+    "description": "REST API for managing Azure Lab Services virtual machines."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/virtualMachines": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "Labs.json#/parameters/LabNameParameter"
+        },
+        {
+          "in": "query",
+          "name": "$filter",
+          "type": "string",
+          "description": "The filter to apply to the operation."
+        }
+      ],
+      "get": {
+        "tags": [
+          "VirtualMachine"
+        ],
+        "summary": "Get all virtual machines for a lab.",
+        "description": "Returns a list of all virtual machines for a lab.",
+        "operationId": "VirtualMachines_ListByLab",
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains all virtual machines for the given lab.",
+            "schema": {
+              "$ref": "#/definitions/PagedVirtualMachines"
+            }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "listVirtualMachine": {
+            "$ref": "./examples/VirtualMachines/listVirtualMachine.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/virtualMachines/{virtualMachineName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "Labs.json#/parameters/LabNameParameter"
+        },
+        {
+          "$ref": "#/parameters/VirtualMachineNameParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "VirtualMachine"
+        ],
+        "summary": "Get a lab virtual machine.",
+        "description": "Returns the properties for a lab virtual machine.",
+        "operationId": "VirtualMachines_Get",
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the lab virtual machine.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "getVirtualMachine": {
+            "$ref": "./examples/VirtualMachines/getVirtualMachine.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/virtualMachines/{virtualMachineName}/start": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "Labs.json#/parameters/LabNameParameter"
+        },
+        {
+          "$ref": "#/parameters/VirtualMachineNameParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "VirtualMachine"
+        ],
+        "summary": "Start a lab virtual machine.",
+        "description": "Action to start a lab virtual machine.",
+        "operationId": "VirtualMachines_Start",
+        "responses": {
+          "200": {
+            "description": "The request was completed."
+          },
+          "202": {
+            "description": "The request was accepted."
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "startVirtualMachine": {
+            "$ref": "./examples/VirtualMachines/startVirtualMachine.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/virtualMachines/{virtualMachineName}/stop": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "Labs.json#/parameters/LabNameParameter"
+        },
+        {
+          "$ref": "#/parameters/VirtualMachineNameParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "VirtualMachine"
+        ],
+        "summary": "Stop a lab virtual machine.",
+        "description": "Action to stop a lab virtual machine.",
+        "operationId": "VirtualMachines_Stop",
+        "responses": {
+          "200": {
+            "description": "The request was completed."
+          },
+          "202": {
+            "description": "The request was accepted."
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "stopVirtualMachine": {
+            "$ref": "./examples/VirtualMachines/stopVirtualMachine.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/virtualMachines/{virtualMachineName}/reimage": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "Labs.json#/parameters/LabNameParameter"
+        },
+        {
+          "$ref": "#/parameters/VirtualMachineNameParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "VirtualMachine"
+        ],
+        "summary": "Re-image a lab virtual machine.",
+        "description": "Re-image a lab virtual machine. The virtual machine will be deleted and recreated using the latest published snapshot of the reference environment of the lab.",
+        "operationId": "VirtualMachines_Reimage",
+        "responses": {
+          "200": {
+            "description": "The request was completed."
+          },
+          "202": {
+            "description": "The request was accepted."
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "reimageVirtualMachine": {
+            "$ref": "./examples/VirtualMachines/reimageVirtualMachine.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/virtualMachines/{virtualMachineName}/redeploy": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "Labs.json#/parameters/LabNameParameter"
+        },
+        {
+          "$ref": "#/parameters/VirtualMachineNameParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "VirtualMachine"
+        ],
+        "summary": "Redeploy a lab virtual machine to a different compute node. For troubleshooting connectivity.",
+        "description": "Action to redeploy a lab virtual machine to a different compute node. For troubleshooting connectivity.",
+        "operationId": "VirtualMachines_Redeploy",
+        "responses": {
+          "200": {
+            "description": "The request was completed."
+          },
+          "202": {
+            "description": "The request was accepted."
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "redeployVirtualMachine": {
+            "$ref": "./examples/VirtualMachines/redeployVirtualMachine.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/virtualMachines/{virtualMachineName}/resetPassword": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "Labs.json#/parameters/LabNameParameter"
+        },
+        {
+          "$ref": "#/parameters/VirtualMachineNameParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "VirtualMachine"
+        ],
+        "summary": "Reset a lab virtual machine password.",
+        "description": "Resets a lab virtual machine password.",
+        "operationId": "VirtualMachines_ResetPassword",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResetPasswordBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was completed."
+          },
+          "202": {
+            "description": "The request was accepted."
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "resetPasswordVirtualMachine": {
+            "$ref": "./examples/VirtualMachines/resetPasswordVirtualMachine.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "VirtualMachine": {
+      "description": "A lab virtual machine resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "System data of the Lab virtual machine.",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Virtual machine resource properties",
+          "$ref": "#/definitions/VirtualMachineProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "PagedVirtualMachines": {
+      "description": "Paged list of lab services virtual machines.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The array page of virtual machine results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachine"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "The link to get the next page of virtual machine results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualMachineProperties": {
+      "description": "Virtual machine resource properties",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Current provisioning state of the virtual machine.",
+          "$ref": "LabServices.json#/definitions/provisioningState",
+          "readOnly": true
+        },
+        "state": {
+          "description": "The current state of the virtual machine",
+          "$ref": "#/definitions/VirtualMachineState",
+          "readOnly": true
+        },
+        "connectionProfile": {
+          "description": "Profile for information about connecting to the virtual machine.",
+          "$ref": "#/definitions/VirtualMachineConnectionProfile",
+          "readOnly": true
+        },
+        "claimedByUserId": {
+          "description": "The lab user ID (not the PUID!) of who claimed the virtual machine.",
+          "type": "string",
+          "readOnly": true
+        },
+        "vmType": {
+          "description": "The type of this VM resource",
+          "$ref": "#/definitions/VirtualMachineType",
+          "readOnly": true
+        }
+      }
+    },
+    "ResetPasswordBody": {
+      "description": "Body of a reset password request.",
+      "type": "object",
+      "properties": {
+        "username": {
+          "description": "The user whose password is being reset",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "password": {
+          "description": "The password",
+          "type": "string",
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "username",
+        "password"
+      ]
+    },
+    "VirtualMachineState": {
+      "type": "string",
+      "enum": [
+        "Stopped",
+        "Starting",
+        "Running",
+        "Stopping",
+        "ResettingPassword",
+        "Reimaging",
+        "Redeploying"
+      ],
+      "description": "The state of a virtual machine.",
+      "x-ms-enum": {
+        "name": "VirtualMachineState",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "Stopped",
+            "description": "The VM is currently stopped."
+          },
+          {
+            "value": "Starting",
+            "description": "The VM is starting."
+          },
+          {
+            "value": "Running",
+            "description": "The VM is running."
+          },
+          {
+            "value": "Stopping",
+            "description": "The VM is stopping."
+          },
+          {
+            "value": "ResettingPassword",
+            "description": "The VM password is being reset."
+          },
+          {
+            "value": "Reimaging",
+            "description": "The VM is being reimaged."
+          },
+          {
+            "value": "Redeploying",
+            "description": "The VM is being redeployed."
+          }
+        ]
+      }
+    },
+    "VirtualMachineConnectionProfile": {
+      "description": "The connection information for the virtual machine",
+      "type": "object",
+      "properties": {
+        "privateIpAddress": {
+          "description": "The private IP address of the virtual machine.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sshAuthority": {
+          "description": "Port and host name separated by semicolon for connecting via SSH protocol to the virtual machine.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sshInBrowserUrl": {
+          "description": "URL for connecting via SSH protocol to the virtual machine in browser.",
+          "$ref": "LabServices.json#/definitions/url",
+          "readOnly": true
+        },
+        "rdpAuthority": {
+          "description": "Port and host name separated by semicolon for connecting via RDP protocol to the virtual machine.",
+          "type": "string",
+          "readOnly": true
+        },
+        "rdpInBrowserUrl": {
+          "description": "URL for connecting via RDP protocol to the virtual machine in browser.",
+          "$ref": "LabServices.json#/definitions/url",
+          "readOnly": true
+        },
+        "adminUsername": {
+          "description": "The username used to log on to the virtual machine as admin.",
+          "type": "string",
+          "readOnly": true
+        },
+        "nonAdminUsername": {
+          "description": "The username used to log on to the virtual machine as non-admin, if one exists.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualMachineType": {
+      "type": "string",
+      "enum": [
+        "User",
+        "Template"
+      ],
+      "description": "The type of the lab virtual machine.",
+      "x-ms-enum": {
+        "name": "VirtualMachineType",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "User",
+            "description": "A user VM"
+          },
+          {
+            "value": "Template",
+            "description": "A template VM"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "VirtualMachineNameParameter": {
+      "name": "virtualMachineName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the virtual machine that uniquely identifies it within the containing lab. Used in resource URIs.",
+      "pattern": "^[-\\w\\\\._\\\\(\\\\)]+$",
+      "minLength": 1,
+      "maxLength": 100,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -67,7 +67,7 @@
             "description": "Parameters for the role eligibility schedule request."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -113,7 +113,7 @@
             "description": "The name (guid) of the role eligibility schedule request to get."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -161,7 +161,7 @@
             "description": "The filter to apply on the operation. Use $filter=atScope() to return all role eligibility schedule requests at or above the scope. Use $filter=principalId eq {id} to return all role eligibility schedule requests at, above or below the scope for the specified principal. Use $filter=asRequestor() to return all role eligibility schedule requests requested by the current user. Use $filter=asTarget() to return all role eligibility schedule requests created for the current user. Use $filter=asApprover() to return all role eligibility schedule requests where the current user is an approver."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -213,7 +213,7 @@
             "description": "The name of the role eligibility request to cancel."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -255,6 +255,7 @@
           "description": "Returns role eligibility requests of specific status."
         }
       },
+      "type": "object",
       "description": "Role eligibility schedule request filter"
     },
     "RoleEligibilityScheduleRequestProperties": {
@@ -280,17 +281,11 @@
             "User",
             "Group",
             "ServicePrincipal",
-            "Unknown",
-            "DirectoryRoleTemplate",
             "ForeignGroup",
-            "Application",
-            "MSI",
-            "DirectoryObjectOrGroup",
-            "Everyone",
             "Device"
           ],
           "x-ms-enum": {
-            "name": "PrincipalType",
+            "name": "principalType",
             "modelAsString": true
           }
         },
@@ -383,9 +378,11 @@
                   "description": "Duration of the role eligibility schedule in TimeSpan."
                 }
               },
+              "type": "object",
               "description": "Expiration of the role eligibility schedule"
             }
           },
+          "type": "object",
           "description": "Schedule info of the role eligibility schedule"
         },
         "targetRoleEligibilityScheduleId": {
@@ -411,6 +408,7 @@
               "description": "Ticket system name for the role eligibility"
             }
           },
+          "type": "object",
           "description": "Ticket Info of the role eligibility"
         },
         "condition": {
@@ -444,6 +442,7 @@
         "principalId",
         "requestType"
       ],
+      "type": "object",
       "description": "Role eligibility schedule request properties with scope."
     },
     "RoleEligibilityScheduleRequest": {
@@ -469,6 +468,7 @@
           "description": "Role eligibility schedule request properties."
         }
       },
+      "type": "object",
       "description": "Role Eligibility schedule request"
     },
     "RoleEligibilityScheduleRequestListResult": {
@@ -485,6 +485,7 @@
           "description": "The URL to use for getting the next set of results."
         }
       },
+      "type": "object",
       "description": "Role eligibility schedule request list operation result."
     },
     "CloudError": {
@@ -494,6 +495,7 @@
           "$ref": "#/definitions/CloudErrorBody"
         }
       },
+      "type": "object",
       "description": "An error response from the service."
     },
     "CloudErrorBody": {
@@ -508,6 +510,7 @@
           "description": "A message describing the error, intended to be suitable for display in a user interface."
         }
       },
+      "type": "object",
       "description": "An error response from the service."
     },
     "ExpandedProperties": {
@@ -570,16 +573,8 @@
             }
           }
         }
-      }
-    }
-  },
-  "parameters": {
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to use for this operation."
+      },
+      "type": "object"
     }
   }
 }

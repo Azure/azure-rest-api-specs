@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testRg",
+    "vaultName": "testvault",
+    "fabricName": "Azure",
+    "api-version": "2021-12-01",
+    "$filter": "backupManagementType eq 'AzureStorage' and workloadType eq 'AzureFileShare'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.RecoveryServices/vaults/testvault/backupFabrics/Azure/protectableContainers/StorageContainer;storage;test-rg;teststorage",
+            "name": "StorageContainer;storage;test-rg;testst",
+            "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectableContainers",
+            "properties": {
+              "friendlyName": "teststorage",
+              "backupManagementType": "AzureStorage",
+              "protectableContainerType": "StorageContainer",
+              "healthStatus": "Healthy",
+              "containerId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Storage/storageAccounts/teststorage"
+            }
+          },
+          {
+            "id": "/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.RecoveryServices/vaults/testvault/backupFabrics/Azure/protectableContainers/StorageContainer;ClassicStorage;test-rg;teststorage",
+            "name": "StorageContainer;ClassicStorage;test-rg;teststorage",
+            "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectableContainers",
+            "properties": {
+              "friendlyName": "teststorage",
+              "backupManagementType": "AzureStorage",
+              "protectableContainerType": "StorageContainer",
+              "healthStatus": "Healthy",
+              "containerId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ClassicStorage/storageAccounts/teststorage"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
