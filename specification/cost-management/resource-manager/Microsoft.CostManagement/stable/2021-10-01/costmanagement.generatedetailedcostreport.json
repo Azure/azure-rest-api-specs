@@ -1,0 +1,408 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-10-01",
+    "title": "CostManagementClient"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{scope}/providers/Microsoft.CostManagement/generateDetailedCostReport": {
+      "post": {
+        "tags": [
+          "UsageDetails"
+        ],
+        "operationId": "GenerateDetailedCostReport_CreateOperation",
+        "description": "Generates the detailed cost report for provided date range, billing period(Only enterprise customers) or Invoice Id asynchronously at a certain scope. Call returns a 202 with header Azure-Consumption-AsyncOperation providing a link to the operation created. A call on the operation will provide the status and if the operation is completed the blob file where generated detailed cost report is being stored.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "GenerateDetailedCostReportByBillingProfileAndInvoiceId": {
+            "$ref": "./examples/GenerateDetailedCostReportByBillingProfileAndInvoiceId.json"
+          },
+          "GenerateDetailedCostReportBySubscriptionAndTimePeriod": {
+            "$ref": "./examples/GenerateDetailedCostReportBySubscriptionAndTimePeriod.json"
+          },
+          "GenerateDetailedCostReportByCustomerAndTimePeriod": {
+            "$ref": "./examples/GenerateDetailedCostReportByCustomerAndTimePeriod.json"
+          },
+          "GenerateDetailedCostReportByBillingProfileAndInvoiceIdAndCustomerId": {
+            "$ref": "./examples/GenerateDetailedCostReportByBillingProfileAndInvoiceIdAndCustomerId.json"
+          },
+          "GenerateDetailedCostReportByBillingAccountLegacyAndBillingPeriod": {
+            "$ref": "./examples/GenerateDetailedCostReportByBillingAccountLegacyAndBillingPeriod.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeUsageDetailsParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateDetailedCostReportDefinition"
+            },
+            "description": "Parameters supplied to the Create detailed cost report operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request processing completed.",
+            "schema": {
+              "$ref": "#/definitions/GenerateDetailedCostReportOperationResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. Request will be processed. Use the Location header to check the status.",
+            "headers": {
+              "Location": {
+                "description": "The URL to check the result of the asynchronous operation.",
+                "type": "string"
+              },
+              "Azure-Consumption-AsyncOperation": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GenerateDetailedCostReportErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.CostManagement/operationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "GenerateDetailedCostReportOperationResults"
+        ],
+        "operationId": "GenerateDetailedCostReportOperationResults_Get",
+        "description": "Get the result of the specified operation. This link is provided in the GenerateDetailedCostReport creation request response header.",
+        "x-ms-examples": {
+          "Get details of the operation result": {
+            "$ref": "./examples/GenerateDetailedCostReportOperationResultsBySubscriptionScope.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The target operation Id."
+          },
+          {
+            "$ref": "#/parameters/scopeUsageDetailsParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GenerateDetailedCostReportOperationResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. The operation is ongoing."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.CostManagement/operationStatus/{operationId}": {
+      "get": {
+        "tags": [
+          "GenerateDetailedCostReportOperationStatus"
+        ],
+        "operationId": "GenerateDetailedCostReportOperationStatus_Get",
+        "description": "Get the status of the specified operation. This link is provided in the GenerateDetailedCostReport creation request response header.",
+        "x-ms-examples": {
+          "Get details of the operation status": {
+            "$ref": "./examples/GenerateDetailedCostReportOperationStatusBySubscriptionScope.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The target operation Id."
+          },
+          {
+            "$ref": "#/parameters/scopeUsageDetailsParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GenerateDetailedCostReportOperationStatuses"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "GenerateDetailedCostReportErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 413 Request Entity Too Large - Request is throttled. The amount of data required to fulfill the request exceeds the maximum size permitted of 2Gb. Please utilize our Exports feature instead. \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"x-ms-ratelimit-microsoft.consumption-retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "GenerateDetailedCostReportDefinition": {
+      "description": "The definition of a cost detailed report.",
+      "properties": {
+        "metric": {
+          "description": "The type of the detailed report. By default ActualCost is provided",
+          "type": "string",
+          "enum": [
+            "ActualCost",
+            "AmortizedCost"
+          ],
+          "x-ms-enum": {
+            "name": "GenerateDetailedCostReportMetricType",
+            "modelAsString": true
+          }
+        },
+        "timePeriod": {
+          "description": "Has time period for pulling data for the cost detailed report. Can only have one of either timePeriod or invoiceId or billingPeriod parameters. If none provided current month cost is provided.",
+          "$ref": "#/definitions/GenerateDetailedCostReportTimePeriod"
+        },
+        "billingPeriod": {
+          "description": "Billing Period in YearMonth(e.g. 202008) format. Only for legacy enterprise customers can use this. Can only have one of either timePeriod or invoiceId or billingPeriod parameters. If none provided current month cost is provided.",
+          "type": "string"
+        },
+        "invoiceId": {
+          "description": "Invoice Id for PayAsYouGo customers and Modern billing profile scope. Can only have one of either timePeriod or invoiceId or billingPeriod parameters. If none provided current month cost is provided.",
+          "type": "string"
+        },
+        "customerId": {
+          "description": "Customer Id for Modern (Invoice Id and billing profile is also required for this).",
+          "type": "string"
+        }
+      }
+    },
+    "GenerateDetailedCostReportTimePeriod": {
+      "description": "The start and end date for pulling data for the cost detailed report.",
+      "properties": {
+        "start": {
+          "description": "The start date to pull data from. example format 2020-03-15",
+          "type": "string"
+        },
+        "end": {
+          "description": "The end date to pull data to. example format 2020-03-15",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ]
+    },
+    "GenerateDetailedCostReportOperationStatuses": {
+      "description": "The status of the long running operation for cost detailed report.",
+      "properties": {
+        "id": {
+          "description": "The id of the long running operation.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the long running operation.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the long running operation.",
+          "$ref": "#/definitions/Status"
+        },
+        "type": {
+          "description": "The type of the long running operation.",
+          "type": "string"
+        },
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorDetails"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "description": "The properties of the resource generated.",
+          "$ref": "#/definitions/DownloadURL"
+        }
+      }
+    },
+    "GenerateDetailedCostReportOperationResult": {
+      "description": "The result of the long running operation for cost detailed report.",
+      "properties": {
+        "id": {
+          "description": "The id of the long running operation.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the long running operation.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the long running operation.",
+          "type": "string"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "description": "The properties of the resource generated.",
+          "$ref": "#/definitions/DownloadURL"
+        }
+      }
+    },
+    "DownloadURL": {
+      "description": "The URL to download the generated report.",
+      "properties": {
+        "downloadUrl": {
+          "description": "The URL to download the generated report.",
+          "type": "string"
+        },
+        "validTill": {
+          "description": "The time at which report URL becomes invalid/expires in UTC e.g. 2020-12-08T05:55:59.4394737Z.",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "ErrorDetails": {
+      "description": "The details of the error.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"x-ms-ratelimit-microsoft.consumption-retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "Status": {
+      "description": "The status of the long running operation.",
+      "properties": {
+        "status": {
+          "description": "The status of the long running operation.",
+          "type": "string",
+          "enum": [
+            "InProgress",
+            "Completed",
+            "Failed",
+            "Queued",
+            "NoDataFound",
+            "ReadyToDownload",
+            "TimedOut"
+          ],
+          "x-ms-enum": {
+            "name": "OperationStatusType",
+            "modelAsString": true
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request."
+    },
+    "scopeUsageDetailsParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with usage details operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope. Also, Modern Commerce Account scopes are '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for billingAccount scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope, and 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for partners.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}

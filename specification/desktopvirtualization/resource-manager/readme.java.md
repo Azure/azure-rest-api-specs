@@ -25,7 +25,7 @@ batch:
   - tag: package-2021-04-01-preview
 ```
 
-### Tag: package-2021-03-09-preview and java
+### Tag: package-2021-04-01-preview and java
 
 These settings apply only when `--tag=package-2021-04-01-preview --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.

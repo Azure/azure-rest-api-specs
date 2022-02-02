@@ -1,0 +1,370 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2021-06-30"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "MigrateMySqlAzureDbForMySqlSyncTaskInput": {
+      "type": "object",
+      "description": "Input for the task that migrates MySQL databases to Azure Database for MySQL for online migrations",
+      "properties": {
+        "sourceConnectionInfo": {
+          "description": "Connection information for source MySQL",
+          "$ref": "./Common.json#/definitions/MySqlConnectionInfo"
+        },
+        "targetConnectionInfo": {
+          "description": "Connection information for target Azure Database for MySQL",
+          "$ref": "./Common.json#/definitions/MySqlConnectionInfo"
+        },
+        "selectedDatabases": {
+          "type": "array",
+          "description": "Databases to migrate",
+          "items": {
+            "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlSyncDatabaseInput"
+          }
+        }
+      },
+      "required": [
+        "sourceConnectionInfo",
+        "targetConnectionInfo",
+        "selectedDatabases"
+      ]
+    },
+    "MigrateMySqlAzureDbForMySqlSyncTaskOutput": {
+      "type": "object",
+      "description": "Output for the task that migrates MySQL databases to Azure Database for MySQL for online migrations",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Result identifier",
+          "readOnly": true
+        },
+        "resultType": {
+          "description": "Result type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "resultType"
+      ],
+      "discriminator": "resultType"
+    },
+    "MigrateMySqlAzureDbForMySqlSyncTaskOutputMigrationLevel": {
+      "x-ms-discriminator-value": "MigrationLevelOutput",
+      "type": "object",
+      "properties": {
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration start time",
+          "readOnly": true
+        },
+        "endedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration end time",
+          "readOnly": true
+        },
+        "sourceServerVersion": {
+          "type": "string",
+          "description": "Source server version",
+          "readOnly": true
+        },
+        "sourceServer": {
+          "type": "string",
+          "description": "Source server name",
+          "readOnly": true
+        },
+        "targetServerVersion": {
+          "type": "string",
+          "description": "Target server version",
+          "readOnly": true
+        },
+        "targetServer": {
+          "type": "string",
+          "description": "Target server name",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlSyncTaskOutput"
+        }
+      ]
+    },
+    "MigrateMySqlAzureDbForMySqlSyncTaskOutputDatabaseLevel": {
+      "type": "object",
+      "x-ms-discriminator-value": "DatabaseLevelOutput",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Name of the database",
+          "readOnly": true
+        },
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration start time",
+          "readOnly": true
+        },
+        "endedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration end time",
+          "readOnly": true
+        },
+        "migrationState": {
+          "$ref": "./TasksCommon.json#/definitions/SyncDatabaseMigrationReportingState",
+          "description": "Migration state that this database is in",
+          "readOnly": true
+        },
+        "incomingChanges": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of incoming changes",
+          "readOnly": true
+        },
+        "appliedChanges": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of applied changes",
+          "readOnly": true
+        },
+        "cdcInsertCounter": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of cdc inserts",
+          "readOnly": true
+        },
+        "cdcDeleteCounter": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of cdc deletes",
+          "readOnly": true
+        },
+        "cdcUpdateCounter": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of cdc updates",
+          "readOnly": true
+        },
+        "fullLoadCompletedTables": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of tables completed in full load",
+          "readOnly": true
+        },
+        "fullLoadLoadingTables": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of tables loading in full load",
+          "readOnly": true
+        },
+        "fullLoadQueuedTables": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of tables queued in full load",
+          "readOnly": true
+        },
+        "fullLoadErroredTables": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of tables errored in full load",
+          "readOnly": true
+        },
+        "initializationCompleted": {
+          "type": "boolean",
+          "description": "Indicates if initial load (full load) has been completed",
+          "readOnly": true
+        },
+        "latency": {
+          "type": "integer",
+          "format": "int64",
+          "description": "CDC apply latency",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlSyncTaskOutput"
+        }
+      ]
+    },
+    "MigrateMySqlAzureDbForMySqlSyncTaskOutputTableLevel": {
+      "type": "object",
+      "x-ms-discriminator-value": "TableLevelOutput",
+      "properties": {
+        "tableName": {
+          "type": "string",
+          "description": "Name of the table",
+          "readOnly": true
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "Name of the database",
+          "readOnly": true
+        },
+        "cdcInsertCounter": {
+          "type": "string",
+          "description": "Number of applied inserts",
+          "readOnly": true
+        },
+        "cdcUpdateCounter": {
+          "type": "string",
+          "description": "Number of applied updates",
+          "readOnly": true
+        },
+        "cdcDeleteCounter": {
+          "type": "string",
+          "description": "Number of applied deletes",
+          "readOnly": true
+        },
+        "fullLoadEstFinishTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Estimate to finish full load",
+          "readOnly": true
+        },
+        "fullLoadStartedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Full load start time",
+          "readOnly": true
+        },
+        "fullLoadEndedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Full load end time",
+          "readOnly": true
+        },
+        "fullLoadTotalRows": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of rows applied in full load",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "./TasksCommon.json#/definitions/SyncTableMigrationState",
+          "description": "Current state of the table migration",
+          "readOnly": true
+        },
+        "totalChangesApplied": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of applied changes",
+          "readOnly": true
+        },
+        "dataErrorsCounter": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of data errors occurred",
+          "readOnly": true
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last modified time on target",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlSyncTaskOutput"
+        }
+      ]
+    },
+    "MigrateMySqlAzureDbForMySqlSyncTaskOutputError": {
+      "type": "object",
+      "x-ms-discriminator-value": "ErrorOutput",
+      "properties": {
+        "error": {
+          "$ref": "./Common.json#/definitions/ReportableException",
+          "description": "Migration error",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlSyncTaskOutput"
+        }
+      ]
+    },
+    "MigrateMySqlAzureDbForMySqlSyncTaskOutputDatabaseError": {
+      "type": "object",
+      "x-ms-discriminator-value": "DatabaseLevelErrorOutput",
+      "properties": {
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "./TasksCommon.json#/definitions/SyncMigrationDatabaseErrorEvent"
+          },
+          "description": "List of error events."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlSyncTaskOutput"
+        }
+      ]
+    },
+    "MigrateMySqlAzureDbForMySqlSyncDatabaseInput": {
+      "type": "object",
+      "description": "Database specific information for MySQL to Azure Database for MySQL migration task inputs",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the database"
+        },
+        "targetDatabaseName": {
+          "type": "string",
+          "description": "Name of target database. Note: Target database will be truncated before starting migration."
+        },
+        "migrationSetting": {
+          "type": "object",
+          "description": "Migration settings which tune the migration behavior",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sourceSetting": {
+          "type": "object",
+          "description": "Source settings to tune source endpoint migration behavior",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "targetSetting": {
+          "type": "object",
+          "description": "Target settings to tune target endpoint migration behavior",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "tableMap": {
+          "type": "object",
+          "description": "Mapping of source to target tables",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
