@@ -1048,6 +1048,54 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/listHosts": {
+      "post": {
+        "operationId": "Monitors_ListHosts",
+        "summary": "List the compute resources currently being monitored by the Dynatrace resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VMHostsListResponse"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Monitors"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Monitors_ListHosts_MaximumSet_Gen": {
+            "$ref": "./examples/Monitors_ListHosts_MaximumSet_Gen.json"
+          },
+          "Monitors_ListHosts_MinimumSet_Gen": {
+            "$ref": "./examples/Monitors_ListHosts_MinimumSet_Gen.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1143,6 +1191,27 @@
         }
       },
       "description": "Response of a list VM Host Update Operation.",
+      "required": [
+        "value",
+        "nextLink"
+      ]
+    },
+    "VMHostsListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VMInfo"
+          },
+          "description": "The items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "description": "Response of a list VM Host Operation.",
       "required": [
         "value",
         "nextLink"
@@ -1399,6 +1468,117 @@
         }
       },
       "description": "VM Resource Ids"
+    },
+    "VMInfo": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Azure VM resource ID"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the Dynatrace agent installed on the VM."
+        },
+        "monitoringType": {
+          "$ref": "#/definitions/MonitoringType",
+          "description": "The monitoring mode of OneAgent"
+        },
+        "autoUpdateSetting": {
+          "$ref": "#/definitions/AutoUpdateSetting",
+          "description": "Update settings of OneAgent."
+        },
+        "updateStatus": {
+          "$ref": "#/definitions/UpdateStatus",
+          "description": "The current update status of OneAgent."
+        },
+        "availabilityState": {
+          "$ref": "#/definitions/AvailabilityState",
+          "description": "The availability state of OneAgent."
+        },
+        "logModule": {
+          "$ref": "#/definitions/LogModule",
+          "description": "Tells whether log modules are enabled or not"
+        },
+        "hostGroup": {
+          "type": "string",
+          "description": "The name of the host group"
+        }
+      },
+      "description": "Details of VM Resource having Dynatrace OneAgent installed"
+    },
+    "MonitoringType": {
+      "type": "string",
+      "description": "The monitoring mode of OneAgent",
+      "enum": [
+        "CLOUD_INFRASTRUCTURE",
+        "FULL_STACK"
+      ],
+      "x-ms-enum": {
+        "name": "MonitoringType",
+        "modelAsString": true
+      }
+    },
+    "AutoUpdateSetting": {
+      "type": "string",
+      "description": "Update settings of OneAgent.",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ],
+      "x-ms-enum": {
+        "name": "AutoUpdateSetting",
+        "modelAsString": true
+      }
+    },
+    "UpdateStatus": {
+      "type": "string",
+      "description": "The current update status of OneAgent.",
+      "enum": [
+        "INCOMPATIBLE",
+        "OUTDATED",
+        "SCHEDULED",
+        "SUPPRESSED",
+        "UNKNOWN",
+        "UP2DATE",
+        "UPDATE_IN_PROGRESS",
+        "UPDATE_PENDING",
+        "UPDATE_PROBLEM"
+      ],
+      "x-ms-enum": {
+        "name": "UpdateStatus",
+        "modelAsString": true
+      }
+    },
+    "AvailabilityState": {
+      "type": "string",
+      "description": "The availability state of OneAgent.",
+      "enum": [
+        "CRASHED",
+        "LOST",
+        "MONITORED",
+        "PRE_MONITORED",
+        "SHUTDOWN",
+        "UNEXPECTED_SHUTDOWN",
+        "UNKNOWN",
+        "UNMONITORED"
+      ],
+      "x-ms-enum": {
+        "name": "AvailabilityState",
+        "modelAsString": true
+      }
+    },
+    "LogModule": {
+      "type": "string",
+      "description": "Tells whether log modules are enabled or not",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ],
+      "x-ms-enum": {
+        "name": "LogModule",
+        "modelAsString": true
+      }
     },
     "VMHostUpdateState": {
       "type": "string",
