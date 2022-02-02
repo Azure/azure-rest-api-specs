@@ -8,7 +8,7 @@ python-mode: create
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.iot.deviceupdate
 package-name: azure-iot-deviceupdate
-package-version: 1.0.0b1
+package-version: 1.1.0b1
 clear-output-folder: true
 add-credentials: true
 credential-scopes: https://api.adu.microsoft.com/.default
