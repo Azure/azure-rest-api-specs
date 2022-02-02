@@ -1,39 +1,26 @@
 {
   "parameters": {
-    "subscriptionId": "d9e39bed-00e1-4f5e-883e-6d94be335056",
-    "resourceGroupName": "rg_88eed28c-5243-4f02-8251-bfa1e69e7057",
-    "workspaceName": "srv_85d31a1e-718b-4bda-9e53-a91230dd4ce5",
-    "sqlDatabaseName": "73164535-f22d-4daa-b014-1f23bbe361b7",
+    "subscriptionId": "e682b8de-be70-4b81-a931-1699b27e2a92",
+    "resourceGroupName": "rg_bfd258ab-71bb-4a86-bf48-076df66c8640",
+    "workspaceName": "srv_b33229ec-42a0-4929-9883-7f46e1b75c2f",
+    "sqlDatabaseName": "113a9eb2-7d40-4009-9dcb-b42daade3760",
     "api-version": "2020-04-01-preview",
     "parameters": {
       "tags": {
         "tag1": "val1"
       },
-      "location": "westus"
+      "location": "westus",
+      "properties": {
+        "storageRedundancy": "Geo",
+        "dataRetention": {
+          "retentionPeriod": "PT0S",
+          "dropRetentionPeriod": "P3D"
+        }
+      }
     }
   },
   "responses": {
     "202": {},
-    "201": {
-      "body": {
-        "systemData": {
-          "createdBy": "string",
-          "createdByType": "User",
-          "createdAt": "2020-06-03T04:05:06Z",
-          "lastModifiedBy": "string",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-06-03T04:05:06Z"
-        },
-        "properties": {
-          "collation": "SQL_Latin1_General_CP1_CI_AS",
-          "databaseGuid": "00000000-0000-0000-0000-000000000004"
-        },
-        "location": "westus",
-        "id": "/subscriptions/d9e39bed-00e1-4f5e-883e-6d94be335056/resourceGroups/rg_88eed28c-5243-4f02-8251-bfa1e69e7057/providers/Microsoft.Synapse/workspaces/srv_85d31a1e-718b-4bda-9e53-a91230dd4ce5/sqlDatabases/73164535-f22d-4daa-b014-1f23bbe361b7",
-        "name": "73164535-f22d-4daa-b014-1f23bbe361b7",
-        "type": "Microsoft.Synapse/workspaces/sqlDatabases"
-      }
-    },
     "200": {
       "body": {
         "systemData": {
@@ -45,12 +32,44 @@
           "lastModifiedAt": "2020-06-03T04:05:06Z"
         },
         "properties": {
+          "status": "Online",
           "collation": "SQL_Latin1_General_CP1_CI_AS",
-          "databaseGuid": "00000000-0000-0000-0000-000000000004"
+          "databaseGuid": "00000000-0000-0000-0000-000000000004",
+          "storageRedundancy": "Geo",
+          "dataRetention": {
+            "retentionPeriod": "PT0S",
+            "dropRetentionPeriod": "P3D"
+          }
         },
         "location": "westus",
-        "id": "/subscriptions/3e8c19f4-eeef-4cb9-bc14-2c3dd459e8a8/resourceGroups/rg_ce5b9d27-ae43-4fe0-986e-95d1df21adf5/providers/Microsoft.Synapse/workspaces/srv_6eeb976d-3b48-4a1f-b45f-d59797b23dac/sqlDatabases/428975cf-c682-4347-8412-468fcf11f988",
-        "name": "428975cf-c682-4347-8412-468fcf11f988",
+        "id": "/subscriptions/e682b8de-be70-4b81-a931-1699b27e2a92/resourceGroups/rg_bfd258ab-71bb-4a86-bf48-076df66c8640/providers/Microsoft.Synapse/workspaces/srv_b33229ec-42a0-4929-9883-7f46e1b75c2f/sqlDatabases/113a9eb2-7d40-4009-9dcb-b42daade3760",
+        "name": "113a9eb2-7d40-4009-9dcb-b42daade3760",
+        "type": "Microsoft.Synapse/workspaces/sqlDatabases"
+      }
+    },
+    "201": {
+      "body": {
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2020-06-03T04:05:06Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-06-03T04:05:06Z"
+        },
+        "properties": {
+          "status": "Online",
+          "collation": "SQL_Latin1_General_CP1_CI_AS",
+          "databaseGuid": "00000000-0000-0000-0000-000000000004",
+          "storageRedundancy": "Geo",
+          "dataRetention": {
+            "retentionPeriod": "PT0S",
+            "dropRetentionPeriod": "P3D"
+          }
+        },
+        "location": "westus",
+        "id": "/subscriptions/02efa278-768f-41fb-8911-6fa67f21e9e9/resourceGroups/rg_8ac20389-0703-435f-a245-2d1bc88d948e/providers/Microsoft.Synapse/workspaces/srv_170600e9-bfc2-44ee-8f15-4bd34090cc83/sqlDatabases/ef1812fe-c621-40df-84ec-5bebff823327",
+        "name": "ef1812fe-c621-40df-84ec-5bebff823327",
         "type": "Microsoft.Synapse/workspaces/sqlDatabases"
       }
     }
