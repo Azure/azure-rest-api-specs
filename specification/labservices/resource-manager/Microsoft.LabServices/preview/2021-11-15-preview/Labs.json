@@ -1,0 +1,797 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-11-15-preview",
+    "title": "LabServicesClient",
+    "description": "REST API for managing Azure Lab Services labs."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.LabServices/labs": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "in": "query",
+          "name": "$filter",
+          "type": "string",
+          "description": "The filter to apply to the operation."
+        }
+      ],
+      "get": {
+        "tags": [
+          "Lab"
+        ],
+        "summary": "Get all labs for a subscription.",
+        "description": "Returns a list of all labs for a subscription.",
+        "operationId": "Labs_ListBySubscription",
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains all Labs for the given subscription.",
+            "schema": {
+              "$ref": "#/definitions/PagedLabs"
+            }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "listLabs": {
+            "$ref": "./examples/Labs/listLabs.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Lab"
+        ],
+        "summary": "Get all labs for a subscription and resource group.",
+        "description": "Returns a list of all labs in a resource group.",
+        "operationId": "Labs_ListByResourceGroup",
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains all Labs for the given subscription and resource group.",
+            "schema": {
+              "$ref": "#/definitions/PagedLabs"
+            }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "listResourceGroupLabs": {
+            "$ref": "./examples/Labs/listResourceGroupLabs.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/LabNameParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Lab"
+        ],
+        "summary": "Get a lab resource.",
+        "description": "Returns the properties of a lab resource.",
+        "operationId": "Labs_Get",
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the Lab.",
+            "schema": {
+              "$ref": "#/definitions/Lab"
+            }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "getLab": {
+            "$ref": "./examples/Labs/getLab.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Lab"
+        ],
+        "summary": "Create or update a lab resource.",
+        "description": "Operation to create or update a lab resource.",
+        "operationId": "Labs_CreateOrUpdate",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Lab"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The update was successful; response contains the Lab.",
+            "schema": {
+              "$ref": "#/definitions/Lab"
+            }
+          },
+          "201": {
+            "description": "The create was successful; response contains the Lab.",
+            "schema": {
+              "$ref": "#/definitions/Lab"
+            }
+          },
+          "202": {
+            "description": "The update was successful and has a long running operation; response contains the Lab.",
+            "schema": {
+              "$ref": "#/definitions/Lab"
+            }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "x-ms-examples": {
+          "putLab": {
+            "$ref": "./examples/Labs/putLab.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Lab"
+        ],
+        "summary": "Update a lab resource.",
+        "description": "Operation to update a lab resource.",
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "Labs_Update",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LabUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource was updated; response contains the Lab.",
+            "schema": {
+              "$ref": "#/definitions/Lab"
+            }
+          },
+          "202": {
+            "description": "The resource was update and has a long running operation; response contains the Lab.",
+            "schema": {
+              "$ref": "#/definitions/Lab"
+            }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "patchLab": {
+            "$ref": "./examples/Labs/patchLab.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Lab"
+        ],
+        "summary": "Deletes a lab resource.",
+        "description": "Operation to delete a lab resource.",
+        "operationId": "Labs_Delete",
+        "responses": {
+          "200": {
+            "description": "The request was successful."
+          },
+          "202": {
+            "description": "The request was accepted."
+          },
+          "204": {
+            "description": "The request has been fulfilled."
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "deleteLab": {
+            "$ref": "./examples/Labs/deleteLab.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/publish": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/LabNameParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "Lab"
+        ],
+        "summary": "Publish or re-publish a lab.",
+        "description": "Publish or re-publish a lab. This will create or update all lab resources, such as virtual machines.",
+        "operationId": "Labs_Publish",
+        "responses": {
+          "200": {
+            "description": "The request was successful."
+          },
+          "202": {
+            "description": "The request was accepted."
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "publishLab": {
+            "$ref": "./examples/Labs/publishLab.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/syncGroup": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/LabNameParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "Lab"
+        ],
+        "summary": "Manually sync the lab group.",
+        "description": "Action used to manually kick off an AAD group sync job.",
+        "operationId": "Labs_SyncGroup",
+        "responses": {
+          "200": {
+            "description": "The request was successful."
+          },
+          "202": {
+            "description": "The request was accepted."
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "syncLab": {
+            "$ref": "./examples/Labs/syncLab.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Lab": {
+      "description": "The lab resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the lab.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Lab resource properties",
+          "$ref": "#/definitions/LabProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "PagedLabs": {
+      "description": "Paged list of labs.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The array page of lab results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Lab"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "The link to get the next page of image results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "LabNetworkProfile": {
+      "description": "Profile for how to handle networking for Labs.",
+      "type": "object",
+      "properties": {
+        "subnetId": {
+          "description": "The external subnet resource id",
+          "$ref": "LabServices.json#/definitions/url"
+        },
+        "loadBalancerId": {
+          "description": "The external load balancer resource id",
+          "$ref": "LabServices.json#/definitions/url"
+        },
+        "publicIpId": {
+          "description": "The external public IP resource id",
+          "$ref": "LabServices.json#/definitions/url"
+        }
+      }
+    },
+    "LabUpdate": {
+      "description": "The lab resource for updates.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "LabServices.json#/definitions/TrackedResourceUpdate"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Lab resource properties",
+          "$ref": "#/definitions/LabUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "LabUpdateProperties": {
+      "description": "Properties of a lab resource used for updates.",
+      "type": "object",
+      "properties": {
+        "autoShutdownProfile": {
+          "description": "The resource auto shutdown configuration for the lab. This controls whether actions are taken on resources that are sitting idle.",
+          "$ref": "LabServices.json#/definitions/AutoShutdownProfile"
+        },
+        "connectionProfile": {
+          "description": "The connection profile for the lab. This controls settings such as web access to lab resources or whether RDP or SSH ports are open.",
+          "$ref": "LabServices.json#/definitions/ConnectionProfile"
+        },
+        "virtualMachineProfile": {
+          "description": "The profile used for creating lab virtual machines.",
+          "$ref": "#/definitions/VirtualMachineProfile"
+        },
+        "securityProfile": {
+          "description": "The lab security profile.",
+          "$ref": "#/definitions/SecurityProfile"
+        },
+        "rosterProfile": {
+          "description": "The lab user list management profile.",
+          "$ref": "#/definitions/RosterProfile"
+        },
+        "labPlanId": {
+          "description": "The ID of the lab plan. Used during resource creation to provide defaults and acts as a permission container when creating a lab via labs.azure.com. Setting a labPlanId on an existing lab provides organization..",
+          "$ref": "LabServices.json#/definitions/url"
+        },
+        "title": {
+          "description": "The title of the lab.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "description": {
+          "description": "The description of the lab.",
+          "type": "string"
+        }
+      }
+    },
+    "LabProperties": {
+      "description": "Properties of a lab resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LabUpdateProperties"
+        }
+      ],
+      "properties": {
+        "provisioningState": {
+          "description": "Current provisioning state of the lab.",
+          "$ref": "LabServices.json#/definitions/provisioningState",
+          "readOnly": true
+        },
+        "networkProfile": {
+          "description": "The network profile for the lab, typically applied via a lab plan. This profile cannot be modified once a lab has been created.",
+          "$ref": "#/definitions/LabNetworkProfile",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "state": {
+          "description": "The lab state.",
+          "$ref": "#/definitions/LabState",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "autoShutdownProfile",
+        "connectionProfile",
+        "securityProfile",
+        "virtualMachineProfile"
+      ]
+    },
+    "SecurityProfile": {
+      "description": "The lab security profile.",
+      "type": "object",
+      "properties": {
+        "registrationCode": {
+          "description": "The registration code for the lab.",
+          "type": "string",
+          "readOnly": true
+        },
+        "openAccess": {
+          "description": "Whether any user or only specified users can register to a lab.",
+          "$ref": "LabServices.json#/definitions/enableState"
+        }
+      }
+    },
+    "RosterProfile": {
+      "description": "The lab user list management profile.",
+      "type": "object",
+      "properties": {
+        "activeDirectoryGroupId": {
+          "description": "The AAD group ID which this lab roster is populated from. Having this set enables AAD sync mode.",
+          "type": "string"
+        },
+        "ltiContextId": {
+          "description": "The unique context identifier for the lab in the lms.",
+          "type": "string"
+        },
+        "lmsInstance": {
+          "description": "The base URI identifying the lms instance.",
+          "type": "string"
+        },
+        "ltiClientId": {
+          "description": "The unique id of the azure lab services tool in the lms.",
+          "type": "string"
+        },
+        "ltiRosterEndpoint": {
+          "description": "The uri of the names and roles service endpoint on the lms for the class attached to this lab.",
+          "type": "string"
+        }
+      }
+    },
+    "VirtualMachineProfile": {
+      "description": "The base virtual machine configuration for a lab.",
+      "type": "object",
+      "properties": {
+        "createOption": {
+          "description": "Indicates what lab virtual machines are created from.",
+          "type": "string",
+          "enum": [
+            "Image",
+            "TemplateVM"
+          ],
+          "x-ms-enum": {
+            "name": "CreateOption",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Image",
+                "description": "An image is used to create all lab user virtual machines. When this option is set, no template VM will be created."
+              },
+              {
+                "value": "TemplateVM",
+                "description": "A template VM will be used to create all lab user virtual machines."
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "imageReference": {
+          "description": "The image configuration for lab virtual machines.",
+          "$ref": "#/definitions/ImageReference",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "osType": {
+          "description": "The OS type of the image",
+          "$ref": "LabServices.json#/definitions/osType",
+          "readOnly": true
+        },
+        "sku": {
+          "description": "The SKU for the lab. Defines the type of virtual machines used in the lab.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "additionalCapabilities": {
+          "description": "Additional VM capabilities.",
+          "$ref": "#/definitions/VirtualMachineAdditionalCapabilities",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "usageQuota": {
+          "description": "The initial quota alloted to each lab user. Must be a time span between 0 and 9999 hours.",
+          "type": "string",
+          "format": "duration"
+        },
+        "useSharedPassword": {
+          "description": "Enabling this option will use the same password for all user VMs.",
+          "default": "Disabled",
+          "$ref": "LabServices.json#/definitions/enableState",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "adminUser": {
+          "description": "Credentials for the admin user on the VM.",
+          "$ref": "#/definitions/Credentials"
+        },
+        "nonAdminUser": {
+          "description": "Credentials for the non-admin user on the VM, if one exists.",
+          "$ref": "#/definitions/Credentials"
+        }
+      },
+      "required": [
+        "createOption",
+        "imageReference",
+        "usageQuota",
+        "sku",
+        "adminUser"
+      ]
+    },
+    "VirtualMachineAdditionalCapabilities": {
+      "description": "The additional capabilities for a lab VM.",
+      "type": "object",
+      "properties": {
+        "installGpuDrivers": {
+          "description": "Flag to pre-install dedicated GPU drivers.",
+          "default": "Disabled",
+          "$ref": "LabServices.json#/definitions/enableState"
+        }
+      }
+    },
+    "Credentials": {
+      "description": "Credentials for a user on a lab VM.",
+      "type": "object",
+      "properties": {
+        "username": {
+          "description": "The username to use when signing in to lab VMs.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "password": {
+          "description": "The password for the user. This is required for the TemplateVM createOption.",
+          "type": "string",
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "username"
+      ]
+    },
+    "ImageReference": {
+      "description": "Image reference information. Used in the virtual machine profile.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Image resource ID",
+          "$ref": "LabServices.json#/definitions/url"
+        },
+        "offer": {
+          "description": "The image offer if applicable.",
+          "type": "string"
+        },
+        "publisher": {
+          "description": "The image publisher",
+          "type": "string"
+        },
+        "sku": {
+          "description": "The image SKU",
+          "type": "string"
+        },
+        "version": {
+          "description": "The image version specified on creation.",
+          "type": "string"
+        },
+        "exactVersion": {
+          "description": "The actual version of the image after use.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "LabState": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Publishing",
+        "Scaling",
+        "Syncing",
+        "Published"
+      ],
+      "description": "The state of a virtual machine.",
+      "x-ms-enum": {
+        "name": "LabState",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "Draft",
+            "description": "The lab is currently in draft (has not been published)."
+          },
+          {
+            "value": "Publishing",
+            "description": "The lab is publishing."
+          },
+          {
+            "value": "Scaling",
+            "description": "The lab is scaling."
+          },
+          {
+            "value": "Syncing",
+            "description": "The lab is syncing users."
+          },
+          {
+            "value": "Published",
+            "description": "The lab has been published."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "LabNameParameter": {
+      "name": "labName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the lab that uniquely identifies it within containing lab account. Used in resource URIs.",
+      "minLength": 1,
+      "maxLength": 100,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
