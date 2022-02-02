@@ -9,12 +9,9 @@ az:
     package-name: azure-mgmt-connectedmachine
 az-output-folder: $(azure-cli-extension-folder)/src/connectedmachine
 python-sdk-output-folder: "$(az-output-folder)/azext_connectedmachine/vendored_sdks/connectedmachine"
+extension-mode: stable
 directive:
-  - where:
-      subject: MachineExtension
-      parameter-name: name
-    set:
-      parameter-name: machine-name
+  # renaming params
   - where:
       subject: MachineExtension
       parameter-name: extension-name
@@ -22,15 +19,31 @@ directive:
       parameter-name: name
   - where:
       subject: MachineExtension
-      parameter-name: type-properties-type
+      parameter-name: auto-upgrade-minor-version
     set:
-      parameter-name: type
+      parameter-name: auto-upgrade-minor
   - where:
-      group: connectedmachine machine$
+      subject: MachineExtension
+      parameter-name: machine-extension-instance-view-type-handler-version-type-handler-version
+    set:
+      parameter-name: inst-handler-version
+  - where:
+      subject: MachineExtension
+      parameter-name: machine-extension-instance-view-type
+    set:
+      parameter-name: instance-view-type
+  - where:
+      subject: PrivateEndpointConnections
+      parameter-name: private-link-service-connection-state
+    set:
+      parameter-name: connection-state
+  # renaming groups
+  - where:
+      group: connectedmachine machine
     set:
       group: connectedmachine
   - where:
-      group: connectedmachine machine-extension$
+      group: connectedmachine machine-extension
     set:
       group: connectedmachine extension
 ```
