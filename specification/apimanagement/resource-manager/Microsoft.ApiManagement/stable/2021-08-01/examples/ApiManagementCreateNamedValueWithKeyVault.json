@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-08-01",
+    "subscriptionId": "subid",
+    "namedValueId": "testprop6",
+    "parameters": {
+      "properties": {
+        "displayName": "prop6namekv",
+        "keyVault": {
+          "identityClientId": "ceaa6b06-c00f-43ef-99ac-f53d1fe876a0",
+          "secretIdentifier": "https://contoso.vault.azure.net/secrets/aadSecret"
+        },
+        "tags": [
+          "foo",
+          "bar"
+        ],
+        "secret": true
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/namedValues/testprop6?api-version=2021-08-01&asyncId=5c730e343244df1b9cb56e85&asyncCode=201"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/namedValues/testprop6",
+        "type": "Microsoft.ApiManagement/service/namedValues",
+        "name": "testprop6",
+        "properties": {
+          "displayName": "prop6namekv",
+          "keyVault": {
+            "secretIdentifier": "https://contoso.vault.azure.net/secrets/aadSecret",
+            "identityClientId": "ceaa6b06-c00f-43ef-99ac-f53d1fe876a0",
+            "lastStatus": {
+              "code": "Success",
+              "timeStampUtc": "2020-09-11T00:54:31.8024882Z"
+            }
+          },
+          "tags": [
+            "foo",
+            "bar"
+          ],
+          "secret": true
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/namedValues/testprop6",
+        "type": "Microsoft.ApiManagement/service/namedValues",
+        "name": "testprop6",
+        "properties": {
+          "displayName": "prop6namekv",
+          "keyVault": {
+            "secretIdentifier": "https://contoso.vault.azure.net/secrets/aadSecret",
+            "identityClientId": "ceaa6b06-c00f-43ef-99ac-f53d1fe876a0",
+            "lastStatus": {
+              "code": "Success",
+              "timeStampUtc": "2020-09-11T00:54:31.8024882Z"
+            }
+          },
+          "tags": [
+            "foo",
+            "bar"
+          ],
+          "secret": true
+        }
+      }
+    }
+  }
+}
