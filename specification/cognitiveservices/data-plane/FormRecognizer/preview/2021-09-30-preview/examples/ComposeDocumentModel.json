@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "api-version": "{apiVersion}",
+    "composeRequest": {
+      "modelId": "{composedModelId}",
+      "description": "{composedModelDescription}",
+      "componentModels": [
+        {
+          "modelId": "{modelId1}"
+        },
+        {
+          "modelId": "{modelId2}"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "{endpoint}/formrecognizer/operations/{operationId}?api-version={apiVersion}"
+      }
+    }
+  }
+}

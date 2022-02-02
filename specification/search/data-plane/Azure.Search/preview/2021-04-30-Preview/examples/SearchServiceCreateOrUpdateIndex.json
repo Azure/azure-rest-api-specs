@@ -123,6 +123,34 @@
       },
       "similarity": {
         "@odata.type": "#Microsoft.Azure.Search.ClassicSimilarity"
+      },
+      "semantic": {
+        "configurations": [
+          {
+            "name": "semanticHotels",
+            "prioritizedFields": {
+              "titleField": {
+                "fieldName": "hotelName"
+              },
+              "prioritizedContentFields": [
+                {
+                  "fieldName": "description"
+                },
+                {
+                  "fieldName": "description_fr"
+                }
+              ],
+              "prioritizedKeywordsFields": [
+                {
+                  "fieldName": "tags"
+                },
+                {
+                  "fieldName": "category"
+                }
+              ]
+            }
+          }
+        ]
       }
     }
   },
@@ -591,6 +619,34 @@
           "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
           "keyVaultUri": "https://myKeyVault.vault.azure.net",
           "accessCredentials": null
+        },
+        "semantic": {
+          "configurations": [
+            {
+              "name": "semanticHotels",
+              "prioritizedFields": {
+                "titleField": {
+                  "fieldName": "hotelName"
+                },
+                "prioritizedContentFields": [
+                  {
+                    "fieldName": "description"
+                  },
+                  {
+                    "fieldName": "description_fr"
+                  }
+                ],
+                "prioritizedKeywordsFields": [
+                  {
+                    "fieldName": "tags"
+                  },
+                  {
+                    "fieldName": "category"
+                  }
+                ]
+              }
+            }
+          ]
         }
       }
     }
