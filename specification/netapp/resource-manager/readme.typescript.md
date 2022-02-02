@@ -9,6 +9,5 @@ typescript:
   package-name: "@azure/arm-netapp"
   payload-flattening-threshold: 2
   output-folder: "$(typescript-sdks-folder)/sdk/netapp/arm-netapp"
-  clear-output-folder: true
   generate-metadata: true
 ```
