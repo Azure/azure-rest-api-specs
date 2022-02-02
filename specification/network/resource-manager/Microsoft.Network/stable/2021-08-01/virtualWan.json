@@ -7522,10 +7522,6 @@
     },
     "VpnServerConfigurationProperties": {
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the VpnServerConfiguration that is unique within a resource group."
-        },
         "vpnProtocols": {
           "type": "array",
           "items": {
@@ -7642,15 +7638,14 @@
       "description": "Parameters for VpnServerConfiguration."
     },
     "VpnServerConfiguration": {
+      "required": [
+        "location"
+      ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/VpnServerConfigurationProperties",
           "description": "Properties of the P2SVpnServer configuration."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
         },
         "etag": {
           "type": "string",
@@ -7742,8 +7737,7 @@
           "description": "The provisioning state of the VpnServerConfigurationPolicyGroup resource."
         }
       },
-      "description": "Parameters for VpnServerConfigurationPolicyGroup.",
-      "type": "object"
+      "description": "Parameters for VpnServerConfigurationPolicyGroup."
     },
     "VpnServerConfigurationPolicyGroup": {
       "properties": {
@@ -7772,8 +7766,7 @@
           "$ref": "./network.json#/definitions/SubResource"
         }
       ],
-      "description": "VpnServerConfigurationPolicyGroup Resource.",
-      "type": "object"
+      "description": "VpnServerConfigurationPolicyGroup Resource."
     },
     "VpnServerConfigurationPolicyGroupMember": {
       "properties": {
