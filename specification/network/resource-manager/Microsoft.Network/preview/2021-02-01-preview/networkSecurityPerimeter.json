@@ -1,0 +1,463 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NetworkSecurityPerimeter",
+    "description": "The Network Security Perimeter API provides a RESTful set of web services that interact with network security perimeter resource.",
+    "version": "2021-02-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeters"
+        ],
+        "operationId": "NetworkSecurityPerimeters_Get",
+        "description": "Gets the specified network security perimeter by the name.",
+        "responses": {
+          "200": {
+            "description": "Request is successful. Returns the resulting network security perimeter resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeter"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkSecurityPerimeterGet": {
+            "$ref": "./examples/NetworkSecurityPerimeterGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NetworkSecurityPerimeters"
+        ],
+        "operationId": "NetworkSecurityPerimeters_CreateOrUpdate",
+        "description": "Creates or updates a Network Security Perimeter.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeter"
+            },
+            "description": "Parameter supplied to create or update the network security perimeter."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource Updated. Returns the network security perimeter.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeter"
+            }
+          },
+          "201": {
+            "description": "Resource Created. Returns the network security perimeter.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeter"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Put Network Security Perimeter": {
+            "$ref": "./examples/NetworkSecurityPerimeterPut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NetworkSecurityPerimeters"
+        ],
+        "operationId": "NetworkSecurityPerimeters_Delete",
+        "description": "Deletes a network security perimeter.",
+        "responses": {
+          "200": {
+            "description": "Delete Succeed."
+          },
+          "204": {
+            "description": "Request successful. The resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkSecurityPerimeterDelete": {
+            "$ref": "./examples/NetworkSecurityPerimeterDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkSecurityPerimeters": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeters"
+        ],
+        "operationId": "NetworkSecurityPerimeters_ListBySubscription",
+        "description": "List all network security perimeters in a subscription.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ListTopParameter"
+          },
+          {
+            "$ref": "#/parameters/ListSkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. Returns the list of the network security perimeters.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "NetworkSecurityPerimetersList": {
+            "$ref": "./examples/NetworkSecurityPerimeterListAll.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeters"
+        ],
+        "operationId": "NetworkSecurityPerimeters_List",
+        "description": "List network security perimeters in a resource group.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ListTopParameter"
+          },
+          {
+            "$ref": "#/parameters/ListSkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. Returns a list of network security perimeters.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Network Security Perimeter": {
+            "$ref": "./examples/NetworkSecurityPerimeterList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/perimeterAssociableResourceTypes": {
+      "get": {
+        "operationId": "PerimeterAssociableResourceTypes_Get",
+        "description": "Gets the list of resources that are onboarded with NSP. These resources can be associated with a network security perimeter",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location of the where the association is present."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the list of resources that are onboarded with network security perimeter feature.",
+            "schema": {
+              "$ref": "#/definitions/PerimeterAssociableResourcesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check Dns Name Availability": {
+            "$ref": "./examples/PerimeterAssociableResourcesList.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NetworkSecurityPerimeter": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NetworkSecurityPerimeterProperties",
+          "description": "The network security perimeter properties"
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Network security perimeter identifier."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "The Network Security Perimeter resource"
+    },
+    "NetworkSecurityPerimeterListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeter"
+          },
+          "description": "Gets a page of NetworkSecurityPerimeter"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next page of results."
+        }
+      },
+      "description": "Result of the request to list NetworkSecurityPerimeter. It contains a list of network security perimeters and a URL link to get the next set of results."
+    },
+    "NetworkSecurityPerimeterProperties": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "A friendly name for the network security perimeter."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the network security perimeter."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the scope assignment resource."
+        }
+      },
+      "description": "Properties of network security perimeter."
+    },
+    "PerimeterAssociableResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PerimeterAssociableResourceProperties",
+          "description": "Properties of the perimeter associable resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Identifier of the perimeter associable resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "Resource that is onboarded to use network security perimeter. Also referred as perimeter associable resource."
+    },
+    "PerimeterAssociableResourcesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PerimeterAssociableResource"
+          },
+          "description": "Gets paged list of perimeter associable resources."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next page of results."
+        }
+      },
+      "description": "Paged list of perimeter associable resources."
+    },
+    "PerimeterAssociableResourceProperties": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A friendly name for the properties of perimeter associable resources."
+        },
+        "resourceType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type/provider name."
+        },
+        "publicDnsZones": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Public DNS zone names of the resources."
+        }
+      },
+      "description": "Properties of the perimeter associable resources."
+    }
+  },
+  "parameters": {
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "NetworkSecurityPerimeterNameParameter": {
+      "name": "networkSecurityPerimeterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the network security perimeter.",
+      "x-ms-parameter-location": "method"
+    },
+    "ListTopParameter": {
+      "name": "$top",
+      "description": "An optional query parameter which specifies the maximum number of records to be returned by the server.",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "minimum": 1,
+      "maximum": 20,
+      "x-ms-parameter-location": "method"
+    },
+    "ListSkipTokenParameter": {
+      "name": "$skipToken",
+      "description": "SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

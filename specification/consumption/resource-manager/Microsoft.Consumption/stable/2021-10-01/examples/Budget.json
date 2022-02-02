@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "api-version": "2021-10-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "MYDEVTESTRG",
+    "budgetName": "TestBudget",
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Consumption/budgets/TestBudget",
+        "name": "TestBudget",
+        "type": "Microsoft.Consumption/budgets",
+        "eTag": "\"1d34d012214157f\"",
+        "properties": {
+          "category": "Cost",
+          "amount": 100.65,
+          "timeGrain": "Monthly",
+          "timePeriod": {
+            "startDate": "2017-10-01T00:00:00Z",
+            "endDate": "2018-10-31T00:00:00Z"
+          },
+          "filter": {
+            "and": [
+              {
+                "dimensions": {
+                  "name": "ResourceId",
+                  "operator": "In",
+                  "values": [
+                    "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Compute/virtualMachines/MSVM2",
+                    "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Compute/virtualMachines/platformcloudplatformGeneric1"
+                  ]
+                }
+              },
+              {
+                "tags": {
+                  "name": "category",
+                  "operator": "In",
+                  "values": [
+                    "Dev",
+                    "Prod"
+                  ]
+                }
+              },
+              {
+                "tags": {
+                  "name": "department",
+                  "operator": "In",
+                  "values": [
+                    "engineering",
+                    "sales"
+                  ]
+                }
+              }
+            ]
+          },
+          "currentSpend": {
+            "amount": 80.89,
+            "unit": "USD"
+          },
+          "notifications": {
+            "Actual_GreaterThan_80_Percent": {
+              "enabled": true,
+              "operator": "GreaterThan",
+              "threshold": 80,
+              "contactEmails": [
+                "johndoe@contoso.com",
+                "janesmith@contoso.com"
+              ],
+              "contactRoles": [
+                "Contributor",
+                "Reader"
+              ],
+              "contactGroups": [
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/microsoft.insights/actionGroups/SampleActionGroup"
+              ],
+              "thresholdType": "Actual"
+            }
+          }
+        }
+      }
+    }
+  }
+}

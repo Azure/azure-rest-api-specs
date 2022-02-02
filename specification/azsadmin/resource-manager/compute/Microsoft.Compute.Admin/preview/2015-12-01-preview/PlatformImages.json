@@ -36,7 +36,7 @@
             "$ref": "Compute.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "Compute.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -47,9 +47,9 @@
             }
           },
           "default": {
-            "description": "Default Response.",
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
             "schema": {
-              "$ref": "#/definitions/ErrorDetails"
+              "$ref": "Compute.json#/definitions/CrpErrorResponse"
             }
           }
         }
@@ -88,7 +88,7 @@
             "$ref": "Compute.json#/parameters/VersionParameter"
           },
           {
-            "$ref": "Compute.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -99,9 +99,9 @@
             }
           },
           "default": {
-            "description": "Default Response.",
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
             "schema": {
-              "$ref": "#/definitions/ErrorDetails"
+              "$ref": "Compute.json#/definitions/CrpErrorResponse"
             }
           }
         }
@@ -138,7 +138,7 @@
             "$ref": "Compute.json#/parameters/VersionParameter"
           },
           {
-            "$ref": "Compute.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/NewPlatformImageParameter"
@@ -164,9 +164,9 @@
             }
           },
           "default": {
-            "description": "Default Response.",
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
             "schema": {
-              "$ref": "#/definitions/ErrorDetails"
+              "$ref": "Compute.json#/definitions/CrpErrorResponse"
             }
           }
         },
@@ -204,14 +204,14 @@
             "$ref": "Compute.json#/parameters/VersionParameter"
           },
           {
-            "$ref": "Compute.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "default": {
-            "description": "Default Response.",
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
             "schema": {
-              "$ref": "#/definitions/ErrorDetails"
+              "$ref": "Compute.json#/definitions/CrpErrorResponse"
             }
           },
           "200": {
@@ -234,7 +234,7 @@
       },
       "allOf": [
         {
-          "$ref": "Compute.json#/definitions/Resource"
+          "$ref": "Compute.json#/definitions/CrpResource"
         }
       ]
     },
@@ -329,37 +329,6 @@
           "description": "Platform image properties.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/PlatformImageProperties"
-        }
-      }
-    },
-    "ErrorDetails": {
-      "description": "Error details.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "Object containing error details.",
-          "$ref": "#/definitions/ErrorDetailsInternal"
-        }
-      }
-    },
-    "ErrorDetailsInternal": {
-      "description": "Error details.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "The error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "The error message.",
-          "type": "string",
-          "readOnly": true
-        },
-        "target": {
-          "description": "The target of the particular error.",
-          "type": "string",
-          "readOnly": true
         }
       }
     }
