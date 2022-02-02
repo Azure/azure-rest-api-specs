@@ -1,0 +1,230 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Machine Learning Workspaces",
+    "version": "2021-07-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/workspaces/skus": {
+      "get": {
+        "tags": [
+          "WorkspaceSkus"
+        ],
+        "description": "Lists all skus with associated features",
+        "operationId": "WorkspaceSkus_List",
+        "x-ms-examples": {
+          "List Skus": {
+            "$ref": "./examples/WorkspaceSku/list.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/SkuListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SkuListResult": {
+      "description": "List of skus with features",
+      "type": "object",
+      "properties": {
+        "value": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkspaceSku"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of Workspace Skus. Call ListNext() with this URI to fetch the next page of Workspace Skus"
+        }
+      }
+    },
+    "SKUCapability": {
+      "description": "Features/user capabilities associated with the sku",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Capability/Feature ID",
+          "type": "string"
+        },
+        "value": {
+          "description": "Details about the feature/capability",
+          "type": "string"
+        }
+      }
+    },
+    "Restriction": {
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of restrictions. As of now only possible value for this is location."
+        },
+        "values": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted."
+        },
+        "reasonCode": {
+          "type": "string",
+          "enum": [
+            "NotSpecified",
+            "NotAvailableForRegion",
+            "NotAvailableForSubscription"
+          ],
+          "x-ms-enum": {
+            "name": "ReasonCode",
+            "modelAsString": true
+          },
+          "description": "The reason for the restriction."
+        }
+      },
+      "description": "The restriction because of which SKU cannot be used."
+    },
+    "ResourceSkuLocationInfo": {
+      "properties": {
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Location of the SKU"
+        },
+        "zones": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of availability zones where the SKU is supported."
+        },
+        "zoneDetails": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuZoneDetails"
+          },
+          "description": "Details of capabilities available to a SKU in specific zones."
+        }
+      }
+    },
+    "ResourceSkuZoneDetails": {
+      "properties": {
+        "name": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "The set of zones that the SKU is available in with the specified capabilities."
+        },
+        "capabilities": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SKUCapability"
+          },
+          "description": "A list of capabilities that are available for the SKU in the specified list of zones."
+        }
+      },
+      "description": "Describes The zonal capabilities of a SKU."
+    },
+    "WorkspaceSku": {
+      "description": "Describes Workspace Sku details and features",
+      "type": "object",
+      "properties": {
+        "locations": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The set of locations that the SKU is available. This will be supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.)."
+        },
+        "locationInfo": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ResourceSkuLocationInfo"
+          },
+          "description": "A list of locations and availability zones in those locations where the SKU is available."
+        },
+        "tier": {
+          "description": "Sku Tier like Basic or Enterprise",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceType": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "capabilities": {
+          "description": "List of features/user capabilities associated with the sku",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SKUCapability"
+          },
+          "readOnly": true
+        },
+        "restrictions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Restriction"
+          },
+          "description": "The restrictions because of which SKU cannot be used. This is empty if there are no restrictions."
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  }
+}
