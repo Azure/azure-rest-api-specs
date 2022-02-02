@@ -58,7 +58,7 @@ Otherwise your PR may be subject to ARM review requirements. Complete the follow
 ### Breaking Change Review Checklist 
 If any of the following scenarios apply to the PR, request approval from the Breaking Change Review Board as defined in the [Breaking Change Policy](http://aka.ms/bcforapi). 
 - [ ] Removing API(s) that were in the last stable version
-- [ ] Removing properties in a stable version
+- [ ] Removing properties that were in the last stable version
 - [ ] Removing API version(s) in a stable version
 - [ ] Updating API in a stable or public preview version with Breaking Change Validation errors
 - [ ] Updating API(s) in public preview over 1 year (refer to [Retirement of Previews](https://dev.azure.com/msazure/AzureWiki/_wiki/wikis/AzureWiki.wiki/37683/Retirement-of-Previews))
