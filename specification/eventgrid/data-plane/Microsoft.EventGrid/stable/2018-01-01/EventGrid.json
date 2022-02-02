@@ -96,6 +96,9 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+		  {
+            "$ref": "#/parameters/ChannelNameParameter"
           }
         ],
         "responses": {
@@ -312,7 +315,8 @@
       "in": "header",
       "description": "Required only when publishing to partner namespaces with partner topic routing mode 'ChannelNameHeader'",
       "required": false,
-      "type": "string"
+      "type": "string",
+	  "x-ms-parameter-location": "method"
     }
   }
 }
