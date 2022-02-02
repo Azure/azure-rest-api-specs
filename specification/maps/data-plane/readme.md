@@ -47,6 +47,8 @@ These settings apply only when `--tag=package-preview-2022-01` is specified on t
 
 ```yaml $(tag) == 'package-preview-2022-01'
 input-file:
+  - Microsoft.Maps/StyleRecipe/preview/2022-01-01-preview/stylerecipe.json
+  - Microsoft.Maps/Styleset/preview/2022-01-01-preview/styleset.json
   - Microsoft.Maps/Tileset/preview/2022-01-01-preview/tileset.json
 ```
 ### Tag: package-preview-2.0
