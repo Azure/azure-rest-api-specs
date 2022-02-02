@@ -28,7 +28,7 @@ These are the global settings for HealthcareApis service.
 title: HealthcareApisManagementClient
 description: Azure Healthcare APIs Client
 openapi-type: arm
-tag: package-2021-01
+tag: package-preview-2021-06
 azure-arm: true
 ```
 
@@ -99,6 +99,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
 ```
