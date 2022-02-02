@@ -1,0 +1,144 @@
+{
+  "parameters": {
+    "subscriptionId": "subId1",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "fluxConfigurationName": "srs-fluxconfig",
+    "api-version": "2022-01-01-preview",
+    "clusterName": "clusterName1"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "description": "Details of the Kubernetes Flux Configuration's current status.",
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/srs-fluxconfig",
+        "type": "Microsoft.KubernetesConfiguration/fluxConfigurations",
+        "name": "srs-fluxconfig",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2021-05-19T05:10:57.027Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2020-05-19T05:10:57.027Z"
+        },
+        "properties": {
+          "scope": "cluster",
+          "namespace": "srs-namespace",
+          "sourceKind": "GitRepository",
+          "suspend": false,
+          "gitRepository": {
+            "url": "https://github.com/Azure/arc-k8s-demo",
+            "timeoutInSeconds": 600,
+            "syncIntervalInSeconds": 600,
+            "repositoryRef": {
+              "branch": "master",
+              "tag": null,
+              "semver": null,
+              "commit": null
+            }
+          },
+          "kustomizations": {
+            "srs-kustomization1": {
+              "path": "./test/path",
+              "dependsOn": [],
+              "timeoutInSeconds": 600,
+              "syncIntervalInSeconds": 600
+            },
+            "srs-kustomization2": {
+              "path": "./other/test/path",
+              "dependsOn": [
+                {
+                  "kustomizationName": "srs-kustomization1"
+                }
+              ],
+              "timeoutInSeconds": 600,
+              "syncIntervalInSeconds": 600,
+              "retryIntervalInSeconds": 600,
+              "prune": false
+            }
+          },
+          "statuses": [
+            {
+              "name": "srs-fluxconfig",
+              "kind": "GitRepository",
+              "complianceState": "Compliant",
+              "appliedBy": null,
+              "helmReleaseProperties": null,
+              "statusConditions": [
+                {
+                  "lastTransitionTime": "2021-05-19T18:12:40Z",
+                  "message": "'Fetched revision: master/0ba6f0d30760d567de0bac86c8c4eec13ce1a590'",
+                  "reason": "GitOperationSucceed",
+                  "status": "True",
+                  "type": "Ready"
+                }
+              ]
+            },
+            {
+              "name": "srs-fluxconfig-srs-kustomization1",
+              "kind": "Kustomization",
+              "complianceState": "Compliant",
+              "appliedBy": {
+                "name": "my-name",
+                "namespace": "my-namespace"
+              },
+              "helmReleaseProperties": {
+                "lastRevisionApplied": 1,
+                "helmChartRef": {
+                  "name": "myname",
+                  "namespace": "mynamespace"
+                },
+                "failureCount": null,
+                "upgradeFailureCount": null,
+                "installFailureCount": null
+              },
+              "statusConditions": [
+                {
+                  "lastTransitionTime": "2021-05-19T18:12:40Z",
+                  "message": "'Applied revision: master/0ba6f0d30760d567de0bac86c8c4eec13ce1a590'",
+                  "reason": "ReconciliationSucceeded",
+                  "status": "True",
+                  "type": "Ready"
+                }
+              ]
+            },
+            {
+              "name": "srs-fluxconfig-srs-kustomization2",
+              "kind": "Kustomization",
+              "complianceState": "Compliant",
+              "appliedBy": null,
+              "helmReleaseProperties": {
+                "lastRevisionApplied": 1,
+                "helmChartRef": {
+                  "name": "myname",
+                  "namespace": "mynamespace"
+                },
+                "failureCount": null,
+                "upgradeFailureCount": null,
+                "installFailureCount": null
+              },
+              "statusConditions": [
+                {
+                  "lastTransitionTime": "2021-05-19T18:12:40Z",
+                  "message": "'Applied revision: master/0ba6f0d30760d567de0bac86c8c4eec13ce1a590'",
+                  "reason": "ReconciliationSucceeded",
+                  "status": "True",
+                  "type": "Ready"
+                }
+              ]
+            }
+          ],
+          "repositoryPublicKey": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDiNkrANrhtRy+02Xc7b5bwvgOKvQMbqUQaXeB6FCDkbLaavw/zO/vIhIBEQu+vbBt6IlI/Pui0rMFr5JjA8Vwwd85oabzU07TPzbFvKSU9eCXqWRKWf0DHNQj/kxPJNtyPYFv3lGoiZZ6QzejOxlW/lPPokUePN0oI10daWwqznm2q0Cmh1EgPUYveq3J5KCWncZXCdwY36zWYulCWFaqazoaGy4kxcqlVy+mPjE/UJthaoLm3mq+23uhlmmfCc1j7W6+H6fcOwTyOtcbimxz2Ug8HlTzSTXBPtEe7qyllMyk62EPNUUq4bVoVsex9sKBK6/hW0Cn2P5i5jslUPCQF",
+          "lastSourceUpdatedCommitId": "master/0ba6f0d30760d567de0bac86c8c4eec13ce1a590",
+          "lastSourceUpdatedAt": "2021-05-19T18:17:12Z",
+          "complianceState": "Compliant",
+          "provisioningState": "Succeeded",
+          "errorMessage": ""
+        }
+      }
+    }
+  }
+}
