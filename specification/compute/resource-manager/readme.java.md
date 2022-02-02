@@ -126,3 +126,17 @@ input-file:
 - Microsoft.Compute/stable/2017-12-01/compute.json
 - Microsoft.Compute/stable/2017-03-30/disk.json
 ```
+
+### Tag: profile-hybrid-2020-09-01 and java
+
+These settings apply only when `--tag=profile-hybrid-2020-09-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'profile-hybrid-2020-09-01' && $(java)
+input-file:
+  - Microsoft.Compute/stable/2020-06-01/compute.json
+  - Microsoft.Compute/stable/2020-06-01/runCommands.json
+  - Microsoft.Compute/stable/2019-04-01/skus.json
+  - Microsoft.Compute/stable/2019-07-01/disk.json
+  - Microsoft.Compute/stable/2019-12-01/gallery.json
+```

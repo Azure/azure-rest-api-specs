@@ -439,6 +439,7 @@
       ]
     },
     "AzureActiveDirectory": {
+      "type": "object",
       "properties": {
         "tenantId": {
           "type": "string",
@@ -456,6 +457,7 @@
       "description": "The settings to enable AAD authentication on the cluster."
     },
     "ClientCertificate": {
+      "type": "object",
       "required": [
         "isAdmin"
       ],
@@ -506,6 +508,7 @@
       ]
     },
     "LoadBalancingRule": {
+      "type": "object",
       "required": [
         "frontendPort",
         "backendPort",
@@ -567,22 +570,23 @@
           "$ref": "#/definitions/Resource"
         },
         {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "x-ms-client-flatten": true,
-              "$ref": "#/definitions/ManagedClusterProperties",
-              "description": "The managed cluster resource properties"
-            },
-            "sku": {
-              "$ref": "#/definitions/Sku",
-              "description": "The sku of the managed cluster"
-            }
-          }
+          "type": "object"
         }
-      ]
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ManagedClusterProperties",
+          "description": "The managed cluster resource properties"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku of the managed cluster"
+        }
+      }
     },
     "ManagedClusterListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -598,6 +602,7 @@
       "description": "Managed Cluster list results"
     },
     "ManagedClusterProperties": {
+      "type": "object",
       "required": [
         "dnsName",
         "adminUserName"
@@ -694,6 +699,7 @@
       "description": "Describes the managed cluster resource properties."
     },
     "ManagedClusterPropertiesUpdateParameters": {
+      "type": "object",
       "properties": {
         "clientConnectionPort": {
           "type": "integer",
@@ -745,6 +751,7 @@
       "description": "Describes the managed cluster resource properties."
     },
     "ManagedClusterUpdateParameters": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -761,6 +768,7 @@
       "description": "Managed cluster update request"
     },
     "ManagedClusterVersionDetails": {
+      "type": "object",
       "properties": {
         "msiVersion": {
           "type": "string",
@@ -778,6 +786,7 @@
       "description": "The detail of the Service Fabric runtime version."
     },
     "Sku": {
+      "type": "object",
       "required": [
         "name"
       ],
@@ -798,6 +807,7 @@
       ]
     },
     "AvailableOperationDisplay": {
+      "type": "object",
       "properties": {
         "provider": {
           "type": "string",
@@ -866,6 +876,7 @@
       "properties": {
         "maxPercentUnhealthyNodes": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum allowed percentage of unhealthy nodes before reporting an error. For example, to allow 10% of nodes to be unhealthy, this value would be 10.\n\nThe percentage represents the maximum tolerated percentage of nodes that can be unhealthy before the cluster is considered in error.\nIf the percentage is respected but there is at least one unhealthy node, the health is evaluated as Warning.\nThe percentage is calculated by dividing the number of unhealthy nodes over the total number of nodes in the cluster.\nThe computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero.\n\nIn large clusters, some nodes will always be down or out for repairs, so this percentage should be configured to tolerate that.\n",
           "default": 0,
           "minimum": 0,
@@ -873,6 +884,7 @@
         },
         "maxPercentUnhealthyApplications": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum allowed percentage of unhealthy applications before reporting an error. For example, to allow 10% of applications to be unhealthy, this value would be 10.\n\nThe percentage represents the maximum tolerated percentage of applications that can be unhealthy before the cluster is considered in error.\nIf the percentage is respected but there is at least one unhealthy application, the health is evaluated as Warning.\nThis is calculated by dividing the number of unhealthy applications over the total number of application instances in the cluster, excluding applications of application types that are included in the ApplicationTypeHealthPolicyMap.\nThe computation rounds up to tolerate one failure on small numbers of applications. Default percentage is zero.\n",
           "default": 0,
           "minimum": 0,
@@ -885,6 +897,7 @@
       }
     },
     "ClusterUpgradeDeltaHealthPolicy": {
+      "type": "object",
       "description": "Describes the delta health policies for the cluster upgrade.",
       "required": [
         "maxPercentDeltaUnhealthyApplications",
@@ -894,18 +907,21 @@
       "properties": {
         "maxPercentDeltaUnhealthyNodes": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum allowed percentage of nodes health degradation allowed during cluster upgrades.\nThe delta is measured between the state of the nodes at the beginning of upgrade and the state of the nodes at the time of the health evaluation.\nThe check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits.\n",
           "minimum": 0,
           "maximum": 100
         },
         "maxPercentUpgradeDomainDeltaUnhealthyNodes": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum allowed percentage of upgrade domain nodes health degradation allowed during cluster upgrades.\nThe delta is measured between the state of the upgrade domain nodes at the beginning of upgrade and the state of the upgrade domain nodes at the time of the health evaluation.\nThe check is performed after every upgrade domain upgrade completion for all completed upgrade domains to make sure the state of the upgrade domains is within tolerated limits.\n",
           "minimum": 0,
           "maximum": 100
         },
         "maxPercentDeltaUnhealthyApplications": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum allowed percentage of applications health degradation allowed during cluster upgrades.\nThe delta is measured between the state of the applications at the beginning of upgrade and the state of the applications at the time of the health evaluation.\nThe check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits. System services are not included in this.\n",
           "minimum": 0,
           "maximum": 100
@@ -917,6 +933,7 @@
       }
     },
     "ClusterUpgradePolicy": {
+      "type": "object",
       "required": [
         "healthCheckRetryTimeout",
         "healthCheckStableDuration",
@@ -967,6 +984,7 @@
       "description": "Describes the policy used when upgrading the cluster."
     },
     "ErrorModel": {
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorModelError",
@@ -976,6 +994,7 @@
       "description": "The structure of the error."
     },
     "ErrorModelError": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -1005,6 +1024,7 @@
       ]
     },
     "OperationListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1022,6 +1042,7 @@
       "description": "Describes the result of the request to list Service Fabric resource provider operations."
     },
     "OperationResult": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1043,6 +1064,7 @@
       "description": "Available operation list result"
     },
     "Resource": {
+      "type": "object",
       "required": [
         "location"
       ],
@@ -1092,6 +1114,7 @@
       "properties": {
         "maxPercentDeltaUnhealthyServices": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum allowed percentage of services health degradation allowed during cluster upgrades.\nThe delta is measured between the state of the services at the beginning of upgrade and the state of the services at the time of the health evaluation.\nThe check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits.\n",
           "default": 0,
           "minimum": 0,
@@ -1112,6 +1135,7 @@
       "properties": {
         "maxPercentUnhealthyServices": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum percentage of services allowed to be unhealthy before your application is considered in error.\n",
           "default": 0,
           "minimum": 0,
@@ -1127,6 +1151,7 @@
       }
     },
     "SettingsParameterDescription": {
+      "type": "object",
       "required": [
         "name",
         "value"
@@ -1144,6 +1169,7 @@
       "description": "Describes a parameter in fabric settings of the cluster."
     },
     "SettingsSectionDescription": {
+      "type": "object",
       "required": [
         "name",
         "parameters"
