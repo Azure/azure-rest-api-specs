@@ -15,46 +15,6 @@
     "application/json"
   ],
   "paths": {
-    "/providers/Microsoft.Web/generateGithubAccessTokenForAppserviceCLI": {
-      "post": {
-        "summary": "Exchange code for GitHub access token for AppService CLI",
-        "description": "Description for Exchange code for GitHub access token for AppService CLI",
-        "operationId": "GenerateGithubAccessTokenForAppserviceCLIAsync",
-        "parameters": [
-          {
-            "name": "request",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AppserviceGithubTokenRequest"
-            },
-            "x-ms-client-flatten": true
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/AppserviceGithubToken"
-            }
-          },
-          "default": {
-            "description": "App Service error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Generate Github Access Token For AppService CLI": {
-            "$ref": "./examples/GenerateGithubAccessTokenForAppserviceCLIAsync.json"
-          }
-        }
-      }
-    },
     "/providers/Microsoft.Web/publishingUsers/web": {
       "get": {
         "summary": "Gets publishing user",

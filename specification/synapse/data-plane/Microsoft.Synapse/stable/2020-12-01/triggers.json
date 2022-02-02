@@ -1,0 +1,694 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-12-01",
+    "title": "ArtifactsClient",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/triggers": {
+      "get": {
+        "tags": [
+          "triggers"
+        ],
+        "operationId": "Trigger_GetTriggersByWorkspace",
+        "x-ms-examples": {
+          "Triggers_ListByWorkspace": {
+            "$ref": "./examples/Triggers_ListByWorkspace.json"
+          }
+        },
+        "description": "Lists triggers.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/TriggerListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/triggers/{triggerName}": {
+      "put": {
+        "tags": [
+          "triggers"
+        ],
+        "operationId": "Trigger_CreateOrUpdateTrigger",
+        "x-ms-examples": {
+          "Triggers_Create": {
+            "$ref": "./examples/Triggers_Create.json"
+          },
+          "Triggers_Update": {
+            "$ref": "./examples/Triggers_Update.json"
+          }
+        },
+        "description": "Creates or updates a trigger.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the trigger entity.  Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "trigger",
+            "description": "Trigger resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TriggerResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/TriggerResource"
+            }
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "trigger"
+        ],
+        "operationId": "Trigger_GetTrigger",
+        "x-ms-examples": {
+          "Triggers_Get": {
+            "$ref": "./examples/Triggers_Get.json"
+          }
+        },
+        "description": "Gets a trigger.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the trigger entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/TriggerResource"
+            }
+          },
+          "304": {
+            "description": "Not modified."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "triggers"
+        ],
+        "operationId": "Trigger_DeleteTrigger",
+        "x-ms-examples": {
+          "Triggers_Delete": {
+            "$ref": "./examples/Triggers_Delete.json"
+          }
+        },
+        "description": "Deletes a trigger.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/triggers/{triggerName}/subscribeToEvents": {
+      "post": {
+        "tags": [
+          "triggers"
+        ],
+        "operationId": "Trigger_SubscribeTriggerToEvents",
+        "x-ms-examples": {
+          "Triggers_SubscribeToEvents": {
+            "$ref": "./examples/Triggers_SubscribeToEvents.json"
+          }
+        },
+        "description": "Subscribe event trigger to events.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trigger is subscribed to events.",
+            "schema": {
+              "$ref": "#/definitions/TriggerSubscriptionOperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/triggers/{triggerName}/getEventSubscriptionStatus": {
+      "post": {
+        "tags": [
+          "triggers"
+        ],
+        "operationId": "Trigger_GetEventSubscriptionStatus",
+        "x-ms-examples": {
+          "Triggers_GetEventSubscriptionStatus": {
+            "$ref": "./examples/Triggers_GetEventSubscriptionStatus.json"
+          }
+        },
+        "description": "Get a trigger's event subscription status.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trigger event subscription state.",
+            "schema": {
+              "$ref": "#/definitions/TriggerSubscriptionOperationStatus"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/triggers/{triggerName}/unsubscribeFromEvents": {
+      "post": {
+        "tags": [
+          "triggers"
+        ],
+        "operationId": "Trigger_UnsubscribeTriggerFromEvents",
+        "x-ms-examples": {
+          "Triggers_UnsubscribeFromEvents": {
+            "$ref": "./examples/Triggers_UnsubscribeFromEvents.json"
+          }
+        },
+        "description": "Unsubscribe event trigger from events.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trigger is unsubscribed from events.",
+            "schema": {
+              "$ref": "#/definitions/TriggerSubscriptionOperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/triggers/{triggerName}/start": {
+      "post": {
+        "tags": [
+          "triggers"
+        ],
+        "operationId": "Trigger_StartTrigger",
+        "x-ms-examples": {
+          "Triggers_Start": {
+            "$ref": "./examples/Triggers_Start.json"
+          }
+        },
+        "description": "Starts a trigger.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trigger has been started successfully."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/triggers/{triggerName}/stop": {
+      "post": {
+        "tags": [
+          "triggers"
+        ],
+        "operationId": "Trigger_StopTrigger",
+        "x-ms-examples": {
+          "Triggers_Stop": {
+            "$ref": "./examples/Triggers_Stop.json"
+          }
+        },
+        "description": "Stops a trigger.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trigger has been stopped successfully."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/triggers/{triggerName}/triggerRuns/{runId}/rerun": {
+      "post": {
+        "tags": [
+          "triggerruns"
+        ],
+        "operationId": "TriggerRun_RerunTriggerInstance",
+        "x-ms-examples": {
+          "Triggers_Rerun": {
+            "$ref": "./examples/TriggerRuns_Rerun.json"
+          }
+        },
+        "description": "Rerun single trigger instance by runId.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "artifacts.json#/parameters/runId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "TriggerRun has been restarted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/triggers/{triggerName}/triggerRuns/{runId}/cancel": {
+      "post": {
+        "tags": [
+          "triggerruns"
+        ],
+        "operationId": "TriggerRun_CancelTriggerInstance",
+        "x-ms-examples": {
+          "Triggers_Rerun": {
+            "$ref": "./examples/TriggerRuns_Cancel.json"
+          }
+        },
+        "description": "Cancel single trigger instance by runId.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "artifacts.json#/parameters/runId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "TriggerRun has been cancelled."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/queryTriggerRuns": {
+      "post": {
+        "tags": [
+          "triggerruns"
+        ],
+        "operationId": "TriggerRun_QueryTriggerRunsByWorkspace",
+        "x-ms-examples": {
+          "TriggerRuns_QueryByWorkspace": {
+            "$ref": "./examples/TriggerRuns_QueryByWorkspace.json"
+          }
+        },
+        "description": "Query trigger runs.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "filterParameters",
+            "description": "Parameters to filter the pipeline run.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "artifacts.json#/definitions/RunFilterParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/TriggerRunsQueryResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "TriggerListResponse": {
+      "description": "A list of trigger resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of triggers.",
+          "items": {
+            "$ref": "#/definitions/TriggerResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "TriggerResource": {
+      "description": "Trigger resource type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "artifacts.json#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/Trigger.json#/definitions/Trigger",
+          "description": "Properties of the trigger."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "TriggerRunsQueryResponse": {
+      "description": "A list of trigger runs.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of trigger runs.",
+          "items": {
+            "$ref": "#/definitions/TriggerRun"
+          }
+        },
+        "continuationToken": {
+          "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
+          "type": "string"
+        }
+      }
+    },
+    "TriggerRun": {
+      "description": "Trigger runs.",
+      "type": "object",
+      "properties": {
+        "triggerRunId": {
+          "type": "string",
+          "description": "Trigger run id.",
+          "readOnly": true
+        },
+        "triggerName": {
+          "type": "string",
+          "description": "Trigger name.",
+          "readOnly": true
+        },
+        "triggerType": {
+          "type": "string",
+          "description": "Trigger type.",
+          "readOnly": true
+        },
+        "triggerRunTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Trigger run start time.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Inprogress"
+          ],
+          "x-ms-enum": {
+            "name": "TriggerRunStatus",
+            "modelAsString": true
+          },
+          "description": "Trigger run status.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Trigger error message.",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "List of property name and value related to trigger run. Name, value pair depends on type of trigger.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "triggeredPipelines": {
+          "description": "List of pipeline name and run Id triggered by the trigger run.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "TriggerSubscriptionOperationStatus": {
+      "description": "Defines the response of a trigger subscription operation.",
+      "type": "object",
+      "properties": {
+        "triggerName": {
+          "description": "Trigger name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Provisioning",
+            "Deprovisioning",
+            "Disabled",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "EventSubscriptionStatus",
+            "modelAsString": true
+          },
+          "description": "Event Subscription Status.",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "workspaceName": {
+      "name": "workspaceName",
+      "description": "The workspace name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The Synapse client API Version."
+    },
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "The workspace development endpoint, for example https://myworkspace.dev.azuresynapse.net.",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
+    "triggerName": {
+      "name": "triggerName",
+      "description": "The trigger name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

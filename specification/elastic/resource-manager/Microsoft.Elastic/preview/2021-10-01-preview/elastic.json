@@ -1,0 +1,1796 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Elastic",
+    "version": "2021-10-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Elastic/operations": {
+      "get": {
+        "tags": [
+          "MonitorsResource"
+        ],
+        "summary": "List all operations provided by Microsoft.Elastic.",
+        "operationId": "Operations_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Elastic/monitors": {
+      "get": {
+        "tags": [
+          "MonitorsResource"
+        ],
+        "summary": "List all monitors under the specified subscription.",
+        "operationId": "Monitors_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ElasticMonitorResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Monitors_List": {
+            "$ref": "./examples/Monitors_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors": {
+      "get": {
+        "tags": [
+          "MonitorsResource"
+        ],
+        "summary": "List all monitors under the specified resource group.",
+        "operationId": "Monitors_ListByResourceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ElasticMonitorResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Monitors_ListByResourceGroup": {
+            "$ref": "./examples/Monitors_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}": {
+      "get": {
+        "tags": [
+          "MonitorsResource"
+        ],
+        "summary": "Get the properties of a specific monitor resource.",
+        "operationId": "Monitors_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ElasticMonitorResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_Get": {
+            "$ref": "./examples/Monitors_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MonitorsResource"
+        ],
+        "summary": "Create a monitor resource.",
+        "operationId": "Monitors_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Elastic monitor resource model",
+            "schema": {
+              "$ref": "#/definitions/ElasticMonitorResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ElasticMonitorResource"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ElasticMonitorResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Monitors_Create": {
+            "$ref": "./examples/Monitors_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "MonitorsResource"
+        ],
+        "summary": "Update a monitor resource.",
+        "operationId": "Monitors_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Elastic resource model update parameters.",
+            "schema": {
+              "$ref": "#/definitions/ElasticMonitorResourceUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ElasticMonitorResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_Update": {
+            "$ref": "./examples/Monitors_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MonitorsResource"
+        ],
+        "summary": "Delete a monitor resource.",
+        "operationId": "Monitors_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Monitors_Delete": {
+            "$ref": "./examples/Monitors_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/listMonitoredResources": {
+      "post": {
+        "tags": [
+          "MonitoredResources"
+        ],
+        "summary": "List the resources currently being monitored by the Elastic monitor resource.",
+        "operationId": "MonitoredResources_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoredResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MonitoredResources_List": {
+            "$ref": "./examples/MonitoredResources_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/listDeploymentInfo": {
+      "post": {
+        "tags": [
+          "DeploymentInfo"
+        ],
+        "summary": "Fetch information regarding Elastic cloud deployment corresponding to the Elastic monitor resource.",
+        "operationId": "DeploymentInfo_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeploymentInfoResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeploymentInfo_List": {
+            "$ref": "./examples/DeploymentInfo_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/createOrUpdateExternalUser": {
+      "post": {
+        "tags": [
+          "DeploymentInfo"
+        ],
+        "summary": "Create User inside elastic deployment which are used by customers to perform operations on the elastic deployment",
+        "operationId": "ExternalUser_CreateOrUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Elastic External User Creation Parameters",
+            "schema": {
+              "$ref": "#/definitions/ExternalUserInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ExternalUserCreationResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeploymentInfo_List": {
+            "$ref": "./examples/ExternalUserInfo.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/tagRules": {
+      "get": {
+        "tags": [
+          "Rules"
+        ],
+        "summary": "List the tag rules for a given monitor resource.",
+        "operationId": "TagRules_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoringTagRulesListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TagRules_List": {
+            "$ref": "./examples/TagRules_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/tagRules/{ruleSetName}": {
+      "put": {
+        "tags": [
+          "Rules"
+        ],
+        "summary": "Create or update a tag rule set for a given monitor resource.",
+        "operationId": "TagRules_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleSetNameParameter"
+          },
+          {
+            "description": "request body of MonitoringTagRules",
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MonitoringTagRules"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoringTagRules"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TagRules_CreateOrUpdate": {
+            "$ref": "./examples/TagRules_CreateOrUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Rules"
+        ],
+        "summary": "Get a tag rule set for a given monitor resource.",
+        "operationId": "TagRules_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleSetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoringTagRules"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TagRules_Get": {
+            "$ref": "./examples/TagRules_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Rules"
+        ],
+        "summary": "Delete a tag rule set for a given monitor resource.",
+        "operationId": "TagRules_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleSetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "TagRules_Delete": {
+            "$ref": "./examples/TagRules_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/listVMHost": {
+      "post": {
+        "tags": [
+          "VMHHostList"
+        ],
+        "summary": "List the vm resources currently being monitored by the Elastic monitor resource.",
+        "operationId": "VMHost_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VMHostListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "VMHost_List": {
+            "$ref": "./examples/VMHost_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/vmIngestionDetails": {
+      "post": {
+        "tags": [
+          "VMIngestionDetails"
+        ],
+        "summary": "List the vm ingestion details that will be monitored by the Elastic monitor resource.",
+        "operationId": "VMIngestion_Details",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VMIngestionDetailsResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VMIngestion_Details": {
+            "$ref": "./examples/VMIngestion_Details.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/vmCollectionUpdate": {
+      "post": {
+        "tags": [
+          "VMCollectionUpdate"
+        ],
+        "summary": "Update the vm details that will be monitored by the Elastic monitor resource.",
+        "operationId": "VMCollection_Update",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "VM resource Id",
+            "schema": {
+              "$ref": "#/definitions/VMCollectionUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VMCollection_Update": {
+            "$ref": "./examples/VMCollection_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/listUpgradableVersions": {
+      "post": {
+        "tags": [
+          "MonitorUpgradableVersions"
+        ],
+        "summary": "List of upgradable versions for a given monitor resource.",
+        "operationId": "UpgradableVersions_Details",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/UpgradableVersionsList"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpgradableVersions_Details": {
+            "$ref": "./examples/UpgradableVersions_Details.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/upgrade": {
+      "post": {
+        "tags": [
+          "DeploymentUpdate"
+        ],
+        "summary": "Upgradable version for a monitor resource.",
+        "operationId": "Monitor_Upgrade",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Elastic Monitor Upgrade Parameters",
+            "schema": {
+              "$ref": "#/definitions/ElasticMonitorUpgrade"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Monitor_Upgrade": {
+            "$ref": "./examples/Monitor_Upgrade.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponseBody": {
+      "description": "Error response body.",
+      "title": "ErrorResponseBody",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Error target.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorResponseBody"
+          }
+        }
+      }
+    },
+    "ResourceProviderDefaultErrorResponse": {
+      "description": "RP default error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Response body of Error",
+          "readOnly": true,
+          "$ref": "#/definitions/ErrorResponseBody"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "The object that represents the operation.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Service provider, i.e., Microsoft.Elastic.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Type on which the operation is performed, e.g., 'monitors'.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Operation type, e.g., read, write, delete, etc.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the operation, e.g., 'Write monitors'.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationResult": {
+      "description": "A Microsoft.Elastic REST API operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name, i.e., {provider}/{resource}/{operation}.",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "$ref": "#/definitions/OperationDisplay"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of GET request to list the Microsoft.Elastic operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of operations supported by the Microsoft.Elastic provider.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationResult"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceSku": {
+      "description": "Microsoft.Elastic SKU.",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the SKU.",
+          "type": "string"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleted",
+        "NotSpecified"
+      ],
+      "type": "string",
+      "description": "Provisioning state of Elastic resource.",
+      "title": "ProvisioningState",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ProvisioningState"
+      }
+    },
+    "MonitoringStatus": {
+      "description": "Flag specifying if the resource monitoring is enabled or disabled.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "MonitoringStatus"
+      }
+    },
+    "ElasticCloudUser": {
+      "description": "Details of the user's elastic account.",
+      "type": "object",
+      "properties": {
+        "emailAddress": {
+          "description": "Email of the Elastic User Account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "User Id of the elastic account of the User.",
+          "type": "string",
+          "readOnly": true
+        },
+        "elasticCloudSsoDefaultUrl": {
+          "description": "Elastic cloud default dashboard sso URL of the Elastic user account.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ElasticCloudDeployment": {
+      "description": "Details of the user's elastic deployment associated with the monitor resource.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Elastic deployment name",
+          "type": "string",
+          "readOnly": true
+        },
+        "deploymentId": {
+          "description": "Elastic deployment Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "azureSubscriptionId": {
+          "description": "Associated Azure subscription Id for the elastic deployment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "elasticsearchRegion": {
+          "description": "Region where Deployment at Elastic side took place.",
+          "type": "string",
+          "readOnly": true
+        },
+        "elasticsearchServiceUrl": {
+          "description": "Elasticsearch ingestion endpoint of the Elastic deployment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "kibanaServiceUrl": {
+          "description": "Kibana endpoint of the Elastic deployment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "kibanaSsoUrl": {
+          "description": "Kibana dashboard sso URL of the Elastic deployment.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ElasticProperties": {
+      "description": "Elastic Resource Properties.",
+      "type": "object",
+      "properties": {
+        "elasticCloudUser": {
+          "description": "Details of the user's elastic account.",
+          "$ref": "#/definitions/ElasticCloudUser"
+        },
+        "elasticCloudDeployment": {
+          "description": "Details of the elastic cloud deployment.",
+          "$ref": "#/definitions/ElasticCloudDeployment"
+        }
+      }
+    },
+    "CompanyInfo": {
+      "description": "Company information of the user to be passed to partners.",
+      "type": "object",
+      "properties": {
+        "domain": {
+          "description": "Domain of the company",
+          "maxLength": 250,
+          "type": "string"
+        },
+        "business": {
+          "description": "Business of the company",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "employeesNumber": {
+          "description": "Number of employees in the company",
+          "maxLength": 20,
+          "type": "string"
+        },
+        "state": {
+          "description": "State of the company location.",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "country": {
+          "description": "Country of the company location.",
+          "maxLength": 50,
+          "type": "string"
+        }
+      }
+    },
+    "UserInfo": {
+      "description": "User Information to be passed to partners.",
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "description": "First name of the user",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "lastName": {
+          "description": "Last name of the user",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "companyName": {
+          "description": "Company name of the user",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "emailAddress": {
+          "description": "Email of the user used by Elastic for contacting them if needed",
+          "pattern": "^([^<>()\\[\\]\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\.,;:\\s@\"]+)*)@(([a-zA-Z-_0-9]+\\.)+[a-zA-Z]{2,})$",
+          "type": "string"
+        },
+        "companyInfo": {
+          "description": "Company information of the user to be passed to partners.",
+          "$ref": "#/definitions/CompanyInfo"
+        }
+      }
+    },
+    "LiftrResourceCategories": {
+      "enum": [
+        "Unknown",
+        "MonitorLogs"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "LiftrResourceCategories"
+      },
+      "readOnly": true
+    },
+    "MonitorProperties": {
+      "description": "Properties specific to the monitor resource.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the monitor resource.",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "monitoringStatus": {
+          "description": "Flag specifying if the resource monitoring is enabled or disabled.",
+          "$ref": "#/definitions/MonitoringStatus"
+        },
+        "elasticProperties": {
+          "description": "Elastic cloud properties.",
+          "$ref": "#/definitions/ElasticProperties"
+        },
+        "userInfo": {
+          "description": "User information.",
+          "$ref": "#/definitions/UserInfo",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "version": {
+          "description": "Version of elastic of the monitor resource",
+          "type": "string"
+        },
+        "liftrResourceCategory": {
+          "$ref": "#/definitions/LiftrResourceCategories"
+        },
+        "liftrResourcePreference": {
+          "description": "The priority of the resource.",
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedIdentityTypes": {
+      "enum": [
+        "SystemAssigned"
+      ],
+      "type": "string",
+      "description": "Managed Identity types.",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ManagedIdentityTypes"
+      }
+    },
+    "IdentityProperties": {
+      "description": "Identity properties.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "The identity ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "The tenant ID of resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Managed identity type.",
+          "$ref": "#/definitions/ManagedIdentityTypes"
+        }
+      }
+    },
+    "ElasticMonitorResource": {
+      "description": "Monitor resource.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "description": "ARM id of the monitor resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the monitor resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the monitor resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sku": {
+          "description": "SKU of the monitor resource.",
+          "$ref": "#/definitions/ResourceSku"
+        },
+        "properties": {
+          "description": "Properties of the monitor resource.",
+          "$ref": "#/definitions/MonitorProperties",
+          "x-ms-client-flatten": false
+        },
+        "identity": {
+          "description": "Identity properties of the monitor resource.",
+          "$ref": "#/definitions/IdentityProperties"
+        },
+        "tags": {
+          "description": "The tags of the monitor resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "description": "The location of the monitor resource",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system metadata relating to this resource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "ElasticMonitorResourceListResponse": {
+      "description": "Response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ElasticMonitorResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "ElasticMonitorResourceUpdateParameters": {
+      "description": "Monitor resource update parameters.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "elastic monitor resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SendingLogs": {
+      "enum": [
+        "True",
+        "False"
+      ],
+      "type": "string",
+      "description": "Flag indicating the status of the resource for sending logs operation to Elastic.",
+      "title": "SendingLogs",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "SendingLogs"
+      }
+    },
+    "MonitoredResource": {
+      "description": "The properties of a resource currently being monitored by the Elastic monitor resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ARM id of the resource.",
+          "type": "string"
+        },
+        "sendingLogs": {
+          "description": "Flag indicating the status of the resource for sending logs operation to Elastic.",
+          "$ref": "#/definitions/SendingLogs"
+        },
+        "reasonForLogsStatus": {
+          "description": "Reason for why the resource is sending logs (or why it is not sending).",
+          "type": "string"
+        }
+      }
+    },
+    "MonitoredResourceListResponse": {
+      "description": "Response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitoredResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "TagAction": {
+      "description": "Valid actions for a filtering tag. Exclusion takes priority over inclusion.",
+      "enum": [
+        "Include",
+        "Exclude"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "TagAction"
+      }
+    },
+    "FilteringTag": {
+      "description": "The definition of a filtering tag. Filtering tags are used for capturing resources and include/exclude them from being monitored.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name (also known as the key) of the tag.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value of the tag.",
+          "type": "string"
+        },
+        "action": {
+          "description": "Valid actions for a filtering tag.",
+          "$ref": "#/definitions/TagAction"
+        }
+      }
+    },
+    "LogRules": {
+      "description": "Set of rules for sending logs for the Monitor resource.",
+      "type": "object",
+      "properties": {
+        "sendAadLogs": {
+          "description": "Flag specifying if AAD logs should be sent for the Monitor resource.",
+          "type": "boolean"
+        },
+        "sendSubscriptionLogs": {
+          "description": "Flag specifying if subscription logs should be sent for the Monitor resource.",
+          "type": "boolean"
+        },
+        "sendActivityLogs": {
+          "description": "Flag specifying if activity logs from Azure resources should be sent for the Monitor resource.",
+          "type": "boolean"
+        },
+        "filteringTags": {
+          "description": "List of filtering tags to be used for capturing logs. This only takes effect if SendActivityLogs flag is enabled. If empty, all resources will be captured. If only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilteringTag"
+          }
+        }
+      }
+    },
+    "MonitoringTagRulesProperties": {
+      "description": "Definition of the properties for a TagRules resource.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the monitoring tag rules.",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "logRules": {
+          "description": "Rules for sending logs.",
+          "$ref": "#/definitions/LogRules"
+        }
+      }
+    },
+    "MonitoringTagRules": {
+      "description": "Capture logs and metrics of Azure resources based on ARM tags.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "name": {
+          "description": "Name of the rule set.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "The id of the rule set.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the rule set.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Properties of the monitoring tag rules.",
+          "$ref": "#/definitions/MonitoringTagRulesProperties",
+          "x-ms-client-flatten": false
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system metadata relating to this resource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "MonitoringTagRulesListResponse": {
+      "description": "Response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitoringTagRules"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "ElasticDeploymentStatus": {
+      "description": "Flag specifying if the Elastic deployment status is healthy or not.",
+      "enum": [
+        "Healthy",
+        "Unhealthy"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ElasticDeploymentStatus"
+      }
+    },
+    "DeploymentInfoResponse": {
+      "description": "The properties of deployment in Elastic cloud corresponding to the Elastic monitor resource.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The Elastic deployment status.",
+          "$ref": "#/definitions/ElasticDeploymentStatus",
+          "readOnly": true
+        },
+        "version": {
+          "description": "Version of the elasticsearch in Elastic cloud deployment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "memoryCapacity": {
+          "description": "RAM capacity of the elasticsearch in Elastic cloud deployment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "diskCapacity": {
+          "description": "Disk capacity of the elasticsearch in Elastic cloud deployment.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ExternalUserCreationResponse": {
+      "description": "The properties of the response we got from elastic while creating external user",
+      "type": "object",
+      "properties": {
+        "created": {
+          "description": "Shows if user is created or updated",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "ExternalUserInfo": {
+      "description": "The properties of the request required for creating user on elastic side",
+      "type": "object",
+      "properties": {
+        "userName": {
+          "description": "Username of the user to be created or updated",
+          "type": "string"
+        },
+        "fullName": {
+          "description": "Full name of the user to be created or updated",
+          "type": "string"
+        },
+        "password": {
+          "x-ms-secret": true,
+          "description": "Password of the user to be created or updated",
+          "type": "string"
+        },
+        "emailId": {
+          "description": "Email id of the user to be created or updated",
+          "type": "string"
+        },
+        "roles": {
+          "description": "Roles to be assigned for  created or updated user",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "VMHostListResponse": {
+      "description": "Response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VMResources"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next Vm resource Id, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "VMResources": {
+      "description": "The vm resource properties that is currently being monitored by the Elastic monitor resource.",
+      "type": "object",
+      "properties": {
+        "vmResourceId": {
+          "description": "The ARM id of the VM resource.",
+          "type": "string"
+        }
+      }
+    },
+    "VMIngestionDetailsResponse": {
+      "description": "The vm ingestion details to install an agent.",
+      "type": "object",
+      "properties": {
+        "cloudId": {
+          "description": "The cloudId of given Elastic monitor resource.",
+          "type": "string"
+        },
+        "ingestionKey": {
+          "description": "Ingestion details to install agent on given VM.",
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "OperationName": {
+      "enum": [
+        "Add",
+        "Delete"
+      ],
+      "type": "string",
+      "description": "Operation to be performed on the given vm resource id.",
+      "title": "OperationName",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "OperationName"
+      }
+    },
+    "VMCollectionUpdate": {
+      "description": "Update VM resource collection.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "vmResourceId": {
+          "description": "ARM id of the VM resource.",
+          "type": "string"
+        },
+        "operationName": {
+          "description": "Operation to be performed for given VM.",
+          "$ref": "#/definitions/OperationName"
+        }
+      }
+    },
+    "UpgradableVersionsList": {
+      "description": "Stack Versions that this version can upgrade to",
+      "type": "object",
+      "properties": {
+        "currentVersion": {
+          "type": "string",
+          "description": "Current version of the elastic monitor"
+        },
+        "upgradableVersions": {
+          "type": "array",
+          "description": "Stack Versions that this version can upgrade to",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ElasticMonitorUpgrade": {
+      "description": "Upgrade elastic monitor version",
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Version to which the elastic monitor should be upgraded to"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to be used with the HTTP request.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "2020-07-01-preview",
+        "2020-07-01",
+        "2021-09-01-preview",
+        "2021-10-01-preview"
+      ]
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)",
+      "required": true,
+      "type": "string"
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group to which the Elastic resource belongs.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "MonitorNameParameter": {
+      "in": "path",
+      "name": "monitorName",
+      "description": "Monitor resource name",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "RuleSetNameParameter": {
+      "in": "path",
+      "name": "ruleSetName",
+      "description": "Tag Rule Set resource name",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "PythonSDKBackupTestRg",
+    "vaultName": "PySDKBackupTestRsVault",
+    "fabricName": "Azure",
+    "containerName": "iaasvmcontainer;iaasvmcontainerv2;pysdktestrg;pysdktestv2vm1",
+    "protectedItemName": "vm;iaasvmcontainerv2;pysdktestrg;pysdktestv2vm1",
+    "recoveryPointId": "1",
+    "api-version": "2021-10-01",
+    "parameters": {
+      "properties": {
+        "initiatorName": "Hello World",
+        "recoveryPointId": "38823086363464",
+        "renewExistingRegistration": true,
+        "virtualMachineId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/pysdktestrg/providers/Microsoft.Compute/virtualMachines/pysdktestv2vm1",
+        "objectType": "IaasVMILRRegistrationRequest"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/PythonSDKBackupTestRg/providers/Microsoft.RecoveryServices/vaults/PySDKBackupTestRsVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasvmcontainerv2;pysdktestrg;pysdktestv2vm1/protectedItems/vm;iaasvmcontainerv2;pysdktestrg;pysdktestv2vm1/operationsStatus/00000000-0000-0000-0000-000000000000?api-version=2016-12-01",
+        "Location": "https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/PythonSDKBackupTestRg/providers/Microsoft.RecoveryServices/vaults/PySDKBackupTestRsVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasvmcontainerv2;pysdktestrg;pysdktestv2vm1/protectedItems/vm;iaasvmcontainerv2;pysdktestrg;pysdktestv2vm1/operationResults/00000000-0000-0000-0000-000000000000?api-version=2016-12-01",
+        "Retry-After": 60
+      }
+    }
+  }
+}

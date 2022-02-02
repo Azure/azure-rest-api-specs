@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "Default",
+    "locationName": "Japan East",
+    "serverTrustGroupName": "server-trust-group-test",
+    "api-version": "2021-08-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/locations/Japan East/serverTrustGroups/server-trust-group-test",
+        "name": "server-trust-group-test",
+        "properties": {
+          "groupMembers": [
+            {
+              "serverId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/managedInstances/managedInstance-1"
+            },
+            {
+              "serverId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/managedInstances/managedInstance-2"
+            }
+          ],
+          "trustScopes": [
+            "GlobalTransactions",
+            "ServiceBroker"
+          ]
+        },
+        "type": "Microsoft.Sql/locations/serverTrustGroups"
+      }
+    }
+  }
+}
