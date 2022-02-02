@@ -8,24 +8,8 @@ title: 'ConnectedMachine'
 
 cli:
   cli-directive:
-    - select: 'operationGroup'
-      where:
-          operationGroup: 'operations'
+    - where:
+          group: machines
+          op: createOrUpdate
       hidden: true
-    - select: 'operation'
-      where:
-          operationGroup: 'machines'
-          operation: '(reconnect|createOrUpdate|update)'
-      removed: true
-    - where:
-          param: 'autoUpgradeMinorVersion'
-      alias:
-          - auto_upgrade_minor
-    - where:
-          operationGroup: 'machineExtensions'
-          param: 'extensionName'
-      alias:
-          - n
-          - extension_name
-          - name
 ```
