@@ -1,7 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "BatchManagement",
+    "title": "BatchManagementClient",
+    "description": "The Batch Management Client.",
     "version": "2021-06-01"
   },
   "host": "management.azure.com",
@@ -4281,11 +4282,6 @@
     "ContainerRegistry": {
       "type": "object",
       "properties": {
-        "registryServer": {
-          "type": "string",
-          "title": "The registry URL.",
-          "description": "If omitted, the default is \"docker.io\"."
-        },
         "username": {
           "type": "string",
           "x-ms-client-name": "userName",
@@ -4294,6 +4290,11 @@
         "password": {
           "type": "string",
           "title": "The password to log into the registry server."
+        },
+        "registryServer": {
+          "type": "string",
+          "title": "The registry URL.",
+          "description": "If omitted, the default is \"docker.io\"."
         },
         "identityReference": {
           "title": "The reference to the user assigned identity to use to access an Azure Container Registry instead of username and password.",
