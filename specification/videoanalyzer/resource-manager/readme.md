@@ -25,10 +25,35 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 These are the global settings for the videoanalyzer.
 
 ```yaml
-title: VideoAnalyzer
+title: VideoAnalyzerManagementClient
 description: Azure Video Analyzer provides a platform for you to build intelligent video applications that span the edge and the cloud
 openapi-type: arm
-tag: package-2021-05-01-preview
+tag: package-preview-2021-11
+```
+
+### Suppression
+
+```yaml
+directive:
+  - from: VideoAnalyzers.json
+    reason: Patch response is 202.
+    suppress: LongRunningResponseStatusCode
+
+  - from: VideoAnalyzers.json
+    reason: Patch response is 202.
+    suppress: TrackedResourcePatchOperation
+```
+
+### Tag: package-preview-2021-11
+
+These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-11'
+input-file:
+  - Microsoft.Media/preview/2021-11-01-preview/EdgeModules.json
+  - Microsoft.Media/preview/2021-11-01-preview/PipelineTopologies.json
+  - Microsoft.Media/preview/2021-11-01-preview/VideoAnalyzers.json
+  - Microsoft.Media/preview/2021-11-01-preview/Videos.json
 ```
 
 ### Tag: package-2021-05-01-preview
@@ -56,6 +81,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-java
   - repo: azure-resource-manager-schemas
@@ -85,5 +111,3 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-

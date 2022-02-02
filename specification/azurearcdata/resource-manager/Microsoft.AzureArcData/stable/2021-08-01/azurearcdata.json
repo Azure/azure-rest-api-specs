@@ -273,6 +273,9 @@
           "200": {
             "description": "Successfully deleted the SQL Managed Instance."
           },
+          "202": {
+            "description": "Resource deletion is in progress.."
+          },
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
@@ -287,7 +290,8 @@
           "Delete a SQL Instance.": {
             "$ref": "./examples/DeleteSqlManagedInstance.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "tags": [
@@ -565,6 +569,9 @@
           "200": {
             "description": "Successfully deleted the SQL Server Instance."
           },
+          "202": {
+            "description": "Resource deletion is in progress."
+          },
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
@@ -579,7 +586,8 @@
           "Delete a SQL Server Instance.": {
             "$ref": "./examples/DeleteSqlServerInstance.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "tags": [
@@ -809,6 +817,9 @@
           "200": {
             "description": "Successfully deleted the DataController."
           },
+          "202": {
+            "description": "Resource deletion is in progress."
+          },
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
@@ -823,7 +834,8 @@
           "Delete a dataController.": {
             "$ref": "./examples/DeleteDataController.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "get": {
         "tags": [

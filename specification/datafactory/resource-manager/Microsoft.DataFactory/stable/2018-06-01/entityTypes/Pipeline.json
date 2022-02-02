@@ -789,6 +789,10 @@
         "useBinaryTransfer": {
           "type": "boolean",
           "description": "Specify whether to use binary transfer mode for FTP stores."
+        },
+        "disableChunking": {
+          "type": "object",
+          "description": "If true, disable parallel reading within each file. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       }
     },
@@ -836,6 +840,10 @@
         "modifiedDatetimeEnd": {
           "type": "object",
           "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "disableChunking": {
+          "type": "object",
+          "description": "If true, disable parallel reading within each file. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       }
     },
@@ -6718,6 +6726,44 @@
         "waitTimeInSeconds"
       ]
     },
+    "FailActivity": {
+      "x-ms-discriminator-value": "Fail",
+      "type": "object",
+      "description": "This activity will fail within its own scope and output a custom error message and error code. The error message and code can provided either as a string literal or as an expression that can be evaluated to a string at runtime. The activity scope can be the whole pipeline or a control activity (e.g. foreach, switch, until), if the fail activity is contained in it.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControlActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Fail activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FailActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "FailActivityTypeProperties": {
+      "description": "Fail activity properties.",
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "The error message that surfaced in the Fail activity. It can be dynamic content that's evaluated to a non empty/blank string at runtime. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "errorCode": {
+          "description": "The error code that categorizes the error type of the Fail activity. It can be dynamic content that's evaluated to a non empty/blank string at runtime. Type: string (or Expression with resultType string).",
+          "type": "object"
+        }
+      },
+      "required": [
+        "message",
+        "errorCode"
+      ]
+    },
     "UntilActivity": {
       "x-ms-discriminator-value": "Until",
       "description": "This activity executes inner activities until the specified boolean expression results to true or timeout is reached, whichever is earlier.",
@@ -7286,8 +7332,32 @@
       "properties": {
         "sinks": {
           "type": "object",
-          "description": "List of Power Query activity sinks mapped to a queryName.",
+          "description": "(Deprecated. Please use Queries). List of Power Query activity sinks mapped to a queryName.",
           "additionalProperties": {
+            "$ref": "./DataFlow.json#/definitions/PowerQuerySink"
+          }
+        },
+        "queries": {
+          "type": "array",
+          "description": "List of mapping for Power Query mashup query to sink dataset(s).",
+          "items": {
+            "$ref": "#/definitions/PowerQuerySinkMapping"
+          }
+        }
+      }
+    },
+    "PowerQuerySinkMapping": {
+      "description": "Map Power Query mashup query to sink dataset(s).",
+      "type": "object",
+      "properties": {
+        "queryName": {
+          "description": "Name of the query in Power Query mashup document.",
+          "type": "string"
+        },
+        "dataflowSinks": {
+          "type": "array",
+          "description": "List of sinks mapped to Power Query mashup query.",
+          "items": {
             "$ref": "./DataFlow.json#/definitions/PowerQuerySink"
           }
         }
