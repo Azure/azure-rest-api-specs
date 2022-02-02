@@ -103,3 +103,14 @@ output-folder: $(csharp-sdks-folder)/$(csharp-profile)/storage/Microsoft.Azure.M
 batch:
   - tag: profile-hybrid-2021-04-01
 ```
+
+### Profile: hybrid_2021_06_01
+
+These settings apply only when `--csharp-profile=hybrid_2021_06_01` is specified on the command line.
+
+```yaml $(csharp-profile)=='hybrid_2021_06_01'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).Storage
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/storage/Microsoft.Azure.Management.Storage/src/Generated
+batch:
+  - tag: profile-hybrid-2021-06-01
+```
