@@ -26,6 +26,13 @@ These settings apply only when `--tag=package-2019-08` is specified on the comma
 input-file: preview/2019-08-15-preview/containerregistry.json
 ```
 
+### Tag: package-2021-07
+
+These settings apply only when `--tag=package-2021-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-07'
+input-file: stable/2021-07-01/containerregistry.json
+```
 ---
 # Code Generation
 
