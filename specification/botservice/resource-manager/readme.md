@@ -26,7 +26,7 @@ These are the global settings for the BotService API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2021-05
+tag: package-2021-03-01
 ```
 
 
