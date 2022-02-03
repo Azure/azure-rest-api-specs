@@ -77,7 +77,7 @@ This block is updated by an automatic script. Edits may be lost!
 
 ``` yaml
 # include the azure profile definitions from the standard location
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
