@@ -1063,14 +1063,18 @@
           "description": "List of reservations that are being purchased in this exchange.",
           "items": {
             "$ref": "#/definitions/PurchaseRequest"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "reservationsToExchange": {
           "type": "array",
           "description": "List of reservations that are being returned in this exchange.",
           "items": {
             "$ref": "#/definitions/ReservationToReturn"
-          }
+          },
+          "x-ms-identifiers": [
+            "reservationId"
+          ]
         }
       }
     },
@@ -1182,7 +1186,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/SkuProperty"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "msrp": {
           "type": "object",
@@ -1201,7 +1208,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/SkuRestriction"
-          }
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
         },
         "tier": {
           "type": "string",
@@ -1218,7 +1228,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/SkuCapability"
-          }
+          },
+          "x-ms-identifiers":[
+            "name"
+          ]
         }
       }
     },
@@ -1371,7 +1384,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PaymentDetail"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1567,7 +1581,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScopeProperties"
-          }
+          },
+          "x-ms-identifiers":[
+            "scope"
+          ]
         }
       }
     },
@@ -1788,14 +1805,18 @@
           "description": "Details of the reservations being purchased",
           "items": {
             "$ref": "#/definitions/ReservationToPurchaseCalculateExchange"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "reservationsToExchange": {
           "type": "array",
           "description": "Details of the reservations being returned",
           "items": {
             "$ref": "#/definitions/ReservationToExchange"
-          }
+          },
+          "x-ms-identifiers":[
+            "reservationId"
+          ]
         },
         "policyResult": {
           "$ref": "#/definitions/ExchangePolicyErrors"
@@ -1824,14 +1845,20 @@
           "description": "Details of the reservations being purchased",
           "items": {
             "$ref": "#/definitions/ReservationToPurchaseExchange"
-          }
+          },
+          "x-ms-identifiers":[
+            "reservationOrderId"
+          ]
         },
         "reservationsToExchange": {
           "type": "array",
           "description": "Details of the reservations being returned",
           "items": {
             "$ref": "#/definitions/ReservationToReturnForExchange"
-          }
+          },
+          "x-ms-identifiers": [
+            "reservationId"
+          ]
         },
         "policyResult": {
           "$ref": "#/definitions/ExchangePolicyErrors"
@@ -1847,7 +1874,8 @@
           "description": "Exchange Policy errors",
           "items": {
             "$ref": "#/definitions/ExchangePolicyError"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2055,7 +2083,8 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/ReservationUtilizationAggregates"
-              }
+              },
+              "x-ms-identifiers": []
             }
           }
         }
@@ -2406,7 +2435,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationResponse"
-          }
+          },
+          "x-ms-identifiers":[
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -2621,7 +2653,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PaymentDetail"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },

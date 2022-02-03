@@ -469,7 +469,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CurrentQuotaLimitBase"
-          }
+          },
+          "x-ms-identifiers": [
+            "/properties/name/value"
+          ]
         },
         "nextLink": {
           "description": "The URI for fetching the next page of quotas (service limits). When no more pages exist, the value is null.",
@@ -485,7 +488,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CurrentQuotaLimit"
-          }
+          },
+          "x-ms-identifiers": [
+            "/quotaInformation/properties/name/value"
+          ]
         },
         "nextLink": {
           "description": "The URI for fetching the next page of quota limits. When no more pages exist, the value is null.",
@@ -502,7 +508,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CurrentQuotaLimitBase"
-          }
+          },
+          "x-ms-identifiers": [
+            "/properties/name/value"
+          ]
         }
       }
     },
@@ -708,7 +717,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubRequest"
-          }
+          },
+          "x-ms-identifiers": [
+            "subRequestId"
+          ]
         }
       }
     },
@@ -796,6 +808,7 @@
           "items": {
             "$ref": "#/definitions/ServiceErrorDetail"
           },
+          "x-ms-identifiers": [],
           "description": "The list of error details.",
           "readOnly": true
         }
