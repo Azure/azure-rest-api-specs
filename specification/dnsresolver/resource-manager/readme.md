@@ -73,9 +73,7 @@ directive:
     from: dnsresolver.json
     suppress: OperationsAPIImplementation
     reason: Operation APIs for Microsoft.Network are to be defined in Network swagger.
-  - where: $.definitions
-    from: dnsresolver.json
-    suppress: TrackedResourceListByImmediateParent
+  - suppress: TrackedResourceListByImmediateParent
     reason: Another list API naming approach is used over the specs.
   - where: $.definitions.Resource
     from: types.json

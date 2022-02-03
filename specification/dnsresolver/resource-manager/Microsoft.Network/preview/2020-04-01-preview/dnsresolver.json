@@ -1692,9 +1692,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/listDnsResolvers": {
       "post": {
         "tags": [
-          "ReverseResourceLookUp"
+          "DnsResolvers"
         ],
-        "operationId": "DnsResolvers_ListDnsResolversByVirtualNetwork",
+        "operationId": "DnsResolvers_ListByVirtualNetwork",
         "description": "Lists DNS resolver resource IDs linked to a virtual network.",
         "parameters": [
           {
@@ -1740,7 +1740,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/listDnsForwardingRulesets": {
       "post": {
         "tags": [
-          "ReverseResourceLookUp"
+          "DnsForwardingRulesets"
         ],
         "operationId": "DnsForwardingRulesets_ListByVirtualNetwork",
         "description": "Lists DNS forwarding ruleset resource IDs attached to a virtual network.",
@@ -1781,57 +1781,6 @@
         "x-ms-examples": {
           "List DNS forwarding rulesets by virtual network": {
             "$ref": "./examples/DnsForwardingRuleset_ListByVirtualNetwork.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsResolvers/{dnsResolverName}/outboundEndpoints/{outboundEndpointName}/listDnsForwardingRulesets": {
-      "post": {
-        "tags": [
-          "ReverseResourceLookUp"
-        ],
-        "operationId": "DnsForwardingRulesets_ListByOutboundEndpoint",
-        "description": "Lists DNS forwarding ruleset resource IDs attached to a outbound endpoint.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DnsResolverNameParameter"
-          },
-          {
-            "$ref": "#/parameters/OutboundEndpointNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/TopParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List of DNS forwarding ruleset resource IDs linked to the outbound.",
-            "schema": {
-              "$ref": "#/definitions/SubResourceListResult"
-            }
-          },
-          "default": {
-            "description": "Default response. It will be deserialized as per the Error definition.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List DNS forwarding rulesets by virtual network": {
-            "$ref": "./examples/DnsForwardingRuleset_ListByOutboundEndpoint.json"
           }
         }
       }
