@@ -177,6 +177,14 @@
         ],
         "description": "Deletes a network manager security user configuration.",
         "operationId": "SecurityUserConfigurations_Delete",
+        "parameters": [
+          {
+            "$ref": "./networkManagerSecurityAdminConfiguration.json#/parameters/ForceDeleteParameter"
+          },
+          {
+            "$ref": "./networkManagerSecurityAdminConfiguration.json#/parameters/RecursiveDeleteParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -348,6 +356,14 @@
         ],
         "description": "Deletes a user rule collection.",
         "operationId": "UserRuleCollections_Delete",
+        "parameters": [
+          {
+            "$ref": "./networkManagerSecurityAdminConfiguration.json#/parameters/ForceDeleteParameter"
+          },
+          {
+            "$ref": "./networkManagerSecurityAdminConfiguration.json#/parameters/RecursiveDeleteParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -531,6 +547,11 @@
         ],
         "description": "Deletes a user rule.",
         "operationId": "UserRules_Delete",
+        "parameters": [
+          {
+            "$ref": "./networkManagerSecurityAdminConfiguration.json#/parameters/ForceDeleteParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Delete Succeed."
