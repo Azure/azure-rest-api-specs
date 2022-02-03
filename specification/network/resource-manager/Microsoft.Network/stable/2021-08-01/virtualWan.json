@@ -6049,7 +6049,7 @@
           "description": "The preferred gateway to route on-prem traffic"
         },
         "hubRoutingPreference": {
-          "type": "string",
+          "$ref": "#/definitions/HubRoutingPreference",
           "description": "The hubRoutingPreference of this VirtualHub."
         }
       },
@@ -6065,6 +6065,19 @@
       ],
       "x-ms-enum": {
         "name": "PreferredRoutingGateway",
+        "modelAsString": true
+      }
+    },
+    "HubRoutingPreference": {
+      "type": "string",
+      "description": "The hub routing preference gateway types",
+      "enum": [
+        "ExpressRoute",
+        "VpnGateway",
+        "ASPath"
+      ],
+      "x-ms-enum": {
+        "name": "HubRoutingPreference",
         "modelAsString": true
       }
     },
