@@ -6,8 +6,19 @@ This is the AutoRest configuration file the Cognitive Services Language SDK.
 
 ## Releases
 
-The current preview release is 2021-11-01-preview
+The current preview release is 2022-02-01-preview
+
 The current stable release of QuestionAnswering is 2021-10-01 and preview release of Luis Deepstack is 2021-07-15-preview
+
+```yaml
+tag: release_2022_02_01_preview
+add-credentials: true
+clear-output-folder: true
+openapi-type: data-plane
+directive:
+  - suppress: LongRunningResponseStatusCode
+    reason: The validation tools do not properly recognize 202 as a supported response code.
+```
 
 ```yaml
 tag: release_2021_11_01_preview
@@ -32,6 +43,19 @@ tag: release_2021_07_15_preview
 add-credentials: true
 clear-output-folder: true
 openapi-type: data-plane
+```
+
+### Release 2022-02-01-preview
+
+These settings apply only when `--tag=release_2022_02_01_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2022_02_01_preview'
+input-file:
+- preview/2022-02-01-preview/textanalytics.json
+title:
+  Microsoft Cognitive Language Service
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ### Release 2021-11-01-preview
