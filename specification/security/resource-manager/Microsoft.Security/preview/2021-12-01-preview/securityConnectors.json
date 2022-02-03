@@ -506,7 +506,7 @@
           "type": "string",
           "description": "The GCP Project id"
         },
-        "workloadIdentityFederationPoolId": {
+        "workloadIdentityPoolId": {
           "type": "string",
           "description": "The GCP workload identity federation pool id"
         }
@@ -800,14 +800,14 @@
         }
       ],
       "properties": {
-        "workloadIdentityProviderId": {
-          "type": "string",
-          "description": "The GCP workload identity provider id for the offering"
-        },
         "nativeCloudConnection": {
           "type": "object",
           "description": "The native cloud connection configuration",
           "properties": {
+            "workloadIdentityProviderId": {
+              "type": "string",
+              "description": "The GCP workload identity provider id for the offering"
+            },
             "serviceAccountEmailAddress": {
               "type": "string",
               "description": "The service account email address in GCP for this offering"
