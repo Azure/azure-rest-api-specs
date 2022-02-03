@@ -23256,17 +23256,19 @@
     "KeyInfo": {
       "description": "Function key info.",
       "type": "object",
+      "required": [
+        "name",
+        "properties"
+       ],
       "properties": {
+        "name": {
+          "description": "Key name",
+          "type": "string"
+        },
         "properties": {
+          "description": "Key properties",
           "type": "object",
-          "required": [
-            "name"
-          ],
           "properties": {
-            "name": {
-              "description": "Key name",
-              "type": "string"
-            },
             "value": {
               "description": "Key value",
               "type": "string"
