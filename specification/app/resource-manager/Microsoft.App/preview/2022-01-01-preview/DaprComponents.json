@@ -260,15 +260,6 @@
             "type": "string"
           },
           {
-            "name": "daprComponentEnvelope",
-            "in": "body",
-            "required": true,
-            "description": "Properties of a Dapr Component that need to be updated",
-            "schema": {
-              "$ref": "#/definitions/DaprComponentPatch"
-            }
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -276,7 +267,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DaprComponent"
+              "$ref": "#/definitions/DaprComponentPatch"
             }
           },
           "default": {
@@ -378,7 +369,7 @@
       }
     },
     "DaprComponentPatch": {
-      "description": "An update to dapr component",
+      "description": "An updat to dapr component",
       "type": "object",
       "properties": {
         "tags": {
