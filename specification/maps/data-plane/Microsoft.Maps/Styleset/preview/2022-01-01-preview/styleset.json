@@ -164,7 +164,7 @@
       "required": true,
       "x-ms-parameter-location": "method"
     },
-    "DataFormat": {
+    "StyleSetDataFormat": {
       "name": "dataFormat",
       "in": "query",
       "description": "Defines the type of input file for a style set to be created from.",
@@ -191,10 +191,10 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "StyleFormat": {
+    "StyleSetStyleFormat": {
       "name": "styleFormat",
       "in": "query",
-      "description": " Defines the type of JSON object that is exported.",
+      "description": " Defines the type of JSON object that is supported.",
       "required": false,
       "type": "string",
       "default": "mapbox",
@@ -214,7 +214,7 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "Alias": {
+    "StyleSetAlias": {
       "name": "alias",
       "description": "The alias of the style set.",
       "type": "string",
@@ -229,10 +229,6 @@
         "x-publish": false,
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe StyleSet Create API allows the caller to create a styleSet from their styleSet configuration file.\n\n## Submit Create Request\n\nTo create your styleset you will make a `POST` request with a styleSet configuration file. \n\nThe Create StyleSet API is a \n[long-running request](https://aka.ms/am-creator-lrt-v2).",
         "operationId": "StyleSet_Create",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "x-ms-examples": {
           "Import Style by providing a azure maps or mapbox style json file": {
             "$ref": "./examples/StyleSet_Create.json"
@@ -249,10 +245,10 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/DataFormat"
+            "$ref": "#/parameters/StyleSetDataFormat"
           },
           {
-            "$ref": "#/parameters/Alias"
+            "$ref": "#/parameters/StyleSetAlias"
           },
           {
             "$ref": "#/parameters/DescriptionStyleSet"
@@ -444,14 +440,14 @@
             "$ref": "#/parameters/StyleName"
           },
           {
-            "$ref": "#/parameters/StyleFormat"
+            "$ref": "#/parameters/StyleSetStyleFormat"
           }
         ],
         "responses": {
           "200": {
             "description": "Get composed styleSet style request completed successfully. The response body contains a single style.",
             "schema": {
-              "$ref": "#/definitions/StyleRecipe"
+              "$ref": "#/definitions/StyleSetStyle"
             }
           },
           "400": {
@@ -687,29 +683,8 @@
         }
       }
     },
-    "StyleSet": {
-      "description": "Detail information for the data.",
-      "type": "object",
-      "properties": {
-        "styleSetId": {
-          "description": "The unique styleSet id for the styleSet.",
-          "type": "string",
-          "readOnly": true
-        },
-        "description": {
-          "description": "The description the caller provided when creating the styleSet. Maximum length 1024 characters.",
-          "type": "string",
-          "readOnly": true
-        },
-        "created": {
-          "description": "The creation date and time of this styleSet.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "StyleRecipe": {
-      "description": "Detail information for the data.",
+    "StyleSetStyle": {
+      "description": "A style configuration in a styleSet.",
       "type": "object",
       "properties": {
         "name": {
@@ -742,13 +717,13 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/LayerObject"
+            "$ref": "#/definitions/StyleLayerObject"
           }
         }
       }
     },
-    "LayerObject": {
-      "description": "A layer object.",
+    "StyleLayerObject": {
+      "description": "Layer object for style recipe.",
       "type": "object",
       "properties": {
         "id": {
