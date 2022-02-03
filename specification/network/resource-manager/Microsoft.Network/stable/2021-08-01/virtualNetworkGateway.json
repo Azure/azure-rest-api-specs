@@ -3449,6 +3449,13 @@
           "type": "boolean",
           "description": "EnableBgp flag."
         },
+        "GatewayCustomBgpIpAddresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayCustomBgpIpAddressIpConfiguration"
+          },
+          "description": "GatewayCustomBgpIpAddresses to be used for virtual network gateway Connection."
+        },
         "useLocalAzureIpAddress": {
           "type": "boolean",
           "description": "Use private local Azure IP for the connection."
@@ -3635,6 +3642,19 @@
         "remoteAddressRanges"
       ],
       "description": "An traffic selector policy for a virtual network gateway connection."
+    },
+    "GatewayCustomBgpIpAddressIpConfiguration": {
+      "properties": {
+        "IpconfigurationId": {
+          "type": "string",
+          "description": "The IpconfigurationId of ipconfiguration which belongs to gateway."
+        },
+        "CustomBgpIpAddress": {
+          "type": "string",
+          "description": "The custom BgpPeeringAddress which belongs to IpconfigurationId."
+        }
+      },
+      "description": "GatewayCustomBgpIpAddressIpConfiguration for a virtual network gateway connection."
     },
     "ConnectionProtocol": {
       "type": "string",
