@@ -2434,39 +2434,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DomainRegistration/generateSsoRequest": {
-      "post": {
-        "tags": [
-          "GlobalDomainRegistration"
-        ],
-        "summary": "Generates a single sign on request for domain management portal",
-        "operationId": "GlobalDomainRegistration_GetDomainControlCenterSsoRequest",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/DomainControlCenterSsoRequest"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DomainRegistration/validateDomainRegistrationInformation": {
       "post": {
         "tags": [
@@ -19197,24 +19164,6 @@
           "type": "string"
         },
         "message": {
-          "type": "string"
-        }
-      }
-    },
-    "DomainControlCenterSsoRequest": {
-      "description": "Single sign on request information for domain management",
-      "type": "object",
-      "properties": {
-        "url": {
-          "description": "Url where the single sign on request is to be made",
-          "type": "string"
-        },
-        "postParameterKey": {
-          "description": "Post parameter key",
-          "type": "string"
-        },
-        "postParameterValue": {
-          "description": "Post parameter value. Client should use 'application/x-www-form-urlencoded' encoding for this value.",
           "type": "string"
         }
       }
