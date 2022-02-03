@@ -28,30 +28,12 @@
               "tags": [
                 "Security"
               ],
-              "updateType": "Azure Stack Hub Service",
-              "requiredComponents": [
-                {
-                  "updateType": "Azure Stack Hub OS",
-                  "versionRequired": "",
-                  "minVersionRequired": "1.2010.0.1"
-                },
-                {
-                  "updateType": "Azure Stack Hub Service",
-                  "versionRequired": "1.2104.0.1",
-                  "minVersionRequired": ""
-                },
+              "packageType": "Infrastructure",
+              "updatePrerequisites": [
                 {
                   "updateType": "OEM",
-                  "versionRequired": "2.0.*.*",
-                  "minVersionRequired": ""
-                }
-              ],
-              "prerequisites": [
-                {
-                  "updateType": "OEM",
-                  "name": "OEM HPE 2.0.1709.0",
-                  "version": "2.0.1709.0",
-                  "informationLink": "https://aka.ms/azurestackupdate"
+                  "packageName": "OEM HPE 2.0.1709.0",
+                  "version": "2.0.1709.0"
                 }
               ],
               "updateStateProperties": {
@@ -60,8 +42,8 @@
               },
               "additionalProperties": "",
               "kbLink": "https://aka.ms/azurestackupdate",
-              "minVersionRequired": "1.2104.0.43",
-              "minOemVersionRequired": "2.0.1008.0",
+              "minVersionRequired": "1.2104.0.1",
+              "minOemVersionRequired": "2.0.1908.0",
               "installedDate": "9999-12-31T11:59:59.99999999Z"
             }
           },
@@ -85,19 +67,7 @@
                 "Security"
               ],
               "updateType": "OEM",
-              "requiredComponents": [
-                {
-                  "updateType": "Azure Stack Hub OS",
-                  "versionRequired": "1.2010.0.1",
-                  "minVersionRequired": ""
-                },
-                {
-                  "updateType": "OEM",
-                  "versionRequired": "2.0.*.*",
-                  "minVersionRequired": ""
-                }
-              ],
-              "prerequisites": [],
+              "updatePrerequisites": [],
               "updateStateProperties": {
                 "progressPercentage": 51,
                 "notifyMessage": ""
