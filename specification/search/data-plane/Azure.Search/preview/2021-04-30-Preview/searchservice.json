@@ -8572,6 +8572,7 @@
       "description": "A dictionary of http request headers."
     },
     "AmlSkill": {
+      "x-ms-client-name": "AzureMachineLearningSkill",
       "x-ms-discriminator-value": "#Microsoft.Skills.Custom.AmlSkill",
       "allOf": [
         {
@@ -8580,11 +8581,13 @@
       ],
       "properties": {
         "uri": {
+          "x-ms-client-name": "ScoringUri",
           "type": "string",
           "x-nullable": true,
           "description": "(Required for no authentication or key authentication) The scoring URI of the AML service to which the JSON payload will be sent. Only the https URI scheme is allowed."
         },
         "key": {
+          "x-ms-client-name": "AuthenticationKey",
           "type": "string",
           "x-nullable": true,
           "description": "(Required for key authentication) The key for the AML service."
