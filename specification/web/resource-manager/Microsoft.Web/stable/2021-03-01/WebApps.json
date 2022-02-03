@@ -23257,13 +23257,21 @@
       "description": "Function key info.",
       "type": "object",
       "properties": {
-        "name": {
-          "description": "Key name",
-          "type": "string"
-        },
-        "value": {
-          "description": "Key value",
-          "type": "string"
+        "properties": {
+          "type": "object",
+          "required": [
+            "name"
+          ],
+          "properties": {
+            "name": {
+              "description": "Key name",
+              "type": "string"
+            },
+            "value": {
+              "description": "Key value",
+              "type": "string"
+            }
+          }
         }
       }
     },
