@@ -1284,16 +1284,16 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Automanage/listServicePrincipalId": {
-      "post": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Automanage/servicePrincipals/{servicePrincipalName}": {
+      "get": {
         "tags": [
-          "ServicePrincipalId"
+          "servicePrincipals"
         ],
-        "operationId": "Automanage_ListServicePrincipalId",
-        "description": "Returns the Automanage ADD first party Application Service Principal Id for the subscription.",
+        "operationId": "Automanage_ServicePrincipal_Get",
+        "description": "Get the Automanage AAD first party Application Service Principal details for the subscription id.",
         "x-ms-examples": {
-          "List service principal id": {
-            "$ref": "./examples/listServicePrincipalId.json"
+          "Get service principal": {
+            "$ref": "./examples/getServicePrincipal.json"
           }
         },
         "parameters": [
@@ -1301,14 +1301,21 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
+            "name": "servicePrincipalName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the servicePrincipal Name. Only default is supported."
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Returns the Automanage ADD first party Application Service Principal Id for the subscription.",
+            "description": "Returns the Automanage ADD first party Application Service Principal details for the subscription.",
             "schema": {
-              "$ref": "#/definitions/ServicePrincipalId"
+              "$ref": "#/definitions/ServicePrincipal"
             }
           },
           "default": {
@@ -1654,14 +1661,46 @@
         }
       }
     },
-    "ServicePrincipalId": {
+    "ServicePrincipal": {
       "description": "The Service Principal Id for the subscription.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the resource."
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "ARM id of the resource."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Type of the resource."
+        },
+        "properties": {
+          "title": "Properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServicePrincipalProperties",
+          "description": "The Service Principal properties for the subscription"
+        }
+      }
+    },
+    "ServicePrincipalProperties": {
+      "description": "The Service Principal properties for the subscription.",
       "type": "object",
       "properties": {
         "servicePrincipalId": {
           "type": "string",
           "readOnly": true,
           "description": "The Service Principal Id for the subscription."
+        },
+        "authorizationSet": {
+          "type": "bool",
+          "readOnly": true,
+          "description": "Returns the contributor RBAC Role exist or not for the Service Principal Id."
         }
       }
     }
