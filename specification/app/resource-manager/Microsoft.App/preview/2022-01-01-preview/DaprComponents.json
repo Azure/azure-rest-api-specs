@@ -230,58 +230,6 @@
           }
         },
         "x-ms-long-running-operation": false
-      },
-      "patch": {
-        "tags": [
-          "DaprComponents"
-        ],
-        "summary": "Update Dapr Component's properties.",
-        "description": "Patches a Dapr Component. Only patching of tags is supported currently",
-        "operationId": "DaprComponents_Update",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "environmentName",
-            "in": "path",
-            "description": "Name of the Managed Environment.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the Dapr Component.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/DaprComponent"
-            }
-          },
-          "default": {
-            "description": "Common error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Patch Dapr Component": {
-            "$ref": "./examples/DaprComponents_Patch.json"
-          }
-        }
       }
     }
   },
@@ -312,7 +260,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
