@@ -198,6 +198,22 @@
         }
       }
     },
+     "DownloadUrl": {
+      "description": "A secure URL that can be used to download a an entity until the URL expires.",
+      "properties": {
+        "expiryTime": {
+          "description": "The time in UTC when the download URL will expire.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "url": {
+          "description": "The URL to the ZIP file. This Zip file will consists of multiple CSV files",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "ProxyResource": {
       "description": "The Resource model definition.",
       "type": "object",
