@@ -441,6 +441,56 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/vendors/{vendorName}/vendorSkus/{skuName}/generateCredential": {
+      "post": {
+        "tags": [
+          "VendorSkus"
+        ],
+        "operationId": "VendorSkus_GenerateCredential",
+        "description": "Generate credentials for publishing SKU images.",
+        "parameters": [
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "name": "skuName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the sku."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operations returns the credential for publishing SKU images.",
+            "schema": {
+              "$ref": "#/definitions/SkuCredential"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Generate a credential for vendor sku": {
+            "$ref": "./examples/VendorSkuGenerateCredential.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/vendors/{vendorName}/vendorSkus/{skuName}/previewSubscriptions": {
       "get": {
         "tags": [
@@ -690,6 +740,7 @@
   },
   "definitions": {
     "Vendor": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -710,6 +761,7 @@
       "description": "Vendor resource."
     },
     "VendorPropertiesFormat": {
+      "type": "object",
       "description": "Vendor properties.",
       "properties": {
         "provisioningState": {
@@ -728,6 +780,7 @@
       }
     },
     "VendorSku": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -748,6 +801,7 @@
       "description": "Sku sub resource."
     },
     "VendorSkuPropertiesFormat": {
+      "type": "object",
       "description": "Sku properties",
       "properties": {
         "provisioningState": {
@@ -804,6 +858,7 @@
       }
     },
     "VendorSkuListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -821,6 +876,7 @@
       "description": "Response for list vendor sku API service call."
     },
     "VendorListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -838,6 +894,7 @@
       "description": "Response for vendors API service call."
     },
     "NetworkFunctionTemplate": {
+      "type": "object",
       "properties": {
         "networkFunctionRoleConfigurations": {
           "type": "array",
@@ -850,6 +907,7 @@
       "description": "The network function template."
     },
     "NetworkFunctionRoleConfiguration": {
+      "type": "object",
       "description": "Network function role configuration.",
       "properties": {
         "roleName": {
@@ -935,6 +993,7 @@
       }
     },
     "ImageReference": {
+      "type": "object",
       "properties": {
         "publisher": {
           "type": "string",
@@ -960,6 +1019,7 @@
       "description": "The image reference properties."
     },
     "StorageProfile": {
+      "type": "object",
       "properties": {
         "imageReference": {
           "$ref": "#/definitions/ImageReference",
@@ -980,6 +1040,7 @@
       "description": "Specifies the storage settings for the virtual machine disks."
     },
     "OsDisk": {
+      "type": "object",
       "properties": {
         "osType": {
           "type": "string",
@@ -1011,6 +1072,7 @@
       "description": "Specifies information about the operating system disk used by the virtual machine. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)."
     },
     "VirtualHardDisk": {
+      "type": "object",
       "properties": {
         "uri": {
           "type": "string",
@@ -1025,6 +1087,7 @@
       "description": "Describes the uri of a disk."
     },
     "DataDisk": {
+      "type": "object",
       "properties": {
         "createOption": {
           "type": "string",
@@ -1051,6 +1114,7 @@
       "description": "Specifies information about the operating system disk used by the virtual machine. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)."
     },
     "CustomProfile": {
+      "type": "object",
       "properties": {
         "metadataConfigurationPath": {
           "type": "string",
@@ -1060,6 +1124,7 @@
       "description": "Specifies the custom settings for the virtual machine."
     },
     "PreviewSubscription": {
+      "type": "object",
       "x-ms-azure-resource": true,
       "description": "Customer subscription which can use a sku.",
       "properties": {
@@ -1102,6 +1167,7 @@
       }
     },
     "PreviewSubscriptionsList": {
+      "type": "object",
       "description": "A list of customer subscriptions which can use a sku.",
       "properties": {
         "value": {
@@ -1115,6 +1181,37 @@
           "readOnly": true,
           "type": "string",
           "description": "The URL to get the next set of results."
+        }
+      }
+    },
+    "SkuCredential": {
+      "description": "The Sku credential definition.",
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "The username of the sku credential."
+        },
+        "acrToken": {
+          "type": "string",
+          "description": "The credential value."
+        },
+        "acrServerUrl": {
+          "type": "string",
+          "description": "The Acr server url"
+        },
+        "repositories": {
+          "type": "array",
+          "description": "The repositories that could be accessed using the current credential.",
+          "items": {
+            "type": "string",
+            "description": "The repository that could be accessed using the current credential."
+          }
+        },
+        "expiry": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time when credential will expire."
         }
       }
     }

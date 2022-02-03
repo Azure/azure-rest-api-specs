@@ -327,10 +327,70 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/networkFunctions/{networkFunctionName}/executeRequest": {
+      "post": {
+        "tags": [
+          "NetworkFunctions"
+        ],
+        "operationId": "NetworkFunctions_ExecuteRequest",
+        "description": "Execute a request to services on a network function.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkFunctionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network function."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExecuteRequestParameters"
+            },
+            "description": "Payload for execute request post call."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Send request to  network function services": {
+            "$ref": "./examples/NetworkFunctionsExecuteRequest.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
     }
   },
   "definitions": {
     "NetworkFunction": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -355,6 +415,7 @@
       "description": "Network function resource response."
     },
     "NetworkFunctionPropertiesFormat": {
+      "type": "object",
       "description": "Network function properties.",
       "properties": {
         "provisioningState": {
@@ -412,6 +473,7 @@
       }
     },
     "NetworkFunctionListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -429,6 +491,7 @@
       "description": "Response for network function API service call."
     },
     "NetworkFunctionUserConfiguration": {
+      "type": "object",
       "properties": {
         "roleName": {
           "type": "string",
@@ -446,6 +509,7 @@
           "description": "The network interface configuration."
         },
         "osProfile": {
+          "type": "object",
           "properties": {
             "customData": {
               "type": "string",
@@ -456,6 +520,51 @@
         }
       },
       "description": "The network function user configuration."
+    },
+    "ExecuteRequestParameters": {
+      "type": "object",
+      "properties": {
+        "serviceEndpoint": {
+          "type": "string",
+          "description": "The endpoint of service to call."
+        },
+        "requestMetadata": {
+          "$ref": "#/definitions/RequestMetadata",
+          "description": "The request metadata."
+        }
+      },
+      "required": [
+        "serviceEndpoint",
+        "requestMetadata"
+      ],
+      "description": "Payload for execute request post call."
+    },
+    "RequestMetadata": {
+      "type": "object",
+      "properties": {
+        "relativePath": {
+          "type": "string",
+          "description": "The relative path of the request."
+        },
+        "httpMethod": {
+          "type": "string",
+          "description": "The http method of the request."
+        },
+        "serializedBody": {
+          "type": "string",
+          "description": "The serialized body of the request."
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "The api version of the request."
+        }
+      },
+      "required": [
+        "relativePath",
+        "httpMethod",
+        "serializedBody"
+      ],
+      "description": "Request metadata of execute request post call payload."
     }
   }
 }
