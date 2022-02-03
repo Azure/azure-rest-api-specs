@@ -608,7 +608,8 @@
             "DefenderForDatabasesAws",
             "CspmMonitorGcp",
             "DefenderForDatabasesGcp",
-            "CspmMonitorGithub"
+            "CspmMonitorGithub",
+            "DefenderForServersGcp"
           ],
           "x-ms-enum": {
             "name": "offeringType",
@@ -743,6 +744,41 @@
               }
             }
           }
+        },
+        "vaAutoProvisioning": {
+          "type": "object",
+          "description": "The Vulnerability Assessment autoprovisioning configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is Vulnerability Assessment auto provisioning enabled"
+            },
+            "configuration": {
+              "type": "object",
+              "description": "configuration for Vulnerability Assessment autoprovisioning",
+              "properties": {
+                "vaType": {
+                  "type": "string",
+                  "description": "The Vulnerability Assessment solution to be provisioned. Can be either 'TVM' or 'Qualys'"
+                }
+              }
+            }
+          }
+        },
+        "mdeAutoProvisioning": {
+          "type": "object",
+          "description": "The Microsoft Defender for Endpoint autoprovisioning configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is Microsoft Defender for Endpoint auto provisioning enabled"
+            },
+            "configuration": {
+              "type": "object",
+              "description": "configuration for Microsoft Defender for Endpoint autoprovisioning",
+              "properties": {}
+            }
+          }
         }
       }
     },
@@ -833,6 +869,91 @@
             "enabled": {
               "type": "boolean",
               "description": "is databases on virtual machines enabled"
+            }
+          }
+        }
+      }
+    },
+    "defenderForServersGcpOffering": {
+      "type": "object",
+      "description": "The Defender for Servers GCP offering configurations",
+      "x-ms-discriminator-value": "DefenderForServersGcp",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {
+        "defenderForServers": {
+          "type": "object",
+          "description": "The Defender for servers connection configuration",
+          "properties": {
+            "workloadIdentityProviderId": {
+              "type": "string",
+              "description": "The workload identity provider id in GCP for this feature"
+            },
+            "serviceAccountEmailAddress": {
+              "type": "string",
+              "description": "The service account email address in GCP for this feature"
+            }
+          }
+        },
+        "arcAutoProvisioning": {
+          "type": "object",
+          "description": "The ARC autoprovisioning configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is arc auto provisioning enabled"
+            },
+            "configuration": {
+              "type": "object",
+              "description": "Configuration for ARC autoprovisioning",
+              "properties": {
+                "clientId": {
+                  "type": "string",
+                  "description": "The agent onboarding service account client id"
+                },
+                "agentOnboardingServiceAccountNumericId": {
+                  "type": "string",
+                  "description": "The agent onboarding service account numeric id"
+                }
+              }
+            }
+          }
+        },
+        "vaAutoProvisioning": {
+          "type": "object",
+          "description": "The Vulnerability Assessment autoprovisioning configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is Vulnerability Assessment auto provisioning enabled"
+            },
+            "configuration": {
+              "type": "object",
+              "description": "configuration for Vulnerability Assessment autoprovisioning",
+              "properties": {
+                "vaType": {
+                  "type": "string",
+                  "description": "The Vulnerability Assessment solution to be provisioned. Can be either 'TVM' or 'Qualys'"
+                }
+              }
+            }
+          }
+        },
+        "mdeAutoProvisioning": {
+          "type": "object",
+          "description": "The Microsoft Defender for Endpoint autoprovisioning configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is Microsoft Defender for Endpoint auto provisioning enabled"
+            },
+            "configuration": {
+              "type": "object",
+              "description": "configuration for Microsoft Defender for Endpoint autoprovisioning",
+              "properties": {}
             }
           }
         }
