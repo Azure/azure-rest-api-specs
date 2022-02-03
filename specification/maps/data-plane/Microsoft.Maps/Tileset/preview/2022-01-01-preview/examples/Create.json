@@ -52,7 +52,13 @@
       "body": {
         "error": {
           "code": "400 BadRequest",
-          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+          "message": "1 errors occurred. More information provided in details.",
+          "details": [
+            {
+                "message": "The value '8f947911-b8f-5c6a-8a71-e1bc33baeac6' is not properly formatted.",
+                "target": "datasetId"
+            }
+          ]
         }
       }
     },
@@ -60,8 +66,10 @@
       "headers": {},
       "body": {
         "error": {
-          "code": "401 Unauthorized",
-          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+          "code": "Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription.",
+          "target": "WWW-Authenticate",
+          "details": []
         }
       }
     },

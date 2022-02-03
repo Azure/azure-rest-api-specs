@@ -188,7 +188,8 @@
             "description": "ZIP style format."
           }
         ]
-      }
+      },
+      "x-ms-parameter-location": "method"
     },
     "StyleFormat": {
       "name": "styleFormat",
@@ -210,14 +211,16 @@
             "description": "mapbox style data format."
           }
         ]
-      }
+      },
+      "x-ms-parameter-location": "method"
     },
     "Alias": {
       "name": "alias",
       "description": "The alias of the style set.",
       "type": "string",
       "in": "query",
-      "required": false
+      "required": false,
+      "x-ms-parameter-location": "method"
     }
   },
   "paths": {
@@ -448,7 +451,7 @@
           "200": {
             "description": "Get composed styleSet style request completed successfully. The response body contains a single style.",
             "schema": {
-              "type": "object"
+              "type": "#/definitions/StyleRecipe"
             }
           },
           "400": {
@@ -505,7 +508,7 @@
     }
   },
   "definitions": {
-    "ODataErrorResponse": {
+    "ODataErrorResponse":{
       "type": "object",
       "description": "This response object is returned when an error occurs in the Azure Maps API.",
       "properties": {
@@ -701,6 +704,81 @@
         "created": {
           "description": "The creation date and time of this styleSet.",
           "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "StyleRecipe": {
+      "description": "Detail information for the data.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name for the style.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "The version of the mapbox style.",
+          "type": "number",
+          "readOnly": true
+        },
+        "sources": {
+          "description": "Data source specifications.",
+          "type": "object",
+          "readOnly": true
+        },
+        "sprite": {
+          "description": "A base URL for retrieving the sprite image and metadata.",
+          "type": "string",
+          "readOnly": true
+        },
+        "glyphs": {
+          "description": "A base URL for retrieving the glyphs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "layers": {
+          "description": "A style's layers property lists all the layers available in that style",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/LayerObject"
+          }
+        }
+      }
+    },
+    "LayerObject": {
+      "description": "A layer object.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The unique id for the layer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the layer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "source-layer": {
+          "description": "The source layer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "source": {
+          "description": "The source.",
+          "type": "string",
+          "readOnly": true
+        },
+        "layout": {
+          "description": "The layout of the layer.",
+          "type": "object",
+          "readOnly": true
+        },
+        "paint": {
+          "description": "The paint configuration of the layer.",
+          "type": "object",
           "readOnly": true
         }
       }
