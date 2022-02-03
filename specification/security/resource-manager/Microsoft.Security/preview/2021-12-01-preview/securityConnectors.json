@@ -609,7 +609,8 @@
             "CspmMonitorGcp",
             "DefenderForDatabasesGcp",
             "CspmMonitorGithub",
-            "DefenderForServersGcp"
+            "DefenderForServersGcp",
+            "DefenderForContainersGcp"
           ],
           "x-ms-enum": {
             "name": "offeringType",
@@ -956,6 +957,58 @@
               "properties": {}
             }
           }
+        }
+      }
+    },
+    "defenderForContainersGcpOffering": {
+      "type": "object",
+      "description": "The containers GCP offering",
+      "x-ms-discriminator-value": "DefenderForContainersGcp",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {
+        "nativeCloudConnection": {
+          "type": "object",
+          "description": "The native cloud connection configuration",
+          "properties": {
+            "serviceAccountEmailAddress": {
+              "type": "string",
+              "description": "The service account email address in GCP for this offering"
+            },
+            "workloadIdentityProviderId": {
+              "type": "string",
+              "description": "The GCP workload identity provider id for this offering"
+            }
+          }
+        },
+        "dataPipelineNativeCloudConnection": {
+          "type": "object",
+          "description": "The native cloud connection configuration",
+          "properties": {
+            "serviceAccountEmailAddress": {
+              "type": "string",
+              "description": "The data collection service account email address in GCP for this offering"
+            },
+            "workloadIdentityProviderId": {
+              "type": "string",
+              "description": "The data collection GCP workload identity provider id for this offering"
+            }
+          }
+        },
+        "auditLogsAutoProvisioningFlag": {
+          "type": "boolean",
+          "description": "Is audit logs data collection enabled"
+        },
+        "defenderAgentAutoProvisioningFlag": {
+          "type": "boolean",
+          "description": "Is Microsoft Defender for Cloud Kubernetes agent auto provisioning enabled"
+        },
+        "policyAgentAutoProvisioningFlag": {
+          "type": "boolean",
+          "description": "Is Policy Kubernetes agent auto provisioning enabled"
         }
       }
     },
