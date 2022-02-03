@@ -3938,7 +3938,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceStatus"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "provisioningState": {
           "description": "Gets or sets the provisioning state.",
@@ -4134,7 +4135,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceStatus"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "provisioningState": {
           "description": "Gets or sets the provisioning state.",
@@ -4446,7 +4448,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NetworkInterfaceUpdate"
-          }
+          },
+          "x-ms-identifiers": [
+            "networkId"
+          ]
         }
       }
     },
@@ -4459,7 +4464,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NetworkInterface"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -4528,7 +4536,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualDisk"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "scsiControllers": {
           "description": "Gets or sets the list of virtual SCSI controllers associated with the virtual machine.",
@@ -4536,6 +4547,10 @@
           "items": {
             "$ref": "#/definitions/VirtualSCSIController"
           },
+          "x-ms-identifiers": [
+            "type",
+            "scsiCtlrUnitNumber"
+          ],
           "readOnly": true
         }
       }
@@ -4549,7 +4564,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualDiskUpdate"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -4593,6 +4611,10 @@
           "items": {
             "$ref": "#/definitions/ErrorDetail"
           },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ],
           "description": "Details about the error state."
         }
       }
@@ -4725,7 +4747,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceStatus"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "provisioningState": {
           "description": "Gets or sets the provisioning state.",
@@ -4934,6 +4957,9 @@
           "items": {
             "$ref": "#/definitions/NetworkInterface"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         },
         "disks": {
@@ -4942,6 +4968,9 @@
           "items": {
             "$ref": "#/definitions/VirtualDisk"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         },
         "customResourceName": {
@@ -4970,7 +4999,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceStatus"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "provisioningState": {
           "description": "Gets or sets the provisioning state.",
@@ -5011,7 +5041,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceStatus"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "customResourceName": {
           "description": "Gets the name of the corresponding resource in Kubernetes.",
@@ -5151,7 +5182,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceStatus"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "customResourceName": {
           "description": "Gets the name of the corresponding resource in Kubernetes.",
@@ -5275,7 +5307,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceStatus"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "customResourceName": {
           "description": "Gets the name of the corresponding resource in Kubernetes.",
@@ -5500,7 +5533,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceStatus"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "provisioningState": {
           "description": "Gets or sets the provisioning state.",
@@ -5826,6 +5860,9 @@
           "items": {
             "$ref": "#/definitions/NicIPAddressSettings"
           },
+          "x-ms-identifiers": [
+            "ipAddress"
+          ],
           "readOnly": true
         }
       }
@@ -5851,7 +5888,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorDetail"
-          }
+          },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ]
         }
       },
       "required": [
@@ -5909,7 +5950,10 @@
           "items": {
             "description": "Operation.",
             "$ref": "#/definitions/operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [
@@ -5946,6 +5990,7 @@
           "items": {
             "$ref": "#/definitions/ErrorDefinition"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         }
       }
@@ -6690,7 +6735,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceStatus"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "provisioningState": {
           "description": "Gets or sets the provisioning state.",
