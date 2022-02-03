@@ -337,9 +337,6 @@
           "200": {
             "description": "OK. The request has succeeded."
           },
-          "204": {
-            "description": "The resource was not found."
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -353,6 +350,9 @@
                 "format": "int32"
               }
             }
+          },
+          "204": {
+            "description": "The resource was not found."
           },
           "409": {
             "description": "Conflict. Payment method cannot be detached from billing profile.",
@@ -532,7 +532,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PaymentMethodLogo"
-          }
+          },
+          "x-ms-identifiers": [
+            "url"
+          ]
         },
         "status": {
           "description": "Status of the payment method.",
@@ -599,7 +602,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PaymentMethodLogo"
-          }
+          },
+          "x-ms-identifiers": [
+            "url"
+          ]
         },
         "status": {
           "description": "Status of the payment method.",
@@ -661,7 +667,8 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/DetachPaymentMethodErrorDetails"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -714,7 +721,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "URL to get the next set of operation list results if there are any.",

@@ -239,7 +239,9 @@
               "$ref": "#/definitions/AddressDetails"
             },
             "x-ms-identifiers": [
-              "adressLine1"
+              "firstName",
+              "lastName",
+              "addressLine1"
             ]
           }
         ],
@@ -3776,7 +3778,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Reseller"
-          }
+          },
+          "x-ms-identifiers": [
+            "resellerId"
+          ]
         }
       }
     },
@@ -3795,7 +3800,9 @@
             "$ref": "#/definitions/AddressDetails"
           },
           "x-ms-identifiers": [
-            "adressLine1"
+            "firstName",
+            "lastName",
+            "addressLine1"
           ]
         },
         "validationMessage": {
@@ -4538,7 +4545,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AzurePlan"
-          }
+          },
+          "x-ms-identifiers": [
+            "skuId"
+          ]
         },
         "invoiceSections": {
           "description": "The invoice sections associated to the billing profile. By default this is not populated, unless it's specified in $expand.",
@@ -4978,8 +4988,7 @@
         "error": {
           "description": "The details of the error.",
           "$ref": "#/definitions/ErrorDetails"
-        },
-        "x-ms-identifiers": []
+        }
       }
     },
     "ErrorSubDetails": {
@@ -5003,7 +5012,11 @@
             "readOnly": true
           }
         }
-      }
+      },
+      "x-ms-identifiers": [
+        "message",
+        "target"
+      ]
     },
     "Reseller": {
       "description": "Details of the reseller.",
@@ -6463,7 +6476,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/BillingProfileInfo"
-          }
+          },
+          "x-ms-identifiers": [
+            "billingProfileId"
+          ]
         },
         "effectiveDate": {
           "description": "The date from which the agreement is effective.",

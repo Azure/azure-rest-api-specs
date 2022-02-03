@@ -26,7 +26,7 @@ These are the global settings for the Billing API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-05
+tag: package-2021-10
 ```
 
 ### Tag: package-2021-10
