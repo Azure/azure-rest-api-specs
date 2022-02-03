@@ -25,7 +25,7 @@ These are the global settings for the Automation API.
 title: AutomationClient
 description: Automation Client
 openapi-type: arm
-tag: package-2021-06-22
+tag: package-2022-01-31
 ```
 
 ### Tag: package-2015-10
