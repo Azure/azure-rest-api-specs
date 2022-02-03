@@ -271,14 +271,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "The managed Cassandra cluster is being updated. Poll the provided operation for completion.",
+          "200": {
+            "description": "Completed synchronously. This will only happen if the fields changed by patch require no changes to the actual Cassandra data center.",
             "schema": {
               "$ref": "#/definitions/ClusterResource"
             }
           },
-          "200": {
-            "description": "Completed synchronously. This will only happen if the fields changed by patch require no changes to the actual Cassandra data center.",
+          "202": {
+            "description": "The managed Cassandra cluster is being updated. Poll the provided operation for completion.",
             "schema": {
               "$ref": "#/definitions/ClusterResource"
             }
@@ -501,14 +501,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Accepted. The data center will be created asynchronously.",
+          "200": {
+            "description": "Accepted. The data center will be updated asynchronously.",
             "schema": {
               "$ref": "#/definitions/DataCenterResource"
             }
           },
-          "200": {
-            "description": "Accepted. The data center will be updated asynchronously.",
+          "201": {
+            "description": "Accepted. The data center will be created asynchronously.",
             "schema": {
               "$ref": "#/definitions/DataCenterResource"
             }
@@ -557,14 +557,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted. Update will proceed asynchronously.",
+          "200": {
+            "description": "Completed synchronously. This will only happen if the fields changed by patch require no changes to the actual Cassandra cluster, such as editing the tags.",
             "schema": {
               "$ref": "#/definitions/DataCenterResource"
             }
           },
-          "200": {
-            "description": "Completed synchronously. This will only happen if the fields changed by patch require no changes to the actual Cassandra cluster, such as editing the tags.",
+          "202": {
+            "description": "Accepted. Update will proceed asynchronously.",
             "schema": {
               "$ref": "#/definitions/DataCenterResource"
             }
@@ -894,14 +894,20 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/Certificate"
-              }
+              },
+              "x-ms-identifiers": [
+                "pem"
+              ]
             },
             "externalGossipCertificates": {
               "description": "List of TLS certificates used to authorize gossip from unmanaged data centers. The TLS certificates of all nodes in unmanaged data centers must be verifiable using one of the certificates provided in this property.",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/Certificate"
-              }
+              },
+              "x-ms-identifiers": [
+                "pem"
+              ]
             },
             "gossipCertificates": {
               "readOnly": true,
@@ -912,14 +918,20 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/Certificate"
-              }
+              },
+              "x-ms-identifiers": [
+                "pem"
+              ]
             },
             "externalSeedNodes": {
               "type": "array",
               "description": "List of IP addresses of seed nodes in unmanaged data centers. These will be added to the seed node lists of all managed nodes.",
               "items": {
                 "$ref": "#/definitions/SeedNode"
-              }
+              },
+              "x-ms-identifiers": [
+                "ipAddress"
+              ]
             },
             "seedNodes": {
               "readOnly": true,
@@ -927,6 +939,9 @@
               "items": {
                 "$ref": "#/definitions/SeedNode"
               },
+              "x-ms-identifiers": [
+                "ipAddress"
+              ],
               "description": "List of IP addresses of seed nodes in the managed data centers. These should be added to the seed node lists of all unmanaged nodes."
             },
             "hoursBetweenBackups": {
@@ -988,7 +1003,8 @@
           "description": "List relevant information about any connection errors to the Datacenters.",
           "items": {
             "$ref": "#/definitions/ConnectionError"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "dataCenters": {
           "type": "array",
@@ -1085,10 +1101,16 @@
                       "format": "double"
                     }
                   }
-                }
+                },
+                "x-ms-identifiers": [
+                  "address"
+                ]
               }
             }
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -1268,7 +1290,10 @@
               "description": "IP addresses for seed nodes in this data center. This is for reference. Generally you will want to use the seedNodes property on the cluster, which aggregates the seed nodes from all data centers in the cluster.",
               "items": {
                 "$ref": "#/definitions/SeedNode"
-              }
+              },
+              "x-ms-identifiers": [
+                "ipAddress"
+              ]
             },
             "base64EncodedCassandraYamlFragment": {
               "type": "string",
