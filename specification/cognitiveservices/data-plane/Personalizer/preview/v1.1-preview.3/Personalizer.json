@@ -622,7 +622,8 @@
         "operationId": "Model_Get",
         "consumes": [],
         "produces": [
-          "application/octet-stream"
+          "application/octet-stream",
+          "application/json"
         ],
         "parameters": [
           {
@@ -639,6 +640,12 @@
             "schema": {
               "type": "file"
             }
+          },
+          "default": {
+            "description": "Requested resource does not exist on the server.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -653,7 +660,7 @@
         ],
         "summary": "Put the digitally signed model file.",
         "description": "Replace the existing model file for the Personalizer service.",
-        "operationId": "SignedModel_Put",
+        "operationId": "Model_Import",
         "consumes": [
           "application/octet-stream"
         ],
@@ -683,8 +690,8 @@
           }
         },
         "x-ms-examples": {
-          "Successful SignedModel_Put request": {
-            "$ref": "./examples/SignedModel_Put.json"
+          "Successful Model_Import request": {
+            "$ref": "./examples/Model_Import.json"
           }
         }
       },
@@ -1441,6 +1448,7 @@
         },
         "totalSummary": {
           "description": "The aggregate total of the Offline Evaluation.",
+          "type": "object",
           "allOf": [
             {
               "$ref": "#/definitions/PolicyResultSummary"
@@ -1587,6 +1595,7 @@
       "properties": {
         "dateRange": {
           "description": "Date range.",
+          "type": "object",
           "allOf": [
             {
               "$ref": "#/definitions/DateRange"
