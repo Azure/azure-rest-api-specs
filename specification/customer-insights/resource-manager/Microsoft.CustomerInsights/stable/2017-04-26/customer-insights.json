@@ -114,14 +114,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created. A new hub is created.",
+          "200": {
+            "description": "OK. An existing hub is updated.",
             "schema": {
               "$ref": "#/definitions/Hub"
             }
           },
-          "200": {
-            "description": "OK. An existing hub is updated.",
+          "201": {
+            "description": "Created. A new hub is created.",
             "schema": {
               "$ref": "#/definitions/Hub"
             }
@@ -1021,11 +1021,11 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted. The delete operation is accepted."
-          },
           "200": {
             "description": "OK. The relationship is deleted."
+          },
+          "202": {
+            "description": "Accepted. The delete operation is accepted."
           }
         },
         "x-ms-long-running-operation": true
@@ -1234,11 +1234,11 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted. The delete operation is accepted."
-          },
           "200": {
             "description": "OK. The relationship link is deleted."
+          },
+          "202": {
+            "description": "Accepted. The delete operation is accepted."
           }
         },
         "x-ms-long-running-operation": true
@@ -3708,6 +3708,10 @@
           "items": {
             "$ref": "#/definitions/PropertyDefinition"
           },
+          "x-ms-identifiers": [
+            "fieldName",
+            "fieldType"
+          ],
           "description": "The properties of the Profile."
         },
         "instancesCount": {
@@ -3781,6 +3785,7 @@
           "items": {
             "$ref": "#/definitions/ProfileEnumValidValuesFormat"
           },
+          "x-ms-identifiers": [],
           "description": "Describes valid values for an enum property."
         },
         "fieldName": {
@@ -3840,6 +3845,9 @@
           "items": {
             "$ref": "#/definitions/DataSourcePrecedence"
           },
+          "x-ms-identifiers": [
+            "dataSource/name"
+          ],
           "readOnly": true,
           "description": "This is specific to interactions modeled as activities. Data sources are used to determine where data is stored and also in precedence rules."
         }
@@ -3933,6 +3941,9 @@
           "items": {
             "$ref": "#/definitions/SalesforceTable"
           },
+          "x-ms-identifiers": [
+            "tableName"
+          ],
           "description": "The Salesforce tables."
         }
       }
@@ -3974,6 +3985,9 @@
           "items": {
             "$ref": "#/definitions/CrmConnectorEntities"
           },
+          "x-ms-identifiers": [
+            "logicalName"
+          ],
           "description": "The entities like account, contact, opportunity."
         },
         "accessToken": {
@@ -4253,6 +4267,10 @@
           "items": {
             "$ref": "#/definitions/ConnectorMappingStructure"
           },
+          "x-ms-identifiers": [
+            "propertyName",
+            "columnName"
+          ],
           "description": "Ingestion mapping information at property level."
         },
         "completeOperation": {
@@ -4504,6 +4522,10 @@
           "items": {
             "$ref": "#/definitions/KpiGroupByMetadata"
           },
+          "x-ms-identifiers": [
+            "fieldName",
+            "fieldType"
+          ],
           "description": "The KPI GroupByMetadata."
         },
         "participantProfilesMetadata": {
@@ -4512,6 +4534,9 @@
           "items": {
             "$ref": "#/definitions/KpiParticipantProfilesMetadata"
           },
+          "x-ms-identifiers": [
+            "typeName"
+          ],
           "description": "The participant profiles."
         },
         "provisioningState": {
@@ -4528,6 +4553,9 @@
           "items": {
             "$ref": "#/definitions/KpiAlias"
           },
+          "x-ms-identifiers": [
+            "aliasName"
+          ],
           "description": "The aliases."
         },
         "extracts": {
@@ -4535,6 +4563,9 @@
           "items": {
             "$ref": "#/definitions/KpiExtract"
           },
+          "x-ms-identifiers": [
+            "extractName"
+          ],
           "description": "The KPI extracts."
         }
       },
@@ -4831,6 +4862,7 @@
           "items": {
             "$ref": "#/definitions/TypePropertiesMapping"
           },
+          "x-ms-identifiers": [],
           "description": "The set of properties mappings between the source and target Types."
         },
         "participantPropertyReferences": {
@@ -4838,6 +4870,7 @@
           "items": {
             "$ref": "#/definitions/ParticipantPropertyReference"
           },
+          "x-ms-identifiers": [],
           "description": "The properties that represent the participating profile."
         },
         "provisioningState": {
@@ -4891,6 +4924,7 @@
           "items": {
             "$ref": "#/definitions/RelationshipTypeFieldMapping"
           },
+          "x-ms-identifiers": [],
           "description": "Maps a profile property with the StrongId of related profile. This is an array to support StrongIds that are composite key as well."
         }
       },
@@ -4939,6 +4973,10 @@
           "items": {
             "$ref": "#/definitions/PropertyDefinition"
           },
+          "x-ms-identifiers": [
+            "fieldName",
+            "fieldType"
+          ],
           "description": "The properties of the Relationship."
         },
         "lookupMappings": {
@@ -4946,6 +4984,7 @@
           "items": {
             "$ref": "#/definitions/RelationshipTypeMapping"
           },
+          "x-ms-identifiers": [],
           "description": "Optional property to be used to map fields in profile to their strong ids in related profile."
         },
         "profileType": {
@@ -5044,6 +5083,7 @@
           "items": {
             "$ref": "#/definitions/RelationshipLinkFieldMapping"
           },
+          "x-ms-identifiers": [],
           "description": "The mappings between Interaction and Relationship fields."
         },
         "profilePropertyReferences": {
@@ -5051,6 +5091,7 @@
           "items": {
             "$ref": "#/definitions/ParticipantProfilePropertyReference"
           },
+          "x-ms-identifiers": [],
           "description": "The property references for the Profile of the Relationship."
         },
         "provisioningState": {
@@ -5063,6 +5104,7 @@
           "items": {
             "$ref": "#/definitions/ParticipantProfilePropertyReference"
           },
+          "x-ms-identifiers": [],
           "description": "The property references for the Related Profile of the Relationship."
         },
         "relationshipName": {
@@ -5127,6 +5169,7 @@
           "items": {
             "$ref": "#/definitions/ParticipantPropertyReference"
           },
+          "x-ms-identifiers": [],
           "description": "The property references."
         },
         "participantName": {
@@ -5208,6 +5251,9 @@
           "items": {
             "$ref": "#/definitions/Participant"
           },
+          "x-ms-identifiers": [
+            "participantName"
+          ],
           "description": "Profiles that participated in the interaction."
         },
         "primaryParticipantProfilePropertyName": {
@@ -5219,6 +5265,9 @@
           "items": {
             "$ref": "#/definitions/DataSourcePrecedence"
           },
+          "x-ms-identifiers": [
+            "dataSource/name"
+          ],
           "readOnly": true,
           "description": "This is specific to interactions modeled as activities. Data sources are used to determine where data is stored and also in precedence rules."
         },
@@ -5336,6 +5385,9 @@
           "items": {
             "$ref": "#/definitions/StrongId"
           },
+          "x-ms-identifiers": [
+            "strongIdName"
+          ],
           "description": "The strong IDs."
         }
       },
@@ -5740,6 +5792,9 @@
           "items": {
             "$ref": "#/definitions/AssignmentPrincipal"
           },
+          "x-ms-identifiers": [
+            "principalId"
+          ],
           "description": "The principals being assigned to."
         },
         "profiles": {
@@ -6003,6 +6058,7 @@
           "items": {
             "$ref": "#/definitions/RelationshipsLookup"
           },
+          "x-ms-identifiers": [],
           "readOnly": true,
           "description": "Suggested relationships for the type."
         }
@@ -6021,6 +6077,7 @@
           "items": {
             "$ref": "#/definitions/ParticipantProfilePropertyReference"
           },
+          "x-ms-identifiers": [],
           "readOnly": true,
           "description": "The property references for the profile type."
         },
@@ -6034,6 +6091,7 @@
           "items": {
             "$ref": "#/definitions/ParticipantProfilePropertyReference"
           },
+          "x-ms-identifiers": [],
           "readOnly": true,
           "description": "The property references for the related profile type."
         },
@@ -6173,6 +6231,9 @@
             },
             "description": "The definition of a prediction grade."
           },
+          "x-ms-identifiers": [
+            "gradeName"
+          ],
           "description": "The prediction grades."
         },
         "systemGeneratedEntities": {
@@ -6227,6 +6288,9 @@
           "items": {
             "$ref": "#/definitions/CanonicalProfileDefinition"
           },
+          "x-ms-identifiers": [
+            "canonicalProfileId"
+          ],
           "description": "Canonical profiles."
         },
         "primaryProfileInstanceCount": {
@@ -6282,6 +6346,7 @@
             },
             "description": "The definition of a prediction distribution."
           },
+          "x-ms-identifiers": [],
           "description": "Distributions of the prediction."
         }
       },
@@ -6331,6 +6396,10 @@
             },
             "description": "The definition of a canonical profile property."
           },
+          "x-ms-identifiers": [
+            "profileName",
+            "type"
+          ],
           "description": "Properties of the canonical profile."
         }
       },
@@ -6462,7 +6531,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "readOnly": true,
