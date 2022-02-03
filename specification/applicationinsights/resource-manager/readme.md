@@ -38,7 +38,7 @@ These are the global settings for the ApplicationInsights API.
 title: ApplicationInsightsManagementClient
 description: Composite Swagger for Application Insights Management Client
 openapi-type: arm
-tag: package-2021-03-only
+tag: package-2022-01-11
 ```
 
 ### Suppression
