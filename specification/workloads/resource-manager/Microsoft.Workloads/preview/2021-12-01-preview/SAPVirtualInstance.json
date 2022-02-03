@@ -146,6 +146,56 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/locations/{location}/sapVirtualInstanceMetadata/default/getDiskConfigurations": {
+      "post": {
+        "tags": [
+          "SAPDiskConfigurations"
+        ],
+        "description": "Get SAP Disk Configurations.",
+        "operationId": "SAPDiskConfigurations",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "SAPDiskConfigurations",
+            "description": "SAP Disk Configurations Request body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SAPDiskConfigurationsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SAP Disk Configurations Result.",
+            "schema": {
+              "$ref": "#/definitions/SAPDiskConfigurationsResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SAPDiskConfigurations_Prod": {
+            "$ref": "./examples/sapvirtualinstances/SAPDiskConfigurations_Prod.json"
+          },
+          "SAPDiskConfigurations_NonProd": {
+            "$ref": "./examples/sapvirtualinstances/SAPDiskConfigurations_NonProd.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances/{sapVirtualInstanceName}": {
       "put": {
         "tags": [
@@ -1974,6 +2024,93 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SAPSupportedSku"
+          }
+        }
+      }
+    },
+    "SAPDiskConfigurationsRequest": {
+      "description": "The SAP request to get list of disk configurations.",
+      "type": "object",
+      "properties": {
+        "appLocation": {
+          "type": "string",
+          "description": "The geo-location where the SAP resources will be created."
+        },
+        "environment": {
+          "$ref": "#/definitions/EnvironmentType"
+        },
+        "sapProduct": {
+          "$ref": "#/definitions/SAPProductType"
+        },
+        "databaseType": {
+          "description": "The database type. Eg: HANA, DB2, etc",
+          "$ref": "#/definitions/SAPDatabaseType"
+        },
+        "deploymentType": {
+          "description": "The deployment type. Eg: SingleServer/ThreeTier",
+          "$ref": "#/definitions/DeploymentType"
+        },
+        "dbVmSku": {
+          "description": "The VM SKU for database instance.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "appLocation",
+        "environment",
+        "sapProduct",
+        "databaseType",
+        "deploymentType",
+        "dbVmSku"
+      ]
+    },
+    "SAPDiskConfiguration": {
+      "description": "The SAP Disk Configuration.",
+      "type": "object",
+      "properties": {
+        "volume": {
+          "type": "string",
+          "description": "The volume name."
+        },
+        "diskType": {
+          "type": "string",
+          "description": "The disk type."
+        },
+        "diskCount": {
+          "description": "The disk count.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "diskSizeGB": {
+          "description": "The disk size in GB.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "diskIopsReadWrite": {
+          "description": "The disk Iops.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "diskMBpsReadWrite": {
+          "description": "The disk provisioned throughput in MBps.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "diskStorageType": {
+          "description": "The disk storage type",
+          "type": "string"
+        }
+      }
+    },
+    "SAPDiskConfigurationsResult": {
+      "description": "The list of disk configuration for vmSku which are part of SAP deployment.",
+      "type": "object",
+      "properties": {
+        "diskConfigurations": {
+          "description": "Gets the list of Disk Configurations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SAPDiskConfiguration"
           }
         }
       }
