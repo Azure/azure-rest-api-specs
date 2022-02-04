@@ -242,9 +242,8 @@ These settings apply only when `--tag=package-2022-03-01-test` is specified on t
 ``` yaml $(tag) == 'package-2022-03-01-test'
 input-file:
 - Microsoft.Compute/stable/2022-03-01/compute/compute.json
-- Microsoft.Compute/stable/2022-03-01/compute/virtualMachine.json
+- Microsoft.Compute/stable/2022-03-01/compute/capacityReservationGroup.json
 - Microsoft.Compute/stable/2022-03-01/compute/logAnalytics.json
-- Microsoft.Compute/stable/2022-03-01/compute/compute.json
 - Microsoft.Compute/stable/2022-03-01/compute/runCommands.json
 - Microsoft.Compute/stable/2022-03-01/common.json
 - Microsoft.Compute/stable/2021-07-01/skus.json

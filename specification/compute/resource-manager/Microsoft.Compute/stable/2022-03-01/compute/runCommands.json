@@ -44,7 +44,7 @@
         "operationId": "VirtualMachineRunCommands_List",
         "x-ms-examples": {
           "VirtualMachineRunCommandList": {
-            "$ref": "./examples/runCommands/VirtualMachineRunCommandList.json"
+            "$ref": "./examples/VirtualMachineRunCommandList.json"
           }
         },
         "description": "Lists all available run commands for a subscription in a location.",
@@ -58,10 +58,10 @@
             "pattern": "^[-\\w\\._]+$"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -85,7 +85,7 @@
         "operationId": "VirtualMachineRunCommands_Get",
         "x-ms-examples": {
           "VirtualMachineRunCommandGet": {
-            "$ref": "./examples/runCommands/VirtualMachineRunCommandGet.json"
+            "$ref": "./examples/VirtualMachineRunCommandGet.json"
           }
         },
         "description": "Gets specific run command for a subscription in a location.",
@@ -106,10 +106,10 @@
             "description": "The command id."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -130,7 +130,7 @@
         "operationId": "VirtualMachines_RunCommand",
         "x-ms-examples": {
           "VirtualMachineRunCommand": {
-            "$ref": "./examples/runCommands/VirtualMachineRunCommand.json"
+            "$ref": "./examples/VirtualMachineRunCommand.json"
           }
         },
         "description": "Run command on the VM.",
@@ -159,10 +159,10 @@
             "description": "Parameters supplied to the Run command operation."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -190,7 +190,7 @@
         "operationId": "VirtualMachineScaleSetVMs_RunCommand",
         "x-ms-examples": {
           "VirtualMachineScaleSetVMs_RunCommand": {
-            "$ref": "./examples/runCommands/VMScaleSetRunCommand.json"
+            "$ref": "./examples/VMScaleSetRunCommand.json"
           }
         },
         "description": "Run command on a virtual machine in a VM scale set.",
@@ -226,10 +226,10 @@
             "description": "Parameters supplied to the Run command operation."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -288,10 +288,10 @@
             "description": "Parameters supplied to the Create Virtual Machine RunCommand operation."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -310,14 +310,14 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../common.json#/definitions/CloudError"
             }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create or update a run command.": {
-            "$ref": "./examples/runCommands/CreateOrUpdateRunCommand.json"
+            "$ref": "./examples/CreateOrUpdateRunCommand.json"
           }
         }
       },
@@ -359,10 +359,10 @@
             "description": "Parameters supplied to the Update Virtual Machine RunCommand operation."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -375,14 +375,14 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../common.json#/definitions/CloudError"
             }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Update a run command.": {
-            "$ref": "./examples/runCommands/UpdateRunCommand.json"
+            "$ref": "./examples/UpdateRunCommand.json"
           }
         }
       },
@@ -415,10 +415,10 @@
             "description": "The name of the virtual machine run command."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -434,14 +434,14 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../common.json#/definitions/CloudError"
             }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Delete a run command.": {
-            "$ref": "./examples/runCommands/DeleteRunCommand.json"
+            "$ref": "./examples/DeleteRunCommand.json"
           }
         }
       },
@@ -481,10 +481,10 @@
             "description": "The expand expression to apply on the operation."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -497,13 +497,13 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../common.json#/definitions/CloudError"
             }
           }
         },
         "x-ms-examples": {
           "Get a run command.": {
-            "$ref": "./examples/runCommands/GetRunCommand.json"
+            "$ref": "./examples/GetRunCommand.json"
           }
         }
       }
@@ -538,10 +538,10 @@
             "description": "The expand expression to apply on the operation."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -554,13 +554,13 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../common.json#/definitions/CloudError"
             }
           }
         },
         "x-ms-examples": {
           "List run commands in a Virtual Machine.": {
-            "$ref": "./examples/runCommands/ListRunCommandsInVM.json"
+            "$ref": "./examples/ListRunCommandsInVM.json"
           }
         },
         "x-ms-pageable": {
@@ -614,10 +614,10 @@
             "description": "Parameters supplied to the Create Virtual Machine RunCommand operation."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -636,14 +636,14 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../common.json#/definitions/CloudError"
             }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create VirtualMachineScaleSet VM run command.": {
-            "$ref": "./examples/runCommands/CreateOrUpdateVirtualMachineScaleSetVMRunCommands.json"
+            "$ref": "./examples/CreateOrUpdateVirtualMachineScaleSetVMRunCommands.json"
           }
         }
       },
@@ -692,10 +692,10 @@
             "description": "Parameters supplied to the Update Virtual Machine RunCommand operation."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -708,14 +708,14 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../common.json#/definitions/CloudError"
             }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Update VirtualMachineScaleSet VM run command.": {
-            "$ref": "./examples/runCommands/UpdateVirtualMachineScaleSetVMRunCommands.json"
+            "$ref": "./examples/UpdateVirtualMachineScaleSetVMRunCommands.json"
           }
         }
       },
@@ -755,10 +755,10 @@
             "description": "The name of the virtual machine run command."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -774,14 +774,14 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../common.json#/definitions/CloudError"
             }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Delete VirtualMachineScaleSet VM run command.": {
-            "$ref": "./examples/runCommands/DeleteVirtualMachineScaleSetVMRunCommands.json"
+            "$ref": "./examples/DeleteVirtualMachineScaleSetVMRunCommands.json"
           }
         }
       },
@@ -828,10 +828,10 @@
             "description": "The expand expression to apply on the operation."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -844,13 +844,13 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../common.json#/definitions/CloudError"
             }
           }
         },
         "x-ms-examples": {
           "Get VirtualMachineScaleSet VM run commands.": {
-            "$ref": "./examples/runCommands/GetVirtualMachineScaleSetVMRunCommands.json"
+            "$ref": "./examples/GetVirtualMachineScaleSetVMRunCommands.json"
           }
         }
       }
@@ -892,10 +892,10 @@
             "description": "The expand expression to apply on the operation."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -908,7 +908,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../common.json#/definitions/CloudError"
             }
           }
         },
@@ -917,7 +917,7 @@
         },
         "x-ms-examples": {
           "List run commands in Vmss instance.": {
-            "$ref": "./examples/runCommands/ListVirtualMachineScaleSetVMRunCommands.json"
+            "$ref": "./examples/ListVirtualMachineScaleSetVMRunCommands.json"
           }
         }
       }
@@ -1079,47 +1079,12 @@
       ],
       "description": "The List Virtual Machine operation response."
     },
-    "InstanceViewStatus": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The status code."
-        },
-        "level": {
-          "type": "string",
-          "description": "The level code.",
-          "enum": [
-            "Info",
-            "Warning",
-            "Error"
-          ],
-          "x-ms-enum": {
-            "name": "StatusLevelTypes",
-            "modelAsString": false
-          }
-        },
-        "displayStatus": {
-          "type": "string",
-          "description": "The short localizable label for the status."
-        },
-        "message": {
-          "type": "string",
-          "description": "The detailed status message, including for alerts and error messages."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time of the status."
-        }
-      },
-      "description": "Instance view status."
-    },
     "RunCommandResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/InstanceViewStatus"
+            "$ref": "./compute.json#/definitions/InstanceViewStatus"
           },
           "description": "Run command operation response."
         }
@@ -1174,7 +1139,7 @@
         "statuses": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/InstanceViewStatus"
+            "$ref": "./compute.json#/definitions/InstanceViewStatus"
           },
           "description": "The resource status information."
         }
@@ -1266,7 +1231,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../common.json#/definitions/Resource"
         }
       ],
       "description": "Describes a Virtual Machine run command."
@@ -1280,7 +1245,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/UpdateResource"
+          "$ref": "./compute.json#/definitions/UpdateResource"
         }
       ],
       "description": "Describes a Virtual Machine run command."
@@ -1303,136 +1268,6 @@
         "value"
       ],
       "description": "The List run command operation response"
-    },
-    "ApiErrorBase": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        }
-      },
-      "description": "Api error base."
-    },
-    "InnerError": {
-      "properties": {
-        "exceptiontype": {
-          "type": "string",
-          "description": "The exception type."
-        },
-        "errordetail": {
-          "type": "string",
-          "description": "The internal error message or exception dump."
-        }
-      },
-      "description": "Inner error details."
-    },
-    "CloudError": {
-      "x-ms-external": true,
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ApiError"
-        }
-      },
-      "description": "An error response from the Compute service."
-    },
-    "ApiError": {
-      "properties": {
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApiErrorBase"
-          },
-          "description": "The Api error details"
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerError",
-          "description": "The Api inner error"
-        },
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        }
-      },
-      "description": "Api error."
-    },
-    "Resource": {
-      "description": "The Resource model definition.",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true
-    },
-    "UpdateResource": {
-      "description": "The Update Resource model definition.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      }
-    }
-  },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
     }
   }
 }
