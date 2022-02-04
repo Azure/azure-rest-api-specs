@@ -33,19 +33,28 @@ tag: package-2022-04
 
 ---
 
+### Tag: package-2022-04
+
+These settings apply only when `--tag=package-2022-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-04-only'
+input-file:
+  - Microsoft.KubernetesConfiguration/stable/2021-03-01/kubernetesconfiguration.json
+  - Microsoft.KubernetesConfiguration/stable/2021-09-01/extensions.json
+  - Microsoft.KubernetesConfiguration/stable/2022-04-01/fluxconfiguration.json
+  - Microsoft.KubernetesConfiguration/stable/2022-04-01/operations.json
+```
 
 ### Tag: package-2022-04
 
 These settings apply only when `--tag=package-2022-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-04'
+```yaml $(tag) == 'package-2022-04-only'
 input-file:
-  - Microsoft.KubernetesConfiguration/stable/2022-04-01/extensionTypes.json
-  - Microsoft.KubernetesConfiguration/stable/2022-04-01/extensions.json
   - Microsoft.KubernetesConfiguration/stable/2022-04-01/fluxconfiguration.json
-  - Microsoft.KubernetesConfiguration/stable/2022-04-01/kubernetesconfiguration.json
   - Microsoft.KubernetesConfiguration/stable/2022-04-01/operations.json
 ```
+
 ### Tag: package-preview-2022-01
 
 These settings apply only when `--tag=package-preview-2022-01` is specified on the command line.
@@ -66,6 +75,7 @@ These settings apply only when `--tag=package-2021-09` is specified on the comma
 ``` yaml $(tag) == 'package-2021-09'
 input-file:
   - Microsoft.KubernetesConfiguration/stable/2021-09-01/extensions.json
+  - Microsoft.KubernetesConfiguration/stable/2021-09-01/operations.json
 ```
 
 ---
@@ -124,15 +134,6 @@ input-file:
   - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/operations.json
 ```
 
-### Tag: package-2021-09
-
-These settings apply only when `--tag=package-2021-09` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-09'
-input-file:
-  - Microsoft.KubernetesConfiguration/stable/2021-09-01/extensions.json
-```
-
 ### Tag: package-preview-2021-05
 
 These settings apply only when `--tag=package-preview-2021-05` is specified on the command line.
@@ -151,6 +152,7 @@ These settings apply only when `--tag=package-2021-03` is specified on the comma
 ``` yaml $(tag) == 'package-2021-03'
 input-file:
   - Microsoft.KubernetesConfiguration/stable/2021-03-01/kubernetesconfiguration.json
+  - Microsoft.KubernetesConfiguration/stable/2021-03-01/operations.json
 ```
 
 ### Tag: package-preview-2020-10

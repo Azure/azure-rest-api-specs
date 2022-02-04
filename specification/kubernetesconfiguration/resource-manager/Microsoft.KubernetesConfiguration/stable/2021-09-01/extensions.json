@@ -386,7 +386,7 @@
           "200": {
             "description": "Operation Status",
             "schema": {
-              "$ref": "#/definitions/OperationStatusResult"
+              "$ref": "../../common/2021-09-01/definitions.json#/definitions/OperationStatusResult"
             }
           },
           "default": {
@@ -671,40 +671,6 @@
           "description": "Origin of the operation",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "OperationStatusResult": {
-      "description": "The current status of an async operation.",
-      "type": "object",
-      "required": [
-        "status"
-      ],
-      "properties": {
-        "id": {
-          "description": "Fully qualified ID for the async operation.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Name of the async operation.",
-          "type": "string"
-        },
-        "status": {
-          "description": "Operation status.",
-          "type": "string"
-        },
-        "properties": {
-          "description": "Additional information, if available.",
-          "type": "object",
-          "x-nullable": true,
-          "x-ms-client-flatten": true,
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "error": {
-          "x-nullable": true,
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
         }
       }
     },
