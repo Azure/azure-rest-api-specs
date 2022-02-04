@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2018-09-15",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "resourceGroupName",
+    "labName": "{labName}",
+    "name": "{vmName}",
+    "labVirtualMachine": {}
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "ownerObjectId": "",
+          "ownerUserPrincipalName": "",
+          "createdByUserId": "",
+          "createdByUser": "",
+          "createdDate": "2018-10-01T16:53:02.4830866-07:00",
+          "computeId": "/subscriptions/{subscriptionId}/resourceGroups/{labName}-{vmName}-{randomSuffix}/providers/Microsoft.Compute/virtualMachines/{vmName}",
+          "osType": "Linux",
+          "size": "Standard_A2_v2",
+          "userName": "{userName}",
+          "labSubnetName": "{virtualNetworkName}Subnet",
+          "labVirtualNetworkId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualnetworks/{virtualNetworkName}",
+          "disallowPublicIpAddress": true,
+          "artifactDeploymentStatus": {
+            "artifactsApplied": 0,
+            "totalArtifacts": 0
+          },
+          "galleryImageReference": {
+            "offer": "UbuntuServer",
+            "publisher": "Canonical",
+            "sku": "16.04-LTS",
+            "osType": "Linux",
+            "version": "Latest"
+          },
+          "networkInterface": {},
+          "allowClaim": true,
+          "storageType": "Standard",
+          "virtualMachineCreationSource": "FromGalleryImage",
+          "dataDiskParameters": [],
+          "provisioningState": "Succeeded",
+          "uniqueIdentifier": "{uniqueIdentifier}"
+        },
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualmachines/{vmName}",
+        "name": "{vmName}",
+        "type": "Microsoft.DevTestLab/labs/virtualMachines",
+        "location": "{location}",
+        "tags": {
+          "tagName1": "tagValue1"
+        }
+      }
+    }
+  }
+}
