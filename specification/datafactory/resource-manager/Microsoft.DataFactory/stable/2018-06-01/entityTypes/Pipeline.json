@@ -5982,14 +5982,16 @@
       "description": "Execute pipeline activity.",
       "allOf": [
         {
-          "$ref": "#/definitions/ControlActivity",
-          "policy": {
-            "$ref": "#/definitions/ActivityPolicy",
-            "description": "Activity policy."
-          }
+          "$ref": "#/definitions/ControlActivity"
         }
       ],
       "properties": {
+        "policy":{
+          "secureInput":{
+            "description": "When set to true, Input from activity is considered as secure and will not be logged to monitoring.",
+            "$ref": "#/definitions/ActivityPolicy/properties/secureInput"
+          }
+        },
         "typeProperties": {
           "description": "Execute pipeline activity properties.",
           "x-ms-client-flatten": true,
