@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+variables:
+  labName:
+    type: string
+    prefix: lab
+prepareSteps: 
+  - step: Create_a_lab
+    operationId: Labs_CreateOrUpdate
+    exampleFile: ..\examples\Labs_CreateOrUpdate.json
+    variables:
+      name:
+        type: string
+        value: $(labName)
+cleanUpSteps:
+  - step: Delete_Lab
+    operationId: Labs_Delete
+    exampleFile: ..\examples\Labs_Delete.json
+    variables:
+      name:
+        type: string
+        value: $(labName)
+scenarios:
+  - scenario: Lab_Scenarios
+    steps:
+      - step: Get_Lab
+        operationId: Labs_Get
+        exampleFile: ../examples/Labs_Get.json
+        variables:
+          name:
+            type: string
+            value: $(labName)
+      - step: Labs_GenerateUploadUri
+        operationId: Labs_GenerateUploadUri
+        exampleFile: ../examples/Labs_GenerateUploadUri.json
+        variables:
+          name:
+            type: string
+            value: $(labName)
+          blob-name:
+            type: string
+            prefix: blob
+      - step: Labs_EnsureCurrentUserProfile
+        operationId: Labs_EnsureCurrentUserProfile
+        exampleFile: ../examples/Labs_EnsureCurrentUserProfile.json
+        variables:
+          name:
+            type: string
+            value: $(labName)

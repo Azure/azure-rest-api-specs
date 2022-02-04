@@ -1,12 +1,12 @@
 {
   "parameters": {
-    "api-version": "2018-09-15",
+    "api-version": "2021-09-01",
     "subscriptionId": "{subscriptionId}",
-    "resourceGroupName": "resourceGroupName",
+    "resourceGroupName": "{resourceGroupName}",
     "name": "{labName}",
     "lab": {
       "properties": {
-        "labStorageType": "{Standard|Premium}"
+        "labStorageType": "Premium"
       },
       "location": "{location}",
       "tags": {
@@ -37,7 +37,7 @@
           "provisioningState": "Creating",
           "uniqueIdentifier": "{uniqueIdentifier}"
         },
-        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}",
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.devtestlab/labs/{labName}",
         "name": "{labName}",
         "type": "Microsoft.DevTestLab/labs",
         "location": "{location}",

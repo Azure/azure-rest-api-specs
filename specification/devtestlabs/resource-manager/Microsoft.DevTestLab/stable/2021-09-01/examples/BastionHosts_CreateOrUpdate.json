@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2021-09-01",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "resourceGroupName",
+    "labName": "{labName}",
+    "virtualNetworkName": "{virtualNetworkName}",
+    "name": "{bastionHostName}",
+    "bastionHost": {
+      "properties": {},
+      "location": "{location}"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "ipAddressId": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.Network/publicIpAddresses/{ipName}",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/pt-test-rg/providers/microsoft.devtestlab/labs/{labName}/virtualnetworks/{virtualNetworkName}/bastionhosts/{bastionHostName}",
+        "name": "{bastionHostName}",
+        "type": "Microsoft.DevTestLab/labs/virtualNetworks/bastionHosts",
+        "location": "{location}",
+        "tags": {
+          "tagName1": "tagValue1"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "provisioningState": "Created"
+        },
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualnetworks/{virtualNetworkName}/bastionhosts/{bastionHostName}",
+        "name": "{bastionHostName}",
+        "type": "Microsoft.DevTestLab/labs/virtualNetworks/bastionHosts",
+        "location": "{location}",
+        "tags": {
+          "tagName1": "tagValue1"
+        }
+      }
+    }
+  }
+}

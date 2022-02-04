@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2018-09-15",
+    "api-version": "2021-09-01",
     "subscriptionId": "{subscriptionId}",
     "resourceGroupName": "resourceGroupName",
     "labName": "{labName}",
@@ -11,12 +11,16 @@
         "diskType": "Standard",
         "diskSizeGiB": 1023,
         "leasedByLabVmId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualmachines/vmName"
-      }
+      },
+      "location": "{location}"
     }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/l{labName}/users/{userId}/disks/{diskName}",
+        "name": "{diskName}",
+        "type": "Microsoft.DevTestLab/labs/users/disks",
         "properties": {
           "diskType": "Standard",
           "diskSizeGiB": 1023,
@@ -27,13 +31,14 @@
           "provisioningState": "Succeeded",
           "uniqueIdentifier": "b7183ac5-1097-4513-b597-4d9d23e0a820"
         },
-        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/l{labName}/users/{userId}/disks/{diskName}",
-        "name": "{diskName}",
-        "type": "Microsoft.DevTestLab/labs/users/disks"
+        "location": "{location}"
       }
     },
     "201": {
       "body": {
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/l{labName}/users/{userId}/disks/{diskName}",
+        "name": "{diskName}",
+        "type": "Microsoft.DevTestLab/labs/users/disks",
         "properties": {
           "diskType": "Standard",
           "diskSizeGiB": 1023,
@@ -44,9 +49,7 @@
           "provisioningState": "Creating",
           "uniqueIdentifier": "b7183ac5-1097-4513-b597-4d9d23e0a820"
         },
-        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/l{labName}/users/{userId}/disks/{diskName}",
-        "name": "{diskName}",
-        "type": "Microsoft.DevTestLab/labs/users/disks"
+        "location": "{location}"
       }
     }
   }

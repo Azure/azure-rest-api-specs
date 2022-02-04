@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for DevTestLab.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for DevTestLab, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,20 +15,29 @@ To build the SDK for DevTestLab, simply [Install AutoRest](https://aka.ms/autore
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the DevTestLab API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-09
+tag: package-2021-09
 ```
 
+### Tag: package-2021-09
+
+These settings apply only when `--tag=package-2021-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-09'
+input-file:
+  - Microsoft.DevTestLab/stable/2021-09-01/DTL.json
+  - Microsoft.DevTestLab/stable/2021-09-01/types.json
+```
 
 ### Tag: package-2018-09
 
@@ -57,10 +66,9 @@ input-file:
 - Microsoft.DevTestLab/preview/2015-05-21-preview/DTL.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -82,7 +90,6 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
 ```
-
 
 ## C#
 
@@ -110,5 +117,183 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
+## Suppression
 
+``` yaml
+directive:
+  - from: DTL.json
+    suppress: R3006 # BodyTopLevelProperties
+    where: 
+      - $.definitions.Lab.properties
+      - $.definitions.ArtifactSource.properties
+      - $.definitions.LabCost.properties
+      - $.definitions.CustomImage.properties
+      - $.definitions.Formula.properties
+      - $.definitions.NotificationChannel.properties
+      - $.definitions.Policy.properties
+      - $.definitions.Schedule.properties
+      - $.definitions.LabSecret.properties
+      - $.definitions.ServiceRunner.properties
+      - $.definitions.SharedGallery.properties
+      - $.definitions.SharedImage.properties
+      - $.definitions.User.properties
+      - $.definitions.Disk.properties
+      - $.definitions.DtlEnvironment.properties
+      - $.definitions.Secret.properties
+      - $.definitions.ServiceFabric.properties
+      - $.definitions.LabVirtualMachine.properties
+      - $.definitions.VirtualNetwork.properties
+      - $.definitions.BastionHost.properties
+      - $.definitions.ArmTemplate.properties
+      - $.definitions.Artifact.properties
+      - $.definitions.Cost.properties
+      - $.definitions.GalleryImage.properties
+      - $.definitions.PolicySet.properties
+    reason: Currently systemData is not allowed.
+  - suppress: TrackedResourceListByResourceGroup
+    from: DTL.json
+    where:
+      - $.definitions.ArtifactSource
+      - $.definitions.Formula
+      - $.definitions.CustomImage
+      - $.definitions.NotificationChannel
+      - $.definitions.Policy
+      - $.definitions.Schedule
+      - $.definitions.LabSecret
+      - $.definitions.ServiceRunner
+      - $.definitions.SharedGallery
+      - $.definitions.SharedImage
+      - $.definitions.User
+      - $.definitions.Disk
+      - $.definitions.DtlEnvironment
+      - $.definitions.Secret
+      - $.definitions.ServiceFabric
+      - $.definitions.LabVirtualMachine
+      - $.definitions.VirtualNetwork
+      - $.definitions.BastionHost
+    reason: Tooling issue
+  - suppress: R3010 # TrackedResourceListByImmediateParent
+    from: DTL.json
+    where:
+      - $.definitions.ArmTemplate
+      - $.definitions.Artifact
+      - $.definitions.ArtifactSource
+      - $.definitions.CustomImage
+      - $.definitions.Formula
+      - $.definitions.GalleryImage
+      - $.definitions.NotificationChannel
+      - $.definitions.Schedule
+      - $.definitions.LabSecret
+      - $.definitions.ServiceRunner
+      - $.definitions.SharedGallery
+      - $.definitions.SharedImage
+      - $.definitions.User
+      - $.definitions.Disk
+      - $.definitions.DtlEnvironment
+      - $.definitions.Secret
+      - $.definitions.ServiceFabric
+      - $.definitions.Schedule
+      - $.definitions.LabCost
+      - $.definitions.LabVirtualMachine
+      - $.definitions.VirtualNetwork
+      - $.definitions.BastionHost
+    reason: These have never been supported.
+  - suppress: R3018 # EnumInsteadOfBoolean
+    from: DTL.json
+    where:
+      - $.definitions.LabSecretProperties.properties.enabledForArmEnvironments
+      - $.definitions.LabSecretProperties.properties.enabledForVmCreation
+      - $.definitions.LabSecretProperties.properties.enabledForArtifacts
+      - $.definitions.GalleryImageProperties.properties.enabled
+      - $.definitions.ArmTemplateProperties.properties.enabled
+      - $.definitions.CustomImageProperties.properties.isPlanAuthorized
+      - $.definitions.CustomImagePropertiesCustom.properties.sysPrep
+      - $.definitions.GalleryImageProperties.properties.isPlanAuthorized
+      - $.definitions.LabAnnouncementProperties.properties.expired
+      - $.definitions.LabProperties.properties.disableAutoUpgradeCseMinorVersion
+      - $.definitions.LabVirtualMachineCreationParameterProperties.properties.isAuthenticationWithSshKey
+      - $.definitions.LabVirtualMachineCreationParameterProperties.properties.disallowPublicIpAddress
+      - $.definitions.LabVirtualMachineCreationParameterProperties.properties.allowClaim
+      - $.definitions.LabVirtualMachineCreationParameterProperties.properties.canApplyArtifacts
+      - $.definitions.LabVirtualMachineProperties.properties.isAuthenticationWithSshKey
+      - $.definitions.LabVirtualMachineProperties.properties.disallowPublicIpAddress
+      - $.definitions.LabVirtualMachineProperties.properties.allowClaim
+      - $.definitions.LabVirtualMachineProperties.properties.canApplyArtifacts
+      - $.definitions.PolicySetResult.properties.hasError
+    reason: Booleans are used to indicate binary states of the property, enum is not appropriate.
+  - suppress: R3018  # EnumInsteadOfBoolean
+    from: types.json
+    where:
+      - $.definitions.ResourceModelWithAllowedPropertySet.properties.identity
+      - $.definitions.ResourceModelWithAllowedPropertySet.properties.sku
+      - $.definitions.ResourceModelWithAllowedPropertySet.properties.plan
+      - $.definitions.CheckNameAvailabilityResponse.properties.nameAvailable
+      - $.definitions.Operation.properties.isDataAction
+    reason: This is a copy of the common types from ARM.
+  - suppress: R3026  # EnumInsteadOfBoolean
+    from: DTL.json
+    where:
+      - $.definitions.ServiceRunner
+    reason: Booleans are used to indicate binary states of the property, enum is not appropriate.
+  - suppress: TrackedResourceListByImmediateParent
+    from: DTL.json
+    where: $.definitions
+    reason: Tooling issue - the listed resources do have a list by immediate parent.
+  - suppress: R1003  # ListInOperationName
+    from: DTL.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.DevTestLab/locations/{location}/operations/{name}"].get.operationId
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policySets/{name}/evaluatePolicies"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{name}/evaluatePolicies"].post.operationId
+    reason: This action is also named this way in previous SDK versions. Changing it would be a breaking change.
+  - suppress: R4000 # SDKViolation
+    from: types.json
+    where:
+      - $.definitions.KeyVaultProperties
+      - $.definitions.ResourceModelWithAllowedPropertySet.properties.identity
+      - $.definitions.ResourceModelWithAllowedPropertySet.properties.plan
+      - $.definitions.ResourceModelWithAllowedPropertySet.properties.sku
+    reason: This is a copy of the common types from ARM.
+  - suppress: R4014  # AllResourcesMustHaveGetOperation
+    from: DTL.json
+    where: $.definitions.PolicySet
+    reason: This operation doesn't make sense in the context of policysets and has never been supported.
+  - suppress: R4015 # NestedResourcesMustHaveListOperation
+    from: types.json
+    where:
+      - $.definitions.KeyVaultProperties
+      - $.definitions.Operation.properties.isDataAction
+      - $.definitions.ResourceModelWithAllowedPropertySet.properties.identity
+      - $.definitions.ResourceModelWithAllowedPropertySet.properties.sku
+      - $.definitions.ResourceModelWithAllowedPropertySet.properties.plan
+    reason: This is a copy of the common types from ARM.
+  - suppress: R4021 # DescriptionAndTitleMissing
+    from: types.json
+    where:
+      - $.definitions.KeyVaultProperties
+      - $.definitions.Operation.properties.isDataAction
+      - $.definitions.ResourceModelWithAllowedPropertySet.properties.identity
+      - $.definitions.ResourceModelWithAllowedPropertySet.properties.sku
+      - $.definitions.ResourceModelWithAllowedPropertySet.properties.plan
+    reason: This is a copy of the common types from ARM.
+  - suppress: R4041 # XmsIdentifierValidation
+    from: DTL.json
+    where:
+       - $.definitions.ComputeVmProperties.properties.statuses
+    reason: No natural id property
+  - suppress: R4041 # XmsIdentifierValidation
+    from: types.json
+    where:
+        - $.definitions.ErrorDetail.properties.details
+        - $.definitions.ErrorDetail.properties.additionalInfo
+        - $.definitions.OperationListResult.properties.value
+        - $.definitions.ErrorDetail.properties.details
+        - $.definitions.ErrorDetail.properties.additionalInfo
+        - $.definitions.OperationListResult.properties.value
+    reason: This is a copy of the common types from ARM.
+  - suppress: R2054 # SecurityDefinitionsStructure
+    from: types.json
+    where: $
+    reason: This is a copy of the common types from ARM.
 
+```

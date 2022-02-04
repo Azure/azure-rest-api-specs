@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2021-09-01",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "resourceGroupName",
+    "labName": "{labName}",
+    "name": "{sharedGalleryName}",
+    "sharedGallery": {
+      "tags": {
+        "tagName1": "tagValue1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "galleryId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.compute/galleries/{sharedGalleryName}",
+          "allowAllImages": "{Enabled|Disabled}",
+          "provisioningState": "Succeeded",
+          "uniqueIdentifier": "{uniqueIdentifier}"
+        },
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/sharedgalleries/{sharedGalleryName}",
+        "name": "{sharedGalleryName}",
+        "type": "Microsoft.DevTestLab/labs/sharedGalleries",
+        "location": "{location}",
+        "tags": {
+          "tagName1": "tagValue1"
+        }
+      }
+    }
+  }
+}
