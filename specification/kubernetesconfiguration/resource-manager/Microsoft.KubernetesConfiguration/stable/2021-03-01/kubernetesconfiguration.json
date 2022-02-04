@@ -249,42 +249,6 @@
           "nextLinkName": "nextLink"
         }
       }
-    },
-    "/providers/Microsoft.KubernetesConfiguration/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "operationId": "Operations_List",
-        "x-ms-examples": {
-          "BatchAccountDelete": {
-            "$ref": "./examples/OperationsList.json"
-          }
-        },
-        "description": "List all the available operations the KubernetesConfiguration resource provider supports.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK response definition.",
-            "schema": {
-              "$ref": "#/definitions/ResourceProviderOperationList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
     }
   },
   "definitions": {
@@ -529,60 +493,6 @@
           "type": "string",
           "readOnly": true,
           "description": "URL to get the next set of configuration objects, if any."
-        }
-      }
-    },
-    "ResourceProviderOperation": {
-      "description": "Supported operation of this resource provider.",
-      "readOnly": true,
-      "properties": {
-        "name": {
-          "description": "Operation name, in format of {provider}/{resource}/{operation}",
-          "type": "string"
-        },
-        "display": {
-          "description": "Display metadata associated with the operation.",
-          "properties": {
-            "provider": {
-              "description": "Resource provider: Microsoft KubernetesConfiguration.",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Type of operation: get, read, delete, etc.",
-              "type": "string"
-            },
-            "description": {
-              "description": "Description of this operation.",
-              "type": "string"
-            }
-          }
-        },
-        "isDataAction": {
-          "description": "The flag that indicates whether the operation applies to data plane.",
-          "type": "boolean",
-          "readOnly": true
-        }
-      }
-    },
-    "ResourceProviderOperationList": {
-      "description": "Result of the request to list operations.",
-      "readOnly": true,
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceProviderOperation"
-          },
-          "description": "List of operations supported by this resource provider."
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "URL to the next set of results, if any."
         }
       }
     }

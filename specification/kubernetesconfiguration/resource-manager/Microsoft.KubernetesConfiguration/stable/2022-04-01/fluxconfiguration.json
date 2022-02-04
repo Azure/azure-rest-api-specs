@@ -648,8 +648,8 @@
           "description": "Specifies other Kustomizations that this Kustomization depends on. This Kustomization will not reconcile until all dependencies have completed their reconciliation.",
           "type": "array",
           "items": {
-            "type": "object",
-            "$ref": "#/definitions/DependsOnDefinition"
+            "description": "Kustomization name of dependency.",
+            "type": "string"
           },
           "x-nullable": true
         },
@@ -699,8 +699,8 @@
           "description": "Specifies other Kustomizations that this Kustomization depends on. This Kustomization will not reconcile until all dependencies have completed their reconciliation.",
           "type": "array",
           "items": {
-            "type": "object",
-            "$ref": "#/definitions/DependsOnDefinition"
+            "description": "Kustomization name of dependency.",
+            "type": "string"
           },
           "x-nullable": true
         },
@@ -731,16 +731,6 @@
           "description": "Enable/disable re-creating Kubernetes resources on the cluster when patching fails due to an immutable field change.",
           "type": "boolean",
           "x-nullable": true
-        }
-      }
-    },
-    "DependsOnDefinition": {
-      "description": "Specify which kustomizations must succeed reconciliation on the cluster prior to reconciling this kustomization",
-      "type": "object",
-      "properties": {
-        "kustomizationName": {
-          "description": "Name of the kustomization to claim dependency on",
-          "type": "string"
         }
       }
     },
@@ -1039,7 +1029,7 @@
             "bucket": {
               "description": "Parameters to reconcile to the Bucket source kind type.",
               "type": "object",
-              "$ref": "#/definitions/BucketDefinition"
+              "$ref": "#/definitions/BucketPatchDefinition"
             },
             "kustomizations": {
               "description": "Array of kustomizations used to reconcile the artifact pulled by the source type on the cluster.",

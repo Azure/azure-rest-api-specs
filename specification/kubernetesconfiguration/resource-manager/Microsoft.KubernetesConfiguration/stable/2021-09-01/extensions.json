@@ -340,57 +340,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/operations": {
-      "get": {
-        "tags": [
-          "Operations in a Cluster"
-        ],
-        "operationId": "OperationStatus_List",
-        "description": "List Async Operations, currently in progress, in a cluster",
-        "x-ms-examples": {
-          "AsyncOperationStatus List": {
-            "$ref": "./examples/ListAsyncOperationStatus.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterRpParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterResourceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Operations in a cluster",
-            "schema": {
-              "$ref": "#/definitions/OperationStatusList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}/operations/{operationId}": {
       "get": {
         "tags": [
@@ -446,42 +395,6 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
-        }
-      }
-    },
-    "/providers/Microsoft.KubernetesConfiguration/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "operationId": "Operations_List",
-        "x-ms-examples": {
-          "BatchAccountDelete": {
-            "$ref": "./examples/OperationsList.json"
-          }
-        },
-        "description": "List all the available operations the KubernetesConfiguration resource provider supports, in this api-version.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK response definition.",
-            "schema": {
-              "$ref": "#/definitions/ResourceProviderOperationList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     }
@@ -761,25 +674,6 @@
         }
       }
     },
-    "ResourceProviderOperationList": {
-      "description": "Result of the request to list operations.",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceProviderOperation"
-          },
-          "description": "List of operations supported by this resource provider."
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "URL to the next set of results, if any."
-        }
-      }
-    },
     "OperationStatusResult": {
       "description": "The current status of an async operation.",
       "type": "object",
@@ -811,25 +705,6 @@
         "error": {
           "x-nullable": true,
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
-        }
-      }
-    },
-    "OperationStatusList": {
-      "description": "The async operations in progress, in the cluster.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/OperationStatusResult"
-          },
-          "description": "List of async operations in progress, in the cluster."
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "URL to get the next set of Operation Result objects, if any."
         }
       }
     },
