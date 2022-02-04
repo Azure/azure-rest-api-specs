@@ -112,6 +112,36 @@
           },
           "description": "A list of IP configurations of the network interface."
         },
+        "enableIPForwarding": {
+          "type": "boolean",
+          "default": false,
+          "description": "Indicates if IP forwarding is enabled."
+        },
+        "vlanProfile": {
+          "type": "object",
+          "description": "Network interface Vlan profile.",
+          "properties": {
+            "mode": {
+              "type": "string",
+              "enum": [
+                "Unknown",
+                "Access"
+              ],
+              "x-ms-enum": {
+                "name": "mode",
+                "modelAsString": true
+              },
+              "description": "Mode of VLAN profile. Currently only Access is supported."
+            },
+            "vlanId": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0,
+              "maximum": 4096,
+              "description": "The VLAN id of the virtual network. By default it is 0"
+            }
+          }
+        },
         "vmSwitchType": {
           "type": "string",
           "description": "The type of the VM switch.",
