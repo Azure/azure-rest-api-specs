@@ -132,6 +132,36 @@
       },
       "description": "Describes the properties of a Compute Operation Value Display."
     },
+    "ApiErrorBase": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        }
+      },
+      "description": "Api error base."
+    },
+    "InnerError": {
+      "properties": {
+        "exceptiontype": {
+          "type": "string",
+          "description": "The exception type."
+        },
+        "errordetail": {
+          "type": "string",
+          "description": "The internal error message or exception dump."
+        }
+      },
+      "description": "Inner error details."
+    },
     "CloudError": {
       "x-ms-external": true,
       "properties": {
@@ -169,55 +199,6 @@
       },
       "description": "Api error."
     },
-    "ApiErrorBase": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        }
-      },
-      "description": "Api error base."
-    },
-    "InnerError": {
-      "properties": {
-        "exceptiontype": {
-          "type": "string",
-          "description": "The exception type."
-        },
-        "errordetail": {
-          "type": "string",
-          "description": "The internal error message or exception dump."
-        }
-      },
-      "description": "Inner error details."
-    },
-    "SubResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id"
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "SubResourceReadOnly": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        }
-      },
-      "x-ms-azure-resource": true
-    },
     "Resource": {
       "description": "The Resource model definition.",
       "properties": {
@@ -251,6 +232,25 @@
       "required": [
         "location"
       ],
+      "x-ms-azure-resource": true
+    },
+    "SubResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "SubResourceReadOnly": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        }
+      },
       "x-ms-azure-resource": true
     }
   },

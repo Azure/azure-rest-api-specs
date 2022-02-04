@@ -183,6 +183,14 @@
       ],
       "description": "Api request input for LogAnalytics getRequestRateByInterval Api."
     },
+    "ThrottledRequestsInput": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/LogAnalyticsInputBase"
+        }
+      ],
+      "description": "Api request input for LogAnalytics getThrottledRequests Api."
+    },
     "LogAnalyticsInputBase": {
       "properties": {
         "blobContainerSasUri": {
@@ -246,14 +254,7 @@
         }
       },
       "description": "LogAnalytics output properties"
-    },
-    "ThrottledRequestsInput": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/LogAnalyticsInputBase"
-        }
-      ],
-      "description": "Api request input for LogAnalytics getThrottledRequests Api."
     }
+
   }
 }
