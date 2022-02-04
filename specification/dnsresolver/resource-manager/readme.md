@@ -79,6 +79,10 @@ directive:
     from: types.json
     suppress: DescriptionAndTitleMissing
     reason: Common types warning.
+  - suppress: PreviewVersionOverOneYear
+    reason: We will go public soon.
+  - suppress: PostOperationIdContainsUrlVerb
+    reason: We have our own convention of naming the list verbs.
 ```
 
 ## Multi-API/Profile support for AutoRest v3 generators
