@@ -4,7 +4,7 @@
     "api-version": "2022-03-01-preview",
     "Endpoint": "{Endpoint}",
     "jobId": "{Job ID}",
-    "input": {
+    "body": {
       "displayName": "Extracting Location & US Region",
       "analysisInput": {
         "documents": [
@@ -23,14 +23,14 @@
       "tasks": [
         {
           "kind": "EntityRecognition",
-          "taskId": "Recognize Entities",
+          "taskName": "Recognize Entities",
           "parameters": {
-            "model-version": "latest"
+            "modelVersion": "latest"
           }
         },
         {
           "kind": "CustomEntityRecognition",
-          "taskId": "Recognize US Regions",
+          "taskName": "Recognize US Regions",
           "parameters": {
             "projectName": "MyProject",
             "deploymentName": "MyDeployment"
@@ -42,7 +42,7 @@
   "responses": {
     "202": {
       "headers": {
-        "Operation-Location": "{Endpoint}/language/analyze-text/jobs/{jobId}?api-version=2022-03-01-preview"
+        "Operation-Location": "{endpoint}/language/analyze-text/jobs/{jobId}"
       }
     }
   }
