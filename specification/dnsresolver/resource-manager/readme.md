@@ -80,9 +80,9 @@ directive:
     suppress: DescriptionAndTitleMissing
     reason: Common types warning.
   - suppress: PreviewVersionOverOneYear
-    reason: We will go public soon.
+    reason: Preview API version is carried over from limited preview timeframe back in 2021.
   - suppress: PostOperationIdContainsUrlVerb
-    reason: We have our own convention of naming the list verbs.
+    reason: A different convention is adopted for naming the POST operations.
 ```
 
 ## Multi-API/Profile support for AutoRest v3 generators
