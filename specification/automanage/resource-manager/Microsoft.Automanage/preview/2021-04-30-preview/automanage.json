@@ -1292,7 +1292,7 @@
         "operationId": "ServicePrincipals_ListBySubscription",
         "description": "Get the Automanage AAD first party Application Service Principal details for the subscription id.",
         "x-ms-examples": {
-          "Get service principal": {
+          "List service principal by subscription": {
             "$ref": "./examples/listServicePrincipalBySubscription.json"
           }
         },
@@ -1318,6 +1318,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },        
         "produces": [
           "application/json"
         ],
@@ -1708,7 +1711,7 @@
           }
         }
       }
-    },    
+    },
     "ServicePrincipal": {
       "description": "The Service Principal Id for the subscription.",
       "type": "object",
