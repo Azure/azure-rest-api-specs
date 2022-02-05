@@ -6,7 +6,7 @@ These settings apply only when `--track2` is specified on the command line.
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-extendedlocation
-package-version: 1.0.0b1
+package-version: 1.0.0b3
 no-namespace-folders: true
 ```
 
@@ -17,6 +17,7 @@ clear-output-folder: true
 batch:
   - tag: package-2021-03-15-preview
   - tag: package-2021-08-15
+  - tag: package-2021-08-31-preview
   - multiapiscript: true
 ```
 
@@ -44,4 +45,14 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ```yaml $(tag) == 'package-2021-08-15' && $(python)
 namespace: azure.mgmt.extendedlocation.v2021_08_15
 output-folder: $(python-sdks-folder)/extendedlocation/azure-mgmt-extendedlocation/azure/mgmt/extendedlocation/v2021_08_15
+```
+
+### Tag: package-2021-08-31-preview and python
+
+These settings apply only when `--tag=package-2021-08-31-preview --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+```yaml $(tag) == 'package-2021-08-31-preview' && $(python)
+namespace: azure.mgmt.extendedlocation.v2021_08_31_preview
+output-folder: $(python-sdks-folder)/extendedlocation/azure-mgmt-extendedlocation/azure/mgmt/extendedlocation/v2021_08_31_preview
 ```
