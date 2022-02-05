@@ -1284,6 +1284,48 @@
         ]
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Automanage/servicePrincipals": {
+      "get": {
+        "tags": [
+          "servicePrincipals"
+        ],
+        "operationId": "ServicePrincipals_ListBySubscription",
+        "description": "Get the Automanage AAD first party Application Service Principal details for the subscription id.",
+        "x-ms-examples": {
+          "Get service principal": {
+            "$ref": "./examples/listServicePrincipalBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the Automanage ADD first party Application Service Principal details for the subscription.",
+            "schema": {
+              "$ref": "#/definitions/ServicePrincipalListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Automanage/servicePrincipals/default": {
       "get": {
         "tags": [
@@ -1654,6 +1696,19 @@
         }
       }
     },
+    "ServicePrincipalListResult": {
+      "description": "The list of ServicePrincipals.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of servicePrincipals.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServicePrincipal"
+          }
+        }
+      }
+    },    
     "ServicePrincipal": {
       "description": "The Service Principal Id for the subscription.",
       "type": "object",
