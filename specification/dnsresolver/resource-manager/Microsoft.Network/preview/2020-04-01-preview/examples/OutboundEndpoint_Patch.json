@@ -5,10 +5,8 @@
     "dnsResolverName": "sampleDnsResolver",
     "outboundEndpointName": "sampleOutboundEndpoint",
     "parameters": {
-      "properties": {
-        "metadata": {
-          "additionalProp1": "value1"
-        }
+      "tags": {
+        "key1": "value1"
       }
     },
     "api-version": "2020-04-01-preview"
@@ -19,6 +17,10 @@
         "id": "/subscriptions/abdd4249-9f34-4cc6-8e42-c2e32110603e/resourceGroups/sampleResourceGroup/providers/Microsoft.Network/outboundEndpoints/sampleOutboundEndpoint",
         "name": "sampleOutboundEndpoint",
         "type": "Microsoft.Network/dnsResolvers/outboundEndpoints",
+        "tags": {
+          "key1": "value1"
+        },
+        "location": "westus2",
         "etag": "00000000-0000-0000-0000-000000000000",
         "systemData": {
           "createdByType": "Application",
@@ -29,9 +31,6 @@
         "properties": {
           "subnet": {
             "id": "/subscriptions/0403cfa9-9659-4f33-9f30-1f191c51d111/resourceGroups/sampleVnetResourceGroupName/providers/Microsoft.Network/virtualNetworks/sampleVirtualNetwork/subnets/sampleSubnet"
-          },
-          "metadata": {
-            "additionalProp2": "value2"
           },
           "provisioningState": "Succecced",
           "resourceGuid": "b4d35f41-0c70-4ec7-bb3e-0cd9f8b7e4be"
