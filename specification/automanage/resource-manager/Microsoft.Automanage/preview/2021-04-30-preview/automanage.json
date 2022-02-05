@@ -1665,27 +1665,17 @@
       "description": "The Service Principal Id for the subscription.",
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "ARM id of the resource."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Name of the resource."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Type of the resource."
-        },
         "properties": {
           "title": "Properties",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ServicePrincipalProperties",
           "description": "The Service Principal properties for the subscription"
-        }
+        },
+        "allOf": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+          }
+        ]
       }
     },
     "ServicePrincipalProperties": {
