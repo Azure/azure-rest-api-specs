@@ -3449,7 +3449,7 @@
           "type": "boolean",
           "description": "EnableBgp flag."
         },
-        "GatewayCustomBgpIpAddresses": {
+        "gatewayCustomBgpIpAddresses": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/GatewayCustomBgpIpAddressIpConfiguration"
@@ -3645,15 +3645,19 @@
     },
     "GatewayCustomBgpIpAddressIpConfiguration": {
       "properties": {
-        "IpconfigurationId": {
+        "ipconfigurationId": {
           "type": "string",
           "description": "The IpconfigurationId of ipconfiguration which belongs to gateway."
         },
-        "CustomBgpIpAddress": {
+        "customBgpIpAddress": {
           "type": "string",
           "description": "The custom BgpPeeringAddress which belongs to IpconfigurationId."
         }
       },
+      "required": [
+        "ipconfigurationId",
+        "customBgpIpAddress"
+      ],
       "description": "GatewayCustomBgpIpAddressIpConfiguration for a virtual network gateway connection."
     },
     "ConnectionProtocol": {
