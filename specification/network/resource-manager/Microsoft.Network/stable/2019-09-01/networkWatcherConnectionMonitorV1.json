@@ -1,0 +1,791 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NetworkManagementClient",
+    "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
+    "version": "2019-09-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionMonitors/{connectionMonitorName}": {
+      "put": {
+        "tags": [
+          "ConnectionMonitors"
+        ],
+        "operationId": "ConnectionMonitors_CreateOrUpdate",
+        "description": "Create or update a connection monitor.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group containing Network Watcher."
+          },
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Network Watcher resource."
+          },
+          {
+            "name": "connectionMonitorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the connection monitor."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectionMonitor"
+            },
+            "description": "Parameters that define the operation to create a connection monitor."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting network watcher resource.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionMonitorResult"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting network watcher resource.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionMonitorResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create connection monitor": {
+            "$ref": "./examples/NetworkWatcherConnectionMonitorCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "tags": [
+          "ConnectionMonitors"
+        ],
+        "operationId": "ConnectionMonitors_Get",
+        "description": "Gets a connection monitor by name.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group containing Network Watcher."
+          },
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Network Watcher resource."
+          },
+          {
+            "name": "connectionMonitorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the connection monitor."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a connection monitor.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionMonitorResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get connection monitor": {
+            "$ref": "./examples/NetworkWatcherConnectionMonitorGet.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ConnectionMonitors"
+        ],
+        "operationId": "ConnectionMonitors_Delete",
+        "description": "Deletes the specified connection monitor.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group containing Network Watcher."
+          },
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Network Watcher resource."
+          },
+          {
+            "name": "connectionMonitorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the connection monitor."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Delete successful."
+          },
+          "202": {
+            "description": "Accepted. The operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete connection monitor": {
+            "$ref": "./examples/NetworkWatcherConnectionMonitorDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "patch": {
+        "tags": [
+          "ConnectionMonitors"
+        ],
+        "operationId": "ConnectionMonitors_UpdateTags",
+        "description": "Update tags of the specified connection monitor.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network watcher."
+          },
+          {
+            "name": "connectionMonitorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the connection monitor."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update connection monitor tags."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns updated connection monitor.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionMonitorResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update connection monitor tags": {
+            "$ref": "./examples/NetworkWatcherConnectionMonitorUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionMonitors/{connectionMonitorName}/stop": {
+      "post": {
+        "tags": [
+          "ConnectionMonitors"
+        ],
+        "operationId": "ConnectionMonitors_Stop",
+        "description": "Stops the specified connection monitor.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group containing Network Watcher."
+          },
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Network Watcher resource."
+          },
+          {
+            "name": "connectionMonitorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the connection monitor."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation stops the connection monitor."
+          },
+          "202": {
+            "description": "Accepted. The operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Stop connection monitor": {
+            "$ref": "./examples/NetworkWatcherConnectionMonitorStop.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionMonitors/{connectionMonitorName}/start": {
+      "post": {
+        "tags": [
+          "ConnectionMonitors"
+        ],
+        "operationId": "ConnectionMonitors_Start",
+        "description": "Starts the specified connection monitor.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group containing Network Watcher."
+          },
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Network Watcher resource."
+          },
+          {
+            "name": "connectionMonitorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the connection monitor."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation starts the connection monitor."
+          },
+          "202": {
+            "description": "Accepted. The operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start connection monitor": {
+            "$ref": "./examples/NetworkWatcherConnectionMonitorStart.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionMonitors/{connectionMonitorName}/query": {
+      "post": {
+        "tags": [
+          "ConnectionMonitors"
+        ],
+        "operationId": "ConnectionMonitors_Query",
+        "description": "Query a snapshot of the most recent connection states.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group containing Network Watcher."
+          },
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Network Watcher resource."
+          },
+          {
+            "name": "connectionMonitorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name given to the connection monitor."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful query of connection states.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionMonitorQueryResult"
+            }
+          },
+          "202": {
+            "description": "Accepted query of connection states.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionMonitorQueryResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query connection monitor": {
+            "$ref": "./examples/NetworkWatcherConnectionMonitorQuery.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionMonitors": {
+      "get": {
+        "tags": [
+          "ConnectionMonitors"
+        ],
+        "operationId": "ConnectionMonitors_List",
+        "description": "Lists all connection monitors for the specified Network Watcher.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group containing Network Watcher."
+          },
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Network Watcher resource."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful connection monitor enumeration request.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionMonitorListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "List connection monitors": {
+            "$ref": "./examples/NetworkWatcherConnectionMonitorList.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ConnectionMonitor": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Connection monitor location."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Connection monitor tags."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ConnectionMonitorParameters",
+          "description": "Properties of the connection monitor."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "Parameters that define the operation to create a connection monitor."
+    },
+    "ConnectionMonitorParameters": {
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/ConnectionMonitorSource",
+          "description": "Describes the source of connection monitor."
+        },
+        "destination": {
+          "$ref": "#/definitions/ConnectionMonitorDestination",
+          "description": "Describes the destination of connection monitor."
+        },
+        "autoStart": {
+          "type": "boolean",
+          "default": true,
+          "description": "Determines if the connection monitor will start automatically once created."
+        },
+        "monitoringIntervalInSeconds": {
+          "type": "integer",
+          "default": 60,
+          "description": "Monitoring interval in seconds."
+        }
+      },
+      "required": [
+        "source",
+        "destination"
+      ],
+      "description": "Parameters that define the operation to create a connection monitor."
+    },
+    "ConnectionMonitorSource": {
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The ID of the resource used as the source by connection monitor."
+        },
+        "port": {
+          "type": "integer",
+          "description": "The source port used by connection monitor."
+        }
+      },
+      "required": [
+        "resourceId"
+      ],
+      "description": "Describes the source of connection monitor."
+    },
+    "ConnectionMonitorDestination": {
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The ID of the resource used as the destination by connection monitor."
+        },
+        "address": {
+          "type": "string",
+          "description": "Address of the connection monitor destination (IP or domain name)."
+        },
+        "port": {
+          "type": "integer",
+          "description": "The destination port used by connection monitor."
+        }
+      },
+      "description": "Describes the destination of connection monitor."
+    },
+    "ConnectionStateSnapshot": {
+      "properties": {
+        "connectionState": {
+          "type": "string",
+          "enum": [
+            "Reachable",
+            "Unreachable",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectionState",
+            "modelAsString": true
+          },
+          "description": "The connection state."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the connection snapshot."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the connection snapshot."
+        },
+        "evaluationState": {
+          "type": "string",
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Completed"
+          ],
+          "x-ms-enum": {
+            "name": "EvaluationState",
+            "modelAsString": true
+          },
+          "description": "Connectivity analysis evaluation state."
+        },
+        "avgLatencyInMs": {
+          "type": "integer",
+          "description": "Average latency in ms."
+        },
+        "minLatencyInMs": {
+          "type": "integer",
+          "description": "Minimum latency in ms."
+        },
+        "maxLatencyInMs": {
+          "type": "integer",
+          "description": "Maximum latency in ms."
+        },
+        "probesSent": {
+          "type": "integer",
+          "description": "The number of sent probes."
+        },
+        "probesFailed": {
+          "type": "integer",
+          "description": "The number of failed probes."
+        },
+        "hops": {
+          "readOnly": true,
+          "type": "array",
+          "description": "List of hops between the source and the destination.",
+          "items": {
+            "$ref": "./networkWatcher.json#/definitions/ConnectivityHop"
+          }
+        }
+      },
+      "description": "Connection state snapshot."
+    },
+    "ConnectionMonitorListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectionMonitorResult"
+          },
+          "description": "Information about connection monitors."
+        }
+      },
+      "description": "List of connection monitors."
+    },
+    "ConnectionMonitorResult": {
+      "x-ms-azure-resource": true,
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the connection monitor."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "ID of the connection monitor."
+        },
+        "etag": {
+          "type": "string",
+          "default": "A unique read-only string that changes whenever the resource is updated.",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Connection monitor type."
+        },
+        "location": {
+          "type": "string",
+          "description": "Connection monitor location."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Connection monitor tags."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ConnectionMonitorResultProperties",
+          "description": "Properties of the connection monitor result."
+        }
+      },
+      "description": "Information about the connection monitor."
+    },
+    "ConnectionMonitorResultProperties": {
+      "properties": {
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the connection monitor."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the connection monitor was started."
+        },
+        "monitoringStatus": {
+          "type": "string",
+          "description": "The monitoring status of the connection monitor."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionMonitorParameters"
+        }
+      ],
+      "description": "Describes the properties of a connection monitor."
+    },
+    "ConnectionMonitorQueryResult": {
+      "properties": {
+        "sourceStatus": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Active",
+            "Inactive"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectionMonitorSourceStatus",
+            "modelAsString": true
+          },
+          "description": "Status of connection monitor source."
+        },
+        "states": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectionStateSnapshot"
+          },
+          "description": "Information about connection states."
+        }
+      },
+      "description": "List of connection states snapshots."
+    }
+  }
+}

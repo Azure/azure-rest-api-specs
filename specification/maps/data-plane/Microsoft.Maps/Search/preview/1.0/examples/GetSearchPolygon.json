@@ -1,0 +1,125 @@
+{
+  "parameters": {
+    "format": "json",
+    "api-version": "1.0",
+    "geometries": "[geometry-ids]",
+    "subscription-key": "[subscription-key]"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "additionalData": [
+          {
+            "providerID": "1111-2222-32-4444444444444",
+            "geometryData": {
+              "type": "FeatureCollection",
+              "features": [
+                {
+                  "type": "Feature",
+                  "properties": {},
+                  "geometry": {
+                    "type": "Polygon",
+                    "coordinates": [
+                      [
+                        [
+                          -122.0665062,
+                          47.6496252
+                        ],
+                        [
+                          -122.0664863,
+                          47.6496113
+                        ],
+                        [
+                          -122.0664843,
+                          47.6496014
+                        ],
+                        [
+                          -122.0663693,
+                          47.6495247
+                        ],
+                        [
+                          -122.0663017,
+                          47.6494664
+                        ],
+                        [
+                          -122.0662679,
+                          47.6494247
+                        ],
+                        [
+                          -122.0661647,
+                          47.6493314
+                        ],
+                        [
+                          -122.067177,
+                          47.649298
+                        ],
+                        [
+                          -122.090715,
+                          47.6543598
+                        ],
+                        [
+                          -122.0907846,
+                          47.6542921
+                        ],
+                        [
+                          -122.0908284,
+                          47.6542603
+                        ]
+                      ]
+                    ]
+                  },
+                  "id": "1111-2222-32-4444444444444"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "400 BadRequest",
+          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}

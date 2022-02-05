@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.SoftwarePlan
-  output-folder: $(csharp-sdks-folder)/softwareplan/management/Microsoft.SoftwarePlan/GeneratedProtocol
+  namespace: Microsoft.Azure.Management.SoftwarePlan
+  output-folder: $(csharp-sdks-folder)/softwareplan/Microsoft.Azure.Management.SoftwarePlan/src/Generated
 ```

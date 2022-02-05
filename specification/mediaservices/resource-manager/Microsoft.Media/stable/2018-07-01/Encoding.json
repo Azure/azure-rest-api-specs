@@ -152,6 +152,13 @@
             "modelAsString": true
           },
           "description": "Specifies the maximum resolution at which your video is analyzed. The default behavior is \"SourceResolution,\" which will keep the input video at its original resolution when analyzed. Using \"StandardDefinition\" will resize input videos to standard definition while preserving the appropriate aspect ratio. It will only resize if the video is of higher resolution. For example, a 1920x1080 input would be scaled to 640x360 before processing. Switching to \"StandardDefinition\" will reduce the time it takes to process high resolution video. It may also reduce the cost of using this component (see https://azure.microsoft.com/en-us/pricing/details/media-services/#analytics for details). However, faces that end up being too small in the resized video may not be detected."
+        },
+        "experimentalOptions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Dictionary containing key value pairs for parameters not exposed in the preset itself"
         }
       },
       "type": "object",
@@ -167,7 +174,14 @@
       "properties": {
         "audioLanguage": {
           "type": "string",
-          "description": "The language for the audio payload in the input using the BCP-47 format of 'language tag-region' (e.g: 'en-US').  The list of supported languages are English ('en-US' and 'en-GB'), Spanish ('es-ES' and 'es-MX'), French ('fr-FR'), Italian ('it-IT'), Japanese ('ja-JP'), Portuguese ('pt-BR'), Chinese ('zh-CN'), German ('de-DE'), Arabic ('ar-EG' and 'ar-SY'), Russian ('ru-RU'), Hindi ('hi-IN'), and Korean ('ko-KR'). If you know the language of your content, it is recommended that you specify it. If the language isn't specified or set to null, automatic language detection will choose the first language detected and process with the selected language for the duration of the file. This language detection feature currently supports English, Chinese, French, German, Italian, Japanese, Spanish, Russian, and Portuguese. It does not currently support dynamically switching between languages after the first language is detected. The automatic detection works best with audio recordings with clearly discernable speech. If automatic detection fails to find the language, transcription would fallback to 'en-US'.\""
+          "description": "The language for the audio payload in the input using the BCP-47 format of 'language tag-region' (e.g: 'en-US').  If you know the language of your content, it is recommended that you specify it. If the language isn't specified or set to null, automatic language detection will choose the first language detected and process with the selected language for the duration of the file. It does not currently support dynamically switching between languages after the first language is detected. The automatic detection works best with audio recordings with clearly discernable speech. If automatic detection fails to find the language, transcription would fallback to 'en-US'.\" The list of supported languages is available here: https://go.microsoft.com/fwlink/?linkid=2109463"
+        },
+        "experimentalOptions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Dictionary containing key value pairs for parameters not exposed in the preset itself"
         }
       },
       "type": "object",
@@ -851,6 +865,7 @@
             "AdaptiveStreaming",
             "AACGoodQualityAudio",
             "ContentAwareEncodingExperimental",
+            "ContentAwareEncoding",
             "H264MultipleBitrate1080p",
             "H264MultipleBitrate720p",
             "H264MultipleBitrateSD"
@@ -881,6 +896,10 @@
               {
                 "value": "ContentAwareEncodingExperimental",
                 "description": "Exposes an experimental preset for content-aware encoding. Given any input content, the service attempts to automatically determine the optimal number of layers, appropriate bitrate and resolution settings for delivery by adaptive streaming. The underlying algorithms will continue to evolve over time. The output will contain MP4 files with video and audio interleaved."
+              },
+              {
+                "value": "ContentAwareEncoding",
+                "description": "Produces a set of GOP-aligned MP4s by using content-aware encoding. Given any input content, the service performs an initial lightweight analysis of the input content, and uses the results to determine the optimal number of layers, appropriate bitrate and resolution settings for delivery by adaptive streaming. This preset is particularly effective for low and medium complexity videos, where the output files will be at lower bitrates but at a quality that still delivers a good experience to viewers. The output will contain MP4 files with video and audio interleaved."
               },
               {
                 "value": "H264MultipleBitrate1080p",
@@ -1331,6 +1350,20 @@
         "label": {
           "type": "string",
           "description": "A label that is assigned to a JobOutput in order to help uniquely identify it. This is useful when your Transform has more than one TransformOutput, whereby your Job has more than one JobOutput. In such cases, when you submit the Job, you will add two or more JobOutputs, in the same order as TransformOutputs in the Transform. Subsequently, when you retrieve the Job, either through events or on a GET request, you can use the label to easily identify the JobOutput. If a label is not provided, a default value of '{presetName}_{outputIndex}' will be used, where the preset name is the name of the preset in the corresponding TransformOutput and the output index is the relative index of the this JobOutput within the Job. Note that this index is the same as the relative index of the corresponding TransformOutput within its Transform."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC date and time at which this Job Output began processing.",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC date and time at which this Job Output finished processing.",
+          "readOnly": true,
+          "x-nullable": true
         }
       },
       "type": "object",
@@ -1628,6 +1661,20 @@
             "type": "string"
           },
           "description": "Customer provided key, value pairs that will be returned in Job and JobOutput state events."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC date and time at which this Job began processing.",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC date and time at which this Job finished processing.",
+          "readOnly": true,
+          "x-nullable": true
         }
       },
       "type": "object",

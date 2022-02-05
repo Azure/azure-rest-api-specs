@@ -26,7 +26,23 @@ These are the global settings for the ContainerRegistry API.
 ``` yaml
 # common
 openapi-type: data-plane
-tag: package-2019-07
+tag: package-2019-08
+```
+### Tag: package-2019-08
+
+These settings apply only when `--tag=package-2019-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-08'
+input-file:
+- Microsoft.ContainerRegistry/preview/2019-08-15/containerregistry.json
+# This override adds support for directly passing in the acquired location link (Since it starts with /)
+# It also caters to passing it without / as some implementations may remove the initial / .
+directive:
+  - from: source-file-csharp
+    where: $
+    transform: >-
+      return $.
+        replace( /_url = _url.Replace\("\{nextBlobUuidLink\}", location\);/g, "_url = _url.Replace(location.StartsWith(\"/\") ? \"/{nextBlobUuidLink}\" : \"{nextBlobUuidLink}\", location);")
 ```
 
 ### Tag: package-2019-07
@@ -45,6 +61,7 @@ These settings apply only when `--tag=package-2018-08` is specified on the comma
 ``` yaml $(tag) == 'package-2018-08'
 input-file:
 - Microsoft.ContainerRegistry/preview/2018-08-10/containerregistry.json
+
 ```
 
 ---
@@ -57,7 +74,10 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-python
+
 ```
 
 ## C#
@@ -71,7 +91,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.ContainerRegistry
   sync-methods: None
-  output-folder: $(csharp-sdks-folder)/ContainerRegistry/preview/Microsoft.Azure.ContainerRegistry/src/Generated
+  output-folder: $(csharp-sdks-folder)/ContainerRegistry/Microsoft.Azure.ContainerRegistry/src/Generated
   clear-output-folder: true
   add-credentials: true
 ```
@@ -79,6 +99,10 @@ csharp:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Suppression
 
@@ -96,8 +120,31 @@ directive:
     reason: No content is returned by put Manifest in compliance with Docker's own specs for compatibility purposes. Specifics https://docs.docker.com/registry/spec/api/#put-manifest
     from: containerregistry.json
     where: $.paths["/v2/{name}/manifests/{reference}"].put.responses["201"]
+  - suppress: LROStatusCodesReturnTypeSchema
+    reason: No content is returned by put End Upload in compliance with Docker's own specs for compatibility purposes. Specifics https://docs.docker.com/v17.12/registry/spec/api/
+    from: containerregistry.json
+    where: $.paths["/{nextBlobUuidLink}"].put.responses["201"]
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: These default values are specified by the Open Container Initiative. Used for cross compatibility. Specifics https://github.com/opencontainers/image-spec/blob/master/annotations.md#rules
+    from: containerregistry.json
+    where:
+      - $.definitions.Platform.properties["os.version"]
+      - $.definitions.Platform.properties["os.features"]
+      - $.definitions.Annotations.properties["org.opencontainers.image.created"]
+      - $.definitions.Annotations.properties["org.opencontainers.image.authors"]
+      - $.definitions.Annotations.properties["org.opencontainers.image.url"]
+      - $.definitions.Annotations.properties["org.opencontainers.image.documentation"]
+      - $.definitions.Annotations.properties["org.opencontainers.image.source"]
+      - $.definitions.Annotations.properties["org.opencontainers.image.version"]
+      - $.definitions.Annotations.properties["org.opencontainers.image.revision"]
+      - $.definitions.Annotations.properties["org.opencontainers.image.vendor"]
+      - $.definitions.Annotations.properties["org.opencontainers.image.licenses"]
+      - $.definitions.Annotations.properties["org.opencontainers.image.ref.name"]
+      - $.definitions.Annotations.properties["org.opencontainers.image.title"]
+      - $.definitions.Annotations.properties["org.opencontainers.image.description"]
 ```
-## Multi-API/Profile support for AutoRest v3 generators 
+
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -109,16 +156,16 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.ContainerRegistry/preview/2019-08-15/containerregistry.json
   - $(this-folder)/Microsoft.ContainerRegistry/preview/2019-07-15/containerregistry.json
   - $(this-folder)/Microsoft.ContainerRegistry/preview/2018-08-10/containerregistry.json
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
+#exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
