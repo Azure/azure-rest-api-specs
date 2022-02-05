@@ -1284,7 +1284,7 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Automanage/servicePrincipals/{servicePrincipalName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Automanage/servicePrincipals/default": {
       "get": {
         "tags": [
           "servicePrincipals"
@@ -1299,13 +1299,6 @@
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "servicePrincipalName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the servicePrincipal Name. Only default is supported."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -1670,13 +1663,13 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ServicePrincipalProperties",
           "description": "The Service Principal properties for the subscription"
-        },
-        "allOf": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
-          }
-        ]
-      }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "ServicePrincipalProperties": {
       "description": "The Service Principal properties for the subscription.",
