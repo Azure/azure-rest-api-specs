@@ -6,12 +6,20 @@
     "description": "The customLocations Rest API spec."
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -28,7 +36,9 @@
   "paths": {
     "/providers/Microsoft.ExtendedLocation/operations": {
       "get": {
-        "tags": ["customLocations"],
+        "tags": [
+          "customLocations"
+        ],
         "operationId": "CustomLocations_ListOperations",
         "description": "Lists all available Custom Locations operations.",
         "parameters": [
@@ -63,7 +73,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ExtendedLocation/customLocations": {
       "get": {
-        "tags": ["customLocations"],
+        "tags": [
+          "customLocations"
+        ],
         "operationId": "CustomLocations_ListBySubscription",
         "summary": "Gets a list of Custom Locations in a subscription.",
         "description": "Gets a list of Custom Locations in the specified subscription. The operation returns properties of each Custom Location",
@@ -101,7 +113,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ExtendedLocation/customLocations": {
       "get": {
-        "tags": ["customLocations"],
+        "tags": [
+          "customLocations"
+        ],
         "operationId": "CustomLocations_ListByResourceGroup",
         "summary": "Gets a list of Custom Locations in the specified subscription and resource group.",
         "description": "Gets a list of Custom Locations in the specified subscription and resource group. The operation returns properties of each Custom Location.",
@@ -142,7 +156,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ExtendedLocation/customLocations/{resourceName}": {
       "get": {
-        "tags": ["customLocations"],
+        "tags": [
+          "customLocations"
+        ],
         "operationId": "CustomLocations_Get",
         "summary": "Gets a Custom Location.",
         "description": "Gets the details of the customLocation with a specified resource group and name.",
@@ -181,7 +197,9 @@
         }
       },
       "put": {
-        "tags": ["customLocations"],
+        "tags": [
+          "customLocations"
+        ],
         "operationId": "CustomLocations_CreateOrUpdate",
         "summary": "Creates or updates a Custom Location.",
         "description": "Creates or updates a Custom Location in the specified Subscription and Resource Group",
@@ -239,7 +257,9 @@
         }
       },
       "delete": {
-        "tags": ["customLocations"],
+        "tags": [
+          "customLocations"
+        ],
         "operationId": "CustomLocations_Delete",
         "summary": "Deletes a Custom Location.",
         "description": "Deletes the Custom Location with the specified Resource Name, Resource Group, and Subscription Id.",
@@ -282,7 +302,9 @@
         }
       },
       "patch": {
-        "tags": ["customLocations"],
+        "tags": [
+          "customLocations"
+        ],
         "operationId": "CustomLocations_Update",
         "summary": "Updates a Custom Location.",
         "description": "Updates a Custom Location with the specified Resource Name in the specified Resource Group and Subscription.",
@@ -333,7 +355,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ExtendedLocation/customLocations/{resourceName}/enabledResourceTypes": {
       "get": {
-        "tags": ["customLocations"],
+        "tags": [
+          "customLocations"
+        ],
         "operationId": "CustomLocations_ListEnabledResourceTypes",
         "summary": "Gets the list of Enabled Resource Types.",
         "description": "Gets the list of the Enabled Resource Types.",
@@ -377,7 +401,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ExtendedLocation/customLocations/{resourceName}/findTargetResourceGroup": {
       "post": {
-        "tags": ["customLocations"],
+        "tags": [
+          "customLocations"
+        ],
         "operationId": "CustomLocations_FindTargetResourceGroup",
         "summary": "Gets matching target resource group for resource sync.",
         "description": "Returns the target resource group associated with the resource sync rules of the Custom Location that match the rules passed in with the Find Target Resource Group Request.",
@@ -430,7 +456,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ExtendedLocation/customLocations/{resourceName}/resourceSyncRules": {
       "get": {
-        "tags": ["resourceSyncRules"],
+        "tags": [
+          "resourceSyncRules"
+        ],
         "operationId": "ResourceSyncRules_ListByCustomLocationID",
         "summary": "Lists all Resource Sync Rules in a Custom Location.",
         "description": "Gets a list of Resource Sync Rules in the specified subscription. The operation returns properties of each Resource Sync Rule",
@@ -474,7 +502,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ExtendedLocation/customLocations/{resourceName}/resourceSyncRules/{childResourceName}": {
       "get": {
-        "tags": ["resourceSyncRules"],
+        "tags": [
+          "resourceSyncRules"
+        ],
         "operationId": "ResourceSyncRules_Get",
         "summary": "Gets a Resource Sync Rule.",
         "description": "Gets the details of the resourceSyncRule with a specified resource group, subscription id Custom Location resource name and Resource Sync Rule name.",
@@ -516,7 +546,9 @@
         }
       },
       "put": {
-        "tags": ["resourceSyncRules"],
+        "tags": [
+          "resourceSyncRules"
+        ],
         "operationId": "ResourceSyncRules_CreateOrUpdate",
         "summary": "Creates or updates a Resource Sync Rule.",
         "description": "Creates or updates a Resource Sync Rule in the parent Custom Location, Subscription Id and Resource Group",
@@ -577,7 +609,9 @@
         }
       },
       "delete": {
-        "tags": ["resourceSyncRules"],
+        "tags": [
+          "resourceSyncRules"
+        ],
         "operationId": "ResourceSyncRules_Delete",
         "summary": "Deletes a Resource Sync Rule.",
         "description": "Deletes the Resource Sync Rule with the specified Resource Sync Rule Name, Custom Location Resource Name, Resource Group, and Subscription Id.",
@@ -619,7 +653,9 @@
         }
       },
       "patch": {
-        "tags": ["resourceSyncRules"],
+        "tags": [
+          "resourceSyncRules"
+        ],
         "operationId": "ResourceSyncRules_Update",
         "summary": "Updates a Resource Sync Rule.",
         "description": "Updates a Resource Sync Rule with the specified Resource Sync Rule name in the specified Resource Group, Subscription and Custom Location name.",
@@ -794,7 +830,10 @@
         "type": {
           "description": "The identity type.",
           "type": "string",
-          "enum": ["SystemAssigned", "None"],
+          "enum": [
+            "SystemAssigned",
+            "None"
+          ],
           "x-ms-enum": {
             "name": "ResourceIdentityType",
             "modelAsString": true
@@ -914,7 +953,9 @@
     },
     "customLocationOperationsList": {
       "description": "Lists of Custom Locations operations.",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "properties": {
         "nextLink": {
           "description": "Next page of operations.",
@@ -944,7 +985,10 @@
             "value": {
               "description": "The kubeconfig value.",
               "type": "string",
-              "x-ms-mutability": ["create", "update"],
+              "x-ms-mutability": [
+                "create",
+                "update"
+              ],
               "x-ms-secret": true
             }
           }
@@ -968,7 +1012,9 @@
           "description": "Type of host the Custom Locations is referencing (Kubernetes, etc...).",
           "default": "Kubernetes",
           "type": "string",
-          "enum": ["Kubernetes"],
+          "enum": [
+            "Kubernetes"
+          ],
           "x-ms-enum": {
             "name": "HostType",
             "modelAsString": true
