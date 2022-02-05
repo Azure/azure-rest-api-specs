@@ -897,12 +897,14 @@
           "properties": {
             "scope": {
               "description": "Scope at which the operator will be installed.",
-              "$ref": "#/definitions/ScopeDefinition"
+              "$ref": "#/definitions/ScopeDefinition",
+              "x-ms-mutability": ["create", "read"]
             },
             "namespace": {
               "description": "The namespace to which this configuration is installed to. Maximum of 253 lower case alphanumeric characters, hyphen and period only.",
               "type": "string",
-              "default": "default"
+              "default": "default",
+              "x-ms-mutability": ["create", "read"]
             },
             "sourceKind": {
               "description": "Source Kind to pull the configuration data from.",
