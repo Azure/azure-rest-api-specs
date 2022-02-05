@@ -5,8 +5,10 @@
     "dnsResolverName": "sampleDnsResolver",
     "inboundEndpointName": "sampleInboundEndpoint",
     "parameters": {
-      "tags": {
-        "key1": "value1"
+      "properties": {
+        "metadata": {
+          "additionalProp1": "value1"
+        }
       }
     },
     "api-version": "2020-04-01-preview"
@@ -17,10 +19,6 @@
         "id": "/subscriptions/abdd4249-9f34-4cc6-8e42-c2e32110603e/resourceGroups/sampleResourceGroup/providers/Microsoft.Network/inboundEndpoints/sampleInboundEndpoint",
         "name": "sampleInboundEndpoint",
         "type": "Microsoft.Network/dnsResolvers/inboundEndpoints",
-        "tags": {
-          "key1": "value1"
-        },
-        "location": "westus2",
         "etag": "00000000-0000-0000-0000-000000000000",
         "systemData": {
           "createdByType": "Application",
@@ -38,6 +36,9 @@
               "privateIpAllocationMethod": "Static"
             }
           ],
+          "metadata": {
+            "additionalProp1": "value1"
+          },
           "provisioningState": "Succeeded",
           "resourceGuid": "87b3e20a-5833-4c40-8ad7-c5160bb1c5bd"
         }
