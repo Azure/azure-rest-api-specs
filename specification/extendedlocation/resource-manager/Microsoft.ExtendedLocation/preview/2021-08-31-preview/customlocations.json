@@ -724,6 +724,17 @@
       "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
       "description": "Resource Sync Rule name."
     },
+    "EnabledResourceTypeNameParameter": {
+      "name": "enabledResourceTypeName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "minLength": 1,
+      "maxLength": 63,
+      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
+      "description": "Custom Locations Enabled Resource Type name."
+    },
     "ResourceNameParameter": {
       "name": "resourceName",
       "in": "path",
@@ -789,7 +800,8 @@
                 "description": "Resource Type",
                 "type": "string"
               }
-            }
+            },
+            "x-ms-identifiers": []
           }
         }
       }
@@ -886,6 +898,7 @@
     },
     "customLocationListResult": {
       "description": "The List Custom Locations operation response.",
+      "type": "object",
       "properties": {
         "nextLink": {
           "description": "The URL to use for getting the next set of results.",
@@ -904,6 +917,7 @@
     },
     "customLocationOperation": {
       "description": "Custom Locations operation.",
+      "type": "object",
       "properties": {
         "display": {
           "$ref": "#/definitions/customLocationOperationValueDisplay",
@@ -929,6 +943,7 @@
     },
     "customLocationOperationValueDisplay": {
       "description": "Describes the properties of a Custom Locations Operation Value Display.",
+      "type": "object",
       "properties": {
         "description": {
           "description": "The description of the operation.",
@@ -954,6 +969,7 @@
     },
     "customLocationOperationsList": {
       "description": "Lists of Custom Locations operations.",
+      "type": "object",
       "required": [
         "value"
       ],
@@ -967,7 +983,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/customLocationOperation"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1011,7 +1028,6 @@
         },
         "hostType": {
           "description": "Type of host the Custom Locations is referencing (Kubernetes, etc...).",
-          "default": "Kubernetes",
           "type": "string",
           "enum": [
             "Kubernetes"
@@ -1027,8 +1043,7 @@
         },
         "provisioningState": {
           "description": "Provisioning State for the Custom Location.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
@@ -1038,7 +1053,8 @@
       "items": {
         "$ref": "#/definitions/matchExpressionsProperties",
         "description": "The list of matchExpressions."
-      }
+      },
+      "x-ms-identifiers": []
     },
     "matchExpressionsProperties": {
       "description": "Resource Sync Rules matchExpression property definition.",
