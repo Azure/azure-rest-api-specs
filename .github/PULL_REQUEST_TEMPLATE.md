@@ -80,7 +80,6 @@ Most of the information about your service should be captured in the issue that 
 
 Is this review for (select one):
 
-- [ ] a private preview
 - [ ] a public preview
 - [ ] GA release 
 
