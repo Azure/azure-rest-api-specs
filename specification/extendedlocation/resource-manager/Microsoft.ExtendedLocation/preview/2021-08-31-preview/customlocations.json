@@ -427,7 +427,7 @@
             "schema": {
               "$ref": "#/definitions/customLocationFindTargetResourceGroupProperties"
             },
-            "description": "Labels supplied to match with Resource Sync Rule."
+            "description": "Labels supplied to match with Resource Sync Rule. This is a map of {key,value} pairs."
           }
         ],
         "responses": {
@@ -878,7 +878,7 @@
       ]
     },
     "customLocationFindTargetResourceGroupProperties": {
-      "description": "Match Labels",
+      "description": "Labels of the custom resource, this is a map of {key,value} pairs.",
       "type": "object",
       "additionalProperties": {
         "type": "string"
@@ -889,7 +889,7 @@
       "type": "object",
       "properties": {
         "targetResourceGroup": {
-          "description": "The matching target resource group.",
+          "description": "The target resource group of matching resource sync rule. The labels from the request will be used to find out matching resource sync rule against the selector property of the resource sync rule. The one with highest priority will be returned if there are multiple matching rules.",
           "type": "string",
           "readOnly": true
         }
