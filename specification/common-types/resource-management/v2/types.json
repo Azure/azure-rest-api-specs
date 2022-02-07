@@ -307,7 +307,11 @@
           "items": {
             "$ref": "#/definitions/ErrorDetail"
           },
-          "description": "The error details."
+          "description": "The error details.",
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ]
         },
         "additionalInfo": {
           "readOnly": true,
@@ -315,7 +319,8 @@
           "items": {
             "$ref": "#/definitions/ErrorAdditionalInfo"
           },
-          "description": "The error additional info."
+          "description": "The error additional info.",
+          "x-ms-identifiers": []
         }
       }
     },
@@ -424,6 +429,9 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of operations supported by the resource provider",
           "readOnly": true
         },
