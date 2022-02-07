@@ -5216,6 +5216,24 @@
         }
       }
     },
+    "FactoryUpdateProperties": {
+      "description": "Factory update resource properties.",
+      "type": "object",
+      "properties": {
+        "publicNetworkAccess": {
+          "description": "Whether or not public network access is allowed for the data factory.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "EncryptionConfiguration": {
       "description": "Definition of CMK for the factory.",
       "properties": {
@@ -5400,17 +5418,10 @@
           "$ref": "#/definitions/FactoryIdentity",
           "description": "Managed service identity of the factory."
         },
-        "publicNetworkAccess": {
-          "description": "Whether or not public network access is allowed for the data factory.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PublicNetworkAccess",
-            "modelAsString": true
-          }
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FactoryUpdateProperties",
+          "description": "Properties of update the factory."
         }
       }
     },
