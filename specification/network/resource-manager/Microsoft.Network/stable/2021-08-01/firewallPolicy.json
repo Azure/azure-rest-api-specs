@@ -1606,6 +1606,12 @@
           "items": {
             "$ref": "#/definitions/FirewallPolicyIntrusionDetectionBypassTrafficSpecifications"
           }
+        },
+        "privateIpRanges": {
+          "type": "array",
+          "description": "Traffic direction is defined depending on if the source or destination IP address is within the private IP range. By default, only ranges defined by IANA RFC 1918 are considered private IP addresses. To extend the definition of private IP addresses to other ranges, specify additional IP address ranges.",
+          "items": {
+            "type": "string"
         }
       }
     },
