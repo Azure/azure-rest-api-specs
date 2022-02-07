@@ -111,7 +111,7 @@ The [Azure API Review Board](https://aka.ms/azapi) is dedicated to helping you c
   
 ### Tooling
  * [Open API validation tools](https://aka.ms/swaggertools) were run on this PR. Go here to see [how to fix errors](https://aka.ms/ci-fix)
- * [Spectral Linting](https://aka.ms/style)
+ * [Spectral Linting](https://aka.ms/azapi/style)
  * [Open API Hub](https://aka.ms/openapiportal)
 
 ### Guidelines & Specifications
