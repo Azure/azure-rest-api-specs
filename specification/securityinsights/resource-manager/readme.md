@@ -154,6 +154,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-java
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
 ```
@@ -188,3 +189,7 @@ See configuration in [readme.nodejs.md](./readme.nodejs.md)
 ## TypeScript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
+
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)
