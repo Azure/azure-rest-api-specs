@@ -1862,25 +1862,25 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/snapshotPolicies": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/SubscriptionId"
-        },
-        {
-          "$ref": "#/parameters/ResourceGroup"
-        },
-        {
-          "$ref": "#/parameters/AccountName"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-        }
-      ],
       "get": {
         "operationId": "SnapshotPolicies_List",
         "description": "List snapshot policy",
         "tags": [
           "Snapshot Policy"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
         ],
         "x-ms-pageable": {
           "nextLinkName": null
@@ -1909,6 +1909,23 @@
         "description": "Get a snapshot Policy",
         "tags": [
           "Snapshot Policy"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/SnapshotPolicyName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
         ],
         "responses": {
           "200": {
@@ -1942,6 +1959,21 @@
             "schema": {
               "$ref": "#/definitions/snapshotPolicy"
             }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/SnapshotPolicyName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1983,6 +2015,21 @@
             "schema": {
               "$ref": "#/definitions/snapshotPolicyPatch"
             }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/SnapshotPolicyName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -2017,6 +2064,23 @@
         "description": "Delete snapshot policy",
         "tags": [
           "Snapshot Policy"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/SnapshotPolicyName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
         ],
         "responses": {
           "200": {
@@ -6653,7 +6717,6 @@
           "title": "size",
           "type": "integer",
           "x-nullable": true,
-          "x-ms-mutability": ["create", "update"],
           "format": "int64",
           "description": "Truncate subvolume to the provided size in bytes",
           "example": 5
