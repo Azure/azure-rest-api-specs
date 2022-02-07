@@ -796,6 +796,49 @@
         }
       }
     },
+    "SharePointOnlineFileReadSettings": {
+      "description": "SharePoint online file read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreReadSettings"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "SharePoint online file wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "SharePoint online file wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
+        "enablePartitionDiscovery": {
+          "type": "boolean",
+          "description": "Indicates whether to enable partition discovery."
+        },
+        "partitionRootPath": {
+          "type": "object",
+          "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "StoreWriteSettings": {
       "description": "Connector write settings.",
       "discriminator": "type",
