@@ -3643,23 +3643,6 @@
       ],
       "description": "An traffic selector policy for a virtual network gateway connection."
     },
-    "GatewayCustomBgpIpAddressIpConfiguration": {
-      "properties": {
-        "ipconfigurationId": {
-          "type": "string",
-          "description": "The IpconfigurationId of ipconfiguration which belongs to gateway."
-        },
-        "customBgpIpAddress": {
-          "type": "string",
-          "description": "The custom BgpPeeringAddress which belongs to IpconfigurationId."
-        }
-      },
-      "required": [
-        "ipconfigurationId",
-        "customBgpIpAddress"
-      ],
-      "description": "GatewayCustomBgpIpAddressIpConfiguration for a virtual network gateway connection."
-    },
     "ConnectionProtocol": {
       "type": "string",
       "description": "Gateway connection protocol.",
@@ -3875,6 +3858,13 @@
         "enableBgp": {
           "type": "boolean",
           "description": "EnableBgp flag."
+        },
+        "gatewayCustomBgpIpAddresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayCustomBgpIpAddressIpConfiguration"
+          },
+          "description": "GatewayCustomBgpIpAddresses to be used for virtual network gateway Connection."
         },
         "usePolicyBasedTrafficSelectors": {
           "type": "boolean",
@@ -4251,6 +4241,23 @@
         }
       },
       "description": "Properties of IPConfigurationBgpPeeringAddress."
+    },
+    "GatewayCustomBgpIpAddressIpConfiguration": {
+      "properties": {
+        "ipConfigurationId": {
+          "type": "string",
+          "description": "The IpconfigurationId of ipconfiguration which belongs to gateway."
+        },
+        "customBgpIpAddress": {
+          "type": "string",
+          "description": "The custom BgpPeeringAddress which belongs to IpconfigurationId."
+        }
+      },
+      "required": [
+        "ipConfigurationId",
+        "customBgpIpAddress"
+      ],
+      "description": "GatewayCustomBgpIpAddressIpConfiguration for a virtual network gateway connection."
     }
   }
 }
