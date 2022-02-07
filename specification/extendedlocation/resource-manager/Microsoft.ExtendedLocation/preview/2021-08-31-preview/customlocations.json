@@ -885,11 +885,11 @@
       }
     },
     "customLocationFindTargetResourceGroupResult": {
-      "description": "The Find Target Resource Group Custom Locations operation response.",
+      "description": "The Find Target Resource Group operation response.",
       "type": "object",
       "properties": {
         "targetResourceGroup": {
-          "description": "The matching target resource groupCustom Locations.",
+          "description": "The matching target resource group.",
           "type": "string",
           "readOnly": true
         }
@@ -1161,7 +1161,7 @@
       }
     },
     "resourceSyncRuleProperties": {
-      "description": "Properties for a resource sync rule.",
+      "description": "Properties for a resource sync rule. For an unmapped custom resource, its labels will be used to find out matching resource sync rules using the selector property of the resource sync rule. If this resource sync rule has highest priority among all matching rules, then the unmapped custom resource will be projected to the target resource group associated with this resource sync rule.",
       "type": "object",
       "properties": {
         "priority": {
@@ -1175,7 +1175,7 @@
           "readOnly": true
         },
         "selector": {
-          "description": "A label selector is a label query over a set of resources. The result of match labels and match expressions should both be satisfied.",
+          "description": "A label selector is composed of two parts, matchLabels and matchExpressions. The first part, matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is 'key', the operator is 'In', and the values array contains only 'value'. The second part, matchExpressions is a list of pod selector requirements. Valid operators include In, NotIn, Exists, and DoesNotExist. The values set must be non-empty in the case of In and NotIn. All of the requirements, from both matchLabels and matchExpressions must all be satisfied in order to match.",
           "type": "object",
           "properties": {
             "matchExpressions": {
@@ -1193,7 +1193,7 @@
           }
         },
         "targetResourceGroup": {
-          "description": "Resource Group, all resources will be projected to. The Custom Locations RP will perform a checkAccess API for write permissions on the resource group.",
+          "description": "For an unmapped custom resource, if this resource sync rule has highest priority among all matching rules, then the unmapped custom resource will be projected to the target resource group associated with this resource sync rule. The user creating this resource sync rule should have write permissions on the target resource group and this will be checked when creating the resource sync rule.",
           "type": "string"
         }
       }
