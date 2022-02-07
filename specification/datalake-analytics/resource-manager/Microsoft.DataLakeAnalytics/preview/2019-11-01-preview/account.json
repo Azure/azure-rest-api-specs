@@ -636,6 +636,9 @@
           "200": {
             "description": "Successfully removed the specified Azure Data Lake Store account information from the specified Azure Data Lake Analytics account."
           },
+          "204": {
+            "description": "The specified datalake storage account does not exist or was already deleted."
+          },
           "default": {
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
@@ -2123,6 +2126,12 @@
             "$ref": "#/definitions/DataLakeAnalyticsAccountBasic"
           },
           "description": "The results of the list operation."
+        },
+        "count": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The current number of data lake analytics accounts under this subscription."
         },
         "nextLink": {
           "readOnly": true,
