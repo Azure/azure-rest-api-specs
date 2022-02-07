@@ -29,9 +29,9 @@
             }
           },
           "default": {
-            "description": "Default error response.",
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -71,9 +71,9 @@
             }
           },
           "default": {
-            "description": "Default error response.",
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -116,9 +116,9 @@
             }
           },
           "default": {
-            "description": "Default error response.",
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -164,9 +164,9 @@
             }
           },
           "default": {
-            "description": "Default error response.",
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -223,9 +223,9 @@
             }
           },
           "default": {
-            "description": "Default error response.",
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -280,9 +280,9 @@
             }
           },
           "default": {
-            "description": "Default error response.",
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -326,9 +326,9 @@
             "description": "No Content"
           },
           "default": {
-            "description": "Default error response.",
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -357,27 +357,6 @@
       "x-ms-enum": {
         "modelAsString": true,
         "name": "CreatedByType"
-      }
-    },
-    "ErrorResponseBody": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "target": {
-          "type": "string"
-        },
-        "details": {
-          "type": "array",
-          "x-ms-identifiers": [],
-          "items": {
-            "$ref": "#/definitions/ErrorResponseBody"
-          }
-        }
       }
     },
     "GrafanaResource": {
@@ -622,14 +601,6 @@
       "x-ms-enum": {
         "modelAsString": true,
         "name": "ProvisioningState"
-      }
-    },
-    "ResourceProviderDefaultErrorResponse": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorResponseBody"
-        }
       }
     },
     "ResourceSku": {
