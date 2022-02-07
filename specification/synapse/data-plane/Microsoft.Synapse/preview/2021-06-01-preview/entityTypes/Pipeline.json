@@ -7053,6 +7053,7 @@
     "ScriptActivity": {
       "description": "Script activity type.",
       "x-ms-discriminator-value": "Script",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ExecutionActivity"
@@ -7072,16 +7073,19 @@
     },
     "ScriptActivityTypeProperties": {
       "description": "Script activity properties.",
+      "type": "object",
       "properties": {
         "scripts": {
           "type": "array",
           "description": "Array of script blocks. Type: array.",
           "items": {
             "$ref": "#/definitions/ScriptActivityScriptBlock"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "logSettings": {
           "description": "Log settings of script activity.",
+          "type": "object",
           "properties": {
             "logDestination": {
               "x-ms-enum": {
@@ -7108,6 +7112,7 @@
     },
     "ScriptActivityScriptBlock": {
       "description": "Script block of scripts.",
+      "type": "object",
       "properties": {
         "text": {
           "type": "object",
@@ -7130,7 +7135,8 @@
           "description": "Array of script parameters. Type: array.",
           "items": {
             "$ref": "#/definitions/ScriptActivityParameter"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -7140,6 +7146,7 @@
     },
     "ScriptActivityParameter": {
       "description": "Parameters of a script block.",
+      "type": "object",
       "properties": {
         "name": {
           "type": "object",
@@ -7186,7 +7193,8 @@
         },
         "size": {
           "description": "The size of the output direction parameter.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
