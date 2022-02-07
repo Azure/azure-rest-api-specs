@@ -50,7 +50,7 @@
           "200": {
             "description": "OK. Returns a list of operations.",
             "schema": {
-              "$ref": "#/definitions/OperationList"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -69,65 +69,6 @@
           "nextLinkName": "nextLink"
         }
       }
-    }
-  },
-  "definitions": {
-    "Operation": {
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Operation name: {provider}/{resource}/{operation}."
-        },
-        "isDataAction": {
-          "description": "Indicates whether the operation is a data action.",
-          "type": "boolean"
-        },
-        "display": {
-          "type": "object",
-          "readOnly": true,
-          "description": "The object that represents the operation.",
-          "properties": {
-            "provider": {
-              "type": "string",
-              "description": "Service provider: Microsoft.HybridNetwork."
-            },
-            "resource": {
-              "type": "string",
-              "description": "Resource on which the operation is performed: Registration definition, registration assignment, etc."
-            },
-            "operation": {
-              "type": "string",
-              "description": "Operation type: Read, write, delete, etc."
-            },
-            "description": {
-              "type": "string",
-              "description": "Description of the operation."
-            }
-          }
-        }
-      },
-      "type": "object",
-      "description": "Object that describes a single Microsoft.HybridNetwork operation."
-    },
-    "OperationList": {
-      "properties": {
-        "value": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "A list of Microsoft.HybridNetwork operations."
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The URL to get the next set of results."
-        }
-      },
-      "type": "object",
-      "description": "A list of the operations."
     }
   }
 }
