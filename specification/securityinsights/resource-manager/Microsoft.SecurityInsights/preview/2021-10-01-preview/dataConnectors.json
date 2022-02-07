@@ -3,7 +3,7 @@
   "info": {
     "title": "Security Insights",
     "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
-    "version": "2021-09-01-preview"
+    "version": "2021-10-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -112,11 +112,17 @@
           "Get a MDATP data connector": {
             "$ref": "./examples/dataConnectors/GetMicrosoftDefenderAdvancedThreatProtectionById.json"
           },
-          "Get a Office ATP data connector": {
+          "Get an Office ATP data connector": {
             "$ref": "./examples/dataConnectors/GetOffice365AdvancedThreatProtectionById.json"
           },
-          "Get a Office IRM data connector": {
+          "Get an Office IRM data connector": {
             "$ref": "./examples/dataConnectors/GetMicrosoftInsiderRiskManagementById.json"
+          },
+          "Get an Office365 Project data connector": {
+            "$ref": "./examples/dataConnectors/GetOffice365ProjectDataConnetorById.json"
+          },
+          "Get an Office365 PowerBI data connector": {
+            "$ref": "./examples/dataConnectors/GetOfficePowerBIDataConnetorById.json"
           },
           "Get a Dynamics365 data connector": {
             "$ref": "./examples/dataConnectors/GetDynamics365DataConnectorById.json"
@@ -175,6 +181,12 @@
         "x-ms-examples": {
           "Creates or updates an Office365 data connector": {
             "$ref": "./examples/dataConnectors/CreateOfficeDataConnetor.json"
+          },
+          "Creates or updates an Office365 Project data connector": {
+            "$ref": "./examples/dataConnectors/CreateOffice365ProjectDataConnetor.json"
+          },
+          "Creates or updates an Office PowerBI data connector": {
+            "$ref": "./examples/dataConnectors/CreateOfficePowerBIDataConnector.json"
           },
           "Creates or updates a Threat Intelligence Taxii data connector.": {
             "$ref": "./examples/dataConnectors/CreateThreatIntelligenceTaxiiDataConnector.json"
@@ -242,6 +254,12 @@
         "x-ms-examples": {
           "Delete an Office365 data connector": {
             "$ref": "./examples/dataConnectors/DeleteOfficeDataConnetor.json"
+          },
+          "Delete an Office365 Project data connector": {
+            "$ref": "./examples/dataConnectors/DeleteOffice365ProjectDataConnetor.json"
+          },
+          "Delete an Office PowerBI data connector": {
+            "$ref": "./examples/dataConnectors/DeleteOfficePowerBIDataConnetor.json"
           },
           "Delete a GenericUI data connector": {
             "$ref": "./examples/dataConnectors/DeleteGenericUI.json"
@@ -407,6 +425,12 @@
           },
           "Check requirements for OfficeIRM.": {
             "$ref": "./examples/dataConnectors/CheckRequirementsOfficeIRM.json"
+          },
+          "Check requirements for Office365Project.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsOffice365Project.json"
+          },
+          "Check requirements for OfficePowerBI.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsOfficePowerBI.json"
           },
           "Check requirements for Dynamics365.": {
             "$ref": "./examples/dataConnectors/CheckRequirementsDynamics365.json"
@@ -810,6 +834,58 @@
         }
       ],
       "description": "OfficeIRM (Microsoft Insider Risk Management) requirements check properties.",
+      "type": "object"
+    },
+    "Office365ProjectCheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "description": "Represents Office365 Project requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Office365ProjectCheckRequirementsProperties",
+          "description": "Office365 Project requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Office365Project"
+    },
+    "Office365ProjectCheckRequirementsProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Office365 Project requirements check properties.",
+      "type": "object"
+    },
+    "OfficePowerBICheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "description": "Represents Office PowerBI requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OfficePowerBICheckRequirementsProperties",
+          "description": "Office Power BI requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "OfficePowerBI"
+    },
+    "OfficePowerBICheckRequirementsProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Office PowerBI requirements check properties.",
       "type": "object"
     },
     "TICheckRequirements": {
@@ -1284,6 +1360,8 @@
         "Office365",
         "OfficeATP",
         "OfficeIRM",
+        "Office365Project",
+        "OfficePowerBI",
         "AmazonWebServicesCloudTrail",
         "AmazonWebServicesS3",
         "AzureAdvancedThreatProtection",
@@ -1322,6 +1400,12 @@
           },
           {
             "value": "OfficeIRM"
+          },
+          {
+            "value": "Office365Project"
+          },
+          {
+            "value": "OfficePowerBI"
           },
           {
             "value": "AmazonWebServicesCloudTrail"
@@ -1518,6 +1602,112 @@
       ],
       "description": "OfficeATP (Office 365 Advanced Threat Protection) data connector properties.",
       "type": "object"
+    },
+    "Office365ProjectDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents Office Microsoft Project data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Office365ProjectDataConnectorProperties",
+          "description": "Office Microsoft Project data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Office365Project"
+    },
+    "Office365ProjectConnectorDataTypes": {
+      "description": "The available data types for Office Microsoft Project data connector.",
+      "properties": {
+        "logs": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Logs data type.",
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "required": [
+        "logs"
+      ]
+    },
+    "Office365ProjectDataConnectorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Office Microsoft Project data connector properties.",
+      "properties": {
+        "dataTypes": {
+          "$ref": "#/definitions/Office365ProjectConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object",
+      "required": [
+        "dataTypes"
+      ]
+    },
+    "OfficePowerBIDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents Office Microsoft PowerBI data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OfficePowerBIDataConnectorProperties",
+          "description": "Office Microsoft PowerBI data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "OfficePowerBI"
+    },
+    "OfficePowerBIConnectorDataTypes": {
+      "description": "The available data types for Office Microsoft PowerBI data connector.",
+      "properties": {
+        "logs": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Logs data type.",
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "required": [
+        "logs"
+      ]
+    },
+    "OfficePowerBIDataConnectorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Office Microsoft PowerBI data connector properties.",
+      "properties": {
+        "dataTypes": {
+          "$ref": "#/definitions/OfficePowerBIConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object",
+      "required": [
+        "dataTypes"
+      ]
     },
     "OfficeIRMDataConnector": {
       "allOf": [
