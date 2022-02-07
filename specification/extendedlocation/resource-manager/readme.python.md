@@ -6,7 +6,7 @@ These settings apply only when `--track2` is specified on the command line.
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-extendedlocation
-package-version: 1.0.0b3
+package-version: 1.0.0b1
 no-namespace-folders: true
 ```
 

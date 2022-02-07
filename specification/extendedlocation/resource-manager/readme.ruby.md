@@ -4,7 +4,7 @@ These settings apply only when `--ruby` is specified on the command line.
 
 ```yaml
 package-name: azure_mgmt_extended_location
-package-version: package-2021-08-15
+package-version: 2021-08-15
 azure-arm: true
 ```
 
