@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resRg",
+    "clusterName": "myCluster",
+    "applicationName": "myApp",
+    "api-version": "2020-03-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "type": "services",
+            "location": "eastus",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp/services/myService",
+            "name": "myCluster",
+            "tags": {},
+            "etag": "W/\"636462502183671257\"",
+            "properties": {
+              "provisioningState": "Updating",
+              "serviceKind": "Stateless",
+              "serviceTypeName": "myServiceType",
+              "partitionDescription": {
+                "partitionScheme": "Singleton"
+              },
+              "serviceLoadMetrics": [
+                {
+                  "name": "metric1",
+                  "weight": "Low"
+                }
+              ],
+              "instanceCount": 1,
+              "servicePackageActivationMode": "SharedProcess"
+            }
+          }
+        ],
+        "nextLink": ""
+      }
+    }
+  }
+}

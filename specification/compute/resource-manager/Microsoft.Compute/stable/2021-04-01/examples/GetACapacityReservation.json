@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2021-04-01",
+    "capacityReservationGroupName": "myCapacityReservationGroup",
+    "capacityReservationName": "myCapacityReservation"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "reservationId": "{GUID}",
+          "provisioningTime": "2021-06-27T01:02:38.3138469+00:00",
+          "virtualMachinesAssociated": [
+            {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM1"
+            },
+            {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM2"
+            },
+            {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM3"
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "instanceView": {
+            "utilizationInfo": {
+              "virtualMachinesAllocated": [
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM1"
+                },
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM2"
+                }
+              ]
+            },
+            "statuses": [
+              {
+                "code": "ProvisioningState/succeeded",
+                "level": "Info",
+                "displayStatus": "Provisioning succeeded"
+              }
+            ]
+          }
+        },
+        "location": "westus",
+        "tags": {
+          "department": "HR"
+        },
+        "sku": {
+          "name": "Standard_DS1_v2",
+          "capacity": 4
+        },
+        "zones": [
+          "1"
+        ],
+        "name": "myCapacityReservation"
+      }
+    }
+  }
+}

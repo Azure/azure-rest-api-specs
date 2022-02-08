@@ -4,11 +4,11 @@
 
 Configuration for generating Computer Vision SDK.
 
-The current release is `release_2_0`.
+The current release is `release_3_2`.
 
 ``` yaml
 
-tag: release_2_0
+tag: release_3_2
 add-credentials: true
 openapi-type: data-plane
 ```
@@ -21,6 +21,66 @@ These settings apply only when `--tag=release_2_0` is specified on the command l
 input-file:
   - stable/v2.0/ComputerVision.json
   - stable/v2.0/Ocr.json
+```
+
+### Release 2.1
+These settings apply only when `--tag=release_2_1` is specified on the command line.
+
+``` yaml $(tag) == 'release_2_1'
+input-file:
+  - stable/v2.1/ComputerVision.json
+  - stable/v2.1/Ocr.json
+```
+
+### Release 3.0-preview
+These settings apply only when `--tag=release_3_0_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_3_0_preview'
+input-file:
+  - preview/v3.0-preview/Ocr.json
+```
+
+### Release 3.0
+These settings apply only when `--tag=release_3_0` is specified on the command line.
+
+``` yaml $(tag) == 'release_3_0'
+input-file:
+  - stable/v3.0/ComputerVision.json
+  - stable/v3.0/Ocr.json
+```
+
+### Release 3.1-preview.2
+These settings apply only when `--tag=release_3_1_preview_2` is specified on the command line.
+
+``` yaml $(tag) == 'release_3_1_preview_2'
+input-file:
+  - preview/v3.1-preview.2/Ocr.json
+```
+
+### Release 3.1
+These settings apply only when `--tag=release_3_1` is specified on the command line.
+
+``` yaml $(tag) == 'release_3_1'
+input-file:
+  - stable/v3.1/ComputerVision.json
+  - stable/v3.1/Ocr.json
+```
+
+### Release 3.2-preview.2
+These settings apply only when `--tag=release_3_2_preview_2` is specified on the command line.
+
+``` yaml $(tag) == 'release_3_2_preview_2'
+input-file:
+  - preview/v3.2-preview.2/Ocr.json
+```
+
+### Release 3.2
+These settings apply only when `--tag=release_3_2` is specified on the command line.
+
+``` yaml $(tag) == 'release_3_2'
+input-file:
+  - stable/v3.2/ComputerVision.json
+  - stable/v3.2/Ocr.json
 ```
 
 ## Swagger to SDK
@@ -65,16 +125,22 @@ directive:
 These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
+May need to supply `--version=V2` on the command line.
 
 ``` yaml $(python)
 python-mode: create
-python:
-  license-header: MICROSOFT_MIT_NO_VERSION
-  add-credentials: true
-  payload-flattening-threshold: 2
-  namespace: azure.cognitiveservices.vision.computervision
-  package-name: azure-cognitiveservices-vision-computervision
-  clear-output-folder: true
+license-header: MICROSOFT_MIT_NO_VERSION
+add-credentials: true
+payload-flattening-threshold: 2
+namespace: azure.cognitiveservices.vision.computervision
+package-name: azure-cognitiveservices-vision-computervision
+package-version: 0.9.0
+clear-output-folder: true
+use: "@microsoft.azure/autorest.python@~4.0.71" 
+version: V2
+multiapi: true
+no-async: true
+client-side-validation: false
 
 directive:
   from: source-file-python
@@ -83,14 +149,12 @@ directive:
     $ = $.replace( /self, mode, url,/g, "self, url, mode," );
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-vision-computervision/azure/cognitiveservices/vision/computervision
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-vision-computervision/azure/cognitiveservices/vision/computervision
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-vision-computervision
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-vision-computervision
 ```
 
 ## Go
@@ -135,6 +199,15 @@ require: $(this-folder)/../../../../profiles/readme.md
 input-file:
   - $(this-folder)/stable/v2.0/ComputerVision.json
   - $(this-folder)/stable/v2.0/Ocr.json
+  - $(this-folder)/stable/v2.1/ComputerVision.json
+  - $(this-folder)/stable/v2.1/Ocr.json
+  - $(this-folder)/preview/v3.0-preview/Ocr.json
+  - $(this-folder)/stable/v3.0/ComputerVision.json
+  - $(this-folder)/stable/v3.0/Ocr.json
+  - $(this-folder)/preview/v3.1-preview.2/Ocr.json
+  - $(this-folder)/preview/v3.2-preview.2/Ocr.json
+  - $(this-folder)/stable/v3.2/ComputerVision.json
+  - $(this-folder)/stable/v3.2/Ocr.json
 
 ```
 
