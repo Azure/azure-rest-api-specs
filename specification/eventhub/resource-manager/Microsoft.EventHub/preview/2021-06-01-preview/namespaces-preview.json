@@ -579,6 +579,11 @@
           "Namespaces NetworkSecurityPerimeterConfigurations"
         ],
         "operationId": "NetworkSecurityPerimeterConfiguration_List",
+        "x-ms-examples": {
+          "NamspaceNetworkSecurityPerimeterConfigurationList": {
+            "$ref": "./examples/NameSpaces/NetworkSecurityPerimeterConfigurationList.json"
+          }
+        },
         "description": "Gets list of current NetworkSecurityPerimeterConfiguration for Namespace",
         "parameters": [
           {
@@ -616,6 +621,7 @@
           "Namespaces NetworkSecurityPerimeterConfigurations"
         ],
         "operationId": "NetworkSecurityPerimeterConfigurations_CreateOrUpdate",
+        "x-ms-examples": { },
         "description": "Refreshes any information about the association.",
         "parameters": [
           {
@@ -1081,6 +1087,7 @@
     },
     "NetworkSecurityPerimeterConfigurationList": {
       "description": "Result of the List NetworkSecurityPerimeterConfiguration operation.",
+      "type": "object",
       "properties": {
         "value": {
           "description": "A collection of NetworkSecurityPerimeterConfigurations",
@@ -1097,6 +1104,7 @@
     },
     "NetworkSecurityPerimeterConfiguration": {
       "description": "Network Security Perimeter related configurations of a given namespace",
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
@@ -1119,6 +1127,7 @@
     },
     "NetworkSecurityPerimeterConfigurationProperties": {
       "description": "Properties of NetworkSecurityPerimeterConfiguration",
+      "type": "object",
       "properties": {
         "provisioningState": {
           "description": "Provisioning state of NetworkSecurityPerimeter configuration propagation",
@@ -1148,6 +1157,7 @@
         },
         "resourceAssociation": {
           "description": "Information about resource association",
+          "type": "object",
           "properties": {
             "name": {
               "description": "Name of the resource",
@@ -1157,6 +1167,7 @@
         },
         "profile": {
           "description": "Information about current network profile",
+          "type": "object",
           "properties": {
             "name": {
               "description": "Name of the resource",
@@ -1179,6 +1190,7 @@
     },
     "ProvisioningIssue": {
       "description": "Describes Provisioning issue for given NetworkSecurityPerimeterConfiguration",
+      "type": "object",
       "properties": {
         "name": {
           "description": "Name of the issue",
@@ -1186,6 +1198,7 @@
         },
         "properties": {
           "description": "Properties of Provisioning Issue",
+          "type": "object",
           "properties": {
             "issueType": {
               "description": "Type of Issue",
@@ -1201,6 +1214,7 @@
     },
     "NspAccessRule": {
       "description": "Information of Access Rule in Network Profile",
+      "type": "object",
       "properties": {
         "name": {
           "description": "Name of the resource",
@@ -1208,6 +1222,7 @@
         },
         "properties": {
           "description": "Properties of Access Rule",
+          "type": "object",
           "properties": {
             "direction": {
               "description": "Direction of Access Rule",
@@ -1234,6 +1249,7 @@
               "type": "array",
               "items": {
                 "description": "Subscription for inbound rule",
+                "type": "object",
                 "properties": {
                   "id": {
                     "description": "Fully qualified identifier of the resource",
@@ -1263,6 +1279,7 @@
     },
     "NetworkSecurityPerimeter": {
       "description": "NetworkSecurityPerimeter related information",
+      "type": "object",
       "properties": {
         "id": {
           "description": "Fully qualified identifier of the resource",
