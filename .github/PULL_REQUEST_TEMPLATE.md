@@ -28,7 +28,7 @@ Add a changelog entry for this PR by answering the following questions:
       - [ ] Terraform
       - [ ] No refresh required for updates in this PR
 
-### Contribution checklist:
+### Contribution checklist (MS Employees Only):
 - [ ] I commit to follow the [Breaking Change Policy](http://aka.ms/bcforapi) of "no breaking changes"
 - [ ] I have reviewed the [documentation](https://aka.ms/ameonboard) for the workflow.
 - [ ] [Validation tools](https://aka.ms/swaggertools) were run on swagger spec(s) and errors have all been fixed in this PR. [How to fix?](https://aka.ms/ci-fix)
