@@ -572,6 +572,80 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/networkSecurityPerimeterConfigurations": {
+      "get": {
+        "tags": [
+          "Namespaces NetworkSecurityPerimeterConfigurations"
+        ],
+        "operationId": "NetworkSecurityPerimeterConfiguration_List",
+        "description": "Gets list of current NetworkSecurityPerimeterConfiguration for Namespace",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Network Security Perimeter Configuration List",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationList"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/networkSecurityPerimeterConfigurations/{resourceAssociationName}/reconcile": {
+      "put": {
+        "tags": [
+          "Namespaces NetworkSecurityPerimeterConfigurations"
+        ],
+        "operationId": "NetworkSecurityPerimeterConfigurations_CreateOrUpdate",
+        "description": "Refreshes any information about the association.",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceAssociationNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Request to reconcile the association accepted."
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1002,6 +1076,205 @@
         "userAssignedIdentity": {
           "type": "string",
           "description": "ARM ID of user Identity selected for encryption"
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationList": {
+      "description": "Result of the List NetworkSecurityPerimeterConfiguration operation.",
+      "properties": {
+        "value": {
+          "description": "A collection of NetworkSecurityPerimeterConfigurations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+          }
+        },
+        "nextLink": {
+          "description": "A link for the next page of private link resources.",
+          "type": "string"
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfiguration": {
+      "description": "Network Security Perimeter related configurations of a given namespace",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
+          "description": "Properties of the private link resource",
+          "x-ms-client-flatten": true
+        },
+        "id": {
+          "description": "Fully qualified identifier of the resource",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the resource",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the resource",
+          "type": "string"
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationProperties": {
+      "description": "Properties of NetworkSecurityPerimeterConfiguration",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of NetworkSecurityPerimeter configuration propagation",
+          "enum": [
+            "Unknown",
+            "Accepted",
+            "Updating",
+            "Active",
+            "Deleting",
+            "Deleted"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NetworkSecurityPerimeterConfigurationProvisiningState",
+            "modelAsString": true
+          }
+        },
+        "provisioningIssues": {
+          "description": "List of Provisioning Issues if any",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProvisioningIssue"
+          }
+        },
+        "networkSecurityPerimeter": {
+          "$ref": "#/definitions/NetworkSecurityPerimeter"
+        },
+        "resourceAssociation": {
+          "description": "Information about resource association",
+          "properties": {
+            "name": {
+              "description": "Name of the resource",
+              "type": "string"
+            }
+          }
+        },
+        "profile": {
+          "description": "Information about current network profile",
+          "properties": {
+            "name": {
+              "description": "Name of the resource",
+              "type": "string"
+            },
+            "accessRulesVersion": {
+              "description": "Current access rules version",
+              "type": "string"
+            },
+            "accessRules": {
+              "description": "List of Access Rules",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NspAccessRule"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ProvisioningIssue": {
+      "description": "Describes Provisioning issue for given NetworkSecurityPerimeterConfiguration",
+      "properties": {
+        "name": {
+          "description": "Name of the issue",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Properties of Provisioning Issue",
+          "properties": {
+            "issueType": {
+              "description": "Type of Issue",
+              "type": "string"
+            },
+            "description": {
+              "description": "Description of the issue",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "NspAccessRule": {
+      "description": "Information of Access Rule in Network Profile",
+      "properties": {
+        "name": {
+          "description": "Name of the resource",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Properties of Access Rule",
+          "properties": {
+            "direction": {
+              "description": "Direction of Access Rule",
+              "enum": [
+                "Inbound",
+                "Outbound"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "NspAccessRuleDirection",
+                "modelAsString": true
+              }
+            },
+            "addressPrefixes": {
+              "description": "Address prefixes in the CIDR format for inbound rules",
+              "type": "array",
+              "items": {
+                "description": "IP Address",
+                "type": "string"
+              }
+            },
+            "subscriptions": {
+              "description": "Subscriptions for inbound rules",
+              "type": "array",
+              "items": {
+                "description": "Subscription for inbound rule",
+                "properties": {
+                  "id": {
+                    "description": "Fully qualified identifier of the resource",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "networkSecurityPerimeters": {
+              "description": "NetworkSecurityPerimeters for inbound rules",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkSecurityPerimeter"
+              }
+            },
+            "fullyQualifiedDomainNames": {
+              "description": "FQDN for outbound rules",
+              "type": "array",
+              "items": {
+                "description": "Fully qualified domain name",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "NetworkSecurityPerimeter": {
+      "description": "NetworkSecurityPerimeter related information",
+      "properties": {
+        "id": {
+          "description": "Fully qualified identifier of the resource",
+          "type": "string"
+        },
+        "perimeterGuid": {
+          "description": "Guid of the resource",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the resource",
+          "type": "string"
         }
       }
     }
