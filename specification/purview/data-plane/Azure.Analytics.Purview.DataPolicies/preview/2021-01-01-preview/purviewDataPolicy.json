@@ -1,0 +1,817 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Purview data Policies Service REST API Document",
+    "version": "2021-01-01-preview"
+  },
+  "paths": {
+    "/dataPolicies/{policyName}/scopes/{dataSource}": {
+      "delete": {
+        "tags": [
+          "DataPolicyBinding"
+        ],
+        "description": "Deletes a data policy binding",
+        "operationId": "DataPolicyBinding_Delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "policyName",
+            "description": "Name of the policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "dataSource",
+            "description": "Name of the datasource associated with the binding to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Policy Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataPolicyBinding_Delete": {
+            "$ref": "./examples/DataPolicyBinding_Delete.json"
+          }
+        }
+      }
+    },
+    "/dataPolicies/{policyName}/scopes": {
+      "get": {
+        "tags": [
+          "DataPolicyBinding"
+        ],
+        "description": "Gets a data policy binding",
+        "operationId": "DataPolicyBinding_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "policyName",
+            "description": "Name of the policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DataPolicyBinding"
+              }
+            }
+          },
+          "default": {
+            "description": "An error response received from the Policy Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "values"
+        },
+        "x-ms-examples": {
+          "DataPolicyBinding_List": {
+            "$ref": "./examples/DataPolicyBinding_List.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DataPolicyBinding"
+        ],
+        "description": "Creates a data policy binding",
+        "operationId": "DataPolicyBinding_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "policyName",
+            "description": "Name of the policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The policyBinding.",
+            "schema": {
+              "$ref": "#/definitions/DataPolicyBinding"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataPolicyBinding"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Policy Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataPolicyBinding_Create": {
+            "$ref": "./examples/DataPolicyBinding_Create.json"
+          }
+        }
+      }
+    },
+    "/dataroles": {
+      "get": {
+        "tags": [
+          "DataPolicyRoles"
+        ],
+        "description": "Lists data policy roles",
+        "operationId": "DataPolicyRoles_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataPolicyRoleList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Policy Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "values"
+        },
+        "x-ms-examples": {
+          "DataPolicyRoles_List": {
+            "$ref": "./examples/DataPolicyRoles_List.json"
+          }
+        }
+      }
+    },
+    "/dataPolicies": {
+      "get": {
+        "tags": [
+          "DataPolicy"
+        ],
+        "description": "List data policy",
+        "operationId": "DataPolicy_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataPolicyList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Policy Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "values"
+        },
+        "x-ms-examples": {
+          "DataPolicy_List": {
+            "$ref": "./examples/DataPolicy_List.json"
+          }
+        }
+      }
+    },
+    "/dataPolicies/{policyName}": {
+      "put": {
+        "tags": [
+          "DataPolicy"
+        ],
+        "description": "Updates a data policy",
+        "operationId": "DataPolicy_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "policyName",
+            "description": "Unique policy name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Policy object to be create or updated. .",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataPolicy"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataPolicy"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Policy Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataPolicy_CreateOrUpdate": {
+            "$ref": "./examples/DataPolicy_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataPolicy"
+        ],
+        "description": "Deletes a data policy",
+        "operationId": "DataPolicy_Delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "policyName",
+            "description": "Unique policy name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Policy Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataPolicy_Delete": {
+            "$ref": "./examples/DataPolicy_Delete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DataPolicy"
+        ],
+        "description": "Gets a data policy",
+        "operationId": "DataPolicy_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "policyName",
+            "description": "Id of an existing policy that needs to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataPolicy"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Policy Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataPolicy_Get": {
+            "$ref": "./examples/DataPolicy_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AttributeMatcher": {
+      "description": "Attribute matcher for a rule",
+      "type": "object",
+      "properties": {
+        "attributeName": {
+          "description": "AttributeName",
+          "type": "string"
+        },
+        "attributeValueIncludes": {
+          "description": "Value for attribute",
+          "type": "string"
+        },
+        "attributeValueIncludedIn": {
+          "description": "List of values for attribute",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "attributeValueExcludes": {
+          "description": "Value excluded for attribute",
+          "type": "string"
+        },
+        "attributeValueExcludedIn": {
+          "description": "List of values excluded for attribute",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DnfCondition": {
+      "description": "The dnf Condition for a rule",
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/AttributeMatcher"
+        }
+      }
+    },
+    "CnfCondition": {
+      "description": "The cnf Condition for a rule",
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/AttributeMatcher"
+        }
+      }
+    },
+    "DecisionRule": {
+      "description": "The decision rule for a policy",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "The kind of rule",
+          "enum": [
+            "decisionrule"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "Kind",
+            "modelAsString": true
+          }
+        },
+        "effect": {
+          "description": "The effect for rule",
+          "enum": [
+            "Deny",
+            "Permit"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Decision",
+            "modelAsString": true
+          }
+        },
+        "dnfCondition": {
+          "$ref": "#/definitions/DnfCondition"
+        }
+      }
+    },
+    "SystemData": {
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "type": "string"
+        },
+        "createdByType": {
+          "type": "string"
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastModifiedBy": {
+          "type": "string"
+        },
+        "lastModifiedByType": {
+          "type": "string"
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "CollectionReference": {
+      "description": "The collection reference for a policy",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of reference",
+          "default": "CollectionReference",
+          "type": "string"
+        },
+        "referenceName": {
+          "description": "The name of reference",
+          "type": "string"
+        }
+      }
+    },
+    "DataFabricPolicyContentDetails": {
+      "type": "object",
+      "properties": {
+        "policyType": {
+          "type": "string"
+        }
+      }
+    },
+    "DataFabricPolicyContent": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "version": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "decisionRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DecisionRule"
+          }
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
+        },
+        "collection": {
+          "$ref": "#/definitions/CollectionReference"
+        },
+        "policyDetails": {
+          "$ref": "#/definitions/DataFabricPolicyContentDetails"
+        }
+      }
+    },
+    "DataPolicy": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataFabricPolicyContent"
+        },
+        "name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "ErrorModel": {
+      "description": "The error model for policy",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "The error message",
+          "type": "string"
+        },
+        "target": {
+          "description": "The error target",
+          "type": "string"
+        },
+        "details": {
+          "description": "The error details",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorModel"
+          }
+        }
+      }
+    },
+    "ErrorResponseModel": {
+      "description": "The error response model for policy",
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorModel"
+        }
+      }
+    },
+    "DataPolicyList": {
+      "required": [
+        "values"
+      ],
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        },
+        "count": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "DataPolicyRoleProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioningState of role",
+          "type": "string"
+        },
+        "roleType": {
+          "description": "The type of role",
+          "type": "string"
+        },
+        "friendlyName": {
+          "description": "The friendly name of role",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of role",
+          "type": "string"
+        },
+        "cnfCondition": {
+          "$ref": "#/definitions/CnfCondition"
+        },
+        "dnfCondition": {
+          "$ref": "#/definitions/DnfCondition"
+        },
+        "version": {
+          "format": "int64",
+          "description": "The version of role",
+          "type": "integer"
+        }
+      }
+    },
+    "DataPolicyRole": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The Id of role",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of role",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of role",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/DataPolicyRoleProperties"
+        }
+      }
+    },
+    "DataPolicyRoleList": {
+      "required": [
+        "values"
+      ],
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataPolicyRole"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        },
+        "count": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "DataFabricPolicyBindingProperties": {
+      "required": [
+        "datasource",
+        "policyName"
+      ],
+      "type": "object",
+      "properties": {
+        "datasource": {
+          "type": "string"
+        },
+        "policyName": {
+          "type": "string"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
+        },
+        "dataSourceScope": {
+          "type": "string"
+        },
+        "dataSourceSubscription": {
+          "type": "string"
+        }
+      }
+    },
+    "DataPolicyBinding": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "bindingId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/DataFabricPolicyBindingProperties"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "api-version": {
+      "in": "query",
+      "name": "api-version",
+      "description": "The api version to use.",
+      "required": true,
+      "type": "string",
+      "x-ms-client-name": "ApiVersion"
+    },
+    "Endpoint": {
+      "in": "path",
+      "name": "Endpoint",
+      "description": "The endpoint of your Purview account. Example: https://{accountName}.purview.azure.com.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client",
+      "x-ms-skip-url-encoding": true
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "basePath": "/policyStore",
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

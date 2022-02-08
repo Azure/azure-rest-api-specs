@@ -87,6 +87,27 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
+These are the global settings for the Purview API.
+
+``` yaml
+openapi-type: data-plane
+tag: package-2021-01-01-preview
+title: PurviewDataPolicyClient
+```
+
+
+### Tag: package-2021-01-01-preview
+
+These settings apply only when `--tag=package-2021-01-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-01-01-preview'
+input-file:
+- Azure.Analytics.Purview.DataPolicies/preview/2021-01-01-preview/purviewDataPolicy.json
+modelerfour:
+  lenient-model-deduplication: true
+```
+
+
 ---
 # Code Generation
 
