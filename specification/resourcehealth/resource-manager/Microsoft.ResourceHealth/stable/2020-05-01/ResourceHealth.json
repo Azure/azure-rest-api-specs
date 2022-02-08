@@ -461,14 +461,18 @@
               "description": "Lists actions the user can take based on the current availabilityState of the resource.",
               "items": {
                 "$ref": "#/definitions/recommendedAction"
-              }
+              },
+              "x-ms-identifiers": []
             },
             "serviceImpactingEvents": {
               "type": "array",
               "description": "Lists the service impacting events that may be affecting the health of the resource.",
               "items": {
                 "$ref": "#/definitions/serviceImpactingEvent"
-              }
+              },
+              "x-ms-identifiers": [
+                "correlationId"
+              ]
             }
           }
         }
@@ -481,6 +485,9 @@
           "items": {
             "$ref": "#/definitions/operation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of operations available in the resourcehealth resource provider."
         }
       },
