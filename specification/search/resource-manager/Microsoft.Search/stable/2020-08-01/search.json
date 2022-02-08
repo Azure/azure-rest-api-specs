@@ -1306,6 +1306,9 @@
           "items": {
             "$ref": "#/definitions/QueryKey"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The query keys for the Azure Cognitive Search service."
         },
         "nextLink": {
@@ -1363,7 +1366,10 @@
           "description": "A list of IP restriction rules that defines the inbound network(s) with allowing access to the search service endpoint. At the meantime, all other public IP networks are blocked by the firewall. These restriction rules are applied only when the 'publicNetworkAccess' of the search service is 'enabled'; otherwise, traffic over public interface is not allowed even with any public IP rules, and private endpoint connections would be the exclusive access method.",
           "items": {
             "$ref": "#/definitions/IpRule"
-          }
+          },
+          "x-ms-identifiers": [
+            "value"
+          ]
         }
       },
       "description": "Network specific rules that determine how the Azure Cognitive Search service may be reached."
@@ -1583,6 +1589,9 @@
           "items": {
             "$ref": "#/definitions/ShareablePrivateLinkResourceType"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of resources that are onboarded to private link service, that are supported by Azure Cognitive Search."
         }
       },
@@ -1866,6 +1875,7 @@
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
           },
+          "x-ms-identifiers": [],
           "description": "Contains nested errors that are related to this error."
         }
       },
@@ -1916,6 +1926,9 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true,
           "description": "The list of operations supported by the resource provider."
         },
