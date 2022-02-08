@@ -1,0 +1,348 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-09-01",
+    "title": "BackupManagementClient",
+    "description": "The Admin Backup Management Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations/{location}/backups": {
+      "get": {
+        "x-ms-examples": {
+          "Returns a list of backups from a location.": {
+            "$ref": "./examples/Backups/List.json"
+          }
+        },
+        "description": "Returns a list of backups from a location.",
+        "tags": [
+          "Backups"
+        ],
+        "operationId": "Backups_List",
+        "parameters": [
+          {
+            "$ref": "Backup.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Backup.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "BackupLocations.json#/parameters/BackupLocationParameter"
+          },
+          {
+            "$ref": "Backup.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "Backup.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "Backup.json#/parameters/SkipParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations/{location}/backups/{backup}": {
+      "get": {
+        "x-ms-examples": {
+          "Returns a backup from a location based on name.": {
+            "$ref": "./examples/Backups/Get.json"
+          }
+        },
+        "description": "Returns a backup from a location based on name.",
+        "tags": [
+          "Backups"
+        ],
+        "operationId": "Backups_Get",
+        "parameters": [
+          {
+            "$ref": "Backup.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Backup.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "BackupLocations.json#/parameters/BackupLocationParameter"
+          },
+          {
+            "$ref": "#/parameters/BackupParameter"
+          },
+          {
+            "$ref": "Backup.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Backup"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations/{location}/backups/{backup}/restore": {
+      "post": {
+        "x-ms-examples": {
+          "Restore a backup.": {
+            "$ref": "./examples/Backups/Restore.json"
+          },
+          "Restore a single role from backup.": {
+            "$ref": "./examples/Backups/SingleRepoRestore.json"
+          }
+        },
+        "description": "Restore a backup.",
+        "tags": [
+          "Backups"
+        ],
+        "operationId": "Backups_Restore",
+        "parameters": [
+          {
+            "$ref": "Backup.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "BackupLocations.json#/parameters/BackupLocationParameter"
+          },
+          {
+            "$ref": "Backup.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/BackupParameter"
+          },
+          {
+            "$ref": "Backup.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RestoreOptionsParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "ACCEPTED"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Backup": {
+      "description": "Information related to a backup.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Properties for a backup.",
+          "$ref": "#/definitions/BackupModel",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Backup.json#/definitions/Resource"
+        }
+      ]
+    },
+    "BackupModel": {
+      "description": "Properties for a backup.",
+      "properties": {
+        "backupInfo": {
+          "description": "Holds information for a backup.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BackupInfo"
+        }
+      }
+    },
+    "BackupInfo": {
+      "type": "object",
+      "description": "Holds information for a backup.",
+      "properties": {
+        "backupDataVersion": {
+          "description": "Version of the backup data.",
+          "type": "string",
+          "readOnly": true
+        },
+        "roleStatus": {
+          "description": "Backup status for each role.",
+          "$ref": "#/definitions/RoleOperationStatusList",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Current status of the backup.",
+          "$ref": "#/definitions/OperationStatus",
+          "readOnly": true
+        },
+        "createdDateTime": {
+          "description": "Creation time of the backup.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "timeTakenToCreate": {
+          "description": "Duration to create the backup.",
+          "type": "string",
+          "readOnly": true
+        },
+        "deploymentID": {
+          "description": "Deployment Id of the stamp.",
+          "type": "string",
+          "readOnly": true
+        },
+        "stampVersion": {
+          "description": "Azure Stack stamp version of the backup.",
+          "type": "string",
+          "readOnly": true
+        },
+        "oemVersion": {
+          "description": "OEM version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isCloudRecoveryReady": {
+          "description": "True if the backup can be used for cloud recovery scenario.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "encryptionCertThumbprint": {
+          "description": "The thumbprint of the certificate used to encrypt the backup encryption key.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationStatus": {
+      "description": "Status of an operation.",
+      "type": "string",
+      "enum": [
+        "Creating",
+        "Queued",
+        "Running",
+        "Deleted",
+        "Failed",
+        "PartialSucceeded",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "OperationStatus",
+        "modelAsString": false
+      }
+    },
+    "RoleOperationStatusList": {
+      "description": "object",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/RoleOperationStatus"
+      }
+    },
+    "RoleOperationStatus": {
+      "description": "Backup status for a role.",
+      "type": "object",
+      "properties": {
+        "roleName": {
+          "description": "Name of the role.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of the role.",
+          "$ref": "#/definitions/OperationStatus"
+        }
+      }
+    },
+    "BackupList": {
+      "type": "object",
+      "description": "List of backups.",
+      "properties": {
+        "value": {
+          "description": "List of backups.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Backup"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        }
+      }
+    },
+    "RestoreOptions": {
+      "description": "Properties for restore options.",
+      "properties": {
+        "roleName": {
+          "description": "The Azure Stack role name for restore, set it to empty for all infrastructure role",
+          "type": "string"
+        },
+        "decryptionCertBase64": {
+          "description": "The certificate file raw data in Base64 string. This should be the .pfx file with the private key.",
+          "type": "string"
+        },
+        "decryptionCertPassword": {
+          "description": "The password for the decryption certificate.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "BackupParameter": {
+      "name": "backup",
+      "in": "path",
+      "description": "Name of the backup.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "RestoreOptionsParameter": {
+      "name": "restoreOptions",
+      "in": "body",
+      "description": "Restore options.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/RestoreOptions"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

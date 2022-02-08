@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "api-version": "2019-11-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "networkWatcherName": "nw1",
+    "connectionMonitorName": "cm1",
+    "location": "centraluseuap",
+    "parameters": {
+      "properties": {
+        "source": {
+          "resourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1"
+        },
+        "destination": {
+          "address": "bing.com",
+          "port": 80
+        },
+        "monitoringIntervalInSeconds": 60
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "cm1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/connectionMonitors/cm1",
+        "etag": "W/\"e7497f26-5f09-4559-900b-fe98f3dedb6f\"",
+        "properties": {
+          "provisioningState": "Updating",
+          "source": {
+            "resourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1",
+            "port": 0
+          },
+          "destination": {
+            "address": "bing.com",
+            "port": 80
+          },
+          "monitoringIntervalInSeconds": 60,
+          "autoStart": true,
+          "monitoringStatus": "NotStarted"
+        },
+        "location": "centraluseuap",
+        "type": "Microsoft.Network/networkWatchers/connectionMonitors"
+      }
+    },
+    "201": {
+      "body": {
+        "name": "cm1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/connectionMonitors/cm1",
+        "etag": "W/\"e7497f26-5f09-4559-900b-fe98f3dedb6f\"",
+        "properties": {
+          "provisioningState": "Updating",
+          "source": {
+            "resourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1",
+            "port": 0
+          },
+          "destination": {
+            "address": "bing.com",
+            "port": 80
+          },
+          "monitoringIntervalInSeconds": 60,
+          "autoStart": true,
+          "monitoringStatus": "NotStarted"
+        },
+        "location": "centraluseuap",
+        "type": "Microsoft.Network/networkWatchers/connectionMonitors"
+      }
+    }
+  }
+}

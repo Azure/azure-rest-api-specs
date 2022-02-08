@@ -2,9 +2,6 @@
   "swagger": "2.0",
   "info": {
     "title": "MonitorManagementClient",
-    "x-ms-code-generation-settings": {
-      "name": "MonitorManagementClient"
-    },
     "version": "2018-01-01"
   },
   "host": "management.azure.com",
@@ -36,7 +33,7 @@
     }
   },
   "paths": {
-    "/{resourceUri}/providers/microsoft.insights/metrics": {
+    "/{resourceUri}/providers/Microsoft.Insights/metrics": {
       "get": {
         "tags": [
           "Metrics"
@@ -69,14 +66,14 @@
             "name": "$filter",
             "in": "query",
             "type": "string",
-            "description": "The **$filter** is used to reduce the set of metric data returned.<br>Example:<br>Metric contains metadata A, B and C.<br>- Return all time series of C where A = a1 and B = b1 or b2<br>**$filter=A eq ‘a1’ and B eq ‘b1’ or B eq ‘b2’ and C eq ‘*’**<br>- Invalid variant:<br>**$filter=A eq ‘a1’ and B eq ‘b1’ and C eq ‘*’ or B = ‘b2’**<br>This is invalid because the logical or operator cannot separate two different metadata names.<br>- Return all time series where A = a1, B = b1 and C = c1:<br>**$filter=A eq ‘a1’ and B eq ‘b1’ and C eq ‘c1’**<br>- Return all time series where A = a1<br>**$filter=A eq ‘a1’ and B eq ‘*’ and C eq ‘*’**.",
+            "description": "The **$filter** is used to reduce the set of metric data returned. Example: Metric contains metadata A, B and C. - Return all time series of C where A = a1 and B = b1 or b2 **$filter=A eq 'a1' and B eq 'b1' or B eq 'b2' and C eq '*'** - Invalid variant: **$filter=A eq 'a1' and B eq 'b1' and C eq '*' or B = 'b2'** This is invalid because the logical or operator cannot separate two different metadata names. - Return all time series where A = a1, B = b1 and C = c1: **$filter=A eq 'a1' and B eq 'b1' and C eq 'c1'** - Return all time series where A = a1 **$filter=A eq 'a1' and B eq '*' and C eq '*'**. Special case: When dimension name or dimension value uses round brackets. Eg: When dimension name is **dim (test) 1** Instead of using $filter= \"dim (test) 1 eq '*' \" use **$filter= \"dim %2528test%2529 1 eq '*' \"** When dimension name is **dim (test) 3** and dimension value is **dim3 (test) val** Instead of using $filter= \"dim (test) 3 eq 'dim3 (test) val' \" use **$filter= \"dim %2528test%2529 3 eq 'dim3 %2528test%2529 val' \"**",
             "required": false
           },
           {
             "$ref": "#/parameters/ResultTypeParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/MetricNamespaceParameter"
@@ -103,6 +100,9 @@
           },
           "Get Metric for metadata": {
             "$ref": "./examples/GetMetricMetadata.json"
+          },
+          "Get Metric with error": {
+            "$ref": "./examples/GetMetricError.json"
           }
         }
       }
@@ -127,7 +127,7 @@
     },
     "Unit": {
       "type": "string",
-      "description": "the unit of the metric.",
+      "description": "The unit of the metric.",
       "enum": [
         "Count",
         "Bytes",
@@ -144,11 +144,12 @@
         "BitsPerSecond"
       ],
       "x-ms-enum": {
-        "name": "Unit",
-        "modelAsString": false
+        "name": "MetricUnit",
+        "modelAsString": true
       }
     },
     "MetricValue": {
+      "type": "object",
       "required": [
         "timeStamp"
       ],
@@ -187,6 +188,7 @@
       "description": "Represents a metric value."
     },
     "MetadataValue": {
+      "type": "object",
       "properties": {
         "name": {
           "$ref": "#/definitions/LocalizableString",
@@ -199,20 +201,6 @@
       },
       "description": "Represents a metric metadata value."
     },
-    "ErrorResponse": {
-      "description": "Describes the format of Error response.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
-        }
-      }
-    },
     "Response": {
       "type": "object",
       "properties": {
@@ -220,7 +208,7 @@
           "type": "number",
           "format": "int32",
           "minimum": 0,
-          "description": "The integer value representing the cost of the query, for data case."
+          "description": "The integer value representing the relative cost of the query."
         },
         "timespan": {
           "type": "string",
@@ -233,11 +221,11 @@
         },
         "namespace": {
           "type": "string",
-          "description": "The namespace of the metrics been queried"
+          "description": "The namespace of the metrics being queried"
         },
         "resourceregion": {
           "type": "string",
-          "description": "The region of the resource been queried for metrics."
+          "description": "The region of the resource being queried for metrics."
         },
         "value": {
           "type": "array",
@@ -268,9 +256,21 @@
           "$ref": "#/definitions/LocalizableString",
           "description": "the name and the display name of the metric, i.e. it is localizable string."
         },
+        "displayDescription": {
+          "type": "string",
+          "description": "Detailed description of this metric."
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "'Success' or the error details on query failures for this metric."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message encountered querying this specific metric."
+        },
         "unit": {
           "$ref": "#/definitions/Unit",
-          "description": "the unit of the metric."
+          "description": "The unit of the metric."
         },
         "timeseries": {
           "type": "array",
@@ -308,6 +308,20 @@
         }
       },
       "description": "A time series result type. The discriminator value is always TimeSeries in this case."
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -342,7 +356,7 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "The names of the metrics (comma separated) to retrieve.",
+      "description": "The names of the metrics (comma separated) to retrieve. Special case: If a metricname itself has a comma in it then use %2 to indicate it. Eg: 'Metric,Name1' should be **'Metric%2Name1'**",
       "x-ms-parameter-location": "method"
     },
     "AggregationsParameter": {
@@ -385,13 +399,6 @@
       "description": "Reduces the set of data collected. The syntax allowed depends on the operation. See the operation's description for details.",
       "x-ms-parameter-location": "method",
       "required": false
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
     },
     "MetricNamespaceParameter": {
       "name": "metricnamespace",

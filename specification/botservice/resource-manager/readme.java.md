@@ -10,6 +10,8 @@ namespace: com.microsoft.azure.management.botservice
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-botservice
+
+service-name: BotService
 ```
 
 ### Java multi-api
@@ -28,7 +30,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-07-12' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.botservice.v2018_07_12
-  output-folder: $(azure-libraries-for-java-folder)/botservice/resource-manager/v2018_07_12
+  output-folder: $(azure-libraries-for-java-folder)/sdk/botservice/mgmt-v2018_07_12
 regenerate-manager: true
 generate-interface: true
 ```
@@ -40,7 +42,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-12-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.botservice.v2017_12_01
-  output-folder: $(azure-libraries-for-java-folder)/botservice/resource-manager/v2017_12_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/botservice/mgmt-v2017_12_01
 regenerate-manager: true
 generate-interface: true
 ```

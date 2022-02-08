@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "resourceGroupName": "contoso-videoanalyzer-rg",
+    "api-version": "2021-10-27-preview",
+    "subscriptionId": "586d4f48-8f08-4a4e-96b7-e1892d6dba9e"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/586d4f48-8f08-4a4e-96b7-e1892d6dba9e/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.VideoIndexer/accounts/contoso-videoanalyzer-rg",
+            "name": "vi1",
+            "type": "Microsoft.VideoIndexer/accounts",
+            "location": "NorthEurope",
+            "tags": {},
+            "properties": {
+              "tenantId": "8c406f87-77ac-4ebb-a401-e8562450630e",
+              "accountId": "462af7c5-d1f6-4b91-86e3-8bc5e8a61574",
+              "accountName": "contosto-videoanalyzer",
+              "mediaServices": {
+                "resourceId": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.Media/mediaservices/contoso-videoanalyzer-ms",
+                "userAssignedIdentity": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoanalyzer-mi"
+              },
+              "provisioningState": "Succeeded"
+            },
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentities": {
+                "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoanalyzer-mi": {
+                  "principalId": "a661c16c-ee39-46e7-93f6-7fb80d17ef13",
+                  "clientId": "92e65ecf-0fae-432e-8272-fedb6edb96c7"
+                }
+              }
+            }
+          }
+        ],
+        "nextLink": "link"
+      }
+    }
+  }
+}
