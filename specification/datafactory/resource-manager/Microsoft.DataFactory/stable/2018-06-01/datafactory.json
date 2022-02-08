@@ -5216,6 +5216,24 @@
         }
       }
     },
+    "FactoryUpdateProperties": {
+      "description": "Factory update resource properties.",
+      "type": "object",
+      "properties": {
+        "publicNetworkAccess": {
+          "description": "Whether or not public network access is allowed for the data factory.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "EncryptionConfiguration": {
       "description": "Definition of CMK for the factory.",
       "properties": {
@@ -5399,6 +5417,11 @@
         "identity": {
           "$ref": "#/definitions/FactoryIdentity",
           "description": "Managed service identity of the factory."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FactoryUpdateProperties",
+          "description": "Properties of update the factory."
         }
       }
     },
@@ -5803,7 +5826,7 @@
           "readOnly": true
         },
         "status": {
-          "description": "The status of a pipeline run.",
+          "description": "The status of a pipeline run. Possible values: Queued, InProgress, Succeeded, Failed, Canceling, Cancelled",
           "type": "string",
           "readOnly": true
         },
@@ -6426,6 +6449,13 @@
           "description": "Data flow instance.",
           "$ref": "#/definitions/DataFlowDebugResource"
         },
+        "dataFlows": {
+          "description": "List of Data flows",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataFlowDebugResource"
+          }
+        },
         "datasets": {
           "type": "array",
           "description": "List of datasets.",
@@ -6685,6 +6715,10 @@
         "datasetParameters": {
           "type": "object",
           "description": "Reference data flow parameters from dataset."
+        },
+        "parameters": {
+          "$ref": "#/definitions/ParameterValueSpecification",
+          "description": "Data flow parameters"
         }
       },
       "additionalProperties": {
