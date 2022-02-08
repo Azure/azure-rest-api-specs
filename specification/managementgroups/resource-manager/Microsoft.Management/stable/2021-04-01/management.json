@@ -1980,6 +1980,10 @@
         "path",
         "ancestors"
       ],
+      "x-ms-enum": {
+        "name": "ManagementGroupExpandType",
+        "modelAsString": true
+      },
       "x-ms-parameter-location": "method",
       "description": "The $expand=children query string parameter allows clients to request inclusion of children in the response payload.  $expand=path includes the path from the root group to the current group.  $expand=ancestors includes the ancestor Ids of the current group."
     },
@@ -2047,6 +2051,10 @@
         "ParentOnly",
         "ChildrenOnly"
       ],
+      "x-ms-enum": {
+        "name": "EntitySearchType",
+        "modelAsString": true
+      },
       "x-ms-parameter-location": "method",
       "description": "The $search parameter is used in conjunction with the $filter parameter to return three different outputs depending on the parameter passed in. \nWith $search=AllowedParents the API will return the entity info of all groups that the requested entity will be able to reparent to as determined by the user's permissions.\nWith $search=AllowedChildren the API will return the entity info of all entities that can be added as children of the requested entity.\nWith $search=ParentAndFirstLevelChildren the API will return the parent and  first level of children that the user has either direct access to or indirect access via one of their descendants.\nWith $search=ParentOnly the API will return only the group if the user has access to at least one of the descendants of the group.\nWith $search=ChildrenOnly the API will return only the first level of children of the group entity info specified in $filter.  The user must have direct access to the children entities or one of it's descendants for it to show up in the results."
     },
@@ -2121,6 +2129,10 @@
         "SubscriptionsOnly",
         "Audit"
       ],
+      "x-ms-enum": {
+        "name": "EntityViewParameterType",
+        "modelAsString": true
+      },
       "x-ms-parameter-location": "method",
       "description": "The view parameter allows clients to filter the type of data that is returned by the getEntities call."
     }
