@@ -316,6 +316,52 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/agentPoolsOperationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "AgentPools"
+        ],
+        "description": "Gets the current result of an agent pool operation by id.",
+        "operationId": "AgentPools_GetOperationResults",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation has completed. The result body will contain the final result.",
+            "schema": {
+              "$ref": "#/definitions/AgentPoolOperationResult"
+            }
+          },
+          "202": {
+            "description": "The operation is still on-going. The result body will contain the current result.",
+            "schema": {
+              "$ref": "#/definitions/AgentPoolOperationResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AgentPools_GetOperationResults": {
+            "$ref": "./examples/AgentPoolsGetOperationResults.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/scheduleRun": {
       "post": {
         "tags": [
@@ -1446,6 +1492,45 @@
           "format": "int32",
           "description": "The number of pending runs in the queue",
           "type": "integer"
+        }
+      }
+    },
+    "AgentPoolOperationResult": {
+      "description": "The operation result of an Agent Pool operation",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource id of the agent pool",
+          "type": "string"
+        },
+        "name": {
+          "description": "The operation id value",
+          "type": "string"
+        },
+        "status": {
+          "description": "The current provisioning state of the operation.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "The time the operation started.",
+          "type": "string"
+        },
+        "error": {
+          "$ref": "#/definitions/ErrorResponse",
+          "description": "If an error has occurred during the operation, this property will have a value"
         }
       }
     },
@@ -3682,6 +3767,13 @@
       "minLength": 3,
       "pattern": "^[a-zA-Z0-9-]*$",
       "x-ms-parameter-location": "method"
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "description": "The id of an agent pool operation.",
+      "required": true,
+      "type": "string"
     },
     "TaskRunNameParameter": {
       "name": "taskRunName",
