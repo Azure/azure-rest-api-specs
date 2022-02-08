@@ -34,16 +34,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Unexpected Error",
-            "schema": {
-              "$ref": "Subscriptions.json#/definitions/Error"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
             }
           }
         }
@@ -70,14 +70,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "default": {
             "description": "Unexpected Error",
             "schema": {
               "$ref": "Subscriptions.json#/definitions/Error"
             }
-          },
-          "200": {
-            "description": "OK"
           }
         }
       }
@@ -103,16 +103,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Unexpected Error",
-            "schema": {
-              "$ref": "Subscriptions.json#/definitions/Error"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/SubscriptionList"
+            }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
             }
           }
         }
@@ -139,16 +139,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Unexpected Error",
-            "schema": {
-              "$ref": "Subscriptions.json#/definitions/Error"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/IdentityHealthCheckReportDefinition"
+            }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
             }
           }
         }
@@ -181,17 +181,17 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted -- Move subscriptions request accepted; operation will complete asynchronously."
+          },
+          "204": {
+            "description": "No Content -- The subscriptions were successfully moved to the target delegated provider offer."
+          },
           "default": {
             "description": "Unexpected Error",
             "schema": {
               "$ref": "Subscriptions.json#/definitions/Error"
             }
-          },
-          "204": {
-            "description": "No Content -- The subscriptions were successfully moved to the target delegated provider offer."
-          },
-          "202": {
-            "description": "Accepted -- Move subscriptions request accepted; operation will complete asynchronously."
           }
         },
         "x-ms-long-running-operation": true
@@ -224,17 +224,17 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted -- Validate move subscriptions request accepted; operation will complete asynchronously."
+          },
+          "204": {
+            "description": "No Content -- The subscriptions can be moved to the target delegated provider offer."
+          },
           "default": {
             "description": "Unexpected Error",
             "schema": {
               "$ref": "Subscriptions.json#/definitions/Error"
             }
-          },
-          "204": {
-            "description": "No Content -- The subscriptions can be moved to the target delegated provider offer."
-          },
-          "202": {
-            "description": "Accepted -- Validate move subscriptions request accepted; operation will complete asynchronously."
           }
         },
         "x-ms-long-running-operation": true
@@ -264,16 +264,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Unexpected Error",
-            "schema": {
-              "$ref": "Subscriptions.json#/definitions/Error"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/SubscriptionList"
+            }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
             }
           }
         },
@@ -307,16 +307,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Unexpected Error",
-            "schema": {
-              "$ref": "Subscriptions.json#/definitions/Error"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
             }
           }
         }
@@ -346,16 +346,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Unexpected Error",
-            "schema": {
-              "$ref": "Subscriptions.json#/definitions/Error"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/SubscriptionDefinition"
+            }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
             }
           }
         }
@@ -386,10 +386,10 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Unexpected Error",
+          "200": {
+            "description": "OK",
             "schema": {
-              "$ref": "Subscriptions.json#/definitions/Error"
+              "$ref": "#/definitions/SubscriptionDefinition"
             }
           },
           "201": {
@@ -398,10 +398,10 @@
               "$ref": "#/definitions/SubscriptionDefinition"
             }
           },
-          "200": {
-            "description": "OK",
+          "default": {
+            "description": "Unexpected Error",
             "schema": {
-              "$ref": "#/definitions/SubscriptionDefinition"
+              "$ref": "Subscriptions.json#/definitions/Error"
             }
           }
         }
@@ -429,17 +429,17 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Unexpected Error",
-            "schema": {
-              "$ref": "Subscriptions.json#/definitions/Error"
-            }
-          },
           "200": {
             "description": "OK"
           },
           "204": {
             "description": "No Content"
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
           }
         }
       }
@@ -576,7 +576,9 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
-          "x-ms-identifiers": [ "name" ]
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -645,7 +647,9 @@
           "items": {
             "$ref": "#/definitions/DirectoryTenantHealthReport"
           },
-          "x-ms-identifiers": [ "tenantId" ]
+          "x-ms-identifiers": [
+            "tenantId"
+          ]
         },
         "nextLink": {
           "description": "URI to the next page.",
@@ -731,7 +735,9 @@
           "items": {
             "$ref": "#/definitions/AppRoleAssignmentHealthReport"
           },
-          "x-ms-identifiers": [ "appRoleAssignment/resource" ]
+          "x-ms-identifiers": [
+            "appRoleAssignment/resource"
+          ]
         },
         "nextLink": {
           "description": "URI to the next page.",
@@ -780,7 +786,9 @@
           "items": {
             "$ref": "#/definitions/OAuth2PermissionGrantHealthReport"
           },
-          "x-ms-identifiers": [ "oAuth2PermissionGrant/resource" ]
+          "x-ms-identifiers": [
+            "oAuth2PermissionGrant/resource"
+          ]
         },
         "nextLink": {
           "description": "URI to the next page.",
@@ -829,7 +837,9 @@
           "items": {
             "$ref": "#/definitions/ServicePrincipalTagHealthReport"
           },
-          "x-ms-identifiers": [ "servicePrincipalTag" ]
+          "x-ms-identifiers": [
+            "servicePrincipalTag"
+          ]
         },
         "nextLink": {
           "description": "URI to the next page.",
@@ -1288,7 +1298,9 @@
           "items": {
             "$ref": "#/definitions/MetricDefinition"
           },
-          "x-ms-identifiers": [ "name" ]
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
