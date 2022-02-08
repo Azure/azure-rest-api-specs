@@ -548,7 +548,19 @@
         },
         "httpMethod": {
           "type": "string",
-          "description": "The http method of the request."
+          "description": "The http method of the request.",
+          "enum": [
+            "Unknown",
+            "Post",
+            "Put",
+            "Get",
+            "Patch",
+            "Delete"
+          ],
+          "x-ms-enum": {
+            "name": "HttpMethod",
+            "modelAsString": true
+          }
         },
         "serializedBody": {
           "type": "string",
