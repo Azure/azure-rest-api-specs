@@ -402,6 +402,21 @@
       "description": "Quota properties.",
       "x-ms-azure-resource": true,
       "properties": {
+        "id": {
+          "description": "The quota request ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the quota request.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Type of resource. \"Microsoft.Capacity/ServiceLimits\""
+        },
         "properties": {
           "description": "Quota properties for the resource.",
           "$ref": "#/definitions/QuotaProperties"
