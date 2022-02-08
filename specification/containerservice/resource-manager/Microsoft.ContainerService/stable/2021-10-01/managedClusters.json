@@ -92,16 +92,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/OSOptionProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1823,14 +1823,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted"
-          },
           "200": {
             "description": "command finished with async pattern, tracking by location header. !!! this is for autorest only, you never get 200 from this api !!!",
             "schema": {
               "$ref": "#/definitions/RunCommandResult"
             }
+          },
+          "202": {
+            "description": "Accepted"
           },
           "default": {
             "description": "Error response describing why the operation failed. If the cluster doesn't exist, 404 (Not found) is returned.",
@@ -1875,14 +1875,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "command running in progress"
-          },
           "200": {
             "description": "command finished",
             "schema": {
               "$ref": "#/definitions/RunCommandResult"
             }
+          },
+          "202": {
+            "description": "command running in progress"
           },
           "default": {
             "description": "Error response describing why the operation failed. If the cluster doesn't exist, 404 (Not found) is returned.",
@@ -2224,7 +2224,9 @@
           "items": {
             "$ref": "#/definitions/OperationValue"
           },
-          "x-ms-identifiers": [ "name" ],
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of operations"
         }
       },
@@ -3294,7 +3296,7 @@
           "items": {
             "$ref": "#/definitions/TimeInWeek"
           },
-          "x-ms-identifiers": [ ],
+          "x-ms-identifiers": [],
           "title": "Time slots during the week when planned maintenance is allowed to proceed.",
           "description": "If two array entries specify the same day of the week, the applied configuration is the union of times in both entries."
         },
@@ -3303,7 +3305,7 @@
           "items": {
             "$ref": "#/definitions/TimeSpan"
           },
-          "x-ms-identifiers": [  ],
+          "x-ms-identifiers": [],
           "description": "Time slots on which upgrade is not allowed."
         }
       },
@@ -3571,7 +3573,7 @@
           "items": {
             "$ref": "#/definitions/ContainerServiceSshPublicKey"
           },
-          "x-ms-identifiers": [  ],
+          "x-ms-identifiers": [],
           "description": "The list of SSH public keys used to authenticate with Linux-based VMs. A maximum of 1 key may be specified."
         }
       },
@@ -3719,7 +3721,9 @@
           "items": {
             "$ref": "#/definitions/ManagedClusterAgentPoolProfile"
           },
-          "x-ms-identifiers": [ "name" ],
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The agent pool properties."
         },
         "linuxProfile": {
@@ -4156,7 +4160,9 @@
           "items": {
             "$ref": "#/definitions/ManagedClusterPoolUpgradeProfile"
           },
-          "x-ms-identifiers": [ "name" ],
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of available upgrade versions for agent pools."
         }
       },
@@ -4353,7 +4359,10 @@
           "items": {
             "$ref": "#/definitions/ManagedClusterPodIdentityProvisioningErrorBody"
           },
-          "x-ms-identifiers": [ "message","target" ],
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ],
           "description": "A list of additional details about the error."
         }
       },
@@ -4402,7 +4411,9 @@
           "items": {
             "$ref": "#/definitions/ManagedClusterPodIdentity"
           },
-          "x-ms-identifiers": [ "name" ]
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "userAssignedIdentityExceptions": {
           "description": "The pod identity exceptions to allow.",
@@ -4496,7 +4507,9 @@
               }
             }
           },
-          "x-ms-identifiers": [ "kubernetesVersion" ],
+          "x-ms-identifiers": [
+            "kubernetesVersion"
+          ],
           "description": "List of orchestrator types and versions available for upgrade."
         },
         "latestNodeImageVersion": {
@@ -4559,7 +4572,9 @@
               }
             }
           },
-          "x-ms-identifiers": [ "kubernetesVersion" ],
+          "x-ms-identifiers": [
+            "kubernetesVersion"
+          ],
           "description": "List of versions available for agent pool."
         }
       },
@@ -4687,7 +4702,9 @@
           "items": {
             "$ref": "#/definitions/CredentialResult"
           },
-          "x-ms-identifiers": [ "name" ],
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "Base64-encoded Kubernetes configuration file."
         }
       },
@@ -4740,7 +4757,10 @@
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
           },
-          "x-ms-identifiers": [ "message", "target" ],
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ],
           "description": "A list of additional details about the error."
         }
       },
@@ -5335,7 +5355,7 @@
           "items": {
             "$ref": "#/definitions/OSOptionProperty"
           },
-          "x-ms-identifiers": [ ],
+          "x-ms-identifiers": [],
           "description": "The list of OS options."
         }
       },
@@ -5386,7 +5406,10 @@
           "items": {
             "$ref": "#/definitions/EndpointDetail"
           },
-          "x-ms-identifiers": [ "ipAddress", "port" ]
+          "x-ms-identifiers": [
+            "ipAddress",
+            "port"
+          ]
         }
       }
     },
@@ -5427,7 +5450,9 @@
           "items": {
             "$ref": "#/definitions/EndpointDependency"
           },
-          "x-ms-identifiers": [ "domainName" ]
+          "x-ms-identifiers": [
+            "domainName"
+          ]
         }
       }
     },
@@ -5444,7 +5469,7 @@
           "items": {
             "$ref": "#/definitions/OutboundEnvironmentEndpoint"
           },
-          "x-ms-identifiers": [ ]
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link to next page of resources.",
