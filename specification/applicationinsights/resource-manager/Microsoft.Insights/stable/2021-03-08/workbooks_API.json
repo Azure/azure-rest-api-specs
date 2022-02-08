@@ -417,8 +417,7 @@
     }
   },
   "definitions": {
-    "WorkbooksResource": {
-      "type": "object",
+    "Resource": {
       "properties": {
         "identity": {
           "description": "Identity used for BYOS",
@@ -457,14 +456,12 @@
           ]
         },
         "tags": {
-          "type": "object",
           "additionalProperties": {
             "type": "string"
           },
           "description": "Resource tags"
         },
         "etag": {
-          "type": "string",
           "additionalProperties": {
             "type": "string"
           },
@@ -475,7 +472,6 @@
       "description": "An azure resource object"
     },
     "WorkbooksListResult": {
-      "type": "array",
       "properties": {
         "value": {
           "type": "array",
@@ -492,11 +488,10 @@
       "description": "Workbook list result."
     },
     "Workbook": {
-      "type": "object",
       "description": "An Application Insights workbook definition.",
       "allOf": [
         {
-          "$ref": "#/definitions/WorkbooksResource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "properties": {

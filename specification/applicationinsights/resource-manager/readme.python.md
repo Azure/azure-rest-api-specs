@@ -38,15 +38,6 @@ clear-output-folder: false
 perform-load: false
 ```
 
-### Tag: package-2021-03-only and python
-
-These settings apply only when `--tag=package-2021-03-only --python` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-03-only' && $(python) && $(track2)
-namespace: azure.mgmt.applicationinsights.v2021_03_08
-output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2021_03_08
-```
-
 ### Tag: package-2015-05 and python
 
 These settings apply only when `--tag=package-2015-05 --python` is specified on the command line.
