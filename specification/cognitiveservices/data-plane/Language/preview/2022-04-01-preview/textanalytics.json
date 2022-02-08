@@ -747,6 +747,10 @@
       "type": "object",
       "description": "Supported parameters for a Healthcare task.",
       "properties": {
+        "structureFHIR": {
+          "type": "boolean",
+          "default": false
+        },
         "stringIndexType": {
           "$ref": "common.json#/definitions/StringIndexType"
         }
@@ -898,6 +902,10 @@
           "items": {
             "$ref": "#/definitions/HealthcareEntityLink"
           }
+        },
+        "fhirBundle": {
+          "type": "string",
+          "description": "JSON bundle containing a FHIR compatible object for consumption in other Healthcare tools. For additional information see https://www.hl7.org/fhir/overview.html."
         }
       },
       "required": [
