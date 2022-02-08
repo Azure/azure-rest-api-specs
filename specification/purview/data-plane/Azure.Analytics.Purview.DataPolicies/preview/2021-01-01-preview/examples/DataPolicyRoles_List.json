@@ -1,85 +1,85 @@
 {
-    "parameters": {
-        "Endpoint": "{Endpoint}",
-        "api-version": "2021-01-01-preview"
-    },
-    "responses": {
-        "200": {
-            "headers": {
-                "x-ms-request-id": "8e58266a-de42-40d5-b3c4-c6a7e159cfba"
-            },
-            "body": {
-                "values": [
-                    {
-                        "id": "purviewdatarole_builtin_read",
-                        "name": "read",
-                        "type": "Microsoft.Purview/role",
-                        "properties": {
-                            "provisioningState": "Provisioned",
-                            "roleType": "BuiltIn",
-                            "friendlyName": "Read",
-                            "cnfCondition": [
-                                [
-                                    {
-                                        "attributeName": "request.azure.dataAction",
-                                        "attributeValueIncludedIn": [
-                                            "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/read",
-                                            "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/executeQuery",
-                                            "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/readChangeFeed",
-                                            "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read",
-                                            "Microsoft.Sql/sqlservers/databases/schemas/tables/rows/select",
-                                            "Microsoft.Sql/sqlservers/databases/select"
-                                        ]
-                                    },
-                                    {
-                                        "attributeName": "request.azure.controlAction",
-                                        "attributeValueIncludedIn": [
-                                            "Microsoft.Storage/storageAccounts/blobServices/generateUserDelegationKey/action",
-                                            "Microsoft.Storage/storageAccounts/blobServices/containers/read"
-                                        ]
-                                    }
-                                ]
-                            ],
-                            "version": 1
-                        }
-                    },
-                    {
-                        "id": "purviewdatarole_builtin_modify",
-                        "name": "modify",
-                        "type": "Microsoft.Purview/role",
-                        "properties": {
-                            "provisioningState": "Provisioned",
-                            "roleType": "BuiltIn",
-                            "friendlyName": "Modify",
-                            "cnfCondition": [
-                                [
-                                    {
-                                        "attributeName": "request.azure.dataAction",
-                                        "attributeValueIncludedIn": [
-                                            "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read",
-                                            "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/write",
-                                            "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/add/action",
-                                            "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/move/action",
-                                            "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/delete"
-                                        ]
-                                    },
-                                    {
-                                        "attributeName": "request.azure.controlAction",
-                                        "attributeValueIncludedIn": [
-                                            "Microsoft.Storage/storageAccounts/blobServices/generateUserDelegationKey/action",
-                                            "Microsoft.Storage/storageAccounts/blobServices/containers/read",
-                                            "Microsoft.Storage/storageAccounts/blobServices/containers/write",
-                                            "Microsoft.Storage/storageAccounts/blobServices/containers/delete"
-                                        ]
-                                    }
-                                ]
-                            ],
-                            "version": 1
-                        }
-                    }
-                ],
-                "count": 2
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "api-version": "2021-01-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "x-ms-request-id": "8e58266a-de42-40d5-b3c4-c6a7e159cfba"
+      },
+      "body": {
+        "values": [
+          {
+            "id": "purviewdatarole_builtin_read",
+            "name": "read",
+            "type": "Microsoft.Purview/role",
+            "properties": {
+              "provisioningState": "Provisioned",
+              "roleType": "BuiltIn",
+              "friendlyName": "Read",
+              "cnfCondition": [
+                [
+                  {
+                    "attributeName": "request.azure.dataAction",
+                    "attributeValueIncludedIn": [
+                      "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/read",
+                      "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/executeQuery",
+                      "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/readChangeFeed",
+                      "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read",
+                      "Microsoft.Sql/sqlservers/databases/schemas/tables/rows/select",
+                      "Microsoft.Sql/sqlservers/databases/select"
+                    ]
+                  },
+                  {
+                    "attributeName": "request.azure.controlAction",
+                    "attributeValueIncludedIn": [
+                      "Microsoft.Storage/storageAccounts/blobServices/generateUserDelegationKey/action",
+                      "Microsoft.Storage/storageAccounts/blobServices/containers/read"
+                    ]
+                  }
+                ]
+              ],
+              "version": 1
             }
-        }
+          },
+          {
+            "id": "purviewdatarole_builtin_modify",
+            "name": "modify",
+            "type": "Microsoft.Purview/role",
+            "properties": {
+              "provisioningState": "Provisioned",
+              "roleType": "BuiltIn",
+              "friendlyName": "Modify",
+              "cnfCondition": [
+                [
+                  {
+                    "attributeName": "request.azure.dataAction",
+                    "attributeValueIncludedIn": [
+                      "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read",
+                      "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/write",
+                      "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/add/action",
+                      "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/move/action",
+                      "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/delete"
+                    ]
+                  },
+                  {
+                    "attributeName": "request.azure.controlAction",
+                    "attributeValueIncludedIn": [
+                      "Microsoft.Storage/storageAccounts/blobServices/generateUserDelegationKey/action",
+                      "Microsoft.Storage/storageAccounts/blobServices/containers/read",
+                      "Microsoft.Storage/storageAccounts/blobServices/containers/write",
+                      "Microsoft.Storage/storageAccounts/blobServices/containers/delete"
+                    ]
+                  }
+                ]
+              ],
+              "version": 1
+            }
+          }
+        ],
+        "count": 2
+      }
     }
+  }
 }
