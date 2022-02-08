@@ -1811,7 +1811,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/IncidentEntitiesResultsMetadata"
-          }
+          },
+          "x-ms-identifiers": [
+            "entityKind"
+          ]
         }
       }
     },
@@ -2077,6 +2080,7 @@
           "items": {
             "$ref": "#/definitions/IncidentLabel"
           },
+          "x-ms-identifiers": [],
           "type": "array"
         },
         "lastActivityTimeUtc": {
@@ -2281,6 +2285,11 @@
           "items": {
             "$ref": "#/definitions/ThreatIntelligence"
           },
+          "x-ms-identifiers": [
+            "providerName",
+            "threatName",
+            "threatType"
+          ],
           "readOnly": true,
           "type": "array"
         },
@@ -2334,6 +2343,11 @@
           "items": {
             "$ref": "#/definitions/ThreatIntelligence"
           },
+          "x-ms-identifiers": [
+            "providerName",
+            "threatName",
+            "threatType"
+          ],
           "readOnly": true,
           "type": "array"
         }
@@ -3284,6 +3298,9 @@
             },
             "type": "object"
           },
+          "x-ms-identifiers": [
+            "reasonType"
+          ],
           "readOnly": true,
           "type": "array"
         },
@@ -3536,6 +3553,7 @@
           "items": {
             "type": "object"
           },
+          "x-ms-identifiers": [],
           "readOnly": true,
           "type": "array"
         }
