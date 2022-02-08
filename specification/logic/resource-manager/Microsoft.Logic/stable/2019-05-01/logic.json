@@ -7185,6 +7185,7 @@
           "items": {
             "$ref": "#/definitions/RetryHistory"
           },
+          "x-ms-identifiers": [],
           "description": "Gets the retry histories."
         }
       },
@@ -7526,6 +7527,7 @@
           "items": {
             "$ref": "#/definitions/RecurrenceScheduleOccurrence"
           },
+          "x-ms-identifiers": [],
           "description": "The monthly occurrences."
         }
       },
@@ -8066,7 +8068,8 @@
           "description": "The schemas which must pass validation when this schema is used.",
           "items": {
             "$ref": "#/definitions/SwaggerSchema"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "discriminator": {
           "type": "string",
@@ -8688,7 +8691,8 @@
           "items": {
             "$ref": "#/definitions/IntegrationServiceEnvironmentNetworkEndpoint",
             "description": "The endpoint."
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -8741,7 +8745,8 @@
           "items": {
             "$ref": "#/definitions/IntegrationServiceEnvironmentNetworkDependency",
             "description": "The integration service environment network dependency."
-          }
+          },
+          "x-ms-identifiers": []
         },
         "outboundNetworkHealth": {
           "$ref": "#/definitions/IntegrationServiceEnvironmentNetworkDependencyHealth",
@@ -8774,7 +8779,10 @@
           "description": "The error message details.",
           "items": {
             "$ref": "#/definitions/ExtendedErrorInfo"
-          }
+          },
+          "x-ms-identifiers": [
+            "code"
+          ]
         },
         "innerError": {
           "$ref": "#/definitions/Object",
@@ -9012,7 +9020,8 @@
           "items": {
             "$ref": "#/definitions/IpAddressRange",
             "description": "The ip address range."
-          }
+          },
+          "x-ms-identifiers": []
         },
         "openAuthenticationPolicies": {
           "$ref": "#/definitions/OpenAuthenticationAccessPolicies",
@@ -9057,7 +9066,10 @@
           "items": {
             "$ref": "#/definitions/OpenAuthenticationPolicyClaim",
             "description": "The access policy claim."
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -9110,7 +9122,10 @@
           "items": {
             "$ref": "#/definitions/IpAddress",
             "description": "The ip address."
-          }
+          },
+          "x-ms-identifiers": [
+            "address"
+          ]
         },
         "accessEndpointIpAddresses": {
           "type": "array",
@@ -9118,7 +9133,10 @@
           "items": {
             "$ref": "#/definitions/IpAddress",
             "description": "The ip address."
-          }
+          },
+          "x-ms-identifiers": [
+            "address"
+          ]
         }
       }
     },
@@ -9197,6 +9215,10 @@
           "items": {
             "$ref": "#/definitions/IntegrationServiceEnvironmentSkuDefinition"
           },
+          "x-ms-identifiers": [
+            "sku/name",
+            "sku/tier"
+          ],
           "description": "The list of integration service environment skus."
         },
         "nextLink": {
@@ -9782,6 +9804,9 @@
           "items": {
             "$ref": "#/definitions/BusinessIdentity"
           },
+          "x-ms-identifiers": [
+            "qualifier"
+          ],
           "description": "The list of partner business identities."
         }
       },
@@ -10382,6 +10407,9 @@
           "items": {
             "$ref": "#/definitions/X12EnvelopeOverride"
           },
+          "x-ms-identifiers": [
+            "messageId"
+          ],
           "description": "The X12 envelope override settings."
         },
         "validationOverrides": {
@@ -10389,6 +10417,9 @@
           "items": {
             "$ref": "#/definitions/X12ValidationOverride"
           },
+          "x-ms-identifiers": [
+            "messageId"
+          ],
           "description": "The X12 validation override settings."
         },
         "messageFilterList": {
@@ -10396,6 +10427,9 @@
           "items": {
             "$ref": "#/definitions/X12MessageIdentifier"
           },
+          "x-ms-identifiers": [
+            "messageId"
+          ],
           "description": "The X12 message filter list."
         },
         "schemaReferences": {
@@ -10403,6 +10437,9 @@
           "items": {
             "$ref": "#/definitions/X12SchemaReference"
           },
+          "x-ms-identifiers": [
+            "messageId"
+          ],
           "description": "The X12 schema references."
         },
         "x12DelimiterOverrides": {
@@ -10410,6 +10447,7 @@
           "items": {
             "$ref": "#/definitions/X12DelimiterOverrides"
           },
+          "x-ms-identifiers": [],
           "description": "The X12 delimiter override settings."
         }
       },
@@ -11235,6 +11273,9 @@
           "items": {
             "$ref": "#/definitions/EdifactEnvelopeOverride"
           },
+          "x-ms-identifiers": [
+            "messageId"
+          ],
           "description": "The EDIFACT envelope override settings."
         },
         "messageFilterList": {
@@ -11242,6 +11283,9 @@
           "items": {
             "$ref": "#/definitions/EdifactMessageIdentifier"
           },
+          "x-ms-identifiers": [
+            "messageId"
+          ],
           "description": "The EDIFACT message filter list."
         },
         "schemaReferences": {
@@ -11249,6 +11293,9 @@
           "items": {
             "$ref": "#/definitions/EdifactSchemaReference"
           },
+          "x-ms-identifiers": [
+            "messageId"
+          ],
           "description": "The EDIFACT schema references."
         },
         "validationOverrides": {
@@ -11256,6 +11303,9 @@
           "items": {
             "$ref": "#/definitions/EdifactValidationOverride"
           },
+          "x-ms-identifiers": [
+            "messageId"
+          ],
           "description": "The EDIFACT validation override settings."
         },
         "edifactDelimiterOverrides": {
@@ -11263,6 +11313,9 @@
           "items": {
             "$ref": "#/definitions/EdifactDelimiterOverride"
           },
+          "x-ms-identifiers": [
+            "messageId"
+          ],
           "description": "The EDIFACT delimiter override settings."
         }
       },
@@ -12189,6 +12242,9 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of Logic operations supported by the Logic resource provider."
         },
         "nextLink": {
@@ -12264,6 +12320,9 @@
           "items": {
             "$ref": "#/definitions/KeyVaultKey"
           },
+          "x-ms-identifiers": [
+            "kid"
+          ],
           "description": "The key vault keys."
         },
         "skipToken": {
@@ -12324,7 +12383,8 @@
           "description": "The events.",
           "items": {
             "$ref": "#/definitions/TrackingEvent"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -12452,7 +12512,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExpressionRoot"
-          }
+          },
+          "x-ms-identifiers": [
+            "path"
+          ]
         }
       }
     },
@@ -12486,7 +12549,8 @@
           "description": "The sub expressions.",
           "items": {
             "$ref": "#/definitions/Expression"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "error": {
           "$ref": "#/definitions/AzureResourceErrorInfo"
@@ -12510,6 +12574,9 @@
           "items": {
             "$ref": "#/definitions/AzureResourceErrorInfo"
           },
+          "x-ms-identifiers": [
+            "code"
+          ],
           "description": "The error details."
         }
       },
@@ -12579,7 +12646,10 @@
           "description": "The repetition indexes.",
           "items": {
             "$ref": "#/definitions/RepetitionIndex"
-          }
+          },
+          "x-ms-identifiers": [
+            "itemIndex"
+          ]
         }
       },
       "allOf": [
@@ -12647,6 +12717,7 @@
           "items": {
             "$ref": "#/definitions/RetryHistory"
           },
+          "x-ms-identifiers": [],
           "description": "Gets the retry histories."
         },
         "iterationCount": {
