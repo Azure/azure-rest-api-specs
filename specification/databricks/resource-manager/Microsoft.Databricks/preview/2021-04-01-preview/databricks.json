@@ -104,14 +104,14 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "NoContent"
+          "200": {
+            "description": "OK. The request has succeeded."
           },
           "202": {
             "description": "Accepted - Returns this status until the asynchronous operation has completed."
           },
-          "200": {
-            "description": "OK. The request has succeeded."
+          "204": {
+            "description": "NoContent"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -226,14 +226,14 @@
               "$ref": "#/definitions/Workspace"
             }
           },
+          "202": {
+            "description": "Accepted"
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          },
-          "202": {
-            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true,
@@ -635,11 +635,11 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted - This is a long running operation. The operation returns a 202 if the validation is complete. The response includes an Azure-AsyncOperation header that contains a status URL. Clients are expected to poll the status URL for the status of the operation."
-          },
           "200": {
             "description": "OK - Returns the status of polling request for the delete operation."
+          },
+          "202": {
+            "description": "Accepted - This is a long running operation. The operation returns a 202 if the validation is complete. The response includes an Azure-AsyncOperation header that contains a status URL. Clients are expected to poll the status URL for the status of the operation."
           },
           "204": {
             "description": "No Content - PrivateEndpoint does not exist."
