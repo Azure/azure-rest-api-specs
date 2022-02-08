@@ -3,7 +3,7 @@
   "info": {
     "title": "DiskResourceProviderClient",
     "description": "The Disk Resource Provider Client.",
-    "version": "2021-08-01"
+    "version": "2021-12-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -2261,7 +2261,7 @@
         },
         "supportedCapabilities": {
           "$ref": "#/definitions/SupportedCapabilities",
-          "description": "List of supported capabilities (like Accelerated Networking) for the image from which the source disk from the snapshot was originally created."
+          "description": "List of supported capabilities for the image from which the source disk from the snapshot was originally created."
         },
         "creationData": {
           "$ref": "#/definitions/CreationData",
@@ -2663,7 +2663,7 @@
         },
         "supportedCapabilities": {
           "$ref": "#/definitions/SupportedCapabilities",
-          "description": "List of supported capabilities (like accelerated networking) to be added on the OS disk."
+          "description": "List of supported capabilities to be added on the OS disk."
         },
         "propertyUpdatesInProgress": {
           "readOnly": true,
@@ -2723,7 +2723,7 @@
         },
         "supportedCapabilities": {
           "$ref": "#/definitions/SupportedCapabilities",
-          "description": "List of supported capabilities (like accelerated networking) for the image from which the OS disk was created."
+          "description": "List of supported capabilities for the image from which the OS disk was created."
         }
       },
       "description": "Snapshot resource update properties."
@@ -2954,9 +2954,21 @@
         "acceleratedNetwork": {
           "type": "boolean",
           "description": "True if the image from which the OS disk is created supports accelerated networking."
+        },
+        "architecture": {
+          "type": "string",
+          "description": "The architecture of the image.",
+          "enum": [
+            "x64",
+            "Arm64"
+          ],
+          "x-ms-enum": {
+            "name": "Architecture",
+            "modelAsString": true
+          }
         }
       },
-      "description": "List of supported capabilities (like accelerated networking) persisted on the disk resource for VM use."
+      "description": "List of supported capabilities persisted on the disk resource for VM use."
     },
     "PropertyUpdatesInProgress": {
       "properties": {
@@ -3522,7 +3534,7 @@
         },
         "supportedCapabilities": {
           "$ref": "#/definitions/SupportedCapabilities",
-          "description": "List of supported capabilities (like accelerated networking) for the image from which the OS disk was created."
+          "description": "List of supported capabilities for the image from which the OS disk was created."
         },
         "familyId": {
           "type": "string",
