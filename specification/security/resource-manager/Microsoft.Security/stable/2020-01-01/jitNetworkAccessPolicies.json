@@ -445,7 +445,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/JitNetworkAccessRequest"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "provisioningState": {
           "type": "string",
@@ -473,7 +474,8 @@
           "description": "Port configurations for the virtual machine",
           "items": {
             "$ref": "#/definitions/JitNetworkAccessPortRule"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "publicIpAddress": {
           "type": "string",
@@ -579,7 +581,8 @@
           "description": "The ports that were opened for the virtual machine",
           "items": {
             "$ref": "#/definitions/JitNetworkAccessRequestPort"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -693,7 +696,12 @@
           "description": "The ports to open for the resource with the `id`",
           "items": {
             "$ref": "#/definitions/JitNetworkAccessPolicyInitiatePort"
-          }
+          },
+          "x-ms-identifiers": [
+            "allowedSourceAddressPrefix",
+            "endTimeUtc",
+            "number"
+          ]
         }
       },
       "required": [

@@ -349,21 +349,28 @@
           "description": "A collection of scopes on which the security automations logic is applied. Supported scopes are the subscription itself or a resource group under that subscription. The automation will only apply on defined scopes.",
           "items": {
             "$ref": "#/definitions/AutomationScope"
-          }
+          },
+          "x-ms-identifiers": [
+            "scopePath"
+          ]
         },
         "sources": {
           "type": "array",
           "description": "A collection of the source event types which evaluate the security automation set of rules.",
           "items": {
             "$ref": "#/definitions/AutomationSource"
-          }
+          },
+          "x-ms-identifiers": [
+            "eventSource"
+          ]
         },
         "actions": {
           "type": "array",
           "description": "A collection of the actions which are triggered if all the configured rules evaluations, within at least one rule set, are true.",
           "items": {
             "$ref": "#/definitions/AutomationAction"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -432,7 +439,8 @@
           "description": "A set of rules which evaluate upon event interception. A logical disjunction is applied between defined rule sets (logical 'or').",
           "items": {
             "$ref": "#/definitions/AutomationRuleSet"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -532,7 +540,7 @@
     },
     "AutomationActionWorkspace": {
       "type": "object",
-      "description": "The Log Analytics Workspace to which event data will be exported. Security alerts data will reside in the 'SecurityAlert' table and the assessments data will reside in the 'SecurityRecommendation' table (under the 'Security'/'SecurityCenterFree' solutions). Note that in order to view the data in the workspace, the Security Center Log Analytics free/standard solution needs to be enabled on that workspace. To learn more about Security Center continuous export capabilities, visit https://aka.ms/ASCExportLearnMore",
+      "description": "The Log Analytics Workspace to which event data will be exported. Security alerts data will reside in the 'SecurityAlert' table and the assessments data will reside in the 'SecurityRecommendation' table (under the 'Security'/'SecurityCenterFree' solutions). Note that in order to view the data in the workspace, the Security Center Log Analytics free/standard solution needs to be enabled on that workspace. To learn more about Security Center continuous export capabilities, visit https://aka.ms/ASCExportLearnMore",
       "x-ms-discriminator-value": "Workspace",
       "allOf": [
         {
@@ -554,7 +562,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AutomationTriggeringRule"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },

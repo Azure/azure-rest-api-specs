@@ -212,7 +212,10 @@
           "description": "Azure resources which are part of this topology resource",
           "items": {
             "$ref": "#/definitions/TopologySingleResource"
-          }
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
         }
       }
     },
@@ -255,7 +258,10 @@
           "description": "Azure resources connected to this resource which are in higher level in the topology view",
           "items": {
             "$ref": "#/definitions/TopologySingleResourceParent"
-          }
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
         },
         "children": {
           "type": "array",
@@ -263,7 +269,10 @@
           "description": "Azure resources connected to this resource which are in lower level in the topology view",
           "items": {
             "$ref": "#/definitions/TopologySingleResourceChild"
-          }
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
         }
       }
     },

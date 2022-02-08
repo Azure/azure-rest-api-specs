@@ -427,7 +427,10 @@
                 "description": "Device alert count by severity."
               }
             }
-          }
+          },
+          "x-ms-identifiers": [
+            "date"
+          ]
         },
         "topAlertedDevices": {
           "description": "List of the 3 devices with the most alerts.",
@@ -511,21 +514,31 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/IoTSecurityAlertedDevice"
-      }
+      },
+      "x-ms-identifiers": [
+        "deviceId"
+      ]
     },
     "IoTSecurityDeviceAlertsList": {
       "description": "List of alerts with the count of raised alerts",
       "type": "array",
       "items": {
         "$ref": "#/definitions/IoTSecurityDeviceAlert"
-      }
+      },
+      "x-ms-identifiers": [
+        "alertDisplayName"
+      ]
     },
     "IoTSecurityDeviceRecommendationsList": {
       "description": "List of aggregated recommendation data, per recommendation type, per device.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/IoTSecurityDeviceRecommendation"
-      }
+      },
+      "x-ms-identifiers": [
+        "recommendationDisplayName",
+        "reportedSeverity"
+      ]
     },
     "IoTSecurityAggregatedAlert": {
       "type": "object",
@@ -659,7 +672,10 @@
                 "description": "Most recent time this alert was raised for this device, on this day."
               }
             }
-          }
+          },
+          "x-ms-identifiers": [
+            "deviceId"
+          ]
         }
       }
     },
