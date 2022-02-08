@@ -42,10 +42,6 @@ directive:
     reason: Patch response is 202.
     suppress: LongRunningResponseStatusCode
 
-  - suppress: R2016
-    where: $.definitions.TrackedResource.required
-    reason: location is a required property for our patch calls
-
   - suppress: DeleteOperationResponses
     reason: Per ARM Specs, async APIs must return 202 when a response is accepted.
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/assets/{assetName}/tracks/{trackName}"].delete.responses'
