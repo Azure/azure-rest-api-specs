@@ -404,6 +404,10 @@
         "apple": {
           "$ref": "#/definitions/Apple",
           "description": "The configuration settings of the Apple provider."
+        },
+        "azureStaticWebApp": {
+          "$ref": "#/definitions/AzureStaticWebApp",
+          "description": "The configuration settings of the Azure Static Web Apps provider."
         }
       }
     },
@@ -678,6 +682,30 @@
         "login": {
           "$ref": "#/definitions/LoginScopes",
           "description": "The configuration settings of the login flow."
+        }
+      }
+    },
+    "AzureStaticWebApp": {
+      "description": "The configuration settings of the Azure Static Web Apps provider.",
+      "type": "object",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/IdentityProviderState",
+          "description": "<code>Disabled</code> if the Azure Static Web Apps provider should not be enabled despite the set registration; otherwise, <code>Enabled</code>."
+        },
+        "registration": {
+          "$ref": "#/definitions/AzureStaticWebAppRegistration",
+          "description": "The configuration settings of the Azure Static Web Apps registration."
+        }
+      }
+    },
+    "AzureStaticWebAppRegistration": {
+      "description": "The configuration settings of the registration for the Azure Static Web Apps provider",
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "description": "The Client ID of the app used for login.",
+          "type": "string"
         }
       }
     },
