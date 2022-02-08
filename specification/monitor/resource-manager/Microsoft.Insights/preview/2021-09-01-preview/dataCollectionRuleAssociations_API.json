@@ -299,13 +299,17 @@
   },
   "definitions": {
     "Metadata": {
-      "description": "Context information about the resource",
+      "description": "Metadata about the resource",
       "type": "object",
       "properties": {
         "provisionedBy": {
           "description": "Azure offering managing this resource on-behalf-of customer.",
           "type": "string",
-          "example": "Azure Security Center"
+          "readOnly": true,
+          "example": "Azure Security Center",
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       }
     },
@@ -348,11 +352,15 @@
           ]
         },
         "metadata": {
-          "description": "Context information about the resource",
+          "description": "Metadata about the resource",
           "allOf": [
             {
               "$ref": "#/definitions/Metadata"
             }
+          ],
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
           ]
         }
       }

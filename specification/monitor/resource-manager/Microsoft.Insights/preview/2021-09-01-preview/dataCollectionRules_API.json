@@ -311,13 +311,17 @@
   },
   "definitions": {
     "Metadata": {
-      "description": "Context information about the resource",
+      "description": "Metadata about the resource",
       "type": "object",
       "properties": {
         "provisionedBy": {
           "description": "Azure offering managing this resource on-behalf-of customer.",
           "type": "string",
-          "example": "Azure Security Center"
+          "readOnly": true,
+          "example": "Azure Security Center",
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       }
     },
@@ -861,11 +865,15 @@
           "example": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Insights/dataCollectionEndpoints/myCollectionEndpoint"
         },
         "metadata": {
-          "description": "Context information about the resource",
+          "description": "Metadata about the resource",
           "allOf": [
             {
               "$ref": "#/definitions/Metadata"
             }
+          ],
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
           ]
         },
         "streamDeclarations": {
