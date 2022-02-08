@@ -103,6 +103,9 @@
           "Create a managed disk and associate with disk access resource.": {
             "$ref": "./examples/CreateAManagedDiskWithDiskAccess.json"
           },
+          "Create a managed disk with dataAccessAuthMode": {
+            "$ref": "./examples/CreateAManagedDiskWithDataAccessAuthMode.json"
+          },
           "Create a managed disk and associate with disk encryption set.": {
             "$ref": "./examples/CreateAManagedDiskWithDiskEncryptionSet.json"
           },
@@ -192,6 +195,9 @@
           },
           "Update a managed disk to add accelerated networking.": {
             "$ref": "./examples/UpdateAManagedDiskToAddAcceleratedNetworking.json"
+          },
+          "Update a managed disk to add architecture.": {
+            "$ref": "./examples/UpdateAManagedDiskToAddArchitecture.json"
           },
           "Update a managed disk to change tier.": {
             "$ref": "./examples/UpdateAManagedDiskToChangeTier.json"
@@ -2216,6 +2222,9 @@
         },
         "publicNetworkAccess": {
           "$ref": "#/definitions/PublicNetworkAccess"
+        },
+        "dataAccessAuthMode": {
+          "$ref": "#/definitions/DataAccessAuthMode"
         }
       },
       "required": [
@@ -2321,6 +2330,9 @@
         },
         "publicNetworkAccess": {
           "$ref": "#/definitions/PublicNetworkAccess"
+        },
+        "dataAccessAuthMode": {
+          "$ref": "#/definitions/DataAccessAuthMode"
         },
         "completionPercent": {
           "type": "number",
@@ -2590,6 +2602,28 @@
         ]
       }
     },
+    "DataAccessAuthMode": {
+      "type": "string",
+      "description": "Add additional AAD authentication requirement when accessing disk/snapshot export URL.",
+      "enum": [
+        "AzureActiveDirectory",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "DataAccessAuthMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AzureActiveDirectory",
+            "description": "When export/upload URL is used additional authentication is performed, to check if the user has necessary RBAC access. Please refer to aka.ms/{placeholder}."
+          },
+          {
+            "value": "None",
+            "description": "No additional authentication would be performed when accessing export/upload URL."
+          }
+        ]
+      }
+    },
     "DiskUpdateProperties": {
       "properties": {
         "osType": {
@@ -2676,6 +2710,9 @@
         },
         "publicNetworkAccess": {
           "$ref": "#/definitions/PublicNetworkAccess"
+        },
+        "dataAccessAuthMode": {
+          "$ref": "#/definitions/DataAccessAuthMode"
         }
       },
       "description": "Disk resource update properties."
@@ -2720,6 +2757,9 @@
         },
         "publicNetworkAccess": {
           "$ref": "#/definitions/PublicNetworkAccess"
+        },
+        "dataAccessAuthMode": {
+          "$ref": "#/definitions/DataAccessAuthMode"
         },
         "supportedCapabilities": {
           "$ref": "#/definitions/SupportedCapabilities",
