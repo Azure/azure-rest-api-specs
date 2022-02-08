@@ -1193,7 +1193,7 @@
           }
         },
         "targetResourceGroup": {
-          "description": "For an unmapped custom resource, if this resource sync rule has highest priority among all matching rules, then the unmapped custom resource will be projected to the target resource group associated with this resource sync rule. The user creating this resource sync rule should have write permissions on the target resource group and this will be checked when creating the resource sync rule.",
+          "description": "For an unmapped custom resource, its labels will be used to find matching resource sync rules. If this resource sync rule is one of the matching rules with highest priority, then the unmapped custom resource will be projected to the target resource group associated with this resource sync rule. The user creating this resource sync rule should have write permissions on the target resource group and this write permission will be validated when creating the resource sync rule.",
           "type": "string"
         }
       }
