@@ -1,0 +1,69 @@
+{
+    "parameters": {
+        "api-version": "2021-03-01-preview",
+        "subscriptionId": "subid",
+        "resourceGroupName": "rg1",
+        "pkiName": "TestPki",
+        "caName": "TestCa"
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Pki/pkis/TestPki/certificateAuthorities/TestCa",
+                "name": "TestCa",
+                "type": "Microsoft.Pki/pkis/certificateAuthorities",
+                "systemData": {
+                    "createdBy": "saruman",
+                    "createdByType": "User",
+                    "createdAt": "2020-02-03T01:01:01.1075056Z",
+                    "lastModifiedBy": "gandalf",
+                    "lastModifiedByType": "User",
+                    "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
+                },
+                "properties": {
+                    "description": "This is a test CA",
+                    "canIssueCa": true,
+                    "canIssueEndEntity": false,
+                    "crlUri": "http://testpki.eastus.pki.azure.net/certificateAuthorities/testca.crl",
+                    "issuerResource": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Pki/pkis/TestPki/certificateAuthorities/RootCa",
+                    "certificateProperties": {
+                        "issuer": null,
+                        "subject": "C=BE, O=Contoso, CN=Contoso Devices G1",
+                        "subjectAlternativeNames": [
+                            "DNS=contoso.com"
+                        ],
+                        "keyUsage": [
+                            "DigitalSignature",
+                            "KeyCertSign",
+                            "CrlSign"
+                        ],
+                        "extendedKeyUsage": [
+                            "AnyExtendedKeyUsage"
+                        ],
+                        "validityNotBefore": "2021-06-14T18:00:00.0Z",
+                        "validityNotAfter": "2023-06-14T18:00:00.0Z",
+                        "keyProperties": {
+                            "keyPlatform": "Software",
+                            "keyTypeOid": "1.2.840.113549.1.1.1",
+                            "keySize": 3072,
+                            "curveOid": null
+                        },
+                        "issuedAt": "2021-06-14T17:51:26.441Z",
+                        "serialNumber": "10:e6:fc:62:b7:41:8a:d5:00:5e:45:b6"
+                    },
+                    "banners": [
+                        {
+                            "createdAt": "2021-06-14T17:51:12.654Z",
+                            "category": "info",
+                            "code": "NoNextGeneration",
+                            "properties": {
+                                "expires": "2023-06-14T18:00:00.0Z"
+                            },
+                            "description": "This CA will expire 2023-06-14T18:00:00.0Z and there is no generation to replace it."
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
