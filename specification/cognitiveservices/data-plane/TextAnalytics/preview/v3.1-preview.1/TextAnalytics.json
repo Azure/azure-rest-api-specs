@@ -47,27 +47,16 @@
         ],
         "parameters": [
           {
-            "name": "model-version",
-            "in": "query",
-            "description": "(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/ModelVersion"
           },
           {
-            "name": "showStats",
-            "in": "query",
-            "description": "(Optional) if set to true, response will contain input and document level statistics.",
-            "type": "boolean",
-            "required": false
+            "$ref": "#/parameters/ShowStats"
           },
           {
-            "in": "body",
-            "name": "input",
-            "description": "Collection of documents to analyze.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MultiLanguageBatchInput"
-            }
+            "$ref": "#/parameters/MultiLanguageInput"
+          },
+          {
+            "$ref": "#/parameters/StringIndexType"
           }
         ],
         "responses": {
@@ -80,7 +69,7 @@
           "default": {
             "description": "Error Response",
             "schema": {
-              "$ref": "#/definitions/TextAnalyticsError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -107,16 +96,10 @@
         ],
         "parameters": [
           {
-            "name": "model-version",
-            "in": "query",
-            "description": "(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
-            "type": "string"
+            "$ref": "#/parameters/ModelVersion"
           },
           {
-            "name": "showStats",
-            "in": "query",
-            "description": "(Optional) if set to true, response will contain input and document level statistics.",
-            "type": "boolean"
+            "$ref": "#/parameters/ShowStats"
           },
           {
             "name": "domain",
@@ -125,13 +108,10 @@
             "type": "string"
           },
           {
-            "in": "body",
-            "name": "input",
-            "description": "Collection of documents to analyze.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MultiLanguageBatchInput"
-            }
+            "$ref": "#/parameters/MultiLanguageInput"
+          },
+          {
+            "$ref": "#/parameters/StringIndexType"
           }
         ],
         "responses": {
@@ -144,7 +124,7 @@
           "default": {
             "description": "Error Response",
             "schema": {
-              "$ref": "#/definitions/TextAnalyticsError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -171,25 +151,16 @@
         ],
         "parameters": [
           {
-            "name": "model-version",
-            "in": "query",
-            "description": "(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
-            "type": "string"
+            "$ref": "#/parameters/ModelVersion"
           },
           {
-            "name": "showStats",
-            "in": "query",
-            "description": "(Optional) if set to true, response will contain input and document level statistics.",
-            "type": "boolean"
+            "$ref": "#/parameters/ShowStats"
           },
           {
-            "in": "body",
-            "name": "input",
-            "description": "Collection of documents to analyze.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MultiLanguageBatchInput"
-            }
+            "$ref": "#/parameters/MultiLanguageInput"
+          },
+          {
+            "$ref": "#/parameters/StringIndexType"
           }
         ],
         "responses": {
@@ -202,7 +173,7 @@
           "default": {
             "description": "Error Response",
             "schema": {
-              "$ref": "#/definitions/TextAnalyticsError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -229,25 +200,13 @@
         ],
         "parameters": [
           {
-            "name": "model-version",
-            "in": "query",
-            "description": "(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
-            "type": "string"
+            "$ref": "#/parameters/ModelVersion"
           },
           {
-            "name": "showStats",
-            "in": "query",
-            "description": "(Optional) if set to true, response will contain input and document level statistics.",
-            "type": "boolean"
+            "$ref": "#/parameters/ShowStats"
           },
           {
-            "in": "body",
-            "name": "input",
-            "description": "Collection of documents to analyze. Documents can now contain a language field to indicate the text language",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MultiLanguageBatchInput"
-            }
+            "$ref": "#/parameters/MultiLanguageInput"
           }
         ],
         "responses": {
@@ -260,7 +219,7 @@
           "default": {
             "description": "Error Response",
             "schema": {
-              "$ref": "#/definitions/TextAnalyticsError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -287,25 +246,13 @@
         ],
         "parameters": [
           {
-            "name": "model-version",
-            "in": "query",
-            "description": "(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
-            "type": "string"
+            "$ref": "#/parameters/ModelVersion"
           },
           {
-            "name": "showStats",
-            "in": "query",
-            "description": "(Optional) if set to true, response will contain input and document level statistics.",
-            "type": "boolean"
+            "$ref": "#/parameters/ShowStats"
           },
           {
-            "in": "body",
-            "name": "input",
-            "description": "Collection of documents to analyze.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/LanguageBatchInput"
-            }
+            "$ref": "#/parameters/LanguageInput"
           }
         ],
         "responses": {
@@ -318,7 +265,7 @@
           "default": {
             "description": "Error Response",
             "schema": {
-              "$ref": "#/definitions/TextAnalyticsError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -345,16 +292,10 @@
         ],
         "parameters": [
           {
-            "name": "model-version",
-            "in": "query",
-            "description": "(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
-            "type": "string"
+            "$ref": "#/parameters/ModelVersion"
           },
           {
-            "name": "showStats",
-            "in": "query",
-            "description": "(Optional) if set to true, response will contain input and document level statistics.",
-            "type": "boolean"
+            "$ref": "#/parameters/ShowStats"
           },
           {
             "name": "opinionMining",
@@ -363,13 +304,10 @@
             "type": "boolean"
           },
           {
-            "in": "body",
-            "name": "input",
-            "description": "Collection of documents to analyze.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MultiLanguageBatchInput"
-            }
+            "$ref": "#/parameters/MultiLanguageInput"
+          },
+          {
+            "$ref": "#/parameters/StringIndexType"
           }
         ],
         "responses": {
@@ -382,7 +320,7 @@
           "default": {
             "description": "Error Response",
             "schema": {
-              "$ref": "#/definitions/TextAnalyticsError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -452,6 +390,19 @@
         }
       }
     },
+    "ErrorResponse": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "type": "object",
+          "description": "Document Error.",
+          "$ref": "#/definitions/TextAnalyticsError"
+        }
+      }
+    },
     "TextAnalyticsError": {
       "type": "object",
       "required": [
@@ -462,14 +413,14 @@
         "code": {
           "type": "string",
           "enum": [
-            "invalidRequest",
-            "invalidArgument",
-            "internalServerError",
-            "serviceUnavailable"
+            "InvalidRequest",
+            "InvalidArgument",
+            "InternalServerError",
+            "ServiceUnavailable"
           ],
           "x-ms-enum": {
             "name": "ErrorCodeValue",
-            "modelAsString": false
+            "modelAsString": true
           },
           "description": "Error code."
         },
@@ -509,7 +460,7 @@
           ],
           "x-ms-enum": {
             "name": "WarningCodeValue",
-            "modelAsString": false
+            "modelAsString": true
           },
           "description": "Error code."
         },
@@ -533,19 +484,19 @@
         "code": {
           "type": "string",
           "enum": [
-            "invalidParameterValue",
-            "invalidRequestBodyFormat",
-            "emptyRequest",
-            "missingInputRecords",
-            "invalidDocument",
-            "modelVersionIncorrect",
-            "invalidDocumentBatch",
-            "unsupportedLanguageCode",
-            "invalidCountryHint"
+            "InvalidParameterValue",
+            "InvalidRequestBodyFormat",
+            "EmptyRequest",
+            "MissingInputRecords",
+            "InvalidDocument",
+            "ModelVersionIncorrect",
+            "InvalidDocumentBatch",
+            "UnsupportedLanguageCode",
+            "InvalidCountryHint"
           ],
           "x-ms-enum": {
             "name": "InnerErrorCodeValue",
-            "modelAsString": false
+            "modelAsString": true
           },
           "description": "Error code."
         },
@@ -734,9 +685,7 @@
         "sentiment",
         "confidenceScores",
         "offset",
-        "length",
-        "aspects",
-        "opinions"
+        "length"
       ],
       "properties": {
         "text": {
@@ -804,6 +753,10 @@
             "mixed",
             "negative"
           ],
+          "x-ms-enum": {
+            "name": "TokenSentimentValue",
+            "modelAsString": false
+          },
           "description": "Aspect level sentiment for the aspect in the sentence."
         },
         "confidenceScores": {
@@ -851,6 +804,10 @@
             "mixed",
             "negative"
           ],
+          "x-ms-enum": {
+            "name": "TokenSentimentValue",
+            "modelAsString": false
+          },
           "description": "Opinion level sentiment for the aspect in the sentence."
         },
         "confidenceScores": {
@@ -890,6 +847,10 @@
             "opinion",
             "aspect"
           ],
+          "x-ms-enum": {
+            "name": "AspectRelationType",
+            "modelAsString": false
+          },
           "description": "The type related to the aspect."
         },
         "ref": {
@@ -1281,7 +1242,7 @@
       "type": "object",
       "required": [
         "id",
-        "detectedLanguages",
+        "detectedLanguage",
         "warnings"
       ],
       "properties": {
@@ -1289,12 +1250,9 @@
           "type": "string",
           "description": "Unique, non-empty document identifier."
         },
-        "detectedLanguages": {
-          "type": "array",
-          "description": "A list of extracted languages.",
-          "items": {
-            "$ref": "#/definitions/DetectedLanguage"
-          }
+        "detectedLanguage": {
+          "description": "Detected Language.",
+          "$ref": "#/definitions/DetectedLanguage"
         },
         "warnings": {
           "type": "array",
@@ -1342,6 +1300,73 @@
       "type": "string",
       "in": "path",
       "x-ms-skip-url-encoding": true
+    },
+    "StringIndexType": {
+      "name": "stringIndexType",
+      "in": "query",
+      "type": "string",
+      "description": "(Optional) Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets",
+      "default": "TextElements_v8",
+      "enum": [
+        "TextElements_v8",
+        "UnicodeCodePoint",
+        "Utf16CodeUnit"
+      ],
+      "x-ms-enum": {
+        "name": "StringIndexType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "TextElements_v8",
+            "description": "Returned offset and length values will correspond to TextElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo."
+          },
+          {
+            "value": "UnicodeCodePoint",
+            "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that support Unicode, for example Python."
+          },
+          {
+            "value": "Utf16CodeUnit",
+            "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "ShowStats": {
+      "name": "showStats",
+      "in": "query",
+      "description": "(Optional) if set to true, response will contain request and document level statistics.",
+      "type": "boolean",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "ModelVersion": {
+      "name": "model-version",
+      "in": "query",
+      "description": "(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
+      "type": "string",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "MultiLanguageInput": {
+      "in": "body",
+      "name": "input",
+      "description": "Collection of documents to analyze.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/MultiLanguageBatchInput"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "LanguageInput": {
+      "in": "body",
+      "name": "input",
+      "description": "Collection of documents to analyze for language endpoint.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/LanguageBatchInput"
+      },
+      "x-ms-parameter-location": "method"
     }
   }
 }

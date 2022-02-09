@@ -1,0 +1,452 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Mixed Reality",
+    "description": "Mixed Reality Resource Provider Object Anchors Resource API",
+    "version": "2021-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MixedReality/objectAnchorsAccounts": {
+      "get": {
+        "operationId": "ObjectAnchorsAccounts_ListBySubscription",
+        "tags": [
+          "Resource",
+          "Proxy"
+        ],
+        "description": "List Object Anchors Accounts by Subscription",
+        "x-ms-examples": {
+          "List object anchors accounts by subscription": {
+            "$ref": "./examples/object-anchors/GetBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ObjectAnchorsAccountPage"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/objectAnchorsAccounts": {
+      "get": {
+        "operationId": "ObjectAnchorsAccounts_ListByResourceGroup",
+        "tags": [
+          "Resource"
+        ],
+        "description": "List Resources by Resource Group",
+        "x-ms-examples": {
+          "List object anchors accounts by resource group": {
+            "$ref": "./examples/object-anchors/GetByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ObjectAnchorsAccountPage"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/objectAnchorsAccounts/{accountName}": {
+      "delete": {
+        "operationId": "ObjectAnchorsAccounts_Delete",
+        "tags": [
+          "Resource"
+        ],
+        "description": "Delete an Object Anchors Account.",
+        "x-ms-examples": {
+          "Delete object anchors account": {
+            "$ref": "./examples/object-anchors/Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "ObjectAnchorsAccounts_Get",
+        "tags": [
+          "Resource"
+        ],
+        "description": "Retrieve an Object Anchors Account.",
+        "x-ms-examples": {
+          "Get object anchors account": {
+            "$ref": "./examples/object-anchors/Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ObjectAnchorsAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "ObjectAnchorsAccounts_Update",
+        "tags": [
+          "Resource"
+        ],
+        "description": "Updating an Object Anchors Account",
+        "x-ms-examples": {
+          "Update object anchors account": {
+            "$ref": "./examples/object-anchors/Patch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/objectAnchorsAccountParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ObjectAnchorsAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "ObjectAnchorsAccounts_Create",
+        "tags": [
+          "Resource"
+        ],
+        "description": "Creating or Updating an object anchors Account.",
+        "x-ms-examples": {
+          "Create object anchors account": {
+            "$ref": "./examples/object-anchors/Put.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/objectAnchorsAccountParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ObjectAnchorsAccount"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ObjectAnchorsAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/objectAnchorsAccounts/{accountName}/listKeys": {
+      "post": {
+        "operationId": "ObjectAnchorsAccounts_ListKeys",
+        "tags": [
+          "Key"
+        ],
+        "description": "List Both of the 2 Keys of an object anchors Account",
+        "x-ms-examples": {
+          "List object anchors account key": {
+            "$ref": "./examples/object-anchors/ListKeys.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./common.json#/definitions/AccountKeys"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/objectAnchorsAccounts/{accountName}/regenerateKeys": {
+      "post": {
+        "operationId": "ObjectAnchorsAccounts_RegenerateKeys",
+        "tags": [
+          "Key"
+        ],
+        "description": "Regenerate specified Key of an object anchors Account",
+        "x-ms-examples": {
+          "Regenerate object anchors account keys": {
+            "$ref": "./examples/object-anchors/RegenerateKey.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/accountKeyRegenerateParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./common.json#/definitions/AccountKeys"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ObjectAnchorsAccount": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "ObjectAnchorsAccount Response.",
+      "type": "object",
+      "properties": {
+        "identity": {
+          "allOf": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity"
+            }
+          ]
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Property bag.",
+          "$ref": "./common.json#/definitions/MixedRealityAccountProperties"
+        },
+        "plan": {
+          "description": "The plan associated with this account",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity"
+        },
+        "sku": {
+          "description": "The sku associated with this account",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Sku"
+        },
+        "kind": {
+          "description": "The kind of account, if supported",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Sku"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "description": "The system metadata related to an object anchors account.",
+          "readOnly": true
+        }
+      }
+    },
+    "ObjectAnchorsAccountPage": {
+      "description": "Result of the request to get resource collection. It contains a list of resources and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ObjectAnchorsAccount"
+          },
+          "description": "List of resources supported by the Resource Provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of resource list results if there are any."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "objectAnchorsAccountParameter": {
+      "name": "objectAnchorsAccount",
+      "description": "Object Anchors Account parameter.",
+      "in": "body",
+      "schema": {
+        "$ref": "#/definitions/ObjectAnchorsAccount"
+      },
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

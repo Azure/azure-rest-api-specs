@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "subscriptionId": "01234567-89ab-4def-0123-456789abcdef",
+    "resourceGroupName": "ExampleResourceGroup",
+    "workspaceName": "ExampleWorkspace",
+    "privateEndpointConnectionName": "ExamplePrivateEndpointConnection",
+    "api-version": "2021-06-01",
+    "request": {
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "status": "Approved",
+          "description": "Approved by abc@example.com"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/privateEndpointConnections/ExamplePrivateEndpointConnection",
+        "name": "sql",
+        "type": "Microsoft.Synapse/workspaces/privateEndpointConnections",
+        "properties": {
+          "provisioningState": "Provisioning",
+          "privateEndpoint": {
+            "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Network/privateEndpoints/ExamplePrivateEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "status": "Approved",
+            "description": "Auto-approved",
+            "actionsRequired": "None"
+          }
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/privateEndpointConnections/ExamplePrivateEndpointConnection",
+        "name": "sql",
+        "type": "Microsoft.Synapse/workspaces/privateEndpointConnections",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "privateEndpoint": {
+            "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Network/privateEndpoints/ExamplePrivateEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "status": "Approved",
+            "description": "Auto-approved",
+            "actionsRequired": "None"
+          }
+        }
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "Error message"
+        }
+      }
+    }
+  }
+}

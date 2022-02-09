@@ -27,6 +27,49 @@
               "provider": "Azure Storage Cache",
               "resource": "Caches"
             }
+          },
+          {
+            "origin": "system",
+            "name": "Microsoft.StorageCache/caches/providers/Microsoft.Insights/metricDefinitions/read",
+            "isDataAction": false,
+            "display": {
+              "operation": "Get Cache Metric Definitions",
+              "provider": "Microsoft Azure HPC Cache",
+              "resource": "StorageCache Metric Definitions",
+              "description": "Reads Cache Metric Definitions."
+            },
+            "properties": {
+              "serviceSpecification": {
+                "metricSpecifications": [
+                  {
+                    "name": "ClientIOPS",
+                    "displayName": "Total Client IOPS",
+                    "displayDescription": "The rate of client file operations processed by the Cache.",
+                    "unit": "Count",
+                    "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Minimum",
+                      "Maximum",
+                      "Average"
+                    ],
+                    "metricClass": "Transactions"
+                  },
+                  {
+                    "name": "ClientLatency",
+                    "displayName": "Average Client Latency",
+                    "displayDescription": "Average latency of client file operations to the Cache.",
+                    "unit": "Milliseconds",
+                    "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Minimum",
+                      "Maximum",
+                      "Average"
+                    ],
+                    "metricClass": "Latency"
+                  }
+                ]
+              }
+            }
           }
         ]
       }

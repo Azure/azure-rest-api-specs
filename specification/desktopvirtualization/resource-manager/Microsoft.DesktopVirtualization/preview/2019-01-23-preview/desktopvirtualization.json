@@ -320,58 +320,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/userApplicationGroupAssignments": {
-      "get": {
-        "tags": [
-          "ApplicationGroup"
-        ],
-        "operationId": "ApplicationGroupAssignments_WorkspaceLevelList",
-        "description": "List application group that user can use.",
-        "x-ms-examples": {
-          "ApplicationGroupAssignment_WorkspaceLevelList": {
-            "$ref": "./examples/ApplicationGroupAssignment_WorkspaceLevelList.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData filter expression. Valid properties for filtering are applicationGroupType."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved user application group assignments in workspace.",
-            "schema": {
-              "$ref": "#/definitions/ApplicationGroupList"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/applicationGroups/{applicationGroupName}": {
       "get": {
         "tags": [
@@ -1598,61 +1546,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts/{sessionHostName}/activeApplications": {
-      "get": {
-        "tags": [
-          "Application"
-        ],
-        "operationId": "ActiveApplications_ListBySessionHost",
-        "description": "List applications for the given session host.",
-        "x-ms-examples": {
-          "ActiveApplications_List": {
-            "$ref": "./examples/ActiveApplication_ListBySessionHost.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/HostPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SessionHostNameParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData filter expression. Valid properties for filtering are userprincipalname and sessionstate."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved active applications in session host.",
-            "schema": {
-              "$ref": "#/definitions/ApplicationList"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts/{sessionHostName}/userSessions/{userSessionId}": {
       "get": {
         "tags": [
@@ -1961,63 +1854,12 @@
         }
       }
     },
-    "Resource": {
-      "description": "ARM resource.",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource ID."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "TrackedResource": {
-      "description": "ARM tracked top level resource.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "Resource location."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
-    },
     "Workspace": {
       "type": "object",
       "description": "Represents a Workspace definition.",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -2109,8 +1951,11 @@
       "description": "Represents a ApplicationGroup definition.",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
+      ],
+      "required": [
+        "properties"
       ],
       "properties": {
         "properties": {
@@ -2123,6 +1968,10 @@
     "ApplicationGroupProperties": {
       "description": "Schema for ApplicationGroup properties.",
       "type": "object",
+      "required": [
+        "hostPoolArmPath",
+        "applicationGroupType"
+      ],
       "properties": {
         "description": {
           "type": "string",
@@ -2162,7 +2011,7 @@
       "description": "ApplicationGroup properties that can be patched.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -2215,8 +2064,11 @@
       "description": "Represents a HostPool definition.",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
+      ],
+      "required": [
+        "properties"
       ],
       "properties": {
         "properties": {
@@ -2229,6 +2081,11 @@
     "HostPoolProperties": {
       "description": "Properties of HostPool.",
       "type": "object",
+      "required": [
+        "hostPoolType",
+        "loadBalancerType",
+        "preferredAppGroupType"
+      ],
       "properties": {
         "friendlyName": {
           "type": "string",
@@ -2313,6 +2170,20 @@
         "ssoContext": {
           "type": "string",
           "description": "Path to keyvault containing ssoContext secret."
+        },
+        "preferredAppGroupType": {
+          "enum": [
+            "None",
+            "Desktop",
+            "RailApplications"
+          ],
+          "x-ms-enum": {
+            "name": "PreferredAppGroupType",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "The type of preferred application group type, default to Desktop Application Group",
+          "x-nullable": false
         }
       }
     },
@@ -2321,7 +2192,7 @@
       "description": "HostPool properties that can be patched.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -2396,6 +2267,19 @@
         "ssoContext": {
           "type": "string",
           "description": "Path to keyvault containing ssoContext secret."
+        },
+        "preferredAppGroupType": {
+          "enum": [
+            "None",
+            "Desktop",
+            "RailApplications"
+          ],
+          "x-ms-enum": {
+            "name": "PreferredAppGroupType",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "The type of preferred application group type, default to Desktop Application Group"
         }
       }
     },
@@ -2466,8 +2350,11 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
+      ],
+      "required": [
+        "properties"
       ],
       "properties": {
         "properties": {
@@ -2480,6 +2367,9 @@
     "ApplicationProperties": {
       "description": "Schema for Application properties.",
       "type": "object",
+      "required": [
+        "commandLineSetting"
+      ],
       "properties": {
         "description": {
           "type": "string",
@@ -2622,7 +2512,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -2741,7 +2631,7 @@
       "description": "Represents a StartMenuItem definition.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -2776,7 +2666,7 @@
       "description": "Represents a SessionHost definition.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -2807,6 +2697,16 @@
         "allowNewSession": {
           "type": "boolean",
           "description": "Allow a new session."
+        },
+        "virtualMachineId": {
+          "type": "string",
+          "description": "Virtual Machine Id of SessionHost's underlying virtual machine.",
+          "readOnly": true
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Resource Id of SessionHost's underlying virtual machine.",
+          "readOnly": true
         },
         "assignedUser": {
           "type": "string",
@@ -2874,7 +2774,7 @@
       "description": "SessionHost properties that can be patched.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -2923,7 +2823,7 @@
       "description": "Represents a UserSession definition.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ],
       "properties": {

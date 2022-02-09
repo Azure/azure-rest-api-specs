@@ -12,5 +12,14 @@ csharp:
   clear-output-folder: true
   client-side-validation: false
   namespace: Microsoft.Kubernetes
-  output-folder: $(csharp-sdks-folder)/Kubernetes/Management.Kubernetes/Generated
+  output-folder: $(csharp-sdks-folder)/hybridkubernetes/Microsoft.Azure.Management.Kubernetes/src/Generated
+
+directive: 
+  - reason: Altering the incorrect null check for required fields in an optional body in listClusterUserCredentials
+    where: $
+    transform: > 
+      if( /AuthenticationDetails clientAuthenticationDetails/g.exec( $ ) ) {
+        $ = $.replace( /(if \(value == null\)[\s]+{[\s]+throw new ValidationException\(ValidationRules.CannotBeNull, "value"\);[\s]+}[\s]+)AuthenticationDetails/g, "AuthenticationDetails" );
+      } 
+  
 ```

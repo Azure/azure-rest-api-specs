@@ -79,8 +79,11 @@
               "$ref": "#/definitions/FileContainer"
             }
           },
-          "404": {
-            "description": "Not Found"
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
           }
         }
       },
@@ -155,8 +158,14 @@
           "200": {
             "description": "OK"
           },
-          "404": {
-            "description": "Not found"
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
           }
         }
       }
@@ -268,6 +277,16 @@
     },
     "FileContainerParameters": {
       "description": "Parameters for creating a new file container.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Specifies the file container body",
+          "$ref": "#/definitions/FileContainerBody"
+        }
+      }
+    },
+    "FileContainerBody": {
+      "description": "Body for creating a new file container.",
       "type": "object",
       "properties": {
         "postCopyAction": {

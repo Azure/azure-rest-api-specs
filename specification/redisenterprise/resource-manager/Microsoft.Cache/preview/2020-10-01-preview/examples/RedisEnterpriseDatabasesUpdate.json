@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "databaseName": "default",
+    "clusterName": "cache1",
+    "resourceGroupName": "rg1",
+    "api-version": "2020-10-01-preview",
+    "subscriptionId": "subid",
+    "parameters": {
+      "properties": {
+        "clientProtocol": "Encrypted",
+        "evictionPolicy": "AllKeysLRU",
+        "modules": [
+          {
+            "name": "RediSearch"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/databases/default",
+        "name": "cache1/default",
+        "type": "Microsoft.Cache/redisEnterprise/databases",
+        "properties": {
+          "provisioningState": "Updating",
+          "resourceState": "Updating",
+          "clientProtocol": "Encrypted",
+          "clusteringPolicy": "OSSCluster",
+          "evictionPolicy": "AllKeysLRU",
+          "port": 10000,
+          "modules": [
+            {
+              "name": "RediSearch",
+              "args": "",
+              "version": "1.0.0"
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Cache/...pathToOperationStatus...",
+        "Location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Cache/...pathToOperationResult..."
+      }
+    }
+  }
+}

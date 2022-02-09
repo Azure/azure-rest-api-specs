@@ -91,6 +91,38 @@
       "x-ms-parameter-location": "method",
       "required": true
     },
+    "serverCollectorName": {
+      "name": "serverCollectorName",
+      "description": "Unique name of a Server collector within a project.",
+      "type": "string",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "required": true
+    },
+    "importCollectorName": {
+      "name": "importCollectorName",
+      "description": "Unique name of a Import collector within a project.",
+      "type": "string",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "required": true
+    },
+    "privateLinkResourceName": {
+      "name": "privateLinkResourceName",
+      "description": "Unique name of a private link resource within a project.",
+      "type": "string",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "required": true
+    },
+    "privateEndpointConnectionName": {
+      "name": "privateEndpointConnectionName",
+      "description": "Unique name of a private endpoint connection within a project.",
+      "type": "string",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "required": true
+    },
     "assessmentOptionsName": {
       "name": "assessmentOptionsName",
       "description": "Name of the assessment options. The only name accepted in default.",
@@ -108,12 +140,6 @@
       "enum": [
         "2019-10-01"
       ]
-    },
-    "acceptLanguage": {
-      "description": "Standard request header. Used by service to respond to client in appropriate language.",
-      "name": "Accept-Language",
-      "type": "string",
-      "in": "header"
     }
   },
   "securityDefinitions": {
@@ -243,6 +269,22 @@
           "x-nullable": true,
           "readOnly": true
         },
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "This value can be set to 'enabled' to avoid breaking changes on existing customer resources and templates. If set to 'disabled', traffic over public interface is not allowed, and private endpoint connections would be the exclusive access method."
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "description": "The list of private endpoint connections to the project.",
+          "readOnly": true
+        },
+        "customerStorageAccountArmId": {
+          "type": "string",
+          "description": "The ARM id of the storage account used for interactions when public access is disabled."
+        },
         "provisioningState": {
           "type": "string",
           "enum": [
@@ -347,6 +389,10 @@
           "format": "date-time",
           "description": "Time when this group was last updated. Date-Time represented in ISO-8601 format.",
           "readOnly": true
+        },
+        "groupType": {
+          "type": "string",
+          "description": "The type of group."
         }
       }
     },
@@ -1800,6 +1846,9 @@
           "items": {
             "$ref": "#/definitions/Project"
           }
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -1922,6 +1971,7 @@
     },
     "HyperVCollector": {
       "type": "object",
+      "x-ms-azure-resource": true,
       "properties": {
         "eTag": {
           "type": "string"
@@ -1987,8 +2037,25 @@
         }
       }
     },
+    "ImportCollectorProperties": {
+      "type": "object",
+      "properties": {
+        "discoverySiteId": {
+          "type": "string"
+        },
+        "createdTimestamp": {
+          "type": "string",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "VMwareCollector": {
       "type": "object",
+      "x-ms-azure-resource": true,
       "properties": {
         "eTag": {
           "type": "string"
@@ -2007,6 +2074,54 @@
         },
         "properties": {
           "$ref": "#/definitions/CollectorProperties"
+        }
+      }
+    },
+    "ServerCollector": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "eTag": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/CollectorProperties"
+        }
+      }
+    },
+    "ImportCollector": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "eTag": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ImportCollectorProperties"
         }
       }
     },
@@ -2032,6 +2147,32 @@
           "description": "List of VMware collectors.",
           "items": {
             "$ref": "#/definitions/VMwareCollector"
+          }
+        }
+      }
+    },
+    "ServerCollectorList": {
+      "type": "object",
+      "description": "List of Server collectors.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Server collectors.",
+          "items": {
+            "$ref": "#/definitions/ServerCollector"
+          }
+        }
+      }
+    },
+    "ImportCollectorList": {
+      "type": "object",
+      "description": "List of Import collectors.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Import collectors.",
+          "items": {
+            "$ref": "#/definitions/ImportCollector"
           }
         }
       }
@@ -2170,6 +2311,190 @@
           }
         }
       }
+    },
+    "PrivateEndpointConnectionCollection": {
+      "type": "object",
+      "description": "A collection of private endpoint connections for a project.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "A list of private endpoint connections for a project.",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "required": [
+        "properties"
+      ],
+      "description": "A private endpoint connection for a project.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the private endpoint endpoint connection.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the object = [Microsoft.Migrate/assessmentProjects/privateEndpointConnections].",
+          "readOnly": true
+        },
+        "eTag": {
+          "type": "string",
+          "description": "For optimistic concurrency control."
+        },
+        "id": {
+          "type": "string",
+          "description": "Path reference to this private endpoint endpoint connection. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/privateEndpointConnections/{privateEndpointConnectionName}",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Properties of the private endpoint endpoint connection.",
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties"
+        }
+      }
+    },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "description": "Private endpoint connection properties.",
+      "properties": {
+        "provisioningState": {
+          "enum": [
+            "Accepted",
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "description": "Indicates whether there is an ongoing operation on the private endpoint.",
+          "readOnly": true
+        },
+        "privateEndpoint": {
+          "description": "ARM id for the private endpoint resource corresponding to the connection.",
+          "$ref": "#/definitions/ResourceId",
+          "readOnly": true
+        },
+        "privateLinkServiceConnectionState": {
+          "description": "State of the private endpoint connection.",
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
+        }
+      }
+    },
+    "ResourceId": {
+      "type": "object",
+      "description": "ARM id for a resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "type": "object",
+      "description": "State of a private endpoint connection.",
+      "properties": {
+        "status": {
+          "enum": [
+            "Approved",
+            "Pending",
+            "Rejected",
+            "Disconnected"
+          ],
+          "type": "string",
+          "description": "Connection status of the private endpoint connection."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the private endpoint connection."
+        },
+        "actionsRequired": {
+          "type": "string",
+          "description": "Actions required on the private endpoint connection."
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "description": "A private link resource for a project for which a private endpoint can be created.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the private link resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the object = [Microsoft.Migrate/assessmentProjects/privateLinkResources].",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "description": "Path reference to this private link resource. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/privateLinkResources/{privateLinkResourceName}",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Properties of the private link resource.",
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResourceProperties": {
+      "description": "Properties of a private link resource.",
+      "type": "object",
+      "properties": {
+        "requiredMembers": {
+          "description": "The private link resource required member names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "Required DNS zone names of the the private link resource."
+        },
+        "groupId": {
+          "description": "The private link resource group id.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResourceCollection": {
+      "type": "object",
+      "description": "A list of private link resources",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     }
   },
   "paths": {
@@ -2184,9 +2509,6 @@
           },
           {
             "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           }
         ],
         "responses": {
@@ -2233,9 +2555,6 @@
           },
           {
             "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           }
         ],
         "responses": {
@@ -2285,9 +2604,6 @@
           },
           {
             "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           }
         ],
         "responses": {
@@ -2332,9 +2648,6 @@
           },
           {
             "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "name": "project",
@@ -2401,9 +2714,6 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "$ref": "#/parameters/acceptLanguage"
-          },
-          {
             "name": "project",
             "description": "Updated project object.",
             "in": "body",
@@ -2454,9 +2764,6 @@
           },
           {
             "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           }
         ],
         "responses": {
@@ -2490,7 +2797,7 @@
       "get": {
         "summary": "Get all available options for the properties of an assessment on a project.",
         "description": "Get all available options for the properties of an assessment on a project.",
-        "operationId": "Project_AssessmentOptions",
+        "operationId": "Projects_AssessmentOptions",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2506,9 +2813,6 @@
           },
           {
             "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           }
         ],
         "responses": {
@@ -2542,7 +2846,7 @@
       "get": {
         "summary": "Gets list of all available options for the properties of an assessment on a project.",
         "description": "Gets list of all available options for the properties of an assessment on a project.",
-        "operationId": "Project_AssessmentOptionsList",
+        "operationId": "Projects_AssessmentOptionsList",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2555,9 +2859,6 @@
           },
           {
             "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           }
         ],
         "responses": {
@@ -2581,7 +2882,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         },
         "x-ms-examples": {
           "AssessmentOptions_Get": {
@@ -2604,9 +2905,6 @@
           },
           {
             "$ref": "#/parameters/projectName"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2661,9 +2959,6 @@
             "$ref": "#/parameters/machineName"
           },
           {
-            "$ref": "#/parameters/acceptLanguage"
-          },
-          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -2710,9 +3005,6 @@
             "$ref": "#/parameters/projectName"
           },
           {
-            "$ref": "#/parameters/acceptLanguage"
-          },
-          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -2737,7 +3029,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         },
         "x-ms-examples": {
           "Groups_ListByProject": {
@@ -2763,9 +3055,6 @@
           },
           {
             "$ref": "#/parameters/groupName"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2813,9 +3102,6 @@
           },
           {
             "$ref": "#/parameters/groupName"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2885,9 +3171,6 @@
             "$ref": "#/parameters/groupName"
           },
           {
-            "$ref": "#/parameters/acceptLanguage"
-          },
-          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -2940,9 +3223,6 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "$ref": "#/parameters/acceptLanguage"
-          },
-          {
             "name": "groupUpdateProperties",
             "description": "Machines list to be added or removed from group.",
             "in": "body",
@@ -2970,6 +3250,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Groups_UpdateMachines": {
+            "$ref": "./examples/Groups_UpdateMachines.json"
+          }
         }
       }
     },
@@ -2990,9 +3275,6 @@
           },
           {
             "$ref": "#/parameters/groupName"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -3019,7 +3301,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         },
         "x-ms-examples": {
           "Assessments_ListByGroup": {
@@ -3044,9 +3326,6 @@
             "$ref": "#/parameters/projectName"
           },
           {
-            "$ref": "#/parameters/acceptLanguage"
-          },
-          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -3071,7 +3350,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         },
         "x-ms-examples": {
           "Assessments_ListByProject": {
@@ -3100,9 +3379,6 @@
           },
           {
             "$ref": "#/parameters/assessmentName"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -3153,9 +3429,6 @@
           },
           {
             "$ref": "#/parameters/assessmentName"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -3228,9 +3501,6 @@
             "$ref": "#/parameters/assessmentName"
           },
           {
-            "$ref": "#/parameters/acceptLanguage"
-          },
-          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -3284,9 +3554,6 @@
           },
           {
             "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           }
         ],
         "responses": {
@@ -3336,9 +3603,6 @@
           },
           {
             "$ref": "#/parameters/assessmentName"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -3399,9 +3663,6 @@
             "$ref": "#/parameters/assessedMachineName"
           },
           {
-            "$ref": "#/parameters/acceptLanguage"
-          },
-          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -3448,9 +3709,6 @@
             "$ref": "#/parameters/projectName"
           },
           {
-            "$ref": "#/parameters/acceptLanguage"
-          },
-          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -3475,7 +3733,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         },
         "x-ms-examples": {
           "HyperVCollectors_ListByProject": {
@@ -3501,9 +3759,6 @@
           },
           {
             "$ref": "#/parameters/hyperVCollectorName"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -3551,9 +3806,6 @@
           },
           {
             "$ref": "#/parameters/hyperVCollectorName"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -3623,9 +3875,6 @@
             "$ref": "#/parameters/hyperVCollectorName"
           },
           {
-            "$ref": "#/parameters/acceptLanguage"
-          },
-          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -3656,6 +3905,218 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/servercollectors": {
+      "get": {
+        "summary": "Get a list of Server collector.",
+        "description": "Get a list of Server collector.",
+        "operationId": "ServerCollectors_ListByProject",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Returns list of Server collectors.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ServerCollectorList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "ServerCollectors_ListByProject": {
+            "$ref": "./examples/ServerCollectors_ListByProject.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/servercollectors/{serverCollectorName}": {
+      "get": {
+        "summary": "Get a Server collector.",
+        "description": "Get a Server collector.",
+        "operationId": "ServerCollectors_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/serverCollectorName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Returns the specific Server collector.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ServerCollector"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServerCollectors_Get": {
+            "$ref": "./examples/ServerCollectors_Get.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Create or Update Server collector.",
+        "description": "Create or Update Server collector",
+        "operationId": "ServerCollectors_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/serverCollectorName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "collectorBody",
+            "description": "New or Updated Server collector.",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ServerCollector"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Existing Server collector.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ServerCollector"
+            }
+          },
+          "201": {
+            "description": "Created. New Server collector was created.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ServerCollector"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServerCollectors_Create": {
+            "$ref": "./examples/ServerCollectors_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes Server collector from the project.",
+        "description": "Delete a Server collector from the project.",
+        "operationId": "ServerCollectors_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/serverCollectorName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Deleted the Server collector.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            }
+          },
+          "204": {
+            "description": "No content. No Server collector with specified name was found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServerCollectors_Delete": {
+            "$ref": "./examples/ServerCollectors_Delete.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/vmwarecollectors": {
       "get": {
         "summary": "Get a list of VMware collector.",
@@ -3670,9 +4131,6 @@
           },
           {
             "$ref": "#/parameters/projectName"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -3699,7 +4157,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         },
         "x-ms-examples": {
           "VMwareCollectors_ListByProject": {
@@ -3725,9 +4183,6 @@
           },
           {
             "$ref": "#/parameters/vmWareCollectorName"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -3775,9 +4230,6 @@
           },
           {
             "$ref": "#/parameters/vmWareCollectorName"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -3847,9 +4299,6 @@
             "$ref": "#/parameters/vmWareCollectorName"
           },
           {
-            "$ref": "#/parameters/acceptLanguage"
-          },
-          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -3880,6 +4329,523 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/importcollectors": {
+      "get": {
+        "summary": "Get a list of Import collector.",
+        "description": "Get a list of Import collector.",
+        "operationId": "ImportCollectors_ListByProject",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Returns list of Import collectors.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ImportCollectorList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "ImportCollectors_ListByProject": {
+            "$ref": "./examples/ImportCollectors_ListByProject.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/importcollectors/{importCollectorName}": {
+      "get": {
+        "summary": "Get a Import collector.",
+        "description": "Get a Import collector.",
+        "operationId": "ImportCollectors_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/importCollectorName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Returns the specific Import collector.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ImportCollector"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImportCollectors_Get": {
+            "$ref": "./examples/ImportCollectors_Get.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Create or Update Import collector.",
+        "description": "Create or Update Import collector",
+        "operationId": "ImportCollectors_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/importCollectorName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "collectorBody",
+            "description": "New or Updated Import collector.",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ImportCollector"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Existing Import collector.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ImportCollector"
+            }
+          },
+          "201": {
+            "description": "Created. New Import collector was created.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ImportCollector"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImportCollectors_Create": {
+            "$ref": "./examples/ImportCollectors_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes Import collector from the project.",
+        "description": "Delete a Import collector from the project.",
+        "operationId": "ImportCollectors_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/importCollectorName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Deleted the Import collector.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            }
+          },
+          "204": {
+            "description": "No content. No Import collector with specified name was found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImportCollectors_Delete": {
+            "$ref": "./examples/ImportCollectors_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentprojects/{projectName}/privateEndpointConnections": {
+      "get": {
+        "summary": "Get all private endpoint connections",
+        "description": "Get all private endpoint connections in the project. Returns a json array of objects of type 'privateEndpointConnections' as specified in the Models section.",
+        "operationId": "PrivateEndpointConnection_ListByProject",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_ListByProject": {
+            "$ref": "./examples/PrivateEndpointConnections_ListByProject.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentprojects/{projectName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "summary": "Get a private endpoint connection in the project.",
+        "description": "Get information related to a specific private endpoint connection in the project. Returns a json object of type 'privateEndpointConnections' as specified in the models section.",
+        "operationId": "PrivateEndpointConnection_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/privateEndpointConnectionName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Get": {
+            "$ref": "./examples/PrivateEndpointConnections_Get.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a private endpoint connection in the project.",
+        "description": "Update a specific private endpoint connection in the project.",
+        "operationId": "PrivateEndpointConnection_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/privateEndpointConnectionName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "privateEndpointConnectionBody",
+            "in": "body",
+            "description": "New or Updated Private Endpoint Connection object.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "202": {
+            "description": "Accepted. Update request is queued for processing.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Create": {
+            "$ref": "./examples/PrivateEndpointConnections_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete the private endpoint connection",
+        "description": "Delete the private endpoint connection from the project. T.\n",
+        "operationId": "PrivateEndpointConnection_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/privateEndpointConnectionName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            }
+          },
+          "204": {
+            "description": "No content. No project with specified name was found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Delete": {
+            "$ref": "./examples/PrivateEndpointConnections_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentprojects/{projectName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "summary": "Get a specific private Link Resource.",
+        "description": "Get information related to a specific private Link Resource in the project. Returns a json object of type 'privateLinkResources' as specified in the models section.",
+        "operationId": "PrivateLinkResource_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/privateLinkResourceName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_Get": {
+            "$ref": "./examples/PrivateLinkResources_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentprojects/{projectName}/privateLinkResources": {
+      "get": {
+        "summary": "Get all private link resources",
+        "description": "Get all private link resources created in the project. Returns a json array of objects of type 'privateLinkResources' as specified in the Models section.",
+        "operationId": "PrivateLinkResource_ListByProject",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_ListByProject": {
+            "$ref": "./examples/PrivateLinkResources_ListByProject.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Migrate/operations": {
       "get": {
         "summary": "Get list of operations supported in the API.",
@@ -3894,7 +4860,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         },
         "x-ms-examples": {
           "Operations_List": {

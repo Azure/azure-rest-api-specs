@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2019-06-15-preview",
+    "version": "2020-03-31",
     "title": "Azure CDN WebApplicationFirewallManagement",
     "description": "APIs to manage web application firewall rules for Azure CDN"
   },
@@ -43,13 +43,13 @@
         "operationId": "Policies_List",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "cdn.json#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "cdn.json#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "cdn.json#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -85,16 +85,16 @@
         "operationId": "Policies_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "cdn.json#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/PolicyNameParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "cdn.json#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "cdn.json#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -125,16 +125,16 @@
         "operationId": "Policies_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "cdn.json#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/PolicyNameParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "cdn.json#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "cdn.json#/parameters/apiVersionParameter"
           },
           {
             "description": "Policy to be created.",
@@ -187,16 +187,16 @@
         "operationId": "Policies_Update",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "cdn.json#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/PolicyNameParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "cdn.json#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "cdn.json#/parameters/apiVersionParameter"
           },
           {
             "description": "CdnWebApplicationFirewallPolicy parameters to be patched.",
@@ -243,16 +243,16 @@
         "operationId": "Policies_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "cdn.json#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/PolicyNameParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "cdn.json#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "cdn.json#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -280,10 +280,10 @@
         "operationId": "ManagedRuleSets_List",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "cdn.json#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "cdn.json#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -463,10 +463,13 @@
         "defaultCustomBlockResponseStatusCode": {
           "description": "If the action type is block, this field defines the default customer overridable http response status code.",
           "type": "integer",
-          "maximum": 599,
-          "exclusiveMaximum": false,
-          "minimum": 200,
-          "exclusiveMinimum": false
+          "enum": [
+            200,
+            403,
+            405,
+            406,
+            429
+          ]
         },
         "defaultCustomBlockResponseBody": {
           "description": "If the action type is block, customer can override the response body. The body must be specified in base64 encoding.",
@@ -614,7 +617,7 @@
           }
         },
         "selector": {
-          "description": "Selector can used to match a specific key for QueryString, RequestUri, RequestHeaders or RequestBody.",
+          "description": "Selector can used to match a specific key for QueryString, Cookies, RequestHeader or PostArgs.",
           "type": "string"
         },
         "operator": {
@@ -885,20 +888,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "Azure Subscription ID.",
-      "required": true,
-      "type": "string"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Version of the API to be used with the client request. Current version is 2017-04-02."
-    },
     "PolicyNameParameter": {
       "name": "policyName",
       "in": "path",
@@ -907,17 +896,6 @@
       "maxLength": 128,
       "x-ms-parameter-location": "method",
       "description": "The name of the CdnWebApplicationFirewallPolicy."
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9_\\-\\(\\)\\.]*[^\\.]$",
-      "minLength": 1,
-      "maxLength": 80,
-      "x-ms-parameter-location": "method",
-      "description": "Name of the Resource group within the Azure subscription."
     }
   }
 }

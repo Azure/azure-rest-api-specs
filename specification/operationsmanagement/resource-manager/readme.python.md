@@ -6,22 +6,19 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 
 ``` yaml $(python)
 python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.operationsmanagement
-  package-name: azure-mgmt-operationsmanagement
-  package-version: 0.1.0
-  clear-output-folder: true
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+namespace: azure.mgmt.operationsmanagement
+package-name: azure-mgmt-operationsmanagement
+package-version: 1.0.0b1
+clear-output-folder: true
 ```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/operationsmanagement/azure-mgmt-operationsmanagement/azure/mgmt/operationsmanagement
+
+``` yaml $(python) && $(python-mode) == 'update' && $(track2)
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/operationsmanagement/azure-mgmt-operationsmanagement/azure/mgmt/operationsmanagement
 ```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/operationsmanagement/azure-mgmt-operationsmanagement
+``` yaml $(python) && $(python-mode) == 'create' && $(track2)
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/operationsmanagement/azure-mgmt-operationsmanagement
 ```
