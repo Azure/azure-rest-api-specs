@@ -44,7 +44,7 @@ directive:
 
   - suppress: R2016
     where: $.definitions.TrackedResource.required
-    reason: location is a required property for our patch calls
+    reason: we are still using PUT definition for PATCH, which has location as required property. this is existing suppression added to avoid breaking change.
 
   - suppress: DeleteOperationResponses
     reason: Per ARM Specs, async APIs must return 202 when a response is accepted.
