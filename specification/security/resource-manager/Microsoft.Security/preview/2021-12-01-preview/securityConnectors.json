@@ -758,7 +758,15 @@
               "properties": {
                 "vaType": {
                   "type": "string",
-                  "description": "The Vulnerability Assessment solution to be provisioned. Can be either 'TVM' or 'Qualys'"
+                  "description": "The Vulnerability Assessment solution to be provisioned. Can be either 'TVM' or 'Qualys'",
+                  "enum": [
+                    "Qualys",
+                    "TVM"
+                  ],
+                  "x-ms-enum": {
+                    "name": "vaType",
+                    "modelAsString": true
+                  }
                 }
               }
             }
