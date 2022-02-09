@@ -190,11 +190,11 @@
           "200": {
             "description": "OK."
           },
-          "204": {
-            "description": "No Content."
-          },
           "202": {
             "description": "Accepted."
+          },
+          "204": {
+            "description": "No Content."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -869,7 +869,10 @@
                   "readOnly": true,
                   "items": {
                     "$ref": "#/definitions/MetricSpecifications"
-                  }
+                  },
+                  "x-ms-identifiers": [
+                    "name"
+                  ]
                 },
                 "logSpecifications": {
                   "description": "The log specifications.",
@@ -877,7 +880,10 @@
                   "readOnly": true,
                   "items": {
                     "$ref": "#/definitions/LogSpecifications"
-                  }
+                  },
+                  "x-ms-identifiers": [
+                    "name"
+                  ]
                 }
               }
             }
@@ -920,7 +926,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/MetricDimensions"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -970,7 +979,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "URL to get the next set of operation list results if there are any.",
@@ -1265,6 +1277,9 @@
             "$ref": "#/definitions/IPv4FirewallRule",
             "description": "The content of firewall rule."
           },
+          "x-ms-identifiers": [
+            "firewallRuleName"
+          ],
           "description": "An array of firewall rules."
         },
         "enablePowerBIService": {
@@ -1420,6 +1435,9 @@
           "items": {
             "$ref": "#/definitions/ResourceSku"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The collection of available SKUs for new resources."
         }
       }
@@ -1433,6 +1451,9 @@
           "items": {
             "$ref": "#/definitions/SkuDetailsForExistingResource"
           },
+          "x-ms-identifiers": [
+            "sku/name"
+          ],
           "description": "The collection of available SKUs for existing resources."
         }
       }
@@ -1492,6 +1513,10 @@
           "items": {
             "$ref": "#/definitions/ErrorDetail"
           },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ],
           "description": "The error details."
         },
         "additionalInfo": {
@@ -1500,6 +1525,7 @@
           "items": {
             "$ref": "#/definitions/ErrorAdditionalInfo"
           },
+          "x-ms-identifiers": [],
           "description": "The error additional info."
         }
       }
