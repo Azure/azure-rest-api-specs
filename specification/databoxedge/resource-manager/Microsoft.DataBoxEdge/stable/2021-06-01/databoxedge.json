@@ -896,14 +896,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to update the diagnostic remote support settings."
-          },
           "200": {
             "description": "Successfully updated the diagnostic remote support settings.",
             "schema": {
               "$ref": "#/definitions/DiagnosticRemoteSupportSettings"
             }
+          },
+          "202": {
+            "description": "Accepted the request to update the diagnostic remote support settings."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -4677,7 +4677,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "x-ms-external": true
@@ -5332,6 +5333,9 @@
           "items": {
             "$ref": "#/definitions/SkuLocationInfo"
           },
+          "x-ms-identifiers": [
+            "location"
+          ],
           "readOnly": true
         },
         "costs": {
@@ -5341,6 +5345,9 @@
           "items": {
             "$ref": "#/definitions/SkuCost"
           },
+          "x-ms-identifiers": [
+            "meterId"
+          ],
           "readOnly": true
         },
         "signupOption": {
@@ -5407,6 +5414,9 @@
           "items": {
             "$ref": "#/definitions/SkuCapability"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         }
       }
@@ -5422,6 +5432,10 @@
           "items": {
             "$ref": "#/definitions/DataBoxEdgeSku"
           },
+          "x-ms-identifiers": [
+            "name",
+            "resourceType"
+          ],
           "readOnly": true
         },
         "nextLink": {
@@ -5526,7 +5540,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RemoteSupportSettings"
-          }
+          },
+          "x-ms-identifiers": [
+            "remoteApplicationType"
+          ]
         }
       }
     },
@@ -5949,7 +5966,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MountPointMap"
-          }
+          },
+          "x-ms-identifiers": [
+            "shareId"
+          ]
         },
         "ioTEdgeAgentInfo": {
           "$ref": "#/definitions/IoTEdgeAgentInfo",
@@ -6108,6 +6128,7 @@
           "items": {
             "$ref": "#/definitions/JobErrorItem"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         },
         "code": {
@@ -6250,6 +6271,10 @@
           "items": {
             "$ref": "#/definitions/NodeInfo"
           },
+          "x-ms-identifiers": [
+            "name",
+            "type"
+          ],
           "readOnly": true
         },
         "version": {
@@ -6457,6 +6482,10 @@
           "items": {
             "$ref": "#/definitions/KubernetesRoleStorageClassInfo"
           },
+          "x-ms-identifiers": [
+            "name",
+            "type"
+          ],
           "readOnly": true
         },
         "endpoints": {
@@ -6465,7 +6494,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MountPointMap"
-          }
+          },
+          "x-ms-identifiers": [
+            "shareId"
+          ]
         }
       }
     },
@@ -6609,7 +6641,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricCounterSet"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6634,7 +6667,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricDimension"
-          }
+          },
+          "x-ms-identifiers": [
+            "sourceName"
+          ]
         },
         "additionalDimensions": {
           "description": "The additional dimensions to be added to metric.",
@@ -6642,7 +6678,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricDimension"
-          }
+          },
+          "x-ms-identifiers": [
+            "sourceName"
+          ]
         }
       }
     },
@@ -6659,7 +6698,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricCounter"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -6756,7 +6798,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricDimension_V1"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "fillGapWithZero": {
           "description": "Set true to fill the gaps with zero.",
@@ -6879,7 +6924,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricConfiguration"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -7104,6 +7150,9 @@
           "items": {
             "$ref": "#/definitions/NetworkAdapter"
           },
+          "x-ms-identifiers": [
+            "adapterId"
+          ],
           "readOnly": true
         }
       }
@@ -7154,7 +7203,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/KubernetesIPConfiguration"
-          }
+          },
+          "x-ms-identifiers": [
+            "ipAddress",
+            "port"
+          ]
         }
       }
     },
@@ -7302,7 +7355,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "Link to the next set of results.",
@@ -7377,6 +7433,9 @@
           "items": {
             "$ref": "#/definitions/OrderStatus"
           },
+          "x-ms-identifiers": [
+            "trackingInformation/serialNumber"
+          ],
           "readOnly": true
         },
         "serialNumber": {
@@ -7391,6 +7450,9 @@
           "items": {
             "$ref": "#/definitions/TrackingInfo"
           },
+          "x-ms-identifiers": [
+            "serialNumber"
+          ],
           "readOnly": true
         },
         "returnTrackingInfo": {
@@ -7400,6 +7462,9 @@
           "items": {
             "$ref": "#/definitions/TrackingInfo"
           },
+          "x-ms-identifiers": [
+            "serialNumber"
+          ],
           "readOnly": true
         },
         "shipmentType": {
@@ -7735,6 +7800,9 @@
           "items": {
             "$ref": "#/definitions/SkuInformation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         }
       }
@@ -7864,7 +7932,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricSpecification_V1"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -8000,7 +8071,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/UserAccessRight"
-          }
+          },
+          "x-ms-identifiers": [
+            "userId"
+          ]
         },
         "clientAccessRights": {
           "description": "List of IP addresses and corresponding access rights on the share(required for NFS protocol).",
@@ -8008,7 +8082,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClientAccessRight"
-          }
+          },
+          "x-ms-identifiers": [
+            "client"
+          ]
         },
         "refreshDetails": {
           "$ref": "#/definitions/RefreshDetails",
@@ -8021,6 +8098,9 @@
           "items": {
             "$ref": "#/definitions/MountPointMap"
           },
+          "x-ms-identifiers": [
+            "shareId"
+          ],
           "readOnly": true
         },
         "dataPolicy": {
@@ -8158,6 +8238,9 @@
           "items": {
             "$ref": "#/definitions/SkuCost"
           },
+          "x-ms-identifiers": [
+            "meterId"
+          ],
           "readOnly": true
         },
         "locations": {
@@ -8176,6 +8259,9 @@
           "items": {
             "$ref": "#/definitions/SkuLocationInfo"
           },
+          "x-ms-identifiers": [
+            "location"
+          ],
           "readOnly": true
         },
         "requiredQuotaIds": {
@@ -8209,6 +8295,9 @@
           "items": {
             "$ref": "#/definitions/ResourceTypeSku"
           },
+          "x-ms-identifiers": [
+            "resourceType"
+          ],
           "readOnly": true
         },
         "nextLink": {
@@ -8467,7 +8556,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubscriptionRegisteredFeatures"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -9009,6 +9101,9 @@
           "items": {
             "$ref": "#/definitions/UpdateDetails"
           },
+          "x-ms-identifiers": [
+            "updateTitle"
+          ],
           "readOnly": true
         },
         "totalUpdateSizeInBytes": {
@@ -9180,6 +9275,9 @@
           "items": {
             "$ref": "#/definitions/ShareAccessRight"
           },
+          "x-ms-identifiers": [
+            "shareId"
+          ],
           "readOnly": true
         },
         "userType": {
