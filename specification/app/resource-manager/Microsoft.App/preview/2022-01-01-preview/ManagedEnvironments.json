@@ -308,6 +308,284 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{managedEnvironmentName}/certificates": {
+      "get": {
+        "tags": [
+          "ManagedEnvironments",
+          "Certificates"
+        ],
+        "summary": "Get the Certificates in a given managed environment.",
+        "operationId": "Certificates_ListByManagedEnvironment",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedEnvironmentName",
+            "in": "path",
+            "description": "Name of the Managed Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CertificateCollection"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Certificates by Managed Environment": {
+            "$ref": "./examples/Certificates_ListByManagedEnvironment.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{managedEnvironmentName}/certificates/{name}": {
+      "get": {
+        "tags": [
+          "ManagedEnvironments",
+          "Certificates"
+        ],
+        "summary": "Get the specified Certificate.",
+        "operationId": "Certificate_GetByName",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedEnvironmentName",
+            "in": "path",
+            "description": "Name of the Managed Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the Certificate.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Certificate"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Certificate": {
+            "$ref": "./examples/Certificate_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagedEnvironments",
+          "Certificates"
+        ],
+        "summary": "Create or Update a Certificate.",
+        "operationId": "Certificate_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedEnvironmentName",
+            "in": "path",
+            "description": "Name of the Managed Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the Certificate.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateEnvelope",
+            "in": "body",
+            "description": "Certificate to be created or updated",
+            "schema": {
+              "$ref": "#/definitions/Certificate"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Certificate"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Certificate": {
+            "$ref": "./examples/Certificate_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ManagedEnvironments",
+          "Certificates"
+        ],
+        "summary": "Deletes the specified Certificate.",
+        "operationId": "Certificate_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedEnvironmentName",
+            "in": "path",
+            "description": "Name of the Managed Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the Certificate.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete operation completed"
+          },
+          "204": {
+            "description": "Certificate does not exist"
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Certificate": {
+            "$ref": "./examples/Certificate_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ManagedEnvironments",
+          "Certificates"
+        ],
+        "summary": "Update properties of a certificate",
+        "description": "Patches a certificate. Currently only patching of tags is supported",
+        "operationId": "Certificates_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedEnvironmentName",
+            "in": "path",
+            "description": "Name of the Managed Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the Certificate.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateEnvelope",
+            "in": "body",
+            "required": true,
+            "description": "Properties of a certificate that need to be updated",
+            "schema": {
+              "$ref": "#/definitions/CertificatePatch"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Container App updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Certificate"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch Certificate": {
+            "$ref": "./examples/Certificates_Patch.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -381,7 +659,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "Environment resource specific properties",
+          "description": "Managed environment resource specific properties",
           "type": "object",
           "properties": {
             "provisioningState": {
@@ -499,6 +777,112 @@
             "update"
           ],
           "x-ms-secret": true
+        }
+      }
+    },
+    "Certificate": {
+      "description": "Certificate used for Custom Domain bindings of Container Apps in a Managed Environment",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Certificate resource specific properties",
+          "type": "object",
+          "properties": {
+            "password": {
+              "description": "Certificate password.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create"
+              ],
+              "x-ms-secret": true
+            },
+            "subjectName": {
+              "description": "Subject name of the certificate.",
+              "type": "string",
+              "readOnly": true
+            },
+            "value": {
+              "format": "byte",
+              "description": "PFX or PEM blob",
+              "type": "string",
+              "x-ms-mutability": [
+                "create"
+              ],
+              "x-ms-secret": true
+            },
+            "issuer": {
+              "description": "Certificate issuer.",
+              "type": "string",
+              "readOnly": true
+            },
+            "issueDate": {
+              "format": "date-time",
+              "description": "Certificate issue Date.",
+              "type": "string",
+              "readOnly": true
+            },
+            "expirationDate": {
+              "format": "date-time",
+              "description": "Certificate expiration date.",
+              "type": "string",
+              "readOnly": true
+            },
+            "thumbprint": {
+              "description": "Certificate thumbprint.",
+              "type": "string",
+              "readOnly": true
+            },
+            "valid": {
+              "description": "Is the certificate valid?.",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "publicKeyHash": {
+              "description": "Public key hash.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      },
+      "x-ms-client-flatten": true
+    },
+    "CertificateCollection": {
+      "description": "Collection of Certificates.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Certificate"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CertificatePatch": {
+      "description": "A certificate to update",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application-specific metadata in the form of key-value pairs."
         }
       }
     }

@@ -25,7 +25,7 @@
         },
         "properties": {
           "provisioningState": "Succeeded",
-          "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/kubeEnvironments/demokube",
+          "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
           "latestRevisionFqdn": "testcontainerApp0-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
           "configuration": {
             "ingress": {
@@ -62,7 +62,8 @@
             },
             "dapr": {
               "enabled": true,
-              "appPort": 3000
+              "appPort": 3000,
+              "appProtocol": "grpc"
             }
           }
         }

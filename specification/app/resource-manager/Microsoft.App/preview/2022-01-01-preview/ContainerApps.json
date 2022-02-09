@@ -309,6 +309,104 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/listCustomHostNameAnalysis": {
+      "post": {
+        "tags": [
+          "ContainerApps"
+        ],
+        "summary": "Analyzes a custom hostname for a Container App",
+        "operationId": "ContainerApps_ListCustomHostNameAnalysis",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customHostname",
+            "in": "query",
+            "description": "Custom hostname.",
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CustomHostnameAnalysisResult"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Analyze Custom Hostname": {
+            "$ref": "./examples/ContainerApps_ListCustomHostNameAnalysis.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{name}/listSecrets": {
+      "post": {
+        "tags": [
+          "ContainerApps"
+        ],
+        "summary": "List secrets for a container app",
+        "operationId": "ContainerApps_ListSecrets",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecretsCollection"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Container Apps Secrets": {
+            "$ref": "./examples/ContainerApps_ListSecrets.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -363,6 +461,10 @@
         }
       ],
       "properties": {
+        "identity": {
+          "description": "managed identities for the Container App to interact with other Azure services without maintaining any secrets or credentials in code.",
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
         "properties": {
           "description": "ContainerApp resource specific properties",
           "type": "object",
@@ -400,6 +502,11 @@
               "type": "string",
               "readOnly": true
             },
+            "customDomainVerificationId": {
+              "description": "Id used to verify domain name ownership",
+              "type": "string",
+              "readOnly": true
+            },
             "configuration": {
               "$ref": "#/definitions/Configuration",
               "description": "Non versioned Container App configuration properties."
@@ -407,6 +514,14 @@
             "template": {
               "$ref": "./CommonDefinitions.json#/definitions/Template",
               "description": "Container App versioned application definition."
+            },
+            "outboundIPAddresses": {
+              "description": "Outbound IP Addresses for container app.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
             }
           },
           "x-ms-client-flatten": true
@@ -489,6 +604,16 @@
             "revisionName"
           ]
         },
+        "customDomains": {
+          "description": "custom domain bindings for Container Apps' hostnames.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomDomain"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
         "allowInsecure": {
           "description": "Bool indicating if HTTP connections to is allowed. If set to false HTTP connections are automatically redirected to HTTPS connections",
           "type": "boolean"
@@ -532,6 +657,42 @@
         }
       }
     },
+    "SecretsCollection": {
+      "description": "Container App Secrets Collection ARM resource.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContainerAppSecret"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "ContainerAppSecret": {
+      "description": "Container App Secret.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Secret Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "Secret Value.",
+          "type": "string",
+          "x-ms-secret": true,
+          "readOnly": true
+        }
+      }
+    },
     "TrafficWeight": {
       "description": "Traffic weight assigned to a revision",
       "type": "object",
@@ -549,6 +710,124 @@
           "description": "Indicates that the traffic weight belongs to a latest stable revision",
           "default": false,
           "type": "boolean"
+        }
+      }
+    },
+    "CustomDomain": {
+      "description": "Custom Domain of a Container App",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Hostname.",
+          "type": "string"
+        },
+        "bindingType": {
+          "description": "Custom Domain binding type.",
+          "enum": [
+            "Disabled",
+            "SniEnabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "bindingType",
+            "modelAsString": true
+          }
+        },
+        "certificateId": {
+          "description": "Resource Id of the Certificate to be bound to this hostname. Must exist in the Managed Environment.",
+          "type": "string"
+        }
+      }
+    },
+    "CustomHostnameAnalysisResult": {
+      "description": "Custom domain analysis.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "CustomHostnameAnalysisResult resource specific properties",
+          "type": "object",
+          "properties": {
+            "hostName": {
+              "description": "Host name that was analyzed",
+              "type": "string",
+              "readOnly": true
+            },
+            "isHostnameAlreadyVerified": {
+              "description": "<code>true</code> if hostname is already verified; otherwise, <code>false</code>.",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "customDomainVerificationTest": {
+              "description": "DNS verification test result.",
+              "enum": [
+                "Passed",
+                "Failed",
+                "Skipped"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "DnsVerificationTestResult",
+                "modelAsString": false
+              }
+            },
+            "customDomainVerificationFailureInfo": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse",
+              "description": "Raw failure information if DNS verification fails.",
+              "readOnly": true
+            },
+            "hasConflictOnManagedEnvironment": {
+              "description": "<code>true</code> if there is a conflict on the Container App's managed environment; otherwise, <code>false</code>.",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "conflictingContainerAppResourceId": {
+              "description": "Name of the conflicting Container App on the Managed Environment if it's within the same subscription.",
+              "type": "string",
+              "readOnly": true
+            },
+            "cNameRecords": {
+              "description": "CName records visible for this hostname.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "txtRecords": {
+              "description": "TXT records visible for this hostname.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "aRecords": {
+              "description": "A records visible for this hostname.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "alternateCNameRecords": {
+              "description": "Alternate CName records visible for this hostname.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "alternateTxtRecords": {
+              "description": "Alternate TXT records visible for this hostname.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     }

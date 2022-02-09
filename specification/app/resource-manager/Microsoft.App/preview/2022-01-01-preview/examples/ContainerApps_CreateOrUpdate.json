@@ -11,7 +11,19 @@
         "configuration": {
           "ingress": {
             "external": true,
-            "targetPort": 3000
+            "targetPort": 3000,
+            "customDomains": [
+              {
+                "name": "www.my-name.com",
+                "bindingType": "SniEnabled",
+                "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube/certificates/my-certificate-for-my-name-dot-com"
+              },
+              {
+                "name": "www.my-other-name.com",
+                "bindingType": "SniEnabled",
+                "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube/certificates/my-certificate-for-my-other-name-dot-com"
+              }
+            ]
           }
         },
         "template": {
@@ -38,7 +50,8 @@
           },
           "dapr": {
             "enabled": true,
-            "appPort": 3000
+            "appPort": 3000,
+            "appProtocol": "http"
           }
         }
       }
@@ -54,14 +67,26 @@
         "location": "East US",
         "properties": {
           "provisioningState": "Succeeded",
-          "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/kubeEnvironments/demokube",
+          "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
           "latestRevisionFqdn": "testcontainerApp0-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
           "configuration": {
             "ingress": {
               "fqdn": "testcontainerApp0.demokube-t24clv0g.eastus.containerApps.k4apps.io",
               "external": true,
               "targetPort": 3000,
-              "transport": "auto"
+              "transport": "auto",
+              "customDomains": [
+                {
+                  "name": "www.my-name.com",
+                  "bindingType": "SniEnabled",
+                  "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube/certificates/my-certificate-for-my-name-dot-com"
+                },
+                {
+                  "name": "www.my-other-name.com",
+                  "bindingType": "SniEnabled",
+                  "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube/certificates/my-certificate-for-my-other-name-dot-com"
+                }
+              ]
             }
           },
           "template": {
@@ -91,7 +116,8 @@
             },
             "dapr": {
               "enabled": true,
-              "appPort": 3000
+              "appPort": 3000,
+              "appProtocol": "http"
             }
           }
         }
@@ -106,7 +132,7 @@
         "location": "East US",
         "properties": {
           "provisioningState": "InProgress",
-          "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/kubeEnvironments/demokube",
+          "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
           "latestRevisionFqdn": "testcontainerApp0-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
           "configuration": {
             "ingress": {
@@ -143,7 +169,8 @@
             },
             "dapr": {
               "enabled": true,
-              "appPort": 3000
+              "appPort": 3000,
+              "appProtocol": "http"
             }
           }
         }
