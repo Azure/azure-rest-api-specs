@@ -98,6 +98,59 @@
         "name": "policy-1",
         "id": "2e6c0bd8-d9d4-46ca-a10c-6deca5b7a8ac"
       }
+    },
+    "201": {
+      "headers": {
+        "x-ms-request-id": "d5496da4-9c52-402f-b067-83cc9ddea888"
+      },
+      "body": {
+        "properties": {
+          "description": "policy description",
+          "version": 1,
+          "decisionRules": [
+            {
+              "kind": "decisionrule",
+              "effect": "Permit",
+              "cnfCondition": [
+                [
+                  {
+                    "attributeName": "resource.azure.path",
+                    "attributeValueIncludedIn": [
+                      "/subscriptions/e6e0a165-6a3b-4d0d-a611-d153bf286620/resourceGroups/some-rg/**"
+                    ]
+                  }
+                ],
+                [
+                  {
+                    "attributeName": "principal.microsoft.id",
+                    "attributeValueIncludedIn": [
+                      "1a5c6fb7-d72e-486c-8262-c3cd85cfde07"
+                    ]
+                  }
+                ],
+                [
+                  {
+                    "attributeName": "derived.purview.role",
+                    "attributeValueIncludes": "purviewdatarole_builtin_read"
+                  }
+                ]
+              ]
+            }
+          ],
+          "systemData": {
+            "createdBy": "1a5c6fb7-d72e-486c-8262-c3cd85cfde07",
+            "createdAt": "2022-02-01T05:20:35.4028768Z",
+            "lastModifiedBy": "1a5c6fb7-d72e-486c-8262-c3cd85cfde07",
+            "lastModifiedAt": "2022-02-01T05:20:35.4028768Z"
+          },
+          "collection": {
+            "type": "CollectionReference",
+            "referenceName": "root-collection-name"
+          }
+        },
+        "name": "policy-1",
+        "id": "2e6c0bd8-d9d4-46ca-a10c-6deca5b7a8ac"
+      }
     }
   }
 }
