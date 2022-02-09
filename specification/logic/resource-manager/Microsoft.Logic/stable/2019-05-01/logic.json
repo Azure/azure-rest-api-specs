@@ -4284,10 +4284,13 @@
           "IntegrationAccountMaps"
         ],
         "operationId": "IntegrationAccountMaps_CreateOrUpdate",
-        "description": "Creates or updates an integration account map.",
+        "description": "Creates or updates an integration account map. If the map is larger than 4MB, you will need to place the map in an Azure blob and use the Blob SAS Url as contentLink.",
         "x-ms-examples": {
           "Create or update a map": {
             "$ref": "./examples/IntegrationAccountMaps_CreateOrUpdate.json"
+          },
+          "Create or update a map larger than 4MB": {
+            "$ref": "./examples/IntegrationAccountLargeMaps_CreateOrUpdate.json"
           }
         },
         "parameters": [

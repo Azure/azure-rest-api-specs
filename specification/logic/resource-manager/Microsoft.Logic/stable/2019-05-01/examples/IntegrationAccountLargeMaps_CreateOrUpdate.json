@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2019-05-01",
+    "resourceGroupName": "testResourceGroup",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "integrationAccountName": "testIntegrationAccount",
+    "mapName": "testMap",
+    "map": {
+      "properties":{
+         "mapType":"Xslt",
+         "contentLink":{
+            "uri":"<Blob SAS URL of the map>",
+            "contentVersion":"1.0"
+         },
+         "contentType":"application/xml",
+         "metadata":{}
+      },
+      "location":"westus"
+   } 
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "properties": {
+          "mapType": "Xslt",
+          "contentLink": {
+            "uri": "<Uri>",
+            "contentVersion": "\"0x8D9EB9F6691E7A2\"",
+            "contentSize": 7888419,
+            "contentHash": {
+              "algorithm": "md5",
+              "value": "GxQRrFCYoyH58kMyu34ISg=="
+            }
+          },
+          "createdTime": "2022-02-09T07:40:10.2863459Z",
+          "changedTime": "2022-02-09T07:40:10.2906473Z",
+          "metadata": {}
+        },
+        "id": "/subscriptions/524c1207-2135-4f08-81f3-6577a6d41405/resourceGroups/refresh/providers/Microsoft.Logic/integrationAccounts/<IntegrationAccount>/maps/testMap",
+        "name": "testMap",
+        "type": "Microsoft.Logic/integrationAccounts/maps"
+      }
+    }
+  }
+}
