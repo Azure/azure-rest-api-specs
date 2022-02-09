@@ -881,7 +881,8 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/ClusterVersionDetails"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "azureActiveDirectory": {
           "$ref": "#/definitions/AzureActiveDirectory",
@@ -899,14 +900,20 @@
           "description": "The list of client certificates referenced by common name that are allowed to manage the cluster.",
           "items": {
             "$ref": "#/definitions/ClientCertificateCommonName"
-          }
+          },
+          "x-ms-identifiers": [
+            "certificateCommonName"
+          ]
         },
         "clientCertificateThumbprints": {
           "type": "array",
           "description": "The list of client certificates referenced by thumbprint that are allowed to manage the cluster.",
           "items": {
             "$ref": "#/definitions/ClientCertificateThumbprint"
-          }
+          },
+          "x-ms-identifiers": [
+            "certificateThumbprint"
+          ]
         },
         "clusterCodeVersion": {
           "type": "string",
@@ -939,7 +946,10 @@
           "description": "The list of custom fabric settings to configure the cluster.",
           "items": {
             "$ref": "#/definitions/SettingsSectionDescription"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "managementEndpoint": {
           "type": "string",
@@ -950,7 +960,8 @@
           "description": "The list of node types in the cluster.",
           "items": {
             "$ref": "#/definitions/NodeTypeDescription"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "provisioningState": {
           "type": "string",
@@ -1025,6 +1036,7 @@
           "items": {
             "$ref": "#/definitions/Notification"
           },
+          "x-ms-identifiers": [],
           "description": "Indicates a list of notification channels for cluster events."
         }
       },
@@ -1052,14 +1064,20 @@
           "description": "The list of client certificates referenced by common name that are allowed to manage the cluster. This will overwrite the existing list.",
           "items": {
             "$ref": "#/definitions/ClientCertificateCommonName"
-          }
+          },
+          "x-ms-identifiers": [
+            "certificateCommonName"
+          ]
         },
         "clientCertificateThumbprints": {
           "type": "array",
           "description": "The list of client certificates referenced by thumbprint that are allowed to manage the cluster. This will overwrite the existing list.",
           "items": {
             "$ref": "#/definitions/ClientCertificateThumbprint"
-          }
+          },
+          "x-ms-identifiers": [
+            "certificateThumbprint"
+          ]
         },
         "clusterCodeVersion": {
           "type": "string",
@@ -1074,14 +1092,18 @@
           "description": "The list of custom fabric settings to configure the cluster. This will overwrite the existing list.",
           "items": {
             "$ref": "#/definitions/SettingsSectionDescription"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nodeTypes": {
           "type": "array",
           "description": "The list of node types in the cluster. This will overwrite the existing list.",
           "items": {
             "$ref": "#/definitions/NodeTypeDescription"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "reliabilityLevel": {
           "$ref": "#/definitions/ReliabilityLevel"
@@ -1134,6 +1156,7 @@
           "items": {
             "$ref": "#/definitions/Notification"
           },
+          "x-ms-identifiers": [],
           "description": "Indicates a list of notification channels for cluster events."
         }
       },
@@ -1505,6 +1528,9 @@
           "items": {
             "$ref": "#/definitions/NotificationTarget"
           },
+          "x-ms-identifiers": [
+            "notificationChannel"
+          ],
           "description": "List of targets that subscribe to the notification."
         }
       },
@@ -1557,7 +1583,10 @@
           "description": "List of operations supported by the Service Fabric resource provider.",
           "items": {
             "$ref": "#/definitions/OperationResult"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -1679,7 +1708,10 @@
           "description": "The list of server certificates referenced by common name that are used to secure the cluster.",
           "items": {
             "$ref": "#/definitions/ServerCertificateCommonName"
-          }
+          },
+          "x-ms-identifiers": [
+            "certificateCommonName"
+          ]
         },
         "x509StoreName": {
           "$ref": "#/definitions/StoreName"
@@ -1741,7 +1773,10 @@
           "description": "The collection of parameters in the section.",
           "items": {
             "$ref": "#/definitions/SettingsParameterDescription"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "description": "Describes a section in the fabric settings of the cluster."

@@ -967,6 +967,9 @@
       "items": {
         "$ref": "#/definitions/ApplicationMetricDescription"
       },
+      "x-ms-identifiers": [
+        "name"
+      ],
       "description": "List of application capacity metric description."
     },
     "ApplicationParameterList": {
@@ -1083,7 +1086,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationUserAssignedIdentity"
-          }
+          },
+          "x-ms-identifiers": [
+            "principalId"
+          ]
         }
       }
     },
@@ -1352,6 +1358,10 @@
       "items": {
         "$ref": "#/definitions/ServiceCorrelationDescription"
       },
+      "x-ms-identifiers": [
+        "scheme",
+        "serviceName"
+      ],
       "description": "A list that describes the correlation of the service with other services."
     },
     "ForceRestart": {
@@ -1734,6 +1744,9 @@
       "items": {
         "$ref": "#/definitions/ServiceLoadMetricDescription"
       },
+      "x-ms-identifiers": [
+        "name"
+      ],
       "description": "The service load metrics is given as an array of ServiceLoadMetricDescription objects."
     },
     "ServiceLoadMetricWeight": {
@@ -1777,6 +1790,9 @@
       "items": {
         "$ref": "#/definitions/ServicePlacementPolicyDescription"
       },
+      "x-ms-identifiers": [
+        "type"
+      ],
       "description": "A list that describes the correlation of the service with other services."
     },
     "ServicePlacementPolicyDescription": {
