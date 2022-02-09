@@ -417,7 +417,11 @@
           "description": "A list of additional details about the error.",
           "items": {
             "$ref": "#/definitions/errorResponseBody"
-          }
+          },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ]
         }
       }
     },
@@ -530,7 +534,8 @@
       "description": "Conditions in alert instance to be matched for a given alert processing rule. Default value is all. Multiple values could be provided with comma separation.",
       "items": {
         "$ref": "#/definitions/Condition"
-      }
+      },
+      "x-ms-identifiers": []
     },
     "Schedule": {
       "type": "object",
@@ -555,7 +560,11 @@
           "description": "List of recurrences.",
           "items": {
             "$ref": "#/definitions/Recurrence"
-          }
+          },
+          "x-ms-identifiers": [
+            "recurrenceType",
+            "startTime"
+          ]
         }
       }
     },
@@ -710,7 +719,10 @@
           "description": "Actions to be applied.",
           "items": {
             "$ref": "#/definitions/Action"
-          }
+          },
+          "x-ms-identifiers": [
+            "actionType"
+          ]
         },
         "description": {
           "type": "string",
