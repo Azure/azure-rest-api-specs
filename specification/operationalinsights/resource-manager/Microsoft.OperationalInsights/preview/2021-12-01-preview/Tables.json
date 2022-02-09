@@ -291,6 +291,48 @@
           "final-state-via": "azure-async-operation"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/tables/{tableName}/migrate": {
+      "post": {
+        "tags": [
+          "Tables"
+        ],
+        "x-ms-examples": {
+          "TablesGet": {
+            "$ref": "./examples/TablesMigrate.json"
+          }
+        },
+        "operationId": "Tables_Migrate",
+        "description": "Migrate a Log Analytics table from support of the Data Collector API and Custom Fields features to support of Data Collection Rule-based Custom Logs.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TableNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -532,7 +574,7 @@
         },
         "description": {
           "type": "string",
-          "description": "Search results table's Description."
+          "description": "Search job Description."
         },
         "limit": {
           "type": "integer",
@@ -552,7 +594,7 @@
         "sourceTable": {
           "readOnly": true,
           "type": "string",
-          "description": "The table to search data from."
+          "description": "The table used in the search job."
         }
       },
       "description": "Parameters of the search job that initiated this table."
@@ -571,7 +613,6 @@
           "description": "The timestamp to end the restore by (UTC)."
         },
         "sourceTable": {
-          "readOnly": true,
           "type": "string",
           "description": "The table to restore data from."
         }
@@ -604,14 +645,14 @@
           "format": "int32",
           "minimum": 4,
           "maximum": 730,
-          "description": "The data table data retention in days, between 4 and 730. Setting this property to null will default to the workspace retention."
+          "description": "The table retention in days, between 4 and 730. Setting this property to -1 will default to the workspace retention."
         },
         "totalRetentionInDays": {
           "type": "integer",
           "format": "int32",
           "minimum": 4,
           "maximum": 2555,
-          "description": "The table data total retention in days, between 4 and 2555. Setting this property to null will default to table retention."
+          "description": "The table total retention in days, between 4 and 2555. Setting this property to -1 will default to table retention."
         },
         "archiveRetentionInDays": {
           "readOnly": true,
@@ -633,7 +674,7 @@
         },
         "plan": {
           "type": "string",
-          "description": "The table plan.",
+          "description": "Instruct the system how to handle and charge the logs ingested to this table.",
           "enum": [
             "Basic",
             "Analytics"
@@ -644,11 +685,11 @@
             "values": [
               {
                 "value": "Basic",
-                "description": "Basic - logs that are adjusted to support high volume / low value verbose logs."
+                "description": "Logs  that are adjusted to support high volume low value verbose logs."
               },
               {
                 "value": "Analytics",
-                "description": "Analytics - logs that allow monitoring and analytics."
+                "description": "Logs  that allow monitoring and analytics."
               }
             ]
           }
