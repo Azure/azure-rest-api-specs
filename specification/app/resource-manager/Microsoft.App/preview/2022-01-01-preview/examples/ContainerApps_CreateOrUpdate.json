@@ -30,7 +30,24 @@
           "containers": [
             {
               "image": "repo/testcontainerApp0:v1",
-              "name": "testcontainerApp0"
+              "name": "testcontainerApp0",
+              "probes": [
+                {
+                  "type": "liveness",
+                  "httpGet": {
+                    "path": "/health",
+                    "port": 8080,
+                    "httpHeaders": [
+                      {
+                        "name": "Custom-Header",
+                        "value": "Awesome"
+                      }
+                    ]
+                  },
+                  "initialDelaySeconds": 3,
+                  "periodSeconds": 3
+                }
+              ]
             }
           ],
           "scale": {
@@ -97,7 +114,24 @@
                 "resources": {
                   "cpu": 0.2,
                   "memory": "100Mi"
-                }
+                },
+                "probes": [
+                  {
+                    "type": "liveness",
+                    "httpGet": {
+                      "path": "/health",
+                      "port": 8080,
+                      "httpHeaders": [
+                        {
+                          "name": "Custom-Header",
+                          "value": "Awesome"
+                        }
+                      ]
+                    },
+                    "initialDelaySeconds": 3,
+                    "periodSeconds": 3
+                  }
+                ]
               }
             ],
             "scale": {
@@ -150,7 +184,24 @@
                 "resources": {
                   "cpu": 0.2,
                   "memory": "100Mi"
-                }
+                },
+                "probes": [
+                  {
+                    "type": "liveness",
+                    "httpGet": {
+                      "path": "/health",
+                      "port": 8080,
+                      "httpHeaders": [
+                        {
+                          "name": "Custom-Header",
+                          "value": "Awesome"
+                        }
+                      ]
+                    },
+                    "initialDelaySeconds": 3,
+                    "periodSeconds": 3
+                  }
+                ]
               }
             ],
             "scale": {

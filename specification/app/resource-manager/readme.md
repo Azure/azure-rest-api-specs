@@ -42,6 +42,8 @@ input-file:
   - Microsoft.App/preview/2022-01-01-preview/Global.json
   - Microsoft.App/preview/2022-01-01-preview/SourceControls.json
   - Microsoft.App/preview/2022-01-01-preview/DaprComponents.json
+  - Microsoft.App/preview/2022-01-01-preview/EasyAuthConfigs.json
+  - Microsoft.App/preview/2022-01-01-preview/ManagedEnvironmentsStorages.json
 directive:
 - suppress: R4009
   from: ContainerAppsRevisions.json
