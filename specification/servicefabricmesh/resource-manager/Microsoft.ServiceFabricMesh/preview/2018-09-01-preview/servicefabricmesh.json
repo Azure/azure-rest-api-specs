@@ -1829,7 +1829,8 @@
           "description": "List of error message details.",
           "items": {
             "$ref": "#/definitions/ErrorDetailsModel"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -1859,7 +1860,10 @@
           "description": "List of Service Fabric operations supported by the Microsoft.ServiceFabric resource provider.",
           "items": {
             "$ref": "#/definitions/OperationResult"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -2464,7 +2468,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/EndpointRef"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -2573,14 +2580,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/TcpConfig"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "http": {
           "description": "Configuration for http connectivity for this gateway.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/HttpConfig"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "status": {
           "readOnly": true,
@@ -2620,7 +2633,10 @@
           "description": "description for routing.",
           "items": {
             "$ref": "#/definitions/HttpHostConfig"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [
@@ -2642,7 +2658,10 @@
           "description": "Route information to use for routing. Routes are processed in the order they are specified. Specify routes that are more specific before routes that can handle general cases.",
           "items": {
             "$ref": "#/definitions/HttpRouteConfig"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [
@@ -2743,7 +2762,10 @@
           "description": "headers and their values to match in request.",
           "items": {
             "$ref": "#/definitions/HttpRouteMatchHeader"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [
@@ -2909,7 +2931,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DiagnosticsSinkProperties"
-          }
+          },
+          "x-ms-identifiers": [
+            "kind",
+            "name"
+          ]
         },
         "enabled": {
           "description": "Status of whether or not sinks are enabled.",
@@ -3250,28 +3276,40 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/EnvironmentVariable"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "settings": {
           "description": "The settings to set in this container. The setting file path can be fetched from environment variable \"Fabric_SettingPath\". The path for Windows container is \"C:\\\\secrets\". The path for Linux container is \"/var/secrets\".",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Setting"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "labels": {
           "description": "The labels to set in this container.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ContainerLabel"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "endpoints": {
           "description": "The endpoints exposed by this container.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/EndpointProperties"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "resources": {
           "description": "The resources required by this container.",
@@ -3282,14 +3320,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VolumeReference"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "volumes": {
           "description": "Volumes to be attached to the container. The lifetime of these volumes is scoped to the application's lifetime.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationScopedVolume"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "diagnostics": {
           "$ref": "#/definitions/DiagnosticsRef",
@@ -3300,7 +3344,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ReliableCollectionsRef"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "instanceView": {
           "readOnly": true,
@@ -3363,7 +3408,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ContainerEvent"
-          }
+          },
+          "x-ms-identifiers": [
+            "name",
+            "type"
+          ]
         }
       }
     },
@@ -3565,6 +3614,9 @@
           "items": {
             "$ref": "#/definitions/AutoScalingPolicy"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "Auto scaling policies"
         },
         "status": {
@@ -3601,14 +3653,21 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ContainerCodePackageProperties"
-          }
+          },
+          "x-ms-identifiers": [
+            "image",
+            "name"
+          ]
         },
         "networkRefs": {
           "type": "array",
           "description": "The names of the private networks that this service needs to be part of.",
           "items": {
             "$ref": "#/definitions/NetworkRef"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "diagnostics": {
           "$ref": "#/definitions/DiagnosticsRef",
@@ -3747,6 +3806,7 @@
           "items": {
             "$ref": "#/definitions/ServiceReplicaDescription"
           },
+          "x-ms-identifiers": [],
           "description": "One page of the list."
         },
         "nextLink": {
