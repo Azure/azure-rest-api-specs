@@ -6,7 +6,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "dashboard"
+  package-name: "@azure/arm-dashboard"
   output-folder: "$(typescript-sdks-folder)/sdk/dashboard/arm-dashboard"
   payload-flattening-threshold: 1
   generate-metadata: true
