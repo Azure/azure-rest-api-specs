@@ -653,7 +653,10 @@
           "description": "The secrets to install in the virtual machines.",
           "items": {
             "$ref": "#/definitions/VaultSecretGroup"
-          }
+          },
+          "x-ms-identifiers": [
+            "sourceVault"
+          ]
         },
         "vmExtensions": {
           "type": "array",
@@ -661,7 +664,11 @@
           "description": "Set of extensions that should be installed onto the virtual machines.",
           "items": {
             "$ref": "#/definitions/VMSSExtension"
-          }
+          },
+          "x-ms-identifiers": [
+            "name",
+            "/properties/publisher"
+          ]
         },
         "vmManagedIdentity": {
           "$ref": "#/definitions/VmManagedIdentity"
@@ -755,6 +762,9 @@
           "items": {
             "$ref": "#/definitions/VaultCertificate"
           },
+          "x-ms-identifiers": [
+            "certificateUrl"
+          ],
           "description": "The list of key vault references in SourceVault which contain certificates."
         }
       },

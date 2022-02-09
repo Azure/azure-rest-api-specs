@@ -1226,7 +1226,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationUserAssignedIdentity"
-          }
+          },
+          "x-ms-identifiers": [
+            "principalId"
+          ]
         }
       }
     },
@@ -1492,6 +1495,10 @@
       "items": {
         "$ref": "#/definitions/ServiceCorrelation"
       },
+      "x-ms-identifiers": [
+        "scheme",
+        "serviceName"
+      ],
       "description": "A list that describes the correlation of the service with other services."
     },
     "ForceRestart": {
@@ -1849,6 +1856,7 @@
       "items": {
         "$ref": "#/definitions/ScalingPolicy"
       },
+      "x-ms-identifiers": [],
       "description": "Scaling policies for this service."
     },
     "ScalingTrigger": {
@@ -1964,6 +1972,9 @@
       "items": {
         "$ref": "#/definitions/ServiceLoadMetric"
       },
+      "x-ms-identifiers": [
+        "name"
+      ],
       "description": "The service load metrics is given as an array of ServiceLoadMetric objects."
     },
     "ServiceLoadMetricWeight": {
@@ -2045,6 +2056,9 @@
       "items": {
         "$ref": "#/definitions/ServicePlacementPolicy"
       },
+      "x-ms-identifiers": [
+        "type"
+      ],
       "description": "A list that describes the correlation of the service with other services."
     },
     "ServicePlacementPolicy": {

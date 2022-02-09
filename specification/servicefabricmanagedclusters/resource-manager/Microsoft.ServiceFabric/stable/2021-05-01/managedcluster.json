@@ -886,6 +886,7 @@
           "items": {
             "$ref": "#/definitions/LoadBalancingRule"
           },
+          "x-ms-identifiers": [],
           "description": "Load balancing rules that are applied to the public load balancer of the cluster."
         },
         "allowRdpAccess": {
@@ -897,6 +898,9 @@
           "items": {
             "$ref": "#/definitions/NetworkSecurityRule"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "Custom Network Security Rules that are applied to the virtual network of the cluster."
         },
         "clients": {
@@ -904,6 +908,9 @@
           "items": {
             "$ref": "#/definitions/ClientCertificate"
           },
+          "x-ms-identifiers": [
+            "commonName"
+          ],
           "description": "Client certificates that are allowed to manage the cluster."
         },
         "azureActiveDirectory": {
@@ -915,6 +922,9 @@
           "items": {
             "$ref": "#/definitions/SettingsSectionDescription"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of custom fabric settings to configure the cluster."
         },
         "provisioningState": {
@@ -1191,7 +1201,10 @@
           "description": "List of operations supported by the Service Fabric resource provider.",
           "items": {
             "$ref": "#/definitions/OperationResult"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -1305,7 +1318,10 @@
           "description": "The collection of parameters in the section.",
           "items": {
             "$ref": "#/definitions/SettingsParameterDescription"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "description": "Describes a section in the fabric settings of the cluster."
