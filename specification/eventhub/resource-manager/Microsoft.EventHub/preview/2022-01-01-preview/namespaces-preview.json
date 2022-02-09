@@ -694,6 +694,19 @@
         "properties": {
           "x-ms-client-flatten": true,
           "properties": {
+            "minimumTlsVersion": {
+              "type": "string",
+              "description": "Minimum TLS version for the incoming connections accepted by the namespace. The Default value would be set to Tls12",
+              "enum": [
+                "Tls12",
+                "Tls11",
+                "Tls"
+              ],
+              "x-ms-enum": {
+                "name": "MinimumTlsVersion",
+                "modelAsString": true
+              }
+            },
             "provisioningState": {
               "readOnly": true,
               "type": "string",
