@@ -617,26 +617,6 @@
       ],
       "description": "Status of asset track operation."
     },
-    "AssetTrackOperationResult": {
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/AssetTrackProperties"
-        }
-      },
-      "type": "object",
-      "required": [
-        "name"
-      ]
-    },
     "AssetCollection": {
       "properties": {
         "value": {
@@ -1926,7 +1906,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AssetTrackOperationResult"
+              "$ref": "#/definitions/AssetTrack"
             }
           },
           "202": {
