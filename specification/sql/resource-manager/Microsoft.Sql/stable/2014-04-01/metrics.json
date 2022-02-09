@@ -319,6 +319,7 @@
           "items": {
             "$ref": "#/definitions/MetricValue"
           },
+          "x-ms-identifiers": [],
           "description": "The metric values for the specified time window and timestep."
         }
       },
@@ -331,6 +332,12 @@
           "items": {
             "$ref": "#/definitions/Metric"
           },
+          "x-ms-identifiers": [
+            "endTime",
+            "startTime",
+            "timeGrain",
+            "/name/value"
+          ],
           "description": "The list of metrics for the database."
         }
       },
@@ -406,6 +413,9 @@
           "items": {
             "$ref": "#/definitions/MetricAvailability"
           },
+          "x-ms-identifiers": [
+            "timeGrain"
+          ],
           "description": "The list of database metric availabilities for the metric."
         }
       },
@@ -418,6 +428,9 @@
           "items": {
             "$ref": "#/definitions/MetricDefinition"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of metric definitions for the database."
         }
       },
