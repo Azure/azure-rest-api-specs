@@ -110,14 +110,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK. The request has succeeded."
-          },
           "202": {
             "description": "Accepted - Returns this status until the asynchronous operation has completed."
           },
           "204": {
             "description": "NoContent"
+          },
+          "200": {
+            "description": "OK. The request has succeeded."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -166,14 +166,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Update succeeded - Returns information about the workspace vNet peering.",
+          "201": {
+            "description": "Created - Returns information about the workspace vNet peering, including provisioning status.",
             "schema": {
               "$ref": "#/definitions/VirtualNetworkPeering"
             }
           },
-          "201": {
-            "description": "Created - Returns information about the workspace vNet peering, including provisioning status.",
+          "200": {
+            "description": "Update succeeded - Returns information about the workspace vNet peering.",
             "schema": {
               "$ref": "#/definitions/VirtualNetworkPeering"
             }
