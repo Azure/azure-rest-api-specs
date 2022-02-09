@@ -81,10 +81,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/DataPolicyBinding"
-              }
+              "$ref": "#/definitions/DataPolicyBindingList"
             }
           },
           "default": {
@@ -763,6 +760,27 @@
         },
         "properties": {
           "$ref": "#/definitions/DataFabricPolicyBindingProperties"
+        }
+      }
+    },
+    "DataPolicyBindingList": {
+      "required": [
+        "values"
+      ],
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataPolicyBinding"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        },
+        "count": {
+          "format": "int32",
+          "type": "integer"
         }
       }
     }
