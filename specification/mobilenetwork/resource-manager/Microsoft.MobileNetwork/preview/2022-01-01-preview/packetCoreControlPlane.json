@@ -364,15 +364,6 @@
           "type": "string",
           "description": "The version of the packet core software that is deployed."
         },
-        "tacList": {
-          "type": "array",
-          "items": {
-            "$ref": "./ts29571.json#/definitions/Tac"
-          },
-          "minItems": 1,
-          "uniqueItems": true,
-          "description": "The list of tracking area codes supported by the packet core control plane resource."
-        },
         "n2Interface": {
           "$ref": "./common.json#/definitions/InterfaceProperties",
           "description": "Interface configuration for N2 reference point."
@@ -380,7 +371,6 @@
       },
       "required": [
         "mobileNetwork",
-        "tacList",
         "n2Interface"
       ]
     },

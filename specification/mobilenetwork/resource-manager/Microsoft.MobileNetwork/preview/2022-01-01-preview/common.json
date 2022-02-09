@@ -175,10 +175,7 @@
       "readOnly": true,
       "description": "The current activation state of the Sim on the network.",
       "enum": [
-        "NotActivated",
         "Activated",
-        "Activating",
-        "Deactivating",
         "Deactivated",
         "Failed"
       ],
@@ -193,18 +190,6 @@
         "name": {
           "type": "string",
           "description": "The logical name for this interface. This should match one of the interfaces configured on your Azure Stack Edge machine."
-        },
-        "ipv4Address": {
-          "$ref": "./ts29571.json#/definitions/Ipv4Addr",
-          "description": "The IPv4 address."
-        },
-        "ipv4Subnet": {
-          "$ref": "./ts29571.json#/definitions/Ipv4AddrMask",
-          "description": "The IPv4 subnet."
-        },
-        "ipv4Gateway": {
-          "$ref": "./ts29571.json#/definitions/Ipv4Addr",
-          "description": "The default IPv4 gateway (router)."
         }
       },
       "required": [
