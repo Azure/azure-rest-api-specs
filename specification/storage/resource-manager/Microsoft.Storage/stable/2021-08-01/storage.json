@@ -2165,6 +2165,9 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of Storage operations supported by the Storage resource provider."
         }
       }
@@ -2227,7 +2230,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -2255,7 +2261,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Dimension"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "aggregationType": {
           "type": "string",
@@ -2365,6 +2374,11 @@
           "items": {
             "$ref": "#/definitions/SkuInformation"
           },
+          "x-ms-identifiers": [
+            "name",
+            "resourceType",
+            "tier"
+          ],
           "description": "Get the list result of storage SKUs and their properties."
         }
       },
@@ -2441,6 +2455,9 @@
           "items": {
             "$ref": "#/definitions/SKUCapability"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc."
         },
         "restrictions": {
@@ -2448,6 +2465,7 @@
           "items": {
             "$ref": "#/definitions/Restriction"
           },
+          "x-ms-identifiers": [],
           "description": "The restrictions because of which SKU cannot be used. This is empty if there are no restrictions."
         }
       },
@@ -2783,6 +2801,10 @@
             "description": "Resource Access Rules.",
             "$ref": "#/definitions/ResourceAccessRule"
           },
+          "x-ms-identifiers": [
+            "resourceId",
+            "tenantId"
+          ],
           "description": "Sets the resource access rules"
         },
         "virtualNetworkRules": {
@@ -2799,6 +2821,9 @@
             "description": "IP rule with specific IP or IP range in CIDR format.",
             "$ref": "#/definitions/IPRule"
           },
+          "x-ms-identifiers": [
+            "value"
+          ],
           "description": "Sets the IP ACL rules"
         },
         "defaultAction": {
@@ -3825,6 +3850,9 @@
           "items": {
             "$ref": "#/definitions/StorageAccountKey"
           },
+          "x-ms-identifiers": [
+            "keyName"
+          ],
           "description": "Gets the list of storage account keys and their properties for the specified storage account."
         }
       },
@@ -4027,6 +4055,10 @@
           "items": {
             "$ref": "#/definitions/BlobRestoreRange"
           },
+          "x-ms-identifiers": [
+            "endRange",
+            "startRange"
+          ],
           "description": "Blob ranges to restore."
         }
       },
@@ -4114,6 +4146,9 @@
           "items": {
             "$ref": "#/definitions/Usage"
           },
+          "x-ms-identifiers": [
+            "/name/value"
+          ],
           "description": "Gets or sets the list of Storage Resource Usages."
         }
       },
@@ -4403,6 +4438,9 @@
           "items": {
             "$ref": "#/definitions/ManagementPolicyRule"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The Storage Account ManagementPolicies Rules. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
         }
       },
@@ -4481,6 +4519,11 @@
           "items": {
             "$ref": "#/definitions/TagFilter"
           },
+          "x-ms-identifiers": [
+            "name",
+            "op",
+            "value"
+          ],
           "description": "An array of blob index tag based filters, there can be at most 10 tag filters"
         }
       },
@@ -4774,6 +4817,11 @@
           "items": {
             "$ref": "#/definitions/ObjectReplicationPolicyRule"
           },
+          "x-ms-identifiers": [
+            "destinationContainer",
+            "ruleId",
+            "sourceContainer"
+          ],
           "description": "The storage account object replication rules."
         }
       },
@@ -4864,6 +4912,11 @@
           "items": {
             "$ref": "#/definitions/PermissionScope"
           },
+          "x-ms-identifiers": [
+            "permissions",
+            "resourceName",
+            "service"
+          ],
           "description": "The permission scopes of the local user."
         },
         "homeDirectory": {
@@ -4945,6 +4998,9 @@
       "items": {
         "$ref": "#/definitions/SshPublicKey"
       },
+      "x-ms-identifiers": [
+        "key"
+      ],
       "description": "Optional, local user ssh authorized keys for SFTP."
     },
     "SshPublicKey": {
@@ -5036,6 +5092,9 @@
           "items": {
             "$ref": "#/definitions/BlobInventoryPolicyRule"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The storage account blob inventory policy rules. The rule is applied when it is enabled."
         }
       },
