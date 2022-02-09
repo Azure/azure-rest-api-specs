@@ -1049,7 +1049,10 @@
           "description": "An array of operations supported by the StoragePool RP.",
           "items": {
             "$ref": "#/definitions/StoragePoolRPOperation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "URI to fetch the next section of the paginated response.",
@@ -1069,7 +1072,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OutboundEnvironmentEndpoint"
-          }
+          },
+          "x-ms-identifiers": [
+            "category"
+          ]
         },
         "nextLink": {
           "description": "Link to next page of resources.",
@@ -1091,7 +1097,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/EndpointDependency"
-          }
+          },
+          "x-ms-identifiers": [
+            "domainName"
+          ]
         }
       }
     },
@@ -1108,7 +1117,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/EndpointDetail"
-          }
+          },
+          "x-ms-identifiers": [
+            "ipAddress",
+            "port"
+          ]
         }
       }
     },
@@ -1166,6 +1179,7 @@
           "items": {
             "$ref": "#/definitions/ResourceSkuInfo"
           },
+          "x-ms-identifiers": [],
           "description": "The list of StoragePool resource skus."
         },
         "nextLink": {
@@ -1195,7 +1209,10 @@
           "description": "List of additional capabilities for StoragePool resource.",
           "items": {
             "$ref": "#/definitions/ResourceSkuCapability"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "locationInfo": {
           "type": "object",
@@ -1219,6 +1236,7 @@
           "items": {
             "$ref": "#/definitions/ResourceSkuRestrictions"
           },
+          "x-ms-identifiers": [],
           "description": "The restrictions because of which SKU cannot be used. This is empty if there are no restrictions."
         }
       }
@@ -1246,6 +1264,7 @@
           "items": {
             "$ref": "#/definitions/ResourceSkuZoneDetails"
           },
+          "x-ms-identifiers": [],
           "description": "Details of capabilities available to a SKU in specific zones."
         }
       }
@@ -1267,6 +1286,9 @@
           "items": {
             "$ref": "#/definitions/ResourceSkuCapability"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "A list of capabilities that are available for the SKU in the specified list of zones."
         }
       },
@@ -1363,6 +1385,9 @@
           "items": {
             "$ref": "#/definitions/DiskPoolZoneInfo"
           },
+          "x-ms-identifiers": [
+            "sku"
+          ],
           "description": "The list of Disk Pool Skus."
         },
         "nextLink": {
@@ -1797,14 +1822,21 @@
           "description": "Access Control List (ACL) for an iSCSI Target; defines LUN masking policy",
           "items": {
             "$ref": "#/definitions/Acl"
-          }
+          },
+          "x-ms-identifiers": [
+            "initiatorIqn"
+          ]
         },
         "luns": {
           "type": "array",
           "description": "List of LUNs to be exposed through iSCSI Target.",
           "items": {
             "$ref": "#/definitions/IscsiLun"
-          }
+          },
+          "x-ms-identifiers": [
+            "lun",
+            "managedDiskAzureResourceId"
+          ]
         },
         "targetIqn": {
           "type": "string",
@@ -1863,14 +1895,21 @@
           "description": "Access Control List (ACL) for an iSCSI Target; defines LUN masking policy",
           "items": {
             "$ref": "#/definitions/Acl"
-          }
+          },
+          "x-ms-identifiers": [
+            "initiatorIqn"
+          ]
         },
         "luns": {
           "type": "array",
           "description": "List of LUNs to be exposed through iSCSI Target.",
           "items": {
             "$ref": "#/definitions/IscsiLun"
-          }
+          },
+          "x-ms-identifiers": [
+            "lun",
+            "managedDiskAzureResourceId"
+          ]
         }
       }
     },
@@ -1883,14 +1922,21 @@
           "description": "Access Control List (ACL) for an iSCSI Target; defines LUN masking policy",
           "items": {
             "$ref": "#/definitions/Acl"
-          }
+          },
+          "x-ms-identifiers": [
+            "initiatorIqn"
+          ]
         },
         "luns": {
           "type": "array",
           "description": "List of LUNs to be exposed through iSCSI Target.",
           "items": {
             "$ref": "#/definitions/IscsiLun"
-          }
+          },
+          "x-ms-identifiers": [
+            "lun",
+            "managedDiskAzureResourceId"
+          ]
         }
       }
     },
@@ -2184,7 +2230,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorResponse"
-          },
+          },"x-ms-identifiers": [],
           "description": "The error details."
         },
         "additionalInfo": {
@@ -2193,6 +2239,7 @@
           "items": {
             "$ref": "#/definitions/ErrorAdditionalInfo"
           },
+          "x-ms-identifiers": [],
           "description": "The error additional info."
         }
       },
