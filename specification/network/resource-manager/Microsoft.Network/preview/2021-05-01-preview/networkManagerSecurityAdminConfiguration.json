@@ -180,9 +180,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/ForceDeleteParameter"
-          },
-          {
-            "$ref": "#/parameters/RecursiveDeleteParameter"
           }
         ],
         "responses": {
@@ -359,9 +356,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/ForceDeleteParameter"
-          },
-          {
-            "$ref": "#/parameters/RecursiveDeleteParameter"
           }
         ],
         "responses": {
@@ -1131,14 +1125,6 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "RecursiveDeleteParameter": {
-      "name": "recursive",
-      "in": "query",
-      "required": false,
-      "type": "boolean",
-      "description": "Deletes the resource recursively. When present in a security configuration delete, all rule collections and rules within the configuration will be deleted. When present in a rule collection delete, all rules within the collection will be deleted.",
       "x-ms-parameter-location": "method"
     },
     "ForceDeleteParameter": {
