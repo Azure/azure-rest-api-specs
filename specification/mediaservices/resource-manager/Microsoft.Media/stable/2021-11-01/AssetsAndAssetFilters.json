@@ -1766,7 +1766,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/assets/{assetName}/tracks/{trackName}/updateTrackData": {
       "post": {
         "summary": "Update the track data",
-        "description": "Update the track data.",
+        "description": "Update the track data. This API should be called after the track file content has been modified in blob container. Otherwise, the track's content will not be updated to video player.",
         "operationId": "Tracks_UpdateTrackData",
         "responses": {
           "202": {
@@ -1975,9 +1975,6 @@
         "x-ms-examples": {
           "Get result of asynchronous operation.": {
             "$ref": "examples/asset-tracks-operation-result-by-id.json"
-          },
-          "Get result of asynchronous operation for POST action with no content response.": {
-            "$ref": "examples/asset-tracks-operation-result-by-id-no-content.json"
           }
         }
       }
