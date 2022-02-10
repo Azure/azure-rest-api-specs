@@ -1190,7 +1190,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/dedicatedSQLminimalTlsSettings/{dedicatedSQLminimalTlsSettingsName}": {
-      "patch": {
+      "put": {
         "operationId": "WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings_Update",
         "summary": "Update server's tls settings.",
         "description": "Update workspace managed sql server's minimal tls settings.",
@@ -1227,7 +1227,7 @@
           },
           {
             "schema": {
-              "$ref": "#/definitions/DedicatedSQLminimalTlsSettingsPatchInfo"
+              "$ref": "#/definitions/DedicatedSQLminimalTlsSettings"
             },
             "in": "body",
             "name": "dedicatedSQLminimalTlsSettingsPatchInfo",
@@ -1237,7 +1237,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved dedicated sql minimal tls settings.",
+            "description": "Successfully updated dedicated sql minimal tls settings.",
             "schema": {
               "$ref": "#/definitions/DedicatedSQLminimalTlsSettings"
             }
@@ -1965,17 +1965,6 @@
           "description": "Link to retrieve next page of results.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "DedicatedSQLminimalTlsSettingsPatchInfo": {
-      "type": "object",
-      "title": "Dedicated SQL minimal tls settings patch info",
-      "description": "Dedicated SQL minimal tls settings patch info",
-      "properties": {
-        "minimalTlsVersion": {
-          "type": "string",
-          "description": "minimal tls version"
         }
       }
     },
