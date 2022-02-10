@@ -64,7 +64,7 @@
           "200": {
             "description": "Get successful. The operation returns all security user configurations in the specified network manager, in a paginated format",
             "schema": {
-              "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/SecurityConfigurationListResult"
+              "$ref": "#/definitions/SecurityUserConfigurationListResult"
             }
           },
           "default": {
@@ -569,6 +569,75 @@
     }
   },
   "definitions": {
+    "SecurityUserConfiguration": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SecurityUserConfigurationPropertiesFormat",
+          "description": "Indicates the properties for the network manager security user configuration."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system metadata related to this resource.",
+          "$ref": "./network.json#/definitions/SystemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Defines the security user configuration"
+    },
+    "SecurityUserConfigurationPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "A display name of the security user configuration."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the security user configuration."
+        },
+        "deleteExistingNSGs": {
+          "type": "string",
+          "enum": [
+            "False",
+            "True"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteExistingNSGs",
+            "modelAsString": true
+          },
+          "description": "Flag if need to delete existing network security groups."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource."
+        }
+      },
+      "description": "Defines the security user configuration properties."
+    },
+    "SecurityUserConfigurationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecurityUserConfiguration"
+          },
+          "description": "Gets a page of security user configurations"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next page of results."
+        }
+      },
+      "description": "A list of network manager security user configurations"
+    },
     "BaseUserRule": {
       "type": "object",
       "properties": {

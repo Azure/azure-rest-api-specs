@@ -569,13 +569,13 @@
     }
   },
   "definitions": {
-    "SecurityConfiguration": {
+    "SecurityAdminConfiguration": {
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SecurityConfigurationPropertiesFormat",
-          "description": "Indicates the properties for the network manager security Configuration."
+          "$ref": "#/definitions/SecurityAdminConfigurationPropertiesFormat",
+          "description": "Indicates the properties for the network manager security admin configuration."
         },
         "systemData": {
           "readOnly": true,
@@ -588,30 +588,18 @@
           "$ref": "./network.json#/definitions/ProxyResource"
         }
       ],
-      "description": "Defines the security configuration"
+      "description": "Defines the security admin configuration"
     },
-    "SecurityConfigurationPropertiesFormat": {
+    "SecurityAdminConfigurationPropertiesFormat": {
       "type": "object",
       "properties": {
         "displayName": {
           "type": "string",
-          "description": "A display name of the security configuration."
+          "description": "A display name of the security admin configuration."
         },
         "description": {
           "type": "string",
           "description": "A description of the security configuration."
-        },
-        "securityType": {
-          "type": "string",
-          "description": "Security Type.",
-          "enum": [
-            "AdminPolicy",
-            "UserPolicy"
-          ],
-          "x-ms-enum": {
-            "name": "SecurityType",
-            "modelAsString": true
-          }
         },
         "applyOnNetworkIntentPolicyBasedServices": {
           "type": "array",
@@ -620,42 +608,30 @@
           },
           "description": "Enum list of network intent policy based services."
         },
-        "deleteExistingNSGs": {
-          "type": "string",
-          "enum": [
-            "False",
-            "True"
-          ],
-          "x-ms-enum": {
-            "name": "DeleteExistingNSGs",
-            "modelAsString": true
-          },
-          "description": "Flag if need to delete existing network security groups."
-        },
         "provisioningState": {
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the resource."
         }
       },
-      "description": "Defines the security Configuration properties."
+      "description": "Defines the security admin configuration properties."
     },
-    "SecurityConfigurationListResult": {
+    "SecurityAdminConfigurationListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SecurityConfiguration"
+            "$ref": "#/definitions/SecurityAdminConfiguration"
           },
-          "description": "Gets a page of security configurations"
+          "description": "Gets a page of security admin configurations"
         },
         "nextLink": {
           "type": "string",
           "description": "Gets the URL to get the next page of results."
         }
       },
-      "description": "A list of network manager security configurations"
+      "description": "A list of network manager security admin configurations"
     },
     "AdminRuleListResult": {
       "type": "object",
