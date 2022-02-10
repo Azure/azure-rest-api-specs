@@ -1055,6 +1055,10 @@
             },
             "description": "Subnet first address, scope, and/or last address."
           },
+          "x-ms-identifiers": [
+            "first",
+            "last"
+          ],
           "description": "The list of subnets, IP addresses, and/or address ranges mapped to this endpoint when using the 'Subnet' traffic routing method. An empty list will match all ranges not covered by other endpoints."
         },
         "customHeaders": {
@@ -1073,6 +1077,9 @@
             },
             "description": "Custom header name and value."
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of custom headers."
         }
       },
@@ -1151,7 +1158,8 @@
           "description": "The query experiences produced in this HeatMap calculation.",
           "items": {
             "$ref": "#/definitions/QueryExperience"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "description": "Class representing a Traffic Manager HeatMap traffic flow properties."
@@ -1173,14 +1181,19 @@
           "description": "The endpoints used in this HeatMap calculation.",
           "items": {
             "$ref": "#/definitions/HeatMapEndpoint"
-          }
+          },
+          "x-ms-identifiers": [
+            "endpointId",
+            "resourceId"
+          ]
         },
         "trafficFlows": {
           "type": "array",
           "description": "The traffic flows produced in this HeatMap calculation.",
           "items": {
             "$ref": "#/definitions/TrafficFlow"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "description": "Class representing a Traffic Manager HeatMap properties."
@@ -1315,6 +1328,9 @@
             },
             "description": "Custom header name and value."
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of custom headers."
         },
         "expectedStatusCodeRanges": {
@@ -1333,6 +1349,7 @@
             },
             "description": "Min and max value of a status code range."
           },
+          "x-ms-identifiers": [],
           "description": "List of expected status code ranges."
         }
       },
@@ -1491,6 +1508,9 @@
           "items": {
             "$ref": "#/definitions/Region"
           },
+          "x-ms-identifiers": [
+            "code"
+          ],
           "description": "The list of Regions grouped under this Region in the Geographic Hierarchy."
         }
       },
@@ -1616,6 +1636,7 @@
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
           },
+          "x-ms-identifiers": [],
           "description": "Error details"
         }
       },
