@@ -2658,14 +2658,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DeepCreatedOrigin"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "originGroups": {
           "description": "The origin groups comprising of origins that are used for load balancing the traffic based on availability.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DeepCreatedOriginGroup"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "customDomains": {
           "description": "The custom domains under the endpoint.",
@@ -2781,7 +2787,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/GeoFilter"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "defaultOriginGroup": {
           "description": "A reference to the origin group.",
@@ -2793,7 +2800,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/UrlSigningKey"
-          }
+          },
+          "x-ms-identifiers": [
+            "keyId"
+          ]
         },
         "deliveryPolicy": {
           "description": "A policy that specifies the delivery rules to be used for an endpoint.",
@@ -2811,7 +2821,10 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/DeliveryRule"
-              }
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
             }
           }
         },
@@ -2849,14 +2862,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DeliveryRuleCondition"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "actions": {
           "description": "A list of actions that are executed when all the conditions of a rule are satisfied.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DeliveryRuleAction"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -4373,7 +4392,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/UrlSigningParamIdentifier"
-          }
+          },
+          "x-ms-identifiers": [
+            "paramName"
+          ]
         }
       }
     },
@@ -5409,7 +5431,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/HttpErrorRangeParameters"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -5867,6 +5890,9 @@
           "items": {
             "$ref": "#/definitions/ResourceUsage"
           },
+          "x-ms-identifiers": [
+            "resourceType"
+          ],
           "description": "List of resource usages."
         },
         "nextLink": {
@@ -5923,6 +5949,9 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of CDN operations supported by the CDN resource provider."
         },
         "nextLink": {
@@ -6001,14 +6030,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/LogSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "metricSpecifications": {
           "description": "Metric specifications of operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -6063,7 +6098,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricAvailability"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "supportedTimeGrainTypes": {
           "type": "array",
@@ -6077,7 +6113,10 @@
           "description": "The dimensions of metric",
           "items": {
             "$ref": "#/definitions/DimensionProperties"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "fillGapWithZero": {
           "type": "boolean",
@@ -6166,7 +6205,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/IpAddressGroup"
-          }
+          },
+          "x-ms-identifiers": [
+            "deliveryRegion"
+          ]
         }
       }
     },
@@ -6183,14 +6225,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/cidrIpAddress"
-          }
+          },
+          "x-ms-identifiers": [
+            "baseIpAddress"
+          ]
         },
         "ipv6Addresses": {
           "description": "The list of ip v6 addresses.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/cidrIpAddress"
-          }
+          },
+          "x-ms-identifiers": [
+            "baseIpAddress"
+          ]
         }
       }
     },
@@ -6428,6 +6476,10 @@
           "items": {
             "$ref": "#/definitions/ErrorDetail"
           },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ],
           "description": "The error details."
         },
         "additionalInfo": {
@@ -6436,6 +6488,7 @@
           "items": {
             "$ref": "#/definitions/ErrorAdditionalInfo"
           },
+          "x-ms-identifiers": [],
           "description": "The error additional info."
         }
       }
