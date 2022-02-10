@@ -2311,6 +2311,9 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "title": "The list of operations supported by the resource provider."
         },
         "nextLink": {
@@ -2386,6 +2389,10 @@
           "items": {
             "$ref": "#/definitions/SkuDescription"
           },
+          "x-ms-identifiers": [
+            "name",
+            "resourceType"
+          ],
           "readOnly": true
         }
       }
@@ -2423,6 +2430,9 @@
           "items": {
             "$ref": "#/definitions/SkuLocationInfoItem"
           },
+          "x-ms-identifiers": [
+            "location"
+          ],
           "readOnly": true
         },
         "restrictions": {
@@ -2431,6 +2441,7 @@
           "items": {
             "type": "object"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         }
       }
@@ -3041,6 +3052,7 @@
           "items": {
             "$ref": "#/definitions/DataConnectionValidationResult"
           },
+          "x-ms-identifiers": [],
           "description": "The list of Kusto data connection validation errors."
         }
       },
@@ -3412,6 +3424,10 @@
           "items": {
             "$ref": "#/definitions/FollowerDatabaseDefinition"
           },
+          "x-ms-identifiers": [
+            "attachedDatabaseConfigurationName",
+            "clusterResourceId"
+          ],
           "description": "The list of follower database result."
         }
       },
@@ -3471,6 +3487,9 @@
           "items": {
             "$ref": "#/definitions/LanguageExtension"
           },
+          "x-ms-identifiers": [
+            "languageExtensionName"
+          ],
           "description": "The list of language extensions."
         }
       },
@@ -3861,6 +3880,10 @@
           "items": {
             "$ref": "#/definitions/AzureResourceSku"
           },
+          "x-ms-identifiers": [
+            "resourceType",
+            "/sku/name"
+          ],
           "description": "The collection of available SKUs for an existing resource."
         }
       }

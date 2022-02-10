@@ -5589,6 +5589,9 @@
           "items": {
             "$ref": "#/definitions/QueryStatistic"
           },
+          "x-ms-identifiers": [
+            "queryId"
+          ],
           "description": "The list of queries.",
           "readOnly": true
         }
@@ -5607,6 +5610,7 @@
           "items": {
             "$ref": "#/definitions/QueryInterval"
           },
+          "x-ms-identifiers": [],
           "description": "The list of query intervals.",
           "readOnly": true
         }
@@ -5632,6 +5636,10 @@
           "items": {
             "$ref": "#/definitions/QueryMetric"
           },
+          "x-ms-identifiers": [
+            "name",
+            "unit"
+          ],
           "description": "The list of query metrics during this interval.",
           "readOnly": true
         }
@@ -5680,6 +5688,7 @@
           "items": {
             "$ref": "#/definitions/TopQueries"
           },
+          "x-ms-identifiers": [],
           "description": "The list of top queries."
         }
       },
@@ -5934,7 +5943,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MaintenanceWindowTimeRange"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "minDurationInMinutes": {
           "format": "int32",
@@ -5986,7 +5996,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MaintenanceWindowTimeRange"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6350,6 +6361,11 @@
           "items": {
             "$ref": "#/definitions/SqlPoolUsage"
           },
+          "x-ms-identifiers": [
+            "name",
+            "resourceName",
+            "unit"
+          ],
           "description": "The list of usages for the Sql pool."
         },
         "nextLink": {
@@ -6846,6 +6862,7 @@
           "items": {
             "$ref": "#/definitions/VulnerabilityAssessmentScanError"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         },
         "storageContainerPath": {
@@ -6983,7 +7000,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SqlPoolVulnerabilityAssessmentRuleBaselineItem"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },

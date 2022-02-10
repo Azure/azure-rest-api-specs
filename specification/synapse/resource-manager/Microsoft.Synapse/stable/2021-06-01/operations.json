@@ -247,14 +247,18 @@
           "description": "Service metric specifications",
           "items": {
             "$ref": "#/definitions/OperationMetaMetricSpecification"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "logSpecifications": {
           "type": "array",
           "description": "Service log specifications",
           "items": {
             "$ref": "#/definitions/OperationMetaLogSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -299,7 +303,10 @@
           "description": "Metric dimensions",
           "items": {
             "$ref": "#/definitions/OperationMetaMetricDimensionSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "supportsInstanceLevelAggregation": {
           "type": "boolean",
