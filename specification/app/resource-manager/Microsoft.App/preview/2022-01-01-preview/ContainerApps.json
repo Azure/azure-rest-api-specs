@@ -418,7 +418,7 @@
           "description": "Collection of secrets used by a Container app",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Secret"
+            "$ref": "./CommonDefinitions.json#/definitions/Secret"
           },
           "x-ms-identifiers": [
             "name"
@@ -635,25 +635,6 @@
         "passwordSecretRef": {
           "description": "The name of the Secret that contains the registry login password",
           "type": "string"
-        }
-      }
-    },
-    "Secret": {
-      "description": "Container App Secret.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Secret Name.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Secret Value.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ],
-          "x-ms-secret": true
         }
       }
     },
