@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-12-01",
+    "version": "2021-02-01",
     "title": "DataBoxEdgeManagementClient"
   },
   "host": "management.azure.com",
@@ -24,7 +24,6 @@
         "operationId": "Operations_List",
         "parameters": [
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -61,11 +60,9 @@
         "operationId": "AvailableSkus_List",
         "parameters": [
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -102,11 +99,9 @@
         "operationId": "Devices_ListBySubscription",
         "parameters": [
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
@@ -150,15 +145,12 @@
         "operationId": "Devices_ListByResourceGroup",
         "parameters": [
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
@@ -209,15 +201,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -238,9 +227,6 @@
         "x-ms-examples": {
           "DataBoxEdgeDeviceGetByName": {
             "$ref": "./examples/DataBoxEdgeDeviceGetByName.json"
-          },
-          "DataBoxEdgeDeviceGetByNameWithDataResidency": {
-            "$ref": "./examples/DataBoxEdgeDeviceGetByNameWithDataResidency.json"
           }
         }
       },
@@ -268,15 +254,12 @@
             }
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -297,9 +280,6 @@
         "x-ms-examples": {
           "DataBoxEdgeDevicePut": {
             "$ref": "./examples/DataBoxEdgeDevicePut.json"
-          },
-          "DataBoxEdgeDevicePutWithDataResidency": {
-            "$ref": "./examples/DataBoxEdgeDevicePutWithDataResidency.json"
           }
         }
       },
@@ -318,22 +298,16 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-				  
-															 
-			
           "200": {
             "description": "Successfully deleted the resource."
           },
@@ -381,15 +355,12 @@
             }
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -430,15 +401,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -489,15 +457,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -538,15 +503,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -597,15 +559,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -660,22 +619,16 @@
             }
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-				  
-																							 
-			
           "200": {
             "description": "Successfully created or updated the bandwidth schedule.",
             "schema": {
@@ -721,15 +674,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -743,9 +693,6 @@
           "204": {
             "description": "Successfully deleted the bandwidth schedule."
           },
-				  
-									
-			
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -777,15 +724,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -833,27 +777,18 @@
             }
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-				  
-																								  
-			
           "200": {
-            "description": "Successfully updated the proactive log collection settings.",
-            "schema": {
-              "$ref": "#/definitions/DiagnosticProactiveLogCollectionSettings"
-            }
+            "description": "Successfully updated the proactive log collection settings."
           },
           "202": {
             "description": "Accepted the request to update the proactive log collection settings."
@@ -889,15 +824,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -945,15 +877,12 @@
             }
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -962,10 +891,7 @@
             "description": "Accepted the request to update the diagnostic remote support settings."
           },
           "200": {
-            "description": "Successfully updated the diagnostic remote support settings.",
-            "schema": {
-              "$ref": "#/definitions/DiagnosticRemoteSupportSettings"
-            }
+            "description": "Successfully updated the diagnostic remote support settings."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -998,22 +924,16 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-				  
-																						
-			
           "200": {
             "description": "Successfully downloaded the updates on the device."
           },
@@ -1051,15 +971,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1100,15 +1017,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1149,22 +1063,16 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-				  
-																															
-			
           "200": {
             "description": "Successfully installed updates on the device."
           },
@@ -1209,15 +1117,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1258,15 +1163,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1307,15 +1209,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1366,15 +1265,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1415,15 +1311,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1467,15 +1360,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1523,22 +1413,16 @@
             }
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-				  
-																				
-			
           "200": {
             "description": "Successfully created or updated the order.",
             "schema": {
@@ -1577,15 +1461,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1599,9 +1480,6 @@
           "204": {
             "description": "The order is already deleted."
           },
-				  
-															
-			
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1633,15 +1511,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1682,15 +1557,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1741,15 +1613,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1804,22 +1673,16 @@
             }
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-				  
-																			   
-			
           "200": {
             "description": "Successfully created or updated the role.",
             "schema": {
@@ -1865,15 +1728,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1887,9 +1747,6 @@
           "204": {
             "description": "The role is already deleted."
           },
-				  
-														   
-			
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1928,15 +1785,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1994,15 +1848,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -2064,22 +1915,16 @@
             }
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-				  
-																				
-			
           "200": {
             "description": "Successfully created or updated the addon.",
             "schema": {
@@ -2132,15 +1977,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -2154,9 +1996,6 @@
           "204": {
             "description": "The addon is already deleted."
           },
-				  
-															
-			
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -2195,15 +2034,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -2254,15 +2090,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -2317,22 +2150,16 @@
             }
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-				  
-																								
-			
           "200": {
             "description": "Successfully created or updated the metrics configuration.",
             "schema": {
@@ -2378,15 +2205,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -2431,22 +2255,16 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-				  
-																															  
-			
           "200": {
             "description": "Successfully scanned the device for updates."
           },
@@ -2493,15 +2311,12 @@
             }
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -2543,15 +2358,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -2602,15 +2414,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -2665,22 +2474,16 @@
             }
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-				  
-																				
-			
           "200": {
             "description": "Successfully created or updated the share.",
             "schema": {
@@ -2726,15 +2529,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -2748,9 +2548,6 @@
           "204": {
             "description": "The share is already deleted."
           },
-				  
-															
-			
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -2789,22 +2586,16 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-				  
-																															   
-			
           "200": {
             "description": "Successfully refreshed the share on the device."
           },
@@ -2842,15 +2633,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -2901,15 +2689,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -2964,22 +2749,16 @@
             }
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-				  
-																									 
-			
           "200": {
             "description": "Successfully created or updated the storage account credential.",
             "schema": {
@@ -3025,15 +2804,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -3047,9 +2823,6 @@
           "204": {
             "description": "The storage account credential is already deleted."
           },
-				  
-																														 
-			
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -3081,15 +2854,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -3140,15 +2910,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -3203,22 +2970,16 @@
             }
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-				  
-																						 
-			
           "200": {
             "description": "Successfully created or updated the StorageAccount.",
             "schema": {
@@ -3264,15 +3025,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -3321,15 +3079,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -3387,15 +3142,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -3457,22 +3209,16 @@
             }
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-				  
-																															  
-			
           "200": {
             "description": "Successfully created or updated the container.",
             "schema": {
@@ -3525,15 +3271,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -3589,22 +3332,16 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-				  
-																						 
-			
           "200": {
             "description": "Successfully refreshed the container on the device."
           },
@@ -3642,15 +3379,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
@@ -3708,15 +3442,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -3771,22 +3502,16 @@
             }
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-				  
-																														   
-			
           "200": {
             "description": "Successfully created or updated the trigger.",
             "schema": {
@@ -3832,15 +3557,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -3854,9 +3576,6 @@
           "204": {
             "description": "The trigger is already deleted."
           },
-				  
-															  
-			
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -3897,22 +3616,16 @@
             }
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-				  
-																						   
-			
           "200": {
             "description": "Successfully triggered support package on the device."
           },
@@ -3959,15 +3672,12 @@
             }
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -4008,15 +3718,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -4066,15 +3773,12 @@
             }
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -4115,15 +3819,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
@@ -4181,15 +3882,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -4244,22 +3942,16 @@
             }
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-				  
-																			   
-			
           "200": {
             "description": "Successfully created or updated the user.",
             "schema": {
@@ -4305,15 +3997,12 @@
             "type": "string"
           },
           {
-							  
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-							  
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -4327,9 +4016,6 @@
           "204": {
             "description": "The user is already deleted."
           },
-				  
-														   
-			
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -4372,7 +4058,6 @@
           }
         },
         "systemData": {
-											 
           "description": "Addon type",
           "$ref": "#/definitions/SystemData"
         }
@@ -4454,11 +4139,6 @@
           "description": "Properties of alert.",
           "readOnly": true,
           "x-ms-client-flatten": true
-		  
-					   
-											 
-																						  
-						  
         }
       }
     },
@@ -4707,7 +4387,6 @@
         },
         "encryptionCertThumbprint": {
           "description": "Thumbprint certificate used to encrypt \\\"Value\\\". If the value is unencrypted, it will be null.",
-						   
           "x-ms-secret": true,
           "type": "string"
         },
@@ -4788,11 +4467,6 @@
           "$ref": "#/definitions/BandwidthScheduleProperties",
           "description": "The properties of the bandwidth schedule.",
           "x-ms-client-flatten": true
-		  
-					   
-											 
-																									  
-						  
         }
       }
     },
@@ -4890,7 +4564,7 @@
       }
     },
     "CloudEdgeManagementRole": {
-       "description": "The preview of Virtual Machine Cloud Management from the Azure supports deploying and managing VMs on your Azure Stack Edge device from Azure Portal. \r\nFor more information, refer to: https://docs.microsoft.com/en-us/azure/databox-online/azure-stack-edge-gpu-virtual-machine-overview\r\nBy using this feature, you agree to the preview legal terms. See the https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/ for additional details.",
+      "description": "The preview of Virtual Machine Cloud Management from the Azure supports deploying and managing VMs on your Azure Stack Edge device from Azure Portal. \r\nFor more information, refer to: https://docs.microsoft.com/en-us/azure/databox-online/azure-stack-edge-gpu-virtual-machine-overview\r\nBy using this feature, you agree to the preview legal terms. See the https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/ for additional details.",
       "required": [
         "kind"
       ],
@@ -5094,11 +4768,6 @@
           "$ref": "#/definitions/ContainerProperties",
           "description": "The container properties.",
           "x-ms-client-flatten": true
-		  
-					   
-											 
-																							  
-						  
         }
       }
     },
@@ -5219,7 +4888,6 @@
             "AzureModularDataCentre"
           ],
           "type": "string",
-						   
           "x-ms-enum": {
             "name": "DataBoxEdgeDeviceKind",
             "modelAsString": true
@@ -5249,11 +4917,6 @@
           "$ref": "#/definitions/DataBoxEdgeDeviceExtendedInfoProperties",
           "description": "The extended info properties.",
           "x-ms-client-flatten": true
-		  
-					   
-											 
-																									  
-						  
         }
       }
     },
@@ -5351,45 +5014,6 @@
             "$ref": "#/definitions/Secret"
           },
           "readOnly": true
-		},
-        "clusterWitnessType": {
-          "description": "Cluster Witness Type",
-          "enum": [
-            "None",
-            "Cloud",
-            "FileShare"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ClusterWitnessType",
-            "modelAsString": true
-          }
-        },
-        "fileShareWitnessLocation": {
-          "description": "The witness location of file share.",
-          "type": "string",
-          "readOnly": true
-        },
-        "fileShareWitnessUsername": {
-          "description": "The username of file share.",
-          "type": "string",
-          "readOnly": true
-        },
-        "cloudWitnessStorageAccountName": {
-          "description": "The Cloud Witness Storage account name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "cloudWitnessContainerName": {
-          "description": "The Container for cloud witness in the storage account.",
-          "type": "string",
-          "readOnly": true
-        },
-        "cloudWitnessStorageEndpoint": {
-          "description": "The Azure service endpoint of the cloud witness storage account.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -5455,7 +5079,6 @@
             "Maintenance"
           ],
           "type": "string",
-						   
           "x-ms-enum": {
             "name": "DataBoxEdgeDeviceStatus",
             "modelAsString": true
@@ -5613,31 +5236,30 @@
           "description": "The Sku name.",
           "enum": [
             "Gateway",
-				   
-						
-							
-							   
-								   
-							   
-								   
-				  
-				  
-						
-				  
-						
-						 
-						 
-						  
-							  
-							
-								
-							
-						  
-						
-						
-				  
+            "Edge",
+            "TEA_1Node",
+            "TEA_1Node_UPS",
+            "TEA_1Node_Heater",
+            "TEA_1Node_UPS_Heater",
+            "TEA_4Node_Heater",
+            "TEA_4Node_UPS_Heater",
+            "TMA",
+            "TDC",
+            "TCA_Small",
+            "GPU",
+            "TCA_Large",
+            "EdgeP_Base",
+            "EdgeP_High",
+            "EdgePR_Base",
+            "EdgePR_Base_UPS",
+            "EP2_64_1VPU_W",
+            "EP2_128_1T4_Mx1_W",
+            "EP2_256_2T4_W",
+            "EdgeMR_Mini",
+            "RCA_Small",
+            "RCA_Large",
+            "RDC",
             "Management"
-						
           ],
           "type": "string",
           "readOnly": true,
@@ -5856,11 +5478,6 @@
           "$ref": "#/definitions/ProactiveLogCollectionSettingsProperties",
           "description": "Properties of the diagnostic proactive log collection settings.",
           "x-ms-client-flatten": true
-		  
-					   
-											 
-																															 
-						  
         }
       }
     },
@@ -5884,11 +5501,6 @@
           "$ref": "#/definitions/DiagnosticRemoteSupportSettingsProperties",
           "description": "Properties of the remote support  settings.",
           "x-ms-client-flatten": true
-		  
-					   
-											 
-																		  
-						  
         }
       }
     },
@@ -6072,7 +5684,6 @@
         },
         "privateKey": {
           "description": "Gets or sets base64 encoded private part of the certificate,\r\nneeded to form the activation key",
-						   
           "x-ms-secret": true,
           "type": "string"
         },
@@ -6651,7 +6262,7 @@
       }
     },
     "KubernetesRole": {
-      "description": "Kubernetes role.",
+      "description": "The limited preview of Kubernetes Cluster Management from the Azure supports:\r\n1. Using a simple turn-key option in Azure Portal, deploy a Kubernetes cluster on your Azure Stack Edge device. \r\n2. Configure Kubernetes cluster running on your device with Arc enabled Kubernetes with a click of a button in the Azure Portal. \r\n Azure Arc enables organizations to view, manage, and govern their on-premises Kubernetes clusters using the Azure Portal, command line tools, and APIs.\r\n3. Easily configure Persistent Volumes using SMB and NFS shares for storing container data. \r\n For more information, refer to the document here: https://databoxupdatepackages.blob.core.windows.net/documentation/Microsoft-Azure-Stack-Edge-K8-Cloud-Management-20210323.pdf \r\n Or Demo: https://databoxupdatepackages.blob.core.windows.net/documentation/Microsoft-Azure-Stack-Edge-K8S-Cloud-Management-20210323.mp4\r\n By using this feature, you agree to the preview legal terms. See the https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/",
       "required": [
         "kind"
       ],
@@ -7220,11 +6831,6 @@
           "$ref": "#/definitions/MonitoringMetricConfigurationProperties",
           "description": "The metric setting properties.",
           "x-ms-client-flatten": true
-		  
-					   
-											 
-																											
-						  
         }
       }
     },
@@ -7472,11 +7078,6 @@
           "description": "The properties of network settings of a device.",
           "readOnly": true,
           "x-ms-client-flatten": true
-		  
-					   
-											 
-																									
-						  
         }
       }
     },
@@ -7706,13 +7307,7 @@
         }
       ],
       "properties": {
-				 
-															 
-						   
-						  
-		  
         "systemData": {
-											 
           "description": "Order configured on ASE resource",
           "$ref": "#/definitions/SystemData"
         },
@@ -7750,11 +7345,6 @@
       ],
       "type": "object",
       "properties": {
-					
-															 
-						   
-						  
-		  
         "contactInformation": {
           "$ref": "#/definitions/ContactDetails",
           "description": "The contact details."
@@ -8167,7 +7757,6 @@
           }
         },
         "systemData": {
-											 
           "description": "Role configured on ASE resource",
           "$ref": "#/definitions/SystemData"
         }
@@ -8287,11 +7876,6 @@
           "$ref": "#/definitions/ShareProperties",
           "description": "The share properties.",
           "x-ms-client-flatten": true
-		  
-					   
-											 
-																						  
-						  
         }
       }
     },
@@ -8449,7 +8033,7 @@
           "description": "SKU name.",
           "enum": [
             "Gateway",
-			"Edge",
+            "Edge",
             "TEA_1Node",
             "TEA_1Node_UPS",
             "TEA_1Node_Heater",
@@ -8472,8 +8056,7 @@
             "RCA_Small",
             "RCA_Large",
             "RDC",
-			"Management",
-			"EdgeMR_TCP"
+            "Management"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -8672,11 +8255,6 @@
           "$ref": "#/definitions/StorageAccountProperties",
           "description": "The Storage Account properties.",
           "x-ms-client-flatten": true
-		  
-					   
-											 
-																								   
-						  
         }
       }
     },
@@ -8700,11 +8278,6 @@
           "$ref": "#/definitions/StorageAccountCredentialProperties",
           "description": "The storage account credential properties.",
           "x-ms-client-flatten": true
-		  
-					   
-											 
-																											 
-						  
         }
       }
     },
@@ -8903,7 +8476,7 @@
       "properties": {
         "minimumTimeStamp": {
           "format": "date-time",
-          "description": "Start of the timespan of the log collection",
+          "description": "MinimumTimeStamp from where logs need to be collected",
           "type": "string"
         },
         "maximumTimeStamp": {
@@ -8933,12 +8506,10 @@
       "readOnly": true,
       "properties": {
         "createdBy": {
-																						   
           "type": "string",
           "description": "The identity that created the resource."
         },
         "createdByType": {
-																											   
           "type": "string",
           "description": "The type of identity that created the resource.",
           "enum": [
@@ -8953,19 +8524,15 @@
           }
         },
         "createdAt": {
-								
-																	 
           "type": "string",
           "format": "date-time",
           "description": "The timestamp of resource creation (UTC)."
         },
         "lastModifiedBy": {
-																								 
           "type": "string",
           "description": "The identity that last modified the resource."
         },
         "lastModifiedByType": {
-																													 
           "type": "string",
           "description": "The type of identity that last modified the resource.",
           "enum": [
@@ -8980,8 +8547,6 @@
           }
         },
         "lastModifiedAt": {
-								
-																			  
           "type": "string",
           "format": "date-time",
           "description": "The type of identity that last modified the resource."
@@ -9037,11 +8602,6 @@
             "name": "TriggerEventType",
             "modelAsString": true
           }
-		  
-					   
-											 
-																							
-						  
         }
       },
       "discriminator": "kind"
@@ -9259,11 +8819,6 @@
           "$ref": "#/definitions/UpdateSummaryProperties",
           "description": "The device update information summary.",
           "x-ms-client-flatten": true
-		  
-					   
-											 
-																								  
-						  
         }
       }
     },
@@ -9545,11 +9100,6 @@
           "$ref": "#/definitions/UserProperties",
           "description": "The storage account credential properties.",
           "x-ms-client-flatten": true
-		  
-					   
-											 
-																						 
-						  
         }
       }
     },
