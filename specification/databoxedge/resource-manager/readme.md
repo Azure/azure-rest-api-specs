@@ -1,4 +1,4 @@
-cls# DataBoxEdge
+# DataBoxEdge
 
 > see https://aka.ms/autorest
 
