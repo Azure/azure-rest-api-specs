@@ -1283,6 +1283,93 @@
           "application/json"
         ]
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Automanage/servicePrincipals": {
+      "get": {
+        "tags": [
+          "servicePrincipals"
+        ],
+        "operationId": "ServicePrincipals_ListBySubscription",
+        "description": "Get the Automanage AAD first party Application Service Principal details for the subscription id.",
+        "x-ms-examples": {
+          "List service principal by subscription": {
+            "$ref": "./examples/listServicePrincipalBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the Automanage ADD first party Application Service Principal details for the subscription.",
+            "schema": {
+              "$ref": "#/definitions/ServicePrincipalListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Automanage/servicePrincipals/default": {
+      "get": {
+        "tags": [
+          "servicePrincipals"
+        ],
+        "operationId": "ServicePrincipals_Get",
+        "description": "Get the Automanage AAD first party Application Service Principal details for the subscription id.",
+        "x-ms-examples": {
+          "Get service principal": {
+            "$ref": "./examples/getServicePrincipal.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the Automanage ADD first party Application Service Principal details for the subscription.",
+            "schema": {
+              "$ref": "#/definitions/ServicePrincipal"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
     }
   },
   "definitions": {
@@ -1609,6 +1696,57 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail",
           "readOnly": true,
           "description": "Error message, if any, returned when deploying the resource."
+        }
+      }
+    },
+    "ServicePrincipalListResult": {
+      "description": "The list of ServicePrincipals.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of servicePrincipals.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServicePrincipal"
+          }
+        }
+      }
+    },
+    "ServicePrincipal": {
+      "description": "The Service Principal Id for the subscription.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "title": "Properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServicePrincipalProperties",
+          "description": "The Service Principal properties for the subscription"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true,
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ServicePrincipalProperties": {
+      "description": "The Service Principal properties for the subscription.",
+      "type": "object",
+      "properties": {
+        "servicePrincipalId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Service Principal Id for the subscription."
+        },
+        "authorizationSet": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Returns the contributor RBAC Role exist or not for the Service Principal Id."
         }
       }
     }
