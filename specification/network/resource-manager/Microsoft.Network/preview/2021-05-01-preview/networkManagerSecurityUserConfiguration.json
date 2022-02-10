@@ -112,7 +112,7 @@
           "200": {
             "description": "Successful operation",
             "schema": {
-              "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/SecurityConfiguration"
+              "$ref": "#/definitions/SecurityUserConfiguration"
             }
           },
           "default": {
@@ -140,7 +140,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/SecurityConfiguration"
+              "$ref": "#/definitions/SecurityUserConfiguration"
             },
             "description": "The security user configuration to create or update"
           }
@@ -149,13 +149,13 @@
           "200": {
             "description": "Updated Configuration",
             "schema": {
-              "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/SecurityConfiguration"
+              "$ref": "#/definitions/SecurityUserConfiguration"
             }
           },
           "201": {
             "description": "Created Configuration",
             "schema": {
-              "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/SecurityConfiguration"
+              "$ref": "#/definitions/SecurityUserConfiguration"
             }
           },
           "default": {
@@ -237,7 +237,7 @@
           "200": {
             "description": "Get successful. The operation returns all ruleCollections in the specified security configuration, in a paginated format",
             "schema": {
-              "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/RuleCollectionListResult"
+              "$ref": "#/definitions/UserRuleCollectionListResult"
             }
           },
           "default": {
@@ -288,7 +288,7 @@
           "200": {
             "description": "Successful operation",
             "schema": {
-              "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/RuleCollection"
+              "$ref": "#/definitions/UserRuleCollection"
             }
           },
           "default": {
@@ -316,7 +316,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/RuleCollection"
+              "$ref": "#/definitions/UserRuleCollection"
             },
             "description": "The User Rule Collection to create or update"
           }
@@ -325,13 +325,13 @@
           "200": {
             "description": "Updated User Rule Collection",
             "schema": {
-              "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/RuleCollection"
+              "$ref": "#/definitions/UserRuleCollection"
             }
           },
           "201": {
             "description": "Created User Rule Collection",
             "schema": {
-              "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/RuleCollection"
+              "$ref": "#/definitions/UserRuleCollection"
             }
           },
           "default": {
@@ -637,6 +637,76 @@
         }
       },
       "description": "A list of network manager security user configurations"
+    },
+    "UserRuleCollectionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserRuleCollection"
+          },
+          "description": "A list of network manager security user configuration rule collections"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next set of results."
+        }
+      },
+      "description": "Security user configuration rule collection list result."
+    },
+    "UserRuleCollection": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UserRuleCollectionPropertiesFormat",
+          "description": "Indicates the properties for the network manager user rule collection."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system metadata related to this resource.",
+          "$ref": "./network.json#/definitions/SystemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Defines the user rule collection."
+    },
+    "UserRuleCollectionPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "A display name of the user rule collection."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the user rule collection."
+        },
+        "appliesToGroups": {
+          "type": "array",
+          "x-ms-identifiers": [
+            "networkGroupId"
+          ],
+          "items": {
+            "$ref": "#/definitions/NetworkManagerSecurityGroupItem"
+          },
+          "description": "Groups for configuration"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource."
+        }
+      },
+      "required": [
+        "appliesToGroups"
+      ],
+      "description": "Defines the user rule collection properties."
     },
     "BaseUserRule": {
       "type": "object",

@@ -650,30 +650,30 @@
       },
       "description": "security configuration admin rule list result."
     },
-    "RuleCollectionListResult": {
+    "AdminRuleCollectionListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/RuleCollection"
+            "$ref": "#/definitions/AdminRuleCollection"
           },
-          "description": "A list of network manager security configuration rule collections"
+          "description": "A list of network manager security admin configuration rule collections"
         },
         "nextLink": {
           "type": "string",
           "description": "Gets the URL to get the next set of results."
         }
       },
-      "description": "Security configuration rule collection list result."
+      "description": "Security admin configuration rule collection list result."
     },
-    "RuleCollection": {
+    "AdminRuleCollection": {
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RuleCollectionPropertiesFormat",
-          "description": "Indicates the properties for the network manager rule collection."
+          "$ref": "#/definitions/AdminRuleCollectionPropertiesFormat",
+          "description": "Indicates the properties for the network manager admin rule collection."
         },
         "systemData": {
           "readOnly": true,
@@ -686,18 +686,18 @@
           "$ref": "./network.json#/definitions/ProxyResource"
         }
       ],
-      "description": "Defines the rule collection."
+      "description": "Defines the admin rule collection."
     },
-    "RuleCollectionPropertiesFormat": {
+    "AdminRuleCollectionPropertiesFormat": {
       "type": "object",
       "properties": {
         "displayName": {
           "type": "string",
-          "description": "A display name of the rule collection."
+          "description": "A display name of the admin rule collection."
         },
         "description": {
           "type": "string",
-          "description": "A description of the rule collection."
+          "description": "A description of the admin rule collection."
         },
         "appliesToGroups": {
           "type": "array",
@@ -718,7 +718,7 @@
       "required": [
         "appliesToGroups"
       ],
-      "description": "Defines the rule collection properties."
+      "description": "Defines the admin rule collection properties."
     },
     "BaseAdminRule": {
       "type": "object",
