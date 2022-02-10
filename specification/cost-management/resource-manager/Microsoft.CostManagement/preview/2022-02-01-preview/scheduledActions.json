@@ -1,0 +1,998 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "CostManagementClient",
+      "version": "2022-02-01-preview"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+      "https"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "security": [
+      {
+        "azure_auth": [
+          "user_impersonation"
+        ]
+      }
+    ],
+    "securityDefinitions": {
+      "azure_auth": {
+        "type": "oauth2",
+        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+        "flow": "implicit",
+        "description": "Azure Active Directory OAuth2 Flow.",
+        "scopes": {
+          "user_impersonation": "impersonate your user account"
+        }
+      }
+    },
+    "paths": {
+      "/providers/Microsoft.CostManagement/scheduledActions": {
+        "get": {
+          "tags": [
+            "ScheduledActions"
+          ],
+          "operationId": "ScheduledActions_List",
+          "description": "Lists all private scheduled actions.",
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+          },
+          "x-ms-examples": {
+            "PrivateScheduledActionsList": {
+              "$ref": "./examples/scheduledActions-list-private.json"
+            },
+            "PrivateScheduledActionsListFilterByViewId": {
+              "$ref": "./examples/scheduledActions-listWithFilter-private.json"
+            }
+          },
+          "parameters": [
+            {
+              "$ref": "#/parameters/apiVersionParameter"
+            },
+            {
+              "name": "$filter",
+              "description": "May be used to filter scheduled actions by properties/viewId. Supported operator is 'eq'.",
+              "in": "query",
+              "required": false,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK. The request has succeeded.",
+              "schema": {
+                "$ref": "#/definitions/ScheduledActionListResult"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          }
+        }
+      },
+      "/{scope}/providers/Microsoft.CostManagement/scheduledActions": {
+        "get": {
+          "tags": [
+            "ScheduledActions"
+          ],
+          "operationId": "ScheduledActions_ListByScope",
+          "description": "Lists all scheduled actions at the given scope.",
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+          },
+          "x-ms-examples": {
+            "ScheduledActionsListByScope": {
+              "$ref": "./examples/scheduledActions-list-shared.json"
+            },
+            "ScheduledActionsListByScopeFilterByViewId": {
+              "$ref": "./examples/scheduledActions-listWithFilter-shared.json"
+            }
+          },
+          "parameters": [
+            {
+              "$ref": "#/parameters/scopeParameter"
+            },
+            {
+              "$ref": "#/parameters/apiVersionParameter"
+            },
+            {
+              "name": "$filter",
+              "description": "May be used to filter scheduled actions by properties/viewId. Supported operator is 'eq'.",
+              "in": "query",
+              "required": false,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK. The request has succeeded.",
+              "schema": {
+                "$ref": "#/definitions/ScheduledActionListResult"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          }
+        }
+      },
+      "/providers/Microsoft.CostManagement/scheduledActions/{name}": {
+        "put": {
+          "tags": [
+            "ScheduledActions"
+          ],
+          "operationId": "ScheduledActions_CreateOrUpdate",
+          "description": "Create or update a private scheduled action.",
+          "x-ms-examples": {
+            "CreateOrUpdatePrivateScheduledAction": {
+              "$ref": "./examples/scheduledAction-createOrUpdate-private.json"
+            }
+          },
+          "parameters": [
+            {
+              "$ref": "#/parameters/scheduledActionNameParameter"
+            },
+            {
+              "$ref": "#/parameters/apiVersionParameter"
+            },
+            {
+              "name": "scheduledAction",
+              "description": "Scheduled action to be created or updated.",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/ScheduledAction"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK. The request has succeeded.",
+              "schema": {
+                "$ref": "#/definitions/ScheduledAction"
+              }
+            },
+            "201": {
+              "description": "Created.",
+              "schema": {
+                "$ref": "#/definitions/ScheduledAction"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "ScheduledActions"
+          ],
+          "operationId": "ScheduledActions_Get",
+          "description": "Gets the scheduled action by name.",
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+          },
+          "x-ms-examples": {
+            "PrivateScheduledAction": {
+              "$ref": "./examples/scheduledAction-get-private.json"
+            }
+          },
+          "parameters": [
+            {
+              "$ref": "#/parameters/scheduledActionNameParameter"
+            },
+            {
+              "$ref": "#/parameters/apiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK. The request has succeeded.",
+              "schema": {
+                "$ref": "#/definitions/ScheduledAction"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "ScheduledActions"
+          ],
+          "operationId": "ScheduledActions_Delete",
+          "description": "The operation to delete a scheduled action.",
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+          },
+          "x-ms-examples": {
+            "PrivateScheduledActionDelete": {
+              "$ref": "./examples/scheduledAction-delete-private.json"
+            }
+          },
+          "parameters": [
+            {
+              "$ref": "#/parameters/scheduledActionNameParameter"
+            },
+            {
+              "$ref": "#/parameters/apiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK. The request has succeeded."
+            },
+            "204": {
+              "description": "NoContent. Resource is not available."
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "/{scope}/providers/Microsoft.CostManagement/scheduledActions/{name}": {
+        "put": {
+          "tags": [
+            "ScheduledActions"
+          ],
+          "operationId": "ScheduledActions_CreateOrUpdateByScope",
+          "description": "Create or update a shared scheduled action with in the given scope.",
+          "x-ms-examples": {
+            "CreateOrUpdateScheduledActionByScope": {
+              "$ref": "./examples/scheduledAction-createOrUpdate-shared.json"
+            }
+          },
+          "parameters": [
+            {
+              "$ref": "#/parameters/scopeParameter"
+            },
+            {
+              "$ref": "#/parameters/scheduledActionNameParameter"
+            },
+            {
+              "$ref": "#/parameters/apiVersionParameter"
+            },
+            {
+              "name": "scheduledAction",
+              "description": "Scheduled action to be created or updated.",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/ScheduledAction"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK. The request has succeeded.",
+              "schema": {
+                "$ref": "#/definitions/ScheduledAction"
+              }
+            },
+            "201": {
+              "description": "Created.",
+              "schema": {
+                "$ref": "#/definitions/ScheduledAction"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "ScheduledActions"
+          ],
+          "operationId": "ScheduledActions_GetByScope",
+          "description": "Gets the scheduled action from given scope by name.",
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+          },
+          "x-ms-examples": {
+            "ScheduledActionByScope": {
+              "$ref": "./examples/scheduledAction-get-shared.json"
+            }
+          },
+          "parameters": [
+            {
+              "$ref": "#/parameters/scopeParameter"
+            },
+            {
+              "$ref": "#/parameters/scheduledActionNameParameter"
+            },
+            {
+              "$ref": "#/parameters/apiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK. The request has succeeded.",
+              "schema": {
+                "$ref": "#/definitions/ScheduledAction"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "ScheduledActions"
+          ],
+          "operationId": "ScheduledActions_DeleteByScope",
+          "description": "The operation to delete a scheduled action from given scope.",
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+          },
+          "x-ms-examples": {
+            "ScheduledActionDeleteByScope": {
+              "$ref": "./examples/scheduledAction-delete-shared.json"
+            }
+          },
+          "parameters": [
+            {
+              "$ref": "#/parameters/scopeParameter"
+            },
+            {
+              "$ref": "#/parameters/scheduledActionNameParameter"
+            },
+            {
+              "$ref": "#/parameters/apiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK. The request has succeeded."
+            },
+            "204": {
+              "description": "NoContent. Resource is not available."
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "/providers/Microsoft.CostManagement/scheduledActions/{name}/execute": {
+        "post": {
+          "tags": [
+            "ScheduledActions"
+          ],
+          "operationId": "ScheduledActions_Execute",
+          "description": "Execute a private scheduled action.",
+          "x-ms-examples": {
+            "ScheduledActionExecute": {
+              "$ref": "./examples/scheduledAction-execute-private.json"
+            }
+          },
+          "parameters": [
+            {
+              "$ref": "#/parameters/scheduledActionNameParameter"
+            },
+            {
+              "$ref": "#/parameters/apiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK. The request has succeeded. It might take up to an hour to receive the email."
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "/{scope}/providers/Microsoft.CostManagement/scheduledActions/{name}/execute": {
+        "post": {
+          "tags": [
+            "ScheduledActions"
+          ],
+          "operationId": "ScheduledActions_ExecuteByScope",
+          "description": "Execute a shared scheduled action from the specified scope.",
+          "x-ms-examples": {
+            "ScheduledActionExecuteByScope": {
+              "$ref": "./examples/scheduledAction-execute-shared.json"
+            }
+          },
+          "parameters": [
+            {
+              "$ref": "#/parameters/scopeParameter"
+            },
+            {
+              "$ref": "#/parameters/scheduledActionNameParameter"
+            },
+            {
+              "$ref": "#/parameters/apiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK. The request has succeeded. It might take up to an hour to receive cost analysis information."
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "/providers/Microsoft.CostManagement/checkNameAvailability": {
+        "post": {
+          "tags": [
+            "ScheduledActions"
+          ],
+          "operationId": "ScheduledActions_CheckNameAvailability",
+          "description": "Checks availability and correctness of a name for a scheduled action.",
+          "x-ms-examples": {
+            "ScheduledActionCheckNameAvailability": {
+              "$ref": "./examples/checkNameAvailability-private-scheduledAction.json"
+            }
+          },
+          "parameters": [
+            {
+              "$ref": "#/parameters/apiVersionParameter"
+            },
+            {
+              "name": "scheduledActionCheckNameAvailabilityRequest",
+              "description": "Scheduled action to be created or updated.",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/ScheduledActionCheckNameAvailabilityRequest"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Response of scheduled action name availability.",
+              "schema": {
+                "$ref": "#/definitions/ScheduledActionCheckNameAvailabilityResponse"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "/{scope}/providers/Microsoft.CostManagement/checkNameAvailability": {
+        "post": {
+          "tags": [
+            "ScheduledActions"
+          ],
+          "operationId": "ScheduledActions_CheckNameAvailabilityByScope",
+          "description": "Checks availability and correctness of a name for a scheduled action within the specified scope.",
+          "x-ms-examples": {
+            "ScheduledActionCheckNameAvailabilityByScope": {
+              "$ref": "./examples/checkNameAvailability-shared-scheduledAction.json"
+            }
+          },
+          "parameters": [
+            {
+              "$ref": "#/parameters/scopeParameter"
+            },
+            {
+              "$ref": "#/parameters/apiVersionParameter"
+            },
+            {
+              "name": "checkNameAvailabilityRequest",
+              "description": "Scheduled action to be created or updated.",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/CheckNameAvailabilityRequest"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Response of scheduled action name availability.",
+              "schema": {
+                "$ref": "#/definitions/CheckNameAvailabilityResponse"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+        "CheckNameAvailabilityRequest": {
+            "type": "object",
+            "description": "The scheduled action check name availability request.",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Scheduled action name."
+              },
+              "type": {
+                "type": "string",
+                "description": "Resource type. This is expected to be Microsoft.CostManagement/ScheduledActions"
+              }
+            }
+          },
+          "CheckNameAvailabilityResponse": {
+            "type": "object",
+            "description": "The scheduled action check name availability response.",
+            "properties": {
+              "nameAvailable": {
+                "type": "boolean",
+                "description": "Whether this scheduled action name is available."
+              },
+              "reason": {
+                "$ref": "#/definitions/Reason",
+                "description": "The reason for the response."
+              },
+              "message": {
+                "type": "string",
+                "description": "Error message if the name is not available."
+              }
+            }
+          },
+        "DaysOfWeek": {
+            "type": "string",
+            "description": "Week day names in english.",
+            "enum": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "x-ms-enum": {
+              "name": "DaysOfWeek",
+              "modelAsString": true
+            }
+          },
+      "ErrorDetails": {
+          "type":"object",
+        "description": "The details of the error.",
+        "properties": {
+          "code": {
+            "description": "Error code.",
+            "type": "string",
+            "readOnly": true
+          },
+          "message": {
+            "description": "Error message indicating why the operation failed.",
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      },
+      "ErrorResponse": {
+        "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"x-ms-ratelimit-microsoft.consumption-retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header.",
+        "type": "object",
+        "properties": {
+          "error": {
+            "description": "The details of the error.",
+            "$ref": "#/definitions/ErrorDetails"
+          }
+        }
+      },
+      "FileDestination": {
+        "type": "string",
+        "description": "Current status of the scheduled action.",
+        "enum": [
+          "Csv"          
+        ],
+        "x-ms-enum": {
+          "name": "FileFormat",
+          "modelAsString": true,
+          "values": [
+            {
+              "value": "Csv",
+              "description": "Copy data into Csv file.",
+              "name": "Csv"
+            }
+          ]
+        }
+    },    
+      "NotificationProperties": {
+        "type": "object",
+        "description": "The properties of the scheduled action notification.",
+        "required": [
+          "to",
+          "subject"
+        ],
+        "properties": {
+          "to": {
+            "description": "Array of email addresses.",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
+            },
+            "minItems": 1,
+            "maxItems": 20
+          },
+          "message": {
+            "description": "Message of a scheduled action email. Optional. The length is limited to 250 characters.",
+            "type": "string"
+          },
+          "subject": {
+            "description": "Subject of a scheduled action email. The length is limited to 70 characters.",
+            "type": "string"
+          }
+        }
+      },
+      "ProxyResource": {
+        "description": "The Resource model definition.",
+        "properties": {
+          "id": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Resource Id."
+          },
+          "name": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Resource name."
+          },
+          "type": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Resource type."
+          },
+          "kind": {
+            "$ref": "#/definitions/ScheduledActionKind",
+            "description": "Kind of the scheduled action."
+          },
+          "eTag": {
+            "type": "string",
+            "description": "eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not."
+          },
+          "systemData": {
+            "type": "object",
+            "description": "Resource metadata properties.",
+            "$ref": "#/definitions/SystemDataDefinition"
+          }
+        },
+        "type":"object",
+        "x-ms-azure-resource": true
+      },
+      "Reason": {
+        "type": "string",
+        "description": "Check name availability response reason.",
+        "enum": [
+          "Available",
+          "AlreadyExists"
+        ],
+        "x-ms-enum": {
+          "name": "Reason",
+          "modelAsString": true
+        }
+      },
+      "ScheduledAction": {
+        "description": "Scheduled action definition.",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/ProxyResource"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/ScheduledActionProperties",
+            "title": "Scheduled action properties"
+          }
+        }
+      },
+      "ScheduledActionKind": {
+        "type": "string",
+        "description": "Kind of the scheduled action.",
+        "enum": [
+          "Email"    
+        ],
+        "x-ms-enum": {
+          "name": "ScheduledActionKind",
+          "modelAsString": true,
+          "values": [
+            {
+              "value": "Email",
+              "description": "Cost analysis information will be emailed.",
+              "name": "Email"
+            }            
+          ]
+        }
+      },
+      "ScheduledActionListResult": {
+        "description": "Scheduled actions list result. It contains a list of scheduled actions.",
+        "type": "object",
+        "properties": {
+          "value": {
+            "description": "The list of scheduled actions.",
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/definitions/ScheduledAction"
+            }
+          },
+          "nextLink": {
+            "description": "The link (url) to the next page of results.",
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      },      
+      "ScheduledActionProperties": {
+        "type": "object",
+        "description": "The properties of the scheduled action.",
+        "required": [
+          "displayName",
+          "notification",
+          "schedule",
+          "status",
+          "viewId"       
+        ],
+        "properties": {
+          "displayName": {
+            "description": "Scheduled action name.",
+            "type": "string"
+          },
+          "fileDestination": {
+            "description": "Destination format of the view data.",
+            "type": "string"
+          },
+          "notification": {
+            "description": "Notification properties based on scheduled action kind.",
+            "$ref": "#/definitions/NotificationProperties"
+          },
+          "schedule": {
+            "description": "Schedule of the scheduled action.",
+            "$ref": "#/definitions/ScheduleProperties"
+          },
+          "scope": {
+            "description": "Cost Management scope like 'subscriptions/{subscriptionId}' for subscription scope, 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for BillingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}' for InvoiceSection scope, 'providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope, '/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountName}' for ExternalBillingAccount scope, and '/providers/Microsoft.CostManagement/externalSubscriptions/{externalSubscriptionName}' for ExternalSubscription scope.",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/definitions/ScheduledActionStatus",
+            "description": "Status of the scheduled action."
+          },
+          "viewId": {
+            "description": "Cost analysis viewId used for scheduled action. For example, '/providers/Microsoft.CostManagement/views/swaggerExample'",
+            "type": "string"
+          }      
+        }
+      },
+      "ScheduledActionStatus": {
+        "type": "string",
+        "description": "Current status of the scheduled action.",
+        "enum": [
+          "Enabled",
+          "Disabled"
+        ],
+        "x-ms-enum": {
+          "name": "ScheduledActionStatus",
+          "modelAsString": true,
+          "values": [
+            {
+              "value": "Disabled",
+              "description": "Scheduled action is saved but not sending emails.",
+              "name": "Disabled"
+            },
+            {
+              "value": "Enabled",
+              "description": "Rule is saved and sending emails.",
+              "name": "Enabled"
+            }
+          ]
+        }
+      }, 
+       "ScheduleFrequency": {
+        "type": "string",
+        "description": "Frequency of the schedule.",
+        "enum": [
+          "Daily",
+          "Weekly",
+          "Monthly"
+        ],
+        "x-ms-enum": {
+          "name": "ScheduleFrequency",
+          "modelAsString": true,
+          "values": [
+            {
+              "value": "Daily",
+              "description": "Cost analysis data will be emailed every day.",
+              "name": "Daily"
+            },
+            {
+              "value": "Weekly",
+              "description": "Cost analysis data will be emailed every week.",
+              "name": "Weekly"
+            },
+            {
+              "value": "Monthly",
+              "description": "Cost analysis data will be emailed every month.",
+              "name": "Monthly"
+            }
+          ]
+        }
+      },
+      "ScheduleProperties": {
+        "type": "object",
+        "description": "The properties of the schedule.",
+        "required": [
+            "endDate",
+          "frequency",
+          "startDate"          
+        ],
+        "properties": {
+          "frequency": {
+            "$ref": "#/definitions/ScheduleFrequency",
+            "description": "Frequency of the schedule."
+          },
+          "hourOfDay": {
+            "type": "integer",
+            "description": "Local time at which cost analysis data will be emailed.",
+            "format": "int32"
+          },
+          "daysOfWeek": {
+            "description": "Day names in english on which cost analysis data will be emailed. This property is applicable when frequency is Weekly or Monthly.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/DaysOfWeek"
+            }
+          },
+          "weeksOfMonth": {
+            "description": "Weeks in which cost analysis data will be emailed. This property is applicable when frequency is Monthly and used in combination with daysOfWeek.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/WeeksOfMonth"
+            }
+          },
+          "dayOfMonth": {
+            "type": "integer",
+            "description": "UTC day on which cost analysis data will be emailed. Must be between 1 and 31. This property is applicable when frequency is Monthly and overrides weeksOfMonth or daysOfWeek.",
+            "format": "int32"
+          },
+          "startDate": {
+            "description": "The start date and time for the scheduled action (UTC).",
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "description": "The end date and time for the scheduled action (UTC).",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }, 
+      "SystemDataDefinition": {
+        "description": "System metadata definition.",
+        "properties": {
+          "createdBy": {
+            "readOnly": true,
+            "type": "string",
+            "description": "String identifier for the identity that created the resource."
+          },
+          "createdByType": {
+            "readOnly": true,
+            "type": "string",
+            "description": "The type of identity that created the resource: user, application, managedIdentity"
+          },
+          "createdAt": {
+            "readOnly": true,
+            "type": "string",
+            "format": "date-time",
+            "description": "The timestamp of resource creation (UTC)."
+          },
+          "lastModifiedBy": {
+            "readOnly": true,
+            "type": "string",
+            "description": "String identifier for the identity that last modified the resource."
+          },
+          "lastModifiedByType": {
+            "readOnly": true,
+            "type": "string",
+            "description": "The type of identity that last modified the resource: user, application, managedIdentity"
+          },
+          "lastModifiedAt": {
+            "readOnly": true,
+            "type": "string",
+            "format": "date-time",
+            "description": "The timestamp of resource last modification (UTC)"
+          }
+        },
+        "type":"object"
+      },
+      "WeeksOfMonth": {
+        "type": "string",
+        "description": "Weeks of month.",
+        "enum": [
+          "First",
+          "Second",
+          "Third",
+          "Fourth",
+          "Last"
+        ],
+        "x-ms-enum": {
+          "name": "WeeksOfMonth",
+          "modelAsString": true
+        }
+      }  
+    },
+    "parameters": {
+      "apiVersionParameter": {
+        "name": "api-version",
+        "in": "query",
+        "required": true,
+        "type": "string",
+        "description": "Version of the API to be used with the client request (e.g. '2022-02-01-preview')."
+      },
+      "scopeParameter": {
+        "name": "scope",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The scope associated with scheduled action operations. This includes 'subscriptions/{subscriptionId}' for subscription scope, 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for BillingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}' for InvoiceSection scope, 'providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope, 'providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountName}' for External Billing Account scope and 'providers/Microsoft.CostManagement/externalSubscriptions/{externalSubscriptionName}' for External Subscription scope.",
+        "x-ms-parameter-location": "method"
+      },
+      "scheduledActionNameParameter": {
+        "name": "name",
+        "in": "path",
+        "description": "Scheduled action name",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
+      }
+    }
+  }
