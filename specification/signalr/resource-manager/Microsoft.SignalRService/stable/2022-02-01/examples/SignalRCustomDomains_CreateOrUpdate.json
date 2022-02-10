@@ -1,19 +1,30 @@
 {
   "parameters": {
+    "body": {
+      "properties": {
+        "certificateName": "cert"
+      }
+    },
     "api-version": "2022-02-01",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "resourceName": "mySignalRService",
-    "sharedPrivateLinkResourceName": "upstream"
+    "domainName": "example.com"
   },
   "responses": {
-    "200": {},
-    "202": {
+    "201": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "certificateName": "cert"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService/customDomain/example.com",
+        "name": "example.com"
+      },
       "headers": {
         "Location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult...",
         "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationStatus..."
       }
-    },
-    "204": {}
+    }
   }
 }

@@ -3,7 +3,7 @@
   "info": {
     "title": "SignalRManagementClient",
     "description": "REST API for Azure SignalR Service",
-    "version": "2021-10-01"
+    "version": "2022-02-01"
   },
   "paths": {
     "/providers/Microsoft.SignalRService/operations": {
@@ -187,6 +187,438 @@
         "x-ms-examples": {
           "SignalR_ListBySubscription": {
             "$ref": "./examples/SignalR_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/customCertificates": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "List all custom certificates.",
+        "operationId": "SignalRCustomCertificates_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes custom certificates of the resource.",
+            "schema": {
+              "$ref": "#/definitions/CustomCertificateList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SignalRCustomCertificates_List": {
+            "$ref": "./examples/SignalRCustomCertificates_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/customCertificates/{certificateName}": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Get a custom certificate.",
+        "operationId": "SignalRCustomCertificates_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "certificateName",
+            "description": "Custom certificate name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe the corresponding custom certificate.",
+            "schema": {
+              "$ref": "#/definitions/CustomCertificate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SignalRCustomCertificates_Get": {
+            "$ref": "./examples/SignalRCustomCertificates_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Create or update a custom certificate.",
+        "operationId": "SignalRCustomCertificates_CreateOrUpdate",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "certificateName",
+            "description": "Custom certificate name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomCertificate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the certificate.",
+            "schema": {
+              "$ref": "#/definitions/CustomCertificate"
+            }
+          },
+          "201": {
+            "description": "Created. The response describes the certificate.",
+            "schema": {
+              "$ref": "#/definitions/CustomCertificate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "SignalRCustomCertificates_CreateOrUpdate": {
+            "$ref": "./examples/SignalRCustomCertificates_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Delete a custom certificate.",
+        "operationId": "SignalRCustomCertificates_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "certificateName",
+            "description": "Custom certificate name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "204": {
+            "description": "Success."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SignalRCustomCertificates_Delete": {
+            "$ref": "./examples/SignalRCustomCertificates_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/customDomains": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "List all custom domains.",
+        "operationId": "SignalRCustomDomains_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes custom domains of the resource.",
+            "schema": {
+              "$ref": "#/definitions/CustomDomainList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SignalRCustomDomains_List": {
+            "$ref": "./examples/SignalRCustomDomains_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/customDomains/{domainName}": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Get a custom domain.",
+        "operationId": "SignalRCustomDomains_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "domainName",
+            "description": "The domain name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe the corresponding custom domain.",
+            "schema": {
+              "$ref": "#/definitions/CustomDomain"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SignalRCustomDomains_Get": {
+            "$ref": "./examples/SignalRCustomDomains_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Create or update a custom domain.",
+        "operationId": "SignalRCustomDomains_CreateOrUpdate",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "domainName",
+            "description": "The domain name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomDomain"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created. The response describes the custom domain and contains a Location header to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/CustomDomain"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "SignalRCustomDomains_CreateOrUpdate": {
+            "$ref": "./examples/SignalRCustomDomains_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Delete a custom domain.",
+        "operationId": "SignalRCustomDomains_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "domainName",
+            "description": "The domain name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response indicates the custom domain is deleted."
+          },
+          "202": {
+            "description": "Accepted. The response indicates the operation is performed in the background."
+          },
+          "204": {
+            "description": "Success. The response indicates the custom domain is deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "SignalRCustomDomains_Delete": {
+            "$ref": "./examples/SignalRCustomDomains_Delete.json"
           }
         }
       }
@@ -1126,6 +1558,141 @@
         "modelAsString": true
       }
     },
+    "CustomCertificate": {
+      "description": "A custom certificate.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CustomCertificateProperties"
+        }
+      }
+    },
+    "CustomCertificateList": {
+      "description": "Custom certificates list.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of custom certificates of this resource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomCertificate"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "CustomCertificateProperties": {
+      "description": "Custom certificate properties.",
+      "required": [
+        "keyVaultBaseUri",
+        "keyVaultSecretName"
+      ],
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "keyVaultBaseUri": {
+          "description": "Base uri of the KeyVault that stores certificate.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "keyVaultSecretName": {
+          "description": "Certificate secret name.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "keyVaultSecretVersion": {
+          "description": "Certificate secret version.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "CustomDomain": {
+      "description": "A custom domain",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CustomDomainProperties"
+        }
+      }
+    },
+    "CustomDomainList": {
+      "description": "Custom domains list",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of custom domains that bind to this resource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomDomain"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "CustomDomainProperties": {
+      "description": "Properties of a custom domain.",
+      "required": [
+        "certificateName"
+      ],
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "certificateName": {
+          "description": "Name of the certificate used for this domain.",
+          "type": "string"
+        }
+      }
+    },
     "Dimension": {
       "description": "Specifications of the Dimension of metrics.",
       "type": "object",
@@ -1173,6 +1740,39 @@
       "x-ms-enum": {
         "name": "KeyType",
         "modelAsString": true
+      }
+    },
+    "LiveTraceCategory": {
+      "description": "Live trace category configuration of a Microsoft.SignalRService resource.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the live trace category's name.\r\nAvailable values: ConnectivityLogs, MessagingLogs.\r\nCase insensitive.",
+          "type": "string"
+        },
+        "enabled": {
+          "description": "Indicates whether or the live trace category is enabled.\r\nAvailable values: true, false.\r\nCase insensitive.",
+          "type": "string"
+        }
+      }
+    },
+    "LiveTraceConfiguration": {
+      "description": "Live trace configuration of a Microsoft.SignalRService resource.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "Indicates whether or not enable live trace.\r\nWhen it's set to true, live trace client can connect to the service.\r\nOtherwise, live trace client can't connect to the service, so that you are unable to receive any log, no matter what you configure in \"categories\".\r\nAvailable values: true, false.\r\nCase insensitive.",
+          "default": "false",
+          "type": "string"
+        },
+        "categories": {
+          "description": "Gets or sets the list of category configurations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LiveTraceCategory"
+          },
+          "x-ms-identifiers": []
+        }
       }
     },
     "LogSpecification": {
@@ -1275,7 +1875,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Dimension"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1324,14 +1925,16 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SignalRRequestType"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "deny": {
           "description": "Denied request types. The value can be one or more of: ClientConnection, ServerConnection, RESTAPI.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SignalRRequestType"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1391,7 +1994,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
@@ -1464,7 +2068,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Request URL that can be used to query next page of private endpoint connections. Returned when the total number of requested private endpoint connections exceed maximum page size.",
@@ -1489,7 +2094,8 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "privateLinkServiceConnectionState": {
           "$ref": "#/definitions/PrivateLinkServiceConnectionState"
@@ -1520,7 +2126,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateLinkResource"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
@@ -1541,21 +2148,24 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "requiredZoneNames": {
           "description": "Required private DNS zone names",
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "shareablePrivateLinkResourceTypes": {
           "description": "The list of resources that are onboarded to private link service",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ShareablePrivateLinkResourceType"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1672,7 +2282,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceLogCategory"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1729,7 +2340,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/UpstreamTemplate"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1754,14 +2366,16 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricSpecification"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "logSpecifications": {
           "description": "Specifications of the Logs for Azure Monitoring.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/LogSpecification"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1824,7 +2438,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SharedPrivateLinkResource"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Request URL that can be used to query next page of private endpoint connections. Returned when the total number of requested private endpoint connections exceed maximum page size.",
@@ -1886,7 +2501,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1957,7 +2573,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateEndpointACL"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2002,7 +2619,8 @@
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "sharedPrivateLinkResources": {
           "description": "The list of shared private link resources.",
@@ -2010,7 +2628,8 @@
           "items": {
             "$ref": "#/definitions/SharedPrivateLinkResource"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "tls": {
           "$ref": "#/definitions/SignalRTlsSettings"
@@ -2025,7 +2644,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SignalRFeature"
-          }
+          },
+          "x-ms-identifiers": []
+        },
+        "liveTraceConfiguration": {
+          "$ref": "#/definitions/LiveTraceConfiguration"
         },
         "resourceLogConfiguration": {
           "$ref": "#/definitions/ResourceLogConfiguration"
@@ -2111,7 +2734,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SignalRResource"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
@@ -2180,7 +2804,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SignalRUsage"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
@@ -2250,7 +2875,8 @@
             "format": "int32",
             "type": "integer"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "scaleType": {
           "readOnly": true,
@@ -2268,7 +2894,8 @@
           "items": {
             "$ref": "#/definitions/Sku"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
@@ -2335,15 +2962,15 @@
       "type": "object",
       "properties": {
         "hubPattern": {
-          "description": "Gets or sets the matching pattern for hub names. If not set, it matches any hub.\r\nThere are 3 kind of patterns supported:\r\n    1. \"*\", it to matches any hub name\r\n    2. Combine multiple hubs with \",\", for example \"hub1,hub2\", it matches \"hub1\" and \"hub2\"\r\n    3. The single hub name, for example, \"hub1\", it matches \"hub1\"",
+          "description": "Gets or sets the matching pattern for hub names. If not set, it matches any hub.\r\nThere are 3 kind of patterns supported:\r\n    1. \"*\", it to matches any hub name.\r\n    2. Combine multiple hubs with \",\", for example \"hub1,hub2\", it matches \"hub1\" and \"hub2\".\r\n    3. The single hub name, for example, \"hub1\", it matches \"hub1\".",
           "type": "string"
         },
         "eventPattern": {
-          "description": "Gets or sets the matching pattern for event names. If not set, it matches any event.\r\nThere are 3 kind of patterns supported:\r\n    1. \"*\", it to matches any event name\r\n    2. Combine multiple events with \",\", for example \"connect,disconnect\", it matches event \"connect\" and \"disconnect\"\r\n    3. The single event name, for example, \"connect\", it matches \"connect\"",
+          "description": "Gets or sets the matching pattern for event names. If not set, it matches any event.\r\nThere are 3 kind of patterns supported:\r\n    1. \"*\", it to matches any event name.\r\n    2. Combine multiple events with \",\", for example \"connect,disconnect\", it matches event \"connect\" and \"disconnect\".\r\n    3. The single event name, for example, \"connect\", it matches \"connect\".",
           "type": "string"
         },
         "categoryPattern": {
-          "description": "Gets or sets the matching pattern for category names. If not set, it matches any category.\r\nThere are 3 kind of patterns supported:\r\n    1. \"*\", it to matches any category name\r\n    2. Combine multiple categories with \",\", for example \"connections,messages\", it matches category \"connections\" and \"messages\"\r\n    3. The single category name, for example, \"connections\", it matches the category \"connections\"",
+          "description": "Gets or sets the matching pattern for category names. If not set, it matches any category.\r\nThere are 3 kind of patterns supported:\r\n    1. \"*\", it to matches any category name.\r\n    2. Combine multiple categories with \",\", for example \"connections,messages\", it matches category \"connections\" and \"messages\".\r\n    3. The single category name, for example, \"connections\", it matches the category \"connections\".",
           "type": "string"
         },
         "urlTemplate": {
