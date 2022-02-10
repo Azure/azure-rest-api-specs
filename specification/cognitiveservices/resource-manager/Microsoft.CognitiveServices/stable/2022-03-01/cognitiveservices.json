@@ -674,7 +674,7 @@
         ],
         "description": "List available Models for the requested Cognitive Services account",
         "x-ms-examples": {
-          "List SKUs": {
+          "List AccountModels": {
             "$ref": "./examples/ListAccountModels.json"
           }
         },
@@ -823,48 +823,6 @@
             "description": "OK.",
             "schema": {
               "$ref": "#/definitions/CommitmentTierListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/models": {
-      "get": {
-        "tags": [
-          "Models"
-        ],
-        "operationId": "Models_List",
-        "description": "List Models.",
-        "x-ms-examples": {
-          "ListCommitmentTiers": {
-            "$ref": "./examples/ListModels.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/locationParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/ModelListResult"
             }
           },
           "default": {
@@ -2995,41 +2953,6 @@
       },
       "description": "Cognitive Services account commitment period."
     },
-    "ModelListResult": {
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link used to get the next page of Model.",
-          "type": "string"
-        },
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Model"
-          },
-          "description": "Gets the list of Cognitive Services accounts Model and their properties."
-        }
-      },
-      "description": "The list of cognitive services accounts operation response."
-    },
-    "Model": {
-      "description": "Cognitive Services account Model.",
-      "type": "object",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/Kind",
-          "description": "The Kind of the resource."
-        },
-        "skuName": {
-          "type": "string",
-          "description": "The name of the SKU. Ex - P3. It is typically a letter+number code"
-        },
-        "model": {
-          "$ref": "#/definitions/AccountModel",
-          "description": "Metadata of account Model."
-        }
-      }
-    },
     "AccountModelListResult": {
       "type": "object",
       "properties": {
@@ -3074,13 +2997,13 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-        },
-        "allOf": [
-          {
-            "$ref": "#/definitions/DeploymentModel"
-          }
-        ]
-      }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentModel"
+        }
+      ]
     },
     "ModelDeprecationInfo": {
       "description": "Cognitive Services account ModelDeprecationInfo.",
