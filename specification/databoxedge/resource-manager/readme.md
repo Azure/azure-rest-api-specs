@@ -36,6 +36,14 @@ These settings apply only when `--tag=package-2021-12-01` is specified on the co
 input-file:
 - Microsoft.DataBoxEdge/stable/2021-12-01/databoxedge.json
 ```
+### Tag: package-2021-06-01
+
+These settings apply only when `--tag=package-2021-06-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06-01'
+input-file:
+- Microsoft.DataBoxEdge/stable/2021-06-01/databoxedge.json
+```
 ### Tag: package-2021-06-01-preview
 
 These settings apply only when `--tag=package-2021-06-01-preview` is specified on the command line.
