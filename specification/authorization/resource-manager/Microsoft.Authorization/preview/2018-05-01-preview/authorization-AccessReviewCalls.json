@@ -171,11 +171,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Request is well formed but the resource does not exist"
-          },
           "200": {
             "description": "Resource deleted successfully"
+          },
+          "204": {
+            "description": "Request is well formed but the resource does not exist"
           },
           "default": {
             "description": "Unexpected error",
@@ -1114,6 +1114,9 @@
           "items": {
             "$ref": "#/definitions/AccessReviewReviewer"
           },
+          "x-ms-identifiers": [
+            "principalId"
+          ],
           "description": "This is the collection of reviewers."
         },
         "reviewersType": {
@@ -1785,7 +1788,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "The URI that can be used to request the next set of paged results.",
