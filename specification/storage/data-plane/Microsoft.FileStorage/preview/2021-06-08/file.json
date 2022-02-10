@@ -4597,7 +4597,7 @@
             "$ref": "#/parameters/LeaseIdOptional"
           },
           {
-            "$ref": "#/parameters/FileLastWriteTime"
+            "$ref": "#/parameters/FileLastWriteTimeMode"
           }
         ],
         "responses": {
@@ -4727,7 +4727,7 @@
             "$ref": "#/parameters/CopySourceAuthorization"
           },
           {
-            "$ref": "#/parameters/FileLastWriteTime"
+            "$ref": "#/parameters/FileLastWriteTimeMode"
           }
         ],
         "responses": {
@@ -6655,6 +6655,23 @@
       "type": "string",
       "format": "date-time-rfc1123",
       "x-ms-parameter-location": "method"
+    },
+    "FileLastWriteTimeMode": {
+      "name": "x-ms-file-last-write-time",
+      "x-ms-client-name": "FileLastWrittenMode",
+      "in": "header",
+      "description": "If the file last write time should be preserved or overwritten",
+      "required": false,
+       "x-ms-parameter-location": "method",
+      "type": "string",
+      "enum": [
+        "Now",
+        "Preserve"
+      ],
+      "x-ms-enum": {
+        "name": "FileLastWrittenMode",
+        "modelAsString": false
+      }
     },
     "FilePermission": {
       "name": "x-ms-file-permission",
