@@ -81,15 +81,6 @@ require: $(this-folder)/../../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Update.Admin/preview/2016-05-01/Update.json
-  - $(this-folder)/Microsoft.Update.Admin/preview/2016-05-01/Updates.json
-  - $(this-folder)/Microsoft.Update.Admin/preview/2016-05-01/UpdateLocations.json
-  - $(this-folder)/Microsoft.Update.Admin/preview/2016-05-01/UpdateRuns.json
-  - $(this-folder)/Microsoft.Update.Admin/stable/2021-07-01/Update.json
-  - $(this-folder)/Microsoft.Update.Admin/stable/2021-07-01/Updates.json
-  - $(this-folder)/Microsoft.Update.Admin/stable/2021-07-01/UpdateLocations.json
-  - $(this-folder)/Microsoft.Update.Admin/stable/2021-07-01/UpdateRuns.json
-
 ```
 
 If there are files that should not be in the `all-api-versions` set,
