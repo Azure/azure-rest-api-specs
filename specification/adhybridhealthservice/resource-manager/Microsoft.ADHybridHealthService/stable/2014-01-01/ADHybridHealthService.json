@@ -1302,7 +1302,8 @@
             "in": "path",
             "description": "The server Id.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1341,7 +1342,8 @@
             "in": "path",
             "description": "The server Id.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "name": "confirm",
@@ -1379,7 +1381,8 @@
             "in": "path",
             "description": "The server Id for which the alert details needs to be queried.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "name": "serviceName",
@@ -1467,7 +1470,8 @@
             "in": "path",
             "description": "The server Id.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2842,7 +2846,8 @@
             "in": "path",
             "description": "The server Id.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2881,7 +2886,8 @@
             "in": "path",
             "description": "The server Id.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "name": "confirm",
@@ -2919,7 +2925,8 @@
             "in": "path",
             "description": "The server Id for which the alert details needs to be queried.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "name": "serviceName",
@@ -3000,7 +3007,8 @@
             "in": "path",
             "description": "The server Id.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -3051,7 +3059,8 @@
             "in": "path",
             "description": "The server Id.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -3095,7 +3104,8 @@
             "in": "path",
             "description": "The server Id.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -3133,7 +3143,8 @@
             "in": "path",
             "description": "The server Id.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -3177,7 +3188,8 @@
             "in": "path",
             "description": "The server Id.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -3279,7 +3291,8 @@
             "in": "path",
             "description": "The server id.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "name": "groupKey",
@@ -3499,7 +3512,8 @@
             "in": "path",
             "description": "The service member id.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "name": "metricName",
@@ -5163,11 +5177,13 @@
       "properties": {
         "serviceId": {
           "description": "The id of the service for whom the export status is being reported.",
-          "type": "string"
+          "type": "string",
+          "format": "uuid"
         },
         "serviceMemberId": {
           "description": "The server Id for whom the export status is being reported.",
-          "type": "string"
+          "type": "string",
+          "format": "uuid"
         },
         "endTime": {
           "description": "The date and time when the export ended.",
@@ -5765,11 +5781,13 @@
         },
         "serviceId": {
           "description": "The service Id.",
-          "type": "string"
+          "type": "string",
+          "format": "uuid"
         },
         "serviceMemberId": {
           "description": "The server Id.",
-          "type": "string"
+          "type": "string",
+          "format": "uuid"
         },
         "mergedEntityId": {
           "description": "The merged entity Id.",
@@ -5885,7 +5903,7 @@
           "type": "integer"
         },
         "kind": {
-          "description": "Indicates whether the dashboard to represent the metric is a line, bar, pie, area or donut chart.",
+          "description": "Indicates whether the dashboard to represent the metric is a line, bar,pie, area or donut chart.",
           "type": "string"
         },
         "isDefault": {
@@ -6716,11 +6734,13 @@
       "properties": {
         "serviceMemberId": {
           "description": "The id of the server.",
-          "type": "string"
+          "type": "string",
+          "format": "uuid"
         },
         "serviceId": {
           "description": "The service id to whom this server belongs.",
-          "type": "string"
+          "type": "string",
+          "format": "uuid"
         },
         "tenantId": {
           "description": "The tenant id to whom this server belongs.",
