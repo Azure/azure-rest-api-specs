@@ -2811,6 +2811,9 @@
           },
           {
             "$ref": "#/parameters/FilePermissionKey"
+          },
+          {
+            "$ref": "#/parameters/Metadata"
           }
         ],
         "responses": {
@@ -2878,6 +2881,11 @@
                 "x-ms-client-name": "FileId",
                 "type": "string",
                 "description": "The fileId of the file."
+              },
+              "x-ms-file-parent-id": {
+                "x-ms-client-name": "FileParentId",
+                "type": "string",
+                "description": "The parent fileId of the directory."
               }
             }
           },
@@ -4599,6 +4607,9 @@
           },
           {
             "$ref": "#/parameters/LeaseIdOptional"
+          },
+          {
+            "$ref": "#/parameters/FileLastWriteTimeMode"
           }
         ],
         "responses": {
@@ -4726,6 +4737,9 @@
           },
           {
             "$ref": "#/parameters/CopySourceAuthorization"
+          },
+          {
+            "$ref": "#/parameters/FileLastWriteTimeMode"
           }
         ],
         "responses": {
@@ -5354,6 +5368,9 @@
             "$ref": "#/parameters/FilePermissionKey"
           },
           {
+            "$ref": "#/parameters/Metadata"
+          },
+          {
             "$ref": "#/parameters/FileContentType"
           }
         ],
@@ -5422,6 +5439,11 @@
                 "x-ms-client-name": "FileId",
                 "type": "string",
                 "description": "The fileId of the file."
+              },
+              "x-ms-file-parent-id": {
+                "x-ms-client-name": "FileParentId",
+                "type": "string",
+                "description": "The parent fileId of the directory."
               }
             }
           },
@@ -6649,7 +6671,7 @@
       "x-ms-client-name": "FileCreationTime",
       "in": "header",
       "description": "Creation time for the file/directory. Default value: Now.",
-      "required": true,
+      "required": false,
       "type": "string",
       "format": "date-time-rfc1123",
       "x-ms-parameter-location": "method"
@@ -6659,7 +6681,7 @@
       "x-ms-client-name": "FileLastWriteTime",
       "in": "header",
       "description": "Last write time for the file/directory. Default value: Now.",
-      "required": true,
+      "required": false,
       "type": "string",
       "format": "date-time-rfc1123",
       "x-ms-parameter-location": "method"
@@ -6673,6 +6695,23 @@
       "type": "string",
       "format": "date-time-rfc1123",
       "x-ms-parameter-location": "method"
+    },
+    "FileLastWriteTimeMode": {
+      "name": "x-ms-file-last-write-time",
+      "x-ms-client-name": "FileLastWrittenMode",
+      "in": "header",
+      "description": "If the file last write time should be preserved or overwritten",
+      "required": false,
+       "x-ms-parameter-location": "method",
+      "type": "string",
+      "enum": [
+        "Now",
+        "Preserve"
+      ],
+      "x-ms-enum": {
+        "name": "FileLastWrittenMode",
+        "modelAsString": false
+      }
     },
     "FilePermission": {
       "name": "x-ms-file-permission",

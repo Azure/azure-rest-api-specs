@@ -1,0 +1,302 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2021-12-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/scanners": {
+      "get": {
+        "x-ms-examples": {
+          "List security scanners by subscription level scope": {
+            "$ref": "./examples/Scanners/ListBySubscriptionScanners_example.json"
+          }
+        },
+        "tags": [
+          "Scanners"
+        ],
+        "description": "Get a list of all relevant security Scanners over a subscription level scope.",
+        "operationId": "Scanners_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ScannersList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/scanners": {
+      "get": {
+        "x-ms-examples": {
+          "List security scanners": {
+            "$ref": "./examples/Scanners/ListScanners_example.json"
+          }
+        },
+        "tags": [
+          "Scanners"
+        ],
+        "description": "Get security scanners on all your resources inside a scope",
+        "operationId": "Scanners_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ScannersList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/scanners/{scannerName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a specific security scanner by scope and scannerName": {
+            "$ref": "./examples/Scanners/GetScanner_example.json"
+          }
+        },
+        "tags": [
+          "Scanners"
+        ],
+        "description": "Get a specific security scanner for the requested scope",
+        "operationId": "Scanners_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/ScannerName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Scanner"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create a security scanner on a specified scope": {
+            "$ref": "./examples/Scanners/PutScanner_example.json"
+          }
+        },
+        "tags": [
+          "Scanners"
+        ],
+        "description": "Create a security scanner on the given scope.",
+        "operationId": "Scanners_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/ScannerName"
+          },
+          {
+            "$ref": "#/parameters/ScannerBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request to put scanner.",
+            "schema": {
+              "$ref": "#/definitions/Scanner"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a security scanner": {
+            "$ref": "./examples/Scanners/DeleteScanner_example.json"
+          }
+        },
+        "tags": [
+          "Scanners"
+        ],
+        "description": "Delete a security Scanners.",
+        "operationId": "Scanners_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/ScannerName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Scanner was deleted"
+          },
+          "204": {
+            "description": "No Content - Scanner does not exist"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ScannersList": {
+      "type": "object",
+      "description": "Page of a Scanners list",
+      "properties": {
+        "value": {
+          "description": "Collection of Scanners in this page",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Scanner"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page"
+        }
+      }
+    },
+    "Scanner": {
+      "type": "object",
+      "description": "Security Scanner resource",
+      "properties": {
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
+        }
+      ]
+    }
+  },
+  "parameters": {
+    "ScannerName": {
+      "name": "scannerName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Security scanner name",
+      "x-ms-parameter-location": "method"
+    },
+    "ScannerBody": {
+      "name": "scanner",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Scanner"
+      },
+      "description": "security scanner",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

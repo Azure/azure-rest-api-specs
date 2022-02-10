@@ -4380,6 +4380,9 @@
           },
           {
             "$ref": "#/parameters/CopySourceAuthorization"
+          },
+          {
+            "$ref": "#/parameters/CopySourceTags"
           }
         ],
         "responses": {
@@ -6162,6 +6165,9 @@
           },
           {
             "$ref": "#/parameters/EncryptionScope"
+          },
+          {
+            "$ref": "#/parameters/CopySourceTags"
           }
         ],
         "responses": {
@@ -7759,6 +7765,12 @@
           },
           {
             "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/Marker"
+          },
+          {
+            "$ref": "#/parameters/MaxResults"
           }
         ],
         "responses": {
@@ -7817,6 +7829,9 @@
               "$ref": "#/definitions/StorageError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "NextMarker"
         }
       },
       "parameters": [
@@ -7884,6 +7899,12 @@
           },
           {
             "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/Marker"
+          },
+          {
+            "$ref": "#/parameters/MaxResults"
           }
         ],
         "responses": {
@@ -7942,6 +7963,9 @@
               "$ref": "#/definitions/StorageError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "NextMarker"
         }
       },
       "parameters": [
@@ -10730,6 +10754,9 @@
           "items": {
             "$ref": "#/definitions/ClearRange"
           }
+        },
+        "NextMarker": {
+          "type": "string"
         }
       }
     },
@@ -11491,6 +11518,23 @@
       "type": "boolean",
       "x-ms-parameter-location": "method",
       "description": "Optional, default is true.  Indicates if properties from the source blob should be copied."
+    },
+    "CopySourceTags": {
+      "name": "x-ms-copy-source-tag-option",
+      "x-ms-client-name": "copySourceTags",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "REPLACE",
+        "COPY"
+      ],
+      "x-ms-enum": {
+        "name": "BlobCopySourceTags",
+        "modelAsString": false
+      },
+      "x-ms-parameter-location": "method",
+      "description": "Optional, default 'replace'.  Indicates if source tags should be copied or replaced with the tags specified by x-ms-tags."
     },
     "DeleteSnapshots": {
       "name": "x-ms-delete-snapshots",

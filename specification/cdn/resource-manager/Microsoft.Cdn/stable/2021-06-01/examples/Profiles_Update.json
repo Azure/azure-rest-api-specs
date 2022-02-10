@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2021-06-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "profileUpdateParameters": {
+      "tags": {
+        "additionalProperties": "Tag1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "profile1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1",
+        "type": "Microsoft.Cdn/profiles",
+        "tags": {
+          "additionalProperties": "Tag1"
+        },
+        "location": "WestCentralUs",
+        "sku": {
+          "name": "Premium_AzureFrontDoor"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceState": "Active"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2021-06-01"
+      },
+      "body": {
+        "name": "profile1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1",
+        "type": "Microsoft.Cdn/profiles",
+        "tags": {
+          "additionalProperties": "Tag1"
+        },
+        "location": "WestCentralUs",
+        "sku": {
+          "name": "Premium_AzureFrontDoor"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceState": "Active"
+        }
+      }
+    }
+  }
+}

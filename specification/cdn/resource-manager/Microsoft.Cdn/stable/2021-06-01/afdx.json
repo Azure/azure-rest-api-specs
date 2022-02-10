@@ -1,0 +1,5796 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-06-01",
+    "title": "CdnManagementClient",
+    "description": "Use these APIs to manage Azure CDN resources through the Azure Resource Manager. You must make sure that requests made to these resources are secure."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/usages": {
+      "post": {
+        "tags": [
+          "AFDProfiles"
+        ],
+        "description": "Checks the quota and actual usage of endpoints under the given CDN profile.",
+        "operationId": "AFDProfiles_ListResourceUsage",
+        "x-ms-examples": {
+          "AFDProfiles_ListResourceUsage": {
+            "$ref": "./examples/AFDProfiles_ListResourceUsage.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UsagesListResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/checkHostNameAvailability": {
+      "post": {
+        "tags": [
+          "AFDProfiles"
+        ],
+        "description": "Validates the custom domain mapping to ensure it maps to the correct CDN endpoint in DNS.",
+        "operationId": "AFDProfiles_CheckHostNameAvailability",
+        "x-ms-examples": {
+          "AFDProfiles_CheckHostNameAvailability": {
+            "$ref": "./examples/AFDProfiles_CheckHostNameAvailability.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "checkHostNameAvailabilityInput",
+            "in": "body",
+            "description": "Custom domain to be validated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckHostNameAvailabilityInput"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "./cdn.json#/definitions/CheckNameAvailabilityOutput"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/customDomains": {
+      "get": {
+        "tags": [
+          "AFDCustomDomains"
+        ],
+        "description": "Lists existing AzureFrontDoor domains.",
+        "operationId": "AFDCustomDomains_ListByProfile",
+        "x-ms-examples": {
+          "AFDCustomDomains_ListByProfile": {
+            "$ref": "./examples/AFDCustomDomains_ListByProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile or CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AFDDomainListResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/customDomains/{customDomainName}": {
+      "get": {
+        "tags": [
+          "AFDCustomDomains"
+        ],
+        "description": "Gets an existing AzureFrontDoor domain with the specified domain name under the specified subscription, resource group and profile.",
+        "operationId": "AFDCustomDomains_Get",
+        "x-ms-examples": {
+          "AFDCustomDomains_Get": {
+            "$ref": "./examples/AFDCustomDomains_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customDomainName",
+            "in": "path",
+            "description": "Name of the domain under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AFDDomain"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AFDCustomDomains"
+        ],
+        "description": "Creates a new domain within the specified profile.",
+        "operationId": "AFDCustomDomains_Create",
+        "x-ms-examples": {
+          "AFDCustomDomains_Create": {
+            "$ref": "./examples/AFDCustomDomains_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customDomainName",
+            "in": "path",
+            "description": "Name of the domain under the profile which is unique globally",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customDomain",
+            "in": "body",
+            "description": "Domain properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AFDDomain"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AFDDomain"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new domain has been created.",
+            "schema": {
+              "$ref": "#/definitions/AFDDomain"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/AFDDomain"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "AFDCustomDomains"
+        ],
+        "description": "Updates an existing domain within a profile.",
+        "operationId": "AFDCustomDomains_Update",
+        "x-ms-examples": {
+          "AFDCustomDomains_Update": {
+            "$ref": "./examples/AFDCustomDomains_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customDomainName",
+            "in": "path",
+            "description": "Name of the domain under the profile which is unique globally",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customDomainUpdateProperties",
+            "in": "body",
+            "description": "Domain properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AFDDomainUpdateParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AFDDomain"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/AFDDomain"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "AFDCustomDomains"
+        ],
+        "description": "Deletes an existing AzureFrontDoor domain with the specified domain name under the specified subscription, resource group and profile.",
+        "operationId": "AFDCustomDomains_Delete",
+        "x-ms-examples": {
+          "AFDCustomDomains_Delete": {
+            "$ref": "./examples/AFDCustomDomains_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customDomainName",
+            "in": "path",
+            "description": "Name of the domain under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content. The request has been accepted but the domain was not found."
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/customDomains/{customDomainName}/refreshValidationToken": {
+      "post": {
+        "tags": [
+          "AFDCustomDomains"
+        ],
+        "description": "Updates the domain validation token.",
+        "operationId": "AFDCustomDomains_RefreshValidationToken",
+        "x-ms-examples": {
+          "AFDCustomDomains_Delete": {
+            "$ref": "./examples/AFDCustomDomains_RefreshValidationToken.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customDomainName",
+            "in": "path",
+            "description": "Name of the domain under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously. Please poll the targeted custom domain and check the 'validationProperties' field for the new validation token values."
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/afdEndpoints": {
+      "get": {
+        "tags": [
+          "AFDEndpoints"
+        ],
+        "description": "Lists existing AzureFrontDoor endpoints.",
+        "operationId": "AFDEndpoints_ListByProfile",
+        "x-ms-examples": {
+          "AFDEndpoints_ListByProfile": {
+            "$ref": "./examples/AFDEndpoints_ListByProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AFDEndpointListResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/afdEndpoints/{endpointName}": {
+      "get": {
+        "tags": [
+          "AFDEndpoints"
+        ],
+        "description": "Gets an existing AzureFrontDoor endpoint with the specified endpoint name under the specified subscription, resource group and profile.",
+        "operationId": "AFDEndpoints_Get",
+        "x-ms-examples": {
+          "AFDEndpoints_Get": {
+            "$ref": "./examples/AFDEndpoints_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AFDEndpoint"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AFDEndpoints"
+        ],
+        "description": "Creates a new AzureFrontDoor endpoint with the specified endpoint name under the specified subscription, resource group and profile.",
+        "operationId": "AFDEndpoints_Create",
+        "x-ms-examples": {
+          "AFDEndpoints_Create": {
+            "$ref": "./examples/AFDEndpoints_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpoint",
+            "in": "body",
+            "description": "Endpoint properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AFDEndpoint"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AFDEndpoint"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new endpoint has been created.",
+            "schema": {
+              "$ref": "#/definitions/AFDEndpoint"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/AFDEndpoint"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "AFDEndpoints"
+        ],
+        "description": "Updates an existing AzureFrontDoor endpoint with the specified endpoint name under the specified subscription, resource group and profile. Only tags can be updated after creating an endpoint. To update origins, use the Update Origin operation. To update origin groups, use the Update Origin group operation. To update domains, use the Update Custom Domain operation.",
+        "operationId": "AFDEndpoints_Update",
+        "x-ms-examples": {
+          "AFDEndpoints_Update": {
+            "$ref": "./examples/AFDEndpoints_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointUpdateProperties",
+            "in": "body",
+            "description": "Endpoint update properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AFDEndpointUpdateParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AFDEndpoint"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/AFDEndpoint"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "AFDEndpoints"
+        ],
+        "description": "Deletes an existing AzureFrontDoor endpoint with the specified endpoint name under the specified subscription, resource group and profile.",
+        "operationId": "AFDEndpoints_Delete",
+        "x-ms-examples": {
+          "AFDEndpoints_Delete": {
+            "$ref": "./examples/AFDEndpoints_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/afdEndpoints/{endpointName}/purge": {
+      "post": {
+        "tags": [
+          "AFDEndpoints"
+        ],
+        "description": "Removes a content from AzureFrontDoor.",
+        "operationId": "AFDEndpoints_PurgeContent",
+        "x-ms-examples": {
+          "AFDEndpoints_PurgeContent": {
+            "$ref": "./examples/AFDEndpoints_PurgeContent.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "contents",
+            "in": "body",
+            "description": "The list of paths to the content and the list of linked domains to be purged. Path can be a full URL, e.g. '/pictures/city.png' which removes a single file, or a directory with a wildcard, e.g. '/pictures/*' which removes all folders and files in the directory.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AfdPurgeParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/afdEndpoints/{endpointName}/usages": {
+      "post": {
+        "tags": [
+          "AFDEndpoints"
+        ],
+        "description": "Checks the quota and actual usage of endpoints under the given CDN profile.",
+        "operationId": "AFDEndpoints_ListResourceUsage",
+        "x-ms-examples": {
+          "AFDEndpoints_ListResourceUsage": {
+            "$ref": "./examples/AFDEndpoints_ListResourceUsage.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UsagesListResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/afdEndpoints/{endpointName}/validateCustomDomain": {
+      "post": {
+        "tags": [
+          "AFDEndpoints"
+        ],
+        "description": "Validates the custom domain mapping to ensure it maps to the correct CDN endpoint in DNS.",
+        "operationId": "AFDEndpoints_ValidateCustomDomain",
+        "x-ms-examples": {
+          "Endpoints_ValidateCustomDomain": {
+            "$ref": "./examples/AFDEndpoints_ValidateCustomDomain.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customDomainProperties",
+            "in": "body",
+            "description": "Custom domain to be validated.",
+            "required": true,
+            "schema": {
+              "$ref": "./cdn.json#/definitions/ValidateCustomDomainInput"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "./cdn.json#/definitions/ValidateCustomDomainOutput"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/originGroups": {
+      "get": {
+        "tags": [
+          "AFDOriginGroups"
+        ],
+        "description": "Lists all of the existing origin groups within a profile.",
+        "operationId": "AFDOriginGroups_ListByProfile",
+        "x-ms-examples": {
+          "AFDOriginGroups_ListByProfile": {
+            "$ref": "./examples/AFDOriginGroups_ListByProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AFDOriginGroupListResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/originGroups/{originGroupName}": {
+      "get": {
+        "tags": [
+          "AFDOriginGroups"
+        ],
+        "description": "Gets an existing origin group within a profile.",
+        "operationId": "AFDOriginGroups_Get",
+        "x-ms-examples": {
+          "AFDOriginGroups_Get": {
+            "$ref": "./examples/AFDOriginGroups_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "originGroupName",
+            "in": "path",
+            "description": "Name of the origin group which is unique within the endpoint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AFDOriginGroup"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AFDOriginGroups"
+        ],
+        "description": "Creates a new origin group within the specified profile.",
+        "operationId": "AFDOriginGroups_Create",
+        "x-ms-examples": {
+          "AFDOriginGroups_Create": {
+            "$ref": "./examples/AFDOriginGroups_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "originGroupName",
+            "in": "path",
+            "description": "Name of the origin group which is unique within the endpoint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "originGroup",
+            "in": "body",
+            "description": "Origin group properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AFDOriginGroup"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AFDOriginGroup"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new origin group has been created.",
+            "schema": {
+              "$ref": "#/definitions/AFDOriginGroup"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/AFDOriginGroup"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "AFDOriginGroups"
+        ],
+        "description": "Updates an existing origin group within a profile.",
+        "operationId": "AFDOriginGroups_Update",
+        "x-ms-examples": {
+          "AFDOriginGroups_Update": {
+            "$ref": "./examples/AFDOriginGroups_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "originGroupName",
+            "in": "path",
+            "description": "Name of the origin group which is unique within the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "originGroupUpdateProperties",
+            "in": "body",
+            "description": "Origin group properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AFDOriginGroupUpdateParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AFDOriginGroup"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/AFDOriginGroup"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "AFDOriginGroups"
+        ],
+        "description": "Deletes an existing origin group within a profile.",
+        "operationId": "AFDOriginGroups_Delete",
+        "x-ms-examples": {
+          "AFDOriginGroups_Delete": {
+            "$ref": "./examples/AFDOriginGroups_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "originGroupName",
+            "in": "path",
+            "description": "Name of the origin group which is unique within the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content. The request has been accepted but the origin group was not found."
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/originGroups/{originGroupName}/usages": {
+      "post": {
+        "tags": [
+          "AFDOriginGroups"
+        ],
+        "description": "Checks the quota and actual usage of endpoints under the given CDN profile.",
+        "operationId": "AFDOriginGroups_ListResourceUsage",
+        "x-ms-examples": {
+          "AFDOriginGroups_ListResourceUsage": {
+            "$ref": "./examples/AFDOriginGroups_ListResourceUsage.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "originGroupName",
+            "in": "path",
+            "description": "Name of the origin group which is unique within the endpoint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UsagesListResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/originGroups/{originGroupName}/origins": {
+      "get": {
+        "tags": [
+          "AFDOrigins"
+        ],
+        "description": "Lists all of the existing origins within an origin group.",
+        "operationId": "AFDOrigins_ListByOriginGroup",
+        "x-ms-examples": {
+          "AFDOrigins_ListByOriginGroup": {
+            "$ref": "./examples/AFDOrigins_ListByOriginGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "originGroupName",
+            "in": "path",
+            "description": "Name of the origin group which is unique within the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AFDOriginListResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/originGroups/{originGroupName}/origins/{originName}": {
+      "get": {
+        "tags": [
+          "AFDOrigins"
+        ],
+        "description": "Gets an existing origin within an origin group.",
+        "operationId": "AFDOrigins_Get",
+        "x-ms-examples": {
+          "AFDOrigins_Get": {
+            "$ref": "./examples/AFDOrigins_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "originGroupName",
+            "in": "path",
+            "description": "Name of the origin group which is unique within the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "originName",
+            "in": "path",
+            "description": "Name of the origin which is unique within the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AFDOrigin"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AFDOrigins"
+        ],
+        "description": "Creates a new origin within the specified origin group.",
+        "operationId": "AFDOrigins_Create",
+        "x-ms-examples": {
+          "AFDOrigins_Create": {
+            "$ref": "./examples/AFDOrigins_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "originGroupName",
+            "in": "path",
+            "description": "Name of the origin group which is unique within the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "originName",
+            "in": "path",
+            "description": "Name of the origin that is unique within the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "origin",
+            "in": "body",
+            "description": "Origin properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AFDOrigin"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AFDOrigin"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new origin has been created.",
+            "schema": {
+              "$ref": "#/definitions/AFDOrigin"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/AFDOrigin"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "AFDOrigins"
+        ],
+        "description": "Updates an existing origin within an origin group.",
+        "operationId": "AFDOrigins_Update",
+        "x-ms-examples": {
+          "AFDOrigins_Update": {
+            "$ref": "./examples/AFDOrigins_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "originGroupName",
+            "in": "path",
+            "description": "Name of the origin group which is unique within the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "originName",
+            "in": "path",
+            "description": "Name of the origin which is unique within the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "originUpdateProperties",
+            "in": "body",
+            "description": "Origin properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AFDOriginUpdateParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AFDOrigin"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/AFDOrigin"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "AFDOrigins"
+        ],
+        "description": "Deletes an existing origin within an origin group.",
+        "operationId": "AFDOrigins_Delete",
+        "x-ms-examples": {
+          "AFDOrigins_Delete": {
+            "$ref": "./examples/AFDOrigins_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "originGroupName",
+            "in": "path",
+            "description": "Name of the origin group which is unique within the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "originName",
+            "in": "path",
+            "description": "Name of the origin which is unique within the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content. The request has been accepted but the origin was not found."
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/afdEndpoints/{endpointName}/routes": {
+      "get": {
+        "tags": [
+          "Routes"
+        ],
+        "description": "Lists all of the existing origins within a profile.",
+        "operationId": "Routes_ListByEndpoint",
+        "x-ms-examples": {
+          "Routes_ListByEndpoint": {
+            "$ref": "./examples/Routes_ListByEndpoint.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RouteListResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/afdEndpoints/{endpointName}/routes/{routeName}": {
+      "get": {
+        "tags": [
+          "Routes"
+        ],
+        "description": "Gets an existing route with the specified route name under the specified subscription, resource group, profile, and AzureFrontDoor endpoint.",
+        "operationId": "Routes_Get",
+        "x-ms-examples": {
+          "Routes_Get": {
+            "$ref": "./examples/Routes_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeName",
+            "in": "path",
+            "description": "Name of the routing rule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Route"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Routes"
+        ],
+        "description": "Creates a new route with the specified route name under the specified subscription, resource group, profile, and AzureFrontDoor endpoint.",
+        "operationId": "Routes_Create",
+        "x-ms-examples": {
+          "Routes_Create": {
+            "$ref": "./examples/Routes_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeName",
+            "in": "path",
+            "description": "Name of the routing rule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "route",
+            "in": "body",
+            "description": "Route properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Route"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Route"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new endpoint has been created.",
+            "schema": {
+              "$ref": "#/definitions/Route"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Route"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "Routes"
+        ],
+        "description": "Updates an existing route with the specified route name under the specified subscription, resource group, profile, and AzureFrontDoor endpoint.",
+        "operationId": "Routes_Update",
+        "x-ms-examples": {
+          "Routes_Update": {
+            "$ref": "./examples/Routes_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeName",
+            "in": "path",
+            "description": "Name of the routing rule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeUpdateProperties",
+            "in": "body",
+            "description": "Route update properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RouteUpdateParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Route"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Route"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "Routes"
+        ],
+        "description": "Deletes an existing route with the specified route name under the specified subscription, resource group, profile, and AzureFrontDoor endpoint.",
+        "operationId": "Routes_Delete",
+        "x-ms-examples": {
+          "Routes_Delete": {
+            "$ref": "./examples/Routes_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeName",
+            "in": "path",
+            "description": "Name of the routing rule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/ruleSets": {
+      "get": {
+        "tags": [
+          "RuleSets"
+        ],
+        "description": "Lists existing AzureFrontDoor rule sets within a profile.",
+        "operationId": "RuleSets_ListByProfile",
+        "x-ms-examples": {
+          "RuleSets_ListByProfile": {
+            "$ref": "./examples/RuleSets_ListByProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RuleSetListResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/ruleSets/{ruleSetName}": {
+      "get": {
+        "tags": [
+          "RuleSets"
+        ],
+        "description": "Gets an existing AzureFrontDoor rule set with the specified rule set name under the specified subscription, resource group and profile.",
+        "operationId": "RuleSets_Get",
+        "x-ms-examples": {
+          "RuleSets_Get": {
+            "$ref": "./examples/RuleSets_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleSetName",
+            "in": "path",
+            "description": "Name of the rule set under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RuleSet"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "RuleSets"
+        ],
+        "description": "Creates a new rule set within the specified profile.",
+        "operationId": "RuleSets_Create",
+        "x-ms-examples": {
+          "RuleSets_Create": {
+            "$ref": "./examples/RuleSets_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleSetName",
+            "in": "path",
+            "description": "Name of the rule set under the profile which is unique globally",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RuleSet"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new rule set has been created.",
+            "schema": {
+              "$ref": "#/definitions/RuleSet"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RuleSets"
+        ],
+        "description": "Deletes an existing AzureFrontDoor rule set with the specified rule set name under the specified subscription, resource group and profile.",
+        "operationId": "RuleSets_Delete",
+        "x-ms-examples": {
+          "RuleSets_Delete": {
+            "$ref": "./examples/RuleSets_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleSetName",
+            "in": "path",
+            "description": "Name of the rule set under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content. The request has been accepted but the rule set was not found."
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/ruleSets/{ruleSetName}/usages": {
+      "post": {
+        "tags": [
+          "RuleSets"
+        ],
+        "description": "Checks the quota and actual usage of endpoints under the given CDN profile.",
+        "operationId": "RuleSets_ListResourceUsage",
+        "x-ms-examples": {
+          "RuleSets_ListResourceUsage": {
+            "$ref": "./examples/RuleSets_ListResourceUsage.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleSetName",
+            "in": "path",
+            "description": "Name of the rule set under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UsagesListResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/ruleSets/{ruleSetName}/rules": {
+      "get": {
+        "tags": [
+          "Rules"
+        ],
+        "description": "Lists all of the existing delivery rules within a rule set.",
+        "operationId": "Rules_ListByRuleSet",
+        "x-ms-examples": {
+          "Rules_ListByRuleSet": {
+            "$ref": "./examples/Rules_ListByRuleSet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleSetName",
+            "in": "path",
+            "description": "Name of the rule set under the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RuleListResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/ruleSets/{ruleSetName}/rules/{ruleName}": {
+      "get": {
+        "tags": [
+          "Rules"
+        ],
+        "description": "Gets an existing delivery rule within a rule set.",
+        "operationId": "Rules_Get",
+        "x-ms-examples": {
+          "Rules_Get": {
+            "$ref": "./examples/Rules_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleSetName",
+            "in": "path",
+            "description": "Name of the rule set under the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "description": "Name of the delivery rule which is unique within the endpoint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Rule"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Rules"
+        ],
+        "description": "Creates a new delivery rule within the specified rule set.",
+        "operationId": "Rules_Create",
+        "x-ms-examples": {
+          "Rules_Create": {
+            "$ref": "./examples/Rules_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleSetName",
+            "in": "path",
+            "description": "Name of the rule set under the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "description": "Name of the delivery rule which is unique within the endpoint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "rule",
+            "in": "body",
+            "description": "The delivery rule properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Rule"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Rule"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new delivery rule has been created.",
+            "schema": {
+              "$ref": "#/definitions/Rule"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Rule"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "Rules"
+        ],
+        "description": "Updates an existing delivery rule within a rule set.",
+        "operationId": "Rules_Update",
+        "x-ms-examples": {
+          "Rules_Update": {
+            "$ref": "./examples/Rules_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleSetName",
+            "in": "path",
+            "description": "Name of the rule set under the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "description": "Name of the delivery rule which is unique within the endpoint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleUpdateProperties",
+            "in": "body",
+            "description": "Delivery rule properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RuleUpdateParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Rule"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Rule"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "Rules"
+        ],
+        "description": "Deletes an existing delivery rule within a rule set.",
+        "operationId": "Rules_Delete",
+        "x-ms-examples": {
+          "Rules_Delete": {
+            "$ref": "./examples/Rules_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleSetName",
+            "in": "path",
+            "description": "Name of the rule set under the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "description": "Name of the delivery rule which is unique within the endpoint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content. The request has been accepted but the origin was not found."
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/securityPolicies": {
+      "get": {
+        "tags": [
+          "SecurityPolicies"
+        ],
+        "description": "Lists security policies associated with the profile",
+        "operationId": "SecurityPolicies_ListByProfile",
+        "x-ms-examples": {
+          "SecurityPolicies_ListByProfile": {
+            "$ref": "./examples/SecurityPolicies_ListByProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/securityPolicies/{securityPolicyName}": {
+      "get": {
+        "tags": [
+          "SecurityPolicies"
+        ],
+        "description": "Gets an existing security policy within a profile.",
+        "operationId": "SecurityPolicies_Get",
+        "x-ms-examples": {
+          "SecurityPolicies_Get": {
+            "$ref": "./examples/SecurityPolicies_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "securityPolicyName",
+            "in": "path",
+            "description": "Name of the security policy under the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityPolicy"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SecurityPolicies"
+        ],
+        "description": "Creates a new security policy within the specified profile.",
+        "operationId": "SecurityPolicies_Create",
+        "x-ms-examples": {
+          "SecurityPolicies_Create": {
+            "$ref": "./examples/SecurityPolicies_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "securityPolicyName",
+            "in": "path",
+            "description": "Name of the security policy under the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "securityPolicy",
+            "in": "body",
+            "description": "The security policy properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SecurityPolicy"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityPolicy"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new delivery rule has been created.",
+            "schema": {
+              "$ref": "#/definitions/SecurityPolicy"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/SecurityPolicy"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "SecurityPolicies"
+        ],
+        "description": "Updates an existing security policy within a profile.",
+        "operationId": "SecurityPolicies_Patch",
+        "x-ms-examples": {
+          "SecurityPolicies_Patch": {
+            "$ref": "./examples/SecurityPolicies_Patch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "securityPolicyName",
+            "in": "path",
+            "description": "Name of the security policy under the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "securityPolicyProperties",
+            "in": "body",
+            "description": "Security policy update properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SecurityPolicyProperties"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityPolicy"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/SecurityPolicy"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "SecurityPolicies"
+        ],
+        "description": "Deletes an existing security policy within profile.",
+        "operationId": "SecurityPolicies_Delete",
+        "x-ms-examples": {
+          "SecurityPolicies_Delete": {
+            "$ref": "./examples/SecurityPolicies_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "securityPolicyName",
+            "in": "path",
+            "description": "Name of the security policy under the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/secrets": {
+      "get": {
+        "tags": [
+          "Secrets"
+        ],
+        "description": "Lists existing AzureFrontDoor secrets.",
+        "operationId": "Secrets_ListByProfile",
+        "x-ms-examples": {
+          "Secrets_ListByProfile": {
+            "$ref": "./examples/Secrets_ListByProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecretListResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/secrets/{secretName}": {
+      "get": {
+        "tags": [
+          "Secrets"
+        ],
+        "description": "Gets an existing Secret within a profile.",
+        "operationId": "Secrets_Get",
+        "x-ms-examples": {
+          "Secrets_Get": {
+            "$ref": "./examples/Secrets_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "secretName",
+            "in": "path",
+            "description": "Name of the Secret under the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Secret"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Secrets"
+        ],
+        "description": "Creates a new Secret within the specified profile.",
+        "operationId": "Secrets_Create",
+        "x-ms-examples": {
+          "Secrets_Create": {
+            "$ref": "./examples/Secrets_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "secretName",
+            "in": "path",
+            "description": "Name of the Secret under the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "secret",
+            "in": "body",
+            "description": "The Secret properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Secret"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Secret"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new delivery rule has been created.",
+            "schema": {
+              "$ref": "#/definitions/Secret"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Secret"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "Secrets"
+        ],
+        "description": "Deletes an existing Secret within profile.",
+        "operationId": "Secrets_Delete",
+        "x-ms-examples": {
+          "Secrets_Delete": {
+            "$ref": "./examples/Secrets_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "secretName",
+            "in": "path",
+            "description": "Name of the Secret under the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content. The request has been accepted but the origin was not found."
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/validateSecret": {
+      "post": {
+        "tags": [
+          "Secrets"
+        ],
+        "description": "Validate a Secret in the profile.",
+        "operationId": "Validate_Secret",
+        "x-ms-examples": {
+          "Validate_Secret": {
+            "$ref": "./examples/Validate_Secret.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "validateSecretInput",
+            "in": "body",
+            "description": "The Secret source.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidateSecretInput"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ValidateSecretOutput"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/getLogAnalyticsMetrics": {
+      "get": {
+        "tags": [
+          "LogAnalytics"
+        ],
+        "operationId": "LogAnalytics_GetLogAnalyticsMetrics",
+        "x-ms-examples": {
+          "LogAnalytics_GetLogAnalyticsMetrics": {
+            "$ref": "./examples/LogAnalytics_GetLogAnalyticsMetrics.json"
+          }
+        },
+        "description": "Get log report for AFD profile",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group. which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "metrics",
+            "type": "array",
+            "required": true,
+            "collectionFormat": "multi",
+            "in": "query",
+            "items": {
+              "type": "string",
+              "enum": [
+                "clientRequestCount",
+                "clientRequestTraffic",
+                "clientRequestBandwidth",
+                "originRequestTraffic",
+                "originRequestBandwidth",
+                "totalLatency"
+              ],
+              "x-ms-enum": {
+                "name": "LogMetric",
+                "modelAsString": true
+              }
+            }
+          },
+          {
+            "name": "dateTimeBegin",
+            "type": "string",
+            "in": "query",
+            "required": true,
+            "format": "date-time"
+          },
+          {
+            "name": "dateTimeEnd",
+            "type": "string",
+            "in": "query",
+            "required": true,
+            "format": "date-time"
+          },
+          {
+            "name": "granularity",
+            "type": "string",
+            "in": "query",
+            "required": true,
+            "enum": [
+              "PT5M",
+              "PT1H",
+              "P1D"
+            ],
+            "x-ms-enum": {
+              "name": "LogMetricsGranularity",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "groupBy",
+            "in": "query",
+            "type": "array",
+            "required": false,
+            "collectionFormat": "multi",
+            "items": {
+              "type": "string",
+              "enum": [
+                "httpStatusCode",
+                "protocol",
+                "cacheStatus",
+                "countryOrRegion",
+                "customDomain"
+              ],
+              "x-ms-enum": {
+                "name": "LogMetricsGroupBy",
+                "modelAsString": true
+              }
+            }
+          },
+          {
+            "name": "continents",
+            "type": "array",
+            "in": "query",
+            "collectionFormat": "multi",
+            "required": false,
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "countryOrRegions",
+            "type": "array",
+            "in": "query",
+            "collectionFormat": "multi",
+            "required": false,
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "customDomains",
+            "type": "array",
+            "required": true,
+            "collectionFormat": "multi",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "protocols",
+            "type": "array",
+            "required": true,
+            "collectionFormat": "multi",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/MetricsResponse"
+            }
+          },
+          "default": {
+            "description": "CDN Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/getLogAnalyticsRankings": {
+      "get": {
+        "tags": [
+          "LogAnalytics"
+        ],
+        "operationId": "LogAnalytics_GetLogAnalyticsRankings",
+        "x-ms-examples": {
+          "LogAnalytics_GetLogAnalyticsRankings": {
+            "$ref": "./examples/LogAnalytics_GetLogAnalyticsRankings.json"
+          }
+        },
+        "description": "Get log analytics ranking report for AFD profile",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group. which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "rankings",
+            "type": "array",
+            "in": "query",
+            "required": true,
+            "collectionFormat": "multi",
+            "items": {
+              "type": "string",
+              "enum": [
+                "url",
+                "referrer",
+                "browser",
+                "userAgent",
+                "countryOrRegion"
+              ],
+              "x-ms-enum": {
+                "name": "LogRanking",
+                "modelAsString": true
+              }
+            }
+          },
+          {
+            "name": "metrics",
+            "type": "array",
+            "in": "query",
+            "required": true,
+            "collectionFormat": "multi",
+            "items": {
+              "type": "string",
+              "enum": [
+                "clientRequestCount",
+                "clientRequestTraffic",
+                "hitCount",
+                "missCount",
+                "userErrorCount",
+                "errorCount"
+              ],
+              "x-ms-enum": {
+                "name": "LogRankingMetric",
+                "modelAsString": true
+              }
+            }
+          },
+          {
+            "name": "maxRanking",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "dateTimeBegin",
+            "type": "string",
+            "in": "query",
+            "required": true,
+            "format": "date-time"
+          },
+          {
+            "name": "dateTimeEnd",
+            "type": "string",
+            "in": "query",
+            "required": true,
+            "format": "date-time"
+          },
+          {
+            "name": "customDomains",
+            "type": "array",
+            "in": "query",
+            "required": false,
+            "collectionFormat": "multi",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/RankingsResponse"
+            }
+          },
+          "default": {
+            "description": "CDN Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/getLogAnalyticsLocations": {
+      "get": {
+        "tags": [
+          "LogAnalytics"
+        ],
+        "operationId": "LogAnalytics_GetLogAnalyticsLocations",
+        "x-ms-examples": {
+          "LogAnalytics_GetLogAnalyticsLocations": {
+            "$ref": "./examples/LogAnalytics_GetLogAnalyticsLocations.json"
+          }
+        },
+        "description": "Get all available location names for AFD log analytics report.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group. which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/ContinentsResponse"
+            }
+          },
+          "default": {
+            "description": "CDN Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/getLogAnalyticsResources": {
+      "get": {
+        "tags": [
+          "LogAnalytics"
+        ],
+        "operationId": "LogAnalytics_GetLogAnalyticsResources",
+        "x-ms-examples": {
+          "LogAnalytics_GetLogAnalyticsResources": {
+            "$ref": "./examples/LogAnalytics_GetLogAnalyticsResources.json"
+          }
+        },
+        "description": "Get all endpoints and custom domains available for AFD log report",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group. which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/ResourcesResponse"
+            }
+          },
+          "default": {
+            "description": "CDN Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/getWafLogAnalyticsMetrics": {
+      "get": {
+        "tags": [
+          "WafLogAnalytics"
+        ],
+        "operationId": "LogAnalytics_GetWafLogAnalyticsMetrics",
+        "x-ms-examples": {
+          "LogAnalytics_GetWafLogAnalyticsMetrics": {
+            "$ref": "./examples/LogAnalytics_GetWafLogAnalyticsMetrics.json"
+          }
+        },
+        "description": "Get Waf related log analytics report for AFD profile.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group. which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "metrics",
+            "type": "array",
+            "in": "query",
+            "required": true,
+            "collectionFormat": "multi",
+            "items": {
+              "type": "string",
+              "enum": [
+                "clientRequestCount"
+              ],
+              "x-ms-enum": {
+                "name": "WafMetric",
+                "modelAsString": true
+              }
+            }
+          },
+          {
+            "name": "dateTimeBegin",
+            "type": "string",
+            "in": "query",
+            "required": true,
+            "format": "date-time"
+          },
+          {
+            "name": "dateTimeEnd",
+            "type": "string",
+            "in": "query",
+            "required": true,
+            "format": "date-time"
+          },
+          {
+            "name": "granularity",
+            "type": "string",
+            "in": "query",
+            "required": true,
+            "enum": [
+              "PT5M",
+              "PT1H",
+              "P1D"
+            ],
+            "x-ms-enum": {
+              "name": "WafGranularity",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "actions",
+            "type": "array",
+            "in": "query",
+            "required": false,
+            "collectionFormat": "multi",
+            "items": {
+              "type": "string",
+              "enum": [
+                "allow",
+                "block",
+                "log",
+                "redirect"
+              ],
+              "x-ms-enum": {
+                "name": "WafAction",
+                "modelAsString": true
+              }
+            }
+          },
+          {
+            "name": "groupBy",
+            "in": "query",
+            "type": "array",
+            "required": false,
+            "collectionFormat": "multi",
+            "items": {
+              "type": "string",
+              "enum": [
+                "httpStatusCode",
+                "customDomain"
+              ],
+              "x-ms-enum": {
+                "name": "WafRankingGroupBy",
+                "modelAsString": true
+              }
+            }
+          },
+          {
+            "name": "ruleTypes",
+            "type": "array",
+            "in": "query",
+            "required": false,
+            "collectionFormat": "multi",
+            "items": {
+              "type": "string",
+              "enum": [
+                "managed",
+                "custom",
+                "bot"
+              ],
+              "x-ms-enum": {
+                "name": "WafRuleType",
+                "modelAsString": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/WafMetricsResponse"
+            }
+          },
+          "default": {
+            "description": "CDN Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/getWafLogAnalyticsRankings": {
+      "get": {
+        "tags": [
+          "WafLogAnalytics"
+        ],
+        "operationId": "LogAnalytics_GetWafLogAnalyticsRankings",
+        "x-ms-examples": {
+          "LogAnalytics_GetWafLogAnalyticsRankings": {
+            "$ref": "./examples/LogAnalytics_GetWafLogAnalyticsRankings.json"
+          }
+        },
+        "description": "Get WAF log analytics charts for AFD profile",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group. which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "metrics",
+            "type": "array",
+            "in": "query",
+            "required": true,
+            "collectionFormat": "multi",
+            "items": {
+              "type": "string",
+              "enum": [
+                "clientRequestCount"
+              ],
+              "x-ms-enum": {
+                "name": "WafMetric",
+                "modelAsString": true
+              }
+            }
+          },
+          {
+            "name": "dateTimeBegin",
+            "type": "string",
+            "in": "query",
+            "required": true,
+            "format": "date-time"
+          },
+          {
+            "name": "dateTimeEnd",
+            "type": "string",
+            "in": "query",
+            "required": true,
+            "format": "date-time"
+          },
+          {
+            "name": "maxRanking",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "rankings",
+            "type": "array",
+            "in": "query",
+            "required": true,
+            "collectionFormat": "multi",
+            "items": {
+              "type": "string",
+              "enum": [
+                "action",
+                "ruleGroup",
+                "ruleId",
+                "userAgent",
+                "clientIp",
+                "url",
+                "countryOrRegion",
+                "ruleType"
+              ],
+              "x-ms-enum": {
+                "name": "WafRankingType",
+                "modelAsString": true
+              }
+            }
+          },
+          {
+            "name": "actions",
+            "type": "array",
+            "in": "query",
+            "required": false,
+            "collectionFormat": "multi",
+            "items": {
+              "type": "string",
+              "enum": [
+                "allow",
+                "block",
+                "log",
+                "redirect"
+              ],
+              "x-ms-enum": {
+                "name": "WafAction",
+                "modelAsString": true
+              }
+            }
+          },
+          {
+            "name": "ruleTypes",
+            "type": "array",
+            "in": "query",
+            "required": false,
+            "collectionFormat": "multi",
+            "items": {
+              "type": "string",
+              "enum": [
+                "managed",
+                "custom",
+                "bot"
+              ],
+              "x-ms-enum": {
+                "name": "WafRuleType",
+                "modelAsString": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/WafRankingsResponse"
+            }
+          },
+          "default": {
+            "description": "CDN Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AfdPurgeParameters": {
+      "type": "object",
+      "description": "Parameters required for content purge.",
+      "required": [
+        "contentPaths"
+      ],
+      "properties": {
+        "contentPaths": {
+          "description": "The path to the content to be purged. Can describe a file path or a wild card directory.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "domains": {
+          "description": "List of domains.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Certificate": {
+      "description": "Certificate used for https",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/SecretType"
+        },
+        "subject": {
+          "description": "Subject name in the certificate.",
+          "type": "string",
+          "readOnly": true
+        },
+        "expirationDate": {
+          "description": "Certificate expiration date.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedCertificate": {
+      "description": "Managed Certificate used for https",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Certificate"
+        }
+      ]
+    },
+    "CustomerCertificate": {
+      "description": "Customer Certificate used for https",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Certificate"
+        }
+      ],
+      "properties": {
+        "secretSource": {
+          "description": "Resource reference to the Azure Key Vault certificate. Expected to be in format of /subscriptions/{​​​​​​​​​subscriptionId}​​​​​​​​​/resourceGroups/{​​​​​​​​​resourceGroupName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/providers/Microsoft.KeyVault/vaults/{vaultName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/secrets/{certificateName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​",
+          "$ref": "./cdn.json#/definitions/ResourceReference"
+        },
+        "secretVersion": {
+          "description": "Certificate version.",
+          "type": "string"
+        },
+        "certificateAuthority": {
+          "description": "Certificate issuing authority.",
+          "type": "string",
+          "readOnly": true
+        },
+        "useLatestVersion": {
+          "description": "Whether to use the latest version for the certificate",
+          "type": "boolean"
+        },
+        "subjectAlternativeNames": {
+          "description": "The list of SANs.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "readOnly": true
+          }
+        },
+        "thumbprint": {
+          "description": "Certificate thumbprint.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureFirstPartyManagedCertificate": {
+      "description": "Azure FirstParty Managed Certificate provided by other first party resource providers to enable HTTPS.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Certificate"
+        }
+      ]
+    },
+    "ValidateSecretInput": {
+      "description": "Input of the secret to be validated.",
+      "type": "object",
+      "required": [
+        "secretSource",
+        "secretType"
+      ],
+      "properties": {
+        "secretType": {
+          "description": "The secret type.",
+          "$ref": "#/definitions/SecretType"
+        },
+        "secretSource": {
+          "description": "Resource reference to the Azure Key Vault secret. Expected to be in format of /subscriptions/{​​​​​​​​​subscriptionId}​​​​​​​​​/resourceGroups/{​​​​​​​​​resourceGroupName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/providers/Microsoft.KeyVault/vaults/{vaultName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/secrets/{secretName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​",
+          "$ref": "./cdn.json#/definitions/ResourceReference"
+        },
+        "secretVersion": {
+          "description": "Secret version, if customer is using a specific version.",
+          "type": "string"
+        }
+      }
+    },
+    "ValidateSecretOutput": {
+      "description": "Output of the validated secret.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The validation status.",
+          "enum": [
+            "Valid",
+            "Invalid",
+            "AccessDenied",
+            "CertificateExpired"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "description": "Detailed error message",
+          "type": "string"
+        }
+      }
+    },
+    "AFDDomainListResult": {
+      "description": "Result of the request to list domains. It contains a list of domain objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/AFDDomain"
+          },
+          "description": "List of AzureFrontDoor domains within a profile."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of domain objects if there are any."
+        }
+      }
+    },
+    "AFDDomain": {
+      "description": "Friendly domain name mapping to the endpoint hostname that the customer provides for branding purposes, e.g. www.contoso.com.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./cdn.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AFDDomainProperties"
+        }
+      }
+    },
+    "AFDDomainProperties": {
+      "description": "The JSON object that contains the properties of the domain to create.",
+      "required": [
+        "hostName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AFDDomainUpdatePropertiesParameters"
+        },
+        {
+          "$ref": "#/definitions/AFDStateProperties"
+        }
+      ],
+      "properties": {
+        "domainValidationState": {
+          "description": "Provisioning substate shows the progress of custom HTTPS enabling/disabling process step by step. DCV stands for DomainControlValidation.",
+          "readOnly": true,
+          "enum": [
+            "Unknown",
+            "Submitting",
+            "Pending",
+            "Rejected",
+            "TimedOut",
+            "PendingRevalidation",
+            "Approved"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DomainValidationState",
+            "modelAsString": true
+          }
+        },
+        "hostName": {
+          "description": "The host name of the domain. Must be a domain name.",
+          "type": "string"
+        },
+        "validationProperties": {
+          "description": "Values the customer needs to validate domain ownership",
+          "readOnly": true,
+          "type": "object",
+          "$ref": "#/definitions/DomainValidationProperties"
+        }
+      }
+    },
+    "AFDDomainUpdateParameters": {
+      "description": "The domain JSON object required for domain creation or update.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AFDDomainUpdatePropertiesParameters"
+        }
+      }
+    },
+    "AFDDomainUpdatePropertiesParameters": {
+      "description": "The JSON object that contains the properties of the domain to create.",
+      "properties": {
+        "profileName": {
+          "description": "The name of the profile which holds the domain.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tlsSettings": {
+          "description": "The configuration specifying how to enable HTTPS for the domain - using AzureFrontDoor managed certificate or user's own certificate. If not specified, enabling ssl uses AzureFrontDoor managed certificate by default.",
+          "type": "object",
+          "$ref": "#/definitions/AFDDomainHttpsParameters"
+        },
+        "azureDnsZone": {
+          "description": "Resource reference to the Azure DNS zone",
+          "type": "object",
+          "$ref": "./cdn.json#/definitions/ResourceReference"
+        },
+        "preValidatedCustomDomainResourceId": {
+          "description": "Resource reference to the Azure resource where custom domain ownership was prevalidated",
+          "type": "object",
+          "$ref": "./cdn.json#/definitions/ResourceReference"
+        }
+      }
+    },
+    "DomainValidationProperties": {
+      "description": "The JSON object that contains the properties to validate a domain.",
+      "properties": {
+        "validationToken": {
+          "description": "Challenge used for DNS TXT record or file based validation",
+          "readOnly": true,
+          "type": "string"
+        },
+        "expirationDate": {
+          "description": "The date time that the token expires",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "AFDDomainHttpsParameters": {
+      "description": "The JSON object that contains the properties to secure a domain.",
+      "required": [
+        "certificateType"
+      ],
+      "properties": {
+        "certificateType": {
+          "description": "Defines the source of the SSL certificate.",
+          "enum": [
+            "CustomerCertificate",
+            "ManagedCertificate",
+            "AzureFirstPartyManagedCertificate"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AfdCertificateType",
+            "modelAsString": true
+          }
+        },
+        "minimumTlsVersion": {
+          "description": "TLS protocol version that will be used for Https",
+          "enum": [
+            "TLS10",
+            "TLS12"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AfdMinimumTlsVersion",
+            "modelAsString": false
+          }
+        },
+        "secret": {
+          "description": "Resource reference to the secret. ie. subs/rg/profile/secret",
+          "type": "object",
+          "$ref": "./cdn.json#/definitions/ResourceReference"
+        }
+      }
+    },
+    "SecurityPolicy": {
+      "description": "SecurityPolicy association for AzureFrontDoor profile",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./cdn.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SecurityPolicyProperties"
+        }
+      }
+    },
+    "SecurityPolicyProperties": {
+      "description": "The json object that contains properties required to create a security policy",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AFDStateProperties"
+        }
+      ],
+      "properties": {
+        "profileName": {
+          "description": "The name of the profile which holds the security policy.",
+          "type": "string",
+          "readOnly": true
+        },
+        "parameters": {
+          "description": "object which contains security policy parameters",
+          "$ref": "#/definitions/SecurityPolicyParameters"
+        }
+      }
+    },
+    "SecurityPolicyParameters": {
+      "description": "The json object containing security policy parameters",
+      "discriminator": "type",
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of the Security policy to create.",
+          "enum": [
+            "WebApplicationFirewall"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SecurityPolicyType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SecurityPolicyWebApplicationFirewallParameters": {
+      "description": "The json object containing security policy waf parameters",
+      "x-ms-discriminator-value": "WebApplicationFirewall",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecurityPolicyParameters"
+        }
+      ],
+      "properties": {
+        "wafPolicy": {
+          "type": "object",
+          "description": "Resource ID.",
+          "$ref": "./cdn.json#/definitions/ResourceReference"
+        },
+        "associations": {
+          "description": "Waf associations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecurityPolicyWebApplicationFirewallAssociation"
+          }
+        }
+      }
+    },
+    "SecurityPolicyWebApplicationFirewallAssociation": {
+      "description": "settings for security policy patterns to match",
+      "type": "object",
+      "properties": {
+        "domains": {
+          "description": "List of domains.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActivatedResourceReference"
+          }
+        },
+        "patternsToMatch": {
+          "description": "List of paths",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SecurityPolicyListResult": {
+      "description": "Result of the request to list security policies. It contains a list of security policy objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SecurityPolicy"
+          },
+          "description": "List of Security policies within a profile"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of security policy objects if there is any."
+        }
+      }
+    },
+    "AFDEndpoint": {
+      "description": "CDN endpoint is the entity within a CDN profile containing configuration information such as origin, protocol, content caching and delivery behavior. The AzureFrontDoor endpoint uses the URL format <endpointname>.azureedge.net.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./cdn.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AFDEndpointProperties"
+        }
+      }
+    },
+    "AFDEndpointProperties": {
+      "description": "The JSON object that contains the properties required to create an endpoint.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AFDEndpointPropertiesUpdateParameters"
+        },
+        {
+          "$ref": "#/definitions/AFDStateProperties"
+        }
+      ],
+      "properties": {
+        "hostName": {
+          "description": "The host name of the endpoint structured as {endpointName}.{DNSZone}, e.g. contoso.azureedge.net",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AFDEndpointListResult": {
+      "description": "Result of the request to list endpoints. It contains a list of endpoint objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/AFDEndpoint"
+          },
+          "description": "List of AzureFrontDoor endpoints within a profile"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of endpoint objects if there is any."
+        }
+      }
+    },
+    "AFDEndpointUpdateParameters": {
+      "type": "object",
+      "description": "Properties required to create or update an endpoint.",
+      "properties": {
+        "tags": {
+          "description": "Endpoint tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AFDEndpointPropertiesUpdateParameters"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "AFDEndpointPropertiesUpdateParameters": {
+      "description": "The JSON object containing endpoint update parameters.",
+      "properties": {
+        "profileName": {
+          "description": "The name of the profile which holds the endpoint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "enabledState": {
+          "description": "Whether to enable use of this rule. Permitted values are 'Enabled' or 'Disabled'",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnabledState",
+            "modelAsString": true
+          }
+        },
+        "originResponseTimeoutSeconds": {
+          "description": "Send and receive timeout on forwarding request to the origin. When timeout is reached, the request fails and returns.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 16,
+          "maximum": 240,
+          "exclusiveMinimum": false
+        }
+      }
+    },
+    "CompressionSettings": {
+      "description": "settings for compression.",
+      "type": "object",
+      "properties": {
+        "contentTypesToCompress": {
+          "description": "List of content types on which compression applies. The value should be a valid MIME type.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isCompressionEnabled": {
+          "description": "Indicates whether content compression is enabled on AzureFrontDoor. Default value is false. If compression is enabled, content will be served as compressed if user requests for a compressed version. Content won't be compressed on AzureFrontDoor when requested content is smaller than 1 byte or larger than 1 MB.",
+          "type": "boolean"
+        }
+      }
+    },
+    "AFDEndpointProtocols": {
+      "description": "Supported protocols for the customer's endpoint.",
+      "enum": [
+        "Http",
+        "Https"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AFDEndpointProtocols",
+        "modelAsString": true
+      }
+    },
+    "SecretListResult": {
+      "description": "Result of the request to list secrets. It contains a list of Secret objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Secret"
+          },
+          "description": "List of AzureFrontDoor secrets within a profile."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of Secret objects if there are any."
+        }
+      }
+    },
+    "Secret": {
+      "description": "Friendly Secret name mapping to the any Secret or secret related information.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./cdn.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SecretProperties"
+        }
+      }
+    },
+    "SecretProperties": {
+      "description": "The JSON object that contains the properties of the Secret to create.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AFDStateProperties"
+        }
+      ],
+      "properties": {
+        "profileName": {
+          "description": "The name of the profile which holds the secret.",
+          "type": "string",
+          "readOnly": true
+        },
+        "parameters": {
+          "description": "object which contains secret parameters",
+          "$ref": "#/definitions/SecretParameters"
+        }
+      }
+    },
+    "SecretParameters": {
+      "description": "The json object containing secret parameters",
+      "discriminator": "type",
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/SecretType"
+        }
+      }
+    },
+    "SecretType": {
+      "description": "The type of the secret resource.",
+      "enum": [
+        "UrlSigningKey",
+        "CustomerCertificate",
+        "ManagedCertificate",
+        "AzureFirstPartyManagedCertificate"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "SecretType",
+        "modelAsString": true
+      }
+    },
+    "UrlSigningKeyParameters": {
+      "description": "Url signing key parameters",
+      "x-ms-discriminator-value": "UrlSigningKey",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretParameters"
+        }
+      ],
+      "required": [
+        "keyId",
+        "secretSource"
+      ],
+      "properties": {
+        "keyId": {
+          "description": "Defines the customer defined key Id. This id will exist in the incoming request to indicate the key used to form the hash.",
+          "type": "string"
+        },
+        "secretSource": {
+          "description": "Resource reference to the Azure Key Vault secret. Expected to be in format of /subscriptions/{​​​​​​​​​subscriptionId}​​​​​​​​​/resourceGroups/{​​​​​​​​​resourceGroupName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/providers/Microsoft.KeyVault/vaults/{vaultName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/secrets/{secretName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​",
+          "type": "object",
+          "$ref": "./cdn.json#/definitions/ResourceReference"
+        },
+        "secretVersion": {
+          "description": "Version of the secret to be used",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedCertificateParameters": {
+      "description": "Managed Certificate used for https",
+      "x-ms-discriminator-value": "ManagedCertificate",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretParameters"
+        }
+      ],
+      "properties": {
+        "subject": {
+          "description": "Subject name in the certificate.",
+          "type": "string",
+          "readOnly": true
+        },
+        "expirationDate": {
+          "description": "Certificate expiration date.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CustomerCertificateParameters": {
+      "description": "Customer Certificate used for https",
+      "x-ms-discriminator-value": "CustomerCertificate",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretParameters"
+        }
+      ],
+      "required": [
+        "secretSource"
+      ],
+      "properties": {
+        "secretSource": {
+          "description": "Resource reference to the Azure Key Vault certificate. Expected to be in format of /subscriptions/{​​​​​​​​​subscriptionId}​​​​​​​​​/resourceGroups/{​​​​​​​​​resourceGroupName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/providers/Microsoft.KeyVault/vaults/{vaultName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/secrets/{certificateName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​",
+          "type": "object",
+          "$ref": "./cdn.json#/definitions/ResourceReference"
+        },
+        "secretVersion": {
+          "description": "Version of the secret to be used",
+          "type": "string"
+        },
+        "useLatestVersion": {
+          "description": "Whether to use the latest version for the certificate",
+          "type": "boolean"
+        },
+        "subject": {
+          "description": "Subject name in the certificate.",
+          "type": "string",
+          "readOnly": true
+        },
+        "expirationDate": {
+          "description": "Certificate expiration date.",
+          "type": "string",
+          "readOnly": true
+        },
+        "certificateAuthority": {
+          "description": "Certificate issuing authority.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subjectAlternativeNames": {
+          "description": "The list of SANs.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "readOnly": true
+          }
+        },
+        "thumbprint": {
+          "description": "Certificate thumbprint.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureFirstPartyManagedCertificateParameters": {
+      "description": "Azure FirstParty Managed Certificate provided by other first party resource providers to enable HTTPS.",
+      "x-ms-discriminator-value": "AzureFirstPartyManagedCertificate",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretParameters"
+        }
+      ]
+    },
+    "RuleSetListResult": {
+      "description": "Result of the request to list rule sets. It contains a list of rule set objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/RuleSet"
+          },
+          "description": "List of AzureFrontDoor rule sets within a profile."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of rule set objects if there are any."
+        }
+      }
+    },
+    "RuleSet": {
+      "description": "Friendly RuleSet name mapping to the any RuleSet or secret related information.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./cdn.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RuleSetProperties"
+        }
+      }
+    },
+    "RuleSetProperties": {
+      "description": "The JSON object that contains the properties of the Rule Set to create.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AFDStateProperties"
+        }
+      ],
+      "properties": {
+        "profileName": {
+          "description": "The name of the profile which holds the rule set.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AFDOrigin": {
+      "description": "CDN origin is the source of the content being delivered via CDN. When the edge nodes represented by an endpoint do not have the requested content cached, they attempt to fetch it from one or more of the configured origins.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./cdn.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AFDOriginProperties"
+        }
+      }
+    },
+    "AFDOriginProperties": {
+      "description": "The JSON object that contains the properties of the origin.",
+      "required": [
+        "hostName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AFDOriginUpdatePropertiesParameters"
+        },
+        {
+          "$ref": "#/definitions/AFDStateProperties"
+        }
+      ]
+    },
+    "AFDOriginUpdateParameters": {
+      "type": "object",
+      "description": "AFDOrigin properties needed for origin update.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AFDOriginUpdatePropertiesParameters"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "AFDOriginUpdatePropertiesParameters": {
+      "description": "The JSON object that contains the properties of the origin.",
+      "properties": {
+        "originGroupName": {
+          "description": "The name of the origin group which contains this origin.",
+          "type": "string",
+          "readOnly": true
+        },
+        "azureOrigin": {
+          "description": "Resource reference to the Azure origin resource.",
+          "type": "object",
+          "$ref": "./cdn.json#/definitions/ResourceReference"
+        },
+        "hostName": {
+          "description": "The address of the origin. Domain names, IPv4 addresses, and IPv6 addresses are supported.This should be unique across all origins in an endpoint.",
+          "type": "string"
+        },
+        "httpPort": {
+          "description": "The value of the HTTP port. Must be between 1 and 65535.",
+          "type": "integer",
+          "format": "int32",
+          "maximum": 65535,
+          "exclusiveMaximum": false,
+          "minimum": 1,
+          "exclusiveMinimum": false
+        },
+        "httpsPort": {
+          "description": "The value of the HTTPS port. Must be between 1 and 65535.",
+          "type": "integer",
+          "maximum": 65535,
+          "format": "int32",
+          "exclusiveMaximum": false,
+          "minimum": 1,
+          "exclusiveMinimum": false
+        },
+        "originHostHeader": {
+          "description": "The host header value sent to the origin with each request. If you leave this blank, the request hostname determines this value. Azure CDN origins, such as Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin hostname by default. This overrides the host header defined at Endpoint",
+          "type": "string"
+        },
+        "priority": {
+          "description": "Priority of origin in given origin group for load balancing. Higher priorities will not be used for load balancing if any lower priority origin is healthy.Must be between 1 and 5",
+          "type": "integer",
+          "format": "int32",
+          "maximum": 5,
+          "minimum": 1
+        },
+        "weight": {
+          "description": "Weight of the origin in given origin group for load balancing. Must be between 1 and 1000",
+          "type": "integer",
+          "format": "int32",
+          "maximum": 1000,
+          "minimum": 1
+        },
+        "sharedPrivateLinkResource": {
+          "description": "The properties of the private link resource for private origin.",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/SharedPrivateLinkResourceProperties"
+          }
+        },
+        "enabledState": {
+          "description": "Whether to enable health probes to be made against backends defined under backendPools. Health probes can only be disabled if there is a single enabled backend in single enabled backend pool.",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnabledState",
+            "modelAsString": true
+          }
+        },
+        "enforceCertificateNameCheck": {
+          "description": "Whether to enable certificate name check at origin level",
+          "type": "boolean"
+        }
+      }
+    },
+    "SharedPrivateLinkResourceProperties": {
+      "properties": {
+        "privateLink": {
+          "type": "object",
+          "$ref": "./cdn.json#/definitions/ResourceReference",
+          "description": "The resource id of the resource the shared private link resource is for."
+        },
+        "privateLinkLocation": {
+          "type": "string",
+          "description": "The location of the shared private link resource"
+        },
+        "groupId": {
+          "type": "string",
+          "description": "The group id from the provider of resource the shared private link resource is for."
+        },
+        "requestMessage": {
+          "type": "string",
+          "description": "The request message for requesting approval of the shared private link resource."
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the shared private link resource. Can be Pending, Approved, Rejected, Disconnected, or Timeout.",
+          "enum": [
+            "Pending",
+            "Approved",
+            "Rejected",
+            "Disconnected",
+            "Timeout"
+          ],
+          "x-ms-enum": {
+            "name": "SharedPrivateLinkResourceStatus",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Describes the properties of an existing Shared Private Link Resource to use when connecting to a private origin."
+    },
+    "AFDOriginListResult": {
+      "description": "Result of the request to list origins. It contains a list of origin objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/AFDOrigin"
+          },
+          "description": "List of CDN origins within an endpoint"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of origin objects if there are any."
+        }
+      }
+    },
+    "AFDOriginGroup": {
+      "description": "AFDOrigin group comprising of origins is used for load balancing to origins when the content cannot be served from CDN.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./cdn.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AFDOriginGroupProperties"
+        }
+      }
+    },
+    "AFDOriginGroupProperties": {
+      "description": "The JSON object that contains the properties of the origin group.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AFDOriginGroupUpdatePropertiesParameters"
+        },
+        {
+          "$ref": "#/definitions/AFDStateProperties"
+        }
+      ]
+    },
+    "AFDOriginGroupUpdateParameters": {
+      "type": "object",
+      "description": "AFDOrigin group properties needed for origin group creation or update.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AFDOriginGroupUpdatePropertiesParameters"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "AFDOriginGroupUpdatePropertiesParameters": {
+      "description": "The JSON object that contains the properties of the origin group.",
+      "properties": {
+        "profileName": {
+          "description": "The name of the profile which holds the origin group.",
+          "type": "string",
+          "readOnly": true
+        },
+        "loadBalancingSettings": {
+          "description": "Load balancing settings for a backend pool",
+          "$ref": "#/definitions/LoadBalancingSettingsParameters"
+        },
+        "healthProbeSettings": {
+          "description": "Health probe settings to the origin that is used to determine the health of the origin.",
+          "type": "object",
+          "$ref": "./cdn.json#/definitions/HealthProbeParameters"
+        },
+        "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": {
+          "description": "Time in minutes to shift the traffic to the endpoint gradually when an unhealthy endpoint comes healthy or a new endpoint is added. Default is 10 mins. This property is currently not supported.",
+          "type": "integer",
+          "format": "int32",
+          "maximum": 50,
+          "minimum": 0
+        },
+        "responseBasedAfdOriginErrorDetectionSettings": {
+          "description": "The JSON object that contains the properties to determine origin health using real requests/responses. This property is currently not supported.",
+          "type": "object",
+          "$ref": "./cdn.json#/definitions/ResponseBasedOriginErrorDetectionParameters"
+        },
+        "sessionAffinityState": {
+          "description": "Whether to allow session affinity on this host. Valid options are 'Enabled' or 'Disabled'",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnabledState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "LoadBalancingSettingsParameters": {
+      "description": "Round-Robin load balancing settings for a backend pool",
+      "type": "object",
+      "properties": {
+        "sampleSize": {
+          "description": "The number of samples to consider for load balancing decisions",
+          "type": "integer",
+          "format": "int32"
+        },
+        "successfulSamplesRequired": {
+          "description": "The number of samples within the sample period that must succeed",
+          "type": "integer",
+          "format": "int32"
+        },
+        "additionalLatencyInMilliseconds": {
+          "description": "The additional latency in milliseconds for probes to fall into the lowest latency bucket",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "AFDOriginGroupListResult": {
+      "description": "Result of the request to list origin groups. It contains a list of origin groups objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/AFDOriginGroup"
+          },
+          "description": "List of CDN origin groups within an endpoint"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of origin objects if there are any."
+        }
+      }
+    },
+    "RouteListResult": {
+      "description": "Result of the request to list routes. It contains a list of route objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Route"
+          },
+          "description": "List of AzureFrontDoor routes within a profile."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of route objects if there are any."
+        }
+      }
+    },
+    "Route": {
+      "description": "Friendly Routes name mapping to the any Routes or secret related information.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./cdn.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RouteProperties"
+        }
+      }
+    },
+    "RouteProperties": {
+      "description": "The JSON object that contains the properties of the Routes to create.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RouteUpdatePropertiesParameters"
+        },
+        {
+          "$ref": "#/definitions/AFDStateProperties"
+        }
+      ],
+      "required": [
+        "originGroup"
+      ]
+    },
+    "RouteUpdateParameters": {
+      "description": "The domain JSON object required for domain creation or update.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RouteUpdatePropertiesParameters"
+        }
+      }
+    },
+    "RouteUpdatePropertiesParameters": {
+      "description": "The JSON object that contains the properties of the domain to create.",
+      "properties": {
+        "endpointName": {
+          "description": "The name of the endpoint which holds the route.",
+          "type": "string",
+          "readOnly": true
+        },
+        "customDomains": {
+          "description": "Domains referenced by this endpoint.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActivatedResourceReference"
+          }
+        },
+        "originGroup": {
+          "description": "A reference to the origin group.",
+          "type": "object",
+          "$ref": "./cdn.json#/definitions/ResourceReference"
+        },
+        "originPath": {
+          "description": "A directory path on the origin that AzureFrontDoor can use to retrieve content from, e.g. contoso.cloudapp.net/originpath.",
+          "type": "string"
+        },
+        "ruleSets": {
+          "description": "rule sets referenced by this endpoint.",
+          "type": "array",
+          "items": {
+            "$ref": "./cdn.json#/definitions/ResourceReference"
+          }
+        },
+        "supportedProtocols": {
+          "description": "List of supported protocols for this route.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AFDEndpointProtocols"
+          }
+        },
+        "patternsToMatch": {
+          "description": "The route patterns of the rule.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "A route pattern of the rule. Must not have any * except possibly after the final / at the end of the path."
+          }
+        },
+        "cacheConfiguration": {
+          "description": "The caching configuration for this route. To disable caching, do not provide a cacheConfiguration object.",
+          "type": "object",
+          "$ref": "#/definitions/AfdRouteCacheConfiguration"
+        },
+        "forwardingProtocol": {
+          "description": "Protocol this rule will use when forwarding traffic to backends.",
+          "type": "string",
+          "enum": [
+            "HttpOnly",
+            "HttpsOnly",
+            "MatchRequest"
+          ],
+          "x-ms-enum": {
+            "name": "ForwardingProtocol",
+            "modelAsString": true
+          }
+        },
+        "linkToDefaultDomain": {
+          "description": "whether this route will be linked to the default endpoint domain.",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "LinkToDefaultDomain",
+            "modelAsString": true
+          }
+        },
+        "httpsRedirect": {
+          "description": "Whether to automatically redirect HTTP traffic to HTTPS traffic. Note that this is a easy way to set up this rule and it will be the first rule that gets executed.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "httpsRedirect",
+            "modelAsString": true
+          }
+        },
+        "enabledState": {
+          "description": "Whether to enable use of this rule. Permitted values are 'Enabled' or 'Disabled'",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnabledState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AfdRouteCacheConfiguration": {
+      "description": "Caching settings for a caching-type route. To disable caching, do not provide a cacheConfiguration object.",
+      "type": "object",
+      "properties": {
+        "queryStringCachingBehavior": {
+          "description": "Defines how Frontdoor caches requests that include query strings. You can ignore any query strings when caching, ignore specific query strings, cache every request with a unique URL, or cache specific query strings.",
+          "enum": [
+            "IgnoreQueryString",
+            "UseQueryString",
+            "IgnoreSpecifiedQueryStrings",
+            "IncludeSpecifiedQueryStrings"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "afdQueryStringCachingBehavior",
+            "modelAsString": true
+          }
+        },
+        "queryParameters": {
+          "description": "query parameters to include or exclude (comma separated).",
+          "type": "string"
+        },
+        "compressionSettings": {
+          "description": "compression settings.",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/CompressionSettings"
+          }
+        }
+      }
+    },
+    "RuleListResult": {
+      "description": "Result of the request to list rules. It contains a list of rule objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Rule"
+          },
+          "description": "List of AzureFrontDoor rules within a rule set."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of rule objects if there are any."
+        }
+      }
+    },
+    "Rule": {
+      "description": "Friendly Rules name mapping to the any Rules or secret related information.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./cdn.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RuleProperties"
+        }
+      }
+    },
+    "RuleProperties": {
+      "description": "The JSON object that contains the properties of the Rules to create.",
+      "type": "object",
+      "required": [
+        "order",
+        "actions"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RuleUpdatePropertiesParameters"
+        },
+        {
+          "$ref": "#/definitions/AFDStateProperties"
+        }
+      ]
+    },
+    "RuleUpdateParameters": {
+      "description": "The domain JSON object required for domain creation or update.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RuleUpdatePropertiesParameters"
+        }
+      }
+    },
+    "RuleUpdatePropertiesParameters": {
+      "description": "The JSON object that contains the properties of the rule to update.",
+      "properties": {
+        "ruleSetName": {
+          "description": "The name of the rule set containing the rule.",
+          "type": "string",
+          "readOnly": true
+        },
+        "order": {
+          "description": "The order in which the rules are applied for the endpoint. Possible values {0,1,2,3,………}. A rule with a lesser order will be applied before a rule with a greater order. Rule with order 0 is a special rule. It does not require any condition and actions listed in it will always be applied.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "conditions": {
+          "description": "A list of conditions that must be matched for the actions to be executed",
+          "type": "array",
+          "items": {
+            "$ref": "./cdn.json#/definitions/DeliveryRuleCondition"
+          }
+        },
+        "actions": {
+          "description": "A list of actions that are executed when all the conditions of a rule are satisfied.",
+          "type": "array",
+          "items": {
+            "$ref": "./cdn.json#/definitions/DeliveryRuleAction"
+          }
+        },
+        "matchProcessingBehavior": {
+          "description": "If this rule is a match should the rules engine continue running the remaining rules or stop. If not present, defaults to Continue.",
+          "type": "string",
+          "enum": [
+            "Continue",
+            "Stop"
+          ],
+          "x-ms-enum": {
+            "name": "MatchProcessingBehavior",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "CheckHostNameAvailabilityInput": {
+      "description": "Input of CheckHostNameAvailability API.",
+      "type": "object",
+      "required": [
+        "hostName"
+      ],
+      "properties": {
+        "hostName": {
+          "description": "The host name to validate.",
+          "type": "string"
+        }
+      }
+    },
+    "ValidationToken": {
+      "description": "The validation token.",
+      "type": "object",
+      "properties": {
+        "token": {
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "AFDStateProperties": {
+      "description": "The tracking states for afd resources.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "description": "Provisioning status",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Updating",
+            "Deleting",
+            "Creating"
+          ],
+          "x-ms-enum": {
+            "name": "AfdProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "deploymentStatus": {
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "DeploymentStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AfdErrorResponse": {
+      "title": "Error response",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "description": "The error object.",
+          "$ref": "./cdn.json#/definitions/ErrorDetail"
+        }
+      }
+    },
+    "MetricsResponse": {
+      "description": "Metrics Response",
+      "properties": {
+        "dateTimeBegin": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dateTimeEnd": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "granularity": {
+          "type": "string",
+          "enum": [
+            "PT5M",
+            "PT1H",
+            "P1D"
+          ]
+        },
+        "series": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "metric": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string",
+                "enum": [
+                  "count",
+                  "bytes",
+                  "bitsPerSecond",
+                  "milliSeconds"
+                ]
+              },
+              "groups": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "data": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "dateTime": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "value": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "RankingsResponse": {
+      "description": "Rankings Response",
+      "properties": {
+        "dateTimeBegin": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dateTimeEnd": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "tables": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "ranking": {
+                "type": "string"
+              },
+              "data": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "metrics": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "metric": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "percentage": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ContinentsResponse": {
+      "description": "Continents Response",
+      "properties": {
+        "continents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "countryOrRegions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "continentId": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ResourcesResponse": {
+      "description": "Resources Response",
+      "properties": {
+        "endpoints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "history": {
+                "type": "boolean"
+              },
+              "customDomains": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "endpointId": {
+                      "type": "string"
+                    },
+                    "history": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "customDomains": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "endpointId": {
+                "type": "string"
+              },
+              "history": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    },
+    "WafMetricsResponse": {
+      "description": "Waf Metrics Response",
+      "properties": {
+        "dateTimeBegin": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dateTimeEnd": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "granularity": {
+          "type": "string",
+          "enum": [
+            "PT5M",
+            "PT1H",
+            "P1D"
+          ]
+        },
+        "series": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "metric": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string",
+                "enum": [
+                  "count"
+                ]
+              },
+              "groups": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "data": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "dateTime": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "value": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "WafRankingsResponse": {
+      "description": "Waf Rankings Response",
+      "properties": {
+        "dateTimeBegin": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dateTimeEnd": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "groupValues": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "metrics": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "metric": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "percentage": {
+                      "type": "number",
+                      "format": "double"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "UsageName": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "A string describing the resource name."
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "A localized string describing the resource name."
+        }
+      },
+      "description": "The usage names."
+    },
+    "Usage": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource identifier."
+        },
+        "unit": {
+          "type": "string",
+          "description": "An enum describing the unit of measurement.",
+          "enum": [
+            "Count"
+          ],
+          "x-ms-enum": {
+            "name": "UsageUnit",
+            "modelAsString": true
+          }
+        },
+        "currentValue": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The current value of the usage."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The limit of usage."
+        },
+        "name": {
+          "$ref": "#/definitions/UsageName",
+          "description": "The name of the type of usage."
+        }
+      },
+      "required": [
+        "unit",
+        "currentValue",
+        "limit",
+        "name"
+      ],
+      "description": "Describes resource usage."
+    },
+    "UsagesListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Usage"
+          },
+          "description": "The list of resource usages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
+        }
+      },
+      "description": "The list usages operation response."
+    },
+    "ActivatedResourceReference": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "isActive": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Whether the resource is active or inactive"
+        }
+      },
+      "description": "Reference to another resource along with its state.",
+      "type": "object",
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Azure Subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request. Current version is 2021-06-01."
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Resource group within the Azure subscription."
+    }
+  }
+}

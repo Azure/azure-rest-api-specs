@@ -2357,7 +2357,7 @@
           "description": "The codes used to unambiguously identify the street",
           "type": "array",
           "items": {
-            "type": "integer",
+            "type": "string",
             "readOnly": true
           },
           "readOnly": true
@@ -2476,12 +2476,12 @@
       "readOnly": true,
       "properties": {
         "northEast": {
-          "description": "North-east (top-left) latitude,longitude coordinate of the bounding box as comma-separated floats",
+          "description": "North-east latitude,longitude coordinate of the bounding box as comma-separated floats",
           "type": "string",
           "readOnly": true
         },
         "southWest": {
-          "description": "South-west (bottom-right) latitude,longitude coordinate of the bounding box as comma-separated floats",
+          "description": "South-west latitude,longitude coordinate of the bounding box as comma-separated floats",
           "type": "string",
           "readOnly": true
         },
@@ -2706,6 +2706,7 @@
       }
     },
     "ReverseSearchAddressBatchProcessResult": {
+      "x-ms-client-name": "ReverseSearchAddressBatchResult",
       "description": "This object is returned from a successful Search Address Reverse Batch service call.",
       "type": "object",
       "allOf": [

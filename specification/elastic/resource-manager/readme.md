@@ -27,7 +27,25 @@ These are the global settings for the elastic.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2020-07-01
+tag: package-2020-07-01-preview
+```
+
+### Tag: package-2021-09-01-preview
+
+These settings apply only when `--tag=package-2021-09-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-09-01-preview'
+input-file:
+  - Microsoft.Elastic/preview/2021-09-01-preview/elastic.json
+```
+
+### Tag: package-2021-10-01-preview
+
+These settings apply only when `--tag=package-2021-10-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-10-01-preview'
+input-file:
+  - Microsoft.Elastic/preview/2021-10-01-preview/elastic.json
 ```
 
 ### Tag: package-2020-07-01-preview
@@ -38,8 +56,6 @@ These settings apply only when `--tag=package-2020-07-01-preview` is specified o
 input-file:
   - Microsoft.Elastic/preview/2020-07-01-preview/elastic.json
 ```
-
----
 
 ### Tag: package-2020-07-01
 
@@ -60,14 +76,16 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
-  - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_elastic']
 ```
+
 ## Suppression
 ```
 directive:
@@ -79,10 +97,23 @@ directive:
     reason: Secrets are OK to return in a POST response.
   - suppress: SECRET_PROPERTY
     from:
+      - Microsoft.Elastic/preview/2021-09-01-preview/elastic.json
+    where:
+      - $.definitions.VMIngestionDetailsResponse.properties.ingestionKey
+    reason: Secrets are OK to return in a POST response.
+  - suppress: SECRET_PROPERTY
+    from:
+      - Microsoft.Elastic/preview/2021-10-01-preview/elastic.json
+    where:
+      - $.definitions.VMIngestionDetailsResponse.properties.ingestionKey
+    reason: Secrets are OK to return in a POST response.
+  - suppress: SECRET_PROPERTY
+    from:
       - Microsoft.Elastic/stable/2020-07-01/elastic.json
     where:
       - $.definitions.VMIngestionDetailsResponse.properties.ingestionKey
     reason: Secrets are OK to return in a POST response.
+
 ```
 
 ## Az
@@ -105,4 +136,6 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
 
+## Ruby
 
+See configuration in [readme.ruby.md](./readme.ruby.md)

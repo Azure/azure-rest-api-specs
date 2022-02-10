@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2021-06-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "ruleSetName": "ruleSet1",
+    "ruleName": "rule1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "rule1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/ruleSets/ruleSet1/rules/rule1",
+        "type": "Microsoft.Cdn/profiles/ruleSets/rules",
+        "properties": {
+          "order": 1,
+          "conditions": [
+            {
+              "name": "RequestMethod",
+              "parameters": {
+                "typeName": "DeliveryRuleRequestMethodConditionParameters",
+                "operator": "Equal",
+                "matchValues": [
+                  "GET"
+                ],
+                "negateCondition": false
+              }
+            }
+          ],
+          "actions": [
+            {
+              "name": "ModifyResponseHeader",
+              "parameters": {
+                "typeName": "DeliveryRuleHeaderActionParameters",
+                "headerAction": "Overwrite",
+                "headerName": "X-CDN",
+                "value": "MSFT"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
