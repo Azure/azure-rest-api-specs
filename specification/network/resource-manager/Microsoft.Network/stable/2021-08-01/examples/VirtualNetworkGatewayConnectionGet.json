@@ -40,6 +40,16 @@
           "dpdTimeoutSeconds": 30,
           "sharedKey": "Abc123",
           "enableBgp": false,
+          "gatewayCustomBgpIpAddresses": [
+            {
+              "ipConfigurationId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw/ipConfigurations/default",
+              "customBgpIpAddress": "169.254.21.1"
+            },
+            {
+              "ipConfigurationId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw/ipConfigurations/ActiveActive",
+              "customBgpIpAddress": "169.254.21.3"
+            }
+          ],
           "useLocalAzureIpAddress": false,
           "usePolicyBasedTrafficSelectors": false,
           "ipsecPolicies": [],
