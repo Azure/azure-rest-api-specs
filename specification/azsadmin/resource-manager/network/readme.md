@@ -24,7 +24,7 @@ These are the global settings for the Network API.
 title: NetworkAdminClient
 description: Network Admin Client
 openapi-type: arm
-tag: package-2015-06-15
+tag: package-package-2022-02-01
 ```
 
 ``` yaml
