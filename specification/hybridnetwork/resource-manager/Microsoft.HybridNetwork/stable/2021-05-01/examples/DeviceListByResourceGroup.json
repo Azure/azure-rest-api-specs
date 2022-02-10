@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2021-05-01",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HybridNetwork/devices/TestDevice",
+            "name": "TestDevice",
+            "type": "Microsoft.HybridNetwork/devices",
+            "location": "eastus",
+            "properties": {
+              "status": "NotRegistered",
+              "provisioningState": "Succeeded",
+              "deviceType": "AzureStackEdge",
+              "azureStackEdge": {
+                "id": "/subscriptions/subid1/resourcegroups/rg2/providers/Microsoft.DataboxEdge/DataboxEdgeDevices/TestDataboxEdgeDeviceName"
+              },
+              "networkFunctions": [
+                {
+                  "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.HybridNetwork/networkFunctions/TestVirtualNetworkFunction"
+                }
+              ]
+            }
+          }
+        ],
+        "nextLink": "string"
+      }
+    }
+  }
+}

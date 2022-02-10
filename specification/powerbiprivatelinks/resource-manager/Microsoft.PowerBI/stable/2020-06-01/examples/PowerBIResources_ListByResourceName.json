@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "subscriptionId": "a0020869-4d28-422a-89f4-c2413130d73c",
+    "resourceGroupName": "resourceGroup",
+    "azureResourceName": "azureResourceName",
+    "api-version": "2020-06-01"
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "name": "conection 1",
+          "location": "west us",
+          "properties": {
+            "tenantId": "ac2bc297-8a3e-46f3-972d-87c2b4ae6e2f",
+            "privateEndpointConnections": [
+              {
+                "id": "/subscriptions/a0020869-4d28-422a-89f4-c2413130d73c/resourceGroups/resourceGroup/providers/Microsoft.PowerBI/privateLinkServicesForPowerBI/azureResourceName/privateEndpointConnections/myPrivateEndpointConnection.58ffb8de-89ad-41eb-9f8f-de0a7db9d721",
+                "name": "myPrivateEndpointConnection",
+                "type": "string",
+                "properties": {
+                  "privateEndpoint": {
+                    "id": "/subscriptions/a0020869-4d28-422a-89f4-c2413130d73c/resourceGroups/resourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+                  },
+                  "privateLinkServiceConnectionState": {
+                    "status": "Pending",
+                    "description": "My private endpoint connection",
+                    "actionsRequired": "None"
+                  }
+                }
+              }
+            ]
+          },
+          "tags": {
+            "tag1": "value1",
+            "tag2": "value2"
+          }
+        }
+      ]
+    }
+  }
+}
