@@ -1489,6 +1489,40 @@
       },
       "description": "The replication role."
     },
+    "DataEncryption": {
+      "type": "object",
+      "description": "The date encryption for cmk.",
+      "properties": {
+        "primaryUserAssignedIdentityId": {
+          "type": "string",
+          "description": "Primary user identity resource id"
+        },
+        "primaryKeyUri": {
+          "type": "string",
+          "description": "Primary key uri"
+        },
+        "geoBackupUserAssignedIdentityId": {
+          "type": "string",
+          "description": "Geo backup user identity resource id as identity can't cross region, need identity in same region as geo backup"
+        },
+        "geoBackupKeyuri": {
+          "type": "string",
+          "description": "Geo backup key uri as key valut can't cross region, need cmk in same region as geo backup"
+        },
+        "type": {
+          "type": "string",
+          "description": "The key type, AzureKeyVault for enable cmk, SystemManaged for disable cmk.",
+          "enum": [
+            "AzureKeyVault",
+            "SystemManaged"
+          ],
+          "x-ms-enum": {
+            "name": "DataEncryptionType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
     "MaintenanceWindow": {
       "type": "object",
       "description": "Maintenance window of a server.",
@@ -1722,6 +1756,10 @@
           "readOnly": true,
           "description": "The maximum number of replicas that a primary server can have."
         },
+        "dataencryption": {
+          "$ref": "#/definitions/DataEncryption",
+          "description": "The Data Encryption for CMK."
+        },
         "state": {
           "type": "string",
           "readOnly": true,
@@ -1779,6 +1817,10 @@
     "Server": {
       "type": "object",
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The cmk identity for the server."
+        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The SKU (pricing tier) of the server."
@@ -2463,6 +2505,36 @@
         }
       },
       "description": "Represents a resource name availability."
+    },
+    "Identity": {
+      "description": "Identity for byok.",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of resource identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "Identity need for cmk, object structure, key is the identity resource id, value is empty for now."
+        },
+        "type": {
+          "type": "string",
+          "description": "The identity type, currently Flexbile sever only support UserAssigned.",
+          "enum": [
+            "UserAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        }
+      }
     },
     "OperationDisplay": {
       "type": "object",
