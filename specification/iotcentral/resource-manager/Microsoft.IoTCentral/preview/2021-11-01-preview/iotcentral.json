@@ -82,7 +82,6 @@
         ],
         "description": "Create or update the metadata of an IoT Central application. The usual pattern to modify a property is to retrieve the IoT Central application metadata and security metadata, and then combine them with the modified values in a new body to update the IoT Central application.",
         "operationId": "Apps_CreateOrUpdate",
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Apps_CreateOrUpdate": {
             "$ref": "./examples/Apps_CreateOrUpdate.json"
@@ -134,7 +133,8 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "tags": [
@@ -142,7 +142,6 @@
         ],
         "description": "Update the metadata of an IoT Central application.",
         "operationId": "Apps_Update",
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Apps_Update": {
             "$ref": "./examples/Apps_Update.json"
@@ -188,7 +187,8 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -196,7 +196,6 @@
         ],
         "description": "Delete an IoT Central application.",
         "operationId": "Apps_Delete",
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Apps_Delete": {
             "$ref": "./examples/Apps_Delete.json"
@@ -232,7 +231,9 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.IoTCentral/iotApps": {
@@ -326,7 +327,6 @@
         ],
         "description": "Update a Private Endpoint Connection.",
         "operationId": "PrivateEndpoints_Create",
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "PrivateEndpoints_Update": {
             "$ref": "./examples/PrivateEndpoints_Update.json"
@@ -372,7 +372,8 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -380,7 +381,6 @@
         ],
         "description": "Deletes a Private Endpoint Connection from the IoT Central Application.",
         "operationId": "PrivateEndpoints_Delete",
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "PrivateEndpoints_Delete": {
             "$ref": "./examples/PrivateEndpoints_Delete.json"
@@ -423,7 +423,8 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTCentral/iotApps/{resourceName}/privateEndpointConnections": {
@@ -460,6 +461,57 @@
             "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the Private Endpoint Connections of the IoT Central Application.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTCentral/iotApps/{resourceName}/privateLinkResources/{privateLinkName}": {
+      "get": {
+        "tags": [
+          "Networking"
+        ],
+        "description": "Get a Private Link of a IoT Central Application.",
+        "operationId": "PrivateLinks_Get",
+        "x-ms-examples": {
+          "PrivateLinks_Get": {
+            "$ref": "./examples/PrivateLinks_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "name": "privateLinkName",
+            "in": "path",
+            "description": "The private link resource name.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The private link resource for the IoT Central Application.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateLinkResource"
             }
           },
           "default": {
