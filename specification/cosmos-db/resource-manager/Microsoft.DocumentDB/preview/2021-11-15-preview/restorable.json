@@ -893,7 +893,7 @@
           "200": {
             "description": "The operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/RestorableTableResourcesGetResult"
+              "$ref": "#/definitions/RestorableTableResourcesListResult"
             }
           },
           "default": {
@@ -902,6 +902,9 @@
               "$ref": "cosmos-db.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     }
@@ -1674,21 +1677,19 @@
         }
       }
     },
-    "RestorableTableResourcesGetResult": {
-      "description": "The Get operation response, that contains the restorable Table names.",
+    "RestorableTableResourcesListResult": {
       "type": "object",
       "properties": {
-        "tableNames": {
+        "value": {
           "readOnly": true,
-          "$ref": "#/definitions/TableRestoreResource"
+          "type": "array",
+          "items": {
+            "$ref": "../../preview/2021-11-15-preview/cosmos-db.json#/definitions/TableName"
+          },
+          "description": "List of restorable table names."
         }
-      }
-    },
-    "TableRestoreResource": {
-      "type": "array",
-      "items": {
-        "$ref": "../../preview/2021-11-15-preview/cosmos-db.json#/definitions/TableName"
-      }
+      },
+      "description": "List of restorable table names."
     },
     "OperationType": {
       "description": "Enum to indicate the operation type of the event.",
@@ -1834,6 +1835,22 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "Restorable Tables event feed end time."
+    },
+    "restoreStartTime": {
+      "name": "startTime",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The snapshot create timestamp after which snapshots need to be listed."
+    },
+    "restoreEndTime": {
+      "name": "endTime",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The snapshot create timestamp before which snapshots need to be listed."
     },
     "locationParameter": {
       "name": "location",
