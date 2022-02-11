@@ -788,7 +788,10 @@
             "type": "object",
             "$ref": "#/definitions/ObjectStatusConditionDefinition"
           },
-          "x-nullable": true
+          "x-nullable": true,
+          "x-ms-identifiers": [
+            "type"
+          ]
         },
         "helmReleaseProperties": {
           "description": "Additional properties that are provided from objects of the HelmRelease kind",
@@ -964,7 +967,12 @@
               "items": {
                 "type": "object",
                 "$ref": "#/definitions/ObjectStatusDefinition"
-              }
+              },
+              "x-ms-identifiers": [
+                "name",
+                "namespace",
+                "kind"
+              ]
             },
             "repositoryPublicKey": {
               "description": "Public Key associated with this fluxConfiguration (either generated within the cluster or provided by the user).",
