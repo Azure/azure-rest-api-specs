@@ -80,7 +80,6 @@ This block is updated by an automatic script. Edits may be lost!
 require: $(this-folder)/../../../../../profiles/readme.md
 
 # all the input files across all versions
-input-file:
 ```
 
 If there are files that should not be in the `all-api-versions` set,
