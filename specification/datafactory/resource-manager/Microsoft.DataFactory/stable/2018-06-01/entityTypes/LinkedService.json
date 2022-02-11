@@ -43,7 +43,8 @@
           "type": "array",
           "items": {
             "type": "object"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "additionalProperties": {
@@ -5396,7 +5397,10 @@
           "type": "array",
           "items": {
             "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
-          }
+          },
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         },
         "hcatalogLinkedServiceName": {
           "description": "The name of Azure SQL linked service that point to the HCatalog database. The on-demand HDInsight cluster is created by using the Azure SQL database as the metastore.",
@@ -5463,7 +5467,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScriptAction"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "virtualNetworkId": {
           "type": "object",
