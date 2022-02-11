@@ -1505,9 +1505,9 @@
           "type": "string",
           "description": "Geo backup user identity resource id as identity can't cross region, need identity in same region as geo backup"
         },
-        "geoBackupKeyuri": {
+        "geoBackupKeyUri": {
           "type": "string",
-          "description": "Geo backup key uri as key valut can't cross region, need cmk in same region as geo backup"
+          "description": "Geo backup key uri as key vault can't cross region, need cmk in same region as geo backup"
         },
         "type": {
           "type": "string",
@@ -1756,7 +1756,7 @@
           "readOnly": true,
           "description": "The maximum number of replicas that a primary server can have."
         },
-        "dataencryption": {
+        "dataEncryption": {
           "$ref": "#/definitions/DataEncryption",
           "description": "The Data Encryption for CMK."
         },
@@ -2507,6 +2507,7 @@
       "description": "Represents a resource name availability."
     },
     "Identity": {
+      "type": "object",
       "description": "Identity for byok.",
       "properties": {
         "principalId": {
@@ -2525,7 +2526,7 @@
         },
         "type": {
           "type": "string",
-          "description": "The identity type, currently Flexbile sever only support UserAssigned.",
+          "description": "The identity type, currently Flexible sever only support UserAssigned.",
           "enum": [
             "UserAssigned"
           ],
