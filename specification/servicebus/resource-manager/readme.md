@@ -73,17 +73,17 @@ These settings apply only when `--tag=package-2022-01-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2022-01-preview'
 input-file:
-- Microsoft.ServiceBus/stable/2022-01-01-preview/namespace-preview.json
-- Microsoft.ServiceBus/stable/2022-01-01-preview/operations.json
-- Microsoft.ServiceBus/stable/2022-01-01-preview/DisasterRecoveryConfig.json
-- Microsoft.ServiceBus/stable/2022-01-01-preview/migrationconfigs.json
-- Microsoft.ServiceBus/stable/2022-01-01-preview/networksets.json
-- Microsoft.ServiceBus/stable/2022-01-01-preview/AuthorizationRules.json
-- Microsoft.ServiceBus/stable/2022-01-01-preview/Queue.json
-- Microsoft.ServiceBus/stable/2022-01-01-preview/topics.json
-- Microsoft.ServiceBus/stable/2022-01-01-preview/Rules.json
-- Microsoft.ServiceBus/stable/2022-01-01-preview/subscriptions.json
-- Microsoft.ServiceBus/stable/2022-01-01-preview/CheckNameAvailability.json
+- Microsoft.ServiceBus/preview/2022-01-01-preview/namespace-preview.json
+- Microsoft.ServiceBus/preview/2022-01-01-preview/operations.json
+- Microsoft.ServiceBus/preview/2022-01-01-preview/DisasterRecoveryConfig.json
+- Microsoft.ServiceBus/preview/2022-01-01-preview/migrationconfigs.json
+- Microsoft.ServiceBus/preview/2022-01-01-preview/networksets.json
+- Microsoft.ServiceBus/preview/2022-01-01-preview/AuthorizationRules.json
+- Microsoft.ServiceBus/preview/2022-01-01-preview/Queue.json
+- Microsoft.ServiceBus/preview/2022-01-01-preview/topics.json
+- Microsoft.ServiceBus/preview/2022-01-01-preview/Rules.json
+- Microsoft.ServiceBus/preview/2022-01-01-preview/subscriptions.json
+- Microsoft.ServiceBus/preview/2022-01-01-preview/CheckNameAvailability.json
 ```
 
 ### Tag: package-2018-01-preview
