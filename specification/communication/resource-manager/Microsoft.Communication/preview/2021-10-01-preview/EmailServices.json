@@ -235,6 +235,18 @@
               "$ref": "#/definitions/EmailServiceResource"
             }
           },
+          "201": {
+            "description": "The update request was accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/EmailServiceResource"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -245,6 +257,10 @@
         "produces": [
           "application/json"
         ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Update EmailService resource": {
             "$ref": "./examples/emailServices/update.json"
