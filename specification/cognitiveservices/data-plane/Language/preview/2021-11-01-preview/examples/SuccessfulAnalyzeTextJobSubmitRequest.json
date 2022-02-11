@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2021-11-01-preview",
+    "Endpoint": "{Endpoint}",
+    "jobId": "{Job ID}",
+    "input": {
+      "displayName": "Extracting Location & US Region",
+      "analysisInput": {
+        "documents": [
+          {
+            "id": "1",
+            "language": "en",
+            "text": "I had a wonderful trip to Seattle last week. The Pacific Northwest is beautiful."
+          },
+          {
+            "id": "2",
+            "language": "en",
+            "text": "I'm flying to NYC tomorrow. I hear the weather is cold on the East Coast this time of year.  Should I bring a heavy coat?"
+          }
+        ]
+      },
+      "tasks": {
+        "entityRecognitionTasks": [
+          {
+            "taskName": "Recognize Entities",
+            "parameters": {
+              "model-version": "latest"
+            }
+          }
+        ],
+        "customEntityRecognitionTasks": [
+          {
+            "taskName": "Recognize US Regions",
+            "parameters": {
+              "projectName": "MyProject",
+              "deploymentName": "MyDeployment"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "{endpoint}/language/analyze-text/jobs/{jobId}"
+      }
+    }
+  }
+}
