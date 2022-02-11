@@ -40,7 +40,8 @@
           "type": "array",
           "items": {
             "type": "object"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "additionalProperties": {
@@ -77,7 +78,10 @@
           "items": {
             "$ref": "../datafactory.json#/definitions/TriggerPipelineReference"
           },
-          "description": "Pipelines that need to be started."
+          "description": "Pipelines that need to be started.",
+          "x-ms-identifiers": [
+            "/pipelineReference/referenceName"
+          ]
         }
       }
     },
@@ -213,7 +217,8 @@
           "items": {
             "$ref": "#/definitions/RecurrenceScheduleOccurrence"
           },
-          "description": "The monthly occurrences."
+          "description": "The monthly occurrences.",
+          "x-ms-identifiers": []
         }
       },
       "additionalProperties": {
@@ -378,7 +383,8 @@
               "type": "array",
               "items": {
                 "type": "object"
-              }
+              },
+              "x-ms-identifiers": []
             },
             "scope": {
               "description": "The ARM resource ID of the Azure Event Grid Topic.",
@@ -450,7 +456,8 @@
               "description": "Triggers that this trigger depends on. Only tumbling window triggers are supported.",
               "items": {
                 "$ref": "#/definitions/DependencyReference"
-              }
+              },
+              "x-ms-identifiers": []
             }
           },
           "required": [
@@ -668,7 +675,10 @@
               "items": {
                 "$ref": "../datafactory.json#/definitions/PipelineReference"
               },
-              "description": "Upstream Pipelines."
+              "description": "Upstream Pipelines.",
+              "x-ms-identifiers": [
+                "referenceName"
+              ]
             },
             "runDimension": {
               "description": "Run Dimension property that needs to be emitted by upstream pipelines.",
