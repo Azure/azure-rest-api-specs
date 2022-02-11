@@ -345,6 +345,18 @@
     }
   },
   "definitions": {
+    "ActionType": {
+      "description": "Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.",
+      "enum": [
+        "Internal"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ActionType"
+      }
+    },
     "CreatedByType": {
       "description": "The type of identity that created the resource.",
       "enum": [
@@ -530,29 +542,33 @@
       }
     },
     "OperationDisplay": {
-      "description": "The object that represents the operation.",
+      "description": "Localized display information for this particular operation.",
       "type": "object",
       "properties": {
         "provider": {
-          "description": "Service provider, i.e., Microsoft.Dashboard.",
-          "type": "string"
+          "description": "The localized friendly form of the resource provider name, i.e., Microsoft.Dashboard.",
+          "type": "string",
+          "readOnly": true
         },
         "resource": {
-          "description": "Type on which the operation is performed, e.g., 'grafana'.",
-          "type": "string"
+          "description": "The localized friendly name of the resource type related to this operation, e.g., 'grafana'.",
+          "type": "string",
+          "readOnly": true
         },
         "operation": {
           "description": "Operation type, e.g., read, write, delete, etc.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "description": {
           "description": "Description of the operation, e.g., 'Read grafana'.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
     "OperationListResult": {
-      "description": "Result of GET request to list the Microsoft.Dashboard operations.",
+      "description": "A list of REST API operations supported by Microsoft.Dashboard provider. It contains an URL link to get the next set of results.",
       "type": "object",
       "properties": {
         "value": {
@@ -561,11 +577,13 @@
           "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/OperationResult"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "description": "URL to get the next set of operation list results if there are any.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -575,15 +593,37 @@
       "properties": {
         "name": {
           "description": "Operation name, i.e., {provider}/{resource}/{operation}.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "isDataAction": {
           "description": "Indicates whether the operation applies to data-plane. Set \"true\" for data-plane operations and \"false\" for ARM/control-plane operations.",
-          "type": "boolean"
+          "type": "boolean",
+          "readOnly": true
         },
         "display": {
           "$ref": "#/definitions/OperationDisplay"
+        },
+        "origin": {
+          "$ref": "#/definitions/Origin"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ActionType"
         }
+      }
+    },
+    "Origin": {
+      "description": "The intended executor of the operation.",
+      "enum": [
+        "user",
+        "system",
+        "user,system"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "Origin"
       }
     },
     "ProvisioningState": {
