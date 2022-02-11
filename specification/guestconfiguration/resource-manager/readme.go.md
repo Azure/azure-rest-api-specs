@@ -23,6 +23,7 @@ azure-arm: true
 batch:
   - tag: package-2020-06-25
   - tag: package-2021-01-25
+  - tag: package-2022-01-25
 ```
 ### Tag: package-2021-01-25 and go
 
