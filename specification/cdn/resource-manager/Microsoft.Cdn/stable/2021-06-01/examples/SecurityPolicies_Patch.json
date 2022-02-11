@@ -5,27 +5,29 @@
     "resourceGroupName": "RG",
     "profileName": "profile1",
     "securityPolicyName": "securityPolicy1",
-    "securityPolicyProperties": {
-      "parameters": {
-        "type": "WebApplicationFirewall",
-        "wafPolicy": {
-          "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Network/frontdoorwebapplicationfirewallpolicies/wafTest"
-        },
-        "associations": [
-          {
-            "domains": [
-              {
-                "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/afddomains/testdomain1"
-              },
-              {
-                "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/afddomains/testdomain2"
-              }
-            ],
-            "patternsToMatch": [
-              "/*"
-            ]
-          }
-        ]
+    "securityPolicyUpdateProperties": {
+      "properties": {
+        "parameters": {
+          "type": "WebApplicationFirewall",
+          "wafPolicy": {
+            "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Network/frontdoorwebapplicationfirewallpolicies/wafTest"
+          },
+          "associations": [
+            {
+              "domains": [
+                {
+                  "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/afddomains/testdomain1"
+                },
+                {
+                  "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/afddomains/testdomain2"
+                }
+              ],
+              "patternsToMatch": [
+                "/*"
+              ]
+            }
+          ]
+        }
       }
     }
   },
