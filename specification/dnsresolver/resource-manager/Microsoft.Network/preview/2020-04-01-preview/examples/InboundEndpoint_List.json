@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "subscriptionId": "abdd4249-9f34-4cc6-8e42-c2e32110603e",
+    "resourceGroupName": "sampleResourceGroup",
+    "dnsResolverName": "sampleDnsResolver",
+    "api-version": "2020-04-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/abdd4249-9f34-4cc6-8e42-c2e32110603e/resourceGroups/sampleResourceGroup/providers/Microsoft.Network/inboundEndpoints/sampleInboundEndpoint1",
+            "name": "sampleInboundEndpoint1",
+            "type": "Microsoft.Network/dnsResolvers/inboundEndpoints",
+            "tags": {
+              "key1": "value1"
+            },
+            "location": "westus2",
+            "etag": "00000000-0000-0000-0000-000000000000",
+            "systemData": {
+              "createdByType": "Application",
+              "createdAt": "2021-04-01T01:01:01.1075056Z",
+              "lastModifiedByType": "Application",
+              "lastModifiedAt": "2021-04-02T02:03:01.1974346Z"
+            },
+            "properties": {
+              "ipConfigurations": [
+                {
+                  "subnet": {
+                    "id": "/subscriptions/abdd4249-9f34-4cc6-8e42-c2e32110603e/resourceGroups/sampleVnetResourceGroupName/providers/Microsoft.Network/virtualNetworks/sampleVirtualNetwork/subnets/sampleSubnet1"
+                  },
+                  "privateIpAddress": "255.1.255.1",
+                  "privateIpAllocationMethod": "Static"
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "resourceGuid": "b6b2d964-8588-4e3a-a7fe-8a5b7fe8eca5"
+            }
+          },
+          {
+            "id": "/subscriptions/abdd4249-9f34-4cc6-8e42-c2e32110603e/resourceGroups/sampleResourceGroup/providers/Microsoft.Network/inboundEndpoints/sampleInboundEndpoint2",
+            "name": "sampleInboundEndpoint2",
+            "type": "Microsoft.Network/dnsResolvers/inboundEndpoints",
+            "tags": {
+              "key1": "value1"
+            },
+            "location": "westus2",
+            "etag": "00000000-0000-0000-0000-000000000000",
+            "systemData": {
+              "createdByType": "Application",
+              "createdAt": "2021-04-02T01:01:01.1075056Z",
+              "lastModifiedByType": "Application",
+              "lastModifiedAt": "2021-04-03T02:03:01.1974346Z"
+            },
+            "properties": {
+              "ipConfigurations": [
+                {
+                  "subnet": {
+                    "id": "/subscriptions/0403cfa9-9659-4f33-9f30-1f191c51d111/resourceGroups/sampleVnetResourceGroupName/providers/Microsoft.Network/virtualNetworks/sampleVirtualNetwork/subnets/sampleSubnet1"
+                  },
+                  "privateIpAddress": "1.1.255.1",
+                  "privateIpAllocationMethod": "Static"
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "resourceGuid": "87b3e20a-5833-4c40-8ad7-c5160bb1c5bd"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}
