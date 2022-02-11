@@ -2604,7 +2604,7 @@
     },
     "DataAccessAuthMode": {
       "type": "string",
-      "description": "Add additional AAD authentication requirement when accessing export/upload URL.",
+      "description": "Additional authentication requirements when exporting or uploading to a disk or snapshot.",
       "enum": [
         "AzureActiveDirectory",
         "None"
@@ -2615,7 +2615,7 @@
         "values": [
           {
             "value": "AzureActiveDirectory",
-            "description": "When export/upload URL is used additional authentication is performed, to check if the user has necessary RBAC access. Please refer to aka.ms/{placeholder}."
+            "description": "When export/upload URL is used, the system checks if the user has an identity in Azure Active Directory and has necessary permissions to export/upload the data. Please refer to aka.ms/DisksAzureADAuth."
           },
           {
             "value": "None",
@@ -2997,7 +2997,7 @@
         },
         "architecture": {
           "type": "string",
-          "description": "The architecture of the image.",
+          "description": "CPU architecture supported by an OS disk.",
           "enum": [
             "x64",
             "Arm64"
