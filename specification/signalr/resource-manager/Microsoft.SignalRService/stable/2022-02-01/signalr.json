@@ -191,438 +191,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/customCertificates": {
-      "get": {
-        "tags": [
-          "SignalR"
-        ],
-        "description": "List all custom certificates.",
-        "operationId": "SignalRCustomCertificates_List",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success. The response describes custom certificates of the resource.",
-            "schema": {
-              "$ref": "#/definitions/CustomCertificateList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "SignalRCustomCertificates_List": {
-            "$ref": "./examples/SignalRCustomCertificates_List.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/customCertificates/{certificateName}": {
-      "get": {
-        "tags": [
-          "SignalR"
-        ],
-        "description": "Get a custom certificate.",
-        "operationId": "SignalRCustomCertificates_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "in": "path",
-            "name": "certificateName",
-            "description": "Custom certificate name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success. The response describe the corresponding custom certificate.",
-            "schema": {
-              "$ref": "#/definitions/CustomCertificate"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SignalRCustomCertificates_Get": {
-            "$ref": "./examples/SignalRCustomCertificates_Get.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "SignalR"
-        ],
-        "description": "Create or update a custom certificate.",
-        "operationId": "SignalRCustomCertificates_CreateOrUpdate",
-        "consumes": [
-          "application/json",
-          "text/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "in": "path",
-            "name": "certificateName",
-            "description": "Custom certificate name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CustomCertificate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success. The response describes the certificate.",
-            "schema": {
-              "$ref": "#/definitions/CustomCertificate"
-            }
-          },
-          "201": {
-            "description": "Created. The response describes the certificate.",
-            "schema": {
-              "$ref": "#/definitions/CustomCertificate"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "SignalRCustomCertificates_CreateOrUpdate": {
-            "$ref": "./examples/SignalRCustomCertificates_CreateOrUpdate.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "SignalR"
-        ],
-        "description": "Delete a custom certificate.",
-        "operationId": "SignalRCustomCertificates_Delete",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "in": "path",
-            "name": "certificateName",
-            "description": "Custom certificate name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success."
-          },
-          "204": {
-            "description": "Success."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SignalRCustomCertificates_Delete": {
-            "$ref": "./examples/SignalRCustomCertificates_Delete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/customDomains": {
-      "get": {
-        "tags": [
-          "SignalR"
-        ],
-        "description": "List all custom domains.",
-        "operationId": "SignalRCustomDomains_List",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success. The response describes custom domains of the resource.",
-            "schema": {
-              "$ref": "#/definitions/CustomDomainList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "SignalRCustomDomains_List": {
-            "$ref": "./examples/SignalRCustomDomains_List.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/customDomains/{domainName}": {
-      "get": {
-        "tags": [
-          "SignalR"
-        ],
-        "description": "Get a custom domain.",
-        "operationId": "SignalRCustomDomains_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "in": "path",
-            "name": "domainName",
-            "description": "The domain name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success. The response describe the corresponding custom domain.",
-            "schema": {
-              "$ref": "#/definitions/CustomDomain"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SignalRCustomDomains_Get": {
-            "$ref": "./examples/SignalRCustomDomains_Get.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "SignalR"
-        ],
-        "description": "Create or update a custom domain.",
-        "operationId": "SignalRCustomDomains_CreateOrUpdate",
-        "consumes": [
-          "application/json",
-          "text/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "in": "path",
-            "name": "domainName",
-            "description": "The domain name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CustomDomain"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created. The response describes the custom domain and contains a Location header to query the operation result.",
-            "schema": {
-              "$ref": "#/definitions/CustomDomain"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "SignalRCustomDomains_CreateOrUpdate": {
-            "$ref": "./examples/SignalRCustomDomains_CreateOrUpdate.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "SignalR"
-        ],
-        "description": "Delete a custom domain.",
-        "operationId": "SignalRCustomDomains_Delete",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "in": "path",
-            "name": "domainName",
-            "description": "The domain name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success. The response indicates the custom domain is deleted."
-          },
-          "202": {
-            "description": "Accepted. The response indicates the operation is performed in the background."
-          },
-          "204": {
-            "description": "Success. The response indicates the custom domain is deleted."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "SignalRCustomDomains_Delete": {
-            "$ref": "./examples/SignalRCustomDomains_Delete.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR": {
       "get": {
         "tags": [
@@ -871,6 +439,438 @@
         "x-ms-examples": {
           "SignalR_Update": {
             "$ref": "./examples/SignalR_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/customCertificates": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "List all custom certificates.",
+        "operationId": "SignalRCustomCertificates_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes custom certificates of the resource.",
+            "schema": {
+              "$ref": "#/definitions/CustomCertificateList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SignalRCustomCertificates_List": {
+            "$ref": "./examples/SignalRCustomCertificates_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/customCertificates/{certificateName}": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Get a custom certificate.",
+        "operationId": "SignalRCustomCertificates_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "certificateName",
+            "description": "Custom certificate name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe the corresponding custom certificate.",
+            "schema": {
+              "$ref": "#/definitions/CustomCertificate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SignalRCustomCertificates_Get": {
+            "$ref": "./examples/SignalRCustomCertificates_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Create or update a custom certificate.",
+        "operationId": "SignalRCustomCertificates_CreateOrUpdate",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "certificateName",
+            "description": "Custom certificate name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomCertificate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the certificate.",
+            "schema": {
+              "$ref": "#/definitions/CustomCertificate"
+            }
+          },
+          "201": {
+            "description": "Created. The response describes the certificate.",
+            "schema": {
+              "$ref": "#/definitions/CustomCertificate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "SignalRCustomCertificates_CreateOrUpdate": {
+            "$ref": "./examples/SignalRCustomCertificates_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Delete a custom certificate.",
+        "operationId": "SignalRCustomCertificates_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "certificateName",
+            "description": "Custom certificate name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "204": {
+            "description": "Success."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SignalRCustomCertificates_Delete": {
+            "$ref": "./examples/SignalRCustomCertificates_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/customDomains": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "List all custom domains.",
+        "operationId": "SignalRCustomDomains_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes custom domains of the resource.",
+            "schema": {
+              "$ref": "#/definitions/CustomDomainList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SignalRCustomDomains_List": {
+            "$ref": "./examples/SignalRCustomDomains_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/customDomains/{name}": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Get a custom domain.",
+        "operationId": "SignalRCustomDomains_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Custom domain name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe the corresponding custom domain.",
+            "schema": {
+              "$ref": "#/definitions/CustomDomain"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SignalRCustomDomains_Get": {
+            "$ref": "./examples/SignalRCustomDomains_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Create or update a custom domain.",
+        "operationId": "SignalRCustomDomains_CreateOrUpdate",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Custom domain name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomDomain"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created. The response describes the custom domain and contains a Location header to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/CustomDomain"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "SignalRCustomDomains_CreateOrUpdate": {
+            "$ref": "./examples/SignalRCustomDomains_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Delete a custom domain.",
+        "operationId": "SignalRCustomDomains_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Custom domain name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response indicates the custom domain is deleted."
+          },
+          "202": {
+            "description": "Accepted. The response indicates the operation is performed in the background."
+          },
+          "204": {
+            "description": "Success. The response indicates the custom domain is deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "SignalRCustomDomains_Delete": {
+            "$ref": "./examples/SignalRCustomDomains_Delete.json"
           }
         }
       }
@@ -1679,7 +1679,8 @@
     "CustomDomainProperties": {
       "description": "Properties of a custom domain.",
       "required": [
-        "certificateName"
+        "customCertificate",
+        "domainName"
       ],
       "type": "object",
       "properties": {
@@ -1687,9 +1688,12 @@
           "readOnly": true,
           "$ref": "#/definitions/ProvisioningState"
         },
-        "certificateName": {
-          "description": "Name of the certificate used for this domain.",
+        "domainName": {
+          "description": "The custom domain name.",
           "type": "string"
+        },
+        "customCertificate": {
+          "$ref": "#/definitions/ResourceReference"
         }
       }
     },
@@ -2284,6 +2288,16 @@
             "$ref": "#/definitions/ResourceLogCategory"
           },
           "x-ms-identifiers": []
+        }
+      }
+    },
+    "ResourceReference": {
+      "description": "Reference to a resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource ID.",
+          "type": "string"
         }
       }
     },

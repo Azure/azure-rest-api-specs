@@ -4,7 +4,7 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "resourceName": "mySignalRService",
-    "domainName": "example.com"
+    "name": "myDomain"
   },
   "responses": {
     "200": {
@@ -13,10 +13,13 @@
           {
             "properties": {
               "provisioningState": "Succeeded",
-              "certificateName": "cert"
+              "domainName": "example.com",
+              "customCertificate": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService/customCertificates/myCert"
+              }
             },
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService/customDomain/example.com",
-            "name": "example.com"
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService/customDomains/myDomain",
+            "name": "myDomain"
           }
         ]
       }

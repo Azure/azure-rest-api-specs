@@ -1,25 +1,31 @@
 {
   "parameters": {
-    "body": {
+    "parameters": {
       "properties": {
-        "certificateName": "cert"
+        "domainName": "example.com",
+        "customCertificate": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService/customCertificates/myCert"
+        }
       }
     },
     "api-version": "2022-02-01",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "resourceName": "mySignalRService",
-    "domainName": "example.com"
+    "name": "myDomain"
   },
   "responses": {
     "201": {
       "body": {
         "properties": {
           "provisioningState": "Succeeded",
-          "certificateName": "cert"
+          "domainName": "example.com",
+          "customCertificate": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService/customCertificates/myCert"
+          }
         },
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService/customDomain/example.com",
-        "name": "example.com"
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService/customDomains/myDomain",
+        "name": "myDomain"
       },
       "headers": {
         "Location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult...",
