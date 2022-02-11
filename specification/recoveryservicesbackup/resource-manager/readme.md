@@ -28,7 +28,7 @@ These are the global settings for the RecoveryServicesBackup API.
 title: Recovery Services Backup Client
 description: Open API 2.0 Specs for Azure RecoveryServices Backup service
 openapi-type: arm
-tag: package-2021-10
+tag: package-2021-12
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
@@ -39,8 +39,8 @@ license-header: MICROSOFT_MIT
 tag: package-passivestamp-2021-11-15
 ```
 
-```yaml $(package-activestamp)
-tag: package-2021-10
+``` yaml $(package-activestamp)
+tag: package-2021-12
 ```
 
 ### Validations
@@ -55,6 +55,14 @@ message-format: json
 ```
 
 
+### Tag: package-2021-12
+
+These settings apply only when `--tag=package-2021-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-12'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-12-01/bms.json
+```
 ### Tag: package-passivestamp-2021-11-15
 
 These settings apply only when `--tag=package-passivestamp-2021-11-15` is specified on the command line.
@@ -63,6 +71,7 @@ These settings apply only when `--tag=package-passivestamp-2021-11-15` is specif
 input-file:
 -  Microsoft.RecoveryServices/stable/2021-11-15/bms.json
 ```
+
 ### Tag: package-passivestamp-2018-12-20
 
 These settings apply only when `--tag=package-passivestamp-2018-12-20` is specified on the command line.
@@ -274,7 +283,6 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -305,6 +313,10 @@ csharp:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Java
 

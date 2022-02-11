@@ -6429,6 +6429,14 @@
             "modelAsString": true
           }
         },
+        "billingProfilesInfo": {
+          "type": "array",
+          "description": "The list of billing profiles associated with agreement and present only for specific agreements.",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/BillingProfileInfo"
+          }
+        },
         "effectiveDate": {
           "description": "The date from which the agreement is effective.",
           "type": "string",
@@ -6452,6 +6460,24 @@
           "description": "The current status of the agreement.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "BillingProfileInfo": {
+      "type": "object",
+      "description": "Details about billing profile associated with agreement and available only for specific agreements.",
+      "properties": {
+        "billingProfileId": {
+          "description": "The unique identifier for the billing profile.",
+          "type": "string"
+        },
+        "billingProfileDisplayName": {
+          "description": "The name of the billing profile",
+          "type": "string"
+        },
+        "indirectRelationshipOrganizationName": {
+          "description": "Billing account name. This property is available for a specific type of agreement.",
+          "type": "string"
         }
       }
     },

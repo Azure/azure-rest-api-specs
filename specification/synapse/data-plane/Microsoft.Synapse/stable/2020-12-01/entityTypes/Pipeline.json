@@ -7080,6 +7080,152 @@
         "dataflow"
       ]
     },
+    "ScriptActivity": {
+      "description": "Script activity type.",
+      "x-ms-discriminator-value": "Script",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "Script activity properties.",
+          "$ref": "#/definitions/ScriptActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties",
+        "linkedServiceName"
+      ]
+    },
+    "ScriptActivityTypeProperties": {
+      "description": "Script activity properties.",
+      "type": "object",
+      "properties": {
+        "scripts": {
+          "type": "array",
+          "description": "Array of script blocks. Type: array.",
+          "items": {
+            "$ref": "#/definitions/ScriptActivityScriptBlock"
+          }
+        },
+        "logSettings": {
+          "description": "Log settings of script activity.",
+          "type": "object",
+          "properties": {
+            "logDestination": {
+              "x-ms-enum": {
+                "name": "ScriptActivityLogDestination",
+                "modelAsString": true
+              },
+              "enum": [
+                "ActivityOutput",
+                "ExternalStore"
+              ],
+              "type": "string",
+              "description": "The destination of logs. Type: string."
+            },
+            "logLocationSettings": {
+              "description": "Log location settings customer needs to provide when enabling log.",
+              "$ref": "#/definitions/LogLocationSettings"
+            }
+          },
+          "required": [
+            "logDestination"
+          ]
+        }
+      }
+    },
+    "ScriptActivityScriptBlock": {
+      "description": "Script block of scripts.",
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "object",
+          "description": "The query text. Type: string (or Expression with resultType string)."
+        },
+        "type": {
+          "x-ms-enum": {
+            "name": "ScriptType",
+            "modelAsString": true
+          },
+          "enum": [
+            "Query",
+            "NonQuery"
+          ],
+          "type": "string",
+          "description": "The type of the query. Type: string."
+        },
+        "parameters": {
+          "type": "array",
+          "description": "Array of script parameters. Type: array.",
+          "items": {
+            "$ref": "#/definitions/ScriptActivityParameter"
+          }
+        }
+      },
+      "required": [
+        "text",
+        "type"
+      ]
+    },
+    "ScriptActivityParameter": {
+      "description": "Parameters of a script block.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "object",
+          "description": "The name of the parameter. Type: string (or Expression with resultType string)."
+        },
+        "type": {
+          "description": "The type of the parameter.",
+          "type": "string",
+          "enum": [
+            "Boolean",
+            "DateTime",
+            "DateTimeOffset",
+            "Decimal",
+            "Double",
+            "Guid",
+            "Int16",
+            "Int32",
+            "Int64",
+            "Single",
+            "String",
+            "Timespan"
+          ],
+          "x-ms-enum": {
+            "name": "ScriptActivityParameterType",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "description": "The value of the parameter.",
+          "type": "object"
+        },
+        "direction": {
+          "description": "The direction of the parameter.",
+          "type": "string",
+          "enum": [
+            "Input",
+            "Output",
+            "InputOutput"
+          ],
+          "x-ms-enum": {
+            "name": "ScriptActivityParameterDirection",
+            "modelAsString": true
+          }
+        },
+        "size": {
+          "description": "The size of the output direction parameter.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
     "SharePointOnlineListSource": {
       "description": "A copy activity source for sharePoint online list source.",
       "type": "object",
