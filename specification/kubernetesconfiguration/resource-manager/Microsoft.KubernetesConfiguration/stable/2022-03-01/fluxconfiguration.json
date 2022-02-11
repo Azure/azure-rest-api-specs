@@ -972,14 +972,21 @@
               "x-nullable": true,
               "readOnly": true
             },
-            "lastSourceUpdatedCommitId": {
-              "description": "Branch and SHA of the last source commit synced with the cluster.",
+            "sourceSyncedCommitId": {
+              "description": "Branch and/or SHA of the source commit synced with the cluster.",
               "type": "string",
               "x-nullable": true,
               "readOnly": true
             },
-            "lastSourceUpdatedAt": {
-              "description": "Datetime the fluxConfiguration last synced its source on the cluster.",
+            "sourceUpdatedAt": {
+              "description": "Datetime the fluxConfiguration synced its source on the cluster.",
+              "type": "string",
+              "format": "date-time",
+              "x-nullable": true,
+              "readOnly": true
+            },
+            "statusUpdatedAt": {
+              "description": "Datetime the fluxConfiguration synced its status on the cluster with Azure.",
               "type": "string",
               "format": "date-time",
               "x-nullable": true,
