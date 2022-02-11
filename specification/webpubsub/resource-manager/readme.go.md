@@ -15,6 +15,13 @@ module-name: sdk/resourcemanager/webpubsub/armwebpubsub
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
+directive:
+- rename-model:
+    from: 'WebPubSubResource'
+    to: 'ResourceInfo'
+- rename-model:
+    from: 'WebPubSubResourceList'
+    to: 'ResourceInfoList'
 ```
 
 ### Go multi-api

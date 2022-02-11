@@ -43,7 +43,8 @@
           "type": "array",
           "items": {
             "type": "object"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "additionalProperties": {
@@ -2546,6 +2547,14 @@
         "credential": {
           "$ref": "../datafactory.json#/definitions/CredentialReference",
           "description": "The credential reference containing authentication information."
+        },
+        "servicePrincipalCredentialType": {
+          "type": "object",
+          "description": "The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalCredential": {
+          "description": "The credential of the service principal object in Azure Active Directory. If servicePrincipalCredentialType is 'ServicePrincipalKey', servicePrincipalCredential can be SecureString or AzureKeyVaultSecretReference. If servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only be AzureKeyVaultSecretReference.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         }
       },
       "required": [
@@ -5388,7 +5397,10 @@
           "type": "array",
           "items": {
             "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
-          }
+          },
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         },
         "hcatalogLinkedServiceName": {
           "description": "The name of Azure SQL linked service that point to the HCatalog database. The on-demand HDInsight cluster is created by using the Azure SQL database as the metastore.",
@@ -5455,7 +5467,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScriptAction"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "virtualNetworkId": {
           "type": "object",
