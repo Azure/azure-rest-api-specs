@@ -57,7 +57,7 @@ _This will keep the spec cleaner and easy to manage._
 
 ## Structure of the extension
 - **How the extension would look in the swagger spec?**
-  - JSON schema for the extension can be found [here](https://github.com/Azure/autorest/blob/master/packages/libs/autorest-schemas/swagger-extensions.json#L1903-L1916).
+  - JSON schema for the extension can be found [here](https://github.com/Azure/autorest/blob/main/packages/libs/autorest-schemas/example-schema.json).
 ```json5
 {
   "info": { ... },
