@@ -2782,6 +2782,9 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineFamilyCoreQuota"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "A list of the dedicated core quota per Virtual Machine family for the Batch account. For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is not returned."
         },
         "dedicatedCoreQuotaPerVMFamilyEnforced": {
@@ -3461,6 +3464,10 @@
           "items": {
             "$ref": "#/definitions/DeleteCertificateError"
           },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ],
           "description": "A list of additional details about the error."
         }
       },
@@ -3818,6 +3825,9 @@
           "items": {
             "$ref": "#/definitions/UserAccount"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "title": "The list of user accounts to be created on each node in the pool."
         },
         "metadata": {
@@ -3825,6 +3835,9 @@
           "items": {
             "$ref": "#/definitions/MetadataItem"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "title": "A list of name-value pairs associated with the pool as metadata.",
           "description": "The Batch service does not assign any meaning to metadata; it is solely for the use of user code."
         },
@@ -3867,6 +3880,7 @@
           "items": {
             "$ref": "#/definitions/MountConfiguration"
           },
+          "x-ms-identifiers": [],
           "title": "A list of file systems to mount on each node in the pool.",
           "description": "This supports Azure Files, NFS, CIFS/SMB, and Blobfuse."
         }
@@ -4134,6 +4148,7 @@
           "items": {
             "$ref": "#/definitions/ResizeError"
           },
+          "x-ms-identifiers": [],
           "title": "Additional details about the error."
         }
       },
@@ -4159,6 +4174,7 @@
           "items": {
             "$ref": "#/definitions/AutoScaleRunError"
           },
+          "x-ms-identifiers": [],
           "title": "Additional details about the error."
         }
       },
@@ -4213,6 +4229,9 @@
           "items": {
             "$ref": "#/definitions/DataDisk"
           },
+          "x-ms-identifiers": [
+            "lun"
+          ],
           "title": "The configuration for data disks attached to the compute nodes in the pool.",
           "description": "This property must be specified if the compute nodes in the pool need to have empty data disks attached to them."
         },
@@ -4241,6 +4260,10 @@
           "items": {
             "$ref": "#/definitions/VMExtension"
           },
+          "x-ms-identifiers": [
+            "name",
+            "type"
+          ],
           "title": "The virtual machine extension for the pool.",
           "description": "If specified, the extensions mentioned in this configuration will be installed on each node."
         },
@@ -4350,6 +4373,9 @@
           "items": {
             "$ref": "#/definitions/ContainerRegistry"
           },
+          "x-ms-identifiers": [
+            "registryServers"
+          ],
           "title": "Additional private registries from which containers can be pulled.",
           "description": "If any images must be downloaded from a private registry which requires credentials, then those credentials must be provided here."
         }
@@ -4645,6 +4671,9 @@
           "items": {
             "$ref": "#/definitions/ResourceFile"
           },
+          "x-ms-identifiers": [
+            "httpUrl"
+          ],
           "title": "A list of files that the Batch service will download to the compute node before running the command line."
         },
         "environmentSettings": {
@@ -4652,6 +4681,9 @@
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "title": "A list of environment variable settings for the start task."
         },
         "userIdentity": {
@@ -5113,6 +5145,7 @@
           "items": {
             "$ref": "#/definitions/ResizeError"
           },
+          "x-ms-identifiers": [],
           "title": "Details of any errors encountered while performing the last resize on the pool.",
           "description": "This property is set only if an error occurred during the last pool resize, and only when the pool allocationState is Steady."
         }
@@ -5128,6 +5161,9 @@
           "items": {
             "$ref": "#/definitions/InboundNatPool"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "title": "A list of inbound NAT pools that can be used to address specific ports on an individual compute node externally.",
           "description": "The maximum number of inbound NAT pools per Batch pool is 5. If the maximum number of inbound NAT pools is exceeded the request fails with HTTP status code 400. This cannot be specified if the IPAddressProvisioningType is NoPublicIPAddresses."
         }
@@ -5191,7 +5227,8 @@
           "description": "The maximum number of rules that can be specified across all the endpoints on a Batch pool is 25. If no network security group rules are specified, a default rule will be created to allow inbound access to the specified backendPort. If the maximum number of network security group rules is exceeded the request fails with HTTP status code 400.",
           "items": {
             "$ref": "#/definitions/NetworkSecurityGroupRule"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -5338,6 +5375,10 @@
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
           },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ],
           "description": "A list of additional details about the error."
         }
       },
@@ -5378,6 +5419,9 @@
           "items": {
             "$ref": "#/definitions/SkuCapability"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "A collection of capabilities which this SKU supports."
         }
       },
@@ -5391,6 +5435,9 @@
           "items": {
             "$ref": "#/definitions/SupportedSku"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of SKUs available for the Batch service in the location."
         },
         "nextLink": {
@@ -5459,6 +5506,9 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "title": "The list of operations supported by the resource provider."
         },
         "nextLink": {
@@ -5710,6 +5760,7 @@
           "items": {
             "$ref": "#/definitions/OutboundEnvironmentEndpoint"
           },
+          "x-ms-identifiers": [],
           "description": "The collection of outbound network dependency endpoints returned by the listing operation."
         },
         "nextLink": {
@@ -5733,6 +5784,9 @@
           "items": {
             "$ref": "#/definitions/EndpointDependency"
           },
+          "x-ms-identifiers": [
+            "domainName"
+          ],
           "description": "The endpoints for this service to which the Batch service makes outbound calls."
         }
       },
@@ -5757,6 +5811,7 @@
           "items": {
             "$ref": "#/definitions/EndpointDetail"
           },
+          "x-ms-identifiers": [],
           "description": "The list of connection details for this endpoint."
         }
       },
