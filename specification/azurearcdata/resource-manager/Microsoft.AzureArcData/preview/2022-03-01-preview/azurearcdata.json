@@ -149,12 +149,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "sqlManagedInstanceName",
-            "description": "Name of SQL Managed Instance",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/sqlManagedInstanceName"
           },
           {
             "$ref": "#/parameters/apiVersion"
@@ -194,12 +189,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "sqlManagedInstanceName",
-            "description": "The name of SQL Managed Instances",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/sqlManagedInstanceName"
           },
           {
             "name": "sqlManagedInstance",
@@ -258,12 +248,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "sqlManagedInstanceName",
-            "description": "The name of Sql Managed Instances",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/sqlManagedInstanceName"
           },
           {
             "$ref": "#/parameters/apiVersion"
@@ -307,12 +292,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "sqlManagedInstanceName",
-            "description": "Name of sqlManagedInstance",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/sqlManagedInstanceName"
           },
           {
             "name": "parameters",
@@ -445,12 +425,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "sqlServerInstanceName",
-            "description": "Name of SQL Server Instance",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/sqlServerInstanceName"
           },
           {
             "$ref": "#/parameters/apiVersion"
@@ -490,12 +465,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "sqlServerInstanceName",
-            "description": "The name of SQL Server Instance",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/sqlServerInstanceName"
           },
           {
             "name": "sqlServerInstance",
@@ -554,12 +524,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "sqlServerInstanceName",
-            "description": "The name of SQL Server Instance",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/sqlServerInstanceName"
           },
           {
             "$ref": "#/parameters/apiVersion"
@@ -603,12 +568,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "sqlServerInstanceName",
-            "description": "Name of sqlServerInstance",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/sqlServerInstanceName"
           },
           {
             "name": "parameters",
@@ -749,11 +709,7 @@
             }
           },
           {
-            "name": "dataControllerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/dataControllerName"
           },
           {
             "$ref": "#/parameters/apiVersion"
@@ -803,11 +759,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "dataControllerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/dataControllerName"
           },
           {
             "$ref": "#/parameters/apiVersion"
@@ -851,11 +803,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "dataControllerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/dataControllerName"
           },
           {
             "$ref": "#/parameters/apiVersion"
@@ -895,11 +843,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "dataControllerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/dataControllerName"
           },
           {
             "$ref": "#/parameters/apiVersion"
@@ -931,6 +875,232 @@
         "x-ms-examples": {
           "Updates a dataController tags.": {
             "$ref": "./examples/UpdateDataController.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/dataControllers/{dataControllerName}/activeDirectoryConnectors": {
+      "get": {
+        "tags": [
+          "ActiveDirectoryConnectors"
+        ],
+        "operationId": "ActiveDirectoryConnectors_List",
+        "summary": "List the active directory connectors associated with the given data controller.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataControllerName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./activeDirectoryConnectors.json#/definitions/ActiveDirectoryConnectorListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 404 ResourceNotFound - The requested resource was not found.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/dataControllers/{dataControllerName}/activeDirectoryConnectors/{activeDirectoryConnectorName}": {
+      "put": {
+        "tags": [
+          "ActiveDirectoryConnectors"
+        ],
+        "operationId": "ActiveDirectoryConnectors_PutActiveDirectoryConnector",
+        "description": "Creates or replaces an active directory connector resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "activeDirectoryConnectorResource",
+            "description": "desc",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "./activeDirectoryConnectors.json#/definitions/ActiveDirectoryConnectorResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/dataControllerName"
+          },
+          {
+            "$ref": "#/parameters/activeDirectoryConnectorName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./activeDirectoryConnectors.json#/definitions/ActiveDirectoryConnectorResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "./activeDirectoryConnectors.json#/definitions/ActiveDirectoryConnectorResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "ActiveDirectoryConnectors"
+        ],
+        "operationId": "ActiveDirectoryConnectors_DeleteActiveDirectoryConnector",
+        "description": "Deletes an active directory connector resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataControllerName"
+          },
+          {
+            "$ref": "#/parameters/activeDirectoryConnectorName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the active directory connector."
+          },
+          "202": {
+            "description": "Resource deletion is in progress."
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorResponse"
+            }
+          },
+          "204": {
+            "description": "The specified active directory connector does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "ActiveDirectoryConnectors"
+        ],
+        "operationId": "ActiveDirectoryConnectors_GetActiveDirectoryConnector",
+        "description": "Retrieves an active directory connector resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataControllerName"
+          },
+          {
+            "$ref": "#/parameters/activeDirectoryConnectorName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./activeDirectoryConnectors.json#/definitions/ActiveDirectoryConnectorResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ActiveDirectoryConnectors"
+        ],
+        "operationId": "ActiveDirectoryConnectors_PatchActiveDirectoryConnector",
+        "description": "Updates an active directory connector resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataControllerName"
+          },
+          {
+            "$ref": "#/parameters/activeDirectoryConnectorName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "name": "activeDirectoryConnectorResource",
+            "description": "desc",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "./activeDirectoryConnectors.json#/definitions/ActiveDirectoryConnectorResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./activeDirectoryConnectors.json#/definitions/ActiveDirectoryConnectorResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -968,6 +1138,38 @@
       "type": "string",
       "description": "The API version to use for the request",
       "x-ms-parameter-location": "client"
+    },
+    "dataControllerName": {
+      "name": "dataControllerName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the data controller",
+      "x-ms-parameter-location": "method"
+    },
+    "activeDirectoryConnectorName": {
+      "name": "activeDirectoryConnectorName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Active Directory connector instance",
+      "x-ms-parameter-location": "method"
+    },
+    "sqlManagedInstanceName": {
+      "name": "sqlManagedInstanceName",
+      "description": "Name of SQL Managed Instance",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "sqlServerInstanceName": {
+      "name": "sqlServerInstanceName",
+      "description": "Name of SQL Server Instance",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
