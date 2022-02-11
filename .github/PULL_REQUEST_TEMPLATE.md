@@ -8,7 +8,7 @@ Add a changelog entry for this PR by answering the following questions:
       - [ ] new API version
       - [ ] update existing version for new feature
       - [ ] update existing version to fix swagger quality issue in s360
-      - [ ] Other, please clarify
+      - [ ] Other, please ssclarify
   2. When are you targeting to deploy the new service/feature to public regions? Please provide the date or, if the date is not yet available, the month.
   3. When do you expect to publish the swagger? Please provide date or, the the date is not yet available, the month.
   4. If updating an existing version, please select the specific langauge SDKs and CLIs that must be refreshed after the swagger is published.
