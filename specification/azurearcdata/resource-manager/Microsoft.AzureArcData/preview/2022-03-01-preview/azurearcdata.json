@@ -1076,58 +1076,6 @@
             "$ref": "./examples/GetActiveDirectoryConnector.json"
           }
         }
-      },
-      "patch": {
-        "tags": [
-          "ActiveDirectoryConnectors"
-        ],
-        "operationId": "ActiveDirectoryConnectors_PatchActiveDirectoryConnector",
-        "description": "Updates an Active Directory connector resource",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/dataControllerName"
-          },
-          {
-            "$ref": "#/parameters/activeDirectoryConnectorName"
-          },
-          {
-            "$ref": "#/parameters/apiVersion"
-          },
-          {
-            "name": "activeDirectoryConnectorUpdateResource",
-            "description": "desc",
-            "required": true,
-            "in": "body",
-            "schema": {
-              "$ref": "./activeDirectoryConnectors.json#/definitions/ActiveDirectoryConnectorUpdateResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "./activeDirectoryConnectors.json#/definitions/ActiveDirectoryConnectorResource"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***",
-            "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Updates an Active Directory connector resource": {
-            "$ref": "./examples/UpdateActiveDirectoryConnector.json"
-          }
-        }
       }
     }
   },
