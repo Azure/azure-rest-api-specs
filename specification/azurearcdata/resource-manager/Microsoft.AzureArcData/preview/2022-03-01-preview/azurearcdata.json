@@ -916,6 +916,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all Active Directory connectors associated with a data controller.": {
+            "$ref": "./examples/ListByDataControllerActiveDirectoryConnector.json"
+          }
         }
       }
     },
@@ -925,7 +930,7 @@
           "ActiveDirectoryConnectors"
         ],
         "operationId": "ActiveDirectoryConnectors_PutActiveDirectoryConnector",
-        "description": "Creates or replaces an active directory connector resource.",
+        "description": "Creates or replaces an Active Directory connector resource.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -975,6 +980,11 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create or update an Active Directory connector instance.": {
+            "$ref": "./examples/CreateOrUpdateActiveDirectoryConnector.json"
+          }
         }
       },
       "delete": {
@@ -982,7 +992,7 @@
           "ActiveDirectoryConnectors"
         ],
         "operationId": "ActiveDirectoryConnectors_DeleteActiveDirectoryConnector",
-        "description": "Deletes an active directory connector resource",
+        "description": "Deletes an Active Directory connector resource",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1017,14 +1027,19 @@
             "description": "The specified active directory connector does not exist."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Deletes an Active Directory connector instance.": {
+            "$ref": "./examples/DeleteActiveDirectoryConnector.json"
+          }
+        }
       },
       "get": {
         "tags": [
           "ActiveDirectoryConnectors"
         ],
         "operationId": "ActiveDirectoryConnectors_GetActiveDirectoryConnector",
-        "description": "Retrieves an active directory connector resource",
+        "description": "Retrieves an Active Directory connector resource",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1055,6 +1070,11 @@
               "$ref": "./common.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Retrieves an Active Directory connector resource.": {
+            "$ref": "./examples/GetActiveDirectoryConnector.json"
+          }
         }
       },
       "patch": {
@@ -1062,7 +1082,7 @@
           "ActiveDirectoryConnectors"
         ],
         "operationId": "ActiveDirectoryConnectors_PatchActiveDirectoryConnector",
-        "description": "Updates an active directory connector resource",
+        "description": "Updates an Active Directory connector resource",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1101,6 +1121,11 @@
             "schema": {
               "$ref": "./common.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Updates an Active Directory connector resource": {
+            "$ref": "./examples/UpdateActiveDirectoryConnector.json"
           }
         }
       }
