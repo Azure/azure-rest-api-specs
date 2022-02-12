@@ -5,10 +5,8 @@
     "dataControllerName": "testdataController",
     "activeDirectoryConnectorName": "testADConnector",
     "api-version": "2022-03-01-preview",
-    "dataControllerResource": {
-      "tags": {
-        "mytag": "newval"
-      }
+    "activeDirectoryConnectorUpdateResource": {
+      "realm": "NEWDOMAIN.LOCAL"
     }
   },
   "responses": {
@@ -17,7 +15,7 @@
         "properties": {
           "spec": {
             "activeDirectory": {
-              "realm": "CONTOSO.LOCAL",
+              "realm": "NEWDOMAIN.LOCAL",
               "domainControllers": {
                 "primaryDomainController": {
                   "hostname": "dc1.contoso.local"
@@ -31,7 +29,7 @@
                   }
                 ]
               },
-              "netbiosDomainName": "CONTOSO"
+              "netbiosDomainName": "NEWDOMAIN"
             },
             "dns": {
               "nameserverIPAddresses": [
@@ -40,7 +38,7 @@
               ],
               "replicas": 1,
               "preferK8sDnsForPtrLookups": false,
-              "domainName": "contoso.local"
+              "domainName": "newdomain.local"
             }
           }
         },
@@ -51,9 +49,6 @@
           "lastModifiedBy": "user2",
           "lastModifiedByType": "User",
           "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
-        },
-        "tags": {
-          "mytag": "newval"
         },
         "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/dataControllers/testdataController/activeDirectoryConnectors/testADConnector",
         "name": "testADConnector",
