@@ -63,6 +63,9 @@
             "$ref": "#/parameters/MigrationNameParameter"
           },
           {
+            "$ref": "#/parameters/MigrationMode"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
@@ -218,7 +221,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrationResource"
+            }
           },
           "204": {
             "description": "NoContent"
@@ -813,6 +819,22 @@
       "description": "Migration list filter. Retrieves either active migrations or all migrations.",
       "x-ms-enum": {
         "name": "MigrationListFilter",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "MigrationMode": {
+      "name": "migrationMode",
+      "in": "query",
+      "required": false,
+      "enum": [
+        "Offline",
+        "Online"
+      ],
+      "type": "string",
+      "description": "Migration Mode. Perform online/offline migration",
+      "x-ms-enum": {
+        "name": "MigrationMode",
         "modelAsString": true
       },
       "x-ms-parameter-location": "method"

@@ -40,14 +40,14 @@ tag: package-preview-2022-02
 ```
 
 
-### Tag: package-preview-2022-02
+### Tag: package-migration-2022-02-privatepreview
 
-These settings apply only when `--tag=package-preview-2022-02` is specified on the command line.
+These settings apply only when `--tag=package-migration-2022-02-privatepreview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-02'
+```yaml $(tag) == 'package-migration-2022-02-privatepreview'
 input-file:
   - Microsoft.DBforPostgreSQL/preview/2022-02-10-privatepreview/Migrations.json
-  - Microsoft.DBforPostgreSQL/preview/2022-02-10-privatepreview/postgresql.json
+  - Microsoft.DBforPostgreSQL/preview/2021-06-15-privatepreview/postgresql.json
 ```
 ### Tag: package-2021-06-15-privatepreview
 
