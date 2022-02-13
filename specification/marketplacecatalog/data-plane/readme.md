@@ -24,16 +24,25 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the marketplacecatalog.
 
-```yaml
+``` yaml
 openapi-type: data-plane
-tag: package-2021-10-01
+tag: package-2022-02
 ```
 
+
+### Tag: package-2022-02
+
+These settings apply only when `--tag=package-2022-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-02'
+input-file:
+  - Microsoft.Marketplace/stable/2022-02-02/marketplacecatalog.json
+```
 ### Tag: package-2021-10-01
 
 These settings apply only when `--tag=package-2021-10-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-10-01'
+``` yaml $(tag) == 'package-2021-10-01'
 input-file:
   - Microsoft.Marketplace/stable/2021-10-01/marketplacecatalog.json
 ```
