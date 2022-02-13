@@ -1407,21 +1407,8 @@
           "type": "array"
         },
         "productFilter": {
-          "description": "The alerts' productName on which the cases will be generated",
-          "enum": [
-            "Microsoft Cloud App Security",
-            "Azure Security Center",
-            "Azure Advanced Threat Protection",
-            "Azure Active Directory Identity Protection",
-            "Azure Security Center for IoT",
-            "Office 365 Advanced Threat Protection",
-            "Microsoft Defender Advanced Threat Protection"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "MicrosoftSecurityProductName"
-          }
+          "$ref": "#/definitions/MicrosoftSecurityProductName",
+          "description": "The alerts' productName on which the cases will be generated"
         },
         "severitiesFilter": {
           "description": "the alerts' severities on which the cases will be generated",
@@ -1435,6 +1422,23 @@
         "productFilter"
       ],
       "type": "object"
+    },
+    "MicrosoftSecurityProductName": {
+      "description": "The alerts' productName on which the cases will be generated",
+      "enum": [
+        "Microsoft Cloud App Security",
+        "Azure Security Center",
+        "Azure Advanced Threat Protection",
+        "Azure Active Directory Identity Protection",
+        "Azure Security Center for IoT",
+        "Office 365 Advanced Threat Protection",
+        "Microsoft Defender Advanced Threat Protection"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "MicrosoftSecurityProductName"
+      }
     },
     "MicrosoftSecurityIncidentCreationAlertRuleProperties": {
       "allOf": [
