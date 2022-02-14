@@ -3,7 +3,7 @@
   "info": {
     "title": "Form Recognizer Client",
     "description": "Extracts content, layout, and structured data from documents.",
-    "version": "2021-09-30-preview"
+    "version": "2022-01-30-preview"
   },
   "securityDefinitions": {
     "apim_key": {
@@ -622,7 +622,8 @@
       "description": "Request body to build a new custom model.",
       "type": "object",
       "required": [
-        "modelId"
+        "modelId",
+        "buildMode"
       ],
       "properties": {
         "modelId": {
@@ -631,9 +632,19 @@
         "description": {
           "$ref": "#/definitions/ModelDescription"
         },
+        "buildMode": {
+          "$ref": "#/definitions/DocumentBuildMode"
+        },
         "azureBlobSource": {
           "description": "Azure Blob Storage location containing the training data.",
           "$ref": "#/definitions/AzureBlobContentSource"
+        },
+        "tags": {
+          "description": "List of key-value tag attributes associated with the model.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -657,6 +668,13 @@
           "uniqueItems": true,
           "items": {
             "$ref": "#/definitions/ComponentModelInfo"
+          }
+        },
+        "tags": {
+          "description": "List of key-value tag attributes associated with the model.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           }
         }
       }
@@ -685,6 +703,13 @@
         },
         "description": {
           "$ref": "#/definitions/ModelDescription"
+        },
+        "tags": {
+          "description": "List of key-value tag attributes associated with the model.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -783,7 +808,7 @@
       "description": "API version.",
       "type": "string",
       "enum": [
-        "2021-09-30-preview"
+        "2022-01-30-preview"
       ],
       "x-ms-enum": {
         "name": "ApiVersion",
@@ -986,6 +1011,17 @@
         "resourceLocation": {
           "description": "URL of the resource targeted by this operation.",
           "type": "string"
+        },
+        "apiVersion": {
+          "description": "API version used to create this operation.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "List of key-value tag attributes associated with the model.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1007,6 +1043,17 @@
           "description": "Date and time (UTC) when the model was created.",
           "type": "string",
           "format": "date-time"
+        },
+        "apiVersion": {
+          "description": "API version used to create this model.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "List of key-value tag attributes associated with the model.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1037,6 +1084,9 @@
       "properties": {
         "description": {
           "$ref": "#/definitions/ModelDescription"
+        },
+        "buildMode": {
+          "$ref": "#/definitions/DocumentBuildMode"
         },
         "fieldSchema": {
           "$ref": "#/definitions/DocTypeSchema"
@@ -1192,6 +1242,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DocumentStyle"
+          }
+        },
+        "languages": {
+          "description": "Detected languages.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DocumentLanguage"
           }
         },
         "documents": {
@@ -1605,6 +1662,32 @@
         }
       }
     },
+    "DocumentLanguage": {
+      "description": "An object representing the detected language for a given text span.",
+      "type": "object",
+      "required": [
+        "languageCode",
+        "spans",
+        "confidence"
+      ],
+      "properties": {
+        "languageCode": {
+          "description": "Detected language.  Value may an ISO 639-1 language code (ex. \"en\", \"fr\") or BCP 47 language tag (ex. \"zh-Hans\").",
+          "type": "string"
+        },
+        "spans": {
+          "description": "Location of the text elements in the concatenated content the language applies to.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DocumentSpan"
+          }
+        },
+        "confidence": {
+          "description": "Confidence of correctly identifying the language.",
+          "$ref": "#/definitions/Confidence"
+        }
+      }
+    },
     "Document": {
       "description": "An object describing the location and semantic content of a document.",
       "type": "object",
@@ -1718,6 +1801,10 @@
             "$ref": "#/definitions/DocumentField"
           }
         },
+        "valueCurrency": {
+          "description": "Currency value.",
+          "$ref": "#/definitions/CurrencyValue"
+        },
         "content": {
           "description": "Field content.",
           "type": "string"
@@ -1756,11 +1843,30 @@
         "countryRegion",
         "signature",
         "array",
-        "object"
+        "object",
+        "currency"
       ],
       "x-ms-enum": {
         "name": "DocumentFieldType",
         "modelAsString": true
+      }
+    },
+    "CurrencyValue": {
+      "description": "Currency field value.",
+      "type": "object",
+      "required": [
+        "amount"
+      ],
+      "properties": {
+        "amount": {
+          "description": "Currency amount.",
+          "type": "number",
+          "format": "double"
+        },
+        "currencySymbol": {
+          "description": "Currency symbol label, if any.",
+          "type": "string"
+        }
       }
     },
     "ModelId": {
@@ -1772,6 +1878,18 @@
       "description": "Model description.",
       "type": "string",
       "maxLength": 4096
+    },
+    "DocumentBuildMode": {
+      "description": "Custom model build mode.",
+      "type": "string",
+      "enum": [
+        "template",
+        "neural"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentBuildMode",
+        "modelAsString": true
+      }
     },
     "DocType": {
       "description": "Document type name.",
@@ -1869,7 +1987,7 @@
       "type": "string",
       "in": "query",
       "enum": [
-        "2021-09-30-preview"
+        "2022-01-30-preview"
       ],
       "x-ms-enum": {
         "name": "ApiVersion",

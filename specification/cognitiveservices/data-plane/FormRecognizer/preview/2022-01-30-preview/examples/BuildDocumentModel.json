@@ -5,9 +5,13 @@
     "buildRequest": {
       "modelId": "{modelId}",
       "description": "{modelDescription}",
+      "buildMode": "template",
       "azureBlobSource": {
-        "containerUrl": "https://{storageAccount}.blob.core.windows.net/{containerName}?{sasToken}",
+        "containerUrl": "https://myStorageAccount.blob.core.windows.net/myContainer?mySasToken",
         "prefix": "{blobNamePrefix}"
+      },
+      "tags": {
+        "createdBy": "{userId}"
       }
     }
   },
