@@ -79,7 +79,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{alias}": {
       "get": {
         "x-ms-examples": {
           "Get a watchlist.": {
@@ -105,7 +105,7 @@
             "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
           },
           {
-            "$ref": "#/parameters/WatchlistAlias"
+            "$ref": "#/parameters/Alias"
           }
         ],
         "responses": {
@@ -148,7 +148,7 @@
             "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
           },
           {
-            "$ref": "#/parameters/WatchlistAlias"
+            "$ref": "#/parameters/Alias"
           }
         ],
         "responses": {
@@ -194,7 +194,7 @@
             "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
           },
           {
-            "$ref": "#/parameters/WatchlistAlias"
+            "$ref": "#/parameters/Alias"
           },
           {
             "$ref": "#/parameters/Watchlist"
@@ -222,7 +222,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}/watchlistItems": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{alias}/watchlistItems": {
       "get": {
         "x-ms-examples": {
           "Get all watchlist Items.": {
@@ -248,7 +248,7 @@
             "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
           },
           {
-            "$ref": "#/parameters/WatchlistAlias"
+            "$ref": "#/parameters/Alias"
           }
         ],
         "responses": {
@@ -270,7 +270,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}/watchlistItems/{watchlistItemId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{alias}/watchlistItems/{watchlistItemId}": {
       "get": {
         "x-ms-examples": {
           "Get a watchlist item.": {
@@ -296,7 +296,7 @@
             "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
           },
           {
-            "$ref": "#/parameters/WatchlistAlias"
+            "$ref": "#/parameters/Alias"
           },
           {
             "$ref": "#/parameters/WatchlistItemId"
@@ -342,7 +342,7 @@
             "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
           },
           {
-            "$ref": "#/parameters/WatchlistAlias"
+            "$ref": "#/parameters/Alias"
           },
           {
             "$ref": "#/parameters/WatchlistItemId"
@@ -388,7 +388,7 @@
             "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
           },
           {
-            "$ref": "#/parameters/WatchlistAlias"
+            "$ref": "#/parameters/Alias"
           },
           {
             "$ref": "#/parameters/WatchlistItemId"
@@ -473,8 +473,8 @@
           "description": "The provider of the watchlist",
           "type": "string"
         },
-        "source": {
-          "description": "The source of the watchlist",
+        "sourceType": {
+          "description": "The sourceType of the watchlist",
           "enum": [
             "Local file",
             "Remote storage"
@@ -482,7 +482,7 @@
           "type": "string",
           "x-ms-enum": {
             "modelAsString": true,
-            "name": "source"
+            "name": "sourceType"
           }
         },
         "created": {
@@ -513,7 +513,7 @@
           "description": "The type of the watchlist",
           "type": "string"
         },
-        "watchlistAlias": {
+        "alias": {
           "description": "The alias of the watchlist",
           "type": "string"
         },
@@ -566,7 +566,7 @@
       },
       "required": [
         "displayName",
-        "source",
+        "sourceType",
         "provider",
         "itemsSearchKey"
       ],
@@ -663,10 +663,10 @@
     }
   },
   "parameters": {
-    "WatchlistAlias": {
+    "Alias": {
       "description": "Watchlist Alias",
       "in": "path",
-      "name": "watchlistAlias",
+      "name": "alias",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
