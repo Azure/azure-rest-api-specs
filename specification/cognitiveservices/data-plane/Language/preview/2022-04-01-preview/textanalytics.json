@@ -653,7 +653,7 @@
       "description": "Enumeration of supported Conversation Analysis LRO tasks.",
       "enum": [
         "TranscriptionPii",
-        "IssueResolutionDetection"
+        "IssueResolutionSummarization"
       ],
       "x-ms-enum": {
         "name": "AnalyzeConversationLROTaskKind",
@@ -665,7 +665,7 @@
       "description": "Enumeration of supported Conversation Analysis task results.",
       "enum": [
         "TranscriptionPiiResults",
-        "IssueResolutionDetectionResults"
+        "IssueResolutionSummarizationResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeConversationLROResultsKind",
@@ -792,12 +792,12 @@
         }
       ]
     },
-    "AnalyzeConversationIssueResolutionDetectionLROTask": {
+    "AnalyzeConversationIssueResolutionSummarizationLROTask": {
       "type": "object",
-      "description": "Task definition for Issue Resolution Detection in conversation.",
+      "description": "Task definition for Issue Resolution Summarization in conversation.",
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/IssueResolutionDetectionTaskParameters"
+          "$ref": "#/definitions/IssueResolutionSummarizationTaskParameters"
         }
       },
       "allOf": [
@@ -805,11 +805,11 @@
           "$ref": "#/definitions/AnalyzeConversationLROTask"
         }
       ],
-      "x-ms-discriminator-value": "IssueResolutionDetectionTasks"
+      "x-ms-discriminator-value": "IssueResolutionSummarizationTasks"
     },
-    "IssueResolutionDetectionTaskParameters": {
+    "IssueResolutionSummarizationTaskParameters": {
       "type": "object",
-      "description": "Supported parameters for an Issue Resolution Detection task.",
+      "description": "Supported parameters for an Issue Resolution Summarization task.",
       "properties": {
       },
       "allOf": [
@@ -821,7 +821,7 @@
         }
       ]
     },
-    "AnalyzeConversationIssueResolutionDetectionLROResult": {
+    "AnalyzeConversationIssueResolutionSummarizationLROResult": {
       "type": "object",
       "properties": {
         "results": {
@@ -836,7 +836,7 @@
       "required": [
         "results"
       ],
-      "x-ms-discriminator-value": "IssueResolutionDetectionResults"
+      "x-ms-discriminator-value": "IssueResolutionSummarizationResults"
     },
     "SummaryResult": {
       "type": "object",
