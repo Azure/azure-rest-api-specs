@@ -2264,6 +2264,18 @@
             "$ref": "#/definitions/GalleryImageFeature"
           },
           "description": "A list of gallery image features."
+        },
+        "architecture": {
+          "type": "string",
+          "description": "The architecture of the image. Applicable to OS disks only.",
+          "enum": [
+            "x64",
+            "Arm64"
+          ],
+          "x-ms-enum": {
+            "name": "Architecture",
+            "modelAsString": true
+          }
         }
       },
       "required": [
