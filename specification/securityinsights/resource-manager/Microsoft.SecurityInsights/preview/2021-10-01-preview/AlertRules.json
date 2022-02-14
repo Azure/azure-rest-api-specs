@@ -1168,40 +1168,42 @@
       "description": "Represents Fusion alert rule template.",
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AlertRuleTemplateWithMitreProperties"
-            }
-          ],
+          "$ref": "#/definitions/FusionAlertRuleTemplateProperties",
           "description": "Fusion alert rule template properties",
-          "properties": {
-            "severity": {
-              "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
-              "description": "The severity for alerts created by this alert rule."
-            },
-            "sourceSettings": {
-              "description": "All supported source signal configurations consumed in fusion detection.",
-              "items": {
-                "$ref": "#/definitions/FusionTemplateSourceSetting"
-              },
-              "x-ms-identifiers": [],
-              "type": "array"
-            }
-          },
-          "required": [
-            "displayName",
-            "description",
-            "status",
-            "severity",
-            "sourceSettings",
-            "alertRulesCreatedByTemplateCount"
-          ],
-          "type": "object",
           "x-ms-client-flatten": true
         }
       },
       "type": "object",
       "x-ms-discriminator-value": "Fusion"
+    },
+    "FusionAlertRuleTemplateProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplateWithMitreProperties"
+        }
+      ],
+      "description": "Fusion alert rule template properties",
+      "severity": {
+        "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
+        "description": "The severity for alerts created by this alert rule."
+      },
+      "sourceSettings": {
+        "description": "All supported source signal configurations consumed in fusion detection.",
+        "items": {
+          "$ref": "#/definitions/FusionTemplateSourceSetting"
+        },
+        "x-ms-identifiers": [],
+        "type": "array"
+      },
+      "required": [
+        "displayName",
+        "description",
+        "status",
+        "severity",
+        "sourceSettings",
+        "alertRulesCreatedByTemplateCount"
+      ],
+      "type": "object"
     },
     "FusionTemplateSourceSetting": {
       "description": "Represents a source signal consumed in Fusion detection.",
