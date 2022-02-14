@@ -1496,14 +1496,7 @@
       "description": "Represents MicrosoftSecurityIncidentCreation rule template.",
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
-            },
-            {
-              "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleCommonProperties"
-            }
-          ],
+          "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties",
           "description": "MicrosoftSecurityIncidentCreation rule template properties",
           "required": [
             "displayName",
@@ -1518,6 +1511,45 @@
       },
       "type": "object",
       "x-ms-discriminator-value": "MicrosoftSecurityIncidentCreation"
+    },
+    "MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
+        }
+      ],
+      "description": "MicrosoftSecurityIncidentCreation rule template properties",
+      "properties": {
+        "displayNamesFilter": {
+          "description": "the alerts' displayNames on which the cases will be generated",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "displayNamesExcludeFilter": {
+          "description": "the alerts' displayNames on which the cases will not be generated",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "productFilter": {
+          "$ref": "#/definitions/MicrosoftSecurityProductName",
+          "description": "The alerts' productName on which the cases will be generated"
+        },
+        "severitiesFilter": {
+          "description": "the alerts' severities on which the cases will be generated",
+          "items": {
+            "$ref": "#/definitions/AlertSeverity"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "productFilter"
+      ],
+      "type": "object"
     },
     "QueryBasedAlertRuleProperties": {
       "description": "Query based alert rule base property bag.",
