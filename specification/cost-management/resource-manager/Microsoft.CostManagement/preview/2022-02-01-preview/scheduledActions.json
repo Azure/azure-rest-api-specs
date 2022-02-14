@@ -615,14 +615,15 @@
       "readOnly": true,
       "properties": {
         "fileFormats": {
-          "description": "Error code.",
+          "type": "array",
+          "description": "File formats.",
           "$ref": "#/definitions/FileFormat"
         }
       }
     },
     "FileFormat": {
       "type": "string",
-      "description": ".",
+      "description": "Destination of the view data. Currently only csv format is supported.",
       "enum": [
         "Csv"
       ],
