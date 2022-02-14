@@ -747,7 +747,8 @@
       "type": "string",
       "description": "Enumeration of supported Conversation Analysis LRO tasks.",
       "enum": [
-        "TranscriptionPii"
+        "TranscriptionPii",
+        "IssueResolutionSummarization"
       ],
       "x-ms-enum": {
         "name": "AnalyzeConversationLROTaskKind",
@@ -759,7 +760,7 @@
       "description": "Enumeration of supported Conversation Analysis task results.",
       "enum": [
         "TranscriptionPiiResults",
-        "IssueDetectionResolutionResults"
+        "IssueResolutionSummarizationResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeConversationLROResultsKind",
@@ -882,6 +883,122 @@
           "$ref": "#/definitions/PreBuiltTaskParameters"
         }
       ]
+    },
+    "AnalyzeConversationIssueResolutionSummarizationLROTask": {
+      "type": "object",
+      "description": "Task definition for Issue Resolution Summarization in conversation.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/IssueResolutionSummarizationTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeConversationLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "IssueResolutionSummarizationTasks"
+    },
+    "IssueResolutionSummarizationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for an Issue Resolution Summarization task.",
+      "properties": {
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskParameters"
+        },
+        {
+          "$ref": "#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
+    "AnalyzeConversationIssueResolutionSummarizationLROResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/SummaryResult"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeConversationLROResult"
+        }
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "IssueResolutionSummarizationResults"
+    },
+    "SummaryResult": {
+      "type": "object",
+      "required": [
+        "summary"
+      ],
+      "properties": {
+        "summary": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/SummaryResultItem"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationResult"
+        }
+      ]
+    },
+    "SummaryResultItem": {
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/SummaryKind"
+        }
+      }
+    },
+    "SummaryKind": {
+      "type": "string",
+      "description": "Enumeration of supported Summary types.",
+      "enum": [
+        "Issue",
+        "Resolution"
+      ],
+      "x-ms-enum": {
+        "name": "SummaryKind",
+        "modelAsString": true
+      }
+    },
+    "Issue": {
+      "type": "object",
+      "properties": {
+        "issue": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "issue"
+      ],
+      "x-ms-discriminator-value": "Issue"
+    },
+    "Resolution": {
+      "type": "object",
+      "properties": {
+        "resolution": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "resolution"
+      ],
+      "x-ms-discriminator-value": "Resolution"
     },
     "TaskIdentifier": {
       "type": "object",
@@ -3319,6 +3436,13 @@
           "description": "Warnings encountered while processing document.",
           "items": {
             "$ref": "#/definitions/ConversationWarning"
+          }
+        },
+        "errors": {
+          "type": "array",
+          "description": "Errors encountered while processing conversation.",
+          "items": {
+            "$ref": "#/definitions/ConversationError"
           }
         },
         "statistics": {
