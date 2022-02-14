@@ -28,12 +28,12 @@ openapi-type: data-plane
 credential-scopes: "https://purview.azure.net/.default"
 ```
 
-``` yaml $(package-administration-account)
+``` yaml $(package-account)
 tag: package-account-2019-11-preview
 title: PurviewAccount
 ```
 
-``` yaml $(package-administration-metadata)
+``` yaml $(package-metadata)
 tag: package-metadata-2021-07-preview
 title: PurviewMetadataPolicies
 ```
@@ -108,7 +108,7 @@ Since this RP has no unique default package, iterate over all of them for valida
 
 ``` yaml $(validation)
 batch:
-  - package-administration-account: true
+  - package-account: true
   - package-catalog: true
   - package-scanning: true
 ```
