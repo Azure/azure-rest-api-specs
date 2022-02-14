@@ -245,6 +245,7 @@
   },
   "definitions": {
     "Resource": {
+      "type": "object",
       "description": "The resource model definition.",
       "properties": {
         "id": {
@@ -277,6 +278,7 @@
       "x-ms-azure-resource": true
     },
     "HanaInstancesListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -293,6 +295,7 @@
       "description": "The response from the List HANA Instances operation."
     },
     "HanaInstance": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -313,6 +316,7 @@
       "description": "HANA instance info on Azure (ARM properties and HANA properties)"
     },
     "HanaInstanceProperties": {
+      "type": "object",
       "properties": {
         "hardwareProfile": {
           "$ref": "#/definitions/HardwareProfile",
@@ -388,6 +392,7 @@
       "description": "Describes the properties of a HANA instance."
     },
     "HardwareProfile": {
+      "type": "object",
       "properties": {
         "hardwareType": {
           "readOnly": true,
@@ -460,6 +465,7 @@
       "description": "Specifies the hardware settings for the HANA instance."
     },
     "Disk": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -507,6 +513,7 @@
       "description": "Specifies information related to a SAP system ID"
     },
     "StorageProfile": {
+      "type": "object",
       "properties": {
         "nfsIpAddress": {
           "readOnly": true,
@@ -531,6 +538,7 @@
       "description": "Specifies the storage settings for the HANA instance disks."
     },
     "OSProfile": {
+      "type": "object",
       "properties": {
         "computerName": {
           "type": "string",
@@ -554,6 +562,7 @@
       "description": "Specifies the operating system settings for the HANA instance."
     },
     "NetworkProfile": {
+      "type": "object",
       "properties": {
         "networkInterfaces": {
           "type": "array",
@@ -571,6 +580,7 @@
       "description": "Specifies the network settings for the HANA instance disks."
     },
     "IpAddress": {
+      "type": "object",
       "properties": {
         "ipAddress": {
           "type": "string",
@@ -710,6 +720,7 @@
       "description": "Details needed to monitor a Hana Instance"
     },
     "ProviderInstanceListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -726,6 +737,7 @@
       "description": "The response from the List provider instances operation."
     },
     "ProviderInstance": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -741,6 +753,7 @@
       "description": "A provider instance associated with a SAP monitor."
     },
     "ProviderInstanceProperties": {
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
