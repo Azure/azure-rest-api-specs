@@ -12484,13 +12484,18 @@
       "type": "object",
       "properties": {
         "tieringMode": {
+          "description": "Tiering Mode to control automatic tiering of recovery points",
           "enum": [
             "Invalid",
             "TierRecommended",
             "TierAfter",
             "DoNotTier"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TieringMode",
+            "modelAsString": true
+          }
         },
         "duration": {
           "format": "int32",
