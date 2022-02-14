@@ -1,9 +1,22 @@
 {
   "parameters": {
     "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-    "api-version": "2019-01-01-preview",
+    "api-version": "2021-04-01",
     "resourceGroupName": "contosoResourceGroup",
-    "resourceName": "contoso.onmicrosoft.com"
+    "resourceName": "contoso.onmicrosoft.com",
+    "createTenantRequestBody": {
+      "location": "United States",
+      "sku": {
+        "name": "Standard",
+        "tier": "A0"
+      },
+      "properties": {
+        "createTenantProperties": {
+          "displayName": "Contoso",
+          "countryCode": "US"
+        }
+      }
+    }
   },
   "responses": {
     "200": {
@@ -24,6 +37,12 @@
         "name": "contoso.onmicrosoft.com",
         "location": "United States",
         "tags": null
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/providers/Microsoft.AzureActiveDirectory/operations/99999999-9999-9999-9999-999999999999",
+        "Retry-After": "60"
       }
     }
   }
