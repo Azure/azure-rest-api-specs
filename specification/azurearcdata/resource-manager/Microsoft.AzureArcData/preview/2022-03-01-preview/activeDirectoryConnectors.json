@@ -47,10 +47,11 @@
     },
     "ActiveDirectoryConnectorProperties": {
       "type": "object",
-      "description": "The properties of an Active directory connector resource",
+      "description": "The properties of an Active Directory connector resource",
       "properties": {
         "provisioningState": {
           "type": "string",
+          "description": "The provisioning state of the Active Directory connector resource.",
           "readOnly": true
         },
         "spec": {
@@ -101,43 +102,9 @@
           "description": "NETBIOS name of the Active Directory domain."
         },
         "domainControllers": {
-          "type": "object",
-          "properties": {
-            "primaryDomainController": {
-              "type": "object",
-              "properties": {
-                "hostname": {
-                  "type": "string",
-                  "description": "Fully-qualified domain name of the Primary Domain Controller (PDC) in the AD domain."
-                }
-              },
-              "required": [
-                "hostname"
-              ]
-            },
-            "secondaryDomainControllers": {
-              "type": "array",
-              "description": "List of the fully-qualified domain names of the secondary domain controllers in the AD domain.",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "hostname": {
-                    "type": "string",
-                    "description": "Fully-qualified domain name of a secondary domain controller in the AD domain."
-                  }
-                },
-                "required": [
-                  "hostname"
-                ]
-              },
-              "x-ms-identifiers": [
-                "hostname"
-              ]
-            }
-          },
-          "required": [
-            "primaryDomainController"
-          ]
+          "$ref": "#/definitions/ActiveDirectoryDomainControllers",
+          "description": "null",
+          "x-ms-client-flatten": false
         }
       },
       "required": [
@@ -177,19 +144,73 @@
         "nameserverIPAddresses"
       ]
     },
+    "ActiveDirectoryDomainControllers": {
+      "type": "object",
+      "description": "Details about the Active Directory domain controllers associated with this AD connector instance",
+      "properties": {
+        "primaryDomainController": {
+          "$ref": "#/definitions/ActiveDirectoryPrimaryDomainController",
+          "description": "null",
+          "x-ms-client-flatten": false
+        },
+        "secondaryDomainControllers": {
+          "$ref": "#/definitions/ActiveDirectorySecondaryDomainControllers",
+          "description": "null",
+          "x-ms-client-flatten": false
+        }
+      },
+      "required": [
+        "primaryDomainController"
+      ]
+    },
+    "ActiveDirectoryPrimaryDomainController": {
+      "type": "object",
+      "description": "Information about the Primary Domain Controller (PDC) in the AD domain.",
+      "properties": {
+        "hostname": {
+          "type": "string",
+          "description": "Fully-qualified domain name of the Primary Domain Controller (PDC) in the AD domain."
+        }
+      },
+      "required": [
+        "hostname"
+      ]
+    },
+    "ActiveDirectorySecondaryDomainControllers": {
+      "type": "array",
+      "description": "List of the fully-qualified domain names of the secondary domain controllers in the AD domain.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "hostname": {
+            "type": "string",
+            "description": "Fully-qualified domain name of a secondary domain controller in the AD domain."
+          }
+        },
+        "required": [
+          "hostname"
+        ]
+      },
+      "x-ms-identifiers": [
+        "hostname"
+      ]
+    },
     "ActiveDirectoryConnectorStatus": {
       "type": "object",
       "description": "The status of the Kubernetes custom resource.",
       "properties": {
         "lastUpdateTime": {
-          "type": "string"
+          "type": "string",
+          "description": "The time that the custom resource was last updated."
         },
         "observedGeneration": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "description": "The version of the replicaSet associated with the AD connector custom resource."
         },
         "state": {
-          "type": "string"
+          "type": "string",
+          "description": "The state of the AD connector custom resource."
         }
       },
       "additionalProperties": {
