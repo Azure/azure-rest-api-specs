@@ -32,12 +32,14 @@
     },
     "PageOfDataControllerResource": {
       "type": "object",
+      "description": "A list of data controllers.",
       "properties": {
         "value": {
           "items": {
             "$ref": "#/definitions/DataControllerResource"
           },
-          "type": "array"
+          "type": "array",
+          "description": "Array of results."
         },
         "nextLink": {
           "type": "string",
@@ -115,6 +117,7 @@
         },
         "provisioningState": {
           "type": "string",
+          "description": "The provisioning state of the Arc Data Controller resource.",
           "readOnly": true
         },
         "clusterId": {

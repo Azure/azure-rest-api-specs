@@ -72,11 +72,13 @@
           "description": "The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code. "
         },
         "family": {
-          "type": "string"
+          "type": "string",
+          "description": "The SKU family"
         },
         "capacity": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "The SKU capacity"
         }
       },
       "required": [
@@ -118,7 +120,8 @@
         },
         "provisioningState": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "The provisioning state of the Arc-enabled SQL Managed Instance resource."
         },
         "licenseType": {
           "type": "string",
