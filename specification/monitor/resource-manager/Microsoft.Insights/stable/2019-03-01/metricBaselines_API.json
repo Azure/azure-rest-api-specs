@@ -181,6 +181,7 @@
           "items": {
             "$ref": "#/definitions/TimeSeriesBaseline"
           },
+          "x-ms-identifiers": [],
           "description": "The baseline for each time series that was queried."
         }
       },
@@ -202,6 +203,9 @@
           "items": {
             "$ref": "#/definitions/MetricSingleDimension"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The dimensions of this time series."
         },
         "timestamps": {
@@ -218,6 +222,7 @@
           "items": {
             "$ref": "#/definitions/SingleBaseline"
           },
+          "x-ms-identifiers": [],
           "description": "The baseline values for each sensitivity."
         },
         "metadataValues": {
@@ -225,6 +230,9 @@
           "items": {
             "$ref": "#/definitions/BaselineMetadata"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The baseline metadata values."
         }
       },

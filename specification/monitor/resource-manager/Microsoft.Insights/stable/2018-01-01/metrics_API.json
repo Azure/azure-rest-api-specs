@@ -277,6 +277,7 @@
           "items": {
             "$ref": "#/definitions/TimeSeriesElement"
           },
+          "x-ms-identifiers": [],
           "description": "the time series returned when a data query is performed."
         }
       },
@@ -297,6 +298,9 @@
           "items": {
             "$ref": "#/definitions/MetadataValue"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "the metadata values returned if $filter was specified in the call."
         },
         "data": {
@@ -304,6 +308,9 @@
           "items": {
             "$ref": "#/definitions/MetricValue"
           },
+          "x-ms-identifiers": [
+            "timeStamp"
+          ],
           "description": "An array of data points representing the metric values.  This is only returned if a result type of data is specified."
         }
       },
