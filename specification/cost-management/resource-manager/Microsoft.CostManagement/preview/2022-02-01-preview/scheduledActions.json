@@ -610,11 +610,14 @@
       }
     },
     "FileDestination": {
-      "type": "array",
+      "type": "object",
       "description": "Destination of the view data. Currently only csv format is supported.",
       "readOnly": true,
-      "items": {
-        "$ref": "#/definitions/FileFormat"
+      "properties": {
+        "fileFormats": {
+          "description": "Error code.",
+          "$ref": "#/definitions/FileFormat"
+        }
       }
     },
     "FileFormat": {
@@ -624,7 +627,7 @@
         "Csv"
       ],
       "x-ms-enum": {
-        "name": "FileFormatType",
+        "name": "FileFormat",
         "modelAsString": true
       }
     },
@@ -810,12 +813,12 @@
         "values": [
           {
             "value": "Disabled",
-            "description": "Scheduled action is saved but not executed.",
+            "description": "Scheduled action is saved but will not be executed.",
             "name": "Disabled"
           },
           {
             "value": "Enabled",
-            "description": "Scheduled action is saved and executed.",
+            "description": "Scheduled action is saved and will be executed.",
             "name": "Enabled"
           }
         ]
@@ -958,7 +961,7 @@
         "Last"
       ],
       "x-ms-enum": {
-        "name": "WeeksOfMonthType",
+        "name": "WeeksOfMonth",
         "modelAsString": true
       }
     }
