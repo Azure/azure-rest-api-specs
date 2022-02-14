@@ -116,7 +116,7 @@ The [Azure API Review Board](https://aka.ms/azapi) is dedicated to helping you c
 ### Guidelines & Specifications
  * [Azure REST API Guidelines](https://aka.ms/azapi/guidelines)
  * [OpenAPI Style Guidelines](https://aka.ms/azapi/style)
- * [Azure Breaking Change Policy](http://aka.ms/bcforapi)
+ * [Azure Breaking Change Policy](http://aka.ms/AzBreakingChangesPolicy/)
 
 ### Helpful Links
  * [Azure DevTools Wiki](https://aka.ms/azapi)
