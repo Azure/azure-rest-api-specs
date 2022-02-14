@@ -25,6 +25,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 These are the global settings for the extendedLocation.
 
 ```yaml
+title: CustomLocationsManagementClient
 openapi-type: arm
 tag: package-2021-08-15
 ```
