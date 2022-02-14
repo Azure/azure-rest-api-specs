@@ -74,7 +74,6 @@ Please follow the link to find more details on [PR review process](https://aka.m
 This PR template is for Data Plane APIs only.
 
 ### API Info: The Basics
-Most of the information about your service should be captured in the issue that serves as your [*engagement record*](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/271/Azure-REST-API-Stewardship?anchor=rest-api-stewardship-process).
 
 * Link to engagement record issue: 
 
