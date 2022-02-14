@@ -66,7 +66,7 @@ Please follow the link to find more details on [PR review process](https://aka.m
   
 </details>
 
-## Data Plane API
+## non-ARM/ Data Plane API
 
 <details>
   <summary>Expand this section for dataplane</summary>
