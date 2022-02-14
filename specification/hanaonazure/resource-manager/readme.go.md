@@ -20,8 +20,8 @@ azure-arm: true
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: package-2017-11
   - tag: package-2021-11-12
+  - tag: package-2017-11
 ```
 
 ### Tag: package-2021-11-12
