@@ -16,6 +16,163 @@
     "application/json"
   ],
   "paths": {
+    "/certificateAuthorities/{id}": {
+      "get": {
+        "tags": [
+          "GET"
+        ],
+        "summary": "Get a certificate authority. This operation requires the certificateAuthorities/read permission.",
+        "operationId": "CertificateAuthority_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The certificate authority id. A case-insensitive string (up to 128 characters long) of alphanumeric characters plus certain special characters : . _ -. No special characters allowed at start or end.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CertificateAuthority"
+            },
+            "headers": {
+              "ETag": {
+                "description": "The ETag of the resource to update.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningServiceErrorDetails"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PUT"
+        ],
+        "summary": "Create or replace a certificate authority with the specified certificate authority source type. This operation requires the certificateAuthorities/write permission.",
+        "operationId": "CertificateAuthority_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The desired certificate authority name. A case-insensitive string (up to 128 characters long) of alphanumeric characters plus certain special characters : . _ -. No special characters allowed at start or end.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateAuthority",
+            "in": "body",
+            "description": "The created certificate authority object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateAuthority"
+            }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The ETag of the certificate authority.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CertificateAuthority"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningServiceErrorDetails"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DELETE"
+        ],
+        "summary": "Delete the certificate authority. This operation requires the certificateAuthorities/delete permission.",
+        "operationId": "CertificateAuthority_Delete",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The certificate authority name. A case-insensitive string (up to 128 characters long) of alphanumeric characters plus certain special characters : . _ -. No special characters allowed at start or end.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The ETag of the certificate authority.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningServiceErrorDetails"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
     "/enrollments/{id}": {
       "get": {
         "tags": [
@@ -406,6 +563,240 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningServiceErrorDetails"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/trustBundles/{id}": {
+      "get": {
+        "tags": [
+          "GET",
+          "TrustBundle"
+        ],
+        "summary": "Get a specific trust bundle and it contents.",
+        "operationId": "TrustBundle_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The trust bundle id. A case-insensitive string (up to 128 characters long) of alphanumeric characters plus certain special characters : . _ -. No special characters allowed at start or end.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TrustBundle"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningServiceErrorDetails"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PUT",
+          "TrustBundle"
+        ],
+        "summary": "Create or update a trust bundle.",
+        "operationId": "TrustBundle_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The trust bundle id. A case-insensitive string (up to 128 characters long) of alphanumeric characters plus certain special characters : . _ -. No special characters allowed at start or end.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "trustBundle",
+            "in": "body",
+            "description": "The trust bundle.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TrustBundle"
+            }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The ETag of the trust bundle.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TrustBundle"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningServiceErrorDetails"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DELETE"
+        ],
+        "summary": "Delete the trust bundle. This operation requires the trustBundle/delete permission.",
+        "operationId": "TrustBundle_Delete",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The trust bundle id. A case-insensitive string (up to 128 characters long) of alphanumeric characters plus certain special characters : . _ -. No special characters allowed at start or end.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The ETag of the trust bundle record.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningServiceErrorDetails"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/certificateAuthorities/query": {
+      "post": {
+        "tags": [
+          "POST"
+        ],
+        "summary": "Retrieves a list of the certificate authorities and a continuation token to retrieve the next page. This operation requires the certificateAuthorities/read permission.",
+        "operationId": "CertificateAuthority_Query",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "x-ms-max-item-count",
+            "in": "header",
+            "description": "Page size",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "x-ms-continuation",
+            "in": "header",
+            "description": "Continuation token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "querySpecification",
+            "in": "body",
+            "description": "The query specification.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuerySpecification"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CertificateAuthority"
+              }
+            },
+            "headers": {
+              "x-ms-continuation": {
+                "description": "The continuation token for getting the next page of results.",
+                "type": "string"
+              },
+              "x-ms-max-item-count": {
+                "description": "The maximum number of items returned in a page.",
+                "type": "integer"
+              },
+              "x-ms-item-type": {
+                "description": "The list of values returned from the query.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response",
@@ -855,6 +1246,95 @@
           }
         }
       }
+    },
+    "/trustBundles/query": {
+      "post": {
+        "tags": [
+          "POST",
+          "TrustBundle"
+        ],
+        "summary": "Query the trust bundles in a DPS instance.",
+        "operationId": "TrustBundle_Query",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "x-ms-max-item-count",
+            "in": "header",
+            "description": "Page size",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "x-ms-continuation",
+            "in": "header",
+            "description": "Continuation token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "withCertificateData",
+            "in": "query",
+            "description": "Flag to indicate if X509 certificate data is required or not",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "querySpecification",
+            "in": "body",
+            "description": "The query specification.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuerySpecification"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TrustBundle"
+              }
+            },
+            "headers": {
+              "x-ms-continuation": {
+                "description": "The continuation token for getting the next page of results.",
+                "type": "string"
+              },
+              "x-ms-max-item-count": {
+                "description": "The maximum number of items returned in a page.",
+                "type": "integer"
+              },
+              "x-ms-item-type": {
+                "description": "The list of values returned from the query.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningServiceErrorDetails"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -881,6 +1361,100 @@
         "timestampUtc": {
           "format": "date-time",
           "type": "string"
+        }
+      }
+    },
+    "CertificateAuthority": {
+      "required": [
+        "certificateAuthorityType"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The certificate authority identifier. A case-insensitive string (up to 64 characters long) of ASCII 7-bit alphanumeric\r\ncharacters plus certain special characters . _ -. No special characters allowed at start or end.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdDateTimeUtc": {
+          "format": "date-time",
+          "description": "The DateTime this resource was created in UTC.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastUpdatedDateTimeUtc": {
+          "format": "date-time",
+          "description": "The DateTime this resource was last updated in UTC.",
+          "type": "string",
+          "readOnly": true
+        },
+        "etag": {
+          "description": "The ETag of the device record.",
+          "type": "string",
+          "readOnly": true
+        },
+        "certificates": {
+          "description": "The certificates affiliated with this Certificate Authority.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CertificateWithMetadata"
+          },
+          "readOnly": true
+        },
+        "certificateAuthorityType": {
+          "type": "string"
+        }
+      },
+      "discriminator": "certificateAuthorityType"
+    },
+    "CertificateWithMetadata": {
+      "type": "object",
+      "properties": {
+        "certificateMetadata": {
+          "$ref": "#/definitions/CertificateMetadata",
+          "readOnly": true
+        },
+        "certificate": {
+          "type": "string"
+        }
+      }
+    },
+    "CertificateMetadata": {
+      "type": "object",
+      "properties": {
+        "subjectName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "sha1Thumbprint": {
+          "type": "string",
+          "readOnly": true
+        },
+        "sha256Thumbprint": {
+          "type": "string",
+          "readOnly": true
+        },
+        "issuerName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "notBeforeUtc": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "notAfterUtc": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "serialNumber": {
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
@@ -912,6 +1486,14 @@
         "attestation": {
           "$ref": "#/definitions/AttestationMechanism",
           "description": "Attestation method used by the device."
+        },
+        "deviceHostname": {
+          "description": "Hostname of the device (optional).\r\nMust adhere to the domain name spec: https://datatracker.ietf.org/doc/html/rfc1035.",
+          "type": "string"
+        },
+        "deviceIpAddress": {
+          "description": "IP address of the device (optional).\r\nThis can be an IPv4 or IPv6 address.",
+          "type": "string"
         },
         "capabilities": {
           "$ref": "#/definitions/DeviceCapabilities",
@@ -974,6 +1556,18 @@
         "customAllocationDefinition": {
           "$ref": "#/definitions/CustomAllocationDefinition",
           "description": "This tells DPS which webhook to call when using custom allocation."
+        },
+        "trustBundleId": {
+          "description": "Optional trust bundle id to associate with the enrollment.",
+          "type": "string"
+        },
+        "clientCertificateIssuancePolicy": {
+          "$ref": "#/definitions/CertificateIssuancePolicy",
+          "description": "Certificate issuance policy for device client certificates."
+        },
+        "serverCertificateIssuancePolicy": {
+          "$ref": "#/definitions/CertificateIssuancePolicy",
+          "description": "Certificate issuance policy for device server certificates."
         }
       }
     },
@@ -1050,6 +1644,31 @@
         "payload": {
           "description": "Custom allocation payload returned from the webhook to the device.",
           "type": "object",
+          "readOnly": true
+        },
+        "trustBundle": {
+          "$ref": "#/definitions/TrustBundle",
+          "description": "The optional trust bundle result returned after a successful device registation.",
+          "readOnly": true
+        },
+        "issuedClientCertificate": {
+          "description": "Client certificate issued to the device in PEM format.",
+          "type": "string",
+          "readOnly": true
+        },
+        "deviceCertificateIssuanceSettings": {
+          "$ref": "#/definitions/DeviceCertificateIssuanceSettings",
+          "description": "Certificate issuance settings specification for the device.",
+          "readOnly": true
+        },
+        "deviceHostname": {
+          "description": "The configured hostname for the device.\r\nUsed for server certificate issuance.",
+          "type": "string",
+          "readOnly": true
+        },
+        "deviceIpAddress": {
+          "description": "The configured IP address for the device.\r\nUsed for server certificate issuance.",
+          "type": "string",
           "readOnly": true
         }
       }
@@ -1151,6 +1770,74 @@
         }
       }
     },
+    "CertificateIssuancePolicy": {
+      "description": "Certificate issuance policy.",
+      "type": "object",
+      "properties": {
+        "certificateAuthorityName": {
+          "description": "Certificate authority name used to issue certificates.",
+          "type": "string"
+        }
+      }
+    },
+    "TrustBundle": {
+      "description": "A collection of trusted root or intermediate certificates associated with one or more device enrollments.",
+      "required": [
+        "certificates"
+      ],
+      "type": "object",
+      "properties": {
+        "certificates": {
+          "description": "The certificates in the trust bundle.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/X509CertificateWithMetadata"
+          }
+        },
+        "id": {
+          "description": "The trust bundle ID. A case-insensitive string (up to 128 characters long) of alphanumeric characters plus certain special characters : . _ -. No special characters allowed at start or end.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "The DateTime this resource was created in UTC.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedDateTime": {
+          "format": "date-time",
+          "description": "The DateTime this resource was last updated in UTC.",
+          "type": "string",
+          "readOnly": true
+        },
+        "etag": {
+          "description": "The ETag of the trust bundle.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DeviceCertificateIssuanceSettings": {
+      "description": "Certificate issuance policy.",
+      "type": "object",
+      "properties": {
+        "certificateIssuanceEndpoint": {
+          "description": "Certificate issuance endpoint which devices can access",
+          "type": "string",
+          "readOnly": true
+        },
+        "certificateType": {
+          "description": "The certificate issuance type.",
+          "enum": [
+            "none",
+            "serverCertificate"
+          ],
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "TpmAttestation": {
       "description": "Attestation via TPM.",
       "required": [
@@ -1205,6 +1892,23 @@
         }
       }
     },
+    "X509CertificateWithMetadata": {
+      "required": [
+        "certificate"
+      ],
+      "type": "object",
+      "properties": {
+        "certificate": {
+          "description": "Certificates in PEM format enclosed within these headers:\r\n-----BEGIN CERTIFICATE-----\\r\\n\r\n-----END CERTIFICATE-----\\r\\n",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/X509CertificateMetadata",
+          "description": "The certificate information.",
+          "readOnly": true
+        }
+      }
+    },
     "X509Certificates": {
       "description": "Primary and secondary certificates",
       "type": "object",
@@ -1226,6 +1930,54 @@
         },
         "secondary": {
           "type": "string"
+        }
+      }
+    },
+    "X509CertificateMetadata": {
+      "type": "object",
+      "properties": {
+        "subjectName": {
+          "description": "Distinguished name from the certificate.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sha1Thumbprint": {
+          "description": "SHA-1 hash value of the certificate as a hexadecimal string.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sha256Thumbprint": {
+          "description": "SHA-256 hash value of the certificate as a hexadecimal string.",
+          "type": "string",
+          "readOnly": true
+        },
+        "issuerName": {
+          "description": "Issuer distinguished name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "notBeforeUtc": {
+          "format": "date-time",
+          "description": "The date on which the certificate becomes valid.",
+          "type": "string",
+          "readOnly": true
+        },
+        "notAfterUtc": {
+          "format": "date-time",
+          "description": "The date on which the certificate is no longer valid.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serialNumber": {
+          "description": "The serial number.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "format": "int32",
+          "description": "The X509 format version.",
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
@@ -1361,6 +2113,18 @@
         "customAllocationDefinition": {
           "$ref": "#/definitions/CustomAllocationDefinition",
           "description": "This tells DPS which webhook to call when using custom allocation."
+        },
+        "trustBundleId": {
+          "description": "Optional trust bundle id to associate with the enrollment.",
+          "type": "string"
+        },
+        "clientCertificateIssuancePolicy": {
+          "$ref": "#/definitions/CertificateIssuancePolicy",
+          "description": "Certificate issuance policy for device client certificates."
+        },
+        "serverCertificateIssuancePolicy": {
+          "$ref": "#/definitions/CertificateIssuancePolicy",
+          "description": "Certificate issuance policy for device server certificates."
         }
       }
     },
@@ -1554,6 +2318,51 @@
           "type": "integer"
         }
       }
+    },
+    "DigiCertCertificateAuthority": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CertificateAuthority"
+        }
+      ],
+      "properties": {
+        "profileName": {
+          "description": "The customer specific DigiCert certificate authority profile name needed to identify their issuing CA instance.",
+          "type": "string"
+        },
+        "apiKey": {
+          "description": "The API key required to authenticate with DigiCert.",
+          "type": "string"
+        }
+      }
+    },
+    "GlobalSignCertificateAuthority": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CertificateAuthority"
+        }
+      ],
+      "properties": {
+        "apiKey": {
+          "description": "The customer specific GlobalSign certificate authority API key needed to identify their issuing CA instance.",
+          "type": "string"
+        },
+        "apiSecret": {
+          "description": "The API secret required to authenticate with GlobalSign.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivatePreviewManagedCertificateAuthority": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CertificateAuthority"
+        }
+      ],
+      "properties": {}
     }
   },
   "parameters": {
