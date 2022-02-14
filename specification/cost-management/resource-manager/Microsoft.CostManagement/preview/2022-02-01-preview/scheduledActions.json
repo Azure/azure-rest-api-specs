@@ -583,23 +583,6 @@
         }
       }
     },
-    "DaysOfWeek": {
-      "type": "string",
-      "description": "Week day names in english.",
-      "enum": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday"
-      ],
-      "x-ms-enum": {
-        "name": "DaysOfWeekType",
-        "modelAsString": true
-      }
-    },
     "ErrorDetails": {
       "type": "object",
       "description": "The details of the error.",
@@ -635,7 +618,7 @@
       }
     },
     "FileFormat": {
-      "type": "enum",
+      "type": "string",
       "description": ".",
       "enum": [
         "Csv"
@@ -890,7 +873,16 @@
           "description": "Day names in english on which cost analysis data will be emailed. This property is applicable when frequency is Weekly or Monthly.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DaysOfWeek"
+            "type": "string",
+            "enum": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ]
           }
         },
         "weeksOfMonth": {
