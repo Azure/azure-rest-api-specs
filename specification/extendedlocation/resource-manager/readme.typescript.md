@@ -6,6 +6,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
+  title: CustomLocationsManagementClient
   package-name: "@azure/arm-extendedlocation"
   output-folder: "$(typescript-sdks-folder)/sdk/extendedlocation/arm-extendedlocation"
   payload-flattening-threshold: 1
