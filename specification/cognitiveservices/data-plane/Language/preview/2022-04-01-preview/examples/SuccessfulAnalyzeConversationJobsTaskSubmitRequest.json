@@ -1,0 +1,87 @@
+{
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2022-04-01-preview",
+    "Endpoint": "{Endpoint}",
+    "jobId": "{Job ID}",
+    "input": {
+      "displayName": "Redacting Pii From transcribed audio",
+      "analysisInput": {
+        "conversations": [
+          {
+            "id": "string",
+            "language": "en-us",
+            "modality": "transcript",
+            "domain": "All",
+            "conversationItems": [
+              {
+                "kind": "TranscriptionTurn",
+                "participantId": "0",
+                "offset": 400000,
+                "utterances": [
+                  {
+                    "content": "Good morning John Doe.",
+                    "type": "text"
+                  },
+                  {
+                    "content": "good morning john doe",
+                    "type": "itn"
+                  },
+                  {
+                    "content": "good morning john doe",
+                    "type": "maskedItn"
+                  },
+                  {
+                    "content": "good morning john doe",
+                    "type": "lexical"
+                  }
+                ],
+                "wordOffsets": [
+                  {
+                    "word": "Good",
+                    "offset": 500000,
+                    "duration": 2700000
+                  },
+                  {
+                    "word": "morning",
+                    "offset": 5300000,
+                    "duration": 900000
+                  },
+                  {
+                    "word": "John",
+                    "offset": 590000,
+                    "duration": 2700000
+                  },
+                  {
+                    "word": "Doe",
+                    "offset": 6300000,
+                    "duration": 920000
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "tasks": [
+        {
+          "taskId": "Transcription PII",
+          "kind": "TranscriptionPII",
+          "parameters": {
+            "model-version": "latest",
+            "piiCatgories": "All",
+            "includeAudioRedaction": true,
+            "showDetectedEntityTypes": true
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "{Endpoint}/language/analyze-conversation/jobs/{jobId}?api-version=2022-04-01-preview"
+      }
+    }
+  }
+}

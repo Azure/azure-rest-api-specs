@@ -186,6 +186,131 @@
           }
         }
       }
+    },
+    "/analyze-conversation/jobs": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "description": "Submit a long conversation for analysis. Specify one or more unique tasks to be executed as a long-running operation.",
+        "operationId": "AnalyzeConversation_SubmitJob",
+        "summary": "Submit analysis job for conversations",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "description": "The conversations to analyze and one or more tasks to execute on the conversations.",
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeConversationJobsInput"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "A successful call results with an Operation-Location header used to check the status of the analysis job.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Submit Analysis Job Request": {
+            "$ref": "./examples/SuccessfulAnalyzeConversationJobsMultipleTaskSubmitRequest.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/analyze-conversation/jobs/{jobId}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "description": "Get the status of an analysis job.  A job may consist of one or more tasks.  Once all tasks are succeeded, the job will transition to the suceeded state and results will be available for each task.",
+        "operationId": "AnalyzeConversation_JobStatus",
+        "summary": "Get analysis status and results",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/JobId"
+          },
+          {
+            "$ref": "#/parameters/ShowStats"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Analysis job status and metadata.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeConversationJobState"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Text Analysis Job Status Request": {
+            "$ref": "./examples/SuccessfulAnalyzeConversationJobsMultipleTaskStatusRequest.json"
+          }
+        }
+      }
+    },
+    "/analyze-conversation/jobs/{jobId}:cancel": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "description": "Cancel a long-running analysis job on conversation.",
+        "operationId": "AnalyzeConversation_CancelJob",
+        "summary": "Cancel a long-running analysis job on conversation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/JobId"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Cancel Job request has been received.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Job Delete Request": {
+            "$ref": ".//examples//SuccessfulAnalyzeConversationJobsCancelRequest.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -270,6 +395,149 @@
           }
         }
       }
+    },
+    "MultiLanguageConversationAnalysisInput": {
+      "properties": {
+        "conversations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Conversation"
+          }
+        }
+      }
+    },
+    "Conversation": {
+      "required": [
+        "id",
+        "language",
+        "modality"
+      ],
+      "properties": {
+        "id": {
+          "description": "Identifier for the conversation",
+          "type": "string"
+        },
+        "language": {
+          "description": "Default languages of the conversation item",
+          "type": "string"
+        },
+        "modality": {
+          "$ref": "#/definitions/Modality"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "conversationItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConversationItem"
+          }
+        }
+      }
+    },
+    "Modality": {
+      "type": "string",
+      "description": "Enumeration of supported conversation genres (or modalities). Currently we will support chat and transcription",
+      "enum": [
+        "Transcript",
+        "Chat"
+      ],
+      "x-ms-enum": {
+        "name": "Modality",
+        "modelAsString": true
+      }
+    },
+    "ConversationItem": {
+      "required": [
+        "participantId",
+        "utterances"
+      ],
+      "properties": {
+        "participantId": {
+          "type": "string"
+        },
+        "order": {
+          "description": "The order of the conversation item.",
+          "type": "integer"
+        },
+        "timestamp": {
+          "description": "The timestamp of the conversation item for ordering.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "languages": {
+          "description": "Optional property to override the language of the conversation item."
+        },
+        "modality": {
+          "description": "Optional property to override the modality of the conversation item."
+        },
+        "utterances": {
+          "description": "The list of the utterance for the item in various formats. Only one text for each format is allowed.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Utterance"
+          }
+        }
+      }
+    },
+    "TranscriptConversationItem": {
+      "type": "object",
+      "description": "Extra properties for supporting additional parameters for transcript conversation.",
+      "properties": {
+        "audioTimings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WordLevelTiming"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationItem"
+        }
+      ]
+    },
+    "Utterance": {
+      "required": [
+        "content",
+        "type"
+      ],
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/UtteranceType"
+        }
+      }
+    },
+    "UtteranceType": {
+      "type": "string",
+      "description": "Enumeration of supported utterance types.",
+      "enum": [
+        "text",
+        "lexical",
+        "itn",
+        "maskedItn"
+      ],
+      "x-ms-enum": {
+        "name": "UtteranceType",
+        "modelAsString": true
+      }
+    },
+    "WordLevelTiming": {
+      "type": "object",
+      "properties": {
+        "word": {
+          "type": "string",
+          "description": "The word recognized."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AudioTiming"
+        }
+      ]
     },
     "LanguageDetectionAnalysisInput": {
       "properties": {
@@ -435,6 +703,184 @@
       "required": [
         "analysisInput",
         "tasks"
+      ]
+    },
+    "AnalyzeConversationJobsInput": {
+      "properties": {
+        "displayName": {
+          "description": "Optional display name for the analysis job.",
+          "type": "string"
+        },
+        "analysisInput": {
+          "$ref": "#/definitions/MultiLanguageConversationAnalysisInput"
+        },
+        "tasks": {
+          "description": "The set of tasks to execute on the input conversation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnalyzeConversationLROTask"
+          }
+        }
+      },
+      "required": [
+        "analysisInput",
+        "tasks"
+      ]
+    },
+    "AnalyzeConversationLROTask": {
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AnalyzeConversationLROTaskKind"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskIdentifier"
+        }
+      ]
+    },
+    "AnalyzeConversationLROTaskKind": {
+      "type": "string",
+      "description": "Enumeration of supported Conversation Analysis LRO tasks.",
+      "enum": [
+        "TranscriptionPii"
+      ],
+      "x-ms-enum": {
+        "name": "AnalyzeConversationLROTaskKind",
+        "modelAsString": true
+      }
+    },
+    "AnalyzeConversationLROResultsKind": {
+      "type": "string",
+      "description": "Enumeration of supported Conversation Analysis task results.",
+      "enum": [
+        "TranscriptionPiiResults",
+        "IssueDetectionResolutionResults"
+      ],
+      "x-ms-enum": {
+        "name": "AnalyzeConversationLROResultsKind",
+        "modelAsString": true
+      }
+    },
+    "AnalyzeConversationTranscriptionPiiLROTask": {
+      "type": "object",
+      "description": "Task definition for a PII redaction in transcriptions.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/TranscriptionPiiTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeConversationLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "TranscriptionPii"
+    },
+    "TranscriptionPiiConversationItemResult": {
+      "type": "object",
+      "required": [
+        "order",
+        "redactedUtterances"
+      ],
+      "properties": {
+        "order": {
+          "type": "integer"
+        },
+        "redactedUtterances": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Utterance"
+          }
+        },
+        "redactedAudioTimings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AudioTiming"
+          }
+        },
+        "entities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Entity"
+          }
+        }
+      }
+    },
+    "AudioTiming": {
+      "type": "object",
+      "properties": {
+        "offset": {
+          "type": "integer"
+        },
+        "duration": {
+          "type": "integer"
+        }
+      }
+    },
+    "AnalyzeConversationTranscriptionPiiLROResult": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeConversationLROResult"
+        }
+      ],
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TranscriptionPiiResult"
+          }
+        }
+      },
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "TranscriptionPiiResults"
+    },
+    "TranscriptionPiiResult": {
+      "required": [
+        "conversationItems"
+      ],
+      "properties": {
+        "conversationItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TranscriptionPiiConversationItemResult"
+          }
+        },
+        "allOf": {
+          "$ref": "#/definitions/ConversationResult"
+        }
+      }
+    },
+    "TranscriptionPiiTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for a Transcription PII task.",
+      "properties": {
+        "piiCategories": {
+          "$ref": "#/definitions/TranscriptionPiiCategories"
+        },
+        "includeAudioRedaction": {
+          "type": "boolean",
+          "default": false
+        },
+        "showDetectedEntityTypes": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskParameters"
+        },
+        {
+          "$ref": "#/definitions/PreBuiltTaskParameters"
+        }
       ]
     },
     "TaskIdentifier": {
@@ -1966,6 +2412,30 @@
       "type": "array",
       "uniqueItems": true
     },
+    "TranscriptionPiiCategories": {
+      "description": "(Optional) describes the PII categories to return for transcription conversation detection.",
+      "items": {
+        "type": "string",
+        "x-ms-enum": {
+          "name": "TranscriptionPiiCategory",
+          "modelAsString": true
+        },
+        "enum": [
+          "Address",
+          "CreditCardNumber",
+          "Email",
+          "Name",
+          "NumericIdentifier",
+          "PhoneNumber",
+          "USSocialSecurityNumber",
+          "Miscellaneous",
+          "All",
+          "Default"
+        ]
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
     "ExtractiveSummarizationTaskParameters": {
       "type": "object",
       "description": "Supported parameters for an Extractive Summarization task.",
@@ -2279,6 +2749,19 @@
         }
       ]
     },
+    "AnalyzeConversationJobState": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobState"
+        },
+        {
+          "$ref": "#/definitions/ConversationTasksState"
+        },
+        {
+          "$ref": "#/definitions/AnalyzeConversationJobStatistics"
+        }
+      ]
+    },
     "Pagination": {
       "properties": {
         "nextLink": {
@@ -2406,6 +2889,14 @@
       },
       "type": "object"
     },
+    "AnalyzeConversationJobStatistics": {
+      "properties": {
+        "statistics": {
+          "$ref": "#/definitions/ConversationRequestStatistics"
+        }
+      },
+      "type": "object"
+    },
     "TasksState": {
       "properties": {
         "tasks": {
@@ -2467,6 +2958,43 @@
       "required": [
         "status",
         "lastUpdateDateTime"
+      ],
+      "type": "object"
+    },
+    "ConversationTasksState": {
+      "properties": {
+        "tasks": {
+          "properties": {
+            "completed": {
+              "type": "integer"
+            },
+            "failed": {
+              "type": "integer"
+            },
+            "inProgress": {
+              "type": "integer"
+            },
+            "total": {
+              "type": "integer"
+            },
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AnalyzeConversationLROResult"
+              }
+            }
+          },
+          "required": [
+            "total",
+            "completed",
+            "failed",
+            "inProgress"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "tasks"
       ],
       "type": "object"
     },
@@ -2660,6 +3188,26 @@
       ],
       "x-ms-discriminator-value": "KeyPhraseExtractionLROResults"
     },
+    "AnalyzeConversationLROResult": {
+      "type": "object",
+      "discriminator": "kind",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AnalyzeConversationLROResultsKind"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskState"
+        },
+        {
+          "$ref": "#/definitions/TaskIdentifier"
+        }
+      ],
+      "required": [
+        "kind"
+      ]
+    },
     "DocumentResponse": {
       "type": "object",
       "properties": {}
@@ -2754,6 +3302,127 @@
         }
       },
       "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+    },
+    "ConversationResult": {
+      "type": "object",
+      "required": [
+        "id",
+        "warnings"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty conversation identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/ConversationWarning"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/ConversationStatistics"
+        }
+      }
+    },
+    "ConversationError": {
+      "type": "object",
+      "required": [
+        "id",
+        "error"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Conversation Id."
+        },
+        "error": {
+          "type": "object",
+          "description": "Conversation Error.",
+          "$ref": "common.json#/definitions/Error"
+        }
+      }
+    },
+    "ConversationWarning": {
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "ConversationTruncated"
+          ],
+          "x-ms-enum": {
+            "name": "WarningCodeValue",
+            "modelAsString": true
+          },
+          "description": "Error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Warning message."
+        },
+        "targetRef": {
+          "type": "string",
+          "description": "A JSON pointer reference indicating the target object."
+        }
+      }
+    },
+    "ConversationStatistics": {
+      "type": "object",
+      "required": [
+        "itemsCount",
+        "transactionsCount"
+      ],
+      "properties": {
+        "itemsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of conversation items recognized in the conversation."
+        },
+        "transactionsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of transactions for the conversation."
+        }
+      },
+      "description": "if showStats=true was specified in the request this field will contain information about the conversation payload.      "
+    },
+    "ConversationRequestStatistics": {
+      "type": "object",
+      "required": [
+        "conversationsCount",
+        "validConversationsCount",
+        "erroneousConversationsCount",
+        "transactionsCount"
+      ],
+      "properties": {
+        "conversationsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of conversations submitted in the request."
+        },
+        "validConversationsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of conversations documents. This excludes empty, over-size limit or non-supported languages documents."
+        },
+        "erroneousConversationsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents."
+        },
+        "transactionsCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of transactions for the request."
+        }
+      },
+      "description": "if showStats=true was specified in the request this field will contain information about the request payload."
     },
     "RequestStatistics": {
       "type": "object",
