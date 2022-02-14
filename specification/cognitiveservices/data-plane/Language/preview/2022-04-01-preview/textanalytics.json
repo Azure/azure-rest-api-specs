@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Cognitive Language Service",
-    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview</a>.0",
+    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.0",
     "version": "2022-04-01-preview"
   },
   "securityDefinitions": {
@@ -23,7 +23,7 @@
     "useSchemePrefix": false,
     "parameters": [
       {
-        "$ref": "#/parameters/Endpoint"
+        "$ref": "common.json#/parameters/Endpoint"
       }
     ]
   },
@@ -34,16 +34,14 @@
         "description": "Submit a collection of text documents for analysis.  Specify a single unique task to be executed immediately.",
         "operationId": "AnalyzeText",
         "consumes": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ShowStats"
@@ -54,12 +52,13 @@
             "name": "body",
             "schema": {
               "$ref": "#/definitions/AnalyzeTextTask"
-            }
+            },
+            "required": true
           }
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "A successful call result",
             "schema": {
               "$ref": "#/definitions/AnalyzeTextTaskResult"
             }
@@ -67,7 +66,7 @@
           "default": {
             "description": "Unexpected error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "common.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -106,7 +105,7 @@
         "summary": "Submit text analysis job",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
             "description": "Collection of documents to analyze and one or more tasks to execute.",
@@ -114,7 +113,8 @@
             "name": "body",
             "schema": {
               "$ref": "#/definitions/AnalyzeTextJobsInput"
-            }
+            },
+            "required": true
           }
         ],
         "responses": {
@@ -129,7 +129,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "common.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -146,12 +146,12 @@
         "produces": [
           "application/json"
         ],
-        "description": "Get the status of an analysis job.  A job may consist of one or more tasks.  Once all tasks are succeeded, the job will transition to the suceeded state and results will be available for each task.",
+        "description": "Get the status of an analysis job.  A job may consist of one or more tasks.  Once all tasks are succeeded, the job will transition to the succeeded state and results will be available for each task.",
         "operationId": "AnalyzeText_JobStatus",
         "summary": "Get analysis status and results",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/JobId"
@@ -160,23 +160,10 @@
             "$ref": "#/parameters/ShowStats"
           },
           {
-            "default": 20,
-            "description": "(Optional) Set the maximum number of results per task. When both top and skip are specified, skip is applied first.",
-            "in": "query",
-            "maximum": 50,
-            "minimum": 1,
-            "name": "top",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "common.json#/parameters/TopParameter"
           },
           {
-            "default": 0,
-            "description": "(Optional) Set the number of elements to offset in the response. When both top and skip are specified, skip is applied first.",
-            "in": "query",
-            "minimum": 0,
-            "name": "skip",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "common.json#/parameters/SkipParameter"
           }
         ],
         "responses": {
@@ -189,7 +176,7 @@
           "default": {
             "description": "Unexpected error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "common.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -198,43 +185,6 @@
             "$ref": "./examples/SuccessfulAnalyzeTextJobsMultipleTaskStatusRequest.json"
           }
         }
-      }
-    },
-    "/analyze-text/jobs/{jobId}:cancel": {
-      "post": {
-        "produces": [
-          "application/json"
-        ],
-        "description": "Cancel a long-running Text Analysis job.",
-        "operationId": "AnalyzeText_CancelJob",
-        "summary": "Cancel a long-running Text Analysis job",
-        "parameters": [
-          {
-            "$ref": "#/parameters/JobId"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Cancel Job request has been received.",
-            "headers": {
-              "Operation-Location": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Job Delete Request": {
-            "$ref": ".//examples//SuccessfulAnalyzeTextJobsCancelRequest.json"
-          }
-        },
-        "x-ms-long-running-operation": true
       }
     },
     "/analyze-conversation/jobs": {
@@ -250,7 +200,7 @@
         "summary": "Submit analysis job for conversations",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
             "description": "The conversations to analyze and one or more tasks to execute on the conversations.",
@@ -273,7 +223,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "common.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -295,7 +245,7 @@
         "summary": "Get analysis status and results",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/JobId"
@@ -314,7 +264,7 @@
           "default": {
             "description": "Unexpected error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "common.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -350,7 +300,7 @@
           "default": {
             "description": "Unexpected error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "common.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -392,8 +342,8 @@
         "Healthcare",
         "ExtractiveSummarization",
         "CustomEntityRecognition",
-        "CustomSingleLabelClassification",
-        "CustomMultiLabelClassification"
+        "CustomSingleClassification",
+        "CustomMultiClassification"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextLROTaskKind",
@@ -428,8 +378,8 @@
         "HealthcareLROResults",
         "ExtractiveSummarizationLROResults",
         "CustomEntityRecognitionLROResults",
-        "CustomSingleLabelClassificationLROResults",
-        "CustomMultiLabelClassificationLROResults"
+        "CustomSingleClassificationLROResults",
+        "CustomMultiClassificationLROResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextLROResultsKind",
@@ -515,14 +465,14 @@
           "type": "string",
           "format": "date-time"
         },
-        "language": {
-          "description": "Optional property to override the language of the conversation turn."
+        "languages": {
+          "description": "Optional property to override the language of the conversation item."
         },
         "modality": {
-          "description": "Optional property to override the modality of the conversation turn."
+          "description": "Optional property to override the modality of the conversation item."
         },
         "utterances": {
-          "description": "The list of the utterance for the turn in various formats. Only one text for each format is allowed.",
+          "description": "The list of the utterance for the item in various formats. Only one text for each format is allowed.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Utterance"
@@ -609,304 +559,6 @@
           "$ref": "#/definitions/AnalyzeTextTaskKind"
         }
       }
-    },
-    "AnalyzeConversationJobsInput": {
-      "properties": {
-        "displayName": {
-          "description": "Optional display name for the analysis job.",
-          "type": "string"
-        },
-        "analysisInput": {
-          "$ref": "#/definitions/MultiLanguageConversationAnalysisInput"
-        },
-        "tasks": {
-          "description": "The set of tasks to execute on the input conversation.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AnalyzeConversationLROTask"
-          }
-        }
-      },
-      "required": [
-        "analysisInput",
-        "tasks"
-      ]
-    },
-    "AnalyzeConversationLROTask": {
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ],
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/AnalyzeConversationLROTaskKind"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TaskIdentifier"
-        }
-      ]
-    },
-    "AnalyzeConversationLROTaskKind": {
-      "type": "string",
-      "description": "Enumeration of supported Conversation Analysis LRO tasks.",
-      "enum": [
-        "TranscriptionPii",
-        "IssueResolutionSummarization"
-      ],
-      "x-ms-enum": {
-        "name": "AnalyzeConversationLROTaskKind",
-        "modelAsString": true
-      }
-    },
-    "AnalyzeConversationLROResultsKind": {
-      "type": "string",
-      "description": "Enumeration of supported Conversation Analysis task results.",
-      "enum": [
-        "TranscriptionPiiResults",
-        "IssueResolutionSummarizationResults"
-      ],
-      "x-ms-enum": {
-        "name": "AnalyzeConversationLROResultsKind",
-        "modelAsString": true
-      }
-    },
-    "AnalyzeConversationTranscriptionPiiLROTask": {
-      "type": "object",
-      "description": "Task definition for a PII redaction in transcriptions.",
-      "properties": {
-        "parameters": {
-          "$ref": "#/definitions/TranscriptionPiiTaskParameters"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeConversationLROTask"
-        }
-      ],
-      "x-ms-discriminator-value": "TranscriptionPii"
-    },
-    "TranscriptionPiiTurnResult": {
-      "type": "object",
-      "required": [
-        "order",
-        "redactedUtterances"
-      ],
-      "properties": {
-        "order": {
-          "type": "integer"
-        },
-        "redactedUtterances": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Utterance"
-          }
-        },
-        "redactedAudioTimings": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AudioTiming"
-          }
-        },
-        "entities": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Entity"
-          }
-        }
-      }
-    },
-    "AudioTiming": {
-      "type": "object",
-      "properties": {
-        "offset": {
-          "type": "integer"
-        },
-        "duration": {
-          "type": "integer"
-        }
-      }
-    },
-    "AnalyzeConversationTranscriptionPiiLROResult": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeConversationLROResult"
-        }
-      ],
-      "properties": {
-        "results": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TranscriptionPiiResult"
-          }
-        }
-      },
-      "required": [
-        "results"
-      ],
-      "x-ms-discriminator-value": "TranscriptionPiiResults"
-    },
-    "TranscriptionPiiResult": {
-      "required": [
-        "conversationItems"
-      ],
-      "properties": {
-        "conversationItems": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TranscriptionPiiTurnResult"
-          }
-        },
-        "allOf": {
-          "$ref": "#/definitions/ConversationResult"
-        }
-      }
-    },
-    "TranscriptionPiiTaskParameters": {
-      "type": "object",
-      "description": "Supported parameters for a Transcription PII task.",
-      "properties": {
-        "piiCategories": {
-          "$ref": "#/definitions/TranscriptionPiiCategories"
-        },
-        "stringIndexType": {
-          "$ref": "#/definitions/StringIndexType"
-        },
-        "includeAudioRedaction": {
-          "type": "boolean",
-          "default": false
-        },
-        "showDetectedEntityTypes": {
-          "type": "boolean",
-          "default": false
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TaskParameters"
-        },
-        {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
-        }
-      ]
-    },
-    "AnalyzeConversationIssueResolutionSummarizationLROTask": {
-      "type": "object",
-      "description": "Task definition for Issue Resolution Summarization in conversation.",
-      "properties": {
-        "parameters": {
-          "$ref": "#/definitions/IssueResolutionSummarizationTaskParameters"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeConversationLROTask"
-        }
-      ],
-      "x-ms-discriminator-value": "IssueResolutionSummarizationTasks"
-    },
-    "IssueResolutionSummarizationTaskParameters": {
-      "type": "object",
-      "description": "Supported parameters for an Issue Resolution Summarization task.",
-      "properties": {
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TaskParameters"
-        },
-        {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
-        }
-      ]
-    },
-    "AnalyzeConversationIssueResolutionSummarizationLROResult": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/SummaryResult"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeConversationLROResult"
-        }
-      ],
-      "required": [
-        "results"
-      ],
-      "x-ms-discriminator-value": "IssueResolutionSummarizationResults"
-    },
-    "SummaryResult": {
-      "type": "object",
-      "required": [
-        "summary"
-      ],
-      "properties": {
-        "summary": {
-          "type": "array",
-          "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/SummaryResultItem"
-              }
-            ]
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConversationResult"
-        }
-      ]
-    },
-    "SummaryResultItem": {
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ],
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/SummaryKind"
-        }
-      }
-    },
-    "SummaryKind": {
-      "type": "string",
-      "description": "Enumeration of supported Summary types.",
-      "enum": [
-        "Issue",
-        "Resolution"
-      ],
-      "x-ms-enum": {
-        "name": "SummaryKind",
-        "modelAsString": true
-      }
-    },
-    "Issue": {
-      "type": "object",
-      "properties": {
-        "issue": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "issue"
-      ],
-      "x-ms-discriminator-value": "Issue"
-    },
-    "Resolution": {
-      "type": "object",
-      "properties": {
-        "resolution": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "resolution"
-      ],
-      "x-ms-discriminator-value": "Resolution"
     },
     "AnalyzeTextLROTask": {
       "discriminator": "kind",
@@ -1053,17 +705,309 @@
         "tasks"
       ]
     },
-    "TaskIdentifier": {
-      "type": "object",
-      "description": "Base task object.",
+    "AnalyzeConversationJobsInput": {
       "properties": {
-        "taskId": {
+        "displayName": {
+          "description": "Optional display name for the analysis job.",
+          "type": "string"
+        },
+        "analysisInput": {
+          "$ref": "#/definitions/MultiLanguageConversationAnalysisInput"
+        },
+        "tasks": {
+          "description": "The set of tasks to execute on the input conversation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnalyzeConversationLROTask"
+          }
+        }
+      },
+      "required": [
+        "analysisInput",
+        "tasks"
+      ]
+    },
+    "AnalyzeConversationLROTask": {
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AnalyzeConversationLROTaskKind"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskIdentifier"
+        }
+      ]
+    },
+    "AnalyzeConversationLROTaskKind": {
+      "type": "string",
+      "description": "Enumeration of supported Conversation Analysis LRO tasks.",
+      "enum": [
+        "TranscriptionPii",
+        "IssueResolutionSummarization"
+      ],
+      "x-ms-enum": {
+        "name": "AnalyzeConversationLROTaskKind",
+        "modelAsString": true
+      }
+    },
+    "AnalyzeConversationLROResultsKind": {
+      "type": "string",
+      "description": "Enumeration of supported Conversation Analysis task results.",
+      "enum": [
+        "TranscriptionPiiResults",
+        "IssueResolutionSummarizationResults"
+      ],
+      "x-ms-enum": {
+        "name": "AnalyzeConversationLROResultsKind",
+        "modelAsString": true
+      }
+    },
+    "AnalyzeConversationTranscriptionPiiLROTask": {
+      "type": "object",
+      "description": "Task definition for a PII redaction in transcriptions.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/TranscriptionPiiTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeConversationLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "TranscriptionPii"
+    },
+    "TranscriptionPiiConversationItemResult": {
+      "type": "object",
+      "required": [
+        "order",
+        "redactedUtterances"
+      ],
+      "properties": {
+        "order": {
+          "type": "integer"
+        },
+        "redactedUtterances": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Utterance"
+          }
+        },
+        "redactedAudioTimings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AudioTiming"
+          }
+        },
+        "entities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Entity"
+          }
+        }
+      }
+    },
+    "AudioTiming": {
+      "type": "object",
+      "properties": {
+        "offset": {
+          "type": "integer"
+        },
+        "duration": {
+          "type": "integer"
+        }
+      }
+    },
+    "AnalyzeConversationTranscriptionPiiLROResult": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeConversationLROResult"
+        }
+      ],
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TranscriptionPiiResult"
+          }
+        }
+      },
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "TranscriptionPiiResults"
+    },
+    "TranscriptionPiiResult": {
+      "required": [
+        "conversationItems"
+      ],
+      "properties": {
+        "conversationItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TranscriptionPiiConversationItemResult"
+          }
+        },
+        "allOf": {
+          "$ref": "#/definitions/ConversationResult"
+        }
+      }
+    },
+    "TranscriptionPiiTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for a Transcription PII task.",
+      "properties": {
+        "piiCategories": {
+          "$ref": "#/definitions/TranscriptionPiiCategories"
+        },
+        "includeAudioRedaction": {
+          "type": "boolean",
+          "default": false
+        },
+        "showDetectedEntityTypes": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskParameters"
+        },
+        {
+          "$ref": "#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
+    "AnalyzeConversationIssueResolutionSummarizationLROTask": {
+      "type": "object",
+      "description": "Task definition for Issue Resolution Summarization in conversation.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/IssueResolutionSummarizationTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeConversationLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "IssueResolutionSummarizationTasks"
+    },
+    "IssueResolutionSummarizationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for an Issue Resolution Summarization task.",
+      "properties": {
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskParameters"
+        },
+        {
+          "$ref": "#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
+    "AnalyzeConversationIssueResolutionSummarizationLROResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/SummaryResult"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeConversationLROResult"
+        }
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "IssueResolutionSummarizationResults"
+    },
+    "SummaryResult": {
+      "type": "object",
+      "required": [
+        "summary"
+      ],
+      "properties": {
+        "summary": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/SummaryResultItem"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationResult"
+        }
+      ]
+    },
+    "SummaryResultItem": {
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/SummaryKind"
+        }
+      }
+    },
+    "SummaryKind": {
+      "type": "string",
+      "description": "Enumeration of supported Summary types.",
+      "enum": [
+        "Issue",
+        "Resolution"
+      ],
+      "x-ms-enum": {
+        "name": "SummaryKind",
+        "modelAsString": true
+      }
+    },
+    "Issue": {
+      "type": "object",
+      "properties": {
+        "issue": {
           "type": "string"
         }
       },
       "required": [
-        "taskId"
-      ]
+        "issue"
+      ],
+      "x-ms-discriminator-value": "Issue"
+    },
+    "Resolution": {
+      "type": "object",
+      "properties": {
+        "resolution": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "resolution"
+      ],
+      "x-ms-discriminator-value": "Resolution"
+    },
+    "TaskIdentifier": {
+      "type": "object",
+      "description": "Base task object.",
+      "properties": {
+        "taskName": {
+          "type": "string"
+        }
+      }
     },
     "TaskParameters": {
       "type": "object",
@@ -1083,7 +1027,12 @@
           "type": "string",
           "default": "latest"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskParameters"
+        }
+      ]
     },
     "PreBuiltResult": {
       "properties": {
@@ -1118,6 +1067,11 @@
           "type": "string"
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskParameters"
+        }
+      ],
       "required": [
         "projectName",
         "deploymentName"
@@ -1155,13 +1109,10 @@
       "description": "Supported parameters for a Custom Entities task.",
       "properties": {
         "stringIndexType": {
-          "$ref": "#/definitions/StringIndexType"
+          "$ref": "common.json#/definitions/StringIndexType"
         }
       },
       "allOf": [
-        {
-          "$ref": "#/definitions/TaskParameters"
-        },
         {
           "$ref": "#/definitions/CustomTaskParameters"
         }
@@ -1206,24 +1157,21 @@
         "documents"
       ]
     },
-    "CustomSingleLabelClassificationTaskParameters": {
+    "CustomSingleClassificationTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a Custom Single Classification task.",
       "allOf": [
-        {
-          "$ref": "#/definitions/TaskParameters"
-        },
         {
           "$ref": "#/definitions/CustomTaskParameters"
         }
       ]
     },
-    "CustomSingleLabelClassificationLROTask": {
+    "CustomSingleClassificationLROTask": {
       "type": "object",
       "description": "Use custom models to classify text into single label taxonomy",
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/CustomSingleLabelClassificationTaskParameters"
+          "$ref": "#/definitions/CustomSingleClassificationTaskParameters"
         }
       },
       "allOf": [
@@ -1231,9 +1179,9 @@
           "$ref": "#/definitions/AnalyzeTextLROTask"
         }
       ],
-      "x-ms-discriminator-value": "CustomSingleLabelClassification"
+      "x-ms-discriminator-value": "CustomSingleClassification"
     },
-    "CustomSingleLabelClassificationResult": {
+    "CustomSingleClassificationResult": {
       "type": "object",
       "properties": {
         "documents": {
@@ -1260,7 +1208,7 @@
     "SingleClassificationDocumentResult": {
       "type": "object",
       "properties": {
-        "class": {
+        "classification": {
           "$ref": "#/definitions/ClassificationResult"
         }
       },
@@ -1270,7 +1218,7 @@
         }
       ],
       "required": [
-        "class"
+        "classification"
       ]
     },
     "ClassificationResult": {
@@ -1287,28 +1235,25 @@
         "confidenceScore": {
           "type": "number",
           "format": "double",
-          "description": "Confidence score between 0 and 1 of the recognized class."
+          "description": "Confidence score between 0 and 1 of the recognized classification."
         }
       }
     },
-    "CustomMultiLabelClassificationTaskParameters": {
+    "CustomMultiClassificationTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a Custom Multi Classification task.",
       "allOf": [
-        {
-          "$ref": "#/definitions/TaskParameters"
-        },
         {
           "$ref": "#/definitions/CustomTaskParameters"
         }
       ]
     },
-    "CustomMultiLabelClassificationLROTask": {
+    "CustomMultiClassificationLROTask": {
       "type": "object",
       "description": "Use custom models to classify text into multi label taxonomy",
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/CustomMultiLabelClassificationTaskParameters"
+          "$ref": "#/definitions/CustomMultiClassificationTaskParameters"
         }
       },
       "allOf": [
@@ -1316,9 +1261,9 @@
           "$ref": "#/definitions/AnalyzeTextLROTask"
         }
       ],
-      "x-ms-discriminator-value": "CustomMultiLabelClassification"
+      "x-ms-discriminator-value": "CustomMultiClassification"
     },
-    "CustomMultiLabelClassificationResult": {
+    "CustomMultiClassificationResult": {
       "type": "object",
       "properties": {
         "documents": {
@@ -1345,7 +1290,7 @@
     "MultiClassificationDocumentResult": {
       "type": "object",
       "properties": {
-        "class": {
+        "classifications": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClassificationResult"
@@ -1358,7 +1303,7 @@
         }
       ],
       "required": [
-        "class"
+        "classifications"
       ]
     },
     "HealthcareTaskParameters": {
@@ -1366,13 +1311,10 @@
       "description": "Supported parameters for a Healthcare task.",
       "properties": {
         "stringIndexType": {
-          "$ref": "#/definitions/StringIndexType"
+          "$ref": "common.json#/definitions/StringIndexType"
         }
       },
       "allOf": [
-        {
-          "$ref": "#/definitions/TaskParameters"
-        },
         {
           "$ref": "#/definitions/PreBuiltTaskParameters"
         }
@@ -1445,13 +1387,88 @@
     },
     "HealthcareEntity": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/HealthcareEntityProperties"
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Entity text as appears in the request."
         },
-        {
-          "$ref": "#/definitions/HealthcareLinkingProperties"
+        "category": {
+          "x-ms-enum": {
+            "name": "healthcareEntityCategory",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Healthcare Entity Category.",
+          "enum": [
+            "BODY_STRUCTURE",
+            "AGE",
+            "GENDER",
+            "EXAMINATION_NAME",
+            "DATE",
+            "DIRECTION",
+            "FREQUENCY",
+            "MEASUREMENT_VALUE",
+            "MEASUREMENT_UNIT",
+            "RELATIONAL_OPERATOR",
+            "TIME",
+            "GENE_OR_PROTEIN",
+            "VARIANT",
+            "ADMINISTRATIVE_EVENT",
+            "CARE_ENVIRONMENT",
+            "HEALTHCARE_PROFESSION",
+            "DIAGNOSIS",
+            "SYMPTOM_OR_SIGN",
+            "CONDITION_QUALIFIER",
+            "MEDICATION_CLASS",
+            "MEDICATION_NAME",
+            "DOSAGE",
+            "MEDICATION_FORM",
+            "MEDICATION_ROUTE",
+            "FAMILY_RELATION",
+            "TREATMENT_NAME"
+          ]
+        },
+        "subcategory": {
+          "type": "string",
+          "description": "(Optional) Entity sub type."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Length for the entity text. Use of different 'stringIndexType' values can affect the length returned."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score between 0 and 1 of the extracted entity."
+        },
+        "assertion": {
+          "type": "object",
+          "$ref": "#/definitions/HealthcareAssertion"
+        },
+        "name": {
+          "description": "Preferred name for the entity. Example: 'histologically' would have a 'name' of 'histologic'.",
+          "type": "string"
+        },
+        "links": {
+          "description": "Entity references in known data sources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthcareEntityLink"
+          }
         }
+      },
+      "required": [
+        "text",
+        "category",
+        "offset",
+        "length",
+        "confidenceScore"
       ]
     },
     "HealthcareRelation": {
@@ -1580,96 +1597,6 @@
         }
       }
     },
-    "HealthcareEntityProperties": {
-      "type": "object",
-      "required": [
-        "text",
-        "category",
-        "offset",
-        "length",
-        "confidenceScore"
-      ],
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "Entity text as appears in the request."
-        },
-        "category": {
-          "x-ms-enum": {
-            "name": "healthcareEntityCategory",
-            "modelAsString": true
-          },
-          "type": "string",
-          "description": "Healthcare Entity Category.",
-          "enum": [
-            "BODY_STRUCTURE",
-            "AGE",
-            "GENDER",
-            "EXAMINATION_NAME",
-            "DATE",
-            "DIRECTION",
-            "FREQUENCY",
-            "MEASUREMENT_VALUE",
-            "MEASUREMENT_UNIT",
-            "RELATIONAL_OPERATOR",
-            "TIME",
-            "GENE_OR_PROTEIN",
-            "VARIANT",
-            "ADMINISTRATIVE_EVENT",
-            "CARE_ENVIRONMENT",
-            "HEALTHCARE_PROFESSION",
-            "DIAGNOSIS",
-            "SYMPTOM_OR_SIGN",
-            "CONDITION_QUALIFIER",
-            "MEDICATION_CLASS",
-            "MEDICATION_NAME",
-            "DOSAGE",
-            "MEDICATION_FORM",
-            "MEDICATION_ROUTE",
-            "FAMILY_RELATION",
-            "TREATMENT_NAME"
-          ]
-        },
-        "subcategory": {
-          "type": "string",
-          "description": "(Optional) Entity sub type."
-        },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned."
-        },
-        "length": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Length for the entity text. Use of different 'stringIndexType' values can affect the length returned."
-        },
-        "confidenceScore": {
-          "type": "number",
-          "format": "double",
-          "description": "Confidence score between 0 and 1 of the extracted entity."
-        }
-      }
-    },
-    "HealthcareLinkingProperties": {
-      "properties": {
-        "assertion": {
-          "type": "object",
-          "$ref": "#/definitions/HealthcareAssertion"
-        },
-        "name": {
-          "description": "Preferred name for the entity. Example: 'histologically' would have a 'name' of 'histologic'.",
-          "type": "string"
-        },
-        "links": {
-          "description": "Entity references in known data sources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HealthcareEntityLink"
-          }
-        }
-      }
-    },
     "SentimentAnalysisTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a Sentiment Analysis task.",
@@ -1679,13 +1606,10 @@
           "default": false
         },
         "stringIndexType": {
-          "$ref": "#/definitions/StringIndexType"
+          "$ref": "common.json#/definitions/StringIndexType"
         }
       },
       "allOf": [
-        {
-          "$ref": "#/definitions/TaskParameters"
-        },
         {
           "$ref": "#/definitions/PreBuiltTaskParameters"
         }
@@ -2014,13 +1938,10 @@
       "description": "Supported parameters for an Entity Recognition task.",
       "properties": {
         "stringIndexType": {
-          "$ref": "#/definitions/StringIndexType"
+          "$ref": "common.json#/definitions/StringIndexType"
         }
       },
       "allOf": [
-        {
-          "$ref": "#/definitions/TaskParameters"
-        },
         {
           "$ref": "#/definitions/PreBuiltTaskParameters"
         }
@@ -2143,13 +2064,10 @@
       "description": "Supported parameters for an Entity Linking task.",
       "properties": {
         "stringIndexType": {
-          "$ref": "#/definitions/StringIndexType"
+          "$ref": "common.json#/definitions/StringIndexType"
         }
       },
       "allOf": [
-        {
-          "$ref": "#/definitions/TaskParameters"
-        },
         {
           "$ref": "#/definitions/PreBuiltTaskParameters"
         }
@@ -2312,13 +2230,10 @@
           "$ref": "#/definitions/PiiCategories"
         },
         "stringIndexType": {
-          "$ref": "#/definitions/StringIndexType"
+          "$ref": "common.json#/definitions/StringIndexType"
         }
       },
       "allOf": [
-        {
-          "$ref": "#/definitions/TaskParameters"
-        },
         {
           "$ref": "#/definitions/PreBuiltTaskParameters"
         }
@@ -2426,30 +2341,6 @@
         "redactedText",
         "entities"
       ]
-    },
-    "TranscriptionPiiCategories": {
-      "description": "(Optional) describes the PII categories to return",
-      "items": {
-        "type": "string",
-        "x-ms-enum": {
-          "name": "TranscriptionPiiCategory",
-          "modelAsString": true
-        },
-        "enum": [
-          "Address",
-          "CreditCardNumber",
-          "Email",
-          "Name",
-          "NumericIdentifier",
-          "PhoneNumber",
-          "USSocialSecurityNumber",
-          "Miscellaneous",
-          "All",
-          "Default"
-        ]
-      },
-      "type": "array",
-      "uniqueItems": true
     },
     "PiiCategories": {
       "description": "(Optional) describes the PII categories to return",
@@ -2638,6 +2529,30 @@
       "type": "array",
       "uniqueItems": true
     },
+    "TranscriptionPiiCategories": {
+      "description": "(Optional) describes the PII categories to return for transcription conversation detection.",
+      "items": {
+        "type": "string",
+        "x-ms-enum": {
+          "name": "TranscriptionPiiCategory",
+          "modelAsString": true
+        },
+        "enum": [
+          "Address",
+          "CreditCardNumber",
+          "Email",
+          "Name",
+          "NumericIdentifier",
+          "PhoneNumber",
+          "USSocialSecurityNumber",
+          "Miscellaneous",
+          "All",
+          "Default"
+        ]
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
     "ExtractiveSummarizationTaskParameters": {
       "type": "object",
       "description": "Supported parameters for an Extractive Summarization task.",
@@ -2650,13 +2565,10 @@
           "$ref": "#/definitions/ExtractiveSummarizationSortingCriteria"
         },
         "stringIndexType": {
-          "$ref": "#/definitions/StringIndexType"
+          "$ref": "common.json#/definitions/StringIndexType"
         }
       },
       "allOf": [
-        {
-          "$ref": "#/definitions/TaskParameters"
-        },
         {
           "$ref": "#/definitions/PreBuiltTaskParameters"
         }
@@ -2781,9 +2693,6 @@
       "description": "Supported parameters for a Key Phrase Extraction task.",
       "allOf": [
         {
-          "$ref": "#/definitions/TaskParameters"
-        },
-        {
           "$ref": "#/definitions/PreBuiltTaskParameters"
         }
       ]
@@ -2865,9 +2774,6 @@
       "type": "object",
       "description": "Supported parameters for a Language Detection task.",
       "allOf": [
-        {
-          "$ref": "#/definitions/TaskParameters"
-        },
         {
           "$ref": "#/definitions/PreBuiltTaskParameters"
         }
@@ -3028,23 +2934,64 @@
       "type": "object"
     },
     "JobState": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobMetadata"
+      "properties": {
+        "displayName": {
+          "type": "string"
         },
-        {
-          "$ref": "#/definitions/JobErrors"
+        "createdDateTime": {
+          "format": "date-time",
+          "type": "string"
         },
-        {
-          "$ref": "#/definitions/Pagination"
+        "expirationDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "jobId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "lastUpdateDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "notStarted",
+            "running",
+            "succeeded",
+            "partiallySucceeded",
+            "failed",
+            "cancelled",
+            "cancelling"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "State"
+          }
+        },
+        "errors": {
+          "items": {
+            "$ref": "common.json#/definitions/Error"
+          },
+          "type": "array"
+        },
+        "nextLink": {
+          "type": "string"
         }
+      },
+      "required": [
+        "jobId",
+        "lastUpdateDateTime",
+        "createdDateTime",
+        "status"
       ]
     },
     "JobErrors": {
       "properties": {
         "errors": {
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "common.json#/definitions/Error"
           },
           "type": "array"
         }
@@ -3104,6 +3051,33 @@
       ],
       "type": "object"
     },
+    "TaskState": {
+      "properties": {
+        "lastUpdateDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "notStarted",
+            "running",
+            "succeeded",
+            "failed",
+            "cancelled",
+            "cancelling"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "State"
+          }
+        }
+      },
+      "required": [
+        "status",
+        "lastUpdateDateTime"
+      ],
+      "type": "object"
+    },
     "ConversationTasksState": {
       "properties": {
         "tasks": {
@@ -3140,53 +3114,6 @@
         "tasks"
       ],
       "type": "object"
-    },
-    "TaskState": {
-      "properties": {
-        "lastUpdateDateTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "status": {
-          "enum": [
-            "notStarted",
-            "running",
-            "succeeded",
-            "failed",
-            "cancelled",
-            "cancelling"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false,
-            "name": "State"
-          }
-        }
-      },
-      "required": [
-        "status",
-        "lastUpdateDateTime"
-      ],
-      "type": "object"
-    },
-    "AnalyzeConversationLROResult": {
-      "type": "object",
-      "discriminator": "kind",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/AnalyzeConversationLROResultsKind"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TaskState"
-        },
-        {
-          "$ref": "#/definitions/TaskIdentifier"
-        }
-      ],
-      "required": [
-        "kind"
-      ]
     },
     "AnalyzeTextLROResult": {
       "type": "object",
@@ -3242,11 +3169,11 @@
       ],
       "x-ms-discriminator-value": "CustomEntityRecognitionLROResults"
     },
-    "CustomSingleLabelClassificationLROResult": {
+    "CustomSingleClassificationLROResult": {
       "type": "object",
       "properties": {
         "results": {
-          "$ref": "#/definitions/CustomSingleLabelClassificationResult"
+          "$ref": "#/definitions/CustomSingleClassificationResult"
         }
       },
       "allOf": [
@@ -3257,13 +3184,13 @@
       "required": [
         "results"
       ],
-      "x-ms-discriminator-value": "CustomSingleLabelClassificationLROResults"
+      "x-ms-discriminator-value": "CustomSingleClassificationLROResults"
     },
-    "CustomMultiLabelClassificationLROResult": {
+    "CustomMultiClassificationLROResult": {
       "type": "object",
       "properties": {
         "results": {
-          "$ref": "#/definitions/CustomMultiLabelClassificationResult"
+          "$ref": "#/definitions/CustomMultiClassificationResult"
         }
       },
       "allOf": [
@@ -3274,7 +3201,7 @@
       "required": [
         "results"
       ],
-      "x-ms-discriminator-value": "CustomMultiLabelClassificationLROResults"
+      "x-ms-discriminator-value": "CustomMultiClassificationLROResults"
     },
     "EntityLinkingLROResult": {
       "type": "object",
@@ -3378,33 +3305,25 @@
       ],
       "x-ms-discriminator-value": "KeyPhraseExtractionLROResults"
     },
-    "StringIndexType": {
-      "type": "string",
-      "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.",
-      "default": "TextElements_v8",
-      "enum": [
-        "TextElements_v8",
-        "UnicodeCodePoint",
-        "Utf16CodeUnit"
+    "AnalyzeConversationLROResult": {
+      "type": "object",
+      "discriminator": "kind",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AnalyzeConversationLROResultsKind"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskState"
+        },
+        {
+          "$ref": "#/definitions/TaskIdentifier"
+        }
       ],
-      "x-ms-enum": {
-        "name": "StringIndexType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "TextElements_v8",
-            "description": "Returned offset and length values will correspond to TextElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo."
-          },
-          {
-            "value": "UnicodeCodePoint",
-            "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that support Unicode, for example Python."
-          },
-          {
-            "value": "Utf16CodeUnit",
-            "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
-          }
-        ]
-      }
+      "required": [
+        "kind"
+      ]
     },
     "DocumentResponse": {
       "type": "object",
@@ -3448,7 +3367,7 @@
         "error": {
           "type": "object",
           "description": "Document Error.",
-          "$ref": "#/definitions/Error"
+          "$ref": "common.json#/definitions/Error"
         }
       }
     },
@@ -3514,7 +3433,7 @@
         },
         "warnings": {
           "type": "array",
-          "description": "Warnings encountered while processing conversation.",
+          "description": "Warnings encountered while processing document.",
           "items": {
             "$ref": "#/definitions/ConversationWarning"
           }
@@ -3545,7 +3464,7 @@
         "error": {
           "type": "object",
           "description": "Conversation Error.",
-          "$ref": "#/definitions/Error"
+          "$ref": "common.json#/definitions/Error"
         }
       }
     },
@@ -3580,14 +3499,14 @@
     "ConversationStatistics": {
       "type": "object",
       "required": [
-        "charactersCount",
+        "itemsCount",
         "transactionsCount"
       ],
       "properties": {
-        "charactersCount": {
+        "itemsCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of text elements recognized in the conversation."
+          "description": "Number of conversation items recognized in the conversation."
         },
         "transactionsCount": {
           "type": "integer",
@@ -3614,12 +3533,12 @@
         "validConversationsCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of valid conversations. This excludes empty, over-size limit or non-supported languages conversations."
+          "description": "Number of conversations documents. This excludes empty, over-size limit or non-supported languages documents."
         },
         "erroneousConversationsCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of invalid conversations. This includes empty, over-size limit or non-supported languages conversations."
+          "description": "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents."
         },
         "transactionsCount": {
           "type": "integer",
@@ -3701,146 +3620,9 @@
           "type": "string"
         }
       }
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "description": "Error response.",
-      "additionalProperties": true,
-      "properties": {
-        "error": {
-          "description": "The error object.",
-          "$ref": "#/definitions/Error"
-        }
-      }
-    },
-    "Error": {
-      "type": "object",
-      "description": "The error object.",
-      "additionalProperties": true,
-      "required": [
-        "code",
-        "message"
-      ],
-      "properties": {
-        "code": {
-          "description": "One of a server-defined set of error codes.",
-          "$ref": "#/definitions/ErrorCode"
-        },
-        "message": {
-          "type": "string",
-          "description": "A human-readable representation of the error."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the error."
-        },
-        "details": {
-          "type": "array",
-          "description": "An array of details about specific errors that led to this reported error.",
-          "items": {
-            "$ref": "#/definitions/Error"
-          }
-        },
-        "innererror": {
-          "description": "An object containing more specific information than the current object about the error.",
-          "$ref": "#/definitions/InnerErrorModel"
-        }
-      }
-    },
-    "InnerErrorModel": {
-      "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-      "additionalProperties": true,
-      "required": [
-        "code",
-        "message"
-      ],
-      "properties": {
-        "code": {
-          "description": "One of a server-defined set of error codes.",
-          "$ref": "#/definitions/InnerErrorCode"
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message."
-        },
-        "details": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Error details."
-        },
-        "target": {
-          "type": "string",
-          "description": "Error target."
-        },
-        "innererror": {
-          "description": "An object containing more specific information than the current object about the error.",
-          "$ref": "#/definitions/InnerErrorModel"
-        }
-      }
-    },
-    "ErrorCode": {
-      "type": "string",
-      "description": "Human-readable error code.",
-      "x-ms-enum": {
-        "name": "ErrorCode",
-        "modelAsString": true
-      },
-      "enum": [
-        "InvalidRequest",
-        "InvalidArgument",
-        "Unauthorized",
-        "Forbidden",
-        "NotFound",
-        "TooManyRequests",
-        "InternalServerError",
-        "ServiceUnavailable"
-      ]
-    },
-    "InnerErrorCode": {
-      "type": "string",
-      "description": "Human-readable error code.",
-      "x-ms-enum": {
-        "name": "InnerErrorCode",
-        "modelAsString": true
-      },
-      "enum": [
-        "InvalidRequest",
-        "InvalidParameterValue",
-        "KnowledgeBaseNotFound",
-        "AzureCognitiveSearchNotFound",
-        "AzureCognitiveSearchThrottling",
-        "ExtractionFailure",
-        "InvalidRequestBodyFormat",
-        "EmptyRequest",
-        "MissingInputDocuments",
-        "InvalidDocument",
-        "ModelVersionIncorrect",
-        "InvalidDocumentBatch",
-        "UnsupportedLanguageCode",
-        "InvalidCountryHint"
-      ]
     }
   },
   "parameters": {
-    "Endpoint": {
-      "name": "Endpoint",
-      "description": "Supported Cognitive Services endpoint (e.g., https://<resource-name>.api.cognitiveservices.azure.com).",
-      "x-ms-parameter-location": "client",
-      "required": true,
-      "type": "string",
-      "in": "path",
-      "x-ms-skip-url-encoding": true
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client API version."
-    },
     "ShowStats": {
       "name": "showStats",
       "in": "query",
