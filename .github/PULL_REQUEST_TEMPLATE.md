@@ -75,7 +75,7 @@ This PR template is for Data Plane APIs only.
 
 ### API Info: The Basics
 
-* Link to engagement record issue: 
+* Link to engagement record issue (if known): 
 
 Is this review for (select one):
 
