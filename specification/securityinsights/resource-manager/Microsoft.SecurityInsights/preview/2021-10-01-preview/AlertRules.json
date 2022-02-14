@@ -761,8 +761,7 @@
           "type": "array"
         }
       },
-      "type": "object",
-      "x-ms-client-flatten": true
+      "type": "object"
     },
     "QueryBasedAlertRuleTemplateProperties": {
       "description": "Query based alert rule template base property bag.",
@@ -1171,6 +1170,14 @@
         "properties": {
           "$ref": "#/definitions/FusionAlertRuleTemplateProperties",
           "description": "Fusion alert rule template properties",
+          "required": [
+            "displayName",
+            "description",
+            "status",
+            "severity",
+            "sourceSettings",
+            "alertRulesCreatedByTemplateCount"
+          ],
           "x-ms-client-flatten": true
         }
       },
@@ -1198,14 +1205,6 @@
           "type": "array"
         }
       },
-      "required": [
-        "displayName",
-        "description",
-        "status",
-        "severity",
-        "sourceSettings",
-        "alertRulesCreatedByTemplateCount"
-      ],
       "type": "object",
       "x-ms-client-flatten": true
     },
