@@ -13,7 +13,7 @@ clear-output-folder: true
 
 ``` yaml $(python-mode) == 'update' && $(track2)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/datalake/azure-mgmt-datalake-analytics/azure/mgmt/datalake/account
+output-folder: $(python-sdks-folder)/datalake/azure-mgmt-datalake-analytics/azure/mgmt/datalake/analytics/account
 ```
 
 ``` yaml $(python-mode) == 'create' && $(track2)
