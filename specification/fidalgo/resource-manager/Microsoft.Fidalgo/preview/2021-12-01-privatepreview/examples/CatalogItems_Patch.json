@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2021-12-01-privatepreview",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "rg1",
+    "devCenterName": "Contoso",
+    "catalogName": "{catalogName}",
+    "catalogItemName": "{itemName}",
+    "body": {
+      "properties": {
+        "description": "Hello world template to deploy a basic API service"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.Fidalgo/devcenters/Contoso/catalogs/{catalogName}/items/{itemName}",
+        "name": "{itemName}",
+        "type": "Microsoft.Fidalgo/devcenters/catalogs/items",
+        "properties": {
+          "description": "Hello world template to deploy a basic API service",
+          "engine": {
+            "type": "ARM",
+            "templatePath": "azuredeploy.json",
+            "parameters": [
+              {
+                "name": "app_name",
+                "type": "string",
+                "description": "The name of the application. This must be provided when deploying an environment with this template."
+              }
+            ]
+          },
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2020-11-11T22:00:08.896Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-11-11T22:00:08.896Z"
+        }
+      }
+    }
+  }
+}
