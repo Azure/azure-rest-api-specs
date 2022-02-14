@@ -1183,17 +1183,19 @@
         }
       ],
       "description": "Fusion alert rule template properties",
-      "severity": {
-        "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
-        "description": "The severity for alerts created by this alert rule."
-      },
-      "sourceSettings": {
-        "description": "All supported source signal configurations consumed in fusion detection.",
-        "items": {
-          "$ref": "#/definitions/FusionTemplateSourceSetting"
+      "properties": {
+        "severity": {
+          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
+          "description": "The severity for alerts created by this alert rule."
         },
-        "x-ms-identifiers": [],
-        "type": "array"
+        "sourceSettings": {
+          "description": "All supported source signal configurations consumed in fusion detection.",
+          "items": {
+            "$ref": "#/definitions/FusionTemplateSourceSetting"
+          },
+          "x-ms-identifiers": [],
+          "type": "array"
+        }
       },
       "required": [
         "displayName",
