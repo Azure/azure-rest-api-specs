@@ -839,11 +839,6 @@
           "type": "boolean",
           "description": "A value indicating whether the offer should not be re-ingest during bootstrap session"
         },
-        "hydrationNotificationRecivedAt": {
-          "type": "string",
-          "description": "Notification creation time",
-          "format": "date-time"
-        },
         "bigCatLastModifiedDate": {
           "type": "string",
           "description": "Last modified date",
@@ -1522,7 +1517,7 @@
         },
         "uiDefinitionUri": {
           "type": "string",
-          "description": "What blade to opne when someone wants to create a marketplace item"
+          "description": "What blade to open when someone wants to create a marketplace item"
         },
         "artifacts": {
           "type": "array",
@@ -1831,7 +1826,7 @@
       "properties": {
         "meterId": {
           "type": "string",
-          "description": "Metetr id"
+          "description": "Meter id"
         },
         "partNumber": {
           "type": "string",
@@ -3244,7 +3239,6 @@
         "IsLcid",
         "IsOptional",
         "IsOut",
-        "IsRetval",
         "HasDefaultValue",
         "CustomAttributes",
         "MetadataToken"
@@ -3278,9 +3272,6 @@
         "IsOut": {
           "type": "boolean"
         },
-        "IsRetval": {
-          "type": "boolean"
-        },
         "DefaultValue": {},
         "RawDefaultValue": {},
         "HasDefaultValue": {
@@ -3300,14 +3291,13 @@
     },
     "ParameterAttributes": {
       "type": "integer",
-      "description": "0 = None\n1 = In\n2 = Out\n4 = Lcid\n8 = Retval\n16 = Optional\n4096 = HasDefault\n8192 = HasFieldMarshal\n16384 = Reserved3\n32768 = Reserved4\n61440 = ReservedMask",
+      "description": "0 = None\n1 = In\n2 = Out\n4 = Lcid\n16 = Optional\n4096 = HasDefault\n8192 = HasFieldMarshal\n16384 = Reserved3\n32768 = Reserved4\n61440 = ReservedMask",
       "x-enumFlags": true,
       "x-enumNames": [
         "None",
         "In",
         "Out",
         "Lcid",
-        "Retval",
         "Optional",
         "HasDefault",
         "HasFieldMarshal",
@@ -3320,7 +3310,6 @@
         1,
         2,
         4,
-        8,
         16,
         4096,
         8192,

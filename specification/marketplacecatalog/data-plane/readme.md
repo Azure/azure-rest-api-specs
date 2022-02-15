@@ -32,9 +32,9 @@ tag: package-2022-02
 
 ### Tag: package-2022-02
 
-These settings apply only when `--tag=package-2022-02` is specified on the command line.
+These settings apply only when `--tag=package-2022-02-02` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-02'
+```yaml $(tag) == 'package-2022-02-02'
 input-file:
   - Microsoft.Marketplace/stable/2022-02-02/marketplacecatalog.json
 ```
