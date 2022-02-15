@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2022-04-01-preview",
+    "Endpoint": "{Endpoint}",
+    "jobId": "{Job ID}",
+    "input": {
+      "displayName": "Analyze conversations from xxx",
+      "analysisInput": {
+        "conversations": [
+          {
+            "id": "20220101meeting",
+            "language": "en",
+            "modality": "text",
+            "domain": "neutral",
+            "conversationItems": [
+              {
+                "participantId": "user",
+                "timestamp": "2021-10-01T10:00:01.001",
+                "utterances": [
+                  {
+                    "type": "text",
+                    "content": "Hi!"
+                  }
+                ]
+              },
+              {
+                "participantId": "agent",
+                "timestamp": "2021-10-01T10:00:01.002",
+                "utterances": [
+                  {
+                    "type": "text",
+                    "content": "Hello, how can I help you?"
+                  }
+                ]
+              },
+              {
+                "participantId": "user",
+                "timestamp": "2021-10-01T10:00:03.004",
+                "utterances": [
+                  {
+                    "type": "text",
+                    "content": "I am having trouble issuing a return of a game on my xbox: call of duty"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "tasks": [
+          {
+            "taskName": "analyze 1",
+            "kind": "IssueResolutionSummarization",
+            "parameters": {
+              "modelVersion": "2022-04-01",
+              "summaryAspects ": "issue, resolution"
+            }
+          }
+        ]
+      }
+    },
+    "responses": {
+      "202": {
+        "headers": {
+          "Operation-Location": "{Endpoint}/language/analyze-conversation/jobs/{jobId}?api-version=2022-04-01-preview"
+        }
+      }
+    }
+  }
+}
