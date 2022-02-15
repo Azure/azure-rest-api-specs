@@ -583,6 +583,23 @@
         }
       }
     },
+    "DaysOfWeek": {
+      "type": "string",
+      "description": "Days of Week.",
+      "enum": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "x-ms-enum": {
+        "name": "DaysOfWeek",
+        "modelAsString": true
+      }
+    },
     "ErrorDetails": {
       "type": "object",
       "description": "The details of the error.",
@@ -612,10 +629,10 @@
     "FileDestination": {
       "type": "object",
       "description": "Destination of the view data. Currently only csv format is supported.",
-      "readOnly": true,
       "properties": {
         "fileFormats": {
           "type": "array",
+          "description": "Destination of the view data. Currently only csv format is supported.",
           "items": {
             "$ref": "#/definitions/FileFormat"
           }
@@ -878,16 +895,7 @@
           "description": "Day names in english on which cost analysis data will be emailed. This property is applicable when frequency is Weekly or Monthly.",
           "type": "array",
           "items": {
-            "type": "string",
-            "enum": [
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday",
-              "Sunday"
-            ]
+            "$ref": "#/definitions/DaysOfWeek"
           }
         },
         "weeksOfMonth": {
