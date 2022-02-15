@@ -65,6 +65,10 @@ csharp:
   clear-output-folder: true
 ```
 
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
 ## Suppression
 
 ``` yaml
