@@ -73,7 +73,7 @@ These settings apply only when `--tag=package-2022-02-15` is specified on the co
 
 ```yaml $(tag) == 'package-2022-02-15'
 input-file:
-  - Microsoft.FluidRelay/preview/2022-02-15/fluidrelay.json
+  - Microsoft.FluidRelay/stable/2022-02-15/fluidrelay.json
 ```
 
 ---
