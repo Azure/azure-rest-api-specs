@@ -408,6 +408,102 @@
         "azureStaticWebApp": {
           "$ref": "#/definitions/AzureStaticWebApp",
           "description": "The configuration settings of the Azure Static Web Apps provider."
+        },
+        "customOpenIdConnectProviders": {
+          "description": "The map of the name of the alias of each custom Open ID Connect provider to the\nconfiguration settings of the custom Open ID Connect provider.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/CustomOpenIdConnectProvider"
+          }
+        }
+      }
+    },
+    "CustomOpenIdConnectProvider": {
+      "description": "The configuration settings of the custom Open ID Connect provider.",
+      "type": "object",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/IdentityProviderState",
+          "description": "<code>Disabled</code> if the custom Open ID Connect provider provider should not be enabled despite the set registration; otherwise, <code>Enabled</code>."
+        },
+        "registration": {
+          "$ref": "#/definitions/OpenIdConnectRegistration",
+          "description": "The configuration settings of the app registration for the custom Open ID Connect provider."
+        },
+        "login": {
+          "$ref": "#/definitions/OpenIdConnectLogin",
+          "description": "The configuration settings of the login flow of the custom Open ID Connect provider."
+        }
+      }
+    },
+    "OpenIdConnectRegistration": {
+      "description": "The configuration settings of the app registration for the custom Open ID Connect provider.",
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "description": "The client id of the custom Open ID Connect provider.",
+          "type": "string"
+        },
+        "clientCredential": {
+          "$ref": "#/definitions/OpenIdConnectClientCredential",
+          "description": "The authentication credentials of the custom Open ID Connect provider."
+        },
+        "openIdConnectConfiguration": {
+          "$ref": "#/definitions/OpenIdConnectConfig",
+          "description": "The configuration settings of the endpoints used for the custom Open ID Connect provider."
+        }
+      }
+    },
+    "OpenIdConnectClientCredential": {
+      "description": "The authentication client credentials of the custom Open ID Connect provider.",
+      "type": "object",
+      "properties": {
+        "clientSecretRefName": {
+          "description": "The app setting that contains the client secret for the custom Open ID Connect provider.",
+          "type": "string"
+        }
+      }
+    },
+    "OpenIdConnectConfig": {
+      "description": "The configuration settings of the endpoints used for the custom Open ID Connect provider.",
+      "type": "object",
+      "properties": {
+        "authorizationEndpoint": {
+          "description": "The endpoint to be used to make an authorization request.",
+          "type": "string"
+        },
+        "tokenEndpoint": {
+          "description": "The endpoint to be used to request a token.",
+          "type": "string"
+        },
+        "issuer": {
+          "description": "The endpoint that issues the token.",
+          "type": "string"
+        },
+        "certificationUri": {
+          "description": "The endpoint that provides the keys necessary to validate the token.",
+          "type": "string"
+        },
+        "wellKnownOpenIdConfiguration": {
+          "description": "The endpoint that contains all the configuration endpoints for the provider.",
+          "type": "string"
+        }
+      }
+    },
+    "OpenIdConnectLogin": {
+      "description": "The configuration settings of the login flow of the custom Open ID Connect provider.",
+      "type": "object",
+      "properties": {
+        "nameClaimType": {
+          "description": "The name of the claim that contains the users name.",
+          "type": "string"
+        },
+        "scopes": {
+          "description": "A list of the scopes that should be requested while authenticating.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
