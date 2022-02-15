@@ -94,7 +94,7 @@
         },
         "x-ms-examples": {
           "Create or update a capacity reservation group.": {
-            "$ref": "./examples/CreateOrUpdateACapacityReservationGroup.json"
+            "$ref": "./examples/capacityReservationExamples/CapacityReservationGroup_CreateOrUpdate.json"
           }
         }
       },
@@ -151,10 +151,10 @@
         },
         "x-ms-examples": {
           "CapacityReservationGroups_Update_MaximumSet_Gen": {
-            "$ref": "./examples/CapacityReservationGroups_Update_MaximumSet_Gen.json"
+            "$ref": "./examples/capacityReservationExamples/CapacityReservationGroup_Update_MaximumSet_Gen.json"
           },
           "CapacityReservationGroups_Update_MinimumSet_Gen": {
-            "$ref": "./examples/CapacityReservationGroups_Update_MinimumSet_Gen.json"
+            "$ref": "./examples/capacityReservationExamples/CapacityReservationGroup_Update_MinimumSet_Gen.json"
           }
         }
       },
@@ -202,10 +202,10 @@
         },
         "x-ms-examples": {
           "CapacityReservationGroups_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/CapacityReservationGroups_Delete_MaximumSet_Gen.json"
+            "$ref": "./examples/capacityReservationExamples/CapacityReservationGroup_Delete_MaximumSet_Gen.json"
           },
           "CapacityReservationGroups_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/CapacityReservationGroups_Delete_MinimumSet_Gen.json"
+            "$ref": "./examples/capacityReservationExamples/CapacityReservationGroup_Delete_MinimumSet_Gen.json"
           }
         }
       },
@@ -267,7 +267,7 @@
         },
         "x-ms-examples": {
           "Get a capacity reservation Group.": {
-            "$ref": "./examples/GetACapacityReservationGroup.json"
+            "$ref": "./examples/capacityReservationExamples/CapacityReservationGroup_Get.json"
           }
         }
       }
@@ -325,7 +325,7 @@
         },
         "x-ms-examples": {
           "List capacity reservation groups in resource group.": {
-            "$ref": "./examples/ListCapacityReservationGroupsInResourceGroup.json"
+            "$ref": "./examples/capacityReservationExamples/CapacityReservationGroup_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -379,7 +379,7 @@
         },
         "x-ms-examples": {
           "List capacity reservation groups in subscription.": {
-            "$ref": "./examples/ListCapacityReservationGroupsInSubscription.json"
+            "$ref": "./examples/capacityReservationExamples/CapacityReservationGroup_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -454,7 +454,7 @@
         },
         "x-ms-examples": {
           "Create or update a capacity reservation .": {
-            "$ref": "./examples/CreateOrUpdateACapacityReservation.json"
+            "$ref": "./examples/capacityReservationExamples/CapacityReservation_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -523,10 +523,10 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "CapacityReservations_Update_MaximumSet_Gen": {
-            "$ref": "./examples/CapacityReservations_Update_MaximumSet_Gen.json"
+            "$ref": "./examples/capacityReservationExamples/CapacityReservation_Update_MaximumSet_Gen.json"
           },
           "CapacityReservations_Update_MinimumSet_Gen": {
-            "$ref": "./examples/CapacityReservations_Update_MinimumSet_Gen.json"
+            "$ref": "./examples/capacityReservationExamples/CapacityReservation_Update_MinimumSet_Gen.json"
           }
         }
       },
@@ -585,10 +585,10 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "CapacityReservations_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/CapacityReservations_Delete_MaximumSet_Gen.json"
+            "$ref": "./examples/capacityReservationExamples/CapacityReservation_Delete_MaximumSet_Gen.json"
           },
           "CapacityReservations_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/CapacityReservations_Delete_MinimumSet_Gen.json"
+            "$ref": "./examples/capacityReservationExamples/CapacityReservation_Delete_MinimumSet_Gen.json"
           }
         }
       },
@@ -657,7 +657,7 @@
         },
         "x-ms-examples": {
           "Get a capacity reservation.": {
-            "$ref": "./examples/GetACapacityReservation.json"
+            "$ref": "./examples/capacityReservationExamples/CapacityReservation_Get.json"
           }
         }
       }
@@ -707,7 +707,7 @@
         },
         "x-ms-examples": {
           "List capacity reservations in reservation group.": {
-            "$ref": "./examples/ListCapacityReservationsInReservationGroup.json"
+            "$ref": "./examples/capacityReservationExamples/CapacityReservation_ListByReservationGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -789,7 +789,7 @@
       },
       "allOf": [
         {
-          "$ref": "./compute.json#/definitions/UpdateResource"
+          "$ref": "./computeRPCommon.json#/definitions/UpdateResource"
         }
       ],
       "description": "Specifies information about the capacity reservation group. Only tags can be updated."
@@ -824,7 +824,7 @@
         "statuses": {
           "type": "array",
           "items": {
-            "$ref": "./compute.json#/definitions/InstanceViewStatus"
+            "$ref": "./computeRPCommon.json#/definitions/InstanceViewStatus"
           },
           "description": "The resource status information."
         }
@@ -910,7 +910,7 @@
           "$ref": "#/definitions/CapacityReservationProperties"
         },
         "sku": {
-          "$ref": "./compute.json#/definitions/Sku",
+          "$ref": "./computeRPCommon.json#/definitions/Sku",
           "description": "SKU of the resource for which capacity needs be reserved. The SKU name and capacity is required to be set. Currently VM Skus with the capability called 'CapacityReservationSupported' set to true are supported. Refer to List Microsoft.Compute SKUs in a region (https://docs.microsoft.com/rest/api/compute/resourceskus/list) for supported values."
         },
         "zones": {
@@ -939,13 +939,13 @@
           "$ref": "#/definitions/CapacityReservationProperties"
         },
         "sku": {
-          "$ref": "./compute.json#/definitions/Sku",
+          "$ref": "./computeRPCommon.json#/definitions/Sku",
           "description": "SKU of the resource for which capacity needs be reserved. The SKU name and capacity is required to be set. Currently VM Skus with the capability called 'CapacityReservationSupported' set to true are supported. Refer to List Microsoft.Compute SKUs in a region (https://docs.microsoft.com/rest/api/compute/resourceskus/list) for supported values."
         }
       },
       "allOf": [
         {
-          "$ref": "./compute.json#/definitions/UpdateResource"
+          "$ref": "./computeRPCommon.json#/definitions/UpdateResource"
         }
       ],
       "description": "Specifies information about the capacity reservation. Only tags and sku.capacity can be updated."

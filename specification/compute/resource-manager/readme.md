@@ -243,17 +243,17 @@ These settings apply only when `--tag=package-2022-03-01` is specified on the co
 input-file:
 - Microsoft.Compute/stable/2022-03-01/common.json
 - Microsoft.Compute/stable/2022-03-01/computeRP/computeRPCommon.json
-- Microsoft.Compute/stable/2022-03-01/computeRP/virtualMachine.json
-- Microsoft.Compute/stable/2022-03-01/computeRP/virtualMachineScaleSet.json
-- Microsoft.Compute/stable/2022-03-01/computeRP/virtualMachineImage.json
-- Microsoft.Compute/stable/2022-03-01/computeRP/virtualMachineExtensionImage.json
-- Microsoft.Compute/stable/2022-03-01/computeRP/availabilitySet.json
-- Microsoft.Compute/stable/2022-03-01/computeRP/proximityPlacementGroup.json
-- Microsoft.Compute/stable/2022-03-01/computeRP/host.json
-- Microsoft.Compute/stable/2022-03-01/computeRP/dedicatedhost.json
+#- Microsoft.Compute/stable/2022-03-01/computeRP/virtualMachine.json
+#- Microsoft.Compute/stable/2022-03-01/computeRP/virtualMachineScaleSet.json
+#- Microsoft.Compute/stable/2022-03-01/computeRP/virtualMachineImage.json
+#- Microsoft.Compute/stable/2022-03-01/computeRP/virtualMachineExtensionImage.json
+# Microsoft.Compute/stable/2022-03-01/computeRP/availabilitySet.json
+#- Microsoft.Compute/stable/2022-03-01/computeRP/proximityPlacementGroup.json
+#- Microsoft.Compute/stable/2022-03-01/computeRP/host.json
+#- Microsoft.Compute/stable/2022-03-01/computeRP/dedicatedhost.json
 - Microsoft.Compute/stable/2022-03-01/computeRP/sshPublicKey.json
-- Microsoft.Compute/stable/2022-03-01/computeRP/image.json
-- Microsoft.Compute/stable/2022-03-01/computeRP/restorePoint.json
+#- Microsoft.Compute/stable/2022-03-01/computeRP/image.json
+#- Microsoft.Compute/stable/2022-03-01/computeRP/restorePoint.json
 - Microsoft.Compute/stable/2022-03-01/computeRP/capacityReservation.json
 - Microsoft.Compute/stable/2022-03-01/computeRP/logAnalytic.json
 - Microsoft.Compute/stable/2022-03-01/computeRP/runCommand.json 
