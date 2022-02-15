@@ -2552,9 +2552,6 @@
             "$ref": "#/definitions/KeyValuePairOfStringAndObject"
           }
         },
-        "_propertyStorage": {
-          "$ref": "#/definitions/PropertyStorage"
-        },
         "Item": {},
         "Comparer": {
           "$ref": "#/definitions/IEqualityComparerOfString"
@@ -2586,45 +2583,6 @@
           "type": "string"
         },
         "Value": {}
-      }
-    },
-    "PropertyStorage": {
-      "type": "object",
-      "required": [
-        "Value",
-        "Properties"
-      ],
-      "properties": {
-        "Value": {},
-        "Properties": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PropertyHelper"
-          }
-        }
-      }
-    },
-    "PropertyHelper": {
-      "type": "object",
-      "required": [
-        "Property",
-        "Name",
-        "ValueGetter",
-        "ValueSetter"
-      ],
-      "properties": {
-        "Property": {
-          "$ref": "#/definitions/PropertyInfo"
-        },
-        "Name": {
-          "type": "string"
-        },
-        "ValueGetter": {
-          "$ref": "#/definitions/FuncOfObjectAndObject"
-        },
-        "ValueSetter": {
-          "$ref": "#/definitions/ActionOfObjectAndObject"
-        }
       }
     },
     "PropertyInfo": {
