@@ -2805,6 +2805,9 @@
           },
           {
             "$ref": "#/parameters/FilePermissionKey"
+          },
+          {
+            "$ref": "#/parameters/Metadata"
           }
         ],
         "responses": {
@@ -2872,6 +2875,11 @@
                 "x-ms-client-name": "FileId",
                 "type": "string",
                 "description": "The fileId of the file."
+              },
+              "x-ms-file-parent-id": {
+                "x-ms-client-name": "FileParentId",
+                "type": "string",
+                "description": "The parent fileId of the directory."
               }
             }
           },
@@ -5327,7 +5335,7 @@
             "$ref": "#/parameters/FilePermissionKey"
           },
           {
-            "$ref": "#/parameters/FileContentType"
+            "$ref": "#/parameters/Metadata"
           }
         ],
         "responses": {
@@ -5395,6 +5403,11 @@
                 "x-ms-client-name": "FileId",
                 "type": "string",
                 "description": "The fileId of the file."
+              },
+              "x-ms-file-parent-id": {
+                "x-ms-client-name": "FileParentId",
+                "type": "string",
+                "description": "The parent fileId of the directory."
               }
             }
           },
@@ -6881,7 +6894,7 @@
       "x-ms-parameter-location": "method"
     },
     "RenameIgnoreReadOnly": {
-      "name": "x-ms-file-rename-ignore-read-only",
+      "name": "x-ms-file-rename-ignore-readonly",
       "x-ms-client-name": "ignoreReadOnly",
       "in": "header",
       "required": false,

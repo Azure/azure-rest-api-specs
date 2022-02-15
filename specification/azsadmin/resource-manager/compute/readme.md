@@ -32,8 +32,7 @@ directive:
       - $.definitions.ScaleUnit
     suppress:
       - NestedResourcesMustHaveListOperation
-    reason:
-      - CRP cannot support the list API for scale units due to the undesired load that would inflict on the system
+    reason: 'CRP cannot support the list API for scale units due to the undesired load that would inflict on the system'
 ```
 
 ### Tag: package-2021-09-01

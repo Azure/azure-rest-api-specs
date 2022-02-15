@@ -254,6 +254,9 @@
               "$ref": "#/definitions/Application"
             }
           },
+          "202": {
+            "description": "Accepted - Returns this status until the asynchronous operation has completed."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -986,7 +989,7 @@
           "pattern": "^[-\\w\\._,\\(\\)]+$"
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "#/definitions/Identity",
           "description": "The identity of the resource."
         }
       },
@@ -1019,7 +1022,7 @@
           "pattern": "^[-\\w\\._,\\(\\)]+$"
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "#/definitions/Identity",
           "description": "The identity of the resource."
         }
       },
@@ -1367,6 +1370,59 @@
       ],
       "description": "SKU for the resource."
     },
+    "Identity": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of resource identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The identity type.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/userAssignedResourceIdentity"
+          },
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+        }
+      },
+      "description": "Identity for the resource."
+    },
+    "userAssignedResourceIdentity": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of user assigned identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant id of user assigned identity."
+        }
+      },
+      "description": "Represents the user assigned identity that is contained within the UserAssignedIdentities dictionary on ResourceIdentity"
+    },
     "Resource": {
       "type": "object",
       "properties": {
@@ -1596,6 +1652,13 @@
             "type": "string"
           },
           "description": "The deny assignment excluded actions."
+        },
+        "allowedDataActions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The deny assignment excluded data actions."
         }
       },
       "description": "Managed application locking policy."
