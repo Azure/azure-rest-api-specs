@@ -2266,6 +2266,9 @@ directive:
   - suppress: RequiredPropertiesMissingInResourceModel
     from: dscpConfiguration.json
     reason: name, id and type properties are inherited from the upper level
+  - suppress: MissingTypeObject
+    from: virtualWan.json
+    reason: ListVpnServerConfigurationPolicyGroupsResult is not an object, its a list of objects:VpnServerConfigurationPolicyGroup
 ```
 
 ---
