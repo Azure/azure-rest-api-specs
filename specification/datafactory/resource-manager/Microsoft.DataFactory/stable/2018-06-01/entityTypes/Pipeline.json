@@ -30,7 +30,10 @@
           "description": "List of activities in pipeline.",
           "items": {
             "$ref": "#/definitions/Activity"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "parameters": {
           "$ref": "../datafactory.json#/definitions/ParameterDefinitionSpecification",
@@ -50,7 +53,8 @@
           "type": "array",
           "items": {
             "type": "object"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "runDimensions": {
           "description": "Dimensions emitted by Pipeline.",
@@ -116,14 +120,18 @@
           "description": "Activity depends on condition.",
           "items": {
             "$ref": "#/definitions/ActivityDependency"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "userProperties": {
           "type": "array",
           "description": "Activity user properties.",
           "items": {
             "$ref": "#/definitions/UserProperty"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "additionalProperties": {
@@ -1544,14 +1552,20 @@
           "description": "List of inputs for the activity.",
           "items": {
             "$ref": "../datafactory.json#/definitions/DatasetReference"
-          }
+          },
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         },
         "outputs": {
           "type": "array",
           "description": "List of outputs for the activity.",
           "items": {
             "$ref": "../datafactory.json#/definitions/DatasetReference"
-          }
+          },
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         }
       },
       "required": [
@@ -1611,7 +1625,8 @@
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
           },
-          "description": "Preserve Rules."
+          "description": "Preserve Rules.",
+          "x-ms-identifiers": []
         },
         "preserve": {
           "type": "array",
@@ -1619,7 +1634,8 @@
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
           },
-          "description": "Preserve rules."
+          "description": "Preserve rules.",
+          "x-ms-identifiers": []
         },
         "validateDataConsistency": {
           "type": "object",
@@ -4090,7 +4106,10 @@
           "description": "Specify the custom metadata to be added to sink data. Type: array of objects (or Expression with resultType array of objects).",
           "items": {
             "$ref": "#/definitions/MetadataItem"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -4441,7 +4460,10 @@
           "description": "Specifies the default values for each target column in SQL DW. The default values in the property overwrite the DEFAULT constraint set in the DB, and identity column cannot have a default value. Type: array of objects (or Expression with resultType array of objects).",
           "items": {
             "$ref": "#/definitions/DWCopyCommandDefaultValue"
-          }
+          },
+          "x-ms-identifiers": [
+            "columnName"
+          ]
         },
         "additionalOptions": {
           "type": "object",
@@ -4788,7 +4810,10 @@
           "description": "Specify the custom metadata to be added to sink data. Type: array of objects (or Expression with resultType array of objects).",
           "items": {
             "$ref": "#/definitions/MetadataItem"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -5192,7 +5217,10 @@
           "type": "array",
           "items": {
             "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
-          }
+          },
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         },
         "arguments": {
           "description": "User specified arguments to HDInsightActivity.",
@@ -5200,7 +5228,8 @@
           "items": {
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
-          }
+          },
+          "x-ms-identifiers": []
         },
         "getDebugInfo": {
           "$ref": "#/definitions/HDInsightActivityDebugInfoOption",
@@ -5228,7 +5257,8 @@
           "items": {
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
-          }
+          },
+          "x-ms-identifiers": []
         },
         "queryTimeout": {
           "type": "integer",
@@ -5276,7 +5306,10 @@
           "type": "array",
           "items": {
             "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
-          }
+          },
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         },
         "arguments": {
           "type": "object",
@@ -5331,7 +5364,10 @@
           "type": "array",
           "items": {
             "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
-          }
+          },
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         },
         "arguments": {
           "description": "User specified arguments to HDInsightActivity.",
@@ -5339,7 +5375,8 @@
           "items": {
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
-          }
+          },
+          "x-ms-identifiers": []
         },
         "getDebugInfo": {
           "$ref": "#/definitions/HDInsightActivityDebugInfoOption",
@@ -5363,7 +5400,8 @@
           "items": {
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
-          }
+          },
+          "x-ms-identifiers": []
         },
         "defines": {
           "description": "Allows user to specify defines for the MapReduce job request.",
@@ -5406,7 +5444,10 @@
           "type": "array",
           "items": {
             "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
-          }
+          },
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         },
         "arguments": {
           "description": "User specified arguments to HDInsightActivity.",
@@ -5414,7 +5455,8 @@
           "items": {
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
-          }
+          },
+          "x-ms-identifiers": []
         },
         "getDebugInfo": {
           "$ref": "#/definitions/HDInsightActivityDebugInfoOption",
@@ -5442,7 +5484,8 @@
           "items": {
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
-          }
+          },
+          "x-ms-identifiers": []
         },
         "fileLinkedService": {
           "description": "Linked service reference where the files are located.",
@@ -5458,7 +5501,8 @@
           "items": {
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
-          }
+          },
+          "x-ms-identifiers": []
         },
         "defines": {
           "description": "Allows user to specify defines for streaming job request.",
@@ -5513,7 +5557,8 @@
           "items": {
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
-          }
+          },
+          "x-ms-identifiers": []
         },
         "getDebugInfo": {
           "$ref": "#/definitions/HDInsightActivityDebugInfoOption",
@@ -5702,7 +5747,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SSISChildPackage"
-          }
+          },
+          "x-ms-identifiers": [
+            "packagePath",
+            "packageName"
+          ]
         }
       }
     },
@@ -5927,14 +5976,20 @@
           "type": "array",
           "items": {
             "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
-          }
+          },
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         },
         "datasets": {
           "description": "Dataset references.",
           "type": "array",
           "items": {
             "$ref": "../datafactory.json#/definitions/DatasetReference"
-          }
+          },
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         }
       }
     },
@@ -6237,14 +6292,20 @@
           "description": "List of datasets passed to web endpoint.",
           "items": {
             "$ref": "../datafactory.json#/definitions/DatasetReference"
-          }
+          },
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         },
         "linkedServices": {
           "type": "array",
           "description": "List of linked services passed to web endpoint.",
           "items": {
             "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
-          }
+          },
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         },
         "connectVia": {
           "description": "The integration runtime reference.",
@@ -6288,7 +6349,8 @@
           "items": {
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
-          }
+          },
+          "x-ms-identifiers": []
         },
         "storeSettings": {
           "$ref": "#/definitions/StoreReadSettings",
@@ -6334,14 +6396,20 @@
           "description": "List of activities to execute if expression is evaluated to true. This is an optional property and if not provided, the activity will exit without any action.",
           "items": {
             "$ref": "#/definitions/Activity"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "ifFalseActivities": {
           "type": "array",
           "description": "List of activities to execute if expression is evaluated to false. This is an optional property and if not provided, the activity will exit without any action.",
           "items": {
             "$ref": "#/definitions/Activity"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [
@@ -6380,14 +6448,20 @@
           "items": {
             "x-ms-client-flatten": true,
             "$ref": "#/definitions/SwitchCase"
-          }
+          },
+          "x-ms-identifiers": [
+            "value"
+          ]
         },
         "defaultActivities": {
           "type": "array",
           "description": "List of activities to execute if no case condition is satisfied. This is an optional property and if not provided, the activity will exit without any action.",
           "items": {
             "$ref": "#/definitions/Activity"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [
@@ -6406,7 +6480,10 @@
           "description": "List of activities to execute for satisfied case condition.",
           "items": {
             "$ref": "#/definitions/Activity"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -6450,7 +6527,10 @@
           "description": "List of activities to execute .",
           "items": {
             "$ref": "#/definitions/Activity"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [
@@ -6799,7 +6879,10 @@
           "description": "List of activities to execute.",
           "items": {
             "$ref": "#/definitions/Activity"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [
@@ -6933,7 +7016,8 @@
             "additionalProperties": {
               "type": "object"
             }
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -6972,7 +7056,8 @@
           "items": {
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
-          }
+          },
+          "x-ms-identifiers": []
         },
         "libraries": {
           "description": "A list of libraries to be installed on the cluster that will execute the job.",
@@ -6983,7 +7068,8 @@
             "additionalProperties": {
               "type": "object"
             }
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -7022,7 +7108,8 @@
           "items": {
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
-          }
+          },
+          "x-ms-identifiers": []
         },
         "libraries": {
           "description": "A list of libraries to be installed on the cluster that will execute the job.",
@@ -7033,7 +7120,8 @@
             "additionalProperties": {
               "type": "object"
             }
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -7342,7 +7430,10 @@
           "description": "List of mapping for Power Query mashup query to sink dataset(s).",
           "items": {
             "$ref": "#/definitions/PowerQuerySinkMapping"
-          }
+          },
+          "x-ms-identifiers": [
+            "queryName"
+          ]
         }
       }
     },
@@ -7359,7 +7450,10 @@
           "description": "List of sinks mapped to Power Query mashup query.",
           "items": {
             "$ref": "./DataFlow.json#/definitions/PowerQuerySink"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -7393,7 +7487,8 @@
           "description": "Array of script blocks. Type: array.",
           "items": {
             "$ref": "#/definitions/ScriptActivityScriptBlock"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "logSettings": {
           "description": "Log settings of script activity.",
@@ -7447,7 +7542,10 @@
           "description": "Array of script parameters. Type: array.",
           "items": {
             "$ref": "#/definitions/ScriptActivityParameter"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [
