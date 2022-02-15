@@ -1517,7 +1517,6 @@
     },
     "Sku": {
       "description": "The resource model definition representing SKU",
-      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1729,7 +1728,12 @@
           "description": "Gets the date of cognitive services account creation."
         },
         "callRateLimit": {
+          "readOnly": true,
           "$ref": "#/definitions/CallRateLimit"
+        },
+        "dynamicThrottlingEnabled": {
+          "type": "boolean",
+          "description": "The flag to enable dynamic throttling."
         },
         "quotaLimit": {
           "readOnly": true,
@@ -1830,23 +1834,16 @@
     "CallRateLimit": {
       "type": "object",
       "properties": {
-        "dynamicThrottlingEnabled": {
-          "type": "boolean",
-          "description": "The flag to enable dynamic throttling."
-        },
         "count": {
           "type": "number",
-          "readOnly": true,
           "description": "The count value of Call Rate Limit."
         },
         "renewalPeriod": {
           "type": "number",
-          "readOnly": true,
           "description": "The renewal period in seconds of Call Rate Limit."
         },
         "rules": {
           "type": "array",
-          "readOnly": true,
           "items": {
             "$ref": "#/definitions/ThrottlingRule"
           }
