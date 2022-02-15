@@ -240,7 +240,7 @@
         "produces": [
           "application/json"
         ],
-        "description": "Get the status of an analysis job.  A job may consist of one or more tasks.  Once all tasks are succeeded, the job will transition to the suceeded state and results will be available for each task.",
+        "description": "Get the status of an analysis job.  A job may consist of one or more tasks.  Once all tasks are succeeded, the job will transition to the succeeded state and results will be available for each task.",
         "operationId": "AnalyzeConversation_JobStatus",
         "summary": "Get analysis status and results",
         "parameters": [
@@ -270,7 +270,7 @@
         },
         "x-ms-examples": {
           "Successful Get Text Analysis Job Status Request": {
-            "$ref": "./examples/SuccessfulAnalyzeConversationJobsMultipleTaskStatusRequest.json"
+            "$ref": "./examples/SuccessfulAnalyzeConversationJobsTaskStatusRequest.json"
           }
         }
       }
@@ -902,8 +902,7 @@
     "IssueResolutionSummarizationTaskParameters": {
       "type": "object",
       "description": "Supported parameters for an Issue Resolution Summarization task.",
-      "properties": {
-      },
+      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/TaskParameters"
