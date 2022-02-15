@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2022-03-01-test
+tag: package-2022-03-01
 
 directive:
   - where:
@@ -235,23 +235,58 @@ directive:
       - RequiredPropertiesMissingInResourceModel
 ```
 
-### Tag: package-2022-03-01-test
+### Tag: package-2022-03-01
 
-These settings apply only when `--tag=package-2022-03-01-test` is specified on the command line.
+These settings apply only when `--tag=package-2022-03-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-03-01-test'
+``` yaml $(tag) == 'package-2022-03-01'
 input-file:
 - Microsoft.Compute/stable/2022-03-01/common.json
-- Microsoft.Compute/stable/2022-03-01/compute/compute.json
-- Microsoft.Compute/stable/2022-03-01/compute/capacityReservationGroup.json
-- Microsoft.Compute/stable/2022-03-01/compute/logAnalytics.json
-- Microsoft.Compute/stable/2022-03-01/compute/runCommands.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/computeRPCommon.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/virtualMachine.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/virtualMachineScaleSet.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/virtualMachineImage.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/virtualMachineExtensionImage.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/availabilitySet.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/proximityPlacementGroup.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/host.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/dedicatedhost.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/sshPublicKey.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/image.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/restorePoint.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/capacityReservation.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/logAnalytic.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/runCommand.json 
 - Microsoft.Compute/stable/2021-07-01/skus.json
 - Microsoft.Compute/stable/2021-08-01/disk.json
 - Microsoft.Compute/stable/2021-07-01/gallery.json
 - Microsoft.Compute/stable/2021-07-01/sharedGallery.json
 - Microsoft.Compute/stable/2021-07-01/communityGallery.json
 - Microsoft.Compute/stable/2021-03-01/cloudService.json
+```
+
+### Tag: package-2022-03-01-only
+
+These settings apply only when `--tag=package-2022-03-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-03-01-only'
+input-file:
+- Microsoft.Compute/stable/2022-03-01/common.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/computeRPCommon.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/virtualMachine.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/virtualMachineScaleSet.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/virtualMachineImage.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/virtualMachineExtensionImage.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/availabilitySet.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/proximityPlacementGroup.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/host.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/dedicatedhost.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/sshPublicKey.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/image.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/restorePoint.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/capacityReservation.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/logAnalytic.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/runCommand.json 
 ```
 
 ### Tag: package-2021-11-01
