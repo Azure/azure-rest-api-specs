@@ -180,6 +180,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/ForceDeleteParameter"
+          },
+          {
+            "$ref": "#/parameters/RecursiveDeleteParameter"
           }
         ],
         "responses": {
@@ -356,6 +359,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/ForceDeleteParameter"
+          },
+          {
+            "$ref": "#/parameters/RecursiveDeleteParameter"
           }
         ],
         "responses": {
@@ -569,13 +575,13 @@
     }
   },
   "definitions": {
-    "SecurityAdminConfiguration": {
+    "SecurityConfiguration": {
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SecurityAdminConfigurationPropertiesFormat",
-          "description": "Indicates the properties for the network manager security admin configuration."
+          "$ref": "#/definitions/SecurityConfigurationPropertiesFormat",
+          "description": "Indicates the properties for the network manager security Configuration."
         },
         "systemData": {
           "readOnly": true,
@@ -588,18 +594,30 @@
           "$ref": "./network.json#/definitions/ProxyResource"
         }
       ],
-      "description": "Defines the security admin configuration"
+      "description": "Defines the security configuration"
     },
-    "SecurityAdminConfigurationPropertiesFormat": {
+    "SecurityConfigurationPropertiesFormat": {
       "type": "object",
       "properties": {
         "displayName": {
           "type": "string",
-          "description": "A display name of the security admin configuration."
+          "description": "A display name of the security configuration."
         },
         "description": {
           "type": "string",
           "description": "A description of the security configuration."
+        },
+        "securityType": {
+          "type": "string",
+          "description": "Security Type.",
+          "enum": [
+            "AdminPolicy",
+            "UserPolicy"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityType",
+            "modelAsString": true
+          }
         },
         "applyOnNetworkIntentPolicyBasedServices": {
           "type": "array",
@@ -608,30 +626,42 @@
           },
           "description": "Enum list of network intent policy based services."
         },
+        "deleteExistingNSGs": {
+          "type": "string",
+          "enum": [
+            "False",
+            "True"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteExistingNSGs",
+            "modelAsString": true
+          },
+          "description": "Flag if need to delete existing network security groups."
+        },
         "provisioningState": {
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the resource."
         }
       },
-      "description": "Defines the security admin configuration properties."
+      "description": "Defines the security Configuration properties."
     },
-    "SecurityAdminConfigurationListResult": {
+    "SecurityConfigurationListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SecurityAdminConfiguration"
+            "$ref": "#/definitions/SecurityConfiguration"
           },
-          "description": "Gets a page of security admin configurations"
+          "description": "Gets a page of security configurations"
         },
         "nextLink": {
           "type": "string",
           "description": "Gets the URL to get the next page of results."
         }
       },
-      "description": "A list of network manager security admin configurations"
+      "description": "A list of network manager security configurations"
     },
     "AdminRuleListResult": {
       "type": "object",
@@ -650,30 +680,30 @@
       },
       "description": "security configuration admin rule list result."
     },
-    "AdminRuleCollectionListResult": {
+    "RuleCollectionListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AdminRuleCollection"
+            "$ref": "#/definitions/RuleCollection"
           },
-          "description": "A list of network manager security admin configuration rule collections"
+          "description": "A list of network manager security configuration rule collections"
         },
         "nextLink": {
           "type": "string",
           "description": "Gets the URL to get the next set of results."
         }
       },
-      "description": "Security admin configuration rule collection list result."
+      "description": "Security configuration rule collection list result."
     },
-    "AdminRuleCollection": {
+    "RuleCollection": {
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AdminRuleCollectionPropertiesFormat",
-          "description": "Indicates the properties for the network manager admin rule collection."
+          "$ref": "#/definitions/RuleCollectionPropertiesFormat",
+          "description": "Indicates the properties for the network manager rule collection."
         },
         "systemData": {
           "readOnly": true,
@@ -686,18 +716,18 @@
           "$ref": "./network.json#/definitions/ProxyResource"
         }
       ],
-      "description": "Defines the admin rule collection."
+      "description": "Defines the rule collection."
     },
-    "AdminRuleCollectionPropertiesFormat": {
+    "RuleCollectionPropertiesFormat": {
       "type": "object",
       "properties": {
         "displayName": {
           "type": "string",
-          "description": "A display name of the admin rule collection."
+          "description": "A display name of the rule collection."
         },
         "description": {
           "type": "string",
-          "description": "A description of the admin rule collection."
+          "description": "A description of the rule collection."
         },
         "appliesToGroups": {
           "type": "array",
@@ -718,7 +748,7 @@
       "required": [
         "appliesToGroups"
       ],
-      "description": "Defines the admin rule collection properties."
+      "description": "Defines the rule collection properties."
     },
     "BaseAdminRule": {
       "type": "object",
@@ -1101,6 +1131,14 @@
       "in": "query",
       "required": false,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "RecursiveDeleteParameter": {
+      "name": "recursive",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "description": "Deletes the resource recursively. When present in a security configuration delete, all rule collections and rules within the configuration will be deleted. When present in a rule collection delete, all rules within the collection will be deleted.",
       "x-ms-parameter-location": "method"
     },
     "ForceDeleteParameter": {

@@ -149,7 +149,7 @@
         "description": "Deletes a network group.",
         "parameters": [
           {
-            "$ref": "#/parameters/ForceDeleteParameter"
+            "$ref": "./networkManagerSecurityAdminConfiguration.json#/parameters/ForceDeleteParameter"
           }
         ],
         "responses": {
@@ -667,14 +667,6 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ForceDeleteParameter": {
-      "name": "force",
-      "in": "query",
-      "required": false,
-      "type": "boolean",
-      "description": "Deletes the resource even if it is part of a deployed configuration. If the configuration has been deployed, the service will do a cleanup deployment in the background, prior to the delete.",
       "x-ms-parameter-location": "method"
     }
   }

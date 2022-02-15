@@ -31,6 +31,23 @@ openapi-type: arm
 tag: package-2021-05
 ```
 
+### Tag: package-2022-02-preview
+
+These settings apply only when `--tag=2022-02-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-02-preview'
+input-file:
+  - Microsoft.Network/preview/2022-02-01-preview/network.json
+  - Microsoft.Network/preview/2022-02-01-preview/networkManager.json
+  - Microsoft.Network/preview/2022-02-01-preview/networkManagerActiveConfiguration.json
+  - Microsoft.Network/preview/2022-02-01-preview/networkManagerConnectivityConfiguration.json
+  - Microsoft.Network/preview/2022-02-01-preview/networkManagerEffectiveConfiguration.json
+  - Microsoft.Network/preview/2022-02-01-preview/networkManagerGroup.json
+  - Microsoft.Network/preview/2022-02-01-preview/networkManagerSecurityUserConfiguration.json
+  - Microsoft.Network/preview/2022-02-01-preview/networkManagerSecurityAdminConfiguration.json
+  - Microsoft.Network/preview/2022-02-01-preview/networkManagerConnection.json
+  - Microsoft.Network/preview/2022-02-01-preview/networkManagerScopeConnection.json
+ ```
 
 ### Tag: package-2021-05-preview
 
