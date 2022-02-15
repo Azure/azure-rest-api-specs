@@ -3449,6 +3449,14 @@
           "type": "boolean",
           "description": "EnableBgp flag."
         },
+        "gatewayCustomBgpIpAddresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayCustomBgpIpAddressIpConfiguration"
+          },
+          "description": "GatewayCustomBgpIpAddresses to be used for virtual network gateway Connection.",
+          "x-ms-identifiers": []
+        },
         "useLocalAzureIpAddress": {
           "type": "boolean",
           "description": "Use private local Azure IP for the connection."
@@ -3852,6 +3860,14 @@
           "type": "boolean",
           "description": "EnableBgp flag."
         },
+        "gatewayCustomBgpIpAddresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayCustomBgpIpAddressIpConfiguration"
+          },
+          "description": "GatewayCustomBgpIpAddresses to be used for virtual network gateway Connection.",
+          "x-ms-identifiers": []
+        },
         "usePolicyBasedTrafficSelectors": {
           "type": "boolean",
           "description": "Enable policy-based traffic selectors."
@@ -4227,6 +4243,24 @@
         }
       },
       "description": "Properties of IPConfigurationBgpPeeringAddress."
+    },
+    "GatewayCustomBgpIpAddressIpConfiguration": {
+      "type": "object",
+      "properties": {
+        "ipConfigurationId": {
+          "type": "string",
+          "description": "The IpconfigurationId of ipconfiguration which belongs to gateway."
+        },
+        "customBgpIpAddress": {
+          "type": "string",
+          "description": "The custom BgpPeeringAddress which belongs to IpconfigurationId."
+        }
+      },
+      "required": [
+        "ipConfigurationId",
+        "customBgpIpAddress"
+      ],
+      "description": "GatewayCustomBgpIpAddressIpConfiguration for a virtual network gateway connection."
     }
   }
 }
