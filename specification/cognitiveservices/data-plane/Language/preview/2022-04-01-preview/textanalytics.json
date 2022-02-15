@@ -908,7 +908,11 @@
     "IssueResolutionSummarizationTaskParameters": {
       "type": "object",
       "description": "Supported parameters for an Issue Resolution Summarization task.",
-      "properties": {},
+      "properties": {
+        "summaryAspects": {
+          "type": "string"
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/TaskParameters"
@@ -938,15 +942,15 @@
     "SummaryResult": {
       "type": "object",
       "required": [
-        "summary"
+        "conversations"
       ],
       "properties": {
-        "summary": {
+        "conversations": {
           "type": "array",
           "items": {
             "allOf": [
               {
-                "$ref": "#/definitions/SummaryResultItem"
+                "$ref": "#/definitions/ConversationsSummaryResult"
               }
             ]
           }
@@ -958,52 +962,38 @@
         }
       ]
     },
+    "ConversationsSummaryResult": {
+      "type": "object",
+      "required": [
+        "summary"
+      ],
+      "properties": {
+        "summaries": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/SummaryResultItem"
+              }
+            ]
+          }
+        }
+      }
+    },
     "SummaryResultItem": {
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ],
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/SummaryKind"
-        }
-      }
-    },
-    "SummaryKind": {
-      "type": "string",
-      "description": "Enumeration of supported Summary types.",
-      "enum": [
-        "Issue",
-        "Resolution"
-      ],
-      "x-ms-enum": {
-        "name": "SummaryKind",
-        "modelAsString": true
-      }
-    },
-    "Issue": {
       "type": "object",
       "properties": {
-        "issue": {
+        "aspect": {
+          "type": "string"
+        },
+        "text": {
           "type": "string"
         }
       },
       "required": [
-        "issue"
-      ],
-      "x-ms-discriminator-value": "Issue"
-    },
-    "Resolution": {
-      "type": "object",
-      "properties": {
-        "resolution": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "resolution"
-      ],
-      "x-ms-discriminator-value": "Resolution"
+        "aspect",
+        "text"
+      ]
     },
     "TaskIdentifier": {
       "type": "object",
