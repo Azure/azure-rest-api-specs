@@ -3011,6 +3011,209 @@
         }
       }
     },
+    "TeamDeskLinkedService": {
+      "x-ms-discriminator-value": "TeamDesk",
+      "description": "Linked service for TeamDesk.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "TeamDesk linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TeamDeskLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "TeamDeskLinkedServiceTypeProperties": {
+      "description": "TeamDesk linked service type properties.",
+      "type": "object",
+      "properties": {
+        "authenticationType": {
+          "description": "The authentication type to use.",
+          "type": "string",
+          "enum": [
+            "Basic",
+            "Token"
+          ],
+          "x-ms-enum": {
+            "name": "TeamDeskAuthenticationType",
+            "modelAsString": true
+          }
+        },
+        "url": {
+          "type": "object",
+          "description": "The url to connect TeamDesk source. Type: string (or Expression with resultType string)."
+        },
+        "userName": {
+          "type": "object",
+          "description": "The username of the TeamDesk source. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "The password of the TeamDesk source.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "apiToken": {
+          "$ref": "../datafactory.json#/definitions/SecretBase",
+          "description": "The api token for the TeamDesk source."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "authenticationType",
+        "url"
+      ]
+    },
+    "QuickbaseLinkedService": {
+      "x-ms-discriminator-value": "Quickbase",
+      "description": "Linked service for Quickbase.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Quickbase linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/QuickbaseLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "QuickbaseLinkedServiceTypeProperties": {
+      "description": "Quickbase linked service type properties.",
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "object",
+          "description": "The url to connect Quickbase source. Type: string (or Expression with resultType string)."
+        },
+        "userToken": {
+          "$ref": "../datafactory.json#/definitions/SecretBase",
+          "description": "The user token for the Quickbase source."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "url",
+        "userToken"
+      ]
+    },
+    "SmartsheetLinkedService": {
+      "x-ms-discriminator-value": "Smartsheet",
+      "description": "Linked service for Smartsheet.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Smartsheet linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SmartsheetLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SmartsheetLinkedServiceTypeProperties": {
+      "description": "Smartsheet linked service type properties.",
+      "type": "object",
+      "properties": {
+        "apiToken": {
+          "$ref": "../datafactory.json#/definitions/SecretBase",
+          "description": "The api token for the Smartsheet source."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "apiToken"
+      ]
+    },
+    "ZendeskLinkedService": {
+      "x-ms-discriminator-value": "Zendesk",
+      "description": "Linked service for Zendesk.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Zendesk linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ZendeskLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "ZendeskLinkedServiceTypeProperties": {
+      "description": "Zendesk linked service type properties.",
+      "type": "object",
+      "properties": {
+        "authenticationType": {
+          "description": "The authentication type to use.",
+          "type": "string",
+          "enum": [
+            "Basic",
+            "Token"
+          ],
+          "x-ms-enum": {
+            "name": "ZendeskAuthenticationType",
+            "modelAsString": true
+          }
+        },
+        "url": {
+          "type": "object",
+          "description": "The url to connect Zendesk source. Type: string (or Expression with resultType string)."
+        },
+        "userName": {
+          "type": "object",
+          "description": "The username of the Zendesk source. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "The password of the Zendesk source.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "apiToken": {
+          "$ref": "../datafactory.json#/definitions/SecretBase",
+          "description": "The api token for the Zendesk source."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "authenticationType",
+        "url"
+      ]
+    },
     "AmazonRedshiftLinkedService": {
       "x-ms-discriminator-value": "AmazonRedshift",
       "description": "Linked service for Amazon Redshift.",
