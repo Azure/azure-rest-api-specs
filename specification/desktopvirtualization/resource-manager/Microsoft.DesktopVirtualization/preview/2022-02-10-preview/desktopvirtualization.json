@@ -3121,6 +3121,14 @@
           "type": "string",
           "description": "Enabled allows this resource to be accessed from both public and private networks, Disabled allows this resource to only be accessed via private endpoints",
           "x-nullable": false
+        },
+        "privateEndpointConnections": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateEndpointConnection"
+          },
+          "description": "List of private endpoint connection associated with the specified resource"
         }
       }
     },
@@ -3519,10 +3527,12 @@
         "publicNetworkAccess": {
           "enum": [
             "Enabled",
-            "Disabled"
+            "Disabled",
+            "EnabledForSessionHostsOnly",
+            "EnabledForClientsOnly"
           ],
           "x-ms-enum": {
-            "name": "PublicNetworkAccess",
+            "name": "HostpoolPublicNetworkAccess",
             "modelAsString": true
           },
           "type": "string",
@@ -3532,6 +3542,14 @@
         "agentUpdate": {
           "$ref": "#/definitions/AgentUpdateProperties",
           "description": "The session host configuration for updating agent, monitoring agent, and stack component."
+        },
+        "privateEndpointConnections": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateEndpointConnection"
+          },
+          "description": "List of private endpoint connection associated with the specified resource"
         }
       }
     },
@@ -3667,10 +3685,12 @@
         "publicNetworkAccess": {
           "enum": [
             "Enabled",
-            "Disabled"
+            "Disabled",
+            "EnabledForSessionHostsOnly",
+            "EnabledForClientsOnly"
           ],
           "x-ms-enum": {
-            "name": "PublicNetworkAccess",
+            "name": "HostpoolPublicNetworkAccess",
             "modelAsString": true
           },
           "type": "string",
