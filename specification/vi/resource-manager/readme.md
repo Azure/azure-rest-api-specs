@@ -52,12 +52,9 @@ tag: package-2021-11-10-preview
 These settings apply only when `--tag=2021-11-10-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2021-11-10-preview'
-version: 2021-11-10-preview
 version-with-underscores: 2021_11_10_preview
 input-file:
   - Microsoft.VideoIndexer/preview/2021-11-10-preview/vi.json
-modelerfour:
-  lenient-model-deduplication: true
 ```
 ### Tag: package-2021-10-27-preview
 
@@ -94,7 +91,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
   - repo: azure-cli-extensions
