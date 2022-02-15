@@ -1433,7 +1433,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/LiveTraceCategory"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -1537,7 +1540,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Dimension"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -1653,7 +1659,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
@@ -1817,7 +1826,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ShareablePrivateLinkResourceType"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1934,7 +1944,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceLogCategory"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -1991,14 +2004,21 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name",
+            "unit"
+          ]
         },
         "logSpecifications": {
           "description": "Specifications of the Logs for Azure Monitoring.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/LogSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -2238,6 +2258,11 @@
           "items": {
             "$ref": "#/definitions/Sku"
           },
+          "x-ms-identifiers": [
+            "resourceType",
+            "/sku/name",
+            "/sku/tier"
+          ],
           "readOnly": true
         },
         "nextLink": {
@@ -2361,7 +2386,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/EventHandler"
-          }
+          },
+          "x-ms-identifiers": [
+            "urlTemplate"
+          ]
         },
         "anonymousConnectPolicy": {
           "description": "The settings for configuring if anonymous connections are allowed for this hub: \"allow\" or \"deny\". Default to \"deny\".",
@@ -2411,7 +2439,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateEndpointACL"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
