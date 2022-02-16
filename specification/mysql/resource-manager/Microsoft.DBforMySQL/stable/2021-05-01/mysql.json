@@ -2507,35 +2507,52 @@
       "description": "Represents a resource name availability."
     },
     "Identity": {
-      "type": "object",
-      "description": "Identity for byok.",
+      "x-ms-client-flatten": true,
       "properties": {
         "principalId": {
-          "readOnly": true,
           "type": "string",
-          "description": "The principal ID of resource identity."
+          "description": "ObjectId from the KeyVault",
+          "readOnly": true
         },
         "tenantId": {
-          "readOnly": true,
           "type": "string",
-          "description": "The tenant ID of resource."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "Identity need for cmk, object structure, key is the identity resource id, value is empty for now."
+          "description": "TenantId from the KeyVault",
+          "readOnly": true
         },
         "type": {
           "type": "string",
-          "description": "The identity type, currently Flexible sever only support UserAssigned.",
+          "description": "Type of managed service identity.",
           "enum": [
             "UserAssigned"
           ],
           "x-ms-enum": {
-            "name": "ResourceIdentityType",
+            "name": "ManagedServiceIdentityType",
             "modelAsString": false
           }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "principalId": {
+                "description": "Principal Id of user assigned identity",
+                "type": "string",
+                "x-ms-client-name": "PrincipalId",
+                "readOnly": true
+              },
+              "clientId": {
+                "description": "Client Id of user assigned identity",
+                "type": "string",
+                "x-ms-client-name": "ClientId",
+                "readOnly": true
+              }
+            }
+          },
+          "description": "Properties for User Assigned Identities"
         }
-      }
+      },
+      "description": "Properties to configure Identity for Bring your Own Keys"
     },
     "OperationDisplay": {
       "type": "object",
