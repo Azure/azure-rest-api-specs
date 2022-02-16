@@ -68,7 +68,7 @@ input-file:
 - Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
 - Microsoft.Insights/preview/2019-10-17-preview/privateLinkScopes_API.json
 - Microsoft.Insights/stable/2020-10-01/activityLogAlerts_API.json
-- Microsoft.Insights/stable/2021-09-01-preview/dataCollectionEndpoints_API.json
+- Microsoft.Insights/preview/2021-09-01-preview/dataCollectionEndpoints_API.json
 - Microsoft.Insights/preview/2021-09-01-preview/dataCollectionRuleAssociations_API.json
 - Microsoft.Insights/preview/2021-09-01-preview/dataCollectionRules_API.json
 ```
@@ -79,7 +79,7 @@ These settings apply only when `--tag=package-2022-02-01-preview-only` is specif
 
 ``` yaml $(tag) == 'package-2022-02-01-preview-only'
 input-file:
-  - Microsoft.Insights/stable/2021-09-01-preview/dataCollectionEndpoints_API.json
+  - Microsoft.Insights/preview/2021-09-01-preview/dataCollectionEndpoints_API.json
   - Microsoft.Insights/preview/2021-09-01-preview/dataCollectionRuleAssociations_API.json
   - Microsoft.Insights/preview/2021-09-01-preview/dataCollectionRules_API.json  
 ```
