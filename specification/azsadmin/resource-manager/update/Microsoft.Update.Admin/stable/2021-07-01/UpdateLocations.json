@@ -45,6 +45,12 @@
             "schema": {
               "$ref": "#/definitions/UpdateLocationList"
             }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -84,6 +90,12 @@
             "schema": {
               "$ref": "#/definitions/UpdateLocation"
             }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -102,7 +114,7 @@
       },
       "allOf": [
         {
-          "$ref": "Update.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ]
     },
@@ -123,7 +135,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PackageVersionInfo"
-          }
+          },
+          "x-ms-identifiers": [
+            "packageType",
+            "version"
+          ]
         },
         "currentVersion": {
           "description": "Current version of your Azure Stack Hub deployment.",

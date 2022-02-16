@@ -48,6 +48,12 @@
             "schema": {
               "$ref": "#/definitions/UpdateList"
             }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -90,6 +96,12 @@
             "schema": {
               "$ref": "#/definitions/Update"
             }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -131,9 +143,9 @@
             }
           },
           "default": {
-            "description": "Default Response.",
+            "description": "Error Response.",
             "schema": {
-              "$ref": "Update.json#/definitions/ExtendedErrorInfo"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -177,9 +189,9 @@
             }
           },
           "default": {
-            "description": "Default Response.",
+            "description": "Error Response.",
             "schema": {
-              "$ref": "Update.json#/definitions/ExtendedErrorInfo"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -220,6 +232,12 @@
             "description": "ACCEPTED",
             "schema": {
               "$ref": "UpdateRuns.json#/definitions/UpdateRun"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -298,7 +316,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/UpdatePrerequisite"
-          }
+          },
+          "x-ms-identifiers": [
+            "packageName"
+          ]
         },
         "updateStateProperties": {
           "description": "Properties when update is in a specific state.",
