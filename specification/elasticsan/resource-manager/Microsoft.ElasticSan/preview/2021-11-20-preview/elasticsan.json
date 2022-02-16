@@ -1274,7 +1274,7 @@
         "tags": [
           "Snapshots"
         ],
-        "description": "Create a Volume Snapshot.",
+        "description": "Get a Volume Snapshot.",
         "operationId": "Snapshots_Get",
         "parameters": [
           {
@@ -1316,7 +1316,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation": false,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -2614,18 +2614,6 @@
     "NetworkRuleSet": {
       "type": "object",
       "properties": {
-        "defaultAction": {
-          "type": "string",
-          "description": "The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.",
-          "enum": [
-            "Allow",
-            "Deny"
-          ],
-          "x-ms-enum": {
-            "name": "NetworkRuleAction",
-            "modelAsString": true
-          }
-        },
         "virtualNetworkRules": {
           "type": "array",
           "items": {
@@ -2641,33 +2629,42 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Full resource id of a vnet subnet, such as '/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1'."
+          "x-ms-client-name": "VirtualNetworkResourceId",
+          "description": "Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}."
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "Allow"
+          ],
+          "x-ms-enum": {
+            "name": "Action",
+            "modelAsString": false
+          },
+          "default": "Allow",
+          "description": "The action of virtual network rule."
         },
         "state": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the state of virtual network rule."
-        },
-        "ignoreMissingVnetServiceEndpoint": {
-          "type": "boolean",
-          "description": "Ignore missing vnet service endpoint or not."
-        },
-        "subnets": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Subnet"
+          "enum": [
+            "provisioning",
+            "deprovisioning",
+            "succeeded",
+            "failed",
+            "networkSourceDeleted"
+          ],
+          "x-ms-enum": {
+            "name": "State",
+            "modelAsString": false
           },
-          "description": "The list of subnets."
+          "description": "Gets the state of virtual network rule."
         }
       },
       "required": [
         "id"
       ],
-      "description": "A rule governing the accessibility from a specific virtual network."
-    },
-    "Subnet": {
-      "type": "string",
-      "description": "Azure Resource Id of a Subnet for the Volume Group."
+      "description": "Virtual Network rule."
     }
   }
 }
