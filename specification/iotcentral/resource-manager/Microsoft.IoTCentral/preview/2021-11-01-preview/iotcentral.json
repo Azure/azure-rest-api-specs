@@ -863,8 +863,12 @@
       "description": "Network Rule Set Properties of this Iot Central application.",
       "type": "object",
       "properties": {
-        "applyToHub": {
-          "description": "Whether these rules apply to the internal IoT Hub.",
+        "applyToDevices": {
+          "description": "Whether these rules apply to the internal IoT Hub and Device Provisioning service.",
+          "type": "boolean"
+        },
+        "applyToIoTCentral": {
+          "description": "Whether these rules apply to the IoT Central application and public APIs.",
           "type": "boolean"
         },
         "defaultAction": {
