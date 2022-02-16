@@ -409,6 +409,9 @@
             "type": "string"
           }
         },
+        "migrationMode": {
+            "$ref": "#/definitions/MigrationMode"
+        },
         "migrationResourceGroup": {
           "$ref": "#/definitions/MigrationResourceGroup"
         },
@@ -628,6 +631,19 @@
         "modelAsString": true
       }
     },
+    "MigrationMode": {
+      "enum": [
+        "Offline",
+        "Online",
+        "SchemaOnly"
+      ],
+      "type": "string",
+      "description": "Migration Mode",
+      "x-ms-enum": {
+        "name": "MigrationMode",
+        "modelAsString": true
+      }
+    },
     "MigrationState": {
       "enum": [
         "InProgress",
@@ -819,22 +835,6 @@
       "description": "Migration list filter. Retrieves either active migrations or all migrations.",
       "x-ms-enum": {
         "name": "MigrationListFilter",
-        "modelAsString": true
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "MigrationMode": {
-      "name": "migrationMode",
-      "in": "query",
-      "required": false,
-      "enum": [
-        "Offline",
-        "Online"
-      ],
-      "type": "string",
-      "description": "Migration Mode. Perform online/offline migration",
-      "x-ms-enum": {
-        "name": "MigrationMode",
         "modelAsString": true
       },
       "x-ms-parameter-location": "method"
