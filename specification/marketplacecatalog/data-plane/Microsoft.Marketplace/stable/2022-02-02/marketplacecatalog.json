@@ -22,17 +22,17 @@
     "/offers/{id}": {
       "get": {
         "tags": [
-          "Public Offer/Product Single"
+          "Public Offers/Products Single"
         ],
-        "summary": "Get a single public catalog item offer by id",
-        "operationId": "SinglePublicOffer_Get",
+        "summary": "Get a public offer by legacy or big id",
+        "operationId": "PublicOffers_Get",
         "parameters": [
           {
             "type": "string",
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "Offer legacy or big id",
+            "description": "Offer id",
             "x-nullable": true
           },
           {
@@ -98,8 +98,8 @@
           }
         },
         "x-ms-examples": {
-          "SinglePublicOffers_Get": {
-            "$ref": "./examples/SinglePublicOffer_Get.json"
+          "PublicOffers_Get": {
+            "$ref": "./examples/PublicOffers_Get.json"
           }
         }
       }
@@ -112,14 +112,6 @@
         "summary": "Get a list of public available offers",
         "operationId": "PublicOffers_List",
         "parameters": [
-          {
-            "type": "string",
-            "name": "storefront",
-            "in": "query",
-            "description": "Relevant storefront",
-            "default": "azure",
-            "x-nullable": true
-          },
           {
             "type": "string",
             "name": "api-version",
