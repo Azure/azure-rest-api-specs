@@ -31,6 +31,22 @@ tag: package-preview-2021-11
 ```
 
 
+### Tag: package-2022-03
+
+These settings apply only when `--tag=package-2022-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-03'
+input-file:
+  - Microsoft.DocumentDB/stable/2022-03-15/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2022-03-15/notebook.json
+  - Microsoft.DocumentDB/stable/2022-03-15/privateEndpointConnection.json
+  - Microsoft.DocumentDB/stable/2022-03-15/privateLinkResources.json
+  - Microsoft.DocumentDB/stable/2022-03-15/rbac.json
+  - Microsoft.DocumentDB/stable/2022-03-15/restorable.json
+  - Microsoft.DocumentDB/stable/2022-03-15/managedCassandra.json
+modelerfour:
+  lenient-model-deduplication: true
+
 ### Tag: package-preview-2021-11
 
 These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
