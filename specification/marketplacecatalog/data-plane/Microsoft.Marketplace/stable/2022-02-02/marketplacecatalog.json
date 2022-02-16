@@ -319,7 +319,6 @@
         "fulfillBeforeChargeEligible",
         "bigId",
         "legalTermsType",
-        "isDeleted",
         "isThirdParty",
         "popularity",
         "hasFreeTrials",
@@ -698,10 +697,6 @@
             }
           ]
         },
-        "isDeleted": {
-          "type": "boolean",
-          "description": "A value indicating is the marketplace item deleted"
-        },
         "isThirdParty": {
           "type": "boolean",
           "description": "A value indicating whether the product is third party offer or not"
@@ -713,13 +708,6 @@
         "hideKeys": {
           "type": "array",
           "description": "List of hide keys provided for the item",
-          "items": {
-            "type": "string"
-          }
-        },
-        "keywords": {
-          "type": "array",
-          "description": "List of keywords provided for the item",
           "items": {
             "type": "string"
           }
@@ -1427,13 +1415,6 @@
         "legacyPlanId": {
           "type": "string",
           "description": "Legacy plan Id which is obtained by combining Offer->LegacyId and PlanId with no separator in between"
-        },
-        "Keywords": {
-          "type": "array",
-          "description": "List of keywords",
-          "items": {
-            "type": "string"
-          }
         },
         "type": {
           "description": "Offer type",
@@ -2367,17 +2348,17 @@
       "type": "object",
       "description": "Represents a feed of entities that includes additional information that OData formats support.",
       "properties": {
-        "NextPageLink": {
+        "nextPageLink": {
           "type": "string",
           "description": "Gets the link for the next page of items in the feed.",
           "format": "uri"
         },
-        "Count": {
+        "count": {
           "type": "integer",
           "description": "Gets the total count of items in the feed.",
           "format": "int64"
         },
-        "Items": {
+        "items": {
           "type": "array",
           "description": "Gets the collection of entities for this feed.",
           "items": {
