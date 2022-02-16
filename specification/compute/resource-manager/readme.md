@@ -251,8 +251,8 @@ input-file:
 #- Microsoft.Compute/stable/2022-03-01/computeRP/proximityPlacementGroup.json
 #- Microsoft.Compute/stable/2022-03-01/computeRP/host.json
 #- Microsoft.Compute/stable/2022-03-01/computeRP/dedicatedhost.json
-- Microsoft.Compute/stable/2022-03-01/computeRP/sshPublicKey.json
-#- Microsoft.Compute/stable/2022-03-01/computeRP/image.json
+#- Microsoft.Compute/stable/2022-03-01/computeRP/sshPublicKey.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/image.json
 #- Microsoft.Compute/stable/2022-03-01/computeRP/restorePoint.json
 - Microsoft.Compute/stable/2022-03-01/computeRP/capacityReservation.json
 - Microsoft.Compute/stable/2022-03-01/computeRP/logAnalytic.json
