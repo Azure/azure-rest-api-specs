@@ -193,22 +193,22 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/VaultName"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/SubscriptionId"
+            "$ref": "#/parameters/VaultName"
           },
           {
             "name": "operationId",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "responses": {
@@ -1378,16 +1378,13 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/VaultName"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/SubscriptionId"
+            "$ref": "#/parameters/VaultName"
           },
           {
             "name": "backupInstanceName",
@@ -1400,6 +1397,9 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "responses": {
@@ -1411,6 +1411,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -1722,22 +1728,22 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/VaultName"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/SubscriptionId"
+            "$ref": "#/parameters/VaultName"
           },
           {
             "name": "backupInstanceName",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "responses": {
@@ -1789,22 +1795,22 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/VaultName"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/SubscriptionId"
+            "$ref": "#/parameters/VaultName"
           },
           {
             "name": "backupInstanceName",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "responses": {
@@ -1856,22 +1862,22 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/VaultName"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/SubscriptionId"
+            "$ref": "#/parameters/VaultName"
           },
           {
             "name": "backupInstanceName",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "responses": {
@@ -1923,22 +1929,22 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/VaultName"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/SubscriptionId"
+            "$ref": "#/parameters/VaultName"
           },
           {
             "name": "backupInstanceName",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "responses": {
@@ -1990,22 +1996,22 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/VaultName"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/SubscriptionId"
+            "$ref": "#/parameters/VaultName"
           },
           {
             "name": "backupInstanceName",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
           },
           {
             "name": "parameters",
@@ -2196,13 +2202,13 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/VaultName"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/SubscriptionId"
+            "$ref": "#/parameters/VaultName"
           },
           {
             "name": "backupInstanceName",
