@@ -27,7 +27,7 @@ These are the global settings for the Cosmos-DB API.
 ``` yaml
 title: CosmosDBManagementClient
 openapi-type: arm
-tag: package-preview-2021-11
+tag: package-2022-03
 ```
 
 
@@ -47,7 +47,6 @@ input-file:
 modelerfour:
   lenient-model-deduplication: true
 ```
-
 ### Tag: package-preview-2021-11
 
 These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
