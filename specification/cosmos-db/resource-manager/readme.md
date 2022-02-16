@@ -46,6 +46,7 @@ input-file:
   - Microsoft.DocumentDB/stable/2022-03-15/managedCassandra.json
 modelerfour:
   lenient-model-deduplication: true
+```
 
 ### Tag: package-preview-2021-11
 
