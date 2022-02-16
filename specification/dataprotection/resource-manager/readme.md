@@ -51,7 +51,7 @@ message-format: json
 
 These settings apply only when `--tag=package-2022-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-01'
+``` yaml $(tag) == 'package-2022-01'
 input-file:
   - Microsoft.DataProtection/stable/2022-01-01/dataprotection.json
 ```
