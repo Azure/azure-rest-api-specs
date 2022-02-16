@@ -960,42 +960,6 @@ directive:
   where: $.definitions
   transform: delete $["ActionGroup"]
   reason: Incompatible values (2020-10-01)
-- from: dataCollectionRules_API.json
-  where: $.definitions.DataCollectionRule.properties.dataFlows
-  transform: delete $["x-ms-identifiers"]
-  reason: schema violation
-- from: dataCollectionRules_API.json
-  where: $.definitions.DestinationsSpec.properties.logAnalytics
-  transform: delete $["x-ms-identifiers"]
-  reason: schema violation
-- from: dataCollectionRules_API.json
-  where: $.definitions.DataSourcesSpec.properties.iisLogs
-  transform: delete $["x-ms-identifiers"]
-  reason: schema violation
-- from: dataCollectionRules_API.json
-  where: $.definitions.DataSourcesSpec.properties.logFiles
-  transform: delete $["x-ms-identifiers"]
-  reason: schema violation
-- from: dataCollectionRules_API.json
-  where: $.definitions.DataSourcesSpec.properties.extensions
-  transform: delete $["x-ms-identifiers"]
-  reason: schema violation
-- from: dataCollectionRules_API.json
-  where: $.definitions.DataSourcesSpec.properties.syslog
-  transform: delete $["x-ms-identifiers"]
-  reason: schema violation
-- from: dataCollectionRules_API.json
-  where: $.definitions.DataSourcesSpec.properties.windowsEventLogs
-  transform: delete $["x-ms-identifiers"]
-  reason: schema violation
-- from: dataCollectionRules_API.json
-  where: $.definitions.DataSourcesSpec.properties.performanceCounters
-  transform: delete $["x-ms-identifiers"]
-  reason: schema violation
-- from: dataCollectionRules_API.json
-  where: $.definitions.StreamDeclaration.properties.columns
-  transform: delete $["x-ms-identifiers"]
-  reason: schema violation
 ```
 
 ### Tag: profile-hybrid-2019-03-01
