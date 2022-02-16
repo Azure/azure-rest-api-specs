@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "name": "testcontainerApp0",
+    "api-version": "2022-01-01-preview",
+    "containerAppEnvelope": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerApp0",
+        "name": "testcontainerApp0",
+        "type": "Microsoft.App/containerApps",
+        "location": "East US",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+          "latestRevisionFqdn": "testcontainerApp0-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+          "configuration": {
+            "ingress": {
+              "fqdn": "testcontainerApp0.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+              "external": true,
+              "targetPort": 3000,
+              "transport": "auto"
+            }
+          },
+          "template": {
+            "containers": [
+              {
+                "image": "repo/testcontainerApp0:v4",
+                "name": "testcontainerApp0",
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                }
+              }
+            ],
+            "scale": {
+              "minReplicas": 1,
+              "maxReplicas": 5,
+              "rules": [
+                {
+                  "name": "httpscalingrule",
+                  "http": {
+                    "metadata": {
+                      "concurrentRequests": "50"
+                    }
+                  }
+                }
+              ]
+            },
+            "dapr": {
+              "enabled": true,
+              "appPort": 3000,
+              "appProtocol": "grpc"
+            }
+          }
+        }
+      }
+    }
+  }
+}
