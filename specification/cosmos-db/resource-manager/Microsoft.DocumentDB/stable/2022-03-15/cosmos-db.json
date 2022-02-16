@@ -3,7 +3,7 @@
   "info": {
     "title": "Cosmos DB",
     "description": "Azure Cosmos DB Database Service Resource Provider REST API",
-    "version": "2021-10-15"
+    "version": "2022-03-15"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -6147,7 +6147,7 @@
           "readOnly": true,
           "description": "List of Private Endpoint Connections configured for the Cosmos DB account.",
           "items": {
-            "$ref": "../../stable/2021-10-15/privateEndpointConnection.json#/definitions/PrivateEndpointConnection"
+            "$ref": "../../stable/2022-03-15/privateEndpointConnection.json#/definitions/PrivateEndpointConnection"
           }
         },
         "enableMultipleWriteLocations": {
@@ -6319,6 +6319,10 @@
           "description": "The default identity for accessing key vault used in features like customer managed keys. The default identity needs to be explicitly set by the users. It can be \"FirstPartyIdentity\", \"SystemAssignedIdentity\" and more.",
           "type": "string"
         },
+        "minimalTLSVersion": {
+          "description": "The minimal TLS version to be used for network calls. The acceptable values are TLS 1.0, TLS 1.1 and TLS 1.2.",
+          "type": "string"
+        },
         "publicNetworkAccess": {
           "description": "Whether requests from Public Network are allowed",
           "$ref": "#/definitions/PublicNetworkAccess"
@@ -6488,6 +6492,10 @@
         },
         "defaultIdentity": {
           "description": "The default identity for accessing key vault used in features like customer managed keys. The default identity needs to be explicitly set by the users. It can be \"FirstPartyIdentity\", \"SystemAssignedIdentity\" and more.",
+          "type": "string"
+        },
+        "minimalTLSVersion": {
+          "description": "The minimal TLS version to be used for network calls. The acceptable values are TLS 1.0, TLS 1.1 and TLS 1.2.",
           "type": "string"
         },
         "publicNetworkAccess": {
