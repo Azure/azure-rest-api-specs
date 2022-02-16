@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Language Authoring CLU APIs",
+    "title": "Language - Conversational Language Understanding Authoring APIs (2022-03-01-preview)",
     "version": "2022-03-01-preview"
   },
   "x-ms-parameterized-host": {
@@ -229,6 +229,16 @@
           },
           {
             "in": "query",
+            "name": "stringIndexType",
+            "description": "Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Utf16CodeUnit"
+            ]
+          },
+          {
+            "in": "query",
             "name": "assetKind",
             "description": "Kind of asset to export.",
             "type": "string"
@@ -281,7 +291,11 @@
             "in": "query",
             "name": "format",
             "description": "The format of the project to import.",
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "clu",
+              "luis"
+            ]
           },
           {
             "in": "body",
@@ -795,6 +809,54 @@
         }
       }
     },
+    "/projects/{projectName}/export/jobs/{jobId}/result": {
+      "get": {
+        "description": "Get export job result details.",
+        "operationId": "Projects_GetExportProjectJobStatusResult",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectName",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "The job Id.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The exported json project object.",
+            "schema": {
+              "$ref": "#/definitions/JsonProject"
+            }
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "404": {
+            "description": "The project does not exist."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      }
+    },
     "/projects/{projectName}/import/jobs/{jobId}": {
       "get": {
         "description": "Get import or replace project job status and result details.",
@@ -990,10 +1052,10 @@
         }
       }
     },
-    "/projects/{projectName}/models/{trainedModelName}/evaluation/predictions": {
+    "/projects/{projectName}/models/{trainedModelName}/evaluation/result": {
       "get": {
-        "description": "Get trained model evaluation predictions.",
-        "operationId": "Models_GetTrainedModelEvaluationPredictions",
+        "description": "Get trained model evaluation result.",
+        "operationId": "Models_GetTrainedModelEvaluationResult",
         "produces": [
           "application/json"
         ],
@@ -1011,6 +1073,16 @@
             "description": "The trained model name.",
             "required": true,
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "stringIndexType",
+            "description": "Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Utf16CodeUnit"
+            ]
           },
           {
             "in": "query",
@@ -1056,10 +1128,10 @@
         }
       }
     },
-    "/projects/{projectName}/models/{trainedModelName}/evaluation/summary": {
+    "/projects/{projectName}/models/{trainedModelName}/evaluation/summaryResult": {
       "get": {
         "description": "Get trained model evaluation summary.",
-        "operationId": "Models_GetTrainedModelEvaluationSummary",
+        "operationId": "Models_GetTrainedModelEvaluationSummaryResult",
         "produces": [
           "application/json"
         ],
@@ -1305,20 +1377,38 @@
           {
             "in": "query",
             "name": "projectKind",
-            "description": "The project kind to get the supported languages for.",
+            "description": "The CLU project kind to get the supported languages for.",
             "required": true,
             "type": "string",
             "enum": [
               "conversation",
-              "workflow"
+              "orchestration"
             ]
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "The number of languages to be returned.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "The offset in the response.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "maxpagesize",
+            "description": "The maximum number of languages per page.",
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "The list of supported languages.",
             "schema": {
-              "$ref": "#/definitions/LanguagesGetObject"
+              "$ref": "#/definitions/LanguageGetObjectList"
             }
           },
           "400": {
@@ -1341,7 +1431,7 @@
     },
     "/projects/global/prebuiltEntities": {
       "get": {
-        "description": "Get list of supported prebuilt entities for conversational projects.",
+        "description": "Get list of Supported prebuilts for conversational projects.",
         "operationId": "CLU_Projects_GetSupportedPrebuilts",
         "produces": [
           "application/json"
@@ -1349,16 +1439,40 @@
         "parameters": [
           {
             "in": "query",
-            "name": "languages",
-            "description": "The languages to get supported prebuilt entities for. If unspecified, prebuilts for all supported languages are returned.",
+            "name": "language",
+            "description": "The language to get supported prebuilt entities for. Reuqired if multilingual is false.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "multilingual",
+            "description": "Whether to get the support prebuilt entities for multilingual or monolingual projects. If true, the language parameter is ignored.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "The number of prebuilt entities to be returned.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "The offset in the response.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "maxpagesize",
+            "description": "The maximum number of prebuilt entities per page.",
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "The list of supported prebuilts.",
+            "description": "The list of supported prebuilt entities.",
             "schema": {
-              "$ref": "#/definitions/PrebuiltsGetObject"
+              "$ref": "#/definitions/PrebuiltGetObjectList"
             }
           },
           "400": {
@@ -1386,9 +1500,40 @@
         "produces": [
           "application/json"
         ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "projectKind",
+            "description": "The project type.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "conversation",
+              "orchestration"
+            ]
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "The number of configs to be returned.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "The offset in the response.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "maxpagesize",
+            "description": "The maximum number of configs per page.",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "List of the supported training config versions.",
+            "description": "List of all trained models.",
             "schema": {
               "$ref": "#/definitions/TrainingConfigVersionsList"
             }
@@ -1491,14 +1636,14 @@
           "description": "Gets or sets the warnings.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobError"
+            "$ref": "#/definitions/ErrorBody"
           }
         },
         "errors": {
           "description": "Gets or sets the errors.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobError"
+            "$ref": "#/definitions/ErrorBody"
           }
         }
       }
@@ -1509,31 +1654,36 @@
         "modelId",
         "lastTrainedDateTime",
         "lastDeployedDateTime",
-        "modelExpirationDate"
+        "deploymentExpirationDate",
+        "modelTrainingConfigVersion"
       ],
       "type": "object",
       "properties": {
         "deploymentName": {
-          "description": "Gets or sets the deployment name.",
+          "description": "Represents deployment name.",
           "type": "string"
         },
         "modelId": {
-          "description": "Gets or sets the deployment modelId.",
+          "description": "Represents deployment modelId.",
           "type": "string"
         },
         "lastTrainedDateTime": {
           "format": "date-time",
-          "description": "Gets or sets the deployment last trained time.",
+          "description": "Represents deployment last trained time.",
           "type": "string"
         },
         "lastDeployedDateTime": {
           "format": "date-time",
-          "description": "Gets or sets the deployment last deployed time.",
+          "description": "Represents deployment last deployed time.",
           "type": "string"
         },
-        "modelExpirationDate": {
+        "deploymentExpirationDate": {
           "format": "date-time",
-          "description": "Gets or sets the model expiration date in the tuntime.",
+          "description": "Represents deployment expiration date in the runtime.",
+          "type": "string"
+        },
+        "modelTrainingConfigVersion": {
+          "description": "Represents model training config version.",
           "type": "string"
         }
       }
@@ -1669,13 +1819,24 @@
         }
       }
     },
+    "ErrorBody": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
     "EvaluationOptions": {
       "type": "object",
       "properties": {
-        "runEvaluation": {
-          "description": "Represents the option to run evaluations. By default, evaluations are turned on.",
-          "type": "boolean"
-        },
         "kind": {
           "description": "Represents the evaluation kind. By default, the evaluation kind is set to percentage.",
           "enum": [
@@ -1847,28 +2008,6 @@
         }
       }
     },
-    "JobError": {
-      "required": [
-        "code",
-        "message"
-      ],
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Gets or sets the error code.",
-          "enum": [
-            "unknown",
-            "notFound",
-            "invalidOperation"
-          ],
-          "type": "string"
-        },
-        "message": {
-          "description": "Gets or sets the error message.",
-          "type": "string"
-        }
-      }
-    },
     "JsonCluOrchestration": {
       "type": "object",
       "properties": {
@@ -1992,11 +2131,20 @@
     },
     "JsonProject": {
       "required": [
+        "api-version",
+        "stringIndexType",
         "metadata"
       ],
       "type": "object",
       "properties": {
         "api-version": {
+          "type": "string"
+        },
+        "stringIndexType": {
+          "description": "Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.",
+          "enum": [
+            "Utf16CodeUnit"
+          ],
           "type": "string"
         },
         "metadata": {
@@ -2045,7 +2193,7 @@
           "description": "Represents the project kind.",
           "enum": [
             "conversation",
-            "workflow"
+            "orchestration"
           ],
           "type": "string"
         },
@@ -2148,18 +2296,23 @@
         }
       }
     },
-    "LanguagesGetObject": {
+    "LanguageGetObjectList": {
       "required": [
-        "languages"
+        "value",
+        "nextLink"
       ],
       "type": "object",
       "properties": {
-        "languages": {
-          "description": "Gets or sets the languages.",
+        "value": {
+          "description": "The list of supported objects.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/LanguageGetObject"
           }
+        },
+        "nextLink": {
+          "description": "The next page link.",
+          "type": "string"
         }
       }
     },
@@ -2185,38 +2338,23 @@
         }
       }
     },
-    "PrebuiltsGetObject": {
+    "PrebuiltGetObjectList": {
       "required": [
-        "prebuiltEntitiesPerLanguage"
+        "value",
+        "nextLink"
       ],
       "type": "object",
       "properties": {
-        "prebuiltEntitiesPerLanguage": {
-          "description": "The prebuilts per language.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrebuiltsPerLanguageGetObject"
-          }
-        }
-      }
-    },
-    "PrebuiltsPerLanguageGetObject": {
-      "required": [
-        "language",
-        "prebuiltEntities"
-      ],
-      "type": "object",
-      "properties": {
-        "language": {
-          "description": "The language.",
-          "type": "string"
-        },
-        "prebuiltEntities": {
-          "description": "The prebuilts.",
+        "value": {
+          "description": "The supported prebuilt entities.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrebuiltGetObject"
           }
+        },
+        "nextLink": {
+          "description": "The next page link.",
+          "type": "string"
         }
       }
     },
@@ -2233,7 +2371,7 @@
           "description": "Represents the project kind.",
           "enum": [
             "conversation",
-            "workflow"
+            "orchestration"
           ],
           "type": "string"
         },
@@ -2306,14 +2444,14 @@
           "description": "Gets or sets the warnings.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobError"
+            "$ref": "#/definitions/ErrorBody"
           }
         },
         "errors": {
           "description": "Gets or sets the errors.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobError"
+            "$ref": "#/definitions/ErrorBody"
           }
         }
       }
@@ -2368,14 +2506,14 @@
           "description": "Gets or sets the warnings.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobError"
+            "$ref": "#/definitions/ErrorBody"
           }
         },
         "errors": {
           "description": "Gets or sets the errors.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobError"
+            "$ref": "#/definitions/ErrorBody"
           }
         }
       }
@@ -2427,14 +2565,14 @@
           "description": "Gets or sets the warnings.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobError"
+            "$ref": "#/definitions/ErrorBody"
           }
         },
         "errors": {
           "description": "Gets or sets the errors.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobError"
+            "$ref": "#/definitions/ErrorBody"
           }
         }
       }
@@ -2476,7 +2614,7 @@
           "description": "Represents the project kind.",
           "enum": [
             "conversation",
-            "workflow"
+            "orchestration"
           ],
           "type": "string"
         },
@@ -2555,7 +2693,10 @@
       "required": [
         "label",
         "modelId",
-        "lastTrainedDateTime"
+        "lastTrainedDateTime",
+        "deploymentExpirationDate",
+        "modelExpirationDate",
+        "modelTrainingConfigVersion"
       ],
       "type": "object",
       "properties": {
@@ -2570,6 +2711,20 @@
         "lastTrainedDateTime": {
           "format": "date-time",
           "description": "Represents trained model last trained time.",
+          "type": "string"
+        },
+        "deploymentExpirationDate": {
+          "format": "date-time",
+          "description": "Represents deployment expiration date in the runtime.",
+          "type": "string"
+        },
+        "modelExpirationDate": {
+          "format": "date-time",
+          "description": "Represents model expiration date.",
+          "type": "string"
+        },
+        "modelTrainingConfigVersion": {
+          "description": "Represents the model training config version.",
           "type": "string"
         }
       }
@@ -2614,16 +2769,21 @@
     },
     "TrainingConfigVersionsList": {
       "required": [
-        "trainingConfigVersions"
+        "value",
+        "nextLink"
       ],
       "type": "object",
       "properties": {
-        "trainingConfigVersions": {
+        "value": {
           "description": "Gets or sets the training config versions.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/TrainingConfigVersionDetails"
           }
+        },
+        "nextLink": {
+          "description": "Gets or sets the next page link.",
+          "type": "string"
         }
       }
     },
@@ -2708,15 +2868,53 @@
           "description": "Gets or sets the warnings.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobError"
+            "$ref": "#/definitions/ErrorBody"
           }
         },
         "errors": {
           "description": "Gets or sets the errors.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobError"
+            "$ref": "#/definitions/ErrorBody"
           }
+        }
+      }
+    },
+    "TrainingJobResultStatus": {
+      "required": [
+        "percentComplete",
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "percentComplete": {
+          "format": "int32",
+          "description": "Represents progress percentage.",
+          "type": "integer"
+        },
+        "startDateTime": {
+          "format": "date-time",
+          "description": "Represents the start date time.",
+          "type": "string"
+        },
+        "endDateTime": {
+          "format": "date-time",
+          "description": "Represents the end date time.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Represents the status of the job.",
+          "enum": [
+            "unknown",
+            "notStarted",
+            "running",
+            "succeeded",
+            "failed",
+            "cancelled",
+            "cancelling",
+            "partiallyCompleted"
+          ],
+          "type": "string"
         }
       }
     },
@@ -2766,29 +2964,11 @@
         },
         "trainingStatus": {
           "description": "Represents model train status.",
-          "$ref": "#/definitions/TrainingJobStatusResultStatus"
+          "$ref": "#/definitions/TrainingJobResultStatus"
         },
         "evaluationStatus": {
           "description": "Represents model evaluation status.",
-          "$ref": "#/definitions/TrainingJobStatusResultStatus"
-        }
-      }
-    },
-    "TrainingJobStatusResultStatus": {
-      "required": [
-        "percentComplete",
-        "elapsedTime"
-      ],
-      "type": "object",
-      "properties": {
-        "percentComplete": {
-          "format": "int32",
-          "description": "Represents progress percentage.",
-          "type": "integer"
-        },
-        "elapsedTime": {
-          "description": "Represents the elapsed time. This string is in the format hh:mm:ss",
-          "type": "string"
+          "$ref": "#/definitions/TrainingJobResultStatus"
         }
       }
     },

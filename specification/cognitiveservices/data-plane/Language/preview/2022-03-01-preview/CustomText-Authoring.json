@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Language Authoring APIs",
+    "title": "Language - Custom Text Authoring APIs (2022-03-01-preview)",
     "version": "2022-03-01-preview"
   },
   "x-ms-parameterized-host": {
@@ -223,9 +223,18 @@
           },
           {
             "in": "query",
+            "name": "stringIndexType",
+            "description": "Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Utf16CodeUnit"
+            ]
+          },
+          {
+            "in": "query",
             "name": "format",
             "description": "The format of the project to export. The currently supported format is `JSON`.",
-            "required": true,
             "type": "string"
           },
           {
@@ -275,13 +284,6 @@
             "in": "path",
             "name": "projectName",
             "description": "The project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "format",
-            "description": "The format of the project to import. The currently supported format is json format.",
             "required": true,
             "type": "string"
           },
@@ -797,6 +799,54 @@
         }
       }
     },
+    "/projects/{projectName}/export/jobs/{jobId}/result": {
+      "get": {
+        "description": "Get export job result details.",
+        "operationId": "Projects_GetExportProjectJobStatusResult",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectName",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "The job Id.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The exported json project object.",
+            "schema": {
+              "$ref": "#/definitions/JsonProject"
+            }
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "404": {
+            "description": "The project does not exist."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      }
+    },
     "/projects/{projectName}/import/jobs/{jobId}": {
       "get": {
         "description": "Get import or replace project job status and result details.",
@@ -992,10 +1042,10 @@
         }
       }
     },
-    "/projects/{projectName}/models/{trainedModelName}/evaluation/predictions": {
+    "/projects/{projectName}/models/{trainedModelName}/evaluation/result": {
       "get": {
-        "description": "Get trained model evaluation predictions.",
-        "operationId": "Models_GetTrainedModelEvaluationPredictions",
+        "description": "Get trained model evaluation result.",
+        "operationId": "Models_GetTrainedModelEvaluationResult",
         "produces": [
           "application/json"
         ],
@@ -1013,6 +1063,16 @@
             "description": "The trained model name.",
             "required": true,
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "stringIndexType",
+            "description": "Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Utf16CodeUnit"
+            ]
           },
           {
             "in": "query",
@@ -1035,7 +1095,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of the evaluation predictions.",
+            "description": "List of the evaluation results.",
             "schema": {
               "$ref": "#/definitions/EvaluationPredictionsList"
             }
@@ -1058,7 +1118,7 @@
         }
       }
     },
-    "/projects/{projectName}/models/{trainedModelName}/evaluation/summary": {
+    "/projects/{projectName}/models/{trainedModelName}/evaluation/summaryResult": {
       "get": {
         "description": "Get trained model evaluation summary.",
         "operationId": "Models_GetTrainedModelEvaluationSummary",
@@ -1085,7 +1145,7 @@
           "200": {
             "description": "List of all evaluation results.",
             "schema": {
-              "$ref": "#/definitions/EvaluationResultObject"
+              "$ref": "#/definitions/EvaluationSummaryObject"
             }
           },
           "400": {
@@ -1303,11 +1363,31 @@
         "produces": [
           "application/json"
         ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "top",
+            "description": "The number of languages to be returned.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "The offset in the response.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "maxpagesize",
+            "description": "The maximum number of languages per page.",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "The list of supported languages.",
             "schema": {
-              "$ref": "#/definitions/LanguagesGetObject"
+              "$ref": "#/definitions/LanguageGetObjectList"
             }
           },
           "400": {
@@ -1334,6 +1414,38 @@
         "operationId": "Models_GetTrainingConfigVersions",
         "produces": [
           "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "projectKind",
+            "description": "The project kind.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "customSingleLabelClassification",
+              "customMultiLabelClassification",
+              "customNamedEntityRecognition"
+            ]
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "The number of configs to be returned.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "The offset in the response.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "maxpagesize",
+            "description": "The maximum number of configs per page.",
+            "type": "string"
+          }
         ],
         "responses": {
           "200": {
@@ -1440,14 +1552,14 @@
           "description": "Gets or sets the warnings.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobError"
+            "$ref": "#/definitions/ErrorBody"
           }
         },
         "errors": {
           "description": "Gets or sets the errors.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobError"
+            "$ref": "#/definitions/ErrorBody"
           }
         }
       }
@@ -1458,31 +1570,36 @@
         "modelId",
         "lastTrainedDateTime",
         "lastDeployedDateTime",
-        "modelExpirationDate"
+        "deploymentExpirationDate",
+        "modelTrainingConfigVersion"
       ],
       "type": "object",
       "properties": {
         "deploymentName": {
-          "description": "Gets or sets the deployment name.",
+          "description": "Represents deployment name.",
           "type": "string"
         },
         "modelId": {
-          "description": "Gets or sets the deployment modelId.",
+          "description": "Represents deployment modelId.",
           "type": "string"
         },
         "lastTrainedDateTime": {
           "format": "date-time",
-          "description": "Gets or sets the deployment last trained time.",
+          "description": "Represents deployment last trained time.",
           "type": "string"
         },
         "lastDeployedDateTime": {
           "format": "date-time",
-          "description": "Gets or sets the deployment last deployed time.",
+          "description": "Represents deployment last deployed time.",
           "type": "string"
         },
-        "modelExpirationDate": {
+        "deploymentExpirationDate": {
           "format": "date-time",
-          "description": "Gets or sets the model expiration date in the tuntime.",
+          "description": "Represents deployment expiration date in the runtime.",
+          "type": "string"
+        },
+        "modelTrainingConfigVersion": {
+          "description": "Represents model training config version.",
           "type": "string"
         }
       }
@@ -1570,10 +1687,10 @@
       "required": [
         "location",
         "language",
-        "modelKind",
-        "namedEntityRecognitionResult",
-        "singleLabelClassificationResult",
-        "multiLabelClassificationResult"
+        "projectKind",
+        "customNamedEntityRecognitionResult",
+        "customSingleLabelClassificationResult",
+        "customMultiLabelClassificationResult"
       ],
       "type": "object",
       "properties": {
@@ -1585,24 +1702,24 @@
           "description": "Represents the document language.",
           "type": "string"
         },
-        "modelKind": {
-          "description": "Represents the model kind.",
+        "projectKind": {
+          "description": "Represents the project kind.",
           "enum": [
-            "singleLabelClassification",
-            "multiLabelClassification",
-            "namedEntityRecognition"
+            "customSingleLabelClassification",
+            "customMultiLabelClassification",
+            "customNamedEntityRecognition"
           ],
           "type": "string"
         },
-        "namedEntityRecognitionResult": {
+        "customNamedEntityRecognitionResult": {
           "description": "Represents the evaluation prediction for named entity recognition.",
           "$ref": "#/definitions/DocumentNamedEntityRecognitionEvaluationPrediction"
         },
-        "singleLabelClassificationResult": {
+        "customSingleLabelClassificationResult": {
           "description": "Represents the evaluation prediction for single label classification.",
           "$ref": "#/definitions/DocumentSingleLabelClassificationEvaluationPrediction"
         },
-        "multiLabelClassificationResult": {
+        "customMultiLabelClassificationResult": {
           "description": "Represents the evaluation prediction for multi label classification.",
           "$ref": "#/definitions/DocumentMultiLabelClassificationEvaluationPrediction"
         }
@@ -1712,13 +1829,24 @@
         }
       }
     },
+    "ErrorBody": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
     "EvaluationOptions": {
       "type": "object",
       "properties": {
-        "runEvaluation": {
-          "description": "Represents the option to run evaluations. By default, evaluations are turned on.",
-          "type": "boolean"
-        },
         "kind": {
           "description": "Represents the evaluation kind. By default, the evaluation kind is set to percentage.",
           "enum": [
@@ -1759,60 +1887,38 @@
         }
       }
     },
-    "EvaluationResultObject": {
+    "EvaluationSummaryObject": {
       "required": [
-        "modelKind",
-        "entitiesEvaluation",
-        "singleLabelClassificationEvaluation",
-        "multiLabelClassificationEvaluation"
+        "projectKind",
+        "customNamedEntityRecognitionEvaluation",
+        "customSingleLabelClassificationEvaluation",
+        "customMultiLabelClassificationEvaluation"
       ],
       "type": "object",
       "properties": {
-        "modelKind": {
+        "projectKind": {
           "description": "Represents the model kind.",
           "enum": [
-            "singleLabelClassification",
-            "multiLabelClassification",
-            "namedEntityRecognition"
+            "customSingleLabelClassification",
+            "customMultiLabelClassification",
+            "customNamedEntityRecognition"
           ],
           "type": "string"
         },
-        "entitiesEvaluation": {
+        "customNamedEntityRecognitionEvaluation": {
           "description": "Contains the data related to extraction evaluation.",
           "$ref": "#/definitions/NamedEntityRecognitionEvaluationObject"
         },
-        "singleLabelClassificationEvaluation": {
+        "customSingleLabelClassificationEvaluation": {
           "description": "Contains the data related to single label classification evaluation.",
           "$ref": "#/definitions/SingleLabelClassificationEvaluationObject"
         },
-        "multiLabelClassificationEvaluation": {
+        "customMultiLabelClassificationEvaluation": {
           "description": "Contains the data related to multi label classification evaluation.",
           "$ref": "#/definitions/MultiLabelClassificationEvaluationObject"
         },
         "evaluationOptions": {
           "$ref": "#/definitions/EvaluationOptions"
-        }
-      }
-    },
-    "JobError": {
-      "required": [
-        "code",
-        "message"
-      ],
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Gets or sets the error code.",
-          "enum": [
-            "unknown",
-            "notFound",
-            "invalidOperation"
-          ],
-          "type": "string"
-        },
-        "message": {
-          "description": "Gets or sets the error message.",
-          "type": "string"
         }
       }
     },
@@ -1907,11 +2013,20 @@
     },
     "JsonProject": {
       "required": [
+        "api-version",
+        "stringIndexType",
         "metadata"
       ],
       "type": "object",
       "properties": {
         "api-version": {
+          "type": "string"
+        },
+        "stringIndexType": {
+          "description": "Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.",
+          "enum": [
+            "Utf16CodeUnit"
+          ],
           "type": "string"
         },
         "metadata": {
@@ -1949,7 +2064,7 @@
     },
     "JsonProjectMetadata": {
       "required": [
-        "modelKind",
+        "projectKind",
         "storageInputContainerName",
         "settings",
         "projectName",
@@ -1957,12 +2072,12 @@
       ],
       "type": "object",
       "properties": {
-        "modelKind": {
+        "projectKind": {
           "description": "Gets or sets the new project model kind.",
           "enum": [
-            "singleLabelClassification",
-            "multiLabelClassification",
-            "namedEntityRecognition"
+            "customSingleLabelClassification",
+            "customMultiLabelClassification",
+            "customNamedEntityRecognition"
           ],
           "type": "string"
         },
@@ -2009,18 +2124,23 @@
         }
       }
     },
-    "LanguagesGetObject": {
+    "LanguageGetObjectList": {
       "required": [
-        "languages"
+        "value",
+        "nextLink"
       ],
       "type": "object",
       "properties": {
-        "languages": {
-          "description": "Gets or sets the languages.",
+        "value": {
+          "description": "The list of supported objects.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/LanguageGetObject"
           }
+        },
+        "nextLink": {
+          "description": "The next page link.",
+          "type": "string"
         }
       }
     },
@@ -2188,7 +2308,7 @@
     },
     "ProjectCreateObject": {
       "required": [
-        "modelKind",
+        "projectKind",
         "storageInputContainerName",
         "settings",
         "projectName",
@@ -2196,12 +2316,12 @@
       ],
       "type": "object",
       "properties": {
-        "modelKind": {
+        "projectKind": {
           "description": "Gets or sets the new project model kind.",
           "enum": [
-            "singleLabelClassification",
-            "multiLabelClassification",
-            "namedEntityRecognition"
+            "customSingleLabelClassification",
+            "customMultiLabelClassification",
+            "customNamedEntityRecognition"
           ],
           "type": "string"
         },
@@ -2278,14 +2398,14 @@
           "description": "Gets or sets the warnings.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobError"
+            "$ref": "#/definitions/ErrorBody"
           }
         },
         "errors": {
           "description": "Gets or sets the errors.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobError"
+            "$ref": "#/definitions/ErrorBody"
           }
         }
       }
@@ -2340,14 +2460,14 @@
           "description": "Gets or sets the warnings.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobError"
+            "$ref": "#/definitions/ErrorBody"
           }
         },
         "errors": {
           "description": "Gets or sets the errors.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobError"
+            "$ref": "#/definitions/ErrorBody"
           }
         }
       }
@@ -2399,14 +2519,14 @@
           "description": "Gets or sets the warnings.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobError"
+            "$ref": "#/definitions/ErrorBody"
           }
         },
         "errors": {
           "description": "Gets or sets the errors.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobError"
+            "$ref": "#/definitions/ErrorBody"
           }
         }
       }
@@ -2417,7 +2537,7 @@
         "lastModifiedDateTime",
         "lastTrainedDateTime",
         "lastDeployedDateTime",
-        "modelKind",
+        "projectKind",
         "storageInputContainerName",
         "settings",
         "projectName",
@@ -2445,12 +2565,12 @@
           "description": "Represents the project last deployed datetime.",
           "type": "string"
         },
-        "modelKind": {
+        "projectKind": {
           "description": "Gets or sets the new project model kind.",
           "enum": [
-            "singleLabelClassification",
-            "multiLabelClassification",
-            "namedEntityRecognition"
+            "customSingleLabelClassification",
+            "customMultiLabelClassification",
+            "customNamedEntityRecognition"
           ],
           "type": "string"
         },
@@ -2635,7 +2755,10 @@
       "required": [
         "label",
         "modelId",
-        "lastTrainedDateTime"
+        "lastTrainedDateTime",
+        "deploymentExpirationDate",
+        "modelExpirationDate",
+        "modelTrainingConfigVersion"
       ],
       "type": "object",
       "properties": {
@@ -2650,6 +2773,20 @@
         "lastTrainedDateTime": {
           "format": "date-time",
           "description": "Represents trained model last trained time.",
+          "type": "string"
+        },
+        "deploymentExpirationDate": {
+          "format": "date-time",
+          "description": "Represents deployment expiration date in the runtime.",
+          "type": "string"
+        },
+        "modelExpirationDate": {
+          "format": "date-time",
+          "description": "Represents model expiration date.",
+          "type": "string"
+        },
+        "modelTrainingConfigVersion": {
+          "description": "Represents the model training config version.",
           "type": "string"
         }
       }
@@ -2694,16 +2831,21 @@
     },
     "TrainingConfigVersionsList": {
       "required": [
-        "trainingConfigVersions"
+        "value",
+        "nextLink"
       ],
       "type": "object",
       "properties": {
-        "trainingConfigVersions": {
+        "value": {
           "description": "Gets or sets the training config versions.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/TrainingConfigVersionDetails"
           }
+        },
+        "nextLink": {
+          "description": "Gets or sets the next page link.",
+          "type": "string"
         }
       }
     },
@@ -2780,15 +2922,53 @@
           "description": "Gets or sets the warnings.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobError"
+            "$ref": "#/definitions/ErrorBody"
           }
         },
         "errors": {
           "description": "Gets or sets the errors.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobError"
+            "$ref": "#/definitions/ErrorBody"
           }
+        }
+      }
+    },
+    "TrainingJobResultStatus": {
+      "required": [
+        "percentComplete",
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "percentComplete": {
+          "format": "int32",
+          "description": "Represents progress percentage.",
+          "type": "integer"
+        },
+        "startDateTime": {
+          "format": "date-time",
+          "description": "Represents the start date time.",
+          "type": "string"
+        },
+        "endDateTime": {
+          "format": "date-time",
+          "description": "Represents the end date time.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Represents the status of the job.",
+          "enum": [
+            "unknown",
+            "notStarted",
+            "running",
+            "succeeded",
+            "failed",
+            "cancelled",
+            "cancelling",
+            "partiallyCompleted"
+          ],
+          "type": "string"
         }
       }
     },
@@ -2830,29 +3010,11 @@
         },
         "trainingStatus": {
           "description": "Represents model train status.",
-          "$ref": "#/definitions/TrainingJobStatusResultStatus"
+          "$ref": "#/definitions/TrainingJobResultStatus"
         },
         "evaluationStatus": {
           "description": "Represents model evaluation status.",
-          "$ref": "#/definitions/TrainingJobStatusResultStatus"
-        }
-      }
-    },
-    "TrainingJobStatusResultStatus": {
-      "required": [
-        "percentComplete",
-        "elapsedTime"
-      ],
-      "type": "object",
-      "properties": {
-        "percentComplete": {
-          "format": "int32",
-          "description": "Represents progress percentage.",
-          "type": "integer"
-        },
-        "elapsedTime": {
-          "description": "Represents the elapsed time. This string is in the format hh:mm:ss",
-          "type": "string"
+          "$ref": "#/definitions/TrainingJobResultStatus"
         }
       }
     }
