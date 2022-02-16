@@ -645,6 +645,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Association reconciled"
+          },
+          "201": {
+            "description": "Request to reconcile the association accepted"
+          },
           "202": {
             "description": "Request to reconcile the association accepted."
           },
@@ -1172,7 +1178,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ProvisioningIssue"
-          }
+          },
+          "x-ms-identifiers": ["name"]
         },
         "networkSecurityPerimeter": {
           "$ref": "#/definitions/NetworkSecurityPerimeter"
