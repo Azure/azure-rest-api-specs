@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2022-01-01"
+    "version": "2022-02-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1230,7 +1230,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationUserAssignedIdentity"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1509,6 +1510,9 @@
       "items": {
         "$ref": "#/definitions/ServiceCorrelation"
       },
+      "x-ms-identifiers": [
+        "serviceName"
+      ],
       "description": "A list that describes the correlation of the service with other services."
     },
     "ForceRestart": {
@@ -1871,6 +1875,7 @@
       "items": {
         "$ref": "#/definitions/ScalingPolicy"
       },
+      "x-ms-identifiers": [],
       "description": "Scaling policies for this service."
     },
     "ScalingTrigger": {
@@ -1986,6 +1991,7 @@
       "items": {
         "$ref": "#/definitions/ServiceLoadMetric"
       },
+      "x-ms-identifiers": [],
       "description": "The service load metrics is given as an array of ServiceLoadMetric objects."
     },
     "ServiceLoadMetricWeight": {
@@ -2069,6 +2075,7 @@
       "items": {
         "$ref": "#/definitions/ServicePlacementPolicy"
       },
+      "x-ms-identifiers": [],
       "description": "A list that describes the correlation of the service with other services."
     },
     "ServicePlacementPolicy": {
@@ -2661,7 +2668,7 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2022-01-01\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2022-02-01-preview\" for this specification.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"

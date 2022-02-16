@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2022-01-01"
+    "version": "2022-02-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -765,7 +765,10 @@
           "description": "The secrets to install in the virtual machines.",
           "items": {
             "$ref": "#/definitions/VaultSecretGroup"
-          }
+          },
+          "x-ms-identifiers": [
+            "sourceVault"
+          ]
         },
         "vmExtensions": {
           "type": "array",
@@ -773,7 +776,10 @@
           "description": "Set of extensions that should be installed onto the virtual machines.",
           "items": {
             "$ref": "#/definitions/VMSSExtension"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "vmManagedIdentity": {
           "$ref": "#/definitions/VmManagedIdentity",
@@ -794,6 +800,7 @@
           "items": {
             "$ref": "#/definitions/FrontendConfiguration"
           },
+          "x-ms-identifiers": [],
           "description": "Indicates the node type uses its own frontend configurations instead of the default one for the cluster. This setting can only be specified for non-primary node types and can not be added or removed after the node type is created."
         },
         "networkSecurityRules": {
@@ -801,6 +808,7 @@
           "items": {
             "$ref": "#/definitions/NetworkSecurityRule"
           },
+          "x-ms-identifiers": [],
           "description": "The Network Security Rules for this node type. This setting can only be specified for node types that are configured with frontend configurations."
         },
         "additionalDataDisks": {
@@ -808,6 +816,9 @@
           "items": {
             "$ref": "#/definitions/VmssDataDisk"
           },
+          "x-ms-identifiers": [
+            "lun"
+          ],
           "description": "Additional managed data disks."
         },
         "enableEncryptionAtHost": {
@@ -835,6 +846,17 @@
         "enableOverProvisioning": {
           "type": "boolean",
           "description": "Specifies whether the node type should be overprovisioned. It is only allowed for stateless node types."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Specifies the availability zones where the node type would span across. If the cluster is not spanning across availability zones, initiates az migration for the cluster."
+        },
+        "isSpotPriority": {
+          "type": "boolean",
+          "description": "Indicates whether the node type will be Spot Virtual Machines. Azure will allocate the VMs if there is capacity available and the VMs can be evicted at any time. "
         }
       },
       "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster."
@@ -1001,7 +1023,8 @@
           "description": "The list of available node type SKUs.",
           "items": {
             "$ref": "#/definitions/NodeTypeAvailableSku"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
@@ -1055,6 +1078,7 @@
           "items": {
             "$ref": "#/definitions/VaultCertificate"
           },
+          "x-ms-identifiers": [],
           "description": "The list of key vault references in SourceVault which contain certificates."
         }
       },
@@ -1442,7 +1466,7 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2022-01-01\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2022-02-01-preview\" for this specification.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"

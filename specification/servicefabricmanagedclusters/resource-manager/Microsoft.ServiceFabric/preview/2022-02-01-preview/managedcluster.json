@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2022-01-01"
+    "version": "2022-02-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -313,6 +313,49 @@
           },
           "200": {
             "description": "The operation completed successfully."
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/azresiliencystatus": {
+      "get": {
+        "tags": [
+          "managedAzResiliencyStatus"
+        ],
+        "summary": "Get Az Resiliency Status of all the Base resources constituting Service Fabric Managed Clusters.",
+        "description": "Get Az Resiliency Status of all the Base resources constituting Service Fabric Managed Clusters.",
+        "operationId": "managedAzResiliencyStatus_get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "x-ms-examples": {
+          "Az Resiliency status of Base Resources": {
+            "$ref": "./examples/managedAzResiliencyStatusGet_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedAzResiliencyStatus"
+            }
           },
           "default": {
             "description": "The detailed error response.",
@@ -723,7 +766,25 @@
         "DnsService",
         "BackupRestoreService",
         "ResourceMonitorService"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "ManagedClusterAddOnFeature",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "DnsService",
+            "description": "Dns service"
+          },
+          {
+            "value": "BackupRestoreService",
+            "description": "Backup and restore service"
+          },
+          {
+            "value": "ResourceMonitorService",
+            "description": "Resource monitor service"
+          }
+        ]
+      }
     },
     "ApplicationTypeVersionsCleanupPolicy": {
       "type": "object",
@@ -1126,6 +1187,7 @@
           "items": {
             "$ref": "#/definitions/LoadBalancingRule"
           },
+          "x-ms-identifiers": [],
           "description": "Load balancing rules that are applied to the public load balancer of the cluster."
         },
         "allowRdpAccess": {
@@ -1137,6 +1199,7 @@
           "items": {
             "$ref": "#/definitions/NetworkSecurityRule"
           },
+          "x-ms-identifiers": [],
           "description": "Custom Network Security Rules that are applied to the Virtual Network of the cluster."
         },
         "clients": {
@@ -1144,6 +1207,7 @@
           "items": {
             "$ref": "#/definitions/ClientCertificate"
           },
+          "x-ms-identifiers": [],
           "description": "Client certificates that are allowed to manage the cluster."
         },
         "azureActiveDirectory": {
@@ -1155,6 +1219,7 @@
           "items": {
             "$ref": "#/definitions/SettingsSectionDescription"
           },
+          "x-ms-identifiers": [],
           "description": "The list of custom fabric settings to configure the cluster."
         },
         "provisioningState": {
@@ -1206,6 +1271,7 @@
           "items": {
             "$ref": "#/definitions/IPTag"
           },
+          "x-ms-identifiers": [],
           "description": "The list of IP tags associated with the default public IP address of the cluster."
         },
         "ipv6Address": {
@@ -1222,6 +1288,7 @@
           "items": {
             "$ref": "#/definitions/Subnet"
           },
+          "x-ms-identifiers": [],
           "description": "Auxiliary subnets for the cluster."
         },
         "serviceEndpoints": {
@@ -1229,6 +1296,7 @@
           "items": {
             "$ref": "#/definitions/ServiceEndpoint"
           },
+          "x-ms-identifiers": [],
           "description": "Service endpoints for subnets in the cluster."
         }
       },
@@ -1308,12 +1376,62 @@
       },
       "description": "Describes the result of the request to list Managed VM Sizes for Service Fabric Managed Clusters."
     },
+    "ManagedAzResiliencyStatus": {
+      "type": "object",
+      "properties": {
+        "baseResourceStatus": {
+          "type": "array",
+          "description": "List of Managed VM Sizes for Service Fabric Managed Clusters.",
+          "items": {
+            "$ref": "#/definitions/ResourceAzStatus"
+          },
+          "x-ms-identifiers": []
+        },
+        "isClusterZoneResilient": {
+          "type": "boolean",
+          "description": "URL to get the next set of Managed VM Sizes if there are any.",
+          "readOnly": true
+        }
+      },
+      "description": "Describes the result of the request to list Managed VM Sizes for Service Fabric Managed Clusters."
+    },
+    "ResourceAzStatus": {
+      "type": "object",
+      "properties": {
+        "resourceName": {
+          "type": "string",
+          "description": "VM Size properties.",
+          "readOnly": true
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "VM Size id.",
+          "readOnly": true
+        },
+        "isZoneResilient": {
+          "type": "boolean",
+          "description": "VM Size name.",
+          "readOnly": true
+        }
+      },
+      "description": "Describes Az Resiliency status of Base resources"
+    },
     "OsType": {
       "type": "string",
       "description": "Cluster operating system, the default will be Windows",
       "enum": [
         "Windows"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "OsType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Windows",
+            "description": "Indicates os is Windows."
+          }
+        ]
+      }
     },
     "ServiceEndpoint": {
       "type": "object",
@@ -1613,7 +1731,8 @@
           "description": "List of operations supported by the Service Fabric resource provider.",
           "items": {
             "$ref": "#/definitions/OperationResult"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
@@ -1731,7 +1850,10 @@
           "description": "The collection of parameters in the section.",
           "items": {
             "$ref": "#/definitions/SettingsParameterDescription"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "description": "Describes a section in the fabric settings of the cluster."
@@ -1774,7 +1896,7 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2022-01-01\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2022-02-01-preview\" for this specification.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"
@@ -1804,11 +1926,11 @@
       "enum": [
         "Windows"
       ],
+      "x-ms-parameter-location": "method",
       "x-ms-enum": {
         "name": "ManagedClusterVersionEnvironment",
         "modelAsString": true
-      },
-      "x-ms-parameter-location": "method"
+      }
     },
     "locationForClusterCodeVersions": {
       "name": "location",
