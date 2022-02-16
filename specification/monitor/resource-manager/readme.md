@@ -942,7 +942,7 @@ directive:
 
 This section is a temporary solution to resolve the failure in those pipeline that is still using modeler v1. 
 
-``` yaml ($(go) && !$(track2) && ($(tag) == 'package-2021-07' || $(tag) == 'package-2022-02')) || $(csharp) || $(validation)
+``` yaml ($(go) && !$(track2) && ($(tag) == 'package-2022-02' || $(tag) == 'package-2022-02')) || $(csharp) || $(validation)
 directive:
 - from: activityLogAlerts_API.json
   where: $.definitions
