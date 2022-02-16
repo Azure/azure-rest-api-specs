@@ -24,7 +24,7 @@ These are the global settings for the Update API.
 title: UpdateAdminClient
 description: Update Admin Client
 openapi-type: arm
-tag: package-2016-05-01
+tag: package-2021-07-01
 ```
 
 ### Tag: package-2016-05-01
