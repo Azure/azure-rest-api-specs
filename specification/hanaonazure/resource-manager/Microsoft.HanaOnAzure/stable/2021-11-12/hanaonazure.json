@@ -525,6 +525,9 @@
           "items": {
             "$ref": "#/definitions/Disk"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "Specifies information about the operating system disk used by the hana instance."
         },
         "hanaSids": {
@@ -532,6 +535,7 @@
           "items": {
             "$ref": "#/definitions/SAPSystemID"
           },
+          "x-ms-identifiers": [],
           "description": "Specifies information related to SAP system IDs for the hana instance."
         }
       },
@@ -569,6 +573,9 @@
           "items": {
             "$ref": "#/definitions/IpAddress"
           },
+          "x-ms-identifiers": [
+            "ipAddress"
+          ],
           "description": "Specifies the network interfaces for the HANA instance."
         },
         "circuitId": {
@@ -617,6 +624,7 @@
         "isDataAction": {
           "readOnly": true,
           "type": "boolean",
+          "x-ms-identifiers": [],
           "description": "Indicates whether the operation applies to data-plane."
         }
       },
