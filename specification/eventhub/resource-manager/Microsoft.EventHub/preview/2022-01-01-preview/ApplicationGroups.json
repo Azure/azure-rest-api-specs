@@ -292,7 +292,7 @@
     "ApplicationGroupPolicyDictionary": {
       "type": "object",
       "additionalProperties": {
-        "$ref": "#/definitions/ThrottlingPolicy"
+        "$ref": "#/definitions/ApplicationGroupPolicy"
       },
       "description": "dictionary object for SchemaGroup group properties"
     },
@@ -333,10 +333,9 @@
           }
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ApplicationGroupPolicy"
-        }
+      "allOf": {
+        "$ref": "#/definitions/ApplicationGroupPolicy"
+      }
       ]
     }
   },
