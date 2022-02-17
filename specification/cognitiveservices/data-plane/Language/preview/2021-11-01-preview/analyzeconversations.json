@@ -103,6 +103,7 @@
       }
     },
     "AnalyzeConversationTask": {
+      "description": "The base class of a conversation input task.",
       "discriminator": "kind",
       "required": [
         "kind"
@@ -114,6 +115,7 @@
       }
     },
     "AnalyzeConversationTaskResult": {
+      "description": "The base class of a conversation task result.",
       "discriminator": "kind",
       "required": [
         "kind"
@@ -125,6 +127,7 @@
       }
     },
     "CustomConversationalTask":{
+      "description": "The input for a custom conversation task.",
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeConversationTask"
@@ -167,6 +170,7 @@
       ]
     },
     "CustomConversationalTaskResult": {
+      "description": "The results of a custom conversation task.",
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeConversationTaskResult"
@@ -186,7 +190,7 @@
     "ConversationItemBase": {
       "type": "object",
       "discriminator": "modality",
-      "description": "The user input formatted conversation (e.g., Text, Transcript).",
+      "description": "The abstract base for a user input formatted conversation (e.g., Text, Transcript).",
       "properties": {
         "participantId": {
           "description": "The user input unique identifier corresponding each participant in the conversation",
@@ -219,6 +223,7 @@
       ]
     },
     "TextConversationItem": {
+      "description": "The Text modality of an input conversation.",
       "x-ms-discriminator-value": "Text",
       "allOf": [
         {
@@ -237,7 +242,7 @@
     },
     "ConversationAnalysisOptions": {
       "type": "object",
-      "description": "The request body.",
+      "description": "The input conversation item and its optional parameters",
       "required": [
         "conversationItem"
       ],
