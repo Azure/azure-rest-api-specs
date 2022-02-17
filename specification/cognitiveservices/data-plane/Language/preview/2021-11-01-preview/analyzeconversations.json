@@ -651,12 +651,14 @@
           "type": "number"
         },
         "resolutions": {
+          "description": "The collection of entity resolution objects.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/BaseResolution"
           }
         },
         "extraInformation": {
+          "description": "The collection of entity extra information objects.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/BaseExtraInformation"
@@ -665,10 +667,12 @@
       }
     },
     "BaseExtraInformation": {
+      "description": "The abstract base object for entity extra information.",
       "type":"object",
       "discriminator": "extraInformationKind",
       "properties": {
         "extraInformationKind":{
+          "description": "The extra information object kind.",
           "type": "string",
           "enum": [
             "EntitySubtype",
@@ -684,6 +688,7 @@
       ]
     },
     "EntitySubtype": {
+      "description": "The concrete entity Subtype model of extra information.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseExtraInformation"
@@ -699,6 +704,7 @@
       }
     },
     "ListKeys":{
+      "description": "The concrete entity list key's model of extra information.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseExtraInformation"
@@ -717,10 +723,12 @@
       }
     },
     "BaseResolution": {
+      "description": "The abstract base class for entity resolutions.",
       "type":"object",
       "discriminator": "resolutionKind",
       "properties": {
         "resolutionKind":{
+          "description": "The entity resolution object kind.",
           "type": "string",
           "enum": [
             "Boolean",
@@ -764,6 +772,7 @@
       ]
     },
     "AgeResolution":{
+      "description": "Represents the Age entity resolution model.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -795,6 +804,7 @@
       ]
     },
     "VolumeResolution":{
+      "description": "Represents the volume entity resolution model.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -849,6 +859,7 @@
       ]
     },
     "SpeedResolution":{
+      "description": "Represents the speed entity resolution model.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -880,7 +891,8 @@
           ],
           "x-ms-enum": {
             "modelAsString": true
-          }
+          },
+          "description": "The speed Unit of measurement"
         }
       },
       "required": [
@@ -888,6 +900,7 @@
       ]
     },
     "AreaResolution":{
+      "description": "Represents the area entity resolution model.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -918,7 +931,8 @@
           ],
           "x-ms-enum": {
             "modelAsString": true
-          }
+          },
+          "description": "The area Unit of measurement"
         }
       },
       "required": [
@@ -926,6 +940,7 @@
       ]
     },
     "LengthResolution":{
+      "description": "Represents the length entity resolution model.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -960,7 +975,8 @@
           ],
           "x-ms-enum": {
             "modelAsString": true
-          }
+          },
+          "description": "The length Unit of measurement"
         }
       },
       "required": [
@@ -968,6 +984,7 @@
       ]
     },
     "InformationResolution":{
+      "description": "Represents the information (data) entity resolution model.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -998,7 +1015,8 @@
           ],
           "x-ms-enum": {
             "modelAsString": true
-          }
+          },
+          "description": "The information (data) Unit of measurement."
         }
       },
       "required": [
@@ -1006,6 +1024,7 @@
       ]
     },
     "TemperatureResolution":{
+      "description": "Represents the temperature entity resolution model.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -1029,7 +1048,8 @@
           ],
           "x-ms-enum": {
             "modelAsString": true
-          }
+          },
+          "description": "The temperature Unit of measurement."
         }
       },
       "required": [
@@ -1037,6 +1057,7 @@
       ]
     },
     "WeightResolution":{
+      "description": "Represents the weight entity resolution model.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -1070,7 +1091,8 @@
           ],
           "x-ms-enum": {
             "modelAsString": true
-          }
+          },
+          "description": "The weight Unit of measurement."
         }
       },
       "required": [
@@ -1078,6 +1100,7 @@
       ]
     },
     "CurrencyResolution":{
+      "description": "Represents the currency entity resolution model.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -1109,6 +1132,7 @@
       ]
     },
     "BooleanResolution":{
+      "description": "A resolution for boolean expressions",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -1121,12 +1145,12 @@
           "type":"boolean"
         }
       },
-      "description": "A resolution for boolean expressions",
       "required": [
         "value"
       ]
     },
     "DateTimeResolution":{
+      "description": "A resolution for date/time entity instances.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -1168,6 +1192,7 @@
       ]
     },
     "NumberResolution":{
+      "description": "A resolution for numeric entity instances.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -1203,6 +1228,7 @@
       ]
     },
     "OrdinalResolution":{
+      "description": "A resolution for ordinal numbers entity instances.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -1240,6 +1266,7 @@
       ]
     },
     "TemporalSpanResolution": {
+      "description": "represents the resolution of a date and/or time span.",
       "allOf":[
         {
           "$ref": "#/definitions/BaseResolution"
@@ -1261,10 +1288,10 @@
         "modifier":{
           "$ref": "#/definitions/TemporalModifier"
         }
-      },
-      "description": "represents the resolution of a date and/or time span."
+      }
     },
     "NumericRangeResolution": {
+      "description": "represents the resolution of numeric intervals.",
       "allOf":[
         {
           "$ref": "#/definitions/BaseResolution"
@@ -1273,16 +1300,39 @@
       "type": "object",
       "x-ms-discriminator-value": "NumericRange",
       "properties": {
+        "rangeKind":{
+          "type":"string",
+          "enum": [
+            "Number",
+            "Speed",
+            "Weight",
+            "Length",
+            "Volume",
+            "Area",
+            "Age",
+            "Information",
+            "Temperature",
+            "Currency"
+          ],
+          "x-ms-enum": {
+            "name": "RangeKind",
+            "modelAsString": false
+          },
+          "description": "The kind of range that the resolution object represents."
+        },
         "minimum":{
-          "$ref": "#/definitions/NumberResolution",
+          "type": "number",
+          "format": "double",
           "description": "The beginning value of  the interval."
         },
         "maximum":{
-          "$ref": "#/definitions/NumberResolution",
+          "type": "number",
+          "format": "double",
           "description": "The ending value of the interval."
         }
       },
       "required": [
+        "rangeKind",
         "minimum",
         "maximum"
       ]
