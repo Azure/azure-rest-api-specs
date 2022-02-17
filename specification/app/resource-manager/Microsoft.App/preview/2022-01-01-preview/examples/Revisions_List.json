@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "containerAppName": "testcontainerApp0",
+    "api-version": "2021-02-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerApp0/revisions/testcontainerApp0-pjxhsye",
+            "name": "testcontainerApp0-pjxhsye",
+            "type": "Microsoft.App/containerApps/revisions",
+            "properties": {
+              "createdTime": "2021-05-24T21:24:22+00:00",
+              "fqdn": "testcontainerApp0-pjxhsye.demokube-t24clv0g.eastus.containerapps.k4apps.io",
+              "template": {
+                "containers": [
+                  {
+                    "image": "repo/testcontainerApp0:v2",
+                    "name": "testcontainerApp0",
+                    "resources": {
+                      "cpu": 0.2,
+                      "memory": "100Mi"
+                    }
+                  }
+                ],
+                "scale": {
+                  "minReplicas": 1,
+                  "maxReplicas": 5,
+                  "rules": [
+                    {
+                      "name": "httpscalingrule",
+                      "http": {
+                        "metadata": {
+                          "concurrentRequests": "50"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "dapr": {
+                  "enabled": true,
+                  "appPort": 3000
+                }
+              },
+              "active": true,
+              "replicas": 1
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

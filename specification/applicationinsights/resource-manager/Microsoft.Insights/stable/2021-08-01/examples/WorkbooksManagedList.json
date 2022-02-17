@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "subscriptionId": "6b643656-33eb-422f-aee8-3ac119r124af",
+    "resourceGroupName": "my-resource-group",
+    "category": "workbook",
+    "sourceId": "/subscriptions/6b643656-33eb-422f-aee8-3ac119r124af/resourceGroups/Default-Web-WestUS/providers/Microsoft.Web/sites/MyTestApp-CodeLens1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentities": {
+                "/subscriptions/6b643656-33eb-422f-aee8-3ac119r124af/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+                  "clientId": "fbe75b66-01c5-4f87-a220-233af3270433",
+                  "principalId": "075a0ca6-4326-4434-9abf-c9b1b79f9x19"
+                }
+              }
+            },
+            "id": "/subscriptions/6b643656-33eb-422f-aee8-3ac145d124af/resourcegroups/my-resource-group/providers/Microsoft.Insights/workbooks/deadb33f-5e0d-4064-8ebb-1a4ed0313eb2",
+            "name": "deadb33f-8bee-4ddq-a059-9be8dac93960",
+            "type": "Microsoft.Insights/workbooks",
+            "location": "westus",
+            "tags": {},
+            "kind": "shared",
+            "properties": {
+              "displayName": "My Workbook 1",
+              "userId": "userId",
+              "sourceId": "Azure Monitor",
+              "serializedData": "{\"verion\":\"Notebook/1.0\",\"items\":[{\"type\":1,\"content\":\"{\"json\":\"## New workbook\\r\\n---\\r\\n\\r\\nWelcome to your new workbook.  This area will display text formatted as markdown.\\r\\n\\r\\n\\r\\nWe've included a basic analytics query to get you started. Use the `Edit` button below each section to configure it or add more sections.\"}\",\"halfWidth\":null,\"conditionalVisibility\":null},{\"type\":3,\"content\":\"{\"version\":\"KqlItem/1.0\",\"query\":\"union withsource=TableName *\\n| summarize Count=count() by TableName\\n| render barchart\",\"showQuery\":false,\"size\":1,\"aggregation\":0,\"showAnnotations\":false}\",\"halfWidth\":null,\"conditionalVisibility\":null}],\"isLocked\":false}",
+              "version": "Notebook/1.0",
+              "category": "workbook",
+              "timeModified": "2020-10-20T22:00:26.4229554Z",
+              "description": "Sample workbook",
+              "revision": "1e2f8435b98248febee70c64ac22e1bb",
+              "storageUri": "/subscriptions/6b643656-33eb-422f-aee8-3ac119r124af/resourceGroups/MyGroup/providers/Microsoft.Storage/storageAccounts/testStorage/blobServices/default/containers/testContainer"
+            }
+          },
+          {
+            "id": "/subscriptions/6b643656-33eb-422f-aee8-3ac145d124af/resourcegroups/my-resource-group/providers/Microsoft.Insights/workbooks/c0deea5e-3344-40f2-96f8-6f8e1cdd5722",
+            "name": "c0deea5e-3344-40f2-96f8-6f8e1cdd5722",
+            "type": "Microsoft.Insights/workbooks",
+            "location": "westus",
+            "tags": {
+              "TagSample01": "sample01",
+              "TagSample02": "sample02"
+            },
+            "kind": "shared",
+            "properties": {
+              "displayName": "My Workbook 2",
+              "userId": "userId",
+              "sourceId": "Azure Monitor",
+              "serializedData": "{\"version\":\"Notebook/1.0\",\"items\":[{\"type\":1,\"content\":\"{\"json\":\"## New workbook\\r\\n---\\r\\n\\r\\nWelcome to your new workbook.  This area will display text formatted as markdown.\\r\\n\\r\\n\\r\\nWe've included a basic analytics query to get you started. Use the `Edit` button below each section to configure it or add more sections.\"}\",\"halfWidth\":null,\"conditionalVisibility\":null},{\"type\":3,\"content\":\"{\"version\":\"KqlItem/1.0\",\"query\":\"union withsource=TableName *\\n| summarize Count=count() by TableName\\n| render barchart\",\"showQuery\":false,\"size\":1,\"aggregation\":0,\"showAnnotations\":false}\",\"halfWidth\":null,\"conditionalVisibility\":null}],\"isLocked\":false}",
+              "version": "Notebook/1.0",
+              "category": "workbook",
+              "timeModified": "2020-10-20T21:00:26.4229554Z",
+              "description": "Sample workbook",
+              "revision": "1e2f8435b98248febee70c64ac22e1bb",
+              "storageUri": "/subscriptions/6b643656-33eb-422f-aee8-3ac119r124af/resourceGroups/MyGroup/providers/Microsoft.Storage/storageAccounts/testStorage/blobServices/default/containers/testContainer"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

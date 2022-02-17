@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-08-01",
+    "subscriptionId": "subid",
+    "loggerId": "loggerId",
+    "parameters": {
+      "properties": {
+        "loggerType": "applicationInsights",
+        "description": "adding a new logger",
+        "credentials": {
+          "instrumentationKey": "11................a1"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/loggerId",
+        "type": "Microsoft.ApiManagement/service/loggers",
+        "name": "loggerId",
+        "properties": {
+          "loggerType": "applicationInsights",
+          "description": null,
+          "credentials": {
+            "instrumentationKey": "{{5a.......2a}}"
+          },
+          "isBuffered": false,
+          "resourceId": "/subscriptions/subid/resourceGroups/rg1/providers/microsoft.insights/components/airesource"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/loggerId",
+        "type": "Microsoft.ApiManagement/service/loggers",
+        "name": "loggerId",
+        "properties": {
+          "loggerType": "applicationInsights",
+          "description": null,
+          "credentials": {
+            "instrumentationKey": "{{5a.......2a}}"
+          },
+          "isBuffered": false
+        }
+      }
+    }
+  }
+}

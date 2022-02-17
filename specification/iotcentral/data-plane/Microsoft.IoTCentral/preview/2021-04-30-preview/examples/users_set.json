@@ -1,0 +1,33 @@
+{
+  "title": "Add or update an email user in your application",
+  "description": "Add or update an email user in your application.",
+  "parameters": {
+    "centralDnsSuffixInPath": "azureiotcentral.com",
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "userId": "123",
+    "api-version": "preview",
+    "body": {
+      "type": "EmailUser",
+      "roles": [
+        {
+          "role": "<role Id>"
+        }
+      ],
+      "email": "bob@contoso.com"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "EmailUser",
+        "roles": [
+          {
+            "role": "<role Id>"
+          }
+        ],
+        "email": "bob@contoso.com"
+      }
+    }
+  }
+}
