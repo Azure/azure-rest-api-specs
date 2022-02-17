@@ -7,7 +7,7 @@
   "paths": {},
   "definitions": {
     "Notebook": {
-      "description": "Notebook properties.",
+      "description": "Notebook.",
       "type": "object",
       "properties": {
         "description": {
@@ -30,13 +30,11 @@
         },
         "nbformat": {
           "description": "Notebook format (major number). Incremented between backwards incompatible changes to the notebook format.",
-          "type": "integer",
-          "format": "int32"
+          "type": "integer"
         },
         "nbformat_minor": {
           "description": "Notebook format (minor number). Incremented for backward compatible changes to the notebook format.",
-          "type": "integer",
-          "format": "int32"
+          "type": "integer"
         },
         "cells": {
           "description": "Array of cells of the current notebook.",
@@ -202,8 +200,7 @@
         },
         "driverCores": {
           "description": "Number of cores to use for the driver.",
-          "type": "integer",
-          "format": "int32"
+          "type": "integer"
         },
         "executorMemory": {
           "description": "Amount of memory to use per executor process.",
@@ -211,17 +208,11 @@
         },
         "executorCores": {
           "description": "Number of cores to use for each executor.",
-          "type": "integer",
-          "format": "int32"
+          "type": "integer"
         },
         "numExecutors": {
           "description": "Number of executors to launch for this session.",
-          "type": "integer",
-          "format": "int32"
-        },
-        "conf": {
-          "description": "Configuration.",
-          "type": "object"
+          "type": "integer"
         }
       },
       "required": [
@@ -242,8 +233,7 @@
         },
         "execution_count": {
           "description": "Execution sequence number.",
-          "type": "integer",
-          "format": "int32"
+          "type": "integer"
         },
         "output_type": {
           "description": "Execution, display, or stream outputs.",
