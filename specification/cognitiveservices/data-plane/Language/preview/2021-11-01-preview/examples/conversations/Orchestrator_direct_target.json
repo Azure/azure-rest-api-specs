@@ -7,24 +7,30 @@
     "CustomConversationalTask": {
       "kind": "CustomConversation",
       "analysisInput": {
-        "query": "How do I integrate QnA Maker and LUIS?",
-        "directTarget": "qnaTargetApp"
-      },
-      "parameters": {
-        "qnaTargetApp": {
-          "targetKind": "question_answering",
-          "apiVersion": "v5.1",
-          "callingOptions": {
-            "question": "Ports and connectors",
-            "top": 3,
-            "userId": "Default",
-            "isTest": true,
-            "context": {
-              "previousQuery": "Meet Surface Pro 4",
-              "previousQnAId": 4
-            }
-          }
-        }
+		"conversationItem":{
+		  "participantId": "1",
+		  "id": "1",
+		  "modality": "text",
+		  "language": "en-GB",
+		  "text": "How do I integrate QnA Maker and LUIS?"
+		},  
+        "directTarget": "qnaTargetApp",
+		"parameters": {
+			"qnaTargetApp": {
+			  "targetKind": "question_answering",
+			  "apiVersion": "v5.1",
+			  "callingOptions": {
+				"question": "Ports and connectors",
+				"top": 3,
+				"userId": "Default",
+				"isTest": true,
+				"context": {
+				  "previousQuery": "Meet Surface Pro 4",
+				  "previousQnAId": 4
+				}
+			  }
+			}
+		}
       }
     },
     "parameters": {

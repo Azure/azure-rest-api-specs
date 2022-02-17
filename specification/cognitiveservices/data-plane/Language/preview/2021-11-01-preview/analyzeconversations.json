@@ -138,7 +138,11 @@
           "$ref": "#/definitions/CustomConversationTaskParameters"
         }
       },
-      "x-ms-discriminator-value": "CustomConversation"
+      "x-ms-discriminator-value": "CustomConversation",
+      "required": [
+        "analysisInput",
+        "parameters"
+      ]
     },
     "CustomConversationTaskParameters":{
       "type": "object",
@@ -179,24 +183,71 @@
       ],
       "x-ms-discriminator-value": "CustomConversationResult"
     },
+    "ConversationItemBase": {
+      "type": "object",
+      "discriminator": "modality",
+      "description": "The user input formatted conversation (e.g., Text, Transcript).",
+      "properties": {
+        "participantId": {
+          "description": "The user input unique identifier corresponding each participant in the conversation",
+          "type": "string"
+        },
+        "id": {
+          "description": "The user input unique identifier corresponding the conversation Item (utterance)",
+          "type":"string"
+        },
+        "language": {
+          "description": "The input language of the conversation item",
+          "type":"string"
+        },
+        "modality": {
+          "description": "The modality (format) of the conversation item (e.g., Text, Transcript)",
+          "type": "string",
+          "enum": [
+            "Text"
+          ],
+          "x-ms-enum": {
+            "name": "modality",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "participantId",
+        "id",
+        "modality"
+      ]
+    },
+    "TextConversationItem": {
+      "x-ms-discriminator-value": "Text",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationItemBase"
+        }
+      ],
+      "properties": {
+        "text": {
+          "description": "The input query",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
     "ConversationAnalysisOptions": {
       "type": "object",
       "description": "The request body.",
       "required": [
-        "query"
+        "conversationItem"
       ],
       "properties": {
-        "query": {
-          "description": "The conversation utterance to be analyzed.",
-          "type": "string"
+        "conversationItem":{
+          "$ref": "#/definitions/ConversationItemBase"
         },
         "directTarget": {
           "type": "string",
           "description": "The name of the target project this request is sending to directly."
-        },
-        "language": {
-          "type": "string",
-          "description": "The language to use in this request. This will be the language setting when communicating with all other target projects."
         },
         "isLoggingEnabled": {
           "description": "If true, the query will be kept by the service for customers to further review, to improve the model quality.",
@@ -732,10 +783,6 @@
             "modelAsString": true
           },
           "description": "The Age Unit of measurement"
-        },
-        "duration":{
-          "type":"string",
-          "description": "A value formatted based on the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations), or the constant string 'Unspecified' if the age unit is not known."
         }
       },
       "required": [
