@@ -4,74 +4,59 @@
     "resourceGroupName": "myResourceGroup",
     "api-version": "2022-03-01",
     "capacityReservationGroupName": "myCapacityReservationGroup",
-    "expand": "instanceView"
+    "capacityReservationName": "myCapacityReservation"
   },
   "responses": {
     "200": {
       "body": {
         "properties": {
-          "capacityReservations": [
+          "reservationId": "{GUID}",
+          "provisioningTime": "2021-06-27T01:02:38.3138469+00:00",
+          "virtualMachinesAssociated": [
             {
-              "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/myCapacityReservationGroup/capacityReservations/myCapacityReservation1"
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM1"
             },
             {
-              "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/myCapacityReservationGroup/capacityReservations/myCapacityReservation2"
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM2"
+            },
+            {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM3"
             }
           ],
+          "provisioningState": "Succeeded",
           "instanceView": {
-            "capacityReservations": [
-              {
-                "name": "myCapacityReservation1",
-                "utilizationInfo": {
-                  "virtualMachinesAllocated": [
-                    {
-                      "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM1"
-                    },
-                    {
-                      "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM2"
-                    }
-                  ]
+            "utilizationInfo": {
+              "virtualMachinesAllocated": [
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM1"
                 },
-                "statuses": [
-                  {
-                    "code": "ProvisioningState/succeeded",
-                    "level": "Info",
-                    "displayStatus": "Provisioning succeeded"
-                  }
-                ]
-              },
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM2"
+                }
+              ]
+            },
+            "statuses": [
               {
-                "name": "myCapacityReservation2",
-                "utilizationInfo": {
-                  "virtualMachinesAllocated": [
-                    {
-                      "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM3"
-                    },
-                    {
-                      "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM4"
-                    }
-                  ]
-                },
-                "statuses": [
-                  {
-                    "code": "ProvisioningState/succeeded",
-                    "level": "Info",
-                    "displayStatus": "Provisioning succeeded"
-                  }
-                ]
+                "code": "ProvisioningState/succeeded",
+                "level": "Info",
+                "displayStatus": "Provisioning succeeded"
               }
             ]
-          }
+          },
+          "timeCreated": "2021-06-27T01:02:38.3138469+00:00"
         },
         "location": "westus",
         "tags": {
-          "{tagName}": "{tagValue}"
+          "department": "HR"
         },
-        "name": "myCapacityReservationGroup",
+        "sku": {
+          "name": "Standard_DS1_v2",
+          "capacity": 4
+        },
         "zones": [
-          "3",
           "1"
-        ]
+        ],
+        "name": "myCapacityReservation"
       }
     }
   }
