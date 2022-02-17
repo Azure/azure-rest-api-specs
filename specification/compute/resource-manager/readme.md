@@ -243,8 +243,8 @@ These settings apply only when `--tag=package-2022-03-01` is specified on the co
 input-file:
 - Microsoft.Compute/stable/2022-03-01/common.json
 - Microsoft.Compute/stable/2022-03-01/computeRP/computeRPCommon.json
-- Microsoft.Compute/stable/2022-03-01/computeRP/virtualMachine.json
 - Microsoft.Compute/stable/2022-03-01/computeRP/virtualMachineScaleSet.json
+- Microsoft.Compute/stable/2022-03-01/computeRP/virtualMachine.json
 - Microsoft.Compute/stable/2022-03-01/computeRP/virtualMachineImage.json
 - Microsoft.Compute/stable/2022-03-01/computeRP/virtualMachineExtensionImage.json
 - Microsoft.Compute/stable/2022-03-01/computeRP/availabilitySet.json
