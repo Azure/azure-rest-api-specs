@@ -4,7 +4,7 @@
     "api-version": "2022-04-01-preview",
     "Endpoint": "{Endpoint}",
     "jobId": "{Job ID}",
-    "input": {
+    "body": {
       "displayName": "Analyze conversations from xxx",
       "analysisInput": {
         "conversations": [
@@ -16,33 +16,21 @@
             "conversationItems": [
               {
                 "participantId": "user",
-                "timestamp": "2021-10-01T10:00:01.001",
-                "utterances": [
-                  {
-                    "type": "text",
-                    "content": "Hi!"
-                  }
-                ]
+                "id": "1",
+                "modality": "text",
+                "text": "Hi!"
               },
               {
                 "participantId": "agent",
-                "timestamp": "2021-10-01T10:00:01.002",
-                "utterances": [
-                  {
-                    "type": "text",
-                    "content": "Hello, how can I help you?"
-                  }
-                ]
+                "id": "2",
+                "modality": "text",
+                "text": "Hello, how can I help you?"
               },
               {
                 "participantId": "user",
-                "timestamp": "2021-10-01T10:00:03.004",
-                "utterances": [
-                  {
-                    "type": "text",
-                    "content": "I am having trouble issuing a return of a game on my xbox: call of duty"
-                  }
-                ]
+                "id": "3",
+                "modality": "text",
+                "text": "I am having trouble issuing a return of a game on my xbox: call of duty"
               }
             ]
           }
@@ -58,12 +46,12 @@
           }
         ]
       }
-    },
-    "responses": {
-      "202": {
-        "headers": {
-          "Operation-Location": "{Endpoint}/language/analyze-conversation/jobs/{jobId}?api-version=2022-04-01-preview"
-        }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "{Endpoint}/language/analyze-conversation/jobs/{jobId}?api-version=2022-04-01-preview"
       }
     }
   }

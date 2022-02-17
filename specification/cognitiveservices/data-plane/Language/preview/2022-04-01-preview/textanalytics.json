@@ -424,7 +424,7 @@
           "type": "string"
         },
         "language": {
-          "description": "Default languages of the conversation item",
+          "description": "Default languages of the conversation item in BCP-47 format",
           "type": "string"
         },
         "modality": {
@@ -445,8 +445,8 @@
       "type": "string",
       "description": "Enumeration of supported conversation genres (or modalities). Currently we will support chat and transcription",
       "enum": [
-        "Transcript",
-        "Chat"
+        "transcript",
+        "text"
       ],
       "x-ms-enum": {
         "name": "Modality",
@@ -454,81 +454,103 @@
       }
     },
     "ConversationItem": {
+      "discriminator": "modality",
       "required": [
+        "id",
         "participantId",
-        "utterances"
+        "modality"
       ],
       "properties": {
-        "participantId": {
-          "type": "string"
-        },
-        "order": {
-          "description": "The order of the conversation item.",
-          "type": "integer"
-        },
-        "timestamp": {
-          "description": "The timestamp of the conversation item for ordering.",
+        "id": {
           "type": "string",
-          "format": "date-time"
+          "description": "Unique identifier for the conversation item."
         },
-        "languages": {
-          "description": "Optional property to override the language of the conversation item."
+        "participantId": {
+          "type": "string",
+          "description": "Identifier for the participant."
+        },
+        "language": {
+          "type": "string",
+          "description": "Optional property to override the language of the conversation item in BCP-47 format."
         },
         "modality": {
-          "description": "Optional property to override the modality of the conversation item."
-        },
-        "utterances": {
-          "description": "The list of the utterance for the item in various formats. Only one text for each format is allowed.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Utterance"
-          }
+          "description": "Property to override the modality of the conversation item.",
+          "$ref": "#/definitions/Modality"
         }
       }
+    },
+    "TextConversationItem": {
+      "type": "object",
+      "description": "Extra properties for supporting additional parameters for transcript conversation.",
+      "required": [
+        "text"
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text input to be analyzed"
+        }
+      },
+      "x-ms-discriminator-value": "text"
     },
     "TranscriptConversationItem": {
       "type": "object",
       "description": "Extra properties for supporting additional parameters for transcript conversation.",
+      "required": [
+        "content"
+      ],
       "properties": {
+        "content": {
+          "type": "object",
+          "$ref": "#/definitions/TranscriptContent"
+        }
+      },
+      "x-ms-discriminator-value": "transcript"
+    },
+    "TranscriptContent": {
+      "type":"object",
+      "properties": {
+        "itn": {
+          "type": "string"
+        },
+        "maskedItn": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "lexical": {
+          "type": "string"
+        },
         "audioTimings": {
-          "type": "array",
+          "type":"array",
           "items": {
             "$ref": "#/definitions/WordLevelTiming"
           }
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConversationItem"
-        }
-      ]
-    },
-    "Utterance": {
-      "required": [
-        "content",
-        "type"
-      ],
-      "properties": {
-        "content": {
-          "type": "string"
-        },
-        "type": {
-          "$ref": "#/definitions/UtteranceType"
-        }
       }
     },
-    "UtteranceType": {
-      "type": "string",
-      "description": "Enumeration of supported utterance types.",
-      "enum": [
-        "text",
-        "lexical",
-        "itn",
-        "maskedItn"
-      ],
-      "x-ms-enum": {
-        "name": "UtteranceType",
-        "modelAsString": true
+    "RedactedTranscriptContent": {
+      "type":"object",
+      "properties": {
+        "itn": {
+          "type": "string"
+        },
+        "maskedItn": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "lexical": {
+          "type": "string"
+        },
+        "audioTimings": {
+          "type":"array",
+          "items": {
+            "$ref": "#/definitions/AudioTiming"
+          }
+        }
       }
     },
     "WordLevelTiming": {
@@ -791,24 +813,16 @@
     "TranscriptionPiiConversationItemResult": {
       "type": "object",
       "required": [
-        "order",
-        "redactedUtterances"
+        "id",
+        "redactedContent"
       ],
       "properties": {
-        "order": {
-          "type": "integer"
+        "id": {
+          "type": "string"
         },
-        "redactedUtterances": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Utterance"
-          }
-        },
-        "redactedAudioTimings": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AudioTiming"
-          }
+        "redactedContent": {
+          "type": "object",
+          "$ref": "#/definitions/RedactedTranscriptContent"
         },
         "entities": {
           "type": "array",
@@ -822,10 +836,13 @@
       "type": "object",
       "properties": {
         "offset": {
+          "description": "Offset from start of speech audio, in ticks.",
           "type": "integer"
         },
         "duration": {
-          "type": "integer"
+          "description": "Duration of word articulation, in ticks.",
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -879,6 +896,10 @@
         "showDetectedEntityTypes": {
           "type": "boolean",
           "default": false
+        },
+        "redactionSource":{
+          "type": "string",
+          "$ref": "#/definitions/ContentSource"
         }
       },
       "allOf": [
@@ -889,6 +910,20 @@
           "$ref": "#/definitions/PreBuiltTaskParameters"
         }
       ]
+    },
+    "ContentSource": {
+      "type": "string",
+      "description": "Enumeration of supported content source types.",
+      "enum": [
+        "lexical",
+        "itn",
+        "maskedItn",
+        "text"
+      ],
+      "x-ms-enum": {
+        "name": "ContentSource",
+        "modelAsString": true
+      }
     },
     "AnalyzeConversationIssueResolutionSummarizationLROTask": {
       "type": "object",
@@ -3431,13 +3466,6 @@
           "description": "Warnings encountered while processing document.",
           "items": {
             "$ref": "#/definitions/ConversationWarning"
-          }
-        },
-        "errors": {
-          "type": "array",
-          "description": "Errors encountered while processing conversation.",
-          "items": {
-            "$ref": "#/definitions/ConversationError"
           }
         },
         "statistics": {

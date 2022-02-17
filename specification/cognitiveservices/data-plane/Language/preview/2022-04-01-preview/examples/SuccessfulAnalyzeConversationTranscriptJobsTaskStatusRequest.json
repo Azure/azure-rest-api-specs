@@ -10,7 +10,7 @@
       "headers": {},
       "body": {
         "createdDateTime": "2020-10-01T15:00:45Z",
-        "displayName": "Redacting Pii From transcribed audio",
+        "displayName": "Redacting PII from transcribed audio",
         "expirationDateTime": "2020-10-03T15:01:03Z",
         "jobId": "c0f2a446-05d9-48fc-ba8f-3ef4af8d0b18",
         "lastUpdateDateTime": "2022-01-25T15:01:03Z",
@@ -29,28 +29,26 @@
               "results": {
                 "conversations": [
                   {
-                    "id": "conversationId",
+                    "id": "conv-01",
                     "conversationItems": [
                       {
-                        "order": "1",
-                        "redactedUtterances": [
-                          {
-                            "content": "Good morning *************.",
-                            "type": "text"
-                          },
-                          {
-                            "content": "good morning *************",
-                            "type": "itn"
-                          },
-                          {
-                            "content": "good morning *************",
-                            "type": "maskedItn"
-                          },
-                          {
-                            "content": "good morning *************",
-                            "type": "lexical"
-                          }
-                        ],
+                        "id": "turn-01",
+                        "redactedContent": {
+                          "text": "Good morning *************.",
+                          "itn": "good morning *************",
+                          "maskedItn": "good morning *************",
+                          "lexical": "good morning *************",
+                          "audioTimings": [
+                            {
+                              "offset": 590000,
+                              "duration": 2700000
+                            },
+                            {
+                              "offset": 6300000,
+                              "duration": 920000
+                            }
+                          ]
+                        },
                         "entities": [
                           {
                             "category": "Name",
@@ -59,102 +57,14 @@
                             "offset": 13,
                             "text": "john doe"
                           }
-                        ],
-                        "redactedAudioOffsets": [
-                          {
-                            "offset": 590000,
-                            "duration": 2700000
-                          },
-                          {
-                            "offset": 6300000,
-                            "duration": 920000
-                          }
-                        ]
-                      },
-                      {
-                        "order": "2",
-                        "redactedUtterances": [
-                          {
-                            "content": "My phone number is *************.",
-                            "type": "text"
-                          },
-                          {
-                            "content": "my phone number is *************",
-                            "type": "itn"
-                          },
-                          {
-                            "content": "my phone number is *************",
-                            "type": "maskedItn"
-                          },
-                          {
-                            "content": "my phone number is *************",
-                            "type": "lexical"
-                          }
-                        ],
-                        "entities": [
-                          {
-                            "category": "PhoneNumber",
-                            "confidenceScore": 0.91,
-                            "length": 8,
-                            "offset": 13,
-                            "text": "nine nine nine eight eight eight seven seven seven seven"
-                          }
-                        ],
-                        "redactedAudioOffsets": [
-                          {
-                            "word": "nine",
-                            "offset": 7300000,
-                            "duration": 920000
-                          },
-                          {
-                            "word": "nine",
-                            "offset": 8300000,
-                            "duration": 920000
-                          },
-                          {
-                            "word": "nine",
-                            "offset": 9300000,
-                            "duration": 920000
-                          },
-                          {
-                            "word": "eight",
-                            "offset": 10300000,
-                            "duration": 950000
-                          },
-                          {
-                            "word": "eight",
-                            "offset": 11300000,
-                            "duration": 920000
-                          },
-                          {
-                            "word": "eight",
-                            "offset": 12300000,
-                            "duration": 920000
-                          },
-                          {
-                            "word": "seven",
-                            "offset": 133300000,
-                            "duration": 920000
-                          },
-                          {
-                            "word": "seven",
-                            "offset": 16300000,
-                            "duration": 920000
-                          },
-                          {
-                            "word": "seven",
-                            "offset": 26300000,
-                            "duration": 920000
-                          },
-                          {
-                            "word": "seven",
-                            "offset": 36300000,
-                            "duration": 920000
-                          }
                         ]
                       }
                     ],
-                    "warnings": []
+                    "warnings": [],
+                    "statistics": {
+                      "charactersCount": 18,
+                      "transactionsCount": 1
+                    }
                   }
                 ],
                 "errors": [],
