@@ -196,6 +196,56 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/locations/{location}/sapVirtualInstanceMetadata/default/getAvailabilityZoneDetails": {
+      "post": {
+        "tags": [
+          "SAPAvailabilityZoneDetails"
+        ],
+        "description": "Get SAP Availability Zone Details.",
+        "operationId": "SAPAvailabilityZoneDetails",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "SAPAvailabilityZoneDetails",
+            "description": "SAP Availability Zone Details Request body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SAPAvailabilityZoneDetailsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SAP Availability Zone Details Result.",
+            "schema": {
+              "$ref": "#/definitions/SAPAvailabilityZoneDetailsResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SAPAvailabilityZoneDetails_eastus": {
+            "$ref": "./examples/sapvirtualinstances/SAPAvailabilityZoneDetails_eastus.json"
+          },
+          "SAPAvailabilityZoneDetails_northeurope": {
+            "$ref": "./examples/sapvirtualinstances/SAPAvailabilityZoneDetails_northeurope.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances/{sapVirtualInstanceName}": {
       "put": {
         "tags": [
@@ -1773,7 +1823,8 @@
           "items": {
             "$ref": "#/definitions/SshPublicKey"
           },
-          "description": "The list of SSH public keys used to authenticate with linux based VMs."
+          "description": "The list of SSH public keys used to authenticate with linux based VMs.",
+          "x-ms-identifiers": []
         }
       },
       "description": "SSH configuration for Linux based VMs running on Azure"
@@ -2024,7 +2075,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SAPSupportedSku"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2111,7 +2163,60 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SAPDiskConfiguration"
-          }
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SAPAvailabilityZoneDetailsRequest": {
+      "description": "The SAP request to get list of availability zones.",
+      "type": "object",
+      "properties": {
+        "appLocation": {
+          "type": "string",
+          "description": "The geo-location where the SAP resources will be created."
+        },
+        "sapProduct": {
+          "$ref": "#/definitions/SAPProductType"
+        },
+        "databaseType": {
+          "description": "The database type. Eg: HANA, DB2, etc",
+          "$ref": "#/definitions/SAPDatabaseType"
+        }
+      },
+      "required": [
+        "appLocation",
+        "sapProduct",
+        "databaseType"
+      ]
+    },
+    "SAPAvailabilityZonePair": {
+      "description": "The SAP Availability Zone Pair.",
+      "type": "object",
+      "properties": {
+        "zoneA": {
+          "description": "The zone A.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "zoneB": {
+          "description": "The zone B.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "SAPAvailabilityZoneDetailsResult": {
+      "description": "The list of supported availability zone pairs which are part of SAP HA deployment.",
+      "type": "object",
+      "properties": {
+        "availabilityZonePairs": {
+          "description": "Gets the list of availability zone pairs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SAPAvailabilityZonePair"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2598,7 +2703,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SAPVirtualInstance"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Gets the value of next link.",
@@ -2615,7 +2721,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SAPCentralServerInstance"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Gets the value of next link.",
@@ -2632,7 +2739,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SAPDatabaseInstance"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Gets the value of next link.",
@@ -2649,7 +2757,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SAPApplicationServerInstance"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Gets the value of next link.",
@@ -2893,6 +3002,7 @@
           "items": {
             "$ref": "#/definitions/CentralServerVmDetails"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         },
         "status": {
@@ -2968,6 +3078,7 @@
           "items": {
             "$ref": "#/definitions/DatabaseVmDetails"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         },
         "status": {
@@ -3033,6 +3144,7 @@
           "items": {
             "$ref": "#/definitions/ErrorDefinition"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         }
       }
