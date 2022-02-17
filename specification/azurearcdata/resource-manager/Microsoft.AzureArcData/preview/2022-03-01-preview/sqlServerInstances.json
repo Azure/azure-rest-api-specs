@@ -31,9 +31,13 @@
           "type": "string",
           "description": "SQL Server version.",
           "enum": [
-            "SQL Server 2019",
+            "SQL Server 2012",
+            "SQL Server 2014",
+            "SQL Server 2016",
             "SQL Server 2017",
-            "SQL Server 2016"
+            "SQL Server 2019",
+            "SQL Server 2022",
+            "Unknown"
           ],
           "x-ms-enum": {
             "name": "sqlVersion",
@@ -75,6 +79,7 @@
           "enum": [
             "Connected",
             "Disconnected",
+            "Registered",
             "Unknown"
           ],
           "x-ms-enum": {
@@ -146,6 +151,26 @@
           "type": "string",
           "description": "The provisioning state of the Arc-enabled SQL Server resource.",
           "readOnly": true
+        },
+        "esuExpirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of ESU Expiration."
+        },
+        "hostType": {
+          "type": "string",
+          "description": "Type of host for Azure Arc SQL Server",
+          "enum": [
+            "Virtual Machine",
+            "Physical Server",
+            "AWS Virtual Machine",
+            "GCP Virtual Machine",
+            "Other"
+          ],
+          "x-ms-enum": {
+            "name": "hostType",
+            "modelAsString": true
+          }
         }
       },
       "required": [

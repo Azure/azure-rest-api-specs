@@ -123,6 +123,15 @@
           "readOnly": true,
           "description": "The provisioning state of the Arc-enabled SQL Managed Instance resource."
         },
+        "keytab": {
+          "type": "string",
+          "description": "Keytab file containing encrypted entries for the Active Directory account generated for this Arc-enabled SQL Managed Instance and its associated service principals.",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
+        },
         "licenseType": {
           "type": "string",
           "enum": [
