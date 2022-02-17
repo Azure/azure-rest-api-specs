@@ -116,6 +116,9 @@
         "x-ms-examples": {
           "PutLink": {
             "$ref": "./examples/PutLink.json"
+          },
+          "PutLinkWithServiceEndpoint": {
+            "$ref": "./examples/PutLinkWithServiceEndpoint.json"
           }
         },
         "parameters": [
@@ -864,6 +867,14 @@
           "readOnly": true,
           "type": "string",
           "description": "The provisioning state. "
+        },
+        "vNetSolution": {
+          "description": "The VNet solution.",
+          "$ref": "#/definitions/VNetSolution"
+        },
+        "secretStore": {
+          "description": "An option to store secret value in secure place",
+          "$ref": "#/definitions/SecretStore"
         }
       }
     },
@@ -1103,6 +1114,38 @@
           "items": {
             "type": "string"
           }
+        },
+        "recommendedRole": {
+          "description": "The recommended role to resolve permissions missing",
+          "type": "string"
+        }
+      }
+    },
+    "VNetSolution": {
+      "type": "object",
+      "description": "The VNet solution for linker",
+      "properties": {
+        "type": {
+          "description": "Type of VNet solution.",
+          "type": "string",
+          "enum": [
+            "serviceEndpoint",
+            "privateLink"
+          ],
+          "x-ms-enum": {
+            "name": "vNetSolutionType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SecretStore": {
+      "type": "object",
+      "description": "An option to store secret value in secure place",
+      "properties": {
+        "keyVaultId": {
+          "type": "string",
+          "description": "The key vault id to store secret"
         }
       }
     }
