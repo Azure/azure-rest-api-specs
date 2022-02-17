@@ -39,11 +39,11 @@ If any further question about AME onboarding or validation tools, please view th
 > - All removals
 
 Otherwise your PR may be subject to ARM review requirements. Complete the following:
-- [ ] Check this box if any of the following apply to the PR so that label “WaitForARMFeedback” will be added automatically to begin ARM API Review. Failure to comply may result in delays to the manifest.
+- [ ] Check this box if any of the following apply to the PR so that label "WaitForARMFeedback" will be added automatically to begin ARM API Review. Failure to comply may result in delays to the manifest.
   - Adding a new service
   - Adding new API(s)
   - Adding a new API version
-    -[ ] To review changes efficiently, ensure you copy the existing version into the new directory structure for first commit and then push new changes, including version updates, in separate commits.
+    -[ ] To review changes efficiently, ensure you are using OpenAPIHub to initialize the PR for adding a new version. More details, refer to the [wiki](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/208/OpenAPI-Hub-Adding-new-API-version).
 
 - [ ] Ensure you've reviewed following [guidelines](https://aka.ms/rpguidelines) including [ARM resource provider contract](https://github.com/Azure/azure-resource-manager-rpc) and [REST guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md). Estimated time (4 hours). This is required before you can request review from ARM API Review board.
 

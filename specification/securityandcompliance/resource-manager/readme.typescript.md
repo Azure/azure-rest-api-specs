@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-securityandcompliance"
   output-folder: "$(typescript-sdks-folder)/sdk/securityandcompliance/arm-securityandcompliance"
-  clear-output-folder: true
   generate-metadata: true
 ```

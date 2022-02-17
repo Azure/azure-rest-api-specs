@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "Default",
+    "locationName": "Japan West",
+    "failoverGroupName": "failover-group-test-3",
+    "api-version": "2021-08-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/locations/JapanWest/instanceFailoverGroups/failover-group-test-3",
+        "name": "failover-group-test-3",
+        "type": "Microsoft.Sql/locations/instanceFailoverGroups",
+        "properties": {
+          "readWriteEndpoint": {
+            "failoverPolicy": "Automatic",
+            "failoverWithDataLossGracePeriodMinutes": 480
+          },
+          "readOnlyEndpoint": {
+            "failoverPolicy": "Disabled"
+          },
+          "replicationRole": "Primary",
+          "replicationState": "CATCH_UP",
+          "partnerRegions": [
+            {
+              "location": "Japan East",
+              "replicationRole": "Secondary"
+            }
+          ],
+          "managedInstancePairs": [
+            {
+              "primaryManagedInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/managedInstances/failover-group-secondary-mngdInstance",
+              "partnerManagedInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/managedInstances/failover-group-primary-mngdInstance"
+            }
+          ]
+        }
+      }
+    },
+    "202": {}
+  }
+}

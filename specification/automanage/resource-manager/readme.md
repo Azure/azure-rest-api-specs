@@ -28,7 +28,7 @@ These are the global settings for the Automanage API.
 title: AutomanageClient
 description: Automanage Client
 openapi-type: arm
-tag: package-2020-06-30-preview
+tag: package-2021-04-30-preview
 ```
 
 ### Tag: package-2021-04-30-preview
@@ -81,6 +81,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node

@@ -2,11 +2,29 @@
 
 These settings apply only when `--go` is specified on the command line.
 
-``` yaml $(go)
+``` yaml $(go) && !$(track2)
 go:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: databox
   clear-output-folder: true
+```
+
+``` yaml $(go) && $(track2)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/resourcemanager/databox/armdatabox
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
+directive:
+- rename-model:
+    from: 'JobDetails'
+    to: 'CommonJobDetails'
+- rename-model:
+    from: 'JobSecrets'
+    to: 'CommonJobSecrets'
+- rename-model:
+    from: 'ScheduleAvailabilityRequest'
+    to: 'CommonScheduleAvailabilityRequest'
 ```
 
 ### Go multi-api
