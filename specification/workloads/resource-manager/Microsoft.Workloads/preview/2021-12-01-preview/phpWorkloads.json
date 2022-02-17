@@ -603,14 +603,6 @@
       "description": "Php workload resource properties",
       "type": "object",
       "properties": {
-        "infraResourceGroup": {
-          "description": "Resource group where the infra resources will be created in Azure",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
         "appLocation": {
           "type": "string",
           "description": "The infra resources for PHP workload will be created in this region."
@@ -1076,23 +1068,6 @@
           "type": "string",
           "description": "Database version"
         },
-        "adminUser": {
-          "type": "string",
-          "description": "Admin user name for the database server resource",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "adminUserPassword": {
-          "type": "string",
-          "format": "password",
-          "description": "Admin user password for the database server resource",
-          "x-ms-secret": true,
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
         "sku": {
           "type": "string",
           "description": "The name of the server SKU, e.g. Standard_D32s_v4"
@@ -1222,8 +1197,7 @@
           "type": "integer",
           "format": "int64",
           "description": "Fileshare size in GB",
-          "minimum": 1,
-          "maximum": 1024
+          "minimum": 1
         },
         "storageResourceId": {
           "type": "string",
