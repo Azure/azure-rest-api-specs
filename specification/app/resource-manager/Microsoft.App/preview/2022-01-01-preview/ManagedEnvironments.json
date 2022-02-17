@@ -793,6 +793,21 @@
           "description": "Certificate resource specific properties",
           "type": "object",
           "properties": {
+            "provisioningState": {
+              "description": "Provisioning state of the certificate.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "DeleteFailed"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "CertificateProvisioningState",
+                "modelAsString": true
+              }
+            },
             "password": {
               "description": "Certificate password.",
               "type": "string",
