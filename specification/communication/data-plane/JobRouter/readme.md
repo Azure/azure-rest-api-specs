@@ -33,9 +33,9 @@ tag: package-jobrouter-2021-10-20-preview2
 
 These settings apply only when `--tag=package-jobrouter-2021-10-20-preview2` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-08-30-preview'
+```yaml $(tag) == 'package-jobrouter-2021-10-20-preview2'
 input-file:
-  - preview/package-2021-08-30-preview/communicationservicesjobrouter.json
+  - preview/package-jobrouter-2021-10-20-preview2/communicationservicesjobrouter.json
 title:
   Azure Communication Services
 ```
@@ -53,3 +53,6 @@ This is not used by Autorest itself.
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
 
+## TypeScript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)
