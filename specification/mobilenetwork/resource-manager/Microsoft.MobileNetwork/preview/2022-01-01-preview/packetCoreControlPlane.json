@@ -364,14 +364,14 @@
           "type": "string",
           "description": "The version of the packet core software that is deployed."
         },
-        "n2Interface": {
+        "controlPlaneAccessInterface": {
           "$ref": "./common.json#/definitions/InterfaceProperties",
-          "description": "Interface configuration for N2 reference point."
+          "description": "The control plane interface on the access network. In 5G networks this is called as N2 interface whereas in 4G networks this is called as S1-MME interface."
         }
       },
       "required": [
         "mobileNetwork",
-        "n2Interface"
+        "controlPlaneAccessInterface"
       ]
     },
     "PacketCoreControlPlaneListResult": {
