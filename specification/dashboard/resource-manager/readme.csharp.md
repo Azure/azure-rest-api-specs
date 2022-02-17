@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.Dashboard
-  output-folder: $(csharp-sdks-folder)/dashboard/management/Microsoft.Dashboard/src/Generated
+  namespace: Microsoft.Azure.Management.Dashboard
+  output-folder: $(csharp-sdks-folder)/dashboard/Microsoft.Azure.Management.Dashboard/src/Generated
 ```
