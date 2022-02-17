@@ -51,7 +51,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/RunId"
+            "$ref": "#/parameters/NotebookRunId"
           },
           {
             "name": "RunNotebookRequest",
@@ -100,7 +100,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/RunId"
+            "$ref": "#/parameters/NotebookRunId"
           }
         ],
         "responses": {
@@ -136,7 +136,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/RunId"
+            "$ref": "#/parameters/NotebookRunId"
           }
         ],
         "responses": {
@@ -179,14 +179,14 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/RunId"
+            "$ref": "#/parameters/NotebookRunId"
           }
         ],
         "responses": {
           "200": {
             "description": "Ok.",
             "schema": {
-              "$ref": "#/definitions/RunNotebookSnapshotResult"
+              "$ref": "#/definitions/RunNotebookSnapshotResponse"
             }
           },
           "default": {
@@ -200,7 +200,7 @@
     }
   },
   "definitions": {
-    "Error": {
+    "RunNotebookError": {
       "description": "Run notebook error.",
       "type": "object",
       "properties": {
@@ -223,7 +223,7 @@
         }
       }
     },
-    "Result": {
+    "RunNotebookResult": {
       "description": "Result of run notebook.",
       "type": "object",
       "properties": {
@@ -257,7 +257,7 @@
           "type": "string"
         },
         "error": {
-          "$ref": "#/definitions/Error"
+          "$ref": "#/definitions/RunNotebookError"
         }
       }
     },
@@ -275,7 +275,7 @@
         },
         "sessionOptions": {
           "description": "Session properties.",
-          "$ref": "#/definitions/SparkSessionOptions"
+          "$ref": "#/definitions/RunNotebookSparkSessionOptions"
         },
         "honorSessionTimeToLive": {
           "description": "Whether session should run till time to live after run completes.",
@@ -285,12 +285,12 @@
           "type": "object",
           "description": "Run notebook parameters",
           "additionalProperties": {
-            "$ref": "#/definitions/parameter"
+            "$ref": "#/definitions/RunNotebookParameter"
           }
         }
       }
     },
-    "parameter": {
+    "RunNotebookParameter": {
       "description": "Run notebook parameter.",
       "type": "object",
       "properties": {
@@ -304,7 +304,7 @@
         }
       }
     },
-    "snapshot": {
+    "RunNotebookSnapshot": {
       "description": "Run notebook snapshot.",
       "type": "object",
       "properties": {
@@ -322,7 +322,7 @@
         },
         "sessionOptions": {
           "description": "Session properties.",
-          "$ref": "#/definitions/SparkSessionOptions"
+          "$ref": "#/definitions/RunNotebookSparkSessionOptions"
         },
         "honorSessionTimeToLive": {
           "description": "Whether session should run till time to live after run completes.",
@@ -341,11 +341,11 @@
           "type": "object",
           "description": "Run notebook parameters",
           "additionalProperties": {
-            "$ref": "#/definitions/parameter"
+            "$ref": "#/definitions/RunNotebookParameter"
           }
         },
         "notebookContent": {
-          "$ref": "./entityTypes/Notebook.json#/definitions/NotebookResource"
+          "$ref": "./notebooks.json#/definitions/NotebookResource"
         }
       },
       "required": [
@@ -353,15 +353,15 @@
         "notebook"
       ]
     },
-    "SnapshotResult": {
+    "RunNotebookSnapshotResult": {
       "description": "Run notebook snapshot result.",
       "type": "object",
       "properties": {
         "snapshot": {
-          "$ref": "#/definitions/snapshot"
+          "$ref": "#/definitions/RunNotebookSnapshot"
         },
         "error": {
-          "$ref": "#/definitions/Error"
+          "$ref": "#/definitions/RunNotebookError"
         },
         "runId": {
           "type": "string",
@@ -391,8 +391,8 @@
         "snapshot"
       ]
     },
-    "RunNotebookSnapshotResult": {
-      "description": "Run notebook snapshot result.",
+    "RunNotebookSnapshotResponse": {
+      "description": "Run notebook snapshot response.",
       "type": "object",
       "properties": {
         "message": {
@@ -401,11 +401,11 @@
           "description": "Response message."
         },
         "result": {
-          "$ref": "#/definitions/SnapshotResult"
+          "$ref": "#/definitions/RunNotebookSnapshotResult"
         }
       }
     },
-    "SparkSessionOptions": {
+    "RunNotebookSparkSessionOptions": {
       "type": "object",
       "properties": {
         "tags": {
@@ -527,7 +527,7 @@
           "description": "Response message."
         },
         "result": {
-          "$ref": "#/definitions/Result"
+          "$ref": "#/definitions/RunNotebookResult"
         }
       }
     }
@@ -541,13 +541,13 @@
       "type": "string",
       "description": "Api version."
     },
-    "RunId": {
+    "NotebookRunId": {
       "name": "runId",
       "in": "path",
       "maxLength": 100,
       "required": true,
       "type": "string",
-      "description": "Spark pool name.",
+      "description": "Notebook run id.",
       "x-ms-parameter-location": "method"
     },
     "Endpoint": {
