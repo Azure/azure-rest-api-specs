@@ -1766,7 +1766,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/assets/{assetName}/tracks/{trackName}/updateTrackData": {
       "post": {
         "summary": "Update the track data",
-        "description": "Update the track data. This API should be called after the track file content has been modified in blob container. Otherwise, the track's content will not be updated to video player.",
+        "description": "Update the track data. Call this API after any changes are made to the track data stored in the asset container. For example, you have modified the WebVTT captions file in the Azure blob storage container for the asset, viewers will not see the new version of the captions unless this API is called. Note, the changes may not be reflected immediately. CDN cache may also need to be purged if applicable.",
         "operationId": "Tracks_UpdateTrackData",
         "responses": {
           "202": {
