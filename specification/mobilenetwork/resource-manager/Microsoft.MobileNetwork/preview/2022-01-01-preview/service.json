@@ -354,7 +354,7 @@
       "type": "object",
       "properties": {
         "ruleName": {
-          "description": "The name of the rule. You must not use any of the following reserved strings - `default`, `requested` or `service`.",
+          "description": "The name of the rule. This must be unique within the parent Service. You must not use any of the following reserved strings - `default`, `requested` or `service`.",
           "type": "string",
           "pattern": "^(?!(default|requested|service)$)[a-zA-Z0-9][a-zA-Z0-9_-]*$",
           "maxLength": 64
@@ -396,7 +396,7 @@
       "type": "object",
       "properties": {
         "templateName": {
-          "description": "The name of the SDF template. You must not use any of the following reserved strings - `default`, `requested` or `service`.",
+          "description": "The name of the SDF template. This must be unique within the parent PccRuleConfiguration. You must not use any of the following reserved strings - `default`, `requested` or `service`.",
           "type": "string",
           "pattern": "^(?!(default|requested|service)$)[a-zA-Z0-9][a-zA-Z0-9_-]*$",
           "maxLength": 64
