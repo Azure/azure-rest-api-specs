@@ -3,14 +3,14 @@
     "namespaceName": "contoso-ua-test-eh-system-1",
     "resourceGroupName": "contosotest",
     "api-version": "2022-01-01",
-    "subscriptionId": "e8baea74-64ce-459b-bee3-5aa4c47b3ae3"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/e8baea74-64ce-459b-bee3-5aa4c47b3ae3/resourceGroups/contosotest/providers/Microsoft.EventHub/namespaces/contoso-ua-test-eh-system-1/applicationgroups/appGroup1",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosotest/providers/Microsoft.EventHub/namespaces/contoso-ua-test-eh-system-1/applicationgroups/appGroup1",
             "name": "appGroup1",
             "type": "Microsoft.EventHub/Namespaces/ApplicationGroups",
             "location": "EAST US 2 EUAP",
@@ -20,48 +20,60 @@
               "clientAppGroupIdentifier": "SASKeyName=RootManageSharedKey",
               "policies": [
                 {
-                  "name": "ThrottlingPolicy1",
-                  "metricId": "IncomingMessages",
-                  "rateLimitThreshold": 7912
+                  "throttlingPolicy":{
+                    "name": "ThrottlingPolicy1",
+                    "metricId": "IncomingMessages",
+                    "rateLimitThreshold": 7912
+                  }
                 },
                 {
-                  "name": "ThrottlingPolicy3",
-                  "metricId": "IncomingBytes",
-                  "rateLimitThreshold": 3951729
+                  "throttlingPolicy":{
+                    "name": "ThrottlingPolicy2",
+                    "metricId": "IncomingBytes",
+                    "rateLimitThreshold": 3951729
+                  }
                 },
                 {
-                  "name": "ThrottlingPolicy4",
-                  "metricId": "OutgoingBytes",
-                  "rateLimitThreshold": 245175
+                  "throttlingPolicy":{
+                    "name": "ThrottlingPolicy3",
+                    "metricId": "OutgoingBytes",
+                    "rateLimitThreshold": 245175
+                  }
                 }
               ],
               "isEnabled": true
             }
           },
           {
-            "id": "/subscriptions/e8baea74-64ce-459b-bee3-5aa4c47b3ae3/resourceGroups/contosotest/providers/Microsoft.EventHub/namespaces/contoso-ua-test-eh-system-1/applicationgroups/appGroup1",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosotest/providers/Microsoft.EventHub/namespaces/contoso-ua-test-eh-system-1/applicationgroups/appGroup1",
             "name": "appGroup2",
             "type": "Microsoft.EventHub/Namespaces/ApplicationGroups",
             "location": "EAST US 2 EUAP",
             "properties": {
               "updatedAt": "2022-01-13T04:08:11.1671879Z",
               "createdAt": "2022-01-13T04:08:11.1671879Z",
-              "clientAppGroupIdentifier": "AADAppID=Guid2",
+              "clientAppGroupIdentifier": "AADAppID=TestGuid",
               "policies": [
                 {
-                  "name": "ThrottlingPolicy1",
-                  "metricId": "IncomingMessages",
-                  "rateLimitThreshold": 15
+                  "throttlingPolicy":{
+                    "name": "ThrottlingPolicy1",
+                    "metricId": "IncomingMessages",
+                    "rateLimitThreshold": 8890
+                  }
                 },
                 {
-                  "name": "ThrottlingPolicy3",
-                  "metricId": "IncomingBytes",
-                  "rateLimitThreshold": 3951729
+                  "throttlingPolicy":{
+                    "name": "ThrottlingPolicy2",
+                    "metricId": "IncomingBytes",
+                    "rateLimitThreshold": 567189
+                  }
                 },
                 {
-                  "name": "ThrottlingPolicy4",
-                  "metricId": "OutgoingBytes",
-                  "rateLimitThreshold": 245175
+                  "throttlingPolicy":{
+                    "name": "ThrottlingPolicy3",
+                    "metricId": "OutgoingBytes",
+                    "rateLimitThreshold": 992445
+                  }
                 }
               ],
               "isEnabled": false

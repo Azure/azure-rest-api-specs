@@ -292,7 +292,7 @@
     "ApplicationGroupPolicyDictionary": {
       "type": "object",
       "additionalProperties": {
-        "$ref": "#/definitions/ApplicationGroupPolicy"
+        "$ref": "#/definitions/ThrottlingPolicy"
       },
       "description": "dictionary object for SchemaGroup group properties"
     }
@@ -311,6 +311,10 @@
       "type": "object",
       "description": "Properties of the throttling policy",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The Name of this policy"
+        },
         "rateLimitThreshold": {
           "format": "int64",
           "type": "integer",
