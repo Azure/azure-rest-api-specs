@@ -1877,6 +1877,10 @@
         "replicationRole": {
           "$ref": "#/definitions/ReplicationRole",
           "description": "The replication role of the server."
+        },
+        "dataEncryption": {
+          "$ref": "#/definitions/DataEncryption",
+          "description": "The Data Encryption for CMK."
         }
       },
       "description": "The properties that can be updated for a server."
@@ -1884,6 +1888,10 @@
     "ServerForUpdate": {
       "type": "object",
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The cmk identity for the server."
+        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The SKU (pricing tier) of the server."
