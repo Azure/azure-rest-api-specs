@@ -1,0 +1,2163 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2021-10-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules": {
+      "get": {
+        "x-ms-examples": {
+          "Get all alert rules.": {
+            "$ref": "./examples/alertRules/GetAllAlertRules.json"
+          }
+        },
+        "tags": [
+          "Alert Rules"
+        ],
+        "description": "Gets all alert rules.",
+        "operationId": "AlertRules_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AlertRulesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a Scheduled alert rule.": {
+            "$ref": "./examples/alertRules/GetScheduledAlertRule.json"
+          },
+          "Get an Nrt alert rule.": {
+            "$ref": "./examples/alertRules/GetNrtAlertRule.json"
+          },
+          "Get a Fusion alert rule.": {
+            "$ref": "./examples/alertRules/GetFusionAlertRule.json"
+          },
+          "Get a MicrosoftSecurityIncidentCreation rule.": {
+            "$ref": "./examples/alertRules/GetMicrosoftSecurityIncidentCreationAlertRule.json"
+          }
+        },
+        "tags": [
+          "Alert Rules"
+        ],
+        "description": "Gets the alert rule.",
+        "operationId": "AlertRules_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/RuleId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AlertRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates a Scheduled alert rule.": {
+            "$ref": "./examples/alertRules/CreateScheduledAlertRule.json"
+          },
+          "Creates or updates a Nrt alert rule.": {
+            "$ref": "./examples/alertRules/CreateNrtAlertRule.json"
+          },
+          "Creates or updates a Fusion alert rule.": {
+            "$ref": "./examples/alertRules/CreateFusionAlertRule.json"
+          },
+          "Creates or updates a Fusion alert rule with scenario exclusion pattern.": {
+            "$ref": "./examples/alertRules/CreateFusionAlertRuleWithFusionScenarioExclusion.json"
+          },
+          "Creates or updates a MicrosoftSecurityIncidentCreation rule.": {
+            "$ref": "./examples/alertRules/CreateMicrosoftSecurityIncidentCreationAlertRule.json"
+          }
+        },
+        "tags": [
+          "Alert Rules"
+        ],
+        "description": "Creates or updates the alert rule.",
+        "operationId": "AlertRules_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/RuleId"
+          },
+          {
+            "$ref": "#/parameters/AlertRule"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AlertRule"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/AlertRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete an alert rule.": {
+            "$ref": "./examples/alertRules/DeleteAlertRule.json"
+          }
+        },
+        "tags": [
+          "Alert Rules"
+        ],
+        "description": "Delete the alert rule.",
+        "operationId": "AlertRules_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/RuleId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}/actions": {
+      "get": {
+        "x-ms-examples": {
+          "Get all actions of alert rule.": {
+            "$ref": "./examples/actions/GetAllActionsByAlertRule.json"
+          }
+        },
+        "tags": [
+          "Actions"
+        ],
+        "description": "Gets all actions of alert rule.",
+        "operationId": "Actions_ListByAlertRule",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/RuleId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ActionsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}/actions/{actionId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get an action of alert rule.": {
+            "$ref": "./examples/actions/GetActionOfAlertRuleById.json"
+          }
+        },
+        "tags": [
+          "Actions"
+        ],
+        "description": "Gets the action of alert rule.",
+        "operationId": "Actions_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/RuleId"
+          },
+          {
+            "$ref": "#/parameters/ActionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ActionResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates an action of alert rule.": {
+            "$ref": "./examples/actions/CreateActionOfAlertRule.json"
+          }
+        },
+        "tags": [
+          "Actions"
+        ],
+        "description": "Creates or updates the action of alert rule.",
+        "operationId": "Actions_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/RuleId"
+          },
+          {
+            "$ref": "#/parameters/ActionId"
+          },
+          {
+            "$ref": "#/parameters/Action"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ActionResponse"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ActionResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete an action of alert rule.": {
+            "$ref": "./examples/actions/DeleteActionOfAlertRule.json"
+          }
+        },
+        "tags": [
+          "Actions"
+        ],
+        "description": "Delete the action of alert rule.",
+        "operationId": "Actions_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/RuleId"
+          },
+          {
+            "$ref": "#/parameters/ActionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRuleTemplates": {
+      "get": {
+        "x-ms-examples": {
+          "Get all alert rule templates.": {
+            "$ref": "./examples/alertRuleTemplates/GetAlertRuleTemplates.json"
+          }
+        },
+        "tags": [
+          "Alert Rule Templates"
+        ],
+        "description": "Gets all alert rule templates.",
+        "operationId": "AlertRuleTemplates_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AlertRuleTemplatesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRuleTemplates/{alertRuleTemplateId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get alert rule template by Id.": {
+            "$ref": "./examples/alertRuleTemplates/GetAlertRuleTemplateById.json"
+          }
+        },
+        "tags": [
+          "Alert Rule Templates"
+        ],
+        "description": "Gets the alert rule template.",
+        "operationId": "AlertRuleTemplates_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/AlertRuleTemplateId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AlertRuleTemplate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Action": {
+      "description": "The action",
+      "in": "body",
+      "name": "action",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ActionRequest"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "ActionId": {
+      "description": "Action ID",
+      "in": "path",
+      "name": "actionId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AlertRule": {
+      "description": "The alert rule",
+      "in": "body",
+      "name": "alertRule",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/AlertRule"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "AlertRuleTemplateId": {
+      "description": "Alert rule template ID",
+      "in": "path",
+      "name": "alertRuleTemplateId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "RuleId": {
+      "description": "Alert rule ID",
+      "in": "path",
+      "name": "ruleId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "AlertRule": {
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Alert rule.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AlertRuleKindEnum",
+          "description": "The kind of the alert rule"
+        }
+      },
+      "discriminator": "kind",
+      "type": "object",
+      "required": [
+        "kind"
+      ]
+    },
+    "AlertRuleKindEnum": {
+      "description": "The kind of the alert rule",
+      "enum": [
+        "Scheduled",
+        "MicrosoftSecurityIncidentCreation",
+        "Fusion",
+        "MLBehaviorAnalytics",
+        "ThreatIntelligence",
+        "NRT"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "AlertRuleKind",
+        "values": [
+          {
+            "value": "Scheduled"
+          },
+          {
+            "value": "MicrosoftSecurityIncidentCreation"
+          },
+          {
+            "value": "Fusion"
+          },
+          {
+            "value": "MLBehaviorAnalytics"
+          },
+          {
+            "value": "ThreatIntelligence"
+          },
+          {
+            "value": "NRT"
+          }
+        ]
+      }
+    },
+    "AlertRuleTemplate": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "Alert rule template.",
+      "discriminator": "kind",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AlertRuleKindEnum",
+          "description": "The kind of the alert rule"
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "AlertRuleTemplateDataSource": {
+      "description": "alert rule template data sources",
+      "properties": {
+        "connectorId": {
+          "description": "The connector id that provides the following data types",
+          "type": "string"
+        },
+        "dataTypes": {
+          "description": "The data types used by the alert rule template",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "AlertRuleTemplatePropertiesBase": {
+      "description": "Base alert rule template property bag.",
+      "properties": {
+        "alertRulesCreatedByTemplateCount": {
+          "description": "the number of alert rules that were created by this template",
+          "type": "integer",
+          "format": "int32"
+        },
+        "lastUpdatedDateUTC": {
+          "description": "The last time that this alert rule template has been updated.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "createdDateUTC": {
+          "description": "The time that this alert rule template has been added.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the alert rule template.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name for alert rule template.",
+          "type": "string"
+        },
+        "requiredDataConnectors": {
+          "description": "The required data sources for this template",
+          "items": {
+            "$ref": "#/definitions/AlertRuleTemplateDataSource"
+          },
+          "x-ms-identifiers": [
+            "connectorId"
+          ],
+          "type": "array"
+        },
+        "status": {
+          "description": "The alert rule template status.",
+          "enum": [
+            "Installed",
+            "Available",
+            "NotAvailable"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "TemplateStatus",
+            "values": [
+              {
+                "description": "Alert rule template installed. and can not use more then once",
+                "value": "Installed"
+              },
+              {
+                "description": "Alert rule template is available.",
+                "value": "Available"
+              },
+              {
+                "description": "Alert rule template is not available",
+                "value": "NotAvailable"
+              }
+            ]
+          }
+        }
+      },
+      "type": "object"
+    },
+    "AlertRuleTemplateWithMitreProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
+        }
+      ],
+      "description": "Alert rule template with MITRE property bag.",
+      "properties": {
+        "tactics": {
+          "description": "The tactics of the alert rule",
+          "items": {
+            "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
+          },
+          "type": "array"
+        },
+        "techniques": {
+          "description": "The techniques of the alert rule",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "QueryBasedAlertRuleTemplateProperties": {
+      "description": "Query based alert rule template base property bag.",
+      "properties": {
+        "query": {
+          "description": "The query that creates alerts for this rule.",
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
+          "description": "The severity for alerts created by this alert rule."
+        },
+        "version": {
+          "description": "The version of this template - in format <a.b.c>, where all are numbers. For example <1.0.2>.",
+          "type": "string"
+        },
+        "customDetails": {
+          "description": "Dictionary of string key-value pairs of columns to be attached to the alert",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "entityMappings": {
+          "$ref": "#/definitions/EntityMappings",
+          "description": "Array of the entity mappings of the alert rule"
+        },
+        "alertDetailsOverride": {
+          "type": "object",
+          "$ref": "#/definitions/AlertDetailsOverride",
+          "description": "The alert details override settings"
+        }
+      },
+      "type": "object"
+    },
+    "AlertRuleTemplatesList": {
+      "description": "List all the alert rule templates.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of alert rule templates.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of alert rule templates.",
+          "items": {
+            "$ref": "#/definitions/AlertRuleTemplate"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": [
+        "value"
+      ]
+    },
+    "AlertRuleTriggerOperator": {
+      "description": "The operation against the threshold that triggers alert rule.",
+      "enum": [
+        "GreaterThan",
+        "LessThan",
+        "Equal",
+        "NotEqual"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": false,
+        "name": "TriggerOperator"
+      }
+    },
+    "AlertRulesList": {
+      "description": "List all the alert rules.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of alert rules.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of alert rules.",
+          "items": {
+            "$ref": "#/definitions/AlertRule"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": [
+        "value"
+      ]
+    },
+    "MLBehaviorAnalyticsAlertRule": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRule"
+        }
+      ],
+      "description": "Represents MLBehaviorAnalytics alert rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MLBehaviorAnalyticsAlertRuleProperties",
+          "description": "MLBehaviorAnalytics alert rule properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MLBehaviorAnalytics"
+    },
+    "MLBehaviorAnalyticsAlertRuleProperties": {
+      "description": "MLBehaviorAnalytics alert rule base property bag.",
+      "properties": {
+        "alertRuleTemplateName": {
+          "description": "The Name of the alert rule template used to create this rule.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the alert rule.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name for alerts created by this alert rule.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "enabled": {
+          "description": "Determines whether this alert rule is enabled or disabled.",
+          "type": "boolean"
+        },
+        "lastModifiedUtc": {
+          "description": "The last time that this alert rule has been modified.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
+          "description": "The severity for alerts created by this alert rule.",
+          "readOnly": true
+        },
+        "tactics": {
+          "description": "The tactics of the alert rule",
+          "items": {
+            "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "techniques": {
+          "description": "The techniques of the alert rule",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "required": [
+        "alertRuleTemplateName",
+        "enabled"
+      ],
+      "type": "object"
+    },
+    "MLBehaviorAnalyticsAlertRuleTemplate": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplate"
+        }
+      ],
+      "description": "Represents MLBehaviorAnalytics alert rule template.",
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AlertRuleTemplateWithMitreProperties"
+            }
+          ],
+          "description": "MLBehaviorAnalytics alert rule template properties.",
+          "properties": {
+            "severity": {
+              "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
+              "description": "The severity for alerts created by this alert rule."
+            }
+          },
+          "type": "object",
+          "required": [
+            "displayName",
+            "description",
+            "status",
+            "severity",
+            "alertRulesCreatedByTemplateCount"
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MLBehaviorAnalytics"
+    },
+    "FusionAlertRule": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRule"
+        }
+      ],
+      "description": "Represents Fusion alert rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FusionAlertRuleProperties",
+          "description": "Fusion alert rule properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Fusion"
+    },
+    "FusionAlertRuleProperties": {
+      "description": "Fusion alert rule base property bag.",
+      "properties": {
+        "alertRuleTemplateName": {
+          "description": "The Name of the alert rule template used to create this rule.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the alert rule.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name for alerts created by this alert rule.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "enabled": {
+          "description": "Determines whether this alert rule is enabled or disabled.",
+          "type": "boolean"
+        },
+        "sourceSettings": {
+          "description": "Configuration for all supported source signals in fusion detection.",
+          "items": {
+            "$ref": "#/definitions/FusionSourceSettings"
+          },
+          "x-ms-identifiers": [],
+          "type": "array"
+        },
+        "scenarioExclusionPatterns": {
+          "description": "Configuration to exclude scenarios in fusion detection.",
+          "items": {
+            "$ref": "#/definitions/FusionScenarioExclusionPattern"
+          },
+          "x-ms-identifiers": [],
+          "type": "array"
+        },
+        "lastModifiedUtc": {
+          "description": "The last time that this alert has been modified.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
+          "description": "The severity for alerts created by this alert rule.",
+          "readOnly": true
+        },
+        "tactics": {
+          "description": "The tactics of the alert rule",
+          "items": {
+            "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "techniques": {
+          "description": "The techniques of the alert rule",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "required": [
+        "alertRuleTemplateName",
+        "enabled",
+        "sourceSettings"
+      ],
+      "type": "object"
+    },
+    "FusionSourceSettings": {
+      "description": "Represents a supported source signal configuration in Fusion detection.",
+      "properties": {
+        "enabled": {
+          "description": "Determines whether this source signal is enabled or disabled in Fusion detection.",
+          "type": "boolean"
+        },
+        "sourceName": {
+          "description": "Name of the Fusion source signal. Refer to Fusion alert rule template for supported values.",
+          "type": "string"
+        },
+        "sourceSubTypes": {
+          "description": "Configuration for all source subtypes under this source signal consumed in fusion detection.",
+          "items": {
+            "$ref": "#/definitions/FusionSourceSubTypeSetting"
+          },
+          "x-ms-identifiers": [],
+          "type": "array"
+        }
+      },
+      "required": [
+        "enabled",
+        "sourceName"
+      ],
+      "type": "object"
+    },
+    "FusionSourceSubTypeSetting": {
+      "description": "Represents a supported source subtype configuration under a source signal in Fusion detection.",
+      "properties": {
+        "enabled": {
+          "description": "Determines whether this source subtype under source signal is enabled or disabled in Fusion detection.",
+          "type": "boolean"
+        },
+        "sourceSubTypeName": {
+          "description": "The Name of the source subtype under a given source signal in Fusion detection. Refer to Fusion alert rule template for supported values.",
+          "type": "string"
+        },
+        "sourceSubTypeDisplayName": {
+          "description": "The display name of source subtype under a source signal consumed in Fusion detection.",
+          "type": "string",
+          "readOnly": true
+        },
+        "severityFilters": {
+          "description": "Severity configuration for a source subtype consumed in fusion detection.",
+          "$ref": "#/definitions/FusionSubTypeSeverityFilter",
+          "type": "object"
+        }
+      },
+      "required": [
+        "enabled",
+        "sourceSubTypeName",
+        "severityFilters"
+      ],
+      "type": "object"
+    },
+    "FusionSubTypeSeverityFilter": {
+      "description": "Represents severity configuration for a source subtype consumed in Fusion detection.",
+      "properties": {
+        "isSupported": {
+          "description": "Determines whether this source subtype supports severity configuration or not.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "filters": {
+          "description": "Individual Severity configuration settings for a given source subtype consumed in Fusion detection.",
+          "items": {
+            "$ref": "#/definitions/FusionSubTypeSeverityFiltersItem"
+          },
+          "x-ms-identifiers": [],
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "FusionSubTypeSeverityFiltersItem": {
+      "description": "Represents a Severity filter setting for a given source subtype consumed in Fusion detection.",
+      "properties": {
+        "severity": {
+          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
+          "description": "The Severity for a given source subtype consumed in Fusion detection."
+        },
+        "enabled": {
+          "description": "Determines whether this severity is enabled or disabled for this source subtype consumed in Fusion detection.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "severity",
+        "enabled"
+      ],
+      "type": "object"
+    },
+    "FusionScenarioExclusionPattern": {
+      "description": "Represents a Fusion scenario exclusion patterns in Fusion detection.",
+      "properties": {
+        "exclusionPattern": {
+          "description": "Scenario exclusion pattern.",
+          "type": "string"
+        },
+        "dateAddedInUTC": {
+          "description": "DateTime when scenario exclusion pattern is added in UTC.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "exclusionPattern",
+        "dateAddedInUTC"
+      ],
+      "type": "object"
+    },
+    "FusionAlertRuleTemplate": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplate"
+        }
+      ],
+      "description": "Represents Fusion alert rule template.",
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AlertRuleTemplateWithMitreProperties"
+            }
+          ],
+          "description": "Fusion alert rule template properties",
+          "properties": {
+            "severity": {
+              "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
+              "description": "The severity for alerts created by this alert rule."
+            },
+            "sourceSettings": {
+              "description": "All supported source signal configurations consumed in fusion detection.",
+              "items": {
+                "$ref": "#/definitions/FusionTemplateSourceSetting"
+              },
+              "x-ms-identifiers": [],
+              "type": "array"
+            }
+          },
+          "required": [
+            "displayName",
+            "description",
+            "status",
+            "severity",
+            "sourceSettings",
+            "alertRulesCreatedByTemplateCount"
+          ],
+          "type": "object",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Fusion"
+    },
+    "FusionTemplateSourceSetting": {
+      "description": "Represents a source signal consumed in Fusion detection.",
+      "properties": {
+        "sourceName": {
+          "description": "The name of a source signal consumed in Fusion detection.",
+          "type": "string"
+        },
+        "sourceSubTypes": {
+          "description": "All supported source subtypes under this source signal consumed in fusion detection.",
+          "items": {
+            "$ref": "#/definitions/FusionTemplateSourceSubType"
+          },
+          "x-ms-identifiers": [],
+          "type": "array"
+        }
+      },
+      "required": [
+        "sourceName"
+      ],
+      "type": "object"
+    },
+    "FusionTemplateSourceSubType": {
+      "description": "Represents a source subtype under a source signal consumed in Fusion detection.",
+      "properties": {
+        "sourceSubTypeName": {
+          "description": "The name of source subtype under a source signal consumed in Fusion detection.",
+          "type": "string"
+        },
+        "sourceSubTypeDisplayName": {
+          "description": "The display name of source subtype under a source signal consumed in Fusion detection.",
+          "type": "string",
+          "readOnly": true
+        },
+        "severityFilter": {
+          "description": "Severity configuration available for a source subtype consumed in fusion detection.",
+          "$ref": "#/definitions/FusionTemplateSubTypeSeverityFilter",
+          "type": "object"
+        }
+      },
+      "required": [
+        "sourceSubTypeName",
+        "severityFilter"
+      ],
+      "type": "object"
+    },
+    "FusionTemplateSubTypeSeverityFilter": {
+      "description": "Represents severity configurations available for a source subtype consumed in Fusion detection.",
+      "properties": {
+        "isSupported": {
+          "description": "Determines whether severity configuration is supported for this source subtype consumed in Fusion detection.",
+          "type": "boolean"
+        },
+        "severityFilters": {
+          "description": "List of all supported severities for this source subtype consumed in Fusion detection.",
+          "items": {
+            "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum"
+          },
+          "x-ms-identifiers": [],
+          "type": "array"
+        }
+      },
+      "required": [
+        "isSupported"
+      ],
+      "type": "object"
+    },
+    "ThreatIntelligenceAlertRule": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRule"
+        }
+      ],
+      "description": "Represents Threat Intelligence alert rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ThreatIntelligenceAlertRuleProperties",
+          "description": "Threat Intelligence alert rule properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "ThreatIntelligence"
+    },
+    "ThreatIntelligenceAlertRuleProperties": {
+      "description": "Threat Intelligence alert rule base property bag.",
+      "properties": {
+        "alertRuleTemplateName": {
+          "description": "The Name of the alert rule template used to create this rule.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the alert rule.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name for alerts created by this alert rule.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "enabled": {
+          "description": "Determines whether this alert rule is enabled or disabled.",
+          "type": "boolean"
+        },
+        "lastModifiedUtc": {
+          "description": "The last time that this alert has been modified.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
+          "description": "The severity for alerts created by this alert rule.",
+          "readOnly": true
+        },
+        "tactics": {
+          "description": "The tactics of the alert rule",
+          "items": {
+            "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "techniques": {
+          "description": "The techniques of the alert rule",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "required": [
+        "alertRuleTemplateName",
+        "enabled"
+      ],
+      "type": "object"
+    },
+    "ThreatIntelligenceAlertRuleTemplate": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplate"
+        }
+      ],
+      "description": "Represents Threat Intelligence alert rule template.",
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AlertRuleTemplateWithMitreProperties"
+            }
+          ],
+          "description": "Threat Intelligence alert rule template properties",
+          "properties": {
+            "severity": {
+              "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
+              "description": "The severity for alerts created by this alert rule."
+            }
+          },
+          "required": [
+            "displayName",
+            "description",
+            "status",
+            "severity",
+            "alertRulesCreatedByTemplateCount"
+          ],
+          "type": "object",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "ThreatIntelligence"
+    },
+    "MicrosoftSecurityIncidentCreationAlertRule": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRule"
+        }
+      ],
+      "description": "Represents MicrosoftSecurityIncidentCreation rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleProperties",
+          "description": "MicrosoftSecurityIncidentCreation rule properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftSecurityIncidentCreation"
+    },
+    "MicrosoftSecurityIncidentCreationAlertRuleCommonProperties": {
+      "description": "MicrosoftSecurityIncidentCreation rule common property bag.",
+      "properties": {
+        "displayNamesFilter": {
+          "description": "the alerts' displayNames on which the cases will be generated",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "displayNamesExcludeFilter": {
+          "description": "the alerts' displayNames on which the cases will not be generated",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "productFilter": {
+          "description": "The alerts' productName on which the cases will be generated",
+          "enum": [
+            "Microsoft Cloud App Security",
+            "Azure Security Center",
+            "Azure Advanced Threat Protection",
+            "Azure Active Directory Identity Protection",
+            "Azure Security Center for IoT",
+            "Office 365 Advanced Threat Protection",
+            "Microsoft Defender Advanced Threat Protection"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "MicrosoftSecurityProductName"
+          }
+        },
+        "severitiesFilter": {
+          "description": "the alerts' severities on which the cases will be generated",
+          "items": {
+            "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "productFilter"
+      ],
+      "type": "object"
+    },
+    "MicrosoftSecurityIncidentCreationAlertRuleProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleCommonProperties"
+        }
+      ],
+      "description": "MicrosoftSecurityIncidentCreation rule property bag.",
+      "properties": {
+        "alertRuleTemplateName": {
+          "description": "The Name of the alert rule template used to create this rule.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the alert rule.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name for alerts created by this alert rule.",
+          "type": "string"
+        },
+        "enabled": {
+          "description": "Determines whether this alert rule is enabled or disabled.",
+          "type": "boolean"
+        },
+        "lastModifiedUtc": {
+          "description": "The last time that this alert has been modified.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "required": [
+        "displayName",
+        "enabled",
+        "productFilter"
+      ],
+      "type": "object"
+    },
+    "MicrosoftSecurityIncidentCreationAlertRuleTemplate": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplate"
+        }
+      ],
+      "description": "Represents MicrosoftSecurityIncidentCreation rule template.",
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
+            },
+            {
+              "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleCommonProperties"
+            }
+          ],
+          "description": "MicrosoftSecurityIncidentCreation rule template properties",
+          "required": [
+            "displayName",
+            "description",
+            "createdDateUTC",
+            "status",
+            "alertRulesCreatedByTemplateCount",
+            "productFilter"
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftSecurityIncidentCreation"
+    },
+    "QueryBasedAlertRuleProperties": {
+      "description": "Query based alert rule base property bag.",
+      "properties": {
+        "alertRuleTemplateName": {
+          "description": "The Name of the alert rule template used to create this rule.",
+          "type": "string"
+        },
+        "templateVersion": {
+          "description": "The version of the alert rule template used to create this rule - in format <a.b.c>, where all are numbers, for example 0 <1.0.2>",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the alert rule.",
+          "type": "string"
+        },
+        "query": {
+          "description": "The query that creates alerts for this rule.",
+          "type": "string"
+        },
+        "tactics": {
+          "description": "The tactics of the alert rule",
+          "items": {
+            "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
+          },
+          "type": "array"
+        },
+        "techniques": {
+          "description": "The techniques of the alert rule",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "displayName": {
+          "description": "The display name for alerts created by this alert rule.",
+          "type": "string"
+        },
+        "enabled": {
+          "description": "Determines whether this alert rule is enabled or disabled.",
+          "type": "boolean"
+        },
+        "lastModifiedUtc": {
+          "description": "The last time that this alert rule has been modified.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "suppressionDuration": {
+          "description": "The suppression (in ISO 8601 duration format) to wait since last time this alert rule been triggered.",
+          "format": "duration",
+          "type": "string"
+        },
+        "suppressionEnabled": {
+          "description": "Determines whether the suppression for this alert rule is enabled or disabled.",
+          "type": "boolean"
+        },
+        "severity": {
+          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
+          "description": "The severity for alerts created by this alert rule."
+        },
+        "incidentConfiguration": {
+          "$ref": "#/definitions/IncidentConfiguration",
+          "description": "The settings of the incidents that created from alerts triggered by this analytics rule"
+        },
+        "customDetails": {
+          "description": "Dictionary of string key-value pairs of columns to be attached to the alert",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "entityMappings": {
+          "$ref": "#/definitions/EntityMappings",
+          "description": "Array of the entity mappings of the alert rule"
+        },
+        "alertDetailsOverride": {
+          "type": "object",
+          "$ref": "#/definitions/AlertDetailsOverride",
+          "description": "The alert details override settings"
+        }
+      },
+      "required": [
+        "displayName",
+        "enabled",
+        "suppressionEnabled",
+        "suppressionDuration"
+      ],
+      "type": "object"
+    },
+    "ScheduledAlertRuleProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScheduledAlertRuleCommonProperties"
+        },
+        {
+          "$ref": "#/definitions/QueryBasedAlertRuleProperties"
+        }
+      ],
+      "description": "Scheduled alert rule base property bag.",
+      "required": [
+        "displayName",
+        "enabled",
+        "severity",
+        "query",
+        "queryFrequency",
+        "queryPeriod",
+        "triggerOperator",
+        "triggerThreshold",
+        "suppressionEnabled",
+        "suppressionDuration"
+      ],
+      "type": "object"
+    },
+    "NrtAlertRuleProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/QueryBasedAlertRuleProperties"
+        }
+      ],
+      "description": "Nrt alert rule base property bag.",
+      "type": "object"
+    },
+    "ScheduledAlertRuleTemplate": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplate"
+        }
+      ],
+      "description": "Represents scheduled alert rule template.",
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AlertRuleTemplateWithMitreProperties"
+            },
+            {
+              "$ref": "#/definitions/QueryBasedAlertRuleTemplateProperties"
+            },
+            {
+              "$ref": "#/definitions/ScheduledAlertRuleCommonProperties"
+            }
+          ],
+          "description": "Scheduled alert rule template properties",
+          "required": [
+            "displayName",
+            "description",
+            "status",
+            "alertRulesCreatedByTemplateCount",
+            "severity",
+            "query",
+            "queryFrequency",
+            "queryPeriod",
+            "triggerOperator",
+            "triggerThreshold",
+            "version"
+          ],
+          "type": "object",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Scheduled"
+    },
+    "NrtAlertRuleTemplate": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplate"
+        }
+      ],
+      "description": "Represents NRT alert rule template.",
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AlertRuleTemplateWithMitreProperties"
+            },
+            {
+              "$ref": "#/definitions/QueryBasedAlertRuleTemplateProperties"
+            }
+          ],
+          "description": "NRT alert rule template properties",
+          "required": [
+            "displayName",
+            "description",
+            "status",
+            "alertRulesCreatedByTemplateCount",
+            "severity",
+            "query",
+            "version"
+          ],
+          "type": "object",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "NRT"
+    },
+    "EventGroupingSettings": {
+      "description": "Event grouping settings property bag.",
+      "properties": {
+        "aggregationKind": {
+          "$ref": "#/definitions/EventGroupingAggregationKind"
+        }
+      },
+      "type": "object"
+    },
+    "EventGroupingAggregationKind": {
+      "description": "The event grouping aggregation kinds",
+      "enum": [
+        "SingleAlert",
+        "AlertPerResult"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "EventGroupingAggregationKind"
+      }
+    },
+    "ScheduledAlertRule": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRule"
+        }
+      ],
+      "description": "Represents scheduled alert rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ScheduledAlertRuleProperties",
+          "description": "Scheduled alert rule properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Scheduled"
+    },
+    "NrtAlertRule": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRule"
+        }
+      ],
+      "description": "Represents NRT alert rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NrtAlertRuleProperties",
+          "description": "NRT alert rule properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "NRT"
+    },
+    "ScheduledAlertRuleCommonProperties": {
+      "description": "Scheduled alert rule template property bag.",
+      "properties": {
+        "queryFrequency": {
+          "description": "The frequency (in ISO 8601 duration format) for this alert rule to run.",
+          "format": "duration",
+          "type": "string"
+        },
+        "queryPeriod": {
+          "description": "The period (in ISO 8601 duration format) that this alert rule looks at.",
+          "format": "duration",
+          "type": "string"
+        },
+        "triggerOperator": {
+          "$ref": "#/definitions/AlertRuleTriggerOperator",
+          "description": "The operation against the threshold that triggers alert rule."
+        },
+        "triggerThreshold": {
+          "description": "The threshold triggers this alert rule.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "eventGroupingSettings": {
+          "$ref": "#/definitions/EventGroupingSettings",
+          "description": "The event grouping settings."
+        }
+      },
+      "type": "object"
+    },
+    "EntityMappings": {
+      "description": "List of entity mappings of the alert rule",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/EntityMapping"
+      },
+      "x-ms-identifiers": []
+    },
+    "EntityMapping": {
+      "description": "Single entity mapping for the alert rule",
+      "properties": {
+        "entityType": {
+          "$ref": "#/definitions/EntityMappingType"
+        },
+        "fieldMappings": {
+          "description": "array of field mappings for the given entity mapping",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FieldMapping"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "type": "object"
+    },
+    "FieldMapping": {
+      "description": "A single field mapping of the mapped entity",
+      "properties": {
+        "identifier": {
+          "description": "the V3 identifier of the entity",
+          "type": "string"
+        },
+        "columnName": {
+          "description": "the column name to be mapped to the identifier",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AlertDetailsOverride": {
+      "description": "Settings for how to dynamically override alert static details",
+      "properties": {
+        "alertDisplayNameFormat": {
+          "description": "the format containing columns name(s) to override the alert name",
+          "type": "string"
+        },
+        "alertDescriptionFormat": {
+          "description": "the format containing columns name(s) to override the alert description",
+          "type": "string"
+        },
+        "alertTacticsColumnName": {
+          "description": "the column name to take the alert tactics from",
+          "type": "string"
+        },
+        "alertSeverityColumnName": {
+          "description": "the column name to take the alert severity from",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "IncidentConfiguration": {
+      "description": "Incident Configuration property bag.",
+      "properties": {
+        "createIncident": {
+          "description": "Create incidents from alerts triggered by this analytics rule",
+          "type": "boolean"
+        },
+        "groupingConfiguration": {
+          "$ref": "#/definitions/GroupingConfiguration",
+          "description": "Set how the alerts that are triggered by this analytics rule, are grouped into incidents"
+        }
+      },
+      "type": "object",
+      "required": [
+        "createIncident"
+      ]
+    },
+    "GroupingConfiguration": {
+      "description": "Grouping configuration property bag.",
+      "properties": {
+        "enabled": {
+          "description": "Grouping enabled",
+          "type": "boolean"
+        },
+        "reopenClosedIncident": {
+          "description": "Re-open closed matching incidents",
+          "type": "boolean"
+        },
+        "lookbackDuration": {
+          "description": "Limit the group to alerts created within the lookback duration (in ISO 8601 duration format)",
+          "format": "duration",
+          "type": "string"
+        },
+        "matchingMethod": {
+          "description": "Grouping matching method. When method is Selected at least one of groupByEntities, groupByAlertDetails, groupByCustomDetails must be provided and not empty.",
+          "enum": [
+            "AllEntities",
+            "AnyAlert",
+            "Selected"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "MatchingMethod",
+            "values": [
+              {
+                "description": "Grouping alerts into a single incident if all the entities match",
+                "value": "AllEntities"
+              },
+              {
+                "description": "Grouping any alerts triggered by this rule into a single incident",
+                "value": "AnyAlert"
+              },
+              {
+                "description": "Grouping alerts into a single incident if the selected entities, custom details and alert details match",
+                "value": "Selected"
+              }
+            ]
+          }
+        },
+        "groupByEntities": {
+          "description": "A list of entity types to group by (when matchingMethod is Selected). Only entities defined in the current alert rule may be used.",
+          "items": {
+            "$ref": "#/definitions/EntityMappingType"
+          },
+          "type": "array"
+        },
+        "groupByAlertDetails": {
+          "description": "A list of alert details to group by (when matchingMethod is Selected)",
+          "items": {
+            "description": "Alert detail",
+            "enum": [
+              "DisplayName",
+              "Severity"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "AlertDetail",
+              "values": [
+                {
+                  "description": "Alert display name",
+                  "value": "DisplayName"
+                },
+                {
+                  "description": "Alert severity",
+                  "value": "Severity"
+                }
+              ]
+            }
+          },
+          "type": "array"
+        },
+        "groupByCustomDetails": {
+          "description": "A list of custom details keys to group by (when matchingMethod is Selected). Only keys defined in the current alert rule may be used.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": [
+        "enabled",
+        "reopenClosedIncident",
+        "lookbackDuration",
+        "matchingMethod"
+      ]
+    },
+    "ActionRequest": {
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Action for alert rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ActionRequestProperties",
+          "description": "Action properties for put request",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "ActionPropertiesBase": {
+      "description": "Action property bag base.",
+      "properties": {
+        "logicAppResourceId": {
+          "description": "Logic App Resource Id, /subscriptions/{my-subscription}/resourceGroups/{my-resource-group}/providers/Microsoft.Logic/workflows/{my-workflow-id}.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "logicAppResourceId"
+      ],
+      "type": "object"
+    },
+    "ActionRequestProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActionPropertiesBase"
+        }
+      ],
+      "description": "Action property bag.",
+      "properties": {
+        "triggerUri": {
+          "description": "Logic App Callback URL for this specific workflow.",
+          "type": "string",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "triggerUri"
+      ],
+      "type": "object"
+    },
+    "ActionResponse": {
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Action for alert rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ActionResponseProperties",
+          "description": "Action properties for get request",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "ActionResponseProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActionPropertiesBase"
+        }
+      ],
+      "description": "Action property bag.",
+      "properties": {
+        "workflowId": {
+          "description": "The name of the logic app's workflow.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ActionsList": {
+      "description": "List all the actions.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of actions.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of actions.",
+          "items": {
+            "$ref": "#/definitions/ActionResponse"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": [
+        "value"
+      ]
+    },
+    "EntityMappingType": {
+      "description": "The V3 type of the mapped entity",
+      "enum": [
+        "Account",
+        "Host",
+        "IP",
+        "Malware",
+        "File",
+        "Process",
+        "CloudApplication",
+        "DNS",
+        "AzureResource",
+        "FileHash",
+        "RegistryKey",
+        "RegistryValue",
+        "SecurityGroup",
+        "URL",
+        "Mailbox",
+        "MailCluster",
+        "MailMessage",
+        "SubmissionMail"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "EntityMappingType",
+        "values": [
+          {
+            "description": "User account entity type",
+            "value": "Account"
+          },
+          {
+            "description": "Host entity type",
+            "value": "Host"
+          },
+          {
+            "description": "IP address entity type",
+            "value": "IP"
+          },
+          {
+            "description": "Malware entity type",
+            "value": "Malware"
+          },
+          {
+            "description": "System file entity type",
+            "value": "File"
+          },
+          {
+            "description": "Process entity type",
+            "value": "Process"
+          },
+          {
+            "description": "Cloud app entity type",
+            "value": "CloudApplication"
+          },
+          {
+            "description": "DNS entity type",
+            "value": "DNS"
+          },
+          {
+            "description": "Azure resource entity type",
+            "value": "AzureResource"
+          },
+          {
+            "description": "File-hash entity type",
+            "value": "FileHash"
+          },
+          {
+            "description": "Registry key entity type",
+            "value": "RegistryKey"
+          },
+          {
+            "description": "Registry value entity type",
+            "value": "RegistryValue"
+          },
+          {
+            "description": "Security group entity type",
+            "value": "SecurityGroup"
+          },
+          {
+            "description": "URL entity type",
+            "value": "URL"
+          },
+          {
+            "description": "Mailbox entity type",
+            "value": "Mailbox"
+          },
+          {
+            "description": "Mail cluster entity type",
+            "value": "MailCluster"
+          },
+          {
+            "description": "Mail message entity type",
+            "value": "MailMessage"
+          },
+          {
+            "description": "Submission mail entity type",
+            "value": "SubmissionMail"
+          }
+        ]
+      }
+    }
+  }
+}

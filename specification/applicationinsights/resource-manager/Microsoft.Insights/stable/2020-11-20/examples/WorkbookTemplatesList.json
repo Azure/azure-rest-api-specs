@@ -1,0 +1,105 @@
+{
+  "parameters": {
+    "api-version": "2020-11-20",
+    "subscriptionId": "6b643656-33eb-422f-aee8-3ac145d124af",
+    "resourceGroupName": "my-resource-group"
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "name": "my-resource-name",
+          "type": "microsoft.insights/workbooktemplate",
+          "location": "westus",
+          "id": "/subscriptions/6b643656-33eb-422f-aee8-3ac145d124af/resourceGroups/my-resource-group/providers/microsoft.insights/workbooktemplates/my-resource-name",
+          "properties": {
+            "priority": 1,
+            "author": "Contoso",
+            "galleries": [
+              {
+                "name": "Simple Template",
+                "category": "Failures",
+                "type": "tsg",
+                "resourceType": "microsoft.insights/components",
+                "order": 100
+              }
+            ],
+            "templateData": {
+              "version": "Notebook/1.0",
+              "items": [
+                {
+                  "type": 1,
+                  "content": {
+                    "json": "## New workbook\n---\n\nWelcome to your new workbook.  This area will display text formatted as markdown.\n\n\nWe've included a basic analytics query to get you started. Use the `Edit` button below each section to configure it or add more sections."
+                  },
+                  "name": "text - 2"
+                },
+                {
+                  "type": 3,
+                  "content": {
+                    "version": "KqlItem/1.0",
+                    "query": "union withsource=TableName *\n| summarize Count=count() by TableName\n| render barchart",
+                    "size": 1,
+                    "exportToExcelOptions": "visible",
+                    "queryType": 0,
+                    "resourceType": "microsoft.operationalinsights/workspaces"
+                  },
+                  "name": "query - 2"
+                }
+              ],
+              "styleSettings": {},
+              "$schema": "https://github.com/Microsoft/Application-Insights-Workbooks/blob/master/schema/workbook.json"
+            }
+          },
+          "tags": null
+        },
+        {
+          "name": "my-resource-name2",
+          "type": "microsoft.insights/workbooktemplate",
+          "location": "westus",
+          "id": "/subscriptions/6b643656-33eb-422f-aee8-3ac145d124af/resourceGroups/my-resource-group/providers/microsoft.insights/workbooktemplates/my-resource-name2",
+          "properties": {
+            "priority": 1,
+            "author": "Contoso",
+            "galleries": [
+              {
+                "name": "Simple Template 2",
+                "category": "Failures",
+                "type": "tsg",
+                "resourceType": "microsoft.insights/components",
+                "order": 100
+              }
+            ],
+            "templateData": {
+              "version": "Notebook/1.0",
+              "items": [
+                {
+                  "type": 1,
+                  "content": {
+                    "json": "## New workbook\n---\n\nWelcome to your new workbook.  This area will display text formatted as markdown.\n\n\nWe've included a basic analytics query to get you started. Use the `Edit` button below each section to configure it or add more sections."
+                  },
+                  "name": "text - 2"
+                },
+                {
+                  "type": 3,
+                  "content": {
+                    "version": "KqlItem/1.0",
+                    "query": "union withsource=TableName *\n| summarize Count=count() by TableName\n| render barchart",
+                    "size": 1,
+                    "exportToExcelOptions": "visible",
+                    "queryType": 0,
+                    "resourceType": "microsoft.operationalinsights/workspaces"
+                  },
+                  "name": "query - 2"
+                }
+              ],
+              "styleSettings": {},
+              "$schema": "https://github.com/Microsoft/Application-Insights-Workbooks/blob/master/schema/workbook.json"
+            }
+          },
+          "tags": null
+        }
+      ]
+    }
+  }
+}
