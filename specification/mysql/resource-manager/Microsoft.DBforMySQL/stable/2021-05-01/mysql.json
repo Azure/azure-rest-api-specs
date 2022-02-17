@@ -2549,25 +2549,33 @@
           "type": "object",
           "additionalProperties": {
             "type": "object",
-            "properties": {
-              "principalId": {
-                "description": "Principal Id of user assigned identity",
-                "type": "string",
-                "x-ms-client-name": "PrincipalId",
-                "readOnly": true
-              },
-              "clientId": {
-                "description": "Client Id of user assigned identity",
-                "type": "string",
-                "x-ms-client-name": "ClientId",
-                "readOnly": true
-              }
+            "description": "",
+            "items": {
+              "$ref": "#/definitions/UserAssignedIdentity"
             }
           },
-          "description": "Properties for User Assigned Identities"
+          "description": "Metadata of user assigned identity."
         }
       },
       "description": "Properties to configure Identity for Bring your Own Keys"
+    },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "Principal Id of user assigned identity",
+          "type": "string",
+          "x-ms-client-name": "PrincipalId",
+          "readOnly": true
+        },
+        "clientId": {
+          "description": "Client Id of user assigned identity",
+          "type": "string",
+          "x-ms-client-name": "ClientId",
+          "readOnly": true
+        }
+      },
+      "description": "Metadata of user assigned identity."
     },
     "OperationDisplay": {
       "type": "object",
