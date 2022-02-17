@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2021-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "workspaceName": "myWorkspace",
+    "requestBody": {
+      "tags": {
+        "Environment": "Dev 2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/grafana/myWorkspace",
+        "name": "myWorkspace",
+        "type": "Microsoft.Dashboard/grafana",
+        "sku": {
+          "name": "Standard"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "grafanaVersion": "7.1",
+          "endpoint": "my.azgrafana.io",
+          "zoneRedundancy": "Enabled"
+        },
+        "tags": {
+          "Environment": "Dev 2"
+        },
+        "location": "West US"
+      }
+    }
+  }
+}
