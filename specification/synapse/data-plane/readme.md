@@ -55,6 +55,7 @@ These settings apply only when `--tag=package-artifacts-composite-v3` is specifi
 
 ``` yaml $(tag) == 'package-artifacts-composite-v3'
 input-file:
+  - Microsoft.Synapse/preview/2021-06-01-preview/runNotebook.json
   - Microsoft.Synapse/preview/2021-11-01-preview/kqlScripts.json
   - Microsoft.Synapse/preview/2021-07-01-preview/symsSync.json
   - Microsoft.Synapse/preview/2021-06-01-preview/sparkConfigurations.json
