@@ -1,107 +1,108 @@
 {
-    "parameters": {
-        "endpoint": "https://contoso.westus.communications.azure.com",
-        "api-version": "2021-10-20_preview2",
-        "id": "90eb00c4-234e-4df7-a231-ef7895518384",
-        "patchClassificationPolicy": {
-            "name": "MainUpdate"
-        },
-        "responses": {
-            "200": {
-                "body": {
-                    "id": "90eb00c4-234e-4df7-a231-ef7895518384",
-                    "name": "MainUpdate",
-                    "fallbackQueueId": "MainQueue",
-                    "queueSelectors": [
-                        {
-                            "kind": "conditional",
-                            "condition": {
-                                "kind": "expression-rule",
-                                "language": "PowerFx",
-                                "expression": "1 = 1"
-                            },
-                            "labelSelectors": [
-                                {
-                                    "key": "foo",
-                                    "operator": "equal",
-                                    "value": "bar"
-                                }
-                            ]
-                        }
-                    ],
-                    "prioritizationRule": {
-                        "kind": "static-rule",
-                        "value": "2"
-                    },
-                    "workerSelectors": []
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2021-10-20_preview2",
+    "id": "90eb00c4-234e-4df7-a231-ef7895518384",
+    "patchClassificationPolicy": {
+      "name": "MainUpdate"
+    },
+    "responses": {
+      "200": {
+        "body": {
+          "id": "90eb00c4-234e-4df7-a231-ef7895518384",
+          "name": "MainUpdate",
+          "fallbackQueueId": "MainQueue",
+          "queueSelectors": [
+            {
+              "kind": "conditional",
+              "condition": {
+                "kind": "expression-rule",
+                "language": "PowerFx",
+                "expression": "1 = 1"
+              },
+              "labelSelectors": [
+                {
+                  "key": "foo",
+                  "operator": "equal",
+                  "value": "bar"
                 }
-            },
-            "400": {
-                "body": {
-                    "communicationError": {
-                        "code": "BadRequest",
-                        "message": "Unknown discriminator static",
-                        "target": "/routing/classificationpolicies/MainClassificationPolicy"
-                    }
-                }
-            },
-            "401": {
-                "body": {
-                    "communicationError": {
-                        "code": "Unauthorized",
-                        "message": "Request is not authorized."
-                    }
-                }
-            },
-            "403": {
-                "body": {
-                    "communicationError": {
-                        "code": "Forbidden",
-                        "message": "User is not allowed to perform specified action."
-                    }
-                }
-            },
-            "404": {
-                "body": {
-                    "communicationError": {
-                        "code": "NotFound",
-                        "message": "The item was not found.",
-                        "target": "/routing/classificationpolicies/MainClassificationPolicy222"
-                    }
-                }
-            },
-            "409": {
-                "body": {
-                    "communicationError": {
-                        "code": "Conflict",
-                        "message": "There was a conflict with the current state of the target resource."
-                    }
-                }
-            },
-            "412": {
-                "body": {
-                    "communicationError": {
-                        "code": "PreconditionFailed",
-                        "message": "The item was in an unexpected state.",
-                        "target": "/routing/classificationpolicies/MainClassificationPolicy2"
-                    }
-                }
-            },
-            "429": {
-                "body": {
-                    "communicationError": {
-                        "code": "TooManyRequests",
-                        "message": "Rate limit exceeded."
-                    }
-                }
-            },
-            "503": {
-                "body": {
-                    "communicationError": {
-                        "code": "ServiceUnavailable",
-                        "message": "Service unavailable."
-                    }
-                }
+              ]
             }
+          ],
+          "prioritizationRule": {
+            "kind": "static-rule",
+            "value": "2"
+          },
+          "workerSelectors": []
         }
+      },
+      "400": {
+        "body": {
+          "communicationError": {
+            "code": "BadRequest",
+            "message": "Unknown discriminator static",
+            "target": "/routing/classificationpolicies/MainClassificationPolicy"
+          }
+        }
+      },
+      "401": {
+        "body": {
+          "communicationError": {
+            "code": "Unauthorized",
+            "message": "Request is not authorized."
+          }
+        }
+      },
+      "403": {
+        "body": {
+          "communicationError": {
+            "code": "Forbidden",
+            "message": "User is not allowed to perform specified action."
+          }
+        }
+      },
+      "404": {
+        "body": {
+          "communicationError": {
+            "code": "NotFound",
+            "message": "The item was not found.",
+            "target": "/routing/classificationpolicies/MainClassificationPolicy222"
+          }
+        }
+      },
+      "409": {
+        "body": {
+          "communicationError": {
+            "code": "Conflict",
+            "message": "There was a conflict with the current state of the target resource."
+          }
+        }
+      },
+      "412": {
+        "body": {
+          "communicationError": {
+            "code": "PreconditionFailed",
+            "message": "The item was in an unexpected state.",
+            "target": "/routing/classificationpolicies/MainClassificationPolicy2"
+          }
+        }
+      },
+      "429": {
+        "body": {
+          "communicationError": {
+            "code": "TooManyRequests",
+            "message": "Rate limit exceeded."
+          }
+        }
+      },
+      "503": {
+        "body": {
+          "communicationError": {
+            "code": "ServiceUnavailable",
+            "message": "Service unavailable."
+          }
+        }
+      }
     }
+  }
+}
