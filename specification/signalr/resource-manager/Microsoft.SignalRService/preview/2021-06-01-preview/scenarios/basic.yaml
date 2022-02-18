@@ -68,6 +68,10 @@ variables:
 scenarios:
   - steps:
       - operationId: SignalR_CheckNameAvailability
+        parameters:
+          parameters:
+            type: Microsoft.SignalRService/SignalR
+            name: $(resourceName)
       - operationId: SignalR_CreateOrUpdate
       - operationId: SignalR_Get
       - operationId: SignalR_Update

@@ -23,7 +23,7 @@ variables:
   resource:
     type: object
     value:
-      properties:
+      properties: {}
       sku:
         name: S0
         tier: Standard
@@ -35,9 +35,8 @@ variables:
     type: object
     value:
       properties:
-        vaultUri: https://myvault.vault.azure.net
-        keyVaultCertName: mycert
-        certVersion: 08a219d06d874795a96db47e06fbb01e
+        vaultUri: https://integration-test-prod.vault.azure.net/
+        keyVaultCertName: pfx-cert
   appName: app01
   appResource:
     type: object
@@ -87,7 +86,6 @@ variables:
     type: object
     value:
       properties:
-        thumbprint: 934367bf1c97033f877db0f15cb1b586957d3133
         certName: asc-certificate
 
 prepareSteps:
@@ -173,7 +171,7 @@ scenarios:
           monitoringSettingResource:
             properties:
               traceEnabled: true
-              appInsightsInstrumentationKey: $(appInsightsInstrumentationKey)
+              appInsightsInstrumentationKey: $(insightsInstrumentationKey)
               appInsightsSamplingRate: 50.0
       - operationId: MonitoringSettings_Get
       - operationId: MonitoringSettings_UpdatePatch
@@ -255,7 +253,7 @@ scenarios:
         outputVariables:
           deploymentName:
             type: string
-            fromRequest: /deploymentName
+            fromResponse: /name
       - operationId: Apps_Update
         parameters:
           appResource:
