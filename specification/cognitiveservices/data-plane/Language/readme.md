@@ -6,10 +6,10 @@ This is the AutoRest configuration file the Cognitive Services Language SDK.
 
 ## Releases
 
-The current preview release of the Conversational Language Understanding service is 2021-11-01-preview.
+The current preview release of the Conversational Language Understanding service is 2022-03-01-preview.
 
 ```yaml
-tag: release_2021_11_01_preview
+tag: release_2022_03_01_preview
 add-credentials: true
 clear-output-folder: true
 openapi-type: data-plane
@@ -28,13 +28,13 @@ add-credentials: true
 clear-output-folder: true
 ```
 
-### Release 2021-11-01-preview
+### Release 2022-03-01-preview
 
-These settings apply only when `--tag=release_2021_11_01_preview` is specified on the command line.
+These settings apply only when `--tag=release_2022_03_01_preview` is specified on the command line.
 
-``` yaml $(tag) == 'release_2021_11_01_preview'
+``` yaml $(tag) == 'release_2022_03_01_preview'
 input-file: 
-- preview/2021-11-01-preview/analyzeconversations.json
+- preview/2022-03-01-preview/analyzeconversations.json
 title: 
   Microsoft Cognitive Language Service
 modelerfour:
