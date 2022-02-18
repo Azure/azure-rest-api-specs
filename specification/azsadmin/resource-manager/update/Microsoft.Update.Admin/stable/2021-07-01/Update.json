@@ -30,7 +30,7 @@
         "operationId": "Operations_List",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -142,31 +142,6 @@
           "type": "string"
         }
       }
-    }
-  },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription.  The subscription ID forms part of the URI for every service call.",
-      "required": true,
-      "type": "string"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "description": "Client API Version.",
-      "required": true,
-      "type": "string",
-      "default": "2021-07-01"
-    },
-    "ResourceGroupParameter": {
-      "description": "Resource group name.",
-      "name": "resourceGroupName",
-      "in": "path",
-      "type": "string",
-      "required": true,
-      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
