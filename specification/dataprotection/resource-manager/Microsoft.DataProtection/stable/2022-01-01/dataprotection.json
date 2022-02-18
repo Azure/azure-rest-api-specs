@@ -1409,9 +1409,6 @@
               "$ref": "#/definitions/BackupInstanceResource"
             }
           },
-          "202": {
-            "description": "Accepted"
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -4136,7 +4133,7 @@
           "description": "Credentials to use to authenticate with data source provider."
         },
         "validationType": {
-          "description": "Specifies the type of validation.",
+          "description": "Specifies the type of validation. In case of DeepValidation, all validations from /validateForBackup API will run again.",
           "enum": [
             "ShallowValidation",
             "DeepValidation"
