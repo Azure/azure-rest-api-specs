@@ -3,7 +3,7 @@
   "info": {
     "title": "AuthorizationManagementClient",
     "version": "2020-10-01-preview",
-    "description": "Role based access control provides you a way to apply granular level policy administration down to individual resources or resource groups. These operations enable you to manage role assignments. A role assignment grants access to Azure Active Directory users."
+    "description": "Role based access control provides you a way to apply granular level policy administration down to individual resources or resource groups. These operations enable you to manage role assignments. A role eligibility grants access to Azure Active Directory users."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -34,37 +34,37 @@
     }
   },
   "paths": {
-    "/{scope}/providers/Microsoft.Authorization/roleAssignmentScheduleRequests/{roleAssignmentScheduleRequestName}": {
+    "/{scope}/providers/Microsoft.Authorization/roleEligibilityScheduleRequests/{roleEligibilityScheduleRequestName}": {
       "put": {
         "tags": [
-          "RoleAssignmentScheduleRequests"
+          "RoleEligibilityScheduleRequests"
         ],
-        "operationId": "RoleAssignmentScheduleRequests_Create",
-        "description": "Creates a role assignment schedule request.",
+        "operationId": "RoleEligibilityScheduleRequests_Create",
+        "description": "Creates a role eligibility schedule request.",
         "parameters": [
           {
             "name": "scope",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The scope of the role assignment schedule request to create. The scope can be any REST resource instance. For example, use '/providers/Microsoft.Subscription/subscriptions/{subscription-id}/' for a subscription, '/providers/Microsoft.Subscription/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for a resource group, and '/providers/Microsoft.Subscription/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider}/{resource-type}/{resource-name}' for a resource.",
+            "description": "The scope of the role eligibility schedule request to create. The scope can be any REST resource instance. For example, use '/providers/Microsoft.Subscription/subscriptions/{subscription-id}/' for a subscription, '/providers/Microsoft.Subscription/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for a resource group, and '/providers/Microsoft.Subscription/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider}/{resource-type}/{resource-name}' for a resource.",
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "roleAssignmentScheduleRequestName",
+            "name": "roleEligibilityScheduleRequestName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "A GUID for the role assignment to create. The name must be unique and different for each role assignment."
+            "description": "The name of the role eligibility to create. It can be any valid GUID."
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RoleAssignmentScheduleRequest"
+              "$ref": "#/definitions/RoleEligibilityScheduleRequest"
             },
-            "description": "Parameters for the role assignment schedule request."
+            "description": "Parameters for the role eligibility schedule request."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -72,9 +72,9 @@
         ],
         "responses": {
           "201": {
-            "description": "Created - Returns information about the role assignment.",
+            "description": "Created - Returns information about the role eligibility schedule request.",
             "schema": {
-              "$ref": "#/definitions/RoleAssignmentScheduleRequest"
+              "$ref": "#/definitions/RoleEligibilityScheduleRequest"
             }
           },
           "default": {
@@ -85,32 +85,32 @@
           }
         },
         "x-ms-examples": {
-          "PutRoleAssignmentScheduleRequest": {
-            "$ref": "./examples/PutRoleAssignmentScheduleRequest.json"
+          "PutRoleEligibilityScheduleRequest": {
+            "$ref": "./examples/PutRoleEligibilityScheduleRequest.json"
           }
         }
       },
       "get": {
         "tags": [
-          "RoleAssignmentScheduleRequests"
+          "RoleEligibilityScheduleRequests"
         ],
-        "operationId": "RoleAssignmentScheduleRequests_Get",
-        "description": "Get the specified role assignment schedule request.",
+        "operationId": "RoleEligibilityScheduleRequests_Get",
+        "description": "Get the specified role eligibility schedule request.",
         "parameters": [
           {
             "name": "scope",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The scope of the role assignment schedule request.",
+            "description": "The scope of the role eligibility schedule request.",
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "roleAssignmentScheduleRequestName",
+            "name": "roleEligibilityScheduleRequestName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name (guid) of the role assignment schedule request to get."
+            "description": "The name (guid) of the role eligibility schedule request to get."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -118,9 +118,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the role assignment schedule request.",
+            "description": "OK - Returns information about the role eligibility schedule request.",
             "schema": {
-              "$ref": "#/definitions/RoleAssignmentScheduleRequest"
+              "$ref": "#/definitions/RoleEligibilityScheduleRequest"
             }
           },
           "default": {
@@ -131,26 +131,26 @@
           }
         },
         "x-ms-examples": {
-          "GetRoleAssignmentScheduleRequestByName": {
-            "$ref": "./examples/GetRoleAssignmentScheduleRequestByName.json"
+          "GetRoleEligibilityScheduleRequestByName": {
+            "$ref": "./examples/GetRoleEligibilityScheduleRequestByName.json"
           }
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/roleAssignmentScheduleRequests": {
+    "/{scope}/providers/Microsoft.Authorization/roleEligibilityScheduleRequests": {
       "get": {
         "tags": [
-          "RoleAssignmentScheduleRequests"
+          "RoleEligibilityScheduleRequests"
         ],
-        "operationId": "RoleAssignmentScheduleRequests_ListForScope",
-        "description": "Gets role assignment schedule requests for a scope.",
+        "operationId": "RoleEligibilityScheduleRequests_ListForScope",
+        "description": "Gets role eligibility schedule requests for a scope.",
         "parameters": [
           {
             "name": "scope",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The scope of the role assignments schedule requests.",
+            "description": "The scope of the role eligibility schedule requests.",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -158,7 +158,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation. Use $filter=atScope() to return all role assignment schedule requests at or above the scope. Use $filter=principalId eq {id} to return all role assignment schedule requests at, above or below the scope for the specified principal. Use $filter=asRequestor() to return all role assignment schedule requests requested by the current user. Use $filter=asTarget() to return all role assignment schedule requests created for the current user. Use $filter=asApprover() to return all role assignment schedule requests where the current user is an approver."
+            "description": "The filter to apply on the operation. Use $filter=atScope() to return all role eligibility schedule requests at or above the scope. Use $filter=principalId eq {id} to return all role eligibility schedule requests at, above or below the scope for the specified principal. Use $filter=asRequestor() to return all role eligibility schedule requests requested by the current user. Use $filter=asTarget() to return all role eligibility schedule requests created for the current user. Use $filter=asApprover() to return all role eligibility schedule requests where the current user is an approver."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -166,9 +166,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns an array of role assignments schedule requests.",
+            "description": "OK - Returns an array of role eligibility schedule requests.",
             "schema": {
-              "$ref": "#/definitions/RoleAssignmentScheduleRequestListResult"
+              "$ref": "#/definitions/RoleEligibilityScheduleRequestListResult"
             }
           },
           "default": {
@@ -181,36 +181,36 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/RoleAssignmentScheduleRequestFilter",
+        "x-ms-odata": "#/definitions/RoleEligibilityScheduleRequestFilter",
         "x-ms-examples": {
-          "GetRoleAssignmentScheduleRequestByScope": {
-            "$ref": "./examples/GetRoleAssignmentScheduleRequestByScope.json"
+          "GetRoleEligibilityScheduleRequestByScope": {
+            "$ref": "./examples/GetRoleEligibilityScheduleRequestByScope.json"
           }
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/roleAssignmentScheduleRequests/{roleAssignmentScheduleRequestName}/cancel": {
+    "/{scope}/providers/Microsoft.Authorization/roleEligibilityScheduleRequests/{roleEligibilityScheduleRequestName}/cancel": {
       "post": {
         "tags": [
-          "RoleAssignmentScheduleRequests"
+          "RoleEligibilityScheduleRequests"
         ],
-        "operationId": "RoleAssignmentScheduleRequests_Cancel",
-        "description": "Cancels a pending role assignment schedule request.",
+        "operationId": "RoleEligibilityScheduleRequests_Cancel",
+        "description": "Cancels a pending role eligibility schedule request.",
         "parameters": [
           {
             "name": "scope",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The scope of the role assignment request to cancel.",
+            "description": "The scope of the role eligibility request to cancel.",
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "roleAssignmentScheduleRequestName",
+            "name": "roleEligibilityScheduleRequestName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the role assignment request to cancel."
+            "description": "The name of the role eligibility request to cancel."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -228,42 +228,99 @@
           }
         },
         "x-ms-examples": {
-          "CancelRoleAssignmentScheduleRequestByName": {
-            "$ref": "./examples/CancelRoleAssignmentScheduleRequestByName.json"
+          "CancelRoleEligibilityScheduleRequestByName": {
+            "$ref": "./examples/CancelRoleEligibilityScheduleRequestByName.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleEligibilityScheduleRequests/{roleEligibilityScheduleRequestName}/validate": {
+      "post": {
+        "tags": [
+          "RoleEligibilityScheduleRequests"
+        ],
+        "operationId": "RoleEligibilityScheduleRequests_Validate",
+        "description": "Validates a new role eligibility schedule request.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope of the role eligibility request to validate.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "roleEligibilityScheduleRequestName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the role eligibility request to validate."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleEligibilityScheduleRequest"
+            },
+            "description": "Parameters for the role eligibility schedule request."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the role eligibility schedule request.",
+            "schema": {
+              "$ref": "#/definitions/RoleEligibilityScheduleRequest"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidateRoleEligibilityScheduleRequestByName": {
+            "$ref": "./examples/ValidateRoleEligibilityScheduleRequestByName.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "RoleAssignmentScheduleRequestFilter": {
+    "RoleEligibilityScheduleRequestFilter": {
       "properties": {
         "principalId": {
           "type": "string",
-          "description": "Returns role assignment requests of the specific principal."
+          "description": "Returns role eligibility requests of the specific principal."
         },
         "roleDefinitionId": {
           "type": "string",
-          "description": "Returns role assignment requests of the specific role definition."
+          "description": "Returns role eligibility requests of the specific role definition."
         },
         "requestorId": {
           "type": "string",
-          "description": "Returns role assignment requests created by specific principal."
+          "description": "Returns role eligibility requests created by specific principal."
         },
         "status": {
           "type": "string",
-          "description": "Returns role assignment requests of specific status."
+          "description": "Returns role eligibility requests of specific status."
         }
       },
       "type": "object",
-      "description": "Role assignment schedule request filter"
+      "description": "Role eligibility schedule request filter"
     },
-    "RoleAssignmentScheduleRequestProperties": {
+    "RoleEligibilityScheduleRequestProperties": {
       "properties": {
         "scope": {
           "type": "string",
           "readOnly": true,
-          "description": "The role assignment schedule request scope."
+          "description": "The role eligibility schedule request scope."
         },
         "roleDefinitionId": {
           "type": "string",
@@ -311,7 +368,7 @@
         "status": {
           "type": "string",
           "readOnly": true,
-          "description": "The status of the role assignment schedule request.",
+          "description": "The status of the role eligibility schedule request.",
           "enum": [
             "Accepted",
             "PendingEvaluation",
@@ -344,28 +401,20 @@
         "approvalId": {
           "type": "string",
           "readOnly": true,
-          "description": "The approvalId of the role assignment schedule request."
-        },
-        "targetRoleAssignmentScheduleId": {
-          "type": "string",
-          "description": "The resultant role assignment schedule id or the role assignment schedule id being updated"
-        },
-        "targetRoleAssignmentScheduleInstanceId": {
-          "type": "string",
-          "description": "The role assignment schedule instance id being updated"
+          "description": "The approvalId of the role eligibility schedule request."
         },
         "scheduleInfo": {
           "properties": {
             "startDateTime": {
               "type": "string",
               "format": "date-time",
-              "description": "Start DateTime of the role assignment schedule."
+              "description": "Start DateTime of the role eligibility schedule."
             },
             "expiration": {
               "properties": {
                 "type": {
                   "type": "string",
-                  "description": "Type of the role assignment schedule expiration",
+                  "description": "Type of the role eligibility schedule expiration",
                   "enum": [
                     "AfterDuration",
                     "AfterDateTime",
@@ -379,41 +428,45 @@
                 "endDateTime": {
                   "type": "string",
                   "format": "date-time",
-                  "description": "End DateTime of the role assignment schedule."
+                  "description": "End DateTime of the role eligibility schedule."
                 },
                 "duration": {
                   "type": "string",
-                  "description": "Duration of the role assignment schedule in TimeSpan."
+                  "description": "Duration of the role eligibility schedule in TimeSpan."
                 }
               },
               "type": "object",
-              "description": "Expiration of the role assignment schedule"
+              "description": "Expiration of the role eligibility schedule"
             }
           },
           "type": "object",
-          "description": "Schedule info of the role assignment schedule"
+          "description": "Schedule info of the role eligibility schedule"
         },
-        "linkedRoleEligibilityScheduleId": {
+        "targetRoleEligibilityScheduleId": {
           "type": "string",
-          "description": "The linked role eligibility schedule id - to activate an eligibility."
+          "description": "The resultant role eligibility schedule id or the role eligibility schedule id being updated"
+        },
+        "targetRoleEligibilityScheduleInstanceId": {
+          "type": "string",
+          "description": "The role eligibility schedule instance id being updated"
         },
         "justification": {
           "type": "string",
-          "description": "Justification for the role assignment"
+          "description": "Justification for the role eligibility"
         },
         "ticketInfo": {
           "properties": {
             "ticketNumber": {
               "type": "string",
-              "description": "Ticket number for the role assignment"
+              "description": "Ticket number for the role eligibility"
             },
             "ticketSystem": {
               "type": "string",
-              "description": "Ticket system name for the role assignment"
+              "description": "Ticket system name for the role eligibility"
             }
           },
           "type": "object",
-          "description": "Ticket Info of the role assignment"
+          "description": "Ticket Info of the role eligibility"
         },
         "condition": {
           "type": "string",
@@ -425,9 +478,9 @@
         },
         "createdOn": {
           "type": "string",
-          "format": "date-time",
           "readOnly": true,
-          "description": "DateTime when role assignment schedule request was created"
+          "format": "date-time",
+          "description": "DateTime when role eligibility schedule request was created"
         },
         "requestorId": {
           "type": "string",
@@ -435,8 +488,8 @@
           "description": "Id of the user who created this request"
         },
         "expandedProperties": {
-          "type": "object",
           "readOnly": true,
+          "type": "object",
           "description": "Additional properties of principal, scope and role definition",
           "$ref": "#/definitions/ExpandedProperties"
         }
@@ -447,42 +500,42 @@
         "requestType"
       ],
       "type": "object",
-      "description": "Role assignment schedule request properties with scope."
+      "description": "Role eligibility schedule request properties with scope."
     },
-    "RoleAssignmentScheduleRequest": {
+    "RoleEligibilityScheduleRequest": {
       "properties": {
         "id": {
           "type": "string",
           "readOnly": true,
-          "description": "The role assignment schedule request ID."
+          "description": "The role eligibility schedule request ID."
         },
         "name": {
           "type": "string",
           "readOnly": true,
-          "description": "The role assignment schedule request name."
+          "description": "The role eligibility schedule request name."
         },
         "type": {
           "type": "string",
           "readOnly": true,
-          "description": "The role assignment schedule request type."
+          "description": "The role eligibility schedule request type."
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RoleAssignmentScheduleRequestProperties",
-          "description": "Role assignment schedule request properties."
+          "$ref": "#/definitions/RoleEligibilityScheduleRequestProperties",
+          "description": "Role eligibility schedule request properties."
         }
       },
       "type": "object",
-      "description": "Role Assignment schedule request"
+      "description": "Role Eligibility schedule request"
     },
-    "RoleAssignmentScheduleRequestListResult": {
+    "RoleEligibilityScheduleRequestListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/RoleAssignmentScheduleRequest"
+            "$ref": "#/definitions/RoleEligibilityScheduleRequest"
           },
-          "description": "Role assignment schedule request list."
+          "description": "Role eligibility schedule request list."
         },
         "nextLink": {
           "type": "string",
@@ -490,7 +543,7 @@
         }
       },
       "type": "object",
-      "description": "Role assignment schedule request list operation result."
+      "description": "Role eligibility schedule request list operation result."
     },
     "CloudError": {
       "x-ms-external": true,
