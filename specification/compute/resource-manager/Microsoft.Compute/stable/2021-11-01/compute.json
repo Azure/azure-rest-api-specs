@@ -9829,6 +9829,9 @@
           "items": {
             "$ref": "#/definitions/RestorePointSourceVMDataDisk"
           },
+          "x-ms-identifiers": [
+            "lun"
+          ],
           "description": "Gets the data disks of the VM captured at the time of the restore point creation."
         }
       },
@@ -9936,6 +9939,7 @@
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
+          "x-ms-identifiers": [],
           "description": "The resource status information."
         }
       },
@@ -10030,6 +10034,9 @@
           "items": {
             "$ref": "#/definitions/ComputeOperationValue"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of compute operations"
         }
       },
@@ -10187,6 +10194,7 @@
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
+          "x-ms-identifiers": [],
           "description": "The resource status information."
         }
       },
@@ -10366,6 +10374,9 @@
           "items": {
             "$ref": "#/definitions/DedicatedHostInstanceViewWithName"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of instance view of the dedicated hosts under the dedicated host group."
         }
       }
@@ -10496,6 +10507,7 @@
           "items": {
             "$ref": "#/definitions/DedicatedHostAllocatableVM"
           },
+          "x-ms-identifiers": [],
           "description": "The unutilized capacity of the dedicated host represented in terms of each VM size that is allowed to be deployed to the dedicated host."
         }
       },
@@ -10517,6 +10529,7 @@
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
+          "x-ms-identifiers": [],
           "description": "The resource status information."
         }
       },
@@ -10653,6 +10666,9 @@
           "items": {
             "$ref": "#/definitions/CapacityReservationInstanceViewWithName"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true,
           "description": "List of instance view of the capacity reservations under the capacity reservation group."
         }
@@ -10754,6 +10770,7 @@
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
+          "x-ms-identifiers": [],
           "description": "The resource status information."
         }
       },
@@ -11019,6 +11036,9 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineSize"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of virtual machine sizes."
         }
       },
@@ -11124,6 +11144,7 @@
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
+          "x-ms-identifiers": [],
           "description": "The resource status information."
         },
         "statuses": {
@@ -11131,6 +11152,7 @@
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
+          "x-ms-identifiers": [],
           "description": "The resource status information."
         }
       },
@@ -11466,6 +11488,9 @@
             "x-ms-client-flatten": true,
             "$ref": "#/definitions/VirtualMachineSoftwarePatchProperties"
           },
+          "x-ms-identifiers": [
+            "patchId"
+          ],
           "description": "The list of patches that have been detected as available for installation."
         },
         "error": {
@@ -11679,6 +11704,9 @@
             "x-ms-client-flatten": true,
             "$ref": "#/definitions/PatchInstallationDetail"
           },
+          "x-ms-identifiers": [
+            "patchId"
+          ],
           "description": "The patches that were installed during the operation."
         },
         "startDateTime": {
@@ -11835,7 +11863,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataDiskImage"
-          }
+          },
+          "x-ms-identifiers": [
+            "lun"
+          ]
         },
         "automaticOSUpgradeProperties": {
           "$ref": "#/definitions/AutomaticOSUpgradeProperties"
@@ -11851,7 +11882,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualMachineImageFeature"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "description": "Describes the properties of a Virtual Machine Image."
@@ -11930,6 +11964,7 @@
           "items": {
             "$ref": "#/definitions/Usage"
           },
+          "x-ms-identifiers": [],
           "description": "The list of compute resource usages."
         },
         "nextLink": {
@@ -11997,6 +12032,7 @@
             "type": "object",
             "description": "resource item"
           },
+          "x-ms-identifiers": [],
           "description": "a list of resource items of the captured virtual machine"
         }
       },
@@ -12642,6 +12678,9 @@
           "items": {
             "$ref": "#/definitions/DataDisk"
           },
+          "x-ms-identifiers": [
+            "lun"
+          ],
           "description": "Specifies the parameters that are used to add a data disk to a virtual machine. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview)."
         }
       },
@@ -12719,6 +12758,9 @@
           "items": {
             "$ref": "#/definitions/VMGalleryApplication"
           },
+          "x-ms-identifiers": [
+            "packageReferenceId"
+          ],
           "description": "Specifies the gallery applications that should be made available to the VM/VMSS"
         }
       },
@@ -12818,6 +12860,7 @@
           "items": {
             "$ref": "#/definitions/WinRMListener"
           },
+          "x-ms-identifiers": [],
           "description": "The list of Windows Remote Management listeners"
         }
       },
@@ -12842,6 +12885,7 @@
           "items": {
             "$ref": "#/definitions/AdditionalUnattendContent"
           },
+          "x-ms-identifiers": [],
           "description": "Specifies additional base-64 encoded XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup."
         },
         "patchSettings": {
@@ -12875,6 +12919,9 @@
           "items": {
             "$ref": "#/definitions/SshPublicKey"
           },
+          "x-ms-identifiers": [
+            "path"
+          ],
           "description": "The list of SSH public keys used to authenticate with linux based VMs."
         }
       },
@@ -12925,6 +12972,9 @@
           "items": {
             "$ref": "#/definitions/VaultCertificate"
           },
+          "x-ms-identifiers": [
+            "certificateUrl"
+          ],
           "description": "The list of key vault references in SourceVault which contain certificates."
         }
       },
@@ -12961,6 +13011,9 @@
           "items": {
             "$ref": "#/definitions/VaultSecretGroup"
           },
+          "x-ms-identifiers": [
+            "sourceVault/id"
+          ],
           "description": "Specifies set of certificates that should be installed onto the virtual machine. To install certificates on a virtual machine it is recommended to use the [Azure Key Vault virtual machine extension for Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux) or the [Azure Key Vault virtual machine extension for Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows)."
         },
         "allowExtensionOperations": {
@@ -13088,6 +13141,7 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineIpTag"
           },
+          "x-ms-identifiers": [],
           "description": "The list of IP tags associated with the public IP address."
         },
         "publicIPPrefix": {
@@ -13290,6 +13344,9 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineNetworkInterfaceIPConfiguration"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "Specifies the IP configurations of the network interface."
         },
         "dscpConfiguration": {
@@ -13342,6 +13399,9 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineNetworkInterfaceConfiguration"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "Specifies the networking configurations that will be used to create the virtual machine networking resources."
         }
       },
@@ -13432,6 +13492,7 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineExtensionHandlerInstanceView"
           },
+          "x-ms-identifiers": [],
           "description": "The virtual machine extension handler instance view."
         },
         "statuses": {
@@ -13439,6 +13500,7 @@
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
+          "x-ms-identifiers": [],
           "description": "The resource status information."
         }
       },
@@ -13455,6 +13517,9 @@
           "items": {
             "$ref": "#/definitions/DiskEncryptionSettings"
           },
+          "x-ms-identifiers": [
+            "diskEncryptionKey/sourceVault/id"
+          ],
           "description": "Specifies the encryption settings for the OS Disk. <br><br> Minimum api-version: 2015-06-15"
         },
         "statuses": {
@@ -13462,6 +13527,7 @@
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
+          "x-ms-identifiers": [],
           "description": "The resource status information."
         }
       },
@@ -13636,6 +13702,9 @@
           "items": {
             "$ref": "#/definitions/DiskInstanceView"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The virtual machine disk information."
         },
         "extensions": {
@@ -13643,6 +13712,10 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineExtensionInstanceView"
           },
+          "x-ms-identifiers": [
+            "name",
+            "type"
+          ],
           "description": "The extensions information."
         },
         "vmHealth": {
@@ -13664,6 +13737,7 @@
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
+          "x-ms-identifiers": [],
           "description": "The resource status information."
         },
         "patchStatus": {
@@ -14143,6 +14217,9 @@
           "items": {
             "$ref": "#/definitions/ImageDataDisk"
           },
+          "x-ms-identifiers": [
+            "lun"
+          ],
           "description": "Specifies the parameters that are used to add a data disk to a virtual machine. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview)."
         },
         "zoneResilient": {
@@ -14305,6 +14382,9 @@
           "items": {
             "$ref": "#/definitions/VaultSecretGroup"
           },
+          "x-ms-identifiers": [
+            "sourceVault/id"
+          ],
           "description": "Specifies set of certificates that should be installed onto the virtual machines in the scale set. To install certificates on a virtual machine it is recommended to use the [Azure Key Vault virtual machine extension for Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux) or the [Azure Key Vault virtual machine extension for Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows)."
         },
         "allowExtensionOperations": {
@@ -14333,6 +14413,9 @@
           "items": {
             "$ref": "#/definitions/VaultSecretGroup"
           },
+          "x-ms-identifiers": [
+            "sourceVault/id"
+          ],
           "description": "The List of certificates for addition to the VM."
         }
       },
@@ -14512,6 +14595,10 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSetDataDisk"
           },
+          "x-ms-identifiers": [
+            "name",
+            "lun"
+          ],
           "description": "Specifies the parameters that are used to add data disks to the virtual machines in the scale set. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview)."
         }
       },
@@ -14532,6 +14619,10 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSetDataDisk"
           },
+          "x-ms-identifiers": [
+            "name",
+            "lun"
+          ],
           "description": "The data disks."
         }
       },
@@ -14922,6 +15013,7 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSetIpTag"
           },
+          "x-ms-identifiers": [],
           "description": "The list of IP tags associated with the public IP address."
         },
         "publicIPPrefix": {
@@ -15546,6 +15638,7 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineStatusCodeCount"
           },
+          "x-ms-identifiers": [],
           "description": "The extensions information."
         }
       },
@@ -15564,6 +15657,7 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineStatusCodeCount"
           },
+          "x-ms-identifiers": [],
           "description": "The extensions information."
         }
       },
@@ -15613,6 +15707,9 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSetVMExtensionsSummary"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The extensions information."
         },
         "statuses": {
@@ -15620,6 +15717,7 @@
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
+          "x-ms-identifiers": [],
           "description": "The resource status information."
         },
         "orchestrationServices": {
@@ -15628,6 +15726,9 @@
           "items": {
             "$ref": "#/definitions/OrchestrationServiceSummary"
           },
+          "x-ms-identifiers": [
+            "serviceName"
+          ],
           "description": "The orchestration services information."
         }
       },
@@ -15734,6 +15835,10 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSetSku"
           },
+          "x-ms-identifiers": [
+            "resourceType",
+            "sku/name"
+          ],
           "description": "The list of skus available for the virtual machine scale set."
         },
         "nextLink": {
@@ -15871,6 +15976,10 @@
           "items": {
             "$ref": "#/definitions/UpgradeOperationHistoricalStatusInfo"
           },
+          "x-ms-identifiers": [
+            "type",
+            "location"
+          ],
           "description": "The list of OS upgrades performed on the virtual machine scale set."
         },
         "nextLink": {
@@ -16034,6 +16143,9 @@
           "items": {
             "$ref": "#/definitions/DiskInstanceView"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The disks information."
         },
         "extensions": {
@@ -16041,6 +16153,10 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineExtensionInstanceView"
           },
+          "x-ms-identifiers": [
+            "name",
+            "type"
+          ],
           "description": "The extensions information."
         },
         "vmHealth": {
@@ -16057,6 +16173,7 @@
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
+          "x-ms-identifiers": [],
           "description": "The resource status information."
         },
         "assignedHost": {
@@ -16306,6 +16423,10 @@
           "items": {
             "$ref": "#/definitions/ApiErrorBase"
           },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ],
           "description": "The Api error details"
         },
         "innererror": {
@@ -16671,7 +16792,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "description": "The status of virtual machine patch operations."
