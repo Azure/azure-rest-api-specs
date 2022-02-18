@@ -264,12 +264,12 @@
             },
             "clientAppGroupIdentifier": {
               "type": "string",
-              "description": "The Unique identifier for application group.Supports SAS(SASKeyName=KeyName) or AAD(AADAppID=Guid1)"
+              "description": "The Unique identifier for application group.Supports SAS(NamespaceSASKeyName=KeyName or EntitySASKeyName=KeyName) or AAD(AADAppID=Guid)"
             },
             "policies": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/ApplicationGroupPolicyDictionary"
+                "$ref": "#/definitions/ApplicationGroupPolicy"
               },
               "x-ms-identifiers": [],
               "description": "List of group policies that define the behavior of application group. The policies can support resource governance scenarios such as limiting ingress or egress traffic."
@@ -288,13 +288,6 @@
         }
       ],
       "description": "The Application Group object"
-    },
-    "ApplicationGroupPolicyDictionary": {
-      "type": "object",
-      "additionalProperties": {
-        "$ref": "#/definitions/ApplicationGroupPolicy"
-      },
-      "description": "dictionary object for SchemaGroup group properties"
     },
     "ApplicationGroupPolicy": {
       "type": "object",
@@ -316,10 +309,14 @@
           },
           "description": "Application Group Policy types"
         }
-      }
+      },
+      "required": [
+        "type"
+      ]
     },
     "ThrottlingPolicy": {
       "type": "object",
+      "x-ms-discriminator-value": "ThrottlingPolicy",
       "description": "Properties of the throttling policy",
       "properties": {
         "rateLimitThreshold": {
