@@ -63,6 +63,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-java
   - repo: azure-cli-extensions
@@ -83,3 +84,8 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Typescript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
+
+
+## Comments and notes
+x-ms-identifiers will become a requirement on every RP resource. To add it, [check here](https://github.com/Azure/autorest/tree/main/docs/extensions#x-ms-identifiers).
+For more info, reach out to the @changeanalysisteam.

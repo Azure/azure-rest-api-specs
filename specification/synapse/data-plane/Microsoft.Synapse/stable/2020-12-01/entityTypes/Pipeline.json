@@ -652,6 +652,10 @@
         "useBinaryTransfer": {
           "type": "boolean",
           "description": "Specify whether to use binary transfer mode for FTP stores."
+        },
+        "disableChunking": {
+          "type": "object",
+          "description": "If true, disable parallel reading within each file. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       }
     },
@@ -699,6 +703,10 @@
         "modifiedDatetimeEnd": {
           "type": "object",
           "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "disableChunking": {
+          "type": "object",
+          "description": "If true, disable parallel reading within each file. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       }
     },
@@ -3761,7 +3769,8 @@
       "properties": {
         "value": {
           "type": "object",
-          "description": "Stored procedure parameter value. Type: string (or Expression with resultType string)."
+          "description": "Stored procedure parameter value. Type: string (or Expression with resultType string).",
+          "x-nullable": true
         },
         "type": {
           "description": "Stored procedure parameter type.",
@@ -3783,6 +3792,35 @@
       ],
       "x-ms-enum": {
         "name": "StoredProcedureParameterType",
+        "modelAsString": true
+      }
+    },
+    "NotebookParameter": {
+      "description": "Notebook parameter.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "object",
+          "description": "Notebook parameter value. Type: string (or Expression with resultType string).",
+          "x-nullable": true
+        },
+        "type": {
+          "description": "Notebook parameter type.",
+          "$ref": "#/definitions/NotebookParameterType"
+        }
+      }
+    },
+    "NotebookParameterType": {
+      "description": "Notebook parameter type.",
+      "type": "string",
+      "enum": [
+        "string",
+        "int",
+        "float",
+        "bool"
+      ],
+      "x-ms-enum": {
+        "name": "NotebookParameterType",
         "modelAsString": true
       }
     },
@@ -7042,6 +7080,152 @@
         "dataflow"
       ]
     },
+    "ScriptActivity": {
+      "description": "Script activity type.",
+      "x-ms-discriminator-value": "Script",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "Script activity properties.",
+          "$ref": "#/definitions/ScriptActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties",
+        "linkedServiceName"
+      ]
+    },
+    "ScriptActivityTypeProperties": {
+      "description": "Script activity properties.",
+      "type": "object",
+      "properties": {
+        "scripts": {
+          "type": "array",
+          "description": "Array of script blocks. Type: array.",
+          "items": {
+            "$ref": "#/definitions/ScriptActivityScriptBlock"
+          }
+        },
+        "logSettings": {
+          "description": "Log settings of script activity.",
+          "type": "object",
+          "properties": {
+            "logDestination": {
+              "x-ms-enum": {
+                "name": "ScriptActivityLogDestination",
+                "modelAsString": true
+              },
+              "enum": [
+                "ActivityOutput",
+                "ExternalStore"
+              ],
+              "type": "string",
+              "description": "The destination of logs. Type: string."
+            },
+            "logLocationSettings": {
+              "description": "Log location settings customer needs to provide when enabling log.",
+              "$ref": "#/definitions/LogLocationSettings"
+            }
+          },
+          "required": [
+            "logDestination"
+          ]
+        }
+      }
+    },
+    "ScriptActivityScriptBlock": {
+      "description": "Script block of scripts.",
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "object",
+          "description": "The query text. Type: string (or Expression with resultType string)."
+        },
+        "type": {
+          "x-ms-enum": {
+            "name": "ScriptType",
+            "modelAsString": true
+          },
+          "enum": [
+            "Query",
+            "NonQuery"
+          ],
+          "type": "string",
+          "description": "The type of the query. Type: string."
+        },
+        "parameters": {
+          "type": "array",
+          "description": "Array of script parameters. Type: array.",
+          "items": {
+            "$ref": "#/definitions/ScriptActivityParameter"
+          }
+        }
+      },
+      "required": [
+        "text",
+        "type"
+      ]
+    },
+    "ScriptActivityParameter": {
+      "description": "Parameters of a script block.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "object",
+          "description": "The name of the parameter. Type: string (or Expression with resultType string)."
+        },
+        "type": {
+          "description": "The type of the parameter.",
+          "type": "string",
+          "enum": [
+            "Boolean",
+            "DateTime",
+            "DateTimeOffset",
+            "Decimal",
+            "Double",
+            "Guid",
+            "Int16",
+            "Int32",
+            "Int64",
+            "Single",
+            "String",
+            "Timespan"
+          ],
+          "x-ms-enum": {
+            "name": "ScriptActivityParameterType",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "description": "The value of the parameter.",
+          "type": "object"
+        },
+        "direction": {
+          "description": "The direction of the parameter.",
+          "type": "string",
+          "enum": [
+            "Input",
+            "Output",
+            "InputOutput"
+          ],
+          "x-ms-enum": {
+            "name": "ScriptActivityParameterDirection",
+            "modelAsString": true
+          }
+        },
+        "size": {
+          "description": "The size of the output direction parameter.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
     "SharePointOnlineListSource": {
       "description": "A copy activity source for sharePoint online list source.",
       "type": "object",
@@ -7170,9 +7354,16 @@
           "description": "Synapse notebook reference.",
           "$ref": "../artifacts.json#/definitions/SynapseNotebookReference"
         },
+        "sparkPool": {
+          "description": "The name of the big data pool which will be used to execute the notebook.",
+          "$ref": "../artifacts.json#/definitions/BigDataPoolParametrizationReference"
+        },
         "parameters": {
           "description": "Notebook parameters.",
-          "$ref": "../artifacts.json#/definitions/ParameterValueSpecification"
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/NotebookParameter"
+          }
         }
       },
       "required": [
@@ -7214,6 +7405,41 @@
           "items": {
             "description": "Type: string (or Expression with resultType string)."
           }
+        },
+        "file": {
+          "type": "object",
+          "description": "The main file used for the job, which will override the 'file' of the spark job definition you provide. Type: string (or Expression with resultType string)."
+        },
+        "className": {
+          "type": "object",
+          "description": "The fully-qualified identifier or the main class that is in the main definition file, which will override the 'className' of the spark job definition you provide. Type: string (or Expression with resultType string)."
+        },
+        "files": {
+          "description": "Additional files used for reference in the main definition file, which will override the 'files' of the spark job definition you provide.",
+          "type": "array",
+          "items": {
+            "description": "Type: string (or Expression with resultType string)."
+          }
+        },
+        "targetBigDataPool": {
+          "$ref": "../artifacts.json#/definitions/BigDataPoolParametrizationReference",
+          "description": "The name of the big data pool which will be used to execute the spark batch job, which will override the 'targetBigDataPool' of the spark job definition you provide."
+        },
+        "executorSize": {
+          "type": "object",
+          "description": "Number of core and memory to be used for executors allocated in the specified Spark pool for the job, which will be used for overriding 'executorCores' and 'executorMemory' of the spark job definition you provide. Type: string (or Expression with resultType string)."
+        },
+        "conf": {
+          "type": "object",
+          "description": "Spark configuration properties, which will override the 'conf' of the spark job definition you provide."
+        },
+        "driverSize": {
+          "type": "object",
+          "description": "Number of core and memory to be used for driver allocated in the specified Spark pool for the job, which will be used for overriding 'driverCores' and 'driverMemory' of the spark job definition you provide. Type: string (or Expression with resultType string)."
+        },
+        "numExecutors": {
+          "description": "Number of executors to launch for this job, which will override the 'numExecutors' of the spark job definition you provide.",
+          "type": "integer"
         }
       },
       "required": [

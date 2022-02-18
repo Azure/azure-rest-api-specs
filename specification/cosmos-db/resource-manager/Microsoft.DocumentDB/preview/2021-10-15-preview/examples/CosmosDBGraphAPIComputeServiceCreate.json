@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-10-15-preview",
+    "subscriptionId": "subid",
+    "serviceName": "GraphAPICompute",
+    "createUpdateParameters": {
+      "properties": {
+        "instanceSize": "Cosmos.D4s",
+        "instanceCount": 1,
+        "serviceType": "GraphAPICompute"
+      }
+    }
+  },
+  "responses": {
+    "202": {},
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/services/GraphAPICompute",
+        "name": "GraphAPICompute",
+        "type": "Microsoft.DocumentDB/databaseAccounts/services",
+        "properties": {
+          "status": "Running",
+          "creationTime": "2021-01-25T12:56:05.4622517Z",
+          "instanceSize": "Cosmos.D4s",
+          "instanceCount": 1,
+          "serviceType": "GraphAPICompute",
+          "graphApiComputeEndpoint": "https://graphAPICompute.gremlin.cosmos.windows-int.net/",
+          "locations": [
+            {
+              "name": "GraphAPICompute-westus2",
+              "location": "West US 2",
+              "status": "Running",
+              "graphApiComputeEndpoint": "https://graphAPICompute-westus.gremlin.cosmos.windows-int.net/"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

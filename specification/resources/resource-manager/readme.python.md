@@ -18,6 +18,8 @@ Generate all API versions currently shipped for this package
 ```yaml $(multiapi) && $(track2)
 clear-output-folder: true
 batch:
+  - tag: package-privatelinks-2020-05
+  - multiapiscript-privatelinks: true
   - tag: package-features-2021-07
   - tag: package-features-2015-12
   - multiapiscript-features: true
@@ -27,7 +29,6 @@ batch:
   - tag: package-locks-2015-01
   - multiapiscript-locks: true
   - tag: package-managedapplications-2018-06
-  - tag: package-policy-2021-07
   - tag: package-policy-2021-06
   - tag: package-policy-2020-09
   - tag: package-policy-2019-09
@@ -69,6 +70,14 @@ batch:
   - tag: package-templatespecs-2021-03-preview
   - tag: package-templatespecs-2019-06-preview
   - multiapiscript-templatespecs: true
+```
+
+```yaml $(multiapiscript-privatelinks)
+package-name: azure-mgmt-resource#privatelinks
+multiapiscript: true
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/privatelinks
+clear-output-folder: false
+perform-load: false
 ```
 
 ```yaml $(multiapiscript-features)
@@ -137,6 +146,19 @@ clear-output-folder: false
 perform-load: false
 ```
 
+### Tag: package-privatelinks-2020-05 and python
+
+These settings apply only when `--tag=package-privatelinks-2020-05 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-privatelinks-2020-05'
+namespace: azure.mgmt.resource.privatelinks.v2020_05_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/privatelinks/v2020_05_01
+python:
+  namespace: azure.mgmt.resource.privatelinks.v2020_05_01
+  output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/privatelinks/v2020_05_01
+```
+
 ### Tag: package-features-2021-07 and python
 
 These settings apply only when `--tag=package-features-2021-07 --python` is specified on the command line.
@@ -198,16 +220,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-managedapplications-2018-06'
 namespace: azure.mgmt.resource.managedapplications
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/managedapplications
-```
-
-### Tag: package-policy-2021-07 and python
-
-These settings apply only when `--tag=package-policy-2021-07 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-policy-2021-07'
-namespace: azure.mgmt.resource.policy.v2021_07_01
-output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/policy/v2021_07_01
 ```
 
 ### Tag: package-policy-2021-06 and python
@@ -568,4 +580,9 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-templatespecs-2021-05'
 namespace: azure.mgmt.resource.templatespecs.v2021_05_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/templatespecs/v2021_05_01
+```
+
+``` yaml $(python) && $(track2)
+modelerfour:
+  lenient-model-deduplication: true
 ```
