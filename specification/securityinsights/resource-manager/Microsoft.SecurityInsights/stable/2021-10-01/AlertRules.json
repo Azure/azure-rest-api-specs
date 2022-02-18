@@ -636,13 +636,13 @@
       ],
       "properties": {
         "kind": {
-          "$ref": "#/definitions/AlertRuleKind",
+          "$ref": "#/definitions/AlertRuleKindEnum",
           "description": "The alert rule kind"
         }
       },
       "type": "object"
     },
-    "AlertRuleKind": {
+    "AlertRuleKindEnum": {
       "description": "The kind of the alert rule",
       "enum": [
         "Scheduled",
@@ -679,7 +679,7 @@
       ],
       "properties": {
         "kind": {
-          "$ref": "#/definitions/AlertRuleKind",
+          "$ref": "#/definitions/AlertRuleKindEnum",
           "description": "The alert rule kind",
           "type": "string"
         }
@@ -831,7 +831,7 @@
           "type": "string"
         },
         "severity": {
-          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverity",
+          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
           "description": "The severity for alerts created by this alert rule.",
           "readOnly": true
         },
@@ -915,7 +915,7 @@
           "type": "string"
         },
         "severity": {
-          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverity",
+          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
           "description": "The severity for alerts created by this alert rule."
         },
         "tactics": {
@@ -969,7 +969,7 @@
         "severitiesFilter": {
           "description": "the alerts' severities on which the cases will be generated",
           "items": {
-            "$ref": "./common/AlertTypes.json#/definitions/AlertSeverity"
+            "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum"
           },
           "type": "array"
         }
@@ -1103,7 +1103,7 @@
         "severitiesFilter": {
           "description": "the alerts' severities on which the cases will be generated",
           "items": {
-            "$ref": "./common/AlertTypes.json#/definitions/AlertSeverity"
+            "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum"
           },
           "type": "array"
         }
@@ -1163,7 +1163,7 @@
           "type": "string"
         },
         "severity": {
-          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverity",
+          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
           "description": "The severity for alerts created by this alert rule."
         },
         "triggerOperator": {
@@ -1507,7 +1507,7 @@
           "type": "string"
         },
         "severity": {
-          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverity",
+          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
           "description": "The severity for alerts created by this alert rule."
         },
         "triggerOperator": {
