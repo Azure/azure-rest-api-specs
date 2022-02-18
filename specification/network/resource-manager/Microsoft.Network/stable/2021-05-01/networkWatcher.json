@@ -2458,7 +2458,10 @@
           "description": "Holds the associations the resource has with other resources in the resource group.",
           "items": {
             "$ref": "#/definitions/TopologyAssociation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "description": "The network resource topology information for the given resource group."
@@ -2670,6 +2673,9 @@
           "items": {
             "$ref": "./networkInterface.json#/definitions/EffectiveNetworkSecurityRule"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "Collection of effective security rules."
         }
       }
@@ -2760,6 +2766,7 @@
           "items": {
             "$ref": "#/definitions/PacketCaptureFilter"
           },
+          "x-ms-identifiers": [],
           "description": "A list of packet capture filters."
         }
       },
@@ -3025,7 +3032,10 @@
           "description": "List of recommended actions.",
           "items": {
             "$ref": "#/definitions/TroubleshootingRecommendedActions"
-          }
+          },
+          "x-ms-identifiers": [
+            "actionId"
+          ]
         }
       }
     },
@@ -3443,7 +3453,8 @@
           "description": "List of hop links.",
           "items": {
             "$ref": "#/definitions/HopLink"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "previousLinks": {
           "readOnly": true,
@@ -3451,7 +3462,8 @@
           "description": "List of previous hop links.",
           "items": {
             "$ref": "#/definitions/HopLink"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "issues": {
           "readOnly": true,
@@ -3459,7 +3471,8 @@
           "description": "List of issues.",
           "items": {
             "$ref": "#/definitions/ConnectivityIssue"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3487,7 +3500,8 @@
           "description": "List of issues.",
           "items": {
             "$ref": "#/definitions/ConnectivityIssue"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "context": {
           "readOnly": true,
@@ -3589,7 +3603,8 @@
           "description": "Provides additional context on the issue.",
           "items": {
             "$ref": "#/definitions/IssueContext"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3627,7 +3642,10 @@
           "description": "List of HTTP headers.",
           "items": {
             "$ref": "#/definitions/HTTPHeader"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "validStatusCodes": {
           "type": "array",
@@ -3726,7 +3744,11 @@
           "description": "List of Azure reachability report items.",
           "items": {
             "$ref": "#/definitions/AzureReachabilityReportItem"
-          }
+          },
+          "x-ms-identifiers": [
+            "provider",
+            "azureLocation"
+          ]
         }
       },
       "required": [
@@ -3751,7 +3773,8 @@
           "description": "List of latency details for each of the time series.",
           "items": {
             "$ref": "#/definitions/AzureReachabilityReportLatencyInfo"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "description": "Azure reachability report details for a given provider location."
@@ -3804,7 +3827,10 @@
           "description": "List of available countries.",
           "items": {
             "$ref": "#/definitions/AvailableProvidersListCountry"
-          }
+          },
+          "x-ms-identifiers": [
+            "countryName"
+          ]
         }
       },
       "required": [
@@ -3830,7 +3856,10 @@
           "description": "List of available states in the country.",
           "items": {
             "$ref": "#/definitions/AvailableProvidersListState"
-          }
+          },
+          "x-ms-identifiers": [
+            "stateName"
+          ]
         }
       },
       "description": "Country details."
@@ -3853,7 +3882,10 @@
           "description": "List of available cities or towns in the state.",
           "items": {
             "$ref": "#/definitions/AvailableProvidersListCity"
-          }
+          },
+          "x-ms-identifiers": [
+            "cityName"
+          ]
         }
       },
       "description": "State details."
@@ -3903,7 +3935,8 @@
           "description": "List of network configuration diagnostic profiles.",
           "items": {
             "$ref": "#/definitions/NetworkConfigurationDiagnosticProfile"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3948,7 +3981,8 @@
           "description": "List of network configuration diagnostic results.",
           "items": {
             "$ref": "#/definitions/NetworkConfigurationDiagnosticResult"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3978,7 +4012,10 @@
           "description": "List of results network security groups diagnostic.",
           "items": {
             "$ref": "#/definitions/EvaluatedNetworkSecurityGroup"
-          }
+          },
+          "x-ms-identifiers": [
+            "networkSecurityGroupId"
+          ]
         }
       }
     },
@@ -4003,7 +4040,10 @@
           "description": "List of network security rules evaluation results.",
           "items": {
             "$ref": "#/definitions/NetworkSecurityRulesEvaluationResult"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -4113,28 +4153,38 @@
           "description": "List of connection monitor endpoints.",
           "items": {
             "$ref": "#/definitions/ConnectionMonitorEndpoint"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "testConfigurations": {
           "type": "array",
           "description": "List of connection monitor test configurations.",
           "items": {
             "$ref": "#/definitions/ConnectionMonitorTestConfiguration"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "testGroups": {
           "type": "array",
           "description": "List of connection monitor test groups.",
           "items": {
             "$ref": "#/definitions/ConnectionMonitorTestGroup"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "outputs": {
           "type": "array",
           "description": "List of connection monitor outputs.",
           "items": {
             "$ref": "#/definitions/ConnectionMonitorOutput"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "notes": {
           "type": "string",
@@ -4249,14 +4299,20 @@
           "description": "List of items which needs to be included to the endpoint scope.",
           "items": {
             "$ref": "#/definitions/ConnectionMonitorEndpointScopeItem"
-          }
+          },
+          "x-ms-identifiers": [
+            "address"
+          ]
         },
         "exclude": {
           "type": "array",
           "description": "List of items which needs to be excluded from the endpoint scope.",
           "items": {
             "$ref": "#/definitions/ConnectionMonitorEndpointScopeItem"
-          }
+          },
+          "x-ms-identifiers": [
+            "address"
+          ]
         }
       },
       "description": "Describes the connection monitor endpoint scope."
@@ -4288,7 +4344,10 @@
           "description": "List of items in the filter.",
           "items": {
             "$ref": "#/definitions/ConnectionMonitorEndpointFilterItem"
-          }
+          },
+          "x-ms-identifiers": [
+            "address"
+          ]
         }
       },
       "description": "Describes the connection monitor endpoint filter."
@@ -4442,7 +4501,10 @@
           "description": "The HTTP headers to transmit with the request.",
           "items": {
             "$ref": "#/definitions/HTTPHeader"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "validStatusCodeRanges": {
           "type": "array",
@@ -4735,6 +4797,7 @@
           "items": {
             "$ref": "#/definitions/ConnectionStateSnapshot"
           },
+          "x-ms-identifiers": [],
           "description": "Information about connection states."
         }
       },

@@ -1012,6 +1012,9 @@
           "items": {
             "$ref": "#/definitions/FirewallPolicyRuleCollection"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "Group of Firewall Policy rule collections."
         },
         "provisioningState": {
@@ -1067,6 +1070,9 @@
           "items": {
             "$ref": "#/definitions/FirewallPolicyRule"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of rules included in a rule collection."
         }
       },
@@ -1089,6 +1095,9 @@
           "items": {
             "$ref": "#/definitions/FirewallPolicyRule"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of rules included in a rule collection."
         }
       },
@@ -1157,6 +1166,7 @@
           "items": {
             "$ref": "#/definitions/FirewallPolicyRuleApplicationProtocol"
           },
+          "x-ms-identifiers": [],
           "description": "Array of Application Protocols."
         },
         "targetFqdns": {
@@ -1605,7 +1615,10 @@
           "description": "List of rules for traffic to bypass.",
           "items": {
             "$ref": "#/definitions/FirewallPolicyIntrusionDetectionBypassTrafficSpecifications"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -1738,7 +1751,10 @@
           "description": "List of workspaces for Firewall Policy Insights.",
           "items": {
             "$ref": "#/definitions/FirewallPolicyLogAnalyticsWorkspace"
-          }
+          },
+          "x-ms-identifiers": [
+            "/workspaceId/id"
+          ]
         },
         "defaultWorkspaceId": {
           "$ref": "./network.json#/definitions/SubResource",
@@ -1797,7 +1813,10 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/FilterItems"
-      }
+      },
+      "x-ms-identifiers": [
+        "field"
+      ]
     },
     "FilterItems": {
       "description": "Will contain the filter name and values to operate on",
@@ -1849,6 +1868,9 @@
           "items": {
             "$ref": "#/definitions/SingleQueryResult"
           },
+          "x-ms-identifiers": [
+            "signatureId"
+          ],
           "description": "Array containing the results of the query"
         }
       }

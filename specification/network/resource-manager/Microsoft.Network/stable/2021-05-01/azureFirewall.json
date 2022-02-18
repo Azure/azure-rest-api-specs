@@ -469,7 +469,10 @@
           "description": "The list of Public IP addresses associated with azure firewall or IP addresses to be retained.",
           "items": {
             "$ref": "#/definitions/AzureFirewallPublicIPAddress"
-          }
+          },
+          "x-ms-identifiers": [
+            "address"
+          ]
         },
         "count": {
           "type": "integer",
@@ -653,6 +656,9 @@
           "items": {
             "$ref": "#/definitions/AzureFirewallApplicationRule"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "Collection of rules used by a application rule collection."
         },
         "provisioningState": {
@@ -727,6 +733,7 @@
           "items": {
             "$ref": "#/definitions/AzureFirewallApplicationRuleProtocol"
           },
+          "x-ms-identifiers": [],
           "description": "Array of ApplicationRuleProtocols."
         },
         "targetFqdns": {
@@ -773,6 +780,9 @@
           "items": {
             "$ref": "#/definitions/AzureFirewallNatRule"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "Collection of rules used by a NAT rule collection."
         },
         "provisioningState": {
@@ -908,6 +918,9 @@
           "items": {
             "$ref": "#/definitions/AzureFirewallNetworkRule"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "Collection of rules used by a network rule collection."
         },
         "provisioningState": {

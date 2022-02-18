@@ -6199,6 +6199,9 @@
           "items": {
             "$ref": "#/definitions/PeerRoute"
           },
+          "x-ms-identifiers": [
+            "localAddress"
+          ],
           "description": "List of peer routes."
         }
       },
@@ -6266,7 +6269,8 @@
           "description": "List of all routes.",
           "items": {
             "$ref": "#/definitions/VirtualHubRoute"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "description": "VirtualHub route table."
@@ -6489,6 +6493,7 @@
           "items": {
             "$ref": "#/definitions/VpnNatRuleMapping"
           },
+          "x-ms-identifiers": [],
           "description": "The private IP address internal mapping for NAT."
         },
         "externalMappings": {
@@ -6496,6 +6501,7 @@
           "items": {
             "$ref": "#/definitions/VpnNatRuleMapping"
           },
+          "x-ms-identifiers": [],
           "description": "The private IP address external mapping for NAT."
         },
         "ipConfigurationId": {
@@ -6624,6 +6630,7 @@
           "items": {
             "$ref": "./virtualNetworkGateway.json#/definitions/IpsecPolicy"
           },
+          "x-ms-identifiers": [],
           "description": "The IPSec Policies to be considered by this connection."
         },
         "trafficSelectorPolicies": {
@@ -6631,6 +6638,7 @@
           "items": {
             "$ref": "./virtualNetworkGateway.json#/definitions/TrafficSelectorPolicy"
           },
+          "x-ms-identifiers": [],
           "description": "The Traffic Selector Policies to be considered by this connection."
         },
         "enableRateLimiting": {
@@ -6820,6 +6828,7 @@
           "items": {
             "$ref": "./virtualNetworkGateway.json#/definitions/IpsecPolicy"
           },
+          "x-ms-identifiers": [],
           "description": "The IPSec Policies to be considered by this connection."
         },
         "enableRateLimiting": {
@@ -6974,7 +6983,10 @@
           "description": "List of all routes.",
           "items": {
             "$ref": "#/definitions/HubRoute"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "labels": {
           "type": "array",
@@ -7122,6 +7134,9 @@
           "items": {
             "$ref": "#/definitions/VirtualWanSecurityProvider"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of VirtualWAN security providers."
         }
       },
@@ -7330,6 +7345,9 @@
           "items": {
             "$ref": "#/definitions/VpnServerConfigVpnClientRootCertificate"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "VPN client root certificate of VpnServerConfiguration."
         },
         "vpnClientRevokedCertificates": {
@@ -7337,6 +7355,9 @@
           "items": {
             "$ref": "#/definitions/VpnServerConfigVpnClientRevokedCertificate"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "VPN client revoked certificate of VpnServerConfiguration."
         },
         "radiusServerRootCertificates": {
@@ -7344,6 +7365,9 @@
           "items": {
             "$ref": "#/definitions/VpnServerConfigRadiusServerRootCertificate"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "Radius Server root certificate of VpnServerConfiguration."
         },
         "radiusClientRootCertificates": {
@@ -7351,6 +7375,9 @@
           "items": {
             "$ref": "#/definitions/VpnServerConfigRadiusClientRootCertificate"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "Radius client root certificate of VpnServerConfiguration."
         },
         "vpnClientIpsecPolicies": {
@@ -7358,6 +7385,7 @@
           "items": {
             "$ref": "./virtualNetworkGateway.json#/definitions/IpsecPolicy"
           },
+          "x-ms-identifiers": [],
           "description": "VpnClientIpsecPolicies for VpnServerConfiguration."
         },
         "radiusServerAddress": {
@@ -7373,6 +7401,9 @@
           "items": {
             "$ref": "./virtualNetworkGateway.json#/definitions/RadiusServer"
           },
+          "x-ms-identifiers": [
+            "radiusServerAddress"
+          ],
           "description": "Multiple Radius Server configuration for VpnServerConfiguration."
         },
         "aadAuthenticationParameters": {
@@ -7705,7 +7736,8 @@
           "description": "List of all routes.",
           "items": {
             "$ref": "#/definitions/VirtualHubRouteV2"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "attachedConnections": {
           "type": "array",
@@ -8051,7 +8083,10 @@
           "description": "List of all Static Routes.",
           "items": {
             "$ref": "#/definitions/StaticRoute"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "bgpConnections": {
           "type": "array",
@@ -8091,6 +8126,7 @@
           "items": {
             "$ref": "#/definitions/VirtualHubEffectiveRoute"
           },
+          "x-ms-identifiers": [],
           "description": "The list of effective routes configured on the virtual hub or the specified resource."
         }
       }
@@ -8224,7 +8260,10 @@
           "readOnly": false,
           "items": {
             "$ref": "#/definitions/RoutingPolicy"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "provisioningState": {
           "$ref": "./network.json#/definitions/ProvisioningState",

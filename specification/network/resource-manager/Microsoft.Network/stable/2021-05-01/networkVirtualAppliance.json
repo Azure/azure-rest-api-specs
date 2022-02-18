@@ -839,7 +839,10 @@
           "description": "List of Virtual Appliance Network Interfaces.",
           "items": {
             "$ref": "#/definitions/VirtualApplianceNicProperties"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "virtualApplianceSites": {
           "type": "array",
@@ -1027,6 +1030,9 @@
           "items": {
             "$ref": "#/definitions/NetworkVirtualApplianceSkuInstances"
           },
+          "x-ms-identifiers": [
+            "scaleUnit"
+          ],
           "description": "The list of scale units available."
         }
       }
@@ -1133,7 +1139,8 @@
           "description": "List of allowed rules.",
           "items": {
             "$ref": "#/definitions/InboundSecurityRules"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "provisioningState": {
           "description": "The provisioning state of the resource.",

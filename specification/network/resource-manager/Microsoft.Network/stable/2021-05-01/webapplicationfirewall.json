@@ -327,7 +327,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/WebApplicationFirewallCustomRule"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "applicationGateways": {
           "readOnly": true,
@@ -411,6 +414,7 @@
           "items": {
             "$ref": "#/definitions/OwaspCrsExclusionEntry"
           },
+          "x-ms-identifiers": [],
           "description": "The Exclusions that are applied on the policy."
         },
         "managedRuleSets": {
@@ -418,6 +422,10 @@
           "items": {
             "$ref": "#/definitions/ManagedRuleSet"
           },
+          "x-ms-identifiers": [
+            "ruleSetType",
+            "ruleSetVersion"
+          ],
           "description": "The managed rule sets that are associated with the policy."
         }
       }
@@ -509,7 +517,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MatchCondition"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "action": {
           "description": "Type of Actions.",
@@ -585,7 +594,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MatchVariable"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "operator": {
           "description": "The operator to be matched.",
@@ -649,7 +659,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ManagedRuleGroupOverride"
-          }
+          },
+          "x-ms-identifiers": [
+            "ruleGroupName"
+          ]
         }
       }
     },
@@ -669,7 +682,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ManagedRuleOverride"
-          }
+          },
+          "x-ms-identifiers": [
+            "ruleId"
+          ]
         }
       }
     },
@@ -718,7 +734,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExclusionManagedRuleGroup"
-          }
+          },
+          "x-ms-identifiers": [
+            "ruleGroupName"
+          ]
         }
       }
     },
@@ -738,7 +757,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExclusionManagedRule"
-          }
+          },
+          "x-ms-identifiers": [
+            "ruleId"
+          ]
         }
       }
     },
@@ -806,6 +828,10 @@
           "items": {
             "$ref": "#/definitions/ExclusionManagedRuleSet"
           },
+          "x-ms-identifiers": [
+            "ruleSetType",
+            "ruleSetVersion"
+          ],
           "description": "The managed rule sets that are associated with the exclusion."
         }
       }
