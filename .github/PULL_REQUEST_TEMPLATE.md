@@ -2,7 +2,6 @@
 
 ## ARM API Information (Control Plane)
 <details>
-  <summary>Expand this section for managment plane</summary>
   
 <i>MSFT employees can try out our new experience at <b>[OpenAPI Hub](https://aka.ms/openapiportal) </b> - one location for using our validation tools and finding your workflow. 
 </i>
