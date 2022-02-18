@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-jobrouter-2021-10-20-preview2` is 
 
 ```yaml $(tag) == 'package-jobrouter-2021-10-20-preview2'
 input-file:
-  - preview/package-jobrouter-2021-10-20-preview2/communicationservicesjobrouter.json
+  - preview/jobrouter-2021-10-20-preview2/communicationservicesjobrouter.json
 title:
   Azure Communication Services
 ```
