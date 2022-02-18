@@ -412,7 +412,7 @@
     }
   },
   "definitions": {
-    "Location": {
+    "ResourceLocation": {
       "description": "Location of the ARM Resource",
       "type": "object",
       "properties": {
@@ -581,7 +581,7 @@
       "description": "Cert based security principal with Ledger RoleName",
       "properties": {
         "cert": {
-          "description": "Base64 encoded public key of the user cert (.pem or .cer)",
+          "description": "Public key of the user cert (.pem or .cer)",
           "type": "string"
         },
         "ledgerRoleName": {
@@ -668,7 +668,7 @@
           "$ref": "#/definitions/Resource"
         },
         {
-          "$ref": "#/definitions/Location"
+          "$ref": "#/definitions/ResourceLocation"
         },
         {
           "$ref": "#/definitions/Tags"
