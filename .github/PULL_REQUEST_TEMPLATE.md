@@ -1,7 +1,6 @@
 
 
 ## ARM API Information (Control Plane)
-<details>
   
 <i>MSFT employees can try out our new experience at <b>[OpenAPI Hub](https://aka.ms/openapiportal) </b> - one location for using our validation tools and finding your workflow. 
 </i>
@@ -62,13 +61,9 @@ If you have any breaking changes as defined in the [Breaking Change Policy](http
 NOTE: To update API(s) in public preview for over 1 year (refer to [Retirement of Previews](https://dev.azure.com/msazure/AzureWiki/_wiki/wikis/AzureWiki.wiki/37683/Retirement-of-Previews))
 
 Please follow the link to find more details on [PR review process](https://aka.ms/SwaggerPRReview).
-  
-</details>
+
 
 ## Non-ARM API Information (Data Plane)
-
-<details>
-  <summary>Expand this section for dataplane</summary>
 
 This PR template is for Data Plane APIs only.
 
@@ -100,8 +95,6 @@ Is this review for (select one):
 The [Azure API Review Board](https://aka.ms/azapi) is dedicated to helping you create amazing APIs. You can read about our mission and learn more about our process on our [wiki](https://aka.ms/azapi).
 * :speech_balloon: [Teams Channel](https://teams.microsoft.com/l/channel/19%3a3ebb18fded0e47938f998e196a52952f%40thread.tacv2/General?groupId=1a10b50c-e870-4fe0-8483-bf5542a8d2d8&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47)
 * :love_letter: [email](mailto://azureapirbcore@microsoft.com)
-
-</details>
 
 <details>
   <summary>Click here for links to tools, specs, guidelines & other good stuff</summary>
