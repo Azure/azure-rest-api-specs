@@ -298,16 +298,29 @@
     },
     "ApplicationGroupPolicy": {
       "type": "object",
+      "discriminator": "type",
       "description": "Properties of the Application Group policy",
       "properties": {
         "name": {
           "type": "string",
           "description": "The Name of this policy"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+          "ThrottlingPolicy"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGroupPolicyType",
+            "modelAsString": true
+          },
+          "description": "Application Group Policy types"
         }
       }
     },
     "ThrottlingPolicy": {
       "type": "object",
+      "x-ms-discriminator-value": "ThrottlingPolicy",
       "description": "Properties of the throttling policy",
       "properties": {
         "rateLimitThreshold": {
