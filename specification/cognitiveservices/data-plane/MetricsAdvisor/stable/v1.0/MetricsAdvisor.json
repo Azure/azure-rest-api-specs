@@ -501,7 +501,7 @@
             "description": "query alerting result request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AlertingResultQuery"
+              "$ref": "#/definitions/Anything"
             }
           }
         ],
@@ -560,7 +560,7 @@
           "AnomalyAlerting"
         ],
         "summary": "Query anomalies under a specific alert",
-        "operationId": "getAnomaliesFromAlertByAnomalyAlertingConfiguration",
+        "operationId": "listAnomaliesForAlert",
         "produces": [
           "application/json"
         ],
@@ -571,7 +571,8 @@
             "description": "anomaly alerting configuration unique id",
             "required": true,
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "x-ms-client-name": "alertConfigurationId"
           },
           {
             "in": "path",
@@ -657,7 +658,7 @@
           "AnomalyAlerting"
         ],
         "summary": "Query incidents under a specific alert",
-        "operationId": "getIncidentsFromAlertByAnomalyAlertingConfiguration",
+        "operationId": "listIncidentsForAlert",
         "produces": [
           "application/json"
         ],
@@ -668,7 +669,8 @@
             "description": "anomaly alerting configuration unique id",
             "required": true,
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "x-ms-client-name": "alertConfigurationId"
           },
           {
             "in": "path",
@@ -1963,7 +1965,8 @@
             "description": "anomaly detection configuration unique id",
             "required": true,
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "x-ms-client-name": "detectionConfigurationId"
           },
           {
             "in": "path",
@@ -3306,7 +3309,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/MetricFeedback"
-            }
+            },
+            "x-ms-client-name": "feedback"
           }
         ],
         "responses": {
@@ -4704,44 +4708,6 @@
         ]
       }
     },
-    "AlertingResultQuery": {
-      "required": [
-        "endTime",
-        "startTime",
-        "timeMode"
-      ],
-      "type": "object",
-      "properties": {
-        "startTime": {
-          "format": "date-time",
-          "description": "start time",
-          "type": "string"
-        },
-        "endTime": {
-          "format": "date-time",
-          "description": "end time",
-          "type": "string"
-        },
-        "timeMode": {
-          "description": "time mode",
-          "enum": [
-            "AnomalyTime",
-            "CreatedTime",
-            "ModifiedTime"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AlertQueryTimeMode",
-            "modelAsString": true
-          }
-        }
-      },
-      "example": {
-        "startTime": "2020-01-01T00:00:00Z",
-        "endTime": "2020-02-01T00:00:00Z",
-        "timeMode": "AnomalyTime"
-      }
-    },
     "AlertResultList": {
       "required": [
         "value"
@@ -4777,7 +4743,8 @@
           "x-ms-enum": {
             "name": "AnomalySeverity",
             "modelAsString": true
-          }
+          },
+          "x-ms-client-name": "severity"
         },
         "anomalyStatus": {
           "description": "anomaly status\r\n\r\nonly return for alerting anomaly result",
@@ -4790,7 +4757,8 @@
           "x-ms-enum": {
             "name": "AnomalyStatus",
             "modelAsString": true
-          }
+          },
+          "x-ms-client-name": "status"
         },
         "value": {
           "format": "double",
@@ -4857,7 +4825,8 @@
           "x-ms-enum": {
             "name": "AnomalySeverity",
             "modelAsString": true
-          }
+          },
+          "x-ms-client-name": "severity"
         },
         "incidentStatus": {
           "description": "incident status\r\n\r\nonly return for alerting incident result",
@@ -4870,7 +4839,8 @@
           "x-ms-enum": {
             "name": "AnomalyIncidentStatus",
             "modelAsString": true
-          }
+          },
+          "x-ms-client-name": "status"
         },
         "valueOfRootNode": {
           "format": "double",
@@ -5483,21 +5453,25 @@
           "x-ms-enum": {
             "name": "DatasourceCredentialType",
             "modelAsString": true
-          }
+          },
+          "x-ms-client-name": "credentialType"
         },
         "dataSourceCredentialId": {
           "format": "uuid",
           "description": "Unique id of data source credential",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "id"
         },
         "dataSourceCredentialName": {
           "description": "Name of data source credential",
-          "type": "string"
+          "type": "string",
+          "x-ms-client-name": "name"
         },
         "dataSourceCredentialDescription": {
           "description": "Description of data source credential",
-          "type": "string"
+          "type": "string",
+          "x-ms-client-name": "description"
         }
       },
       "discriminator": "dataSourceCredentialType",
@@ -7375,7 +7349,20 @@
       "type": "object",
       "properties": {
         "group": {
-          "$ref": "#/definitions/DimensionGroupIdentity",
+          "required": [
+            "dimension"
+          ],
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "x-ms-client-name": "seriesGroupKey",
+              "description": "dimension specified for series group",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
           "x-ms-client-flatten": true
         },
         "conditionOperator": {
@@ -7408,7 +7395,20 @@
       "type": "object",
       "properties": {
         "series": {
-          "$ref": "#/definitions/SeriesIdentity",
+          "required": [
+            "dimension"
+          ],
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "x-ms-client-name": "seriesKey",
+              "description": "dimension specified for series group",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
           "x-ms-client-flatten": true
         },
         "conditionOperator": {
@@ -7498,7 +7498,21 @@
       "type": "object",
       "properties": {
         "series": {
-          "$ref": "#/definitions/SeriesIdentity"
+          "required": [
+            "dimension"
+          ],
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "x-ms-client-name": "seriesKey",
+              "description": "dimension specified for series group",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
         },
         "timestampList": {
           "description": "timestamps of the series",
@@ -7506,7 +7520,8 @@
           "items": {
             "format": "date-time",
             "type": "string"
-          }
+          },
+          "x-ms-client-name": "timestamps"
         },
         "valueList": {
           "description": "values of the series",
@@ -7514,14 +7529,16 @@
           "items": {
             "format": "double",
             "type": "number"
-          }
+          },
+          "x-ms-client-name": "values"
         },
         "isAnomalyList": {
           "description": "whether points of the series are anomalies",
           "type": "array",
           "items": {
             "type": "boolean"
-          }
+          },
+          "x-ms-client-name": "isAnomaly"
         },
         "periodList": {
           "description": "period calculated on each point of the series",
@@ -7529,7 +7546,8 @@
           "items": {
             "format": "int32",
             "type": "integer"
-          }
+          },
+          "x-ms-client-name": "periods"
         },
         "expectedValueList": {
           "description": "expected values of the series given by smart detector",
@@ -7537,7 +7555,8 @@
           "items": {
             "format": "double",
             "type": "number"
-          }
+          },
+          "x-ms-client-name": "expectedValues"
         },
         "lowerBoundaryList": {
           "description": "lower boundary list of the series given by smart detector",
@@ -7545,7 +7564,8 @@
           "items": {
             "format": "double",
             "type": "number"
-          }
+          },
+          "x-ms-client-name": "lowerBounds"
         },
         "upperBoundaryList": {
           "description": "upper boundary list of the series given by smart detector",
@@ -7553,7 +7573,8 @@
           "items": {
             "format": "double",
             "type": "number"
-          }
+          },
+          "x-ms-client-name": "upperBounds"
         }
       }
     },
@@ -7563,7 +7584,8 @@
         "alertId": {
           "description": "alert id",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "id"
         },
         "timestamp": {
           "format": "date-time",
@@ -7609,7 +7631,8 @@
           "format": "uuid",
           "description": "anomaly detection configuration unique id\r\n\r\nonly return for alerting anomaly result",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "detectionConfigurationId"
         },
         "timestamp": {
           "format": "date-time",
@@ -7636,7 +7659,8 @@
           }
         },
         "property": {
-          "$ref": "#/definitions/AnomalyProperty"
+          "$ref": "#/definitions/AnomalyProperty",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -7666,11 +7690,13 @@
           "format": "uuid",
           "description": "anomaly detection configuration unique id\r\n\r\nonly return for alerting incident result",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "detectionConfigurationId"
         },
         "incidentId": {
           "description": "incident id",
-          "type": "string"
+          "type": "string",
+          "x-ms-client-name": "id"
         },
         "startTime": {
           "format": "date-time",
@@ -7683,10 +7709,12 @@
           "type": "string"
         },
         "rootNode": {
-          "$ref": "#/definitions/SeriesIdentity"
+          "$ref": "#/definitions/SeriesIdentity",
+          "x-ms-client-flatten": true
         },
         "property": {
-          "$ref": "#/definitions/IncidentProperty"
+          "$ref": "#/definitions/IncidentProperty",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -7732,7 +7760,8 @@
       ],
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/AzureSQLConnectionStringParam"
+          "$ref": "#/definitions/AzureSQLConnectionStringParam",
+          "x-ms-client-flatten": true
         }
       },
       "x-ms-discriminator-value": "AzureSQLConnectionString"
@@ -7749,7 +7778,8 @@
       ],
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/DataLakeGen2SharedKeyParam"
+          "$ref": "#/definitions/DataLakeGen2SharedKeyParam",
+          "x-ms-client-flatten": true
         }
       },
       "x-ms-discriminator-value": "DataLakeGen2SharedKey"
@@ -7766,7 +7796,8 @@
       ],
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/ServicePrincipalParam"
+          "$ref": "#/definitions/ServicePrincipalParam",
+          "x-ms-client-flatten": true
         }
       },
       "x-ms-discriminator-value": "ServicePrincipal"
@@ -7783,7 +7814,8 @@
       ],
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/ServicePrincipalInKVParam"
+          "$ref": "#/definitions/ServicePrincipalInKVParam",
+          "x-ms-client-flatten": true
         }
       },
       "x-ms-discriminator-value": "ServicePrincipalInKV"
@@ -8122,7 +8154,8 @@
           "type": "boolean"
         }
       }
-    }
+    },
+    "Anything": {}
   },
   "securityDefinitions": {
     "ma_api_key": {
