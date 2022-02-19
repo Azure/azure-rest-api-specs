@@ -3,13 +3,13 @@
   "info": {
     "title": "PhoneNumbersClient",
     "description": "The phone numbers client uses Azure Communication Services to purchase and manage phone numbers.",
-    "version": "2021-12-31"
+    "version": "2022-03-31"
   },
   "paths": {
     "/availablePhoneNumbers/countries": {
       "get": {
         "tags": [
-          "Browse for available countries and area codes"
+          "Browse for available countries, cities and area codes"
         ],
         "summary": "Gets the list of supported countries.",
         "operationId": "PhoneNumbers_ListAvailableCountries",
@@ -56,13 +56,13 @@
         }
       }
     },
-    "/availablePhoneNumbers/countries/{countryCode}/tollfreeareacodes": {
+    "/availablePhoneNumbers/countries/{countryCode}/cities": {
       "get": {
         "tags": [
-          "Browse for available countries and area codes"
+          "Browse for available countries, cities and area codes"
         ],
-        "summary": "Get the list of toll-free area codes of available phone numbers.",
-        "operationId": "PhoneNumbers_ListAvailableTollFreeAreaCodes",
+        "summary": "Gets the list of cities with available phone numbers.",
+        "operationId": "PhoneNumbers_ListAvailableCities",
         "consumes": [
           "application/json"
         ],
@@ -98,7 +98,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/TollFreeAreaCodes"
+              "$ref": "#/definitions/PhoneNumberCities"
             }
           },
           "default": {
@@ -110,13 +110,13 @@
         }
       }
     },
-    "/availablePhoneNumbers/countries/{countryCode}/geographicareacodes": {
+    "/availablePhoneNumbers/countries/{countryCode}/areacodes": {
       "get": {
         "tags": [
-          "Browse for available countries and area codes"
+          "Browse for available countries, cities and area codes"
         ],
-        "summary": "Gets the list of geographic area codes of available phone numbers.",
-        "operationId": "PhoneNumbers_ListGeographicFreeAreaCodes",
+        "summary": "Gets the list of available area codes.",
+        "operationId": "PhoneNumbers_ListAreaCodes",
         "consumes": [
           "application/json"
         ],
@@ -148,6 +148,38 @@
             "default": 100
           },
           {
+            "in": "query",
+            "name": "numberType",
+            "description": "Filter by numberType, e.g. Geographic, TollFree.",
+            "type": "string",
+            "enum": [
+              "geographic",
+              "tollFree"
+            ]
+          },
+          {
+            "in": "query",
+            "name": "assignmentType",
+            "description": "Filter by assignmentType, e.g. User, Application.",
+            "type": "string",
+            "enum": [
+              "person",
+              "application"
+            ]
+          },
+          {
+            "in": "query",
+            "name": "city",
+            "description": "The name of city in which to search for the area code. This is required if the number type is Geographic.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "state",
+            "description": "The name or abbreviation the state or province in which to search for the area code.",
+            "type": "integer"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -155,7 +187,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/GeographicAreaCodes"
+              "$ref": "#/definitions/AreaCodes"
             }
           },
           "default": {
@@ -170,9 +202,9 @@
     "/availablePhoneNumbers/countries/{countryCode}/offerings": {
       "get": {
         "tags": [
-          "Browse for available countries and area codes"
+          "Browse for available countries, cities and area codes"
         ],
-        "summary": "List available offerings for the given country",
+        "summary": "List available offerings of capabilities with rates for the given country",
         "operationId": "PhoneNumbers_ListOfferings",
         "produces": [
           "application/json"
@@ -250,7 +282,7 @@
         "tags": [
           "Find and purchase available phone numbers"
         ],
-        "summary": "Search for available phone numbers to purchase.",
+        "summary": "Searches for available phone numbers to purchase.",
         "operationId": "PhoneNumbers_SearchAvailablePhoneNumbers",
         "consumes": [
           "application/json"
@@ -742,55 +774,6 @@
     }
   },
   "definitions": {
-    "GeographicAreaCode": {
-      "description": "A geographic area code result.",
-      "type": "object",
-      "properties": {
-        "city": {
-          "description": "Name of the city. e.g., Seattle.",
-          "type": "string"
-        },
-        "localizedCityName": {
-          "description": "Localized name of the city. e.g, Seattle.",
-          "type": "string"
-        },
-        "stateCode": {
-          "description": "A string containing an available area code.",
-          "type": "string"
-        },
-        "localizedStateName": {
-          "description": "Localized name of the city. e.g, WA",
-          "type": "string"
-        },
-        "areaCodes": {
-          "description": "The list of available area codes with stock count.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AreaCode"
-          }
-        }
-      }
-    },
-    "GeographicAreaCodes": {
-      "description": "The list of available geographic area codes result.",
-      "required": [
-        "geographicAreaCodes"
-      ],
-      "type": "object",
-      "properties": {
-        "geographicAreaCodes": {
-          "description": "Represents a list of available geographic area codes.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/GeographicAreaCode"
-          }
-        },
-        "nextLink": {
-          "description": "Represents the URL link to the next page of geographic area codes.",
-          "type": "string"
-        }
-      }
-    },
     "PhoneNumberCapabilities": {
       "description": "Capabilities of a phone number.",
       "required": [
@@ -865,8 +848,12 @@
         "capabilities": {
           "$ref": "#/definitions/PhoneNumberCapabilities"
         },
-        "cityId": {
-          "description": "The city ID, as returned from the Geographic area codes API.",
+        "city": {
+          "description": "Optionally for geographic phone number type, the city of the desired phone numbers.",
+          "type": "string"
+        },
+        "state": {
+          "description": "Optionally for geographic phone number type, the state or province of the desired phone numbers.",
           "type": "string"
         },
         "areaCode": {
@@ -1081,20 +1068,6 @@
         }
       }
     },
-    "PhoneNumberCity": {
-      "description": "The city of the phone number, if the phone number type is Geographic.",
-      "type": "object",
-      "properties": {
-        "cityId": {
-          "description": "The ID of the city.",
-          "type": "string"
-        },
-        "localizedName": {
-          "description": "The localized name of the city.",
-          "type": "string"
-        }
-      }
-    },
     "PurchasedPhoneNumber": {
       "description": "Represents a purchased phone number.",
       "required": [
@@ -1148,9 +1121,6 @@
             "modelAsString": true
           }
         },
-        "city": {
-          "$ref": "#/definitions/PhoneNumberCity"
-        },
         "purchaseDate": {
           "format": "date-time",
           "description": "The date and time that the phone number was purchased.",
@@ -1182,27 +1152,23 @@
       }
     },
     "AreaCode": {
-      "description": "An area code with stock availability result.",
+      "description": "An area code.",
       "type": "object",
       "properties": {
         "areaCode": {
           "description": "An area code as a string.",
           "type": "string"
-        },
-        "stockCount": {
-          "description": "Stock count available for the area code.",
-          "type": "integer"
         }
       }
     },
-    "TollFreeAreaCodes": {
-      "description": "The list of available toll-free area codes.",
+    "AreaCodes": {
+      "description": "The list of available area codes.",
       "required": [
-        "tollFreeAreaCodes"
+        "areaCodes"
       ],
       "type": "object",
       "properties": {
-        "tollFreeAreaCodes": {
+        "areaCodes": {
           "description": "Represents a list of available toll-free area codes.",
           "type": "array",
           "items": {
@@ -1242,6 +1208,53 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PhoneNumberCountry"
+          }
+        },
+        "nextLink": {
+          "description": "Represents the URL link to the next page",
+          "type": "string"
+        }
+      }
+    },
+    "PhoneNumberCity": {
+      "description": "Represents a city.",
+      "required": [
+        "name",
+        "localizedName"
+      ],
+      "type": "object",
+      "properties": {
+        "localizedName": {
+          "description": "Represents the localized name of the city.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Represents the name of the city",
+          "type": "string"
+        },
+        "localizedStateName": {
+          "description": "Represents the localized name of the state of the city.",
+          "type": "string"
+        },
+        "stateName": {
+          "description": "Represents the name of the state of the city",
+          "type": "string"
+        },
+        "abbreviatedStateName": {
+          "description": "Represents the abbreviated name of the state the city",
+          "type": "string"
+        }
+      }
+    },
+    "PhoneNumberCities": {
+      "description": "Represents a wrapper around a list of cities.",
+      "type": "object",
+      "properties": {
+        "cities": {
+          "description": "Represents the underlying list of cities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PhoneNumberCity"
           }
         },
         "nextLink": {
