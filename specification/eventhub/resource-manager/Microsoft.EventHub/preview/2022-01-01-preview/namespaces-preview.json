@@ -702,14 +702,14 @@
           "properties": {
             "minimumTlsVersion": {
               "type": "string",
-              "description": "Minimum TLS version for the incoming connections accepted by the namespace. The Default value would be set to Tls12",
+              "description": "The minimum TLS version for the cluster to support, e.g. '1.2'",
               "enum": [
-                "Tls12",
-                "Tls11",
-                "Tls"
+                "1.0",
+                "1.1",
+                "1.2"
               ],
               "x-ms-enum": {
-                "name": "MinimumTlsVersion",
+                "name": "TlsVersion",
                 "modelAsString": true
               }
             },
