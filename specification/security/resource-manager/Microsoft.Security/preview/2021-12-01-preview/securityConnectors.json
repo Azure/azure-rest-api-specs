@@ -507,6 +507,7 @@
           "description": "The GCP Project id"
         },
         "workloadIdentityPoolId": {
+          "readOnly": true,
           "type": "string",
           "description": "The GCP workload identity federation pool id"
         }
@@ -756,7 +757,7 @@
               "type": "object",
               "description": "configuration for Vulnerability Assessment autoprovisioning",
               "properties": {
-                "vaType": {
+                "type": {
                   "type": "string",
                   "description": "The Vulnerability Assessment solution to be provisioned. Can be either 'TVM' or 'Qualys'",
                   "enum": [
@@ -764,7 +765,7 @@
                     "TVM"
                   ],
                   "x-ms-enum": {
-                    "name": "vaType",
+                    "name": "type",
                     "modelAsString": true
                   }
                 }
@@ -875,7 +876,7 @@
               "properties": {
                 "clientId": {
                   "type": "string",
-                  "description": "The agent onboarding service account client id"
+                  "description": "The Azure service principal client id for agent onboarding"
                 },
                 "agentOnboardingServiceAccountNumericId": {
                   "type": "string",
@@ -897,7 +898,7 @@
               "type": "object",
               "description": "configuration for Vulnerability Assessment autoprovisioning",
               "properties": {
-                "vaType": {
+                "type": {
                   "type": "string",
                   "description": "The Vulnerability Assessment solution to be provisioned. Can be either 'TVM' or 'Qualys'"
                 }
