@@ -8,6 +8,13 @@
     "parameters": {
       "tags": {
         "newKey": "newVal"
+      },
+      "properties" : {
+        "monitoringSettings": {
+          "azureMonitorAlertSettings": {
+            "alertsForAllJobFailures": "Enabled"
+          } 
+        } 
       }
     }
   },
@@ -35,7 +42,12 @@
               "datastoreType": "VaultStore",
               "type": "LocallyRedundant"
             }
-          ]
+          ],
+          "monitoringSettings": {
+            "azureMonitorAlertSettings": {
+              "alertsForAllJobFailures": "Enabled"
+            } 
+          } 
         }
       }
     }

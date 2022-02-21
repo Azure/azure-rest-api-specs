@@ -3372,6 +3372,23 @@
       "type": "object",
       "x-ms-discriminator-value": "AbsoluteDeleteOption"
     },
+    "AzureMonitorAlertSettings": {
+      "type": "object",
+      "description": "Settings for Azure Monitor based alerts",
+      "properties": {
+        "alertsForAllJobFailures": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AlertsState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "RecoveryPointsFilters": {
       "type": "object",
       "properties": {
@@ -4299,6 +4316,10 @@
           },
           "x-ms-identifiers": [],
           "type": "array"
+        },
+        "monitoringSettings": {
+          "$ref": "#/definitions/MonitoringSettings",
+          "description": "Monitoring Settings"
         }
       },
       "required": [
@@ -5376,6 +5397,15 @@
       ],
       "type": "object"
     },
+    "MonitoringSettings": {
+      "type": "object",
+      "description": "Monitoring Settings",
+      "properties": {
+        "azureMonitorAlertSettings": {
+          "$ref": "#/definitions/AzureMonitorAlertSettings"
+        }
+      }
+    },
     "OperationExtendedInfo": {
       "description": "Operation Extended Info",
       "properties": {
@@ -5444,12 +5474,26 @@
       "title": "OperationResource",
       "type": "object"
     },
+    "PatchBackupVaultInput": {
+      "description": "Backup Vault Contract for Patch Backup Vault API.",
+      "type": "object",
+      "properties": {
+        "monitoringSettings": {
+          "$ref": "#/definitions/MonitoringSettings",
+          "description": "Monitoring Settings"
+        }
+      }
+    },
     "PatchResourceRequestInput": {
       "description": "Patch Request content for Microsoft.DataProtection resources",
       "properties": {
         "identity": {
           "$ref": "#/definitions/DppIdentityDetails",
           "description": "Input Managed Identity Details"
+        },
+        "properties": {
+          "$ref": "#/definitions/PatchBackupVaultInput",
+          "description": "Resource properties."
         },
         "tags": {
           "additionalProperties": {
