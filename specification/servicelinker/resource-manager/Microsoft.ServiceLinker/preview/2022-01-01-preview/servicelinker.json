@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft.ServiceLinker",
     "description": "Microsoft.ServiceLinker provider",
-    "version": "2021-01-01-privatepreview"
+    "version": "2022-01-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -116,6 +116,9 @@
         "x-ms-examples": {
           "PutLink": {
             "$ref": "./examples/PutLink.json"
+          },
+          "PutLinkWithServiceEndpoint": {
+            "$ref": "./examples/PutLinkWithServiceEndpoint.json"
           }
         },
         "parameters": [
@@ -164,6 +167,10 @@
           "Links"
         ],
         "operationId": "Linker_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "description": "Delete a link.",
         "x-ms-examples": {
           "DeleteLink": {
@@ -187,6 +194,9 @@
           },
           "204": {
             "description": "Deleted. The link is not found."
+          },
+          "202": {
+            "description": "Long running operation."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -258,14 +268,15 @@
         "tags": [
           "Links"
         ],
-        "operationId": "Linker_ValidateLinker",
+        "operationId": "Linker_Validate",
         "description": "Validate a link.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "ValidateLinkSuccess": {
             "$ref": "./examples/ValidateLinkSuccess.json"
-          },
-          "ValidateLinkFailure": {
-            "$ref": "./examples/ValidateLinkFailure.json"
           }
         },
         "parameters": [
@@ -285,6 +296,9 @@
             "schema": {
               "$ref": "#/definitions/ValidateResult"
             }
+          },
+          "202": {
+            "description": "Accepted - Returns this status until the asynchronous operation has completed."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -341,6 +355,11 @@
         ],
         "operationId": "Operations_List",
         "description": "Lists the available ServiceLinker REST API operations.",
+        "x-ms-examples": {
+          "GetConfiguration": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -367,6 +386,126 @@
     }
   },
   "definitions": {
+    "TargetServiceType": {
+      "description": "The target service type.",
+      "type": "string",
+      "enum": [
+        "AzureResource",
+        "ConfluentBootstrapServer",
+        "ConfluentSchemaRegistry"
+      ],
+      "x-ms-enum": {
+        "name": "type",
+        "modelAsString": true
+      }
+    },
+    "TargetServiceBase": {
+      "description": "The target service properties",
+      "discriminator": "type",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The target service type.",
+          "$ref": "#/definitions/TargetServiceType"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "AzureResourceType": {
+      "description": "The azure resource type.",
+      "type": "string",
+      "enum": [
+        "KeyVault"
+      ],
+      "x-ms-enum": {
+        "name": "type",
+        "modelAsString": true
+      }
+    },
+    "AzureResourcePropertiesBase": {
+      "description": "The azure resource properties",
+      "discriminator": "type",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The azure resource type.",
+          "$ref": "#/definitions/AzureResourceType"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "AzureResource": {
+      "x-ms-discriminator-value": "AzureResource",
+      "type": "object",
+      "description": "The azure resource info when target service type is AzureResource",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetServiceBase"
+        }
+      ],
+      "properties": {
+        "id": {
+          "description": "The Id of azure resource.",
+          "type": "string"
+        },
+        "resourceProperties": {
+          "description": "The azure resource connection related properties.",
+          "$ref": "#/definitions/AzureResourcePropertiesBase"
+        }
+      }
+    },
+    "AzureKeyVaultProperties": {
+      "x-ms-discriminator-value": "KeyVault",
+      "type": "object",
+      "description": "The resource properties when type is Azure Key Vault",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureResourcePropertiesBase"
+        }
+      ],
+      "properties": {
+        "connectAsKubernetesCsiDriver": {
+          "description": "True if connect via Kubernetes CSI Driver.",
+          "type": "boolean"
+        }
+      }
+    },
+    "ConfluentBootstrapServer": {
+      "x-ms-discriminator-value": "ConfluentBootstrapServer",
+      "type": "object",
+      "description": "The service properties when target service type is ConfluentBootstrapServer",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetServiceBase"
+        }
+      ],
+      "properties": {
+        "endpoint": {
+          "description": "The endpoint of service.",
+          "type": "string"
+        }
+      }
+    },
+    "ConfluentSchemaRegistry": {
+      "x-ms-discriminator-value": "ConfluentSchemaRegistry",
+      "type": "object",
+      "description": "The service properties when target service type is ConfluentSchemaRegistry",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetServiceBase"
+        }
+      ],
+      "properties": {
+        "endpoint": {
+          "description": "The endpoint of service.",
+          "type": "string"
+        }
+      }
+    },
     "AuthType": {
       "description": "The authentication type.",
       "type": "string",
@@ -385,6 +524,7 @@
     "AuthInfoBase": {
       "description": "The authentication info",
       "discriminator": "authType",
+      "type": "object",
       "properties": {
         "authType": {
           "description": "The authentication type.",
@@ -397,6 +537,7 @@
     },
     "SecretAuthInfo": {
       "x-ms-discriminator-value": "secret",
+      "type": "object",
       "description": "The authentication info when authType is secret",
       "allOf": [
         {
@@ -413,13 +554,11 @@
           "type": "string",
           "x-ms-secret": true
         }
-      },
-      "required": [
-        "name"
-      ]
+      }
     },
     "UserAssignedIdentityAuthInfo": {
       "x-ms-discriminator-value": "userAssignedIdentity",
+      "type": "object",
       "description": "The authentication info when authType is userAssignedIdentity",
       "allOf": [
         {
@@ -435,14 +574,11 @@
           "description": "Subscription id for userAssignedIdentity.",
           "type": "string"
         }
-      },
-      "required": [
-        "clientId",
-        "subscriptionId"
-      ]
+      }
     },
     "SystemAssignedIdentityAuthInfo": {
       "x-ms-discriminator-value": "systemAssignedIdentity",
+      "type": "object",
       "description": "The authentication info when authType is systemAssignedIdentity",
       "allOf": [
         {
@@ -452,6 +588,7 @@
     },
     "ServicePrincipalSecretAuthInfo": {
       "x-ms-discriminator-value": "servicePrincipalSecret",
+      "type": "object",
       "description": "The authentication info when authType is servicePrincipal secret",
       "allOf": [
         {
@@ -469,7 +606,8 @@
         },
         "secret": {
           "description": "Secret for servicePrincipal auth.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -480,6 +618,7 @@
     },
     "ServicePrincipalCertificateAuthInfo": {
       "x-ms-discriminator-value": "servicePrincipalCertificate",
+      "type": "object",
       "description": "The authentication info when authType is servicePrincipal certificate",
       "allOf": [
         {
@@ -497,7 +636,8 @@
         },
         "certificate": {
           "description": "ServicePrincipal certificate for servicePrincipal auth.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -562,28 +702,30 @@
     },
     "LinkerProperties": {
       "description": "The properties of the linker.",
+      "type": "object",
       "properties": {
-        "targetId": {
-          "description": "The resource Id of target service.",
-          "type": "string"
+        "targetService": {
+          "$ref": "#/definitions/TargetServiceBase",
+          "description": "The target service properties"
         },
         "authInfo": {
           "description": "The authentication type.",
           "$ref": "#/definitions/AuthInfoBase"
         },
         "clientType": {
+          "description": "The application client type",
           "type": "string",
           "enum": [
             "none",
             "dotnet",
-            "dotnetCore",
-            "python",
-            "django",
-            "php",
-            "Nodejs",
             "java",
+            "python",
             "go",
-            "springCloudBinding"
+            "php",
+            "ruby",
+            "django",
+            "nodejs",
+            "springBoot"
           ],
           "x-ms-enum": {
             "name": "clientType",
@@ -594,6 +736,18 @@
           "readOnly": true,
           "type": "string",
           "description": "The provisioning state. "
+        },
+        "vNetSolution": {
+          "description": "The VNet solution.",
+          "$ref": "#/definitions/VNetSolution"
+        },
+        "secretStore": {
+          "description": "An option to store secret value in secure place",
+          "$ref": "#/definitions/SecretStore"
+        },
+        "scope": {
+          "type": "string",
+          "description": "connection scope in source service."
         }
       }
     },
@@ -601,22 +755,13 @@
       "description": "A configuration item for source resource",
       "type": "object",
       "properties": {
-        "type": {
-          "description": "The type of setting. One of appSettings, connectionStrings, serviceBindings",
-          "type": "string",
-          "enum": [
-            "appSettings",
-            "connectionStrings",
-            "serviceBindings"
-          ],
-          "x-ms-enum": {
-            "name": "type",
-            "modelAsString": true
-          }
+        "name": {
+          "description": "The name of setting.",
+          "type": "string"
         },
-        "linkConfig": {
-          "description": "The configuration of the linker for appSettings or connectionStrings or serviceBindings",
-          "type": "object"
+        "value": {
+          "description": "The value of setting",
+          "type": "string"
         }
       }
     },
@@ -624,12 +769,15 @@
       "description": "Configurations for source resource, include appSettings, connectionString and serviceBindings",
       "type": "object",
       "properties": {
-        "sourceConfigurations": {
+        "configurations": {
           "description": "The configuration properties for source resource.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SourceConfiguration"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -637,25 +785,13 @@
       "description": "The validation result for a linker.",
       "type": "object",
       "properties": {
-        "name": {
+        "linkerName": {
           "description": "The linker name.",
           "type": "string"
         },
-        "linkerStatus": {
-          "description": "Specifies if the linker is healthy.",
-          "type": "string",
-          "enum": [
-            "Healthy",
-            "Not healthy"
-          ],
-          "x-ms-enum": {
-            "name": "linkerStatus",
-            "modelAsString": true
-          }
-        },
-        "reason": {
-          "description": "The reason of the error.",
-          "type": "string"
+        "isConnectionAvailable": {
+          "description": "A boolean value indicating whether the connection is available or not",
+          "type": "boolean"
         },
         "reportStartTimeUtc": {
           "type": "string",
@@ -667,6 +803,10 @@
           "format": "date-time",
           "description": "The end time of the validation report."
         },
+        "sourceId": {
+          "description": "The resource id of the linker source application.",
+          "type": "string"
+        },
         "targetId": {
           "description": "The resource Id of target service.",
           "type": "string"
@@ -674,6 +814,79 @@
         "authType": {
           "description": "The authentication type.",
           "$ref": "#/definitions/AuthType"
+        },
+        "validationDetail": {
+          "description": "The detail of validation result",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationResultItem"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "ValidationResultItem": {
+      "description": "The validation item for a linker.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The validation item name.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The display name of validation item",
+          "type": "string"
+        },
+        "result": {
+          "description": "The result of validation",
+          "type": "string",
+          "enum": [
+            "success",
+            "failed",
+            "warning"
+          ],
+          "x-ms-enum": {
+            "name": "validationItemResult",
+            "modelAsString": true
+          }
+        },
+        "errorMessage": {
+          "description": "The error message of validation result",
+          "type": "string"
+        },
+        "errorCode": {
+          "description": "The error code of validation result",
+          "type": "string"
+        }
+      }
+    },
+    "VNetSolution": {
+      "type": "object",
+      "description": "The VNet solution for linker",
+      "properties": {
+        "type": {
+          "description": "Type of VNet solution.",
+          "type": "string",
+          "enum": [
+            "serviceEndpoint",
+            "privateLink"
+          ],
+          "x-ms-enum": {
+            "name": "vNetSolutionType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SecretStore": {
+      "type": "object",
+      "description": "An option to store secret value in secure place",
+      "properties": {
+        "keyVaultId": {
+          "type": "string",
+          "description": "The key vault id to store secret"
         }
       }
     }
