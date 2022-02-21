@@ -616,7 +616,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/networkSecurityPerimeterConfigurations/{resourceAssociationName}/reconcile": {
-      "put": {
+      "post": {
         "tags": [
           "Namespaces NetworkSecurityPerimeterConfigurations"
         ],
@@ -647,9 +647,6 @@
         "responses": {
           "200": {
             "description": "Association reconciled"
-          },
-          "201": {
-            "description": "Request to reconcile the association accepted"
           },
           "202": {
             "description": "Request to reconcile the association accepted."
@@ -1162,11 +1159,11 @@
             "Failed",
             "Deleting",
             "Deleted",
-            "Cancelled"
+            "Canceled"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "NetworkSecurityPerimeterConfigurationProvisiningState",
+            "name": "NetworkSecurityPerimeterConfigurationProvisioningState",
             "modelAsString": true
           }
         },
@@ -1189,7 +1186,7 @@
           "type": "object",
           "properties": {
             "name": {
-              "description": "Name of the resource",
+              "description": "Name of the resource association",
               "type": "string"
             }
           }
@@ -1295,7 +1292,7 @@
                 "readOnly": true,
                 "properties": {
                   "id": {
-                    "description": "Fully qualified identifier of the resource",
+                    "description": "Fully qualified identifier of subscription",
                     "type": "string"
                   }
                 }
