@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-11-01",
+    "version": "2021-01-31-preview",
     "title": "HealthcareApisClient",
     "description": "Use this API to manage Microsoft HealthcareApis services in your Azure subscription."
   },
@@ -2329,6 +2329,10 @@
         "acrConfiguration": {
           "$ref": "#/definitions/ServiceAcrConfigurationInfo",
           "description": "The azure container registry settings used for convert data operation of the service instance."
+        },
+        "importConfiguration": {
+          "$ref": "#/definitions/ServiceImportConfigurationInfo",
+          "description": "The settings for the import operation of the service instance."
         }
       }
     },
@@ -2440,6 +2444,27 @@
         "storageAccountName": {
           "type": "string",
           "description": "The name of the default export storage account.",
+          "readOnly": false
+        }
+      }
+    },
+    "ServiceImportConfigurationInfo": {
+      "description": "Import operation configuration information",
+      "type": "object",
+      "properties": {
+        "integrationDataStore": {
+          "type": "string",
+          "description": "The name of the default integration storage account.",
+          "readOnly": false
+        },
+        "initialImportMode": {
+          "type": "boolean",
+          "description": "If the FHIR service is in InitialImportMode.",
+          "readOnly": false
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "If the import operation is enabled.",
           "readOnly": false
         }
       }
@@ -3694,6 +3719,10 @@
         "resourceVersionPolicyConfiguration": {
           "description": "Determines tracking of history for resources.",
           "$ref": "#/definitions/ResourceVersionPolicyConfiguration"
+        },
+        "importConfiguration": {
+          "description": "Fhir Service import configuration.",
+          "$ref": "#/definitions/FhirServiceImportConfiguration"
         }
       }
     },
@@ -3873,6 +3902,27 @@
         "storageAccountName": {
           "type": "string",
           "description": "The name of the default export storage account.",
+          "readOnly": false
+        }
+      }
+    },
+    "FhirServiceImportConfiguration": {
+      "description": "Import operation configuration information",
+      "type": "object",
+      "properties": {
+        "integrationDataStore": {
+          "type": "string",
+          "description": "The name of the default integration storage account.",
+          "readOnly": false
+        },
+        "initialImportMode": {
+          "type": "boolean",
+          "description": "If the FHIR service is in InitialImportMode.",
+          "readOnly": false
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "If the import operation is enabled.",
           "readOnly": false
         }
       }
