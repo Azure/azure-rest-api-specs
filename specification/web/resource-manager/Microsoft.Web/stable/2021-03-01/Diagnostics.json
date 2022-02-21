@@ -1549,7 +1549,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DetectorAbnormalTimePeriod"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "solutions": {
           "description": "List of proposed solutions",
@@ -1577,7 +1578,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DiagnosticMetricSet"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "data": {
           "description": "Additional Source Data",
@@ -1586,7 +1590,10 @@
             "type": "array",
             "items": {
               "$ref": "./CommonDefinitions.json#/definitions/NameValuePair"
-            }
+            },
+            "x-ms-identifiers": [
+              "name"
+            ]
           }
         },
         "detectorMetaData": {
@@ -1634,7 +1641,10 @@
           "type": "array",
           "items": {
             "$ref": "./CommonDefinitions.json#/definitions/NameValuePair"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -1672,7 +1682,10 @@
             "type": "array",
             "items": {
               "$ref": "./CommonDefinitions.json#/definitions/NameValuePair"
-            }
+            },
+            "x-ms-identifiers": [
+              "name"
+            ]
           }
         },
         "type": {
@@ -1774,21 +1787,28 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/AbnormalTimePeriod"
-              }
+              },
+              "x-ms-identifiers": []
             },
             "payload": {
               "description": "Data by each detector",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/AnalysisData"
-              }
+              },
+              "x-ms-identifiers": [
+                "source"
+              ]
             },
             "nonCorrelatedDetectors": {
               "description": "Data by each detector for detectors that did not corelate",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/DetectorDefinition"
-              }
+              },
+              "x-ms-identifiers": [
+                "displayName"
+              ]
             }
           },
           "x-ms-client-flatten": true
@@ -1917,14 +1937,18 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/DiagnosticMetricSet"
-              }
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
             },
             "abnormalTimePeriods": {
               "description": "List of Correlated events found by the detector",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/DetectorAbnormalTimePeriod"
-              }
+              },
+              "x-ms-identifiers": []
             },
             "data": {
               "description": "Additional Data that detector wants to send.",
@@ -1933,7 +1957,10 @@
                 "type": "array",
                 "items": {
                   "$ref": "./CommonDefinitions.json#/definitions/NameValuePair"
-                }
+                },
+                "x-ms-identifiers": [
+                  "name"
+                ]
               }
             },
             "responseMetaData": {
@@ -2010,7 +2037,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DiagnosticMetricSample"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2065,7 +2093,10 @@
             "type": "array",
             "items": {
               "$ref": "./CommonDefinitions.json#/definitions/NameValuePair"
-            }
+            },
+            "x-ms-identifiers": [
+              "name"
+            ]
           }
         },
         "metadata": {
@@ -2075,7 +2106,10 @@
             "type": "array",
             "items": {
               "$ref": "./CommonDefinitions.json#/definitions/NameValuePair"
-            }
+            },
+            "x-ms-identifiers": [
+              "name"
+            ]
           }
         }
       }

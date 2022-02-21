@@ -388,21 +388,30 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/StackMajorVersion"
-          }
+          },
+          "x-ms-identifiers": [
+            "runtimeVersion"
+          ]
         },
         "frameworks": {
           "description": "List of frameworks associated with application stack.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationStack"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "isDeprecated": {
           "description": "<code>true</code> if this is the stack is deprecated; otherwise, <code>false</code>.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationStack"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -464,7 +473,10 @@
           "items": {
             "$ref": "#/definitions/FunctionAppMinorVersion"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "value"
+          ]
         }
       }
     },
@@ -622,7 +634,10 @@
               "items": {
                 "$ref": "#/definitions/FunctionAppMajorVersion"
               },
-              "readOnly": true
+              "readOnly": true,
+              "x-ms-identifiers": [
+                "value"
+              ]
             },
             "preferredOs": {
               "description": "Function App stack preferred OS.",
@@ -773,7 +788,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/StackMinorVersion"
-          }
+          },
+          "x-ms-identifiers": [
+            "runtimeVersion"
+          ]
         },
         "applicationInsights": {
           "description": "<code>true</code> if this supports Application Insights; otherwise, <code>false</code>.",
@@ -849,7 +867,10 @@
           "items": {
             "$ref": "#/definitions/WebAppMinorVersion"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "value"
+          ]
         }
       }
     },
@@ -991,7 +1012,10 @@
               "items": {
                 "$ref": "#/definitions/WebAppMajorVersion"
               },
-              "readOnly": true
+              "readOnly": true,
+              "x-ms-identifiers": [
+                "value"
+              ]
             },
             "preferredOs": {
               "description": "Web App stack preferred OS.",

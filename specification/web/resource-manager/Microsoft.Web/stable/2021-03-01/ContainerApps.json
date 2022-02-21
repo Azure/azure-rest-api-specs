@@ -309,7 +309,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Secret"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "activeRevisionsMode": {
           "description": "ActiveRevisionsMode controls how active revisions are handled for the Container app:\n<list><item>Multiple: multiple revisions can be active. If no value if provided, this is the default</item><item>Single: Only one revision can be active at a time. Revision weights can not be used in this mode</item></list>",
@@ -332,7 +335,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RegistryCredentials"
-          }
+          },
+          "x-ms-identifiers": [
+            "server"
+          ]
         }
       }
     },
@@ -428,7 +434,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ContainerAppSecret"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -468,7 +477,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/TrafficWeight"
-          }
+          },
+          "x-ms-identifiers": [
+            "revisionName"
+          ]
         },
         "allowInsecure": {
           "description": "Bool indicating if HTTP connections to is allowed. If set to false HTTP connections are automatically redirected to HTTPS connections",
