@@ -85,6 +85,9 @@
               "$ref": "#/definitions/MigrationResource"
             }
           },
+          "202": {
+            "description": "Accepted"
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -389,6 +392,12 @@
         "sourceDBServerResourceId": {
           "type": "string"
         },
+        "sourceDBServerFullyQualifiedDomainName": {
+          "type": "string"
+        },
+        "targetDBServerFullyQualifiedDomainName": {
+          "type": "string"
+        },
         "secretParameters": {
           "$ref": "#/definitions/MigrationSecretParameters"
         },
@@ -471,6 +480,12 @@
       "type": "object",
       "properties": {
         "sourceDBServerResourceId": {
+          "type": "string"
+        },
+        "sourceDBServerFullyQualifiedDomainName": {
+          "type": "string"
+        },
+        "targetDBServerFullyQualifiedDomainName": {
           "type": "string"
         },
         "secretParameters": {
