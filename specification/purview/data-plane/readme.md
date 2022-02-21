@@ -30,22 +30,22 @@ credential-scopes: "https://purview.azure.net/.default"
 
 ``` yaml $(package-account)
 tag: package-account-2019-11-preview
-title: PurviewAccount
+title: PurviewAccountClient
 ```
 
 ``` yaml $(package-metadata)
 tag: package-metadata-2021-07-preview
-title: PurviewMetadataPolicies
+title: PurviewMetadataPoliciesClient
 ```
 
 ``` yaml $(package-catalog)
 tag: package-catalog-2021-05-preview
-title: PurviewCatalog
+title: PurviewCatalogClient
 ```
 
 ``` yaml $(package-scanning)
 tag: package-scanning-2018-12-preview
-title: PurviewScanning
+title: PurviewScanningClient
 ```
 
 ### Tag: package-account-2019-11-preview
