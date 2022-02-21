@@ -39,7 +39,7 @@ These settings apply only when `--tag=package-preview-2022-01` is specified on t
 
 ```yaml $(tag) == 'package-preview-2022-01'
 input-file:
-  - Microsoft.HealthcareApis/stable/2022-01-31-preview/healthcare-apis.json
+  - Microsoft.HealthcareApis/preview/2022-01-31-preview/healthcare-apis.json
 ```
 ### Tag: package-2021-11
 
