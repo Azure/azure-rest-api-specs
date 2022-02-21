@@ -34,43 +34,6 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.OperationalInsights/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "description": "Lists all of the available insights REST API operations.",
-        "operationId": "Operations_List",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "Insights error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.OperationalInsights/queryPacks": {
       "get": {
         "description": "Gets a list of all Log Analytics QueryPacks within a subscription.",
@@ -515,68 +478,6 @@
         "nextLink": {
           "type": "string",
           "description": "The URI to get the next set of Log Analytics QueryPack definitions if too many QueryPacks where returned in the result set."
-        }
-      }
-    },
-    "Operation": {
-      "description": "CDN REST API operation",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
-          "type": "string"
-        },
-        "isDataAction": {
-          "description": "Indicates whether the operation is a data action",
-          "type": "boolean"
-        },
-        "display": {
-          "$ref": "#/definitions/OperationDisplay",
-          "description": "Display of the operation"
-        },
-        "origin": {
-          "description": "Origin of the operation",
-          "type": "string"
-        }
-      }
-    },
-    "OperationListResult": {
-      "description": "Result of the request to list CDN operations. It contains a list of operations and a URL link to get the next set of results.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "uniqueItems": false,
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "List of CDN operations supported by the CDN resource provider."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of operation list results if there are any."
-        }
-      }
-    },
-    "OperationDisplay": {
-      "description": "Operation display payload",
-      "type": "object",
-      "properties": {
-        "provider": {
-          "description": "Resource provider of the operation",
-          "type": "string"
-        },
-        "resource": {
-          "description": "Resource of the operation",
-          "type": "string"
-        },
-        "operation": {
-          "description": "Localized friendly name for the operation",
-          "type": "string"
-        },
-        "description": {
-          "description": "Localized friendly description for the operation",
-          "type": "string"
         }
       }
     }
