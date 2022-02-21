@@ -133,13 +133,13 @@
         }
       }
     },
-    "/teamsUser/:exchangeAccessToken": {
+    "/teamsUser/:getToken": {
       "post": {
         "tags": [
           "TeamsUser"
         ],
         "summary": "Exchange an AAD access token of a Teams user for a new Communication Identity access token with a matching expiration time.",
-        "operationId": "CommunicationIdentity_ExchangeTeamsUserAccessToken",
+        "operationId": "CommunicationIdentity_GetTeamsUserAccessToken",
         "consumes": [
           "application/json"
         ],
@@ -153,10 +153,10 @@
           {
             "in": "body",
             "name": "body",
-            "description": "AAD access token of a Teams user",
+            "description": "AAD access token of a Teams user.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TeamsUserAccessTokenRequest"
+              "$ref": "#/definitions/TeamsUserGetTokenRequest"
             }
           }
         ],
@@ -176,7 +176,7 @@
         },
         "x-ms-examples": {
           "Exchange a Teams user access token": {
-            "$ref": "./examples/ExchangeTeamsUserAccessToken.json"
+            "$ref": "./examples/GetTeamsUserAccessToken.json"
           }
         }
       }
@@ -316,7 +316,8 @@
       "description": "List of scopes for an access token.",
       "enum": [
         "chat",
-        "voip"
+        "voip",
+        "email"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -324,14 +325,24 @@
         "modelAsString": true
       }
     },
-    "TeamsUserAccessTokenRequest": {
+    "TeamsUserGetTokenRequest": {
       "required": [
-        "token"
+        "appId",
+        "token",
+        "userId"
       ],
       "type": "object",
       "properties": {
         "token": {
           "description": "AAD access token of a Teams User to acquire a new Communication Identity access token.",
+          "type": "string"
+        },
+        "appId": {
+          "description": "App ID of Contoso app to be compared with appid claim in the AAD access token",
+          "type": "string"
+        },
+        "userId": {
+          "description": "User ID of Fabricam user be compared with oid claim in the AAD access token",
           "type": "string"
         }
       }
