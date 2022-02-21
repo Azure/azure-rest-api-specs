@@ -1529,6 +1529,9 @@
           "items": {
             "$ref": "#/definitions/Site"
           },
+          "x-ms-identifiers": [
+            "siteId"
+          ],
           "description": "The list of sites"
         },
         "channelId": {
@@ -1926,6 +1929,9 @@
           "items": {
             "$ref": "#/definitions/WebChatSite"
           },
+          "x-ms-identifiers": [
+            "siteId"
+          ],
           "description": "The list of Web Chat sites"
         }
       },
@@ -1954,6 +1960,9 @@
           "items": {
             "$ref": "#/definitions/DirectLineSite"
           },
+          "x-ms-identifiers": [
+            "siteId"
+          ],
           "description": "The list of Direct Line sites"
         },
         "DirectLineEmbedCode": {
@@ -2141,7 +2150,10 @@
           "description": "The list of line channel registrations",
           "items": {
             "$ref": "#/definitions/LineRegistration"
-          }
+          },
+          "x-ms-identifiers": [
+            "generatedId"
+          ]
         },
         "callbackUrl": {
           "type": "string",
@@ -2476,7 +2488,10 @@
           "description": "Service Provider Parameters associated with the Connection Setting",
           "items": {
             "$ref": "#/definitions/ConnectionSettingParameter"
-          }
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
         },
         "provisioningState": {
           "type": "string",
@@ -2529,6 +2544,9 @@
           "items": {
             "$ref": "#/definitions/ServiceProvider"
           },
+          "x-ms-identifiers": [
+            "properties/id"
+          ],
           "description": "Gets the list of bot service providers and their properties."
         }
       },
@@ -2618,7 +2636,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ServiceProviderParameter"
-          }
+          },
+          "x-ms-identifiers": [
+            "name",
+            "type"
+          ]
         }
       },
       "description": "The Object used to describe a Service Provider supported by Bot Service"
@@ -2672,7 +2694,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationEntity"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
