@@ -4652,7 +4652,10 @@
           "description": "List of integration runtime status.",
           "items": {
             "$ref": "#/definitions/IntegrationRuntimeStatusResponse"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "The link to the next page of results, if any remaining results exist.",
@@ -4871,7 +4874,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CloudError"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -5627,14 +5631,16 @@
           "description": "List of filters.",
           "items": {
             "$ref": "#/definitions/RunQueryFilter"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "orderBy": {
           "type": "array",
           "description": "List of OrderBy option.",
           "items": {
             "$ref": "#/definitions/RunQueryOrderBy"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -5749,7 +5755,10 @@
           "description": "List of pipeline runs.",
           "items": {
             "$ref": "#/definitions/PipelineRun"
-          }
+          },
+          "x-ms-identifiers": [
+            "runId"
+          ]
         },
         "continuationToken": {
           "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
@@ -5883,7 +5892,10 @@
           "description": "List of activity runs.",
           "items": {
             "$ref": "#/definitions/ActivityRun"
-          }
+          },
+          "x-ms-identifiers": [
+            "pipelineRunId"
+          ]
         },
         "continuationToken": {
           "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
@@ -5979,7 +5991,10 @@
           "description": "List of trigger runs.",
           "items": {
             "$ref": "#/definitions/TriggerRun"
-          }
+          },
+          "x-ms-identifiers": [
+            "triggerRunId"
+          ]
         },
         "continuationToken": {
           "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
@@ -6076,7 +6091,10 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
-          "description": "List of Data Factory operations supported by the Data Factory resource provider."
+          "description": "List of Data Factory operations supported by the Data Factory resource provider.",
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -6144,14 +6162,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationLogSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "metricSpecifications": {
           "description": "Details about operations related to metrics.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationMetricSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -6214,14 +6238,18 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationMetricAvailability"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "dimensions": {
           "description": "Defines the metric dimension.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationMetricDimension"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -6301,7 +6329,10 @@
           "description": "List of exposure control features.",
           "items": {
             "$ref": "#/definitions/ExposureControlRequest"
-          }
+          },
+          "x-ms-identifiers": [
+            "featureName"
+          ]
         }
       }
     },
@@ -6331,7 +6362,10 @@
           "description": "List of exposure control feature values.",
           "items": {
             "$ref": "#/definitions/ExposureControlResponse"
-          }
+          },
+          "x-ms-identifiers": [
+            "featureName"
+          ]
         }
       }
     },
@@ -6454,21 +6488,30 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataFlowDebugResource"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "datasets": {
           "type": "array",
           "description": "List of datasets.",
           "items": {
             "$ref": "#/definitions/DatasetDebugResource"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "linkedServices": {
           "type": "array",
           "description": "List of linked services.",
           "items": {
             "$ref": "#/definitions/LinkedServiceDebugResource"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "staging": {
           "description": "Staging info for debug session.",
@@ -6483,7 +6526,10 @@
               "description": "Source setting for data flow debug.",
               "items": {
                 "$ref": "#/definitions/DataFlowSourceSetting"
-              }
+              },
+              "x-ms-identifiers": [
+                "sourceName"
+              ]
             },
             "parameters": {
               "description": "Data flow parameters.",
@@ -6598,7 +6644,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataFlowDebugSessionInfo"
-          }
+          },
+          "x-ms-identifiers": [
+            "dataFlowName",
+            "sessionId"
+          ]
         },
         "nextLink": {
           "description": "The link to the next page of results, if any remaining results exist.",
