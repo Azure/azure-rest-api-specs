@@ -236,8 +236,8 @@ These settings apply only when `--tag=package-2022-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-02'
 input-file:
-- Microsoft.OperationalInsights/stable/2019-09-01/QueryPacks_API.json
-- Microsoft.OperationalInsights/stable/2019-09-01/QueryPackQueries_API.json
+- Microsoft.OperationalInsights/stable/2019-09-01/QueryPacks.json
+- Microsoft.OperationalInsights/stable/2019-09-01/QueryPackQueries.json
 - Microsoft.OperationalInsights/stable/2020-08-01/DataExports.json
 - Microsoft.OperationalInsights/stable/2020-08-01/DataSources.json
 - Microsoft.OperationalInsights/stable/2020-08-01/IntelligencePacks.json
