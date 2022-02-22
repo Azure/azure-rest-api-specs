@@ -138,7 +138,7 @@
         "tags": [
           "TeamsUser"
         ],
-        "summary": "Exchange an AAD access token of a Teams user for a new Communication Identity access token with a matching expiration time.",
+        "summary": "Exchange an Azure Active Directory (Azure AD) access token of a Teams user for a new Communication Identity access token with a matching expiration time.",
         "operationId": "CommunicationIdentity_GetTeamsUserAccessToken",
         "consumes": [
           "application/json"
@@ -153,7 +153,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "AAD access token of a Teams user.",
+            "description": "Request payload for the token exchange.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/TeamsUserGetTokenRequest"
@@ -334,15 +334,15 @@
       "type": "object",
       "properties": {
         "token": {
-          "description": "AAD access token of a Teams User to acquire a new Communication Identity access token.",
+          "description": "Azure AD access token of a Teams User to acquire a new Communication Identity access token.",
           "type": "string"
         },
         "appId": {
-          "description": "Client ID of an AAD application to be verified against the appid claim in the AAD access token",
+          "description": "Client ID of an Azure AD application to be verified against the appid claim in the Azure AD access token.",
           "type": "string"
         },
         "userId": {
-          "description": "Object ID of an AAD user (Teams User) to be verified against the oid claim in the AAD access token",
+          "description": "Object ID of an Azure AD user (Teams User) to be verified against the oid claim in the Azure AD access token.",
           "type": "string"
         }
       }
