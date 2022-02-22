@@ -532,11 +532,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/serviceConfigs": {
       "get": {
-        "operationId": "Clusters_GetServiceConfigs",
-        "description": "Gets the config dump of all services running in cluster.",
+        "operationId": "Clusters_ListServiceConfigs",
+        "description": "Lists the config dump of all services running in cluster.",
         "x-ms-examples": {
           "HDInsightClusterGetServiceConfigs": {
-            "$ref": "./examples/GetClusterServiceConfigs.json"
+            "$ref": "./examples/ListClusterServiceConfigs.json"
           }
         },
         "parameters": [
@@ -577,8 +577,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/sessionClusters/{sessionClusterName}/serviceConfigs": {
       "get": {
-        "operationId": "SessionClusters_GetServiceConfigs",
-        "description": "Gets the config dump of all services running in session cluster.",
+        "operationId": "SessionClusters_ListServiceConfigs",
+        "description": "Lists the config dump of all services running in session cluster.",
         "x-ms-examples": {
           "HDInsightSessionClusterGetServiceConfigs": {
             "$ref": "./examples/GetSessionClusterServiceConfigs.json"
@@ -924,13 +924,13 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/instanceViews": {
       "get": {
-        "operationId": "Clusters_GetInstanceViews",
+        "operationId": "Clusters_ListInstanceViews",
         "x-ms-examples": {
           "HDInsightClusterGetInstanceViews": {
-            "$ref": "./examples/GetClusterInstanceViews.json"
+            "$ref": "./examples/ListClusterInstanceViews.json"
           }
         },
-        "description": "Gets the lists of instance views",
+        "description": "Lists the lists of instance views",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1011,13 +1011,13 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/sessionClusters/{sessionClusterName}/instanceViews": {
       "get": {
-        "operationId": "SessionClusters_GetInstanceViews",
+        "operationId": "SessionClusters_ListInstanceViews",
         "x-ms-examples": {
           "HDInsightSessionClusterGetInstanceViews": {
-            "$ref": "./examples/GetSessionClusterInstanceViews.json"
+            "$ref": "./examples/ListSessionClusterInstanceViews.json"
           }
         },
-        "description": "Gets the list of instance views",
+        "description": "Lists the list of instance views",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1106,6 +1106,11 @@
       "get": {
         "description": "Returns list of operations.",
         "operationId": "Operations_List",
+        "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "./examples/GetOperations.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -1133,7 +1138,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/clusterOfferingVersions": {
       "get": {
         "description": "Returns a list of cluster type versions.",
-        "operationId": "clusterOfferingVersions_ListByLocation",
+        "operationId": "ClusterOfferingVersions_ListByLocation",
         "x-ms-examples": {
           "ClusterTypeVersionListResult": {
             "$ref": "./examples/ListClusterOfferingVersions.json"
@@ -1154,7 +1159,7 @@
           "200": {
             "description": "Clusters successfully returned.",
             "schema": {
-              "$ref": "#/definitions/clusterOfferingVersionsListResult"
+              "$ref": "#/definitions/ClusterOfferingVersionsListResult"
             }
           },
           "default": {
@@ -1476,7 +1481,8 @@
           "description": "Properties of Key Vault secret.",
           "items": {
             "$ref": "#/definitions/ClusterSecretReference"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1526,7 +1532,8 @@
           "description": "List of Config Files.",
           "items": {
             "$ref": "#/definitions/ClusterConfigFile"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1547,7 +1554,8 @@
           "description": "List of service configs.",
           "items": {
             "$ref": "#/definitions/ClusterServiceConfig"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1571,7 +1579,8 @@
           "description": "List of SSH connectivity endpoints.",
           "items": {
             "$ref": "#/definitions/SshConnectivityEndpoint"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "readOnly": true
@@ -1629,9 +1638,11 @@
         },
         "serviceConfigsProfiles": {
           "type": "array",
+          "description": "The service configs profiles.",
           "items": {
             "$ref": "#/definitions/ClusterServiceConfigsProfile"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "connectivityProfile": {
           "$ref": "#/definitions/ConnectivityProfile"
@@ -1794,7 +1805,8 @@
           "description": "Cluster/SessionCluster instance service config in the array.",
           "items": {
             "$ref": "#/definitions/ClusterInstanceServiceConfig"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
@@ -1844,7 +1856,9 @@
           "items": {
             "$ref": "#/definitions/ClusterInstanceViewResult"
           },
-          "type": "array"
+          "type": "array",
+          "description": "Cluster instance view array.",
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link (url) to the next page of results.",
@@ -1868,6 +1882,7 @@
         },
         "properties": {
           "description": "Properties of the instance view.",
+          "x-ms-client-flatten": true,
           "allOf": [
             {
               "$ref": "#/definitions/ClusterInstanceViewProperties"
@@ -1878,6 +1893,7 @@
     },
     "ClusterInstanceViewProperties": {
       "type": "object",
+      "description": "Cluster Instance View Properties.",
       "required": [
         "status",
         "serviceStatuses"
@@ -1896,7 +1912,8 @@
           "description": "List of statuses of relevant services that make up the hilo cluster to surface to the customer.",
           "items": {
             "$ref": "#/definitions/ServiceStatus"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1908,13 +1925,16 @@
       ],
       "properties": {
         "ready": {
-          "type": "string"
+          "type": "string",
+          "description": "The cluster ready status"
         },
         "reason": {
-          "type": "string"
+          "type": "string",
+          "description": "The status reason."
         },
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "The additional message."
         }
       }
     },
@@ -2044,7 +2064,7 @@
         }
       }
     },
-    "clusterOfferingVersionsListResult": {
+    "ClusterOfferingVersionsListResult": {
       "type": "object",
       "description": "Represents a list of cluster type and stack version mappings.",
       "properties": {
@@ -2052,8 +2072,9 @@
           "type": "array",
           "description": "The cluster type and stack version mappings in the array.",
           "items": {
-            "$ref": "#/definitions/clusterOfferingVersions"
-          }
+            "$ref": "#/definitions/ClusterOfferingVersions"
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
@@ -2062,7 +2083,7 @@
         }
       }
     },
-    "clusterOfferingVersions": {
+    "ClusterOfferingVersions": {
       "type": "object",
       "description": "Cluster type and stack versions mapping.",
       "properties": {
@@ -2073,11 +2094,11 @@
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Gets or sets the properties. Define cluster type versions properties.",
-          "$ref": "#/definitions/clusterOfferingVersionsProperties"
+          "$ref": "#/definitions/ClusterOfferingVersionsProperties"
         }
       }
     },
-    "clusterOfferingVersionsProperties": {
+    "ClusterOfferingVersionsProperties": {
       "type": "object",
       "description": "ClusterTypeVersion internal properties.",
       "properties": {
