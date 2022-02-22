@@ -6,16 +6,13 @@ swaggers:
 
 variables:
   resourceName: signalrswaggertest4
-  capacity:
-    type: int
-    value: 1
   parameters:
     type: object
     value:
       sku:
         name: Standard_S1
         tier: Standard
-        capacity: $(capacity)
+        capacity: 1
       properties:
         tls:
           clientCertEnabled: false
@@ -83,6 +80,8 @@ scenarios:
                 value: true
       - operationId: SignalR_ListKeys
       - operationId: SignalR_RegenerateKey
+        parameters:
+          parameters: {}
       - operationId: SignalR_Restart
       - operationId: Usages_List
       - operationId: SignalR_ListByResourceGroup
