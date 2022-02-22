@@ -8,6 +8,8 @@ rest-level-client: true
 add-credentials: true
 license-header: MICROSOFT_MIT_NO_VERSION
 generate-metadata: true
+clear-output-folder: true
+credential-scopes: $(security-scopes)
 ```
 
 ``` yaml $(typescript) && !$(multi-client)
