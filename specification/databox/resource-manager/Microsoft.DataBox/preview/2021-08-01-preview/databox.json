@@ -2709,6 +2709,29 @@
         "accountDetails": {
           "$ref": "#/definitions/DataAccountDetails",
           "description": "Account details of the data to be transferred"
+        },
+        "logCollectionLevel": {
+          "description": "Level of the logs to be collected.",
+          "enum": [
+            "Error",
+            "Verbose"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "LogCollectionLevel",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "Error",
+                "description": "Only Errors will be collected in the logs."
+              },
+              {
+                "value": "Verbose",
+                "description": "Verbose logging (includes Errors, CRC, size information and others)."
+              }
+            ]
+          },
+          "default": "Error"
         }
       }
     },
@@ -3307,7 +3330,10 @@
             "PUS20",
             "AdHoc",
             "CH1",
-            "DSM05"
+            "DSM05",
+            "BN7",
+            "SN6",
+            "PAR22"
           ],
           "type": "string",
           "readOnly": true,
@@ -3464,6 +3490,15 @@
               },
               {
                 "value": "DSM05"
+              },
+              {
+                "value": "BN7"
+              },
+              {
+                "value": "SN6"
+              },
+              {
+                "value": "PAR22"
               }
             ]
           }

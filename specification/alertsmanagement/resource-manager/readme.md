@@ -41,11 +41,32 @@ directive:
 title: AlertsManagementClient
 description: AlertsManagement Client
 openapi-type: arm
-tag: package-2019-06-preview
+tag: package-2021-08
 ```
 
 
 
+### Tag: package-2021-08
+
+These settings apply only when `--tag=package-2021-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-08'
+input-file:
+  - Microsoft.AlertsManagement/stable/2021-08-08/AlertProcessingRules.json
+  - Microsoft.AlertsManagement/preview/2019-05-05-preview/AlertsManagement.json
+  - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
+```
+
+### Tag: package-preview-2021-08
+
+These settings apply only when `--tag=package-preview-2021-08` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-08'
+input-file:
+  - Microsoft.AlertsManagement/preview/2021-08-08-preview/AlertProcessingRules.json
+  - Microsoft.AlertsManagement/preview/2019-05-05-preview/AlertsManagement.json
+  - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
+```
 
 ### Tag: package-2021-04-only
 
@@ -55,16 +76,6 @@ These settings apply only when `--tag=package-2021-04-only` is specified on the 
 input-file:
   - Microsoft.AlertsManagement/stable/2019-03-01/AlertsManagement.json
   - Microsoft.AlertsManagement/stable/2021-04-01/SmartDetectorAlertRulesApi.json
-```
-
-### Tag: package-preview-2021-08
-
-These settings apply only when `--tag=package-preview-2021-08` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2021-08'
-input-file:
-  - Microsoft.AlertsManagement/preview/2021-08-08-preview/ActionRules.json
-  - Microsoft.AlertsManagement/preview/2021-08-08-preview/AlertsManagement.json
 ```
 
 ### Tag: package-preview-2021-01
@@ -162,6 +173,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-trenton
   - repo: azure-resource-manager-schemas
 ```
