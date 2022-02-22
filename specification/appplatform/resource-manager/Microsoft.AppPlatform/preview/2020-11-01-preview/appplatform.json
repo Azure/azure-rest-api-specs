@@ -2782,7 +2782,8 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": ["location"]
     },
     "Resource": {
       "description": "The core properties of ARM resources.",
@@ -3545,11 +3546,13 @@
           "description": "Properties of the Binding resource",
           "x-ms-client-flatten": false
         }
-      }
+      },
+      "required": ["properties"]
     },
     "BindingResourceProperties": {
       "description": "Binding resource properties payload",
       "type": "object",
+      "required": ["resourceId", "bindingParameters", "key"],
       "properties": {
         "resourceName": {
           "description": "The name of the bound resource",
@@ -3625,7 +3628,8 @@
           "description": "Properties of the certificate resource payload.",
           "x-ms-client-flatten": false
         }
-      }
+      },
+      "required": ["properties"]
     },
     "CertificateProperties": {
       "description": "Certificate resource payload.",
@@ -3716,7 +3720,8 @@
       "properties": {
         "type": {
           "description": "Type of the resource to check name availability",
-          "type": "string"
+          "type": "string",
+          "enum": ["Microsoft.AppPlatform/Spring"]
         },
         "name": {
           "description": "Name to be checked",
@@ -3841,11 +3846,13 @@
           "$ref": "#/definitions/Sku",
           "description": "Sku of the Deployment resource"
         }
-      }
+      },
+      "required": ["properties"]
     },
     "DeploymentResourceProperties": {
       "description": "Deployment resource properties payload",
       "type": "object",
+      "required": ["source"],
       "properties": {
         "source": {
           "$ref": "#/definitions/UserSourceInfo",
@@ -3918,6 +3925,7 @@
     "UserSourceInfo": {
       "description": "Source information for a deployment",
       "type": "object",
+      "required": ["type", "relativePath"],
       "properties": {
         "type": {
           "description": "Type of the source uploaded",

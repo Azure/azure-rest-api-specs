@@ -1221,7 +1221,8 @@
       "properties": {
         "type": {
           "description": "The resource type. Can be \"Microsoft.SignalRService/SignalR\" or \"Microsoft.SignalRService/webPubSub\"",
-          "type": "string"
+          "type": "string",
+          "enum": ["Microsoft.SignalRService/SignalR", "Microsoft.SignalRService/webPubSub"]
         },
         "name": {
           "description": "The resource name to validate. e.g.\"my-resource-name\"",
@@ -1372,7 +1373,8 @@
           "description": "Properties of the private endpoint connection",
           "x-ms-client-flatten": true
         }
-      }
+      },
+      "required": ["properties"]
     },
     "PrivateEndpointConnectionList": {
       "description": "A list of private endpoint connections",
@@ -1408,7 +1410,8 @@
           "$ref": "#/definitions/PrivateLinkServiceConnectionState",
           "description": "Connection state"
         }
-      }
+      },
+      "required": ["privateLinkServiceConnectionState"]
     },
     "PrivateLinkResource": {
       "description": "Private link resource",
@@ -1576,7 +1579,11 @@
       "properties": {
         "name": {
           "description": "The name of the SKU. Required.\r\n\r\nAllowed values: Standard_S1, Free_F1",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Standard_S1",
+            "Free_F1"
+          ]
         },
         "tier": {
           "$ref": "#/definitions/SignalRSkuTier",
@@ -1695,7 +1702,8 @@
           "description": "Describes the properties of a Shared Private Link Resource",
           "x-ms-client-flatten": true
         }
-      }
+      },
+      "required": ["properties"]
     },
     "SharedPrivateLinkResourceList": {
       "description": "A list of shared private link resources",
@@ -2006,7 +2014,8 @@
           "description": "Metadata pertaining to creation and last modification of the resource.",
           "readOnly": true
         }
-      }
+      },
+      "required": ["sku"]
     },
     "SignalRResourceList": {
       "description": "Object that includes an array of resources and a possible link for next set.",
@@ -2133,7 +2142,10 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "location"
+      ]
     },
     "UpstreamAuthSettings": {
       "description": "Upstream auth settings.",
