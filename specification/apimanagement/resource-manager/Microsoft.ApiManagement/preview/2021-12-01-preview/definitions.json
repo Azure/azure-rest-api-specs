@@ -4172,8 +4172,11 @@
           }
         },
         "reportUri": {
-          "type": "string",
-          "description": "The URL used by the browser to report CSP violations."
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The URIs used by the browser to report CSP violations."
         },
         "allowedSources": {
           "type": "array",
