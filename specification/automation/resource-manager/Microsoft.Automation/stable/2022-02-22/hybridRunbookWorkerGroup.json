@@ -320,45 +320,43 @@
       },
       "description": "Definition of RunAs credential to use for hybrid worker."
     },
-    "HybridRunbookWorkerGroup": {
-      "x-ms-azure-resource": true,
+    "HybridRunbookWorkerGroupProperties": {
+      "type": "object",
       "properties": {
-        "id": {
+        "groupType": {
           "type": "string",
-          "description": "Gets or sets the id of the resource."
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the group."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of the resource."
-        },
-        "properties": {
-          "groupType": {
-            "type": "string",
-            "description": "Type of the HybridWorkerGroup.",
-            "enum": [
-              "User",
-              "System"
-              ],
-            "x-ms-enum": {
-              "name": "GroupTypeEnum",
-              "modelAsString": true
-            }
-          },
-          "credential": {
-            "$ref": "#/definitions/RunAsCredentialAssociationProperty",
-            "description": "Sets the credential of a worker group."
+          "description": "Type of the HybridWorkerGroup.",
+          "enum": [
+            "User",
+            "System"
+            ],
+          "x-ms-enum": {
+            "name": "GroupTypeEnum",
+            "modelAsString": true
           }
         },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "Resource system metadata."
+        "credential": {
+          "$ref": "#/definitions/RunAsCredentialAssociationProperty",
+          "description": "Sets the credential of a worker group."
         }
       },
+      "description": "Definition of hybrid runbook worker group property."
+    },
+    "HybridRunbookWorkerGroup": {
+      "properties": {
+        "$ref": "#/definitions/HybridRunbookWorkerGroupProperties",
+        "x-ms-client-flatten": true,
+        "description": "Gets or sets the hybrid worker group properties."
+      },
+      "systemData": {
+        "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+        "description": "Resource system metadata."
+      },
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/Resource"
+        }
+      ],
       "description": "Definition of hybrid runbook worker group."
     },
     "HybridRunbookWorkerGroupsListResult": {
@@ -377,7 +375,7 @@
       },
       "description": "The response model for the list hybrid runbook worker groups."
     },
-    "HybridRunbookWorkerGroupProperties": {
+    "HybridRunbookWorkerGroupCreateOrUpdateProperties": {
       "type": "object",
       "properties": {
         "credential": {
@@ -391,7 +389,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/HybridRunbookWorkerGroupProperties",
+          "$ref": "#/definitions/HybridRunbookWorkerGroupCreateOrUpdateProperties",
           "x-ms-client-flatten": true,
           "description": "Gets or sets hybrid runbook worker group create or update properties."
         },
