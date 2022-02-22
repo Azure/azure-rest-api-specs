@@ -30,7 +30,10 @@
           "description": "List of activities in pipeline.",
           "items": {
             "$ref": "#/definitions/Activity"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "parameters": {
           "$ref": "../datafactory.json#/definitions/ParameterDefinitionSpecification",
@@ -50,7 +53,8 @@
           "type": "array",
           "items": {
             "type": "object"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "runDimensions": {
           "description": "Dimensions emitted by Pipeline.",
@@ -116,14 +120,18 @@
           "description": "Activity depends on condition.",
           "items": {
             "$ref": "#/definitions/ActivityDependency"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "userProperties": {
           "type": "array",
           "description": "Activity user properties.",
           "items": {
             "$ref": "#/definitions/UserProperty"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "additionalProperties": {
@@ -789,6 +797,10 @@
         "useBinaryTransfer": {
           "type": "boolean",
           "description": "Specify whether to use binary transfer mode for FTP stores."
+        },
+        "disableChunking": {
+          "type": "object",
+          "description": "If true, disable parallel reading within each file. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       }
     },
@@ -836,6 +848,10 @@
         "modifiedDatetimeEnd": {
           "type": "object",
           "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "disableChunking": {
+          "type": "object",
+          "description": "If true, disable parallel reading within each file. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       }
     },
@@ -1536,14 +1552,20 @@
           "description": "List of inputs for the activity.",
           "items": {
             "$ref": "../datafactory.json#/definitions/DatasetReference"
-          }
+          },
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         },
         "outputs": {
           "type": "array",
           "description": "List of outputs for the activity.",
           "items": {
             "$ref": "../datafactory.json#/definitions/DatasetReference"
-          }
+          },
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         }
       },
       "required": [
@@ -1603,7 +1625,8 @@
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
           },
-          "description": "Preserve Rules."
+          "description": "Preserve Rules.",
+          "x-ms-identifiers": []
         },
         "preserve": {
           "type": "array",
@@ -1611,7 +1634,8 @@
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
           },
-          "description": "Preserve rules."
+          "description": "Preserve rules.",
+          "x-ms-identifiers": []
         },
         "validateDataConsistency": {
           "type": "object",
@@ -2396,6 +2420,44 @@
         }
       }
     },
+    "AmazonRdsForSqlServerSource": {
+      "description": "A copy activity Amazon RDS for SQL Server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "sqlReaderQuery": {
+          "type": "object",
+          "description": "SQL reader query. Type: string (or Expression with resultType string)."
+        },
+        "sqlReaderStoredProcedureName": {
+          "type": "object",
+          "description": "Name of the stored procedure for a SQL Database source. This cannot be used at the same time as SqlReaderQuery. Type: string (or Expression with resultType string)."
+        },
+        "storedProcedureParameters": {
+          "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StoredProcedureParameter"
+          }
+        },
+        "produceAdditionalTypes": {
+          "description": "Which additional types to produce.",
+          "type": "object"
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
+          "type": "object"
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for Sql source partitioning.",
+          "$ref": "#/definitions/SqlPartitionSettings"
+        }
+      }
+    },
     "AzureSqlSource": {
       "description": "A copy activity Azure SQL source.",
       "type": "object",
@@ -2668,6 +2730,75 @@
             "description": "Type: string (or Expression with resultType string)."
           },
           "description": "Names of the physical partitions of Oracle table. "
+        },
+        "partitionColumnName": {
+          "type": "object",
+          "description": "The name of the column in integer type that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        },
+        "partitionUpperBound": {
+          "type": "object",
+          "description": "The maximum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        },
+        "partitionLowerBound": {
+          "type": "object",
+          "description": "The minimum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "AmazonRdsForOracleSource": {
+      "description": "A copy activity AmazonRdsForOracle source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "oracleReaderQuery": {
+          "type": "object",
+          "description": "AmazonRdsForOracle reader query. Type: string (or Expression with resultType string)."
+        },
+        "queryTimeout": {
+          "type": "object",
+          "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "partitionOption": {
+          "type": "object",
+          "description": "The partition mechanism that will be used for AmazonRdsForOracle read in parallel. Type: string (or Expression with resultType string)."
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for AmazonRdsForOracle source partitioning.",
+          "$ref": "#/definitions/AmazonRdsForOraclePartitionSettings"
+        },
+        "additionalColumns": {
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
+        }
+      }
+    },
+    "AmazonRdsForOraclePartitionOption": {
+      "type": "string",
+      "enum": [
+        "None",
+        "PhysicalPartitionsOfTable",
+        "DynamicRange"
+      ],
+      "x-ms-enum": {
+        "name": "AmazonRdsForOraclePartitionOption",
+        "modelAsString": true
+      }
+    },
+    "AmazonRdsForOraclePartitionSettings": {
+      "description": "The settings that will be leveraged for AmazonRdsForOracle source partitioning.",
+      "type": "object",
+      "properties": {
+        "partitionNames": {
+          "type": "object",
+          "items": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          },
+          "description": "Names of the physical partitions of AmazonRdsForOracle table. "
         },
         "partitionColumnName": {
           "type": "object",
@@ -3975,7 +4106,10 @@
           "description": "Specify the custom metadata to be added to sink data. Type: array of objects (or Expression with resultType array of objects).",
           "items": {
             "$ref": "#/definitions/MetadataItem"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -4326,7 +4460,10 @@
           "description": "Specifies the default values for each target column in SQL DW. The default values in the property overwrite the DEFAULT constraint set in the DB, and identity column cannot have a default value. Type: array of objects (or Expression with resultType array of objects).",
           "items": {
             "$ref": "#/definitions/DWCopyCommandDefaultValue"
-          }
+          },
+          "x-ms-identifiers": [
+            "columnName"
+          ]
         },
         "additionalOptions": {
           "type": "object",
@@ -4673,7 +4810,10 @@
           "description": "Specify the custom metadata to be added to sink data. Type: array of objects (or Expression with resultType array of objects).",
           "items": {
             "$ref": "#/definitions/MetadataItem"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -5077,7 +5217,10 @@
           "type": "array",
           "items": {
             "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
-          }
+          },
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         },
         "arguments": {
           "description": "User specified arguments to HDInsightActivity.",
@@ -5085,7 +5228,8 @@
           "items": {
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
-          }
+          },
+          "x-ms-identifiers": []
         },
         "getDebugInfo": {
           "$ref": "#/definitions/HDInsightActivityDebugInfoOption",
@@ -5113,7 +5257,8 @@
           "items": {
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
-          }
+          },
+          "x-ms-identifiers": []
         },
         "queryTimeout": {
           "type": "integer",
@@ -5161,7 +5306,10 @@
           "type": "array",
           "items": {
             "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
-          }
+          },
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         },
         "arguments": {
           "type": "object",
@@ -5216,7 +5364,10 @@
           "type": "array",
           "items": {
             "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
-          }
+          },
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         },
         "arguments": {
           "description": "User specified arguments to HDInsightActivity.",
@@ -5224,7 +5375,8 @@
           "items": {
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
-          }
+          },
+          "x-ms-identifiers": []
         },
         "getDebugInfo": {
           "$ref": "#/definitions/HDInsightActivityDebugInfoOption",
@@ -5248,7 +5400,8 @@
           "items": {
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
-          }
+          },
+          "x-ms-identifiers": []
         },
         "defines": {
           "description": "Allows user to specify defines for the MapReduce job request.",
@@ -5291,7 +5444,10 @@
           "type": "array",
           "items": {
             "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
-          }
+          },
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         },
         "arguments": {
           "description": "User specified arguments to HDInsightActivity.",
@@ -5299,7 +5455,8 @@
           "items": {
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
-          }
+          },
+          "x-ms-identifiers": []
         },
         "getDebugInfo": {
           "$ref": "#/definitions/HDInsightActivityDebugInfoOption",
@@ -5327,7 +5484,8 @@
           "items": {
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
-          }
+          },
+          "x-ms-identifiers": []
         },
         "fileLinkedService": {
           "description": "Linked service reference where the files are located.",
@@ -5343,7 +5501,8 @@
           "items": {
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
-          }
+          },
+          "x-ms-identifiers": []
         },
         "defines": {
           "description": "Allows user to specify defines for streaming job request.",
@@ -5398,7 +5557,8 @@
           "items": {
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
-          }
+          },
+          "x-ms-identifiers": []
         },
         "getDebugInfo": {
           "$ref": "#/definitions/HDInsightActivityDebugInfoOption",
@@ -5587,7 +5747,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SSISChildPackage"
-          }
+          },
+          "x-ms-identifiers": [
+            "packagePath",
+            "packageName"
+          ]
         }
       }
     },
@@ -5812,14 +5976,20 @@
           "type": "array",
           "items": {
             "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
-          }
+          },
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         },
         "datasets": {
           "description": "Dataset references.",
           "type": "array",
           "items": {
             "$ref": "../datafactory.json#/definitions/DatasetReference"
-          }
+          },
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         }
       }
     },
@@ -6122,14 +6292,20 @@
           "description": "List of datasets passed to web endpoint.",
           "items": {
             "$ref": "../datafactory.json#/definitions/DatasetReference"
-          }
+          },
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         },
         "linkedServices": {
           "type": "array",
           "description": "List of linked services passed to web endpoint.",
           "items": {
             "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
-          }
+          },
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         },
         "connectVia": {
           "description": "The integration runtime reference.",
@@ -6173,7 +6349,8 @@
           "items": {
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
-          }
+          },
+          "x-ms-identifiers": []
         },
         "storeSettings": {
           "$ref": "#/definitions/StoreReadSettings",
@@ -6219,14 +6396,20 @@
           "description": "List of activities to execute if expression is evaluated to true. This is an optional property and if not provided, the activity will exit without any action.",
           "items": {
             "$ref": "#/definitions/Activity"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "ifFalseActivities": {
           "type": "array",
           "description": "List of activities to execute if expression is evaluated to false. This is an optional property and if not provided, the activity will exit without any action.",
           "items": {
             "$ref": "#/definitions/Activity"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [
@@ -6265,14 +6448,20 @@
           "items": {
             "x-ms-client-flatten": true,
             "$ref": "#/definitions/SwitchCase"
-          }
+          },
+          "x-ms-identifiers": [
+            "value"
+          ]
         },
         "defaultActivities": {
           "type": "array",
           "description": "List of activities to execute if no case condition is satisfied. This is an optional property and if not provided, the activity will exit without any action.",
           "items": {
             "$ref": "#/definitions/Activity"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [
@@ -6291,7 +6480,10 @@
           "description": "List of activities to execute for satisfied case condition.",
           "items": {
             "$ref": "#/definitions/Activity"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -6335,7 +6527,10 @@
           "description": "List of activities to execute .",
           "items": {
             "$ref": "#/definitions/Activity"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [
@@ -6611,6 +6806,44 @@
         "waitTimeInSeconds"
       ]
     },
+    "FailActivity": {
+      "x-ms-discriminator-value": "Fail",
+      "type": "object",
+      "description": "This activity will fail within its own scope and output a custom error message and error code. The error message and code can provided either as a string literal or as an expression that can be evaluated to a string at runtime. The activity scope can be the whole pipeline or a control activity (e.g. foreach, switch, until), if the fail activity is contained in it.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControlActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Fail activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FailActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "FailActivityTypeProperties": {
+      "description": "Fail activity properties.",
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "The error message that surfaced in the Fail activity. It can be dynamic content that's evaluated to a non empty/blank string at runtime. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "errorCode": {
+          "description": "The error code that categorizes the error type of the Fail activity. It can be dynamic content that's evaluated to a non empty/blank string at runtime. Type: string (or Expression with resultType string).",
+          "type": "object"
+        }
+      },
+      "required": [
+        "message",
+        "errorCode"
+      ]
+    },
     "UntilActivity": {
       "x-ms-discriminator-value": "Until",
       "description": "This activity executes inner activities until the specified boolean expression results to true or timeout is reached, whichever is earlier.",
@@ -6646,7 +6879,10 @@
           "description": "List of activities to execute.",
           "items": {
             "$ref": "#/definitions/Activity"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [
@@ -6780,7 +7016,8 @@
             "additionalProperties": {
               "type": "object"
             }
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -6819,7 +7056,8 @@
           "items": {
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
-          }
+          },
+          "x-ms-identifiers": []
         },
         "libraries": {
           "description": "A list of libraries to be installed on the cluster that will execute the job.",
@@ -6830,7 +7068,8 @@
             "additionalProperties": {
               "type": "object"
             }
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -6869,7 +7108,8 @@
           "items": {
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
-          }
+          },
+          "x-ms-identifiers": []
         },
         "libraries": {
           "description": "A list of libraries to be installed on the cluster that will execute the job.",
@@ -6880,7 +7120,8 @@
             "additionalProperties": {
               "type": "object"
             }
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -7179,10 +7420,190 @@
       "properties": {
         "sinks": {
           "type": "object",
-          "description": "List of Power Query activity sinks mapped to a queryName.",
+          "description": "(Deprecated. Please use Queries). List of Power Query activity sinks mapped to a queryName.",
           "additionalProperties": {
             "$ref": "./DataFlow.json#/definitions/PowerQuerySink"
           }
+        },
+        "queries": {
+          "type": "array",
+          "description": "List of mapping for Power Query mashup query to sink dataset(s).",
+          "items": {
+            "$ref": "#/definitions/PowerQuerySinkMapping"
+          },
+          "x-ms-identifiers": [
+            "queryName"
+          ]
+        }
+      }
+    },
+    "PowerQuerySinkMapping": {
+      "description": "Map Power Query mashup query to sink dataset(s).",
+      "type": "object",
+      "properties": {
+        "queryName": {
+          "description": "Name of the query in Power Query mashup document.",
+          "type": "string"
+        },
+        "dataflowSinks": {
+          "type": "array",
+          "description": "List of sinks mapped to Power Query mashup query.",
+          "items": {
+            "$ref": "./DataFlow.json#/definitions/PowerQuerySink"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "ScriptActivity": {
+      "description": "Script activity type.",
+      "x-ms-discriminator-value": "Script",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "Script activity properties.",
+          "$ref": "#/definitions/ScriptActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties",
+        "linkedServiceName"
+      ]
+    },
+    "ScriptActivityTypeProperties": {
+      "description": "Script activity properties.",
+      "type": "object",
+      "properties": {
+        "scripts": {
+          "type": "array",
+          "description": "Array of script blocks. Type: array.",
+          "items": {
+            "$ref": "#/definitions/ScriptActivityScriptBlock"
+          },
+          "x-ms-identifiers": []
+        },
+        "logSettings": {
+          "description": "Log settings of script activity.",
+          "type": "object",
+          "properties": {
+            "logDestination": {
+              "x-ms-enum": {
+                "name": "ScriptActivityLogDestination",
+                "modelAsString": true
+              },
+              "enum": [
+                "ActivityOutput",
+                "ExternalStore"
+              ],
+              "type": "string",
+              "description": "The destination of logs. Type: string."
+            },
+            "logLocationSettings": {
+              "description": "Log location settings customer needs to provide when enabling log.",
+              "$ref": "#/definitions/LogLocationSettings"
+            }
+          },
+          "required": [
+            "logDestination"
+          ]
+        }
+      }
+    },
+    "ScriptActivityScriptBlock": {
+      "description": "Script block of scripts.",
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "object",
+          "description": "The query text. Type: string (or Expression with resultType string)."
+        },
+        "type": {
+          "x-ms-enum": {
+            "name": "ScriptType",
+            "modelAsString": true
+          },
+          "enum": [
+            "Query",
+            "NonQuery"
+          ],
+          "type": "string",
+          "description": "The type of the query. Type: string."
+        },
+        "parameters": {
+          "type": "array",
+          "description": "Array of script parameters. Type: array.",
+          "items": {
+            "$ref": "#/definitions/ScriptActivityParameter"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "text",
+        "type"
+      ]
+    },
+    "ScriptActivityParameter": {
+      "description": "Parameters of a script block.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "object",
+          "description": "The name of the parameter. Type: string (or Expression with resultType string)."
+        },
+        "type": {
+          "description": "The type of the parameter.",
+          "type": "string",
+          "enum": [
+            "Boolean",
+            "DateTime",
+            "DateTimeOffset",
+            "Decimal",
+            "Double",
+            "Guid",
+            "Int16",
+            "Int32",
+            "Int64",
+            "Single",
+            "String",
+            "Timespan"
+          ],
+          "x-ms-enum": {
+            "name": "ScriptActivityParameterType",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "description": "The value of the parameter.",
+          "type": "object"
+        },
+        "direction": {
+          "description": "The direction of the parameter.",
+          "type": "string",
+          "enum": [
+            "Input",
+            "Output",
+            "InputOutput"
+          ],
+          "x-ms-enum": {
+            "name": "ScriptActivityParameterDirection",
+            "modelAsString": true
+          }
+        },
+        "size": {
+          "description": "The size of the output direction parameter.",
+          "type": "integer",
+          "format": "int32"
         }
       }
     },

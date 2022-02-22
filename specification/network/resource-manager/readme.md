@@ -28,15 +28,198 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2021-02
+tag: package-2021-05
 ```
 
+
+### Tag: package-2021-05-preview
+
+These settings apply only when `--tag=2021-05-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-05-preview'
+input-file:
+  - Microsoft.Network/preview/2021-05-01-preview/network.json
+  - Microsoft.Network/preview/2021-05-01-preview/networkManager.json
+  - Microsoft.Network/preview/2021-05-01-preview/networkManagerActiveConfiguration.json
+  - Microsoft.Network/preview/2021-05-01-preview/networkManagerConnectivityConfiguration.json
+  - Microsoft.Network/preview/2021-05-01-preview/networkManagerEffectiveConfiguration.json
+  - Microsoft.Network/preview/2021-05-01-preview/networkManagerGroup.json
+  - Microsoft.Network/preview/2021-05-01-preview/networkManagerSecurityUserConfiguration.json
+  - Microsoft.Network/preview/2021-05-01-preview/networkManagerSecurityAdminConfiguration.json
+  - Microsoft.Network/preview/2021-05-01-preview/networkManagerConnection.json
+  - Microsoft.Network/preview/2021-05-01-preview/networkManagerScopeConnection.json
+  - Microsoft.Network/stable/2021-05-01/applicationGateway.json
+  - Microsoft.Network/stable/2021-05-01/applicationSecurityGroup.json
+  - Microsoft.Network/stable/2021-05-01/availableDelegations.json
+  - Microsoft.Network/stable/2021-05-01/availableServiceAliases.json
+  - Microsoft.Network/stable/2021-05-01/azureFirewall.json
+  - Microsoft.Network/stable/2021-05-01/azureFirewallFqdnTag.json
+  - Microsoft.Network/stable/2021-05-01/azureWebCategory.json
+  - Microsoft.Network/stable/2021-05-01/bastionHost.json
+  - Microsoft.Network/stable/2021-05-01/checkDnsAvailability.json
+  - Microsoft.Network/stable/2021-05-01/cloudServiceNetworkInterface.json
+  - Microsoft.Network/stable/2021-05-01/cloudServicePublicIpAddress.json
+  - Microsoft.Network/stable/2021-05-01/customIpPrefix.json
+  - Microsoft.Network/stable/2021-05-01/ddosCustomPolicy.json
+  - Microsoft.Network/stable/2021-05-01/ddosProtectionPlan.json
+  - Microsoft.Network/stable/2021-05-01/dscpConfiguration.json
+  - Microsoft.Network/stable/2021-05-01/endpointService.json
+  - Microsoft.Network/stable/2021-05-01/expressRouteCircuit.json
+  - Microsoft.Network/stable/2021-05-01/expressRouteCrossConnection.json
+  - Microsoft.Network/stable/2021-05-01/expressRoutePort.json
+  - Microsoft.Network/stable/2021-05-01/firewallPolicy.json
+  - Microsoft.Network/stable/2021-05-01/ipAllocation.json
+  - Microsoft.Network/stable/2021-05-01/ipGroups.json
+  - Microsoft.Network/stable/2021-05-01/loadBalancer.json
+  - Microsoft.Network/stable/2021-05-01/natGateway.json
+  - Microsoft.Network/stable/2021-05-01/network.json
+  - Microsoft.Network/stable/2021-05-01/networkInterface.json
+  - Microsoft.Network/stable/2021-05-01/networkProfile.json
+  - Microsoft.Network/stable/2021-05-01/networkSecurityGroup.json
+  - Microsoft.Network/stable/2021-05-01/networkVirtualAppliance.json
+  - Microsoft.Network/stable/2021-05-01/networkWatcher.json
+  - Microsoft.Network/stable/2021-05-01/operation.json
+  - Microsoft.Network/stable/2021-05-01/privateEndpoint.json
+  - Microsoft.Network/stable/2021-05-01/privateLinkService.json
+  - Microsoft.Network/stable/2021-05-01/publicIpAddress.json
+  - Microsoft.Network/stable/2021-05-01/publicIpPrefix.json
+  - Microsoft.Network/stable/2021-05-01/routeFilter.json
+  - Microsoft.Network/stable/2021-05-01/routeTable.json
+  - Microsoft.Network/stable/2021-05-01/securityPartnerProvider.json
+  - Microsoft.Network/stable/2021-05-01/serviceCommunity.json
+  - Microsoft.Network/stable/2021-05-01/serviceEndpointPolicy.json
+  - Microsoft.Network/stable/2021-05-01/serviceTags.json
+  - Microsoft.Network/stable/2021-05-01/usage.json
+  - Microsoft.Network/stable/2021-05-01/virtualNetwork.json
+  - Microsoft.Network/stable/2021-05-01/virtualNetworkGateway.json
+  - Microsoft.Network/stable/2021-05-01/virtualNetworkTap.json
+  - Microsoft.Network/stable/2021-05-01/virtualRouter.json
+  - Microsoft.Network/stable/2021-05-01/virtualWan.json
+  - Microsoft.Network/stable/2021-05-01/vmssNetworkInterface.json
+  - Microsoft.Network/stable/2021-05-01/vmssPublicIpAddress.json
+  - Microsoft.Network/stable/2021-05-01/webapplicationfirewall.json
+```
+
+### Tag: package-2021-05
+
+These settings apply only when `--tag=package-2021-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-05'
+input-file:
+  - Microsoft.Network/stable/2021-05-01/applicationGateway.json
+  - Microsoft.Network/stable/2021-05-01/applicationSecurityGroup.json
+  - Microsoft.Network/stable/2021-05-01/availableDelegations.json
+  - Microsoft.Network/stable/2021-05-01/availableServiceAliases.json
+  - Microsoft.Network/stable/2021-05-01/azureFirewall.json
+  - Microsoft.Network/stable/2021-05-01/azureFirewallFqdnTag.json
+  - Microsoft.Network/stable/2021-05-01/azureWebCategory.json
+  - Microsoft.Network/stable/2021-05-01/bastionHost.json
+  - Microsoft.Network/stable/2021-05-01/checkDnsAvailability.json
+  - Microsoft.Network/stable/2021-05-01/cloudServiceNetworkInterface.json
+  - Microsoft.Network/stable/2021-05-01/cloudServicePublicIpAddress.json
+  - Microsoft.Network/stable/2021-05-01/customIpPrefix.json
+  - Microsoft.Network/stable/2021-05-01/ddosCustomPolicy.json
+  - Microsoft.Network/stable/2021-05-01/ddosProtectionPlan.json
+  - Microsoft.Network/stable/2021-05-01/dscpConfiguration.json
+  - Microsoft.Network/stable/2021-05-01/endpointService.json
+  - Microsoft.Network/stable/2021-05-01/expressRouteCircuit.json
+  - Microsoft.Network/stable/2021-05-01/expressRouteCrossConnection.json
+  - Microsoft.Network/stable/2021-05-01/expressRoutePort.json
+  - Microsoft.Network/stable/2021-05-01/firewallPolicy.json
+  - Microsoft.Network/stable/2021-05-01/ipAllocation.json
+  - Microsoft.Network/stable/2021-05-01/ipGroups.json
+  - Microsoft.Network/stable/2021-05-01/loadBalancer.json
+  - Microsoft.Network/stable/2021-05-01/natGateway.json
+  - Microsoft.Network/stable/2021-05-01/network.json
+  - Microsoft.Network/stable/2021-05-01/networkInterface.json
+  - Microsoft.Network/stable/2021-05-01/networkProfile.json
+  - Microsoft.Network/stable/2021-05-01/networkSecurityGroup.json
+  - Microsoft.Network/stable/2021-05-01/networkVirtualAppliance.json
+  - Microsoft.Network/stable/2021-05-01/networkWatcher.json
+  - Microsoft.Network/stable/2021-05-01/operation.json
+  - Microsoft.Network/stable/2021-05-01/privateEndpoint.json
+  - Microsoft.Network/stable/2021-05-01/privateLinkService.json
+  - Microsoft.Network/stable/2021-05-01/publicIpAddress.json
+  - Microsoft.Network/stable/2021-05-01/publicIpPrefix.json
+  - Microsoft.Network/stable/2021-05-01/routeFilter.json
+  - Microsoft.Network/stable/2021-05-01/routeTable.json
+  - Microsoft.Network/stable/2021-05-01/securityPartnerProvider.json
+  - Microsoft.Network/stable/2021-05-01/serviceCommunity.json
+  - Microsoft.Network/stable/2021-05-01/serviceEndpointPolicy.json
+  - Microsoft.Network/stable/2021-05-01/serviceTags.json
+  - Microsoft.Network/stable/2021-05-01/usage.json
+  - Microsoft.Network/stable/2021-05-01/virtualNetwork.json
+  - Microsoft.Network/stable/2021-05-01/virtualNetworkGateway.json
+  - Microsoft.Network/stable/2021-05-01/virtualNetworkTap.json
+  - Microsoft.Network/stable/2021-05-01/virtualRouter.json
+  - Microsoft.Network/stable/2021-05-01/virtualWan.json
+  - Microsoft.Network/stable/2021-05-01/vmssNetworkInterface.json
+  - Microsoft.Network/stable/2021-05-01/vmssPublicIpAddress.json
+  - Microsoft.Network/stable/2021-05-01/webapplicationfirewall.json
+```
+### Tag: package-2021-03
+
+These settings apply only when `--tag=package-2021-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03'
+input-file:
+  - Microsoft.Network/stable/2021-03-01/applicationGateway.json
+  - Microsoft.Network/stable/2021-03-01/applicationSecurityGroup.json
+  - Microsoft.Network/stable/2021-03-01/availableDelegations.json
+  - Microsoft.Network/stable/2021-03-01/availableServiceAliases.json
+  - Microsoft.Network/stable/2021-03-01/azureFirewall.json
+  - Microsoft.Network/stable/2021-03-01/azureFirewallFqdnTag.json
+  - Microsoft.Network/stable/2021-03-01/azureWebCategory.json
+  - Microsoft.Network/stable/2021-03-01/bastionHost.json
+  - Microsoft.Network/stable/2021-03-01/checkDnsAvailability.json
+  - Microsoft.Network/stable/2021-03-01/cloudServiceNetworkInterface.json
+  - Microsoft.Network/stable/2021-03-01/cloudServicePublicIpAddress.json
+  - Microsoft.Network/stable/2021-03-01/customIpPrefix.json
+  - Microsoft.Network/stable/2021-03-01/ddosCustomPolicy.json
+  - Microsoft.Network/stable/2021-03-01/ddosProtectionPlan.json
+  - Microsoft.Network/stable/2021-03-01/dscpConfiguration.json
+  - Microsoft.Network/stable/2021-03-01/endpointService.json
+  - Microsoft.Network/stable/2021-03-01/expressRouteCircuit.json
+  - Microsoft.Network/stable/2021-03-01/expressRouteCrossConnection.json
+  - Microsoft.Network/stable/2021-03-01/expressRoutePort.json
+  - Microsoft.Network/stable/2021-03-01/firewallPolicy.json
+  - Microsoft.Network/stable/2021-03-01/ipAllocation.json
+  - Microsoft.Network/stable/2021-03-01/ipGroups.json
+  - Microsoft.Network/stable/2021-03-01/loadBalancer.json
+  - Microsoft.Network/stable/2021-03-01/natGateway.json
+  - Microsoft.Network/stable/2021-03-01/network.json
+  - Microsoft.Network/stable/2021-03-01/networkInterface.json
+  - Microsoft.Network/stable/2021-03-01/networkProfile.json
+  - Microsoft.Network/stable/2021-03-01/networkSecurityGroup.json
+  - Microsoft.Network/stable/2021-03-01/networkVirtualAppliance.json
+  - Microsoft.Network/stable/2021-03-01/networkWatcher.json
+  - Microsoft.Network/stable/2021-03-01/operation.json
+  - Microsoft.Network/stable/2021-03-01/privateEndpoint.json
+  - Microsoft.Network/stable/2021-03-01/privateLinkService.json
+  - Microsoft.Network/stable/2021-03-01/publicIpAddress.json
+  - Microsoft.Network/stable/2021-03-01/publicIpPrefix.json
+  - Microsoft.Network/stable/2021-03-01/routeFilter.json
+  - Microsoft.Network/stable/2021-03-01/routeTable.json
+  - Microsoft.Network/stable/2021-03-01/securityPartnerProvider.json
+  - Microsoft.Network/stable/2021-03-01/serviceCommunity.json
+  - Microsoft.Network/stable/2021-03-01/serviceEndpointPolicy.json
+  - Microsoft.Network/stable/2021-03-01/serviceTags.json
+  - Microsoft.Network/stable/2021-03-01/usage.json
+  - Microsoft.Network/stable/2021-03-01/virtualNetwork.json
+  - Microsoft.Network/stable/2021-03-01/virtualNetworkGateway.json
+  - Microsoft.Network/stable/2021-03-01/virtualNetworkTap.json
+  - Microsoft.Network/stable/2021-03-01/virtualRouter.json
+  - Microsoft.Network/stable/2021-03-01/virtualWan.json
+  - Microsoft.Network/stable/2021-03-01/vmssNetworkInterface.json
+  - Microsoft.Network/stable/2021-03-01/vmssPublicIpAddress.json
+  - Microsoft.Network/stable/2021-03-01/webapplicationfirewall.json
+```
 
 ### Tag: package-2021-02
 
 These settings apply only when `--tag=package-2021-02` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-02'
+``` yaml $(tag) == 'package-2021-02'
 input-file:
   - Microsoft.Network/stable/2021-02-01/applicationGateway.json
   - Microsoft.Network/stable/2021-02-01/applicationSecurityGroup.json
@@ -89,6 +272,7 @@ input-file:
   - Microsoft.Network/stable/2021-02-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2021-02-01/webapplicationfirewall.json
 ```
+
 ### Tag: package-2020-11
 
 These settings apply only when `--tag=package-2020-11` is specified on the command line.
@@ -148,38 +332,12 @@ input-file:
 
 ```
 
-### Tag: package-2021-02-preview
+### Tag: package-2021-02-preview-only
 
-These settings apply only when `--tag=2021-02-preview` is specified on the command line.
+These settings apply only when `--tag=2021-02-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-02-preview'
+``` yaml $(tag) == 'package-2021-02-preview-only'
 input-file:
-  - Microsoft.Network/stable/2020-11-01/applicationGateway.json
-  - Microsoft.Network/stable/2020-11-01/applicationSecurityGroup.json
-  - Microsoft.Network/stable/2020-11-01/availableDelegations.json
-  - Microsoft.Network/stable/2020-11-01/availableServiceAliases.json
-  - Microsoft.Network/stable/2020-11-01/azureFirewall.json
-  - Microsoft.Network/stable/2020-11-01/azureFirewallFqdnTag.json
-  - Microsoft.Network/stable/2020-11-01/azureWebCategory.json
-  - Microsoft.Network/stable/2020-11-01/bastionHost.json
-  - Microsoft.Network/stable/2020-11-01/checkDnsAvailability.json
-  - Microsoft.Network/stable/2020-11-01/cloudServiceNetworkInterface.json
-  - Microsoft.Network/stable/2020-11-01/cloudServicePublicIpAddress.json
-  - Microsoft.Network/stable/2020-11-01/customIpPrefix.json
-  - Microsoft.Network/stable/2020-11-01/ddosCustomPolicy.json
-  - Microsoft.Network/stable/2020-11-01/ddosProtectionPlan.json
-  - Microsoft.Network/stable/2020-11-01/dscpConfiguration.json
-  - Microsoft.Network/stable/2020-11-01/endpointService.json
-  - Microsoft.Network/stable/2020-11-01/expressRouteCircuit.json
-  - Microsoft.Network/stable/2020-11-01/expressRouteCrossConnection.json
-  - Microsoft.Network/stable/2020-11-01/expressRoutePort.json
-  - Microsoft.Network/stable/2020-11-01/firewallPolicy.json
-  - Microsoft.Network/stable/2020-11-01/ipAllocation.json
-  - Microsoft.Network/stable/2020-11-01/ipGroups.json
-  - Microsoft.Network/stable/2020-11-01/loadBalancer.json
-  - Microsoft.Network/stable/2020-11-01/natGateway.json
-  - Microsoft.Network/preview/2021-02-01-preview/network.json
-  - Microsoft.Network/stable/2020-11-01/networkInterface.json
   - Microsoft.Network/preview/2021-02-01-preview/networkManager.json
   - Microsoft.Network/preview/2021-02-01-preview/networkManagerActiveConfiguration.json
   - Microsoft.Network/preview/2021-02-01-preview/networkManagerConnectivityConfiguration.json
@@ -188,30 +346,72 @@ input-file:
   - Microsoft.Network/preview/2021-02-01-preview/networkManagerSecurityUserConfiguration.json
   - Microsoft.Network/preview/2021-02-01-preview/networkManagerSecurityAdminConfiguration.json
   - Microsoft.Network/preview/2021-02-01-preview/networkSecurityPerimeter.json
-  - Microsoft.Network/stable/2020-11-01/networkProfile.json
-  - Microsoft.Network/stable/2020-11-01/networkSecurityGroup.json
-  - Microsoft.Network/stable/2020-11-01/networkVirtualAppliance.json
-  - Microsoft.Network/stable/2020-11-01/networkWatcher.json
-  - Microsoft.Network/stable/2020-11-01/operation.json
-  - Microsoft.Network/stable/2020-11-01/privateEndpoint.json
-  - Microsoft.Network/stable/2020-11-01/privateLinkService.json
-  - Microsoft.Network/stable/2020-11-01/publicIpAddress.json
-  - Microsoft.Network/stable/2020-11-01/publicIpPrefix.json
-  - Microsoft.Network/stable/2020-11-01/routeFilter.json
-  - Microsoft.Network/stable/2020-11-01/routeTable.json
-  - Microsoft.Network/stable/2020-11-01/securityPartnerProvider.json
-  - Microsoft.Network/stable/2020-11-01/serviceCommunity.json
-  - Microsoft.Network/stable/2020-11-01/serviceEndpointPolicy.json
-  - Microsoft.Network/stable/2020-11-01/serviceTags.json
-  - Microsoft.Network/stable/2020-11-01/usage.json
-  - Microsoft.Network/stable/2020-11-01/virtualNetwork.json
-  - Microsoft.Network/stable/2020-11-01/virtualNetworkGateway.json
-  - Microsoft.Network/stable/2020-11-01/virtualNetworkTap.json
-  - Microsoft.Network/stable/2020-11-01/virtualRouter.json
-  - Microsoft.Network/stable/2020-11-01/virtualWan.json
-  - Microsoft.Network/stable/2020-11-01/vmssNetworkInterface.json
-  - Microsoft.Network/stable/2020-11-01/vmssPublicIpAddress.json
-  - Microsoft.Network/stable/2020-11-01/webapplicationfirewall.json
+```
+
+### Tag: package-2021-02-preview
+
+These settings apply only when `--tag=2021-02-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-02-preview'
+input-file:
+  - Microsoft.Network/preview/2021-02-01-preview/network.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManager.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManagerActiveConfiguration.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManagerConnectivityConfiguration.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManagerEffectiveConfiguration.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManagerGroup.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManagerSecurityUserConfiguration.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManagerSecurityAdminConfiguration.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkSecurityPerimeter.json
+  - Microsoft.Network/stable/2021-03-01/applicationGateway.json
+  - Microsoft.Network/stable/2021-03-01/applicationSecurityGroup.json
+  - Microsoft.Network/stable/2021-03-01/availableDelegations.json
+  - Microsoft.Network/stable/2021-03-01/availableServiceAliases.json
+  - Microsoft.Network/stable/2021-03-01/azureFirewall.json
+  - Microsoft.Network/stable/2021-03-01/azureFirewallFqdnTag.json
+  - Microsoft.Network/stable/2021-03-01/azureWebCategory.json
+  - Microsoft.Network/stable/2021-03-01/bastionHost.json
+  - Microsoft.Network/stable/2021-03-01/checkDnsAvailability.json
+  - Microsoft.Network/stable/2021-03-01/cloudServiceNetworkInterface.json
+  - Microsoft.Network/stable/2021-03-01/cloudServicePublicIpAddress.json
+  - Microsoft.Network/stable/2021-03-01/customIpPrefix.json
+  - Microsoft.Network/stable/2021-03-01/ddosCustomPolicy.json
+  - Microsoft.Network/stable/2021-03-01/ddosProtectionPlan.json
+  - Microsoft.Network/stable/2021-03-01/dscpConfiguration.json
+  - Microsoft.Network/stable/2021-03-01/endpointService.json
+  - Microsoft.Network/stable/2021-03-01/expressRouteCircuit.json
+  - Microsoft.Network/stable/2021-03-01/expressRouteCrossConnection.json
+  - Microsoft.Network/stable/2021-03-01/expressRoutePort.json
+  - Microsoft.Network/stable/2021-03-01/firewallPolicy.json
+  - Microsoft.Network/stable/2021-03-01/ipAllocation.json
+  - Microsoft.Network/stable/2021-03-01/ipGroups.json
+  - Microsoft.Network/stable/2021-03-01/loadBalancer.json
+  - Microsoft.Network/stable/2021-03-01/natGateway.json
+  - Microsoft.Network/stable/2021-03-01/networkInterface.json
+  - Microsoft.Network/stable/2021-03-01/networkProfile.json
+  - Microsoft.Network/stable/2021-03-01/networkSecurityGroup.json
+  - Microsoft.Network/stable/2021-03-01/networkVirtualAppliance.json
+  - Microsoft.Network/stable/2021-03-01/networkWatcher.json
+  - Microsoft.Network/stable/2021-03-01/operation.json
+  - Microsoft.Network/stable/2021-03-01/privateEndpoint.json
+  - Microsoft.Network/stable/2021-03-01/privateLinkService.json
+  - Microsoft.Network/stable/2021-03-01/publicIpAddress.json
+  - Microsoft.Network/stable/2021-03-01/publicIpPrefix.json
+  - Microsoft.Network/stable/2021-03-01/routeFilter.json
+  - Microsoft.Network/stable/2021-03-01/routeTable.json
+  - Microsoft.Network/stable/2021-03-01/securityPartnerProvider.json
+  - Microsoft.Network/stable/2021-03-01/serviceCommunity.json
+  - Microsoft.Network/stable/2021-03-01/serviceEndpointPolicy.json
+  - Microsoft.Network/stable/2021-03-01/serviceTags.json
+  - Microsoft.Network/stable/2021-03-01/usage.json
+  - Microsoft.Network/stable/2021-03-01/virtualNetwork.json
+  - Microsoft.Network/stable/2021-03-01/virtualNetworkGateway.json
+  - Microsoft.Network/stable/2021-03-01/virtualNetworkTap.json
+  - Microsoft.Network/stable/2021-03-01/virtualRouter.json
+  - Microsoft.Network/stable/2021-03-01/virtualWan.json
+  - Microsoft.Network/stable/2021-03-01/vmssNetworkInterface.json
+  - Microsoft.Network/stable/2021-03-01/vmssPublicIpAddress.json
+  - Microsoft.Network/stable/2021-03-01/webapplicationfirewall.json
 ```
 
 ### Tag: package-2021-03-preview
@@ -2025,6 +2225,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
@@ -2068,5 +2269,3 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-

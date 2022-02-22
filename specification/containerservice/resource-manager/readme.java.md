@@ -1,4 +1,6 @@
-These settings apply only when `--java` is specified on the command line.
+## Java
+
+These settings apply only when `--java` is specified on the command line and `--tag=profile-hybrid-2020-09-01` is not specified.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
@@ -10,7 +12,11 @@ payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-containerservice
 title: ContainerServiceManagementClient
 description: "Container Service Client"
+```
 
+These settings also apply when `--tag=profile-hybrid-2020-09-01` is not specified.
+
+``` yaml $(java) && $(tag) != 'profile-hybrid-2020-09-01'
 input-file:
   - Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
   - Microsoft.ContainerService/stable/2019-08-01/location.json
@@ -37,6 +43,76 @@ batch:
   - tag: package-2021-03
   - tag: package-2021-05
   - tag: package-2021-07
+  - tag: package-2021-08
+  - tag: package-2021-09
+  - tag: package-2021-10
+  - tag: package-preview-2022-01
+  - tag: package-2022-01
+```
+
+### Tag: package-2022-01 and java
+
+These settings apply only when `--tag=package-2022-01` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2022-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2022_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2022_01_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-preview-2022-01 and java
+
+These settings apply only when `--tag=package-preview-2022-01` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-preview-2022-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2022_01_02_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2022_01_02_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2021-10 and java
+
+These settings apply only when `--tag=package-2021-10` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2021-10' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2021_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2021_10_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2021-09 and java
+
+These settings apply only when `--tag=package-2021-09` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2021-09' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2021_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2021_09_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2021-08 and java
+
+These settings apply only when `--tag=package-2021-08` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2021-08' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2021_08_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2021_08_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2021-07 and java
@@ -310,4 +386,14 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2017_07_01
 regenerate-manager: true
 generate-interface: true
+```
+
+### Tag: profile-hybrid-2020-09-01 and java
+
+These settings apply only when `--tag=profile-hybrid-2020-09-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'profile-hybrid-2020-09-01' && $(java)
+input-file:
+  - Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
 ```

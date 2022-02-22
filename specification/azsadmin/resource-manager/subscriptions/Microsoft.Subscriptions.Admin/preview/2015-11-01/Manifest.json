@@ -37,16 +37,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Unexpected Error",
-            "schema": {
-              "$ref": "Subscriptions.json#/definitions/Error"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ManifestList"
+            }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
             }
           }
         },
@@ -79,16 +79,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Unexpected Error",
-            "schema": {
-              "$ref": "Subscriptions.json#/definitions/Error"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Manifest"
+            }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
             }
           }
         }
@@ -186,7 +186,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Manifest"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "URI to next page.",
@@ -264,7 +267,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExtensionDefinition"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "URI to next page.",
@@ -321,7 +327,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceAccess"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "URI to next page.",
@@ -351,7 +360,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceType"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "URI to next page.",
@@ -509,7 +521,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AuthorizationActionMapping"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "URI to next page.",
@@ -538,7 +551,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/LinkedAccessCheck"
-          }
+          },
+          "x-ms-identifiers": [
+            "actionName",
+            "linkedType"
+          ]
         },
         "nextLink": {
           "description": "URI to next page.",
@@ -579,7 +596,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/LinkedNotificationRule"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "URI to next page.",
@@ -607,7 +625,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/LinkedOperationRule"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "URI to next page.",
@@ -709,7 +728,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApiProfile"
-          }
+          },
+          "x-ms-identifiers": [
+            "apiVersion",
+            "profileVersion"
+          ]
         },
         "nextLink": {
           "description": "URI to next page.",
@@ -738,7 +761,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceProviderEndpoint"
-          }
+          },
+          "x-ms-identifiers": [
+            "endpointUri"
+          ]
         },
         "nextLink": {
           "description": "URI to next page.",
@@ -815,7 +841,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AzureResourceHydrationAccount"
-          }
+          },
+          "x-ms-identifiers": [
+            "accountName"
+          ]
         },
         "nextLink": {
           "description": "URI to next page.",
@@ -853,7 +882,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/FanoutLinkedNotificationRule"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "URI to next page.",

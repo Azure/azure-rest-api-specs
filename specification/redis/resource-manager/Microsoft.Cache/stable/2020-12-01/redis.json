@@ -1663,6 +1663,9 @@
               "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
+          "204": {
+            "description": "No Content -- The private endpoint connection does not exist."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1822,6 +1825,58 @@
       "properties": {
         "redisConfiguration": {
           "type": "object",
+          "properties": {
+            "rdb-backup-enabled": {
+              "type": "string",
+              "description": "Specifies whether the rdb backup is enabled"
+            },
+            "rdb-backup-frequency": {
+              "type": "string",
+              "description": "Specifies the frequency for creating rdb backup"
+            },
+            "rdb-backup-max-snapshot-count": {
+              "type": "string",
+              "description": "Specifies the maximum number of snapshots for rdb backup"
+            },
+            "rdb-storage-connection-string": {
+              "type": "string",
+              "description": "The storage account connection string for storing rdb file"
+            },
+            "aof-storage-connection-string-0": {
+              "type": "string",
+              "description": "First storage account connection string"
+            },
+            "aof-storage-connection-string-1": {
+              "type": "string",
+              "description": "Second storage account connection string"
+            },
+            "maxfragmentationmemory-reserved": {
+              "type": "string",
+              "description": "Value in megabytes reserved for fragmentation per shard"
+            },
+            "maxmemory-policy": {
+              "type": "string",
+              "description": "The eviction strategy used when your data won't fit within its memory limit."
+            },
+            "maxmemory-reserved": {
+              "type": "string",
+              "description": "Value in megabytes reserved for non-cache usage per shard e.g. failover."
+            },
+            "maxmemory-delta": {
+              "type": "string",
+              "description": "Value in megabytes reserved for non-cache usage per shard e.g. failover."
+            },
+            "maxclients": {
+              "type": "string",
+              "description": "The max clients config",
+              "readOnly": true
+            },
+            "zonal-configuration": {
+              "type": "string",
+              "description": "Zonal Configuration",
+              "readOnly": true
+            }
+          },
           "additionalProperties": {
             "type": "string"
           },
@@ -1833,6 +1888,7 @@
         },
         "enableNonSslPort": {
           "type": "boolean",
+          "default": false,
           "description": "Specifies whether the non-ssl Redis server port (6379) is enabled."
         },
         "replicasPerMaster": {
@@ -1876,6 +1932,7 @@
             "Enabled",
             "Disabled"
           ],
+          "default": "Enabled",
           "type": "string",
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
@@ -1900,7 +1957,11 @@
         "staticIP": {
           "type": "string",
           "pattern": "^\\d+\\.\\d+\\.\\d+\\.\\d+$",
-          "description": "Static IP address. Required when deploying a Redis cache inside an existing Azure Virtual Network."
+          "description": "Static IP address. Optionally, may be specified when deploying a Redis cache inside an existing Azure Virtual Network; auto assigned by default.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -2367,6 +2428,11 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ScheduleEntries",
           "description": "List of patch schedules for a Redis cache."
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
         }
       },
       "required": [
@@ -2472,7 +2538,11 @@
         },
         "linkedRedisCacheLocation": {
           "type": "string",
-          "description": "Location of the linked redis cache."
+          "description": "Location of the linked redis cache.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "serverRole": {
           "type": "string",

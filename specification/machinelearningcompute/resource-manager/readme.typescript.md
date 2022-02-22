@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-machinelearningcompute"
   output-folder: "$(typescript-sdks-folder)/sdk/machinelearningcompute/arm-machinelearningcompute"
-  clear-output-folder: true
   generate-metadata: true
 ```

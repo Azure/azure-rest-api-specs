@@ -332,6 +332,83 @@
         }
       }
     },
+    "/indexers('{indexerName}')/search.resetdocs": {
+      "post": {
+        "tags": [
+          "Indexers"
+        ],
+        "operationId": "Indexers_ResetDocs",
+        "x-ms-examples": {
+          "SearchServiceResetDocs": {
+            "$ref": "./examples/SearchServiceResetDocs.json"
+          }
+        },
+        "description": "Resets specific documents in the datasource to be selectively re-ingested by the indexer.",
+        "externalDocs": {
+          "url": "https://aka.ms/reset-documents"
+        },
+        "parameters": [
+          {
+            "name": "indexerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the indexer to reset documents for."
+          },
+          {
+            "name": "keysOrIds",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "x-ms-client-name": "DocumentKeysOrIds",
+              "properties": {
+                "documentKeys": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "document keys to be reset"
+                },
+                "datasourceDocumentIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "datasource document identifiers to be reset"
+                }
+              }
+            }
+          },
+          {
+            "name": "overwrite",
+            "in": "query",
+            "required": false,
+            "default": false,
+            "type": "boolean",
+            "description": "If false, keys or ids will be appended to existing ones. If true, only the keys or ids in this payload will be queued to be re-ingested."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        }
+      }
+    },
     "/indexers('{indexerName}')/search.run": {
       "post": {
         "tags": [
@@ -424,10 +501,10 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/DisableCacheReprocessingChangeDetectionParameter"
+            "$ref": "#/parameters/IgnoreResetRequirementsParameter"
           },
           {
-            "$ref": "#/parameters/IgnoreResetRequirementsParameter"
+            "$ref": "#/parameters/DisableCacheReprocessingChangeDetectionParameter"
           }
         ],
         "x-ms-request-id": "request-id",
@@ -738,10 +815,10 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/DisableCacheReprocessingChangeDetectionParameter"
+            "$ref": "#/parameters/IgnoreResetRequirementsParameter"
           },
           {
-            "$ref": "#/parameters/IgnoreResetRequirementsParameter"
+            "$ref": "#/parameters/DisableCacheReprocessingChangeDetectionParameter"
           }
         ],
         "x-ms-request-id": "request-id",
@@ -947,6 +1024,69 @@
             "schema": {
               "$ref": "#/definitions/SearchIndexerSkillset"
             }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        }
+      }
+    },
+    "/skillsets('{skillsetName}')/search.resetskills": {
+      "post": {
+        "tags": [
+          "Skillsets"
+        ],
+        "operationId": "Skillsets_ResetSkills",
+        "x-ms-examples": {
+          "SearchServiceResetSkills": {
+            "$ref": "./examples/SearchServiceResetSkills.json"
+          }
+        },
+        "description": "Reset an existing skillset in a search service.",
+        "externalDocs": {
+          "url": "https://aka.ms/reset-skills"
+        },
+        "parameters": [
+          {
+            "name": "skillsetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the skillset to reset."
+          },
+          {
+            "name": "skillNames",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "x-ms-client-name": "SkillNames",
+              "properties": {
+                "skillNames": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "the names of skills to be reset."
+                }
+              }
+            },
+            "description": "The names of skills to reset."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "204": {
+            "description": "The skills in the skillset are successfully reset."
           },
           "default": {
             "description": "Error response.",
@@ -1592,6 +1732,263 @@
         }
       }
     },
+    "/aliases": {
+      "post": {
+        "tags": [
+          "Aliases"
+        ],
+        "operationId": "Aliases_Create",
+        "x-ms-examples": {
+          "SearchServiceCreateAlias": {
+            "$ref": "./examples/SearchServiceCreateAlias.json"
+          }
+        },
+        "description": "Creates a new search alias.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/Create-Alias"
+        },
+        "parameters": [
+          {
+            "name": "alias",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchAlias"
+            },
+            "description": "The definition of the alias to create."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SearchAlias"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Aliases"
+        ],
+        "operationId": "Aliases_List",
+        "x-ms-examples": {
+          "SearchServiceListAliases": {
+            "$ref": "./examples/SearchServiceListAliases.json"
+          }
+        },
+        "description": "Lists all aliases available for a search service.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/List-Aliases"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ListAliasesResult"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/aliases('{aliasName}')": {
+      "put": {
+        "tags": [
+          "Aliases"
+        ],
+        "operationId": "Aliases_CreateOrUpdate",
+        "x-ms-examples": {
+          "SearchServiceCreateOrUpdateAlias": {
+            "$ref": "./examples/SearchServiceCreateOrUpdateAlias.json"
+          }
+        },
+        "description": "Creates a new search alias or updates an alias if it already exists.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/Update-Alias"
+        },
+        "parameters": [
+          {
+            "name": "aliasName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The definition of the alias to create or update."
+          },
+          {
+            "name": "alias",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchAlias"
+            },
+            "description": "The definition of the alias to create or update."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/PreferHeaderParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SearchAlias"
+            }
+          },
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SearchAlias"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Aliases"
+        ],
+        "operationId": "Aliases_Delete",
+        "x-ms-examples": {
+          "SearchServiceDeleteAlias": {
+            "$ref": "./examples/SearchServiceDeleteAlias.json"
+          }
+        },
+        "description": "Deletes a search alias and its associated mapping to an index. This operation is permanent, with no recovery option. The mapped index is untouched by this operation.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/Delete-Alias"
+        },
+        "parameters": [
+          {
+            "name": "aliasName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the alias to delete."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "404": {
+            "description": ""
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Aliases"
+        ],
+        "operationId": "Aliases_Get",
+        "x-ms-examples": {
+          "SearchServiceGetAlias": {
+            "$ref": "./examples/SearchServiceGetAlias.json"
+          }
+        },
+        "description": "Retrieves an alias definition.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/Get-Alias"
+        },
+        "parameters": [
+          {
+            "name": "aliasName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the alias to retrieve."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SearchAlias"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        }
+      }
+    },
     "/servicestats": {
       "get": {
         "tags": [
@@ -1639,11 +2036,15 @@
         },
         "analyzer": {
           "$ref": "#/definitions/LexicalAnalyzerName",
-          "description": "The name of the analyzer to use to break the given text. If this parameter is not specified, you must specify a tokenizer instead. The tokenizer and analyzer parameters are mutually exclusive."
+          "description": "The name of the analyzer to use to break the given text."
         },
         "tokenizer": {
           "$ref": "#/definitions/LexicalTokenizerName",
-          "description": "The name of the tokenizer to use to break the given text. If this parameter is not specified, you must specify an analyzer instead. The tokenizer and analyzer parameters are mutually exclusive."
+          "description": "The name of the tokenizer to use to break the given text."
+        },
+        "normalizer": {
+          "$ref": "#/definitions/LexicalNormalizerName",
+          "description": "The name of the normalizer to use to normalize the given text."
         },
         "tokenFilters": {
           "type": "array",
@@ -1651,7 +2052,7 @@
             "$ref": "#/definitions/TokenFilterName",
             "x-nullable": false
           },
-          "description": "An optional list of token filters to use when breaking the given text. This parameter can only be set when using the tokenizer parameter."
+          "description": "An optional list of token filters to use when breaking the given text."
         },
         "charFilters": {
           "type": "array",
@@ -1659,7 +2060,7 @@
             "$ref": "#/definitions/CharFilterName",
             "x-nullable": false
           },
-          "description": "An optional list of character filters to use when breaking the given text. This parameter can only be set when using the tokenizer parameter."
+          "description": "An optional list of character filters to use when breaking the given text."
         }
       },
       "required": [
@@ -2934,6 +3335,7 @@
       }
     },
     "LexicalNormalizer": {
+      "discriminator": "@odata.type",
       "properties": {
         "@odata.type": {
           "type": "string",
@@ -5640,6 +6042,82 @@
       },
       "description": "Ranking function based on the Okapi BM25 similarity algorithm. BM25 is a TF-IDF-like algorithm that includes length normalization (controlled by the 'b' parameter) as well as term frequency saturation (controlled by the 'k1' parameter)."
     },
+    "SemanticSettings": {
+      "properties": {
+        "configurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SemanticConfiguration"
+          },
+          "description": "The semantic configurations for the index."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/semantic-search-overview"
+      },
+      "description": "Defines parameters for a search index that influence semantic capabilities."
+    },
+    "SemanticConfiguration": {
+      "properties": {
+        "name": {
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/rest/api/searchservice/Naming-rules"
+          },
+          "type": "string",
+          "description": "The name of the semantic configuration.",
+          "x-nullable": false
+        },
+        "prioritizedFields": {
+          "$ref": "#/definitions/PrioritizedFields",
+          "x-nullable": false,
+          "description": "Describes the title, content, and keyword fields to be used for semantic ranking, captions, highlights, and answers. At least one of the three sub properties (titleField, prioritizedKeywordsFields and prioritizedContentFields) need to be set."
+        }
+      },
+      "required": [
+        "name",
+        "prioritizedFields"
+      ],
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/semantic-search-overview"
+      },
+      "description": "Defines a specific configuration to be used in the context of semantic capabilities."
+    },
+    "PrioritizedFields": {
+      "properties": {
+        "titleField": {
+          "$ref": "#/definitions/SemanticField",
+          "description": "Defines the title field to be used for semantic ranking, captions, highlights, and answers. If you don't have a title field in your index, leave this blank."
+        },
+        "prioritizedContentFields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SemanticField"
+          },
+          "description": "Defines the content fields to be used for semantic ranking, captions, highlights, and answers. For the best result, the selected fields should contain text in natural language form. The order of the fields in the array represents their priority. Fields with lower priority may get truncated if the content is long."
+        },
+        "prioritizedKeywordsFields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SemanticField"
+          },
+          "description": "Defines the keyword fields to be used for semantic ranking, captions, highlights, and answers. For the best result, the selected fields should contain a list of keywords. The order of the fields in the array represents their priority. Fields with lower priority may get truncated if the content is long."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/semantic-search-overview"
+      },
+      "description": "Describes the title, content, and keywords fields to be used for semantic ranking, captions, highlights, and answers."
+    },
+    "SemanticField": {
+      "properties": {
+        "fieldName": {
+          "type": "string",
+          "description": "",
+          "x-nullable": false
+        }
+      },
+      "description": "A field that is used as part of the semantic configuration."
+    },
     "DataSourceCredentials": {
       "properties": {
         "connectionString": {
@@ -6204,6 +6682,7 @@
         },
         "parameters": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
             "type": "object"
           },
@@ -6434,6 +6913,16 @@
           "readOnly": true,
           "description": "The outcome of this indexer execution."
         },
+        "statusDetail": {
+          "$ref": "#/definitions/IndexerExecutionStatusDetail",
+          "readOnly": true,
+          "description": "The outcome of this indexer execution."
+        },
+        "currentState": {
+          "$ref": "#/definitions/IndexerCurrentState",
+          "readOnly": true,
+          "description": "All of the state that defines and dictates the indexer's current execution."
+        },
         "errorMessage": {
           "type": "string",
           "readOnly": true,
@@ -6604,6 +7093,95 @@
       },
       "x-nullable": false,
       "description": "Represents the overall indexer status."
+    },
+    "IndexerExecutionStatusDetail": {
+      "type": "string",
+      "enum": [
+        "resetDocs"
+      ],
+      "x-ms-enum": {
+        "name": "IndexerExecutionStatusDetail",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "resetDocs",
+            "name": "ResetDocs",
+            "description": "Indicates that the reset that occurred was for a call to ResetDocs."
+          }
+        ]
+      },
+      "description": "Details the status of an individual indexer execution."
+    },
+    "IndexerCurrentState": {
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/IndexingMode",
+          "readOnly": true,
+          "description": "The mode the indexer is running in."
+        },
+        "allDocsInitialChangeTrackingState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Change tracking state used when indexing starts on all documents in the datasource."
+        },
+        "allDocsFinalChangeTrackingState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Change tracking state value when indexing finishes on all documents in the datasource."
+        },
+        "resetDocsInitialChangeTrackingState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Change tracking state used when indexing starts on select, reset documents in the datasource."
+        },
+        "resetDocsFinalChangeTrackingState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Change tracking state value when indexing finishes on select, reset documents in the datasource."
+        },
+        "resetDocumentKeys": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "The list of document keys that have been reset. The document key is the document's unique identifier for the data in the search index. The indexer will prioritize selectively re-ingesting these keys."
+        },
+        "resetDatasourceDocumentIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "The list of datasource document ids that have been reset. The datasource document id is the unique identifier for the data in the datasource. The indexer will prioritize selectively re-ingesting these ids."
+        }
+      },
+      "description": "Represents all of the state that defines and dictates the indexer's current execution."
+    },
+    "IndexingMode": {
+      "type": "string",
+      "enum": [
+        "indexingAllDocs",
+        "indexingResetDocs"
+      ],
+      "x-ms-enum": {
+        "name": "IndexingMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "indexingAllDocs",
+            "name": "IndexingAllDocs",
+            "description": "The indexer is indexing all documents in the datasource."
+          },
+          {
+            "value": "indexingResetDocs",
+            "name": "indexingResetDocs",
+            "description": "The indexer is indexing selective, reset documents in the datasource. The documents being indexed are defined on indexer status."
+          }
+        ]
+      },
+      "x-nullable": false,
+      "description": "Represents the mode the indexer is executing in."
     },
     "SearchIndexerLimits": {
       "properties": {
@@ -7209,6 +7787,15 @@
             "url": "https://docs.microsoft.com/azure/search/index-ranking-similarity"
           }
         },
+        "semantic": {
+          "$ref": "#/definitions/SemanticSettings",
+          "description": "Defines parameters for a search index that influence semantic capabilities.",
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/azure/search/semantic-search-overview"
+          },
+          "x-ms-client-name": "SemanticSettings",
+          "x-nullable": true
+        },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
           "type": "string",
@@ -7220,6 +7807,34 @@
         "fields"
       ],
       "description": "Represents a search index definition, which describes the fields and search behavior of an index."
+    },
+    "SearchAlias": {
+      "properties": {
+        "name": {
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/rest/api/searchservice/Naming-rules"
+          },
+          "type": "string",
+          "description": "The name of the alias."
+        },
+        "indexes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The name of the index this alias maps to. Only one index name may be specified."
+        },
+        "@odata.etag": {
+          "x-ms-client-name": "ETag",
+          "type": "string",
+          "description": "The ETag of the alias."
+        }
+      },
+      "required": [
+        "name",
+        "indexes"
+      ],
+      "description": "Represents an index alias, which describes a mapping from the alias name to an index. The alias name can be used in place of the index name for supported operations."
     },
     "GetIndexStatisticsResult": {
       "properties": {
@@ -7260,6 +7875,23 @@
         "value"
       ],
       "description": "Response from a List Indexes request. If successful, it includes the full definitions of all indexes."
+    },
+    "ListAliasesResult": {
+      "properties": {
+        "value": {
+          "x-ms-client-name": "Aliases",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SearchAlias"
+          },
+          "description": "The aliases in the Search service."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "Response from a List Aliases request. If successful, it includes the associated index mappings for all aliases."
     },
     "SearchIndexerSkillset": {
       "properties": {
@@ -8242,6 +8874,55 @@
       },
       "description": "A dictionary of http request headers."
     },
+    "AmlSkill": {
+      "x-ms-client-name": "AzureMachineLearningSkill",
+      "x-ms-discriminator-value": "#Microsoft.Skills.Custom.AmlSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerSkill"
+        }
+      ],
+      "properties": {
+        "uri": {
+          "x-ms-client-name": "ScoringUri",
+          "type": "string",
+          "x-nullable": true,
+          "description": "(Required for no authentication or key authentication) The scoring URI of the AML service to which the JSON payload will be sent. Only the https URI scheme is allowed."
+        },
+        "key": {
+          "x-ms-client-name": "AuthenticationKey",
+          "type": "string",
+          "x-nullable": true,
+          "description": "(Required for key authentication) The key for the AML service."
+        },
+        "resourceId": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "(Required for token authentication). The Azure Resource Manager resource ID of the AML service. It should be in the format subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.MachineLearningServices/workspaces/{workspace-name}/services/{service_name}."
+        },
+        "timeout": {
+          "type": "string",
+          "format": "duration",
+          "x-nullable": true,
+          "description": "(Optional) When specified, indicates the timeout for the http client making the API call."
+        },
+        "region": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "(Optional for token authentication). The region the AML service is deployed in."
+        },
+        "degreeOfParallelism": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "description": "(Optional) When specified, indicates the number of calls the indexer will make in parallel to the endpoint you have provided. You can decrease this value if your endpoint is failing under too high of a request load, or raise it if your endpoint is able to accept more requests and you would like an increase in the performance of the indexer. If not set, a default value of 5 is used. The degreeOfParallelism can be set to a maximum of 10 and a minimum of 1."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/azure/search/cognitive-search-aml-skill"
+      },
+      "description": "The AML skill allows you to extend AI enrichment with a custom Azure Machine Learning (AML) model. Once an AML model is trained and deployed, an AML skill integrates it into AI enrichment."
+    },
     "ListSkillsetsResult": {
       "properties": {
         "value": {
@@ -8646,7 +9327,8 @@
         "ro",
         "sr-Cyrl",
         "sr-Latn",
-        "sk"
+        "sk",
+        "unk"
       ],
       "x-ms-enum": {
         "name": "OcrSkillLanguage",
@@ -8755,6 +9437,10 @@
           {
             "value": "sk",
             "description": "Slovak"
+          },
+          {
+            "value": "unk",
+            "description": "Unknown.  If the language is explicitly set to \"unk\", the language will be auto-detected."
           }
         ]
       },
@@ -9603,6 +10289,11 @@
     },
     "ServiceCounters": {
       "properties": {
+        "aliasesCount": {
+          "x-ms-client-name": "aliasCounter",
+          "$ref": "#/definitions/ResourceCounter",
+          "description": "Total number of aliases."
+        },
         "documentCount": {
           "x-ms-client-name": "documentCounter",
           "$ref": "#/definitions/ResourceCounter",
@@ -9792,6 +10483,7 @@
     },
     "IgnoreResetRequirementsParameter": {
       "name": "ignoreResetRequirements",
+      "x-ms-client-name": "skipIndexerResetRequirementForCache",
       "in": "query",
       "required": false,
       "type": "boolean",

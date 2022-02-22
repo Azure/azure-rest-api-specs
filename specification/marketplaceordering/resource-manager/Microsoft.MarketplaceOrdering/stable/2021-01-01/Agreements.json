@@ -486,6 +486,10 @@
             "operation": {
               "description": "Operation type: Get Agreement, Sign Agreement, Cancel Agreement etc.",
               "type": "string"
+            },
+            "description": {
+              "description": "Operation description.",
+              "type": "string"
             }
           }
         }
@@ -499,6 +503,9 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of Microsoft.MarketplaceOrdering operations supported by the Microsoft.MarketplaceOrdering resource provider."
         },
         "nextLink": {

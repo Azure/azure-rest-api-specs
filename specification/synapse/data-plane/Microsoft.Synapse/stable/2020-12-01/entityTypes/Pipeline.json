@@ -652,6 +652,10 @@
         "useBinaryTransfer": {
           "type": "boolean",
           "description": "Specify whether to use binary transfer mode for FTP stores."
+        },
+        "disableChunking": {
+          "type": "object",
+          "description": "If true, disable parallel reading within each file. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       }
     },
@@ -699,6 +703,10 @@
         "modifiedDatetimeEnd": {
           "type": "object",
           "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "disableChunking": {
+          "type": "object",
+          "description": "If true, disable parallel reading within each file. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       }
     },
@@ -1157,17 +1165,21 @@
       ],
       "properties": {
         "filePattern": {
-          "description": "File pattern of JSON. This setting controls the way a collection of JSON objects will be treated. The default value is 'setOfObjects'. It is case-sensitive.",
-          "type": "string",
-          "enum": [
-            "setOfObjects",
-            "arrayOfObjects"
-          ],
-          "x-ms-enum": {
-            "name": "JsonWriteFilePattern",
-            "modelAsString": true
-          }
+          "type": "object",
+          "description": "File pattern of JSON. This setting controls the way a collection of JSON objects will be treated. The default value is 'setOfObjects'. It is case-sensitive."
         }
+      }
+    },
+    "JsonWriteFilePattern": {
+      "description": "All available filePatterns.",
+      "type": "string",
+      "enum": [
+        "setOfObjects",
+        "arrayOfObjects"
+      ],
+      "x-ms-enum": {
+        "name": "JsonWriteFilePattern",
+        "modelAsString": true
       }
     },
     "AvroSource": {
@@ -2270,6 +2282,44 @@
         }
       }
     },
+    "AmazonRdsForSqlServerSource": {
+      "description": "A copy activity Amazon RDS for SQL Server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "sqlReaderQuery": {
+          "type": "object",
+          "description": "SQL reader query. Type: string (or Expression with resultType string)."
+        },
+        "sqlReaderStoredProcedureName": {
+          "type": "object",
+          "description": "Name of the stored procedure for a SQL Database source. This cannot be used at the same time as SqlReaderQuery. Type: string (or Expression with resultType string)."
+        },
+        "storedProcedureParameters": {
+          "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StoredProcedureParameter"
+          }
+        },
+        "produceAdditionalTypes": {
+          "description": "Which additional types to produce.",
+          "type": "object"
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
+          "type": "object"
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for Sql source partitioning.",
+          "$ref": "#/definitions/SqlPartitionSettings"
+        }
+      }
+    },
     "AzureSqlSource": {
       "description": "A copy activity Azure SQL source.",
       "type": "object",
@@ -2551,6 +2601,75 @@
             "description": "Type: string (or Expression with resultType string)."
           },
           "description": "Names of the physical partitions of Oracle table. "
+        },
+        "partitionColumnName": {
+          "type": "object",
+          "description": "The name of the column in integer type that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        },
+        "partitionUpperBound": {
+          "type": "object",
+          "description": "The maximum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        },
+        "partitionLowerBound": {
+          "type": "object",
+          "description": "The minimum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "AmazonRdsForOracleSource": {
+      "description": "A copy activity AmazonRdsForOracle source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "oracleReaderQuery": {
+          "type": "object",
+          "description": "AmazonRdsForOracle reader query. Type: string (or Expression with resultType string)."
+        },
+        "queryTimeout": {
+          "type": "object",
+          "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "partitionOption": {
+          "type": "object",
+          "description": "The partition mechanism that will be used for AmazonRdsForOracle read in parallel. Type: string (or Expression with resultType string)."
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for AmazonRdsForOracle source partitioning.",
+          "$ref": "#/definitions/AmazonRdsForOraclePartitionSettings"
+        },
+        "additionalColumns": {
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
+        }
+      }
+    },
+    "AmazonRdsForOraclePartitionOption": {
+      "type": "string",
+      "enum": [
+        "None",
+        "PhysicalPartitionsOfTable",
+        "DynamicRange"
+      ],
+      "x-ms-enum": {
+        "name": "AmazonRdsForOraclePartitionOption",
+        "modelAsString": true
+      }
+    },
+    "AmazonRdsForOraclePartitionSettings": {
+      "description": "The settings that will be leveraged for AmazonRdsForOracle source partitioning.",
+      "type": "object",
+      "properties": {
+        "partitionNames": {
+          "type": "object",
+          "items": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          },
+          "description": "Names of the physical partitions of AmazonRdsForOracle table. "
         },
         "partitionColumnName": {
           "type": "object",
@@ -3650,7 +3769,8 @@
       "properties": {
         "value": {
           "type": "object",
-          "description": "Stored procedure parameter value. Type: string (or Expression with resultType string)."
+          "description": "Stored procedure parameter value. Type: string (or Expression with resultType string).",
+          "x-nullable": true
         },
         "type": {
           "description": "Stored procedure parameter type.",
@@ -3672,6 +3792,35 @@
       ],
       "x-ms-enum": {
         "name": "StoredProcedureParameterType",
+        "modelAsString": true
+      }
+    },
+    "NotebookParameter": {
+      "description": "Notebook parameter.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "object",
+          "description": "Notebook parameter value. Type: string (or Expression with resultType string).",
+          "x-nullable": true
+        },
+        "type": {
+          "description": "Notebook parameter type.",
+          "$ref": "#/definitions/NotebookParameterType"
+        }
+      }
+    },
+    "NotebookParameterType": {
+      "description": "Notebook parameter type.",
+      "type": "string",
+      "enum": [
+        "string",
+        "int",
+        "float",
+        "bool"
+      ],
+      "x-ms-enum": {
+        "name": "NotebookParameterType",
         "modelAsString": true
       }
     },
@@ -6931,6 +7080,152 @@
         "dataflow"
       ]
     },
+    "ScriptActivity": {
+      "description": "Script activity type.",
+      "x-ms-discriminator-value": "Script",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "Script activity properties.",
+          "$ref": "#/definitions/ScriptActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties",
+        "linkedServiceName"
+      ]
+    },
+    "ScriptActivityTypeProperties": {
+      "description": "Script activity properties.",
+      "type": "object",
+      "properties": {
+        "scripts": {
+          "type": "array",
+          "description": "Array of script blocks. Type: array.",
+          "items": {
+            "$ref": "#/definitions/ScriptActivityScriptBlock"
+          }
+        },
+        "logSettings": {
+          "description": "Log settings of script activity.",
+          "type": "object",
+          "properties": {
+            "logDestination": {
+              "x-ms-enum": {
+                "name": "ScriptActivityLogDestination",
+                "modelAsString": true
+              },
+              "enum": [
+                "ActivityOutput",
+                "ExternalStore"
+              ],
+              "type": "string",
+              "description": "The destination of logs. Type: string."
+            },
+            "logLocationSettings": {
+              "description": "Log location settings customer needs to provide when enabling log.",
+              "$ref": "#/definitions/LogLocationSettings"
+            }
+          },
+          "required": [
+            "logDestination"
+          ]
+        }
+      }
+    },
+    "ScriptActivityScriptBlock": {
+      "description": "Script block of scripts.",
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "object",
+          "description": "The query text. Type: string (or Expression with resultType string)."
+        },
+        "type": {
+          "x-ms-enum": {
+            "name": "ScriptType",
+            "modelAsString": true
+          },
+          "enum": [
+            "Query",
+            "NonQuery"
+          ],
+          "type": "string",
+          "description": "The type of the query. Type: string."
+        },
+        "parameters": {
+          "type": "array",
+          "description": "Array of script parameters. Type: array.",
+          "items": {
+            "$ref": "#/definitions/ScriptActivityParameter"
+          }
+        }
+      },
+      "required": [
+        "text",
+        "type"
+      ]
+    },
+    "ScriptActivityParameter": {
+      "description": "Parameters of a script block.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "object",
+          "description": "The name of the parameter. Type: string (or Expression with resultType string)."
+        },
+        "type": {
+          "description": "The type of the parameter.",
+          "type": "string",
+          "enum": [
+            "Boolean",
+            "DateTime",
+            "DateTimeOffset",
+            "Decimal",
+            "Double",
+            "Guid",
+            "Int16",
+            "Int32",
+            "Int64",
+            "Single",
+            "String",
+            "Timespan"
+          ],
+          "x-ms-enum": {
+            "name": "ScriptActivityParameterType",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "description": "The value of the parameter.",
+          "type": "object"
+        },
+        "direction": {
+          "description": "The direction of the parameter.",
+          "type": "string",
+          "enum": [
+            "Input",
+            "Output",
+            "InputOutput"
+          ],
+          "x-ms-enum": {
+            "name": "ScriptActivityParameterDirection",
+            "modelAsString": true
+          }
+        },
+        "size": {
+          "description": "The size of the output direction parameter.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
     "SharePointOnlineListSource": {
       "description": "A copy activity source for sharePoint online list source.",
       "type": "object",
@@ -7059,9 +7354,16 @@
           "description": "Synapse notebook reference.",
           "$ref": "../artifacts.json#/definitions/SynapseNotebookReference"
         },
+        "sparkPool": {
+          "description": "The name of the big data pool which will be used to execute the notebook.",
+          "$ref": "../artifacts.json#/definitions/BigDataPoolParametrizationReference"
+        },
         "parameters": {
           "description": "Notebook parameters.",
-          "$ref": "../artifacts.json#/definitions/ParameterValueSpecification"
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/NotebookParameter"
+          }
         }
       },
       "required": [
@@ -7095,6 +7397,49 @@
         "sparkJob": {
           "description": "Synapse spark job reference.",
           "$ref": "../artifacts.json#/definitions/SynapseSparkJobReference"
+        },
+        "args": {
+          "x-ms-client-name": "arguments",
+          "description": "User specified arguments to SynapseSparkJobDefinitionActivity.",
+          "type": "array",
+          "items": {
+            "description": "Type: string (or Expression with resultType string)."
+          }
+        },
+        "file": {
+          "type": "object",
+          "description": "The main file used for the job, which will override the 'file' of the spark job definition you provide. Type: string (or Expression with resultType string)."
+        },
+        "className": {
+          "type": "object",
+          "description": "The fully-qualified identifier or the main class that is in the main definition file, which will override the 'className' of the spark job definition you provide. Type: string (or Expression with resultType string)."
+        },
+        "files": {
+          "description": "Additional files used for reference in the main definition file, which will override the 'files' of the spark job definition you provide.",
+          "type": "array",
+          "items": {
+            "description": "Type: string (or Expression with resultType string)."
+          }
+        },
+        "targetBigDataPool": {
+          "$ref": "../artifacts.json#/definitions/BigDataPoolParametrizationReference",
+          "description": "The name of the big data pool which will be used to execute the spark batch job, which will override the 'targetBigDataPool' of the spark job definition you provide."
+        },
+        "executorSize": {
+          "type": "object",
+          "description": "Number of core and memory to be used for executors allocated in the specified Spark pool for the job, which will be used for overriding 'executorCores' and 'executorMemory' of the spark job definition you provide. Type: string (or Expression with resultType string)."
+        },
+        "conf": {
+          "type": "object",
+          "description": "Spark configuration properties, which will override the 'conf' of the spark job definition you provide."
+        },
+        "driverSize": {
+          "type": "object",
+          "description": "Number of core and memory to be used for driver allocated in the specified Spark pool for the job, which will be used for overriding 'driverCores' and 'driverMemory' of the spark job definition you provide. Type: string (or Expression with resultType string)."
+        },
+        "numExecutors": {
+          "description": "Number of executors to launch for this job, which will override the 'numExecutors' of the spark job definition you provide.",
+          "type": "integer"
         }
       },
       "required": [

@@ -26,7 +26,7 @@ These are the global settings for the extendedLocation.
 
 ```yaml
 openapi-type: arm
-tag: package-2021-03-15-preview
+tag: package-2021-08-15
 ```
 
 ### Tag: package-2021-03-15-preview
@@ -36,6 +36,25 @@ These settings apply only when `--tag=package-2021-03-15-preview` is specified o
 ```yaml $(tag) == 'package-2021-03-15-preview'
 input-file:
   - Microsoft.ExtendedLocation/preview/2021-03-15-preview/customlocations.json
+```
+
+### Tag: package-2021-08-15
+
+These settings apply only when `--tag=package-2021-08-15` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-08-15'
+input-file:
+  - Microsoft.ExtendedLocation/stable/2021-08-15/customlocations.json
+```
+
+
+### Tag: package-2021-08-31-preview
+
+These settings apply only when `--tag=package-2021-08-31-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-08-31-preview'
+input-file:
+  - Microsoft.ExtendedLocation/preview/2021-08-31-preview/customlocations.json
 ```
 
 ---
@@ -52,6 +71,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
