@@ -202,6 +202,9 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineSize"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of virtual machine sizes."
         }
       },
@@ -842,6 +845,9 @@
           "items": {
             "$ref": "#/definitions/DataDisk"
           },
+          "x-ms-identifiers": [
+            "lun"
+          ],
           "description": "Specifies the parameters that are used to add a data disk to a virtual machine. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview)."
         }
       },
@@ -919,6 +925,9 @@
           "items": {
             "$ref": "#/definitions/VMGalleryApplication"
           },
+          "x-ms-identifiers": [
+            "packageReferenceId"
+          ],
           "description": "Specifies the gallery applications that should be made available to the VM/VMSS"
         }
       },
@@ -1008,6 +1017,7 @@
           "items": {
             "$ref": "#/definitions/WinRMListener"
           },
+          "x-ms-identifiers": [],
           "description": "The list of Windows Remote Management listeners"
         }
       },
@@ -1032,6 +1042,7 @@
           "items": {
             "$ref": "#/definitions/AdditionalUnattendContent"
           },
+          "x-ms-identifiers": [],
           "description": "Specifies additional base-64 encoded XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup."
         },
         "patchSettings": {
@@ -1065,6 +1076,9 @@
           "items": {
             "$ref": "#/definitions/SshPublicKey"
           },
+          "x-ms-identifiers": [
+            "path"
+          ],
           "description": "The list of SSH public keys used to authenticate with linux based VMs."
         }
       },
@@ -1115,6 +1129,9 @@
           "items": {
             "$ref": "#/definitions/VaultCertificate"
           },
+          "x-ms-identifiers": [
+            "certificateUrl"
+          ],
           "description": "The list of key vault references in SourceVault which contain certificates."
         }
       },
@@ -1151,6 +1168,9 @@
           "items": {
             "$ref": "#/definitions/VaultSecretGroup"
           },
+          "x-ms-identifiers": [
+            "sourceVault/id"
+          ],
           "description": "Specifies set of certificates that should be installed onto the virtual machine. To install certificates on a virtual machine it is recommended to use the [Azure Key Vault virtual machine extension for Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux) or the [Azure Key Vault virtual machine extension for Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows)."
         },
         "allowExtensionOperations": {
@@ -1253,6 +1273,9 @@
           "items": {
             "$ref": "./virtualMachine.json#/definitions/VirtualMachineNetworkInterfaceConfiguration"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "Specifies the networking configurations that will be used to create the virtual machine networking resources."
         }
       },
@@ -1326,6 +1349,9 @@
           "items": {
             "$ref": "#/definitions/DiskEncryptionSettings"
           },
+          "x-ms-identifiers": [
+            "diskEncryptionKey/sourceVault/id"
+          ],
           "description": "Specifies the encryption settings for the OS Disk. <br><br> Minimum api-version: 2015-06-15"
         },
         "statuses": {
@@ -1333,6 +1359,7 @@
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
+          "x-ms-identifiers": [],
           "description": "The resource status information."
         }
       },
