@@ -478,7 +478,7 @@
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "Kind",
+            "name": "DecisionRuleKind",
             "modelAsString": true
           }
         },
@@ -655,7 +655,16 @@
       "properties": {
         "provisioningState": {
           "description": "The provisioning state of role",
-          "type": "string"
+          "enum": [
+            "Deprecated",
+            "Provisioned",
+            "New"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         },
         "roleType": {
           "description": "The type of role",
