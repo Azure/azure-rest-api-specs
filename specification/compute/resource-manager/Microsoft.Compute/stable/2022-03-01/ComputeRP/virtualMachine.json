@@ -1870,6 +1870,7 @@
           "items": {
             "$ref": "./computeRPCommon.json#/definitions/InstanceViewStatus"
           },
+          "x-ms-identifiers": [],
           "description": "The resource status information."
         },
         "statuses": {
@@ -1877,6 +1878,7 @@
           "items": {
             "$ref": "./computeRPCommon.json#/definitions/InstanceViewStatus"
           },
+          "x-ms-identifiers": [],
           "description": "The resource status information."
         }
       },
@@ -2152,6 +2154,9 @@
             "x-ms-client-flatten": true,
             "$ref": "#/definitions/VirtualMachineSoftwarePatchProperties"
           },
+          "x-ms-identifiers": [
+            "patchId"
+          ],
           "description": "The list of patches that have been detected as available for installation."
         },
         "error": {
@@ -2365,6 +2370,9 @@
             "x-ms-client-flatten": true,
             "$ref": "#/definitions/PatchInstallationDetail"
           },
+          "x-ms-identifiers": [
+            "patchId"
+          ],
           "description": "The patches that were installed during the operation."
         },
         "startDateTime": {
@@ -2486,6 +2494,7 @@
             "type": "object",
             "description": "resource item"
           },
+          "x-ms-identifiers": [],
           "description": "a list of resource items of the captured virtual machine"
         }
       },
@@ -2549,6 +2558,7 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineIpTag"
           },
+          "x-ms-identifiers": [],
           "description": "The list of IP tags associated with the public IP address."
         },
         "publicIPPrefix": {
@@ -2722,6 +2732,9 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineNetworkInterfaceIPConfiguration"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "Specifies the IP configurations of the network interface."
         },
         "dscpConfiguration": {
@@ -2777,6 +2790,7 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineExtensionHandlerInstanceView"
           },
+          "x-ms-identifiers": [],
           "description": "The virtual machine extension handler instance view."
         },
         "statuses": {
@@ -2784,6 +2798,7 @@
           "items": {
             "$ref": "./computeRPCommon.json#/definitions/InstanceViewStatus"
           },
+          "x-ms-identifiers": [],
           "description": "The resource status information."
         }
       },
@@ -2891,6 +2906,9 @@
           "items": {
             "$ref": "./computeRPCommon.json#/definitions/DiskInstanceView"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The virtual machine disk information."
         },
         "extensions": {
@@ -2898,6 +2916,10 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineExtensionInstanceView"
           },
+          "x-ms-identifiers": [
+            "name",
+            "type"
+          ],
           "description": "The extensions information."
         },
         "vmHealth": {
@@ -2919,6 +2941,7 @@
           "items": {
             "$ref": "./computeRPCommon.json#/definitions/InstanceViewStatus"
           },
+          "x-ms-identifiers": [],
           "description": "The resource status information."
         },
         "patchStatus": {
@@ -3158,7 +3181,8 @@
           "type": "array",
           "items": {
             "$ref": "./computeRPCommon.json#/definitions/InstanceViewStatus"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "description": "The status of virtual machine patch operations."
