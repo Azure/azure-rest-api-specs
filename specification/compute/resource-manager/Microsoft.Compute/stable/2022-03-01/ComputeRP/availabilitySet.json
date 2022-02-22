@@ -1,0 +1,514 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ComputeManagementClient",
+    "description": "The Compute Management Client.",
+    "version": "2022-03-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}": {
+      "put": {
+        "tags": [
+          "AvailabilitySets"
+        ],
+        "operationId": "AvailabilitySets_CreateOrUpdate",
+        "description": "Create or update an availability set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "availabilitySetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the availability set."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AvailabilitySet"
+            },
+            "description": "Parameters supplied to the Create Availability Set operation."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AvailabilitySet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an availability set.": {
+            "$ref": "./examples/availabilitySetExamples/AvailabilitySet_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AvailabilitySets"
+        ],
+        "operationId": "AvailabilitySets_Update",
+        "description": "Update an availability set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "availabilitySetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the availability set."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AvailabilitySetUpdate"
+            },
+            "description": "Parameters supplied to the Update Availability Set operation."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AvailabilitySet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AvailabilitySets_Update_MaximumSet_Gen": {
+            "$ref": "./examples/availabilitySetExamples/AvailabilitySets_Update_MaximumSet_Gen.json"
+          },
+          "AvailabilitySets_Update_MinimumSet_Gen": {
+            "$ref": "./examples/availabilitySetExamples/AvailabilitySets_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AvailabilitySets"
+        ],
+        "operationId": "AvailabilitySets_Delete",
+        "description": "Delete an availability set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "availabilitySetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the availability set."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AvailabilitySets_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/availabilitySetExamples/AvailabilitySets_Delete_MaximumSet_Gen.json"
+          },
+          "AvailabilitySets_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/availabilitySetExamples/AvailabilitySets_Delete_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "AvailabilitySets"
+        ],
+        "operationId": "AvailabilitySets_Get",
+        "description": "Retrieves information about an availability set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "availabilitySetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the availability set."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AvailabilitySet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AvailabilitySets_Get_MaximumSet_Gen": {
+            "$ref": "./examples/availabilitySetExamples/AvailabilitySets_Get_MaximumSet_Gen.json"
+          },
+          "AvailabilitySets_Get_MinimumSet_Gen": {
+            "$ref": "./examples/availabilitySetExamples/AvailabilitySets_Get_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets": {
+      "get": {
+        "tags": [
+          "AvailabilitySets"
+        ],
+        "operationId": "AvailabilitySets_ListBySubscription",
+        "description": "Lists all availability sets in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply to the operation. Allowed values are 'instanceView'."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AvailabilitySetListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List availability sets in a subscription.": {
+            "$ref": "./examples/availabilitySetExamples/AvailabilitySet_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets": {
+      "get": {
+        "tags": [
+          "AvailabilitySets"
+        ],
+        "operationId": "AvailabilitySets_List",
+        "description": "Lists all availability sets in a resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AvailabilitySetListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "AvailabilitySets_List_MaximumSet_Gen": {
+            "$ref": "./examples/availabilitySetExamples/AvailabilitySets_List_MaximumSet_Gen.json"
+          },
+          "AvailabilitySets_List_MinimumSet_Gen": {
+            "$ref": "./examples/availabilitySetExamples/AvailabilitySets_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/vmSizes": {
+      "get": {
+        "tags": [
+          "AvailabilitySets"
+        ],
+        "operationId": "AvailabilitySets_ListAvailableSizes",
+        "description": "Lists all available virtual machine sizes that can be used to create a new virtual machine in an existing availability set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "availabilitySetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the availability set."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./computeRPCommon.json#/definitions/VirtualMachineSizeListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "AvailabilitySets_ListAvailableSizes_MaximumSet_Gen": {
+            "$ref": "./examples/availabilitySetExamples/AvailabilitySets_ListAvailableSizes_MaximumSet_Gen.json"
+          },
+          "AvailabilitySets_ListAvailableSizes_MinimumSet_Gen": {
+            "$ref": "./examples/availabilitySetExamples/AvailabilitySets_ListAvailableSizes_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AvailabilitySetProperties": {
+      "properties": {
+        "platformUpdateDomainCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Update Domain count."
+        },
+        "platformFaultDomainCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Fault Domain count."
+        },
+        "virtualMachines": {
+          "type": "array",
+          "items": {
+            "$ref": "../common.json#/definitions/SubResource"
+          },
+          "description": "A list of references to all virtual machines in the availability set."
+        },
+        "proximityPlacementGroup": {
+          "$ref": "../common.json#/definitions/SubResource",
+          "description": "Specifies information about the proximity placement group that the availability set should be assigned to. <br><br>Minimum api-version: 2018-04-01."
+        },
+        "statuses": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./computeRPCommon.json#/definitions/InstanceViewStatus"
+          },
+          "x-ms-identifiers": [],
+          "description": "The resource status information."
+        }
+      },
+      "description": "The instance view of a resource."
+    },
+    "AvailabilitySetSkuType": {
+      "type": "string",
+      "description": "Specifies the sku of an Availability Set. Use 'Aligned' for virtual machines with managed disks and 'Classic' for virtual machines with unmanaged disks. Default value is 'Classic'.",
+      "enum": [
+        "Classic",
+        "Aligned"
+      ],
+      "x-ms-enum": {
+        "name": "AvailabilitySetSkuTypes",
+        "modelAsString": true
+      }
+    },
+    "AvailabilitySet": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AvailabilitySetProperties"
+        },
+        "sku": {
+          "$ref": "./computeRPCommon.json#/definitions/Sku",
+          "description": "Sku of the availability set, only name is required to be set. See AvailabilitySetSkuTypes for possible set of values. Use 'Aligned' for virtual machines with managed disks and 'Classic' for virtual machines with unmanaged disks. Default value is 'Classic'."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../common.json#/definitions/Resource"
+        }
+      ],
+      "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Availability sets overview](https://docs.microsoft.com/azure/virtual-machines/availability-set-overview). <br><br> For more information on Azure planned maintenance, see [Maintenance and updates for Virtual Machines in Azure](https://docs.microsoft.com/azure/virtual-machines/maintenance-and-updates) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+    },
+    "AvailabilitySetUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AvailabilitySetProperties"
+        },
+        "sku": {
+          "$ref": "./computeRPCommon.json#/definitions/Sku",
+          "description": "Sku of the availability set"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./computeRPCommon.json#/definitions/UpdateResource"
+        }
+      ],
+      "description": "Specifies information about the availability set that the virtual machine should be assigned to. Only tags may be updated."
+    },
+    "AvailabilitySetListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AvailabilitySet"
+          },
+          "description": "The list of availability sets"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Availability Set operation response."
+    }
+  }
+}
