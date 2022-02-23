@@ -1229,7 +1229,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PolicyState"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1398,7 +1399,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExpressionEvaluationDetails"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "ifNotExistsDetails": {
           "description": "Evaluation details of IfNotExists effect.",
@@ -1505,7 +1507,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Summary"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1529,7 +1532,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PolicyAssignmentSummary"
-          }
+          },
+          "x-ms-identifiers": [
+            "policyAssignmentId"
+          ]
         }
       }
     },
@@ -1557,21 +1563,24 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ComplianceDetail"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "policyDetails": {
           "description": "The policy artifact summary at this level. For query scope level, it represents policy assignment summary. For policy assignment level, it represents policy definitions summary.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ComplianceDetail"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "policyGroupDetails": {
           "description": "The policy definition group summary at this level.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ComplianceDetail"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1609,14 +1618,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PolicyDefinitionSummary"
-          }
+          },
+          "x-ms-identifiers": [
+            "policyDefinitionId"
+          ]
         },
         "policyGroups": {
           "description": "Policy definition group summary.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PolicyGroupSummary"
-          }
+          },
+          "x-ms-identifiers": [
+            "policyGroupName"
+          ]
         }
       }
     },
@@ -1695,7 +1710,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
