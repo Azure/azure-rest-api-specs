@@ -8,7 +8,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
  license-header: MICROSOFT_MIT_NO_VERSION
  package-name: azure-mgmt-loadtestservice
  no-namespace-folders: true
- package-version: 1.0.0b1
+ package-version: 2022-03-01-preview
  clear-output-folder: true
 ```
 
