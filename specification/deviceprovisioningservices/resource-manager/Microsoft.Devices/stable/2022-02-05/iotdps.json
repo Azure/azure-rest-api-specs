@@ -1615,11 +1615,11 @@
         },
         "error": {
           "description": "Error message containing code, description and details",
-          "$ref": "#/definitions/ErrorMesssage"
+          "$ref": "#/definitions/ErrorMessage"
         }
       }
     },
-    "ErrorMesssage": {
+    "ErrorMessage": {
       "description": "Error response containing message and code.",
       "type": "object",
       "properties": {
@@ -1721,12 +1721,14 @@
         },
         "isVerified": {
           "description": "Determines whether certificate has been verified.",
-          "type": "boolean"
+          "type": "boolean",
+          "readOnly": true
         },
         "certificate": {
           "description": "base-64 representation of X509 certificate .cer file or just .pem file content.",
           "type": "string",
-          "format": "byte"
+          "format": "byte",
+          "readOnly": true
         },
         "created": {
           "description": "The certificate's creation date and time.",
