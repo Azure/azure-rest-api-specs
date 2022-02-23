@@ -42,7 +42,8 @@
             "name": "body",
             "schema": {
               "$ref": "#/definitions/AnalyzeConversationTask"
-            }
+            },
+            "required": true
           }
         ],
         "consumes": [
@@ -62,7 +63,12 @@
             "description": "Error response.",
             "schema": {
               "$ref": "common.json#/definitions/ErrorResponse"
-            }
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
           }
         },
         "x-ms-examples": {
@@ -306,10 +312,8 @@
       ],
       "properties": {
         "result": {
-          "type": "object",
           "$ref": "#/definitions/ConversationResult",
-          "description": "The actual response from a Conversation project.",
-          "x-nullable": true
+          "description": "The actual response from a Conversation project."
         }
       }
     },
@@ -536,8 +540,7 @@
         "result": {
           "type": "object",
           "$ref": "#/definitions/ConversationResult",
-          "description": "The actual response from a Conversation project.",
-          "x-nullable": true
+          "description": "The actual response from a Conversation project."
         }
       }
     },
@@ -1390,8 +1393,7 @@
       "properties": {
         "result": {
           "type": "object",
-          "description": "The actual response from a LUIS Generally Available application.",
-          "x-nullable": true
+          "description": "The actual response from a LUIS Generally Available application."
         }
       }
     },
@@ -1408,8 +1410,7 @@
         "result": {
           "type": "object",
           "$ref": "../2021-07-15-preview/questionanswering.json#/definitions/KnowledgeBaseAnswers",
-          "description": "The generated answer by a Question Answering KB.",
-          "x-nullable": true
+          "description": "The generated answer by a Question Answering KB."
         }
       }
     }
@@ -1422,7 +1423,6 @@
       "schema": {
         "$ref": "#/definitions/ConversationAnalysisOptions"
       },
-      "x-nullable": true,
       "description": "Post body of the request.",
       "x-ms-parameter-location": "method"
     }
