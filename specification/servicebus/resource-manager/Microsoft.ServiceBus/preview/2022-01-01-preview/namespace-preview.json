@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceBusManagementClient",
     "description": "Azure Service Bus client for managing Namespace",
-    "version": "2021-11-01"
+    "version": "2022-01-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -686,6 +686,19 @@
     "SBNamespaceProperties": {
       "type": "object",
       "properties": {
+        "minimumTlsVersion": {
+          "type": "string",
+          "description": "The minimum TLS version for the cluster to support, e.g. '1.2'",
+          "enum": [
+            "1.0",
+            "1.1",
+            "1.2"
+          ],
+          "x-ms-enum": {
+            "name": "TlsVersion",
+            "modelAsString": true
+          }
+        },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
