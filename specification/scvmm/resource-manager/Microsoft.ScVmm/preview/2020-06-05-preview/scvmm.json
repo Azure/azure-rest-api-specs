@@ -2951,6 +2951,24 @@
         }
       }
     },
+    "AvailabilitySets": {
+      "description": "Availability Sets in vm.",
+      "type": "array",
+      "items": {
+        "description": "Availability Set model",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Gets the ARM Id of the microsoft.scvmm/availabilitySets resource.",
+            "type": "string"
+          },
+          "name": {
+            "description": "Gets or sets the name of the availability set.",
+            "type": "string"
+          }
+        }
+      }
+    },
     "VirtualMachineProperties": {
       "description": "Defines the resource properties.",
       "properties": {
@@ -2987,22 +3005,7 @@
           ]
         },
         "availabilitySets": {
-          "description": "Availability Sets in vm.",
-          "type": "array",
-          "items": {
-            "description": "Availability Set model",
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Gets the ARM Id of the microsoft.scvmm/availabilitySets resource.",
-                "type": "string"
-              },
-              "name": {
-                "description": "Gets or sets the name of the availability set.",
-                "type": "string"
-              }
-            }
-          }
+          "$ref" : "#/definitions/AvailabilitySets"
         },
         "osProfile": {
           "description": "OS properties.",
@@ -3661,6 +3664,9 @@
         },
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfileUpdate"
+        },
+        "availabilitySets": {
+          "$ref": "#/definitions/AvailabilitySets"
         }
       }
     },
