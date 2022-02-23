@@ -205,6 +205,47 @@
             }
          }
       },
+     "Operation": {
+      "description": "A Consumption REST API operation.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Operation Id."
+        },
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Consumption.",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: UsageDetail, etc.",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string",
+              "readOnly": true
+            },
+            "description": {
+              "description": "Description of the operation.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
      "OperationListResult": {
       "description": "Result of listing consumption operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
