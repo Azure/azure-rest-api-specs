@@ -1,6 +1,8 @@
 
 
 ## ARM API Information (Control Plane)
+
+NOTE: DELETE THIS SECTION IF YOUR PR IS ONLY DATA PLANE (non-ARM)
   
 <i>MSFT employees can try out our new experience at <b>[OpenAPI Hub](https://aka.ms/openapiportal) </b> - one location for using our validation tools and finding your workflow. 
 </i>
@@ -57,6 +59,7 @@ Please follow the link to find more details on [PR review process](https://aka.m
 ## Non-ARM API Information (Data Plane)
 
 This PR template is for Data Plane APIs only.
+NOTE: DELETE THIS SECTION IF YOUR PR IS ONLY CONTROL PLANE (ARM)
 
 ### API Info: The Basics
 
