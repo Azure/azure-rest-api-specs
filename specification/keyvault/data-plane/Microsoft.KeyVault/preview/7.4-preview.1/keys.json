@@ -1572,6 +1572,11 @@
           "$ref": "#/definitions/KeyReleasePolicy",
           "x-nullable": true,
           "description": "The policy rules under which the key can be exported."
+        },
+        "entityId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The system-generated ID for this key."
         }
       },
       "description": "A KeyBundle consisting of a WebKey plus its attributes."
@@ -1597,6 +1602,11 @@
           "type": "boolean",
           "readOnly": true,
           "description": "True if the key's lifetime is managed by key vault. If this is a key backing a certificate, then managed will be true."
+        },
+        "entityId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The system-generated ID for this key."
         }
       },
       "description": "The key item containing key metadata."
