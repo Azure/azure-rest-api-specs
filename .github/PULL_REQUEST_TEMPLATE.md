@@ -73,7 +73,7 @@ This PR template is for Data Plane APIs only.
 
 Is this review for (select one):
 
-- [ ] a public preview
+- [ ] A public preview
 - [ ] GA release 
 
 ### What are you changing?
