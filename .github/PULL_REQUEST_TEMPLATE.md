@@ -15,16 +15,7 @@ Add a changelog entry for this PR by answering the following questions:
       - [ ] Other, please clarify
   2. When are you targeting to deploy the new service/feature to public regions? Please provide the date or, if the date is not yet available, the month.
   3. When do you expect to publish the swagger? Please provide date or, the the date is not yet available, the month.
-  4. If updating an existing version, please select the specific langauge SDKs and CLIs that must be refreshed after the swagger is published.
-      - [ ] SDK of .NET (need service team to ensure code readiness)
-      - [ ] SDK of Python
-      - [ ] SDK of Java
-      - [ ] SDK of Js
-      - [ ] SDK of Go
-      - [ ] PowerShell
-      - [ ] CLI
-      - [ ] Terraform
-      - [ ] No refresh required for updates in this PR
+  4. By default, Azure SDKs of all languages (.NET/Python/Java/JavaScript for both management-plane SDK and data-plane SDK, Go for management-plane SDK only ) MUST be refreshed with/after swagger of new version is published. If you prefer NOT to refresh any specific SDK language upon swagger updates in the current PR, please leave details with justification here. 
 
 ### Contribution checklist (MS Employees Only):
 - [ ] I commit to follow the [Breaking Change Policy](http://aka.ms/AzBreakingChangesPolicy) of "no breaking changes"
