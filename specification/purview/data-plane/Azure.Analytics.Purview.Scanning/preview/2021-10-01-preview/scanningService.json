@@ -6932,6 +6932,19 @@
         "user_impersonation": "impersonate your user account"
       },
       "description": "Azure Active Directory OAuth2 Flow."
+    },
+    "AADToken": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/v2.0/oauth2/authorize",
+      "tokenUrl": "https://login.microsoftonline.com/common/v2.0/oauth2/token"
     }
-  }
+  },
+  "security": [
+    {
+      "AADToken": [
+        "https://purview.azure.net/.default"
+      ]
+    }
+  ]
 }

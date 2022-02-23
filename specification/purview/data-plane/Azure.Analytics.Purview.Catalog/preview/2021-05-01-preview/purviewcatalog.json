@@ -33,12 +33,18 @@
       },
       "type": "oauth2",
       "description": "Azure Active Directory OAuth2 Flow."
+    },
+    "AADToken": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/v2.0/oauth2/authorize",
+      "tokenUrl": "https://login.microsoftonline.com/common/v2.0/oauth2/token"
     }
   },
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
+      "AADToken": [
+        "https://purview.azure.net/.default"
       ]
     }
   ],
