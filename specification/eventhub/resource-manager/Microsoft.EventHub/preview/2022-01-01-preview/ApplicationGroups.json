@@ -233,6 +233,7 @@
           "description": "Result of the List Application Groups operation."
         },
         "nextLink": {
+          "readOnly":  true,
           "type": "string",
           "description": "Link to the next set of results. Not empty if Value contains an incomplete list of Authorization Rules"
         }
@@ -246,18 +247,6 @@
           "type": "object",
           "x-ms-client-flatten": true,
           "properties": {
-            "updatedAt": {
-              "readOnly": true,
-              "format": "date-time",
-              "type": "string",
-              "description": "Exact time the Application Group was updated"
-            },
-            "createdAt": {
-              "readOnly": true,
-              "format": "date-time",
-              "type": "string",
-              "description": "Exact time the Application Group was created."
-            },
             "isEnabled": {
               "type": "boolean",
               "description": "Determines if Application Group is allowed to create connection with namespace or not. Once the isEnabled is set to false, all the existing connections of application group gets dropped and no new connections will be allowed"
@@ -330,7 +319,8 @@
           "enum": [
             "IncomingBytes",
             "OutgoingBytes",
-            "IncomingMessages"
+            "IncomingMessages",
+            "OutgoingMessages"
           ],
           "x-ms-enum": {
             "name": "MetricId",
