@@ -616,14 +616,14 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/networkSecurityPerimeterConfigurations/{resourceAssociationName}/reconcile": {
-      "put": {
+      "post": {
         "tags": [
           "Namespaces NetworkSecurityPerimeterConfigurations"
         ],
         "operationId": "NetworkSecurityPerimeterConfigurations_CreateOrUpdate",
         "description": "Refreshes any information about the association.",
         "x-ms-examples": {
-          "NamspaceNetworkSecurityPerimeterConfigurationList": {
+          "NetworkSecurityPerimeterConfigurationList": {
             "$ref": "./examples/NameSpaces/NetworkSecurityPerimeterConfigurationReconcile.json"
           }
         },
@@ -647,9 +647,6 @@
         "responses": {
           "200": {
             "description": "Association reconciled"
-          },
-          "201": {
-            "description": "Request to reconcile the association accepted"
           },
           "202": {
             "description": "Request to reconcile the association accepted."
@@ -702,14 +699,14 @@
           "properties": {
             "minimumTlsVersion": {
               "type": "string",
-              "description": "Minimum TLS version for the incoming connections accepted by the namespace. The Default value would be set to Tls12",
+              "description": "The minimum TLS version for the cluster to support, e.g. '1.2'",
               "enum": [
-                "Tls12",
-                "Tls11",
-                "Tls"
+                "1.0",
+                "1.1",
+                "1.2"
               ],
               "x-ms-enum": {
-                "name": "MinimumTlsVersion",
+                "name": "TlsVersion",
                 "modelAsString": true
               }
             },
@@ -1119,6 +1116,7 @@
       "properties": {
         "value": {
           "description": "A collection of NetworkSecurityPerimeterConfigurations",
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
@@ -1129,29 +1127,24 @@
     "NetworkSecurityPerimeterConfiguration": {
       "description": "Network Security Perimeter related configurations of a given namespace",
       "type": "object",
+      "readOnly": true,
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
           "description": "Properties of the Network Security Perimeter Configuration",
           "x-ms-client-flatten": true
-        },
-        "id": {
-          "description": "Fully qualified identifier of the resource",
-          "type": "string"
-        },
-        "name": {
-          "description": "Name of the resource",
-          "type": "string"
-        },
-        "type": {
-          "description": "Type of the resource",
-          "type": "string"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/definitions.json#/definitions/TrackedResource"
+        }
+      ]
     },
     "NetworkSecurityPerimeterConfigurationProperties": {
       "description": "Properties of NetworkSecurityPerimeterConfiguration",
       "type": "object",
+      "readOnly": true,
       "properties": {
         "provisioningState": {
           "description": "Provisioning state of NetworkSecurityPerimeter configuration propagation",
@@ -1165,11 +1158,12 @@
             "SucceededWithIssues",
             "Failed",
             "Deleting",
-            "Deleted"
+            "Deleted",
+            "Canceled"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "NetworkSecurityPerimeterConfigurationProvisiningState",
+            "name": "NetworkSecurityPerimeterConfigurationProvisioningState",
             "modelAsString": true
           }
         },
@@ -1188,16 +1182,18 @@
         },
         "resourceAssociation": {
           "description": "Information about resource association",
+          "readOnly": true,
           "type": "object",
           "properties": {
             "name": {
-              "description": "Name of the resource",
+              "description": "Name of the resource association",
               "type": "string"
             }
           }
         },
         "profile": {
           "description": "Information about current network profile",
+          "readOnly": true,
           "type": "object",
           "properties": {
             "name": {
@@ -1222,6 +1218,7 @@
     "ProvisioningIssue": {
       "description": "Describes Provisioning issue for given NetworkSecurityPerimeterConfiguration",
       "type": "object",
+      "readOnly": true,
       "properties": {
         "name": {
           "description": "Name of the issue",
@@ -1230,6 +1227,7 @@
         "properties": {
           "description": "Properties of Provisioning Issue",
           "type": "object",
+          "readOnly": true,
           "properties": {
             "issueType": {
               "description": "Type of Issue",
@@ -1246,6 +1244,7 @@
     "NspAccessRule": {
       "description": "Information of Access Rule in Network Profile",
       "type": "object",
+      "readOnly": true,
       "properties": {
         "id": {
           "description": "Fully qualified identifier of the resource",
@@ -1261,6 +1260,7 @@
         },
         "properties": {
           "description": "Properties of Access Rule",
+          "readOnly": true,
           "type": "object",
           "properties": {
             "direction": {
@@ -1289,9 +1289,10 @@
               "items": {
                 "description": "Subscription for inbound rule",
                 "type": "object",
+                "readOnly": true,
                 "properties": {
                   "id": {
-                    "description": "Fully qualified identifier of the resource",
+                    "description": "Fully qualified identifier of subscription",
                     "type": "string"
                   }
                 }
@@ -1300,6 +1301,7 @@
             "networkSecurityPerimeters": {
               "description": "NetworkSecurityPerimeters for inbound rules",
               "type": "array",
+              "readOnly": true,
               "items": {
                 "$ref": "#/definitions/NetworkSecurityPerimeter"
               }
@@ -1307,6 +1309,7 @@
             "fullyQualifiedDomainNames": {
               "description": "FQDN for outbound rules",
               "type": "array",
+              "readOnly": true,
               "items": {
                 "description": "Fully qualified domain name",
                 "type": "string"
@@ -1319,6 +1322,7 @@
     "NetworkSecurityPerimeter": {
       "description": "NetworkSecurityPerimeter related information",
       "type": "object",
+      "readOnly": true,
       "properties": {
         "id": {
           "description": "Fully qualified identifier of the resource",
