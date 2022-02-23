@@ -1,0 +1,139 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ComputeManagementClient",
+    "description": "The Compute Management Client.",
+    "version": "2022-01-03"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "GalleryImageFeature": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the gallery image feature."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the gallery image feature."
+        }
+      },
+      "description": "A feature for gallery image."
+    },
+    "GalleryImageIdentifier": {
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "description": "The name of the gallery image definition publisher."
+        },
+        "offer": {
+          "type": "string",
+          "description": "The name of the gallery image definition offer."
+        },
+        "sku": {
+          "type": "string",
+          "description": "The name of the gallery image definition SKU."
+        }
+      },
+      "required": [
+        "publisher",
+        "offer",
+        "sku"
+      ],
+      "description": "This is the gallery image definition identifier."
+    },
+    "RecommendedMachineConfiguration": {
+      "properties": {
+        "vCPUs": {
+          "$ref": "#/definitions/ResourceRange"
+        },
+        "memory": {
+          "$ref": "#/definitions/ResourceRange"
+        }
+      },
+      "description": "The properties describe the recommended machine configuration for this Image Definition. These properties are updatable."
+    },
+    "ResourceRange": {
+      "properties": {
+        "min": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of the resource."
+        },
+        "max": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of the resource."
+        }
+      },
+      "description": "Describes the resource range."
+    },
+    "Disallowed": {
+      "properties": {
+        "diskTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of disk types."
+        }
+      },
+      "description": "Describes the disallowed disk types."
+    },
+    "ImagePurchasePlan": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The plan ID."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The publisher ID."
+        },
+        "product": {
+          "type": "string",
+          "description": "The product ID."
+        }
+      },
+      "description": "Describes the gallery image definition purchase plan. This is used by marketplace images."
+    }
+  },
+  "parameters": {
+    "LocationNameParameter": {
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Resource location."
+    }
+  }
+}
