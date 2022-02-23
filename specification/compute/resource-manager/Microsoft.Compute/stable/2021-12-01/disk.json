@@ -2186,6 +2186,9 @@
           "items": {
             "$ref": "#/definitions/ShareInfoElement"
           },
+          "x-ms-identifiers": [
+            "vmUri"
+          ],
           "description": "Details of the list of all VMs that have the disk attached. maxShares should be set to a value greater than one for disks to allow attaching them to multiple VMs."
         },
         "networkAccessPolicy": {
@@ -2368,6 +2371,9 @@
           "items": {
             "$ref": "#/definitions/KeyForDiskEncryptionSet"
           },
+          "x-ms-identifiers": [
+            "sourceVault/id"
+          ],
           "description": "A readonly collection of key vault keys previously used by this disk encryption set while a key rotation is in progress. It will be empty if there is no ongoing key rotation."
         },
         "provisioningState": {
@@ -2403,6 +2409,9 @@
           "items": {
             "$ref": "#/definitions/EncryptionSettingsElement"
           },
+          "x-ms-identifiers": [
+            "diskEncryptionKey/sourceVault/id"
+          ],
           "description": "A collection of encryption settings, one for each disk volume."
         },
         "encryptionSettingsVersion": {
@@ -3666,6 +3675,10 @@
           "items": {
             "$ref": "#/definitions/ApiErrorBase"
           },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ],
           "description": "The Api error details"
         },
         "innererror": {
