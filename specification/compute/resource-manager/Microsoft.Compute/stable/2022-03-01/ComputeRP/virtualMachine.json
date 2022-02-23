@@ -1606,7 +1606,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./computeRPCommon.json#/definitions/RetrieveBootDiagnosticsDataResult"
+              "$ref": "#/definitions/RetrieveBootDiagnosticsDataResult"
             }
           },
           "default": {
@@ -1851,6 +1851,21 @@
     }
   },
   "definitions": {
+    "RetrieveBootDiagnosticsDataResult": {
+      "properties": {
+        "consoleScreenshotBlobUri": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The console screenshot blob URI"
+        },
+        "serialConsoleLogBlobUri": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The serial console log blob URI."
+        }
+      },
+      "description": "The SAS URIs of the console screenshot and serial log blobs."
+    },
     "VirtualMachineExtensionInstanceView": {
       "properties": {
         "name": {
