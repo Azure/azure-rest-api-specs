@@ -706,6 +706,9 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2998,6 +3001,11 @@
           "items": {
             "$ref": "#/definitions/AccountModel"
           },
+          "x-ms-identifiers": [
+            "name",
+            "format",
+            "version"
+          ],
           "description": "Gets the list of Cognitive Services accounts Model and their properties."
         }
       },
