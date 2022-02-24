@@ -69,6 +69,16 @@ Is this review for (select one):
 
 - [ ] A public preview
 - [ ] GA release 
+### REST API Review Checklist
+
+Ensure you have reviewed the following as a requirement for requesting a review from REST API Stewardship Board. 
+
+- [ ] The [Azure REST API guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md) - an addendum to the [Microsoft REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md).
+- [ ] The [versioning guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#api-versioning) .
+- [ ] The [Azure Global Breaking Change and Retirement Policy](https://aka.ms/aprwiki) .
+See also [Considerations for Service Design](https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md) and [Designing & Versioning HTTP APIs](https://www.youtube.com/watch?v=9Ng00IlBCtw&list=PL9XzOCngAkqs4m0XdULJu_78nM3Ok3Q65)  for an introduction to the design process.
+
+
 
 ### What are you changing?
 <sup>This section will help us focus on the specific parts of your API that are new or have been modified. <br/>Please share a link to the design document for the new APIs, a link to the previous Open API document (swagger) if applicable, and the root paths that have been updated. </sup>
