@@ -4,7 +4,7 @@
     "Ocp-Apim-Subscription-Key": "{API key}",
     "Content-Type": "application/json",
     "api-version": "2021-11-01-preview",
-    "CustomConversationalTask": {
+    "body": {
       "kind": "CustomConversation",
       "analysisInput": {
 		"conversationItem":{
@@ -31,12 +31,12 @@
 			  }
 			}
 		}
+      },
+	  "parameters": {
+         "projectName": "{project-name}",
+         "deploymentName": "{deployment-name}",
+         "verbose": true
       }
-    },
-    "parameters": {
-      "projectName": "{project-name}",
-      "deploymentName": "{deployment-name}",
-      "verbose": true
     }
   },
   "responses": {
