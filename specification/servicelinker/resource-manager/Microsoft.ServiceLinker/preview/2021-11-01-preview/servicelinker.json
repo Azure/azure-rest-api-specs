@@ -116,6 +116,9 @@
         "x-ms-examples": {
           "PutLink": {
             "$ref": "./examples/PutLink.json"
+          },
+          "PutLinkWithServiceEndpoint": {
+            "$ref": "./examples/PutLinkWithServiceEndpoint.json"
           }
         },
         "parameters": [
@@ -355,6 +358,11 @@
         ],
         "operationId": "Operations_List",
         "description": "Lists the available ServiceLinker REST API operations.",
+        "x-ms-examples": {
+          "GetConfiguration": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -615,6 +623,14 @@
           "readOnly": true,
           "type": "string",
           "description": "The provisioning state. "
+        },
+        "vNetSolution": {
+          "description": "The VNet solution.",
+          "$ref": "#/definitions/VNetSolution"
+        },
+        "secretStore": {
+          "description": "An option to store secret value in secure place",
+          "$ref": "#/definitions/SecretStore"
         }
       }
     },
@@ -689,6 +705,34 @@
         "authType": {
           "description": "The authentication type.",
           "$ref": "#/definitions/AuthType"
+        }
+      }
+    },
+    "VNetSolution": {
+      "type": "object",
+      "description": "The VNet solution for linker",
+      "properties": {
+        "type": {
+          "description": "Type of VNet solution.",
+          "type": "string",
+          "enum": [
+            "serviceEndpoint",
+            "privateLink"
+          ],
+          "x-ms-enum": {
+            "name": "vNetSolutionType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SecretStore": {
+      "type": "object",
+      "description": "An option to store secret value in secure place",
+      "properties": {
+        "keyVaultId": {
+          "type": "string",
+          "description": "The key vault id to store secret"
         }
       }
     }
