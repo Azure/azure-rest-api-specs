@@ -1517,6 +1517,7 @@
     },
     "Sku": {
       "description": "The resource model definition representing SKU",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1663,6 +1664,9 @@
           "items": {
             "$ref": "#/definitions/SkuCapability"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "Gets the capabilities of the cognitive services account. Each item indicates the capability of a specific feature. The values are read-only and for reference only."
         },
         "isMigrated": {
@@ -1696,6 +1700,9 @@
           "items": {
             "$ref": "#/definitions/UserOwnedStorage"
           },
+          "x-ms-identifiers": [
+            "resourceId"
+          ],
           "description": "The storage accounts for this resource."
         },
         "privateEndpointConnections": {
@@ -1846,7 +1853,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ThrottlingRule"
-          }
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
         }
       },
       "description": "The call rate limit Cognitive Services account."
@@ -1864,7 +1874,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ThrottlingRule"
-          }
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
         }
       }
     },
@@ -1890,7 +1903,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RequestMatchPattern"
-          }
+          },
+          "x-ms-identifiers": [
+            "path",
+            "method"
+          ]
         }
       }
     },
@@ -1966,6 +1983,10 @@
           "items": {
             "$ref": "#/definitions/AccountSku"
           },
+          "x-ms-identifiers": [
+            "sku/name",
+            "resourceType"
+          ],
           "description": "Gets the list of Cognitive Services accounts and their properties."
         }
       },
@@ -1993,6 +2014,9 @@
           "items": {
             "$ref": "#/definitions/Usage"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of usages for Cognitive Service account."
         }
       },
@@ -2110,6 +2134,11 @@
           "items": {
             "$ref": "#/definitions/SkuAvailability"
           },
+          "x-ms-identifiers": [
+            "skuName",
+            "type",
+            "kind"
+          ],
           "description": "Check SKU availability result list."
         }
       }
@@ -2278,6 +2307,7 @@
           "items": {
             "$ref": "#/definitions/ResourceSkuRestrictions"
           },
+          "x-ms-identifiers": [],
           "description": "The restrictions because of which SKU cannot be used. This is empty if there are no restrictions."
         }
       },
@@ -2310,6 +2340,11 @@
           "items": {
             "$ref": "#/definitions/ResourceSku"
           },
+          "x-ms-identifiers": [
+            "resourceType",
+            "name",
+            "kind"
+          ],
           "description": "The list of skus available for the subscription."
         },
         "nextLink": {
@@ -2342,6 +2377,7 @@
           "items": {
             "$ref": "#/definitions/IpRule"
           },
+          "x-ms-identifiers": [],
           "description": "The list of IP address rules."
         },
         "virtualNetworkRules": {
@@ -2754,6 +2790,13 @@
           "items": {
             "$ref": "#/definitions/CommitmentTier"
           },
+          "x-ms-identifiers": [
+            "kind",
+            "tier",
+            "skuName",
+            "hostingModel",
+            "planType"
+          ],
           "description": "Gets the list of Cognitive Services accounts CommitmentTier and their properties."
         }
       },
