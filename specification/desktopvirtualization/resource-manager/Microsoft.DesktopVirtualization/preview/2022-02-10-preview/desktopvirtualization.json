@@ -5225,7 +5225,7 @@
         "rampDownCapacityThresholdPct": {
           "type": "integer",
           "format": "int32",
-          "minimum": 1,
+          "minimum": 0,
           "maximum": 100,
           "description": "Capacity threshold for ramp down period."
         },
@@ -5531,7 +5531,7 @@
       "type": "string",
       "description": "The name of the host pool within the specified resource group",
       "maxLength": 64,
-      "minLength": 1,
+      "minLength": 3,
       "x-ms-parameter-location": "method"
     },
     "MSIXPackageFullNameParameter": {
@@ -5541,7 +5541,7 @@
       "type": "string",
       "description": "The version specific package full name of the MSIX package within specified hostpool",
       "maxLength": 100,
-      "minLength": 1,
+      "minLength": 3,
       "x-ms-parameter-location": "method"
     },
     "ApplicationGroupNameParameter": {
@@ -5551,7 +5551,7 @@
       "type": "string",
       "description": "The name of the application group",
       "maxLength": 64,
-      "minLength": 1,
+      "minLength": 3,
       "x-ms-parameter-location": "method"
     },
     "ApplicationNameParameter": {
@@ -5561,7 +5561,7 @@
       "type": "string",
       "description": "The name of the application within the specified application group",
       "maxLength": 24,
-      "minLength": 1,
+      "minLength": 3,
       "x-ms-parameter-location": "method"
     },
     "DesktopNameParameter": {
@@ -5571,7 +5571,7 @@
       "type": "string",
       "description": "The name of the desktop within the specified desktop group",
       "maxLength": 24,
-      "minLength": 1,
+      "minLength": 3,
       "x-ms-parameter-location": "method"
     },
     "WorkspaceNameParameter": {
@@ -5581,7 +5581,7 @@
       "type": "string",
       "description": "The name of the workspace",
       "maxLength": 64,
-      "minLength": 1,
+      "minLength": 3,
       "x-ms-parameter-location": "method"
     },
     "SessionHostNameParameter": {
@@ -5591,7 +5591,7 @@
       "type": "string",
       "description": "The name of the session host within the specified host pool",
       "maxLength": 48,
-      "minLength": 1,
+      "minLength": 3,
       "x-ms-parameter-location": "method"
     },
     "UserSessionIdParameter": {
@@ -5611,7 +5611,7 @@
       "type": "string",
       "description": "The name of the start menu item within the specified host pool",
       "maxLength": 24,
-      "minLength": 1,
+      "minLength": 3,
       "x-ms-parameter-location": "method"
     },
     "MSIXImageURIParameter": {
@@ -5621,7 +5621,7 @@
       "type": "string",
       "description": "URI to the MSIX Image (VHD/CIM).",
       "maxLength": 100,
-      "minLength": 1,
+      "minLength": 3,
       "x-ms-parameter-location": "method"
     },
     "ScalingPlanNameParameter": {
@@ -5630,8 +5630,8 @@
       "required": true,
       "type": "string",
       "description": "The name of the scaling plan.",
-      "maxLength": 1024,
-      "minLength": 1,
+      "maxLength": 64,
+      "minLength": 3,
       "x-ms-parameter-location": "method"
     }
   }
