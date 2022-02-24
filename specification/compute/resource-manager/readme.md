@@ -245,6 +245,7 @@ input-file:
 - Microsoft.Compute/stable/2021-11-01/runCommands.json
 - Microsoft.Compute/stable/2021-07-01/skus.json
 - Microsoft.Compute/stable/2021-08-01/disk.json
+- Microsoft.Compute/stable/2022-01-03/common.json
 - Microsoft.Compute/stable/2022-01-03/GalleryRP/galleryRPCommon.json
 - Microsoft.Compute/stable/2022-01-03/GalleryRP/gallery.json
 - Microsoft.Compute/stable/2022-01-03/GalleryRP/sharedGallery.json
