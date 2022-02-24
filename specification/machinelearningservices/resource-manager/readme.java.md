@@ -18,6 +18,7 @@ service-name: MachineLearningServices
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2022-02-01-preview
   - tag: package-2022-01-01-preview
   - tag: package-2021-07-01
   - tag: package-2021-03-01-preview
@@ -37,6 +38,19 @@ batch:
   - tag: package-2020-04-01-preview
   - tag: package-2020-02-18-preview
   - tag: package-2018-03-preview
+```
+
+### Tag: package-2022-02-01-preview and java
+
+These settings apply only when `--tag=package-2022-02-01-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2022-02-01-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.machinelearningservices.v2022_02_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/machinelearningservices/mgmt-v2022_02_01_preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2022-01-01-preview and java
