@@ -124,7 +124,7 @@
           {
             "in": "body",
             "name": "patch",
-            "description": "JSON Document containined the partial update for the classification policy",
+            "description": "JSON Document contained the partial update for the classification policy",
             "schema": {
               "$ref": "#/definitions/ClassificationPolicy"
             }
@@ -831,6 +831,35 @@
             "$ref": "./examples/Jobs_UpdateJob.json"
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Deletes a job and all of its traces.",
+        "operationId": "JobRouter_DeleteJob",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a job and all of its traces": {
+            "$ref": "./examples/Jobs_DeleteJob.json"
+          }
+        }
       }
     },
     "/routing/jobs/{id}:cancel": {
@@ -1013,37 +1042,6 @@
         "x-ms-examples": {
           "Gets a job position in a queue": {
             "$ref": "./examples/Jobs_GetInQueuePosition.json"
-          }
-        }
-      }
-    },
-    "/routing/jobs/{id}:delete": {
-      "post": {
-        "tags": [
-          "Jobs"
-        ],
-        "summary": "Deletes a job and all of its traces.",
-        "operationId": "JobRouter_DeleteJob",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Success"
-          }
-        },
-        "x-ms-examples": {
-          "Deletes a job and all of its traces": {
-            "$ref": "./examples/Jobs_DeleteJob.json"
           }
         }
       }
@@ -1597,6 +1595,35 @@
             "$ref": "./examples/Workers_GetWorker.json"
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "Workers"
+        ],
+        "summary": "Deletes a worker and all of its traces.",
+        "operationId": "JobRouter_DeleteWorker",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "workerId",
+            "description": "Id of the worker to delete",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          }
+        },
+        "x-ms-examples": {
+          "Delete a Worker and all of its traces": {
+            "$ref": "./examples/Workers_DeleteWorker.json"
+          }
+        }
       }
     },
     "/routing/workers/{workerId}/assignments/{assignmentId}:release": {
@@ -1644,37 +1671,6 @@
         "x-ms-examples": {
           "Release a Worker's Assignment": {
             "$ref": "./examples/Workers_ReleaseAssignment.json"
-          }
-        }
-      }
-    },
-    "/routing/workers/{workerId}:delete": {
-      "post": {
-        "tags": [
-          "Workers"
-        ],
-        "summary": "Deletes a worker and all of its traces.",
-        "operationId": "JobRouter_DeleteWorker",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "workerId",
-            "description": "Id of the worker to delete",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Success"
-          }
-        },
-        "x-ms-examples": {
-          "Delete a Worker and all of its traces": {
-            "$ref": "./examples/Workers_DeleteWorker.json"
           }
         }
       }
@@ -1953,7 +1949,7 @@
     "CompleteJobResponse": {
       "type": "object"
     },
-    "ConditionalLabelSelector": {
+    "ConditionalQueueSelector": {
       "description": "Describes a set of label selectors that will be attached if the given condition resolves to true",
       "required": [
         "condition",
@@ -1962,7 +1958,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/LabelSelectorAttachment"
+          "$ref": "#/definitions/QueueSelectorAttachment"
         }
       ],
       "properties": {
@@ -1977,7 +1973,37 @@
           "description": "The label selectors to attach",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/LabelSelector"
+            "$ref": "#/definitions/QueueSelector"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "conditional"
+    },
+    "ConditionalWorkerSelector": {
+      "description": "Describes a set of label selectors that will be attached if the given condition resolves to true",
+      "required": [
+        "condition",
+        "labelSelectors"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkerSelectorAttachment"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "readOnly": true
+        },
+        "condition": {
+          "description": "The condition that must be true for the label selectors to be attached"
+        },
+        "labelSelectors": {
+          "description": "The label selectors to attach",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkerSelector"
           }
         }
       },
@@ -2361,60 +2387,6 @@
         }
       }
     },
-    "LabelSelector": {
-      "description": "Describes a condition that must be met against a set of labels",
-      "required": [
-        "key",
-        "labelOperator"
-      ],
-      "type": "object",
-      "properties": {
-        "key": {
-          "description": "The label key to query against",
-          "maxLength": 500,
-          "minLength": 0,
-          "type": "string"
-        },
-        "labelOperator": {
-          "description": "Describes how the value of the label is compared to the value defined on the label selector",
-          "enum": [
-            "equal",
-            "notEqual",
-            "lessThan",
-            "lessThanEqual",
-            "greaterThan",
-            "greaterThanEqual"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "LabelOperator",
-            "modelAsString": false
-          }
-        },
-        "value": {
-          "description": "The value to compare against the actual label value with the given operator",
-          "x-nullable": true
-        },
-        "ttl": {
-          "description": "Describes how long this label selector is valid. Requires input conforming to ISO8601 duration format.",
-          "type": "string",
-          "x-nullable": true
-        }
-      }
-    },
-    "LabelSelectorAttachment": {
-      "required": [
-        "kind"
-      ],
-      "type": "object",
-      "properties": {
-        "kind": {
-          "description": "The type discriminator describing the type of label selector attachment",
-          "type": "string"
-        }
-      },
-      "discriminator": "kind"
-    },
     "LongestIdleMode": {
       "description": "Jobs are directed to the worker who has been idle longest.",
       "type": "object",
@@ -2460,7 +2432,7 @@
           "description": "Updated WorkerSelectors.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/LabelSelector"
+            "$ref": "#/definitions/WorkerSelector"
           },
           "x-nullable": true
         }
@@ -2614,7 +2586,7 @@
           "description": "A collection of manually specified label selectors, which a worker must satisfy in order to process this job.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/LabelSelector"
+            "$ref": "#/definitions/WorkerSelector"
           },
           "x-nullable": true
         },
@@ -2622,7 +2594,7 @@
           "description": "A collection of label selectors attached by a classification policy, which a worker must satisfy in order to process this job.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/LabelSelector"
+            "$ref": "#/definitions/WorkerSelector"
           },
           "readOnly": true,
           "x-nullable": true
@@ -2720,7 +2692,7 @@
         },
         "totalCapacity": {
           "format": "int32",
-          "description": "The total capacity score this worker has to manage mulitple concurrent jobs.",
+          "description": "The total capacity score this worker has to manage multiple concurrent jobs.",
           "type": "integer"
         },
         "labels": {
@@ -2775,7 +2747,7 @@
         }
       }
     },
-    "PassThroughLabelSelector": {
+    "PassThroughQueueSelector": {
       "description": "Attaches a label selector where the value is pass through from the job label with the same key",
       "required": [
         "key",
@@ -2784,7 +2756,49 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/LabelSelectorAttachment"
+          "$ref": "#/definitions/QueueSelectorAttachment"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "readOnly": true
+        },
+        "key": {
+          "description": "The label key to query against",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "labelOperator": {
+          "description": "Describes how the value of the label is compared to the value pass through",
+          "enum": [
+            "equal",
+            "notEqual",
+            "lessThan",
+            "lessThanEqual",
+            "greaterThan",
+            "greaterThanEqual"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "LabelOperator",
+            "modelAsString": false
+          }
+        }
+      },
+      "x-ms-discriminator-value": "pass-through"
+    },
+    "PassThroughWorkerSelector": {
+      "description": "Attaches a label selector where the value is pass through from the job label with the same key",
+      "required": [
+        "key",
+        "labelOperator"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkerSelectorAttachment"
         }
       ],
       "properties": {
@@ -2869,6 +2883,54 @@
       },
       "x-ms-discriminator-value": "queue-length"
     },
+    "QueueSelector": {
+      "required": [
+        "key",
+        "labelOperator"
+      ],
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "The label key to query against",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "labelOperator": {
+          "description": "Describes how the value of the label is compared to the value defined on the label selector",
+          "enum": [
+            "equal",
+            "notEqual",
+            "lessThan",
+            "lessThanEqual",
+            "greaterThan",
+            "greaterThanEqual"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "LabelOperator",
+            "modelAsString": false
+          }
+        },
+        "value": {
+          "description": "The value to compare against the actual label value with the given operator",
+          "x-nullable": true
+        }
+      }
+    },
+    "QueueSelectorAttachment": {
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "The type discriminator describing the type of label selector attachment",
+          "type": "string"
+        }
+      },
+      "discriminator": "kind"
+    },
     "QueueStatistics": {
       "description": "Statistics for the queue",
       "required": [
@@ -2894,6 +2956,27 @@
             "type": "number"
           },
           "x-nullable": true
+        }
+      }
+    },
+    "QueueWeightedAllocation": {
+      "required": [
+        "labelSelectors",
+        "weight"
+      ],
+      "type": "object",
+      "properties": {
+        "weight": {
+          "format": "double",
+          "description": "The percentage of this weight, expressed as a fraction of 1.",
+          "type": "number"
+        },
+        "labelSelectors": {
+          "description": "A collection of label selectors that will be applied if this allocation is selected.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueueSelector"
+          }
         }
       }
     },
@@ -3030,7 +3113,7 @@
           "description": "A collection of manually specified label selectors, which a worker must satisfy in order to process this job.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/LabelSelector"
+            "$ref": "#/definitions/WorkerSelector"
           },
           "x-nullable": true
         },
@@ -3038,7 +3121,7 @@
           "description": "A collection of label selectors attached by a classification policy, which a worker must satisfy in order to process this job.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/LabelSelector"
+            "$ref": "#/definitions/WorkerSelector"
           },
           "readOnly": true,
           "x-nullable": true
@@ -3118,7 +3201,7 @@
         },
         "totalCapacity": {
           "format": "int32",
-          "description": "The total capacity score this worker has to manage mulitple concurrent jobs.",
+          "description": "The total capacity score this worker has to manage multiple concurrent jobs.",
           "type": "integer"
         },
         "labels": {
@@ -3173,14 +3256,35 @@
         }
       }
     },
-    "RuleEngineLabelSelector": {
+    "RuleEngineQueueSelector": {
       "required": [
         "rule"
       ],
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/LabelSelectorAttachment"
+          "$ref": "#/definitions/QueueSelectorAttachment"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "readOnly": true
+        },
+        "rule": {
+          "description": "A RouterRule that resolves a collection of LabelSelector to attach"
+        }
+      },
+      "x-ms-discriminator-value": "rule-engine"
+    },
+    "RuleEngineWorkerSelector": {
+      "required": [
+        "rule"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkerSelectorAttachment"
         }
       ],
       "properties": {
@@ -3233,7 +3337,7 @@
         }
       }
     },
-    "StaticLabelSelector": {
+    "StaticQueueSelector": {
       "description": "Describes a label selector that will always be attached",
       "required": [
         "labelSelector"
@@ -3241,7 +3345,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/LabelSelectorAttachment"
+          "$ref": "#/definitions/QueueSelectorAttachment"
         }
       ],
       "properties": {
@@ -3250,7 +3354,7 @@
           "readOnly": true
         },
         "labelSelector": {
-          "$ref": "#/definitions/LabelSelector"
+          "$ref": "#/definitions/QueueSelector"
         }
       },
       "x-ms-discriminator-value": "static"
@@ -3277,6 +3381,28 @@
       },
       "x-ms-discriminator-value": "static-rule"
     },
+    "StaticWorkerSelector": {
+      "description": "Describes a label selector that will always be attached",
+      "required": [
+        "labelSelector"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkerSelectorAttachment"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "readOnly": true
+        },
+        "labelSelector": {
+          "$ref": "#/definitions/WorkerSelector"
+        }
+      },
+      "x-ms-discriminator-value": "static"
+    },
     "WaitTimeExceptionTrigger": {
       "description": "Trigger for an exception action on exceeding wait time",
       "required": [
@@ -3300,29 +3426,7 @@
       },
       "x-ms-discriminator-value": "wait-time"
     },
-    "WeightedAllocation": {
-      "description": "A percentage based allocation.",
-      "required": [
-        "labelSelectors",
-        "weight"
-      ],
-      "type": "object",
-      "properties": {
-        "weight": {
-          "format": "double",
-          "description": "The percentage of this weight, expressed as a fraction of 1.",
-          "type": "number"
-        },
-        "labelSelectors": {
-          "description": "A collection of label selectors that will be applied if this allocation is selected.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LabelSelector"
-          }
-        }
-      }
-    },
-    "WeightedAllocationLabelSelector": {
+    "WeightedAllocationQueueSelector": {
       "description": "Describes multiple sets of label selectors, of which one will be selected and attached according to a weighting",
       "required": [
         "allocations"
@@ -3330,7 +3434,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/LabelSelectorAttachment"
+          "$ref": "#/definitions/QueueSelectorAttachment"
         }
       ],
       "properties": {
@@ -3342,11 +3446,37 @@
           "description": "A collection of percentage based weighted allocations.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WeightedAllocation"
+            "$ref": "#/definitions/QueueWeightedAllocation"
           }
         }
       },
-      "x-ms-discriminator-value": "weighted-allocation"
+      "x-ms-discriminator-value": "weighted-allocation-queue-selector"
+    },
+    "WeightedAllocationWorkerSelector": {
+      "description": "Describes multiple sets of label selectors, of which one will be selected and attached according to a weighting",
+      "required": [
+        "allocations"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkerSelectorAttachment"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "readOnly": true
+        },
+        "allocations": {
+          "description": "A collection of percentage based weighted allocations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkerWeightedAllocation"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "weighted-allocation-worker-selector"
     },
     "WorkerAssignment": {
       "required": [
@@ -3393,6 +3523,84 @@
         "nextLink": {
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "WorkerSelector": {
+      "required": [
+        "key",
+        "labelOperator"
+      ],
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "The label key to query against",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "labelOperator": {
+          "description": "Describes how the value of the label is compared to the value defined on the label selector",
+          "enum": [
+            "equal",
+            "notEqual",
+            "lessThan",
+            "lessThanEqual",
+            "greaterThan",
+            "greaterThanEqual"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "LabelOperator",
+            "modelAsString": false
+          }
+        },
+        "value": {
+          "description": "The value to compare against the actual label value with the given operator",
+          "x-nullable": true
+        },
+        "ttl": {
+          "description": "Describes how long this label selector is valid. Requires input conforming to ISO8601 duration format.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "expedite": {
+          "description": "Pushes the job to the front of the queue as long as this selector is active.",
+          "type": "boolean"
+        }
+      }
+    },
+    "WorkerSelectorAttachment": {
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "The type discriminator describing the type of label selector attachment",
+          "type": "string"
+        }
+      },
+      "discriminator": "kind"
+    },
+    "WorkerWeightedAllocation": {
+      "required": [
+        "labelSelectors",
+        "weight"
+      ],
+      "type": "object",
+      "properties": {
+        "weight": {
+          "format": "double",
+          "description": "The percentage of this weight, expressed as a fraction of 1.",
+          "type": "number"
+        },
+        "labelSelectors": {
+          "description": "A collection of label selectors that will be applied if this allocation is selected.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkerSelector"
+          }
         }
       }
     }
