@@ -26,7 +26,7 @@ These are the global settings for the Azure Purview Catalog API.
 ``` yaml
 openapi-type: data-plane
 security: AADToken
-security-scopes:  https://purview.azure.net/.default
+security-scopes: https://purview.azure.net/.default
 ```
 
 ``` yaml $(package-account)
