@@ -3,7 +3,7 @@
   "info": {
     "title": "WANDisco Fusion",
     "description": "WANDisco Fusion",
-    "version": "2021-05-01-preview"
+    "version": "2022-01-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -318,98 +318,6 @@
         "x-ms-examples": {
           "Successful migrator delete": {
             "$ref": "./examples/LiveDataMigrator/MigratorDelete.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/migrators/{migratorName}/generateUpgrade": {
-      "post": {
-        "tags": [
-          "migrator"
-        ],
-        "description": "Generate the updated version of a Migrator.",
-        "operationId": "Migrators_GenerateUpgrade",
-        "parameters": [
-          {
-            "$ref": "./commonTypes.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./commonTypes.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./commonTypes.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/MigratorNameParameter"
-          }
-        ],
-        "x-ms-examples": {
-          "Generated updated Migrator": {
-            "$ref": "./examples/LiveDataMigrator/MigratorGenerateUpgrade.json"
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Generate upgraded migrator request completed."
-          },
-          "202": {
-            "description": "Generate upgraded migrator request accepted."
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/migrators/{migratorName}/updateDownloadLocation": {
-      "post": {
-        "tags": [
-          "migrator"
-        ],
-        "description": "Update the downloadLocation of the Migrator.",
-        "operationId": "Migrators_UpdateDownloadLocation",
-        "parameters": [
-          {
-            "$ref": "./commonTypes.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./commonTypes.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./commonTypes.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/MigratorNameParameter"
-          }
-        ],
-        "x-ms-examples": {
-          "Refresh a Migrator": {
-            "$ref": "./examples/LiveDataMigrator/MigratorUpdateDownloadLocation.json"
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Update download location request completed."
-          },
-          "202": {
-            "description": "Update download location request accepted."
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -2614,27 +2522,6 @@
           "$ref": "./commonTypes.json#/definitions/ProvisioningState",
           "readOnly": true
         },
-        "deploymentType": {
-          "description": "The type of install required for the migrator",
-          "type": "string",
-          "enum": [
-            "DEB",
-            "RPM"
-          ],
-          "x-ms-enum": {
-            "name": "MigratorDeploymentType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "DEB"
-              },
-              {
-                "value": "RPM"
-              }
-            ]
-          },
-          "default": "RPM"
-        },
         "downloadLocation": {
           "description": "The location for downloading deployment files",
           "type": "string",
@@ -2669,27 +2556,6 @@
         "migratorStatus": {
           "description": "Status of the Migrator server",
           "$ref": "#/definitions/MigratorDetails"
-        },
-        "installParameters": {
-          "description": "Installation configuration for the Migrator server",
-          "type": "object",
-          "properties": {
-            "user": {
-              "description": "The system user to run the process as",
-              "type": "string",
-              "default": "hdfs"
-            },
-            "installDir": {
-              "description": "The directory under which to install",
-              "type": "string",
-              "default": "/opt/wandisco"
-            },
-            "logDir": {
-              "description": "The directory where logs will be written",
-              "type": "string",
-              "default": "/var/log"
-            }
-          }
         },
         "bandwidthPolicy": {
           "title": "BandwidthPolicy",
@@ -2935,20 +2801,8 @@
           "readOnly": true
         },
         "metadataTargetKind": {
-          "description": "The kind of metadata target.",
-          "type": "string",
-          "enum": [
-            "AzureSqlMetadataTarget"
-          ],
-          "x-ms-enum": {
-            "name": "MetadataTargetKind",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "AzureSqlMetadataTarget"
-              }
-            ]
-          }
+          "$ref": "#/definitions/MetadataTargetKind",
+          "description": "The type of Metadata Target provider that will be used"
         },
         "dataTargetId": {
           "description": "Resource ID of Migrator Target.",
@@ -2963,6 +2817,57 @@
       "required": [
         "metadataTargetKind"
       ]
+    },
+    "DatabricksMetadataTarget": {
+      "description": "Databricks Metadata target properties",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetadataTargetProperties"
+        }
+      ],
+      "properties": {
+        "jdbcServerHostname": {
+          "description": "Hostname for the Databricks JDBC server.",
+          "type": "string"
+        },
+        "jdbcPort": {
+          "description": "Port for the Databricks JDBC server.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "jdbcHttpPath": {
+          "description": "Path for the Databricks JDBC server.",
+          "type": "string"
+        },
+        "accessToken": {
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create"
+          ],
+          "description": "Access token for the Databricks server.",
+          "type": "string"
+        },
+        "fsMountPoint": {
+          "description": "Mount point for the ADLS/S3/GCS location within dbfs filesystem.",
+          "type": "string"
+        },
+        "convertToDeltaLake": {
+          "description": "Convert table to USING DELTA format and data to Delta Lake format.",
+          "type": "boolean"
+        },
+        "deleteAfterConversion": {
+          "description": "Delete staging data after conversion.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "jdbcServerHostname",
+        "jdbcPort",
+        "jdbcHttpPath",
+        "accessToken"
+      ],
+      "x-ms-discriminator-value": "DatabricksMetadataTarget"
     },
     "AzureSqlMetadataTarget": {
       "description": "Azure SQL Metadata target properties",
@@ -3019,6 +2924,120 @@
         "sqlDatabase"
       ],
       "x-ms-discriminator-value": "AzureSqlMetadataTarget"
+    },
+    "SnowflakeMetadataTarget": {
+      "description": "Snowflake Metadata Target properties",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetadataTargetProperties"
+        }
+      ],
+      "properties": {
+        "accountIdentifier": {
+          "description": "The ID of the Snowflake account you're using with the associated data migration.",
+          "type": "string"
+        },
+        "stageDatabase": {
+          "description": "The Snowflake database to store staging data on for data transformation.",
+          "type": "string",
+          "default": "WANDISCO"
+        },
+        "stageSchema": {
+          "description": "The Snowflake schema to be used for storing staging data for data transformation.",
+          "type": "string",
+          "default": "PUBLIC"
+        },
+        "stage": {
+          "description": "This should be an external stage which points to the ADLSGen2 file system",
+          "type": "string"
+        },
+        "warehouse": {
+          "description": "The virtual warehouse to use for the data migration.",
+          "type": "string"
+        },
+        "schema": {
+          "description": "The Snowflake schema used for the Metadata target",
+          "type": "string",
+          "default": "PUBLIC"
+        },
+        "role": {
+          "description": "The Snowflake role you're using which allows you to create, modify, and use the stored data for transformation and migration.",
+          "type": "string"
+        },
+        "snowflakeAuthKind": {
+          "$ref": "#/definitions/SnowflakeAuthKind",
+          "description": "The kind of snowflake authentication to use"
+        },
+        "user": {
+          "description": "Snowflake user",
+          "type": "string"
+        },
+        "password": {
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create"
+          ],
+          "description": "Password of Snowflake account or passphrase for the private key file",
+          "type": "string"
+        },
+        "privateKeyFile": {
+          "description": "A path to the location of the private key file (in PEM format) to use for key pair authentication.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "accountIdentifier",
+        "stage",
+        "warehouse",
+        "snowflakeAuthKind",
+        "user"
+      ],
+      "x-ms-discriminator-value": "SnowflakeMetadataTarget"
+    },
+    "MetadataTargetKind": {
+      "description": "The kind of metadata target.",
+      "type": "string",
+      "enum": [
+        "AzureSqlMetadataTarget",
+        "SnowflakeMetadataTarget",
+        "DatabricksMetadataTarget"
+      ],
+      "x-ms-enum": {
+        "name": "MetadataTargetKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AzureSqlMetadataTarget"
+          },
+          {
+            "value": "SnowflakeMetadataTarget"
+          },
+          {
+            "value": "DatabricksMetadataTarget"
+          }
+        ]
+      }
+    },
+    "SnowflakeAuthKind": {
+      "description": "Snowflake account authorization type.",
+      "type": "string",
+      "enum": [
+        "Basic",
+        "PrivateKey"
+      ],
+      "x-ms-enum": {
+        "name": "SnowflakeAuthKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Basic"
+          },
+          {
+            "value": "PrivateKey"
+          }
+        ]
+      }
     },
     "MetadataMigrationList": {
       "description": "The list of Migrator Metadata Migrations.",
