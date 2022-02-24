@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ApplicationInsightsManagementClient",
-    "description": "Azure Application Insights workbook type.",
+    "description": "Azure workbook resource type.",
     "version": "2021-08-01"
   },
   "host": "management.azure.com",
@@ -36,7 +36,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/workbooks": {
       "get": {
-        "description": "Get all private workbooks defined within a specified subscription and category.",
+        "description": "Get all Workbooks defined within a specified subscription and category.",
         "operationId": "Workbooks_ListBySubscription",
         "parameters": [
           {
@@ -78,9 +78,6 @@
           },
           "WorkbooksList2": {
             "$ref": "./examples/WorkbooksList2.json"
-          },
-          "WorkbooksManagedList": {
-            "$ref": "./examples/WorkbooksManagedList.json"
           }
         }
       }
@@ -132,7 +129,10 @@
         "x-ms-examples": {
           "WorkbooksList": {
             "$ref": "./examples/WorkbooksList.json"
-          }
+          },
+          "WorkbooksManagedList": {
+            "$ref": "./examples/WorkbooksManagedList.json"
+          }          
         }
       }
     },
@@ -474,7 +474,7 @@
       "description": "Workbook list result."
     },
     "Workbook": {
-      "description": "An Application Insights workbook definition.",
+      "description": "A workbook definition.",
       "type": "object",
       "allOf": [
         {
@@ -683,7 +683,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the Application Insights component resource.",
+      "description": "The name of the workbook resource.",
       "x-ms-parameter-location": "method"
     },
     "CategoryParameter": {
