@@ -1,0 +1,292 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-11-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advancedThreatProtectionSettings": {
+      "get": {
+        "tags": [
+          "DatabaseAdvancedThreatProtectionSettings"
+        ],
+        "description": "Gets a list of database's Advanced Threat Protection states.",
+        "operationId": "DatabaseAdvancedThreatProtectionSettings_ListByDatabase",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the database Advanced Threat Protection states.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseAdvancedThreatProtectionListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 UpdateNotAllowedOnPausedDatabase - User attempted to perform an update on a paused database.\n\n * 400 AdvancedThreatProtectionInsufficientDiskSpace - Insufficient disk space to save the Advanced Threat Protection settings metadata in the database\n\n * 400 InvalidDatabaseAdvancedThreatProtectionCreateRequest - The create database Advanced Threat Protection request does not exist or has no properties object\n\n * 400 AdvancedThreatProtectionInvalidUserSuppliedParameter - An invalid parameter value was provided by the client\n\n * 400 UpsertDatabaseAdvancedThreatProtectionFailed - An error has occurred while saving Advanced Threat Protection settings, please try again later\n\n * 400 UpsertDatabaseAdvancedThreatProtectionFailed - An error has occurred while saving Advanced Threat Protection settings, please try again later\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 UpsertDatabaseAdvancedThreatProtectionFailed - An error has occurred while saving Advanced Threat Protection settings, please try again later\n\n * 409 DatabaseAdvancedThreatProtectionInProgress - Setting the database Advanced Threat Protection is already in progress\n\n * 409 UpsertDatabaseAdvancedThreatProtectionFailed - An error has occurred while saving Advanced Threat Protection settings, please try again later\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 UpsertDatabaseAdvancedThreatProtectionFailed - An error has occurred while saving Advanced Threat Protection settings, please try again later\n\n * 500 GetDatabaseAdvancedThreatProtectionFailed - Failed to get Advanced Threat Protection settings"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Lists the database's Advanced Threat Protection settings.": {
+            "$ref": "./examples/DatabaseAdvancedThreatProtectionSettingsListByDatabase.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advancedThreatProtectionSettings/{advancedThreatProtectionName}": {
+      "get": {
+        "tags": [
+          "DatabaseAdvancedThreatProtectionSettings"
+        ],
+        "description": "Gets a database's Advanced Threat Protection state.",
+        "operationId": "DatabaseAdvancedThreatProtectionSettings_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "advancedThreatProtectionName",
+            "in": "path",
+            "description": "The name of the Advanced Threat Protection state.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "AdvancedThreatProtectionName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the database's Advanced Threat Protection state.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseAdvancedThreatProtection"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 UpdateNotAllowedOnPausedDatabase - User attempted to perform an update on a paused database.\n\n * 400 AdvancedThreatProtectionInsufficientDiskSpace - Insufficient disk space to save the Advanced Threat Protection settings metadata in the database\n\n * 400 InvalidDatabaseAdvancedThreatProtectionCreateRequest - The create database Advanced Threat Protection request does not exist or has no properties object\n\n * 400 AdvancedThreatProtectionInvalidUserSuppliedParameter - An invalid parameter value was provided by the client\n\n * 400 UpsertDatabaseAdvancedThreatProtectionFailed - An error has occurred while saving Advanced Threat Protection settings, please try again later\n\n * 400 UpsertDatabaseAdvancedThreatProtectionFailed - An error has occurred while saving Advanced Threat Protection settings, please try again later\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 UpsertDatabaseAdvancedThreatProtectionFailed - An error has occurred while saving Advanced Threat Protection settings, please try again later\n\n * 409 DatabaseAdvancedThreatProtectionInProgress - Setting the database Advanced Threat Protection is already in progress\n\n * 409 UpsertDatabaseAdvancedThreatProtectionFailed - An error has occurred while saving Advanced Threat Protection settings, please try again later\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 UpsertDatabaseAdvancedThreatProtectionFailed - An error has occurred while saving Advanced Threat Protection settings, please try again later\n\n * 500 GetDatabaseAdvancedThreatProtectionFailed - Failed to get Advanced Threat Protection settings"
+          }
+        },
+        "x-ms-examples": {
+          "Get a database's Advanced Threat Protection settings.": {
+            "$ref": "./examples/DatabaseAdvancedThreatProtectionSettingsGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DatabaseAdvancedThreatProtectionSettings"
+        ],
+        "description": "Creates or updates a database's Advanced Threat Protection state.",
+        "operationId": "DatabaseAdvancedThreatProtectionSettings_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "advancedThreatProtectionName",
+            "in": "path",
+            "description": "The name of the Advanced Threat Protection state.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "AdvancedThreatProtectionName",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The database Advanced Threat Protection state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseAdvancedThreatProtection"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully set the database Advanced Threat Protection state.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseAdvancedThreatProtection"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 UpdateNotAllowedOnPausedDatabase - User attempted to perform an update on a paused database.\n\n * 400 AdvancedThreatProtectionInsufficientDiskSpace - Insufficient disk space to save the Advanced Threat Protection settings metadata in the database\n\n * 400 InvalidDatabaseAdvancedThreatProtectionCreateRequest - The create database Advanced Threat Protection request does not exist or has no properties object\n\n * 400 AdvancedThreatProtectionInvalidUserSuppliedParameter - An invalid parameter value was provided by the client\n\n * 400 UpsertDatabaseAdvancedThreatProtectionFailed - An error has occurred while saving Advanced Threat Protection settings, please try again later\n\n * 400 UpsertDatabaseAdvancedThreatProtectionFailed - An error has occurred while saving Advanced Threat Protection settings, please try again later\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 UpsertDatabaseAdvancedThreatProtectionFailed - An error has occurred while saving Advanced Threat Protection settings, please try again later\n\n * 409 DatabaseAdvancedThreatProtectionInProgress - Setting the database Advanced Threat Protection is already in progress\n\n * 409 UpsertDatabaseAdvancedThreatProtectionFailed - An error has occurred while saving Advanced Threat Protection settings, please try again later\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 UpsertDatabaseAdvancedThreatProtectionFailed - An error has occurred while saving Advanced Threat Protection settings, please try again later\n\n * 500 GetDatabaseAdvancedThreatProtectionFailed - Failed to get Advanced Threat Protection settings"
+          },
+          "201": {
+            "description": "Successfully created the database Advanced Threat Protection state.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseAdvancedThreatProtection"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a database's Advanced Threat Protection settings with minimal parameters": {
+            "$ref": "./examples/DatabaseAdvancedThreatProtectionSettingsCreateMin.json"
+          },
+          "Update a database's Advanced Threat Protection settings with all parameters": {
+            "$ref": "./examples/DatabaseAdvancedThreatProtectionSettingsCreateMax.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AdvancedThreatProtectionProperties": {
+      "description": "Properties of an Advanced Threat Protection state.",
+      "required": [
+        "state"
+      ],
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "Specifies the state of the Advanced Threat Protection, whether it is enabled or disabled or a state has not been applied yet on the specific database or server.",
+          "enum": [
+            "New",
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AdvancedThreatProtectionState",
+            "modelAsString": false
+          }
+        },
+        "creationTime": {
+          "format": "date-time",
+          "description": "Specifies the UTC creation time of the policy.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DatabaseAdvancedThreatProtection": {
+      "description": "A database Advanced Threat Protection.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../common/v1/types.json#/definitions/systemData",
+          "description": "SystemData of AdvancedThreatProtectionResource.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/AdvancedThreatProtectionProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DatabaseAdvancedThreatProtectionListResult": {
+      "description": "A list of the database's Advanced Threat Protection configurations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatabaseAdvancedThreatProtection"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

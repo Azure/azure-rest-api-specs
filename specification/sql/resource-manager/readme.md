@@ -41,6 +41,7 @@ input-file:
   - Microsoft.Sql/preview/2021-11-01-preview/BackupShortTermRetentionPolicies.json
   - Microsoft.Sql/preview/2021-11-01-preview/BlobAuditing.json
   - Microsoft.Sql/preview/2021-11-01-preview/DataWarehouseUserActivities.json
+  - Microsoft.Sql/preview/2021-11-01-preview/DatabaseAdvancedThreatProtectionSettings.json
   - Microsoft.Sql/preview/2021-11-01-preview/DatabaseAdvisors.json
   - Microsoft.Sql/preview/2021-11-01-preview/DatabaseAutomaticTuning.json
   - Microsoft.Sql/preview/2021-11-01-preview/DatabaseColumns.json
@@ -119,6 +120,7 @@ input-file:
   - Microsoft.Sql/preview/2021-11-01-preview/RestorableDroppedManagedDatabases.json
   - Microsoft.Sql/preview/2021-11-01-preview/RestorePoints.json
   - Microsoft.Sql/preview/2021-11-01-preview/SensitivityLabels.json
+  - Microsoft.Sql/preview/2021-11-01-preview/ServerAdvancedThreatProtectionSettings.json
   - Microsoft.Sql/preview/2021-11-01-preview/ServerAdvisors.json
   - Microsoft.Sql/preview/2021-11-01-preview/ServerAutomaticTuning.json
   - Microsoft.Sql/preview/2021-11-01-preview/ServerAzureADAdministrators.json
