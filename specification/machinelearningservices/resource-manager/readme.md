@@ -39,7 +39,6 @@ input-file:
   - Microsoft.MachineLearningServices/preview/2022-02-01-preview/machineLearningServices.json
   - Microsoft.MachineLearningServices/preview/2022-02-01-preview/mfe.json
   - Microsoft.MachineLearningServices/preview/2022-02-01-preview/workspaceFeatures.json
-  - Microsoft.MachineLearningServices/preview/2022-02-01-preview/workspaceSkus.json
 ```
 
 ### Tag: package-2022-01-01-preview
