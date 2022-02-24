@@ -34,14 +34,6 @@ opt-in-extensible-enums: true
 
 ```yaml
 directive:
-  - from: AssetsAndAssetFilters.json
-    reason: Patch response is 202.
-    suppress: LongRunningResponseStatusCode
-
-  - from: Accounts.json
-    reason: Patch response is 202.
-    suppress: LongRunningResponseStatusCode
-
   - suppress: R2016
     where: $.definitions.TrackedResource.required
     reason: we are still using PUT definition for PATCH, which has location as required property. this is existing suppression added to avoid breaking change.
