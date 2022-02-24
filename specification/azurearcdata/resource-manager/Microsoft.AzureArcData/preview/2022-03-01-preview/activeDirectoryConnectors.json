@@ -149,8 +149,8 @@
       "description": "Details about the Active Directory domain controllers associated with this AD connector instance",
       "properties": {
         "primaryDomainController": {
-          "$ref": "#/definitions/ActiveDirectoryPrimaryDomainController",
-          "description": "null",
+          "$ref": "#/definitions/ActiveDirectoryDomainController",
+          "description": "Information about the Primary Domain Controller (PDC) in the AD domain.",
           "x-ms-client-flatten": false
         },
         "secondaryDomainControllers": {
@@ -163,13 +163,13 @@
         "primaryDomainController"
       ]
     },
-    "ActiveDirectoryPrimaryDomainController": {
+    "ActiveDirectoryDomainController": {
       "type": "object",
-      "description": "Information about the Primary Domain Controller (PDC) in the AD domain.",
+      "description": "Information about a domain controller in the AD domain.",
       "properties": {
         "hostname": {
           "type": "string",
-          "description": "Fully-qualified domain name of the Primary Domain Controller (PDC) in the AD domain."
+          "description": "Fully-qualified domain name of a domain controller in the AD domain."
         }
       },
       "required": [
@@ -178,18 +178,11 @@
     },
     "ActiveDirectorySecondaryDomainControllers": {
       "type": "array",
-      "description": "List of the fully-qualified domain names of the secondary domain controllers in the AD domain.",
+      "description": "Information about the secondary domain controllers in the AD domain.",
       "items": {
-        "type": "object",
-        "properties": {
-          "hostname": {
-            "type": "string",
-            "description": "Fully-qualified domain name of a secondary domain controller in the AD domain."
-          }
-        },
-        "required": [
-          "hostname"
-        ]
+        "$ref": "#/definitions/ActiveDirectoryDomainController",
+        "description": "List of the fully-qualified domain names of the secondary domain controllers in the AD domain.",
+        "x-ms-client-flatten": false
       },
       "x-ms-identifiers": [
         "hostname"
