@@ -2268,7 +2268,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List Snapshots": {
+          "List Managed Cluster Snapshots": {
             "$ref": "./examples/ManagedClusterSnapshotsList.json"
           }
         }
@@ -2310,7 +2310,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List Snapshots by Resource Group": {
+          "List Managed Cluster Snapshots by Resource Group": {
             "$ref": "./examples/ManagedClusterSnapshotsListByResourceGroup.json"
           }
         }
@@ -2352,7 +2352,7 @@
           }
         },
         "x-ms-examples": {
-          "Get Snapshot": {
+          "Get Managed Cluster Snapshot": {
             "$ref": "./examples/ManagedClusterSnapshotsGet.json"
           }
         }
@@ -2407,8 +2407,57 @@
           }
         },
         "x-ms-examples": {
-          "Create/Update Snapshot": {
+          "Create/Update Managed Cluster Snapshot": {
             "$ref": "./examples/ManagedClusterSnapshotsCreate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ManagedClusterSnapshots"
+        ],
+        "operationId": "ManagedClusterSnapshots_UpdateTags",
+        "summary": "Updates tags on a managed cluster snapshot.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to the Update managed cluster snapshot Tags operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ManagedClusterSnapshot"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Managed Cluster Snapshot Tags": {
+            "$ref": "./examples/ManagedClusterSnapshotsUpdateTags.json"
           }
         }
       },
@@ -2447,7 +2496,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete Snapshot": {
+          "Delete Managed Cluster Snapshot": {
             "$ref": "./examples/ManagedClusterSnapshotsDelete.json"
           }
         }
@@ -5887,7 +5936,7 @@
         },
         "managedClusterPropertiesReadOnly": {
           "$ref": "#/definitions/ManagedClusterPropertiesForSnapshot",
-          "description": "What the properties are snapshoted when getting managed cluster snapshot. Those properties are read-only."
+          "description": "What the properties will be showed when getting managed cluster snapshot. Those properties are read-only."
         }
       },
       "description": "Properties for a managed cluster snapshot."
@@ -5907,14 +5956,15 @@
         },
         "enableRbac": {
           "type": "boolean",
-          "description": "Whether the cluster that snapshoted has enabled Kubernetes Role-Based Access Control or not."
+          "description": "Whether the cluster has enabled Kubernetes Role-Based Access Control or not."
         },
         "networkProfile": {
           "type": "object",
           "$ref": "#/definitions/NetworkProfileForSnapshot",
-          "description": "The current network profile that snapshoted."
+          "description": "The current network profile."
         }
-      }
+      },
+      "description": "managed cluster properties for snapshot, these properties are read only."
     },
     "NetworkProfileForSnapshot": {
       "type": "object",
@@ -6016,7 +6066,8 @@
           "title": "The load balancer sku for the managed cluster.",
           "description": "The default is 'standard'. See [Azure Load Balancer SKUs](https://docs.microsoft.com/azure/load-balancer/skus) for more information about the differences between load balancer SKUs."
         }
-      }
+      },
+      "description": "network profile for managed cluster snapshot, these properties are read only."
     },
     "SnapshotType": {
       "type": "string",
