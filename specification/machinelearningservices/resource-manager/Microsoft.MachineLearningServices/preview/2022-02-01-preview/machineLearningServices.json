@@ -50,7 +50,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "#/definitions/AmlOperationListResult"
             }
           },
           "default": {
@@ -209,6 +209,7 @@
         ],
         "description": "Updates a machine learning workspace with the specified parameters.",
         "operationId": "Workspaces_Update",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Update Workspace": {
             "$ref": "./examples/Workspace/update.json"
@@ -243,6 +244,9 @@
             "schema": {
               "$ref": "#/definitions/Workspace"
             }
+          },
+          "202": {
+            "description": "The request was successful; the request was well-formed and received properly."
           },
           "default": {
             "description": "Error response describing why the operation failed",
@@ -488,6 +492,12 @@
             "schema": {
               "$ref": "#/definitions/ListUsagesResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -528,6 +538,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineSizeListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -967,6 +983,9 @@
                 "type": "string"
               }
             }
+          },
+          "204": {
+            "description": "No content; The target compute does not exist."
           },
           "default": {
             "description": "Error response describing why the request failed.",
@@ -1463,6 +1482,12 @@
             "schema": {
               "$ref": "#/definitions/PrivateLinkResourceListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1946,7 +1971,7 @@
     }
   },
   "definitions": {
-    "Operation": {
+    "AmlOperation": {
       "description": "Azure Machine Learning workspace REST API operation",
       "type": "object",
       "properties": {
@@ -1956,6 +1981,7 @@
         },
         "display": {
           "description": "Display name of operation",
+          "type": "object",
           "properties": {
             "provider": {
               "description": "The resource provider name: Microsoft.MachineLearningExperimentation",
@@ -1974,16 +2000,21 @@
               "type": "string"
             }
           }
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation applies to data-plane",
+          "type": "boolean"
         }
       }
     },
-    "OperationListResult": {
+    "AmlOperationListResult": {
+      "type": "object",
       "description": "An array of operations supported by the resource provider.",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Operation"
+            "$ref": "#/definitions/AmlOperation"
           },
           "description": "List of AML workspace operations supported by the AML workspace resource provider."
         }
@@ -2046,11 +2077,11 @@
           "type": "string"
         },
         "applicationInsights": {
-          "description": "ARM id of the application insights associated with this workspace. This cannot be changed once the workspace has been created",
+          "description": "ARM id of the application insights associated with this workspace.",
           "type": "string"
         },
         "containerRegistry": {
-          "description": "ARM id of the container registry associated with this workspace. This cannot be changed once the workspace has been created",
+          "description": "ARM id of the container registry associated with this workspace.",
           "type": "string",
           "x-nullable": true
         },
@@ -2088,30 +2119,6 @@
           "type": "boolean",
           "description": "The flag to signal HBI data in the workspace and reduce diagnostic data collected by the service",
           "default": false
-        },
-        "softDeleteEnabled": {
-          "type": "string",
-          "description": "create a workspace with soft delete capability",
-          "enum": [
-            "True",
-            "False"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "SoftDeleteEnabled"
-          }
-        },
-        "allowRecoverSoftDeletedWorkspace": {
-          "type": "string",
-          "description": "Allow a soft deleted workspace to be recovered",
-          "enum": [
-            "True",
-            "False"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "AllowRecoverSoftDeletedWorkspace"
-          }
         },
         "serviceProvisionedResourceGroup": {
           "type": "string",
@@ -2191,6 +2198,7 @@
       }
     },
     "WorkspaceUpdateParameters": {
+      "type": "object",
       "description": "The parameters for updating a machine learning workspace.",
       "properties": {
         "tags": {
@@ -2216,6 +2224,7 @@
       }
     },
     "WorkspacePropertiesUpdateParameters": {
+      "type": "object",
       "description": "The parameters for updating the properties of a machine learning workspace.",
       "properties": {
         "description": {
@@ -2249,10 +2258,19 @@
             "modelAsString": true,
             "name": "PublicNetworkAccess"
           }
+        },
+        "applicationInsights": {
+          "description": "ARM id of the application insights associated with this workspace.",
+          "type": "string"
+        },
+        "containerRegistry": {
+          "description": "ARM id of the container registry associated with this workspace.",
+          "type": "string"
         }
       }
     },
     "UsageName": {
+      "type": "object",
       "properties": {
         "value": {
           "readOnly": true,
@@ -2318,6 +2336,7 @@
       "description": "Describes AML Resource Usage."
     },
     "ListUsagesResult": {
+      "type": "object",
       "properties": {
         "value": {
           "readOnly": true,
@@ -2336,6 +2355,7 @@
       "description": "The List Usages operation response."
     },
     "VirtualMachineSize": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -2413,6 +2433,7 @@
       "description": "Describes the properties of a VM size."
     },
     "EstimatedVMPrices": {
+      "type": "object",
       "properties": {
         "billingCurrency": {
           "type": "string",
@@ -2499,6 +2520,7 @@
       "description": "The estimated price info for using a VM of a particular OS type, tier, etc."
     },
     "VirtualMachineSizeListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -2511,6 +2533,7 @@
       "description": "The List Virtual Machine size operation response."
     },
     "WorkspaceListResult": {
+      "type": "object",
       "description": "The result of a request to list machine learning workspaces.",
       "properties": {
         "value": {
@@ -2527,6 +2550,7 @@
       }
     },
     "QuotaBaseProperties": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -2557,6 +2581,7 @@
       "description": "The properties for Quota update or retrieval."
     },
     "QuotaUpdateParameters": {
+      "type": "object",
       "properties": {
         "value": {
           "description": "The list for update quota.",
@@ -2745,6 +2770,7 @@
       }
     },
     "UpdateWorkspaceQuotasResult": {
+      "type": "object",
       "properties": {
         "value": {
           "description": "The list of workspace quota update result.",
@@ -2763,6 +2789,7 @@
       "description": "The result of update workspace quota."
     },
     "UpdateWorkspaceQuotas": {
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -2816,6 +2843,7 @@
       "description": "The properties for update Quota response."
     },
     "ResourceName": {
+      "type": "object",
       "properties": {
         "value": {
           "readOnly": true,
@@ -2831,6 +2859,7 @@
       "description": "The Resource Name."
     },
     "ResourceQuota": {
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -2875,6 +2904,7 @@
       "description": "The quota assigned to a resource."
     },
     "ListWorkspaceQuotas": {
+      "type": "object",
       "properties": {
         "value": {
           "description": "The list of Workspace Quotas by VM Family",
@@ -2893,6 +2923,7 @@
       "description": "The List WorkspaceQuotasByVMFamily operation response."
     },
     "ResourceId": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -3029,13 +3060,7 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         },
         {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "description": "Compute properties",
-              "$ref": "#/definitions/Compute"
-            }
-          }
+          "$ref": "#/definitions/ComputeResourceSchema"
         }
       ],
       "properties": {
@@ -3060,6 +3085,15 @@
         }
       }
     },
+    "ComputeResourceSchema": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Compute properties",
+          "$ref": "#/definitions/Compute"
+        }
+      }
+    },
     "Compute": {
       "type": "object",
       "description": "Machine Learning compute object.",
@@ -3071,7 +3105,8 @@
         },
         "computeLocation": {
           "description": "Location for the underlying compute",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "provisioningState": {
           "type": "string",
@@ -3140,79 +3175,82 @@
           "$ref": "#/definitions/Compute"
         },
         {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "type": "object",
-              "description": "AKS properties",
-              "properties": {
-                "clusterFqdn": {
-                  "description": "Cluster full qualified domain name",
-                  "type": "string"
-                },
-                "systemServices": {
-                  "type": "array",
-                  "description": "System services",
-                  "items": {
-                    "$ref": "#/definitions/SystemService"
-                  },
-                  "readOnly": true
-                },
-                "agentCount": {
-                  "description": "Number of agents",
-                  "type": "integer",
-                  "format": "int32",
-                  "minimum": 0
-                },
-                "agentVmSize": {
-                  "description": "Agent virtual machine size",
-                  "type": "string"
-                },
-                "clusterPurpose": {
-                  "description": "Intended usage of the cluster",
-                  "type": "string",
-                  "default": "FastProd",
-                  "enum": [
-                    "FastProd",
-                    "DenseProd",
-                    "DevTest"
-                  ],
-                  "x-ms-enum": {
-                    "name": "ClusterPurpose",
-                    "modelAsString": true
-                  }
-                },
-                "sslConfiguration": {
-                  "description": "SSL configuration",
-                  "$ref": "#/definitions/SslConfiguration"
-                },
-                "aksNetworkingConfiguration": {
-                  "description": "AKS networking configuration for vnet",
-                  "$ref": "#/definitions/AksNetworkingConfiguration"
-                },
-                "loadBalancerType": {
-                  "description": "Load Balancer Type",
-                  "type": "string",
-                  "default": "PublicIp",
-                  "enum": [
-                    "PublicIp",
-                    "InternalLoadBalancer"
-                  ],
-                  "x-ms-enum": {
-                    "name": "LoadBalancerType",
-                    "modelAsString": true
-                  }
-                },
-                "loadBalancerSubnet": {
-                  "description": "Load Balancer Subnet",
-                  "type": "string"
-                }
-              }
-            }
-          }
+          "$ref": "#/definitions/AKSSchema"
         }
       ],
       "x-ms-discriminator-value": "AKS"
+    },
+    "AKSSchema": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "AKS properties",
+          "properties": {
+            "clusterFqdn": {
+              "description": "Cluster full qualified domain name",
+              "type": "string"
+            },
+            "systemServices": {
+              "type": "array",
+              "description": "System services",
+              "items": {
+                "$ref": "#/definitions/SystemService"
+              },
+              "readOnly": true
+            },
+            "agentCount": {
+              "description": "Number of agents",
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0
+            },
+            "agentVmSize": {
+              "description": "Agent virtual machine size",
+              "type": "string"
+            },
+            "clusterPurpose": {
+              "description": "Intended usage of the cluster",
+              "type": "string",
+              "default": "FastProd",
+              "enum": [
+                "FastProd",
+                "DenseProd",
+                "DevTest"
+              ],
+              "x-ms-enum": {
+                "name": "ClusterPurpose",
+                "modelAsString": true
+              }
+            },
+            "sslConfiguration": {
+              "description": "SSL configuration",
+              "$ref": "#/definitions/SslConfiguration"
+            },
+            "aksNetworkingConfiguration": {
+              "description": "AKS networking configuration for vnet",
+              "$ref": "#/definitions/AksNetworkingConfiguration"
+            },
+            "loadBalancerType": {
+              "description": "Load Balancer Type",
+              "type": "string",
+              "default": "PublicIp",
+              "enum": [
+                "PublicIp",
+                "InternalLoadBalancer"
+              ],
+              "x-ms-enum": {
+                "name": "LoadBalancerType",
+                "modelAsString": true
+              }
+            },
+            "loadBalancerSubnet": {
+              "description": "Load Balancer Subnet",
+              "type": "string"
+            }
+          }
+        }
+      }
     },
     "Kubernetes": {
       "description": "A Machine Learning compute based on Kubernetes Compute.",
@@ -3333,7 +3371,8 @@
         "subnet": {
           "title": "Subnet.",
           "description": "Virtual network subnet resource ID the compute nodes belong to.",
-          "$ref": "#/definitions/ResourceId"
+          "$ref": "#/definitions/ResourceId",
+          "x-nullable": true
         },
         "remoteLoginPortPublicAccess": {
           "type": "string",
@@ -3405,6 +3444,11 @@
           "default": true,
           "title": "Enable node public IP.",
           "description": "Enable or disable node public IP address provisioning. Possible values are: Possible values are: true - Indicates that the compute nodes will have public IPs provisioned. false - Indicates that the compute nodes will have a private endpoint and no public IPs."
+        },
+        "propertyBag": {
+          "type": "object",
+          "additionalProperties": {},
+          "description": "A property bag containing additional properties."
         }
       }
     },
@@ -3415,17 +3459,20 @@
           "$ref": "#/definitions/Compute"
         },
         {
-          "type": "object",
-          "description": "Properties(top level) of AmlCompute",
-          "properties": {
-            "properties": {
-              "description": "Properties of AmlCompute",
-              "$ref": "#/definitions/AmlComputeProperties"
-            }
-          }
+          "$ref": "#/definitions/AmlComputeSchema"
         }
       ],
       "x-ms-discriminator-value": "AmlCompute"
+    },
+    "AmlComputeSchema": {
+      "type": "object",
+      "description": "Properties(top level) of AmlCompute",
+      "properties": {
+        "properties": {
+          "description": "Properties of AmlCompute",
+          "$ref": "#/definitions/AmlComputeProperties"
+        }
+      }
     },
     "ComputeInstanceProperties": {
       "description": "Compute Instance properties",
@@ -3516,6 +3563,45 @@
           "description": "The last operation on ComputeInstance.",
           "$ref": "#/definitions/ComputeInstanceLastOperation",
           "readOnly": true
+        },
+        "schedules": {
+          "description": "The list of schedules to be applied on the computes.",
+          "$ref": "#/definitions/ComputeSchedules",
+          "readOnly": true
+        },
+        "enableNodePublicIp": {
+          "type": "boolean",
+          "title": "Enable node public IP.",
+          "description": "Enable or disable node public IP address provisioning. Possible values are: Possible values are: true - Indicates that the compute nodes will have public IPs provisioned. false - Indicates that the compute nodes will have a private endpoint and no public IPs."
+        },
+        "containers": {
+          "type": "array",
+          "readOnly": true,
+          "description": "Describes informations of containers on this ComputeInstance.",
+          "items": {
+            "$ref": "#/definitions/ComputeInstanceContainer"
+          }
+        },
+        "dataDisks": {
+          "type": "array",
+          "readOnly": true,
+          "description": "Describes informations of dataDisks on this ComputeInstance.",
+          "items": {
+            "$ref": "#/definitions/ComputeInstanceDataDisk"
+          }
+        },
+        "dataMounts": {
+          "type": "array",
+          "readOnly": true,
+          "description": "Describes informations of dataMounts on this ComputeInstance.",
+          "items": {
+            "$ref": "#/definitions/ComputeInstanceDataMount"
+          }
+        },
+        "versions": {
+          "description": "ComputeInstance version.",
+          "$ref": "#/definitions/ComputeInstanceVersion",
+          "readOnly": true
         }
       }
     },
@@ -3526,17 +3612,20 @@
           "$ref": "#/definitions/Compute"
         },
         {
-          "type": "object",
-          "description": "Properties(top level) of ComputeInstance",
-          "properties": {
-            "properties": {
-              "description": "Properties of ComputeInstance",
-              "$ref": "#/definitions/ComputeInstanceProperties"
-            }
-          }
+          "$ref": "#/definitions/ComputeInstanceSchema"
         }
       ],
       "x-ms-discriminator-value": "ComputeInstance"
+    },
+    "ComputeInstanceSchema": {
+      "type": "object",
+      "description": "Properties(top level) of ComputeInstance",
+      "properties": {
+        "properties": {
+          "description": "Properties of ComputeInstance",
+          "$ref": "#/definitions/ComputeInstanceProperties"
+        }
+      }
     },
     "VirtualMachine": {
       "description": "A Machine Learning compute based on Azure Virtual Machines.",
@@ -3545,38 +3634,46 @@
           "$ref": "#/definitions/Compute"
         },
         {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "type": "object",
-              "properties": {
-                "virtualMachineSize": {
-                  "description": "Virtual Machine size",
-                  "type": "string"
-                },
-                "sshPort": {
-                  "description": "Port open for ssh connections.",
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "address": {
-                  "description": "Public IP address of the virtual machine.",
-                  "type": "string"
-                },
-                "administratorAccount": {
-                  "description": "Admin credentials for virtual machine",
-                  "$ref": "#/definitions/VirtualMachineSshCredentials"
-                },
-                "isNotebookInstanceCompute": {
-                  "description": "Indicates whether this compute will be used for running notebooks.",
-                  "type": "boolean"
-                }
-              }
-            }
-          }
+          "$ref": "#/definitions/VirtualMachineSchema"
         }
       ],
       "x-ms-discriminator-value": "VirtualMachine"
+    },
+    "VirtualMachineSchema": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "virtualMachineSize": {
+              "description": "Virtual Machine size",
+              "type": "string"
+            },
+            "sshPort": {
+              "description": "Port open for ssh connections.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "notebookServerPort": {
+              "description": "Notebook server port open for ssh connections.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "address": {
+              "description": "Public IP address of the virtual machine.",
+              "type": "string"
+            },
+            "administratorAccount": {
+              "description": "Admin credentials for virtual machine",
+              "$ref": "#/definitions/VirtualMachineSshCredentials"
+            },
+            "isNotebookInstanceCompute": {
+              "description": "Indicates whether this compute will be used for running notebooks.",
+              "type": "boolean"
+            }
+          }
+        }
+      }
     },
     "HDInsightProperties": {
       "type": "object",
@@ -3604,15 +3701,18 @@
           "$ref": "#/definitions/Compute"
         },
         {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/HDInsightProperties"
-            }
-          }
+          "$ref": "#/definitions/HDInsightSchema"
         }
       ],
       "x-ms-discriminator-value": "HDInsight"
+    },
+    "HDInsightSchema": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HDInsightProperties"
+        }
+      }
     },
     "DataFactory": {
       "description": "A DataFactory compute.",
@@ -3644,15 +3744,18 @@
           "$ref": "#/definitions/Compute"
         },
         {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/DatabricksProperties"
-            }
-          }
+          "$ref": "#/definitions/DatabricksSchema"
         }
       ],
       "x-ms-discriminator-value": "Databricks"
+    },
+    "DatabricksSchema": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabricksProperties"
+        }
+      }
     },
     "DataLakeAnalytics": {
       "description": "A DataLakeAnalytics compute.",
@@ -3661,21 +3764,24 @@
           "$ref": "#/definitions/Compute"
         },
         {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "type": "object",
-              "properties": {
-                "dataLakeStoreAccountName": {
-                  "description": "DataLake Store Account Name",
-                  "type": "string"
-                }
-              }
-            }
-          }
+          "$ref": "#/definitions/DataLakeAnalyticsSchema"
         }
       ],
       "x-ms-discriminator-value": "DataLakeAnalytics"
+    },
+    "DataLakeAnalyticsSchema": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "dataLakeStoreAccountName": {
+              "description": "DataLake Store Account Name",
+              "type": "string"
+            }
+          }
+        }
+      }
     },
     "SynapseSpark": {
       "type": "object",
@@ -3734,24 +3840,6 @@
         }
       ],
       "x-ms-discriminator-value": "SynapseSpark"
-    },
-    "ServicePrincipalCredentials": {
-      "type": "object",
-      "description": "Service principal credentials.",
-      "properties": {
-        "clientId": {
-          "description": "Client Id",
-          "type": "string"
-        },
-        "clientSecret": {
-          "description": "Client secret",
-          "type": "string"
-        }
-      },
-      "required": [
-        "clientId",
-        "clientSecret"
-      ]
     },
     "SystemService": {
       "type": "object",
@@ -3835,6 +3923,7 @@
       }
     },
     "UserAccountCredentials": {
+      "type": "object",
       "properties": {
         "adminUserName": {
           "type": "string",
@@ -3896,6 +3985,7 @@
       ]
     },
     "NodeStateCounts": {
+      "type": "object",
       "properties": {
         "idleNodeCount": {
           "readOnly": true,
@@ -3953,6 +4043,7 @@
       "description": "Desired scale settings for the amlCompute."
     },
     "ClusterUpdateProperties": {
+      "type": "object",
       "properties": {
         "properties": {
           "description": "Properties of ClusterUpdate",
@@ -3962,6 +4053,7 @@
       "description": "The properties of a amlCompute that need to be updated."
     },
     "ClusterUpdateParameters": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -3991,6 +4083,7 @@
       }
     },
     "AmlComputeNodeInformation": {
+      "type": "object",
       "description": "Compute node information related to a AmlCompute.",
       "properties": {
         "nodeId": {
@@ -4116,16 +4209,19 @@
           "$ref": "#/definitions/ComputeSecrets"
         },
         {
-          "type": "object",
-          "properties": {
-            "administratorAccount": {
-              "description": "Admin credentials for virtual machine.",
-              "$ref": "#/definitions/VirtualMachineSshCredentials"
-            }
-          }
+          "$ref": "#/definitions/VirtualMachineSecretsSchema"
         }
       ],
       "x-ms-discriminator-value": "VirtualMachine"
+    },
+    "VirtualMachineSecretsSchema": {
+      "type": "object",
+      "properties": {
+        "administratorAccount": {
+          "description": "Admin credentials for virtual machine.",
+          "$ref": "#/definitions/VirtualMachineSshCredentials"
+        }
+      }
     },
     "DatabricksComputeSecretsProperties": {
       "type": "object",
@@ -4183,6 +4279,7 @@
       "description": "List of private endpoint connection associated with the specified workspace"
     },
     "PrivateEndpointConnection": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
@@ -4217,6 +4314,7 @@
       "description": "The Private Endpoint Connection resource."
     },
     "PrivateEndpointConnectionProperties": {
+      "type": "object",
       "properties": {
         "privateEndpoint": {
           "$ref": "#/definitions/PrivateEndpoint",
@@ -4237,6 +4335,7 @@
       "description": "Properties of the PrivateEndpointConnectProperties."
     },
     "PrivateEndpoint": {
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -4252,6 +4351,7 @@
       "description": "The Private Endpoint resource."
     },
     "PrivateLinkServiceConnectionState": {
+      "type": "object",
       "properties": {
         "status": {
           "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus",
@@ -4299,6 +4399,7 @@
       }
     },
     "PrivateLinkResourceListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -4311,6 +4412,7 @@
       "description": "A list of private link resources"
     },
     "PrivateLinkResource": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties",
@@ -4345,6 +4447,7 @@
       "description": "A private link resource"
     },
     "PrivateLinkResourceProperties": {
+      "type": "object",
       "properties": {
         "groupId": {
           "description": "The private link resource group id.",
@@ -4370,6 +4473,7 @@
       "description": "Properties of a private link resource."
     },
     "SharedPrivateLinkResource": {
+      "type": "object",
       "properties": {
         "name": {
           "description": "Unique name of the private link.",
@@ -4383,6 +4487,7 @@
       }
     },
     "SharedPrivateLinkResourceProperty": {
+      "type": "object",
       "properties": {
         "privateLinkResourceId": {
           "description": "The resource id that private link links to.",
@@ -4422,20 +4527,8 @@
           "description": "The identity that will be used to access the key vault for encryption at rest."
         },
         "keyVaultProperties": {
-          "$ref": "#/definitions/KeyVaultProperties",
+          "$ref": "#/definitions/EncryptionKeyVaultProperties",
           "description": "Customer Key vault properties."
-        },
-        "cosmosDbResourceId": {
-          "description": "The Bring-Your-Own cosmosdb account that customer brings to store data",
-          "type": "string"
-        },
-        "storageAccountResourceId": {
-          "description": "The Bring-Your-Own storage account that customer brings to store data",
-          "type": "string"
-        },
-        "searchAccountResourceId": {
-          "description": "The Bring-Your-Own search account that customer brings to store index",
-          "type": "string"
         }
       },
       "required": [
@@ -4444,7 +4537,7 @@
       ],
       "type": "object"
     },
-    "KeyVaultProperties": {
+    "EncryptionKeyVaultProperties": {
       "properties": {
         "keyVaultArmId": {
           "description": "The ArmId of the keyVault where the customer owned encryption key is present.",
@@ -4577,6 +4670,267 @@
             "name": "OperationStatus",
             "modelAsString": true
           }
+        },
+        "operationTrigger": {
+          "type": "string",
+          "description": "Trigger of operation.",
+          "enum": [
+            "User",
+            "Schedule",
+            "IdleShutdown"
+          ],
+          "x-ms-enum": {
+            "name": "operationTrigger",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ComputeInstanceVersion": {
+      "type": "object",
+      "description": "Version of computeInstance.",
+      "properties": {
+        "runtime": {
+          "type": "string",
+          "description": "Runtime of compute instance."
+        }
+      }
+    },
+    "ComputeSchedules": {
+      "type": "object",
+      "description": "The list of schedules to be applied on the computes",
+      "properties": {
+        "computeStartStop": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComputeStartStopSchedule"
+          },
+          "description": "The list of compute start stop schedules to be applied."
+        }
+      }
+    },
+    "ComputeStartStopSchedule": {
+      "type": "object",
+      "description": "Compute start stop schedule properties",
+      "properties": {
+        "id": {
+          "description": "Schedule id.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "provisioningStatus": {
+          "type": "string",
+          "enum": [
+            "Completed",
+            "Provisioning",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningStatus",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "description": "The current deployment state of schedule."
+        },
+        "action": {
+          "$ref": "#/definitions/ComputePowerAction"
+        },
+        "schedule": {
+          "$ref": "mfe.json#/definitions/ScheduleBase"
+        }
+      }
+    },
+    "ComputePowerAction": {
+      "type": "string",
+      "description": "The compute power action.",
+      "enum": [
+        "Start",
+        "Stop"
+      ],
+      "x-ms-enum": {
+        "name": "ComputePowerAction",
+        "modelAsString": true
+      }
+    },
+    "ComputeInstanceDataMount": {
+      "type": "object",
+      "description": "Defines an Aml Instance DataMount.",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "Source of the ComputeInstance data mount."
+        },
+        "sourceType": {
+          "description": "Data source type.",
+          "type": "string",
+          "enum": [
+            "Dataset",
+            "Datastore",
+            "URI"
+          ],
+          "x-ms-enum": {
+            "name": "sourceType",
+            "modelAsString": true
+          }
+        },
+        "mountName": {
+          "type": "string",
+          "description": "name of the ComputeInstance data mount."
+        },
+        "mountAction": {
+          "description": "Mount Action.",
+          "type": "string",
+          "enum": [
+            "Mount",
+            "Unmount"
+          ],
+          "x-ms-enum": {
+            "name": "mountAction",
+            "modelAsString": true
+          }
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "who this data mount created by."
+        },
+        "mountPath": {
+          "type": "string",
+          "description": "Path of this data mount."
+        },
+        "mountState": {
+          "description": "Mount state.",
+          "type": "string",
+          "enum": [
+            "MountRequested",
+            "Mounted",
+            "MountFailed",
+            "UnmountRequested",
+            "UnmountFailed",
+            "Unmounted"
+          ],
+          "x-ms-enum": {
+            "name": "mountState",
+            "modelAsString": true
+          }
+        },
+        "mountedOn": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Mounted time.",
+          "description": "The time when the disk mounted."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error of this data mount."
+        }
+      }
+    },
+    "ComputeInstanceDataDisk": {
+      "type": "object",
+      "description": "Defines an Aml Instance DataDisk.",
+      "properties": {
+        "caching": {
+          "description": "Caching type of Data Disk.",
+          "type": "string",
+          "enum": [
+            "None",
+            "ReadOnly",
+            "ReadWrite"
+          ],
+          "x-ms-enum": {
+            "name": "caching",
+            "modelAsString": true
+          }
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The initial disk size in gigabytes.",
+          "description": "The initial disk size in gigabytes."
+        },
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The logical unit number.",
+          "description": "The lun is used to uniquely identify each data disk. If attaching multiple disks, each should have a distinct lun."
+        },
+        "storageAccountType": {
+          "description": "type of this storage account.",
+          "type": "string",
+          "default": "Standard_LRS",
+          "enum": [
+            "Standard_LRS",
+            "Premium_LRS"
+          ],
+          "x-ms-enum": {
+            "name": "storageAccountType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ComputeInstanceContainer": {
+      "type": "object",
+      "description": "Defines an Aml Instance container.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the ComputeInstance container."
+        },
+        "autosave": {
+          "description": "Auto save settings.",
+          "type": "string",
+          "enum": [
+            "None",
+            "Local",
+            "Remote"
+          ],
+          "x-ms-enum": {
+            "name": "autosave",
+            "modelAsString": true
+          }
+        },
+        "gpu": {
+          "type": "string",
+          "description": "Information of GPU."
+        },
+        "network": {
+          "description": "network of this container.",
+          "type": "string",
+          "enum": [
+            "Bridge",
+            "Host"
+          ],
+          "x-ms-enum": {
+            "name": "network",
+            "modelAsString": true
+          }
+        },
+        "environment": {
+          "description": "Environment information of this container.",
+          "$ref": "#/definitions/ComputeInstanceEnvironmentInfo"
+        },
+        "services": {
+          "type": "array",
+          "readOnly": true,
+          "description": "services of this containers.",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "ComputeInstanceEnvironmentInfo": {
+      "type": "object",
+      "description": "Environment information",
+      "properties": {
+        "name": {
+          "description": "name of environment.",
+          "type": "string"
+        },
+        "version": {
+          "description": "version of environment.",
+          "type": "string"
         }
       }
     },
@@ -4755,23 +5109,13 @@
     "WorkspaceConnection": {
       "x-ms-azure-resource": true,
       "description": "Workspace connection.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "ResourceId of the workspace connection.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Friendly name of the workspace connection.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type of workspace connection.",
-          "readOnly": true
-        },
         "properties": {
           "type": "object",
           "description": "Properties of workspace connection.",
