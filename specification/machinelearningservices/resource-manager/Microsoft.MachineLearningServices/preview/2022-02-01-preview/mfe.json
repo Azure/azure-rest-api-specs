@@ -6240,7 +6240,7 @@
           },
           {
             "value": "LinearSVM",
-            "description": "A support vector machine (SVM) is a supervised machine learning model that uses classification algorithms for two-group classification problems.\nAfter giving an SVM model sets of labeled training data for each category, they’re able to categorize new text.\nLinear SVM performs best when input data is linear, i.e., data can be easily classified by drawing the straight line between classifed values on a plotted graph."
+            "description": "A support vector machine (SVM) is a supervised machine learning model that uses classification algorithms for two-group classification problems.\nAfter giving an SVM model sets of labeled training data for each category, they’re able to categorize new text.\nLinear SVM performs best when input data is linear, i.e., data can be easily classified by drawing the straight line between classified values on a plotted graph."
           },
           {
             "value": "KNN",
@@ -6311,7 +6311,7 @@
           },
           {
             "value": "IOU",
-            "description": "Intersection Over Union. Interserction of predictions divided by union of predictions."
+            "description": "Intersection Over Union. Intersection of predictions divided by union of predictions."
           }
         ]
       },
@@ -7806,7 +7806,7 @@
       "additionalProperties": false
     },
     "FeaturizationMode": {
-      "description": "Feturization mode - determines data featurization mode.",
+      "description": "Featurization mode - determines data featurization mode.",
       "enum": [
         "Auto",
         "Custom",
@@ -7935,7 +7935,7 @@
           "x-nullable": true
         },
         "primaryMetric": {
-          "description": "Primary metric for forecating task.",
+          "description": "Primary metric for forecasting task.",
           "default": "NormalizedRootMeanSquaredError",
           "$ref": "#/definitions/ForecastingPrimaryMetrics"
         }
@@ -8066,7 +8066,7 @@
         "values": [
           {
             "value": "SpearmanCorrelation",
-            "description": "The Spearman’s rank coefficient of correlation is a non-parametric measure of rank correlation."
+            "description": "The Spearman's rank coefficient of correlation is a non-parametric measure of rank correlation."
           },
           {
             "value": "NormalizedRootMeanSquaredError",
@@ -8478,7 +8478,7 @@
           "x-nullable": true
         },
         "layersToFreeze": {
-          "description": "Number of layers to freeze for the model. Must be a positive integer.\r\nFor instance, passing 2 as value for 'seresnext' means\r\nfreezing layer0 and layer1. For a full list of models suported and details on layer freeze, please\r\nsee: https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.",
+          "description": "Number of layers to freeze for the model. Must be a positive integer.\r\nFor instance, passing 2 as value for 'seresnext' means\r\nfreezing layer0 and layer1. For a full list of models supported and details on layer freeze, please\r\nsee: https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.",
           "type": "string",
           "example": "choice(1, 2)",
           "x-nullable": true
@@ -8715,7 +8715,7 @@
       "additionalProperties": false
     },
     "ImageModelSettings": {
-      "description": "Seetings used for training the model.\r\nFor more information on the available settings please visit the official documentation:\r\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.",
+      "description": "Settings used for training the model.\r\nFor more information on the available settings please visit the official documentation:\r\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.",
       "type": "object",
       "properties": {
         "advancedSettings": {
@@ -8809,7 +8809,7 @@
         },
         "layersToFreeze": {
           "format": "int32",
-          "description": "Number of layers to freeze for the model. Must be a positive integer.\r\nFor instance, passing 2 as value for 'seresnext' means\r\nfreezing layer0 and layer1. For a full list of models suported and details on layer freeze, please\r\nsee: https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.",
+          "description": "Number of layers to freeze for the model. Must be a positive integer.\r\nFor instance, passing 2 as value for 'seresnext' means\r\nfreezing layer0 and layer1. For a full list of models supported and details on layer freeze, please\r\nsee: https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.",
           "type": "integer",
           "x-nullable": true
         },
@@ -8915,7 +8915,7 @@
       "additionalProperties": false
     },
     "ImageModelSettingsClassification": {
-      "description": "Seetings used for training the model.\r\nFor more information on the available settings please visit the official documentation:\r\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.",
+      "description": "Settings used for training the model.\r\nFor more information on the available settings please visit the official documentation:\r\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.",
       "type": "object",
       "allOf": [
         {
@@ -8951,7 +8951,7 @@
       "additionalProperties": false
     },
     "ImageModelSettingsObjectDetection": {
-      "description": "Seetings used for training the model.\r\nFor more information on the available settings please visit the official documentation:\r\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.",
+      "description": "Settings used for training the model.\r\nFor more information on the available settings please visit the official documentation:\r\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.",
       "type": "object",
       "allOf": [
         {
@@ -9067,7 +9067,7 @@
       ],
       "properties": {
         "modelSettings": {
-          "description": "Seetings used for training the model.",
+          "description": "Settings used for training the model.",
           "$ref": "#/definitions/ImageModelSettingsObjectDetection",
           "x-nullable": true
         },
@@ -12417,7 +12417,7 @@
           "type": "boolean"
         },
         "mode": {
-          "description": "Featurization mode - User can keep the default 'Auto' mode and AutoML will take care of necessary transformation of the data in featurization phase.\r\nIf 'Off' is selected then no featuriztion is done.\r\nIf 'Custom' is selected then user can specify additional inputs to customize how featurization is done.",
+          "description": "Featurization mode - User can keep the default 'Auto' mode and AutoML will take care of necessary transformation of the data in featurization phase.\r\nIf 'Off' is selected then no featurization is done.\r\nIf 'Custom' is selected then user can specify additional inputs to customize how featurization is done.",
           "default": "Auto",
           "$ref": "#/definitions/FeaturizationMode"
         },
@@ -12767,7 +12767,7 @@
       ],
       "properties": {
         "primaryMetric": {
-          "description": "Primary metrtic for Text-Classification task.",
+          "description": "Primary metric for Text-Classification task.",
           "default": "Accuracy",
           "$ref": "#/definitions/ClassificationPrimaryMetrics"
         }
@@ -12788,7 +12788,7 @@
       ],
       "properties": {
         "primaryMetric": {
-          "description": "Primary metrtic for Text-Classification-Multilabel task.\r\nCurrently only Accuracy is supported as primary metric, hence user need not set it explicitly.",
+          "description": "Primary metric for Text-Classification-Multilabel task.\r\nCurrently only Accuracy is supported as primary metric, hence user need not set it explicitly.",
           "$ref": "#/definitions/ClassificationMultilabelPrimaryMetrics",
           "readOnly": true
         }
