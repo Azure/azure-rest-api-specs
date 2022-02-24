@@ -156,45 +156,45 @@
             }
          }
       },
-      "/providers/Microsoft.CostManagement/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-         "x-ms-examples":{
-             "OperationsList":{
-                "$ref":"./examples/OperationList.json"
-             }
-         },
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
-        },
-        "operationId": "Operations_List",
-        "description": "Lists all of the available consumption REST API operations.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/OperationListResult"
+      "/providers/Microsoft.CostManagement/operations":{
+         "get":{
+            "tags":[
+               "Operations"
+            ],
+            "x-ms-examples":{
+               "OperationsList":{
+                  "$ref":"./examples/OperationList.json"
+               }
+            },
+            "externalDocs":{
+               "url":"https://docs.microsoft.com/en-us/rest/api/cost-management/"
+            },
+            "operationId":"Operations_List",
+            "description":"Lists all of the available consumption REST API operations.",
+            "parameters":[
+               {
+                  "$ref":"#/parameters/apiVersionParameter"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"OK. The request has succeeded.",
+                  "schema":{
+                     "$ref":"#/definitions/OperationListResult"
+                  }
+               },
+               "default":{
+                  "description":"Error response describing why the operation failed.",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               }
+            },
+            "x-ms-pageable":{
+               "nextLinkName":"nextLink"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
+         }
       }
-    }
    },
    "definitions":{
       "Error":{
@@ -213,67 +213,97 @@
             }
          }
       },
-     "Operation": {
-      "description": "A Consumption REST API operation.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Operation Id."
-        },
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}.",
-          "type": "string",
-          "readOnly": true
-        },
-        "display": {
-          "description": "The object that represents the operation.",
-          "type": "object",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft.Consumption.",
-              "type": "string",
-              "readOnly": true
+      "Operation":{
+         "description":"A Consumption REST API operation.",
+         "type":"object",
+         "properties":{
+            "id":{
+               "readOnly":true,
+               "type":"string",
+               "description":"Operation Id."
             },
-            "resource": {
-              "description": "Resource on which the operation is performed: UsageDetail, etc.",
-              "type": "string",
-              "readOnly": true
+            "name":{
+               "description":"Operation name: {provider}/{resource}/{operation}.",
+               "type":"string",
+               "readOnly":true
             },
-            "operation": {
-              "description": "Operation type: Read, write, delete, etc.",
-              "type": "string",
-              "readOnly": true
-            },
-            "description": {
-              "description": "Description of the operation.",
-              "type": "string",
-              "readOnly": true
+            "display":{
+               "description":"The object that represents the operation.",
+               "type":"object",
+               "properties":{
+                  "provider":{
+                     "description":"Service provider: Microsoft.Consumption.",
+                     "type":"string",
+                     "readOnly":true
+                  },
+                  "resource":{
+                     "description":"Resource on which the operation is performed: UsageDetail, etc.",
+                     "type":"string",
+                     "readOnly":true
+                  },
+                  "operation":{
+                     "description":"Operation type: Read, write, delete, etc.",
+                     "type":"string",
+                     "readOnly":true
+                  },
+                  "description":{
+                     "description":"Description of the operation.",
+                     "type":"string",
+                     "readOnly":true
+                  }
+               }
             }
-          }
-        }
-      }
-    },
-     "OperationListResult": {
-      "description": "Result of listing consumption operations. It contains a list of operations and a URL link to get the next set of results.",
-      "type":"object",
-      "properties": {
-        "value": {
-          "description": "List of consumption operations supported by the Microsoft.Consumption resource provider.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Operation"
-          }
-        },
-        "nextLink": {
-          "description": "URL to get the next set of operation list results if there are any.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
+         }
+      },
+      "OperationDisplay":{
+         "description":"Operation display payload",
+         "type":"object",
+         "properties":{
+            "provider":{
+               "description":"Resource provider of the operation",
+               "type":"string"
+            },
+            "resource":{
+               "description":"Resource of the operation",
+               "type":"string"
+            },
+            "operation":{
+               "description":"Localized friendly name for the operation",
+               "type":"string"
+            },
+            "description":{
+               "description":"Localized friendly description for the operation",
+               "type":"string"
+            }
+         }
+      },
+      "OperationListResult":{
+         "description":"Result of listing consumption operations. It contains a list of operations and a URL link to get the next set of results.",
+         "type":"object",
+         "properties":{
+            "value":{
+               "description":"List of consumption operations supported by the Microsoft.Consumption resource provider.",
+               "type":"array",
+               "readOnly":true,
+               "items":{
+                  "$ref":"#/definitions/Operation"
+               }
+            },
+            "nextLink":{
+               "description":"URL to get the next set of operation list results if there are any.",
+               "type":"string",
+               "readOnly":true
+            },
+            "isDataAction":{
+               "description":"Indicates whether the operation is a data action",
+               "type":"boolean"
+            },
+            "display":{
+               "$ref":"#/definitions/OperationDisplay",
+               "description":"Display of the operation"
+            }
+         }
+      },
       "ErrorDetails":{
          "description":"The details of the error.",
          "type":"object",
