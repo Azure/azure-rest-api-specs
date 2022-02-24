@@ -3984,10 +3984,6 @@
           },
           "title": "PublicNetworkAccess of the managedCluster",
           "description": "Allow or deny public network access for AKS"
-        },
-        "kmsProfile": {
-          "$ref": "#/definitions/ManagedClusterKMSProfile",
-          "description": "The Key Management Service configuration."
         }
       },
       "description": "Properties of the managed cluster."
@@ -4323,28 +4319,6 @@
         "enabled"
       ],
       "description": "A Kubernetes add-on profile for a managed cluster."
-    },
-    "ManagedClusterKMSProfile": {
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Whether to enable key management service."
-        },
-        "keyVaultName": {
-          "type": "string",
-          "description": "The key vault name."
-        },
-        "keyName": {
-          "type": "string",
-          "description": "The key name."
-        },
-        "keyVersion": {
-          "type": "string",
-          "description": "The version of the key."
-        }
-      },
-      "title": "KMSProfile specifies attributes for key management service integration.",
-      "description": "key management service profile for a managed cluster."
     },
     "ManagedClusterPodIdentity": {
       "properties": {
@@ -5536,6 +5510,10 @@
         "azureDefender": {
           "$ref": "#/definitions/ManagedClusterSecurityProfileAzureDefender",
           "description": "Azure Defender settings for the security profile."
+        },
+        "azureKeyVaultKms": {
+          "$ref": "#/definitions/AzureKeyVaultKms",
+          "description": "Azure Key Vault key management service settings for the security profile."
         }
       },
       "description": "Security profile for the container service cluster."
@@ -5553,6 +5531,20 @@
         }
       },
       "description": "Azure Defender settings for the security profile."
+    },
+    "AzureKeyVaultKms": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether to enable Azure Key Vault key management service"
+        },
+        "KeyId": {
+          "type": "string",
+          "description": "Identifier of Azure Key Vault key. When Azure Key Vault key management service is enabled, this field is required and must be a valid key identifier. When Azure Key Vault key management service is disabled, leave the field empty."
+        }
+      },
+      "description": "Azure Key Vault key management service settings for the security profile."
     },
     "CreationData": {
       "description": "Data used when creating a target resource from a source resource.",
