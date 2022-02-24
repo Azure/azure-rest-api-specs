@@ -3697,7 +3697,7 @@
           "description": "Enabled to allow this resource to be access from the public network"
         },
         "agentUpdate": {
-          "$ref": "#/definitions/AgentUpdateProperties",
+          "$ref": "#/definitions/AgentUpdatePatchProperties",
           "description": "The session host configuration for updating agent, monitoring agent, and stack component."
         }
       }
@@ -3800,6 +3800,78 @@
       }
     },
     "MaintenanceWindowProperties": {
+      "description": "Maintenance window starting hour and day of week.",
+      "type": "object",
+      "properties": {
+        "hour": {
+          "format": "int32",
+          "type": "integer",
+          "description": "The update start hour of the day. (0 - 23)"
+        },
+        "dayOfWeek": {
+          "type": "string",
+          "description": "Day of the week.",
+          "enum": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "x-ms-enum": {
+            "name": "DayOfWeek",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "AgentUpdatePatchProperties": {
+      "description": "The session host configuration for updating agent, monitoring agent, and stack component.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of maintenance for session host components.",
+          "enum": [
+            "Default",
+            "Scheduled"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHostComponentUpdateType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Default",
+                "description": "Agent and other agent side components are delivery schedule is controlled by WVD Infra."
+              },
+              {
+                "value": "Scheduled",
+                "description": "TenantAdmin have opted in for Scheduled Component Update feature."
+              }
+            ]
+          }
+        },
+        "useSessionHostLocalTime": {
+          "type": "boolean",
+          "description": "Whether to use localTime of the virtual machine."
+        },
+        "maintenanceWindowTimeZone": {
+          "type": "string",
+          "description": "Time zone for maintenance as defined in https://docs.microsoft.com/en-us/dotnet/api/system.timezoneinfo.findsystemtimezonebyid?view=net-5.0. Must be set if useLocalTime is true."
+        },
+        "maintenanceWindows": {
+          "type": "array",
+          "description": "List of maintenance windows. Maintenance windows are 2 hours long.",
+          "items": {
+            "$ref": "#/definitions/MaintenanceWindowPatchProperties"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "MaintenanceWindowPatchProperties": {
       "description": "Maintenance window starting hour and day of week.",
       "type": "object",
       "properties": {
