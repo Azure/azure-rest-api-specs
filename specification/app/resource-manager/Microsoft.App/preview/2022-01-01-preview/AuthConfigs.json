@@ -393,10 +393,6 @@
           "$ref": "#/definitions/Google",
           "description": "The configuration settings of the Google provider."
         },
-        "legacyMicrosoftAccount": {
-          "$ref": "#/definitions/LegacyMicrosoftAccount",
-          "description": "The configuration settings of the legacy Microsoft Account provider."
-        },
         "twitter": {
           "$ref": "#/definitions/Twitter",
           "description": "The configuration settings of the Twitter provider."
@@ -738,28 +734,6 @@
         "consumerSecretRefName": {
           "description": "The app secret ref name that contains the OAuth 1.0a consumer secret of the Twitter\napplication used for sign-in.",
           "type": "string"
-        }
-      }
-    },
-    "LegacyMicrosoftAccount": {
-      "description": "The configuration settings of the legacy Microsoft Account provider.",
-      "type": "object",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/IdentityProviderState",
-          "description": "<code>Disabled</code> if the legacy Microsoft Account provider should not be enabled despite the set registration; otherwise, <code>Enabled</code>."
-        },
-        "registration": {
-          "$ref": "#/definitions/ClientRegistration",
-          "description": "The configuration settings of the app registration for the legacy Microsoft Account provider."
-        },
-        "login": {
-          "$ref": "#/definitions/LoginScopes",
-          "description": "The configuration settings of the login flow."
-        },
-        "validation": {
-          "$ref": "#/definitions/AllowedAudiencesValidation",
-          "description": "The configuration settings of the legacy Microsoft Account provider token validation flow."
         }
       }
     },
