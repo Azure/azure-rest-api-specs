@@ -1775,6 +1775,56 @@
           "nextLinkName": null
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/locations/{location}/asyncOperations/{operationId}": {
+      "get": {
+        "tags": [
+          "AsyncOperationStatus"
+        ],
+        "operationId": "AsyncOperationStatus_Get",
+        "description": "For checking the ongoing status of an operation",
+        "x-ms-examples": {
+          "RedisCacheAsyncOperationStatus": {
+            "$ref": "./examples/RedisCacheAsyncOperationStatus.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location at which operation was triggered"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of asynchronous operation"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Asynchronous operation status response",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2709,6 +2759,23 @@
         }
       },
       "description": "The response of listUpgradeNotifications."
+    },
+    "OperationStatus": {
+      "type": "object",
+      "description": "Asynchronous operation status",
+      "properties": {
+        "properties": {
+          "description": "Additional properties from RP, only when operation is successful",
+          "type": "object",
+          "additionalProperties": {}
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
+        }
+      ],
+      "x-ms-external": true
     }
   },
   "parameters": {
