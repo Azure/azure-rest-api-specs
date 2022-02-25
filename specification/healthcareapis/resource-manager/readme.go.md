@@ -38,7 +38,7 @@ output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2021-06-01-pr
 directive:
   - from: swagger-document
     where: definitions.ServicesProperties.properties.provisioningState.enum
-    transform: >
+    transform: >-
       $.push['Moving']
       $.push['Suspended']
       $.push['Warned']
