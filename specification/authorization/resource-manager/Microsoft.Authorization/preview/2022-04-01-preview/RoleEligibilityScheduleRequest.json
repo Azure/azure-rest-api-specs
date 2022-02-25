@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "AuthorizationManagementClient",
-    "version": "2020-10-01-preview",
+    "version": "2022-04-01-preview",
     "description": "Role based access control provides you a way to apply granular level policy administration down to individual resources or resource groups. These operations enable you to manage role assignments. A role eligibility grants access to Azure Active Directory users."
   },
   "host": "management.azure.com",
@@ -230,6 +230,63 @@
         "x-ms-examples": {
           "CancelRoleEligibilityScheduleRequestByName": {
             "$ref": "./examples/CancelRoleEligibilityScheduleRequestByName.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleEligibilityScheduleRequests/{roleEligibilityScheduleRequestName}/validate": {
+      "post": {
+        "tags": [
+          "RoleEligibilityScheduleRequests"
+        ],
+        "operationId": "RoleEligibilityScheduleRequests_Validate",
+        "description": "Validates a new role eligibility schedule request.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope of the role eligibility request to validate.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "roleEligibilityScheduleRequestName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the role eligibility request to validate."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleEligibilityScheduleRequest"
+            },
+            "description": "Parameters for the role eligibility schedule request."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the role eligibility schedule request.",
+            "schema": {
+              "$ref": "#/definitions/RoleEligibilityScheduleRequest"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidateRoleEligibilityScheduleRequestByName": {
+            "$ref": "./examples/ValidateRoleEligibilityScheduleRequestByName.json"
           }
         }
       }
@@ -574,7 +631,8 @@
           }
         }
       },
-      "type": "object"
+      "type": "object",
+      "description": "Expanded info of resource, role and principal"
     }
   }
 }
