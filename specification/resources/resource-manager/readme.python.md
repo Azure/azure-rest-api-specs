@@ -76,7 +76,6 @@ batch:
 package-name: azure-mgmt-resource#privatelinks
 multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/privatelinks
-clear-output-folder: false
 perform-load: false
 ```
 
@@ -84,7 +83,6 @@ perform-load: false
 package-name: azure-mgmt-resource#features
 multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/features
-clear-output-folder: false
 perform-load: false
 ```
 
@@ -92,7 +90,6 @@ perform-load: false
 package-name: azure-mgmt-resource#policy
 multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/policy
-clear-output-folder: false
 perform-load: false
 ```
 
@@ -100,7 +97,6 @@ perform-load: false
 package-name: azure-mgmt-resource#resources
 multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources
-clear-output-folder: false
 perform-load: false
 ```
 
@@ -108,7 +104,6 @@ perform-load: false
 package-name: azure-mgmt-resource#subscriptions
 multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/subscriptions
-clear-output-folder: false
 perform-load: false
 ```
 
@@ -116,7 +111,6 @@ perform-load: false
 package-name: azure-mgmt-resource#deploymentscripts
 multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/deploymentscripts
-clear-output-folder: false
 perform-load: false
 ```
 
@@ -125,7 +119,6 @@ perform-load: false
 package-name: azure-mgmt-resource#templatespecs
 multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/templatespecs
-clear-output-folder: false
 perform-load: false
 ```
 
@@ -134,7 +127,6 @@ perform-load: false
 package-name: azure-mgmt-resource#locks
 multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/locks
-clear-output-folder: false
 perform-load: false
 ```
 
@@ -142,7 +134,6 @@ perform-load: false
 package-name: azure-mgmt-resource#links
 multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/links
-clear-output-folder: false
 perform-load: false
 ```
 
