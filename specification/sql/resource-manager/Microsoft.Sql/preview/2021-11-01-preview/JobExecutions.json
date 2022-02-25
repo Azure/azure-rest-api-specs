@@ -123,121 +123,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/cancel": {
-      "post": {
-        "tags": [
-          "JobExecutions"
-        ],
-        "description": "Requests cancellation of a job execution.",
-        "operationId": "JobExecutions_Cancel",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "name": "jobAgentName",
-            "in": "path",
-            "description": "The name of the job agent.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "description": "The name of the job.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobExecutionId",
-            "in": "path",
-            "description": "The id of the job execution to cancel.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully requested cancellation of the job execution."
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found."
-          }
-        },
-        "x-ms-examples": {
-          "Cancel a job execution.": {
-            "$ref": "./examples/CancelJobExecution.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/start": {
-      "post": {
-        "tags": [
-          "JobExecutions"
-        ],
-        "description": "Starts an elastic job execution.",
-        "operationId": "JobExecutions_Create",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "name": "jobAgentName",
-            "in": "path",
-            "description": "The name of the job agent.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "description": "The name of the job to get.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully started an execution for the job.",
-            "schema": {
-              "$ref": "#/definitions/JobExecution"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found."
-          },
-          "202": {
-            "description": "Accepted"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Start a job execution.": {
-            "$ref": "./examples/CreateJobExecution.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions": {
       "get": {
         "tags": [
@@ -478,9 +363,140 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/cancel": {
+      "post": {
+        "tags": [
+          "JobExecutions"
+        ],
+        "description": "Requests cancellation of a job execution.",
+        "operationId": "JobExecutions_Cancel",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobExecutionId",
+            "in": "path",
+            "description": "The id of the job execution to cancel.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully requested cancellation of the job execution."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-examples": {
+          "Cancel a job execution.": {
+            "$ref": "./examples/CancelJobExecution.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/start": {
+      "post": {
+        "tags": [
+          "JobExecutions"
+        ],
+        "description": "Starts an elastic job execution.",
+        "operationId": "JobExecutions_Create",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the job to get.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully started an execution for the job.",
+            "schema": {
+              "$ref": "#/definitions/JobExecution"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Start a job execution.": {
+            "$ref": "./examples/CreateJobExecution.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "JobExecution": {
+      "description": "An execution of a job",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JobExecutionProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "JobExecutionListResult": {
       "description": "A list of job executions.",
       "type": "object",
@@ -634,22 +650,6 @@
           "description": "The database name.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "JobExecution": {
-      "description": "An execution of a job",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/JobExecutionProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
         }
       }
     }

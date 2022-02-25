@@ -16,6 +16,81 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/instancePools": {
+      "get": {
+        "tags": [
+          "InstancePools"
+        ],
+        "description": "Gets a list of all instance pools in the subscription.",
+        "operationId": "InstancePools_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of instance pools in a subscription.",
+            "schema": {
+              "$ref": "#/definitions/InstancePoolListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionNotFound - The requested subscription was not found."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List instance pools in the subscription": {
+            "$ref": "./examples/ListInstancePoolsBySubscriptionId.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/instancePools": {
+      "get": {
+        "tags": [
+          "InstancePools"
+        ],
+        "description": "Gets a list of instance pools in the resource group",
+        "operationId": "InstancePools_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of instance pools.",
+            "schema": {
+              "$ref": "#/definitions/InstancePoolListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionNotFound - The requested subscription was not found."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List instance pools by resource group": {
+            "$ref": "./examples/ListInstancePoolsByResourceGroup.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/instancePools/{instancePoolName}": {
       "get": {
         "tags": [
@@ -220,84 +295,51 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/instancePools": {
-      "get": {
-        "tags": [
-          "InstancePools"
-        ],
-        "description": "Gets a list of instance pools in the resource group",
-        "operationId": "InstancePools_ListByResourceGroup",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of instance pools.",
-            "schema": {
-              "$ref": "#/definitions/InstancePoolListResult"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 SubscriptionNotFound - The requested subscription was not found."
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List instance pools by resource group": {
-            "$ref": "./examples/ListInstancePoolsByResourceGroup.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/instancePools": {
-      "get": {
-        "tags": [
-          "InstancePools"
-        ],
-        "description": "Gets a list of all instance pools in the subscription.",
-        "operationId": "InstancePools_List",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of instance pools in a subscription.",
-            "schema": {
-              "$ref": "#/definitions/InstancePoolListResult"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 SubscriptionNotFound - The requested subscription was not found."
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List instance pools in the subscription": {
-            "$ref": "./examples/ListInstancePoolsBySubscriptionId.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
+    "InstancePool": {
+      "description": "An Azure SQL instance pool.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "sku": {
+          "$ref": "../../../common/v1/types.json#/definitions/Sku",
+          "description": "The name and tier of the SKU."
+        },
+        "properties": {
+          "$ref": "#/definitions/InstancePoolProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "InstancePoolListResult": {
+      "description": "A list of Azure SQL instance pools.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstancePool"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "InstancePoolProperties": {
       "description": "Properties of an instance pool.",
       "required": [
@@ -342,29 +384,6 @@
         }
       }
     },
-    "InstancePool": {
-      "description": "An Azure SQL instance pool.",
-      "required": [
-        "location"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "properties": {
-        "sku": {
-          "$ref": "../../../common/v1/types.json#/definitions/Sku",
-          "description": "The name and tier of the SKU."
-        },
-        "properties": {
-          "$ref": "#/definitions/InstancePoolProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "InstancePoolUpdate": {
       "description": "An update to an Instance pool.",
       "type": "object",
@@ -375,25 +394,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        }
-      }
-    },
-    "InstancePoolListResult": {
-      "description": "A list of Azure SQL instance pools.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Array of results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InstancePool"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
         }
       }
     }

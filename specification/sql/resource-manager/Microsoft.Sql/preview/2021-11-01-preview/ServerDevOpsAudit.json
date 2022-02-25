@@ -16,6 +16,48 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/devOpsAuditingSettings": {
+      "get": {
+        "tags": [
+          "ServerDevOpsAudit"
+        ],
+        "description": "Lists DevOps audit settings of a server.",
+        "operationId": "ServerDevOpsAuditSettings_ListByServer",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved server DevOps audit settings.",
+            "schema": {
+              "$ref": "#/definitions/ServerDevOpsAuditSettingsListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List DevOps audit settings of a server": {
+            "$ref": "./examples/ServerDevOpsAuditSettingsList.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/devOpsAuditingSettings/{devOpsAuditingSettingsName}": {
       "get": {
         "tags": [
@@ -124,51 +166,49 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/devOpsAuditingSettings": {
-      "get": {
-        "tags": [
-          "ServerDevOpsAudit"
-        ],
-        "description": "Lists DevOps audit settings of a server.",
-        "operationId": "ServerDevOpsAuditSettings_ListByServer",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved server DevOps audit settings.",
-            "schema": {
-              "$ref": "#/definitions/ServerDevOpsAuditSettingsListResult"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List DevOps audit settings of a server": {
-            "$ref": "./examples/ServerDevOpsAuditSettingsList.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
+    "ServerDevOpsAuditingSettings": {
+      "description": "A server DevOps auditing settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../common/v1/types.json#/definitions/systemData",
+          "description": "SystemData of ServerDevOpsAuditSettingsResource.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerDevOpsAuditSettingsProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ServerDevOpsAuditSettingsListResult": {
+      "description": "A list of server DevOps audit settings.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerDevOpsAuditingSettings"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "ServerDevOpsAuditSettingsProperties": {
       "description": "Properties of a server DevOps audit settings.",
       "required": [
@@ -209,46 +249,6 @@
           "format": "uuid",
           "description": "Specifies the blob storage subscription Id.",
           "type": "string"
-        }
-      }
-    },
-    "ServerDevOpsAuditingSettings": {
-      "description": "A server DevOps auditing settings.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "systemData": {
-          "$ref": "../../../common/v1/types.json#/definitions/systemData",
-          "description": "SystemData of ServerDevOpsAuditSettingsResource.",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/ServerDevOpsAuditSettingsProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ServerDevOpsAuditSettingsListResult": {
-      "description": "A list of server DevOps audit settings.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Array of results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServerDevOpsAuditingSettings"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
         }
       }
     }

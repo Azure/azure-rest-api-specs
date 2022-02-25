@@ -240,6 +240,22 @@
     }
   },
   "definitions": {
+    "Job": {
+      "description": "A job.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JobProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "JobListResult": {
       "description": "A list of jobs.",
       "type": "object",
@@ -316,22 +332,6 @@
         "interval": {
           "description": "Value of the schedule's recurring interval, if the ScheduleType is recurring. ISO8601 duration format.",
           "type": "string"
-        }
-      }
-    },
-    "Job": {
-      "description": "A job.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/JobProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
         }
       }
     }

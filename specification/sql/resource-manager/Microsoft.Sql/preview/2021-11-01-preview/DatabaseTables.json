@@ -134,29 +134,6 @@
     }
   },
   "definitions": {
-    "DatabaseTableProperties": {
-      "description": "Database table properties.",
-      "type": "object",
-      "properties": {
-        "temporalType": {
-          "description": "The table temporal type.",
-          "enum": [
-            "NonTemporalTable",
-            "HistoryTable",
-            "SystemVersionedTemporalTable"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "TableTemporalType",
-            "modelAsString": true
-          }
-        },
-        "memoryOptimized": {
-          "description": "Whether or not the table is memory optimized.",
-          "type": "boolean"
-        }
-      }
-    },
     "DatabaseTable": {
       "description": "A database table resource.",
       "type": "object",
@@ -191,21 +168,44 @@
           "readOnly": true
         }
       }
+    },
+    "DatabaseTableProperties": {
+      "description": "Database table properties.",
+      "type": "object",
+      "properties": {
+        "temporalType": {
+          "description": "The table temporal type.",
+          "enum": [
+            "NonTemporalTable",
+            "HistoryTable",
+            "SystemVersionedTemporalTable"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TableTemporalType",
+            "modelAsString": true
+          }
+        },
+        "memoryOptimized": {
+          "description": "Whether or not the table is memory optimized.",
+          "type": "boolean"
+        }
+      }
     }
   },
   "parameters": {
-    "ServerNameParameter": {
-      "name": "serverName",
-      "in": "path",
-      "description": "The name of the server.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "DatabaseNameParameter": {
       "name": "databaseName",
       "in": "path",
       "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

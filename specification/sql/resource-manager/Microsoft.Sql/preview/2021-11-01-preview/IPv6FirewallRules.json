@@ -16,6 +16,48 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/ipv6FirewallRules": {
+      "get": {
+        "tags": [
+          "IPv6FirewallRules"
+        ],
+        "description": "Gets a list of IPv6 firewall rules.",
+        "operationId": "IPv6FirewallRules_ListByServer",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of IPv6 firewall rules.",
+            "schema": {
+              "$ref": "#/definitions/IPv6FirewallRuleListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List IPv6 Firewall Rules": {
+            "$ref": "./examples/IPv6FirewallRuleList.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/ipv6FirewallRules/{firewallRuleName}": {
       "get": {
         "tags": [
@@ -167,96 +209,9 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/ipv6FirewallRules": {
-      "get": {
-        "tags": [
-          "IPv6FirewallRules"
-        ],
-        "description": "Gets a list of IPv6 firewall rules.",
-        "operationId": "IPv6FirewallRules_ListByServer",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of IPv6 firewall rules.",
-            "schema": {
-              "$ref": "#/definitions/IPv6FirewallRuleListResult"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found."
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List IPv6 Firewall Rules": {
-            "$ref": "./examples/IPv6FirewallRuleList.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
-    "IPv6ServerFirewallRuleProperties": {
-      "description": "The properties of an IPv6 server firewall rule.",
-      "type": "object",
-      "properties": {
-        "startIPv6Address": {
-          "description": "The start IP address of the firewall rule. Must be IPv6 format.",
-          "type": "string"
-        },
-        "endIPv6Address": {
-          "description": "The end IP address of the firewall rule. Must be IPv6 format. Must be greater than or equal to startIpAddress.",
-          "type": "string"
-        }
-      }
-    },
-    "ResourceWithWritableName": {
-      "description": "ARM resource.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource name.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Resource type.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "ProxyResourceWithWritableName": {
-      "description": "ARM proxy resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceWithWritableName"
-        }
-      ],
-      "properties": {}
-    },
     "IPv6 FirewallRule": {
       "description": "An IPv6 server firewall rule.",
       "type": "object",
@@ -292,17 +247,50 @@
         }
       }
     },
-    "IPv6FirewallRuleList": {
-      "description": "A list of IPv6 server firewall rules.",
+    "IPv6ServerFirewallRuleProperties": {
+      "description": "The properties of an IPv6 server firewall rule.",
       "type": "object",
       "properties": {
-        "values": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IPv6 FirewallRule"
-          }
+        "startIPv6Address": {
+          "description": "The start IP address of the firewall rule. Must be IPv6 format.",
+          "type": "string"
+        },
+        "endIPv6Address": {
+          "description": "The end IP address of the firewall rule. Must be IPv6 format. Must be greater than or equal to startIpAddress.",
+          "type": "string"
         }
       }
+    },
+    "ProxyResourceWithWritableName": {
+      "description": "ARM proxy resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceWithWritableName"
+        }
+      ],
+      "properties": {}
+    },
+    "ResourceWithWritableName": {
+      "description": "ARM resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource name.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {

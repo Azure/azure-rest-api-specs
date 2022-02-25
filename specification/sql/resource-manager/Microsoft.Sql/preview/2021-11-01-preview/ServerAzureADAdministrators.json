@@ -16,6 +16,48 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators": {
+      "get": {
+        "tags": [
+          "ServerAzureADAdministrators"
+        ],
+        "description": "Gets a list of Azure Active Directory administrators in a server.",
+        "operationId": "ServerAzureADAdministrators_ListByServer",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of Azure Active Directory administrators.",
+            "schema": {
+              "$ref": "#/definitions/AdministratorListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidServerAdministratorTypePropertyName - Server active directory administrator type should be ActiveDirectory\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 InvalidServerAzureADOnlyAuthenticationParameter - User tried to set AzureADOnlyAuthentication parameter to false which is not allowed, please use azureADOnlyAuthentications API instead.\n\n * 400 InvalidServerAzureADAdminDeleteOperation - User tried to delete server Azure Active Azure admin when AzureADOnlyAuthentication is set, please use azureADOnlyAuthentications API first.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets a list of Azure Active Directory administrator.": {
+            "$ref": "./examples/AdministratorList.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators/{administratorName}": {
       "get": {
         "tags": [
@@ -193,51 +235,28 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators": {
-      "get": {
-        "tags": [
-          "ServerAzureADAdministrators"
-        ],
-        "description": "Gets a list of Azure Active Directory administrators in a server.",
-        "operationId": "ServerAzureADAdministrators_ListByServer",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of Azure Active Directory administrators.",
-            "schema": {
-              "$ref": "#/definitions/AdministratorListResult"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidServerAdministratorTypePropertyName - Server active directory administrator type should be ActiveDirectory\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 InvalidServerAzureADOnlyAuthenticationParameter - User tried to set AzureADOnlyAuthentication parameter to false which is not allowed, please use azureADOnlyAuthentications API instead.\n\n * 400 InvalidServerAzureADAdminDeleteOperation - User tried to delete server Azure Active Azure admin when AzureADOnlyAuthentication is set, please use azureADOnlyAuthentications API first.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found."
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Gets a list of Azure Active Directory administrator.": {
-            "$ref": "./examples/AdministratorList.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
+    "AdministratorListResult": {
+      "description": "A list of active directory administrators.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerAzureADAdministrator"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "AdministratorProperties": {
       "description": "Properties of a active directory administrator.",
       "required": [
@@ -292,25 +311,6 @@
           "$ref": "#/definitions/AdministratorProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
-        }
-      }
-    },
-    "AdministratorListResult": {
-      "description": "A list of active directory administrators.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Array of results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServerAzureADAdministrator"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
         }
       }
     }
