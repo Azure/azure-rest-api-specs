@@ -3,6 +3,9 @@
 ``` yaml $(java)
 
 directive:
+  - rename-model:
+      from: MapTileset
+      to: MapTilesetPrivate
   - from: swagger-document
     where: '$.parameters["BoundingBoxSouthWest"]'
     transform: >
@@ -15,22 +18,6 @@ directive:
     where: '$.parameters["bbox"]'
     transform: >
       $["x-ms-client-name"] = "BoundingBoxPrivate";
-  - from: swagger-document
-    where: '$.definitions["MapTileset"]'
-    transform: >
-      $["x-ms-client-name"] = "MapTilesetPrivate";
-#   - from: swagger-document
-#     where: '$.paths["/map/tile"].get'
-#     transform: >
-#       $["operationId"] = "GetMapTile";
-#   - from: swagger-document
-#     where: '$.paths["/map/statetile"].get'
-#     transform: >
-#       $["operationId"] = "GetMapStateTile";
-#   - from: swagger-document
-#     where: '$.paths["/map/static/{format}"].get'
-#     transform: >
-#       $["operationId"] = "GetMapStaticImage";
     
 java:
     namespace: com.azure.maps.render
