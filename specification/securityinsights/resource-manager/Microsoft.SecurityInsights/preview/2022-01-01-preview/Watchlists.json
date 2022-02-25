@@ -492,7 +492,15 @@
           },
           "source": {
             "description": "The filename of the watchlist, called 'source'",
-            "type": "string"
+            "enum": [
+              "Local file",
+              "Remote storage"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "source"
+            }
           },
           "sourceType": {
             "description": "The sourceType of the watchlist",
@@ -582,6 +590,7 @@
         },
         "required": [
           "displayName",
+          "source",
           "sourceType",
           "provider",
           "itemsSearchKey"
