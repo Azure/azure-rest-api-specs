@@ -17,8 +17,11 @@ output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
 directive:
 - rename-model:
-    from: 'Resource'
-    to: 'ResourceModel'
+    from: 'SignalRResource'
+    to: 'ResourceInfo'
+- rename-model:
+    from: 'SignalRResourceList'
+    to: 'ResourceInfoList'
 ```
 
 ### Go multi-api

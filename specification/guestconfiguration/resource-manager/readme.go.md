@@ -18,7 +18,7 @@ azure-arm: true
 directive:
 - rename-model:
     from: 'AssignmentReport'
-    to: 'AssignmentReportModel'
+    to: 'CommonAssignmentReport'
 ```
 
 ### Go multi-api

@@ -3564,6 +3564,88 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/extensions/onedeploy": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Invoke onedeploy status API /api/deployments and gets the deployment status for the site",
+        "description": "Description for Invoke onedeploy status API /api/deployments and gets the deployment status for the site",
+        "operationId": "WebApps_GetOneDeployStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Invoke the OneDeploy publish web app extension.",
+        "description": "Description for Invoke the OneDeploy publish web app extension.",
+        "operationId": "WebApps_CreateOneDeployOperation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions": {
       "get": {
         "tags": [
@@ -9776,6 +9858,52 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/authsettingsV2": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets site's Authentication / Authorization settings for apps via the V2 format",
+        "operationId": "WebApps_GetAuthSettingsV2WithoutSecretsSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will get the settings for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteAuthSettingsV2"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
       "put": {
         "tags": [
           "WebApps"
@@ -21706,7 +21834,10 @@
               "items": {
                 "$ref": "#/definitions/DatabaseBackupSetting"
               },
-              "readOnly": true
+              "readOnly": true,
+              "x-ms-identifiers": [
+                "name"
+              ]
             },
             "scheduled": {
               "description": "True if this backup has been created due to a schedule being triggered.",
@@ -21799,7 +21930,10 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/DatabaseBackupSetting"
-              }
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
             }
           },
           "x-ms-client-flatten": true
@@ -23282,7 +23416,10 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/MSDeployCore"
-              }
+              },
+              "x-ms-identifiers": [
+                "packageUri"
+              ]
             }
           },
           "x-ms-client-flatten": true
@@ -23345,7 +23482,8 @@
               "items": {
                 "$ref": "#/definitions/MSDeployLogEntry"
               },
-              "readOnly": true
+              "readOnly": true,
+              "x-ms-identifiers": []
             }
           },
           "x-ms-client-flatten": true
@@ -23691,7 +23829,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PerfMonResponse"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link to next page of resources.",
@@ -23765,7 +23904,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PerfMonSample"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -23867,7 +24007,10 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/PrivateAccessVirtualNetwork"
-              }
+              },
+              "x-ms-identifiers": [
+                "key"
+              ]
             }
           },
           "x-ms-client-flatten": true
@@ -23911,7 +24054,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateAccessSubnet"
-          }
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
         }
       }
     },
@@ -24467,7 +24613,10 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/DatabaseBackupSetting"
-              }
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
             },
             "ignoreConflictingHostNames": {
               "description": "Changes a logic when restoring an app with custom domains. <code>true</code> to remove custom domains automatically. If <code>false</code>, custom domains are added to \nthe app's object when it is being restored, but that might fail due to conflicts during the operation.",
@@ -24784,21 +24933,30 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SiteCloneabilityCriterion"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "unsupportedFeatures": {
           "description": "List of features enabled on app that are non-blocking but cannot be cloned. The app can still be cloned\nbut the features in this list will not be set up on cloned app.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SiteCloneabilityCriterion"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "blockingCharacteristics": {
           "description": "List of blocking application characteristics.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SiteCloneabilityCriterion"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -25146,7 +25304,10 @@
               "type": "array",
               "items": {
                 "$ref": "./CommonDefinitions.json#/definitions/HostNameSslState"
-              }
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
             },
             "serverFarmId": {
               "description": "Resource ID of the associated App Service plan, formatted as: \"/subscriptions/{subscriptionID}/resourceGroups/{groupName}/providers/Microsoft.Web/serverfarms/{appServicePlanName}\".",
@@ -25797,7 +25958,10 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/TriggeredJobRun"
-              }
+              },
+              "x-ms-identifiers": [
+                "web_job_id"
+              ]
             }
           },
           "x-ms-client-flatten": true
