@@ -52,6 +52,49 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/deletedServers": {
+      "get": {
+        "tags": [
+          "DeletedServers"
+        ],
+        "description": "Gets a list of deleted servers for a location.",
+        "operationId": "DeletedServers_ListByLocation",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The name of the region where the resource is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of deleted servers.",
+            "schema": {
+              "$ref": "#/definitions/DeletedServerListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidLocation - An invalid location was specified.\n\n * 404 SubscriptionNotFound - The requested subscription was not found."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List deleted servers": {
+            "$ref": "./examples/DeletedServerList.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/deletedServers/{deletedServerName}": {
       "get": {
         "tags": [
@@ -95,49 +138,6 @@
         "x-ms-examples": {
           "Get deleted server": {
             "$ref": "./examples/DeletedServerGet.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/deletedServers": {
-      "get": {
-        "tags": [
-          "DeletedServers"
-        ],
-        "description": "Gets a list of deleted servers for a location.",
-        "operationId": "DeletedServers_ListByLocation",
-        "parameters": [
-          {
-            "name": "locationName",
-            "in": "path",
-            "description": "The name of the region where the resource is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of deleted servers.",
-            "schema": {
-              "$ref": "#/definitions/DeletedServerListResult"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidLocation - An invalid location was specified.\n\n * 404 SubscriptionNotFound - The requested subscription was not found."
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List deleted servers": {
-            "$ref": "./examples/DeletedServerList.json"
           }
         }
       }
@@ -195,6 +195,22 @@
     }
   },
   "definitions": {
+    "DeletedServer": {
+      "description": "A deleted server.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeletedServerProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "DeletedServerListResult": {
       "description": "A list of deleted servers.",
       "type": "object",
@@ -238,22 +254,6 @@
           "description": "The fully qualified domain name of the server.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "DeletedServer": {
-      "description": "A deleted server.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DeletedServerProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
         }
       }
     }

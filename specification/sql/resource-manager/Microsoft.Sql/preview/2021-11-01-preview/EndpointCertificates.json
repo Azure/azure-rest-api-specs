@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-11-01",
+    "version": "2021-11-01-preview",
     "title": "SqlManagementClient",
     "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
   },
@@ -16,52 +16,6 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/endpointCertificates/{endpointType}": {
-      "get": {
-        "tags": [
-          "EndpointCertificates"
-        ],
-        "description": "Gets a certificate used on the endpoint with the given id.",
-        "operationId": "EndpointCertificates_Get",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ManagedInstanceNameParameter"
-          },
-          {
-            "name": "endpointType",
-            "in": "path",
-            "description": "Type of the endpoint whose certificate the customer is looking for.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved an endpoint certificate.",
-            "schema": {
-              "$ref": "#/definitions/EndpointCertificate"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
-          }
-        },
-        "x-ms-examples": {
-          "Gets an endpoint certificate.": {
-            "$ref": "./examples/EndpointCertificatesGet.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/endpointCertificates": {
       "get": {
         "tags": [
@@ -71,16 +25,16 @@
         "operationId": "EndpointCertificates_ListByInstance",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ManagedInstanceNameParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -103,57 +57,61 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/endpointCertificates/{endpointType}": {
+      "get": {
+        "tags": [
+          "EndpointCertificates"
+        ],
+        "description": "Gets a certificate used on the endpoint with the given id.",
+        "operationId": "EndpointCertificates_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "endpointType",
+            "in": "path",
+            "description": "Type of the endpoint whose certificate the customer is looking for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved an endpoint certificate.",
+            "schema": {
+              "$ref": "#/definitions/EndpointCertificate"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
+          }
+        },
+        "x-ms-examples": {
+          "Gets an endpoint certificate.": {
+            "$ref": "./examples/EndpointCertificatesGet.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
-    "EndpointCertificateProperties": {
-      "description": "The properties of an endpoint certificate.",
-      "type": "object",
-      "properties": {
-        "publicBlob": {
-          "description": "The certificate public blob",
-          "type": "string"
-        }
-      }
-    },
-    "Resource": {
-      "description": "ARM resource.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Resource type.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "ProxyResource": {
-      "description": "ARM proxy resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {}
-    },
     "EndpointCertificate": {
       "description": "Certificate used on an endpoint on the Managed Instance.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -182,101 +140,23 @@
           "readOnly": true
         }
       }
+    },
+    "EndpointCertificateProperties": {
+      "description": "The properties of an endpoint certificate.",
+      "type": "object",
+      "properties": {
+        "publicBlob": {
+          "description": "The certificate public blob",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "The subscription ID that identifies an Azure subscription.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "client"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "description": "The API version to use for the request.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "client"
-    },
-    "ResourceGroupParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ServerNameParameter": {
-      "name": "serverName",
-      "in": "path",
-      "description": "The name of the server.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "ManagedInstanceNameParameter": {
       "name": "managedInstanceName",
       "in": "path",
       "description": "The name of the managed instance.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "DatabaseNameParameter": {
-      "name": "databaseName",
-      "in": "path",
-      "description": "The name of the database.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "SqlVirtualMachineInstanceNameParameter": {
-      "name": "sqlVirtualMachineInstanceName",
-      "in": "path",
-      "description": "The name of the SqlVirtualMachineInstance.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "SqlVirtualMachineContainerNameParameter": {
-      "name": "sqlVirtualMachineContainerName",
-      "in": "path",
-      "description": "The name of the SqlVirtualMachineContainer.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "VirtualClusterNameParameter": {
-      "name": "virtualClusterName",
-      "in": "path",
-      "description": "The name of the virtual cluster.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "WorkspaceNameParameter": {
-      "name": "workspaceName",
-      "in": "path",
-      "description": "The name of the workspace.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "SqlPoolNameParameter": {
-      "name": "sqlPoolName",
-      "in": "path",
-      "description": "The name of the sql pool.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "SqlDatabaseNameParameter": {
-      "name": "sqlDatabaseName",
-      "in": "path",
-      "description": "The name of the sql database.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

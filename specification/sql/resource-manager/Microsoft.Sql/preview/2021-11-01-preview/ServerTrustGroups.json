@@ -16,6 +16,52 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/serverTrustGroups": {
+      "get": {
+        "tags": [
+          "ServerTrustGroups"
+        ],
+        "description": "Lists a server trust group.",
+        "operationId": "ServerTrustGroups_ListByLocation",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The name of the region where the resource is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the server trust groups.",
+            "schema": {
+              "$ref": "#/definitions/ServerTrustGroupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 ServerTrustGroupNotFound - Server trust group with specified name does not exist.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 406 ServerTrustGroupMemberIsBusy - Group member '{0}' is not in a valid state and cannot perform Server trust group operation.\n\n * 406 ServerTrustGroupInInvalidState - SQL trust group '{0}' is busy and cannot perform requested operation.\n\n * 406 ServerTrustGroupMemberNotFound - Group member '{0}' is not found, therefore we cannot perform Server trust group operation."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List server trust groups": {
+            "$ref": "./examples/ServerTrustGroupList.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/serverTrustGroups/{serverTrustGroupName}": {
       "get": {
         "tags": [
@@ -185,52 +231,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/serverTrustGroups": {
-      "get": {
-        "tags": [
-          "ServerTrustGroups"
-        ],
-        "description": "Lists a server trust group.",
-        "operationId": "ServerTrustGroups_ListByLocation",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "name": "locationName",
-            "in": "path",
-            "description": "The name of the region where the resource is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the server trust groups.",
-            "schema": {
-              "$ref": "#/definitions/ServerTrustGroupListResult"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 ServerTrustGroupNotFound - Server trust group with specified name does not exist.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 406 ServerTrustGroupMemberIsBusy - Group member '{0}' is not in a valid state and cannot perform Server trust group operation.\n\n * 406 ServerTrustGroupInInvalidState - SQL trust group '{0}' is busy and cannot perform requested operation.\n\n * 406 ServerTrustGroupMemberNotFound - Group member '{0}' is not found, therefore we cannot perform Server trust group operation."
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List server trust groups": {
-            "$ref": "./examples/ServerTrustGroupList.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/serverTrustGroups": {
       "get": {
         "tags": [
@@ -275,34 +275,6 @@
     }
   },
   "definitions": {
-    "ServerTrustGroupProperties": {
-      "description": "Properties of a server trust group.",
-      "required": [
-        "groupMembers",
-        "trustScopes"
-      ],
-      "type": "object",
-      "properties": {
-        "groupMembers": {
-          "description": "Group members information for the server trust group.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServerInfo"
-          }
-        },
-        "trustScopes": {
-          "description": "Trust scope of the server trust group.",
-          "type": "array",
-          "items": {
-            "enum": [
-              "GlobalTransactions",
-              "ServiceBroker"
-            ],
-            "type": "string"
-          }
-        }
-      }
-    },
     "ServerInfo": {
       "description": "Server info for the server trust group.",
       "required": [
@@ -348,6 +320,34 @@
           "description": "Link to retrieve next page of results.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "ServerTrustGroupProperties": {
+      "description": "Properties of a server trust group.",
+      "required": [
+        "groupMembers",
+        "trustScopes"
+      ],
+      "type": "object",
+      "properties": {
+        "groupMembers": {
+          "description": "Group members information for the server trust group.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerInfo"
+          }
+        },
+        "trustScopes": {
+          "description": "Trust scope of the server trust group.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "GlobalTransactions",
+              "ServiceBroker"
+            ],
+            "type": "string"
+          }
         }
       }
     }

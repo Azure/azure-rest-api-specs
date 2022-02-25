@@ -274,6 +274,29 @@
     }
   },
   "definitions": {
+    "JobAgent": {
+      "description": "An Azure SQL job agent.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "sku": {
+          "$ref": "../../../common/v1/types.json#/definitions/Sku",
+          "description": "The name and tier of the SKU."
+        },
+        "properties": {
+          "$ref": "#/definitions/JobAgentProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "JobAgentListResult": {
       "description": "A list of Azure SQL job agents.",
       "type": "object",
@@ -323,29 +346,6 @@
             "name": "JobAgentState",
             "modelAsString": true
           }
-        }
-      }
-    },
-    "JobAgent": {
-      "description": "An Azure SQL job agent.",
-      "required": [
-        "location"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "properties": {
-        "sku": {
-          "$ref": "../../../common/v1/types.json#/definitions/Sku",
-          "description": "The name and tier of the SKU."
-        },
-        "properties": {
-          "$ref": "#/definitions/JobAgentProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
         }
       }
     },

@@ -240,41 +240,6 @@
     }
   },
   "definitions": {
-    "JobTargetGroupListResult": {
-      "description": "A list of target groups.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Array of results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JobTargetGroup"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "JobTargetGroupProperties": {
-      "description": "Properties of job target group.",
-      "required": [
-        "members"
-      ],
-      "type": "object",
-      "properties": {
-        "members": {
-          "description": "Members of the target group.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JobTarget"
-          }
-        }
-      }
-    },
     "JobTarget": {
       "description": "A job target, for example a specific database or a container of databases that is evaluated during job execution.",
       "required": [
@@ -345,6 +310,41 @@
           "$ref": "#/definitions/JobTargetGroupProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "JobTargetGroupListResult": {
+      "description": "A list of target groups.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobTargetGroup"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "JobTargetGroupProperties": {
+      "description": "Properties of job target group.",
+      "required": [
+        "members"
+      ],
+      "type": "object",
+      "properties": {
+        "members": {
+          "description": "Members of the target group.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobTarget"
+          }
         }
       }
     }

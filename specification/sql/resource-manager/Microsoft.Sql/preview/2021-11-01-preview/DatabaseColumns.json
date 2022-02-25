@@ -243,6 +243,22 @@
     }
   },
   "definitions": {
+    "DatabaseColumn": {
+      "description": "A database column resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabaseColumnProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "DatabaseColumnListResult": {
       "description": "A list of database columns.",
       "type": "object",
@@ -332,37 +348,21 @@
           "type": "boolean"
         }
       }
-    },
-    "DatabaseColumn": {
-      "description": "A database column resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DatabaseColumnProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      }
     }
   },
   "parameters": {
-    "ServerNameParameter": {
-      "name": "serverName",
-      "in": "path",
-      "description": "The name of the server.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "DatabaseNameParameter": {
       "name": "databaseName",
       "in": "path",
       "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

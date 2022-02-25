@@ -149,6 +149,22 @@
     }
   },
   "definitions": {
+    "ManagedInstanceOperation": {
+      "description": "A managed instance operation.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedInstanceOperationProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "ManagedInstanceOperationListResult": {
       "description": "The response to a list managed instance operations request",
       "type": "object",
@@ -164,6 +180,22 @@
         "nextLink": {
           "description": "Link to retrieve next page of results.",
           "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedInstanceOperationParametersPair": {
+      "description": "The parameters of a managed instance operation.",
+      "type": "object",
+      "properties": {
+        "currentParameters": {
+          "$ref": "#/definitions/UpsertManagedServerOperationParameters",
+          "description": "The current parameters.",
+          "readOnly": true
+        },
+        "requestedParameters": {
+          "$ref": "#/definitions/UpsertManagedServerOperationParameters",
+          "description": "The requested parameters.",
           "readOnly": true
         }
       }
@@ -266,22 +298,6 @@
         }
       }
     },
-    "ManagedInstanceOperationParametersPair": {
-      "description": "The parameters of a managed instance operation.",
-      "type": "object",
-      "properties": {
-        "currentParameters": {
-          "$ref": "#/definitions/UpsertManagedServerOperationParameters",
-          "description": "The current parameters.",
-          "readOnly": true
-        },
-        "requestedParameters": {
-          "$ref": "#/definitions/UpsertManagedServerOperationParameters",
-          "description": "The requested parameters.",
-          "readOnly": true
-        }
-      }
-    },
     "ManagedInstanceOperationSteps": {
       "description": "The steps of a managed instance operation.",
       "type": "object",
@@ -357,22 +373,6 @@
             "Canceled"
           ],
           "type": "string"
-        }
-      }
-    },
-    "ManagedInstanceOperation": {
-      "description": "A managed instance operation.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ManagedInstanceOperationProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
         }
       }
     }

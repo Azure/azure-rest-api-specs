@@ -16,6 +16,48 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/connectionPolicies": {
+      "get": {
+        "tags": [
+          "ServerConnectionPolicies"
+        ],
+        "description": "Lists connection policy",
+        "operationId": "ServerConnectionPolicies_ListByServer",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the server connection policy list",
+            "schema": {
+              "$ref": "#/definitions/ServerConnectionPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidConnectionPolicyName - Invalid connection policy name.\n\n * 400 ConnectionPolicyParamsNull - The request body cannot be null.\n\n * 400 InvalidConnectionPolicyType - Connection type is invalid\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Lists a servers connection policies": {
+            "$ref": "./examples/ServerConnectionPoliciesList.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/connectionPolicies/{connectionPolicyName}": {
       "get": {
         "tags": [
@@ -132,73 +174,9 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/connectionPolicies": {
-      "get": {
-        "tags": [
-          "ServerConnectionPolicies"
-        ],
-        "description": "Lists connection policy",
-        "operationId": "ServerConnectionPolicies_ListByServer",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the server connection policy list",
-            "schema": {
-              "$ref": "#/definitions/ServerConnectionPolicyListResult"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidConnectionPolicyName - Invalid connection policy name.\n\n * 400 ConnectionPolicyParamsNull - The request body cannot be null.\n\n * 400 InvalidConnectionPolicyType - Connection type is invalid\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Lists a servers connection policies": {
-            "$ref": "./examples/ServerConnectionPoliciesList.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
-    "ServerConnectionPolicyProperties": {
-      "description": "The properties of a server connection policy.",
-      "required": [
-        "connectionType"
-      ],
-      "type": "object",
-      "properties": {
-        "connectionType": {
-          "description": "The server connection type.",
-          "enum": [
-            "Default",
-            "Redirect",
-            "Proxy"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ServerConnectionType",
-            "modelAsString": true
-          }
-        }
-      }
-    },
     "ServerConnectionPolicy": {
       "description": "A server connection policy",
       "type": "object",
@@ -241,6 +219,28 @@
           "description": "Link to retrieve next page of results.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "ServerConnectionPolicyProperties": {
+      "description": "The properties of a server connection policy.",
+      "required": [
+        "connectionType"
+      ],
+      "type": "object",
+      "properties": {
+        "connectionType": {
+          "description": "The server connection type.",
+          "enum": [
+            "Default",
+            "Redirect",
+            "Proxy"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ServerConnectionType",
+            "modelAsString": true
+          }
         }
       }
     }

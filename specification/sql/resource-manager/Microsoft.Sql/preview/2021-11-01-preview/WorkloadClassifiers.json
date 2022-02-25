@@ -16,6 +16,58 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups/{workloadGroupName}/workloadClassifiers": {
+      "get": {
+        "tags": [
+          "WorkloadClassifiers"
+        ],
+        "description": "Gets the list of workload classifiers for a workload group",
+        "operationId": "WorkloadClassifiers_ListByWorkloadGroup",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "workloadGroupName",
+            "in": "path",
+            "description": "The name of the workload group from which to receive the classifiers from.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of workload groups.",
+            "schema": {
+              "$ref": "#/definitions/WorkloadClassifierListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 OperationNotAllowedOnPausedDatabase - Operation is not allowed on a paused database.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get the list of workload classifiers for a workload group": {
+            "$ref": "./examples/GetWorkloadClassifierList.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups/{workloadGroupName}/workloadClassifiers/{workloadClassifierName}": {
       "get": {
         "tags": [
@@ -205,94 +257,9 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups/{workloadGroupName}/workloadClassifiers": {
-      "get": {
-        "tags": [
-          "WorkloadClassifiers"
-        ],
-        "description": "Gets the list of workload classifiers for a workload group",
-        "operationId": "WorkloadClassifiers_ListByWorkloadGroup",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DatabaseNameParameter"
-          },
-          {
-            "name": "workloadGroupName",
-            "in": "path",
-            "description": "The name of the workload group from which to receive the classifiers from.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of workload groups.",
-            "schema": {
-              "$ref": "#/definitions/WorkloadClassifierListResult"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 OperationNotAllowedOnPausedDatabase - Operation is not allowed on a paused database.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Get the list of workload classifiers for a workload group": {
-            "$ref": "./examples/GetWorkloadClassifierList.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
-    "WorkloadClassifierProperties": {
-      "description": "Workload classifier definition. For more information look at sys.workload_management_workload_classifiers (DMV).",
-      "required": [
-        "memberName"
-      ],
-      "type": "object",
-      "properties": {
-        "memberName": {
-          "description": "The workload classifier member name.",
-          "type": "string"
-        },
-        "label": {
-          "description": "The workload classifier label.",
-          "type": "string"
-        },
-        "context": {
-          "description": "The workload classifier context.",
-          "type": "string"
-        },
-        "startTime": {
-          "description": "The workload classifier start time for classification.",
-          "type": "string"
-        },
-        "endTime": {
-          "description": "The workload classifier end time for classification.",
-          "type": "string"
-        },
-        "importance": {
-          "description": "The workload classifier importance.",
-          "type": "string"
-        }
-      }
-    },
     "WorkloadClassifier": {
       "description": "Workload classifier operations for a data warehouse",
       "type": "object",
@@ -327,21 +294,54 @@
           "readOnly": true
         }
       }
+    },
+    "WorkloadClassifierProperties": {
+      "description": "Workload classifier definition. For more information look at sys.workload_management_workload_classifiers (DMV).",
+      "required": [
+        "memberName"
+      ],
+      "type": "object",
+      "properties": {
+        "memberName": {
+          "description": "The workload classifier member name.",
+          "type": "string"
+        },
+        "label": {
+          "description": "The workload classifier label.",
+          "type": "string"
+        },
+        "context": {
+          "description": "The workload classifier context.",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "The workload classifier start time for classification.",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "The workload classifier end time for classification.",
+          "type": "string"
+        },
+        "importance": {
+          "description": "The workload classifier importance.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
-    "ServerNameParameter": {
-      "name": "serverName",
-      "in": "path",
-      "description": "The name of the server.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "DatabaseNameParameter": {
       "name": "databaseName",
       "in": "path",
       "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

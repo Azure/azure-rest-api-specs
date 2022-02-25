@@ -16,6 +16,48 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "ManagedInstancePrivateEndpointConnections"
+        ],
+        "description": "Gets all private endpoint connections on a server.",
+        "operationId": "ManagedInstancePrivateEndpointConnections_ListByManagedInstance",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved private endpoint connections.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstancePrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 PrivateEndpointConnectionDoesNotExist - Private Endpoint Connection does not exist\n\n * 400 PrivateEndpointConnectionStatusNotPending - Private Endpoint Connection Status is not Pending\n\n * 400 NullRemotePrivateLinkServiceConnectionState - Remote Private Link Service Connection State is Null\n\n * 400 NullPrivateEndpointConnectionProperties - Private Endpoint Connection Properties is Null\n\n * 400 NullRemotePrivateLinkServiceConnectionStateStatus - Remote Private Link Service Connection State Status is Null\n\n * 400 IncorrectPrivateLinkServiceConnectionStateStatus - Private Link Service Connection State Status must be \"Approved\" or \"Rejected\"\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets list of private endpoint connections on a server.": {
+            "$ref": "./examples/ManagedInstancePrivateEndpointConnectionList.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "tags": [
@@ -163,51 +205,44 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/privateEndpointConnections": {
-      "get": {
-        "tags": [
-          "ManagedInstancePrivateEndpointConnections"
-        ],
-        "description": "Gets all private endpoint connections on a server.",
-        "operationId": "ManagedInstancePrivateEndpointConnections_ListByManagedInstance",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ManagedInstanceNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved private endpoint connections.",
-            "schema": {
-              "$ref": "#/definitions/ManagedInstancePrivateEndpointConnectionListResult"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 PrivateEndpointConnectionDoesNotExist - Private Endpoint Connection does not exist\n\n * 400 PrivateEndpointConnectionStatusNotPending - Private Endpoint Connection Status is not Pending\n\n * 400 NullRemotePrivateLinkServiceConnectionState - Remote Private Link Service Connection State is Null\n\n * 400 NullPrivateEndpointConnectionProperties - Private Endpoint Connection Properties is Null\n\n * 400 NullRemotePrivateLinkServiceConnectionStateStatus - Remote Private Link Service Connection State Status is Null\n\n * 400 IncorrectPrivateLinkServiceConnectionStateStatus - Private Link Service Connection State Status must be \"Approved\" or \"Rejected\"\n\n * 404 ResourceNotFound - The requested resource was not found."
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Gets list of private endpoint connections on a server.": {
-            "$ref": "./examples/ManagedInstancePrivateEndpointConnectionList.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
+    "ManagedInstancePrivateEndpointConnection": {
+      "description": "A private endpoint connection",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedInstancePrivateEndpointConnectionProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ManagedInstancePrivateEndpointConnectionListResult": {
+      "description": "A list of private endpoint connections.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedInstancePrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "ManagedInstancePrivateEndpointConnectionProperties": {
       "description": "Properties of a private endpoint connection.",
       "type": "object",
@@ -253,41 +288,6 @@
         },
         "actionsRequired": {
           "description": "The private link service connection description.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ManagedInstancePrivateEndpointConnection": {
-      "description": "A private endpoint connection",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ManagedInstancePrivateEndpointConnectionProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ManagedInstancePrivateEndpointConnectionListResult": {
-      "description": "A list of private endpoint connections.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Array of results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ManagedInstancePrivateEndpointConnection"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
           "type": "string",
           "readOnly": true
         }

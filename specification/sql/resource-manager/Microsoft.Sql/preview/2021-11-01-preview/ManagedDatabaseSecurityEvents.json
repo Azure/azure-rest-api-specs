@@ -101,18 +101,19 @@
     }
   },
   "definitions": {
-    "SecurityEventsFilterParameters": {
-      "description": "The properties that are supported in the $filter operation.",
+    "SecurityEvent": {
+      "description": "A security event.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
-        "eventTime": {
-          "format": "date-time",
-          "description": "Filter on the event time.",
-          "type": "string"
-        },
-        "showServerRecords": {
-          "description": "Whether to show server records or not.",
-          "type": "boolean"
+        "properties": {
+          "$ref": "#/definitions/SecurityEventProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -196,6 +197,21 @@
         }
       }
     },
+    "SecurityEventsFilterParameters": {
+      "description": "The properties that are supported in the $filter operation.",
+      "type": "object",
+      "properties": {
+        "eventTime": {
+          "format": "date-time",
+          "description": "Filter on the event time.",
+          "type": "string"
+        },
+        "showServerRecords": {
+          "description": "Whether to show server records or not.",
+          "type": "boolean"
+        }
+      }
+    },
     "SecurityEventSqlInjectionAdditionalProperties": {
       "description": "The properties of a security event sql injection additional properties.",
       "type": "object",
@@ -238,22 +254,6 @@
           "description": "The sql error message",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "SecurityEvent": {
-      "description": "A security event.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SecurityEventProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
         }
       }
     }

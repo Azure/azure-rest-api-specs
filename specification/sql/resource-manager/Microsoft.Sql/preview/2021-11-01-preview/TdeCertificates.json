@@ -67,6 +67,22 @@
     }
   },
   "definitions": {
+    "TdeCertificate": {
+      "description": "A TDE certificate that can be uploaded into a server.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TdeCertificateProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "TdeCertificateProperties": {
       "description": "Properties of a TDE certificate.",
       "required": [
@@ -89,22 +105,6 @@
             "create",
             "update"
           ]
-        }
-      }
-    },
-    "TdeCertificate": {
-      "description": "A TDE certificate that can be uploaded into a server.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/TdeCertificateProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
         }
       }
     }

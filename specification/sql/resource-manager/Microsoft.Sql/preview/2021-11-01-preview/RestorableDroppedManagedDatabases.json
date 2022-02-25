@@ -105,6 +105,25 @@
     }
   },
   "definitions": {
+    "RestorableDroppedManagedDatabase": {
+      "description": "A restorable dropped managed database resource.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RestorableDroppedManagedDatabaseProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "RestorableDroppedManagedDatabaseListResult": {
       "description": "A list of restorable dropped managed databases.",
       "type": "object",
@@ -150,25 +169,6 @@
           "description": "The earliest restore date of the database (ISO8601 format).",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "RestorableDroppedManagedDatabase": {
-      "description": "A restorable dropped managed database resource.",
-      "required": [
-        "location"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RestorableDroppedManagedDatabaseProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
         }
       }
     }

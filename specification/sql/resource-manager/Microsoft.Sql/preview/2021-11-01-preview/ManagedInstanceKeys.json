@@ -224,6 +224,27 @@
     }
   },
   "definitions": {
+    "ManagedInstanceKey": {
+      "description": "A managed instance key.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "description": "Kind of encryption protector. This is metadata used for the Azure portal experience.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ManagedInstanceKeyProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "ManagedInstanceKeyListResult": {
       "description": "A list of managed instance keys.",
       "type": "object",
@@ -287,27 +308,6 @@
           "description": "Key auto rotation opt-in flag. Either true or false.",
           "type": "boolean",
           "readOnly": true
-        }
-      }
-    },
-    "ManagedInstanceKey": {
-      "description": "A managed instance key.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "kind": {
-          "description": "Kind of encryption protector. This is metadata used for the Azure portal experience.",
-          "type": "string",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/ManagedInstanceKeyProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
         }
       }
     }

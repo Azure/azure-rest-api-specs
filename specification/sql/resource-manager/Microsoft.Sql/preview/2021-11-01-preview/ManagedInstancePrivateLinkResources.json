@@ -106,6 +106,22 @@
     }
   },
   "definitions": {
+    "ManagedInstancePrivateLink": {
+      "description": "A private link resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedInstancePrivateLinkProperties",
+          "description": "The private link resource group id.",
+          "readOnly": true
+        }
+      }
+    },
     "ManagedInstancePrivateLinkListResult": {
       "description": "A list of private link resources",
       "type": "object",
@@ -148,22 +164,6 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
-        }
-      }
-    },
-    "ManagedInstancePrivateLink": {
-      "description": "A private link resource",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ManagedInstancePrivateLinkProperties",
-          "description": "The private link resource group id.",
           "readOnly": true
         }
       }
