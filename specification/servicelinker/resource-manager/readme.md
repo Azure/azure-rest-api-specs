@@ -57,6 +57,15 @@ input-file:
   - Microsoft.ServiceLinker/preview/2022-01-01-preview/servicelinker.json
 ```
 
+### Tag: package-2021-01-01-privatepreview
+
+These settings apply only when `--tag=package-2021-01-01-privatepreview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-01-01-privatepreview'
+input-file:
+  - Microsoft.ServiceLinker/preview/2021-01-01-privatepreview/servicelinker.json
+```
+
 ## Suppression
 
 ``` yaml
