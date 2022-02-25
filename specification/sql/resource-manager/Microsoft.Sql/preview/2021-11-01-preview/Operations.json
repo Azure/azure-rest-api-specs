@@ -43,7 +43,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List Operations.": {
+          "Lists all of the available SQL Rest API operations": {
             "$ref": "./examples/ListOperations.json"
           }
         }
@@ -51,25 +51,6 @@
     }
   },
   "definitions": {
-    "OperationListResult": {
-      "description": "Result of the request to list SQL operations.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Array of results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "Operation": {
       "description": "SQL REST API operation definition.",
       "type": "object",
@@ -129,6 +110,25 @@
         },
         "description": {
           "description": "The localized friendly description for the operation.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list SQL operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
           "type": "string",
           "readOnly": true
         }

@@ -106,6 +106,22 @@
     }
   },
   "definitions": {
+    "PrivateLinkResource": {
+      "description": "A private link resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "The private link resource group id.",
+          "readOnly": true
+        }
+      }
+    },
     "PrivateLinkResourceListResult": {
       "description": "A list of private link resources",
       "type": "object",
@@ -148,22 +164,6 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
-        }
-      }
-    },
-    "PrivateLinkResource": {
-      "description": "A private link resource",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "The private link resource group id.",
           "readOnly": true
         }
       }

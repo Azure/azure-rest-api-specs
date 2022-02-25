@@ -16,6 +16,52 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/syncAgents": {
+      "get": {
+        "tags": [
+          "SyncAgents"
+        ],
+        "description": "Lists sync agents in a server.",
+        "operationId": "SyncAgents_ListByServer",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server on which the sync agent is hosted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of sync agents.",
+            "schema": {
+              "$ref": "#/definitions/SyncAgentListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidSyncGroupCreateOrUpdateRequest - The create or update sync group request body is empty.\n\n * 400 InvalidSyncMemberCreateOrUpdateRequest - The create or update sync member request body is empty.\n\n * 400 InvalidSyncAgentCreateOrUpdateRequest - The create or update sync agent request body is empty.\n\n * 400 InvalidDatabaseResourceId - Invalid database resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 InvalidSyncAgentResourceId - Invalid sync agent resource identifier.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 SyncOperation_GenericFailure - Failed to perform data sync operation.\n\n * 400 SyncOperation_WrongSyncDatabase - The sync database specified does not match the existing one.\n\n * 400 SyncOperation_DwInSyncGroup - Cannot use datawarehouse edition in data sync.\n\n * 400 SyncOperation_MasterDbInSyncGroup - Cannot use logical master in data sync.\n\n * 400 CannotDeleteInUseSyncAgent - Cannot delete sync agent because it is used by sync member.\n\n * 400 InvalidSyncAgent - Sync agent is invalid.\n\n * 400 InvalidSyncMetadataDatabase - Sync metadata database is invalid.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 409 SyncOperation_AgentAlreadyExists - The sync agent with the same name already exists.\n\n * 409 SyncOperation_AgentIdAlreadyExists - The sync agent with the same id already exists."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get sync agents under a server": {
+            "$ref": "./examples/SyncAgentListByServer.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/syncAgents/{syncAgentName}": {
       "get": {
         "tags": [
@@ -188,52 +234,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/syncAgents": {
-      "get": {
-        "tags": [
-          "SyncAgents"
-        ],
-        "description": "Lists sync agents in a server.",
-        "operationId": "SyncAgents_ListByServer",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the server on which the sync agent is hosted.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of sync agents.",
-            "schema": {
-              "$ref": "#/definitions/SyncAgentListResult"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidSyncGroupCreateOrUpdateRequest - The create or update sync group request body is empty.\n\n * 400 InvalidSyncMemberCreateOrUpdateRequest - The create or update sync member request body is empty.\n\n * 400 InvalidSyncAgentCreateOrUpdateRequest - The create or update sync agent request body is empty.\n\n * 400 InvalidDatabaseResourceId - Invalid database resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 InvalidSyncAgentResourceId - Invalid sync agent resource identifier.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 SyncOperation_GenericFailure - Failed to perform data sync operation.\n\n * 400 SyncOperation_WrongSyncDatabase - The sync database specified does not match the existing one.\n\n * 400 SyncOperation_DwInSyncGroup - Cannot use datawarehouse edition in data sync.\n\n * 400 SyncOperation_MasterDbInSyncGroup - Cannot use logical master in data sync.\n\n * 400 CannotDeleteInUseSyncAgent - Cannot delete sync agent because it is used by sync member.\n\n * 400 InvalidSyncAgent - Sync agent is invalid.\n\n * 400 InvalidSyncMetadataDatabase - Sync metadata database is invalid.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 409 SyncOperation_AgentAlreadyExists - The sync agent with the same name already exists.\n\n * 409 SyncOperation_AgentIdAlreadyExists - The sync agent with the same id already exists."
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Get sync agents under a server": {
-            "$ref": "./examples/SyncAgentListByServer.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/syncAgents/{syncAgentName}/generateKey": {
       "post": {
         "tags": [
@@ -339,57 +339,6 @@
     }
   },
   "definitions": {
-    "SyncAgentProperties": {
-      "description": "Properties of an Azure SQL Database sync agent.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Name of the sync agent.",
-          "type": "string",
-          "readOnly": true
-        },
-        "syncDatabaseId": {
-          "description": "ARM resource id of the sync database in the sync agent.",
-          "type": "string"
-        },
-        "lastAliveTime": {
-          "format": "date-time",
-          "description": "Last alive time of the sync agent.",
-          "type": "string",
-          "readOnly": true
-        },
-        "state": {
-          "description": "State of the sync agent.",
-          "enum": [
-            "Online",
-            "Offline",
-            "NeverConnected"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "SyncAgentState",
-            "modelAsString": true
-          }
-        },
-        "isUpToDate": {
-          "description": "If the sync agent version is up to date.",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "expiryTime": {
-          "format": "date-time",
-          "description": "Expiration time of the sync agent version.",
-          "type": "string",
-          "readOnly": true
-        },
-        "version": {
-          "description": "Version of the sync agent.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "SyncAgent": {
       "description": "An Azure SQL Database sync agent.",
       "type": "object",
@@ -406,25 +355,6 @@
         }
       }
     },
-    "SyncAgentListResult": {
-      "description": "A list of sync agents.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Array of results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SyncAgent"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "SyncAgentKeyProperties": {
       "description": "Properties of an Azure SQL Database sync agent key.",
       "type": "object",
@@ -433,6 +363,22 @@
           "description": "Key of sync agent.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "SyncAgentLinkedDatabase": {
+      "description": "An Azure SQL Database sync agent linked database.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SyncAgentLinkedDatabaseProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -499,19 +445,73 @@
         }
       }
     },
-    "SyncAgentLinkedDatabase": {
-      "description": "An Azure SQL Database sync agent linked database.",
+    "SyncAgentListResult": {
+      "description": "A list of sync agents.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/SyncAgentLinkedDatabaseProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SyncAgent"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SyncAgentProperties": {
+      "description": "Properties of an Azure SQL Database sync agent.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the sync agent.",
+          "type": "string",
+          "readOnly": true
+        },
+        "syncDatabaseId": {
+          "description": "ARM resource id of the sync database in the sync agent.",
+          "type": "string"
+        },
+        "lastAliveTime": {
+          "format": "date-time",
+          "description": "Last alive time of the sync agent.",
+          "type": "string",
+          "readOnly": true
+        },
+        "state": {
+          "description": "State of the sync agent.",
+          "enum": [
+            "Online",
+            "Offline",
+            "NeverConnected"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "SyncAgentState",
+            "modelAsString": true
+          }
+        },
+        "isUpToDate": {
+          "description": "If the sync agent version is up to date.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "expiryTime": {
+          "format": "date-time",
+          "description": "Expiration time of the sync agent version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "Version of the sync agent.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }

@@ -217,6 +217,32 @@
     }
   },
   "definitions": {
+    "ServerKey": {
+      "description": "A server key.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "description": "Kind of encryption protector. This is metadata used for the Azure portal experience.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Resource location.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerKeyProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "ServerKeyListResult": {
       "description": "A list of server keys.",
       "type": "object",
@@ -264,7 +290,7 @@
           ]
         },
         "uri": {
-          "description": "The URI of the server key. If the ServerKeyType is AzureKeyVault, then the URI is required.",
+          "description": "The URI of the server key. If the ServerKeyType is AzureKeyVault, then the URI is required. The AKV URI is required to be in this format: 'https://YourVaultName.vault.azure.net/keys/YourKeyName/YourKeyVersion'",
           "type": "string",
           "x-ms-mutability": [
             "create"
@@ -285,32 +311,6 @@
           "description": "Key auto rotation opt-in flag. Either true or false.",
           "type": "boolean",
           "readOnly": true
-        }
-      }
-    },
-    "ServerKey": {
-      "description": "A server key.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "kind": {
-          "description": "Kind of encryption protector. This is metadata used for the Azure portal experience.",
-          "type": "string",
-          "readOnly": true
-        },
-        "location": {
-          "description": "Resource location.",
-          "type": "string",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/ServerKeyProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
         }
       }
     }

@@ -16,6 +16,227 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/currentSensitivityLabels": {
+      "get": {
+        "tags": [
+          "ManagedDatabaseSensitivityLabels"
+        ],
+        "description": "Gets the sensitivity labels of a given database",
+        "operationId": "ManagedDatabaseSensitivityLabels_ListCurrentByDatabase",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that filters elements in the collection.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the sensitivity labels.",
+            "schema": {
+              "$ref": "#/definitions/SensitivityLabelListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 SensitivityLabelsInvalidODataQuery - The specified OData query is either not valid or not supported\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable."
+          }
+        },
+        "x-ms-odata": "#/definitions/SensitivityLabel",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets the current sensitivity labels of a given database in a managed database": {
+            "$ref": "./examples/ManagedDatabaseSensitivityLabelsListByDatabaseCurrent.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ManagedDatabaseSensitivityLabels"
+        ],
+        "description": "Update sensitivity labels of a given database using an operations batch.",
+        "operationId": "ManagedDatabaseSensitivityLabels_Update",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SensitivityLabelUpdateList"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated sensitivity labels."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 SensitivityLabelSourceNameNotSupported - The specified sensitivity label source is not valid\n\n * 400 InvalidSensitivityLabelsBatch - The specified sensitivity labels batch is not valid. Please provide batch operations\n\n * 400 SensitivityLabelsMissingSchema - Operation[{0}]: Missing schema information\n\n * 400 SensitivityLabelsMissingTable - Operation[{0}]: Missing table information\n\n * 400 SensitivityLabelsMissingColumn - Operation[{0}]: Missing column information\n\n * 400 SensitivityLabelsUpdateSameColumnMoreThanOnce - The column {0} can not be updated more than once in a single command\n\n * 400 InvalidSensitivityLabelResource - The specified sensitivity label resource is not valid\n\n * 400 SensitivityLabelLabelNameAndInfoTypeNotProvided - At least one of LabelName and InformationType must be specified\n\n * 400 LabelNameTooLong - Label name cannot exceed {0} characters\n\n * 400 InformationTypeTooLong - Information type cannot exceed {0} characters\n\n * 400 LabelIdMustBeGuid - The provided ‘labelId’ is invalid. Value must be a GUID\n\n * 400 InformationTypeIdMustBeGuid - The provided ‘informationTypeId’ is invalid. Value must be a GUID\n\n * 400 LabelMissing - Label is required. At least one of ‘labelName’ or ‘labelId’ must be provided\n\n * 400 InformationTypeMissing - Information type is required. At least one of ‘informationType’ or ‘informationTypeId’ must be provided\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SensitivityLabelsLabelNotFound - The specified sensitivity label could not be found\n\n * 404 SensitivityLabelsSchemaNotFound - The schema {0} could not be found\n\n * 404 SensitivityLabelsTableNotFound - The table {0} could not be found in schema {1}\n\n * 404 SensitivityLabelsColumnNotFound - The column {0} could not be found in table {2}.{1}\n\n * 501 SensitivityLabelRecommendedSourceNameNotSupported - 'Recommended' sensitivity label source is not supported yet\n\n * 501 SensitivityLabelRecommendedSourceNameNotSupported - 'Recommended' sensitivity label source is not supported yet\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable."
+          }
+        },
+        "x-ms-examples": {
+          "Update sensitivity labels of a given database using an operations batch.": {
+            "$ref": "./examples/ManagedDatabaseSensitivityLabelsCurrentUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/recommendedSensitivityLabels": {
+      "get": {
+        "tags": [
+          "ManagedDatabaseSensitivityLabels"
+        ],
+        "description": "Gets the sensitivity labels of a given database",
+        "operationId": "ManagedDatabaseSensitivityLabels_ListRecommendedByDatabase",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "includeDisabledRecommendations",
+            "in": "query",
+            "description": "Specifies whether to include disabled recommendations or not.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that filters elements in the collection.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the sensitivity labels.",
+            "schema": {
+              "$ref": "#/definitions/SensitivityLabelListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 SensitivityLabelsInvalidODataQuery - The specified OData query is either not valid or not supported\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable."
+          }
+        },
+        "x-ms-odata": "#/definitions/SensitivityLabel",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets the recommended sensitivity labels of a given database in a managed database": {
+            "$ref": "./examples/ManagedDatabaseSensitivityLabelsListByDatabaseRecommended.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ManagedDatabaseSensitivityLabels"
+        ],
+        "description": "Update recommended sensitivity labels states of a given database using an operations batch.",
+        "operationId": "ManagedDatabaseRecommendedSensitivityLabels_Update",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RecommendedSensitivityLabelUpdateList"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated recommended sensitivity labels."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 SensitivityLabelSourceNameNotSupported - The specified sensitivity label source is not valid\n\n * 400 InvalidRecommendedSensitivityLabelsBatch - The specified recommended sensitivity labels operations are not valid\n\n * 400 SensitivityLabelsMissingSchema - Operation[{0}]: Missing schema information\n\n * 400 SensitivityLabelsMissingTable - Operation[{0}]: Missing table information\n\n * 400 SensitivityLabelsMissingColumn - Operation[{0}]: Missing column information\n\n * 400 SensitivityLabelsUpdateSameColumnMoreThanOnce - The column {0} can not be updated more than once in a single command\n\n * 400 InvalidSensitivityLabelResource - The specified sensitivity label resource is not valid\n\n * 400 SensitivityLabelLabelNameAndInfoTypeNotProvided - At least one of LabelName and InformationType must be specified\n\n * 400 LabelNameTooLong - Label name cannot exceed {0} characters\n\n * 400 InformationTypeTooLong - Information type cannot exceed {0} characters\n\n * 400 LabelIdMustBeGuid - The provided ‘labelId’ is invalid. Value must be a GUID\n\n * 400 InformationTypeIdMustBeGuid - The provided ‘informationTypeId’ is invalid. Value must be a GUID\n\n * 400 LabelMissing - Label is required. At least one of ‘labelName’ or ‘labelId’ must be provided\n\n * 400 InformationTypeMissing - Information type is required. At least one of ‘informationType’ or ‘informationTypeId’ must be provided\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SensitivityLabelsLabelNotFound - The specified sensitivity label could not be found\n\n * 404 SensitivityLabelsSchemaNotFound - The schema {0} could not be found\n\n * 404 SensitivityLabelsTableNotFound - The table {0} could not be found in schema {1}\n\n * 404 SensitivityLabelsColumnNotFound - The column {0} could not be found in table {2}.{1}\n\n * 501 SensitivityLabelRecommendedSourceNameNotSupported - 'Recommended' sensitivity label source is not supported yet\n\n * 501 SensitivityLabelRecommendedSourceNameNotSupported - 'Recommended' sensitivity label source is not supported yet\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable."
+          }
+        },
+        "x-ms-examples": {
+          "Update recommended sensitivity labels of a given database using an operations batch.": {
+            "$ref": "./examples/ManagedDatabaseSensitivityLabelsRecommendedUpdate.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}": {
       "get": {
         "tags": [
@@ -335,7 +556,7 @@
             "description": "Successfully disabled the sensitivity recommendations on the given column."
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 404 SensitivityLabelsColumnNotFound - The column {0} could not be found in table {2}.{1}\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance."
+            "description": "*** Error Responses: ***\n\n * 404 SensitivityLabelsColumnNotFound - The column {0} could not be found in table {2}.{1}\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 CannotFindObject - Cannot find the object because it does not exist or you do not have permissions\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
           }
         },
         "x-ms-examples": {
@@ -412,7 +633,7 @@
             "description": "Successfully enabled the sensitivity recommendations on the given column."
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 404 SensitivityLabelsColumnNotFound - The column {0} could not be found in table {2}.{1}\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance."
+            "description": "*** Error Responses: ***\n\n * 404 SensitivityLabelsColumnNotFound - The column {0} could not be found in table {2}.{1}\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 CannotFindObject - Cannot find the object because it does not exist or you do not have permissions\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
           }
         },
         "x-ms-examples": {
@@ -422,13 +643,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/currentSensitivityLabels": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/sensitivityLabels": {
       "get": {
         "tags": [
           "ManagedDatabaseSensitivityLabels"
         ],
         "description": "Gets the sensitivity labels of a given database",
-        "operationId": "ManagedDatabaseSensitivityLabels_ListCurrentByDatabase",
+        "operationId": "ManagedDatabaseSensitivityLabels_ListByDatabase",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
@@ -438,18 +659,6 @@
           },
           {
             "$ref": "#/parameters/DatabaseNameParameter"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$count",
-            "in": "query",
-            "required": false,
-            "type": "boolean"
           },
           {
             "name": "$filter",
@@ -481,170 +690,117 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Gets the current sensitivity labels of a given database in a managed database": {
-            "$ref": "./examples/ManagedDatabaseSensitivityLabelsListByDatabaseCurrent.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "ManagedDatabaseSensitivityLabels"
-        ],
-        "description": "Update sensitivity labels of a given database using an operations batch.",
-        "operationId": "ManagedDatabaseSensitivityLabels_Update",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ManagedInstanceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DatabaseNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SensitivityLabelUpdateList"
-            }
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully updated sensitivity labels."
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 SensitivityLabelSourceNameNotSupported - The specified sensitivity label source is not valid\n\n * 400 InvalidSensitivityLabelsBatch - The specified sensitivity labels batch is not valid. Please provide batch operations\n\n * 400 SensitivityLabelsMissingSchema - Operation[{0}]: Missing schema information\n\n * 400 SensitivityLabelsMissingTable - Operation[{0}]: Missing table information\n\n * 400 SensitivityLabelsMissingColumn - Operation[{0}]: Missing column information\n\n * 400 SensitivityLabelsUpdateSameColumnMoreThanOnce - The column {0} can not be updated more than once in a single command\n\n * 400 InvalidSensitivityLabelResource - The specified sensitivity label resource is not valid\n\n * 400 SensitivityLabelLabelNameAndInfoTypeNotProvided - At least one of LabelName and InformationType must be specified\n\n * 400 LabelNameTooLong - Label name cannot exceed {0} characters\n\n * 400 InformationTypeTooLong - Information type cannot exceed {0} characters\n\n * 400 LabelIdMustBeGuid - The provided ‘labelId’ is invalid. Value must be a GUID\n\n * 400 InformationTypeIdMustBeGuid - The provided ‘informationTypeId’ is invalid. Value must be a GUID\n\n * 400 LabelMissing - Label is required. At least one of ‘labelName’ or ‘labelId’ must be provided\n\n * 400 InformationTypeMissing - Information type is required. At least one of ‘informationType’ or ‘informationTypeId’ must be provided\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SensitivityLabelsLabelNotFound - The specified sensitivity label could not be found\n\n * 404 SensitivityLabelsSchemaNotFound - The schema {0} could not be found\n\n * 404 SensitivityLabelsTableNotFound - The table {0} could not be found in schema {1}\n\n * 404 SensitivityLabelsColumnNotFound - The column {0} could not be found in table {2}.{1}\n\n * 501 SensitivityLabelRecommendedSourceNameNotSupported - 'Recommended' sensitivity label source is not supported yet\n\n * 501 SensitivityLabelRecommendedSourceNameNotSupported - 'Recommended' sensitivity label source is not supported yet\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable."
-          }
-        },
-        "x-ms-examples": {
-          "Update sensitivity labels of a given database using an operations batch.": {
-            "$ref": "./examples/ManagedDatabaseSensitivityLabelsCurrentUpdate.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/recommendedSensitivityLabels": {
-      "get": {
-        "tags": [
-          "ManagedDatabaseSensitivityLabels"
-        ],
-        "description": "Gets the sensitivity labels of a given database",
-        "operationId": "ManagedDatabaseSensitivityLabels_ListRecommendedByDatabase",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ManagedInstanceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DatabaseNameParameter"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "includeDisabledRecommendations",
-            "in": "query",
-            "description": "Specifies whether to include disabled recommendations or not.",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "An OData filter expression that filters elements in the collection.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the sensitivity labels.",
-            "schema": {
-              "$ref": "#/definitions/SensitivityLabelListResult"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 SensitivityLabelsInvalidODataQuery - The specified OData query is either not valid or not supported\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable."
-          }
-        },
-        "x-ms-odata": "#/definitions/SensitivityLabel",
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Gets the recommended sensitivity labels of a given database in a managed database": {
-            "$ref": "./examples/ManagedDatabaseSensitivityLabelsListByDatabaseRecommended.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "ManagedDatabaseSensitivityLabels"
-        ],
-        "description": "Update recommended sensitivity labels states of a given database using an operations batch.",
-        "operationId": "ManagedDatabaseRecommendedSensitivityLabels_Update",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ManagedInstanceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DatabaseNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RecommendedSensitivityLabelUpdateList"
-            }
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully updated recommended sensitivity labels."
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 SensitivityLabelSourceNameNotSupported - The specified sensitivity label source is not valid\n\n * 400 InvalidRecommendedSensitivityLabelsBatch - The specified recommended sensitivity labels operations are not valid\n\n * 400 SensitivityLabelsMissingSchema - Operation[{0}]: Missing schema information\n\n * 400 SensitivityLabelsMissingTable - Operation[{0}]: Missing table information\n\n * 400 SensitivityLabelsMissingColumn - Operation[{0}]: Missing column information\n\n * 400 SensitivityLabelsUpdateSameColumnMoreThanOnce - The column {0} can not be updated more than once in a single command\n\n * 400 InvalidSensitivityLabelResource - The specified sensitivity label resource is not valid\n\n * 400 SensitivityLabelLabelNameAndInfoTypeNotProvided - At least one of LabelName and InformationType must be specified\n\n * 400 LabelNameTooLong - Label name cannot exceed {0} characters\n\n * 400 InformationTypeTooLong - Information type cannot exceed {0} characters\n\n * 400 LabelIdMustBeGuid - The provided ‘labelId’ is invalid. Value must be a GUID\n\n * 400 InformationTypeIdMustBeGuid - The provided ‘informationTypeId’ is invalid. Value must be a GUID\n\n * 400 LabelMissing - Label is required. At least one of ‘labelName’ or ‘labelId’ must be provided\n\n * 400 InformationTypeMissing - Information type is required. At least one of ‘informationType’ or ‘informationTypeId’ must be provided\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SensitivityLabelsLabelNotFound - The specified sensitivity label could not be found\n\n * 404 SensitivityLabelsSchemaNotFound - The schema {0} could not be found\n\n * 404 SensitivityLabelsTableNotFound - The table {0} could not be found in schema {1}\n\n * 404 SensitivityLabelsColumnNotFound - The column {0} could not be found in table {2}.{1}\n\n * 501 SensitivityLabelRecommendedSourceNameNotSupported - 'Recommended' sensitivity label source is not supported yet\n\n * 501 SensitivityLabelRecommendedSourceNameNotSupported - 'Recommended' sensitivity label source is not supported yet\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable."
-          }
-        },
-        "x-ms-examples": {
-          "Update recommended sensitivity labels of a given database using an operations batch.": {
-            "$ref": "./examples/ManagedDatabaseSensitivityLabelsRecommendedUpdate.json"
+          "Gets the current and recommended sensitivity labels of a given database": {
+            "$ref": "./examples/ManagedDatabaseSensitivityLabelsListByDatabase.json"
           }
         }
       }
     }
   },
   "definitions": {
+    "RecommendedSensitivityLabelUpdate": {
+      "description": "A recommended sensitivity label update operation.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecommendedSensitivityLabelUpdateProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RecommendedSensitivityLabelUpdateList": {
+      "description": "A list of recommended sensitivity label update operations.",
+      "type": "object",
+      "properties": {
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecommendedSensitivityLabelUpdate"
+          }
+        }
+      }
+    },
+    "RecommendedSensitivityLabelUpdateProperties": {
+      "description": "Properties of an operation executed on a recommended sensitivity label.",
+      "required": [
+        "op",
+        "schema",
+        "table",
+        "column"
+      ],
+      "type": "object",
+      "properties": {
+        "op": {
+          "enum": [
+            "enable",
+            "disable"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RecommendedSensitivityLabelUpdateKind",
+            "modelAsString": false
+          }
+        },
+        "schema": {
+          "description": "Schema name of the column to update.",
+          "type": "string"
+        },
+        "table": {
+          "description": "Table name of the column to update.",
+          "type": "string"
+        },
+        "column": {
+          "description": "Column name to update.",
+          "type": "string"
+        }
+      }
+    },
+    "SensitivityLabel": {
+      "description": "A sensitivity label.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "managedBy": {
+          "description": "Resource that manages the sensitivity label.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/SensitivityLabelProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SensitivityLabelListResult": {
+      "description": "A list of sensitivity labels.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SensitivityLabel"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "SensitivityLabelProperties": {
       "description": "Properties of a sensitivity label.",
       "type": "object",
@@ -701,8 +857,8 @@
         }
       }
     },
-    "SensitivityLabel": {
-      "description": "A sensitivity label.",
+    "SensitivityLabelUpdate": {
+      "description": "A sensitivity label update operation.",
       "type": "object",
       "allOf": [
         {
@@ -710,34 +866,10 @@
         }
       ],
       "properties": {
-        "managedBy": {
-          "description": "Resource that manages the sensitivity label.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
-          "$ref": "#/definitions/SensitivityLabelProperties",
+          "$ref": "#/definitions/SensitivityLabelUpdateProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
-        }
-      }
-    },
-    "SensitivityLabelListResult": {
-      "description": "A list of sensitivity labels.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Array of results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SensitivityLabel"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -791,100 +923,21 @@
           "description": "The sensitivity label information to apply on a column."
         }
       }
-    },
-    "SensitivityLabelUpdate": {
-      "description": "A sensitivity label update operation.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SensitivityLabelUpdateProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "RecommendedSensitivityLabelUpdateList": {
-      "description": "A list of recommended sensitivity label update operations.",
-      "type": "object",
-      "properties": {
-        "operations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RecommendedSensitivityLabelUpdate"
-          }
-        }
-      }
-    },
-    "RecommendedSensitivityLabelUpdateProperties": {
-      "description": "Properties of an operation executed on a recommended sensitivity label.",
-      "required": [
-        "op",
-        "schema",
-        "table",
-        "column"
-      ],
-      "type": "object",
-      "properties": {
-        "op": {
-          "enum": [
-            "enable",
-            "disable"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "RecommendedSensitivityLabelUpdateKind",
-            "modelAsString": false
-          }
-        },
-        "schema": {
-          "description": "Schema name of the column to update.",
-          "type": "string"
-        },
-        "table": {
-          "description": "Table name of the column to update.",
-          "type": "string"
-        },
-        "column": {
-          "description": "Column name to update.",
-          "type": "string"
-        }
-      }
-    },
-    "RecommendedSensitivityLabelUpdate": {
-      "description": "A recommended sensitivity label update operation.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RecommendedSensitivityLabelUpdateProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      }
     }
   },
   "parameters": {
-    "ManagedInstanceNameParameter": {
-      "name": "managedInstanceName",
-      "in": "path",
-      "description": "The name of the managed instance.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "DatabaseNameParameter": {
       "name": "databaseName",
       "in": "path",
       "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ManagedInstanceNameParameter": {
+      "name": "managedInstanceName",
+      "in": "path",
+      "description": "The name of the managed instance.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

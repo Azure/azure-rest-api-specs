@@ -237,152 +237,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/enable": {
-      "post": {
-        "tags": [
-          "SensitivityLabels"
-        ],
-        "description": "Enables sensitivity recommendations on a given column (recommendations are enabled by default on all columns)",
-        "operationId": "SensitivityLabels_EnableRecommendation",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DatabaseNameParameter"
-          },
-          {
-            "name": "schemaName",
-            "in": "path",
-            "description": "The name of the schema.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "tableName",
-            "in": "path",
-            "description": "The name of the table.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "columnName",
-            "in": "path",
-            "description": "The name of the column.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "sensitivityLabelSource",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "recommended"
-            ],
-            "x-ms-enum": {
-              "name": "SensitivityLabelSource",
-              "modelAsString": false
-            }
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully enabled the sensitivity recommendations on the given column."
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 404 SensitivityLabelsColumnNotFound - The column {0} could not be found in table {2}.{1}\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance."
-          }
-        },
-        "x-ms-examples": {
-          "Enables sensitivity recommendations on a given column": {
-            "$ref": "./examples/RecommendedColumnSensitivityLabelEnable.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/disable": {
-      "post": {
-        "tags": [
-          "SensitivityLabels"
-        ],
-        "description": "Disables sensitivity recommendations on a given column",
-        "operationId": "SensitivityLabels_DisableRecommendation",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DatabaseNameParameter"
-          },
-          {
-            "name": "schemaName",
-            "in": "path",
-            "description": "The name of the schema.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "tableName",
-            "in": "path",
-            "description": "The name of the table.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "columnName",
-            "in": "path",
-            "description": "The name of the column.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "sensitivityLabelSource",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "recommended"
-            ],
-            "x-ms-enum": {
-              "name": "SensitivityLabelSource",
-              "modelAsString": false
-            }
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully disabled the sensitivity recommendation on the given column."
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 404 SensitivityLabelsColumnNotFound - The column {0} could not be found in table {2}.{1}\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance."
-          }
-        },
-        "x-ms-examples": {
-          "Disables sensitivity recommendations on a given column": {
-            "$ref": "./examples/RecommendedColumnSensitivityLabelDisable.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}": {
       "get": {
         "tags": [
@@ -622,9 +476,311 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/disable": {
+      "post": {
+        "tags": [
+          "SensitivityLabels"
+        ],
+        "description": "Disables sensitivity recommendations on a given column",
+        "operationId": "SensitivityLabels_DisableRecommendation",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the schema.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "description": "The name of the table.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "columnName",
+            "in": "path",
+            "description": "The name of the column.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sensitivityLabelSource",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "recommended"
+            ],
+            "x-ms-enum": {
+              "name": "SensitivityLabelSource",
+              "modelAsString": false
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully disabled the sensitivity recommendation on the given column."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 404 SensitivityLabelsColumnNotFound - The column {0} could not be found in table {2}.{1}\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 CannotFindObject - Cannot find the object because it does not exist or you do not have permissions\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          }
+        },
+        "x-ms-examples": {
+          "Disables sensitivity recommendations on a given column": {
+            "$ref": "./examples/RecommendedColumnSensitivityLabelDisable.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/enable": {
+      "post": {
+        "tags": [
+          "SensitivityLabels"
+        ],
+        "description": "Enables sensitivity recommendations on a given column (recommendations are enabled by default on all columns)",
+        "operationId": "SensitivityLabels_EnableRecommendation",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the schema.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "description": "The name of the table.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "columnName",
+            "in": "path",
+            "description": "The name of the column.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sensitivityLabelSource",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "recommended"
+            ],
+            "x-ms-enum": {
+              "name": "SensitivityLabelSource",
+              "modelAsString": false
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully enabled the sensitivity recommendations on the given column."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 404 SensitivityLabelsColumnNotFound - The column {0} could not be found in table {2}.{1}\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 CannotFindObject - Cannot find the object because it does not exist or you do not have permissions\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          }
+        },
+        "x-ms-examples": {
+          "Enables sensitivity recommendations on a given column": {
+            "$ref": "./examples/RecommendedColumnSensitivityLabelEnable.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sensitivityLabels": {
+      "get": {
+        "tags": [
+          "SensitivityLabels"
+        ],
+        "description": "Gets the sensitivity labels of a given database",
+        "operationId": "SensitivityLabels_ListByDatabase",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that filters elements in the collection.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the sensitivity labels.",
+            "schema": {
+              "$ref": "#/definitions/SensitivityLabelListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 SensitivityLabelsInvalidODataQuery - The specified OData query is either not valid or not supported\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable."
+          }
+        },
+        "x-ms-odata": "#/definitions/SensitivityLabel",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets the current and recommended sensitivity labels of a given database": {
+            "$ref": "./examples/SensitivityLabelsListByDatabase.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "RecommendedSensitivityLabelUpdate": {
+      "description": "A recommended sensitivity label update operation.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecommendedSensitivityLabelUpdateProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RecommendedSensitivityLabelUpdateList": {
+      "description": "A list of recommended sensitivity label update operations.",
+      "type": "object",
+      "properties": {
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecommendedSensitivityLabelUpdate"
+          }
+        }
+      }
+    },
+    "RecommendedSensitivityLabelUpdateProperties": {
+      "description": "Properties of an operation executed on a recommended sensitivity label.",
+      "required": [
+        "op",
+        "schema",
+        "table",
+        "column"
+      ],
+      "type": "object",
+      "properties": {
+        "op": {
+          "enum": [
+            "enable",
+            "disable"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RecommendedSensitivityLabelUpdateKind",
+            "modelAsString": false
+          }
+        },
+        "schema": {
+          "description": "Schema name of the column to update.",
+          "type": "string"
+        },
+        "table": {
+          "description": "Table name of the column to update.",
+          "type": "string"
+        },
+        "column": {
+          "description": "Column name to update.",
+          "type": "string"
+        }
+      }
+    },
+    "SensitivityLabel": {
+      "description": "A sensitivity label.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "managedBy": {
+          "description": "Resource that manages the sensitivity label.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/SensitivityLabelProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SensitivityLabelListResult": {
+      "description": "A list of sensitivity labels.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SensitivityLabel"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "SensitivityLabelProperties": {
       "description": "Properties of a sensitivity label.",
       "type": "object",
@@ -681,8 +837,8 @@
         }
       }
     },
-    "SensitivityLabel": {
-      "description": "A sensitivity label.",
+    "SensitivityLabelUpdate": {
+      "description": "A sensitivity label update operation.",
       "type": "object",
       "allOf": [
         {
@@ -690,34 +846,10 @@
         }
       ],
       "properties": {
-        "managedBy": {
-          "description": "Resource that manages the sensitivity label.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
-          "$ref": "#/definitions/SensitivityLabelProperties",
+          "$ref": "#/definitions/SensitivityLabelUpdateProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
-        }
-      }
-    },
-    "SensitivityLabelListResult": {
-      "description": "A list of sensitivity labels.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Array of results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SensitivityLabel"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -771,100 +903,21 @@
           "description": "The sensitivity label information to apply on a column."
         }
       }
-    },
-    "SensitivityLabelUpdate": {
-      "description": "A sensitivity label update operation.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SensitivityLabelUpdateProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "RecommendedSensitivityLabelUpdateList": {
-      "description": "A list of recommended sensitivity label update operations.",
-      "type": "object",
-      "properties": {
-        "operations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RecommendedSensitivityLabelUpdate"
-          }
-        }
-      }
-    },
-    "RecommendedSensitivityLabelUpdateProperties": {
-      "description": "Properties of an operation executed on a recommended sensitivity label.",
-      "required": [
-        "op",
-        "schema",
-        "table",
-        "column"
-      ],
-      "type": "object",
-      "properties": {
-        "op": {
-          "enum": [
-            "enable",
-            "disable"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "RecommendedSensitivityLabelUpdateKind",
-            "modelAsString": false
-          }
-        },
-        "schema": {
-          "description": "Schema name of the column to update.",
-          "type": "string"
-        },
-        "table": {
-          "description": "Table name of the column to update.",
-          "type": "string"
-        },
-        "column": {
-          "description": "Column name to update.",
-          "type": "string"
-        }
-      }
-    },
-    "RecommendedSensitivityLabelUpdate": {
-      "description": "A recommended sensitivity label update operation.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RecommendedSensitivityLabelUpdateProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      }
     }
   },
   "parameters": {
-    "ServerNameParameter": {
-      "name": "serverName",
-      "in": "path",
-      "description": "The name of the server.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "DatabaseNameParameter": {
       "name": "databaseName",
       "in": "path",
       "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

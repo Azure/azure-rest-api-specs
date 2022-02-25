@@ -60,6 +60,22 @@
     }
   },
   "definitions": {
+    "ServerOperation": {
+      "description": "A server operation.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServerOperationProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "ServerOperationListResult": {
       "description": "The response to a list server operations request",
       "type": "object",
@@ -164,22 +180,6 @@
           "description": "Whether the operation can be cancelled.",
           "type": "boolean",
           "readOnly": true
-        }
-      }
-    },
-    "ServerOperation": {
-      "description": "A server operation.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ServerOperationProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
         }
       }
     }

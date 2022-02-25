@@ -71,6 +71,22 @@
     }
   },
   "definitions": {
+    "MaintenanceWindowOptions": {
+      "description": "Maintenance window options.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MaintenanceWindowOptionsProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "MaintenanceWindowOptionsProperties": {
       "description": "Maintenance window options properties.",
       "type": "object",
@@ -140,22 +156,6 @@
         "duration": {
           "description": "Duration of maintenance window in minutes.",
           "type": "string"
-        }
-      }
-    },
-    "MaintenanceWindowOptions": {
-      "description": "Maintenance window options.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/MaintenanceWindowOptionsProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
         }
       }
     }

@@ -105,6 +105,22 @@
     }
   },
   "definitions": {
+    "RecoverableManagedDatabase": {
+      "description": "A recoverable managed database resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecoverableManagedDatabaseProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "RecoverableManagedDatabaseListResult": {
       "description": "A list of recoverable managed databases.",
       "type": "object",
@@ -132,22 +148,6 @@
           "description": "The last available backup date.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "RecoverableManagedDatabase": {
-      "description": "A recoverable managed database resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RecoverableManagedDatabaseProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
         }
       }
     }

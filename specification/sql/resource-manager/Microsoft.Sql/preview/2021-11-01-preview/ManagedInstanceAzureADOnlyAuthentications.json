@@ -16,6 +16,48 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/azureADOnlyAuthentications": {
+      "get": {
+        "tags": [
+          "ManagedInstanceAzureADOnlyAuthentications"
+        ],
+        "description": "Gets a list of server Azure Active Directory only authentications.",
+        "operationId": "ManagedInstanceAzureADOnlyAuthentications_ListByInstance",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of Azure Active Directory only authentication objects.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceAzureADOnlyAuthListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ManagedInstanceNotInSubscriptionResourceGroup - Specified managed instance does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets a list of Azure Active Directory only authentication object.": {
+            "$ref": "./examples/ManagedInstanceAzureADOnlyAuthListByInstance.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/azureADOnlyAuthentications/{authenticationName}": {
       "get": {
         "tags": [
@@ -193,64 +235,9 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/azureADOnlyAuthentications": {
-      "get": {
-        "tags": [
-          "ManagedInstanceAzureADOnlyAuthentications"
-        ],
-        "description": "Gets a list of server Azure Active Directory only authentications.",
-        "operationId": "ManagedInstanceAzureADOnlyAuthentications_ListByInstance",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ManagedInstanceNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of Azure Active Directory only authentication objects.",
-            "schema": {
-              "$ref": "#/definitions/ManagedInstanceAzureADOnlyAuthListResult"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ManagedInstanceNotInSubscriptionResourceGroup - Specified managed instance does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Gets a list of Azure Active Directory only authentication object.": {
-            "$ref": "./examples/ManagedInstanceAzureADOnlyAuthListByInstance.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
-    "ManagedInstanceAzureADOnlyAuthProperties": {
-      "description": "Properties of a active directory only authentication for Managed Instance.",
-      "required": [
-        "azureADOnlyAuthentication"
-      ],
-      "type": "object",
-      "properties": {
-        "azureADOnlyAuthentication": {
-          "description": "Azure Active Directory only Authentication enabled.",
-          "type": "boolean"
-        }
-      }
-    },
     "ManagedInstanceAzureADOnlyAuthentication": {
       "description": "Azure Active Directory only authentication.",
       "type": "object",
@@ -283,6 +270,19 @@
           "description": "Link to retrieve next page of results.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "ManagedInstanceAzureADOnlyAuthProperties": {
+      "description": "Properties of a active directory only authentication for Managed Instance.",
+      "required": [
+        "azureADOnlyAuthentication"
+      ],
+      "type": "object",
+      "properties": {
+        "azureADOnlyAuthentication": {
+          "description": "Azure Active Directory only Authentication enabled.",
+          "type": "boolean"
         }
       }
     }

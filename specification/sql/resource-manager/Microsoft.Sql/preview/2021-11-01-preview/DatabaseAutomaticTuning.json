@@ -112,48 +112,6 @@
     }
   },
   "definitions": {
-    "DatabaseAutomaticTuningProperties": {
-      "description": "Database-level Automatic Tuning properties.",
-      "type": "object",
-      "properties": {
-        "desiredState": {
-          "description": "Automatic tuning desired state.",
-          "enum": [
-            "Inherit",
-            "Custom",
-            "Auto",
-            "Unspecified"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AutomaticTuningMode",
-            "modelAsString": false
-          }
-        },
-        "actualState": {
-          "description": "Automatic tuning actual state.",
-          "enum": [
-            "Inherit",
-            "Custom",
-            "Auto",
-            "Unspecified"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "AutomaticTuningMode",
-            "modelAsString": false
-          }
-        },
-        "options": {
-          "description": "Automatic tuning options definition.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/AutomaticTuningOptions"
-          }
-        }
-      }
-    },
     "AutomaticTuningOptions": {
       "description": "Automatic tuning properties for individual advisors.",
       "type": "object",
@@ -225,21 +183,63 @@
           "x-ms-client-flatten": true
         }
       }
+    },
+    "DatabaseAutomaticTuningProperties": {
+      "description": "Database-level Automatic Tuning properties.",
+      "type": "object",
+      "properties": {
+        "desiredState": {
+          "description": "Automatic tuning desired state.",
+          "enum": [
+            "Inherit",
+            "Custom",
+            "Auto",
+            "Unspecified"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AutomaticTuningMode",
+            "modelAsString": false
+          }
+        },
+        "actualState": {
+          "description": "Automatic tuning actual state.",
+          "enum": [
+            "Inherit",
+            "Custom",
+            "Auto",
+            "Unspecified"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AutomaticTuningMode",
+            "modelAsString": false
+          }
+        },
+        "options": {
+          "description": "Automatic tuning options definition.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/AutomaticTuningOptions"
+          }
+        }
+      }
     }
   },
   "parameters": {
-    "ServerNameParameter": {
-      "name": "serverName",
-      "in": "path",
-      "description": "The name of the server.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "DatabaseNameParameter": {
       "name": "databaseName",
       "in": "path",
       "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

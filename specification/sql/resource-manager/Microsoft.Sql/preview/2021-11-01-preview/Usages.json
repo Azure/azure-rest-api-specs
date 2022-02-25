@@ -74,22 +74,17 @@
     }
   },
   "definitions": {
-    "UsageListResult": {
-      "description": "A list of usages.",
+    "Name": {
+      "description": "ARM Usage Name",
       "type": "object",
       "properties": {
         "value": {
-          "description": "Array of results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Usage"
-          },
-          "readOnly": true
+          "description": "Usage name value",
+          "type": "string"
         },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
+        "localizedValue": {
+          "description": "Usage name localized value.",
+          "type": "string"
         }
       }
     },
@@ -137,17 +132,22 @@
         }
       }
     },
-    "Name": {
-      "description": "ARM Usage Name",
+    "UsageListResult": {
+      "description": "A list of usages.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "Usage name value",
-          "type": "string"
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Usage"
+          },
+          "readOnly": true
         },
-        "localizedValue": {
-          "description": "Usage name localized value.",
-          "type": "string"
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }

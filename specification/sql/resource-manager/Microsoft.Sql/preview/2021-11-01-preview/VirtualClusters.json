@@ -16,45 +16,6 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/virtualClusters/{virtualClusterName}/updateManagedInstanceDnsServers": {
-      "post": {
-        "tags": [
-          "VirtualClusters"
-        ],
-        "description": "Synchronizes the DNS server settings used by the managed instances inside the given virtual cluster.",
-        "operationId": "VirtualClusters_UpdateDnsServers",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/VirtualClusterNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully synchronized the DNS server settings.",
-            "schema": {
-              "$ref": "#/definitions/UpdateManagedInstanceDnsServersOperation"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 VnetConfigHasInvalidDns - User tried to inject Managed Server subnet with invalid custom DNS.\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 404 ResourceDoesNotExist - Resource with the name '{0}' does not exist. To continue, specify a valid resource name."
-          }
-        },
-        "x-ms-examples": {
-          "Synchronizes the DNS server settings used by the managed instances inside the given virtual cluster.": {
-            "$ref": "./examples/UpdateManagedInstanceDnsServers.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/virtualClusters": {
       "get": {
         "tags": [
@@ -259,6 +220,45 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/virtualClusters/{virtualClusterName}/updateManagedInstanceDnsServers": {
+      "post": {
+        "tags": [
+          "VirtualClusters"
+        ],
+        "description": "Synchronizes the DNS server settings used by the managed instances inside the given virtual cluster.",
+        "operationId": "VirtualClusters_UpdateDnsServers",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/VirtualClusterNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully synchronized the DNS server settings.",
+            "schema": {
+              "$ref": "#/definitions/UpdateManagedInstanceDnsServersOperation"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 VnetConfigHasInvalidDns - User tried to inject Managed Server subnet with invalid custom DNS.\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 404 ResourceDoesNotExist - Resource with the name '{0}' does not exist. To continue, specify a valid resource name."
+          }
+        },
+        "x-ms-examples": {
+          "Synchronizes the DNS server settings used by the managed instances inside the given virtual cluster.": {
+            "$ref": "./examples/UpdateManagedInstanceDnsServers.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -288,6 +288,25 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DnsRefreshConfigurationProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "VirtualCluster": {
+      "description": "An Azure SQL virtual cluster.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualClusterProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         }
@@ -340,25 +359,6 @@
             "read",
             "update"
           ]
-        }
-      }
-    },
-    "VirtualCluster": {
-      "description": "An Azure SQL virtual cluster.",
-      "required": [
-        "location"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/VirtualClusterProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
         }
       }
     },
