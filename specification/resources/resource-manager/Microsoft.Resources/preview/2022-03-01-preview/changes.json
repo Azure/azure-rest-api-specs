@@ -66,10 +66,10 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/top"
+            "$ref": "#/parameters/$top"
           },
           {
-            "$ref": "#/parameters/skipToken"
+            "$ref": "#/parameters/$skipToken"
           }
         ],
         "responses": {
@@ -401,23 +401,23 @@
       "description": "The ID of the change resource",
       "x-ms-parameter-location": "method"
     },
-    "top": {
+    "$top": {
       "required": false,
       "default": 100,
       "description": "(Optional) Set the maximum number of results per response.",
       "in": "query",
-      "maximum": 999,
+      "maximum": 100,
       "minimum": 1,
-      "name": "top",
+      "name": "$top",
       "type": "integer",
       "format": "int64",
       "x-ms-parameter-location": "method"
     },
-    "skipToken": {
+    "$skipToken": {
       "required": false,
       "description": "(Optional) The page-continuation token",
       "in": "query",
-      "name": "skipToken",
+      "name": "$skipToken",
       "type": "string",
       "x-ms-parameter-location": "method"
     }
