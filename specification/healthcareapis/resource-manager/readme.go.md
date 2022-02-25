@@ -35,6 +35,15 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-preview-2021-06' && $(go)
 output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2021-06-01-preview/$(namespace)
+directive:
+  - from: swagger-document
+    where: definitions.ServicesProperties.properties.provisioningState.enum
+    transform: >
+      $.push['Moving']
+      $.push['Suspended']
+      $.push['Warned']
+      $.push['SystemMaintenance']
+      return $
 ```
 
 ### Tag: package-2020-03-30 and go
