@@ -271,6 +271,9 @@
           "$ref": "../../../common/v1/definitions.json#/definitions/systemData"
         }
       },
+      "required": [
+        "clientAppGroupIdentifier"
+      ],
       "allOf": [
         {
           "$ref": "../../../common/v2/definitions.json#/definitions/ProxyResource"
@@ -300,6 +303,7 @@
         }
       },
       "required": [
+        "name",
         "type"
       ]
     },
@@ -328,6 +332,10 @@
           }
         }
       },
+      "required": [
+        "rateLimitThreshold",
+        "metricId"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/ApplicationGroupPolicy"
