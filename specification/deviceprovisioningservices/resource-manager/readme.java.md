@@ -12,12 +12,6 @@ Please also specify `--azure-libraries-for-java-folder=<path to "SDKs" directory
 ``` yaml $(java)
 java:
   azure-arm: true
-  regenerate-manager: true
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  client-side-validation: false
-  generate-interface: true
-  clear-output-folder: true
   output-folder: $(azure-libraries-for-java-folder)/deviceprovisioningservices
 
 directive:
