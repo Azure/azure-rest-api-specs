@@ -20,7 +20,7 @@ directive:
     
 java:
     namespace: com.azure.maps.render
-    license-header: MICROSOFT_MIT_NO_CODEGEN
+    license-header: MICROSOFT_MIT_SMALL
     payload-flattening-threshold: 0
     output-folder: $(azure-libraries-for-java-folder)/azure-maps-render
     add-context-parameter: true
