@@ -1,6 +1,17 @@
 ## Java
 
 ``` yaml $(java)
+
+directive:
+  - rename-model:
+      from: RouteMatrix
+      to: RouteMatrixPrivate
+  - rename-model:
+      from: RouteMatrixResult
+      to: RouteMatrixResultPrivate   
+  - rename-model:
+      from: RouteMatrixQuery
+      to: RouteMatrixQueryPrivate           
 java:
     namespace: com.azure.maps.route
     license-header: MICROSOFT_MIT_NO_CODEGEN
@@ -15,4 +26,5 @@ java:
     polling: {}
     models-subpackage: implementation.models
     custom-types-subpackage: models
+    custom-types: AlternativeRouteType,BatchResultSummary,ComputeTravelTime,DelayMagnitude,DrivingSide,EffectiveSetting,ErrorAdditionalInfo,ErrorDetail,ErrorResponse,ErrorResponseException,GuidanceInstructionType,GuidanceManeuver,InclineLevel,JunctionType,Report,ResponseSectionType,ResponseTravelMode,Route,RouteAvoidType,RouteDirections,RouteDirectionsBatchResult,RouteGuidance,RouteInstructionGroup,RouteInstructionsType,RouteLegSummary,RouteMatrixSummary,RouteOptimizedWaypoint,RouteRangeResult,RouteReport,RouteRepresentationForBestOrder,RouteSection,RouteSectionTec,RouteSectionTecCause,RouteSummary,RouteType,SectionType,SimpleCategory,TravelMode,VehicleEngineType,VehicleLoadType,WindingnessLevel
 ```
