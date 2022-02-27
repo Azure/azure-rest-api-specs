@@ -27,13 +27,22 @@ These are the global settings for Render Client.
 ``` yaml
 title: RenderClient
 openapi-type: data-plane
-tag: 2.0-preview
+tag: 2.1-preview
 # at some point those credentials will move away to Swagger according to [this](https://github.com/Azure/autorest/issues/3718)
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: https://atlas.microsoft.com/.default
 ```
 
+### Tag: 2.1-preview
+
+These settings apply only when `--tag=2.1-preview` is specified on the command line.
+
+``` yaml $(tag) == '2.1-preview'
+input-file:
+  - preview/1.0/render.json
+  - preview/2.1/render.json
+```
 
 ### Tag: 2.0-preview
 

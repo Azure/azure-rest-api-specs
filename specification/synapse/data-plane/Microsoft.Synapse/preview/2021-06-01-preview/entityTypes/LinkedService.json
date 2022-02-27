@@ -276,6 +276,51 @@
         "connectionString"
       ]
     },
+    "AmazonRdsForSqlServerLinkedService": {
+      "x-ms-discriminator-value": "AmazonRdsForSqlServer",
+      "description": "Amazon RDS for SQL Server linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Amazon RDS for SQL Server linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AmazonRdsForSqlServerLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AmazonRdsForSqlServerLinkedServiceTypeProperties": {
+      "description": "SQL Server linked service properties.",
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "type": "object"
+        },
+        "userName": {
+          "type": "object",
+          "description": "The on-premises Windows authentication user name. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "The on-premises Windows authentication password.",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "connectionString"
+      ]
+    },
     "AzureSqlDatabaseLinkedService": {
       "x-ms-discriminator-value": "AzureSqlDatabase",
       "description": "Microsoft Azure SQL Database linked service.",
@@ -1077,6 +1122,47 @@
         },
         "password": {
           "$ref": "../artifacts.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "connectionString"
+      ]
+    },
+    "AmazonRdsForOracleLinkedService": {
+      "x-ms-discriminator-value": "AmazonRdsForOracle",
+      "description": "AmazonRdsForOracle database.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "AmazonRdsForOracle database linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AmazonRdsForLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AmazonRdsForLinkedServiceTypeProperties": {
+      "description": "AmazonRdsForOracle database linked service properties.",
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "type": "object"
+        },
+        "password": {
+          "$ref": "../artifacts.json#/definitions/SecretBase",
           "description": "The Azure key vault secret reference of password in connection string."
         },
         "encryptedCredential": {

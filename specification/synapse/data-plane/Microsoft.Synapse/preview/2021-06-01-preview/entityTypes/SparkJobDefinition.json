@@ -29,6 +29,16 @@
         "jobProperties": {
           "description": "The properties of the Spark job.",
           "$ref": "#/definitions/SparkJobProperties"
+        },
+        "folder": {
+          "description": "The folder that this Spark job definition is in. If not specified, this Spark job definition will appear at the root level.",
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "The name of the folder that this Spark job definition is in.",
+              "type": "string"
+            }
+          }
         }
       },
       "additionalProperties": {

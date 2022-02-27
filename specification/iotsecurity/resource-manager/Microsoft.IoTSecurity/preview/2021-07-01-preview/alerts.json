@@ -414,6 +414,22 @@
           "example": "New",
           "description": "The status of the alert",
           "$ref": "#/definitions/AlertStatus"
+        },
+        "techniques": {
+          "description": "A list of of techniques that lead up to the intent/tactic",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TechniqueModel"
+          },
+          "example": [
+            {
+              "id": "T1005",
+              "name": "Data from Local System",
+              "description": "Adversaries may search local system sources, such as file systems or local databases, to find files of interest and sensitive data prior to Exfiltration.",
+              "link": "https://attack.mitre.org/techniques/T1005"
+            }
+          ]
         }
       }
     },
@@ -438,6 +454,36 @@
               "$ref": "#/definitions/AlertStatus"
             }
           }
+        }
+      }
+    },
+    "TechniqueModel": {
+      "type": "object",
+      "description": "Technique properties",
+      "properties": {
+        "id": {
+          "description": "Technique id",
+          "readOnly": true,
+          "type": "string",
+          "example": "T1005"
+        },
+        "name": {
+          "description": "Technique display name",
+          "readOnly": true,
+          "type": "string",
+          "example": "Data from Local System"
+        },
+        "description": {
+          "description": "Technique description",
+          "readOnly": true,
+          "type": "string",
+          "example": "Adversaries may search local system sources, such as file systems or local databases, to find files of interest and sensitive data prior to Exfiltration."
+        },
+        "link": {
+          "description": "Link to the technique in MITRE portal",
+          "readOnly": true,
+          "type": "string",
+          "example": "https://attack.mitre.org/techniques/T1005"
         }
       }
     }

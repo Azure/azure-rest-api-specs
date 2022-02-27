@@ -20,8 +20,9 @@ batch:
   - tag: package-2021-07-01-preview-only
   - tag: package-2021-03-01-preview-only
   - tag: package-2021-01-01-preview-only
+  - tag: package-2020-10-01-preview-only
   - tag: package-2020-04-01-preview-only
-  - tag: package-2020-10-01-preview
+  - tag: package-2019-08-01-preview-only
   - tag: package-2018-09-01-preview-only
   - tag: package-2018-07-01-preview-only
   - tag: package-2018-05-01-preview
@@ -55,6 +56,23 @@ namespace: azure.mgmt.authorization.v2021_03_01_preview
 output-folder: $(python-sdks-folder)/authorization/azure-mgmt-authorization/azure/mgmt/authorization/v2021_03_01_preview
 ```
 
+### Tag: package-2021-01-01-preview-only and python
+
+These settings apply only when `--tag=package-2021-01-01-preview-only --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-01-01-preview-only' && $(python)
+namespace: azure.mgmt.authorization.v2021_01_01_preview
+output-folder: $(python-sdks-folder)/authorization/azure-mgmt-authorization/azure/mgmt/authorization/v2021_01_01_preview
+```
+### Tag: package-2020-10-01-preview-only and python
+
+These settings apply only when `--tag=package-2020-10-01-preview-only --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10-01-preview-only' && $(python)
+namespace: azure.mgmt.authorization.v2020_10_01_preview
+output-folder: $(python-sdks-folder)/authorization/azure-mgmt-authorization/azure/mgmt/authorization/v2020_10_01_preview
+```
+
 ### Tag: package-2020-04-01-preview-only and python
 
 These settings apply only when `--tag=package-2020-04-01-preview-only --python` is specified on the command line.
@@ -62,6 +80,15 @@ These settings apply only when `--tag=package-2020-04-01-preview-only --python` 
 ``` yaml $(tag) == 'package-2020-04-01-preview-only' && $(python)
 namespace: azure.mgmt.authorization.v2020_04_01_preview
 output-folder: $(python-sdks-folder)/authorization/azure-mgmt-authorization/azure/mgmt/authorization/v2020_04_01_preview
+```
+
+### Tag: package-2019-08-01-preview-only and python
+
+These settings apply only when `--tag=package-2019-08-01-preview-only --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-08-01-preview-only' && $(python)
+namespace: azure.mgmt.authorization.v2019_08_01_preview
+output-folder: $(python-sdks-folder)/authorization/azure-mgmt-authorization/azure/mgmt/authorization/v2019_08_01_preview
 ```
 
 ### Tag: package-2018-09-01-preview-only and python
@@ -116,21 +143,4 @@ These settings apply only when `--tag=2015-06-01-preview --python` is specified 
 ``` yaml $(tag) == 'package-2015-06-01-preview' && $(python)
 namespace: azure.mgmt.authorization.v2015_06_01
 output-folder: $(python-sdks-folder)/authorization/azure-mgmt-authorization/azure/mgmt/authorization/v2015_06_01
-```
-
-### Tag: package-2021-01-01-preview-only and python
-
-These settings apply only when `--tag=package-2021-01-01-preview-only --python` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-01-01-preview-only' && $(python)
-namespace: azure.mgmt.authorization.v2021_01_01_preview
-output-folder: $(python-sdks-folder)/authorization/azure-mgmt-authorization/azure/mgmt/authorization/v2021_01_01_preview
-```
-### Tag: package-2020-10-01-preview and python
-
-These settings apply only when `--tag=package-2020-10-01-preview --python` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-10-01-preview' && $(python)
-namespace: azure.mgmt.authorization.v2020_10_01_preview
-output-folder: $(python-sdks-folder)/authorization/azure-mgmt-authorization/azure/mgmt/authorization/v2020_10_01_preview
 ```

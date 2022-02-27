@@ -9,7 +9,7 @@ python-mode: create
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.maps.render
 package-name: azure-maps-render
-package-version: 2.0-preview
+package-version: 2.1-preview
 clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'

@@ -47,7 +47,7 @@
           "Promotion, Activate"
         ],
         "responses": {
-          "200": {
+          "202": {
             "description": "The resource has been created",
             "schema": {
               "$ref": "#/definitions/PromotionResponse"
@@ -330,6 +330,10 @@
         "reason": {
           "type": "string",
           "description": "Reason in case the subscription is not eligible for promotion."
+        },
+        "details": {
+          "type": "string",
+          "description": "Details in case the subscription is not eligible for promotion."
         },
         "eligibilitySubscriptionId": {
           "type": "string",

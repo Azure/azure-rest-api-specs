@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "searchRequest": {
+      "keywords": null,
+      "limit": 3,
+      "filter": {
+        "and": [
+          {
+            "term": "ExampleTerm",
+            "glossaryName": "Glossary"
+          }
+        ]
+      }
+    },
+    "api-version": "2021-09-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@search.count": 1,
+        "value": [
+          {
+            "@search.score": 1.0,
+            "id": "b20ac13a-7883-4376-b076-bac9f8f214a8",
+            "qualifiedName": "https://exampleaccount.blob.core.windows.net/examplecontainer",
+            "name": "examplecontainer",
+            "description": null,
+            "owner": null,
+            "entityType": "azure_blob_container",
+            "classification": [],
+            "assetType": [
+              "Azure Blob Storage"
+            ],
+            "term": [
+              {
+                "name": "ExampleTerm",
+                "glossaryName": "Glossary"
+              }
+            ],
+            "contact": [],
+            "label": [
+              "Example.Label"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

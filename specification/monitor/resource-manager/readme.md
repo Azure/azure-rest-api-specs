@@ -35,7 +35,7 @@ title: MonitorManagementClient
 ``` yaml
 description: Monitor Management Client
 openapi-type: arm
-tag: package-2021-07
+tag: package-2021-04
 ```
 
 ### Tag: package-2021-07
@@ -67,6 +67,15 @@ input-file:
 - Microsoft.Insights/stable/2021-04-01/dataCollectionEndpoints_API.json
 - Microsoft.Insights/stable/2021-04-01/dataCollectionRuleAssociations_API.json
 - Microsoft.Insights/stable/2021-04-01/dataCollectionRules_API.json
+```
+
+### Tag: package-2021-07-01-preview-only
+
+These settings apply only when `--tag=package-2021-07-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-07-01-preview-only'
+input-file:
+- Microsoft.Insights/preview/2021-07-01-preview/privateLinkScopes_API.json
 ```
 
 ### Tag: package-2021-04
@@ -644,7 +653,9 @@ These settings apply only when `--tag=package-2015-07-01-only` is specified on t
 ``` yaml $(tag) == 'package-2015-07-01-only'
 input-file:
 - Microsoft.Insights/stable/2015-07-01/serviceDiagnosticsSettings_API.json
+- Microsoft.Insights/stable/2015-07-01/metricDefinitions_API.json
 - Microsoft.Insights/stable/2014-04-01/alertRules_API.json
+- Microsoft.Insights/stable/2015-07-01/operations_API.json
 ```
 
 ### Tag: package-2015-04-01-only
@@ -722,6 +733,21 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-monitor
 
 ``` yaml
 directive:
+  - suppress: R4009
+    from: privateLinkScopes_API.json
+    reason: 'Contract is defined in the Network RP private endpoint spec, can be updated by internal calls from Network RP. '
+  - suppress: R3018
+    from: privateLinkScopes_API.json
+    where: $.definitions.PrivateEndpointConnectionProperties.properties.queryOnlyPrivateLinkResources
+    reason: 'This property indicates whether data coming through this private endpoint should restrict itself only to resources in the scope - it has only ''''true'''' or ''''false'''' options, so it fits boolean type.'
+  - suppress: R3018
+    from: privateLinkScopes_API.json
+    where: $.definitions.PrivateEndpointConnectionProperties.properties.ingestOnlyToPrivateLinkResources
+    reason: 'This property indicates whether data coming through this private endpoint should restrict itself only to resources in the scope - it has only ''''true'''' or ''''false'''' options, so it fits boolean type.'
+  - suppress: OperationsAPIImplementation
+    from: privateLinkScopes_API.json
+    where: $.paths
+    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
   - suppress: R3016
     reason: The feature (polymorphic types) is in the process of deprecation and fixing this will require changes in the backend.
   - suppress: OperationsAPIImplementation
@@ -779,6 +805,14 @@ directive:
   - suppress: DefaultErrorResponseSchema
     from: metricDefinitions_API.json
     reason: 'Updating the error response to the new format would be a breaking change.'
+  - suppress: OperationsAPIImplementation
+    from: operations_API.json
+    where: $.paths
+    reason: 'The operations API is implemented however the tool is still firing due to the casing being different'
+  - suppress: OperationsAPIImplementation
+    from: serviceDiagnosticsSettings_API.json
+    where: $.paths
+    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
   - suppress: OperationsAPIImplementation
     from: subscriptionDiagnosticsSettings_API.json
     where: $.paths

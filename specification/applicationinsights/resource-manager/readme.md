@@ -402,6 +402,7 @@ These settings apply only when `--tag=package-2018-05-01-preview` is specified o
 input-file:
 - Microsoft.Insights/preview/2018-05-01-preview/componentProactiveDetection_API.json
 - Microsoft.Insights/preview/2018-05-01-preview/components_API.json
+- Microsoft.Insights/preview/2018-05-01-preview/webTests_API.json
 ```
 
 ### Tag: package-2017-10

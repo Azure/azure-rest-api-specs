@@ -259,9 +259,12 @@
           },
           "description": "Connectivity topology type."
         },
-        "hubId": {
-          "type": "string",
-          "description": "The hub vnet Id."
+        "hubs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Hub"
+          },
+          "description": "List of hubItems"
         },
         "isGlobal": {
           "type": "string",
@@ -304,6 +307,20 @@
         "connectivityTopology"
       ],
       "description": "Properties of network manager connectivity configuration"
+    },
+    "Hub": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "Resource Type."
+        }
+      },
+      "description": "Hub Item."
     },
     "connectivityGroupItem": {
       "type": "object",

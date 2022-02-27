@@ -90,6 +90,7 @@ input-file:
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/Watchlists.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/AlertRules.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/EntityQueries.json
+- Microsoft.SecurityInsights/preview/2021-03-01-preview/EntityQueryTemplates.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/Metadata.json
 directive:
   - suppress: R4017

@@ -25,7 +25,7 @@ These are the global settings for the Automation API.
 title: AutomationClient
 description: Automation Client
 openapi-type: arm
-tag: package-2020-01-13-preview
+tag: package-2021-06-22
 ```
 
 ### Tag: package-2015-10
@@ -232,6 +232,45 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/webhook.json
 ```
 
+### Tag: package-2021-06-22
+
+These settings apply only when `--tag=package-2021-06-22` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06-22'
+input-file:
+- Microsoft.Automation/preview/2020-01-13-preview/privateEndpointConnection.json
+- Microsoft.Automation/preview/2020-01-13-preview/privateLinkResources.json
+- Microsoft.Automation/preview/2020-01-13-preview/python2package.json
+- Microsoft.Automation/preview/2020-01-13-preview/dscNode.json
+- Microsoft.Automation/preview/2020-01-13-preview/dscNodeConfiguration.json
+- Microsoft.Automation/preview/2020-01-13-preview/dscCompilationJob.json
+- Microsoft.Automation/preview/2020-01-13-preview/dscNodeCounts.json
+- Microsoft.Automation/preview/2020-01-13-preview/sourceControl.json
+- Microsoft.Automation/preview/2020-01-13-preview/sourceControlSyncJob.json
+- Microsoft.Automation/preview/2020-01-13-preview/sourceControlSyncJobStreams.json
+- Microsoft.Automation/stable/2021-06-22/account.json
+- Microsoft.Automation/preview/2020-01-13-preview/certificate.json
+- Microsoft.Automation/preview/2020-01-13-preview/connection.json
+- Microsoft.Automation/preview/2020-01-13-preview/connectionType.json
+- Microsoft.Automation/preview/2020-01-13-preview/credential.json
+- Microsoft.Automation/stable/2021-06-22/hybridRunbookWorkerGroup.json
+- Microsoft.Automation/preview/2020-01-13-preview/jobSchedule.json
+- Microsoft.Automation/preview/2020-01-13-preview/linkedWorkspace.json
+- Microsoft.Automation/preview/2020-01-13-preview/module.json
+- Microsoft.Automation/preview/2020-01-13-preview/schedule.json
+- Microsoft.Automation/preview/2020-01-13-preview/variable.json
+- Microsoft.Automation/preview/2020-01-13-preview/watcher.json
+- Microsoft.Automation/stable/2019-06-01/dscConfiguration.json
+- Microsoft.Automation/stable/2019-06-01/job.json
+- Microsoft.Automation/stable/2021-06-22/operations.json
+- Microsoft.Automation/stable/2019-06-01/softwareUpdateConfiguration.json
+- Microsoft.Automation/stable/2019-06-01/softwareUpdateConfigurationRun.json
+- Microsoft.Automation/stable/2019-06-01/softwareUpdateConfigurationMachineRun.json
+- Microsoft.Automation/stable/2018-06-30/runbook.json
+- Microsoft.Automation/stable/2015-10-31/webhook.json
+- Microsoft.Automation/stable/2021-06-22/hybridRunbookWorker.json
+```
+
 ---
 ## Suppression
 ``` yaml
@@ -257,6 +296,21 @@ directive:
   - suppress: LongRunningResponseStatusCode
     from: runbook.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/publish"].post["x-ms-long-running-operation"]
+  - suppress: DefaultErrorResponseSchema
+    from: hybridRunbookWorkerGroup.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
+  - suppress: DefaultErrorResponseSchema
+    from: hybridRunbookWorker.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
+  - suppress: DefaultErrorResponseSchema
+    from: operations.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
+  - suppress: BodyTopLevelProperties
+    from: hybridRunbookWorkerGroup.json
+    reason: This body format is already part of the previous api, cannot change it as it will result in breaking change.
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: hybridRunbookWorkerGroup.json
+    reason: This body format is already part of the previous api, cannot change it as it will result in breaking change.
 ```
 
 ---
