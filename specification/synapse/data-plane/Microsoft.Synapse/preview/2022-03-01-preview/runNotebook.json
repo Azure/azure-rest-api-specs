@@ -410,29 +410,24 @@
       "properties": {
         "tags": {
           "type": "object",
-          "x-nullable": true,
           "additionalProperties": {
             "type": "string"
           }
         },
         "kind": {
-          "x-nullable": true,
           "type": "string",
           "description": "The session kind"
         },
         "proxyUser": {
-          "x-nullable": true,
           "type": "string",
           "description": "User to impersonate when starting the session"
         },
         "name": {
-          "x-nullable": true,
           "type": "string",
           "description": "The name of this session"
         },
         "jars": {
           "uniqueItems": false,
-          "x-nullable": true,
           "type": "array",
           "description": "jars to be used in this session",
           "items": {
@@ -442,7 +437,6 @@
         "pyFiles": {
           "x-ms-client-name": "pythonFiles",
           "uniqueItems": false,
-          "x-nullable": true,
           "description": "Python files to be used in this session",
           "type": "array",
           "items": {
@@ -452,7 +446,6 @@
         "files": {
           "uniqueItems": false,
           "type": "array",
-          "x-nullable": true,
           "description": "files to be used in this session",
           "items": {
             "type": "string"
@@ -460,7 +453,6 @@
         },
         "archives": {
           "uniqueItems": false,
-          "x-nullable": true,
           "description": "Archives to be used in this session",
           "type": "array",
           "items": {
@@ -469,7 +461,6 @@
         },
         "queue": {
           "type": "object",
-          "x-nullable": true,
           "description": "The name of the YARN queue to which submitted"
         },
         "conf": {
@@ -506,14 +497,12 @@
         },
         "isQueueable": {
           "type": "boolean",
-          "x-nullable": true,
           "description": "Whether to queue session creation if Spark pool doesn't have enough capacity. Default value is true in notebook runs API"
         },
         "heartbeatTimeoutInSecond": {
           "type": "integer",
           "format": "int32",
-          "description": "Timeout in second to which session be orphaned",
-          "x-nullable": true
+          "description": "Timeout in second to which session be orphaned"
         }
       }
     },
