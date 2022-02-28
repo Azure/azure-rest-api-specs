@@ -975,6 +975,7 @@
     },
     "Resource": {
       "description": "The common properties of an ARM resource.",
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -1071,7 +1072,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
