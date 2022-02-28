@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "api-version": "2021-10-01",
+    "billingScope": "subscriptions/00000000-0000-0000-0000-00000000/resourceGroups/testGroup",
+    "lookBackPeriod": "Last30Days",
+    "product": "Standard_DS13_v2",
+    "region": "westus",
+    "scope": "Single",
+    "term": "P3Y"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "subscriptions/00000000-0000-0000-0000-00000000/resourceGroups/testGroup/providers/microsoft.consumption/reservationrecommendationdetails",
+        "name": "reservationRecommendationDetails",
+        "type": "Microsoft.Consumption/ReservationRecommendationDetails",
+        "properties": {
+          "currency": "USD",
+          "resource": {
+            "appliedScopes": [
+              "00000000-0000-0000-0000-00000000",
+              "testGroup"
+            ],
+            "onDemandRate": 0.519,
+            "product": "Standard_DS13_v2",
+            "region": "westus",
+            "reservationRate": 0.302549467275493,
+            "resourceType": "virtualmachines"
+          },
+          "resourceGroup": "testGroup",
+          "savings": {
+            "calculatedSavings": [
+              {
+                "onDemandCost": 368.4813602070006,
+                "overageCost": 0.0,
+                "quantity": 2,
+                "reservationCost": 429.01514459665,
+                "totalReservationCost": 429.01514459665,
+                "savings": -60.5337843896494
+              },
+              {
+                "onDemandCost": 368.481360207000,
+                "overageCost": 1.557,
+                "quantity": 1,
+                "reservationCost": 214.507572298325,
+                "totalReservationCost": 216.064572298325,
+                "savings": 152.416787908675
+              }
+            ],
+            "lookBackPeriod": 30,
+            "recommendedQuantity": 1.0,
+            "reservationOrderTerm": "P3Y",
+            "savingsType": "instance",
+            "unitOfMeasure": "hour"
+          },
+          "scope": "Single",
+          "usage": {
+            "firstConsumptionDate": "2020-02-03T00:00:00",
+            "lastConsumptionDate": "2020-03-03T13:00:00",
+            "lookBackUnitType": "virtualMachine quantity",
+            "usageData": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "usageGrain": "hourly"
+          }
+        }
+      }
+    },
+    "204": {}
+  }
+}

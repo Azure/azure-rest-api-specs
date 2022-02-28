@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "serverName": "mysqltestserver",
+    "resourceGroupName": "testrg",
+    "api-version": "2021-05-01",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "parameters": {
+      "value": [
+        {
+          "name": "event_scheduler",
+          "properties": {
+            "value": "OFF"
+          }
+        },
+        {
+          "name": "div_precision_increment",
+          "properties": {
+            "value": "8"
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "value": "ON",
+              "description": "Indicates the status of the Event Scheduler. It is always OFF for a replica server to keep the replication consistency.",
+              "defaultValue": "OFF",
+              "dataType": "Enumeration",
+              "allowedValues": "ON,OFF",
+              "source": "user-override",
+              "isConfigPendingRestart": "False",
+              "isDynamicConfig": "True",
+              "isReadOnly": "False"
+            },
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver/configurations/event_scheduler",
+            "name": "event_scheduler",
+            "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
+          },
+          {
+            "properties": {
+              "value": "8",
+              "description": "Number of digits by which to increase the scale of the result of division operations.",
+              "defaultValue": "4",
+              "dataType": "Integer",
+              "allowedValues": "0-30",
+              "source": "user-override",
+              "isConfigPendingRestart": "False",
+              "isDynamicConfig": "True",
+              "isReadOnly": "False"
+            },
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver/configurations/div_precision_increment",
+            "name": "div_precision_increment",
+            "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
+          }
+        ]
+      }
+    },
+    "202": {}
+  }
+}

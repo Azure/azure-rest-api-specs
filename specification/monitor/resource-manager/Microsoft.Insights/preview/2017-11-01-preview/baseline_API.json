@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-    "/{resourceUri}/providers/microsoft.insights/baseline/{metricName}": {
+    "/{resourceUri}/providers/Microsoft.Insights/baseline/{metricName}": {
       "get": {
         "tags": [
           "Baseline"
@@ -66,7 +66,7 @@
             "$ref": "#/parameters/BaselineResultTypeParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -238,6 +238,15 @@
             "description": "A single high threshold value."
           },
           "description": "The high thresholds of the baseline."
+        },
+        "timestamps": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "date-time",
+            "description": "the timestamp for the baseline value in ISO 8601 format."
+          },
+          "description": "the array of timestamps of the baselines."
         }
       },
       "required": [
@@ -314,13 +323,6 @@
       "description": "Allows retrieving only metadata of the baseline. On data request all information is retrieved.",
       "x-ms-parameter-location": "method",
       "required": false
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
     }
   }
 }

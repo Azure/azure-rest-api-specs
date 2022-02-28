@@ -1,0 +1,44 @@
+{
+  "title": "List of resources onboarded for network security perimeter feature (perimeter associable resources).",
+  "parameters": {
+    "api-version": "2021-03-01-preview",
+    "subscriptionId": "subId",
+    "location": "westus"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Microsoft.Sql.servers",
+            "id": "/subscriptions/{subscriptionID}/providers/Microsoft.Network/perimeterAssociableResourceTypes/Microsoft.Sql.servers",
+            "type": "Microsoft.Network/PerimeterAssociableResourceTypes",
+            "properties": {
+              "resourceType": "Microsoft.Sql/servers",
+              "displayName": "Microsoft.Sql/servers",
+              "publicDnsZones": [
+                "database.windows.net"
+              ]
+            }
+          },
+          {
+            "name": "Microsoft.Storage.accounts",
+            "id": "/subscriptions/{subscriptionId}/providers/Microsoft.Network/perimeterAssociableResourceTypes/Microsoft.Storage.storageAccounts",
+            "type": "Microsoft.Network/PerimeterAssociableResourceTypes",
+            "properties": {
+              "resourceType": "Microsoft.Storage/accounts",
+              "displayName": "Microsoft.Storage/accounts",
+              "publicDnsZones": [
+                "blob.core.windows.net",
+                "table.core.windows.net",
+                "queue.core.windows.net",
+                "file.core.windows.net"
+              ]
+            }
+          }
+        ],
+        "nextLink": "{baseurl}/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/perimeterAssociableResourceTypes?api-version=2021-03-01-preview&$skipToken=10"
+      }
+    }
+  }
+}

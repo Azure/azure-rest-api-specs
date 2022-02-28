@@ -2250,7 +2250,6 @@
       "description": "A rule that specifies a set of actions and conditions",
       "type": "object",
       "required": [
-        "name",
         "order",
         "actions"
       ],
@@ -2301,6 +2300,8 @@
             "UrlPath",
             "UrlFileExtension",
             "UrlFileName",
+            "HttpVersion",
+            "Cookies",
             "IsDevice"
           ],
           "x-ms-enum": {
@@ -2505,6 +2506,42 @@
         "parameters": {
           "description": "Defines the parameters for the condition.",
           "$ref": "#/definitions/UrlFileNameMatchConditionParameters"
+        }
+      }
+    },
+    "DeliveryRuleHttpVersionCondition": {
+      "description": "Defines the HttpVersion condition for the delivery rule.",
+      "x-ms-discriminator-value": "HttpVersion",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleCondition"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the condition.",
+          "$ref": "#/definitions/HttpVersionMatchConditionParameters"
+        }
+      }
+    },
+    "DeliveryRuleCookiesCondition": {
+      "description": "Defines the Cookies condition for the delivery rule.",
+      "x-ms-discriminator-value": "Cookies",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleCondition"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the condition.",
+          "$ref": "#/definitions/CookiesMatchConditionParameters"
         }
       }
     },
@@ -3093,6 +3130,102 @@
         }
       }
     },
+    "HttpVersionMatchConditionParameters": {
+      "description": "Defines the parameters for HttpVersion match conditions",
+      "required": [
+        "operator",
+        "matchValues",
+        "@odata.type"
+      ],
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "enum": [
+            "#Microsoft.Azure.Cdn.Models.DeliveryRuleHttpVersionConditionParameters"
+          ]
+        },
+        "operator": {
+          "description": "Describes operator to be matched",
+          "type": "string",
+          "enum": [
+            "Equal"
+          ],
+          "x-ms-enum": {
+            "name": "HttpVersionOperator",
+            "modelAsString": true
+          }
+        },
+        "negateCondition": {
+          "description": "Describes if this is negate condition or not",
+          "type": "boolean"
+        },
+        "matchValues": {
+          "description": "The match value for the condition of the delivery rule",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CookiesMatchConditionParameters": {
+      "description": "Defines the parameters for Cookies match conditions",
+      "required": [
+        "operator",
+        "matchValues",
+        "selector",
+        "@odata.type"
+      ],
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "enum": [
+            "#Microsoft.Azure.Cdn.Models.DeliveryRuleCookiesConditionParameters"
+          ]
+        },
+        "selector": {
+          "description": "Name of Cookies to be matched",
+          "type": "string"
+        },
+        "operator": {
+          "description": "Describes operator to be matched",
+          "type": "string",
+          "enum": [
+            "Any",
+            "Equal",
+            "Contains",
+            "BeginsWith",
+            "EndsWith",
+            "LessThan",
+            "LessThanOrEqual",
+            "GreaterThan",
+            "GreaterThanOrEqual"
+          ],
+          "x-ms-enum": {
+            "name": "CookiesOperator",
+            "modelAsString": true
+          }
+        },
+        "negateCondition": {
+          "description": "Describes if this is negate condition or not",
+          "type": "boolean"
+        },
+        "matchValues": {
+          "description": "The match value for the condition of the delivery rule",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "transforms": {
+          "description": "List of transforms",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transform"
+          }
+        }
+      }
+    },
     "IsDeviceMatchConditionParameters": {
       "description": "Defines the parameters for IsDevice match conditions",
       "required": [
@@ -3154,9 +3287,11 @@
           "type": "string",
           "enum": [
             "CacheExpiration",
+            "CacheKeyQueryString",
             "ModifyRequestHeader",
             "ModifyResponseHeader",
-            "UrlRedirect"
+            "UrlRedirect",
+            "UrlRewrite"
           ],
           "x-ms-enum": {
             "name": "DeliveryRuleAction",
@@ -3238,6 +3373,52 @@
         "customFragment": {
           "type": "string",
           "description": "Fragment to add to the redirect URL. Fragment is the part of the URL that comes after #. Do not include the #."
+        }
+      }
+    },
+    "UrlRewriteAction": {
+      "description": "Defines the url rewrite action for the delivery rule.",
+      "x-ms-discriminator-value": "UrlRewrite",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleAction"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the action.",
+          "$ref": "#/definitions/UrlRewriteActionParameters"
+        }
+      }
+    },
+    "UrlRewriteActionParameters": {
+      "description": "Defines the parameters for the url rewrite action.",
+      "required": [
+        "sourcePattern",
+        "destination",
+        "@odata.type"
+      ],
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "enum": [
+            "#Microsoft.Azure.Cdn.Models.DeliveryRuleUrlRewriteActionParameters"
+          ]
+        },
+        "sourcePattern": {
+          "description": "define a request URI pattern that identifies the type of requests that may be rewritten. Currently, source pattern uses a prefix-based match. To match all URL paths, use \"/\" as the source pattern value. To match only the root directory and re-write this path, use the origin path field",
+          "type": "string"
+        },
+        "destination": {
+          "description": "Define the destination path for be used in the rewrite. This will overwrite the source pattern ",
+          "type": "string"
+        },
+        "preserveUnmatchedPath": {
+          "description": "If True, the remaining path after the source pattern will be appended to the new destination path.  ",
+          "type": "boolean"
         }
       }
     },
@@ -3372,6 +3553,58 @@
         },
         "cacheDuration": {
           "description": "The duration for which the content needs to be cached. Allowed format is [d.]hh:mm:ss",
+          "type": "string",
+          "x-nullable": true
+        }
+      }
+    },
+    "DeliveryRuleCacheKeyQueryStringAction": {
+      "description": "Defines the cache-key query string action for the delivery rule.",
+      "x-ms-discriminator-value": "CacheKeyQueryString",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleAction"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the action.",
+          "$ref": "#/definitions/CacheKeyQueryStringActionParameters"
+        }
+      }
+    },
+    "CacheKeyQueryStringActionParameters": {
+      "description": "Defines the parameters for the cache-key query string action.",
+      "required": [
+        "queryStringBehavior",
+        "@odata.type"
+      ],
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "enum": [
+            "#Microsoft.Azure.Cdn.Models.DeliveryRuleCacheKeyQueryStringBehaviorActionParameters"
+          ]
+        },
+        "queryStringBehavior": {
+          "description": "Caching behavior for the requests",
+          "type": "string",
+          "enum": [
+            "Include",
+            "IncludeAll",
+            "Exclude",
+            "ExcludeAll"
+          ],
+          "x-ms-enum": {
+            "name": "queryStringBehavior",
+            "modelAsString": true
+          }
+        },
+        "queryParameters": {
+          "description": "query parameters to include or exclude (comma separated).",
           "type": "string",
           "x-nullable": true
         }
@@ -3694,6 +3927,10 @@
             "modelAsString": true
           }
         },
+        "customHttpsParameters": {
+          "description": "Certificate parameters for securing custom HTTPS",
+          "$ref": "#/definitions/CustomDomainHttpsParameters"
+        },
         "validationData": {
           "description": "Special validation or data may be required when delivering CDN to some regions due to local compliance reasons. E.g. ICP license number of a custom domain is required to deliver content in China.",
           "type": "string"
@@ -3757,6 +3994,19 @@
           "x-ms-enum": {
             "name": "ProtocolType",
             "modelAsString": true
+          }
+        },
+        "minimumTlsVersion": {
+          "description": "TLS protocol version that will be used for Https",
+          "enum": [
+            "None",
+            "TLS10",
+            "TLS12"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "minimumTlsVersion",
+            "modelAsString": false
           }
         }
       }
@@ -4281,7 +4531,8 @@
             "Custom_Verizon",
             "Standard_Akamai",
             "Standard_ChinaCdn",
-            "Standard_Microsoft"
+            "Standard_Microsoft",
+            "Premium_ChinaCdn"
           ],
           "type": "string",
           "x-ms-enum": {
