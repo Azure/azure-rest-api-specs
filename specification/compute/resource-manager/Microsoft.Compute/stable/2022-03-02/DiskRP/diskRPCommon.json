@@ -416,9 +416,21 @@
         "acceleratedNetwork": {
           "type": "boolean",
           "description": "True if the image from which the OS disk is created supports accelerated networking."
+        },
+        "architecture": {
+          "type": "string",
+          "description": "CPU architecture supported by an OS disk.",
+          "enum": [
+            "x64",
+            "Arm64"
+          ],
+          "x-ms-enum": {
+            "name": "Architecture",
+            "modelAsString": true
+          }
         }
       },
-      "description": "List of supported capabilities (like accelerated networking) persisted on the disk resource for VM use."
+      "description": "List of supported capabilities persisted on the disk resource for VM use."
     },
     "DiskSecurityType": {
       "type": "string",
@@ -508,6 +520,28 @@
         }
       },
       "description": "A disk access SAS uri."
+    },
+    "DataAccessAuthMode": {
+      "type": "string",
+      "description": "Additional authentication requirements when exporting or uploading to a disk or snapshot.",
+      "enum": [
+        "AzureActiveDirectory",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "DataAccessAuthMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AzureActiveDirectory",
+            "description": "When export/upload URL is used, the system checks if the user has an identity in Azure Active Directory and has necessary permissions to export/upload the data. Please refer to aka.ms/DisksAzureADAuth."
+          },
+          {
+            "value": "None",
+            "description": "No additional authentication would be performed when accessing export/upload URL."
+          }
+        ]
+      }
     }
   },
   "parameters": {

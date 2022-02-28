@@ -103,6 +103,9 @@
           "Create a managed disk and associate with disk access resource.": {
             "$ref": "./examples/diskExamples/Disk_Create_WithDiskAccess.json"
           },
+          "Create a managed disk with dataAccessAuthMode": {
+            "$ref": "./examples/diskExamples/Disk_Create_WithDataAccessAuthMode.json"
+          },
           "Create a managed disk and associate with disk encryption set.": {
             "$ref": "./examples/diskExamples/Disk_Create_WithDiskEncryptionSet.json"
           },
@@ -195,6 +198,9 @@
           },
           "Update a managed disk to change tier.": {
             "$ref": "./examples/diskExamples/Disk_Update_ChangeTier.json"
+          },
+          "Update a managed disk to add architecture.": {
+            "$ref": "./examples/diskExamples//Disk_Update_ToAddArchitecture.json"
           }
         }
       },
@@ -715,6 +721,9 @@
         },
         "publicNetworkAccess": {
           "$ref": "./diskRPCommon.json#/definitions/PublicNetworkAccess"
+        },
+        "dataAccessAuthMode": {
+          "$ref": "./diskRPCommon.json#/definitions/DataAccessAuthMode"
         }
       },
       "required": [
@@ -795,7 +804,7 @@
         },
         "supportedCapabilities": {
           "$ref": "./diskRPCommon.json#/definitions/SupportedCapabilities",
-          "description": "List of supported capabilities (like accelerated networking) to be added on the OS disk."
+          "description": "List of supported capabilities to be added on the OS disk."
         },
         "propertyUpdatesInProgress": {
           "readOnly": true,
@@ -808,6 +817,9 @@
         },
         "publicNetworkAccess": {
           "$ref": "./diskRPCommon.json#/definitions/PublicNetworkAccess"
+        },
+        "dataAccessAuthMode": {
+          "$ref": "./diskRPCommon.json#/definitions/DataAccessAuthMode"
         }
       },
       "description": "Disk resource update properties."

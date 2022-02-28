@@ -522,7 +522,7 @@
         },
         "supportedCapabilities": {
           "$ref": "./diskRPCommon.json#/definitions/SupportedCapabilities",
-          "description": "List of supported capabilities (like Accelerated Networking) for the image from which the source disk from the snapshot was originally created."
+          "description": "List of supported capabilities for the image from which the source disk from the snapshot was originally created."
         },
         "creationData": {
           "$ref": "./diskRPCommon.json#/definitions/CreationData",
@@ -586,6 +586,9 @@
         "completionPercent": {
           "type": "number",
           "description": "Percentage complete for the background copy when a resource is created via the CopyStart operation."
+        },
+        "dataAccessAuthMode": {
+          "$ref": "./diskRPCommon.json#/definitions/DataAccessAuthMode"
         }
       },
       "required": [
@@ -634,9 +637,12 @@
         "publicNetworkAccess": {
           "$ref": "./diskRPCommon.json#/definitions/PublicNetworkAccess"
         },
+        "dataAccessAuthMode": {
+          "$ref": "./diskRPCommon.json#/definitions/DataAccessAuthMode"
+        },
         "supportedCapabilities": {
           "$ref": "./diskRPCommon.json#/definitions/SupportedCapabilities",
-          "description": "List of supported capabilities (like accelerated networking) for the image from which the OS disk was created."
+          "description": "List of supported capabilities for the image from which the OS disk was created."
         }
       },
       "description": "Snapshot resource update properties."
