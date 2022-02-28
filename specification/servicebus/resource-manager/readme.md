@@ -26,7 +26,7 @@ These are the global settings for the ServiceBus API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-11
+tag: package-2022-01-preview
 ```
 
 ### Tag: package-2021-01-preview
