@@ -83,6 +83,23 @@ input-file:
 
 ---
 
+### Tag: package-2021-10
+
+These settings apply only when `--tag=package-2021-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-10'
+input-file:
+  - Microsoft.SecurityInsights/stable/2021-10-01/Incidents.json
+  - Microsoft.SecurityInsights/stable/2021-10-01/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/stable/2021-10-01/Watchlists.json
+  - Microsoft.SecurityInsights/stable/2021-10-01/operations.json
+  - Microsoft.SecurityInsights/stable/2021-10-01/OnboardingStates.json
+  - Microsoft.SecurityInsights/stable/2021-10-01/AlertRules.json
+  - Microsoft.SecurityInsights/stable/2021-10-01/Bookmarks.json
+  - Microsoft.SecurityInsights/stable/2021-10-01/DataConnectors.json
+  - Microsoft.SecurityInsights/stable/2021-10-01/AutomationRules.json
+```
+
 ### Tag: package-2021-04-01-only
 
 These settings apply only when `--tag=package-2021-04-01-only` is specified on the command line.
