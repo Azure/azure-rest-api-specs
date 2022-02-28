@@ -81,6 +81,43 @@
           }
         }
       },
+      "get": {
+        "tags": [
+          "PrivateLinkAssociation"
+        ],
+        "operationId": "PrivateLinkAssociation_Get",
+        "description": "Get a single private link association",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateLinkAssociationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok. The request has succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkAssociationGetResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a private link association for a MG scope.": {
+            "$ref": "./examples/GetPrivateLinkAssociation.json"
+          }
+        }
+      },
       "delete": {
         "tags": [
           "PrivateLinkAssociation"
@@ -124,7 +161,7 @@
         "tags": [
           "PrivateLinkAssociation"
         ],
-        "operationId": "PrivateLinkAssociation_Get",
+        "operationId": "PrivateLinkAssociation_List",
         "description": "Get a private link association for a management group scope",
         "parameters": [
           {
@@ -150,7 +187,7 @@
         },
         "x-ms-examples": {
           "Get a private link association for a MG scope.": {
-            "$ref": "./examples/GetPrivateLinkAssociation.json"
+            "$ref": "./examples/ListPrivateLinkAssociation.json"
           }
         }
       }
@@ -171,7 +208,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group the template will be deployed to. The name is case insensitive.",
+            "description": "The name of the resource group. The name is case insensitive.",
             "minLength": 1,
             "maxLength": 90
           },
@@ -226,7 +263,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group the template will be deployed to. The name is case insensitive.",
+            "description": "The name of the resource group. The name is case insensitive.",
             "minLength": 1,
             "maxLength": 90
           },
@@ -272,7 +309,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group the template will be deployed to. The name is case insensitive.",
+            "description": "The name of the resource group. The name is case insensitive.",
             "minLength": 1,
             "maxLength": 90
           },
@@ -335,7 +372,52 @@
         },
         "x-ms-examples": {
           "Delete a Resource Management Private Link.": {
-            "$ref": "./examples/ListResourceManagementPrivateLink.json"
+            "$ref": "./examples/ListSubscriptionResourceManagementPrivateLink.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/resourceManagementPrivateLinks": {
+      "get":{
+        "tags": [
+          "ResourceManagementPrivateLink"
+        ],
+        "operationId": "ResourceManagementPrivateLink_ListAtRGLevel",
+        "description": "Get all the resource management private links in a resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok - Returns an array of private links.",
+            "schema": {
+              "$ref": "#/definitions/ResourceManagementPrivateLinkListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a Resource Management Private Link.": {
+            "$ref": "./examples/ListResourceGroupResourceManagementPrivateLink.json"
           }
         }
       }
@@ -345,19 +427,21 @@
     "PrivateLinkAssociationProperties": {
       "type": "object",
       "properties": {
-        "privateLink": {
-          "type": "string",
-          "description": "The rmpl Resource ID."
-        },
-        "publicNetworkAccess": {
-          "type": "string",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "publicNetworkAccessOptions",
-            "modelAsString": true
+        "properties":{
+          "privateLink": {
+            "type": "string",
+            "description": "The rmpl Resource ID."
+          },
+          "publicNetworkAccess": {
+            "type": "string",
+            "enum": [
+              "Enabled",
+              "Disabled"
+            ],
+            "x-ms-enum": {
+              "name": "publicNetworkAccessOptions",
+              "modelAsString": true
+            }
           }
         }
       }
