@@ -124,9 +124,6 @@
               "$ref": "#/definitions/App"
             }
           },
-          "202": {
-            "description": "Accepted - Put request accepted; the operation will complete asynchronously."
-          },
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
@@ -281,16 +278,16 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTCentral/iotApps/{resourceName}/privateEndpointConnections/{privateEndpointName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTCentral/iotApps/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "tags": [
           "Networking"
         ],
-        "description": "Get the metadata of a Private Endpoint Connection for the IoT Central Application.",
-        "operationId": "PrivateEndpoints_Get",
+        "description": "Get the metadata of a private endpoint connection for the IoT Central Application.",
+        "operationId": "PrivateEndpointConnections_Get",
         "x-ms-examples": {
-          "PrivateEndpoints_Get": {
-            "$ref": "./examples/PrivateEndpoints_Get.json"
+          "PrivateEndpointConnections_Get": {
+            "$ref": "./examples/PrivateEndpointConnections_Get.json"
           }
         },
         "parameters": [
@@ -307,7 +304,7 @@
             "$ref": "#/parameters/resourceName"
           },
           {
-            "$ref": "#/parameters/privateEndpointName"
+            "$ref": "#/parameters/privateEndpointConnectionName"
           }
         ],
         "responses": {
@@ -331,11 +328,11 @@
         "tags": [
           "Networking"
         ],
-        "description": "Update a Private Endpoint Connection.",
-        "operationId": "PrivateEndpoints_Create",
+        "description": "Update a private endpoint connection.",
+        "operationId": "PrivateEndpointConnections_Create",
         "x-ms-examples": {
-          "PrivateEndpoints_Update": {
-            "$ref": "./examples/PrivateEndpoints_Update.json"
+          "PrivateEndpointConnections_Update": {
+            "$ref": "./examples/PrivateEndpointConnections_Update.json"
           }
         },
         "parameters": [
@@ -352,12 +349,12 @@
             "$ref": "#/parameters/resourceName"
           },
           {
-            "$ref": "#/parameters/privateEndpointName"
+            "$ref": "#/parameters/privateEndpointConnectionName"
           },
           {
-            "name": "PrivateEndpoint",
+            "name": "PrivateEndpointConnection",
             "in": "body",
-            "description": "The Private Endpoint metadata.",
+            "description": "The private endpoint connection metadata.",
             "required": true,
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
@@ -386,11 +383,11 @@
         "tags": [
           "Networking"
         ],
-        "description": "Deletes a Private Endpoint Connection from the IoT Central Application.",
-        "operationId": "PrivateEndpoints_Delete",
+        "description": "Deletes a private endpoint connection from the IoT Central Application.",
+        "operationId": "PrivateEndpointConnections_Delete",
         "x-ms-examples": {
-          "PrivateEndpoints_Delete": {
-            "$ref": "./examples/PrivateEndpoints_Delete.json"
+          "PrivateEndpointConnections_Delete": {
+            "$ref": "./examples/PrivateEndpointConnections_Delete.json"
           }
         },
         "parameters": [
@@ -407,7 +404,7 @@
             "$ref": "#/parameters/resourceName"
           },
           {
-            "$ref": "#/parameters/privateEndpointName"
+            "$ref": "#/parameters/privateEndpointConnectionName"
           }
         ],
         "responses": {
@@ -440,11 +437,11 @@
         "tags": [
           "Networking"
         ],
-        "description": "Get all Private Endpoint Connections of a IoT Central Application.",
-        "operationId": "PrivateEndpoints_List",
+        "description": "Get all private endpoint connections of a IoT Central Application.",
+        "operationId": "PrivateEndpointConnections_List",
         "x-ms-examples": {
-          "PrivateEndpoints_List": {
-            "$ref": "./examples/PrivateEndpoints_List.json"
+          "PrivateEndpointConnections_List": {
+            "$ref": "./examples/PrivateEndpointConnections_List.json"
           }
         },
         "x-ms-pageable": {
@@ -466,7 +463,7 @@
         ],
         "responses": {
           "200": {
-            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the Private Endpoint Connections of the IoT Central Application.",
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the private endpoint connections of the IoT Central Application.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
             }
@@ -482,12 +479,12 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTCentral/iotApps/{resourceName}/privateLinkResources/{privateLinkName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTCentral/iotApps/{resourceName}/privateLinkResources/{privateLinkResourceName}": {
       "get": {
         "tags": [
           "Networking"
         ],
-        "description": "Get a Private Link of a IoT Central Application.",
+        "description": "Get a private link resource of a IoT Central Application.",
         "operationId": "PrivateLinks_Get",
         "x-ms-examples": {
           "PrivateLinks_Get": {
@@ -508,7 +505,7 @@
             "$ref": "#/parameters/resourceName"
           },
           {
-            "name": "privateLinkName",
+            "name": "privateLinkResourceName",
             "in": "path",
             "description": "The private link resource name.",
             "required": true,
@@ -539,7 +536,7 @@
         "tags": [
           "Networking"
         ],
-        "description": "Get all Private Links of a IoT Central Application.",
+        "description": "Get all private link resources of a IoT Central Application.",
         "operationId": "PrivateLinks_List",
         "x-ms-examples": {
           "PrivateLinks_List": {
@@ -565,7 +562,7 @@
         ],
         "responses": {
           "200": {
-            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the Private Links of the IoT Central Application.",
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the private links of the IoT Central Application.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateLinkResourceListResult"
             }
@@ -864,11 +861,11 @@
       "type": "object",
       "properties": {
         "applyToDevices": {
-          "description": "Whether these rules apply to the internal IoT Hub and Device Provisioning service.",
+          "description": "Whether these rules apply for device connectivity to IoT Hub and Device Provisioning service associated with this application.",
           "type": "boolean"
         },
         "applyToIoTCentral": {
-          "description": "Whether these rules apply to the IoT Central application and public APIs.",
+          "description": "Whether these rules apply for connectivity via IoT Central web portal and APIs.",
           "type": "boolean"
         },
         "defaultAction": {
@@ -1247,8 +1244,8 @@
       "x-ms-parameter-location": "method",
       "x-comment": "validation must match #/definitions/App"
     },
-    "privateEndpointName": {
-      "name": "privateEndpointName",
+    "privateEndpointConnectionName": {
+      "name": "privateEndpointConnectionName",
       "in": "path",
       "description": "The private endpoint connection name.",
       "required": true,
