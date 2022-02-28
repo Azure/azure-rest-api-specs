@@ -3005,7 +3005,7 @@
           ]
         },
         "availabilitySets": {
-          "$ref" : "#/definitions/AvailabilitySets"
+          "$ref": "#/definitions/AvailabilitySets"
         },
         "osProfile": {
           "description": "OS properties.",
@@ -3728,6 +3728,19 @@
           "type": "integer",
           "description": "Gets or sets the desired number of vCPUs for the vm.",
           "format": "int32",
+          "readOnly": true
+        },
+        "limitCpuForMigration": {
+          "type": "string",
+          "description": "Gets or sets a value indicating whether to enable processor compatibility mode for live migration of VMs.",
+          "enum": [
+            "false",
+            "true"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "LimitCpuForMigration"
+          },
           "readOnly": true
         },
         "dynamicMemoryEnabled": {
