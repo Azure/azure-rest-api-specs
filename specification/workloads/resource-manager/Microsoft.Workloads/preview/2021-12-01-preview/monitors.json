@@ -368,6 +368,9 @@
           },
           "Get properties of a SAP monitor NetWeaver provider": {
             "$ref": "./examples/workloadmonitor/NetWeaverProviderInstances_Get.json"
+          },
+          "Get properties of a OS provider": {
+            "$ref": "./examples/workloadmonitor/PrometheusOSProviderInstances_Get.json"
           }
         },
         "produces": [
@@ -422,6 +425,9 @@
           },
           "Create a SAP Monitor NetWeaver provider": {
             "$ref": "./examples/workloadmonitor/NetWeaverProviderInstances_Create.json"
+          },
+          "Create a OS provider": {
+            "$ref": "./examples/workloadmonitor/PrometheusOSProviderInstances_Create.json"
           }
         },
         "parameters": [
@@ -894,6 +900,22 @@
         }
       },
       "x-ms-discriminator-value": "SapNetWeaver"
+    },
+    "PrometheusOSProviderInstanceProperties": {
+      "description": "Gets or sets the PrometheusOS provider properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProviderSpecificProperties"
+        }
+      ],
+      "properties": {
+        "prometheusUrl": {
+          "description": "URL of the Node Exporter endpoint",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "PrometheusOS"
     },
     "ProviderSpecificProperties": {
       "description": "Gets or sets the provider specific properties.",
