@@ -21,3 +21,8 @@ output-folder: $(python-sdks-folder)/sql/azure-mgmt-sql/azure/mgmt/sql
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/sql/azure-mgmt-sql
 ```
+
+``` yaml $(python) && $(track2)
+modelerfour:
+  lenient-model-deduplication: true
+```
