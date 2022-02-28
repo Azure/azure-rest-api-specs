@@ -88,6 +88,8 @@ These settings apply only when `--tag=package-2022-03-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2022-03-01'
 input-file:
+- Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
 - Microsoft.Authorization/stable/2022-03-01/authorization-DenyAssignmentCalls.json
 - Microsoft.Authorization/stable/2022-03-01/authorization-ProviderOperationsCalls.json
 - Microsoft.Authorization/stable/2022-03-01/authorization-RoleAssignmentsCalls.json
