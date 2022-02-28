@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for HanaOnAzure.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for HanaOnAzure, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,24 +15,32 @@ To build the SDK for HanaOnAzure, simply [Install AutoRest](https://aka.ms/autor
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the HANA on Azure API.
 
 ``` yaml
 title: HanaManagementClient
 description: HANA on Azure Client
 openapi-type: arm
-tag: package-2020-02-07-preview
+tag: package-2021-11
 azure-arm: true
 ```
 
 
+### Tag: package-2021-11
+
+These settings apply only when `--tag=package-2021-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-11'
+input-file:
+  - Microsoft.HanaOnAzure/stable/2021-11-12/hanaonazure.json
+```
 ### Tag: package-2017-11
 
 These settings apply only when `--tag=package-2017-11` is specified on the command line.
@@ -51,9 +59,7 @@ input-file:
 - Microsoft.HanaOnAzure/preview/2020-02-07-preview/hanaonazure.json
 ```
 
-
 # Code Generation
-
 
 ## Swagger to SDK
 
@@ -71,6 +77,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
 ```
+
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
@@ -112,8 +119,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-
-
-
-
