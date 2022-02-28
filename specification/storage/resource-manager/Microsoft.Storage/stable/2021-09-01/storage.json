@@ -152,6 +152,9 @@
           },
           "StorageAccountCreateAllowedCopyScopeToAAD": {
             "$ref": "./examples/StorageAccountCreateAllowedCopyScopeToAAD.json"
+          },
+          "StorageAccountCreatePremiumBlockBlobStorage": {
+            "$ref": "./examples/StorageAccountCreatePremiumBlockBlobStorage.json"
           }
         },
         "parameters": [
@@ -2957,10 +2960,11 @@
         },
         "accessTier": {
           "type": "string",
-          "description": "Required for storage accounts where kind = BlobStorage. The access tier used for billing.",
+          "description": "Required for storage accounts where kind = BlobStorage. The access tier is used for billing. The 'Premium' access tier is the default value for premium block blobs storage account type and it cannot be changed for the premium block blobs storage account type.",
           "enum": [
             "Hot",
-            "Cool"
+            "Cool",
+            "Premium"
           ],
           "x-ms-enum": {
             "name": "AccessTier",
@@ -3538,10 +3542,11 @@
         "accessTier": {
           "readOnly": true,
           "type": "string",
-          "description": "Required for storage accounts where kind = BlobStorage. The access tier used for billing.",
+          "description": "Required for storage accounts where kind = BlobStorage. The access tier is used for billing. The 'Premium' access tier is the default value for premium block blobs storage account type and it cannot be changed for the premium block blobs storage account type.",
           "enum": [
             "Hot",
-            "Cool"
+            "Cool",
+            "Premium"
           ],
           "x-ms-enum": {
             "name": "AccessTier",
@@ -3862,10 +3867,11 @@
         },
         "accessTier": {
           "type": "string",
-          "description": "Required for storage accounts where kind = BlobStorage. The access tier used for billing.",
+          "description": "Required for storage accounts where kind = BlobStorage. The access tier is used for billing. The 'Premium' access tier is the default value for premium block blobs storage account type and it cannot be changed for the premium block blobs storage account type.",
           "enum": [
             "Hot",
-            "Cool"
+            "Cool",
+            "Premium"
           ],
           "x-ms-enum": {
             "name": "AccessTier",
