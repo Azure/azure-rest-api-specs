@@ -209,7 +209,6 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedDatabaseSchemas.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedDatabaseSecurityAlertPolicies.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedDatabaseSecurityEvents.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/ManagedDatabaseSensitivityLabels.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedDatabaseTables.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedDatabaseTransparentDataEncryption.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedDatabaseVulnerabilityAssessmentRuleBaselines.json
@@ -232,7 +231,6 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/PrivateLinkResources.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/RecoverableManagedDatabases.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/RestorePoints.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/SensitivityLabels.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ServerAdvisors.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ServerAutomaticTuning.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ServerAzureADAdministrators.json
@@ -272,6 +270,9 @@ input-file:
 - ./Microsoft.Sql/preview/2021-05-01-preview/RestorableDroppedManagedDatabases.json
 - ./Microsoft.Sql/preview/2021-05-01-preview/ServerConnectionPolicies.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/ReplicationLinks.json
+- ./Microsoft.Sql/preview/2021-11-01-preview/ManagedDatabaseSensitivityLabels.json
+- ./Microsoft.Sql/preview/2021-11-01-preview/ManagedServerDnsAliases.json
+- ./Microsoft.Sql/preview/2021-11-01-preview/SensitivityLabels.json
 
 
 # Needed when there is more than one input file
