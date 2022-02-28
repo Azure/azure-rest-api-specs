@@ -251,6 +251,15 @@ input-file:
 - Microsoft.Compute/stable/2021-03-01/cloudService.json
 ```
 
+### Tag: package-2021-12-01-only
+
+These settings apply only when `--tag=package-2021-12-01-oly` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-12-01-only'
+input-file:
+- Microsoft.Compute/stable/2021-12-01/disk.json
+```
+
 ### Tag: package-2021-11-01
 
 These settings apply only when `--tag=package-2021-11-01` is specified on the command line.
