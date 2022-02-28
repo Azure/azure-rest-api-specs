@@ -24,3 +24,8 @@ output-folder: $(python-sdks-folder)/redis/azure-mgmt-redis/azure/mgmt/redis
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/redis/azure-mgmt-redis
 ```
+
+``` yaml $(python) && $(track2)
+modelerfour:
+  lenient-model-deduplication: true
+```

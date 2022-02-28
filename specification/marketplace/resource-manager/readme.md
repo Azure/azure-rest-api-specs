@@ -26,12 +26,22 @@ These are the global settings for the Marketplace API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-06-01
+tag: package-2021-12
 ```
+
 ### Composite packages
 
 The following packages may be composed from multiple api-versions.
 
+
+### Tag: package-2021-12
+
+These settings apply only when `--tag=package-2021-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-12'
+input-file:
+  - Microsoft.Marketplace/stable/2021-12-01/Marketplace.json
+```
 ### Tag: package-composite-v2
 
 These settings apply only when `--tag=package-composite-v2` is specified on the command line.
@@ -119,6 +129,3 @@ csharp:
   modelerfour:
     lenient-model-deduplication: true
 ```
-
-
-

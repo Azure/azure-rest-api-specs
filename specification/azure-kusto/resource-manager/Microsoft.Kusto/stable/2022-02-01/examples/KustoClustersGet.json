@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789098",
+    "resourceGroupName": "kustorptest",
+    "clusterName": "kustoCluster",
+    "api-version": "2022-02-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster",
+        "name": "kustoCluster",
+        "type": "Microsoft.Kusto/Clusters",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "enableDiskEncryption": false,
+          "enableStreamingIngest": true,
+          "enablePurge": false,
+          "keyVaultProperties": {
+            "keyVaultUri": "https://dummy.keyvault.com",
+            "keyName": "keyName",
+            "keyVersion": "keyVersion"
+          },
+          "engineType": "V3",
+          "enableAutoStop": true,
+          "publicIPType": "IPv4",
+          "publicNetworkAccess": "Enabled",
+          "allowedIpRangeList": [],
+          "restrictOutboundNetworkAccess": "Enabled",
+          "allowedFqdnList": [
+            "my-stroage.blob.core.windows.net"
+          ],
+          "privateEndpointConnections": [
+            {
+              "name": "privateEndpointTest",
+              "type": "Microsoft.Kusto/Clusters/PrivateEndpointConnections",
+              "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster/privateEndpointConnections/privateEndpointTest",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "groupId": "cluster",
+                "privateEndpoint": {
+                  "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/rg1Network/providers/Microsoft.Network/privateEndpoints/privateEndpointName"
+                },
+                "privateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "description": "Auto-approved",
+                  "actionsRequired": "None"
+                }
+              }
+            }
+          ]
+        },
+        "sku": {
+          "name": "Standard_L8s",
+          "capacity": 2,
+          "tier": "Standard"
+        },
+        "systemData": {
+          "createdBy": "user@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2021-06-29T15:06:54.2757906Z",
+          "lastModifiedBy": "user@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-06-29T15:06:54.2757906Z"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "tenantId": "b932977f-6277-4ab7-a2cd-5bd21f07aaf4",
+          "principalId": "faabad1f-4876-463c-af9d-6ba2d2d2394c",
+          "userAssignedIdentities": {}
+        },
+        "etag": "abcd123"
+      }
+    }
+  }
+}
