@@ -1,4 +1,4 @@
-``` yaml
+``` yaml $(java)
 batch:
 - service: purview
   module: azure-analytics-purview-administration
