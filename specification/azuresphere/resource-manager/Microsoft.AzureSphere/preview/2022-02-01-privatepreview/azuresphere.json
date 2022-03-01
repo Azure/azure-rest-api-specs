@@ -3133,13 +3133,7 @@
     },
     "Product": {
       "type": "object",
-      "properties": {
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "System data for the resource.",
-          "readOnly": true
-        }
-      },
+      "properties": {},
       "description": "An Azure Sphere product",
       "allOf": [
         {
@@ -3233,13 +3227,7 @@
     },
     "DeviceGroup": {
       "type": "object",
-      "properties": {
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "System data for the resource.",
-          "readOnly": true
-        }
-      },
+      "properties": {},
       "description": "An Azure Sphere device group",
       "allOf": [
         {
@@ -3299,13 +3287,7 @@
     },
     "Image": {
       "type": "object",
-      "properties": {
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "System data for the resource.",
-          "readOnly": true
-        }
-      },
+      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResource_ImageProperties"
@@ -3359,13 +3341,7 @@
     },
     "Device": {
       "type": "object",
-      "properties": {
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "System data for the resource.",
-          "readOnly": true
-        }
-      },
+      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResource_DeviceProperties"
@@ -3409,13 +3385,7 @@
     },
     "Certificate": {
       "type": "object",
-      "properties": {
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "System data for the resource.",
-          "readOnly": true
-        }
-      },
+      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResource_CertificateProperties"
@@ -3442,7 +3412,10 @@
             "$ref": "#/definitions/ImageComponent"
           },
           "description": "List of elements",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "imageIdentifier"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -3657,7 +3630,10 @@
             "$ref": "#/definitions/DeviceImage"
           },
           "description": "List of elements",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "identifier"
+          ]
         },
         "nextLink": {
           "type": "string",
