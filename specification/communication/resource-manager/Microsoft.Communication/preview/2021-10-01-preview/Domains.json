@@ -339,10 +339,10 @@
         ],
         "parameters": [
           {
-            "name": "verificationType",
+            "name": "parameters",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/VerificationType"
+              "$ref": "#/definitions/VerificationParameter"
             },
             "description": "Type of verification to be initiated.",
             "required": true
@@ -404,10 +404,10 @@
         ],
         "parameters": [
           {
-            "name": "verificationType",
+            "name": "parameters",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/VerificationType"
+              "$ref": "#/definitions/VerificationParameter"
             },
             "description": "Type of verification to be canceled.",
             "required": true
@@ -461,18 +461,27 @@
     }
   },
   "definitions": {
-    "VerificationType": {
-      "description": "Type of verification.",
-      "enum": [
-        "Domain",
-        "SPF",
-        "DKIM",
-        "DMARC"
+    "VerificationParameter": {
+      "description": "Input parameter for verification APIs",
+      "type": "object",
+      "required": [
+        "verificationType"
       ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "VerificationType",
-        "modelAsString": true
+      "properties": {
+        "verificationType": {
+          "description": "Type of verification.",
+          "enum": [
+            "Domain",
+            "SPF",
+            "DKIM",
+            "DMARC"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "VerificationType",
+            "modelAsString": true
+          }
+        }
       }
     },
     "VerificationStatusRecord": {
@@ -483,10 +492,11 @@
           "description": "Status of the verification operation.",
           "enum": [
             "NotStarted",
-            "RequestReceived",
-            "InProgress",
-            "UnableToVerify",
-            "Verified"
+            "VerificationRequested",
+            "VerificationInProgress",
+            "VerificationFailed",
+            "Verified",
+            "CancellationRequested"
           ],
           "type": "string",
           "readOnly": true,
@@ -529,6 +539,13 @@
         }
       }
     },
+    "ValidSenderUsernameCollection": {
+      "description": "Collection of valid sender usernames. This is a key-value pair where key=username and value=default display name.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
     "DomainProperties": {
       "description": "A class that describes the properties of a Domains resource.",
       "type": "object",
@@ -564,10 +581,7 @@
         "fromSenderDomain": {
           "description": "P2 sender domain that is displayed to the email recipients [RFC 5322].",
           "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "readOnly": true
         },
         "mailFromSenderDomain": {
           "description": "P1 sender domain that is present on the email envelope [RFC 5321].",
@@ -616,6 +630,9 @@
             }
           },
           "readOnly": true
+        },
+        "validSenderUsernames": {
+          "$ref": "#/definitions/ValidSenderUsernameCollection"
         }
       }
     },
@@ -674,6 +691,9 @@
         },
         "spfManagement": {
           "$ref": "#/definitions/SPFManagement"
+        },
+        "validSenderUsernames": {
+          "$ref": "#/definitions/ValidSenderUsernameCollection"
         }
       }
     },
