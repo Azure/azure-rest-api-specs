@@ -9,6 +9,7 @@ batch:
   module: azure-analytics-purview-catalog
   input-file:
   - Azure.Analytics.Purview.Catalog/preview/2021-05-01-preview/purviewcatalog.json
+  readme: readme.java.catalog.md
 - service: purview
   module: azure-analytics-purview-scanning
   input-file:
