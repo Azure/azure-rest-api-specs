@@ -8,8 +8,6 @@ generate-client-interfaces: false
 sync-methods: all
 license-header: MICROSOFT_MIT_SMALL
 low-level-client: true
-credential-types: tokencredential
-credential-scopes: https://purview.azure.net/.default
 title: PurviewCatalogClient
 artifact-id: azure-analytics-purview-catalog
 service-name: PurviewCatalog
@@ -23,4 +21,5 @@ generate-samples: true
 polling: {}
 
 generate-builder-per-client: false
+require: readme.md
 ```
