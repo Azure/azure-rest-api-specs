@@ -1098,7 +1098,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         }
@@ -1150,7 +1150,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         }
@@ -1193,7 +1193,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         }
@@ -5091,6 +5091,10 @@
         "enabled": {
           "type": "boolean",
           "description": "Policy is enabled if set to true."
+        },
+        "destination": {
+          "type": "string",
+          "description": "Deprecated Property from API version 2021-04-01 onwards, the required destination container name must be sepcified at the rule level 'poliy.rule.destination'"
         },
         "type": {
           "type": "string",
