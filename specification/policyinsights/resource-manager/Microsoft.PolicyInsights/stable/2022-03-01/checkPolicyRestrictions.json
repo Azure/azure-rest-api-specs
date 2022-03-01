@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "CheckPolicyRestrictionsClient",
-    "version": "2020-07-01"
+    "version": "2022-03-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -116,6 +116,51 @@
           }
         }
       }
+    },
+    "/providers/{managementGroupsNamespace}/managementGroups/{managementGroupId}/providers/Microsoft.PolicyInsights/checkPolicyRestrictions": {
+      "post": {
+        "operationId": "PolicyRestrictions_CheckAtManagementGroupScope",
+        "description": "Checks what restrictions Azure Policy will place on resources within a management group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/managementGroupsNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/managementGroupIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckManagementGroupRestrictionsRequest"
+            },
+            "description": "The check policy restrictions parameters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The restrictions that will be placed on the resource by Azure Policy.",
+            "schema": {
+              "$ref": "#/definitions/CheckRestrictionsResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../stable/2019-10-01/policyMetadata.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check policy restrictions at subscription scope": {
+            "$ref": "./examples/PolicyRestrictions_CheckAtManagementGroupScope.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -137,6 +182,24 @@
       "required": [
         "resourceDetails"
       ]
+    },
+    "CheckManagementGroupRestrictionsRequest": {
+      "type": "object",
+      "description": "The check policy restrictions parameters describing the resource that is being evaluated.",
+      "properties": {
+        "resourceDetails": {
+          "description": "The information about the resource that will be evaluated.",
+          "$ref": "#/definitions/CheckRestrictionsResourceDetails"
+        },
+        "pendingFields": {
+          "description": "The list of fields and values that should be evaluated for potential restrictions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PendingField"
+          },
+          "x-ms-identifiers": []
+        }
+      }
     },
     "CheckRestrictionsResourceDetails": {
       "description": "The information about the resource that will be evaluated.",
@@ -315,6 +378,31 @@
           "readOnly": true
         }
       }
+    }
+  },
+  "parameters": {
+    "managementGroupsNamespaceParameter": {
+      "name": "managementGroupsNamespace",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "Microsoft.Management"
+      ],
+      "x-ms-enum": {
+        "name": "ManagementGroupsNamespaceType",
+        "modelAsString": false
+      },
+      "description": "The namespace for Microsoft Management RP; only \"Microsoft.Management\" is allowed.",
+      "x-ms-parameter-location": "method"
+    },
+    "managementGroupIdParameter": {
+      "name": "managementGroupId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Management group ID.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
