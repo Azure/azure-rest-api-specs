@@ -239,6 +239,9 @@
           },
           "StorageAccountGetPropertiesCMKEnabled": {
             "$ref": "./examples/StorageAccountGetPropertiesCMKEnabled.json"
+          },
+          "StorageAccountGetAsyncSkuConversionStatus": {
+            "$ref": "./examples/StorageAccountGetAsyncSkuConversionStatus.json"
           }
         },
         "parameters": [
@@ -3382,6 +3385,40 @@
       },
       "description": "This defines account-level immutability policy properties."
     },
+    "StorageAccountSkuConversionStatus": {
+      "type": "object",
+      "properties": {
+        "skuConversionStatus": {
+          "readOnly": true,
+          "type": "string",
+          "description": "This property indicates the current sku conversion status.",
+          "enum": [
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "SkuConversionStatus",
+            "modelAsString": true
+          }
+        },
+        "targetSkuName": {
+          "$ref": "./common.json#/definitions/SkuName",
+          "description": "This property represents the target sku name to which the account sku is being converted asynchronously."
+        },
+        "startTime": {
+          "readOnly": true,
+          "type": "string",
+          "description": "This property represents the sku conversion start time."
+        },
+        "endTime": {
+          "readOnly": true,
+          "type": "string",
+          "description": "This property represents the sku conversion end time."
+        }
+      },
+      "description": "This defines the sku conversion status object for asynchronous sku conversions."
+    },
     "BlobRestoreStatus": {
       "properties": {
         "status": {
@@ -3695,6 +3732,11 @@
             "modelAsString": true
           },
           "description": "Restrict copy to and from Storage Accounts within an AAD tenant or with Private Links to the same VNet."
+        },
+        "storageAccountSkuConversionStatus": {
+          "$ref": "#/definitions/StorageAccountSkuConversionStatus",
+          "x-ms-client-name": "StorageAccountSkuConversionStatus",
+          "description": "This property is readOnly and is set by server during asynchronous storage account sku conversion operations."
         }
       },
       "description": "Properties of the storage account."
