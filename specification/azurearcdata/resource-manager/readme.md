@@ -41,6 +41,7 @@ input-file:
   - Microsoft.AzureArcData/preview/2022-03-01-preview/common.json
   - Microsoft.AzureArcData/preview/2022-03-01-preview/dataControllers.json
   - Microsoft.AzureArcData/preview/2022-03-01-preview/operations.json
+  - Microsoft.AzureArcData/preview/2022-03-01-preview/postgresInstances.json
   - Microsoft.AzureArcData/preview/2022-03-01-preview/sqlManagedInstances.json
   - Microsoft.AzureArcData/preview/2022-03-01-preview/sqlServerInstances.json
 ```
