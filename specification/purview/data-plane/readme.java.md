@@ -16,6 +16,8 @@ packages:
   - Azure.Analytics.Purview.Scanning/preview/2018-12-01-preview/scanningService.json
 ```
 
+### administration
+
 ``` yaml $(java) && $(tag) == 'package-administration'
 batch:
   - package-metadata: true
@@ -49,6 +51,8 @@ service-name: PurviewAccount
 service-versions:
   - 2019-11-01-preview
 ```
+
+### catalog
 
 ``` yaml $(java) && $(tag) == 'package-catalog'
 input-file: Azure.Analytics.Purview.Catalog/preview/2021-05-01-preview/purviewcatalog.json
