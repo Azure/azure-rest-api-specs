@@ -44,10 +44,8 @@
             "description": "Bad Request",
             "schema": {
               "enum": [
-                "DisplayNameAlreadyExist",
-                "InvalidGranularityNone",
-                "SizeLimitExceeded",
-                "InvalidRequestSchema"
+                "DisplayNameUserError",
+                "SizeLimitExceededError"
               ],
               "type": "string",
               "x-ms-enum": {
@@ -88,13 +86,6 @@
           },
           {
             "in": "query",
-            "name": "top",
-            "description": "For paging, the total number of items to request",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "in": "query",
             "name": "maxpagesize",
             "description": "The maximum number of items in one page",
             "type": "integer",
@@ -102,7 +93,7 @@
           },
           {
             "in": "query",
-            "name": "`filter`",
+            "name": "filter",
             "description": "The filter expression filters out the resources to be returned, currently contains(displayName, 'our filter name’) is supported",
             "type": "string"
           }
@@ -112,18 +103,6 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/RootCauseAnalysisDataSetList"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/MultiDimRCAListDataSetErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String identical to error code.",
-                "type": "string"
-              }
             }
           }
         },
@@ -160,18 +139,6 @@
             "schema": {
               "$ref": "#/definitions/RootCauseAnalysisDataSet"
             }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/MultiDimRCAGetDataSetErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String identical to error code.",
-                "type": "string"
-              }
-            }
           }
         },
         "x-ms-examples": {
@@ -185,7 +152,7 @@
           "RootCauseAnalysisDataSet"
         ],
         "summary": "Delete a root cause analysis data set",
-        "operationId": "DeleteRootCauseAnalysisADataSet",
+        "operationId": "DeleteRootCauseAnalysisDataSet",
         "parameters": [
           {
             "in": "path",
@@ -203,22 +170,168 @@
         },
         "x-ms-examples": {
           "Delete a root cause analysis data set": {
-            "$ref": "./examples/DeleteRootCauseAnalysisADataSet.json"
+            "$ref": "./examples/DeleteRootCauseAnalysisDataSet.json"
           }
         }
       }
     },
-    "/rootCauseAnalysis/dataSets/{dataSetId}:upload": {
-      "post": {
+    "/rootCauseAnalysis/dataSets/{dataSetId}/timestamps/{timestamp}/partitions/{partitionId}": {
+      "put": {
         "tags": [
           "RootCauseAnalysisDataSet"
         ],
-        "summary": "Upload data to root cause analysis data set",
+        "summary": "Upload data to root cause analysis data set by paritition",
         "operationId": "UploadRootCauseAnalysisData",
         "consumes": [
           "application/json"
         ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataSetId",
+            "description": "The root cause analysis data set unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "path",
+            "name": "timestamp",
+            "description": "Timestamp of the data",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "path",
+            "name": "partitionId",
+            "description": "The partition unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Data to be uploaded to perform root cause analysis",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RootCauseAnalysisUploadDataRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "headers": {
+              "Location": {
+                "description": "Location of the newly created resource.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Upload data to root cause analysis data set by paritition": {
+            "$ref": "./examples/UploadRootCauseAnalysisData.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RootCauseAnalysisDataSet"
+        ],
+        "summary": "Delete root cause analysis data by partitionId",
+        "operationId": "DeleteRootCauseAnalysisDataByPartitionId",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataSetId",
+            "description": "The root cause analysis data set unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "path",
+            "name": "timestamp",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "path",
+            "name": "partitionId",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The resource is deleted successfully or does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Delete root cause analysis data by partitionId": {
+            "$ref": "./examples/DeleteRootCauseAnalysisDataByPartitionId.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "RootCauseAnalysisDataSet"
+        ],
+        "summary": "Get data meta for a give parition Id",
+        "operationId": "GetRootCauseAnalysisDataMeta",
         "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataSetId",
+            "description": "The root cause analysis data set unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "path",
+            "name": "timestamp",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "partitionId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RootCauseAnalysisDataMeta"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get data meta for a give parition Id": {
+            "$ref": "./examples/GetRootCauseAnalysisDataMeta.json"
+          }
+        }
+      }
+    },
+    "/rootCauseAnalysis/dataSets/{dataSetId}/timestamps:upload": {
+      "post": {
+        "tags": [
+          "RootCauseAnalysisDataSet"
+        ],
+        "summary": "Upload data to root cause analysis data set by block",
+        "operationId": "UploadRootCauseAnalysisDataByBlock",
+        "consumes": [
           "application/json"
         ],
         "parameters": [
@@ -241,36 +354,24 @@
           }
         ],
         "responses": {
-          "204": {
+          "201": {
             "description": "Success"
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/MultiDimRCAGetDataSetErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String identical to error code.",
-                "type": "string"
-              }
-            }
           }
         },
         "x-ms-examples": {
-          "Upload data to root cause analysis data set": {
-            "$ref": "./examples/UploadRootCauseAnalysisData.json"
+          "Upload data to root cause analysis data set by block": {
+            "$ref": "./examples/UploadRootCauseAnalysisDataByBlock.json"
           }
         }
       }
     },
-    "/rootCauseAnalysis/dataSets/{dataSetId}/data": {
-      "delete": {
+    "/rootCauseAnalysis/dataSets/{dataSetId}/timestamps:purge": {
+      "post": {
         "tags": [
           "RootCauseAnalysisDataSet"
         ],
-        "summary": "Delete root cause analysis data",
-        "operationId": "DeleteRootCauseAnalysisData",
+        "summary": "Delete root cause analysis data by time range",
+        "operationId": "DeleteRootCauseAnalysisDataByTimeRange",
         "parameters": [
           {
             "in": "path",
@@ -282,31 +383,38 @@
           },
           {
             "in": "query",
-            "name": "`filter`",
-            "description": "The filter expression filters out the resources, currently 3 kinds of operation are supported. They are startDateTime eq 'your time', endDateTime eq 'your time, partitionIdentity eq 'identity'.",
-            "type": "string"
+            "name": "start",
+            "description": "Start date time",
+            "type": "string",
+            "format": "datetime"
+          },
+          {
+            "in": "query",
+            "name": "end",
+            "description": "End date time",
+            "type": "string",
+            "format": "datetime"
           }
         ],
         "responses": {
           "204": {
-            "description": "The resource is deleted successfully or does not exist."
+            "description": "Success"
           }
         },
         "x-ms-examples": {
-          "Delete root cause analysis data": {
-            "$ref": "./examples/DeleteRootCauseAnalysisData.json"
+          "Delete root cause analysis data by time range": {
+            "$ref": "./examples/DeleteRootCauseAnalysisDataByTimeRange.json"
           }
         }
-      },
+      }
+    },
+    "/rootCauseAnalysis/dataSets/{dataSetId}/timestamps": {
       "get": {
         "tags": [
           "RootCauseAnalysisDataSet"
         ],
-        "summary": "List root cause analysis data in a specified data set",
-        "operationId": "ListRootCauseAnalysisData",
-        "produces": [
-          "application/json"
-        ],
+        "summary": "List data meta",
+        "operationId": "ListRootCauseAnalysisDataMeta",
         "parameters": [
           {
             "in": "path",
@@ -325,13 +433,6 @@
           },
           {
             "in": "query",
-            "name": "top",
-            "description": "For paging, the total number of items to request",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "in": "query",
             "name": "maxpagesize",
             "description": "The maximum number of items in one page",
             "type": "integer",
@@ -339,22 +440,19 @@
           },
           {
             "in": "query",
-            "name": "`filter`",
-            "description": "The filter expression filters out the resources, currently 3 kinds of operation are supported. They are startDateTime eq 'your time', endDateTime eq 'your time, partitionIdentity eq 'identity'.",
+            "name": "filter",
+            "description": "The filter expression filters out the resources, currently 2 kinds of operation are supported. They are ge(timestamp, 'your timestamp string') and le(timestamp, 'your timestamp string'). Timestamp string must be ISO format. For example ge(timestamp,2022-01-01T00:00:00Z), le(timestamp, 2022-02-01T00:00:00Z). This expression can go like, filter=ge(timestamp, 2022-01-01T00:00:00Z)), filter=le(timestamp, 2022-01-01T00:00:00Z)), or fiter=and(ge(timestamp, 2022-01-01T00:00:00Z)),le(timestamp, 2022-02-01T00:00:00Z)))",
             "type": "string"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/RootCauseAnalysisDataMetaListResponse"
-            }
+          "201": {
+            "description": "Success"
           }
         },
         "x-ms-examples": {
-          "List root cause analysis data in a specified data set": {
-            "$ref": "./examples/ListRootCauseAnalysisData.json"
+          "List data meta": {
+            "$ref": "./examples/ListRootCauseAnalysisDataMeta.json"
           }
         }
       }
@@ -416,13 +514,6 @@
           },
           {
             "in": "query",
-            "name": "top",
-            "description": "For paging, the total number of items to request",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "in": "query",
             "name": "maxpagesize",
             "description": "The maximum number of items in one page",
             "type": "integer",
@@ -430,7 +521,7 @@
           },
           {
             "in": "query",
-            "name": "`filter`",
+            "name": "filter",
             "description": "The filter expression filters out the resources to be returned, currently contains(displayName, 'our filter name’) is supported",
             "type": "string"
           }
@@ -584,13 +675,6 @@
           },
           {
             "in": "query",
-            "name": "top",
-            "description": "For paging, the total number of items to request",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "in": "query",
             "name": "maxpagesize",
             "description": "The maximum number of items in one page",
             "type": "integer",
@@ -598,7 +682,7 @@
           },
           {
             "in": "query",
-            "name": "`filter`",
+            "name": "filter",
             "description": "The filter expression filters out the resources to be returned, currently contains(displayName, 'our filter name’) is supported",
             "type": "string"
           }
@@ -697,7 +781,7 @@
       }
     },
     "/rootCauseAnalysis/instances/{instanceId}/models/{modelId}/inferences": {
-      "post": {
+      "put": {
         "tags": [
           "RootCauseAnalysisModel"
         ],
@@ -948,62 +1032,6 @@
         }
       }
     },
-    "MultiDimRCAListDataSetErrorDetail": {
-      "type": "object",
-      "properties": {
-        "message": {
-          "description": "Human-readable error message",
-          "type": "string"
-        },
-        "code": {
-          "description": "Error code",
-          "enum": [
-            "InvalidFilter"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "MultiDimRCAListDataSetErrorCode",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "MultiDimRCAListDataSetErrorResponse": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/MultiDimRCAListDataSetErrorDetail"
-        }
-      }
-    },
-    "MultiDimRCAGetDataSetErrorDetail": {
-      "type": "object",
-      "properties": {
-        "message": {
-          "description": "Human-readable error message",
-          "type": "string"
-        },
-        "code": {
-          "description": "Error code",
-          "enum": [
-            "DatasetNotFound"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "MultiDimRCAGetDataSetErrorCode",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "MultiDimRCAGetDataSetErrorResponse": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/MultiDimRCAGetDataSetErrorDetail"
-        }
-      }
-    },
     "MultiDimRCADataPartition": {
       "required": [
         "data",
@@ -1031,7 +1059,69 @@
             }
           }
         }
-      }
+      },
+      "example": {
+  "partitionIdentity": "PartitionIdentity1",
+  "timestamp": "2021-12-01T00:00:00Z",
+  "data": [
+    [
+      "CN",
+      "__SUM__",
+      0.38,
+      3800,
+      10000
+    ],
+    [
+      "CN",
+      "ios",
+      0.3,
+      3000,
+      10000
+    ],
+    [
+      "CN",
+      "Android",
+      0.006,
+      60,
+      10000
+    ],
+    [
+      "US",
+      "__SUM__",
+      0.6,
+      6000,
+      10000
+    ],
+    [
+      "JP",
+      "__SUM__",
+      0.001,
+      10,
+      10000
+    ],
+    [
+      "DE",
+      "__SUM__",
+      0.0002,
+      20,
+      10000
+    ],
+    [
+      "CA",
+      "__SUM__",
+      0.006,
+      60,
+      10000
+    ],
+    [
+      "__SUM__",
+      "__SUM__",
+      1,
+      10000,
+      10000
+    ]
+  ]
+}
     },
     "RootCauseAnalysisUploadDataRequest": {
       "required": [
@@ -1445,26 +1535,6 @@
       },
       "x-ms-discriminator-value": "multidimensional"
     },
-    "RootCauseAnalysisDataMetaListResponse": {
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "@nextLink": {
-          "description": "Link of next page, only provided when there are next pages",
-          "type": "string",
-          "readOnly": true
-        },
-        "value": {
-          "description": "Response values",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RootCauseAnalysisDataMeta"
-          }
-        }
-      }
-    },
     "MultiDimRCATargetMeasure": {
       "required": [
         "dataSetId",
@@ -1670,10 +1740,10 @@
       "required": [
         "bestEpoch",
         "bestValidationLoss",
-        "dataSize",
         "edgeSize",
         "epochs",
         "latencyInSecond",
+        "nodeSize",
         "trainLoss",
         "validationLoss"
       ],
@@ -1721,8 +1791,8 @@
           "description": "Best validation loss",
           "type": "number"
         },
-        "dataSize": {
-          "description": "Data size for each epoch",
+        "nodeSize": {
+          "description": "Node size for each timestamp",
           "type": "array",
           "items": {
             "format": "int32",
@@ -1730,9 +1800,12 @@
           }
         },
         "edgeSize": {
-          "format": "int32",
-          "description": "Edge size",
-          "type": "integer"
+          "description": "Edge size for each timestamp",
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
         }
       }
     },
@@ -1746,10 +1819,8 @@
         "code": {
           "description": "Error code",
           "enum": [
-            "DisplayNameAlreadyExist",
-            "InvalidGranularityNone",
-            "SizeLimitExceeded",
-            "InvalidRequestSchema"
+            "DisplayNameUserError",
+            "SizeLimitExceededError"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1832,25 +1903,20 @@
         },
         "taskInfo": {
           "$ref": "#/definitions/MultiDimRCATrainingTaskInfo"
+        },
+        "parameter": {
+          "$ref": "#/definitions/MultiDimRCATrainingParameter"
         }
       },
       "discriminator": "kind"
     },
     "MultiDimRCATrainingResponse": {
-      "required": [
-        "parameter"
-      ],
       "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/RootCauseAnalysisTrainingResponse"
         }
       ],
-      "properties": {
-        "parameter": {
-          "$ref": "#/definitions/MultiDimRCATrainingParameter"
-        }
-      },
       "x-ms-discriminator-value": "multidimensional"
     },
     "RootCauseAnalysisTrainingResponseList": {
@@ -2086,25 +2152,20 @@
         },
         "result": {
           "$ref": "#/definitions/MultiDimRCAInferenceResult"
+        },
+        "parameter": {
+          "$ref": "#/definitions/MultiDimRCAInferenceParameter"
         }
       },
       "discriminator": "kind"
     },
     "MultiDimRCAInferenceResponse": {
-      "required": [
-        "parameter"
-      ],
       "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/RootCauseAnalysisInferenceResponse"
         }
       ],
-      "properties": {
-        "parameter": {
-          "$ref": "#/definitions/MultiDimRCAInferenceParameter"
-        }
-      },
       "x-ms-discriminator-value": "multidimensional"
     }
   },
