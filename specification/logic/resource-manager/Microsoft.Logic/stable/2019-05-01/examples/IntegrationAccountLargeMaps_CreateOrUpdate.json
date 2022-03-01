@@ -2,20 +2,20 @@
   "parameters": {
     "api-version": "2019-05-01",
     "resourceGroupName": "testResourceGroup",
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "subscriptionId": "<Azure-subscription-ID>",
     "integrationAccountName": "testIntegrationAccount",
     "mapName": "testMap",
     "map": {
-      "properties":{
-         "mapType":"Xslt",
-         "contentLink":{
-            "uri":"<Blob SAS URL of the map>"
-         },
-         "contentType":"application/xml",
-         "metadata":{}
+      "properties": {
+        "mapType": "Xslt",
+        "contentLink": {
+          "uri": "<blob-SAS-URL-for-map>"
+        },
+        "contentType": "application/xml",
+        "metadata": {}
       },
-      "location":"westus"
-   } 
+      "location": "westus"
+    }
   },
   "responses": {
     "200": {
@@ -23,7 +23,7 @@
         "properties": {
           "mapType": "Xslt",
           "contentLink": {
-            "uri": "<Uri>",
+            "uri": "<URI>",
             "contentVersion": "\"0x8D9EB9F6691E7A2\"",
             "contentSize": 7888419,
             "contentHash": {
@@ -35,7 +35,7 @@
           "changedTime": "2022-02-09T07:40:10.2906473Z",
           "metadata": {}
         },
-        "id": "/subscriptions/524c1207-2135-4f08-81f3-6577a6d41405/resourceGroups/refresh/providers/Microsoft.Logic/integrationAccounts/<IntegrationAccount>/maps/testMap",
+        "id": "/subscriptions/<Azure-subscription-ID>/resourceGroups/refresh/providers/Microsoft.Logic/integrationAccounts/testIntegrationAccount/maps/testMap",
         "name": "testMap",
         "type": "Microsoft.Logic/integrationAccounts/maps"
       }
@@ -57,7 +57,7 @@
           "changedTime": "2022-02-09T07:40:10.2906473Z",
           "metadata": {}
         },
-        "id": "/subscriptions/524c1207-2135-4f08-81f3-6577a6d41405/resourceGroups/refresh/providers/Microsoft.Logic/integrationAccounts/<IntegrationAccount>/maps/testMap",
+        "id": "/subscriptions/<Azure-subscription-ID>/resourceGroups/refresh/providers/Microsoft.Logic/integrationAccounts/testIntegrationAccount/maps/testMap",
         "name": "testMap",
         "type": "Microsoft.Logic/integrationAccounts/maps"
       }
