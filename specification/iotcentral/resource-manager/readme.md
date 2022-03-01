@@ -52,7 +52,7 @@ directive:
 
 These settings apply only when `--tag=package-2021-06` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-06'
+```yaml $(tag) == 'package-2021-06'
 input-file:
   - Microsoft.IoTCentral/stable/2021-06-01/iotcentral.json
 directive:
