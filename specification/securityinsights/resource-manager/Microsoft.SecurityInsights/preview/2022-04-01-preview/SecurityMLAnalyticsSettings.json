@@ -1,0 +1,301 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Security Insights",
+      "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+      "version": "2022-04-01-preview"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+      "https"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "security": [
+      {
+        "azure_auth": [
+          "user_impersonation"
+        ]
+      }
+    ],
+    "securityDefinitions": {
+      "azure_auth": {
+        "type": "oauth2",
+        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+        "flow": "implicit",
+        "description": "Azure Active Directory OAuth2 Flow",
+        "scopes": {
+          "user_impersonation": "impersonate your user account"
+        }
+      }
+    },
+    "paths": {
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings": {
+        "get": {
+          "x-ms-examples": {
+            "Get all Security ML Analytics Settings.": {
+              "$ref": "./examples/securityMLAnalyticsSettings/GetAllSecurityMLAnalyticsSettings.json"
+            }
+          },
+          "tags": [
+            "Security ML Analytics Settings"
+          ],
+          "description": "Gets all Security ML Analytics Settings.",
+          "operationId": "SecurityMLAnalyticsSettings_List",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/SecurityMLAnalyticsSettingsList"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+              }
+            }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings/{settingsResourceName}": {
+          "get": {
+            "x-ms-examples": {
+              "Get a Anomaly Security ML Analytics Setting.": {
+                "$ref": "./examples/securityMLAnalyticsSettings/GetAnomalySecurityMLAnalyticsSetting.json"
+              }
+            },
+            "tags": [
+              "Security ML Analytics Settings"
+            ],
+            "description": "Gets the Security ML Analytics Setting.",
+            "operationId": "SecurityMLAnalyticsSettings_Get",
+            "parameters": [
+              {
+                "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+              },
+              {
+                "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+              },
+              {
+                "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+              },
+              {
+                "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+              },
+              {
+                "$ref": "#/parameters/SettingsResourceName"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "OK",
+                "schema": {
+                  "$ref": "#/definitions/SecurityMLAnalyticsSetting"
+                }
+              },
+              "default": {
+                "description": "Error response describing why the operation failed.",
+                "schema": {
+                  "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+                }
+              }
+            }
+          },
+          "put": {
+            "x-ms-examples": {
+              "Creates or updates a Anomaly Security ML Analytics Settings.": {
+                "$ref": "./examples/securityMLAnalyticsSetting/CreateAnomalySecurityMLAnalyticsSetting.json"
+              }
+            },
+            "tags": [
+              "Security ML Analytics Settings"
+            ],
+            "description": "Creates or updates the Security ML Analytics Settings.",
+            "operationId": "SecurityMLAnalyticsSettings_CreateOrUpdate",
+            "parameters": [
+              {
+                "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+              },
+              {
+                "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+              },
+              {
+                "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+              },
+              {
+                "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+              },
+              {
+                "$ref": "#/parameters/SettingsResourceName"
+              },
+              {
+                "$ref": "#/parameters/SecurityMLAnalyticsSetting"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "OK",
+                "schema": {
+                  "$ref": "#/definitions/SecurityMLAnalyticsSetting"
+                }
+              },
+              "201": {
+                "description": "Created",
+                "schema": {
+                  "$ref": "#/definitions/SecurityMLAnalyticsSetting"
+                }
+              },
+              "default": {
+                "description": "Error response describing why the operation failed.",
+                "schema": {
+                  "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+                }
+              }
+            }
+          },
+          "delete": {
+            "x-ms-examples": {
+              "Delete a Security ML Analytics Setting.": {
+                "$ref": "./examples/alertRules/DeleteSecurityMLAnalyticsSetting.json"
+              }
+            },
+            "tags": [
+              "Security ML Analytics Settings"
+            ],
+            "description": "Delete the Security ML Analytics Setting.",
+            "operationId": "SecurityMLAnalyticsSettings_Delete",
+            "parameters": [
+              {
+                "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+              },
+              {
+                "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+              },
+              {
+                "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+              },
+              {
+                "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+              },
+              {
+                "$ref": "#/parameters/SettingsResourceName"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "OK"
+              },
+              "204": {
+                "description": "No Content"
+              },
+              "default": {
+                "description": "Error response describing why the operation failed.",
+                "schema": {
+                  "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "SecurityMLAnalyticsSetting": {
+        "description": "The security ML Analytics setting",
+        "in": "body",
+        "name": "securityMLAnalyticsSetting",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/SecurityMLAnalyticsSetting"
+        }
+      },
+      "SettingsResourceName": {
+        "description": "Security ML Analytics Settings resource name",
+        "in": "body",
+        "name": "settingsResourceName",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/SecurityMLAnalyticsSetting"
+        }
+      }
+    },
+    "definitions": {
+      "SecurityMLAnalyticsSetting": {
+        "allOf": [
+          {
+            "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+          }
+        ],
+        "description": "Security ML Analytics Setting",
+        "properties": {
+          "kind": {
+            "$ref": "#/definitions/SecurityMLAnalyticsSettingsKindEnum",
+            "description": "The kind of security ML Analytics Setting"
+          }
+        },
+        "discriminator": "kind",
+        "type": "object",
+        "required": [
+          "kind"
+        ]
+      },
+      "SecurityMLAnalyticsSettingsKindEnum": {
+        "description": "The kind of security ML analytics setting",
+        "enum": [
+          "Anomaly"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "modelAsString": true,
+          "name": "SecurityMLAnalyticsSettingKind",
+          "values": [
+            {
+              "value": "Anomaly"
+            }
+          ]
+        }
+      },
+      "SecurityMLAnalyticsSettingsList": {
+        "description": "List all the securityMLAnalyticsSettings",
+        "properties": {
+          "nextLink": {
+            "description": "URL to fetch the next set of securityMLAnalyticsSettings.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "value": {
+            "description": "Array of securityMLAnalyticsSettings",
+            "items": {
+              "$ref": "#/definitions/SecurityMLAnalyticsSetting"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object",
+        "required": [
+          "value"
+        ]
+      }
+    }
+}
