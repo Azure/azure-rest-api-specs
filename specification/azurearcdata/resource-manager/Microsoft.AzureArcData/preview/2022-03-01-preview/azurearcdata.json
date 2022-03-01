@@ -1077,6 +1077,282 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureArcData/postgresInstances": {
+      "get": {
+        "tags": [
+          "PostgresInstances"
+        ],
+        "operationId": "PostgresInstances_List",
+        "summary": "List postgres Instance resources in the subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./postgresInstances.json#/definitions/PostgresInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all Postgres Instance in a subscription.": {
+            "$ref": "./examples/ListSubscriptionPostgresInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/postgresInstances": {
+      "get": {
+        "tags": [
+          "PostgresInstances"
+        ],
+        "operationId": "PostgresInstances_ListByResourceGroup",
+        "description": "Get a postgres Instances list by Resource group name.",
+        "summary": "List postgres Instance resources in the resource group",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./postgresInstances.json#/definitions/PostgresInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all postgres Instances in a resource group.": {
+            "$ref": "./examples/ListByResourceGroupPostgresInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/postgresInstances/{postgresInstanceName}": {
+      "get": {
+        "tags": [
+          "PostgresInstances"
+        ],
+        "operationId": "PostgresInstances_Get",
+        "description": "Retrieves a postgres Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/postgresInstanceName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./postgresInstances.json#/definitions/PostgresInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a postgres Instances.": {
+            "$ref": "./examples/GetPostgresInstance.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PostgresInstances"
+        ],
+        "operationId": "PostgresInstances_Create",
+        "description": "Creates or replaces a postgres Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/postgresInstanceName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "name": "resource",
+            "description": "The postgres instance",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "./postgresInstances.json#/definitions/PostgresInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./postgresInstances.json#/definitions/PostgresInstance"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "./postgresInstances.json#/definitions/PostgresInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a Postgres Instance.": {
+            "$ref": "./examples/CreateOrUpdatePostgresInstance.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "PostgresInstances"
+        ],
+        "operationId": "PostgresInstances_Delete",
+        "description": "Deletes a postgres Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/postgresInstanceName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the Postgres Instance."
+          },
+          "202": {
+            "description": "Resource deletion is in progress."
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorResponse"
+            }
+          },
+          "204": {
+            "description": "The specified Postgres Instance does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a PostgresInstances.": {
+            "$ref": "./examples/DeletePostgresInstance.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "PostgresInstances"
+        ],
+        "operationId": "PostgresInstances_Update",
+        "description": "Updates a postgres Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/postgresInstanceName"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The Postgres Instance.",
+            "required": true,
+            "schema": {
+              "$ref": "./postgresInstances.json#/definitions/PostgresInstanceUpdate"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./postgresInstances.json#/definitions/PostgresInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a postgres Instances tags.": {
+            "$ref": "./examples/UpdatePostgresInstance.json"
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -1139,6 +1415,14 @@
     "sqlServerInstanceName": {
       "name": "sqlServerInstanceName",
       "description": "Name of SQL Server Instance",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "postgresInstanceName": {
+      "name": "postgresInstanceName",
+      "description": "Name of Postgres Instance",
       "in": "path",
       "required": true,
       "type": "string",
