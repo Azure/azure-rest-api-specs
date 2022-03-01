@@ -57,7 +57,8 @@
         },
         "provisioningState": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "The provisioning state of the Azure Arc-enabled PostgreSQL instance."
         }
       }
     },
@@ -100,7 +101,8 @@
           }
         },
         "properties": {
-          "$ref": "#/definitions/PostgresInstanceProperties"
+          "$ref": "#/definitions/PostgresInstanceProperties",
+          "x-ms-client-flatten": false
         }
       }
     },
