@@ -165,7 +165,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "The filter expression filters out the resources to be returned, currently contains(displayName, 'ourfilter name’) is supported",
+            "description": "The filter expression filters out the resources to be returned, currently contains(displayName, 'filter name’) is supported",
             "type": "string"
           }
         ],
@@ -183,9 +183,6 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "List root cause analysis data sets": {
             "$ref": "./examples/ListRootCauseAnalysisDataSets.json"
@@ -198,7 +195,7 @@
         "tags": [
           "RootCauseAnalysisDataSet"
         ],
-        "summary": "Upload data to root cause analysis data set by paritition",
+        "summary": "Upload data to root cause analysis data set by partition",
         "operationId": "UploadRootCauseAnalysisData",
         "consumes": [
           "application/json"
@@ -259,7 +256,7 @@
           }
         },
         "x-ms-examples": {
-          "Upload data to root cause analysis data set by paritition": {
+          "Upload data to root cause analysis data set by partition": {
             "$ref": "./examples/UploadRootCauseAnalysisData.json"
           }
         }
@@ -268,7 +265,7 @@
         "tags": [
           "RootCauseAnalysisDataSet"
         ],
-        "summary": "Delete root cause analysis data by partitionId",
+        "summary": "Delete root cause analysis data by partition Id",
         "operationId": "DeleteRootCauseAnalysisDataByPartitionId",
         "produces": [
           "application/json"
@@ -311,7 +308,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete root cause analysis data by partitionId": {
+          "Delete root cause analysis data by partition Id": {
             "$ref": "./examples/DeleteRootCauseAnalysisDataByPartitionId.json"
           }
         }
@@ -320,7 +317,7 @@
         "tags": [
           "RootCauseAnalysisDataSet"
         ],
-        "summary": "Get data meta for a give parition Id",
+        "summary": "Get data meta for a given partition Id",
         "operationId": "GetRootCauseAnalysisDataMeta",
         "produces": [
           "application/json"
@@ -365,7 +362,7 @@
           }
         },
         "x-ms-examples": {
-          "Get data meta for a give parition Id": {
+          "Get data meta for a given partition Id": {
             "$ref": "./examples/GetRootCauseAnalysisDataMeta.json"
           }
         }
@@ -443,16 +440,14 @@
           {
             "in": "query",
             "name": "start",
-            "description": "Start date time",
-            "type": "string",
-            "format": "datetime"
+            "description": "Start date time, should be ISO format",
+            "type": "string"
           },
           {
             "in": "query",
             "name": "end",
-            "description": "End date time",
-            "type": "string",
-            "format": "datetime"
+            "description": "End date time, should be ISO format",
+            "type": "string"
           }
         ],
         "responses": {
@@ -479,7 +474,7 @@
           "RootCauseAnalysisDataSet"
         ],
         "summary": "List data meta",
-        "operationId": "ListRootCauseAnalysisDataMetas",
+        "operationId": "ListRootCauseAnalysisDataMeta",
         "produces": [
           "application/json"
         ],
@@ -509,13 +504,16 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "The filter expression filters out the resources, currently 2 kinds of operation are supported. They are ge(timestamp, 'your timestamp string') and le(timestamp, 'your timestamp string'). Timestamp string must be ISO format. For example ge(timestamp,2022-01-01T00:00:00Z), le(timestamp, 2022-02-01T00:00:00Z). This expression can go like, filter=ge(timestamp, 2022-01-01T00:00:00Z)), filter=le(timestamp, 2022-01-01T00:00:00Z)), or fiter=and(ge(timestamp, 2022-01-01T00:00:00Z)),le(timestamp, 2022-02-01T00:00:00Z)))",
+            "description": "The filter expression filters out the resources, currently 2 kinds of operation are supported. They are ge(timestamp, XXXX) and le(timestamp, XXXX). Timestamp must be ISO format",
             "type": "string"
           }
         ],
         "responses": {
-          "201": {
-            "description": "Success"
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RootCauseAnalysisDataMetaListResponse"
+            }
           },
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
@@ -524,12 +522,9 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "List data meta": {
-            "$ref": "./examples/ListRootCauseAnalysisDataMetas.json"
+            "$ref": "./examples/ListRootCauseAnalysisDataMeta.json"
           }
         }
       }
@@ -693,7 +688,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "The filter expression filters out the resources to be returned, currently contains(displayName, 'ourfilter name’) is supported",
+            "description": "The filter expression filters out the resources to be returned, currently contains(displayName, 'filter name’) is supported",
             "type": "string"
           }
         ],
@@ -710,9 +705,6 @@
               "$ref": "#/definitions/ErrorCode"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Get instance list for root cause analysis": {
@@ -911,7 +903,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "The filter expression filters out the resources to be returned, currently contains(displayName, 'ourfilter name’) is supported",
+            "description": "The filter expression filters out the resources to be returned, currently contains(displayName, 'filter name’) is supported",
             "type": "string"
           }
         ],
@@ -928,9 +920,6 @@
               "$ref": "#/definitions/ErrorCode"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Query training task state list for root cause analysis": {
@@ -1727,6 +1716,25 @@
         }
       },
       "x-ms-discriminator-value": "multidimensional"
+    },
+    "RootCauseAnalysisDataMetaListResponse": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Link of next page, only provided when there are next pages",
+          "type": "string"
+        },
+        "value": {
+          "description": "Response values",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RootCauseAnalysisDataMeta"
+          }
+        }
+      }
     },
     "MultiDimRCAMeasure": {
       "required": [
