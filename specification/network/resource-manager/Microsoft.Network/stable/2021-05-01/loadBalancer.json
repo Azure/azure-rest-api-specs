@@ -1726,6 +1726,20 @@
             "$ref": "#/definitions/NatRulePortMapping"
           },
           "description": "Collection of inbound NAT rule port mappings."
+        },
+        "adminState": {
+          "type": "string",
+          "description": "A list of administrative states which once set can override health probe so that Load Balancer will always forward new connections to backend, or deny new connections and reset existing connections.",
+          "enum": [
+            "None",
+            "Up",
+            "Down",
+            "Drain"
+          ],
+          "x-ms-enum": {
+            "name": "LoadBalancerBackendAddressAdminState",
+            "modelAsString": true
+          }
         }
       },
       "description": "Properties of the load balancer backend addresses."
@@ -1805,6 +1819,11 @@
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the backend address pool resource."
+        },
+        "drainPeriodInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Amount of seconds Load Balancer waits for before sending RESET to client and backend address."
         }
       },
       "description": "Properties of the backend address pool."
