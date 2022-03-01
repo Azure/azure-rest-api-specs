@@ -312,60 +312,6 @@
             "$ref": "./examples/DeleteRootCauseAnalysisDataByPartitionId.json"
           }
         }
-      },
-      "get": {
-        "tags": [
-          "RootCauseAnalysisDataSet"
-        ],
-        "summary": "Get data meta for a given partition Id",
-        "operationId": "GetRootCauseAnalysisDataMeta",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "dataSetId",
-            "description": "The root cause analysis data set unique id",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "in": "path",
-            "name": "timestamp",
-            "description": "The time stamp to be queried, should be a string of ISO format",
-            "required": true,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "in": "path",
-            "name": "partitionId",
-            "description": "The root cause analysis data set partition unique id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/RootCauseAnalysisDataMeta"
-            }
-          },
-          "default": {
-            "description": "Client error or server error (4xx or 5xx)",
-            "schema": {
-              "$ref": "#/definitions/ErrorCode"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get data meta for a given partition Id": {
-            "$ref": "./examples/GetRootCauseAnalysisDataMeta.json"
-          }
-        }
       }
     },
     "/rootCauseAnalysis/dataSets/{dataSetId}/timestamps:upload": {
@@ -468,13 +414,62 @@
         }
       }
     },
+    "/rootCauseAnalysis/dataSets/{dataSetId}/timestamps/{timestamp}/partitions": {
+      "get": {
+        "tags": [
+          "RootCauseAnalysisDataSet"
+        ],
+        "summary": "List data meta for a given timestamp",
+        "operationId": "ListRootCauseAnalysisDataMetaByTimestamp",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataSetId",
+            "description": "The root cause analysis data set unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "path",
+            "name": "timestamp",
+            "description": "The time stamp to be queried, should be a string of ISO format",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RootCauseAnalysisDataMetaListResponse"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List data meta for a given timestamp": {
+            "$ref": "./examples/ListRootCauseAnalysisDataMetaByTimestamp.json"
+          }
+        }
+      }
+    },
     "/rootCauseAnalysis/dataSets/{dataSetId}/timestamps": {
       "get": {
         "tags": [
           "RootCauseAnalysisDataSet"
         ],
         "summary": "List data meta",
-        "operationId": "ListRootCauseAnalysisDataMeta",
+        "operationId": "ListRootCauseAnalysisDataMetaByTimeRange",
         "produces": [
           "application/json"
         ],
@@ -524,7 +519,7 @@
         },
         "x-ms-examples": {
           "List data meta": {
-            "$ref": "./examples/ListRootCauseAnalysisDataMeta.json"
+            "$ref": "./examples/ListRootCauseAnalysisDataMetaByTimeRange.json"
           }
         }
       }
