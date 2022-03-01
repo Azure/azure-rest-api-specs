@@ -43,7 +43,7 @@
           "description": "The instance admin"
         },
         "basicLoginInformation": {
-          "$ref": "#/definitions/BasicLoginInformation",
+          "$ref": "./common.json#/definitions/BasicLoginInformation",
           "description": "Username and password for basic authentication."
         },
         "k8sRaw": {
@@ -120,25 +120,6 @@
           "description": "Link to retrieve next page of results.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "BasicLoginInformation": {
-      "type": "object",
-      "description": "Username and password for basic login authentication.",
-      "properties": {
-        "username": {
-          "type": "string",
-          "description": "Login username."
-        },
-        "password": {
-          "type": "string",
-          "description": "Login password.",
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ],
-          "x-ms-secret": true
         }
       }
     }
