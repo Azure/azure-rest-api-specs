@@ -39,6 +39,7 @@ batch:
   - tag: package-2019-11
   - tag: package-2020-10-only
   - tag: package-2021-07
+  - tag: package-2021-05-01-preview-only
 ```
 
 ### Tag: package-2017-09 and go
