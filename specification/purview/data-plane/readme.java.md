@@ -36,6 +36,8 @@ service-name: PurviewMetadata
 artifact-id: azure-analytics-purview-administration
 service-versions:
   - 2021-07-01-preview
+
+generate-builder-per-client: false
 ```
 
 ``` yaml $(java) && $(package-account)
@@ -50,6 +52,8 @@ artifact-id: azure-analytics-purview-administration
 service-name: PurviewAccount
 service-versions:
   - 2019-11-01-preview
+
+generate-builder-per-client: false
 ```
 
 ### catalog
