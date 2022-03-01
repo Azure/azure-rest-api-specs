@@ -2,11 +2,11 @@
   "swagger": "2.0",
   "info": {
     "title": "Anomaly Detector Client",
-    "description": "The Anomaly Detector API detects anomalies automatically in time series data. It supports two kinds of mode, one is for stateless using, another is for stateful using. In stateless mode, there are three functionalities. Entire Detect is for detecting the whole series with model trained by the time series, Last Detect is detecting last point with model trained by points before. ChangePoint Detect is for detecting trend changes in time series. In stateful mode, user can store time series, the stored time series will be used for detection anomalies. Under this mode, user can still use the above three functionalities by only giving a time range without preparing time series in client side. Besides the above three functionalities, stateful model also provide group based detection and labeling service. By leveraging labeling service user can provide labels for each detection result, these labels will be used for retuning or regenerating detection models. Inconsistency detection is a kind of group based detection, this detection will find inconsistency ones in a set of time series. By using anomaly detector service, business customers can discover incidents and establish a logic flow for root cause analysis.",
-    "version": "2.0-preview"
+    "description": "Root cause analysis(RCA) helps trace the crucial dimension combinations that contribute to the given anomaly point with aggregated dimension combination. For example, when a point with dimension Country = Sum, version = Sum is detected as anomaly point, using root cause analysis algorithm, we can locate the child dimension combination, for example, it might be Country = CN, version = IOS causes the given anomaly. Our algorithm supports finding root cause  from both single and multiple measures.",
+    "version": "1.2-preview"
   },
   "paths": {
-    "/rootCauseAnalysis/dataSets": {
+    "/rootCauseAnalysis/dataSets/{dataSetId}": {
       "put": {
         "tags": [
           "RootCauseAnalysisDataSet"
@@ -20,6 +20,14 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "in": "path",
+            "name": "dataSetId",
+            "description": "The root cause analysis data set unique id, should be a string of uuid.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
           {
             "in": "body",
             "name": "body",
@@ -40,24 +48,10 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "enum": [
-                "DisplayNameUserError",
-                "SizeLimitExceededError"
-              ],
-              "type": "string",
-              "x-ms-enum": {
-                "name": "MultiDimRCACreateDataSetErrorCode",
-                "modelAsString": true
-              }
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String identical to error code.",
-                "type": "string"
-              }
+              "$ref": "#/definitions/ErrorCode"
             }
           }
         },
@@ -71,8 +65,85 @@
         "tags": [
           "RootCauseAnalysisDataSet"
         ],
-        "summary": "List root cause analysis data set",
-        "operationId": "ListRootCauseAnalysisDataSet",
+        "summary": "Get a root cause analysis data set by its id",
+        "operationId": "GetRootCauseAnalysisDataSet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataSetId",
+            "description": "The root cause analysis data set unique id, should be a string of uuid.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RootCauseAnalysisDataSet"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a root cause analysis data set by its id": {
+            "$ref": "./examples/GetRootCauseAnalysisDataSet.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RootCauseAnalysisDataSet"
+        ],
+        "summary": "Delete a root cause analysis data set",
+        "operationId": "DeleteRootCauseAnalysisDataSet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataSetId",
+            "description": "The root cause analysis data set unique id, should be a string of uuid.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The resource is deleted successfully or does not exist."
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a root cause analysis data set": {
+            "$ref": "./examples/DeleteRootCauseAnalysisDataSet.json"
+          }
+        }
+      }
+    },
+    "/rootCauseAnalysis/dataSets": {
+      "get": {
+        "tags": [
+          "RootCauseAnalysisDataSet"
+        ],
+        "summary": "List root cause analysis data sets",
+        "operationId": "ListRootCauseAnalysisDataSets",
         "produces": [
           "application/json"
         ],
@@ -94,7 +165,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "The filter expression filters out the resources to be returned, currently contains(displayName, 'our filter name’) is supported",
+            "description": "The filter expression filters out the resources to be returned, currently contains(displayName, 'ourfilter name’) is supported",
             "type": "string"
           }
         ],
@@ -104,73 +175,20 @@
             "schema": {
               "$ref": "#/definitions/RootCauseAnalysisDataSetList"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List root cause analysis data set": {
-            "$ref": "./examples/ListRootCauseAnalysisDataSet.json"
-          }
-        }
-      }
-    },
-    "/rootCauseAnalysis/dataSets/{dataSetId}": {
-      "get": {
-        "tags": [
-          "RootCauseAnalysisDataSet"
-        ],
-        "summary": "Get a root cause analysis data set by its id",
-        "operationId": "GetRootCauseAnalysisDataSet",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "dataSetId",
-            "description": "The root cause analysis data set unique id",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/RootCauseAnalysisDataSet"
+              "$ref": "#/definitions/ErrorCode"
             }
           }
         },
-        "x-ms-examples": {
-          "Get a root cause analysis data set by its id": {
-            "$ref": "./examples/GetRootCauseAnalysisDataSet.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "RootCauseAnalysisDataSet"
-        ],
-        "summary": "Delete a root cause analysis data set",
-        "operationId": "DeleteRootCauseAnalysisDataSet",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "dataSetId",
-            "description": "The root cause analysis data set unique id",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "The resource is deleted successfully or does not exist."
-          }
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Delete a root cause analysis data set": {
-            "$ref": "./examples/DeleteRootCauseAnalysisDataSet.json"
+          "List root cause analysis data sets": {
+            "$ref": "./examples/ListRootCauseAnalysisDataSets.json"
           }
         }
       }
@@ -185,11 +203,14 @@
         "consumes": [
           "application/json"
         ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
             "name": "dataSetId",
-            "description": "The root cause analysis data set unique id",
+            "description": "The root cause analysis data set unique id. Should be a string of uuid",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -197,7 +218,7 @@
           {
             "in": "path",
             "name": "timestamp",
-            "description": "Timestamp of the data",
+            "description": "Timestamp of the data, should be a string of ISO format.",
             "required": true,
             "type": "string",
             "format": "date-time"
@@ -229,6 +250,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
           }
         },
         "x-ms-examples": {
@@ -243,6 +270,9 @@
         ],
         "summary": "Delete root cause analysis data by partitionId",
         "operationId": "DeleteRootCauseAnalysisDataByPartitionId",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -255,6 +285,7 @@
           {
             "in": "path",
             "name": "timestamp",
+            "description": "The time stamp to be queried, should be a string of ISO format",
             "required": true,
             "type": "string",
             "format": "date-time"
@@ -262,6 +293,7 @@
           {
             "in": "path",
             "name": "partitionId",
+            "description": "The root cause analysis data set partition unique id",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -270,6 +302,12 @@
         "responses": {
           "204": {
             "description": "The resource is deleted successfully or does not exist."
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
           }
         },
         "x-ms-examples": {
@@ -299,12 +337,15 @@
           {
             "in": "path",
             "name": "timestamp",
+            "description": "The time stamp to be queried, should be a string of ISO format",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "date-time"
           },
           {
             "in": "path",
             "name": "partitionId",
+            "description": "The root cause analysis data set partition unique id",
             "required": true,
             "type": "string"
           }
@@ -314,6 +355,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/RootCauseAnalysisDataMeta"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
             }
           }
         },
@@ -332,6 +379,9 @@
         "summary": "Upload data to root cause analysis data set by block",
         "operationId": "UploadRootCauseAnalysisDataByBlock",
         "consumes": [
+          "application/json"
+        ],
+        "produces": [
           "application/json"
         ],
         "parameters": [
@@ -356,6 +406,12 @@
         "responses": {
           "201": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
           }
         },
         "x-ms-examples": {
@@ -372,6 +428,9 @@
         ],
         "summary": "Delete root cause analysis data by time range",
         "operationId": "DeleteRootCauseAnalysisDataByTimeRange",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -399,6 +458,12 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
           }
         },
         "x-ms-examples": {
@@ -414,7 +479,10 @@
           "RootCauseAnalysisDataSet"
         ],
         "summary": "List data meta",
-        "operationId": "ListRootCauseAnalysisDataMeta",
+        "operationId": "ListRootCauseAnalysisDataMetas",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -448,16 +516,25 @@
         "responses": {
           "201": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List data meta": {
-            "$ref": "./examples/ListRootCauseAnalysisDataMeta.json"
+            "$ref": "./examples/ListRootCauseAnalysisDataMetas.json"
           }
         }
       }
     },
-    "/rootCauseAnalysis/instances": {
+    "/rootCauseAnalysis/instances/{instanceId}": {
       "put": {
         "tags": [
           "RootCauseAnalysisInstance"
@@ -467,7 +544,18 @@
         "consumes": [
           "application/json"
         ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
+          {
+            "in": "path",
+            "name": "instanceId",
+            "description": "Instance unique id, should be a string of uuid.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
           {
             "in": "body",
             "name": "body",
@@ -487,6 +575,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
           }
         },
         "x-ms-examples": {
@@ -499,8 +593,85 @@
         "tags": [
           "RootCauseAnalysisInstance"
         ],
+        "summary": "Query an instance information for root cause analysis",
+        "operationId": "GetRootCauseAnalysisInstance",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "instanceId",
+            "description": "Instance unique id, should be a string of uuid.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RootCauseAnalysisInstance"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query an instance information for root cause analysis": {
+            "$ref": "./examples/GetRootCauseAnalysisInstance.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RootCauseAnalysisInstance"
+        ],
+        "summary": "Delete an instance for root cause analysis",
+        "operationId": "DeleteRootCauseAnalysisInstance",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "instanceId",
+            "description": "Instance unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The resource is deleted successfully or does not exist."
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an instance for root cause analysis": {
+            "$ref": "./examples/DeleteRootCauseAnalysisInstance.json"
+          }
+        }
+      }
+    },
+    "/rootCauseAnalysis/instances": {
+      "get": {
+        "tags": [
+          "RootCauseAnalysisInstance"
+        ],
         "summary": "Get instance list for root cause analysis",
-        "operationId": "ListRootCauseAnalysisInstance",
+        "operationId": "ListRootCauseAnalysisInstances",
         "produces": [
           "application/json"
         ],
@@ -522,7 +693,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "The filter expression filters out the resources to be returned, currently contains(displayName, 'our filter name’) is supported",
+            "description": "The filter expression filters out the resources to be returned, currently contains(displayName, 'ourfilter name’) is supported",
             "type": "string"
           }
         ],
@@ -532,78 +703,25 @@
             "schema": {
               "$ref": "#/definitions/RootCauseAnalysisInstanceResponseList"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get instance list for root cause analysis": {
-            "$ref": "./examples/ListRootCauseAnalysisInstance.json"
-          }
-        }
-      }
-    },
-    "/rootCauseAnalysis/instances/{instanceId}": {
-      "get": {
-        "tags": [
-          "RootCauseAnalysisInstance"
-        ],
-        "summary": "Query an instance information for root cause analysis",
-        "operationId": "GetRootCauseAnalysisInstance",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "instanceId",
-            "description": "Instance unique id",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/RootCauseAnalysisInstance"
+              "$ref": "#/definitions/ErrorCode"
             }
           }
         },
-        "x-ms-examples": {
-          "Query an instance information for root cause analysis": {
-            "$ref": "./examples/GetRootCauseAnalysisInstance.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "RootCauseAnalysisInstance"
-        ],
-        "summary": "Delete an instance for root cause analysis",
-        "operationId": "DeleteRootCauseAnalysisInstance",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "instanceId",
-            "description": "Instance unique id",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "The resource is deleted successfully or does not exist."
-          }
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Delete an instance for root cause analysis": {
-            "$ref": "./examples/DeleteRootCauseAnalysisInstance.json"
+          "Get instance list for root cause analysis": {
+            "$ref": "./examples/ListRootCauseAnalysisInstances.json"
           }
         }
       }
     },
-    "/rootCauseAnalysis/instances/{instanceId}/models": {
+    "/rootCauseAnalysis/instances/{instanceId}/models/{modelId}": {
       "put": {
         "tags": [
           "RootCauseAnalysisModel"
@@ -613,11 +731,22 @@
         "consumes": [
           "application/json"
         ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
             "name": "instanceId",
-            "description": "Instance unique id",
+            "description": "Instance unique id, should be a string of uuid",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "path",
+            "name": "modelId",
+            "description": "Model unique id, should be a string of uuid",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -640,6 +769,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
           }
         },
         "x-ms-examples": {
@@ -648,12 +783,12 @@
           }
         }
       },
-      "get": {
+      "delete": {
         "tags": [
           "RootCauseAnalysisModel"
         ],
-        "summary": "Query training task state list for root cause analysis",
-        "operationId": "ListRootCauseAnalysisTrainingStates",
+        "summary": "Delete a model for root cause analysis",
+        "operationId": "DeleteRootCauseAnalysisModel",
         "produces": [
           "application/json"
         ],
@@ -661,59 +796,7 @@
           {
             "in": "path",
             "name": "instanceId",
-            "description": "Instance unique id",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "in": "query",
-            "name": "skip",
-            "description": "For paging, skipped number",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "in": "query",
-            "name": "maxpagesize",
-            "description": "The maximum number of items in one page",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "in": "query",
-            "name": "filter",
-            "description": "The filter expression filters out the resources to be returned, currently contains(displayName, 'our filter name’) is supported",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/RootCauseAnalysisTrainingResponseList"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Query training task state list for root cause analysis": {
-            "$ref": "./examples/ListRootCauseAnalysisTrainingStates.json"
-          }
-        }
-      }
-    },
-    "/rootCauseAnalysis/instances/{instanceId}/models/{modelId}": {
-      "delete": {
-        "tags": [
-          "RootCauseAnalysisModel"
-        ],
-        "summary": "Delete a model for root cause analysis",
-        "operationId": "DeleteRootCauseAnalysisModel",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "instanceId",
-            "description": "Instance unique id",
+            "description": "Instance unique id, should be a string of uuid.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -721,7 +804,7 @@
           {
             "in": "path",
             "name": "modelId",
-            "description": "Model unique id",
+            "description": "Model unique id, should be a string of uuid.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -730,6 +813,12 @@
         "responses": {
           "204": {
             "description": "The resource is deleted successfully or does not exist."
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
           }
         },
         "x-ms-examples": {
@@ -751,7 +840,7 @@
           {
             "in": "path",
             "name": "instanceId",
-            "description": "Instance unique id",
+            "description": "Instance unique id, should be a string of uuid.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -759,7 +848,7 @@
           {
             "in": "path",
             "name": "modelId",
-            "description": "Model unique id",
+            "description": "Model unique id, should be a string of uuid.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -771,6 +860,12 @@
             "schema": {
               "$ref": "#/definitions/RootCauseAnalysisTrainingResponse"
             }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
           }
         },
         "x-ms-examples": {
@@ -780,7 +875,71 @@
         }
       }
     },
-    "/rootCauseAnalysis/instances/{instanceId}/models/{modelId}/inferences": {
+    "/rootCauseAnalysis/instances/{instanceId}/models": {
+      "get": {
+        "tags": [
+          "RootCauseAnalysisModel"
+        ],
+        "summary": "Query training task state list for root cause analysis",
+        "operationId": "ListRootCauseAnalysisTrainingStates",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "instanceId",
+            "description": "Instance unique id, should be a string of uuid.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "For paging, skipped number",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "maxpagesize",
+            "description": "The maximum number of items in one page",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "The filter expression filters out the resources to be returned, currently contains(displayName, 'ourfilter name’) is supported",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RootCauseAnalysisTrainingResponseList"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Query training task state list for root cause analysis": {
+            "$ref": "./examples/ListRootCauseAnalysisTrainingStates.json"
+          }
+        }
+      }
+    },
+    "/rootCauseAnalysis/instances/{instanceId}/models/{modelId}/inferences/{inferenceId}": {
       "put": {
         "tags": [
           "RootCauseAnalysisModel"
@@ -790,11 +949,14 @@
         "consumes": [
           "application/json"
         ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
             "name": "instanceId",
-            "description": "Instance unique id",
+            "description": "Instance unique id, should be a string of uuid.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -802,7 +964,15 @@
           {
             "in": "path",
             "name": "modelId",
-            "description": "Model unique id",
+            "description": "Model unique id, should be a string of uuid.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "path",
+            "name": "inferenceId",
+            "description": "Inference unique id, should be a string of uuid.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -826,6 +996,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
           }
         },
         "x-ms-examples": {
@@ -833,9 +1009,7 @@
             "$ref": "./examples/CreateRootCauseAnalysisInferenceTask.json"
           }
         }
-      }
-    },
-    "/rootCauseAnalysis/instances/{instanceId}/models/{modelId}/inferences/{inferenceId}": {
+      },
       "get": {
         "tags": [
           "RootCauseAnalysisModel"
@@ -849,7 +1023,7 @@
           {
             "in": "path",
             "name": "instanceId",
-            "description": "Instance unique id",
+            "description": "Instance unique id, should be a string of uuid.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -857,7 +1031,7 @@
           {
             "in": "path",
             "name": "modelId",
-            "description": "Model unique id",
+            "description": "Model unique id, should be a string of uuid.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -865,7 +1039,7 @@
           {
             "in": "path",
             "name": "inferenceId",
-            "description": "Inference unique id",
+            "description": "Inference unique id, should be a string of uuid.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -876,6 +1050,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/RootCauseAnalysisInferenceResponse"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
             }
           }
         },
@@ -1012,6 +1192,19 @@
         }
       },
       "x-ms-discriminator-value": "multidimensional"
+    },
+    "ErrorCode": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "Human-readable error message",
+          "type": "string"
+        },
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        }
+      }
     },
     "RootCauseAnalysisDataSetList": {
       "required": [
@@ -1535,7 +1728,7 @@
       },
       "x-ms-discriminator-value": "multidimensional"
     },
-    "MultiDimRCATargetMeasure": {
+    "MultiDimRCAMeasure": {
       "required": [
         "dataSetId",
         "measureName"
@@ -1550,27 +1743,6 @@
         "measureName": {
           "description": "Target measure name for root cause analysis instance",
           "type": "string"
-        }
-      }
-    },
-    "MultiDimRCADataScope": {
-      "required": [
-        "dataSetId",
-        "measureNames"
-      ],
-      "type": "object",
-      "properties": {
-        "dataSetId": {
-          "format": "uuid",
-          "description": "Data set id for root cause analysis instance",
-          "type": "string"
-        },
-        "measureNames": {
-          "description": "Measure name list for root cause analysis instance",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
@@ -1609,14 +1781,14 @@
     "dataSetId": "01234567-8901-2345-6789-012345678901",
     "measureName": "error rate"
   },
-  "dataSets": [
+  "assistiveMeasures": [
     {
       "dataSetId": "01234567-8901-2345-6789-012345678901",
-      "measureNames": [
-        "error count",
-        "total call count",
-        "error rate"
-      ]
+      "measureName": "error count"
+    },
+    {
+      "dataSetId": "01234567-8901-2345-6789-012345678901",
+      "measureName": "total call count"
     }
   ],
   "displayName": "Sample Root Cause Analysis Instance Name",
@@ -1625,7 +1797,7 @@
     },
     "MultiRCADimInstance": {
       "required": [
-        "dataSets",
+        "assistiveMeasures",
         "targetMeasure"
       ],
       "type": "object",
@@ -1636,13 +1808,13 @@
       ],
       "properties": {
         "targetMeasure": {
-          "$ref": "#/definitions/MultiDimRCATargetMeasure"
+          "$ref": "#/definitions/MultiDimRCAMeasure"
         },
-        "dataSets": {
+        "assistiveMeasures": {
           "description": "Data sets for root cause analysis",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MultiDimRCADataScope"
+            "$ref": "#/definitions/MultiDimRCAMeasure"
           }
         }
       },
@@ -1809,7 +1981,7 @@
         }
       }
     },
-    "MultiDimRCACreateDataSetErrorDetail": {
+    "ErrorDetail": {
       "type": "object",
       "properties": {
         "message": {
@@ -1817,16 +1989,7 @@
           "type": "string"
         },
         "code": {
-          "description": "Error code",
-          "enum": [
-            "DisplayNameUserError",
-            "SizeLimitExceededError"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "MultiDimRCACreateDataSetErrorCode",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ErrorCode"
         }
       }
     },
@@ -1899,7 +2062,7 @@
           "type": "string"
         },
         "error": {
-          "$ref": "#/definitions/MultiDimRCACreateDataSetErrorDetail"
+          "$ref": "#/definitions/ErrorDetail"
         },
         "taskInfo": {
           "$ref": "#/definitions/MultiDimRCATrainingTaskInfo"
@@ -2148,7 +2311,7 @@
           "type": "string"
         },
         "error": {
-          "$ref": "#/definitions/MultiDimRCACreateDataSetErrorDetail"
+          "$ref": "#/definitions/ErrorDetail"
         },
         "result": {
           "$ref": "#/definitions/MultiDimRCAInferenceResult"
@@ -2173,7 +2336,8 @@
     "apiKeyHeader": {
       "type": "apiKey",
       "name": "Ocp-Apim-Subscription-Key",
-      "in": "header"
+      "in": "header",
+      "description": "The secret key for your Azure Cognitive Services subscription."
     }
   },
   "security": [
@@ -2193,7 +2357,7 @@
     }
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/anomalydetector/v2.0-preview",
+    "hostTemplate": "{Endpoint}/anomalydetector/v1.2-preview",
     "useSchemePrefix": false,
     "parameters": [
       {

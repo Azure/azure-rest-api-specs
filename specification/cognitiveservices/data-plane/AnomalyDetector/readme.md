@@ -29,15 +29,15 @@ input-file:
   - preview/v1.1-preview/AnomalyDetector.json
   - preview/v1.1-preview/MultivariateAnomalyDetector.json
 ```
-### Release 2.0-preview
+### Release 1.2-preview
 
 These settings apply only when `--tag=release_2_0_preview` is specified on the command line.
 
 ```yaml $(tag) == 'release_2_0_preview'
 input-file:
-  - preview/v2.0-preview/AnomalyDetector.json
-  - preview/v2.0-preview/MultivariateAnomalyDetector.json
-  - preview/v2.0-preview/RootCauseAnalysis.json
+  - preview/v1.2-preview/AnomalyDetector.json
+  - preview/v1.2-preview/MultivariateAnomalyDetector.json
+  - preview/v1.2-preview/RootCauseAnalysis.json
 ```
 
 ## Swagger to SDK
