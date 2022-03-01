@@ -1,0 +1,300 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-11-15-preview",
+    "title": "LabServicesClient",
+    "description": "REST API for managing Azure Lab Services resource SKUs."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.LabServices/skus": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "in": "query",
+          "name": "$filter",
+          "type": "string",
+          "description": "The filter to apply to the operation."
+        }
+      ],
+      "get": {
+        "tags": [
+          "Skus"
+        ],
+        "summary": "Gets all the Azure Lab Services resource SKUs.",
+        "description": "Returns a list of all the Azure Lab Services resource SKUs.",
+        "operationId": "Skus_List",
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains all Azure Lab Services virtual machine sizes.",
+            "schema": {
+              "$ref": "#/definitions/PagedLabServicesSkus"
+            }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "listSkus": {
+            "$ref": "./examples/Skus/listSkus.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LabServicesSku": {
+      "description": "Azure Lab Services resource SKUs",
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "description": "The lab services resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the SKU.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tier": {
+          "description": "The tier of the SKU.",
+          "type": "string",
+          "enum": [
+            "Standard",
+            "Premium"
+          ],
+          "x-ms-enum": {
+            "name": "LabServicesSkuTier",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "size": {
+          "description": "The SKU size.",
+          "type": "string",
+          "readOnly": true
+        },
+        "family": {
+          "description": "The family of the SKU.",
+          "type": "string",
+          "readOnly": true
+        },
+        "capacity": {
+          "$ref": "#/definitions/LabServicesSkuCapacity"
+        },
+        "capabilities": {
+          "description": "The capabilities of the SKU.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LabServicesSkuCapabilities"
+          },
+          "readOnly": true
+        },
+        "locations": {
+          "description": "List of locations that are available for a size.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "costs": {
+          "description": "Metadata for retrieving price info of a lab services SKUs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LabServicesSkuCost"
+          },
+          "readOnly": true
+        },
+        "restrictions": {
+          "description": "Restrictions of a lab services SKUs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LabServicesSkuRestrictions"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PagedLabServicesSkus": {
+      "description": "Paged list of lab services skus.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The array page of sku results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LabServicesSku"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "The link to get the next page of sku results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "LabServicesSkuCapabilities": {
+      "description": "The array of capabilities of a lab services SKU.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the capability for a SKU.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "The value of the capability for a SKU.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "LabServicesSkuCapacity": {
+      "description": "The scale out/in options of the SKU.",
+      "type": "object",
+      "properties": {
+        "default": {
+          "description": "The default capacity for this resource.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "minimum": {
+          "description": "The lowest permitted capacity for this resource.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "maximum": {
+          "description": "The highest permitted capacity for this resource.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "scaleType": {
+          "description": "The localized name of the resource.",
+          "type": "string",
+          "enum": [
+            "None",
+            "Manual",
+            "Automatic"
+          ],
+          "x-ms-enum": {
+            "name": "ScaleType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "The capacity is not adjustable in any way."
+              },
+              {
+                "value": "Manual",
+                "description": "The user must manually scale this SKU in and out."
+              },
+              {
+                "value": "Automatic",
+                "description": "The user is permitted to scale this SKU in and out."
+              }
+            ]
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "LabServicesSkuCost": {
+      "description": "The array of costs of a lab services SKU.",
+      "type": "object",
+      "properties": {
+        "meterId": {
+          "description": "The meter id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "quantity": {
+          "description": "The quantity of units charged.",
+          "type": "number",
+          "readOnly": true
+        },
+        "extendedUnit": {
+          "description": "The extended unit.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "LabServicesSkuRestrictions": {
+      "description": "The restriction details.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of restriction.",
+          "type": "string",
+          "enum": [
+            "Location"
+          ],
+          "x-ms-enum": {
+            "name": "RestrictionType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "values": {
+          "description": "The values of the restriction.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "reasonCode": {
+          "description": "The reason for the restriction.",
+          "type": "string",
+          "enum": [
+            "QuotaId",
+            "NotAvailableForSubscription"
+          ],
+          "x-ms-enum": {
+            "name": "RestrictionReasonCode",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

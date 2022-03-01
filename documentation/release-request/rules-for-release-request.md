@@ -1,7 +1,7 @@
 This file claims some rules for those who want official SDK release.
 
 # How to ask for official SDK 
-Kake release request in [website](https://portal.azure-devex-tools.com/tools/request-api-release)
+Make release request in [request-api-release](https://portal.azure-devex-tools.com/tools/request-api-release)
 
 # Some guidance and rules when you fill the release issue
 
