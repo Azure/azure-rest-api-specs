@@ -975,6 +975,9 @@
           },
           "StorageAccountSetManagementPolicyForBlockAndAppendBlobs": {
             "$ref": "./examples/StorageAccountSetManagementPolicyForBlockAndAppendBlobs.json"
+          },
+          "StorageAccountSetManagementPolicy_LastTierChangeTimeActions": {
+            "$ref": "./examples/StorageAccountSetManagementPolicy_LastTierChangeTimeActions.json"
           }
         },
         "parameters": [
@@ -4606,9 +4609,15 @@
           "multipleOf": 1.0,
           "minimum": 0,
           "description": "Value indicating the age in days after last blob access. This property can only be used in conjunction with last access time tracking policy"
+        },
+        "daysAfterLastTierChangeTimeGreaterThan": {
+          "type": "number",
+          "multipleOf": 1.0,
+          "minimum": 0,
+          "description": "Value indicating the age in days after last blob tier change time. This property is only applicable for tierToArchive actions and requires daysAfterModificationGreaterThan to be set for baseBlobs based actions. The blob will be archived if both the conditions are satisfied."
         }
       },
-      "description": "Object to define the number of days after object last modification Or last access. Properties daysAfterModificationGreaterThan and daysAfterLastAccessTimeGreaterThan are mutually exclusive."
+      "description": "Object to define the number of days after object last modification Or last access. Properties daysAfterModificationGreaterThan and daysAfterLastAccessTimeGreaterThan are mutually exclusive and the daysAfterLastTierChangeTimeGreaterThan property is only applicable for tierToArchive actions and requires daysAfterModificationGreaterThan to be set, also it cannot be used in conjunction with daysAfterLastAccessTimeGreaterThan."
     },
     "DateAfterCreation": {
       "properties": {
@@ -4617,6 +4626,12 @@
           "multipleOf": 1.0,
           "minimum": 0,
           "description": "Value indicating the age in days after creation"
+        },
+        "daysAfterLastTierChangeTimeGreaterThan": {
+          "type": "number",
+          "multipleOf": 1.0,
+          "minimum": 0,
+          "description": "Value indicating the age in days after last blob tier change time. This property is only applicable for tierToArchive actions and requires daysAfterCreationGreaterThan to be set for snapshots and blob version based actions. The blob will be archived if both the conditions are satisfied."
         }
       },
       "required": [
