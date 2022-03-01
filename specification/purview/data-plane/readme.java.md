@@ -27,12 +27,9 @@ input-file:
   - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/purview/data-plane/Azure.Analytics.Purview.MetadataPolicies/preview/2021-07-01-preview/purviewMetadataPolicy.json
 
 java: true
-output-folder: ../
 namespace: com.azure.analytics.purview.administration
 license-header: MICROSOFT_MIT_SMALL
 low-level-client: true
-credential-types: tokencredential
-credential-scopes: https://purview.azure.net/.default
 generate-samples: true
 title: PurviewMetadataClient
 service-name: PurviewMetadata
@@ -46,12 +43,9 @@ input-file:
   - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/purview/data-plane/Azure.Analytics.Purview.Account/preview/2019-11-01-preview/account.json
 
 java: true
-output-folder: ../
 namespace: com.azure.analytics.purview.administration
 license-header: MICROSOFT_MIT_SMALL
 low-level-client: true
-credential-types: tokencredential
-credential-scopes: https://purview.azure.net/.default
 generate-samples: true
 title: PurviewAccountClient
 artifact-id: azure-analytics-purview-administration
@@ -69,8 +63,6 @@ sync-methods: all
 license-header: MICROSOFT_MIT_SMALL
 low-level-client: true
 title: PurviewCatalogClient
-artifact-id: azure-analytics-purview-catalog
-service-name: PurviewCatalog
 service-versions:
   - 2021-05-01-preview
 generate-client-as-impl: true
@@ -81,5 +73,4 @@ generate-samples: true
 polling: {}
 
 generate-builder-per-client: false
-require: readme.md
 ```
