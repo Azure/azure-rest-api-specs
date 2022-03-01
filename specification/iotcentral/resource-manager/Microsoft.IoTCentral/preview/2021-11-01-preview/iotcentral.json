@@ -949,34 +949,6 @@
       "description": "The IoT Central application.",
       "type": "object",
       "properties": {
-        "properties": {
-          "description": "The common properties of an IoT Central application.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AppProperties"
-        },
-        "sku": {
-          "description": "A valid instance SKU.",
-          "$ref": "#/definitions/AppSkuInfo"
-        },
-        "identity": {
-          "description": "The managed identities for the IoT Central application.",
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/SystemAssignedServiceIdentity"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "x-ms-azure-resource": true,
-      "required": [
-        "sku"
-      ]
-    },
-    "Resource": {
-      "description": "The common properties of an ARM resource.",
-      "type": "object",
-      "properties": {
         "id": {
           "readOnly": true,
           "type": "string",
@@ -1008,10 +980,24 @@
             "type": "string"
           },
           "description": "The resource tags."
+        },
+        "properties": {
+          "description": "The common properties of an IoT Central application.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AppProperties"
+        },
+        "sku": {
+          "description": "A valid instance SKU.",
+          "$ref": "#/definitions/AppSkuInfo"
+        },
+        "identity": {
+          "description": "The managed identities for the IoT Central application.",
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/SystemAssignedServiceIdentity"
         }
       },
       "x-ms-azure-resource": true,
       "required": [
+        "sku",
         "location"
       ]
     },
