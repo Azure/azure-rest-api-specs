@@ -10,7 +10,7 @@ packages:
 - name: azure-analytics-purview-catalog
   input-file:
   - Azure.Analytics.Purview.Catalog/preview/2021-05-01-preview/purviewcatalog.json
-  tag: package-catalog
+  tag: package-catalog-2021-05-preview
 - name: azure-analytics-purview-scanning
   input-file:
   - Azure.Analytics.Purview.Scanning/preview/2018-12-01-preview/scanningService.json
@@ -26,9 +26,7 @@ batch:
 
 ``` yaml $(java) && $(package-metadata)
 input-file: Azure.Analytics.Purview.MetadataPolicies/preview/2021-07-01-preview/purviewMetadataPolicy.json
-java: true
 namespace: com.azure.analytics.purview.administration
-license-header: MICROSOFT_MIT_SMALL
 low-level-client: true
 generate-samples: true
 title: PurviewMetadataClient
@@ -42,9 +40,7 @@ generate-builder-per-client: false
 
 ``` yaml $(java) && $(package-account)
 input-file: Azure.Analytics.Purview.Account/preview/2019-11-01-preview/account.json
-java: true
 namespace: com.azure.analytics.purview.administration
-license-header: MICROSOFT_MIT_SMALL
 low-level-client: true
 generate-samples: true
 title: PurviewAccountClient
@@ -58,21 +54,12 @@ generate-builder-per-client: false
 
 ### catalog
 
-``` yaml $(java) && $(tag) == 'package-catalog'
-input-file: Azure.Analytics.Purview.Catalog/preview/2021-05-01-preview/purviewcatalog.json
-java: true
+``` yaml $(java) && $(tag) == 'package-catalog-2021-05-preview'
 namespace: com.azure.analytics.purview.catalog
-generate-client-interfaces: false
-sync-methods: all
-license-header: MICROSOFT_MIT_SMALL
 low-level-client: true
 title: PurviewCatalogClient
 service-versions:
   - 2021-05-01-preview
-generate-client-as-impl: true
-add-context-parameter: true
-context-client-method-parameter: true
-generate-sync-async-clients: true
 generate-samples: true
 polling: {}
 
