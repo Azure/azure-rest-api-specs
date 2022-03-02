@@ -120,7 +120,7 @@ input-file:
   - $(this-folder)/preview/v1.1-preview/MultivariateAnomalyDetector.json
   - $(this-folder)/preview/v1.1-preview.1/MultivariateAnomalyDetector.json
   - $(this-folder)/preview/v1.2-preview/RootCauseAnalysis.json
-
+```
 
 If there are files that should not be in the `all-api-versions` set, 
 uncomment the  `exclude-file` section below and add the file paths.

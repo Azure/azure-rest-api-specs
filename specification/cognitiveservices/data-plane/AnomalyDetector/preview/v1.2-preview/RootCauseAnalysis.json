@@ -51,7 +51,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -90,7 +90,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -126,7 +126,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -179,7 +179,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -254,7 +254,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -306,7 +306,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -356,7 +356,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -406,7 +406,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -455,7 +455,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -516,7 +516,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -575,7 +575,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -614,7 +614,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -650,7 +650,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -703,7 +703,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -769,7 +769,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -813,7 +813,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -860,7 +860,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -921,7 +921,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -996,7 +996,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -1051,7 +1051,7 @@
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/ErrorCode"
+              "$ref": "#/definitions/ErrorDetail"
             }
           }
         },
@@ -1189,7 +1189,7 @@
       },
       "x-ms-discriminator-value": "multidimensional"
     },
-    "ErrorCode": {
+    "ErrorDetail": {
       "type": "object",
       "properties": {
         "message": {
@@ -1266,12 +1266,12 @@
     "MultiDimRCADataPartition": {
       "required": [
         "data",
-        "partitionIdentity",
+        "partitionId",
         "timestamp"
       ],
       "type": "object",
       "properties": {
-        "partitionIdentity": {
+        "partitionId": {
           "description": "Multidimensional root cause analysis data partition unique ID",
           "type": "string"
         },
@@ -1322,7 +1322,7 @@
   "kind": "multidimensional",
   "value": [
     {
-      "partitionIdentity": "PartitionIdentity1",
+      "partitionId": "PartitionIdentity1",
       "timestamp": "2021-12-01T00:00:00Z",
       "data": [
         [
@@ -1384,7 +1384,7 @@
       ]
     },
     {
-      "partitionIdentity": "PartitionIdentity2",
+      "partitionId": "PartitionIdentity2",
       "timestamp": "2021-11-30T00:00:00Z",
       "data": [
         [
@@ -1446,7 +1446,7 @@
       ]
     },
     {
-      "partitionIdentity": "PartitionIdentity3",
+      "partitionId": "PartitionIdentity3",
       "timestamp": "2021-11-29T00:00:00Z",
       "data": [
         [
@@ -1508,7 +1508,7 @@
       ]
     },
     {
-      "partitionIdentity": "PartitionIdentity4",
+      "partitionId": "PartitionIdentity4",
       "timestamp": "2021-11-28T00:00:00Z",
       "data": [
         [
@@ -1570,7 +1570,7 @@
       ]
     },
     {
-      "partitionIdentity": "PartitionIdentity5",
+      "partitionId": "PartitionIdentity5",
       "timestamp": "2021-11-27T00:00:00Z",
       "data": [
         [
@@ -1638,12 +1638,12 @@
       "required": [
         "dataSize",
         "lastModifiedDateTime",
-        "partitionIdentity",
+        "partitionId",
         "timestamp"
       ],
       "type": "object",
       "properties": {
-        "partitionIdentity": {
+        "partitionId": {
           "description": "Multidimensional root cause analysis partition identity",
           "type": "string"
         },
@@ -1868,7 +1868,7 @@
         "bestEpoch",
         "bestValidationLoss",
         "edgeSize",
-        "epochs",
+        "epoch",
         "latencyInSecond",
         "nodeSize",
         "trainLoss",
@@ -1876,7 +1876,7 @@
       ],
       "type": "object",
       "properties": {
-        "epochs": {
+        "epoch": {
           "description": "Train epochs",
           "type": "array",
           "items": {
@@ -1933,18 +1933,6 @@
             "format": "int32",
             "type": "integer"
           }
-        }
-      }
-    },
-    "ErrorDetail": {
-      "type": "object",
-      "properties": {
-        "message": {
-          "description": "Human-readable error message",
-          "type": "string"
-        },
-        "code": {
-          "$ref": "#/definitions/ErrorCode"
         }
       }
     },
@@ -2069,7 +2057,7 @@
           "type": "string"
         },
         "dimensionScope": {
-          "description": "Dimension scope used to narrow down the search",
+          "description": "Dimension scope used to narrow down the search. Only dimension with specific value need to be provided.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -2132,15 +2120,15 @@
       "properties": {
         "dataSetId": {
           "format": "uuid",
-          "description": "data set unique id of the root cause measure",
+          "description": "Data set unique id of the root cause measure",
           "type": "string"
         },
         "displayName": {
-          "description": "name of the root cause measure",
+          "description": "Name of the root cause measure",
           "type": "string"
         },
         "trendType": {
-          "description": "trend type of the measure",
+          "description": "Trend type of the measure",
           "enum": [
             "rise",
             "drop"
@@ -2153,7 +2141,7 @@
         },
         "contributionScore": {
           "format": "double",
-          "description": "contribution score of the measure",
+          "description": "Contribution score to show how much this measure contributes to the root cause",
           "type": "number"
         }
       }
@@ -2167,7 +2155,7 @@
       "type": "object",
       "properties": {
         "dimension": {
-          "description": "dimension combination of the root cause",
+          "description": "Dimension combination of the root cause",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -2175,11 +2163,11 @@
         },
         "score": {
           "format": "double",
-          "description": "score of the root cause",
+          "description": "Score of the root cause item",
           "type": "number"
         },
         "measures": {
-          "description": "root cause measures",
+          "description": "Root cause measures",
           "type": "array",
           "items": {
             "$ref": "#/definitions/MultiDimRootCauseMeasure"
@@ -2215,7 +2203,7 @@
       "type": "object",
       "properties": {
         "kind": {
-          "description": "kind of root cause analysis",
+          "description": "Kind of root cause analysis",
           "enum": [
             "multidimensional"
           ],

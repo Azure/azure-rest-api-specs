@@ -1,6 +1,7 @@
 {
   "parameters": {
     "Endpoint": "{Endpoint}",
+    "ApiVersion": "v1.1-preview.1",
     "Content-Type": "application/json",
     "Ocp-Apim-Subscription-Key": "{API key}",
     "body": {
@@ -200,7 +201,9 @@
       ],
       "maxAnomalyRatio": 0.25,
       "sensitivity": 95,
-      "granularity": "monthly"
+      "granularity": "monthly",
+      "imputeMode": "fixed",
+      "imputeFixedValue": 800
     }
   },
   "responses": {
@@ -213,7 +216,8 @@
         "expectedValue": 809.23280846597038,
         "upperMargin": 40.461640423298519,
         "lowerMargin": 40.461640423298519,
-        "suggestedWindow": 49
+        "suggestedWindow": 49,
+        "severity": 0.0
       }
     }
   }
