@@ -171,6 +171,36 @@
         }
       },
       "description": "An error response from the Storage service."
+    },
+    "SignedIdentifier": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "An unique identifier of the stored access policy."
+        },
+        "accessPolicy": {
+          "$ref": "#/definitions/AccessPolicy",
+          "description": "Access policy"
+        }
+      }
+    },
+    "AccessPolicy": {
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the access policy"
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiry time of the access policy"
+        },
+        "permission": {
+          "type": "string",
+          "description": "List of abbreviated permissions."
+        }
+      }
     }
   }
 }

@@ -164,6 +164,9 @@
         "x-ms-examples": {
           "TableOperationPut": {
             "$ref": "./examples/TableOperationPut.json"
+          },
+          "TableOperationPutOrPatchAcls": {
+            "$ref": "./examples/TableOperationPutOrPatchAcls.json"
           }
         },
         "description": "Creates a new table with the specified table name, under the specified account.",
@@ -207,6 +210,9 @@
         "x-ms-examples": {
           "TableOperationPatch": {
             "$ref": "./examples/TableOperationPatch.json"
+          },
+          "TableOperationPutOrPatchAcls": {
+            "$ref": "./examples/TableOperationPutOrPatchAcls.json"
           }
         },
         "description": "Creates a new table with the specified table name, under the specified account.",
@@ -428,6 +434,13 @@
           "type": "string",
           "readOnly": true,
           "description": "Table name under the specified account"
+        },
+        "signedIdentifiers": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/SignedIdentifier"
+          },
+          "description": "List of stored access policies specified on the table."
         }
       }
     },
