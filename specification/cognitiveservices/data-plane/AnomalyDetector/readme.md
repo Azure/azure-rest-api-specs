@@ -108,6 +108,7 @@ require: $(this-folder)/../../../../profiles/readme.md
 input-file:
   - $(this-folder)/stable/v1.0/AnomalyDetector.json
   - $(this-folder)/preview/v1.1-preview/MultivariateAnomalyDetector.json
+  - $(this-folder)/preview/v1.2-preview/RootCauseAnalysis.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
