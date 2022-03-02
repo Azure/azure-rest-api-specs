@@ -2235,7 +2235,7 @@
           "200": {
             "description": "The SQL container merge operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PartitionInfoResult"
+              "$ref": "#/definitions/physicalPartitionStorageInfoCollection"
             }
           },
           "default": {
@@ -3561,7 +3561,7 @@
         "200": {
           "description": "The MongoDB Collection merge operation was completed successfully.",
           "schema": {
-            "$ref": "#/definitions/PartitionInfoResult"
+            "$ref": "#/definitions/physicalPartitionStorageInfoCollection"
           }
         },
         "default": {
@@ -9905,21 +9905,15 @@
         }        
       }
     },
-    "PartitionInfoResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PartitionInfo"
+    "physicalPartitionStorageInfoCollection": {
+       "readOnly": true,
+        "type": "array",
+        "items": {
+            "$ref": "#/definitions/physicalPartitionStorageInfo"
           },
           "description": "List of physical partitions and their properties."
-        }
-      },
-      "description": "The Merge operation response, that contains the physical partition and their properties."
-    },
-    "PartitionInfo": {
+      },      
+    "physicalPartitionStorageInfo": {
       "description": "The storage of a physical partition",
       "type": "object",
       "properties": {
