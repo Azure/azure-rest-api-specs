@@ -66,3 +66,7 @@ swagger-to-sdk:
 ## TypeScript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
