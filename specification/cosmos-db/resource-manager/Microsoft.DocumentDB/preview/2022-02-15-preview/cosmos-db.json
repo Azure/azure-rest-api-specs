@@ -2187,65 +2187,6 @@
           }
         }
       },
-      "post": {
-        "operationId": "SqlResources_SqlContainerPartitionMerge",
-        "x-ms-examples": {
-          "CosmosDBSqlContainerDelete": {
-            "$ref": "./examples/CosmosDBSqlContainerPartitionMerge.json"
-          }
-        },
-        "description": "Merges the partitions of a SQL Container",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/accountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/databaseNameParameter"
-          },
-          {
-            "$ref": "#/parameters/containerNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "mergeParameters",
-            "required": true,
-            "description": "The parameters for the merge operation.",
-            "schema": {
-              "$ref": "#/definitions/MergeParameters"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The SQL container merge operation will complete asynchronously."
-          },
-          "200": {
-            "description": "The SQL container merge operation was completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PartitionInfoResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-    },
     "delete": {
       "operationId": "SqlResources_DeleteSqlContainer",
       "x-ms-examples": {
@@ -2285,6 +2226,67 @@
       }
     }
   },
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/partitionMerge": {
+      "post": {
+              "operationId": "SqlResources_SqlContainerPartitionMerge",
+              "x-ms-examples": {
+                "CosmosDBSqlContainerPartitionMerge": {
+                  "$ref": "./examples/CosmosDBSqlContainerPartitionMerge.json"
+                }
+              },
+              "description": "Merges the partitions of a SQL Container",
+              "x-ms-long-running-operation": true,
+              "x-ms-long-running-operation-options": {
+                "final-state-via": "location"
+              },
+              "parameters": [
+                {
+                  "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+                },
+                {
+                  "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+                },
+                {
+                  "$ref": "#/parameters/accountNameParameter"
+                },
+                {
+                  "$ref": "#/parameters/databaseNameParameter"
+                },
+                {
+                  "$ref": "#/parameters/containerNameParameter"
+                },
+                {
+                  "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+                },
+                {
+                  "in": "body",
+                  "name": "mergeParameters",
+                  "required": true,
+                  "description": "The parameters for the merge operation.",
+                  "schema": {
+                    "$ref": "#/definitions/MergeParameters"
+                  }
+                }
+              ],
+              "responses": {
+                "202": {
+                  "description": "The SQL container merge operation will complete asynchronously."
+                },
+                "200": {
+                  "description": "The SQL container merge operation was completed successfully.",
+                  "schema": {
+                    "$ref": "#/definitions/PhysicalPartitionStorageInfoCollection"
+                  }
+                },
+                "default": {
+                  "description": "Error response describing why the operation failed.",
+                  "schema": {
+                    "$ref": "#/definitions/CloudError"
+                  }
+                }
+              }
+          }
+      },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/throughputSettings/default": {
       "get": {
         "operationId": "SqlResources_GetSqlContainerThroughput",
@@ -3513,65 +3515,67 @@
         }
       }
     },
-    "post": {
-      "operationId": "MongoDBResources_MongoDBCollectionPartitionMerge",
-      "x-ms-examples": {
-        "CosmosDBSqlContainerDelete": {
-          "$ref": "./examples/CosmosDBMongoDBCollectionPartitionMerge.json"
-        }
-      },
-      "description": "Merges the partitions of a MongoDB Collection",
-      "x-ms-long-running-operation": true,
-      "x-ms-long-running-operation-options": {
-        "final-state-via": "location"
-      },
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/accountNameParameter"
-        },
-        {
-          "$ref": "#/parameters/databaseNameParameter"
-        },
-        {
-          "$ref": "#/parameters/containerNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "in": "body",
-          "name": "mergeParameters",
-          "required": true,
-          "description": "The parameters for the merge operation.",
-          "schema": {
-            "$ref": "#/definitions/MergeParameters"
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{containerName}/partitionMerge": {
+      "post": {
+              "operationId": "MongoDBResources_MongoDBCollectionPartitionMerge",
+              "x-ms-examples": {
+                "CosmosDBMongoDBCollectionPartitionMerge": {
+                  "$ref": "./examples/CosmosDBMongoDBCollectionPartitionMerge.json"
+                }
+              },
+              "description": "Merges the partitions of a MongoDB Collection",
+              "x-ms-long-running-operation": true,
+              "x-ms-long-running-operation-options": {
+                "final-state-via": "location"
+              },
+              "parameters": [
+                {
+                  "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+                },
+                {
+                  "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+                },
+                {
+                  "$ref": "#/parameters/accountNameParameter"
+                },
+                {
+                  "$ref": "#/parameters/databaseNameParameter"
+                },
+                {
+                  "$ref": "#/parameters/containerNameParameter"
+                },
+                {
+                  "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+                },
+                {
+                  "in": "body",
+                  "name": "mergeParameters",
+                  "required": true,
+                  "description": "The parameters for the merge operation.",
+                  "schema": {
+                    "$ref": "#/definitions/MergeParameters"
+                  }
+                }
+              ],
+              "responses": {
+                "202": {
+                  "description": "The MongoDB collection merge operation will complete asynchronously."
+                },
+                "200": {
+                  "description": "The MongoDB collection merge operation was completed successfully.",
+                  "schema": {
+                    "$ref": "#/definitions/PhysicalPartitionStorageInfoCollection"
+                  }
+                },
+                "default": {
+                  "description": "Error response describing why the operation failed.",
+                  "schema": {
+                    "$ref": "#/definitions/CloudError"
+                  }
+                }
+              }
           }
-        }
-      ],
-      "responses": {
-        "202": {
-          "description": "The MongoDB Collection merge operation will complete asynchronously."
-        },
-        "200": {
-          "description": "The MongoDB Collection merge operation was completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/PartitionInfoResult"
-          }
-        },
-        "default": {
-          "description": "Error response describing why the operation failed.",
-          "schema": {
-            "$ref": "#/definitions/CloudError"
-          }
-        }
-      }
-  },
+      },    
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}/throughputSettings/default": {
       "get": {
         "operationId": "MongoDBResources_GetMongoDBCollectionThroughput",
@@ -9905,7 +9909,7 @@
         }        
       }
     },
-    "PartitionInfoResult": {
+    "PhysicalPartitionStorageInfoCollection": {
       "type": "object",
       "properties": {
         "physicalPartitionStorageInfoCollection": {
