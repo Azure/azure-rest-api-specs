@@ -148,7 +148,6 @@ input-file:
   - Microsoft.Sql/preview/2021-11-01-preview/VirtualNetworkRules.json
   - Microsoft.Sql/preview/2021-11-01-preview/WorkloadClassifiers.json
   - Microsoft.Sql/preview/2021-11-01-preview/WorkloadGroups.json
-  - Microsoft.Sql/preview/2021-11-01-preview/ManagedServerDnsAliases.json
 ```
 ### Tag: package-composite-v5
 
