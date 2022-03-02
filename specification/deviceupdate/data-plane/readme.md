@@ -60,6 +60,7 @@ This is not used by Autorest itself.
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-python-track2
 ```
 
 ## TypeScript
