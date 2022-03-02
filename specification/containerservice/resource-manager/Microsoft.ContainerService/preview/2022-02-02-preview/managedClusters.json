@@ -2234,6 +2234,273 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/managedclustersnapshots": {
+      "get": {
+        "tags": [
+          "ManagedClusterSnapshots"
+        ],
+        "operationId": "ManagedClusterSnapshots_List",
+        "summary": "Gets a list of managed cluster snapshots in the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ManagedClusterSnapshotListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Managed Cluster Snapshots": {
+            "$ref": "./examples/ManagedClusterSnapshotsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedclustersnapshots": {
+      "get": {
+        "tags": [
+          "ManagedClusterSnapshots"
+        ],
+        "operationId": "ManagedClusterSnapshots_ListByResourceGroup",
+        "summary": "Lists managed cluster snapshots in the specified subscription and resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ManagedClusterSnapshotListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Managed Cluster Snapshots by Resource Group": {
+            "$ref": "./examples/ManagedClusterSnapshotsListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedclustersnapshots/{resourceName}": {
+      "get": {
+        "tags": [
+          "ManagedClusterSnapshots"
+        ],
+        "operationId": "ManagedClusterSnapshots_Get",
+        "summary": "Gets a managed cluster snapshot.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ManagedClusterSnapshot"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Managed Cluster Snapshot": {
+            "$ref": "./examples/ManagedClusterSnapshotsGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagedClusterSnapshots"
+        ],
+        "operationId": "ManagedClusterSnapshots_CreateOrUpdate",
+        "summary": "Creates or updates a managed cluster snapshot.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedClusterSnapshot"
+            },
+            "description": "The managed cluster snapshot to create or update."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ManagedClusterSnapshot"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ManagedClusterSnapshot"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create/Update Managed Cluster Snapshot": {
+            "$ref": "./examples/ManagedClusterSnapshotsCreate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ManagedClusterSnapshots"
+        ],
+        "operationId": "ManagedClusterSnapshots_UpdateTags",
+        "summary": "Updates tags on a managed cluster snapshot.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to the Update managed cluster snapshot Tags operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ManagedClusterSnapshot"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Managed Cluster Snapshot Tags": {
+            "$ref": "./examples/ManagedClusterSnapshotsUpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ManagedClusterSnapshots"
+        ],
+        "operationId": "ManagedClusterSnapshots_Delete",
+        "summary": "Deletes a managed cluster snapshot.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Managed Cluster Snapshot": {
+            "$ref": "./examples/ManagedClusterSnapshotsDelete.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -3038,75 +3305,15 @@
     "ContainerServiceNetworkProfile": {
       "properties": {
         "networkPlugin": {
-          "type": "string",
-          "enum": [
-            "azure",
-            "kubenet",
-            "none"
-          ],
-          "default": "kubenet",
-          "x-ms-enum": {
-            "name": "NetworkPlugin",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "azure",
-                "description": "Use the Azure CNI network plugin. See [Azure CNI (advanced) networking](https://docs.microsoft.com/azure/aks/concepts-network#azure-cni-advanced-networking) for more information."
-              },
-              {
-                "value": "kubenet",
-                "description": "Use the Kubenet network plugin. See [Kubenet (basic) networking](https://docs.microsoft.com/azure/aks/concepts-network#kubenet-basic-networking) for more information."
-              },
-              {
-                "value": "none",
-                "description": "Do not use a network plugin. A custom CNI will need to be installed after cluster creation for networking functionality."
-              }
-            ]
-          },
+          "$ref": "#/definitions/NetworkPlugin",
           "description": "Network plugin used for building the Kubernetes network."
         },
         "networkPolicy": {
-          "type": "string",
-          "enum": [
-            "calico",
-            "azure"
-          ],
-          "x-ms-enum": {
-            "name": "NetworkPolicy",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "calico",
-                "description": "Use Calico network policies. See [differences between Azure and Calico policies](https://docs.microsoft.com/azure/aks/use-network-policies#differences-between-azure-and-calico-policies-and-their-capabilities) for more information."
-              },
-              {
-                "value": "azure",
-                "description": "Use Azure network policies. See [differences between Azure and Calico policies](https://docs.microsoft.com/azure/aks/use-network-policies#differences-between-azure-and-calico-policies-and-their-capabilities) for more information."
-              }
-            ]
-          },
+          "$ref": "#/definitions/NetworkPolicy",
           "description": "Network policy used for building the Kubernetes network."
         },
         "networkMode": {
-          "type": "string",
-          "enum": [
-            "transparent",
-            "bridge"
-          ],
-          "x-ms-enum": {
-            "name": "networkMode",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "transparent",
-                "description": "No bridge is created. Intra-VM Pod to Pod communication is through IP routes created by Azure CNI. See [Transparent Mode](https://docs.microsoft.com/azure/aks/faq#transparent-mode) for more information."
-              },
-              {
-                "value": "bridge",
-                "description": "This is no longer supported"
-              }
-            ]
-          },
+          "$ref": "#/definitions/NetworkMode",
           "title": "The network mode Azure CNI is configured with.",
           "description": "This cannot be specified if networkPlugin is anything other than 'azure'."
         },
@@ -3169,25 +3376,7 @@
           "description": "This can only be set at cluster creation time and cannot be changed later. For more information see [egress outbound type](https://docs.microsoft.com/azure/aks/egress-outboundtype)."
         },
         "loadBalancerSku": {
-          "type": "string",
-          "enum": [
-            "standard",
-            "basic"
-          ],
-          "x-ms-enum": {
-            "name": "loadBalancerSku",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "standard",
-                "description": "Use a a standard Load Balancer. This is the recommended Load Balancer SKU. For more information about on working with the load balancer in the managed cluster, see the [standard Load Balancer](https://docs.microsoft.com/azure/aks/load-balancer-standard) article."
-              },
-              {
-                "value": "basic",
-                "description": "Use a basic Load Balancer with limited functionality."
-              }
-            ]
-          },
+          "$ref": "#/definitions/LoadBalancerSku",
           "title": "The load balancer sku for the managed cluster.",
           "description": "The default is 'standard'. See [Azure Load Balancer SKUs](https://docs.microsoft.com/azure/load-balancer/skus) for more information about the differences between load balancer SKUs."
         },
@@ -5574,6 +5763,24 @@
       },
       "description": "The response from the List Snapshots operation."
     },
+    "ManagedClusterSnapshotListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedClusterSnapshot"
+          },
+          "description": "The list of managed cluster snapshots."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of managed cluster snapshot results.",
+          "readOnly": true
+        }
+      },
+      "description": "The response from the List Managed Cluster Snapshots operation."
+    },
     "Snapshot": {
       "type": "object",
       "properties": {
@@ -5594,6 +5801,27 @@
         }
       ],
       "description": "A node pool snapshot resource."
+    },
+    "ManagedClusterSnapshot": {
+      "type": "object",
+      "properties": {
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true,
+          "description": "The system metadata relating to this snapshot."
+        },
+        "properties": {
+          "description": "Properties of a managed cluster snapshot.",
+          "$ref": "#/definitions/ManagedClusterSnapshotProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "A managed cluster snapshot resource."
     },
     "SnapshotProperties": {
       "type": "object",
@@ -5636,11 +5864,173 @@
       },
       "description": "Properties used to configure a node pool snapshot."
     },
+    "ManagedClusterSnapshotProperties": {
+      "type": "object",
+      "properties": {
+        "creationData": {
+          "$ref": "#/definitions/CreationData",
+          "description": "CreationData to be used to specify the source resource ID to create this snapshot."
+        },
+        "snapshotType": {
+          "$ref": "#/definitions/SnapshotType"
+        },
+        "managedClusterPropertiesReadOnly": {
+          "$ref": "#/definitions/ManagedClusterPropertiesForSnapshot",
+          "description": "What the properties will be showed when getting managed cluster snapshot. Those properties are read-only."
+        }
+      },
+      "description": "Properties for a managed cluster snapshot."
+    },
+    "ManagedClusterPropertiesForSnapshot": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "kubernetesVersion": {
+          "type": "string",
+          "description": "The current kubernetes version."
+        },
+        "sku": {
+          "type": "object",
+          "$ref": "#/definitions/ManagedClusterSKU",
+          "description": "The current managed cluster sku."
+        },
+        "enableRbac": {
+          "type": "boolean",
+          "description": "Whether the cluster has enabled Kubernetes Role-Based Access Control or not."
+        },
+        "networkProfile": {
+          "type": "object",
+          "$ref": "#/definitions/NetworkProfileForSnapshot",
+          "description": "The current network profile."
+        }
+      },
+      "description": "managed cluster properties for snapshot, these properties are read only."
+    },
+    "NetworkProfileForSnapshot": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "networkPlugin": {
+          "$ref": "#/definitions/NetworkPlugin",
+          "description": "networkPlugin for managed cluster snapshot."
+        },
+        "networkPolicy": {
+          "$ref": "#/definitions/NetworkPolicy",
+          "description": "networkPolicy for managed cluster snapshot."
+        },
+        "networkMode": {
+          "$ref": "#/definitions/NetworkMode",
+          "description": "networkMode for managed cluster snapshot."
+        },
+        "loadBalancerSku": {
+          "$ref": "#/definitions/LoadBalancerSku",
+          "description": "loadBalancerSku for managed cluster snapshot."
+        }
+      },
+      "description": "network profile for managed cluster snapshot, these properties are read only."
+    },
+    "NetworkPlugin": {
+      "type": "string",
+      "enum": [
+        "azure",
+        "kubenet",
+        "none"
+      ],
+      "default": "kubenet",
+      "x-ms-enum": {
+        "name": "NetworkPlugin",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "azure",
+            "description": "Use the Azure CNI network plugin. See [Azure CNI (advanced) networking](https://docs.microsoft.com/azure/aks/concepts-network#azure-cni-advanced-networking) for more information."
+          },
+          {
+            "value": "kubenet",
+            "description": "Use the Kubenet network plugin. See [Kubenet (basic) networking](https://docs.microsoft.com/azure/aks/concepts-network#kubenet-basic-networking) for more information."
+          },
+          {
+            "value": "none",
+            "description": "Do not use a network plugin. A custom CNI will need to be installed after cluster creation for networking functionality."
+          }
+        ]
+      },
+      "description": "Network plugin used for building the Kubernetes network."
+    },
+    "NetworkPolicy": {
+      "type": "string",
+      "enum": [
+        "calico",
+        "azure"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "calico",
+            "description": "Use Calico network policies. See [differences between Azure and Calico policies](https://docs.microsoft.com/azure/aks/use-network-policies#differences-between-azure-and-calico-policies-and-their-capabilities) for more information."
+          },
+          {
+            "value": "azure",
+            "description": "Use Azure network policies. See [differences between Azure and Calico policies](https://docs.microsoft.com/azure/aks/use-network-policies#differences-between-azure-and-calico-policies-and-their-capabilities) for more information."
+          }
+        ]
+      },
+      "description": "Network policy used for building the Kubernetes network."
+    },
+    "NetworkMode": {
+      "type": "string",
+      "enum": [
+        "transparent",
+        "bridge"
+      ],
+      "x-ms-enum": {
+        "name": "networkMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "transparent",
+            "description": "No bridge is created. Intra-VM Pod to Pod communication is through IP routes created by Azure CNI. See [Transparent Mode](https://docs.microsoft.com/azure/aks/faq#transparent-mode) for more information."
+          },
+          {
+            "value": "bridge",
+            "description": "This is no longer supported"
+          }
+        ]
+      },
+      "title": "The network mode Azure CNI is configured with.",
+      "description": "This cannot be specified if networkPlugin is anything other than 'azure'."
+    },
+    "LoadBalancerSku": {
+      "type": "string",
+      "enum": [
+        "standard",
+        "basic"
+      ],
+      "x-ms-enum": {
+        "name": "loadBalancerSku",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "standard",
+            "description": "Use a a standard Load Balancer. This is the recommended Load Balancer SKU. For more information about on working with the load balancer in the managed cluster, see the [standard Load Balancer](https://docs.microsoft.com/azure/aks/load-balancer-standard) article."
+          },
+          {
+            "value": "basic",
+            "description": "Use a basic Load Balancer with limited functionality."
+          }
+        ]
+      },
+      "title": "The load balancer sku for the managed cluster.",
+      "description": "The default is 'standard'. See [Azure Load Balancer SKUs](https://docs.microsoft.com/azure/load-balancer/skus) for more information about the differences between load balancer SKUs."
+    },
     "SnapshotType": {
       "type": "string",
       "default": "NodePool",
       "enum": [
-        "NodePool"
+        "NodePool",
+        "ManagedCluster"
       ],
       "x-ms-enum": {
         "name": "SnapshotType",
@@ -5649,6 +6039,10 @@
           {
             "value": "NodePool",
             "description": "The snapshot is a snapshot of a node pool."
+          },
+          {
+            "value": "ManagedCluster",
+            "description": "The snapshot is a snapshot of a managed cluster."
           }
         ]
       },
