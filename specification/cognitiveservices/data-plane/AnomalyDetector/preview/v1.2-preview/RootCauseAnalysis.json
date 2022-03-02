@@ -199,7 +199,7 @@
           "RootCauseAnalysisDataSet"
         ],
         "summary": "Upload data to root cause analysis data set by partition",
-        "operationId": "UploadRootCauseAnalysisData",
+        "operationId": "UploadRootCauseAnalysisDataByPartition",
         "consumes": [
           "application/json"
         ],
@@ -260,7 +260,7 @@
         },
         "x-ms-examples": {
           "Upload data to root cause analysis data set by partition": {
-            "$ref": "./examples/UploadRootCauseAnalysisData.json"
+            "$ref": "./examples/UploadRootCauseAnalysisDataByPartition.json"
           }
         }
       },
@@ -1113,7 +1113,7 @@
     "Region",
     "Version"
   ],
-  "aggregateIdentifier": "__SUM__",
+  "aggregatedIdentifier": "__SUM__",
   "measures": [
     {
       "displayName": "error rate"
@@ -1131,7 +1131,7 @@
     },
     "MultiDimRCADataSet": {
       "required": [
-        "aggregateIdentifier",
+        "aggregatedIdentifier",
         "customInterval",
         "dimensionKeys",
         "granularity",
@@ -1165,7 +1165,7 @@
         },
         "customInterval": {
           "format": "int32",
-          "description": "Multidimensional root cause data set customized granularity interval in seconds",
+          "description": "Multidimensional root cause data set customized granularity interval. If the granularity is daily and customInterval is 3, it means the data interval should be 3 days.",
           "type": "integer"
         },
         "dimensionKeys": {
@@ -1175,12 +1175,12 @@
             "type": "string"
           }
         },
-        "aggregateIdentifier": {
-          "description": "Multidimensional root cause analysis measure aggregate value",
+        "aggregatedIdentifier": {
+          "description": "Multidimensional root cause analysis measure aggregated Identitifier to describe the dimension is aggregated",
           "type": "string"
         },
         "measures": {
-          "description": "Measure list to do multidimensional root cause analysis",
+          "description": "Measures for the data",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RootCauseAnalysisMeasure"
@@ -1223,14 +1223,11 @@
     },
     "RootCauseAnalysisUploadDataPartitionRequest": {
       "required": [
-        "$type",
+        "data",
         "kind"
       ],
       "type": "object",
       "properties": {
-        "$type": {
-          "type": "string"
-        },
         "kind": {
           "description": "Root cause analysis kind",
           "enum": [
@@ -1241,33 +1238,7 @@
             "name": "RootCauseAnalysisType",
             "modelAsString": true
           }
-        }
-      },
-      "discriminator": "$type",
-      "example": {
-  "data": [
-    [
-      "CN",
-      "__SUM__",
-      0.38,
-      3800,
-      10000
-    ]
-  ],
-  "kind": "multidimensional"
-}
-    },
-    "MultiDimRCAUploadDataPartitionRequest": {
-      "required": [
-        "data"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RootCauseAnalysisUploadDataPartitionRequest"
-        }
-      ],
-      "properties": {
+        },
         "data": {
           "description": "Multidimensional root cause data detail, the first few columns should be the dimension value. the last few columns should be the measure values",
           "type": "array",
@@ -1279,7 +1250,18 @@
           }
         }
       },
-      "x-ms-discriminator-value": "multidimensional"
+      "example": {
+  "kind": "multidimensional",
+  "data": [
+    [
+      "CN",
+      "__SUM__",
+      0.38,
+      3800,
+      10000
+    ]
+  ]
+}
     },
     "MultiDimRCADataPartition": {
       "required": [
@@ -1312,14 +1294,11 @@
     },
     "RootCauseAnalysisUploadDataBlockRequest": {
       "required": [
-        "$type",
-        "kind"
+        "kind",
+        "value"
       ],
       "type": "object",
       "properties": {
-        "$type": {
-          "type": "string"
-        },
         "kind": {
           "description": "Root cause analysis kind",
           "enum": [
@@ -1330,10 +1309,17 @@
             "name": "RootCauseAnalysisType",
             "modelAsString": true
           }
+        },
+        "value": {
+          "description": "Multidimensional root cause analysis data",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MultiDimRCADataPartition"
+          }
         }
       },
-      "discriminator": "$type",
       "example": {
+  "kind": "multidimensional",
   "value": [
     {
       "partitionIdentity": "PartitionIdentity1",
@@ -1645,52 +1631,10 @@
         ]
       ]
     }
-  ],
-  "kind": "multidimensional"
+  ]
 }
     },
-    "MultiDimRCAUploadDataBlockRequest": {
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RootCauseAnalysisUploadDataBlockRequest"
-        }
-      ],
-      "properties": {
-        "value": {
-          "description": "Multidimensional root cause analysis data",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MultiDimRCADataPartition"
-          }
-        }
-      },
-      "x-ms-discriminator-value": "multidimensional"
-    },
     "RootCauseAnalysisDataMeta": {
-      "required": [
-        "kind"
-      ],
-      "type": "object",
-      "properties": {
-        "kind": {
-          "description": "Root cause analysis kind",
-          "enum": [
-            "multidimensional"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "RootCauseAnalysisType",
-            "modelAsString": true
-          }
-        }
-      },
-      "discriminator": "kind"
-    },
-    "MultiDimRCADataMeta": {
       "required": [
         "dataSize",
         "lastModifiedDateTime",
@@ -1698,11 +1642,6 @@
         "timestamp"
       ],
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RootCauseAnalysisDataMeta"
-        }
-      ],
       "properties": {
         "partitionIdentity": {
           "description": "Multidimensional root cause analysis partition identity",
@@ -1723,8 +1662,7 @@
           "description": "Multidimensional root cause data last time updated",
           "type": "string"
         }
-      },
-      "x-ms-discriminator-value": "multidimensional"
+      }
     },
     "RootCauseAnalysisDataMetaListResponse": {
       "required": [
