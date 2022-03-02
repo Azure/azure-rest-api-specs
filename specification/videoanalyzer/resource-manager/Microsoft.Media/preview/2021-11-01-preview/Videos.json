@@ -243,6 +243,10 @@
           "items": {
             "$ref": "#/definitions/TokenClaim"
           },
+          "x-ms-identifiers": [
+            "name",
+            "value"
+          ],
           "description": "List of additional token claims to be validated. Token must contains all claims and respective values for it to be valid."
         },
         "keys": {
@@ -250,6 +254,9 @@
           "items": {
             "$ref": "#/definitions/TokenKey"
           },
+          "x-ms-identifiers": [
+            "kid"
+          ],
           "description": "List of keys which can be used to validate access tokens. Having multiple keys allow for seamless key rotation of the token signing key. Token signature must match exactly one key."
         }
       },

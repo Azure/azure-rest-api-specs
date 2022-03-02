@@ -21,10 +21,29 @@ azure-arm: true
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-preview-2021-06
   - tag: package-2020-03-30
   - tag: package-2020-03
   - tag: package-2019-09
   - tag: package-2018-08-preview
+```
+
+### Tag: package-preview-2021-06 and go
+
+These settings apply only when `--tag=package-preview-2021-06 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-preview-2021-06' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2021-06-01-preview/$(namespace)
+
+directive:
+  - from: healthcare-apis.json
+    where: $.definitions.ServicesProperties.properties.provisioningState
+    transform: >-
+      return {
+              "description": "The provisioning state.",
+              "$ref": "#/definitions/ProvisioningState"
+            }
 ```
 
 ### Tag: package-2020-03-30 and go
