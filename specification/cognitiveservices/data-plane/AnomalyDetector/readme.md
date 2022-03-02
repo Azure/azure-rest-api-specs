@@ -4,10 +4,10 @@
 
 Configuration for generating Anomaly Detector SDK.
 
-The current release is `release_1_1_preview`.
+The current release is `release_1_1_preview.1`.
 
 ``` yaml
-tag: release_1_1_preview
+tag: release_1_1_preview.1
 add-credentials: true
 openapi-type: data-plane
 ```
@@ -29,6 +29,16 @@ input-file:
   - preview/v1.1-preview/AnomalyDetector.json
   - preview/v1.1-preview/MultivariateAnomalyDetector.json
 ```
+
+### Release 1.1-preview.1
+These settings apply only when `--tag=release_1_1_preview.1` is specified on the command line.
+
+``` yaml $(tag) == 'release_1_1_preview.1'
+input-file: 
+  - preview/v1.1-preview.1/AnomalyDetector.json
+  - preview/v1.1-preview.1/MultivariateAnomalyDetector.json
+```
+
 ### Release 1.2-preview
 
 These settings apply only when `--tag=release_1_2_preview` is specified on the command line.
@@ -110,7 +120,7 @@ input-file:
   - $(this-folder)/preview/v1.1-preview/MultivariateAnomalyDetector.json
   - $(this-folder)/preview/v1.1-preview.1/MultivariateAnomalyDetector.json
   - $(this-folder)/preview/v1.2-preview/RootCauseAnalysis.json
-```
+
 
 If there are files that should not be in the `all-api-versions` set, 
 uncomment the  `exclude-file` section below and add the file paths.
