@@ -126,6 +126,7 @@
       "description": "Describes the gallery image definition purchase plan. This is used by marketplace images."
     },
     "SharedGalleryImageVersionStorageProfile": {
+      "type": "object",
       "properties": {
         "osDiskImage": {
           "$ref": "#/definitions/SharedGalleryOSDiskImage"
@@ -135,6 +136,9 @@
           "items": {
             "$ref": "#/definitions/SharedGalleryDataDiskImage"
           },
+          "x-ms-identifiers": [
+            "lun"
+          ],
           "description": "A list of data disk images."
         }
       },
@@ -149,6 +153,7 @@
       "description": "This is the OS disk image."
     },
     "SharedGalleryDataDiskImage": {
+      "type": "object",
       "properties": {
         "lun": {
           "type": "integer",
@@ -167,6 +172,7 @@
       "description": "This is the data disk image."
     },
     "SharedGalleryDiskImage": {
+      "type": "object",
       "properties": {
         "diskSizeGB": {
           "readOnly": true,
