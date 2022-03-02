@@ -32,6 +32,12 @@ tag: 1.0-preview
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: https://atlas.microsoft.com/.default
+track2: true
+verbose: true
+sdk-integration: true
+modelerfour:
+  additional-checks: false
+  lenient-model-deduplication: true
 ```
 
 
@@ -51,6 +57,15 @@ These settings apply only when `--tag=2.0-preview` is specified on the command l
 ``` yaml $(tag) == '2.0-preview'
 input-file:
   - preview/2021-11-01-preview/geocoding.json
+```
+
+### Tag: 2.1-preview
+
+These settings apply only when `--tag=2.1-preview` is specified on the command line.
+
+``` yaml $(tag) == '2.1-preview'
+input-file:
+  - preview/2022-02-01-preview/geocoding.json
 ```
 
 # Code Generation
