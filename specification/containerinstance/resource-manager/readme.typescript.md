@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-containerinstance"
   output-folder: "$(typescript-sdks-folder)/sdk/containerinstance/arm-containerinstance"
-  clear-output-folder: true
   generate-metadata: true
 ```
