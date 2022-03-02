@@ -87,7 +87,7 @@
     }
   },
   "definitions": {
-    "AnalyzeConversationTaskKind":{
+    "AnalyzeConversationTaskKind": {
       "type": "string",
       "description": "Enumeration of supported Conversation tasks.",
       "enum": [
@@ -98,7 +98,7 @@
         "modelAsString": true
       }
     },
-    "AnalyzeConversationTaskResultsKind":{
+    "AnalyzeConversationTaskResultsKind": {
       "type": "string",
       "description": "Enumeration of supported conversational task results",
       "enum": [
@@ -117,8 +117,8 @@
       ],
       "properties": {
         "kind": {
-            "$ref": "#/definitions/AnalyzeConversationTaskKind"
-          }
+          "$ref": "#/definitions/AnalyzeConversationTaskKind"
+        }
       }
     },
     "AnalyzeConversationTaskResult": {
@@ -133,7 +133,7 @@
         }
       }
     },
-    "CustomConversationalTask":{
+    "CustomConversationalTask": {
       "description": "The input for a custom conversation task.",
       "allOf": [
         {
@@ -154,16 +154,16 @@
         "parameters"
       ]
     },
-    "CustomConversationTaskParameters":{
+    "CustomConversationTaskParameters": {
       "type": "object",
       "description": "Input parameters necessary for a Custom Conversation Task.",
       "properties": {
-        "projectName":{
-          "type":"string",
+        "projectName": {
+          "type": "string",
           "description": "The name of the project to use."
         },
-        "deploymentName":{
-          "type":"string",
+        "deploymentName": {
+          "type": "string",
           "description": "The name of the specific deployment of the project to use."
         },
         "verbose": {
@@ -205,11 +205,11 @@
         },
         "id": {
           "description": "The user input unique identifier corresponding the conversation Item (utterance)",
-          "type":"string"
+          "type": "string"
         },
         "language": {
           "description": "The input language of the conversation item",
-          "type":"string"
+          "type": "string"
         },
         "modality": {
           "description": "The modality (format) of the conversation item (e.g., Text, Transcript)",
@@ -254,7 +254,7 @@
         "conversationItem"
       ],
       "properties": {
-        "conversationItem":{
+        "conversationItem": {
           "$ref": "#/definitions/ConversationItemBase"
         },
         "directTarget": {
@@ -672,10 +672,10 @@
     },
     "BaseExtraInformation": {
       "description": "The abstract base object for entity extra information.",
-      "type":"object",
+      "type": "object",
       "discriminator": "extraInformationKind",
       "properties": {
-        "extraInformationKind":{
+        "extraInformationKind": {
           "description": "The extra information object kind.",
           "type": "string",
           "enum": [
@@ -699,23 +699,23 @@
           "$ref": "#/definitions/BaseExtraInformation"
         }
       ],
-      "type":"object",
+      "type": "object",
       "x-ms-discriminator-value": "EntitySubtype",
       "properties": {
         "value": {
-          "type":"string",
+          "type": "string",
           "description": "The Subtype of an extracted entity type."
         }
       }
     },
-    "ListKeys":{
+    "ListKeys": {
       "description": "The concrete entity list key's model of extra information.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseExtraInformation"
         }
       ],
-      "type":"object",
+      "type": "object",
       "x-ms-discriminator-value": "ListKeys",
       "properties": {
         "keys": {
@@ -729,10 +729,10 @@
     },
     "BaseResolution": {
       "description": "The abstract base class for entity resolutions.",
-      "type":"object",
+      "type": "object",
       "discriminator": "resolutionKind",
       "properties": {
-        "resolutionKind":{
+        "resolutionKind": {
           "description": "The entity resolution object kind.",
           "type": "string",
           "enum": [
@@ -762,7 +762,7 @@
         "resolutionKind"
       ]
     },
-    "QuantityResolution":{
+    "QuantityResolution": {
       "description": "represents resolutions for quantities.",
       "type": "object",
       "properties": {
@@ -776,7 +776,7 @@
         "value"
       ]
     },
-    "AgeResolution":{
+    "AgeResolution": {
       "description": "Represents the Age entity resolution model.",
       "allOf": [
         {
@@ -786,7 +786,7 @@
           "$ref": "#/definitions/QuantityResolution"
         }
       ],
-      "type":"object",
+      "type": "object",
       "x-ms-discriminator-value": "Age",
       "properties": {
         "unit": {
@@ -809,7 +809,7 @@
         "unit"
       ]
     },
-    "VolumeResolution":{
+    "VolumeResolution": {
       "description": "Represents the volume entity resolution model.",
       "allOf": [
         {
@@ -819,7 +819,7 @@
           "$ref": "#/definitions/QuantityResolution"
         }
       ],
-      "type":"object",
+      "type": "object",
       "x-ms-discriminator-value": "Volume",
       "properties": {
         "unit": {
@@ -865,7 +865,7 @@
         "unit"
       ]
     },
-    "SpeedResolution":{
+    "SpeedResolution": {
       "description": "Represents the speed entity resolution model.",
       "allOf": [
         {
@@ -875,7 +875,7 @@
           "$ref": "#/definitions/QuantityResolution"
         }
       ],
-      "type":"object",
+      "type": "object",
       "x-ms-discriminator-value": "Speed",
       "properties": {
         "unit": {
@@ -907,7 +907,7 @@
         "unit"
       ]
     },
-    "AreaResolution":{
+    "AreaResolution": {
       "description": "Represents the area entity resolution model.",
       "allOf": [
         {
@@ -917,7 +917,7 @@
           "$ref": "#/definitions/QuantityResolution"
         }
       ],
-      "type":"object",
+      "type": "object",
       "x-ms-discriminator-value": "Area",
       "properties": {
         "unit": {
@@ -948,7 +948,7 @@
         "unit"
       ]
     },
-    "LengthResolution":{
+    "LengthResolution": {
       "description": "Represents the length entity resolution model.",
       "allOf": [
         {
@@ -958,7 +958,7 @@
           "$ref": "#/definitions/QuantityResolution"
         }
       ],
-      "type":"object",
+      "type": "object",
       "x-ms-discriminator-value": "Length",
       "properties": {
         "unit": {
@@ -993,7 +993,7 @@
         "unit"
       ]
     },
-    "InformationResolution":{
+    "InformationResolution": {
       "description": "Represents the information (data) entity resolution model.",
       "allOf": [
         {
@@ -1003,7 +1003,7 @@
           "$ref": "#/definitions/QuantityResolution"
         }
       ],
-      "type":"object",
+      "type": "object",
       "x-ms-discriminator-value": "Information",
       "properties": {
         "unit": {
@@ -1034,7 +1034,7 @@
         "unit"
       ]
     },
-    "TemperatureResolution":{
+    "TemperatureResolution": {
       "description": "Represents the temperature entity resolution model.",
       "allOf": [
         {
@@ -1044,7 +1044,7 @@
           "$ref": "#/definitions/QuantityResolution"
         }
       ],
-      "type":"object",
+      "type": "object",
       "x-ms-discriminator-value": "Temperature",
       "properties": {
         "unit": {
@@ -1067,7 +1067,7 @@
         "unit"
       ]
     },
-    "WeightResolution":{
+    "WeightResolution": {
       "description": "Represents the weight entity resolution model.",
       "allOf": [
         {
@@ -1077,7 +1077,7 @@
           "$ref": "#/definitions/QuantityResolution"
         }
       ],
-      "type":"object",
+      "type": "object",
       "x-ms-discriminator-value": "Weight",
       "properties": {
         "unit": {
@@ -1111,7 +1111,7 @@
         "unit"
       ]
     },
-    "CurrencyResolution":{
+    "CurrencyResolution": {
       "description": "Represents the currency entity resolution model.",
       "allOf": [
         {
@@ -1124,14 +1124,14 @@
       "type": "object",
       "x-ms-discriminator-value": "Currency",
       "properties": {
-        "ISO4217":{
+        "ISO4217": {
           "type": "string",
           "description": "The alphabetic code based on another ISO standard, ISO 3166, which lists the codes for country names. The first two letters of the ISO 4217 three-letter code are the same as the code for the country name, and, where possible, the third letter corresponds to the first letter of the currency name."
         },
         "value": {
-            "type": "number",
-            "format": "double",
-            "description": "The money amount captured in the extracted entity"
+          "type": "number",
+          "format": "double",
+          "description": "The money amount captured in the extracted entity"
         },
         "unit": {
           "type": "string",
@@ -1143,34 +1143,34 @@
         "unit"
       ]
     },
-    "BooleanResolution":{
+    "BooleanResolution": {
       "description": "A resolution for boolean expressions",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
         }
       ],
-      "type":"object",
+      "type": "object",
       "x-ms-discriminator-value": "Boolean",
-      "properties":{
-        "value":{
-          "type":"boolean"
+      "properties": {
+        "value": {
+          "type": "boolean"
         }
       },
       "required": [
         "value"
       ]
     },
-    "DateTimeResolution":{
+    "DateTimeResolution": {
       "description": "A resolution for date/time entity instances.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
         }
       ],
-      "type":"object",
+      "type": "object",
       "x-ms-discriminator-value": "DateTime",
-      "properties":{
+      "properties": {
         "timex": {
           "$ref": "#/definitions/TimeExpression"
         },
@@ -1193,7 +1193,7 @@
           "type": "string",
           "description": "The actual time that the extracted text denote."
         },
-        "modifier":{
+        "modifier": {
           "$ref": "#/definitions/TemporalModifier"
         }
       },
@@ -1203,7 +1203,7 @@
         "value"
       ]
     },
-    "NumberResolution":{
+    "NumberResolution": {
       "description": "A resolution for numeric entity instances.",
       "allOf": [
         {
@@ -1239,7 +1239,7 @@
         "value"
       ]
     },
-    "OrdinalResolution":{
+    "OrdinalResolution": {
       "description": "A resolution for ordinal numbers entity instances.",
       "allOf": [
         {
@@ -1249,12 +1249,12 @@
       "type": "object",
       "x-ms-discriminator-value": "Ordinal",
       "properties": {
-        "offset":{
+        "offset": {
           "type": "string",
           "description": "The offset With respect to the reference (e.g., offset = -1 in \"show me the second to last\""
         },
-        "relativeTo":{
-          "type":"string",
+        "relativeTo": {
+          "type": "string",
           "enum": [
             "Current",
             "End",
@@ -1266,7 +1266,7 @@
           },
           "description": "The reference point that the ordinal number denotes."
         },
-        "value":{
+        "value": {
           "type": "string",
           "description": "A simple arithmetic expression that the ordinal denotes."
         }
@@ -1279,32 +1279,32 @@
     },
     "TemporalSpanResolution": {
       "description": "represents the resolution of a date and/or time span.",
-      "allOf":[
+      "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
         }
       ],
-      "type":"object",
+      "type": "object",
       "x-ms-discriminator-value": "TemporalSpan",
       "properties": {
-        "begin":{
+        "begin": {
           "$ref": "#/definitions/TimeExpression"
         },
-        "end":{
+        "end": {
           "$ref": "#/definitions/TimeExpression"
         },
-        "duration":{
-          "type":"string",
+        "duration": {
+          "type": "string",
           "description": "An optional duration value formatted based on the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)"
         },
-        "modifier":{
+        "modifier": {
           "$ref": "#/definitions/TemporalModifier"
         }
       }
     },
     "NumericRangeResolution": {
       "description": "represents the resolution of numeric intervals.",
-      "allOf":[
+      "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
         }
@@ -1312,8 +1312,8 @@
       "type": "object",
       "x-ms-discriminator-value": "NumericRange",
       "properties": {
-        "rangeKind":{
-          "type":"string",
+        "rangeKind": {
+          "type": "string",
           "enum": [
             "Number",
             "Speed",
@@ -1332,12 +1332,12 @@
           },
           "description": "The kind of range that the resolution object represents."
         },
-        "minimum":{
+        "minimum": {
           "type": "number",
           "format": "double",
           "description": "The beginning value of  the interval."
         },
-        "maximum":{
+        "maximum": {
           "type": "number",
           "format": "double",
           "description": "The ending value of the interval."
@@ -1349,7 +1349,7 @@
         "maximum"
       ]
     },
-    "TemporalModifier":{
+    "TemporalModifier": {
       "type": "string",
       "description": "An optional modifier of a date/time instance.",
       "enum": [
@@ -1377,11 +1377,10 @@
         "modelAsString": true
       }
     },
-    "TimeExpression":{
+    "TimeExpression": {
       "type": "string",
       "description": "An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
     },
-
     "LUISTargetIntentResult": {
       "type": "object",
       "description": "It is a wrap up of LUIS Generally Available response.",
