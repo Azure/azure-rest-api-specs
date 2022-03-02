@@ -183,6 +183,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "List root cause analysis data sets": {
             "$ref": "./examples/ListRootCauseAnalysisDataSets.json"
@@ -234,7 +237,7 @@
             "description": "Data to be uploaded to perform root cause analysis",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RootCauseAnalysisUploadDataBlockRequest"
+              "$ref": "#/definitions/RootCauseAnalysisUploadDataPartitionRequest"
             }
           }
         ],
@@ -517,6 +520,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "List data meta": {
             "$ref": "./examples/ListRootCauseAnalysisDataMetaByTimeRange.json"
@@ -700,6 +706,9 @@
               "$ref": "#/definitions/ErrorCode"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Get instance list for root cause analysis": {
@@ -915,6 +924,9 @@
               "$ref": "#/definitions/ErrorCode"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Query training task state list for root cause analysis": {
@@ -1208,6 +1220,66 @@
           }
         }
       }
+    },
+    "RootCauseAnalysisUploadDataPartitionRequest": {
+      "required": [
+        "$type",
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "$type": {
+          "type": "string"
+        },
+        "kind": {
+          "description": "Root cause analysis kind",
+          "enum": [
+            "multidimensional"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RootCauseAnalysisType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "$type",
+      "example": {
+  "data": [
+    [
+      "CN",
+      "__SUM__",
+      0.38,
+      3800,
+      10000
+    ]
+  ],
+  "kind": "multidimensional"
+}
+    },
+    "MultiDimRCAUploadDataPartitionRequest": {
+      "required": [
+        "data"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RootCauseAnalysisUploadDataPartitionRequest"
+        }
+      ],
+      "properties": {
+        "data": {
+          "description": "Multidimensional root cause data detail, the first few columns should be the dimension value. the last few columns should be the measure values",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "x-ms-discriminator-value": "multidimensional"
     },
     "MultiDimRCADataPartition": {
       "required": [
