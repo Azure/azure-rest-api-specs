@@ -39,6 +39,9 @@
         "x-ms-examples": {
           "Get security alerts on a subscription": {
             "$ref": "./examples/Alerts/GetAlertsSubscription_example.json"
+          },
+          "Get security alerts, that were affected by auto dismiss rule, on a subscription": {
+            "$ref": "./examples/Alerts/GetAlertsSubscriptionWithAutoDismissRule_example.json"
           }
         },
         "tags": [
@@ -61,6 +64,9 @@
           },
           {
             "$ref": "#/parameters/ODataExpand"
+          },
+          {
+            "$ref": "#/parameters/AutoDismissRuleName"
           }
         ],
         "responses": {
@@ -87,6 +93,9 @@
         "x-ms-examples": {
           "Get security alerts on a resource group": {
             "$ref": "./examples/Alerts/GetAlertsResourceGroup_example.json"
+          },
+          "Get security alerts, that should be dismissed by auto dismiss rule, on a resource group": {
+            "$ref": "./examples/Alerts/GetAlertsResourceGroupWithAutoDismissRule_example.json"
           }
         },
         "tags": [
@@ -112,6 +121,9 @@
           },
           {
             "$ref": "#/parameters/ODataExpand"
+          },
+          {
+            "$ref": "#/parameters/AutoDismissRuleName"
           }
         ],
         "responses": {
@@ -138,6 +150,9 @@
         "x-ms-examples": {
           "Get security alerts on a subscription from a security data location": {
             "$ref": "./examples/Alerts/GetAlertsSubscriptionsLocation_example.json"
+          },
+          "Get security alerts, that should be dismissed by auto dismiss rule, on a subscription from a security data location": {
+            "$ref": "./examples/Alerts/GetAlertsSubscriptionsLocationWithAutoDismissRule_example.json"
           }
         },
         "tags": [
@@ -163,6 +178,9 @@
           },
           {
             "$ref": "#/parameters/ODataExpand"
+          },
+          {
+            "$ref": "#/parameters/AutoDismissRuleName"
           }
         ],
         "responses": {
@@ -189,6 +207,9 @@
         "x-ms-examples": {
           "Get security alerts on a resource group from a security data location": {
             "$ref": "./examples/Alerts/GetAlertsResourceGroupLocation_example.json"
+          },
+          "Get security alerts, that should be dismissed by auto dismiss rule, on a resource group from a security data location": {
+            "$ref": "./examples/Alerts/GetAlertsResourceGroupLocationWithAutoDismissRule_example.json"
           }
         },
         "tags": [
@@ -217,6 +238,9 @@
           },
           {
             "$ref": "#/parameters/ODataExpand"
+          },
+          {
+            "$ref": "#/parameters/AutoDismissRuleName"
           }
         ],
         "responses": {
@@ -738,6 +762,13 @@
       "required": true,
       "type": "string",
       "description": "Name of the alert object",
+      "x-ms-parameter-location": "method"
+    },
+    "AutoDismissRuleName": {
+      "name": "autoDismissRuleName",
+      "in": "query",
+      "type": "string",
+      "description": "The name of an existing auto dismiss rule. Use it to simulate the rule on existing alerts and get the alerts that would have been dismissed if the rule was enabled when the alert was created",
       "x-ms-parameter-location": "method"
     }
   }

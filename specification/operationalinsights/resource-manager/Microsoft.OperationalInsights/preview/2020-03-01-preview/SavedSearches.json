@@ -232,7 +232,15 @@
         },
         "query": {
           "type": "string",
-          "description": "The query expression for the saved search. Please see https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-search-reference for reference."
+          "description": "The query expression for the saved search."
+        },
+        "functionAlias": {
+          "type": "string",
+          "description": "The function alias if query serves as a function."
+        },
+        "functionParameters": {
+          "type": "string",
+          "description": "The optional function parameters if query serves as a function. Value should be in the following format: 'param-name1:type1 = default_value1, param-name2:type2 = default_value2'. For more examples and proper syntax please refer to https://docs.microsoft.com/en-us/azure/kusto/query/functions/user-defined-functions."
         },
         "version": {
           "type": "integer",
@@ -256,7 +264,7 @@
     },
     "SavedSearch": {
       "properties": {
-        "eTag": {
+        "etag": {
           "type": "string",
           "description": "The ETag of the saved search."
         },

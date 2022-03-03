@@ -80,7 +80,7 @@
           "default": {
             "description": "Error Response",
             "schema": {
-              "$ref": "#/definitions/TextAnalyticsError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -138,7 +138,7 @@
           "default": {
             "description": "Error Response",
             "schema": {
-              "$ref": "#/definitions/TextAnalyticsError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -196,7 +196,7 @@
           "default": {
             "description": "Error Response",
             "schema": {
-              "$ref": "#/definitions/TextAnalyticsError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -254,7 +254,7 @@
           "default": {
             "description": "Error Response",
             "schema": {
-              "$ref": "#/definitions/TextAnalyticsError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -312,7 +312,7 @@
           "default": {
             "description": "Error Response",
             "schema": {
-              "$ref": "#/definitions/TextAnalyticsError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -375,6 +375,19 @@
           "type": "string",
           "description": "Document Id."
         },
+        "error": {
+          "type": "object",
+          "description": "Document Error.",
+          "$ref": "#/definitions/TextAnalyticsError"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
         "error": {
           "type": "object",
           "description": "Document Error.",
@@ -663,7 +676,8 @@
         "sentiment",
         "confidenceScores",
         "offset",
-        "length"
+        "length",
+        "text"
       ],
       "properties": {
         "text": {
@@ -1064,7 +1078,7 @@
       "type": "object",
       "required": [
         "id",
-        "detectedLanguages",
+        "detectedLanguage",
         "warnings"
       ],
       "properties": {
@@ -1072,12 +1086,9 @@
           "type": "string",
           "description": "Unique, non-empty document identifier."
         },
-        "detectedLanguages": {
-          "type": "array",
-          "description": "A list of extracted languages.",
-          "items": {
-            "$ref": "#/definitions/DetectedLanguage"
-          }
+        "detectedLanguage": {
+          "description": "Detected Language.",
+          "$ref": "#/definitions/DetectedLanguage"
         },
         "warnings": {
           "type": "array",

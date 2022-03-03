@@ -247,7 +247,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Adding the version parameter retrieves a specific version of a key."
+            "description": "Adding the version parameter retrieves a specific version of a key. This URI fragment is optional. If not specified, the latest version of the key is returned."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1141,7 +1141,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The version of the secret."
+            "description": "The version of the secret. This URI fragment is optional. If not specified, the latest version of the secret is returned."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2270,7 +2270,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The version of the certificate."
+            "description": "The version of the certificate. This URI fragment is optional. If not specified, the latest version of the certificate is returned."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -3754,7 +3754,7 @@
               },
               {
                 "value": "oct",
-                "description": "Octet sequence (used to represent symmetric keys)"
+                "description": "Not supported in this version. Octet sequence (used to represent symmetric keys)"
               }
             ]
           }
@@ -3879,11 +3879,44 @@
             "Purgeable",
             "Recoverable+Purgeable",
             "Recoverable",
-            "Recoverable+ProtectedSubscription"
+            "Recoverable+ProtectedSubscription",
+            "CustomizedRecoverable+Purgeable",
+            "CustomizedRecoverable",
+            "CustomizedRecoverable+ProtectedSubscription"
           ],
           "x-ms-enum": {
             "name": "DeletionRecoveryLevel",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Purgeable",
+                "description": "Denotes a vault state in which deletion is an irreversible operation, without the possibility for recovery. This level corresponds to no protection being available against a Delete operation; the data is irretrievably lost upon accepting a Delete operation at the entity level or higher (vault, resource group, subscription etc.)"
+              },
+              {
+                "value": "Recoverable+Purgeable",
+                "description": "Denotes a vault state in which deletion is recoverable, and which also permits immediate and permanent deletion (i.e. purge). This level guarantees the recoverability of the deleted entity during the retention interval (90 days), unless a Purge operation is requested, or the subscription is cancelled. System wil permanently delete it after 90 days, if not recovered"
+              },
+              {
+                "value": "Recoverable",
+                "description": "Denotes a vault state in which deletion is recoverable without the possibility for immediate and permanent deletion (i.e. purge). This level guarantees the recoverability of the deleted entity during the retention interval(90 days) and while the subscription is still available. System wil permanently delete it after 90 days, if not recovered"
+              },
+              {
+                "value": "Recoverable+ProtectedSubscription",
+                "description": "Denotes a vault and subscription state in which deletion is recoverable within retention interval (90 days), immediate and permanent deletion (i.e. purge) is not permitted, and in which the subscription itself  cannot be permanently canceled. System wil permanently delete it after 90 days, if not recovered"
+              },
+              {
+                "value": "CustomizedRecoverable+Purgeable",
+                "description": "Denotes a vault state in which deletion is recoverable, and which also permits immediate and permanent deletion (i.e. purge when 7<= SoftDeleteRetentionInDays < 90). This level guarantees the recoverability of the deleted entity during the retention interval, unless a Purge operation is requested, or the subscription is cancelled."
+              },
+              {
+                "value": "CustomizedRecoverable",
+                "description": "Denotes a vault state in which deletion is recoverable without the possibility for immediate and permanent deletion (i.e. purge when 7<= SoftDeleteRetentionInDays < 90).This level guarantees the recoverability of the deleted entity during the retention interval and while the subscription is still available."
+              },
+              {
+                "value": "CustomizedRecoverable+ProtectedSubscription",
+                "description": "Denotes a vault and subscription state in which deletion is recoverable, immediate and permanent deletion (i.e. purge) is not permitted, and in which the subscription itself cannot be permanently canceled when 7<= SoftDeleteRetentionInDays < 90. This level guarantees the recoverability of the deleted entity during the retention interval, and also reflects the fact that the subscription itself cannot be cancelled."
+              }
+            ]
           },
           "readOnly": true,
           "x-nullable": false
@@ -4126,11 +4159,44 @@
             "Purgeable",
             "Recoverable+Purgeable",
             "Recoverable",
-            "Recoverable+ProtectedSubscription"
+            "Recoverable+ProtectedSubscription",
+            "CustomizedRecoverable+Purgeable",
+            "CustomizedRecoverable",
+            "CustomizedRecoverable+ProtectedSubscription"
           ],
           "x-ms-enum": {
             "name": "DeletionRecoveryLevel",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Purgeable",
+                "description": "Denotes a vault state in which deletion is an irreversible operation, without the possibility for recovery. This level corresponds to no protection being available against a Delete operation; the data is irretrievably lost upon accepting a Delete operation at the entity level or higher (vault, resource group, subscription etc.)"
+              },
+              {
+                "value": "Recoverable+Purgeable",
+                "description": "Denotes a vault state in which deletion is recoverable, and which also permits immediate and permanent deletion (i.e. purge). This level guarantees the recoverability of the deleted entity during the retention interval (90 days), unless a Purge operation is requested, or the subscription is cancelled. System wil permanently delete it after 90 days, if not recovered"
+              },
+              {
+                "value": "Recoverable",
+                "description": "Denotes a vault state in which deletion is recoverable without the possibility for immediate and permanent deletion (i.e. purge). This level guarantees the recoverability of the deleted entity during the retention interval(90 days) and while the subscription is still available. System wil permanently delete it after 90 days, if not recovered"
+              },
+              {
+                "value": "Recoverable+ProtectedSubscription",
+                "description": "Denotes a vault and subscription state in which deletion is recoverable within retention interval (90 days), immediate and permanent deletion (i.e. purge) is not permitted, and in which the subscription itself  cannot be permanently canceled. System wil permanently delete it after 90 days, if not recovered"
+              },
+              {
+                "value": "CustomizedRecoverable+Purgeable",
+                "description": "Denotes a vault state in which deletion is recoverable, and which also permits immediate and permanent deletion (i.e. purge when 7<= SoftDeleteRetentionInDays < 90). This level guarantees the recoverability of the deleted entity during the retention interval, unless a Purge operation is requested, or the subscription is cancelled."
+              },
+              {
+                "value": "CustomizedRecoverable",
+                "description": "Denotes a vault state in which deletion is recoverable without the possibility for immediate and permanent deletion (i.e. purge when 7<= SoftDeleteRetentionInDays < 90).This level guarantees the recoverability of the deleted entity during the retention interval and while the subscription is still available."
+              },
+              {
+                "value": "CustomizedRecoverable+ProtectedSubscription",
+                "description": "Denotes a vault and subscription state in which deletion is recoverable, immediate and permanent deletion (i.e. purge) is not permitted, and in which the subscription itself cannot be permanently canceled when 7<= SoftDeleteRetentionInDays < 90. This level guarantees the recoverability of the deleted entity during the retention interval, and also reflects the fact that the subscription itself cannot be cancelled."
+              }
+            ]
           },
           "readOnly": true,
           "x-nullable": false
@@ -4180,11 +4246,44 @@
             "Purgeable",
             "Recoverable+Purgeable",
             "Recoverable",
-            "Recoverable+ProtectedSubscription"
+            "Recoverable+ProtectedSubscription",
+            "CustomizedRecoverable+Purgeable",
+            "CustomizedRecoverable",
+            "CustomizedRecoverable+ProtectedSubscription"
           ],
           "x-ms-enum": {
             "name": "DeletionRecoveryLevel",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Purgeable",
+                "description": "Denotes a vault state in which deletion is an irreversible operation, without the possibility for recovery. This level corresponds to no protection being available against a Delete operation; the data is irretrievably lost upon accepting a Delete operation at the entity level or higher (vault, resource group, subscription etc.)"
+              },
+              {
+                "value": "Recoverable+Purgeable",
+                "description": "Denotes a vault state in which deletion is recoverable, and which also permits immediate and permanent deletion (i.e. purge). This level guarantees the recoverability of the deleted entity during the retention interval (90 days), unless a Purge operation is requested, or the subscription is cancelled. System wil permanently delete it after 90 days, if not recovered"
+              },
+              {
+                "value": "Recoverable",
+                "description": "Denotes a vault state in which deletion is recoverable without the possibility for immediate and permanent deletion (i.e. purge). This level guarantees the recoverability of the deleted entity during the retention interval(90 days) and while the subscription is still available. System wil permanently delete it after 90 days, if not recovered"
+              },
+              {
+                "value": "Recoverable+ProtectedSubscription",
+                "description": "Denotes a vault and subscription state in which deletion is recoverable within retention interval (90 days), immediate and permanent deletion (i.e. purge) is not permitted, and in which the subscription itself  cannot be permanently canceled. System wil permanently delete it after 90 days, if not recovered"
+              },
+              {
+                "value": "CustomizedRecoverable+Purgeable",
+                "description": "Denotes a vault state in which deletion is recoverable, and which also permits immediate and permanent deletion (i.e. purge when 7<= SoftDeleteRetentionInDays < 90). This level guarantees the recoverability of the deleted entity during the retention interval, unless a Purge operation is requested, or the subscription is cancelled."
+              },
+              {
+                "value": "CustomizedRecoverable",
+                "description": "Denotes a vault state in which deletion is recoverable without the possibility for immediate and permanent deletion (i.e. purge when 7<= SoftDeleteRetentionInDays < 90).This level guarantees the recoverability of the deleted entity during the retention interval and while the subscription is still available."
+              },
+              {
+                "value": "CustomizedRecoverable+ProtectedSubscription",
+                "description": "Denotes a vault and subscription state in which deletion is recoverable, immediate and permanent deletion (i.e. purge) is not permitted, and in which the subscription itself cannot be permanently canceled when 7<= SoftDeleteRetentionInDays < 90. This level guarantees the recoverability of the deleted entity during the retention interval, and also reflects the fact that the subscription itself cannot be cancelled."
+              }
+            ]
           },
           "readOnly": true,
           "x-nullable": false
@@ -5137,7 +5236,7 @@
         "value": {
           "x-ms-client-name": "base64EncodedCertificate",
           "type": "string",
-          "description": "Base64 encoded representation of the certificate object to import. This certificate needs to contain the private key."
+          "description": "A PEM file or a base64-encoded PFX file.  PEM files need to contain the private key."
         },
         "pwd": {
           "x-ms-client-name": "password",
@@ -5497,11 +5596,44 @@
             "Purgeable",
             "Recoverable+Purgeable",
             "Recoverable",
-            "Recoverable+ProtectedSubscription"
+            "Recoverable+ProtectedSubscription",
+            "CustomizedRecoverable+Purgeable",
+            "CustomizedRecoverable",
+            "CustomizedRecoverable+ProtectedSubscription"
           ],
           "x-ms-enum": {
             "name": "DeletionRecoveryLevel",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Purgeable",
+                "description": "Denotes a vault state in which deletion is an irreversible operation, without the possibility for recovery. This level corresponds to no protection being available against a Delete operation; the data is irretrievably lost upon accepting a Delete operation at the entity level or higher (vault, resource group, subscription etc.)"
+              },
+              {
+                "value": "Recoverable+Purgeable",
+                "description": "Denotes a vault state in which deletion is recoverable, and which also permits immediate and permanent deletion (i.e. purge). This level guarantees the recoverability of the deleted entity during the retention interval (90 days), unless a Purge operation is requested, or the subscription is cancelled. System wil permanently delete it after 90 days, if not recovered"
+              },
+              {
+                "value": "Recoverable",
+                "description": "Denotes a vault state in which deletion is recoverable without the possibility for immediate and permanent deletion (i.e. purge). This level guarantees the recoverability of the deleted entity during the retention interval(90 days) and while the subscription is still available. System wil permanently delete it after 90 days, if not recovered"
+              },
+              {
+                "value": "Recoverable+ProtectedSubscription",
+                "description": "Denotes a vault and subscription state in which deletion is recoverable within retention interval (90 days), immediate and permanent deletion (i.e. purge) is not permitted, and in which the subscription itself  cannot be permanently canceled. System wil permanently delete it after 90 days, if not recovered"
+              },
+              {
+                "value": "CustomizedRecoverable+Purgeable",
+                "description": "Denotes a vault state in which deletion is recoverable, and which also permits immediate and permanent deletion (i.e. purge when 7<= SoftDeleteRetentionInDays < 90). This level guarantees the recoverability of the deleted entity during the retention interval, unless a Purge operation is requested, or the subscription is cancelled."
+              },
+              {
+                "value": "CustomizedRecoverable",
+                "description": "Denotes a vault state in which deletion is recoverable without the possibility for immediate and permanent deletion (i.e. purge when 7<= SoftDeleteRetentionInDays < 90).This level guarantees the recoverability of the deleted entity during the retention interval and while the subscription is still available."
+              },
+              {
+                "value": "CustomizedRecoverable+ProtectedSubscription",
+                "description": "Denotes a vault and subscription state in which deletion is recoverable, immediate and permanent deletion (i.e. purge) is not permitted, and in which the subscription itself cannot be permanently canceled when 7<= SoftDeleteRetentionInDays < 90. This level guarantees the recoverability of the deleted entity during the retention interval, and also reflects the fact that the subscription itself cannot be cancelled."
+              }
+            ]
           },
           "readOnly": true,
           "x-nullable": false
@@ -5772,11 +5904,44 @@
             "Purgeable",
             "Recoverable+Purgeable",
             "Recoverable",
-            "Recoverable+ProtectedSubscription"
+            "Recoverable+ProtectedSubscription",
+            "CustomizedRecoverable+Purgeable",
+            "CustomizedRecoverable",
+            "CustomizedRecoverable+ProtectedSubscription"
           ],
           "x-ms-enum": {
             "name": "DeletionRecoveryLevel",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Purgeable",
+                "description": "Denotes a vault state in which deletion is an irreversible operation, without the possibility for recovery. This level corresponds to no protection being available against a Delete operation; the data is irretrievably lost upon accepting a Delete operation at the entity level or higher (vault, resource group, subscription etc.)"
+              },
+              {
+                "value": "Recoverable+Purgeable",
+                "description": "Denotes a vault state in which deletion is recoverable, and which also permits immediate and permanent deletion (i.e. purge). This level guarantees the recoverability of the deleted entity during the retention interval (90 days), unless a Purge operation is requested, or the subscription is cancelled. System wil permanently delete it after 90 days, if not recovered"
+              },
+              {
+                "value": "Recoverable",
+                "description": "Denotes a vault state in which deletion is recoverable without the possibility for immediate and permanent deletion (i.e. purge). This level guarantees the recoverability of the deleted entity during the retention interval(90 days) and while the subscription is still available. System wil permanently delete it after 90 days, if not recovered"
+              },
+              {
+                "value": "Recoverable+ProtectedSubscription",
+                "description": "Denotes a vault and subscription state in which deletion is recoverable within retention interval (90 days), immediate and permanent deletion (i.e. purge) is not permitted, and in which the subscription itself  cannot be permanently canceled. System wil permanently delete it after 90 days, if not recovered"
+              },
+              {
+                "value": "CustomizedRecoverable+Purgeable",
+                "description": "Denotes a vault state in which deletion is recoverable, and which also permits immediate and permanent deletion (i.e. purge when 7<= SoftDeleteRetentionInDays < 90). This level guarantees the recoverability of the deleted entity during the retention interval, unless a Purge operation is requested, or the subscription is cancelled."
+              },
+              {
+                "value": "CustomizedRecoverable",
+                "description": "Denotes a vault state in which deletion is recoverable without the possibility for immediate and permanent deletion (i.e. purge when 7<= SoftDeleteRetentionInDays < 90).This level guarantees the recoverability of the deleted entity during the retention interval and while the subscription is still available."
+              },
+              {
+                "value": "CustomizedRecoverable+ProtectedSubscription",
+                "description": "Denotes a vault and subscription state in which deletion is recoverable, immediate and permanent deletion (i.e. purge) is not permitted, and in which the subscription itself cannot be permanently canceled when 7<= SoftDeleteRetentionInDays < 90. This level guarantees the recoverability of the deleted entity during the retention interval, and also reflects the fact that the subscription itself cannot be cancelled."
+              }
+            ]
           },
           "readOnly": true,
           "x-nullable": false

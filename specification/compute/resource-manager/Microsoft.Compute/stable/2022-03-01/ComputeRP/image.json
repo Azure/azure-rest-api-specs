@@ -1,0 +1,597 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ComputeManagementClient",
+    "description": "The Compute Management Client.",
+    "version": "2022-03-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/images/{imageName}": {
+      "put": {
+        "tags": [
+          "Images"
+        ],
+        "operationId": "Images_CreateOrUpdate",
+        "description": "Create or update an image.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "imageName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the image."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Image"
+            },
+            "description": "Parameters supplied to the Create Image operation."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a virtual machine image from a blob.": {
+            "$ref": "./examples/imageExamples/Image_CreateFromABlob.json"
+          },
+          "Create a virtual machine image from a snapshot.": {
+            "$ref": "./examples/imageExamples/Image_CreateFromASnapshot.json"
+          },
+          "Create a virtual machine image from a managed disk.": {
+            "$ref": "./examples/imageExamples/Image_CreateFromAManagedDisk.json"
+          },
+          "Create a virtual machine image from an existing virtual machine.": {
+            "$ref": "./examples/imageExamples/Image_CreateFromAVM.json"
+          },
+          "Create a virtual machine image that includes a data disk from a blob.": {
+            "$ref": "./examples/imageExamples/Image_Create_DataDiskFromABlobIncluded.json"
+          },
+          "Create a virtual machine image that includes a data disk from a snapshot.": {
+            "$ref": "./examples/imageExamples/Image_Create_DataDiskFromASnapshotIncluded.json"
+          },
+          "Create a virtual machine image that includes a data disk from a managed disk.": {
+            "$ref": "./examples/imageExamples/Image_Create_DataDiskFromAManagedDiskIncluded.json"
+          },
+          "Create a virtual machine image from a blob with DiskEncryptionSet resource.": {
+            "$ref": "./examples/imageExamples/Image_CreateFromABlobWithDiskEncryptionSet.json"
+          },
+          "Create a virtual machine image from a snapshot with DiskEncryptionSet resource.": {
+            "$ref": "./examples/imageExamples/Image_CreateFromASnapshotWithDiskEncryptionSet.json"
+          },
+          "Create a virtual machine image from a managed disk with DiskEncryptionSet resource.": {
+            "$ref": "./examples/imageExamples/Image_CreateFromAManagedDiskWithDiskEncryptionSet.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Images"
+        ],
+        "operationId": "Images_Update",
+        "description": "Update an image.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "imageName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the image."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageUpdate"
+            },
+            "description": "Parameters supplied to the Update Image operation."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Updates tags of an Image.": {
+            "$ref": "./examples/imageExamples/Image_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Images"
+        ],
+        "operationId": "Images_Delete",
+        "description": "Deletes an Image.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "imageName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the image."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Images_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/imageExamples/Images_Delete_MaximumSet_Gen.json"
+          },
+          "Images_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/imageExamples/Images_Delete_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Images"
+        ],
+        "operationId": "Images_Get",
+        "description": "Gets an image.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "imageName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the image."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get information about a virtual machine image.": {
+            "$ref": "./examples/imageExamples/Image_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/images": {
+      "get": {
+        "tags": [
+          "Images"
+        ],
+        "operationId": "Images_ListByResourceGroup",
+        "description": "Gets the list of images under a resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all virtual machine images in a resource group.": {
+            "$ref": "./examples/imageExamples/Image_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/images": {
+      "get": {
+        "tags": [
+          "Images"
+        ],
+        "operationId": "Images_List",
+        "description": "Gets the list of Images in the subscription. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images.",
+        "parameters": [
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all virtual machine images in a subscription.": {
+            "$ref": "./examples/imageExamples/Image_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ImageOSDisk": {
+      "properties": {
+        "osType": {
+          "type": "string",
+          "description": "This property allows you to specify the type of the OS that is included in the disk if creating a VM from a custom image. <br><br> Possible values are: <br><br> **Windows** <br><br> **Linux**",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "x-ms-enum": {
+            "name": "OperatingSystemTypes",
+            "modelAsString": false
+          }
+        },
+        "osState": {
+          "type": "string",
+          "description": "The OS State.",
+          "enum": [
+            "Generalized",
+            "Specialized"
+          ],
+          "x-ms-enum": {
+            "name": "OperatingSystemStateTypes",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Generalized",
+                "description": "Generalized image. Needs to be provisioned during deployment time."
+              },
+              {
+                "value": "Specialized",
+                "description": "Specialized image. Contains already provisioned OS Disk."
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageDisk"
+        }
+      ],
+      "required": [
+        "osType",
+        "osState"
+      ],
+      "description": "Describes an Operating System disk."
+    },
+    "ImageDataDisk": {
+      "properties": {
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageDisk"
+        }
+      ],
+      "required": [
+        "lun"
+      ],
+      "description": "Describes a data disk."
+    },
+    "ImageDisk": {
+      "properties": {
+        "snapshot": {
+          "$ref": "../common.json#/definitions/SubResource",
+          "description": "The snapshot."
+        },
+        "managedDisk": {
+          "$ref": "../common.json#/definitions/SubResource",
+          "description": "The managedDisk."
+        },
+        "blobUri": {
+          "type": "string",
+          "description": "The Virtual Hard Disk."
+        },
+        "caching": {
+          "type": "string",
+          "description": "Specifies the caching requirements. <br><br> Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly for Premium storage**",
+          "enum": [
+            "None",
+            "ReadOnly",
+            "ReadWrite"
+          ],
+          "x-ms-enum": {
+            "name": "CachingTypes",
+            "modelAsString": false
+          }
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the size of empty data disks in gigabytes. This element can be used to overwrite the name of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
+        },
+        "storageAccountType": {
+          "$ref": "./computeRPCommon.json#/definitions/StorageAccountType",
+          "description": "Specifies the storage account type for the managed disk. NOTE: UltraSSD_LRS can only be used with data disks, it cannot be used with OS Disk."
+        },
+        "diskEncryptionSet": {
+          "$ref": "./computeRPCommon.json#/definitions/DiskEncryptionSetParameters",
+          "description": "Specifies the customer managed disk encryption set resource id for the managed image disk."
+        }
+      },
+      "description": "Describes a image disk."
+    },
+    "ImageStorageProfile": {
+      "properties": {
+        "osDisk": {
+          "$ref": "#/definitions/ImageOSDisk",
+          "description": "Specifies information about the operating system disk used by the virtual machine. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview)."
+        },
+        "dataDisks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageDataDisk"
+          },
+          "x-ms-identifiers": [
+            "lun"
+          ],
+          "description": "Specifies the parameters that are used to add a data disk to a virtual machine. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview)."
+        },
+        "zoneResilient": {
+          "type": "boolean",
+          "description": "Specifies whether an image is zone resilient or not. Default is false. Zone resilient images can be created only in regions that provide Zone Redundant Storage (ZRS)."
+        }
+      },
+      "description": "Describes a storage profile."
+    },
+    "ImageProperties": {
+      "properties": {
+        "sourceVirtualMachine": {
+          "$ref": "../common.json#/definitions/SubResource",
+          "description": "The source virtual machine from which Image is created."
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/ImageStorageProfile",
+          "description": "Specifies the storage settings for the virtual machine disks."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state."
+        },
+        "hyperVGeneration": {
+          "$ref": "./computeRPCommon.json#/definitions/HyperVGenerationType",
+          "description": "Specifies the HyperVGenerationType of the VirtualMachine created from the image. From API Version 2019-03-01 if the image source is a blob, then we need the user to specify the value, if the source is managed resource like disk or snapshot, we may require the user to specify the property if we cannot deduce it from the source managed resource."
+        }
+      },
+      "description": "Describes the properties of an Image."
+    },
+    "Image": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ImageProperties"
+        },
+        "extendedLocation": {
+          "$ref": "../common.json#/definitions/ExtendedLocation",
+          "description": "The extended location of the Image."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../common.json#/definitions/Resource"
+        }
+      ],
+      "description": "The source user image virtual hard disk. The virtual hard disk will be copied before being attached to the virtual machine. If SourceImage is provided, the destination virtual hard drive must not exist."
+    },
+    "ImageUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ImageProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./computeRPCommon.json#/definitions/UpdateResource"
+        }
+      ],
+      "description": "The source user image virtual hard disk. Only tags may be updated."
+    },
+    "ImageListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Image"
+          },
+          "description": "The list of Images."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of Images. Call ListNext() with this to fetch the next page of Images."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Image operation response."
+    }
+  }
+}

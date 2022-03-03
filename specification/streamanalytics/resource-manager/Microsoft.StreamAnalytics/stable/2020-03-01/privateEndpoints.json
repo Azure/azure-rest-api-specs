@@ -1,0 +1,366 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "StreamAnalyticsManagementClient",
+    "version": "2020-03-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StreamAnalytics/clusters/{clusterName}/privateEndpoints/{privateEndpointName}": {
+      "put": {
+        "tags": [
+          "PrivateEndpoints"
+        ],
+        "description": "Creates a Stream Analytics Private Endpoint or replaces an already existing Private Endpoint.",
+        "operationId": "PrivateEndpoints_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create a private endpoint": {
+            "$ref": "./examples/PrivateEndpoint_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "privateEndpoint",
+            "description": "The definition of the private endpoint that will be used to create a new cluster or replace the existing one.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpoint"
+            }
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./clusters.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/IfMatchHeader"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/IfNoneMatchHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The private endpoint was successfully created or replaced.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpoint"
+            }
+          },
+          "201": {
+            "description": "The private endpoint was successfully created or replaced.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpoint"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "PrivateEndpoints"
+        ],
+        "description": "Gets information about the specified Private Endpoint.",
+        "operationId": "PrivateEndpoints_Get",
+        "x-ms-examples": {
+          "Get a private endpoint": {
+            "$ref": "./examples/PrivateEndpoint_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./clusters.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified private endpoint.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpoint"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpoints"
+        ],
+        "description": "Delete the specified private endpoint.",
+        "operationId": "PrivateEndpoints_Delete",
+        "x-ms-examples": {
+          "Delete a private endpoint": {
+            "$ref": "./examples/PrivateEndpoint_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./clusters.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The private endpoint was successfully deleted."
+          },
+          "202": {
+            "description": "The delete request was successfully initiated."
+          },
+          "204": {
+            "description": "The private endpoint does not exist."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StreamAnalytics/clusters/{clusterName}/privateEndpoints": {
+      "get": {
+        "tags": [
+          "PrivateEndpoints"
+        ],
+        "description": "Lists the private endpoints in the cluster.",
+        "operationId": "PrivateEndpoints_ListByCluster",
+        "x-ms-examples": {
+          "Get the private endpoints in a cluster": {
+            "$ref": "./examples/PrivateEndpoint_ListByCluster.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./clusters.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully listed the private endpoints under the specified cluster.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointListResult"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PrivateEndpoint": {
+      "type": "object",
+      "description": "Complete information about the private endpoint.",
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties associated with a private endpoint.",
+          "$ref": "#/definitions/PrivateEndpointProperties"
+        },
+        "etag": {
+          "description": "Unique opaque string (generally a GUID) that represents the metadata state of the resource (private endpoint) and changes whenever the resource is updated. Required on PUT (CreateOrUpdate) requests.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointProperties": {
+      "type": "object",
+      "description": "The properties associated with a private endpoint.",
+      "properties": {
+        "createdDate": {
+          "description": "The date when this private endpoint was created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "manualPrivateLinkServiceConnections": {
+          "description": "A list of connections to the remote resource. Immutable after it is set.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkServiceConnection"
+          }
+        }
+      }
+    },
+    "PrivateLinkServiceConnection": {
+      "type": "object",
+      "description": "A grouping of information about the connection to the remote resource.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Bag of properties defining a privatelinkServiceConnection.",
+          "$ref": "#/definitions/PrivateLinkServiceConnectionProperties"
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionProperties": {
+      "type": "object",
+      "description": "Bag of properties defining a privatelinkServiceConnection.",
+      "properties": {
+        "privateLinkServiceId": {
+          "description": "The resource id of the private link service. Required on PUT (CreateOrUpdate) requests.",
+          "type": "string"
+        },
+        "groupIds": {
+          "description": "The ID(s) of the group(s) obtained from the remote resource that this private endpoint should connect to. Required on PUT (CreateOrUpdate) requests.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requestMessage": {
+          "description": "A message passed to the owner of the remote resource with this connection request. Restricted to 140 chars.",
+          "type": "string",
+          "readOnly": true
+        },
+        "privateLinkServiceConnectionState": {
+          "description": "A collection of read-only information about the state of the connection to the private remote resource.",
+          "$ref": "#/definitions/PrivateLinkConnectionState"
+        }
+      }
+    },
+    "PrivateLinkConnectionState": {
+      "type": "object",
+      "description": "A collection of read-only information about the state of the connection to the private remote resource.",
+      "properties": {
+        "status": {
+          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the remote resource/service.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The reason for approval/rejection of the connection.",
+          "type": "string",
+          "readOnly": true
+        },
+        "actionsRequired": {
+          "description": "A message indicating if changes on the service provider require any updates on the consumer.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointListResult": {
+      "type": "object",
+      "description": "A list of private endpoints.",
+      "properties": {
+        "value": {
+          "description": "A list of private endpoints.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpoint"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "The URL to fetch the next set of private endpoints.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "PrivateEndpointNameParameter": {
+      "name": "privateEndpointName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the private endpoint.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

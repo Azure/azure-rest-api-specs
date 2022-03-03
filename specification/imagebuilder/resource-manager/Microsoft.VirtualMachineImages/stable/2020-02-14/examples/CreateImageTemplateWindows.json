@@ -10,6 +10,12 @@
         "imagetemplate_tag1": "IT_T1",
         "imagetemplate_tag2": "IT_T2"
       },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity_1": {}
+        }
+      },
       "properties": {
         "source": {
           "type": "ManagedImage",
@@ -27,8 +33,50 @@
           },
           {
             "type": "PowerShell",
+            "name": "PowerShell (inline) Customizer Elevated user Example",
+            "inline": [
+              "Powershell command-1",
+              "Powershell command-2",
+              "Powershell command-3"
+            ],
+            "runElevated": true
+          },
+          {
+            "type": "PowerShell",
+            "name": "PowerShell (inline) Customizer Elevated Local System user Example",
+            "inline": [
+              "Powershell command-1",
+              "Powershell command-2",
+              "Powershell command-3"
+            ],
+            "runElevated": true,
+            "runAsSystem": true
+          },
+          {
+            "type": "PowerShell",
             "name": "PowerShell (script) Customizer Example",
             "scriptUri": "https://example.com/path/to/script.ps1",
+            "validExitCodes": [
+              0,
+              1
+            ]
+          },
+          {
+            "type": "PowerShell",
+            "name": "PowerShell (script) Customizer Elevated Local System user Example",
+            "scriptUri": "https://example.com/path/to/script.ps1",
+            "runElevated": true,
+            "validExitCodes": [
+              0,
+              1
+            ]
+          },
+          {
+            "type": "PowerShell",
+            "name": "PowerShell (script) Customizer Elevated Local System user Example",
+            "scriptUri": "https://example.com/path/to/script.ps1",
+            "runElevated": true,
+            "runAsSystem": true,
             "validExitCodes": [
               0,
               1
@@ -79,6 +127,15 @@
         "name": "myImageTemplate",
         "location": "westus",
         "type": "Microsoft.VirtualMachineImages/imageTemplate",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity_1": {
+              "clientId": "00000000-0000-0000-0000-000000000000",
+              "principalId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        },
         "properties": {
           "source": {
             "type": "ManagedImage",
@@ -86,9 +143,86 @@
           },
           "customize": [
             {
-              "type": "Shell",
-              "name": "Shell Customizer Example",
-              "scriptUri": "https://example.com/path/to/script.sh"
+              "type": "PowerShell",
+              "name": "PowerShell (inline) Customizer Example",
+              "inline": [
+                "Powershell command-1",
+                "Powershell command-2",
+                "Powershell command-3"
+              ],
+              "runElevated": false,
+              "runAsSystem": false
+            },
+            {
+              "type": "PowerShell",
+              "name": "PowerShell (inline) Customizer Elevated user Example",
+              "inline": [
+                "Powershell command-1",
+                "Powershell command-2",
+                "Powershell command-3"
+              ],
+              "runElevated": true,
+              "runAsSystem": false
+            },
+            {
+              "type": "PowerShell",
+              "name": "PowerShell (inline) Customizer Elevated Local System user Example",
+              "inline": [
+                "Powershell command-1",
+                "Powershell command-2",
+                "Powershell command-3"
+              ],
+              "runElevated": true,
+              "runAsSystem": true
+            },
+            {
+              "type": "PowerShell",
+              "name": "PowerShell (script) Customizer Example",
+              "scriptUri": "https://example.com/path/to/script.ps1",
+              "validExitCodes": [
+                0,
+                1
+              ],
+              "runElevated": false,
+              "runAsSystem": false
+            },
+            {
+              "type": "PowerShell",
+              "name": "PowerShell (script) Customizer Elevated Local System user Example",
+              "scriptUri": "https://example.com/path/to/script.ps1",
+              "runElevated": true,
+              "runAsSystem": false,
+              "validExitCodes": [
+                0,
+                1
+              ]
+            },
+            {
+              "type": "PowerShell",
+              "name": "PowerShell (script) Customizer Elevated Local System user Example",
+              "scriptUri": "https://example.com/path/to/script.ps1",
+              "runElevated": true,
+              "runAsSystem": true,
+              "validExitCodes": [
+                0,
+                1
+              ]
+            },
+            {
+              "type": "WindowsRestart",
+              "name": "Restart Customizer Example",
+              "restartCommand": "shutdown /f /r /t 0 /c \"packer restart\"",
+              "restartCheckCommand": "powershell -command \"& {Write-Output 'restarted.'}\"",
+              "restartTimeout": "10m"
+            },
+            {
+              "type": "WindowsUpdate",
+              "name": "Windows Update Customizer Example",
+              "searchCriteria": "BrowseOnly=0 and IsInstalled=0",
+              "filters": [
+                "$_.BrowseOnly"
+              ],
+              "updateLimit": 100
             }
           ],
           "distribute": [
@@ -118,6 +252,15 @@
         "name": "myImageTemplate",
         "location": "westus",
         "type": "Microsoft.VirtualMachineImages/imageTemplate",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity_1": {
+              "clientId": "00000000-0000-0000-0000-000000000000",
+              "principalId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        },
         "properties": {
           "source": {
             "type": "ManagedImage",
@@ -125,9 +268,86 @@
           },
           "customize": [
             {
-              "type": "Shell",
-              "name": "Shell Customizer Example",
-              "scriptUri": "https://example.com/path/to/script.sh"
+              "type": "PowerShell",
+              "name": "PowerShell (inline) Customizer Example",
+              "inline": [
+                "Powershell command-1",
+                "Powershell command-2",
+                "Powershell command-3"
+              ],
+              "runElevated": false,
+              "runAsSystem": false
+            },
+            {
+              "type": "PowerShell",
+              "name": "PowerShell (inline) Customizer Elevated user Example",
+              "inline": [
+                "Powershell command-1",
+                "Powershell command-2",
+                "Powershell command-3"
+              ],
+              "runElevated": true,
+              "runAsSystem": false
+            },
+            {
+              "type": "PowerShell",
+              "name": "PowerShell (inline) Customizer Elevated Local System user Example",
+              "inline": [
+                "Powershell command-1",
+                "Powershell command-2",
+                "Powershell command-3"
+              ],
+              "runElevated": true,
+              "runAsSystem": true
+            },
+            {
+              "type": "PowerShell",
+              "name": "PowerShell (script) Customizer Example",
+              "scriptUri": "https://example.com/path/to/script.ps1",
+              "validExitCodes": [
+                0,
+                1
+              ],
+              "runElevated": false,
+              "runAsSystem": false
+            },
+            {
+              "type": "PowerShell",
+              "name": "PowerShell (script) Customizer Elevated Local System user Example",
+              "scriptUri": "https://example.com/path/to/script.ps1",
+              "runElevated": true,
+              "runAsSystem": false,
+              "validExitCodes": [
+                0,
+                1
+              ]
+            },
+            {
+              "type": "PowerShell",
+              "name": "PowerShell (script) Customizer Elevated Local System user Example",
+              "scriptUri": "https://example.com/path/to/script.ps1",
+              "runElevated": true,
+              "runAsSystem": true,
+              "validExitCodes": [
+                0,
+                1
+              ]
+            },
+            {
+              "type": "WindowsRestart",
+              "name": "Restart Customizer Example",
+              "restartCommand": "shutdown /f /r /t 0 /c \"packer restart\"",
+              "restartCheckCommand": "powershell -command \"& {Write-Output 'restarted.'}\"",
+              "restartTimeout": "10m"
+            },
+            {
+              "type": "WindowsUpdate",
+              "name": "Windows Update Customizer Example",
+              "searchCriteria": "BrowseOnly=0 and IsInstalled=0",
+              "filters": [
+                "$_.BrowseOnly"
+              ],
+              "updateLimit": 100
             }
           ],
           "distribute": [

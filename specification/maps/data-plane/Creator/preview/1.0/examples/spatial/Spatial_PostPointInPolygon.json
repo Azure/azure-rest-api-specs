@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "geography": "us",
+    "format": "json",
+    "api-version": "1.0",
+    "lat": 33.5362475,
+    "lon": -111.9267386,
+    "pointInPolygonRequestBody": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {
+            "geometryId": 1001
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -111.9267386,
+                  33.5362475
+                ],
+                [
+                  -111.9627875,
+                  33.5104882
+                ],
+                [
+                  -111.9027061,
+                  33.5004686
+                ],
+                [
+                  -111.9267386,
+                  33.5362475
+                ]
+              ]
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "summary": {
+          "sourcePoint": {
+            "lat": 33.5362475,
+            "lon": -111.9267386
+          },
+          "udid": null,
+          "information": "1 polygons processed in user data"
+        },
+        "result": {
+          "pointInPolygons": true,
+          "intersectingGeometries": [
+            "1001"
+          ]
+        }
+      }
+    }
+  }
+}
