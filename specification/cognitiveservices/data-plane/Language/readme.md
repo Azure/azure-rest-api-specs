@@ -40,7 +40,6 @@ directive:
     reason: The validation tools do not properly recognize 202 as a supported response code.
 ```
 
-
 ```yaml
 tag: release_2021_10_01
 add-credentials: true
@@ -61,8 +60,8 @@ These settings apply only when `--tag=release_2022_03_01_preview` is specified o
 
 ``` yaml $(tag) == 'release_2022_03_01_preview'
 input-file:
-- preview/2022-03-01-preview/textanalytics.json
-- preview/2022-03-01-preview/analyzeconversations.json
+  - preview/2022-03-01-preview/textanalytics.json
+  - preview/2022-03-01-preview/analyzeconversations.json
 title:
   Microsoft Cognitive Language Service
 modelerfour:
@@ -157,4 +156,3 @@ input-file:
   - preview/2022-03-01-preview/textanalytics.json
   - preview/2022-03-01-preview/analyzeconversations.json
 ```
-

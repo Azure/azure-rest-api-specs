@@ -708,22 +708,19 @@
         }
       }
     },
-    "ListKeys": {
-      "description": "The concrete entity list key's model of extra information.",
+    "ListKey": {
+      "description": "The canonical form of a closed list entity.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseExtraInformation"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "ListKeys",
+      "x-ms-discriminator-value": "ListKey",
       "properties": {
-        "keys": {
-          "type": "array",
-          "description": "A Collection of keys that the extracted entity was mapped to.",
-          "items": {
-            "type": "string"
-          }
+        "listKey": {
+          "type": "string",
+          "description": "A keys that the extracted entity was mapped to."
         }
       }
     },
