@@ -282,7 +282,8 @@
           "items": {
             "$ref": "#/definitions/Repo"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -357,6 +358,11 @@
           "description": "The id (a Guid) of the source control",
           "type": "string"
         },
+        "version": {
+          "$ref": "#/definitions/Version",
+          "description": "The version number associated with the source control",
+          "type": "string"
+        },
         "displayName": {
           "description": "The display name of the source control",
           "type": "string"
@@ -380,6 +386,14 @@
         "repository": {
           "description": "Repository metadata.",
           "$ref": "#/definitions/Repository"
+        },
+        "repositoryResourceInfo": {
+          "description": "Information regarding the resources created in user's repository.",
+          "$ref": "#/definitions/RepositoryResourceInfo"
+        },
+        "lastDeploymentInfo": {
+          "description": "Information regarding the latest deployment for the source control.",
+          "$ref": "#/definitions/DeploymentInfo"
         }
       },
       "required": [
@@ -415,7 +429,124 @@
           "items": {
             "$ref": "#/definitions/ContentPathMap"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "RepositoryResourceInfo": {
+      "type": "object",
+      "description": "Resources created in user's repository for the source-control.",
+      "properties": {
+        "webhook": {
+          "type": "object",
+          "description": "The webhook object created for the source-control.",
+          "$ref": "#/definitions/Webhook"
+        },
+        "gitHubResourceInfo": {
+          "type": "object",
+          "description": "Resources created in GitHub for this source-control.",
+          "$ref": "#/definitions/GitHubResourceInfo"
+        },
+        "azureDevOpsResourceInfo": {
+          "type": "object",
+          "description": "Resources created in Azure DevOps for this source-control.",
+          "$ref": "#/definitions/AzureDevOpsResourceInfo"
+        }
+      }
+    },
+    "Webhook": {
+      "description": "Detail about the webhook object.",
+      "type": "object",
+      "properties": {
+        "webhookId": {
+          "description": "Unique identifier for the webhook.",
+          "type": "string"
+        },
+        "webhookUrl": {
+          "description": "URL that gets invoked by the webhook.",
+          "type": "string"
+        },
+        "webhookSecretUpdateTime": {
+          "description": "Time when the webhook secret was updated.",
+          "type": "string"
+        },
+        "rotateWebhookSecret": {
+          "description": "A flag to instruct the backend service to rotate webhook secret.",
+          "type": "boolean"
+        }
+      }
+    },
+    "GitHubResourceInfo": {
+      "description": "Resources created in GitHub repository.",
+      "type": "object",
+      "properties": {
+        "appInstallationId": {
+          "description": "GitHub application installation id.",
+          "type": "string"
+        }
+      }
+    },
+    "AzureDevOpsResourceInfo": {
+      "description": "Resources created in Azure DevOps repository.",
+      "type": "object",
+      "properties": {
+        "pipelineId": {
+          "description": "Id of the pipeline created for the source-control.",
+          "type": "string"
+        },
+        "serviceConnectionId": {
+          "description": "Id of the service-connection created for the source-control.",
+          "type": "string"
+        }
+      }
+    },
+    "DeploymentInfo": {
+      "description": "Information regarding a deployment.",
+      "type": "object",
+      "properties": {
+        "deploymentFetchStatus": {
+          "$ref": "#/definitions/DeploymentFetchStatus",
+          "description": "Status while fetching the last deployment.",
+          "type": "string"
+        },
+        "deployment": {
+          "$ref": "#/definitions/Deployment",
+          "description": "Deployment information.",
+          "type": "object"
+        },
+        "message": {
+          "description": "Additional details about the deployment that can be shown to the user.",
+          "type": "string"
+        }
+      }
+    },
+    "Deployment": {
+      "description": "Description about a deployment.",
+      "type": "object",
+      "properties": {
+        "deploymentId": {
+          "description": "Deployment identifier.",
+          "type": "string"
+        },
+        "deploymentState": {
+          "$ref": "#/definitions/DeploymentState",
+          "description": "Current status of the deployment.",
+          "type": "string"
+        },
+        "deploymentResult": {
+          "$ref": "#/definitions/DeploymentResult",
+          "description": "The outcome of the deployment.",
+          "type": "string"
+        },
+        "deploymentTime": {
+          "format": "date-time",
+          "description": "The time when the deployment finished.",
+          "type": "string"
+        },
+        "deploymentLogsUrl": {
+          "description": "Url to access repository action logs.",
+          "type": "string"
         }
       }
     },
@@ -470,6 +601,102 @@
           },
           {
             "value": "DevOps"
+          }
+        ]
+      }
+    },
+    "Version": {
+      "description": "The version of the source control.",
+      "enum": [
+        "V1",
+        "V2"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "Version",
+        "values": [
+          {
+            "value": "V1"
+          },
+          {
+            "value": "V2"
+          }
+        ]
+      }
+    },
+    "DeploymentFetchStatus": {
+      "description": "Status while trying to fetch the deployment information.",
+      "enum": [
+        "Success",
+        "Unauthorized",
+        "NotFound"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "DeploymentFetchStatus",
+        "values": [
+          {
+            "value": "Success"
+          },
+          {
+            "value": "Unauthorized"
+          },
+          {
+            "value": "NotFound"
+          }
+        ]
+      }
+    },
+    "DeploymentState": {
+      "description": "The current state of the deployment.",
+      "enum": [
+        "In_Progress",
+        "Completed",
+        "Queued",
+        "Canceling"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "DeploymentState",
+        "values": [
+          {
+            "value": "In_Progress"
+          },
+          {
+            "value": "Completed"
+          },
+          {
+            "value": "Queued"
+          },
+          {
+            "value": "Canceling"
+          }
+        ]
+      }
+    },
+    "DeploymentResult": {
+      "description": "Status while trying to fetch the deployment information.",
+      "enum": [
+        "Success",
+        "Canceled",
+        "Failed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "DeploymentResult",
+        "values": [
+          {
+            "value": "Success"
+          },
+          {
+            "value": "Canceled"
+          },
+          {
+            "value": "Failed"
           }
         ]
       }
