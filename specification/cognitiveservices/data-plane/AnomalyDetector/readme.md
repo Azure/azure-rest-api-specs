@@ -4,10 +4,10 @@
 
 Configuration for generating Anomaly Detector SDK.
 
-The current release is `release_1_1_preview.1`.
+The current release is `release_1_2_preview`.
 
 ``` yaml
-tag: release_1_1_preview.1
+tag: release_1_2_preview
 add-credentials: true
 openapi-type: data-plane
 ```
