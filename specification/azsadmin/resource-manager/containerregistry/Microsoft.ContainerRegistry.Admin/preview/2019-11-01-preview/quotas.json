@@ -1,0 +1,271 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-11-01-preview",
+    "title": "ContainerRegistryManagementClient",
+    "description": "Admin Container Registry Management Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry.Admin/locations/{location}/quotas/{quotaName}": {
+      "put": {
+        "x-ms-examples": {
+          "Create or update an existing container registry quota.": {
+            "$ref": "./examples/Quotas/CreateOrUpdate.json"
+          }
+        },
+        "tags": [
+          "ContainerRegistryQuotas"
+        ],
+        "description": "Create or update an existing container registry quota.",
+        "operationId": "Quota_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/QuotaNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerRegistryQuotaParameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- The container registry quota has been created or updated.",
+            "schema": {
+              "$ref": "#/definitions/ContainerRegistryQuota"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete an existing container registry quota.": {
+            "$ref": "./examples/Quotas/Delete.json"
+          }
+        },
+        "tags": [
+          "ContainerRegistryQuotas"
+        ],
+        "description": "Delete an existing container registry quota",
+        "operationId": "Quotas_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/QuotaNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- The container registry quota has been deleted."
+          },
+          "204": {
+            "description": "NotFound -- The container registry quota not found."
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "x-ms-examples": {
+          "Returns the specified container registry quota.": {
+            "$ref": "./examples/Quotas/Get.json"
+          }
+        },
+        "tags": [
+          "ContainerRegistryQuotas"
+        ],
+        "description": "Returns the specified container registry quota.",
+        "operationId": "Quotas_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/QuotaNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- The container registry quota has been returned.",
+            "schema": {
+              "$ref": "#/definitions/ContainerRegistryQuota"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry.Admin/locations/{location}/quotas": {
+      "get": {
+        "x-ms-examples": {
+          "Returns a list of container registry quotas at the given location.": {
+            "$ref": "./examples/Quotas/List.json"
+          }
+        },
+        "tags": [
+          "ContainerRegistryQuotas"
+        ],
+        "description": "Returns a list of container registry quotas at the given location.",
+        "operationId": "Quotas_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- The list of container registry quotas has been returned.",
+            "schema": {
+              "$ref": "#/definitions/ContainerRegistryQuotaList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ContainerRegistryQuota": {
+      "description": "Container registry quota.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Container registry quota properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ContainerRegistryQuotaProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ContainerRegistryQuotaProperties": {
+      "description": "Container registry quota properties.",
+      "type": "object",
+      "properties": {
+        "numberOfRegistries": {
+          "description": "Total number of container registry accounts.",
+          "type": "integer",
+          "format": "int32",
+          "default": 20
+        },
+        "capacityPerRegistryInGiB": {
+          "description": "Storage capacity (GiB) of each registry.",
+          "type": "integer",
+          "format": "int32",
+          "default": 100
+        }
+      }
+    },
+    "ContainerRegistryQuotaList": {
+      "description": "List of container registry quotas.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of container registry quotas.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContainerRegistryQuota"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "QuotaNameParameter": {
+      "description": "The name of the container registry quota.",
+      "name": "quotaName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ContainerRegistryQuotaParameters": {
+      "description": "The properties of quota being created or updated.",
+      "name": "quotaObject",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ContainerRegistryQuota"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

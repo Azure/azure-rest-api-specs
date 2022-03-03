@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2019-07-01",
+    "diskEncryptionSetName": "myDiskEncryptionSet",
+    "diskEncryptionSet": {
+      "location": "West US",
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "activeKey": {
+          "sourceVault": {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+          },
+          "keyUrl": "https://myvmvault.vault-int.azure-int.net/keys/{key}"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "myDiskEncryptionSet",
+        "location": "West US",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "properties": {
+          "activeKey": {
+            "sourceVault": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+            },
+            "keyUrl": "https://myvmvault.vault-int.azure-int.net/keys/{key}"
+          },
+          "previousKeys": []
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "name": "myDiskEncryptionSet",
+        "location": "West US",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "properties": {
+          "activeKey": {
+            "sourceVault": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+            },
+            "keyUrl": "https://myvmvault.vault-int.azure-int.net/keys/{key}"
+          },
+          "previousKeys": []
+        }
+      }
+    }
+  }
+}

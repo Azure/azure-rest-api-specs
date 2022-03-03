@@ -1,0 +1,203 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg123",
+    "workspaceName": "workspace123",
+    "api-version": "2021-03-01-preview",
+    "endpointName": "testEndpoint",
+    "deploymentName": "testDeployment",
+    "body": {
+      "tags": {
+        "additionalProp1": "string",
+        "additionalProp2": "string",
+        "additionalProp3": "string"
+      },
+      "location": "string",
+      "kind": "string",
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myuseridentity": {
+            "principalId": "string",
+            "clientId": "string"
+          }
+        }
+      },
+      "properties": {
+        "endpointComputeType": "K8S",
+        "scaleSettings": {
+          "pollingInterval": "PT1M",
+          "scaleType": "Auto",
+          "targetUtilizationPercentage": 50
+        },
+        "containerResourceRequirements": {
+          "cpu": 4,
+          "cpuLimit": 4,
+          "memoryInGB": 64,
+          "memoryInGBLimit": 64
+        },
+        "requestSettings": {
+          "maxQueueWait": "PT1M",
+          "requestTimeout": "PT1M",
+          "maxConcurrentRequestsPerInstance": 5
+        },
+        "provisioningState": "Creating",
+        "description": "string",
+        "properties": {
+          "additionalProp1": "string",
+          "additionalProp2": "string",
+          "additionalProp3": "string"
+        },
+        "appInsightsEnabled": true,
+        "livenessProbe": {
+          "failureThreshold": 50,
+          "successThreshold": 50,
+          "timeout": "PT1M",
+          "period": "PT1M",
+          "initialDelay": "PT1M"
+        },
+        "model": {
+          "referenceType": "Id",
+          "assetId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/models/model123"
+        },
+        "codeConfiguration": {
+          "codeId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/codes/code123/versions/1",
+          "scoringScript": "string"
+        },
+        "environmentId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/environments/env123"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "tags": {
+          "additionalProp1": "string",
+          "additionalProp2": "string",
+          "additionalProp3": "string"
+        },
+        "location": "string",
+        "kind": "string",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myuseridentity": {
+              "clientId": "string"
+            }
+          }
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/onlineEndpoints/testEndpoint/deployments/testDeployment",
+        "name": "testDeployment",
+        "type": "Microsoft.MachineLearningServices/workspaces/onlineEndpoints/deployments",
+        "properties": {
+          "endpointComputeType": "K8S",
+          "containerResourceRequirements": {
+            "cpu": 4,
+            "cpuLimit": 4,
+            "memoryInGB": 64,
+            "memoryInGBLimit": 64
+          },
+          "scaleSettings": {
+            "pollingInterval": "PT1M",
+            "scaleType": "Auto",
+            "targetUtilizationPercentage": 50
+          },
+          "requestSettings": {
+            "maxQueueWait": "PT1M",
+            "requestTimeout": "PT1M",
+            "maxConcurrentRequestsPerInstance": 5
+          },
+          "provisioningState": "Creating",
+          "description": "string",
+          "properties": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "appInsightsEnabled": true,
+          "livenessProbe": {
+            "failureThreshold": 50,
+            "successThreshold": 50,
+            "timeout": "PT1M",
+            "period": "PT1M",
+            "initialDelay": "PT1M"
+          },
+          "model": {
+            "referenceType": "Id",
+            "assetId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/models/model123"
+          },
+          "codeConfiguration": {
+            "codeId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/codes/code123/versions/1",
+            "scoringScript": "string"
+          },
+          "environmentId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/environments/env123"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "tags": {
+          "additionalProp1": "string",
+          "additionalProp2": "string",
+          "additionalProp3": "string"
+        },
+        "location": "string",
+        "kind": "string",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myuseridentity": {
+              "clientId": "string"
+            }
+          }
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/onlineEndpoints/testEndpoint/deployments/testDeployment",
+        "name": "testDeployment",
+        "type": "Microsoft.MachineLearningServices/workspaces/onlineEndpoints/deployments",
+        "properties": {
+          "endpointComputeType": "K8S",
+          "containerResourceRequirements": {
+            "cpu": 4,
+            "cpuLimit": 4,
+            "memoryInGB": 64,
+            "memoryInGBLimit": 64
+          },
+          "scaleSettings": {
+            "pollingInterval": "PT1M",
+            "scaleType": "Auto",
+            "targetUtilizationPercentage": 50
+          },
+          "requestSettings": {
+            "maxQueueWait": "PT1M",
+            "requestTimeout": "PT1M",
+            "maxConcurrentRequestsPerInstance": 5
+          },
+          "provisioningState": "Creating",
+          "description": "string",
+          "properties": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "appInsightsEnabled": true,
+          "livenessProbe": {
+            "failureThreshold": 50,
+            "successThreshold": 50,
+            "timeout": "PT1M",
+            "period": "PT1M",
+            "initialDelay": "PT1M"
+          },
+          "model": {
+            "referenceType": "Id",
+            "assetId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/models/model123"
+          },
+          "codeConfiguration": {
+            "codeId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/codes/code123/versions/1",
+            "scoringScript": "string"
+          },
+          "environmentId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/environments/env123"
+        }
+      }
+    }
+  }
+}

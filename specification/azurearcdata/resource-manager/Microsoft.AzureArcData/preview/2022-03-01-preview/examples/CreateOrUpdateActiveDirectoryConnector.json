@@ -1,0 +1,131 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "dataControllerName": "testdataController",
+    "activeDirectoryConnectorName": "testADConnector",
+    "api-version": "2022-03-01-preview",
+    "activeDirectoryConnectorResource": {
+      "properties": {
+        "spec": {
+          "activeDirectory": {
+            "realm": "CONTOSO.LOCAL",
+            "domainControllers": {
+              "primaryDomainController": {
+                "hostname": "dc1.contoso.local"
+              },
+              "secondaryDomainControllers": [
+                {
+                  "hostname": "dc2.contoso.local"
+                },
+                {
+                  "hostname": "dc3.contoso.local"
+                }
+              ]
+            }
+          },
+          "dns": {
+            "nameserverIPAddresses": [
+              "11.11.111.111",
+              "22.22.222.222"
+            ],
+            "replicas": 1,
+            "preferK8sDnsForPtrLookups": false
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "spec": {
+            "activeDirectory": {
+              "realm": "CONTOSO.LOCAL",
+              "domainControllers": {
+                "primaryDomainController": {
+                  "hostname": "dc1.contoso.local"
+                },
+                "secondaryDomainControllers": [
+                  {
+                    "hostname": "dc2.contoso.local"
+                  },
+                  {
+                    "hostname": "dc3.contoso.local"
+                  }
+                ]
+              },
+              "netbiosDomainName": "CONTOSO"
+            },
+            "dns": {
+              "nameserverIPAddresses": [
+                "11.11.111.111",
+                "22.22.222.222"
+              ],
+              "replicas": 1,
+              "preferK8sDnsForPtrLookups": false,
+              "domainName": "contoso.local"
+            }
+          }
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/dataControllers/testdataController/activeDirectoryConnectors/testADConnector",
+        "name": "testADConnector",
+        "type": "Microsoft.AzureArcData/dataControllers/activeDirectoryConnectors"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "spec": {
+            "activeDirectory": {
+              "realm": "CONTOSO.LOCAL",
+              "domainControllers": {
+                "primaryDomainController": {
+                  "hostname": "dc1.contoso.local"
+                },
+                "secondaryDomainControllers": [
+                  {
+                    "hostname": "dc2.contoso.local"
+                  },
+                  {
+                    "hostname": "dc3.contoso.local"
+                  }
+                ]
+              },
+              "netbiosDomainName": "CONTOSO"
+            },
+            "dns": {
+              "nameserverIPAddresses": [
+                "11.11.111.111",
+                "22.22.222.222"
+              ],
+              "replicas": 1,
+              "preferK8sDnsForPtrLookups": false,
+              "domainName": "contoso.local"
+            }
+          }
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/dataControllers/testdataController/activeDirectoryConnectors/testADConnector",
+        "name": "testADConnector",
+        "type": "Microsoft.AzureArcData/dataControllers/activeDirectoryConnectors"
+      }
+    }
+  }
+}

@@ -131,6 +131,84 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Insights/components/{applicationName}/metadata": {
+      "post": {
+        "operationId": "Metadata_Post",
+        "summary": "Gets metadata information",
+        "description": "Retrieve the metadata information for the app, including its schema, etc.",
+        "x-ms-examples": {
+          "metadataPost": {
+            "$ref": "examples/metadata-post.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/applicationName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/metadataResults"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "Metadata_Get",
+        "summary": "Gets metadata information",
+        "description": "Retrieve the metadata information for the app, including its schema, etc.",
+        "x-ms-examples": {
+          "metadataGet": {
+            "$ref": "examples/metadata-get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/applicationName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/metadataResults"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Insights/components/{applicationName}/metrics/{metricId}": {
       "get": {
         "operationId": "Metrics_Get",
@@ -408,14 +486,6 @@
     }
   },
   "parameters": {
-    "appId": {
-      "name": "appId",
-      "description": "ID of the application. This is Application ID from the API Access settings blade in the Azure portal.",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "metricId": {
       "name": "metricId",
       "in": "path",
@@ -977,6 +1047,7 @@
         }
       },
       "additionalProperties": {
+        "description": "Additional properties that can be provided on the metric result info",
         "type": "object"
       }
     },
@@ -1141,6 +1212,9 @@
             "additionalProperties": {
               "type": "object"
             }
+          },
+          "additionalProperties": {
+            "type": "object"
           }
         },
         "customMeasurements": {
@@ -1150,6 +1224,9 @@
             "additionalProperties": {
               "type": "object"
             }
+          },
+          "additionalProperties": {
+            "type": "object"
           }
         },
         "operation": {
@@ -1180,7 +1257,10 @@
           "description": "Client info of the event",
           "$ref": "#/definitions/eventsClientInfo"
         }
-      }
+      },
+      "required": [
+        "type"
+      ]
     },
     "eventsTraceResult": {
       "x-ms-discriminator-value": "trace",
@@ -2018,6 +2098,241 @@
           "type": "string"
         }
       }
+    },
+    "metadataResults": {
+      "title": "A metadata response.",
+      "description": "The metadata result for the app, including available tables, etc.",
+      "type": "object",
+      "properties": {
+        "tableGroups": {
+          "description": "The list of groups of tables on the app.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/metadataTableGroup"
+          },
+          "uniqueItems": true
+        },
+        "tables": {
+          "description": "The list of tables and columns that comprise the schema of the app.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/metadataTable"
+          },
+          "uniqueItems": true
+        },
+        "functions": {
+          "description": "The list of functions stored on the app.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/metadataFunction"
+          },
+          "uniqueItems": true
+        },
+        "applications": {
+          "description": "The list of Application Insights apps that were referenced in the metadata request.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/metadataApplication"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "metadataTableGroup": {
+      "title": "A group of tables.",
+      "description": "The table grouping can be either an Application Insights schema or a Log Analytics solution.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ID of the table group",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the table group",
+          "type": "string"
+        },
+        "source": {
+          "description": "The source of the table group, can be either AI or OMS for Log Analytics workspaces",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name of the table group",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the table group",
+          "type": "string"
+        },
+        "tables": {
+          "description": "The list of tables contained in the table group",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "metadataTable": {
+      "title": "A data table that takes part in a schema of an Application Insights app.",
+      "description": "Tables are part of the app schema, and contain a list of columns and a reference to other relevant metadata items.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ID of the table",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the table",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the table",
+          "type": "string"
+        },
+        "timespanColumn": {
+          "description": "The column associated with the timespan query parameter for the table",
+          "type": "string"
+        },
+        "columns": {
+          "description": "The list of columns defined on the table",
+          "type": "array",
+          "items": {
+            "properties": {
+              "name": {
+                "description": "The name of the column",
+                "type": "string"
+              },
+              "description": {
+                "description": "The description of the column",
+                "type": "string"
+              },
+              "type": {
+                "description": "The data type of the column",
+                "type": "string",
+                "enum": [
+                  "bool",
+                  "datetime",
+                  "dynamic",
+                  "int",
+                  "long",
+                  "real",
+                  "string"
+                ],
+                "x-ms-enum": {
+                  "name": "MetadataColumnDataType",
+                  "modelAsString": true
+                }
+              },
+              "isPreferredFacet": {
+                "description": "A flag indicating this column is a preferred facet",
+                "type": "boolean"
+              },
+              "source": {
+                "description": "an indication of the source of the column, used only when multiple apps have conflicting definition for the column",
+                "type": "object"
+              }
+            },
+            "required": [
+              "name",
+              "type"
+            ]
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "metadataFunction": {
+      "title": "A stored function.",
+      "description": "Functions are stored Kusto queries that can be specified as part of queries by using their name.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ID of the function.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the function, to be used in queries.",
+          "type": "string"
+        },
+        "parameters": {
+          "description": "The parameters/arguments of the function, if any.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name of the function.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the function.",
+          "type": "string"
+        },
+        "body": {
+          "description": "The KQL body of the function.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "body"
+      ]
+    },
+    "metadataApplication": {
+      "title": "An Application Insights application.",
+      "description": "Application Insights apps that were part of the metadata request and that the user has access to.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ID of the Application Insights app.",
+          "type": "string"
+        },
+        "resourceId": {
+          "description": "The ARM resource ID of the Application Insights app.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the Application Insights app.",
+          "type": "string"
+        },
+        "region": {
+          "description": "The Azure region of the Application Insights app.",
+          "type": "string"
+        },
+        "tables": {
+          "description": "The list of custom tables for the Application Insights app.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "functions": {
+          "description": "The list of stored functions on the Application Insights app",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tableGroups": {
+          "description": "The list of table groups on the Application Insights app",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "resourceId",
+        "name",
+        "region"
+      ]
     },
     "errorDetail": {
       "title": "Error details.",
