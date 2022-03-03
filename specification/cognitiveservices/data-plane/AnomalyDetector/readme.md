@@ -40,7 +40,6 @@ input-file:
 ```
 
 ### Release 1.2-preview
-
 These settings apply only when `--tag=release_1_2_preview` is specified on the command line.
 
 ```yaml $(tag) == 'release_1_2_preview'
