@@ -23,7 +23,7 @@
           {
             "in": "path",
             "name": "dataSetId",
-            "description": "The root cause analysis data set unique id, should be a string of uuid.",
+            "description": "The root cause analysis data set unique id, should be a string of uuid",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -74,7 +74,7 @@
           {
             "in": "path",
             "name": "dataSetId",
-            "description": "The root cause analysis data set unique id, should be a string of uuid.",
+            "description": "The root cause analysis data set unique id, should be a string of uuid",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -113,7 +113,7 @@
           {
             "in": "path",
             "name": "dataSetId",
-            "description": "The root cause analysis data set unique id, should be a string of uuid.",
+            "description": "The root cause analysis data set unique id, should be a string of uuid",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -218,7 +218,7 @@
           {
             "in": "path",
             "name": "timestamp",
-            "description": "Timestamp of the data, should be a string of ISO format.",
+            "description": "Timestamp of the data, should be a string of ISO format",
             "required": true,
             "type": "string",
             "format": "date-time"
@@ -226,7 +226,7 @@
           {
             "in": "path",
             "name": "partitionId",
-            "description": "The partition unique id",
+            "description": "The partition unique id，should be a string of uuid",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -277,7 +277,7 @@
           {
             "in": "path",
             "name": "dataSetId",
-            "description": "The root cause analysis data set unique id",
+            "description": "Data set unique id，should be a string of uuid",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -293,7 +293,7 @@
           {
             "in": "path",
             "name": "partitionId",
-            "description": "The root cause analysis data set partition unique id",
+            "description": "Data partition unique id，should be a string of uuid",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -334,7 +334,7 @@
           {
             "in": "path",
             "name": "dataSetId",
-            "description": "The root cause analysis data set unique id",
+            "description": "The root cause analysis data set unique id，should be a string of uuid",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -381,7 +381,7 @@
           {
             "in": "path",
             "name": "dataSetId",
-            "description": "The root cause analysis data set unique id",
+            "description": "The root cause analysis data set unique id，should be a string of uuid",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -1165,7 +1165,7 @@
         },
         "customInterval": {
           "format": "int32",
-          "description": "Multidimensional root cause data set customized granularity interval. If the granularity is daily and customInterval is 3, it means the data interval should be 3 days.",
+          "description": "Multidimensional root cause data set customized granularity interval. For example, if the granularity is daily and customInterval is 3, it means the data interval should be 3 days.",
           "type": "integer"
         },
         "dimensionKeys": {
@@ -1176,7 +1176,7 @@
           }
         },
         "aggregatedIdentifier": {
-          "description": "Identifier to describe the aggregated dimension",
+          "description": "Identifier to describe the aggregated dimension for this data set. Only one identifier should be used.",
           "type": "string"
         },
         "measures": {
@@ -1240,7 +1240,7 @@
           }
         },
         "data": {
-          "description": "Multidimensional root cause data detail, the first few columns should be the dimension value. the last few columns should be the measure values",
+          "description": "Root cause data detail, the first few columns should be the dimension value. the last few columns should be the measure values. For the value doesn't exist, use null to define it.",
           "type": "array",
           "items": {
             "type": "array",
@@ -1263,7 +1263,7 @@
   ]
 }
     },
-    "MultiDimRCADataPartition": {
+    "RootCauseAnalysisDataPartition": {
       "required": [
         "data",
         "partitionId",
@@ -1272,16 +1272,17 @@
       "type": "object",
       "properties": {
         "partitionId": {
-          "description": "Multidimensional root cause analysis data partition unique ID",
+          "format": "uuid",
+          "description": "Root cause analysis data partition unique ID",
           "type": "string"
         },
         "timestamp": {
           "format": "date-time",
-          "description": "Multidimensional root cause analysis date time of the data",
+          "description": "Root cause analysis date time of the data",
           "type": "string"
         },
         "data": {
-          "description": "Multidimensional root cause data detail, the first few columns should be the dimension value. the last few columns should be the measure values",
+          "description": "Root cause data detail, the first few columns should be the dimension value. the last few columns should be the measure values",
           "type": "array",
           "items": {
             "type": "array",
@@ -1311,10 +1312,10 @@
           }
         },
         "value": {
-          "description": "Multidimensional root cause analysis data",
+          "description": "Root cause analysis data",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MultiDimRCADataPartition"
+            "$ref": "#/definitions/RootCauseAnalysisDataPartition"
           }
         }
       },
@@ -1322,7 +1323,7 @@
   "kind": "multidimensional",
   "value": [
     {
-      "partitionId": "PartitionIdentity1",
+      "partitionId": "11111111-2222-3333-4444-000000000000",
       "timestamp": "2021-12-01T00:00:00Z",
       "data": [
         [
@@ -1384,7 +1385,7 @@
       ]
     },
     {
-      "partitionId": "PartitionIdentity2",
+      "partitionId": "21111111-2222-3333-4444-000000000000",
       "timestamp": "2021-11-30T00:00:00Z",
       "data": [
         [
@@ -1446,7 +1447,7 @@
       ]
     },
     {
-      "partitionId": "PartitionIdentity3",
+      "partitionId": "31111111-2222-3333-4444-000000000000",
       "timestamp": "2021-11-29T00:00:00Z",
       "data": [
         [
@@ -1508,7 +1509,7 @@
       ]
     },
     {
-      "partitionId": "PartitionIdentity4",
+      "partitionId": "41111111-2222-3333-4444-000000000000",
       "timestamp": "2021-11-28T00:00:00Z",
       "data": [
         [
@@ -1570,7 +1571,7 @@
       ]
     },
     {
-      "partitionId": "PartitionIdentity5",
+      "partitionId": "51111111-2222-3333-4444-000000000000",
       "timestamp": "2021-11-27T00:00:00Z",
       "data": [
         [
@@ -1644,22 +1645,23 @@
       "type": "object",
       "properties": {
         "partitionId": {
-          "description": "Multidimensional root cause analysis partition identity",
+          "format": "uuid",
+          "description": "Root cause analysis partition ID",
           "type": "string"
         },
         "dataSize": {
           "format": "int32",
-          "description": "Multidimensional root cause analysis data size in the partition identity",
+          "description": "Root cause analysis data size in the partition ID",
           "type": "integer"
         },
         "timestamp": {
           "format": "date-time",
-          "description": "Multidimensional root cause date time of the data",
+          "description": "Root cause date time of the data",
           "type": "string"
         },
         "lastModifiedDateTime": {
           "format": "date-time",
-          "description": "Multidimensional root cause data last time updated",
+          "description": "Root cause data last time updated",
           "type": "string"
         }
       }
@@ -1696,7 +1698,7 @@
           "type": "string"
         },
         "measureName": {
-          "description": "Target measure name for root cause analysis instance",
+          "description": "Target measure display name for root cause analysis instance",
           "type": "string"
         }
       }
@@ -1794,12 +1796,29 @@
         }
       }
     },
+    "RootCauseAnalysisTrainingParameter": {
+      "required": [
+        "$type"
+      ],
+      "type": "object",
+      "properties": {
+        "$type": {
+          "type": "string"
+        }
+      },
+      "discriminator": "$type"
+    },
     "MultiDimRCATrainingParameter": {
       "required": [
         "endDateTime",
         "startDateTime"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RootCauseAnalysisTrainingParameter"
+        }
+      ],
       "properties": {
         "startDateTime": {
           "format": "date-time",
@@ -1811,15 +1830,21 @@
           "description": "End time of data used to train model",
           "type": "string"
         }
-      }
+      },
+      "x-ms-discriminator-value": "multidimensional"
     },
     "RootCauseAnalysisTrainingRequest": {
       "required": [
         "displayName",
-        "kind"
+        "kind",
+        "parameter"
       ],
       "type": "object",
       "properties": {
+        "displayName": {
+          "description": "Model display name",
+          "type": "string"
+        },
         "kind": {
           "description": "Root cause analysis kind",
           "enum": [
@@ -1831,37 +1856,30 @@
             "modelAsString": true
           }
         },
-        "displayName": {
-          "description": "Model name",
-          "type": "string"
+        "parameter": {
+          "description": "Parameter for training"
         }
       },
-      "discriminator": "kind",
       "example": {
+  "displayName": "Sample Root Cause Analysis Model Name",
+  "kind": "multidimensional",
   "parameter": {
     "startDateTime": "2021-10-01T00:00:00Z",
     "endDateTime": "2021-11-30T00:00:00Z"
-  },
-  "displayName": "Sample Root Cause Analysis Model Name",
-  "kind": "multidimensional"
+  }
 }
     },
-    "MultiDimRCATrainingRequest": {
+    "RootCauseAnalysisTrainingTaskInfo": {
       "required": [
-        "parameter"
+        "$type"
       ],
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RootCauseAnalysisTrainingRequest"
-        }
-      ],
       "properties": {
-        "parameter": {
-          "$ref": "#/definitions/MultiDimRCATrainingParameter"
+        "$type": {
+          "type": "string"
         }
       },
-      "x-ms-discriminator-value": "multidimensional"
+      "discriminator": "$type"
     },
     "MultiDimRCATrainingTaskInfo": {
       "required": [
@@ -1875,6 +1893,11 @@
         "validationLoss"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RootCauseAnalysisTrainingTaskInfo"
+        }
+      ],
       "properties": {
         "epoch": {
           "description": "Train epochs",
@@ -1934,7 +1957,8 @@
             "type": "integer"
           }
         }
-      }
+      },
+      "x-ms-discriminator-value": "multidimensional"
     },
     "RootCauseAnalysisTrainingResponse": {
       "required": [
@@ -1949,17 +1973,6 @@
       ],
       "type": "object",
       "properties": {
-        "kind": {
-          "description": "kind of root cause analysis",
-          "enum": [
-            "multidimensional"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "RootCauseAnalysisType",
-            "modelAsString": true
-          }
-        },
         "taskId": {
           "format": "uuid",
           "description": "Training task unique id for root cause analysis",
@@ -1978,6 +1991,17 @@
         "displayName": {
           "description": "Model name for root cause analysis",
           "type": "string"
+        },
+        "kind": {
+          "description": "kind of root cause analysis",
+          "enum": [
+            "multidimensional"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RootCauseAnalysisType",
+            "modelAsString": true
+          }
         },
         "status": {
           "description": "Training task status for root cause analysis",
@@ -2008,22 +2032,12 @@
           "$ref": "#/definitions/ErrorDetail"
         },
         "taskInfo": {
-          "$ref": "#/definitions/MultiDimRCATrainingTaskInfo"
+          "description": "Training task information"
         },
         "parameter": {
-          "$ref": "#/definitions/MultiDimRCATrainingParameter"
+          "description": "Root cause analysis training parameter"
         }
-      },
-      "discriminator": "kind"
-    },
-    "MultiDimRCATrainingResponse": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RootCauseAnalysisTrainingResponse"
-        }
-      ],
-      "x-ms-discriminator-value": "multidimensional"
+      }
     },
     "RootCauseAnalysisTrainingResponseList": {
       "required": [
@@ -2057,7 +2071,7 @@
           "type": "string"
         },
         "dimensionScope": {
-          "description": "Dimension scope used to narrow down the search. Only dimension with specific value need to be provided.",
+          "description": "Dimension scope used to narrow down the search. Only dimension with specific value needs to be provided.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -2297,14 +2311,29 @@
       "type": "string",
       "in": "path",
       "x-ms-skip-url-encoding": true
+    },
+    "ApiVersion": {
+      "name": "ApiVersion",
+      "description": "Anomaly Detector API version (for example, v1.0).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "1.2-preview"
+      ],
+      "in": "path",
+      "x-ms-skip-url-encoding": true
     }
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/anomalydetector/v1.2-preview",
+    "hostTemplate": "{Endpoint}/anomalydetector/{ApiVersion}",
     "useSchemePrefix": false,
     "parameters": [
       {
         "$ref": "#/parameters/Endpoint"
+      },
+      {
+        "$ref": "#/parameters/ApiVersion"
       }
     ]
   }
