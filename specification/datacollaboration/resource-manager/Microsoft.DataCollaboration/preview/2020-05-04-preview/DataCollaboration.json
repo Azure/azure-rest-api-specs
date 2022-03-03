@@ -1064,7 +1064,11 @@
             "enum": [
               "Production",
               "Sample"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "dataSetCategoryType",
+              "modelAsString": true
+            }
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1123,7 +1127,11 @@
             "enum": [
               "Production",
               "Sample"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "dataSetCategoryType",
+              "modelAsString": true
+            }
           },
           {
             "name": "dataSet",
@@ -1197,7 +1205,11 @@
             "enum": [
               "Production",
               "Sample"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "dataSetCategoryType",
+              "modelAsString": true
+            }
           },
           {
             "$ref": "#/parameters/api-version"
@@ -3337,6 +3349,9 @@
         "x-ms-examples": {
           "Constraints_CreateOrUpdate": {
             "$ref": "./examples/Constraints_CreateOrUpdate.json"
+          },
+          "Constraints_ScriptParameter_CreateOrUpdate": {
+            "$ref": "./examples/Constraints_ScriptParameter_CreateOrUpdate.json"
           }
         }
       },
@@ -5601,7 +5616,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConstrainedResource"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -5650,7 +5666,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Constraint"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -5695,7 +5712,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConsumerInvitation"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -5830,7 +5848,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataAsset"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -5914,7 +5933,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataAssetReference"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6126,7 +6146,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataCollaborationErrorInfo"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "message": {
           "description": "Message of the error",
@@ -6264,7 +6285,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataSet"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6288,7 +6310,8 @@
           "items": {
             "format": "date-time",
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "x-ms-discriminator-value": "DateTimeOptionsSet"
@@ -6591,7 +6614,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Entitlement"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6651,7 +6675,8 @@
           "items": {
             "format": "float",
             "type": "number"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "x-ms-discriminator-value": "FloatOptionsSet"
@@ -6771,7 +6796,8 @@
           "items": {
             "format": "int32",
             "type": "integer"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "x-ms-discriminator-value": "IntegerOptionsSet"
@@ -6877,7 +6903,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Invitation"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -7018,7 +7045,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ManagedPrivateEndpoint"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -7093,7 +7121,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationModel"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -7129,7 +7158,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DimensionProperties"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "displayDescription": {
           "description": "description of the metric",
@@ -7165,7 +7195,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "supportedTimeGrainTypes": {
           "description": "supported time grain types",
@@ -7173,7 +7204,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "unit": {
           "description": "units for the metric",
@@ -7201,7 +7233,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationMetaLogSpecification"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "metricSpecifications": {
           "description": "metric specifications for the operation",
@@ -7209,7 +7242,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationMetaMetricSpecification"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -7392,7 +7426,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Participant"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -7520,7 +7555,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Pipeline"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -7560,7 +7596,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScriptParameter"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -7597,7 +7634,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PipelineRun"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -7653,7 +7691,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PipelineRunParameterAssignment"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -7773,7 +7812,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PipelineStep"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -7810,7 +7850,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PipelineStepRun"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -7868,7 +7909,8 @@
           "items": {
             "$ref": "#/definitions/PipelineSubstep"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "startTime": {
           "format": "date-time",
@@ -7994,7 +8036,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Policy"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -8065,7 +8108,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Proposal"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -8281,7 +8325,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceReference"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -8345,7 +8390,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AdapterBindingConstraint"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "description": {
           "description": "Description of the constraint.",
@@ -8386,7 +8432,8 @@
           "items": {
             "$ref": "#/definitions/ScriptExecutionParameter"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "name": {
           "description": "The name of the script",
@@ -8480,7 +8527,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SinkBindingExecutionInformation"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "sourceBindings": {
           "description": "Source Binding",
@@ -8488,7 +8536,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SourceBindingExecutionInformation"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "synapseSparkInformation": {
           "$ref": "#/definitions/SynapseSparkInformation",
@@ -8534,7 +8583,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Script"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -8743,7 +8793,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScriptReference"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -8803,7 +8854,8 @@
           "items": {
             "$ref": "#/definitions/ScriptParameter"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "placeholderInfo": {
           "$ref": "#/definitions/ScriptReferencePlaceholderInfo",
@@ -8883,7 +8935,8 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "sources": {
           "description": "The list of parameters the script can use as it's data sources",
@@ -8892,7 +8945,8 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
@@ -8933,7 +8987,8 @@
           "items": {
             "$ref": "#/definitions/ScriptParameter"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "purpose": {
           "description": "Script purpose",
@@ -8984,7 +9039,8 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "sources": {
           "description": "The list of parameters the scriptReference can use as it's data sources",
@@ -8993,7 +9049,8 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
@@ -9029,7 +9086,8 @@
           "items": {
             "$ref": "#/definitions/ScriptParameter"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "purpose": {
           "description": "Script purpose",
@@ -9075,7 +9133,8 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "sources": {
           "description": "The list of parameters the script can use as it's data sources",
@@ -9084,7 +9143,8 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
@@ -9217,7 +9277,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "x-ms-discriminator-value": "StringOptionsSet"
@@ -9347,7 +9408,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "diagnosticsLogBindings": {
           "description": "Bindings between the diagnostics logs and data assets",
@@ -9355,7 +9417,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DiagnosticsLog"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "executorNodeSize": {
           "description": "The node size to use per executor.",
@@ -9393,7 +9456,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScriptParameterBinding"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "scriptParameters": {
           "description": "List of pipeline step level script parameters",
@@ -9401,7 +9465,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScriptParameter"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "scriptRevision": {
           "format": "int32",
@@ -9414,7 +9479,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScriptDataAssetBinding"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "scriptSourceBindings": {
           "description": "Bindings between the script's source keys and data assets",
@@ -9422,7 +9488,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScriptDataAssetBinding"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "synapseSparkPoolId": {
           "description": "The Synapse Spark pool that will execute this step",
@@ -9645,7 +9712,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScriptParameter"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "provisioningState": {
           "description": "Provisioning state of the script.",
@@ -9694,7 +9762,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "sources": {
           "description": "The list of parameters the script can use as it's data sources",
@@ -9702,7 +9771,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "visibility": {
           "description": "Script visibility mode",
@@ -9806,7 +9876,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualOutputReference"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -9866,7 +9937,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Workspace"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
