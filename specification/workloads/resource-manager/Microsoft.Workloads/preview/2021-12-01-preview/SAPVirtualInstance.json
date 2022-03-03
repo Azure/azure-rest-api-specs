@@ -2253,6 +2253,10 @@
         }
       ],
       "properties": {
+        "databaseType": {
+          "description": "The database type.",
+          "$ref": "#/definitions/SAPDatabaseType"
+        },
         "subnetId": {
           "description": "The subnet id.",
           "type": "string"
@@ -2295,6 +2299,10 @@
       "description": "Gets or sets the database configuration.",
       "type": "object",
       "properties": {
+        "databaseType": {
+          "description": "The database type.",
+          "$ref": "#/definitions/SAPDatabaseType"
+        },
         "subnetId": {
           "description": "The subnet id.",
           "type": "string"
@@ -2593,6 +2601,10 @@
       "properties": {
         "virtualMachineId": {
           "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/SAPVirtualInstanceStatus",
           "readOnly": true
         }
       }
@@ -3083,10 +3095,6 @@
         },
         "status": {
           "$ref": "#/definitions/SAPVirtualInstanceStatus",
-          "readOnly": true
-        },
-        "health": {
-          "$ref": "#/definitions/HealthState",
           "readOnly": true
         },
         "provisioningState": {
