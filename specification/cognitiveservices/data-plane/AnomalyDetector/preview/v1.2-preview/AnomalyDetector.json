@@ -18,11 +18,14 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/anomalydetector/v1.2-preview",
+    "hostTemplate": "{Endpoint}/anomalydetector/{ApiVersion}",
     "useSchemePrefix": false,
     "parameters": [
       {
         "$ref": "#/parameters/Endpoint"
+      },
+      {
+        "$ref": "#/parameters/ApiVersion"
       }
     ]
   },
@@ -58,6 +61,12 @@
           },
           "default": {
             "description": "Error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "error code"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/AnomalyDetectorError"
             }
@@ -101,6 +110,12 @@
           },
           "default": {
             "description": "Error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "error code"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/AnomalyDetectorError"
             }
@@ -144,6 +159,12 @@
           },
           "default": {
             "description": "Error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "error code"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/AnomalyDetectorError"
             }
@@ -173,7 +194,9 @@
             "InvalidSeries",
             "InvalidJsonFormat",
             "RequiredGranularity",
-            "RequiredSeries"
+            "RequiredSeries",
+            "InvalidImputeMode",
+            "InvalidImputeFixedValue"
           ],
           "x-ms-enum": {
             "name": "AnomalyDetectorErrorCodes",
@@ -189,7 +212,6 @@
     "TimeGranularity": {
       "type": "string",
       "description": "Optional argument, can be one of yearly, monthly, weekly, daily, hourly, minutely, secondly, microsecond or none. If granularity is not present, it will be none by default. If granularity is none, the timestamp property in time series point can be absent.",
-      "x-nullable": false,
       "x-ms-enum": {
         "name": "TimeGranularity",
         "modelAsString": false,
@@ -240,11 +262,52 @@
     "CustomInterval": {
       "type": "integer",
       "format": "int32",
-      "x-nullable": false,
       "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}."
+    },
+    "ImputeMode": {
+      "type": "string",
+      "description": "Define the impute method, can be one of auto, previous, linear, fixed, zero, notFill.",
+      "x-ms-enum": {
+        "name": "ImputeMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "auto"
+          },
+          {
+            "value": "previous"
+          },
+          {
+            "value": "linear"
+          },
+          {
+            "value": "fixed"
+          },
+          {
+            "value": "zero"
+          },
+          {
+            "value": "notFill"
+          }
+        ]
+      },
+      "enum": [
+        "auto",
+        "previous",
+        "linear",
+        "fixed",
+        "zero",
+        "notFill"
+      ]
+    },
+    "ImputeFixedValue": {
+      "type": "number",
+      "format": "float",
+      "description": "Used when imputeMode set to \"fixed\", in this case, it will be used to impute the missing values."
     },
     "DetectRequest": {
       "type": "object",
+      "description": "The request of entire or last anomaly detection.",
       "required": [
         "series"
       ],
@@ -260,8 +323,8 @@
           "$ref": "#/definitions/TimeGranularity"
         },
         "customInterval": {
-          "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}.",
-          "$ref": "#/definitions/CustomInterval"
+          "$ref": "#/definitions/CustomInterval",
+          "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}."
         },
         "period": {
           "type": "integer",
@@ -277,11 +340,20 @@
           "type": "integer",
           "format": "int32",
           "description": "Optional argument, advanced model parameter, between 0-99, the lower the value is, the larger the margin value will be which means less anomalies will be accepted."
+        },
+        "imputeMode": {
+          "$ref": "#/definitions/ImputeMode",
+          "description": "Used to specify how to deal with missing values in the input series, it's used when granularity is not \"none\"."
+        },
+        "imputeFixedValue": {
+          "$ref": "#/definitions/ImputeFixedValue",
+          "description": "Used to specify the value to fill, it's used when granularity is not \"none\" and imputeMode is \"fixed\"."
         }
       }
     },
     "TimeSeriesPoint": {
       "type": "object",
+      "description": "The definition of input timeseries points.",
       "required": [
         "value"
       ],
@@ -300,6 +372,7 @@
     },
     "EntireDetectResponse": {
       "type": "object",
+      "description": "The response of entire anomaly detection.",
       "required": [
         "expectedValues",
         "isAnomaly",
@@ -320,8 +393,7 @@
           "description": "ExpectedValues contain expected value for each input point. The index of the array is consistent with the input series.",
           "items": {
             "type": "number",
-            "format": "float",
-            "x-nullable": false
+            "format": "float"
           }
         },
         "upperMargins": {
@@ -329,8 +401,7 @@
           "description": "UpperMargins contain upper margin of each input point. UpperMargin is used to calculate upperBoundary, which equals to expectedValue + (100 - marginScale)*upperMargin. Anomalies in response can be filtered by upperBoundary and lowerBoundary. By adjusting marginScale value, less significant anomalies can be filtered in client side. The index of the array is consistent with the input series.",
           "items": {
             "type": "number",
-            "format": "float",
-            "x-nullable": false
+            "format": "float"
           }
         },
         "lowerMargins": {
@@ -338,38 +409,43 @@
           "description": "LowerMargins contain lower margin of each input point. LowerMargin is used to calculate lowerBoundary, which equals to expectedValue - (100 - marginScale)*lowerMargin. Points between the boundary can be marked as normal ones in client side. The index of the array is consistent with the input series.",
           "items": {
             "type": "number",
-            "format": "float",
-            "x-nullable": false
+            "format": "float"
           }
         },
         "isAnomaly": {
           "type": "array",
           "description": "IsAnomaly contains anomaly properties for each input point. True means an anomaly either negative or positive has been detected. The index of the array is consistent with the input series.",
           "items": {
-            "type": "boolean",
-            "x-nullable": false
+            "type": "boolean"
           }
         },
         "isNegativeAnomaly": {
           "type": "array",
           "description": "IsNegativeAnomaly contains anomaly status in negative direction for each input point. True means a negative anomaly has been detected. A negative anomaly means the point is detected as an anomaly and its real value is smaller than the expected one. The index of the array is consistent with the input series.",
           "items": {
-            "type": "boolean",
-            "x-nullable": false
+            "type": "boolean"
           }
         },
         "isPositiveAnomaly": {
           "type": "array",
           "description": "IsPositiveAnomaly contain anomaly status in positive direction for each input point. True means a positive anomaly has been detected. A positive anomaly means the point is detected as an anomaly and its real value is larger than the expected one. The index of the array is consistent with the input series.",
           "items": {
-            "type": "boolean",
-            "x-nullable": false
+            "type": "boolean"
+          }
+        },
+        "severity": {
+          "type": "array",
+          "description": "The severity score for each input point. The larger the value is, the more sever the anomaly is. For normal points, the \"severity\" is always 0.",
+          "items": {
+            "type": "number",
+            "format": "float"
           }
         }
       }
     },
     "LastDetectResponse": {
       "type": "object",
+      "description": "The response of last anomaly detection.",
       "required": [
         "expectedValue",
         "isAnomaly",
@@ -417,11 +493,17 @@
         "isPositiveAnomaly": {
           "type": "boolean",
           "description": "Anomaly status in positive direction of the latest point. True means the latest point is an anomaly and its real value is larger than the expected one."
+        },
+        "severity": {
+          "type": "number",
+          "format": "float",
+          "description": "The severity score for the last input point. The larger the value is, the more sever the anomaly is. For normal points, the \"severity\" is always 0."
         }
       }
     },
     "ChangePointDetectRequest": {
       "type": "object",
+      "description": "The request of change point detection.",
       "required": [
         "granularity",
         "series"
@@ -439,8 +521,8 @@
           "description": "Can only be one of yearly, monthly, weekly, daily, hourly, minutely or secondly. Granularity is used for verify whether input series is valid."
         },
         "customInterval": {
-          "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}.",
-          "$ref": "#/definitions/CustomInterval"
+          "$ref": "#/definitions/CustomInterval",
+          "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}."
         },
         "period": {
           "type": "integer",
@@ -461,6 +543,7 @@
     },
     "ChangePointDetectResponse": {
       "type": "object",
+      "description": "The response of change point detection.",
       "properties": {
         "period": {
           "type": "integer",
@@ -473,8 +556,7 @@
           "description": "isChangePoint contains change point properties for each input point. True means an anomaly either negative or positive has been detected. The index of the array is consistent with the input series.",
           "items": {
             "type": "boolean",
-            "readOnly": true,
-            "x-nullable": false
+            "readOnly": true
           }
         },
         "confidenceScores": {
@@ -483,8 +565,7 @@
           "items": {
             "type": "number",
             "format": "float",
-            "readOnly": true,
-            "x-nullable": false
+            "readOnly": true
           }
         }
       }
@@ -497,6 +578,18 @@
       "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    },
+    "ApiVersion": {
+      "name": "ApiVersion",
+      "description": "Anomaly Detector API version (for example, v1.0).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "v1.1-preview.1"
+      ],
       "in": "path",
       "x-ms-skip-url-encoding": true
     }
