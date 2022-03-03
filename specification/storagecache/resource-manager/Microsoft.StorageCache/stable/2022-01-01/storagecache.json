@@ -64,7 +64,7 @@
         ],
         "description": "Lists all of the available Resource Provider operations.",
         "x-ms-examples": {
-          "StorageTargets_List": {
+          "Operations_List": {
             "$ref": "./examples/Operations_List.json"
           }
         },
@@ -209,6 +209,55 @@
         ],
         "description": "Gets the status of an asynchronous operation for the Azure HPC Cache",
         "operationId": "AscOperations_Get"
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/locations/{location}/usages": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the region to query for usage information."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The usage information was returned.",
+            "schema": {
+              "$ref": "#/definitions/ResourceUsagesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AscUsages_List": {
+            "$ref": "./examples/AscResourceUsages_Get.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          "AscUsages"
+        ],
+        "description": "Gets the quantity used and quota limit for resources",
+        "operationId": "AscUsages_List"
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/caches": {
@@ -1325,7 +1374,10 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/definitions/MetricSpecification"
-                  }
+                  },
+                  "x-ms-identifiers": [
+                    "name"
+                  ]
                 }
               }
             }
@@ -1346,7 +1398,8 @@
           "items": {
             "$ref": "#/definitions/ApiOperation"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         }
       },
       "type": "object"
@@ -1374,7 +1427,8 @@
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         },
         "message": {
           "description": "A message describing the error, intended to be suitable for display in a user interface.",
@@ -1712,7 +1766,10 @@
           "items": {
             "$ref": "#/definitions/NfsAccessPolicy"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -1895,7 +1952,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NfsAccessRule"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -2037,7 +2095,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Condition"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2166,7 +2225,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NamespaceJunction"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "targetType": {
           "description": "Type of the Storage Target.",
@@ -2314,7 +2374,10 @@
           "items": {
             "$ref": "#/definitions/ResourceSkuCapabilities"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "locations": {
           "readOnly": true,
@@ -2329,7 +2392,8 @@
           "items": {
             "$ref": "#/definitions/ResourceSkuLocationInfo"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         },
         "name": {
           "description": "The name of this SKU.",
@@ -2340,7 +2404,8 @@
           "items": {
             "$ref": "#/definitions/Restriction"
           },
-          "description": "The restrictions preventing this SKU from being used. This is empty if there are no restrictions."
+          "description": "The restrictions preventing this SKU from being used. This is empty if there are no restrictions.",
+          "x-ms-identifiers": []
         }
       },
       "type": "object"
@@ -2421,7 +2486,8 @@
           "items": {
             "$ref": "#/definitions/ResourceSku"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2505,7 +2571,72 @@
           "items": {
             "$ref": "#/definitions/UsageModel"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": [
+            "modelName"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "ResourceUsagesListResult": {
+      "description": "Result of the request to list resource usages. It contains a list of resource usages & limits and a URL link to get the next set of results.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to get the next set of resource usage list results if there are any.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "List of usages and limits for resources controlled by the Microsoft.StorageCache resource provider.",
+          "items": {
+            "$ref": "#/definitions/ResourceUsage"
+          },
+          "readOnly": true,
+          "type": "array",
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "ResourceUsage": {
+      "description": "The usage and limit (quota) for a resource.",
+      "properties": {
+        "limit": {
+          "description": "The limit (quota) for this resource.",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "unit": {
+          "description": "Unit that the limit and usages are expressed in, such as 'Count'.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "currentValue": {
+          "description": "The current usage of this resource.",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "name": {
+          "description": "Naming information for this resource type.",
+          "readOnly": true,
+          "type": "object",
+          "properties": {
+            "value": {
+              "description": "Canonical name for this resource type.",
+              "type": "string"
+            },
+            "localizedValue": {
+              "description": "Localized name for this resource type.",
+              "type": "string"
+            }
+          }
         }
       },
       "type": "object"
@@ -2563,7 +2694,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricDimension"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
