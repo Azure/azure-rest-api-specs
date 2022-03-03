@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "searchServiceName": "mysearchservice",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-04-01-preview",
+    "subscriptionId": "subid",
+    "service": {
+      "properties": {
+        "replicaCount": 3,
+        "partitionCount": 1,
+        "publicNetworkAccess": "enabled",
+        "networkRuleSet": {
+          "ipRules": [
+            {
+              "value": "123.4.5.6"
+            },
+            {
+              "value": "123.4.6.0/18"
+            }
+          ],
+          "bypass": "AzurePortal"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice",
+        "name": "mysearchservice",
+        "location": "westus",
+        "type": "Microsoft.Search/searchServices",
+        "tags": {
+          "app-name": "My e-commerce app",
+          "new-tag": "Adding a new tag"
+        },
+        "sku": {
+          "name": "standard"
+        },
+        "properties": {
+          "replicaCount": 3,
+          "partitionCount": 1,
+          "status": "running",
+          "statusDetails": "",
+          "hostingMode": "default",
+          "provisioningState": "succeeded",
+          "publicNetworkAccess": "enabled",
+          "networkRuleSet": {
+            "ipRules": [
+              {
+                "value": "10.2.3.4"
+              }
+            ],
+            "bypass": "AzurePortal"
+          },
+          "privateEndpointConnections": [],
+          "sharedPrivateLinkResources": [],
+          "encryptionWithCmk": {
+            "enforcement": "Unspecified",
+            "encryptionComplianceStatus": "Compliant"
+          },
+          "disableLocalAuth": false,
+          "authOptions": {
+            "apiKeyOnly": {}
+          },
+          "disabledDataExfiltrationOptions": []
+        }
+      }
+    }
+  }
+}
