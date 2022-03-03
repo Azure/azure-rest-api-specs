@@ -2032,7 +2032,7 @@
           "$ref": "#/definitions/ErrorDetail"
         },
         "taskInfo": {
-          "description": "Training task information"
+          "description": "Training task information, if status is failed, this failed will not be shown"
         },
         "parameter": {
           "description": "Root cause analysis training parameter"
@@ -2058,12 +2058,29 @@
         }
       }
     },
+    "RootCauseAnalysisInferenceParameter": {
+      "required": [
+        "$type"
+      ],
+      "type": "object",
+      "properties": {
+        "$type": {
+          "type": "string"
+        }
+      },
+      "discriminator": "$type"
+    },
     "MultiDimRCAInferenceParameter": {
       "required": [
         "dimensionScope",
         "timestamp"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RootCauseAnalysisInferenceParameter"
+        }
+      ],
       "properties": {
         "timestamp": {
           "format": "date-time",
@@ -2077,11 +2094,13 @@
             "type": "string"
           }
         }
-      }
+      },
+      "x-ms-discriminator-value": "multidimensional"
     },
     "RootCauseAnalysisInferenceRequest": {
       "required": [
-        "kind"
+        "kind",
+        "parameter"
       ],
       "type": "object",
       "properties": {
@@ -2095,33 +2114,18 @@
             "name": "RootCauseAnalysisType",
             "modelAsString": true
           }
+        },
+        "parameter": {
+          "description": "Parameter for inference"
         }
       },
-      "discriminator": "kind",
       "example": {
+  "kind": "multidimensional",
   "parameter": {
     "timestamp": "2021-12-01T00:00:00Z",
     "dimensionScope": {}
-  },
-  "kind": "multidimensional"
+  }
 }
-    },
-    "MultiDimRCAInferenceRequest": {
-      "required": [
-        "parameter"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RootCauseAnalysisInferenceRequest"
-        }
-      ],
-      "properties": {
-        "parameter": {
-          "$ref": "#/definitions/MultiDimRCAInferenceParameter"
-        }
-      },
-      "x-ms-discriminator-value": "multidimensional"
     },
     "MultiDimRootCauseMeasure": {
       "required": [
@@ -2189,11 +2193,28 @@
         }
       }
     },
+    "RootCauseAnalysisInferenceResult": {
+      "required": [
+        "$type"
+      ],
+      "type": "object",
+      "properties": {
+        "$type": {
+          "type": "string"
+        }
+      },
+      "discriminator": "$type"
+    },
     "MultiDimRCAInferenceResult": {
       "required": [
         "rootCauses"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RootCauseAnalysisInferenceResult"
+        }
+      ],
       "properties": {
         "rootCauses": {
           "description": "root causes",
@@ -2202,7 +2223,8 @@
             "$ref": "#/definitions/MultiDimRootCause"
           }
         }
-      }
+      },
+      "x-ms-discriminator-value": "multidimensional"
     },
     "RootCauseAnalysisInferenceResponse": {
       "required": [
@@ -2216,17 +2238,6 @@
       ],
       "type": "object",
       "properties": {
-        "kind": {
-          "description": "Kind of root cause analysis",
-          "enum": [
-            "multidimensional"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "RootCauseAnalysisType",
-            "modelAsString": true
-          }
-        },
         "inferenceId": {
           "format": "uuid",
           "description": "Inference unique id for root cause analysis",
@@ -2241,6 +2252,17 @@
           "format": "uuid",
           "description": "Model unique id for root cause analysis",
           "type": "string"
+        },
+        "kind": {
+          "description": "Kind of root cause analysis",
+          "enum": [
+            "multidimensional"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RootCauseAnalysisType",
+            "modelAsString": true
+          }
         },
         "status": {
           "description": "Inference task status for root cause analysis",
@@ -2271,22 +2293,12 @@
           "$ref": "#/definitions/ErrorDetail"
         },
         "result": {
-          "$ref": "#/definitions/MultiDimRCAInferenceResult"
+          "description": "Root cause analysis inference result, if status is failed, this field wil not be shown"
         },
         "parameter": {
-          "$ref": "#/definitions/MultiDimRCAInferenceParameter"
+          "description": "Root cause analysis inference parameter"
         }
-      },
-      "discriminator": "kind"
-    },
-    "MultiDimRCAInferenceResponse": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RootCauseAnalysisInferenceResponse"
-        }
-      ],
-      "x-ms-discriminator-value": "multidimensional"
+      }
     }
   },
   "securityDefinitions": {
