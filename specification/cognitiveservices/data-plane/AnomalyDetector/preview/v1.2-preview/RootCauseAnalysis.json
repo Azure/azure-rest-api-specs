@@ -3,7 +3,7 @@
   "info": {
     "title": "Anomaly Detector Client",
     "description": "Root cause analysis(RCA) helps trace the crucial dimension combinations that contribute to the given anomaly point with aggregated dimension combination. For example, when a point with dimension Country = Sum, version = Sum is detected as anomaly point, using root cause analysis algorithm, we can locate the child dimension combination, for example, it might be Country = CN, version = IOS causes the given anomaly. Our algorithm supports finding root cause  from both single and multiple measures.",
-    "version": "1.2-preview"
+    "version": "1.1-preview.2"
   },
   "paths": {
     "/rootCauseAnalysis/dataSets/{dataSetId}": {
@@ -722,7 +722,7 @@
         "tags": [
           "RootCauseAnalysisModel"
         ],
-        "summary": "Trigger a model training task for root cause analysis",
+        "summary": "Create a training model for root cause analysis",
         "operationId": "CreateRootCauseAnalysisTrainingTask",
         "consumes": [
           "application/json"
@@ -774,7 +774,7 @@
           }
         },
         "x-ms-examples": {
-          "Trigger a model training task for root cause analysis": {
+          "Create a training model for root cause analysis": {
             "$ref": "./examples/CreateRootCauseAnalysisTrainingTask.json"
           }
         }
@@ -940,7 +940,7 @@
         "tags": [
           "RootCauseAnalysisModel"
         ],
-        "summary": "Trigger an inference task for root cause analysis",
+        "summary": "Create an inference task for root cause analysis",
         "operationId": "CreateRootCauseAnalysisInferenceTask",
         "consumes": [
           "application/json"
@@ -1001,7 +1001,7 @@
           }
         },
         "x-ms-examples": {
-          "Trigger an inference task for root cause analysis": {
+          "Create an inference task for root cause analysis": {
             "$ref": "./examples/CreateRootCauseAnalysisInferenceTask.json"
           }
         }
@@ -2331,7 +2331,7 @@
       "required": true,
       "type": "string",
       "enum": [
-        "v1.2-preview"
+        "v1.1-preview.2"
       ],
       "in": "path",
       "x-ms-skip-url-encoding": true
