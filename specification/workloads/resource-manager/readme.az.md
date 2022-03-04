@@ -6,9 +6,9 @@ For new Resource Provider. It is highly recommended to onboard Azure CLI extensi
 
 ``` yaml $(az) && $(target-mode) != 'core'
 az:
-    extensions: workloads
-    namespace: azure.mgmt.workloads
-    package-name: azure-mgmt-workloads
+  extensions: workloads
+  namespace: azure.mgmt.workloads
+  package-name: azure-mgmt-workloads
 az-output-folder: $(azure-cli-extension-folder)/src/workloads
 python-sdk-output-folder: "$(az-output-folder)/azext_workloads/vendored_sdks/workloads"
 # add additional configuration here specific for Azure CLI
