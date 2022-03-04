@@ -27,7 +27,7 @@ These are the global settings for Render Client.
 ``` yaml
 title: RenderClient
 openapi-type: data-plane
-tag: 2.1-preview
+tag: 2.0-preview
 # at some point those credentials will move away to Swagger according to [this](https://github.com/Azure/autorest/issues/3718)
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
