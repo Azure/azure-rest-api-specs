@@ -449,6 +449,10 @@
           "x-ms-identifiers": [
             "server"
           ]
+        },
+        "dapr": {
+          "$ref": "#/definitions/Dapr",
+          "description": "Dapr configuration for the Container App."
         }
       }
     },
@@ -559,6 +563,37 @@
             "type": "string"
           },
           "description": "Application-specific metadata in the form of key-value pairs."
+        }
+      }
+    },
+    "Dapr": {
+      "description": "Container App Dapr configuration.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "Boolean indicating if the Dapr side car is enabled",
+          "type": "boolean"
+        },
+        "appId": {
+          "description": "Dapr application identifier",
+          "type": "string"
+        },
+        "appProtocol": {
+          "description": "Tells Dapr which protocol your application is using. Valid options are http and grpc. Default is http",
+          "enum": [
+            "http",
+            "grpc"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "appProtocol",
+            "modelAsString": true
+          }
+        },
+        "appPort": {
+          "format": "int32",
+          "description": "Tells Dapr which port your application is listening on",
+          "type": "integer"
         }
       }
     },
