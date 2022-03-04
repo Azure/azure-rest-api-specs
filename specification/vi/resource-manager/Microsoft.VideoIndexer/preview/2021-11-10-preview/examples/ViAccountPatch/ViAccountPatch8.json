@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "accountName": "contosto-videoanalyzer",
+    "resourceGroupName": "contosto-videoanalyzer-rg",
+    "api-version": "2021-11-10-preview",
+    "subscriptionId": "b04775c3-63fa-40f3-9430-139d2e5522d3",
+    "parameters": {
+      "properties": {
+        "mediaServices": {
+          "userAssignedIdentity": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoanalyzer-mi"
+        }
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {}
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/586d4f48-8f08-4a4e-96b7-e1892d6dba9e/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.VideoIndexer/accounts/contosto-videoanalyzer",
+        "name": "contosto-videoanalyzer",
+        "location": "NorthEurope",
+        "type": "Microsoft.VideoIndexer/accounts",
+        "tags": {},
+        "properties": {}
+      }
+    },
+    "400": {
+      "body": {
+        "error": {
+          "code": "MissingIdentityIds",
+          "message": "The identity ids must not be null or empty for 'UserAssigned' identity type."
+        }
+      }
+    },
+    "404": {
+      "body": {}
+    },
+    "500": {
+      "body": {
+        "error": {
+          "code": "GENERAL",
+          "message": "Trace id: '9677927b-ae6b-496g-1df8-9ec3048b4bf2'."
+        }
+      }
+    }
+  }
+}
