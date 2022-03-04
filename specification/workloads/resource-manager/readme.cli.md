@@ -1,4 +1,1 @@
-``` yaml
-# add any configuration here for all CLI languages
-# refer to the faq.md for more details
-```
+## CLI Common Settings for all the command line tools
