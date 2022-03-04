@@ -3,7 +3,7 @@
   "info": {
     "title": "Anomaly Detector Client",
     "description": "Root cause analysis(RCA) helps trace the crucial dimension combinations that contribute to the given anomaly point with aggregated dimension combination. For example, when a point with dimension Country = Sum, version = Sum is detected as anomaly point, using root cause analysis algorithm, we can locate the child dimension combination, for example, it might be Country = CN, version = IOS causes the given anomaly. Our algorithm supports finding root cause  from both single and multiple measures.",
-    "version": "1.2-preview"
+    "version": "1.1-preview.2"
   },
   "paths": {
     "/rootCauseAnalysis/dataSets/{dataSetId}": {
@@ -55,6 +55,10 @@
             }
           }
         },
+        "x-ms-error-code": {
+          "description": "error code",
+          "type": "string"
+        },
         "x-ms-examples": {
           "Create a root cause analysis data set": {
             "$ref": "./examples/CreateRootCauseAnalysisDataSet.json"
@@ -94,6 +98,10 @@
             }
           }
         },
+        "x-ms-error-code": {
+          "description": "error code",
+          "type": "string"
+        },
         "x-ms-examples": {
           "Get a root cause analysis data set by its id": {
             "$ref": "./examples/GetRootCauseAnalysisDataSet.json"
@@ -129,6 +137,10 @@
               "$ref": "#/definitions/ErrorDetail"
             }
           }
+        },
+        "x-ms-error-code": {
+          "description": "error code",
+          "type": "string"
         },
         "x-ms-examples": {
           "Delete a root cause analysis data set": {
@@ -182,6 +194,10 @@
               "$ref": "#/definitions/ErrorDetail"
             }
           }
+        },
+        "x-ms-error-code": {
+          "description": "error code",
+          "type": "string"
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -258,6 +274,10 @@
             }
           }
         },
+        "x-ms-error-code": {
+          "description": "error code",
+          "type": "string"
+        },
         "x-ms-examples": {
           "Upload data to root cause analysis data set by partition": {
             "$ref": "./examples/UploadRootCauseAnalysisDataByPartition.json"
@@ -310,6 +330,10 @@
             }
           }
         },
+        "x-ms-error-code": {
+          "description": "error code",
+          "type": "string"
+        },
         "x-ms-examples": {
           "Delete root cause analysis data by partition Id": {
             "$ref": "./examples/DeleteRootCauseAnalysisDataByPartitionId.json"
@@ -359,6 +383,10 @@
               "$ref": "#/definitions/ErrorDetail"
             }
           }
+        },
+        "x-ms-error-code": {
+          "description": "error code",
+          "type": "string"
         },
         "x-ms-examples": {
           "Upload data to root cause analysis data set by block": {
@@ -410,6 +438,10 @@
             }
           }
         },
+        "x-ms-error-code": {
+          "description": "error code",
+          "type": "string"
+        },
         "x-ms-examples": {
           "Delete root cause analysis data by time range": {
             "$ref": "./examples/DeleteRootCauseAnalysisDataByTimeRange.json"
@@ -431,7 +463,7 @@
           {
             "in": "path",
             "name": "dataSetId",
-            "description": "The root cause analysis data set unique id",
+            "description": "The root cause analysis data set unique id, should be a string of uuid",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -439,7 +471,7 @@
           {
             "in": "path",
             "name": "timestamp",
-            "description": "The time stamp to be queried, should be a string of ISO format",
+            "description": "The time stamp to be queried, should be a string of ISO format, should be a string of uuid",
             "required": true,
             "type": "string",
             "format": "date-time"
@@ -458,6 +490,10 @@
               "$ref": "#/definitions/ErrorDetail"
             }
           }
+        },
+        "x-ms-error-code": {
+          "description": "error code",
+          "type": "string"
         },
         "x-ms-examples": {
           "List data meta for a given timestamp": {
@@ -480,7 +516,7 @@
           {
             "in": "path",
             "name": "dataSetId",
-            "description": "The root cause analysis data set unique id",
+            "description": "The root cause analysis data set unique id, should be a string of uuid",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -519,6 +555,10 @@
               "$ref": "#/definitions/ErrorDetail"
             }
           }
+        },
+        "x-ms-error-code": {
+          "description": "error code",
+          "type": "string"
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -579,6 +619,10 @@
             }
           }
         },
+        "x-ms-error-code": {
+          "description": "error code",
+          "type": "string"
+        },
         "x-ms-examples": {
           "Create an instance for root cause analysis": {
             "$ref": "./examples/CreateRootCauseAnalysisInstance.json"
@@ -618,6 +662,10 @@
             }
           }
         },
+        "x-ms-error-code": {
+          "description": "error code",
+          "type": "string"
+        },
         "x-ms-examples": {
           "Query an instance information for root cause analysis": {
             "$ref": "./examples/GetRootCauseAnalysisInstance.json"
@@ -653,6 +701,10 @@
               "$ref": "#/definitions/ErrorDetail"
             }
           }
+        },
+        "x-ms-error-code": {
+          "description": "error code",
+          "type": "string"
         },
         "x-ms-examples": {
           "Delete an instance for root cause analysis": {
@@ -707,6 +759,10 @@
             }
           }
         },
+        "x-ms-error-code": {
+          "description": "error code",
+          "type": "string"
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -722,7 +778,7 @@
         "tags": [
           "RootCauseAnalysisModel"
         ],
-        "summary": "Trigger a model training task for root cause analysis",
+        "summary": "Create a training model for root cause analysis",
         "operationId": "CreateRootCauseAnalysisTrainingTask",
         "consumes": [
           "application/json"
@@ -773,8 +829,12 @@
             }
           }
         },
+        "x-ms-error-code": {
+          "description": "error code",
+          "type": "string"
+        },
         "x-ms-examples": {
-          "Trigger a model training task for root cause analysis": {
+          "Create a training model for root cause analysis": {
             "$ref": "./examples/CreateRootCauseAnalysisTrainingTask.json"
           }
         }
@@ -816,6 +876,10 @@
               "$ref": "#/definitions/ErrorDetail"
             }
           }
+        },
+        "x-ms-error-code": {
+          "description": "error code",
+          "type": "string"
         },
         "x-ms-examples": {
           "Delete a model for root cause analysis": {
@@ -863,6 +927,10 @@
               "$ref": "#/definitions/ErrorDetail"
             }
           }
+        },
+        "x-ms-error-code": {
+          "description": "error code",
+          "type": "string"
         },
         "x-ms-examples": {
           "Query a training task state for root cause analysis": {
@@ -925,6 +993,10 @@
             }
           }
         },
+        "x-ms-error-code": {
+          "description": "error code",
+          "type": "string"
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -940,7 +1012,7 @@
         "tags": [
           "RootCauseAnalysisModel"
         ],
-        "summary": "Trigger an inference task for root cause analysis",
+        "summary": "Create an inference task for root cause analysis",
         "operationId": "CreateRootCauseAnalysisInferenceTask",
         "consumes": [
           "application/json"
@@ -1000,8 +1072,12 @@
             }
           }
         },
+        "x-ms-error-code": {
+          "description": "error code",
+          "type": "string"
+        },
         "x-ms-examples": {
-          "Trigger an inference task for root cause analysis": {
+          "Create an inference task for root cause analysis": {
             "$ref": "./examples/CreateRootCauseAnalysisInferenceTask.json"
           }
         }
@@ -1054,6 +1130,10 @@
               "$ref": "#/definitions/ErrorDetail"
             }
           }
+        },
+        "x-ms-error-code": {
+          "description": "error code",
+          "type": "string"
         },
         "x-ms-examples": {
           "Query an inference task state for root cause analysis": {
@@ -1637,9 +1717,9 @@
     },
     "RootCauseAnalysisDataMeta": {
       "required": [
-        "dataSize",
         "lastModifiedDateTime",
         "partitionId",
+        "rowCount",
         "timestamp"
       ],
       "type": "object",
@@ -1649,9 +1729,9 @@
           "description": "Root cause analysis partition ID",
           "type": "string"
         },
-        "dataSize": {
+        "rowCount": {
           "format": "int32",
-          "description": "Root cause analysis data size in the partition ID",
+          "description": "Root cause analysis data row count in the partition ID",
           "type": "integer"
         },
         "timestamp": {
@@ -2331,7 +2411,7 @@
       "required": true,
       "type": "string",
       "enum": [
-        "v1.2-preview"
+        "v1.1-preview.2"
       ],
       "in": "path",
       "x-ms-skip-url-encoding": true
