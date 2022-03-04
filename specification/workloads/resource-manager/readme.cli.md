@@ -1,8 +1,4 @@
-## CLI
-
-These settings don't need to apply `--cli` on the command line.
-
-``` yaml $(cli)
-cli:
-  cli-name: workloads
+``` yaml
+# add any configuration here for all CLI languages
+# refer to the faq.md for more details
 ```
