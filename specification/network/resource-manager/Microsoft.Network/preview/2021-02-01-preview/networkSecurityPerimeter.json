@@ -708,6 +708,11 @@
           "readOnly": true,
           "type": "string",
           "description": "Resource type."
+        },
+        "apiVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "API version."
         }
       },
       "allOf": [
@@ -739,9 +744,8 @@
       "properties": {
         "accessRulesVersion": {
           "readOnly": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "Integer version number that increases with every update to access rules."
+          "type": "string",
+          "description": "Version number that increases with every update to access rules within the profile."
         }
       },
       "description": "Properties of NSP profile."
@@ -767,6 +771,11 @@
           "readOnly": true,
           "type": "string",
           "description": "Resource type."
+        },
+        "apiVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "API version."
         }
       },
       "allOf": [
@@ -796,14 +805,6 @@
     "NspAccessRuleProperties": {
       "type": "object",
       "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "A friendly name for the NSP access rule."
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the NSP access rule resource."
-        },
         "provisioningState": {
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
@@ -834,9 +835,43 @@
             "type": "string"
           },
           "description": "Outbound rules fully qualified domain name format."
+        },
+        "subscriptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Subscription id in the ARM id format."
+        },
+        "networkSecurityPerimeters": {
+          "type": "array",
+          "items": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/PerimeterBasedAccessRule"
+          },
+          "description": "Inbound rule specified by the permieter id."
         }
       },
       "description": "Properties of NSP profile."
+    },
+    "PerimeterBasedAccessRule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "NSP id in the ARM id format."
+        },
+        "perimeterGuid": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource guid of the NSP supplied."
+        },
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Location of the NSP supplied."
+        }
+      }
     },
     "PerimeterAssociableResource": {
       "type": "object",
@@ -936,7 +971,7 @@
       "x-ms-parameter-location": "method"
     },
     "AccessRuleNameParameter": {
-      "name": "accessRulleName",
+      "name": "accessRuleName",
       "in": "path",
       "required": true,
       "type": "string",
