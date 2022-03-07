@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2021-09
+tag: package-2022-03
 ```
 
 ## Suppression
@@ -50,11 +50,24 @@ directive:
       - virtualNetworks.json
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 ```
+
+
+### Tag: package-2022-03
+
+These settings apply only when `--tag=package-2022-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-03'
+input-file:
+  - Microsoft.AzureStackHCI/stable/2022-03-01/arcSettings.json
+  - Microsoft.AzureStackHCI/stable/2022-03-01/clusters.json
+  - Microsoft.AzureStackHCI/stable/2022-03-01/extensions.json
+  - Microsoft.AzureStackHCI/stable/2022-03-01/operations.json
+```
 ### Tag: package-preview-2021-09
 
 These settings apply only when `--tag=package-preview-2021-09` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-09'
+``` yaml $(tag) == 'package-preview-2021-09'
 input-file:
   - Microsoft.AzureStackHCI/preview/2021-09-01-preview/arcSettings.json
   - Microsoft.AzureStackHCI/preview/2021-09-01-preview/clusters.json
@@ -72,13 +85,14 @@ input-file:
 
 These settings apply only when `--tag=package-2021-09` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-09'
+``` yaml $(tag) == 'package-2021-09'
 input-file:
   - Microsoft.AzureStackHCI/stable/2021-09-01/arcSettings.json
   - Microsoft.AzureStackHCI/stable/2021-09-01/clusters.json
   - Microsoft.AzureStackHCI/stable/2021-09-01/extensions.json
   - Microsoft.AzureStackHCI/stable/2021-09-01/operations.json
 ```
+
 ### Tag: package-preview-2021-07
 
 These settings apply only when `--tag=package-preview-2021-07` is specified on the command line.
