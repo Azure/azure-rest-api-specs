@@ -229,10 +229,10 @@
         },
         "x-ms-examples": {
           "Successful Transcript Conversation Analysis Job Request": {
-            "$ref": "./examples/SuccessfulAnalyzeConversationTranscriptJobsTaskSubmitRequest.json"
+            "$ref": "./examples/SuccessfulConversationSummarySubmit.json"
           },
           "Successful Text Conversation Analysis Job Request": {
-            "$ref": "./examples/SuccessfulAnalyzeConversationTextJobsTaskSubmitRequest.json"
+            "$ref": "./examples/SuccessfulConversationPIISubmit.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -290,6 +290,9 @@
         "operationId": "AnalyzeConversation_CancelJob",
         "summary": "Cancel a analysis job on the collection of conversations.",
         "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "#/parameters/JobId"
           }
@@ -461,8 +464,10 @@
       "type": "string",
       "description": "Enumeration of supported conversation domains.",
       "enum": [
+        "unknown",
         "finance",
-        "neutral"
+        "healthcare",
+        "generic"
       ],
       "x-ms-enum": {
         "name": "ConversationDomain",
@@ -832,7 +837,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeConversationLROTask"
+          "$ref": "#/definitions/AnalyzeConversationTask"
         }
       ],
       "x-ms-discriminator-value": "TranscriptionPii"
@@ -841,7 +846,8 @@
       "type": "object",
       "required": [
         "id",
-        "redactedContent"
+        "redactedContent",
+        "entities"
       ],
       "properties": {
         "id": {
@@ -963,7 +969,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeConversationLROTask"
+          "$ref": "#/definitions/AnalyzeConversationTask"
         }
       ],
       "x-ms-discriminator-value": "IssueResolutionSummarizationTasks"
