@@ -69,7 +69,7 @@ These settings apply only when `--tag=package-2021-11` is specified on the comma
 ```yaml $(tag) == 'package-2021-11'
 input-file:
   - Microsoft.Media/stable/2021-11-01/AccountFilters.json
-  - Microsoft.Media/stable/2021-11-01/Accounts.json
+  - Microsoft.Media/stable/2021-06-01/Accounts.json
   - Microsoft.Media/stable/2021-11-01/AssetsAndAssetFilters.json
   - Microsoft.Media/stable/2021-11-01/ContentKeyPolicies.json
   - Microsoft.Media/stable/2021-11-01/Encoding.json
