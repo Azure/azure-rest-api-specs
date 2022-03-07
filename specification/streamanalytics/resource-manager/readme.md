@@ -28,16 +28,30 @@ These are the global settings for the StreamAnalytics API.
 title: Stream Analytics Management Client
 description: Stream Analytics Client
 openapi-type: arm
-tag: package-pure-2020-03
+tag: package-preview-2022-03
 ```
 
+
+### Tag: package-preview-2022-03
+
+These settings apply only when `--tag=package-preview-2022-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-03'
+input-file:
+  - Microsoft.StreamAnalytics/preview/2022-03-01-preview/functions.json
+  - Microsoft.StreamAnalytics/preview/2022-03-01-preview/inputs.json
+  - Microsoft.StreamAnalytics/preview/2022-03-01-preview/outputs.json
+  - Microsoft.StreamAnalytics/preview/2022-03-01-preview/streamingjobs.json
+  - Microsoft.StreamAnalytics/preview/2022-03-01-preview/subscriptions.json
+  - Microsoft.StreamAnalytics/preview/2022-03-01-preview/transformations.json
+```
 ### Tag: package-2021-10-preview
 
 These settings apply only when `--tag=package-2021-10-preview` is specified on the command line.
 
 This section contains the composite set of APIs. Stream Analytics Cluster and Private Endpoint related APIs are under 2020-03-01-preview version. Streamingjobs related APIs are under 2021-10-01-preview version.
 
-```yaml $(tag) == 'package-2021-10-preview'
+``` yaml $(tag) == 'package-2021-10-preview'
 input-file:
   - Microsoft.StreamAnalytics/preview/2021-10-01-preview/functions.json
   - Microsoft.StreamAnalytics/preview/2021-10-01-preview/inputs.json
@@ -55,7 +69,7 @@ These settings apply only when `--tag=package-2020-03-preview` is specified on t
 
 This section contains the composite set of APIs. Stream Analytics Cluster and Private Endpoint related APIs are under 2020-03-01-preview version. Streamingjobs related APIs are under 2017-04-01-preview version.
 
-```yaml $(tag) == 'package-2020-03-preview'
+``` yaml $(tag) == 'package-2020-03-preview'
 input-file:
   - Microsoft.StreamAnalytics/preview/2017-04-01-preview/functions.json
   - Microsoft.StreamAnalytics/preview/2017-04-01-preview/inputs.json
@@ -88,9 +102,9 @@ input-file:
 
 These settings apply only when `--tag=package-pure-2020-03-preview` is specified on the command line.
 
-This section only contains input swagger files for version 2020-03-01-preview, including Stream Analytics Cluster and Private Endpoint related APIs.  
+This section only contains input swagger files for version 2020-03-01-preview, including Stream Analytics Cluster and Private Endpoint related APIs.
 
-```yaml $(tag) == 'package-pure-2020-03-preview'
+``` yaml $(tag) == 'package-pure-2020-03-preview'
 input-file:
   - Microsoft.StreamAnalytics/preview/2020-03-01-preview/clusters.json
   - Microsoft.StreamAnalytics/preview/2020-03-01-preview/privateEndpoints.json
@@ -100,9 +114,9 @@ input-file:
 
 These settings apply only when `--tag=package-pure-2017-04-preview` is specified on the command line.
 
-This section only contains input swagger files for version 2017-04-01-preview, including streamingjobs related APIs. 
+This section only contains input swagger files for version 2017-04-01-preview, including streamingjobs related APIs.
 
-```yaml $(tag) == 'package-pure-2017-04-preview'
+``` yaml $(tag) == 'package-pure-2017-04-preview'
 input-file:
   - Microsoft.StreamAnalytics/preview/2017-04-01-preview/functions.json
   - Microsoft.StreamAnalytics/preview/2017-04-01-preview/inputs.json
@@ -264,6 +278,3 @@ directive:
   - suppress: R3023 # Operations API must be implemented for '/providers/Microsoft.StreamAnalytics/operations'.
     reason:  Operations API under 2017-04-01-preview is the super-set of all RPs operations (across all API-versions).
 ```
-
-
-
