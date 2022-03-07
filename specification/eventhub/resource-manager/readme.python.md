@@ -32,6 +32,7 @@ Generate all API versions currently shipped for this package
 ```yaml $(multiapi) && !$(track2)
 batch:
   - tag: package-2021-11
+  - tag: package-2022-01-preview
   - tag: package-2021-06-preview
   - tag: package-2021-01-preview
   - tag: package-2018-01-preview
@@ -43,6 +44,7 @@ batch:
 clear-output-folder: true
 batch:
   - tag: package-2021-11
+  - tag: package-2022-01-preview
   - tag: package-2021-06-preview
   - tag: package-2021-01-preview
   - tag: package-2018-01-preview
@@ -68,6 +70,19 @@ output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eve
 python:
   namespace: azure.mgmt.eventhub.v2021_11_01
   output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2021_11_01
+```
+
+### Tag: package-2022-01-preview and python
+
+These settings apply only when `--tag=package-2022-01-preview --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2021-06-preview'
+namespace: azure.mgmt.eventhub.v2022_01_01_preview
+output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2022_01_01_preview
+python:
+  namespace: azure.mgmt.eventhub.v2022_01_01_preview
+  output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2022_01_01_preview
 ```
 
 ### Tag: package-2021-06-preview and python

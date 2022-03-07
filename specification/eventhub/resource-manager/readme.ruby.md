@@ -13,6 +13,7 @@ azure-arm: true
 ``` yaml $(ruby) && $(multiapi)
 batch:
   - tag: package-2021-11
+  - tag: package-2022-01-preview
   - tag: package-2021-06-preview
   - tag: package-2021-01-preview
   - tag: package-2018-01-preview
@@ -70,6 +71,17 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 ``` yaml $(tag) == 'package-2021-06-preview' && $(ruby)
 
 namespace: "Azure::EventHub::Mgmt::V2021_06_01_preview"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_event_hub/lib
+```
+
+### Tag: package-2021-06-preview and ruby
+
+These settings apply only when `--tag=package-2022-01-preview --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-2022-01-preview' && $(ruby)
+
+namespace: "Azure::EventHub::Mgmt::V2022_01_01_preview"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_event_hub/lib
 ```
 
