@@ -9,6 +9,8 @@ scenarios:
         armTemplate: ./generate_unique_string.json
       - step: Create-Profile
         exampleFile: ../examples/Profiles_Create.json
+        variables:
+          profileName: $(profileResourceName)
       - step: Create-AFDEndpoint
         exampleFile: ../examples/AFDEndpoints_Create.json
       - step: Update-AFDEndpoint
@@ -19,8 +21,3 @@ scenarios:
         exampleFile: ../examples/Profiles_Delete.json
     variables:
       location: global
-      profileResourceName: ""
-      endpointResourceName: ""
-      originGroupResourceName: ""
-      originResourceName: ""
-      routeResourceName: ""
