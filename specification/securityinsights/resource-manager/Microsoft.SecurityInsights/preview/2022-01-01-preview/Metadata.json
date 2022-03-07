@@ -1,0 +1,899 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2022-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/metadata": {
+      "get": {
+        "x-ms-examples": {
+          "Get all metadata.": {
+            "$ref": "./examples/metadata/GetAllMetadata.json"
+          },
+          "Get all metadata with OData filter/orderby/skip/top": {
+            "$ref": "./examples/metadata/GetAllMetadataOData.json"
+          }
+        },
+        "tags": [
+          "Metadata"
+        ],
+        "description": "List of all metadata",
+        "operationId": "Metadata_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataTop"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MetadataList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/metadata/{metadataName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get single metadata by name": {
+            "$ref": "./examples/metadata/GetMetadata.json"
+          }
+        },
+        "tags": [
+          "Metadata"
+        ],
+        "description": "Get a Metadata.",
+        "operationId": "Metadata_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/MetadataName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MetadataModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete metadata.": {
+            "$ref": "./examples/metadata/DeleteMetadata.json"
+          }
+        },
+        "tags": [
+          "Metadata"
+        ],
+        "description": "Delete a Metadata.",
+        "operationId": "Metadata_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/MetadataName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create/update full metadata.": {
+            "$ref": "./examples/metadata/PutMetadata.json"
+          },
+          "Create/update minimal metadata.": {
+            "$ref": "./examples/metadata/PutMetadataMinimal.json"
+          }
+        },
+        "tags": [
+          "Metadata"
+        ],
+        "description": "Create a Metadata.",
+        "operationId": "Metadata_Create",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/MetadataName"
+          },
+          {
+            "$ref": "#/parameters/Metadata"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, Operation successfully completed",
+            "schema": {
+              "$ref": "#/definitions/MetadataModel"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/MetadataModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "x-ms-examples": {
+          "Update metadata.": {
+            "$ref": "./examples/metadata/PatchMetadata.json"
+          }
+        },
+        "tags": [
+          "Metadata"
+        ],
+        "description": "Update an existing Metadata.",
+        "operationId": "Metadata_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/MetadataName"
+          },
+          {
+            "$ref": "#/parameters/MetadataPatch"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MetadataModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "MetadataList": {
+      "description": "List of all the metadata.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of metadata.",
+          "items": {
+            "$ref": "#/definitions/MetadataModel"
+          },
+          "type": "array"
+        },
+        "nextLink": {
+          "description": "URL to fetch the next page of metadata.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MetadataModel": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Metadata resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/metadataProperties",
+          "description": "Metadata properties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "metadataPatch": {
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Metadata patch request body.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/metadataPropertiesPatch",
+          "description": "Metadata patch request body",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "metadataContentId": {
+      "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Can be optionally set for user created content to define dependencies.  If an active content item is made from a template, both will have the same contentId.",
+      "type": "string"
+    },
+    "metadataParentId": {
+      "description": "Full parent resource ID of the content item the metadata is for.  This is the full resource ID including the scope (subscription and resource group)",
+      "type": "string"
+    },
+    "metadataVersion": {
+      "description": "Version of the content.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM template best practices.  Can also be any string, but then we cannot guarantee any version checks",
+      "type": "string"
+    },
+    "metadataKind": {
+      "type": "string",
+      "description": "The kind of content the metadata is for.",
+      "enum": [
+        "DataConnector",
+        "DataType",
+        "Workbook",
+        "WorkbookTemplate",
+        "Playbook",
+        "PlaybookTemplate",
+        "AnalyticsRuleTemplate",
+        "AnalyticsRule",
+        "HuntingQuery",
+        "InvestigationQuery",
+        "Parser",
+        "Watchlist",
+        "WatchlistTemplate",
+        "Solution",
+        "AzureFunction",
+        "LogicAppsCustomConnector",
+        "AutomationRule"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "kind",
+        "values": [
+          {
+            "value": "DataConnector"
+          },
+          {
+            "value": "DataType"
+          },
+          {
+            "value": "Workbook"
+          },
+          {
+            "value": "WorkbookTemplate"
+          },
+          {
+            "value": "Playbook"
+          },
+          {
+            "value": "PlaybookTemplate"
+          },
+          {
+            "value": "AnalyticsRuleTemplate"
+          },
+          {
+            "value": "AnalyticsRule"
+          },
+          {
+            "value": "HuntingQuery"
+          },
+          {
+            "value": "InvestigationQuery"
+          },
+          {
+            "value": "Parser"
+          },
+          {
+            "value": "Watchlist"
+          },
+          {
+            "value": "WatchlistTemplate"
+          },
+          {
+            "value": "Solution"
+          },
+          {
+            "value": "AzureFunction"
+          },
+          {
+            "value": "LogicAppsCustomConnector"
+          },
+          {
+            "value": "AutomationRule"
+          }
+        ]
+      }
+    },
+    "metadataSource": {
+      "description": "The original source of the content item, where it comes from.",
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "description": "Source type of the content",
+          "type": "string",
+          "enum": [
+            "LocalWorkspace",
+            "Community",
+            "Solution",
+            "SourceRepository"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "sourceKind",
+            "values": [
+              {
+                "value": "LocalWorkspace"
+              },
+              {
+                "value": "Community"
+              },
+              {
+                "value": "Solution"
+              },
+              {
+                "value": "SourceRepository"
+              }
+            ]
+          }
+        },
+        "name": {
+          "description": "Name of the content source.  The repo name, solution name, LA workspace name etc.",
+          "type": "string"
+        },
+        "sourceId": {
+          "description": "ID of the content source.  The solution ID, workspace ID, etc",
+          "type": "string"
+        }
+      }
+    },
+    "metadataAuthor": {
+      "type": "object",
+      "description": "Publisher or creator of the content item.",
+      "properties": {
+        "name": {
+          "description": "Name of the author. Company or person.",
+          "type": "string"
+        },
+        "email": {
+          "description": "Email of author contact",
+          "type": "string"
+        },
+        "link": {
+          "description": "Link for author/vendor page",
+          "type": "string"
+        }
+      }
+    },
+    "metadataSupport": {
+      "type": "object",
+      "description": "Support information for the content item.",
+      "required": [
+        "tier"
+      ],
+      "properties": {
+        "tier": {
+          "description": "Type of support for content item",
+          "type": "string",
+          "enum": [
+            "Microsoft",
+            "Partner",
+            "Community"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "supportTier",
+            "values": [
+              {
+                "value": "Microsoft"
+              },
+              {
+                "value": "Partner"
+              },
+              {
+                "value": "Community"
+              }
+            ]
+          }
+        },
+        "name": {
+          "description": "Name of the support contact. Company or person.",
+          "type": "string"
+        },
+        "email": {
+          "description": "Email of support contact",
+          "type": "string"
+        },
+        "link": {
+          "description": "Link for support help, like to support page to open a ticket etc.",
+          "type": "string"
+        }
+      }
+    },
+    "metadataDependencies": {
+      "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex dependencies.",
+      "type": "object",
+      "properties": {
+        "contentId": {
+          "description": "Id of the content item we depend on",
+          "$ref": "#/definitions/metadataContentId"
+        },
+        "kind": {
+          "description": "Type of the content item we depend on",
+          "$ref": "#/definitions/metadataKind"
+        },
+        "version": {
+          "description": "Version of the the content item we depend on.  Can be blank, * or missing to indicate any version fulfills the dependency.  If version does not match our defined numeric format then an exact match is required.",
+          "$ref": "#/definitions/metadataVersion"
+        },
+        "name": {
+          "description": "Name of the content item",
+          "type": "string"
+        },
+        "operator": {
+          "description": "Operator used for list of dependencies in criteria array.",
+          "type": "string",
+          "enum": [
+            "AND",
+            "OR"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "operator",
+            "values": [
+              {
+                "value": "AND"
+              },
+              {
+                "value": "OR"
+              }
+            ]
+          }
+        },
+        "criteria": {
+          "description": "This is the list of dependencies we must fulfill, according to the AND/OR operator",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/metadataDependencies",
+            "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex formats."
+          }
+        }
+      }
+    },
+    "metadataCategories": {
+      "type": "object",
+      "description": "ies for the solution content item",
+      "properties": {
+        "domains": {
+          "description": "domain for the solution content item",
+          "type": "array",
+          "example": [
+            "str1",
+            "str2",
+            "str3"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "verticals": {
+          "description": "Industry verticals for the solution content item",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "str1",
+            "str2",
+            "str3"
+          ]
+        }
+      }
+    },
+    "metadataProviders": {
+      "description": "Providers for the solution content item",
+      "type": "array",
+      "example": [
+        "str1",
+        "str2",
+        "str3"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "firstPublishDate": {
+      "description": "first publish date of solution content item",
+      "type": "string",
+      "format": "date"
+    },
+    "lastPublishDate": {
+      "description": "last publish date of solution content item",
+      "type": "string",
+      "format": "date"
+    },
+    "metadataCustomVersion": {
+      "description": "The custom version of the content. A optional free text",
+      "type": "string"
+    },
+    "metadataContentSchemaVersion": {
+      "description": "Schema version of the content. Can be used to distinguish between different flow based on the schema version",
+      "type": "string"
+    },
+    "metadataIcon": {
+      "description": "the icon identifier. this id can later be fetched from the solution template",
+      "type": "string"
+    },
+    "metadataThreatAnalysisTactics": {
+      "description": "the tactics the resource covers",
+      "type": "array",
+      "example": [
+        "reconnaissance",
+        "exfiltration"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "metadataThreatAnalysisTechniques": {
+      "description": "the techniques the resource covers, these have to be aligned with the tactics being used",
+      "type": "array",
+      "example": [
+        "T1548",
+        "T1548.001",
+        "T1134.003"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "metadataPreviewImages": {
+      "description": "preview image file names. These will be taken from the solution artifacts",
+      "type": "array",
+      "example": [
+        "example.png",
+        "example2.jpeg"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "metadataPreviewImagesDark": {
+      "description": "preview image file names. These will be taken from the solution artifacts. used for dark theme support",
+      "type": "array",
+      "example": [
+        "example.png",
+        "example2.jpeg"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "metadataProperties": {
+      "description": "Metadata property bag.",
+      "required": [
+        "parentId",
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "contentId": {
+          "$ref": "#/definitions/metadataContentId",
+          "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Dynamic for user-created.  This is the resource name"
+        },
+        "parentId": {
+          "$ref": "#/definitions/metadataParentId",
+          "description": "Full parent resource ID of the content item the metadata is for.  This is the full resource ID including the scope (subscription and resource group)"
+        },
+        "version": {
+          "$ref": "#/definitions/metadataVersion",
+          "description": "Version of the content.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM template best practices.  Can also be any string, but then we cannot guarantee any version checks"
+        },
+        "kind": {
+          "$ref": "#/definitions/metadataKind",
+          "description": "The kind of content the metadata is for."
+        },
+        "source": {
+          "$ref": "#/definitions/metadataSource",
+          "description": "Source of the content.  This is where/how it was created."
+        },
+        "author": {
+          "$ref": "#/definitions/metadataAuthor",
+          "description": "The creator of the content item."
+        },
+        "support": {
+          "$ref": "#/definitions/metadataSupport",
+          "description": "Support information for the metadata - type, name, contact information"
+        },
+        "dependencies": {
+          "$ref": "#/definitions/metadataDependencies",
+          "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex formats."
+        },
+        "categories": {
+          "$ref": "#/definitions/metadataCategories",
+          "description": "Categories for the solution content item"
+        },
+        "providers": {
+          "$ref": "#/definitions/metadataProviders",
+          "description": "Providers for the solution content item"
+        },
+        "firstPublishDate": {
+          "$ref": "#/definitions/firstPublishDate",
+          "description": "first publish date solution content item"
+        },
+        "lastPublishDate": {
+          "$ref": "#/definitions/lastPublishDate",
+          "description": "last publish date for the solution content item"
+        },
+        "customVersion": {
+          "$ref": "#/definitions/metadataCustomVersion",
+          "description": "The custom version of the content. A optional free text"
+        },
+        "contentSchemaVersion": {
+          "$ref": "#/definitions/metadataContentSchemaVersion",
+          "description": "Schema version of the content. Can be used to distinguish between different flow based on the schema version"
+        },
+        "icon": {
+          "$ref": "#/definitions/metadataIcon",
+          "description": "the icon identifier. this id can later be fetched from the solution template"
+        },
+        "threatAnalysisTactics": {
+          "$ref": "#/definitions/metadataThreatAnalysisTactics",
+          "description": "the tactics the resource covers"
+        },
+        "threatAnalysisTechniques": {
+          "$ref": "#/definitions/metadataThreatAnalysisTechniques",
+          "description": "the techniques the resource covers, these have to be aligned with the tactics being used"
+        },
+        "previewImages": {
+          "$ref": "#/definitions/metadataPreviewImages",
+          "description": "preview image file names. These will be taken from the solution artifacts"
+        },
+        "previewImagesDark": {
+          "$ref": "#/definitions/metadataPreviewImagesDark",
+          "description": "preview image file names. These will be taken from the solution artifacts. used for dark theme support"
+        }
+      }
+    },
+    "metadataPropertiesPatch": {
+      "description": "Metadata property bag for patch requests.  This is the same as the MetadataProperties, but with nothing required",
+      "type": "object",
+      "properties": {
+        "contentId": {
+          "$ref": "#/definitions/metadataContentId",
+          "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Dynamic for user-created.  This is the resource name"
+        },
+        "parentId": {
+          "$ref": "#/definitions/metadataParentId",
+          "description": "Full parent resource ID of the content item the metadata is for.  This is the full resource ID including the scope (subscription and resource group)"
+        },
+        "version": {
+          "$ref": "#/definitions/metadataVersion",
+          "description": "Version of the content.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM template best practices.  Can also be any string, but then we cannot guarantee any version checks"
+        },
+        "kind": {
+          "$ref": "#/definitions/metadataKind",
+          "description": "The kind of content the metadata is for."
+        },
+        "source": {
+          "$ref": "#/definitions/metadataSource",
+          "description": "Source of the content.  This is where/how it was created."
+        },
+        "author": {
+          "$ref": "#/definitions/metadataAuthor",
+          "description": "The creator of the content item."
+        },
+        "support": {
+          "$ref": "#/definitions/metadataSupport",
+          "description": "Support information for the metadata - type, name, contact information"
+        },
+        "dependencies": {
+          "$ref": "#/definitions/metadataDependencies",
+          "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex formats."
+        },
+        "categories": {
+          "$ref": "#/definitions/metadataCategories",
+          "description": "Categories for the solution content item"
+        },
+        "providers": {
+          "$ref": "#/definitions/metadataProviders",
+          "description": "Providers for the solution content item"
+        },
+        "firstPublishDate": {
+          "$ref": "#/definitions/firstPublishDate",
+          "description": "first publish date solution content item"
+        },
+        "lastPublishDate": {
+          "$ref": "#/definitions/lastPublishDate",
+          "description": "last publish date for the solution content item"
+        },
+        "customVersion": {
+          "$ref": "#/definitions/metadataCustomVersion",
+          "description": "The custom version of the content. A optional free text"
+        },
+        "contentSchemaVersion": {
+          "$ref": "#/definitions/metadataContentSchemaVersion",
+          "description": "Schema version of the content. Can be used to distinguish between different flow based on the schema version"
+        },
+        "icon": {
+          "$ref": "#/definitions/metadataIcon",
+          "description": "the icon identifier. this id can later be fetched from the solution template"
+        },
+        "threatAnalysisTactics": {
+          "$ref": "#/definitions/metadataThreatAnalysisTactics",
+          "description": "the tactics the resource covers"
+        },
+        "threatAnalysisTechniques": {
+          "$ref": "#/definitions/metadataThreatAnalysisTechniques",
+          "description": "the techniques the resource covers, these have to be aligned with the tactics being used"
+        },
+        "previewImages": {
+          "$ref": "#/definitions/metadataPreviewImages",
+          "description": "preview image file names. These will be taken from the solution artifacts"
+        },
+        "previewImagesDark": {
+          "$ref": "#/definitions/metadataPreviewImagesDark",
+          "description": "preview image file names. These will be taken from the solution artifacts. used for dark theme support"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Metadata": {
+      "description": "Metadata resource.",
+      "in": "body",
+      "name": "metadata",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/MetadataModel"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "MetadataPatch": {
+      "description": "Partial metadata request.",
+      "in": "body",
+      "name": "metadataPatch",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/metadataPatch"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "MetadataName": {
+      "description": "The Metadata name.",
+      "in": "path",
+      "name": "metadataName",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
