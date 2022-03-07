@@ -197,6 +197,51 @@
         }
       }
     },
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/queryUserOffers": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStore_QueryUserOffers",
+        "description": "List of user's approved offers from the provided offers and subscriptions",
+        "parameters": [
+          {
+            "$ref": "#/parameters/PrivateStoreIdParameter"
+          },
+          {
+            "in": "body",
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryUserOffersPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OfferListResponse"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QueryUserOffers": {
+            "$ref": "./examples/QueryUserOffers.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/billingAccounts": {
       "parameters": [
         {
@@ -606,6 +651,88 @@
         "x-ms-examples": {
           "BulkCollectionsAction": {
             "$ref": "./examples/BulkCollectionsAction.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collections/{collectionId}/approveAllItems": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStoreCollection_ApproveAllItems",
+        "description": "Empty the collection and approve all items",
+        "parameters": [
+          {
+            "$ref": "#/parameters/PrivateStoreIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CollectionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated collection retrieved with a single offer that represents all offers.",
+            "schema": {
+              "$ref": "#/definitions/Collection"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApproveAllItems": {
+            "$ref": "./examples/ApproveAllItems.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collections/{collectionId}/disableApproveAllItems": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStoreCollection_DisableApproveAllItems",
+        "description": "Empty the collection and disable the approve all items",
+        "parameters": [
+          {
+            "$ref": "#/parameters/PrivateStoreIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CollectionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated collection retrieved without any offer.",
+            "schema": {
+              "$ref": "#/definitions/Collection"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DisableApproveAllItems": {
+            "$ref": "./examples/DisableApproveAllItems.json"
           }
         }
       }
@@ -1699,6 +1826,16 @@
           "description": "Indicating whether all subscriptions are selected (=true) or not (=false).",
           "type": "boolean"
         },
+        "allItemsApproved":{
+          "description": "Indicating whether all items are approved for this collection (=true) or not (=false).",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "allItemsApprovedModifiedAt":{
+          "description": "Gets the modified date of all items approved; Init value is empty string.",
+          "type": "string",
+          "readOnly": true
+        },
         "subscriptionsList": {
           "description": "Gets or sets subscription ids list. Empty list indicates all subscriptions are selected, null indicates no update is done, explicit list indicates the explicit selected subscriptions. On insert, null is considered as bad request",
           "type": "array",
@@ -1973,6 +2110,11 @@
           "items": {
             "type": "string"
           }
+        },
+        "icon": {
+          "description": "The offer icon url.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -2212,6 +2354,24 @@
             "$ref": "#/definitions/NewNotifications"
           },
           "x-ms-identifiers": []
+        }
+      }
+    },
+    "QueryUserOffersPayload": {
+      "description": "List of offers IDs and subscriptions IDs to query the user's approved offers",
+      "type": "object",
+      "properties": {
+        "offersIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "subscriptionsIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
