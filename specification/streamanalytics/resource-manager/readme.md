@@ -28,13 +28,15 @@ These are the global settings for the StreamAnalytics API.
 title: Stream Analytics Management Client
 description: Stream Analytics Client
 openapi-type: arm
-tag: package-2022-03-preview
+tag: package-pure-2020-03
 ```
 
 
 ### Tag: package-2022-03-preview
 
 These settings apply only when `--tag=package-2022-03-preview` is specified on the command line.
+
+This section contains the composite set of APIs. Stream Analytics Cluster and Private Endpoint related APIs are under 2020-03-01-preview version. Streamingjobs related APIs are under 2022-03-01-preview version.
 
 ```yaml $(tag) == 'package-2022-03-preview'
 input-file:
@@ -46,6 +48,7 @@ input-file:
   - Microsoft.StreamAnalytics/preview/2020-03-01-preview/clusters.json
   - Microsoft.StreamAnalytics/preview/2020-03-01-preview/privateEndpoints.json
 ```
+
 ### Tag: package-2021-10-preview
 
 These settings apply only when `--tag=package-2021-10-preview` is specified on the command line.
