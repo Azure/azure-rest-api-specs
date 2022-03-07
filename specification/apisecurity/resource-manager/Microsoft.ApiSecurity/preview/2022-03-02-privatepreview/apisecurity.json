@@ -1,0 +1,1082 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-03-02-privatepreview",
+    "title": "Azure Security API Security Resource Provider (v2)",
+    "description": "PP2 RP service OpenAPI Specification (CAS Resource Provider v2)"
+  },
+  "host": "apisecuritypp2rp.trafficmanager.net",
+  "basePath": "/",
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiSecurity/apimRPOnboards": {
+      "post": {
+        "description": "create initial CAS RP onboarding with APIM RP for Defender for API from customer",
+        "summary": "create initial CAS RP onboarding with APIM RP for Defender for API from customer",
+        "tags": [
+          "OnboardOffboardWithApimRP",
+          "ApimRPConfig"
+        ],
+        "operationId": "V2ApimRPOnboard_Create",
+        "x-ms-examples": {
+          "V2ApimRPOnboard_Create_PropertySet": {
+            "$ref": "./examples/V2ApimRPOnboard_Create_PropertySet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApimRPonboardConfigurationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "201": {
+            "description": "Successfully onboarded with APIM RP with onboarding record created on APIM side",
+            "headers": {
+              "Location": {
+                "description": "The location of the created onboarding record on APIM side",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request to onboarded with APIM RP",
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "Access token in API key header is missing or invalid",
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "Onboarding URI resource page does not exist",
+            "x-ms-error-response": true
+          },
+          "409": {
+            "description": "Conflict (race condition)",
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiSecurity/apimRPOffboards": {
+      "post": {
+        "description": "offboard CAS RP with APIM RP for Defender for API from customer",
+        "summary": "offboard CAS RP with APIM RP for Defender for API from customer",
+        "tags": [
+          "OnboardOffboardWithApimRP",
+          "ApimRPConfig"
+        ],
+        "operationId": "V2ApimRPOffboard_Create",
+        "x-ms-examples": {
+          "V2ApimRPOffboard_Create_PropertySet": {
+            "$ref": "./examples/V2ApimRPOffboard_Create_PropertySet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApimRPoffboardRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request to offboard CAS RP with APIM RP",
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "Access token in API key header is missing or invalid",
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "Offboarding URI resource page does not exist",
+            "x-ms-error-response": true
+          },
+          "409": {
+            "description": "Conflict (race condition)",
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiSecurity/apimRPOnboards/{apimRPOnboardId}": {
+      "get": {
+        "description": "Retrieve CAS RP onboarding configurations with APIM RP for Defender for API from customer by onboarding Id",
+        "summary": "Retrieve CAS RP onboarding configurations with APIM RP for Defender for API from customer by onboarding Id",
+        "tags": [
+          "ApimRPConfig"
+        ],
+        "operationId": "V2ApimRPOnboard_Get",
+        "x-ms-examples": {
+          "V2ApimRPOnboard_Get_PropertySet": {
+            "$ref": "./examples/V2ApimRPOnboard_Get_PropertySet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "apimRPOnboardId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Current parameter configuration of CAS RP onboarded with APIM RP",
+            "schema": {
+              "$ref": "#/definitions/ApimRPonboardConfiguration"
+            }
+          },
+          "401": {
+            "description": "Access token in API key header is missing or invalid",
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "Configuration does not exist",
+            "x-ms-error-response": true
+          }
+        }
+      },
+      "patch": {
+        "description": "update CAS RP onboarding configurations with APIM RP for Defender for API from customer by onboarding Id",
+        "summary": "update CAS RP onboarding configurations with APIM RP for Defender for API from customer by onboarding Id",
+        "tags": [
+          "ApimRPConfig"
+        ],
+        "operationId": "V2ApimRPOnboard_Update",
+        "x-ms-examples": {
+          "V2ApimRPOnboard_Update_PropertySet": {
+            "$ref": "./examples/V2ApimRPOnboard_Update_PropertySet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "apimRPOnboardId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApimRPOnboardParametersConfigRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Current parameter configuration of CAS RP onboarded with APIM RP",
+            "schema": {
+              "$ref": "#/definitions/ApimRPonboardConfiguration"
+            }
+          },
+          "400": {
+            "description": "Bad request to update CAS RP onboarding configurations",
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "Access token in API key header is missing or invalid",
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "Configuration does not exist",
+            "x-ms-error-response": true
+          },
+          "409": {
+            "description": "Conflict (race condition)",
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiSecurity/openApiSpecifications": {
+      "post": {
+        "description": "Upon user requesting OSA, return the maintained APIM API Collection(s)'s specification(s) to UI.",
+        "summary": "Upon user requesting OSA, return the maintained APIM API Collection(s)'s specification(s) to UI.",
+        "tags": [
+          "OAS"
+        ],
+        "operationId": "V2OpenApiSpecifications_Get",
+        "x-ms-examples": {
+          "V2OpenApiSpecifications_Get_PropertySet": {
+            "$ref": "./examples/V2OpenApiSpecifications_Get_PropertySet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "default": 20,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OASsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OASs of the desired API collections",
+            "schema": {
+              "$ref": "#/definitions/OASsResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request to retrieve the maintained APIM API Collections specifications",
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "Access token in API key header is missing or invalid",
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "OSA retrieving URI resource page does not exist",
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ApiSecurity/apiCollections": {
+      "post": {
+        "description": "Upon user requesting collections for a list of subscriptions, return the collections data to UI",
+        "summary": "Upon user requesting collections for a list of subscriptions, return the collections data to UI",
+        "tags": [
+          "ApiCollections"
+        ],
+        "operationId": "V2ApiCollections_List",
+        "x-ms-examples": {
+          "V2ApiCollections_List_PropertySet": {
+            "$ref": "./examples/V2ApiCollections_List_PropertySet.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "default": 20,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiCollectionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ApiCollectionResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request to retrieve collections data",
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "Access token in API key header is missing or invalid",
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "Collections URI resource page does not exist",
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ApiSecurity/apiCollections/{apiCollectionId}/apiCollectionDetails": {
+      "post": {
+        "description": "Upon user requesting collection details for a subscription, return the collection details data to UI",
+        "summary": "Upon user requesting collection details for a subscription, return the collection details data to UI",
+        "tags": [
+          "ApiCollections"
+        ],
+        "operationId": "V2ApiCollectionDetails_List",
+        "x-ms-examples": {
+          "V2ApiCollectionDetails_List_PropertySet": {
+            "$ref": "./examples/V2ApiCollectionDetails_List_PropertySet.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "apiCollectionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "default": 20,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiCollectionDetailsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ApiCollectionDetailsResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request to retrieve collections data",
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "Access token in API key header is missing or invalid",
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "Collection details URI resource page does not exist",
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ApiSecurity/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available RP operations.",
+        "operationId": "V2Operations_List",
+        "x-ms-examples": {
+          "V2Operations_List_PropertySet": {
+            "$ref": "./examples/V2Operations_List_PropertySet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "JsonValueKind": {
+      "title": "JsonValueKind",
+      "example": 0,
+      "type": "integer",
+      "format": "int32",
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "x-ms-enum": {
+        "name": "JsonValueKind",
+        "modelAsString": false
+      }
+    },
+    "JsonElement": {
+      "title": "JsonElement",
+      "type": "object",
+      "properties": {
+        "valueKind": {
+          "$ref": "#/definitions/JsonValueKind"
+        }
+      }
+    },
+    "ApiCollectionDetailsRequest": {
+      "title": "ApiCollectionDetailsRequest",
+      "type": "object",
+      "properties": {
+        "subscriptionId": {
+          "description": "a subscription Id of customer",
+          "type": "string",
+          "format": "uuid"
+        }
+      },
+      "required": [
+        "subscriptionId"
+      ]
+    },
+    "ApiCollectionRequest": {
+      "title": "ApiCollectionRequest",
+      "type": "object",
+      "properties": {
+        "subscriptionIds": {
+          "description": "list of subscription Ids of customer",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "required": [
+        "subscriptionIds"
+      ]
+    },
+    "ApimApiEvent": {
+      "title": "ApimApiEvent",
+      "description": "enum to describe the type of APIM API events",
+      "example": "API_CREATED",
+      "type": "string",
+      "enum": [
+        "API_CREATED",
+        "API_UPDATED",
+        "API_DELETED"
+      ],
+      "x-ms-enum": {
+        "name": "ApimApiEvent",
+        "modelAsString": true
+      }
+    },
+    "ApiCollection": {
+      "title": "ApiCollection",
+      "description": "APIM API collection information",
+      "type": "object",
+      "properties": {
+        "subscriptionId": {
+          "description": "an APIM customer's subscription Id",
+          "type": "string",
+          "format": "uuid"
+        },
+        "resourceGroup": {
+          "description": "an APIM customer's resource group",
+          "type": "string"
+        },
+        "serviceInstanceName": {
+          "description": "an APIM customer's APIM service/instance/resource name",
+          "type": "string"
+        },
+        "apiCollectionName": {
+          "description": "name of an APIM customer's API collection",
+          "type": "string"
+        },
+        "revision": {
+          "description": "revision of an APIM customer's API collection",
+          "example": 1,
+          "type": "integer",
+          "default": 1,
+          "format": "int32"
+        }
+      }
+    },
+    "OASsRequest": {
+      "title": "OASsRequest",
+      "description": "Request object for returning maintained OASs of API collections in CAS BE",
+      "type": "object",
+      "properties": {
+        "content": {
+          "description": "the desired list of customers and their associated APIM APIs that recently were updated",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiCollection"
+          },
+          "minItems": 1,
+          "maxItems": 100,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "OASsResponse": {
+      "title": "OASsResponse",
+      "description": "Response object that contains the list of the OASs of the desired API collections",
+      "type": "object",
+      "properties": {
+        "content": {
+          "description": "the list of the OASs of the desired APIM API collections",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "maxItems": 100
+        }
+      }
+    },
+    "ApimRPOnboardParametersConfigRequest": {
+      "title": "ApimRPOnboardParametersConfigRequest",
+      "description": "Request object used to configure parameters in initial onboarding",
+      "type": "object",
+      "properties": {
+        "apis": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "enableExportingPayload": {
+          "description": "newly configured flag to specify if CAS RP would like to receive APIM APIs's payload data or not (nullable to specify no change)",
+          "type": "boolean"
+        },
+        "payloadSize": {
+          "description": "newly Configured payload size of APIM http traffic (nullable to specify no change)",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ApimRPonboardConfigurationRequest": {
+      "title": "ApimRPonboardConfigurationRequest",
+      "description": "Current configuration object to be used by APIM RP through CAS RP onboarding process or afterwards parameters configuration",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "the name of CAS RP",
+          "type": "string"
+        },
+        "id": {
+          "description": "an APIM RP side generated ID identifying CAS RP entity",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "webhook": {
+          "description": "webhook registered at Event Grid by CAS RP",
+          "type": "string"
+        },
+        "apis": {
+          "description": "list of the URIs of API endpoints that CAS RP is interested in their traffic during initial onboarding with APIM",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "enableExportingPayload": {
+          "description": "CAS RP would like to receive APIM APIs's payload data or not",
+          "example": true,
+          "type": "boolean",
+          "default": true
+        },
+        "payloadSize": {
+          "description": "Configured payload size of APIM http traffic during onboarding",
+          "example": 32768,
+          "type": "integer",
+          "default": 32768,
+          "format": "int32"
+        },
+        "samplingRate": {
+          "description": "Configured sampling rate for the exported customer’s APIM http traffic",
+          "example": 1,
+          "type": "number",
+          "default": 1,
+          "format": "double"
+        },
+        "subscribedApimApiEvents": {
+          "description": "list of APIM API events that CAS RP is interested to subscribe via webhook",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApimApiEvent"
+          }
+        }
+      }
+    },
+    "ApimRPonboardConfiguration": {
+      "title": "ApimRPonboardConfiguration",
+      "description": "Current configuration object to be used by APIM RP through CAS RP onboarding process or afterwards parameters configuration",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "the name of CAS RP",
+          "type": "string"
+        },
+        "id": {
+          "description": "an APIM RP side generated ID identifying CAS RP entity",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "webhook": {
+          "description": "webhook registered at Event Grid by CAS RP",
+          "type": "string"
+        },
+        "apis": {
+          "description": "list of the URIs of API endpoints that CAS RP is interested in their traffic during initial onboarding with APIM",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "enableExportingPayload": {
+          "description": "CAS RP would like to receive APIM APIs's payload data or not",
+          "example": true,
+          "type": "boolean",
+          "default": true
+        },
+        "payloadSize": {
+          "description": "Configured payload size of APIM http traffic during onboarding",
+          "example": 32768,
+          "type": "integer",
+          "default": 32768,
+          "format": "int32"
+        },
+        "samplingRate": {
+          "description": "Configured sampling rate for the exported customer’s APIM http traffic",
+          "example": 1,
+          "type": "number",
+          "default": 1,
+          "format": "double"
+        },
+        "subscribedApimApiEvents": {
+          "description": "list of APIM API events that CAS RP is interested to subscribe via webhook",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApimApiEvent"
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "ApimRPoffboardRequest": {
+      "title": "ApimRPoffboardRequest",
+      "description": "Request object used to pass info to APIM RP during CAS RP offboarding process",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "an APIM RP side previously generated during the onboarding process to identify CAS RP entity",
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    },
+    "ApiCollectionDocumentProperties": {
+      "title": "ApiCollectionDocumentProperties",
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "type": "string"
+        },
+        "subscriptionId": {
+          "type": "string"
+        },
+        "collectionId": {
+          "type": "string"
+        },
+        "collectionName": {
+          "type": "string"
+        },
+        "userFriendlyCollectionName": {
+          "type": "string"
+        },
+        "uriPath": {
+          "type": "string"
+        },
+        "discoveredVia": {
+          "description": "from which APIM service/instance/resource current API collection belongs to",
+          "type": "string"
+        },
+        "numberOfInactiveApiEndpoints": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numberOfTotalApiEndpoints": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numberOfApimResources": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "suspectedPII": {
+          "description": "number of API endpoints that contain suspected PII",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SystemData": {
+      "title": "SystemData",
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "type": "string"
+        },
+        "createdByType": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastModifiedBy": {
+          "type": "string"
+        },
+        "lastModifiedByType": {
+          "type": "string"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "ApiCollectionDocument": {
+      "title": "ApiCollectionDocument",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApiCollectionDocumentProperties"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
+        }
+      }
+    },
+    "ApiCollectionResponse": {
+      "title": "ApiCollectionResponse",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiCollectionDocument"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "EndpointTypes": {
+      "title": "EndpointTypes",
+      "description": "enum to describe the type of an API endpoint",
+      "example": "DOCUMENTED",
+      "type": "string",
+      "enum": [
+        "DOCUMENTED",
+        "NON_DOCUMENTED"
+      ],
+      "x-ms-enum": {
+        "name": "EndpointTypes",
+        "modelAsString": true
+      }
+    },
+    "PiiDataClassificationItem": {
+      "title": "PiiDataClassificationItem",
+      "description": "enum to describe the classification of an API endpoint",
+      "example": "NAME",
+      "type": "string",
+      "enum": [
+        "NAME",
+        "STREET_ADDR",
+        "EMAIL_ADDR",
+        "PHONE_NUMBER",
+        "IP_ADDR",
+        "MAC_ADDR",
+        "SSN",
+        "PASSPORT_NUMBER",
+        "DRIVER_LICENSE",
+        "STATE_ID",
+        "TAX_PAYER_ID",
+        "PATIENT_ID",
+        "FINANCIAL_ACC",
+        "CREDIT_CARD_NUMBER",
+        "DEBIT_CARD_NUMBER",
+        "VIN_NUMBER",
+        "COOKIE",
+        "LOCATION_DATA"
+      ],
+      "x-ms-enum": {
+        "name": "PiiDataClassificationItem",
+        "modelAsString": true
+      }
+    },
+    "ApiCollectionDetailsDocumentProperties": {
+      "title": "ApiCollectionDetailsDocumentProperties",
+      "type": "object",
+      "properties": {
+        "endPoint": {
+          "type": "string"
+        },
+        "httpMethod": {
+          "type": "string"
+        },
+        "discoveryDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "triggerDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endpointType": {
+          "$ref": "#/definitions/EndpointTypes"
+        },
+        "isEndpointActive": {
+          "type": "boolean"
+        },
+        "piiDataClassifications": {
+          "description": "Array of suspected PII classifications that API endpoint belongs to",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PiiDataClassificationItem"
+          }
+        }
+      }
+    },
+    "ApiCollectionDetailsDocument": {
+      "title": "ApiCollectionDetailsDocument",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApiCollectionDetailsDocumentProperties"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
+        }
+      }
+    },
+    "ApiCollectionDetailsResponse": {
+      "title": "ApiCollectionDetailsResponse",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiCollectionDetailsDocument"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "name": "OnboardOffboardWithApimRP",
+      "description": ""
+    },
+    {
+      "name": "ApimRPConfig",
+      "description": ""
+    },
+    {
+      "name": "OAS",
+      "description": ""
+    },
+    {
+      "name": "ApiCollections",
+      "description": ""
+    },
+    {
+      "name": "Health",
+      "description": ""
+    }
+  ]
+}

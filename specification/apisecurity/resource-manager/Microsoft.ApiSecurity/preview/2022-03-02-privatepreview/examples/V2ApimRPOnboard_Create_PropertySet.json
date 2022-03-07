@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "subscriptionId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "api-version": "2022-03-02-privatepreview",
+    "body": {
+      "name": "PP2RPtestName1",
+      "webhook": "https://www.example.com/myPP2RPwebhook",
+      "apis": [
+        "testApimApi1",
+        "testApimApi2"
+      ],
+      "enableExportingPayload": true,
+      "payloadSize": 32768,
+      "samplingRate": 0.5,
+      "subscribedApimApiEvents": [
+        "API_CREATED"
+      ]
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Location": "https://www.example.com/subscriptions/3fa85f64-5717-4562-b3fc-2c963f66afa6/providers/Microsoft.ApiSecurity/apimRPOnboards/testApimRPOnboardId1"
+      }
+    },
+    "400": {},
+    "401": {},
+    "404": {},
+    "409": {}
+  }
+}
