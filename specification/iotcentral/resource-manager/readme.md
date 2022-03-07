@@ -47,6 +47,14 @@ directive:
   - suppress: R4018
     from: iotcentral.json
     reason: We do not yet support isDataAction, display.description and display.resource.
+  - suppress: R3026
+    from: iotcentral.json
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTCentral/iotApps/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}"]'
+    reason: privateLink and privateEndpointConnection sub-resources don't have patch operations.
+  - suppress: R3026
+    from: iotcentral.json
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTCentral/iotApps/{resourceName}/privateLinkResources/{groupId}"]'
+    reason: privateLink and privateEndpointConnection sub-resources don't have patch operations.
 ```
 ### Tag: package-2021-06
 
