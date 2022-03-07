@@ -52,12 +52,6 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json#/definitions/ErrorResponseLinkedStorage"
-            }
-          },
           "200": {
             "description": "Successful response containing the live metrics stream token.",
             "schema": {
@@ -67,6 +61,12 @@
               "application/json": {
                 "liveToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json#/definitions/ErrorResponseLinkedStorage"
             }
           }
         },
@@ -99,7 +99,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationLive"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",

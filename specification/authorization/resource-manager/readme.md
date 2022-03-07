@@ -82,6 +82,15 @@ directive:
     reason: common-types doesn't need to reference api version.
 ```
 
+### Tag: package-2022-04-01-preview-only
+
+These settings apply only when `--tag=package-2022-04-01-preview-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-04-01-preview-only'
+input-file:
+- Microsoft.Authorization/preview/2022-04-01-preview/RoleAssignmentScheduleRequest.json
+- Microsoft.Authorization/preview/2022-04-01-preview/RoleEligibilityScheduleRequest.json
+```
 
 ### Tag: package-preview-2021-11
 
