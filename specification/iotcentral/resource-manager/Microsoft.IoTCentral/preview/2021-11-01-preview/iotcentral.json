@@ -120,6 +120,16 @@
           },
           "201": {
             "description": "This is returned as a response to the status polling request for the create or update operation. The body contains the resource representation that indicates a transitional provisioning state.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "How long the user should wait before making a follow-up request.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/App"
             }
@@ -177,7 +187,17 @@
             }
           },
           "202": {
-            "description": "Accepted - Patch request accepted; the operation will complete asynchronously."
+            "description": "Accepted - Patch request accepted; the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "How long the user should wait before making a follow-up request.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "DefaultErrorResponse",
@@ -220,7 +240,17 @@
             "description": "This is returned as a response to the status polling request for the delete operation. The body contains the resource representation that indicates a transitional provisioning state."
           },
           "202": {
-            "description": "Accepted - Delete request accepted; the operation will complete asynchronously."
+            "description": "Accepted - Delete request accepted; the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "How long the user should wait before making a follow-up request.",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Once the long running delete operation completes successfully, a 204 No Content status code is returned when the status polling request finds the IoT Central application metadata in the service and the status of the delete operation is set to a completed state."
@@ -364,6 +394,16 @@
         "responses": {
           "201": {
             "description": "This is returned as a response to the status polling request for the create or update operation. The body contains the resource representation that indicates a transitional provisioning state.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "How long the user should wait before making a follow-up request.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
@@ -421,7 +461,17 @@
             }
           },
           "202": {
-            "description": "Accepted - Delete request accepted; the operation will complete asynchronously."
+            "description": "Accepted - Delete request accepted; the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "How long the user should wait before making a follow-up request.",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Once the long running delete operation completes successfully, a 204 No Content status code is returned."
