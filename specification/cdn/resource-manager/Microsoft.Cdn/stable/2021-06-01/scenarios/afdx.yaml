@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.1/schema.json
+
+scope: ResourceGroup
+scenarios:
+  - scenario: test-afd-profile-crud
+    description: Microsoft.CDN/Profile
+    steps:
+      - step: Generate_Unique_Resource-Name
+        armTemplate: ./generate_unique_string.json
+      - step: Create-Profile
+        exampleFile: ../examples/Profiles_Create.json
+      - step: Create-AFDEndpoint
+        exampleFile: ../examples/AFDEndpoints_Create.json
+      - step: Update-AFDEndpoint
+        exampleFile: ../examples/AFDEndpoints_Update.json
+      - step: Delete-AFDEndpoint
+        exampleFile: ../examples/AFDEndpoints_Delete.json
+      - step: Delete-Profile
+        exampleFile: ../examples/Profiles_Delete.json
+    variables:
+      location: global
+      profileResourceName: ""
+      endpointResourceName: ""
+      originGroupResourceName: ""
+      originResourceName: ""
+      routeResourceName: ""

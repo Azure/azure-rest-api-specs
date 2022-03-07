@@ -1,0 +1,56 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "profileResourceNamePrefix": {
+      "type": "string",
+      "defaultValue": "afdx-p-"
+    },
+    "originGroupResourceNamePrefix": {
+        "type": "string",
+        "defaultValue": "afdx-og-"
+      },
+    "originResourceNamePrefix": {
+        "type": "string",
+        "defaultValue": "afdx-o-"
+      },
+    "endpointResourceNamePrefix": {
+        "type": "string",
+        "defaultValue": "afdx-ed-"
+      },
+    "routeResourceNamePrefix": {
+        "type": "string",
+        "defaultValue": "afdx-r-"
+      }
+  },
+  "variables": {
+    "profileResourceName": "[concat(parameters('profileResourceNamePrefix'), uniqueString(resourceGroup().id))]",
+    "originGroupResourceName": "[concat(parameters('originGroupResourceNamePrefix'), uniqueString(resourceGroup().id))]",
+    "originResourceName": "[concat(parameters('originResourceNamePrefix'), uniqueString(resourceGroup().id))]",
+    "endpointResourceName": "[concat(parameters('endpointResourceNamePrefix'), uniqueString(resourceGroup().id))]",
+    "routeResourceName": "[concat(parameters('routeResourceNamePrefix'), uniqueString(resourceGroup().id))]"
+  },
+  "resources": [],
+  "outputs": {
+    "profileResourceName": {
+      "type": "string",
+      "value": "[variables('profileResourceName')]"
+    },
+    "originGroupResourceName": {
+        "type": "string",
+        "value": "[variables('originGroupResourceName')]"
+      },
+    "originResourceName": {
+        "type": "string",
+        "value": "[variables('originResourceName')]"
+      },
+    "endpointResourceName": {
+        "type": "string",
+        "value": "[variables('endpointResourceName')]"
+      },
+    "routeResourceName": {
+        "type": "string",
+        "value": "[variables('routeResourceName')]"
+      }
+  }
+}
