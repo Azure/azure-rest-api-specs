@@ -48,12 +48,7 @@ directive:
     from: iotcentral.json
     reason: We do not yet support isDataAction, display.description and display.resource.
   - suppress: R3026
-    from: iotcentral.json
-    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTCentral/iotApps/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}"]'
-    reason: privateLink and privateEndpointConnection sub-resources don't have patch operations.
-  - suppress: R3026
-    from: iotcentral.json
-    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTCentral/iotApps/{resourceName}/privateLinkResources/{groupId}"]'
+    from: privatelinks.json
     reason: privateLink and privateEndpointConnection sub-resources don't have patch operations.
 ```
 ### Tag: package-2021-06
@@ -82,15 +77,6 @@ These settings apply only when `--tag=package-2018-09-01` is specified on the co
 ``` yaml $(tag) == 'package-2018-09-01'
 input-file:
 - Microsoft.IoTCentral/stable/2018-09-01/iotcentral.json
-```
-
-### Tag: package-2017-07-01-privatepreview
-
-These settings apply only when `--tag=package-2017-07-01-privatepreview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-07-01-privatepreview'
-input-file:
-- Microsoft.IoTCentral/preview/2017-07-01-privatepreview/iotcentral.json
 ```
 
 ---
@@ -150,14 +136,6 @@ payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-iotcentral
 ```
 
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2018-09-01
-  - tag: package-2017-07-01-privatepreview
-```
-
 ### Tag: package-2018-09-01 and java
 
 These settings apply only when `--tag=package-2018-09-01 --java` is specified on the command line.
@@ -167,19 +145,6 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 java:
   namespace: com.microsoft.azure.management.iotcentral.v2018_09_01
   output-folder: $(azure-libraries-for-java-folder)/sdk/iotcentral/mgmt-v2018_09_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2017-07-01-privatepreview and java
-
-These settings apply only when `--tag=package-2017-07-01-privatepreview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag)=='package-2017-07-01-privatepreview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.iotcentral.v2017_07_01_privatepreview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/iotcentral/mgmt-v2017_07_01_privatepreview
 regenerate-manager: true
 generate-interface: true
 ```
