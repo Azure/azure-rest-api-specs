@@ -1121,6 +1121,12 @@
         "x-ms-examples": {
           "StorageAccountSetBlobInventoryPolicy": {
             "$ref": "./examples/StorageAccountSetBlobInventoryPolicy.json"
+          },
+          "StorageAccountSetBlobInventoryPolicyIncludeDeleteAndNewSchemaForHnsAccount": {
+            "$ref": "./examples/StorageAccountSetBlobInventoryPolicyIncludeDeleteAndNewSchemaForHnsAccount.json"
+          },
+          "StorageAccountSetBlobInventoryPolicyIncludeDeleteAndNewSchemaForNonHnsAccount": {
+            "$ref": "./examples/StorageAccountSetBlobInventoryPolicyIncludeDeleteAndNewSchemaForNonHnsAccount.json"
           }
         },
         "parameters": [
@@ -5150,6 +5156,7 @@
           "description": "Policy is enabled if set to true."
         },
         "destination": {
+          "readOnly": true,
           "type": "string",
           "description": "Deprecated Property from API version 2021-04-01 onwards, the required destination container name must be specified at the rule level 'policy.rule.destination'"
         },
@@ -5253,7 +5260,7 @@
           "items": {
             "type": "string"
           },
-          "description": "This is a required field. This field specifies the fields and properties of the object to be included in the inventory. The Schema field value 'Name' is always required. The valid values for this field for the 'Blob' definition.objectType include 'Name, Creation-Time, Last-Modified, Content-Length, Content-MD5, BlobType, AccessTier, AccessTierChangeTime, AccessTierInferred, Tags, Expiry-Time, hdi_isfolder, Owner, Group, Permissions, Acl, Snapshot, VersionId, IsCurrentVersion, Metadata, LastAccessTime'. The valid values for 'Container' definition.objectType include 'Name, Last-Modified, Metadata, LeaseStatus, LeaseState, LeaseDuration, PublicAccess, HasImmutabilityPolicy, HasLegalHold'. Schema field values 'Expiry-Time, hdi_isfolder, Owner, Group, Permissions, Acl' are valid only for Hns enabled accounts.'Tags' field is only valid for non Hns accounts"
+          "description": "This is a required field. This field specifies the fields and properties of the object to be included in the inventory. The Schema field value 'Name' is always required. The valid values for this field for the 'Blob' definition.objectType include 'Name, Creation-Time, Last-Modified, Content-Length, Content-MD5, BlobType, AccessTier, AccessTierChangeTime, AccessTierInferred, Tags, Expiry-Time, hdi_isfolder, Owner, Group, Permissions, Acl, Snapshot, VersionId, IsCurrentVersion, Metadata, LastAccessTime, Tags, Etag, ContentType, ContentEncoding, ContentLanguage, ContentCRC64, CacheControl, ContentDisposition, LeaseStatus, LeaseState, LeaseDuration, ServerEncrypted, Deleted, DeletionId, DeletedTime, RemainingRetentionDays, ImmutabilityPolicyUntilDate, ImmutabilityPolicyMode, LegalHold, CopyId, CopyStatus, CopySource, CopyProgress, CopyCompletionTime, CopyStatusDescription, CustomerProvidedKeySha256, RehydratePriority, ArchiveStatus, XmsBlobSequenceNumber, EncryptionScope, IncrementalCopy, TagCount'. The valid values for 'Container' definition.objectType include 'Name, Last-Modified, Metadata, LeaseStatus, LeaseState, LeaseDuration, PublicAccess, HasImmutabilityPolicy, HasLegalHold, Etag, DefaultEncryptionScope, DenyEncryptionScopeOverride, ImmutableStorageWithVersioningEnabled, Deleted, Version, DeletedTime, RemainingRetentionDays'. Schema field values 'Expiry-Time, hdi_isfolder, Owner, Group, Permissions, Acl' are valid only for Hns enabled accounts.'Tags, DeletionId, DeletedTime' field is only valid for Non-Hns accounts."
         }
       },
       "required": [
@@ -5271,7 +5278,14 @@
           "items": {
             "type": "string"
           },
-          "description": "An array of strings for blob prefixes to be matched."
+          "description": "An array of strings with maximum 10 blob prefixes to be included in the inventory."
+        },
+        "excludePrefix": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "An array of strings with maximum 10 blob prefixes to be excluded from the inventory."
         },
         "blobTypes": {
           "type": "array",
@@ -5287,6 +5301,10 @@
         "includeSnapshots": {
           "type": "boolean",
           "description": "Includes blob snapshots in blob inventory when value is set to true. The definition.schemaFields value 'Snapshot' is required if this property is set to true, else it must be excluded."
+        },
+        "includeDeleted": {
+          "type": "boolean",
+          "description": "For 'Container' definition.objectType the definition.schemaFields must include 'Deleted, Version, DeletedTime and RemainingRetentionDays'. For 'Blob' definition.objectType and HNS enabled storage accounts the definition.schemaFields must include 'DeletionId, Deleted, DeletedTime and RemainingRetentionDays' and for Hns disabled accounts the definition.schemaFields must include 'Deleted and RemainingRetentionDays', else it must be excluded."
         }
       },
       "description": "An object that defines the blob inventory rule filter conditions. For 'Blob' definition.objectType all filter properties are applicable, 'blobTypes' is required and others are optional. For 'Container' definition.objectType only prefixMatch is applicable and is optional."
