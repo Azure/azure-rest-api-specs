@@ -3,7 +3,7 @@
   "info": {
     "title": "Security Insights",
     "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
-    "version": "2021-10-01-preview",
+    "version": "2022-01-01-preview",
     "x-ms-code-generation-settings": {
       "name": "SecurityInsights"
     }
@@ -384,12 +384,15 @@
       "properties": {
         "displayName": {
           "description": "The display name of the automation rule",
-          "type": "string"
+          "type": "string",
+          "maxLength": 500
         },
         "order": {
           "format": "int32",
           "description": "The order of execution of the automation rule",
-          "type": "integer"
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
         },
         "triggeringLogic": {
           "$ref": "#/definitions/AutomationRuleTriggeringLogic"
@@ -399,7 +402,9 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AutomationRuleAction"
-          }
+          },
+          "x-ms-identifiers": [],
+          "maxItems": 20
         },
         "lastModifiedTimeUtc": {
           "format": "date-time",
@@ -833,9 +838,13 @@
         "conditions": {
           "description": "The conditions to evaluate to determine if the automation rule should be triggered on a given object",
           "type": "array",
+          "maxItems": 50,
           "items": {
             "$ref": "#/definitions/AutomationRuleCondition"
-          }
+          },
+          "x-ms-identifiers": [
+            "conditionType"
+          ]
         }
       }
     },
