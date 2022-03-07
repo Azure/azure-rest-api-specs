@@ -27,7 +27,15 @@ These are the global settings for the playfab.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-01-26-preview
+tag: package-2022-03-02-preview
+```
+### Tag: package-2022-03-02-preview
+
+These settings apply only when `--tag=package-2022-03-02-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-03-02-preview'
+input-file:
+  - Microsoft.PlayFab/preview/2022-03-02-preview/playfab.json
 ```
 
 ### Tag: package-2022-01-26-preview
