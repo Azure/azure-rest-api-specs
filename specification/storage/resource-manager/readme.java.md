@@ -181,3 +181,35 @@ Creating this tag to pick proper resources from the hybrid profile.
 input-file:
 - Microsoft.Storage/stable/2017-10-01/storage.json
 ```
+
+### Tag: profile-hybrid-2020-09-01 and java
+
+These settings apply only when `--tag=profile-hybrid-2020-09-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'profile-hybrid-2020-09-01' && $(java)
+input-file:
+  - Microsoft.Storage/stable/2019-06-01/storage.json
+  - Microsoft.Storage/stable/2019-06-01/blob.json
+  - Microsoft.Storage/stable/2019-06-01/file.json
+  - Microsoft.Storage/stable/2019-06-01/queue.json
+  - Microsoft.Storage/stable/2019-06-01/table.json
+
+directive:
+  - from: storage.json
+    where: $.definitions.Identity.properties.type
+    transform: > 
+      $['x-ms-enum'].modelAsString = true;
+
+  - suppress: R3018
+    reason: Existing boolean properties
+    approved-by: "@fearthecowboy"
+
+  - where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/setLegalHold"].post.operationId
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/clearLegalHold"].post.operationId
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey"].post.operationId
+    suppress: R1003
+    reason: APIs return array of values, is not actually a 'list' operation
+    approved-by: "@fearthecowboy"
+```

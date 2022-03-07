@@ -31,7 +31,14 @@ azure-validator: false
 ```
 
 ---
+### Tag: package-preview-2022-02
 
+These settings apply only when `--tag=package-preview-2022-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-02'
+input-file:
+  - Microsoft.CostManagement/preview/2022-02-01-preview/costmanagement.pricesheets.json
+```
 
 ### Tag: package-2021-10
 
@@ -277,6 +284,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby

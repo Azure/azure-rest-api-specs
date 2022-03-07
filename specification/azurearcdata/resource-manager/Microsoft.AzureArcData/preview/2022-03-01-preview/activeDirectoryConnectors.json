@@ -1,0 +1,225 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-03-01-preview",
+    "title": "AzureArcDataManagementClient",
+    "description": "The AzureArcData management API provides a RESTful set of web APIs to manage Azure Data Services on Azure Arc Resources."
+  },
+  "paths": {},
+  "definitions": {
+    "ActiveDirectoryConnectorListResult": {
+      "description": "A list of active directory connectors",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActiveDirectoryConnectorResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ActiveDirectoryConnectorResource": {
+      "type": "object",
+      "description": "Active directory connector resource",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ActiveDirectoryConnectorProperties",
+          "description": "null",
+          "x-ms-client-flatten": false
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "ActiveDirectoryConnectorProperties": {
+      "type": "object",
+      "description": "The properties of an Active Directory connector resource",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the Active Directory connector resource.",
+          "readOnly": true
+        },
+        "spec": {
+          "$ref": "#/definitions/ActiveDirectoryConnectorSpec",
+          "description": "null",
+          "x-ms-client-flatten": false
+        },
+        "status": {
+          "$ref": "#/definitions/ActiveDirectoryConnectorStatus",
+          "description": "null",
+          "x-ms-client-flatten": false
+        }
+      },
+      "required": [
+        "spec"
+      ]
+    },
+    "ActiveDirectoryConnectorSpec": {
+      "description": "The specifications of the AD Kubernetes resource.",
+      "type": "object",
+      "properties": {
+        "activeDirectory": {
+          "$ref": "#/definitions/ActiveDirectoryConnectorDomainDetails",
+          "description": "null",
+          "x-ms-client-flatten": false
+        },
+        "dns": {
+          "$ref": "#/definitions/ActiveDirectoryConnectorDNSDetails",
+          "description": "null",
+          "x-ms-client-flatten": false
+        }
+      },
+      "required": [
+        "activeDirectory",
+        "dns"
+      ]
+    },
+    "ActiveDirectoryConnectorDomainDetails": {
+      "type": "object",
+      "description": "Active Directory domain details",
+      "properties": {
+        "realm": {
+          "type": "string",
+          "description": "Name (uppercase) of the Active Directory domain that this AD connector will be associated with."
+        },
+        "netbiosDomainName": {
+          "type": "string",
+          "description": "NETBIOS name of the Active Directory domain."
+        },
+        "domainControllers": {
+          "$ref": "#/definitions/ActiveDirectoryDomainControllers",
+          "description": "null",
+          "x-ms-client-flatten": false
+        }
+      },
+      "required": [
+        "realm",
+        "domainControllers"
+      ]
+    },
+    "ActiveDirectoryConnectorDNSDetails": {
+      "type": "object",
+      "description": "DNS server details",
+      "properties": {
+        "domainName": {
+          "type": "string",
+          "description": "DNS domain name for which DNS lookups should be forwarded to the Active Directory DNS servers."
+        },
+        "nameserverIPAddresses": {
+          "type": "array",
+          "description": "List of Active Directory DNS server IP addresses.",
+          "items": {
+            "type": "string",
+            "minimum": 1
+          }
+        },
+        "replicas": {
+          "type": "integer",
+          "description": "Replica count for DNS proxy service. Default value is 1.",
+          "default": 1,
+          "format": "int64"
+        },
+        "preferK8sDnsForPtrLookups": {
+          "type": "boolean",
+          "description": "Flag indicating whether to prefer Kubernetes DNS server response over AD DNS server response for IP address lookups.",
+          "default": true
+        }
+      },
+      "required": [
+        "nameserverIPAddresses"
+      ]
+    },
+    "ActiveDirectoryDomainControllers": {
+      "type": "object",
+      "description": "Details about the Active Directory domain controllers associated with this AD connector instance",
+      "properties": {
+        "primaryDomainController": {
+          "$ref": "#/definitions/ActiveDirectoryDomainController",
+          "description": "Information about the Primary Domain Controller (PDC) in the AD domain.",
+          "x-ms-client-flatten": false
+        },
+        "secondaryDomainControllers": {
+          "$ref": "#/definitions/ActiveDirectorySecondaryDomainControllers",
+          "description": "null",
+          "x-ms-client-flatten": false
+        }
+      },
+      "required": [
+        "primaryDomainController"
+      ]
+    },
+    "ActiveDirectoryDomainController": {
+      "type": "object",
+      "description": "Information about a domain controller in the AD domain.",
+      "properties": {
+        "hostname": {
+          "type": "string",
+          "description": "Fully-qualified domain name of a domain controller in the AD domain."
+        }
+      },
+      "required": [
+        "hostname"
+      ]
+    },
+    "ActiveDirectorySecondaryDomainControllers": {
+      "type": "array",
+      "description": "Information about the secondary domain controllers in the AD domain.",
+      "items": {
+        "$ref": "#/definitions/ActiveDirectoryDomainController",
+        "description": "List of the fully-qualified domain names of the secondary domain controllers in the AD domain.",
+        "x-ms-client-flatten": false
+      },
+      "x-ms-identifiers": [
+        "hostname"
+      ]
+    },
+    "ActiveDirectoryConnectorStatus": {
+      "type": "object",
+      "description": "The status of the Kubernetes custom resource.",
+      "properties": {
+        "lastUpdateTime": {
+          "type": "string",
+          "description": "The time that the custom resource was last updated."
+        },
+        "observedGeneration": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The version of the replicaSet associated with the AD connector custom resource."
+        },
+        "state": {
+          "type": "string",
+          "description": "The state of the AD connector custom resource."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

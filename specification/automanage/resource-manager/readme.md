@@ -28,7 +28,20 @@ These are the global settings for the Automanage API.
 title: AutomanageClient
 description: Automanage Client
 openapi-type: arm
-tag: package-2020-06-30-preview
+tag: package-2021-04-30-preview
+```
+
+### Tag: package-2021-04-30-preview
+
+These settings apply only when `--tag=package-2021-04-30-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04-30-preview'
+input-file:
+- Microsoft.Automanage/preview/2021-04-30-preview/automanage.json
+directive:
+  - suppress: R3010
+    from: Microsoft.Automanage/preview/2021-04-30-preview/automanage.json
+    reason: list by immediate parent operations are defined
 ```
 
 ### Tag: package-2020-06-30-preview
@@ -48,6 +61,11 @@ directive:
     from: automanage.json
     where: $.paths
     reason: 'Microsoft.Automanage is a proxy resource provider under Microsoft. Please refer PR https://github.com/Azure/azure-rest-api-specs-pr/pull/1283'
+  - suppress: R3018  # EnumInsteadOfBoolean - Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: isDataAction"
+    where:
+      - $.definitions.Operation.properties.isDataAction
+    from: types.json
+    reason: its per the RPC specification
 ```
 
 ---
@@ -63,6 +81,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
