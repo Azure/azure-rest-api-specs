@@ -602,7 +602,7 @@
           "200": {
             "description": "Successfully retrieved the valid SKUs for the specified streaming job.",
             "schema": {
-              "$ref": "#/definitions/GetStreamingJobSKUsResult"
+              "$ref": "#/definitions/GetStreamingJobSKUResults"
             },
             "headers": {
               "ETag": {
@@ -1020,7 +1020,7 @@
         }
       }
     },
-    "GetStreamingJobSKUsResult": {
+    "GetStreamingJobSKUResults": {
       "type": "object",
       "description": "Result of the request to get streaming job SKUs.",
       "properties": {
@@ -1029,17 +1029,23 @@
           "items": {
             "$ref": "#/definitions/GetStreamingJobSKUResult"
           },
-          "description": "Specifies a list of available SKUs that the streaming job can use."
+          "description": "The list of available SKUs that the streaming job can use."
         }
       }
     },
     "GetStreamingJobSKUResult": {
       "type": "object",
-      "description": "Specifies the details of SKU that the streaming job can use.",
+      "description": "Describes an available SKU information.",
       "properties": {
+        "resourceType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of resource the SKU applies to."
+        },
         "sku": {
           "type": "string",
           "description": "The properties that are associated with a SKU.",
+          "readOnly": true,
           "properties": {
             "name": {
               "type": "string",
@@ -1054,15 +1060,6 @@
             }
           }
         },
-        "allowedValues": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Specifies the number of streaming units that the streaming job can use."
-          },
-          "description": "Specifies the valid streaming units a streaming job can scale to."
-        },
         "capacity": {
           "$ref": "#/definitions/SKUCapacity"
         }
@@ -1070,32 +1067,63 @@
     },
     "SKUCapacity": {
       "type": "object",
-      "description": "Specifies the details of SKU capacity that the streaming job can use.",
+      "description": "Describes scaling information of a SKU.",
+      "readOnly": true,
       "properties": {
         "minimum": {
           "type": "integer",
           "format": "int32",
+          "readOnly": true,
           "description": "Specifies the minimum streaming units that the streaming job can use."
         },
         "maximum": {
           "type": "integer",
           "format": "int32",
+          "readOnly": true,
           "description": "Specifies the maximum streaming units that the streaming job can use."
         },
         "default": {
           "type": "integer",
           "format": "int32",
+          "readOnly": true,
           "description": "Specifies the default streaming units that the streaming job can use."
         },
         "scaleType": {
           "type": "string",
-          "description": "Describes the type of the scaling.",
+          "readOnly": true,
+          "description": "The scale type applicable to the sku.",
           "enum": [
-            "automatic"
+            "automatic",
+            "manual",
+            "none"
           ],
           "x-ms-enum": {
-            "name": "ScaleType",
-            "modelAsString": true
+            "name": "ResourceSkuCapacityScaleType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "automatic",
+                "description": "Supported scale type automatic."
+              },
+              {
+                "value": "manual",
+                "description": "Supported scale type manual."
+              },
+              {
+                "value": "none",
+                "description": "Scaling not supported."
+              }
+            ]
+          }
+        },
+        "allowedValues": {
+          "type": "array",
+          "description": "Specifies the valid streaming units a streaming job can scale to.",
+          "readOnly": true,
+          "items": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Specifies the number of streaming units that the streaming job can use."
           }
         }
       }
