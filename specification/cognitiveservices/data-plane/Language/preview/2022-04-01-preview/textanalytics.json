@@ -146,7 +146,7 @@
         "produces": [
           "application/json"
         ],
-        "description": "Get the status of an analysis job.  A job may consist of one or more tasks.  Once all tasks are succeeded, the job will transition to the succeeded state and results will be available for each task.",
+        "description": "Get the status of an analysis job. A job may consist of one or more tasks. Once all tasks are succeeded, the job will transition to the succeeded state and results will be available for each task.",
         "operationId": "AnalyzeText_JobStatus",
         "summary": "Get analysis status and results",
         "parameters": [
@@ -195,7 +195,7 @@
         "produces": [
           "application/json"
         ],
-        "description": "Submit a long conversation for analysis. Specify one or more unique tasks to be executed as a long-running operation.",
+        "description": "Submit a collection of conversations for analysis. Specify one or more unique tasks to be executed.",
         "operationId": "AnalyzeConversation_SubmitJob",
         "summary": "Submit analysis job for conversations",
         "parameters": [
@@ -203,7 +203,7 @@
             "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
-            "description": "The conversations to analyze and one or more tasks to execute on the conversations.",
+            "description": "The collection of conversations to analyze and one or more tasks to execute.",
             "in": "body",
             "name": "body",
             "schema": {
@@ -243,7 +243,7 @@
         "produces": [
           "application/json"
         ],
-        "description": "Get the status of an analysis job.  A job may consist of one or more tasks.  Once all tasks are succeeded, the job will transition to the succeeded state and results will be available for each task.",
+        "description": "Get the status of an analysis job. A job may consist of one or more tasks. Once all tasks are succeeded, the job will transition to the succeeded state and results will be available for each task.",
         "operationId": "AnalyzeConversation_JobStatus",
         "summary": "Get analysis status and results",
         "parameters": [
@@ -286,9 +286,9 @@
         "produces": [
           "application/json"
         ],
-        "description": "Cancel a long-running analysis job on conversation.",
+        "description": "Cancel a analysis job on the collection of conversations.",
         "operationId": "AnalyzeConversation_CancelJob",
-        "summary": "Cancel a long-running analysis job on conversation.",
+        "summary": "Cancel a analysis job on the collection of conversations.",
         "parameters": [
           {
             "$ref": "#/parameters/JobId"
@@ -403,6 +403,9 @@
       }
     },
     "MultiLanguageConversationAnalysisInput": {
+      "required": [
+        "conversations"
+      ],
       "properties": {
         "conversations": {
           "type": "array",
@@ -416,7 +419,8 @@
       "required": [
         "id",
         "language",
-        "modality"
+        "modality",
+        "conversationItems"
       ],
       "properties": {
         "id": {
@@ -424,14 +428,14 @@
           "type": "string"
         },
         "language": {
-          "description": "Default languages of the conversation item in BCP-47 format",
+          "description": "Default language of the conversation item in BCP-47 format",
           "type": "string"
         },
         "modality": {
           "$ref": "#/definitions/Modality"
         },
         "domain": {
-          "type": "string"
+          "$ref": "#/definitions/ConversationDomain"
         },
         "conversationItems": {
           "type": "array",
@@ -443,7 +447,7 @@
     },
     "Modality": {
       "type": "string",
-      "description": "Enumeration of supported conversation genres (or modalities). Currently we will support chat and transcription",
+      "description": "Enumeration of supported conversation modalities.",
       "enum": [
         "transcript",
         "text"
@@ -453,7 +457,20 @@
         "modelAsString": true
       }
     },
+    "ConversationDomain":{
+      "type": "string",
+      "description": "Enumeration of supported conversation domains.",
+      "enum": [
+        "finance",
+        "neutral"
+      ],
+      "x-ms-enum": {
+        "name": "ConversationDomain",
+        "modelAsString": true
+      }
+    },
     "ConversationItem": {
+      "description": "One single conversation item.",
       "discriminator": "modality",
       "required": [
         "id",
@@ -471,17 +488,17 @@
         },
         "language": {
           "type": "string",
-          "description": "Optional property to override the language of the conversation item in BCP-47 format."
+          "description": "Optional property to override the language of the conversation item in BCP-47 format. If the property is missing the language will be defaulted to one specified in the parent conversation object."
         },
         "modality": {
-          "description": "Property to override the modality of the conversation item.",
+          "description": "Property to set the modality of the conversation item.",
           "$ref": "#/definitions/Modality"
         }
       }
     },
     "TextConversationItem": {
       "type": "object",
-      "description": "Extra properties for supporting additional parameters for transcript conversation.",
+      "description": "Extra properties for supporting additional parameters for text conversation.",
       "required": [
         "text"
       ],
@@ -511,19 +528,24 @@
       "type":"object",
       "properties": {
         "itn": {
-          "type": "string"
+          "type": "string",
+          "description": "Inverse Text Normalization representation of input. The inverse-text-normalized form is the recognized text from Microsoft’s Speech to Text API, with phone numbers, numbers, abbreviations, and other transformations applied."
         },
         "maskedItn": {
-          "type": "string"
+          "type": "string",
+          "description": "The ITN form with profanity masking applied."
         },
         "text": {
-          "type": "string"
+          "type": "string",
+          "description": "The display form of the recognized text from Microsoft's speech to text API, with punctuation and capitalization added."
         },
         "lexical": {
-          "type": "string"
+          "type": "string",
+          "description": "The lexical form of the recognized text from Microsoft's Speech to Text. The actual words recognized."
         },
         "audioTimings": {
           "type":"array",
+          "description": "The list of word level audio timing information",
           "items": {
             "$ref": "#/definitions/WordLevelTiming"
           }
@@ -534,19 +556,24 @@
       "type":"object",
       "properties": {
         "itn": {
-          "type": "string"
+          "type": "string",
+          "description": "The redacted output for ITN format input."
         },
         "maskedItn": {
-          "type": "string"
+          "type": "string",
+          "description": "The redacted output for masked itn format input."
         },
         "text": {
-          "type": "string"
+          "type": "string",
+          "description": "The redacted output for text format input."
         },
         "lexical": {
-          "type": "string"
+          "type": "string",
+          "description": "The redacted output for lexical format input."
         },
         "audioTimings": {
           "type":"array",
+          "description": "The list of redacted audio segments",
           "items": {
             "$ref": "#/definitions/AudioTiming"
           }
@@ -746,7 +773,7 @@
           "description": "The set of tasks to execute on the input conversation.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AnalyzeConversationLROTask"
+            "$ref": "#/definitions/AnalyzeConversationTask"
           }
         }
       },
@@ -755,7 +782,7 @@
         "tasks"
       ]
     },
-    "AnalyzeConversationLROTask": {
+    "AnalyzeConversationTask": {
       "discriminator": "kind",
       "required": [
         "kind"
@@ -773,7 +800,7 @@
     },
     "AnalyzeConversationLROTaskKind": {
       "type": "string",
-      "description": "Enumeration of supported Conversation Analysis LRO tasks.",
+      "description": "Enumeration of supported analysis tasks on a collection of conversations.",
       "enum": [
         "TranscriptionPii",
         "IssueResolutionSummarization"
@@ -836,11 +863,12 @@
       "type": "object",
       "properties": {
         "offset": {
-          "description": "Offset from start of speech audio, in ticks.",
-          "type": "integer"
+          "description": "Offset from start of speech audio, in ticks. 1 tick = 100 ns.",
+          "type": "integer",
+          "format": "int64"
         },
         "duration": {
-          "description": "Duration of word articulation, in ticks.",
+          "description": "Duration of word articulation, in ticks. 1 tick = 100 ns.",
           "type": "integer",
           "format": "int32"
         }
@@ -913,7 +941,7 @@
     },
     "ContentSource": {
       "type": "string",
-      "description": "Enumeration of supported content source types.",
+      "description": "Enumeration of supported transcript content source types.",
       "enum": [
         "lexical",
         "itn",
@@ -2560,7 +2588,7 @@
       "uniqueItems": true
     },
     "TranscriptionPiiCategories": {
-      "description": "(Optional) describes the PII categories to return for transcription conversation detection.",
+      "description": "(Optional) Describes the PII categories to return for detection. By default default categories will be returned which will vary with languages.",
       "items": {
         "type": "string",
         "x-ms-enum": {
@@ -3378,7 +3406,7 @@
           }
         },
         "statistics": {
-          "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
+          "description": "If showStats=true was specified in the request this field will contain information about the document payload.",
           "$ref": "#/definitions/DocumentStatistics"
         }
       }
@@ -3482,7 +3510,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Conversation Id."
+          "description": "The id of the conversation."
         },
         "error": {
           "type": "object",
@@ -3531,7 +3559,7 @@
           "description": "Number of transactions for the conversation."
         }
       },
-      "description": "if showStats=true was specified in the request this field will contain information about the conversation payload.      "
+      "description": "If showStats=true was specified in the request this field will contain information about the conversation payload."
     },
     "ConversationRequestStatistics": {
       "type": "object",
