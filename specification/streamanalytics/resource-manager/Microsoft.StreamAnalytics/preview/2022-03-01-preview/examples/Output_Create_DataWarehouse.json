@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "api-version": "2021-10-01-preview",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d",
+    "resourceGroupName": "sjrg",
+    "jobName": "sjName",
+    "outputName": "dwOutput",
+    "output": {
+      "properties": {
+        "datasource": {
+          "type": "Microsoft.Sql/Server/DataWarehouse",
+          "properties": {
+            "table": "test2",
+            "server": "asatestserver",
+            "database": "zhayaSQLpool",
+            "user": "tolladmin",
+            "password": "password123"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "ETag": "731a47c6-ff67-4439-bde6-a2a3da4c1ecf"
+      },
+      "body": {
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/sjName/outputs/dwOutput",
+        "name": "dwOutput",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+        "properties": {
+          "datasource": {
+            "type": "Microsoft.Sql/Server/DataWarehouse",
+            "properties": {
+              "table": "test2",
+              "server": "asatestserver",
+              "database": "zhayaSQLpool",
+              "user": "tolladmin"
+            }
+          }
+        }
+      }
+    },
+    "200": {
+      "headers": {
+        "ETag": "731a47c6-ff67-4439-bde6-a2a3da4c1ecf"
+      },
+      "body": {
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/sjName/outputs/dwOutput",
+        "name": "dwOutput",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+        "properties": {
+          "datasource": {
+            "type": "Microsoft.Sql/Server/DataWarehouse",
+            "properties": {
+              "table": "test2",
+              "server": "asatestserver",
+              "database": "zhayaSQLpool",
+              "user": "tolladmin"
+            }
+          }
+        }
+      }
+    }
+  }
+}
