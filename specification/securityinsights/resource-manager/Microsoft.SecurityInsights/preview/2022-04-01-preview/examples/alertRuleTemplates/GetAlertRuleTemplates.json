@@ -1,0 +1,238 @@
+{
+  "parameters": {
+    "api-version": "2022-04-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/AlertRuleTemplates/65360bb0-8986-4ade-a89d-af3cf44d28aa",
+            "name": "65360bb0-8986-4ade-a89d-af3cf44d28aa",
+            "type": "Microsoft.SecurityInsights/AlertRuleTemplates",
+            "kind": "Scheduled",
+            "properties": {
+              "severity": "Low",
+              "query": "let timeframe = 1d;\nAWSCloudTrail\n| where TimeGenerated >= ago(timeframe)\n| where EventName == \"CreateNetworkAclEntry\"\n    or EventName == \"CreateRoute\"\n| project TimeGenerated, EventName, EventTypeName, UserIdentityAccountId, UserIdentityPrincipalid, UserAgent, UserIdentityUserName, SessionMfaAuthenticated, SourceIpAddress, AWSRegion, EventSource, AdditionalEventData, ResponseElements\n| extend AccountCustomEntity = UserIdentityUserName, IPCustomEntity = SourceIpAddress",
+              "queryFrequency": "P1D",
+              "queryPeriod": "P1D",
+              "triggerOperator": "GreaterThan",
+              "triggerThreshold": 0,
+              "displayName": "Changes to Amazon VPC settings",
+              "description": "This alert monitors changes to Amazon VPC (Virtual Private Cloud) settings such as new ACL entries and routes in route tables.\nMore information: https://medium.com/@GorillaStack/the-most-important-aws-cloudtrail-security-events-to-track-a5b9873f8255 \nand https://aws.amazon.com/vpc/",
+              "tactics": [
+                "PrivilegeEscalation",
+                "LateralMovement"
+              ],
+              "techniques": [
+                "T1037",
+                "T1021"
+              ],
+              "lastUpdatedDateUTC": "2020-02-27T00:00:00Z",
+              "createdDateUTC": "2019-02-27T00:00:00Z",
+              "status": "Available",
+              "version": "1.0.1",
+              "requiredDataConnectors": [
+                {
+                  "connectorId": "AWS",
+                  "dataTypes": [
+                    "AWSCloudTrail"
+                  ]
+                }
+              ],
+              "alertRulesCreatedByTemplateCount": 0
+            }
+          },
+          {
+            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/AlertRuleTemplates/f71aba3d-28fb-450b-b192-4e76a83015c8",
+            "name": "f71aba3d-28fb-450b-b192-4e76a83015c8",
+            "type": "Microsoft.SecurityInsights/AlertRuleTemplates",
+            "kind": "Fusion",
+            "properties": {
+              "displayName": "Advanced Multi-Stage Attack Detection",
+              "description": "Microsoft Sentinel uses Fusion, a correlation engine based on scalable machine learning algorithms, to automatically detect multistage attacks by identifying combinations of anomalous behaviors and suspicious activities that are observed at various stages of the kill chain. On the basis of these discoveries, Azure Sentinel generates incidents that would otherwise be very difficult to catch. By design, these incidents are low-volume, high-fidelity, and high-severity, which is why this detection is turned ON by default.\n\nSince Fusion correlates multiple signals from various products to detect advanced multistage attacks, successful Fusion detections are presented as Fusion incidents on the Microsoft Sentinel Incidents page. This rule covers the following detections:\n- Fusion for emerging threats\n- Fusion for ransomware\n- Scenario-based Fusion detections (122 scenarios)\n\nTo enable these detections, we recommend you configure the following data connectors for best results:\n- Out-of-the-box anomaly detections\n- Azure Active Directory Identity Protection\n- Azure Defender\n- Azure Defender for IoT\n- Microsoft 365 Defender\n- Microsoft Cloud App Security    \n- Microsoft Defender for Endpoint\n- Microsoft Defender for Identity\n- Microsoft Defender for Office 365\n- Palo Alto Networks\n- Scheduled analytics rules, both built-in and those created by your security analysts. Analytics rules must contain kill-chain (tactics) and entity mapping information in order to be used by Fusion.\n\nFor the full description of each detection that is supported by Fusion, go to https://aka.ms/SentinelFusion.",
+              "tactics": [
+                "Collection",
+                "CommandAndControl",
+                "CredentialAccess",
+                "DefenseEvasion",
+                "Discovery",
+                "Execution",
+                "Exfiltration",
+                "Impact",
+                "InitialAccess",
+                "LateralMovement",
+                "Persistence",
+                "PrivilegeEscalation"
+              ],
+              "sourceSettings": [
+                {
+                  "sourceName": "Anomalies",
+                  "sourceSubTypes": null
+                },
+                {
+                  "sourceName": "Alert providers",
+                  "sourceSubTypes": [
+                    {
+                      "sourceSubTypeName": "Azure Active Directory Identity Protection",
+                      "severityFilter": {
+                        "enabled": true,
+                        "isSupported": true,
+                        "severityFilters": [
+                          "Informational",
+                          "Low",
+                          "Medium",
+                          "High"
+                        ]
+                      }
+                    },
+                    {
+                      "sourceSubTypeName": "Azure Defender",
+                      "severityFilter": {
+                        "enabled": true,
+                        "isSupported": true,
+                        "severityFilters": [
+                          "Informational",
+                          "Low",
+                          "Medium",
+                          "High"
+                        ]
+                      }
+                    },
+                    {
+                      "sourceSubTypeName": "Azure Defender for IoT",
+                      "severityFilter": {
+                        "enabled": true,
+                        "isSupported": true,
+                        "severityFilters": [
+                          "Informational",
+                          "Low",
+                          "Medium",
+                          "High"
+                        ]
+                      }
+                    },
+                    {
+                      "sourceSubTypeName": "Microsoft 365 Defender",
+                      "severityFilter": {
+                        "enabled": true,
+                        "isSupported": true,
+                        "severityFilters": [
+                          "Informational",
+                          "Low",
+                          "Medium",
+                          "High"
+                        ]
+                      }
+                    },
+                    {
+                      "sourceSubTypeName": "Microsoft Cloud App Security",
+                      "severityFilter": {
+                        "enabled": true,
+                        "isSupported": true,
+                        "severityFilters": [
+                          "Informational",
+                          "Low",
+                          "Medium",
+                          "High"
+                        ]
+                      }
+                    },
+                    {
+                      "sourceSubTypeName": "Microsoft Defender for Endpoint",
+                      "severityFilter": {
+                        "enabled": true,
+                        "isSupported": true,
+                        "severityFilters": [
+                          "Informational",
+                          "Low",
+                          "Medium",
+                          "High"
+                        ]
+                      }
+                    },
+                    {
+                      "sourceSubTypeName": "Microsoft Defender for Identity",
+                      "severityFilter": {
+                        "enabled": true,
+                        "isSupported": true,
+                        "severityFilters": [
+                          "Informational",
+                          "Low",
+                          "Medium",
+                          "High"
+                        ]
+                      }
+                    },
+                    {
+                      "sourceSubTypeName": "Microsoft Defender for Office 365",
+                      "severityFilter": {
+                        "enabled": true,
+                        "isSupported": true,
+                        "severityFilters": [
+                          "Informational",
+                          "Low",
+                          "Medium",
+                          "High"
+                        ]
+                      }
+                    },
+                    {
+                      "sourceSubTypeName": "Azure Sentinel scheduled analytics rules",
+                      "severityFilter": {
+                        "enabled": true,
+                        "isSupported": true,
+                        "severityFilters": [
+                          "Informational",
+                          "Low",
+                          "Medium",
+                          "High"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "sourceName": "Raw logs from other sources",
+                  "sourceSubTypes": [
+                    {
+                      "sourceSubTypeName": "Palo Alto Networks",
+                      "severityFilter": {
+                        "enabled": false,
+                        "isSupported": false,
+                        "severityFilters": null
+                      }
+                    }
+                  ]
+                }
+              ],
+              "lastUpdatedDateUTC": "2021-06-09T00:00:00Z",
+              "createdDateUTC": "2019-07-25T00:00:00Z",
+              "status": "Available",
+              "severity": "High",
+              "alertRulesCreatedByTemplateCount": 0
+            }
+          },
+          {
+            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/AlertRuleTemplates/b3cfc7c0-092c-481c-a55b-34a3979758cb",
+            "name": "b3cfc7c0-092c-481c-a55b-34a3979758cb",
+            "type": "Microsoft.SecurityInsights/AlertRuleTemplates",
+            "kind": "MicrosoftSecurityIncidentCreation",
+            "properties": {
+              "productFilter": "Microsoft Cloud App Security",
+              "displayName": "Create incidents based on Microsoft Cloud App Security alerts",
+              "description": "Create incidents based on all alerts generated in Microsoft Cloud App Security",
+              "lastUpdatedDateUTC": "2020-02-27T00:00:00Z",
+              "createdDateUTC": "2019-07-16T00:00:00Z",
+              "status": "Available",
+              "alertRulesCreatedByTemplateCount": 0
+            }
+          }
+        ]
+      }
+    }
+  }
+}
