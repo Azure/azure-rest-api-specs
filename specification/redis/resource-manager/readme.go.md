@@ -19,6 +19,8 @@ directive:
 - rename-model:
    from: 'RedisResource'
    to: 'ResourceInfo'
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ### Go multi-api
