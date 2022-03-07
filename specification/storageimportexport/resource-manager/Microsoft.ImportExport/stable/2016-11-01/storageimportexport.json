@@ -616,7 +616,8 @@
                     "description": "Provides information about the error message."
                   }
                 }
-              }
+              },
+              "x-ms-identifiers": []
             },
             "innererror": {
               "type": "object",
@@ -711,7 +712,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DriveStatus"
-          }
+          },
+          "x-ms-identifiers": [
+            "driveId"
+          ]
         },
         "export": {
           "description": "A property containing information about the blobs to be exported for an export job. This property is included for export jobs only.",
@@ -827,7 +831,10 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/DriveStatus"
-              }
+              },
+              "x-ms-identifiers": [
+                "driveId"
+              ]
             }
           },
           "description": "Specifies the properties of a UpdateJob."
@@ -1281,7 +1288,10 @@
           "description": "drive status",
           "items": {
             "$ref": "#/definitions/DriveBitLockerKey"
-          }
+          },
+          "x-ms-identifiers": [
+            "driveId"
+          ]
         }
       }
     },
@@ -1306,7 +1316,10 @@
           "description": "operations",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     }

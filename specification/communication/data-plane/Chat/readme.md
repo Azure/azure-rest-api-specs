@@ -156,6 +156,8 @@ license-header: MICROSOFT_MIT_NO_VERSION
 add-credential: true
 generate-as-internal: >
     AzureCommunicationChatClient=ChatClientInternal
+    AzureCommunicationChatClientOptions=AzureCommunicationChatClientOptionsInternal
+    AddChatParticipantsRequest=AddChatParticipantsRequestInternal
     CreateChatThreadResult=CreateChatThreadResultInternal
     CreateChatThreadRequest=CreateChatThreadRequestInternal
     ChatMessage=ChatMessageInternal
@@ -163,6 +165,8 @@ generate-as-internal: >
     ChatParticipant=ChatParticipantInternal
     ChatMessageReadReceipt=ChatMessageReadReceiptInternal
     ChatThreadProperties=ChatThreadPropertiesInternal
+    CommunicationIdentifierModel=CommunicationIdentifierModelInternal
+    UpdateChatThreadRequest=UpdateChatThreadRequestInternal
 directive:
 # Rename CommunicationError to ChatError
 - from: swagger-document
