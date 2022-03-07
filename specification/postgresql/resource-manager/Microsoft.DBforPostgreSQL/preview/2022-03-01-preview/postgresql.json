@@ -1031,15 +1031,15 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/locations/${location}/getAvailableCachedServerName": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/locations/${location}/getCachedServerName": {
       "post": {
         "tags": [
-          "GetAvailableCachedServerName"
+          "GetCachedServerName"
         ],
-        "operationId": "GetAvailableCachedServerName_Execute",
+        "operationId": "GetCachedServerName_Execute",
         "x-ms-examples": {
-          "AvailableCachedServerName": {
-            "$ref": "./examples/getAvailableCachedServerName.json"
+          "CachedServerName": {
+            "$ref": "./examples/GetCachedServerName.json"
           }
         },
         "description": "Get available chaced server name for fast provisioning",
@@ -1061,7 +1061,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AvailableCachedServerNameRequest"
+              "$ref": "#/definitions/CachedServerNameRequest"
             },
             "description": "The required parameters for get cached name available for fast provisioning."
           }
@@ -1070,7 +1070,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AvailableCachedServerName"
+              "$ref": "#/definitions/CachedServerName"
             }
           },
           "default": {
@@ -2150,7 +2150,7 @@
       },
       "description": "Represents server restart parameters."
     },
-    "AvailableCachedServerNameRequest": {
+    "CachedServerNameRequest": {
       "required": [
         "version",
         "storage",
@@ -2173,9 +2173,9 @@
       },
       "description": "Request from client to get available cached server name"
     },
-    "AvailableCachedServerName": {
+    "CachedServerName": {
       "properties": {
-        "AvailableServerName": {
+        "name": {
           "type": "string",
           "description": "The name of available cached server",
           "readOnly": true
