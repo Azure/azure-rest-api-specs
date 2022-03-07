@@ -11,7 +11,8 @@
       "streamingJob": {
         "properties": {
           "sku": {
-            "name": "Standard"
+            "name": "Standard",
+            "capacity": 36
           },
           "eventsOutOfOrderPolicy": "Drop",
           "outputErrorPolicy": "Drop",
@@ -19,6 +20,7 @@
           "eventsLateArrivalMaxDelayInSeconds": 5,
           "dataLocale": "en-US",
           "compatibilityLevel": "1.0",
+          "query": "Select Id, Name from inputtest",
           "inputs": [
             {
               "properties": {
@@ -39,13 +41,6 @@
               "name": "inputtest"
             }
           ],
-          "transformation": {
-            "properties": {
-              "streamingUnits": 1,
-              "query": "Select Id, Name from inputtest"
-            },
-            "name": "transformationtest"
-          },
           "outputs": [
             {
               "properties": {

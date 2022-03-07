@@ -43,7 +43,6 @@ input-file:
   - Microsoft.StreamAnalytics/preview/2022-03-01-preview/outputs.json
   - Microsoft.StreamAnalytics/preview/2022-03-01-preview/streamingjobs.json
   - Microsoft.StreamAnalytics/preview/2022-03-01-preview/subscriptions.json
-  - Microsoft.StreamAnalytics/preview/2022-03-01-preview/transformations.json
   - Microsoft.StreamAnalytics/preview/2020-03-01-preview/clusters.json
   - Microsoft.StreamAnalytics/preview/2020-03-01-preview/privateEndpoints.json
 ```

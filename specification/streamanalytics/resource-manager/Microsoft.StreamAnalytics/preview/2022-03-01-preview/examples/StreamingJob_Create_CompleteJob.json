@@ -7,7 +7,8 @@
     "streamingJob": {
       "properties": {
         "sku": {
-          "name": "Standard"
+          "name": "Standard",
+          "capacity": 36
         },
         "eventsOutOfOrderPolicy": "Drop",
         "outputErrorPolicy": "Drop",
@@ -15,6 +16,7 @@
         "eventsLateArrivalMaxDelayInSeconds": 5,
         "dataLocale": "en-US",
         "compatibilityLevel": "1.0",
+        "query": "Select Id, Name from inputtest",
         "inputs": [
           {
             "properties": {
@@ -42,13 +44,6 @@
             "name": "inputtest"
           }
         ],
-        "transformation": {
-          "properties": {
-            "streamingUnits": 1,
-            "query": "Select Id, Name from inputtest"
-          },
-          "name": "transformationtest"
-        },
         "outputs": [
           {
             "properties": {
@@ -93,7 +88,8 @@
         },
         "properties": {
           "sku": {
-            "name": "Standard"
+            "name": "Standard",
+            "capacity": 36
           },
           "jobId": "732e4b1d-94a7-43ae-8297-3ad04f1540b9",
           "provisioningState": "Succeeded",
@@ -105,6 +101,7 @@
           "dataLocale": "en-US",
           "createdDate": "2017-05-11T04:37:11.54Z",
           "compatibilityLevel": "1.0",
+          "query": "Select Id, Name from inputtest",
           "inputs": [
             {
               "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg3276/providers/Microsoft.StreamAnalytics/streamingjobs/sj7804/inputs/inputtest",
@@ -134,16 +131,6 @@
               }
             }
           ],
-          "transformation": {
-            "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg3276/providers/Microsoft.StreamAnalytics/streamingjobs/sj7804/transformations/transformationtest",
-            "name": "transformationtest",
-            "type": "Microsoft.StreamAnalytics/streamingjobs/transformations",
-            "properties": {
-              "streamingUnits": 1,
-              "query": "Select Id, Name from inputtest",
-              "etag": "91d8fcbe-60b3-49c3-9f21-9942b95602b8"
-            }
-          },
           "functions": [],
           "outputs": [
             {
@@ -183,7 +170,8 @@
         },
         "properties": {
           "sku": {
-            "name": "Standard"
+            "name": "Standard",
+            "capacity": 36
           },
           "jobId": "732e4b1d-94a7-43ae-8297-3ad04f1540b9",
           "provisioningState": "Succeeded",
@@ -195,6 +183,7 @@
           "dataLocale": "en-US",
           "createdDate": "2017-05-11T04:37:11.54Z",
           "compatibilityLevel": "1.0",
+          "query": "Select Id, Name from inputtest",
           "inputs": [
             {
               "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg3276/providers/Microsoft.StreamAnalytics/streamingjobs/sj7804/inputs/inputtest",
@@ -224,16 +213,6 @@
               }
             }
           ],
-          "transformation": {
-            "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg3276/providers/Microsoft.StreamAnalytics/streamingjobs/sj7804/transformations/transformationtest",
-            "name": "transformationtest",
-            "type": "Microsoft.StreamAnalytics/streamingjobs/transformations",
-            "properties": {
-              "streamingUnits": 1,
-              "query": "Select Id, Name from inputtest",
-              "etag": "91d8fcbe-60b3-49c3-9f21-9942b95602b8"
-            }
-          },
           "functions": [],
           "outputs": [
             {

@@ -77,10 +77,10 @@
         "operationId": "StreamingJobs_CreateOrReplace",
         "description": "Creates a streaming job or replaces an already existing streaming job.",
         "x-ms-examples": {
-          "Create a streaming job shell (a streaming job with no inputs, outputs, transformation, or functions)": {
+          "Create a streaming job shell (a streaming job with no inputs, outputs, query, or functions)": {
             "$ref": "./examples/StreamingJob_Create_JobShell.json"
           },
-          "Create a complete streaming job (a streaming job with a transformation, at least 1 input and at least 1 output)": {
+          "Create a complete streaming job (a streaming job with a query, at least 1 input and at least 1 output)": {
             "$ref": "./examples/StreamingJob_Create_CompleteJob.json"
           }
         },
@@ -274,7 +274,7 @@
           "Get a streaming job and do not use the $expand OData query parameter": {
             "$ref": "./examples/StreamingJob_Get_NoExpand.json"
           },
-          "Get a streaming job and use the $expand OData query parameter to expand inputs, outputs, transformation, and functions": {
+          "Get a streaming job and use the $expand OData query parameter to expand inputs, outputs, query, and functions": {
             "$ref": "./examples/StreamingJob_Get_Expand.json"
           }
         },
@@ -284,7 +284,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The $expand OData query parameter. This is a comma-separated list of additional streaming job properties to include in the response, beyond the default set returned when this parameter is absent. The default set is all streaming job properties other than 'inputs', 'transformation', 'outputs', and 'functions'."
+            "description": "The $expand OData query parameter. This is a comma-separated list of additional streaming job properties to include in the response, beyond the default set returned when this parameter is absent. The default set is all streaming job properties other than 'inputs', 'query', 'outputs', and 'functions'."
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
@@ -332,7 +332,7 @@
           "List all streaming jobs in a resource group and do not use the $expand OData query parameter": {
             "$ref": "./examples/StreamingJob_List_ByResourceGroup_NoExpand.json"
           },
-          "List all streaming jobs in a resource group and use the $expand OData query parameter to expand inputs, outputs, transformation, and functions": {
+          "List all streaming jobs in a resource group and use the $expand OData query parameter to expand inputs, outputs, query, and functions": {
             "$ref": "./examples/StreamingJob_List_ByResourceGroup_Expand.json"
           }
         },
@@ -342,7 +342,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The $expand OData query parameter. This is a comma-separated list of additional streaming job properties to include in the response, beyond the default set returned when this parameter is absent. The default set is all streaming job properties other than 'inputs', 'transformation', 'outputs', and 'functions'."
+            "description": "The $expand OData query parameter. This is a comma-separated list of additional streaming job properties to include in the response, beyond the default set returned when this parameter is absent. The default set is all streaming job properties other than 'inputs', 'query', 'outputs', and 'functions'."
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
@@ -384,7 +384,7 @@
           "List all streaming jobs in a subscription and do not use the $expand OData query parameter": {
             "$ref": "./examples/StreamingJob_List_BySubscription_NoExpand.json"
           },
-          "List all streaming jobs in a subscription and use the $expand OData query parameter to expand inputs, outputs, transformation, and functions": {
+          "List all streaming jobs in a subscription and use the $expand OData query parameter to expand inputs, outputs, query, and functions": {
             "$ref": "./examples/StreamingJob_List_BySubscription_Expand.json"
           }
         },
@@ -394,7 +394,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The $expand OData query parameter. This is a comma-separated list of additional streaming job properties to include in the response, beyond the default set returned when this parameter is absent. The default set is all streaming job properties other than 'inputs', 'transformation', 'outputs', and 'functions'."
+            "description": "The $expand OData query parameter. This is a comma-separated list of additional streaming job properties to include in the response, beyond the default set returned when this parameter is absent. The default set is all streaming job properties other than 'inputs', 'query', 'outputs', and 'functions'."
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
@@ -571,6 +571,54 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StreamAnalytics/streamingjobs/{jobName}/skus": {
+      "get": {
+        "tags": [
+          "StreamingJobs"
+        ],
+        "operationId": "StreamingJobs_GetSkus",
+        "description": "Gets a list of available SKUs about the specified streaming job.",
+        "x-ms-examples": {
+          "Get valid SKUs list for the specified streaming job": {
+            "$ref": "./examples/StreamingJob_GetSkus.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/StreamingJobNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the valid SKUs for the specified streaming job.",
+            "schema": {
+              "$ref": "#/definitions/GetStreamingJobSKUResults"
+            },
+            "headers": {
+              "ETag": {
+                "description": "The current entity tag for the streaming job. This is an opaque string. You can use it to detect whether the resource has changed between requests. You can also use it in the If-Match or If-None-Match headers for write operations for optimistic concurrency.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -737,16 +785,16 @@
           "format": "date-time",
           "description": "Value is an ISO-8601 formatted UTC timestamp indicating when the streaming job was created."
         },
+        "query": {
+          "type": "string",
+          "description": "Specifies the query that will be run in the streaming job. You can learn more about the Stream Analytics Query Language (SAQL) here: https://msdn.microsoft.com/library/azure/dn834998 . Required on PUT (CreateOrReplace) requests."
+        },
         "inputs": {
           "type": "array",
           "items": {
             "$ref": "./inputs.json#/definitions/Input"
           },
           "description": "A list of one or more inputs to the streaming job. The name property for each input is required when specifying this property in a PUT request. This property cannot be modify via a PATCH operation. You must use the PATCH API available for the individual input."
-        },
-        "transformation": {
-          "$ref": "./transformations.json#/definitions/Transformation",
-          "description": "Indicates the query and the number of streaming units to use for the streaming job. The name property of the transformation is required when specifying this property in a PUT request. This property cannot be modify via a PATCH operation. You must use the PATCH API available for the individual transformation."
         },
         "outputs": {
           "type": "array",
@@ -818,6 +866,11 @@
             "name": "SkuName",
             "modelAsString": true
           }
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of streaming units that the streaming job uses."
         }
       }
     },
@@ -964,6 +1017,114 @@
         },
         "path": {
           "type": "string"
+        }
+      }
+    },
+    "GetStreamingJobSKUResults": {
+      "type": "object",
+      "description": "Result of the request to get streaming job SKUs.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GetStreamingJobSKUResult"
+          },
+          "description": "The list of available SKUs that the streaming job can use."
+        }
+      }
+    },
+    "GetStreamingJobSKUResult": {
+      "type": "object",
+      "description": "Describes an available SKU information.",
+      "properties": {
+        "resourceType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of resource the SKU applies to."
+        },
+        "sku": {
+          "type": "object",
+          "description": "The properties that are associated with a SKU.",
+          "readOnly": true,
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name of the SKU.",
+              "enum": [
+                "Standard"
+              ],
+              "x-ms-enum": {
+                "name": "SkuName",
+                "modelAsString": true
+              }
+            }
+          }
+        },
+        "capacity": {
+          "$ref": "#/definitions/SKUCapacity"
+        }
+      }
+    },
+    "SKUCapacity": {
+      "type": "object",
+      "description": "Describes scaling information of a SKU.",
+      "readOnly": true,
+      "properties": {
+        "minimum": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "Specifies the minimum streaming units that the streaming job can use."
+        },
+        "maximum": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "Specifies the maximum streaming units that the streaming job can use."
+        },
+        "default": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "Specifies the default streaming units that the streaming job can use."
+        },
+        "scaleType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The scale type applicable to the sku.",
+          "enum": [
+            "automatic",
+            "manual",
+            "none"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceSkuCapacityScaleType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "automatic",
+                "description": "Supported scale type automatic."
+              },
+              {
+                "value": "manual",
+                "description": "Supported scale type manual."
+              },
+              {
+                "value": "none",
+                "description": "Scaling not supported."
+              }
+            ]
+          }
+        },
+        "allowedValues": {
+          "type": "array",
+          "description": "Specifies the valid streaming units a streaming job can scale to.",
+          "readOnly": true,
+          "items": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Specifies the number of streaming units that the streaming job can use."
+          }
         }
       }
     }
