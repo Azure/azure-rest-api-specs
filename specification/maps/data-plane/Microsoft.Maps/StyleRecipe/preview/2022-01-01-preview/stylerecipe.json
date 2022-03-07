@@ -1,15 +1,15 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Maps Tileset Service",
+    "title": "Azure Maps Style Service",
     "version": "2022-01-01-preview",
-    "description": "APIs for managing Tilesets."
+    "description": "This is an extension of the Azure Maps Tileset API to serve custom styles. It will allow a client to create a list of map styling information which can be combined with tilesetIds to compose a Mapbox style that can be consumed directly by front-end services (map control web & mobile SDKs, styling tools like [Maputnik](https://maputnik.github.io/editor/))."
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{geography}.atlas.microsoft.com",
     "parameters": [
       {
-        "$ref": "#/parameters/GeographicResourceLocation"
+        "$ref": "../../../../Common/preview/1.0/common.json#/parameters/GeographicResourceLocation"
       }
     ]
   },
@@ -116,33 +116,6 @@
     }
   },
   "parameters": {
-    "GeographicResourceLocation": {
-      "name": "geography",
-      "description": "This parameter specifies where the Azure Maps Creator resource is located.  Valid values are us and eu.",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "default": "us",
-      "enum": [
-        "us",
-        "eu"
-      ],
-      "x-ms-enum": {
-        "name": "GeographicResourceLocation",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "us",
-            "description": "Used to access an Azure Maps Creator resource in the United States"
-          },
-          {
-            "value": "eu",
-            "description": "Used to access an Azure Maps Creator resource in Europe"
-          }
-        ]
-      },
-      "x-ms-parameter-location": "client"
-    },
     "SubscriptionKey": {
       "name": "subscription-key",
       "description": "One of the Azure Maps keys provided from an Azure Map Account. Please refer to this [article](https://docs.microsoft.com/azure/azure-maps/how-to-manage-authentication) for details on how to manage authentication.",
@@ -160,69 +133,109 @@
       "default": "2022-01-01-preview",
       "x-ms-parameter-location": "client"
     },
-    "JsonFormat": {
-      "name": "format",
-      "description": "Desired format of the response. Only `json` format is supported.",
+    "StyleRecipeId": {
+      "name": "styleRecipeId",
+      "description": "The Style Recipe Id.",
       "type": "string",
       "in": "path",
       "required": true,
-      "enum": [
-        "json"
-      ],
-      "x-ms-enum": {
-        "name": "JsonFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "json",
-            "description": "[The JavaScript Object Notation Data Interchange Format](https://tools.ietf.org/html/rfc8259)"
-          }
-        ]
-      },
       "x-ms-parameter-location": "method"
     },
-    "DatasetIdQuery": {
-      "name": "datasetId",
-      "description": "The unique `datasetId` that the tileset create API uses to retrieve features to generate tiles. The `datasetId` must have been obtained from a successful [Dataset Create API](https://docs.microsoft.com/en-us/rest/api/maps/v2/dataset/create) call.",
-      "type": "string",
-      "in": "query",
-      "required": true,
-      "x-ms-parameter-location": "client"
-    },
-    "TilesetId": {
+    "TilesetIdQueryParameter": {
       "name": "tilesetId",
       "description": "The Tileset Id",
-      "type": "string",
-      "in": "path",
-      "required": true,
-      "x-ms-parameter-location": "method"
-    },
-    "DescriptionTileset": {
-      "name": "description",
-      "description": "User provided description of the tileset.",
       "type": "string",
       "in": "query",
       "required": false,
       "x-ms-parameter-location": "method"
     },
-    "TilesetOperationId": {
+    "DescriptionStyle": {
+      "name": "description",
+      "description": "User provided description of the style.",
+      "type": "string",
+      "in": "query",
+      "x-ms-parameter-location": "method"
+    },
+    "StyleRecipeOperationId": {
       "name": "operationId",
       "type": "string",
       "in": "path",
-      "description": "The ID to query the status for the tileset create/import request.",
+      "description": "The ID to query the status for the style recipe create/import request.",
       "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "StyleDataFormat": {
+      "name": "dataFormat",
+      "in": "query",
+      "description": "Defines the type of input file for a style to be created from.",
+      "required": false,
+      "type": "string",
+      "default": "JSON",
+      "enum": [
+        "JSON",
+        "ZIP"
+      ],
+      "x-ms-enum": {
+        "name": "DataFormatType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "JSON",
+            "description": "JSON style format."
+          },
+          {
+            "value": "ZIP",
+            "description": "ZIP style format."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "StyleFormat": {
+      "name": "styleFormat",
+      "in": "query",
+      "description": " Defines the type of JSON object that is imported.",
+      "required": false,
+      "type": "string",
+      "default": "mapbox",
+      "enum": [
+        "mapbox",
+        "azureMapsStyleRecipe"
+      ],
+      "x-ms-enum": {
+        "name": "StyleFormatType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "mapbox",
+            "description": "mapbox style data format."
+          },
+          {
+            "value": "azureMapsStyleRecipe",
+            "description": "Azure Maps style recipe data format."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "Alias": {
+      "name": "alias",
+      "description": "The alias of the style recipe.",
+      "type": "string",
+      "in": "query",
+      "required": false,
       "x-ms-parameter-location": "method"
     }
   },
   "paths": {
-    "/tilesets": {
+    "/styles/styleRecipes": {
       "post": {
         "x-publish": false,
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n [This](https://docs.microsoft.com/en-us/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe Tileset Create API allows the caller to create a tileset from a dataset. A tileset contains a set of tiles that can be consumed \nfrom the [Get Map Tile](/rest/api/maps/render/getmaptile) to retrieve custom tiles. To make a dataset, use the \n[DataSet Create API](/rest/api/maps/dataset/createpreview).\n\n## Submit Create Request\n\nTo create your tileset you will make a `POST` request with an empty body. The `datasetId` query parameter will be \nused as the source of the tileset data.\n\nThe Create Tileset API is a \n[long-running request](https://aka.ms/am-creator-lrt-v2).",
-        "operationId": "Tileset_Create",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n [This](https://docs.microsoft.com/en-us/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe Style Import API allows the caller to import a style recipe from their style json file.\n\n## Submit Import Request\n\nTo import your style recipe you will make a `POST` request with an azure maps style or mapbox style. \n\nThe Import Style Recipe API is a \n[long-running request](https://aka.ms/am-creator-lrt-v2).",
+        "operationId": "StyleRecipe_Import",
         "x-ms-examples": {
-          "Create Tileset by providing a Dataset Id and an optional tileset recipe in request body": {
-            "$ref": "./examples/Create.json"
+          "Import Style Recipe by providing a azure maps or mapbox style json file": {
+            "$ref": "./examples/StyleRecipe_Import.json"
           }
         },
         "parameters": [
@@ -236,18 +249,24 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/DatasetIdQuery"
+            "$ref": "#/parameters/StyleDataFormat"
           },
           {
-            "$ref": "#/parameters/DescriptionTileset"
+            "$ref": "#/parameters/StyleFormat"
           },
           {
-            "name": "TilesetRecipe",
+            "$ref": "#/parameters/DescriptionStyle"
+          },
+          {
+            "$ref": "#/parameters/Alias"
+          },
+          {
+            "name": "ImportContent",
             "in": "body",
-            "description": "The custom tileset recipe to use.",
-            "required": false,
+            "description": "The style recipe content to be imported.",
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/TilesetRecipe"
+              "type": "object"
             }
           }
         ],
@@ -274,11 +293,11 @@
       },
       "get": {
         "x-publish": false,
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a list of all tilesets created.   \n<br>",
-        "operationId": "Tileset_List",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a list of all style recipes imported.   \n<br>",
+        "operationId": "StyleRecipe_List",
         "x-ms-examples": {
-          "Get a list of all tilesets": {
-            "$ref": "./examples/List.json"
+          "Get a list of all styles": {
+            "$ref": "./examples/StyleRecipe_List.json"
           }
         },
         "parameters": [
@@ -294,9 +313,9 @@
         ],
         "responses": {
           "200": {
-            "description": "List tileset request completed successfully. The response body contains a list of all tilesets.",
+            "description": "List style recipe request completed successfully. The response body contains a list of all style recipes.",
             "schema": {
-              "$ref": "#/definitions/TilesetListResponse"
+              "$ref": "#/definitions/StyleRecipeListResult"
             }
           },
           "400": {
@@ -317,14 +336,14 @@
         }
       }
     },
-    "/tilesets/{tilesetId}": {
+    "/styles/styleRecipes/{styleRecipeId}": {
       "get": {
         "x-publish": false,
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a tileset.",
-        "operationId": "Tileset_Get",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to export a style recipe.",
+        "operationId": "StyleRecipe_Export",
         "x-ms-examples": {
-          "Gets the details for a single tileset": {
-            "$ref": "./examples/Get.json"
+          "Exports the details for a single style recipe": {
+            "$ref": "./examples/StyleRecipe_Export.json"
           }
         },
         "parameters": [
@@ -338,14 +357,20 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/TilesetId"
+            "$ref": "#/parameters/StyleRecipeId"
+          },
+          {
+            "$ref": "#/parameters/StyleFormat"
+          },
+          {
+            "$ref": "#/parameters/TilesetIdQueryParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "List tileset request completed successfully. The response body contains a list of all tilesets.",
+            "description": "Export style request completed successfully. The response body contains a single style.",
             "schema": {
-              "$ref": "#/definitions/TilesetDetailInfo"
+              "$ref": "#/definitions/StyleRecipeModel"
             }
           },
           "400": {
@@ -367,11 +392,11 @@
       },
       "delete": {
         "x-publish": false,
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to delete a created tileset.<br>    \nYou can use this API if a tileset is no longer needed. \n\n### Submit Delete Request\n\nTo delete your content you will issue a `DELETE` request where the path will contain the `tilesetId` of the tileset to delete.<br>    \n\n#### Delete request \"Successful\"\n\nThe Tileset Delete API returns a HTTP `204 No Content` response with an empty body, if the tileset was deleted successfully.<br>    \n\n#### Delete request \"Failed\"\n\nA HTTP `400 Bad Request` error response will be returned if the tileset with the passed-in `tilesetId` is not found. \n\nHere is a sample error response:\n\n<br>\n\n```json\n{\n  \"error\": {\n      \"code\": \"400 BadRequest\",\n      \"message\": \"Bad request - Tileset Id: d85b5b27-5fc4-4599-8b50-47160e90f8ce does not exist.\"\n  }\n}\n```",
-        "operationId": "Tileset_Delete",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to delete an imported style recipe.<br>    \nYou can use this API if a style recipe is no longer needed. \n\n### Submit Delete Request\n\nTo delete your content you will issue a `DELETE` request where the path will contain the `styleRecipeId` of the style recipe to delete.<br>    \n\n#### Delete request \"Successful\"\n\nThe Style Recipe Delete API returns a HTTP `204 No Content` response with an empty body, if the style recipe was deleted successfully.<br>    \n\n#### Delete request \"Failed\"\n\nA HTTP `400 Bad Request` error response will be returned if the style recipe with the passed-in `styleRecipeId` is not found. \n\nHere is a sample error response:\n\n<br>\n\n```json\n{\n  \"error\": {\n      \"code\": \"400 BadRequest\",\n      \"message\": \"Bad request - StyleRecipe Id: d85b5b27-5fc4-4599-8b50-47160e90f8ce does not exist.\"\n  }\n}\n```",
+        "operationId": "StyleRecipe_Delete",
         "x-ms-examples": {
-          "Delete a created tileset": {
-            "$ref": "./examples/Delete.json"
+          "Delete an imported style recipe": {
+            "$ref": "./examples/StyleRecipe_Delete.json"
           }
         },
         "parameters": [
@@ -385,12 +410,12 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/TilesetId"
+            "$ref": "#/parameters/StyleRecipeId"
           }
         ],
         "responses": {
           "204": {
-            "description": "Tileset delete request completed successfully."
+            "description": "Style recipe delete request completed successfully."
           },
           "400": {
             "$ref": "#/responses/400"
@@ -410,135 +435,28 @@
         }
       }
     },
-    "/tilesets/recipes": {
+    "/styles/styleRecipes/operations/{operationId}": {
       "get": {
         "x-publish": false,
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to get a default tileset recipe based on the dataset provided.",
-        "operationId": "Tileset_GetRecipe",
-        "x-ms-examples": {
-          "Gets the tileset recipe for a given dataset ontology": {
-            "$ref": "./examples/GetRecipe.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../Common/preview/1.0/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionKey"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/DatasetIdQuery"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Get tileset recipe request completed successfully. The response body contains a default tileset recipe generated for the given dataset ontology.",
-            "schema": {
-              "$ref": "#/definitions/TilesetRecipe"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
-          }
-        }
-      }
-    },
-    "/tilesets/recipes/validate": {
-      "post": {
-        "x-publish": false,
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to validate a tileset recipe.",
-        "operationId": "Tileset_ValidateRecipe",
-        "x-ms-examples": {
-          "Validates the correctness of a tileset recipe": {
-            "$ref": "./examples/ValidateRecipe.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../Common/preview/1.0/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionKey"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/DatasetIdQuery"
-          },
-          {
-            "name": "TilesetRecipe",
-            "in": "body",
-            "description": "The custom tileset recipe to use.",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/TilesetRecipe"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Validate tileset recipe request completed successfully. The response body contains the validation results.",
-            "schema": {
-              "$ref": "#/definitions/TilesetRecipeValidationResult"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
-          }
-        }
-      }
-    },
-    "/tilesets/operations/{operationId}": {
-      "get": {
-        "x-publish": false,
-        "description": "This path will be obtained from a call to /tilesets/create.  While in progress, an http200 will be returned with no extra headers -  followed by an http200 with Resource-Location header once successfully completed.",
-        "operationId": "Tileset_GetOperation",
+        "description": "This path will be obtained from a call to create a style recipe.  While in progress, an http200 will be returned with no extra headers -  followed by an http200 with Resource-Location header once successfully completed.",
+        "operationId": "StyleRecipe_GetOperation",
         "x-ms-examples": {
           "Get the status of an operation which is still running": {
-            "$ref": "./examples/GetOperationStillRunning.json"
+            "$ref": "./examples/StyleRecipe_GetOperationStillRunning.json"
           },
           "Get the status of an operation which has finished successfully": {
-            "$ref": "./examples/GetOperation.json"
+            "$ref": "./examples/StyleRecipe_GetOperation.json"
           }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionKey"
-          },
-          {
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/TilesetOperationId"
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/StyleRecipeOperationId"
           }
         ],
         "responses": {
@@ -580,8 +498,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ODataError"
-          },
-          "readOnly": true
+          }
         },
         "target": {
           "type": "string",
@@ -644,16 +561,16 @@
         }
       }
     },
-    "TilesetListResponse": {
-      "description": "The response model for the Tileset List API. Returns a list of all tilesets.",
+    "StyleRecipeListResult": {
+      "description": "The response model for the Style Recipe List API. Returns a list of all styleRecipes.",
       "type": "object",
       "properties": {
-        "tilesets": {
-          "description": "A list of all tilesets.",
+        "styleRecipes": {
+          "description": "A list of all styles.",
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/TilesetDetailInfo"
+            "$ref": "#/definitions/StyleRecipeListItem"
           }
         },
         "nextLink": {
@@ -663,141 +580,108 @@
         }
       }
     },
-    "TilesetDetailInfo": {
+    "StyleRecipeListItem": {
       "description": "Detail information for the data.",
       "type": "object",
       "properties": {
-        "tilesetId": {
-          "description": "The unique tileset id for the tileset.",
-          "type": "string",
-          "readOnly": true
-        },
-        "ontology": {
-          "description": "The ontology of the source dataset. Please refer to this [article](https://docs.microsoft.com/en-us/azure/azure-maps/creator-facility-ontology) for more information about Azure Maps Creator ontologies.",
-          "type": "string",
-          "readOnly": true
-        },
-        "datasetId": {
-          "description": "The unique dataset Id used to create the tileset.",
+        "styleRecipeId": {
+          "description": "The unique styleRecipe id for the style.",
           "type": "string",
           "readOnly": true
         },
         "description": {
-          "description": "The description the caller provided when creating the tileset. Maximum length 1024 characters.",
+          "description": "The description the caller provided when creating the style. Maximum length 1024 characters.",
           "type": "string",
           "readOnly": true
         },
-        "minZoom": {
-          "description": "The lowest tile zoom level tile generated for the tileset.",
-          "type": "integer",
+        "alias": {
+          "description": "The alias of the style recipe.",
+          "type": "string",
           "readOnly": true
         },
-        "maxZoom": {
-          "description": "The highest tile zoom level tile generated for the tileset.",
-          "type": "integer",
+        "created": {
+          "description": "The creation date and time of this styleSet.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "StyleLayerObject": {
+      "description": "Layer object for style recipe.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The unique id for the layer.",
+          "type": "string",
           "readOnly": true
         },
-        "bbox": {
-          "description": "Bounding box which all features of the tileset lay within. Projection used - EPSG:3857. Format : 'minLon, minLat, maxLon, maxLat'.",
+        "type": {
+          "description": "The type of the layer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "source-layer": {
+          "description": "The source layer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "source": {
+          "description": "The source.",
+          "type": "string",
+          "readOnly": true
+        },
+        "layout": {
+          "description": "The layout of the layer.",
+          "type": "object",
+          "readOnly": true
+        },
+        "paint": {
+          "description": "The paint configuration of the layer.",
+          "type": "object",
+          "readOnly": true
+        }
+      }
+    },
+    "StyleRecipeModel": {
+      "description": "Detail information for the data.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The unique style recipe id for the style.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "The version of the style recipe.",
+          "type": "number",
+          "readOnly": true
+        },
+        "created": {
+          "description": "The creation date and time of this style recipe.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The description the caller provided when creating the style. Maximum length 1024 characters.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sources": {
+          "description": "Data source specifications.",
+          "type": "object",
+          "readOnly": true
+        },
+        "sprite": {
+          "description": "A base URL for retrieving the sprite image and metadata.",
+          "type": "string",
+          "readOnly": true
+        },
+        "layers": {
+          "description": "A style's layers property lists all the layers available in that style",
           "type": "array",
           "readOnly": true,
           "items": {
-            "type": "number"
-          }
-        },
-        "tilesetRecipe": {
-          "description": "Tileset recipe which is used to build the tileset.",
-          "$ref": "#/definitions/TilesetRecipe"
-        }
-      }
-    },
-    "TilesetRecipe": {
-      "description": "A tileset recipe object. Please refer to [Tileset Recipe Specification]() for details.",
-      "type": "object",
-      "required": [
-        "version",
-        "layers"
-      ],
-      "properties": {
-        "version": {
-          "description": "The version of Azure Maps Tiling service recipe reference that the recipe uses.",
-          "type": "integer"
-        },
-        "layers": {
-          "description": "The names of the layers and their configuration options.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/LayerObject"
-          }
-        }
-      }
-    },
-    "LayerObject": {
-      "description": "Layer object for tileset recipe.",
-      "type": "object",
-      "required": [
-        "features",
-        "minzoom",
-        "maxzoom"
-      ],
-      "properties": {
-        "features": {
-          "description": "Specifies the output on a per feature basis.",
-          "$ref": "#/definitions/Feature"
-        },
-        "minzoom": {
-          "description": "The lowest zoom level for the layer to build.",
-          "type": "integer"
-        },
-        "maxzoom": {
-          "description": "The highest zoom level for the layer to build.",
-          "type": "integer"
-        }
-      }
-    },
-    "Feature": {
-      "description": "Feature configuration for tileset recipe.",
-      "type": "object",
-      "required": [
-        "featureClasses"
-      ],
-      "properties": {
-        "featureClasses": {
-          "description": "The list of featureClasses that will be used to build the layer.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "filter": {
-          "description": "Removes features that do not match a pattern.",
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        }
-      }
-    },
-    "TilesetRecipeValidationResult": {
-      "description": "Tileset recipe validation result.",
-      "type": "object",
-      "properties": {
-        "valid": {
-          "description": "Validation result.",
-          "type": "boolean"
-        },
-        "warnings": {
-          "description": "The list of validation warnings.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "errors": {
-          "description": "The list of validation errors",
-          "type": "array",
-          "items": {
-            "type": "string"
+            "$ref": "#/definitions/StyleLayerObject"
           }
         }
       }

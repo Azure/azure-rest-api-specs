@@ -1,0 +1,97 @@
+{
+  "parameters": {
+    "geography": "us",
+    "api-version": "2022-01-01-preview",
+    "subscription-key": "[subscription-key]",
+    "styleSetId": "[styleSetId]",
+    "styleName": "composedStyle",
+    "styleFormat": "azureMapsStyleRecipe"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "version": 8,
+        "name": "My cool map styling",
+        "sources": {
+          "microsoft.base": {
+            "url": "https://us.atlas.microsoft.com/map/tileset?api-version=2.1&tilesetId=microsoft.base",
+            "type": "vector"
+          },
+          "64d79640-1db8-42e9-8e4a-714be32543c6": {
+            "url": "https://us.atlas.microsoft.com/tileset/64d79640-1db8-42e9-8e4a-714be32543c6",
+            "type": "vector"
+          }
+        },
+        "sprite": "https://us.atlas.microsoft.com/styles/sprites/019db5fd-1792-4a84-9e39-7a82ceaea311",
+        "glyphs": "https://us.atlas.microsoft.com/styles/glyphs/{fontstack}/{range}.pbf",
+        "layers": [
+          {
+            "id": "microsoft.maps.base.base.background:grayscale_light:microsoft.base",
+            "source-layer": "microsoft.base",
+            "source": "microsoft.base",
+            "type": "background",
+            "layout": {},
+            "paint": {
+              "background-color": "hsl(55, 11%, 96%)"
+            }
+          },
+          {
+            "id": "indoorLayer:9c451b0a-6527-49a7-9154-1b3d9486487f:64d79640-1db8-42e9-8e4a-714be32543c6",
+            "source-layer": "microsoft.base",
+            "source": "microsoft.base",
+            "type": "background",
+            "layout": {},
+            "paint": {
+              "background-color": "hsl(55, 11%, 96%)"
+            }
+          }
+        ]
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "400 BadRequest",
+          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}
