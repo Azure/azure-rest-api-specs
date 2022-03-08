@@ -40,6 +40,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/galleryimages/{galleryimagesName}": {
       "get": {
         "operationId": "galleryimages_Retrieve",
+        "description": "Lists all galleryimages under the resource group.",
         "x-ms-examples": {
           "GetGalleryImage": {
             "$ref": "./examples/GetGalleryImage.json"
@@ -76,6 +77,7 @@
       },
       "put": {
         "operationId": "galleryimages_CreateOrUpdate",
+        "description": "Create or update a galleryimage.",
         "x-ms-examples": {
           "PutGalleryImage": {
             "$ref": "./examples/PutGalleryImage.json"
@@ -130,6 +132,7 @@
       },
       "delete": {
         "operationId": "galleryimages_Delete",
+        "description": "Delete a galleryimage.",
         "x-ms-examples": {
           "DeleteGalleryImage": {
             "$ref": "./examples/DeleteGalleryImage.json"
@@ -166,6 +169,7 @@
       },
       "patch": {
         "operationId": "galleryimages_Update",
+        "description": "Update a galleryimage.",
         "x-ms-examples": {
           "UpdateGalleryImage": {
             "$ref": "./examples/UpdateGalleryImage.json"
@@ -218,6 +222,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/galleryimages": {
       "get": {
         "operationId": "galleryimages_ListByResourceGroup",
+        "description": "Lists all galleryimages under the resource group.",
         "x-ms-examples": {
           "ListGalleryImageByResourceGroup": {
             "$ref": "./examples/ListGalleryImageByResourceGroup.json"
@@ -256,6 +261,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/galleryimages": {
       "get": {
         "operationId": "galleryimages_ListBySubscription",
+        "description": "List all galleryimages under the subscription",
         "x-ms-examples": {
           "ListGalleryImageByResourceGroup": {
             "$ref": "./examples/ListGalleryImageBySubscription.json"
@@ -315,7 +321,8 @@
           "description": "operating system type that the gallery image uses. Expected to be linux or windows"
         },
         "provisioningState": {
-          "type": "string"
+          "type": "string",
+          "description": "Provisioning state of the gallery image."
         },
         "resourceName": {
           "type": "string",
@@ -367,6 +374,7 @@
         },
         "extendedLocation": {
           "type": "object",
+          "description": "The extendedLocation of the resource.",
           "properties": {
             "type": {
               "type": "string",
@@ -399,6 +407,7 @@
     },
     "galleryimagesListResult": {
       "type": "object",
+      "description": "List of galleryimages.",
       "properties": {
         "value": {
           "type": "array",
@@ -407,7 +416,9 @@
           }
         },
         "nextLink": {
-          "type": "string"
+          "type": "string",
+          "description": "Link to the next set of results.",
+          "readOnly": true
         }
       }
     }
@@ -420,7 +431,8 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "maxLength": 64,
-      "minLength": 3
+      "minLength": 3,
+      "description": "Name of the gallery image"
     }
   }
 }
