@@ -69,7 +69,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Retrieved RP operations",
+            "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ElasticSanOperationListResult"
             }
@@ -115,7 +115,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Lists the available Skus and information related to them.",
+            "description": "Lists the available SKUs supported by Microsoft.Storage for given subscription.",
             "schema": {
               "$ref": "#/definitions/SkuInformationList"
             }
@@ -157,7 +157,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Operation completed successfully; retrieved Elastic San by subscription",
+            "description": "OK -- Operation completed successfully; retrieved Elastic San by subscription",
             "schema": {
               "$ref": "#/definitions/ElasticSanList"
             }
@@ -202,7 +202,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Operation completed successfully; retrieved elasticSans by resource group",
+            "description": "OK -- Operation completed successfully; retrieved elasticSans by resource group",
             "schema": {
               "$ref": "#/definitions/ElasticSanList"
             }
@@ -264,7 +264,7 @@
               "$ref": "#/definitions/ElasticSan"
             }
           },
-          "201": {
+          "202": {
             "description": "Accepted -- Create request accepted; operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/ElasticSan"
@@ -321,7 +321,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- Returned when the update operation is successfully completed.",
+            "description": "OK -- ElasticSAN properties updated successfully.",
             "schema": {
               "$ref": "#/definitions/ElasticSan"
             }
@@ -374,13 +374,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Delete operation completed successfully."
+            "description": "OK -- Delete operation completed successfully."
           },
           "202": {
-            "description": "Delete request accepted; operation will complete asynchronously."
+            "description": "Accepted -- Delete request accepted; operation will complete asynchronously."
           },
           "204": {
-            "description": "Resource does not exist in the subscription."
+            "description": "NoContent --ElasticSAN does not exist in the subscription."
           },
           "default": {
             "description": "Error from the RP",
@@ -424,7 +424,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Operation completed successfully; retrieved ElasticSan.",
+            "description": "OK -- Operation completed successfully; retrieved ElasticSan.",
             "schema": {
               "$ref": "#/definitions/ElasticSan"
             }
@@ -469,7 +469,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Operation completed successfully; retrieved Volume Group List.",
+            "description": "OK -- Operation completed successfully; retrieved Volume Group List.",
             "schema": {
               "$ref": "#/definitions/VolumeGroupList"
             }
@@ -534,7 +534,7 @@
               "$ref": "#/definitions/VolumeGroup"
             }
           },
-          "201": {
+          "202": {
             "description": "Accepted -- Create request accepted; operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/VolumeGroup"
@@ -650,13 +650,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Delete operation completed successfully."
+            "description": "OK -- Delete operation completed successfully."
           },
           "202": {
-            "description": "Delete request accepted; operation will complete asynchronously."
+            "description": "Accepted -- Delete request accepted; operation will complete asynchronously."
           },
           "204": {
-            "description": "Resource does not exist in the subscription."
+            "description": "NoContent -- Resource does not exist in the subscription."
           },
           "default": {
             "description": "Error from the RP",
@@ -768,7 +768,7 @@
               "$ref": "#/definitions/Volume"
             }
           },
-          "201": {
+          "202": {
             "description": "Accepted -- Create request accepted; operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/Volume"
@@ -1120,7 +1120,7 @@
               "$ref": "#/definitions/Snapshot"
             }
           },
-          "201": {
+          "202": {
             "description": "Accepted -- Create request accepted; operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/Snapshot"
@@ -1188,7 +1188,7 @@
               "$ref": "#/definitions/Snapshot"
             }
           },
-          "201": {
+          "202": {
             "description": "Accepted -- Create request accepted; operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/Snapshot"
@@ -1242,13 +1242,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Delete operation completed successfully."
-          },
-          "202": {
-            "description": "Delete request accepted; operation will complete asynchronously."
+            "description": "OK -- Delete operation completed successfully."
           },
           "204": {
-            "description": "Resource does not exist in the subscription."
+            "description": "NoContent -- Resource does not exist in the subscription."
           },
           "default": {
             "description": "Error from the RP",
@@ -1303,7 +1300,7 @@
               "$ref": "#/definitions/Snapshot"
             }
           },
-          "201": {
+          "202": {
             "description": "Accepted -- Create request accepted; operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/Snapshot"
@@ -1373,7 +1370,7 @@
               "$ref": "#/definitions/Snapshot"
             }
           },
-          "201": {
+          "202": {
             "description": "Accepted -- Create request accepted; operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/Snapshot"
@@ -1463,7 +1460,7 @@
       "x-ms-parameter-location": "method"
     },
     "ForceDeleteSnapshotsParameter": {
-      "name": "x-ms-force-delete-snapshots",
+      "name": "x-ms-delete-snapshots",
       "x-ms-client-name": "forceDeleteSnapshots",
       "description": "Required if the Volume has associated snapshots",
       "x-ms-parameter-location": "method",
@@ -1472,7 +1469,7 @@
       "type": "boolean"
     },
     "ForceDeleteVolumesSnapshotsParameter": {
-      "name": "x-ms-force-delete-volumes-snapshots",
+      "name": "x-ms-delete-volumes-snapshots",
       "x-ms-client-name": "forceDeleteVolumesAndSnapshots",
       "description": "Required if the Volume Group has associated volumes and snapshots",
       "x-ms-parameter-location": "method",
@@ -1481,7 +1478,7 @@
       "type": "boolean"
     },
     "ForceDeleteVolumeGroupsParameter": {
-      "name": "x-ms-force-delete-volumegroups",
+      "name": "x-ms-delete-volumegroups",
       "x-ms-client-name": "forceDeleteVolumeGroups",
       "description": "Required if the San has associated Volume Groups",
       "x-ms-parameter-location": "method",
@@ -1760,15 +1757,6 @@
         "sku": {
           "description": "The Sku tier",
           "$ref": "#/definitions/Sku"
-        },
-        "apiVersions": {
-          "description": "The API versions in which SKU is available",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
         },
         "locationInfo": {
           "description": "Availability of the SKU for the location/zone",
