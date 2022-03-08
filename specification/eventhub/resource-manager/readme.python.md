@@ -77,7 +77,7 @@ python:
 These settings apply only when `--tag=package-2022-01-preview --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2021-06-preview'
+``` yaml $(tag) == 'package-2022-01-preview'
 namespace: azure.mgmt.eventhub.v2022_01_01_preview
 output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2022_01_01_preview
 python:
