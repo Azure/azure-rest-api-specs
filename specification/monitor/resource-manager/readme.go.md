@@ -38,10 +38,8 @@ batch:
   - tag: package-2019-06
   - tag: package-2019-11
   - tag: package-2020-10-only
-  - tag: package-2021-05-01-preview-only
   - tag: package-2021-07
   - tag: package-2021-09
-  - tag: package-2022-02-01-preview-only
 ```
 
 ### Tag: package-2017-09 and go
@@ -116,15 +114,6 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/monitor/mgmt/2020-10-01/$(namespace)
 ```
 
-### Tag: package-2021-05-01-preview-only and go
-
-These settings apply only when `--tag=package-2021-05-01-preview-only --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2021-05-01-preview-only' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2021-05-01-preview/$(namespace)
-```
-
 ### Tag: package-2021-07 and go
 
 These settings apply only when `--tag=package-2021-07 --go` is specified on the command line.
@@ -141,22 +130,4 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2021-09' && $(go)
 output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2021-09-01-preview/$(namespace)
-```
-
-### Tag: package-2022-02 and go
-
-These settings apply only when `--tag=package-2022-02 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2022-02' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2022-02-preview/$(namespace)
-```
-
-### Tag: package-2022-02-01-preview-only and go
-
-These settings apply only when `--tag=package-2022-02-01-preview-only --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2022-02-01-preview-only' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2022-02-01-preview/$(namespace)
 ```
