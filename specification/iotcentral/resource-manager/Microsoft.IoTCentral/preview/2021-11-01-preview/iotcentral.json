@@ -1021,54 +1021,12 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ],
       "x-ms-azure-resource": true,
       "required": [
         "sku"
-      ]
-    },
-    "Resource": {
-      "description": "The common properties of an ARM resource.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The ARM resource identifier."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The ARM resource name.",
-          "pattern": "^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{2,99}[a-zA-Z0-9]$",
-          "x-comment": "pattern must match #/parameters/resourceName"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource type."
-        },
-        "location": {
-          "type": "string",
-          "description": "The resource location.",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "The resource tags."
-        }
-      },
-      "x-ms-azure-resource": true,
-      "required": [
-        "location"
       ]
     },
     "AppPatch": {
