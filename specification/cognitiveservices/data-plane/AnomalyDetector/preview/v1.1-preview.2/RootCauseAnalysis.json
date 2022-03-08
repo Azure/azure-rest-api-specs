@@ -773,6 +773,41 @@
         }
       }
     },
+    "/rootCauseAnalysis/kinds": {
+      "get": {
+        "tags": [
+          "RootCauseAnalysisKind"
+        ],
+        "summary": "Get kind list for root cause analysis",
+        "operationId": "ListRootCauseAnalysisKinds",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RootCauseAnalysisKindList"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            }
+          }
+        },
+        "x-ms-error-code": {
+          "description": "error code",
+          "type": "string"
+        },
+        "x-ms-examples": {
+          "Get kind list for root cause analysis": {
+            "$ref": "./examples/ListRootCauseAnalysisKinds.json"
+          }
+        }
+      }
+    },
     "/rootCauseAnalysis/instances/{instanceId}/models/{modelId}": {
       "put": {
         "tags": [
@@ -815,6 +850,25 @@
         "responses": {
           "201": {
             "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RootCauseAnalysisTrainingResponse"
+            },
+            "examples": {
+              "application/json": {
+  "taskId": "11111111-1111-4444-4444-000000000000",
+  "instanceId": "11111111-2222-3333-4444-000000000000",
+  "modelId": "11223344-5555-6666-7777-000000000000",
+  "displayName": "Model name 1",
+  "kind": "multidimensional",
+  "status": "scheduled",
+  "createdDateTime": "2021-11-30T00:00:00Z",
+  "lastModifiedDateTime": "2021-11-30T00:00:00Z",
+  "parameter": {
+    "startDateTime": "2021-10-01T00:00:00Z",
+    "endDateTime": "2021-11-30T00:00:00Z"
+  }
+}
+            },
             "headers": {
               "Location": {
                 "description": "Location of the newly created resource.",
@@ -1058,6 +1112,25 @@
         "responses": {
           "201": {
             "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RootCauseAnalysisInferenceResponse"
+            },
+            "examples": {
+              "application/json": {
+  "taskId": "11111111-1111-4444-4444-000000000000",
+  "instanceId": "11111111-2222-3333-4444-000000000000",
+  "modelId": "11223344-5555-6666-7777-000000000000",
+  "displayName": "Model name 1",
+  "kind": "multidimensional",
+  "status": "scheduled",
+  "createdDateTime": "2021-11-30T00:00:00Z",
+  "lastModifiedDateTime": "2021-11-30T00:00:00Z",
+  "parameter": {
+    "startDateTime": "2021-10-01T00:00:00Z",
+    "endDateTime": "2021-11-30T00:00:00Z"
+  }
+}
+            },
             "headers": {
               "Location": {
                 "description": "Location of the newly created resource.",
@@ -1872,6 +1945,28 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RootCauseAnalysisInstance"
+          }
+        }
+      }
+    },
+    "RootCauseAnalysisKindList": {
+      "required": [
+        "kinds"
+      ],
+      "type": "object",
+      "properties": {
+        "kinds": {
+          "description": "Root cause analysis kind list",
+          "type": "array",
+          "items": {
+            "enum": [
+              "multidimensional"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "RootCauseAnalysisType",
+              "modelAsString": true
+            }
           }
         }
       }
