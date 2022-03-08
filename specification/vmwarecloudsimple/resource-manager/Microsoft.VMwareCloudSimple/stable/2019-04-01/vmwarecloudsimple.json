@@ -2212,7 +2212,11 @@
           "items": {
             "description": "The list of specification's metrics",
             "$ref": "#/definitions/AvailableOperationDisplayPropertyServiceSpecificationMetricsItem"
-          }
+          },
+          "x-ms-identifiers": [
+            "name",
+            "unit"
+          ]
         }
       }
     },
@@ -2228,7 +2232,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AvailableOperation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -2255,6 +2262,7 @@
           "items": {
             "$ref": "#/definitions/CSRPErrorBody"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         },
         "message": {
@@ -2465,7 +2473,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CustomizationNicSetting"
-          }
+          },
+          "x-ms-identifiers": [
+            "macAddress"
+          ]
         }
       }
     },
@@ -3153,7 +3164,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SkuAvailability"
-          }
+          },
+          "x-ms-identifiers": [
+            "dedicatedAvailabilityZoneId",
+            "dedicatedPlacementGroupId",
+            "skuId"
+          ]
         }
       }
     },
@@ -3232,6 +3248,9 @@
           "items": {
             "$ref": "#/definitions/Usage"
           },
+          "x-ms-identifiers": [
+            "/name/value"
+          ],
           "readOnly": true
         }
       }
@@ -3401,7 +3420,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualDisk"
-          }
+          },
+          "x-ms-identifiers": [
+            "virtualDiskId"
+          ]
         },
         "dnsname": {
           "description": "The DNS name of Virtual Machine in VCenter",
@@ -3441,7 +3463,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualNic"
-          }
+          },
+          "x-ms-identifiers": [
+            "virtualNicId"
+          ]
         },
         "numberOfCores": {
           "description": "The number of CPU cores",
@@ -3603,7 +3628,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualDisk"
-          }
+          },
+          "x-ms-identifiers": [
+            "virtualDiskId"
+          ]
         },
         "exposeToGuestVM": {
           "description": "Expose Guest OS or not",
@@ -3624,7 +3652,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualNic"
-          }
+          },
+          "x-ms-identifiers": [
+            "virtualNicId"
+          ]
         },
         "numberOfCores": {
           "description": "The number of CPU cores",
