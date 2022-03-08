@@ -208,7 +208,7 @@
           "PrivateStores"
         ],
         "operationId": "PrivateStore_QueryUserOffers",
-        "description": "List of user's approved offers from the provided offers and subscriptions",
+        "description": "List of user's approved offers for the provided offers and subscriptions",
         "parameters": [
           {
             "$ref": "#/parameters/PrivateStoreIdParameter"
@@ -223,9 +223,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "List of offers",
             "schema": {
-              "$ref": "#/definitions/OfferListResponse"
+              "$ref": "#/definitions/QueryOffers"
             }
           },
           "default": {
@@ -666,7 +666,7 @@
           "PrivateStores"
         ],
         "operationId": "PrivateStoreCollection_ApproveAllItems",
-        "description": "Empty the collection and approve all items",
+        "description": "Delete all existing offers from the collection and enable approve all items.",
         "parameters": [
           {
             "$ref": "#/parameters/PrivateStoreIdParameter"
@@ -677,9 +677,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Updated collection retrieved with a single offer that represents all offers.",
+            "description": "Retrieve the updated collection details.",
             "schema": {
-              "$ref": "#/definitions/Collection"
+              "$ref": "#/definitions/CollectionProperties"
             }
           },
           "default": {
@@ -707,7 +707,7 @@
           "PrivateStores"
         ],
         "operationId": "PrivateStoreCollection_DisableApproveAllItems",
-        "description": "Empty the collection and disable the approve all items",
+        "description": "Disable approve all items for the collection.",
         "parameters": [
           {
             "$ref": "#/parameters/PrivateStoreIdParameter"
@@ -718,9 +718,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Updated collection retrieved without any offer.",
+            "description": "Retrieve the updated collection details.",
             "schema": {
-              "$ref": "#/definitions/Collection"
+              "$ref": "#/definitions/CollectionProperties"
             }
           },
           "default": {
@@ -1832,7 +1832,7 @@
           "readOnly": true
         },
         "allItemsApprovedModifiedAt":{
-          "description": "Gets the modified date of all items approved; Init value is empty string.",
+          "description": "Gets the modified date of all items approved.",
           "type": "string",
           "readOnly": true
         },
@@ -2358,16 +2358,16 @@
       }
     },
     "QueryUserOffersPayload": {
-      "description": "List of offers IDs and subscriptions IDs to query the user's approved offers",
+      "description": "List of offers IDs and list of user's subscriptions IDs to query the user's approved offers",
       "type": "object",
       "properties": {
-        "offersIds": {
+        "offerIds": {
           "type": "array",
           "items": {
             "type": "string"
           }
         },
-        "subscriptionsIds": {
+        "subscriptionIds": {
           "type": "array",
           "items": {
             "type": "string"
