@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "api-version": "2020-05-01",
+    "billingAccountName": "{billingAccountName}",
+    "productName": "{productName}",
+    "parameters": {
+      "destinationInvoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{newInvoiceSectionName}"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "isMoveEligible": false,
+        "errorDetails": {
+          "code": "ProductTypeNotSupported",
+          "message": "Product '{productName}' is not allowed to be transferred."
+        }
+      }
+    }
+  }
+}
