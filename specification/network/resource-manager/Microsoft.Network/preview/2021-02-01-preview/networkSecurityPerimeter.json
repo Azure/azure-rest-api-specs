@@ -445,7 +445,7 @@
           }
         },
         "x-ms-examples": {
-          "NspProfilesGet": {
+          "NspAccessRuleGet": {
             "$ref": "./examples/NspAccessRuleGet.json"
           }
         }
@@ -610,7 +610,7 @@
           }
         },
         "x-ms-examples": {
-          "NspProfilesGet": {
+          "NspAssociationGet": {
             "$ref": "./examples/NspAssociationGet.json"
           }
         }
@@ -634,7 +634,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Updated - Existing access rule is updated. Returns the resource.",
+            "description": "Updated - Existing resource association is updated. Returns the resource.",
             "schema": {
               "$ref": "#/definitions/NspAssociation"
             }
@@ -653,7 +653,7 @@
           }
         },
         "x-ms-examples": {
-          "NspAccessRulePut": {
+          "NspAssociationPut": {
             "$ref": "./examples/NspAssociationPut.json"
           }
         }
@@ -679,7 +679,7 @@
           }
         },
         "x-ms-examples": {
-          "NspAccessRulesDelete": {
+          "NspAssociationDelete": {
             "$ref": "./examples/NspAssociationDelete.json"
           }
         }
@@ -730,7 +730,7 @@
           }
         },
         "x-ms-examples": {
-          "NspAccessRulesList": {
+          "NspAssociationList": {
             "$ref": "./examples/NspAssociationList.json"
           }
         }
@@ -858,16 +858,16 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/NspProfileProperties",
-          "description": "The network security perimeter properties"
+          "description": "Properties of the network security perimeter profile"
         },
         "name": {
           "type": "string",
-          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+          "description": "The name of the profile resource that is unique within a perimeter. This name can be used to access the resource."
         },
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Network security perimeter identifier."
+          "description": "Identifier of the network security perimeter profile in ARM id format."
         },
         "type": {
           "readOnly": true,
@@ -880,7 +880,7 @@
           "$ref": "./network.json#/definitions/Resource"
         }
       ],
-      "description": "The Network Security Perimeter resource"
+      "description": "The network security perimeter profile resource"
     },
     "NspProfileListResult": {
       "type": "object",
@@ -920,7 +920,7 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+          "description": "The name of the access rule that is unique within a profile. This name can be used to access the resource."
         },
         "id": {
           "readOnly": true,
@@ -1007,7 +1007,7 @@
           "description": "Inbound rule specified by the perimeter id."
         }
       },
-      "description": "Properties of NSP profile."
+      "description": "Properties of NSP access rule."
     },
     "PerimeterBasedAccessRule": {
       "type": "object",
@@ -1090,6 +1090,20 @@
         "profile": {
           "$ref": "./network.json#/definitions/SubResource",
           "description": "Profile id to which the PaaS resource is associated."
+        },
+        "accessMode": {
+          "type": "string",
+          "enum": [
+            "Unspecified",
+            "EnforceMode",
+            "LearningMode",
+            "DryRunMode"
+          ],
+          "x-ms-enum": {
+            "name": "AssociationAccessMode",
+            "modelAsString": true
+          },
+          "description": "Access mode on the association."
         }
       }
     },
@@ -1195,7 +1209,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the NSP profile.",
+      "description": "The name of the NSP access rule.",
       "x-ms-parameter-location": "method"
     },
     "AssociationNameParameter": {
