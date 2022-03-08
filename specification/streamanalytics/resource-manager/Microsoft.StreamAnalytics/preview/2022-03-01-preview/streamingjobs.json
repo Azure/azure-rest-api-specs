@@ -602,7 +602,7 @@
           "200": {
             "description": "Successfully retrieved the valid SKUs for the specified streaming job.",
             "schema": {
-              "$ref": "#/definitions/GetStreamingJobSKUResults"
+              "$ref": "#/definitions/GetStreamingJobSkuResults"
             }
           },
           "default": {
@@ -1014,20 +1014,20 @@
         }
       }
     },
-    "GetStreamingJobSKUResults": {
+    "GetStreamingJobSkuResults": {
       "type": "object",
       "description": "Result of the request to get streaming job SKUs.",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/GetStreamingJobSKUResult"
+            "$ref": "#/definitions/GetStreamingJobSkuResult"
           },
           "description": "The list of available SKUs that the streaming job can use."
         }
       }
     },
-    "GetStreamingJobSKUResult": {
+    "GetStreamingJobSkuResult": {
       "type": "object",
       "description": "Describes an available SKU information.",
       "properties": {
@@ -1055,11 +1055,11 @@
           }
         },
         "capacity": {
-          "$ref": "#/definitions/SKUCapacity"
+          "$ref": "#/definitions/SkuCapacity"
         }
       }
     },
-    "SKUCapacity": {
+    "SkuCapacity": {
       "type": "object",
       "description": "Describes scaling information of a SKU.",
       "readOnly": true,
@@ -1085,14 +1085,14 @@
         "scaleType": {
           "type": "string",
           "readOnly": true,
-          "description": "The scale type applicable to the sku.",
+          "description": "The scale type applicable to the SKU.",
           "enum": [
             "automatic",
             "manual",
             "none"
           ],
           "x-ms-enum": {
-            "name": "ResourceSkuCapacityScaleType",
+            "name": "SkuCapacityScaleType",
             "modelAsString": true,
             "values": [
               {
