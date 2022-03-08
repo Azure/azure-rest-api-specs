@@ -219,7 +219,7 @@
         "description": "Send test notifications to a set of provided receivers",
         "operationId": "ActionGroups_PostTestNotifications",
         "x-ms-examples": {
-          "List action groups": {
+          "Create notifications at subscription level": {
             "$ref": "./examples/postTestNotifications.json"
           }
         },
@@ -265,7 +265,7 @@
         "description": "Send test notifications to a set of provided receivers",
         "operationId": "ActionGroups_PostTestNotificationsAtResourceGroupLevel",
         "x-ms-examples": {
-          "List action groups": {
+          "Create notifications at resource group level": {
             "$ref": "./examples/postTestNotificationsAtResourceGroupLevel.json"
           }
         },
@@ -310,7 +310,7 @@
         "description": "Get the test notifications by the notification id",
         "operationId": "ActionGroups_GetTestNotifications",
         "x-ms-examples": {
-          "Get notification details": {
+          "Get notification details at subscription level": {
             "$ref": "./examples/getTestNotifications.json"
           }
         },
@@ -346,7 +346,7 @@
         "description": "Get the test notifications by the notification id",
         "operationId": "ActionGroups_GetTestNotifications",
         "x-ms-examples": {
-          "Get notification details": {
+          "Get notification details at resource group level": {
             "$ref": "./examples/getTestNotificationsAtResourceGroupLevel.json"
           }
         },
@@ -385,7 +385,7 @@
         "description": "Get a list of all action groups in a subscription.",
         "operationId": "ActionGroups_ListBySubscriptionId",
         "x-ms-examples": {
-          "List action groups": {
+          "List action groups at subscription level": {
             "$ref": "./examples/listActionGroups.json"
           }
         },
@@ -421,7 +421,7 @@
         "description": "Get a list of all action groups in a resource group.",
         "operationId": "ActionGroups_ListByResourceGroup",
         "x-ms-examples": {
-          "List action groups": {
+          "List action groups at resource group level": {
             "$ref": "./examples/listActionGroups.json"
           }
         },
@@ -583,23 +583,23 @@
       "description": "The details of the test notification results.",
       "type": "object",
       "properties": {
-        "Context": {
+        "context": {
           "type": "object",
           "$ref": "#/definitions/Context"
         },
-        "State": {
+        "state": {
           "type": "string",
           "description": "The overall state"
         },
-        "CompletedTime": {
+        "completedTime": {
           "type": "string",
           "description": "The completed time"
         },
-        "CreatedTime": {
+        "createdTime": {
           "type": "string",
           "description": "The created time"
         },
-        "ActionDetails": {
+        "actionDetails": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ActionDetail"
@@ -615,27 +615,27 @@
       "description": "The action detail",
       "type": "object",
       "properties": {
-        "MechanismType": {
+        "mechanismType": {
           "type": "string",
           "description": "The mechanism type"
         },
-        "Name": {
+        "name": {
           "type": "string",
           "description": "The name of the action"
         },
-        "Status": {
+        "status": {
           "type": "string",
           "description": "The status of the action"
         },
-        "SubState": {
+        "subState": {
           "type": "string",
           "description": "The substatus of the action"
         },
-        "SendTime": {
+        "sendTime": {
           "type": "string",
           "description": "The send time"
         },
-        "Detail": {
+        "detail": {
           "type": "string",
           "description": "The detail of the friendly error message"
         }
@@ -645,11 +645,11 @@
       "description": "The context info",
       "type": "object",
       "properties": {
-        "NotificationSource": {
+        "notificationSource": {
           "type": "string",
           "description": "The source of the notification request"
         },
-        "ContextType": {
+        "contextType": {
           "type": "string",
           "description": "The context id type"
         }
