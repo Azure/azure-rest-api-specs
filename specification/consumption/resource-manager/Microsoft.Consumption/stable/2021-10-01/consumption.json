@@ -1425,6 +1425,11 @@
         ],
         "operationId": "Operations_List",
         "description": "Lists all of the available consumption REST API operations.",
+        "x-ms-examples": {
+          "PriceSheetForBillingPeriod": {
+            "$ref": "./examples/OperationList.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1716,6 +1721,61 @@
           {
             "name": "$filter",
             "description": "May be used to filter the lots by Status, Source etc. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Lots"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}/providers/Microsoft.Consumption/lots": {
+      "get": {
+        "tags": [
+          "Lots"
+        ],
+        "operationId": "Lots_ListByCustomer",
+        "description": "Lists all Azure credits and Microsoft Azure consumption commitments for a billing account or a billing profile and a customer. Microsoft Azure consumption commitments are only supported for the billing account scope.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "LotsListByCustomer": {
+            "$ref": "./examples/LotsListByCustomer.json"
+          },
+          "LotsListByCustomerWithFilter": {
+            "$ref": "./examples/LotsListByCustomerWithFilters.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/customerIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter the lots by Status, Source etc. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
             "in": "query",
             "required": false,
             "type": "string"
@@ -3775,7 +3835,6 @@
     "ModernReservationTransaction": {
       "description": "Modern Reservation transaction resource.",
       "type": "object",
-      "x-ms-discriminator-value": "Modern",
       "allOf": [
         {
           "$ref": "#/definitions/ReservationTransactionResource"
@@ -5535,6 +5594,14 @@
       "name": "billingAccountId",
       "in": "path",
       "description": "BillingAccount ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "customerIdParameter": {
+      "name": "customerId",
+      "in": "path",
+      "description": "Customer ID",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
