@@ -6,7 +6,7 @@
       "name": "MicrosoftKubernetesConfigurationClient"
     },
     "description": "Azure Arc K8s Clusters API reference for Private Link's Scopes management.",
-    "version": "2021-12-10-preview"
+    "version": "2022-04-02-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -792,6 +792,7 @@
     "KubernetesConfigurationPrivateLinkScopeProperties": {
       "type": "object",
       "description": "Properties that define a Azure Arc PrivateLinkScope resource.",
+      "required":["clusterArmId"],
       "properties": {
         "publicNetworkAccess": {
           "description": "Indicates whether machines associated with the private link scope can also use public Azure Arc service endpoints.",
@@ -801,6 +802,10 @@
           "type": "string",
           "description": "Current state of this PrivateLinkScope: whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Provisioning ,Succeeded, Canceled and Failed.",
           "readOnly": true
+        },
+        "clusterArmId": {
+          "type": "string",
+          "description": "Managed Cluster ARM ID for the private link scope  (Required)"
         },
         "privateLinkScopeId": {
           "readOnly": true,
