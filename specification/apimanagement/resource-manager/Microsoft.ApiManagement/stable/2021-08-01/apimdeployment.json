@@ -719,14 +719,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
-          },
           "200": {
             "description": "Network configuration updates were successfully applied on the Api Management service.",
             "schema": {
               "$ref": "#/definitions/ApiManagementServiceResource"
             }
+          },
+          "202": {
+            "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -750,6 +750,10 @@
           "items": {
             "$ref": "#/definitions/ResourceSkuResult"
           },
+          "x-ms-identifiers": [
+            "resourceType",
+            "sku/name"
+          ],
           "description": "The list of skus available for the service."
         },
         "nextLink": {
@@ -1290,6 +1294,10 @@
           "items": {
             "$ref": "#/definitions/HostnameConfiguration"
           },
+          "x-ms-identifiers": [
+            "hostName",
+            "type"
+          ],
           "description": "Custom hostname configuration of the API Management service."
         },
         "publicIPAddresses": {
@@ -1333,6 +1341,10 @@
           "items": {
             "$ref": "#/definitions/AdditionalLocation"
           },
+          "x-ms-identifiers": [
+            "location",
+            "sku"
+          ],
           "description": "Additional datacenter locations of the API Management service."
         },
         "customProperties": {
@@ -1347,6 +1359,9 @@
           "items": {
             "$ref": "#/definitions/CertificateConfiguration"
           },
+          "x-ms-identifiers": [
+            "certificate/thumbprint"
+          ],
           "description": "List of Certificates that need to be installed in the API Management service. Max supported certificates that can be installed is 10."
         },
         "enableClientCertificate": {
@@ -1813,6 +1828,9 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of operations supported by the resource provider."
         },
         "nextLink": {
