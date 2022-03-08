@@ -1,0 +1,107 @@
+{
+  "parameters": {
+    "subscriptionId": "subId1",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "extensionName": "ClusterMonitor",
+    "api-version": "2022-03-01",
+    "clusterName": "clusterName1",
+    "extension": {
+      "properties": {
+        "extensionType": "azuremonitor-containers",
+        "autoUpgradeMinorVersion": true,
+        "releaseTrain": "Preview",
+        "scope": {
+          "cluster": {
+            "releaseNamespace": "kube-system"
+          }
+        },
+        "configurationSettings": {
+          "omsagent.secret.wsid": "a38cef99-5a89-52ed-b6db-22095c23664b",
+          "omsagent.env.clusterName": "clusterName1"
+        },
+        "configurationProtectedSettings": {
+          "omsagent.secret.key": "secretKeyValue01"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Operation-Location": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/ClusterMonitor/operations/{operationId}",
+        "x-ms-async-operation-timeout": "PT48H",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Kubernetes/ConnectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/ClusterMonitor/operations/operationId?api-version=2022-03-01"
+      },
+      "description": "Details of the Kubernetes Extension's current status.",
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/ClusterMonitor",
+        "type": "Microsoft.KubernetesConfiguration/extensions",
+        "name": "ClusterMonitor",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2021-09-08T05:10:57.027Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2021-09-08T05:10:57.027Z"
+        },
+        "properties": {
+          "extensionType": "azuremonitor-containers",
+          "autoUpgradeMinorVersion": true,
+          "releaseTrain": "Preview",
+          "version": "0.1.4",
+          "scope": {
+            "cluster": {
+              "releaseNamespace": "kube-system"
+            }
+          },
+          "configurationSettings": {
+            "omsagent.secret.wsid": "a38cef99-5a89-52ed-b6db-22095c23664b",
+            "omsagent.env.clusterName": "clusterName1"
+          },
+          "provisioningState": "Creating",
+          "statuses": []
+        }
+      }
+    },
+    "200": {
+      "headers": {
+        "Operation-Location": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/ClusterMonitor/operations/{operationId}",
+        "x-ms-async-operation-timeout": "PT48H"
+      },
+      "description": "Details of the Kubernetes Extension's current status.",
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/ClusterMonitor",
+        "type": "Microsoft.KubernetesConfiguration/extensions",
+        "name": "ClusterMonitor",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2021-09-08T05:10:57.027Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2021-09-08T05:10:57.027Z"
+        },
+        "properties": {
+          "extensionType": "azuremonitor-containers",
+          "autoUpgradeMinorVersion": true,
+          "releaseTrain": "Preview",
+          "version": "0.1.4",
+          "scope": {
+            "cluster": {
+              "releaseNamespace": "kube-system"
+            }
+          },
+          "configurationSettings": {
+            "omsagent.secret.wsid": "a38cef99-5a89-52ed-b6db-22095c23664b",
+            "omsagent.env.clusterName": "clusterName1"
+          },
+          "provisioningState": "Creating",
+          "statuses": []
+        }
+      }
+    }
+  }
+}
