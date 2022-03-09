@@ -611,6 +611,9 @@
               "$ref": "../../common/v1/definitions.json#/definitions/Error"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -1024,6 +1027,11 @@
             "$ref": "#/definitions/GetStreamingJobSkuResult"
           },
           "description": "The list of available SKUs that the streaming job can use."
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1034,7 +1042,14 @@
         "resourceType": {
           "readOnly": true,
           "type": "string",
-          "description": "The type of resource the SKU applies to."
+          "description": "The type of resource the SKU applies to.",
+          "enum": [
+            "Microsoft.StreamAnalytics/streamingjobs"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceType",
+            "modelAsString": true
+          }
         },
         "sku": {
           "type": "object",
