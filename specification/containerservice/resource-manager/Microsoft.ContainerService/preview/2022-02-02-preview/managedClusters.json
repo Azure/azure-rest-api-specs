@@ -2505,6 +2505,7 @@
   },
   "definitions": {
     "OperationListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -2518,6 +2519,7 @@
       "description": "The List Operation response."
     },
     "OperationValue": {
+      "type": "object",
       "properties": {
         "origin": {
           "type": "string",
@@ -2538,6 +2540,7 @@
       "description": "Describes the properties of a Operation value."
     },
     "OperationValueDisplay": {
+      "type": "object",
       "properties": {
         "operation": {
           "type": "string",
@@ -2563,6 +2566,7 @@
       "description": "Describes the properties of a Operation Value Display."
     },
     "Resource": {
+      "type": "object",
       "description": "The Resource model definition.",
       "properties": {
         "id": {
@@ -2602,6 +2606,7 @@
       "x-ms-azure-resource": true
     },
     "SubResource": {
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -2623,6 +2628,7 @@
       "x-ms-azure-resource": true
     },
     "TagsObject": {
+      "type": "object",
       "properties": {
         "tags": {
           "type": "object",
@@ -2842,6 +2848,7 @@
       ]
     },
     "ManagedClusterServicePrincipalProfile": {
+      "type": "object",
       "properties": {
         "clientId": {
           "type": "string",
@@ -2858,6 +2865,7 @@
       ]
     },
     "ContainerServiceMasterProfile": {
+      "type": "object",
       "properties": {
         "count": {
           "type": "integer",
@@ -2912,6 +2920,7 @@
       "description": "Profile for the container service master."
     },
     "ManagedClusterAgentPoolProfileProperties": {
+      "type": "object",
       "properties": {
         "count": {
           "type": "integer",
@@ -3174,6 +3183,7 @@
       "description": "A cluster must have at least one 'System' Agent Pool at all times. For additional information on agent pool restrictions and best practices, see: https://docs.microsoft.com/azure/aks/use-system-pools"
     },
     "AgentPoolListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -3191,6 +3201,7 @@
       "description": "The response from the List Agent Pools operation."
     },
     "AgentPoolUpgradeSettings": {
+      "type": "object",
       "properties": {
         "maxSurge": {
           "type": "string",
@@ -3217,6 +3228,7 @@
       "description": "Agent Pool."
     },
     "ManagedClusterWindowsProfile": {
+      "type": "object",
       "properties": {
         "adminUsername": {
           "type": "string",
@@ -3283,6 +3295,7 @@
       "description": "Windows gMSA Profile in the managed cluster."
     },
     "ContainerServiceLinuxProfile": {
+      "type": "object",
       "properties": {
         "adminUsername": {
           "type": "string",
@@ -3301,6 +3314,7 @@
       "description": "Profile for Linux VMs in the container service cluster."
     },
     "ContainerServiceNetworkProfile": {
+      "type": "object",
       "properties": {
         "networkPlugin": {
           "$ref": "#/definitions/NetworkPlugin",
@@ -3423,6 +3437,7 @@
       "description": "Profile of network configuration."
     },
     "MaintenanceConfigurationListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -3493,6 +3508,7 @@
       }
     },
     "MaintenanceConfiguration": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
@@ -3514,6 +3530,7 @@
       "description": "See [planned maintenance](https://docs.microsoft.com/azure/aks/planned-maintenance) for more information about planned maintenance."
     },
     "MaintenanceConfigurationProperties": {
+      "type": "object",
       "properties": {
         "timeInWeek": {
           "type": "array",
@@ -3534,6 +3551,7 @@
       "description": "Properties used to configure planned maintenance for a Managed Cluster."
     },
     "TimeInWeek": {
+      "type": "object",
       "properties": {
         "day": {
           "$ref": "#/definitions/WeekDay",
@@ -3575,6 +3593,7 @@
       "description": "Hour in a day."
     },
     "TimeSpan": {
+      "type": "object",
       "properties": {
         "start": {
           "type": "string",
@@ -3591,6 +3610,7 @@
       "description": "For example, between 2021-05-25T13:00:00Z and 2021-05-25T14:00:00Z."
     },
     "RunCommandRequest": {
+      "type": "object",
       "properties": {
         "command": {
           "type": "string",
@@ -3611,6 +3631,7 @@
       ]
     },
     "RunCommandResult": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -3626,6 +3647,7 @@
       "description": "run command result."
     },
     "CommandResultProperties": {
+      "type": "object",
       "properties": {
         "provisioningState": {
           "type": "string",
@@ -3703,8 +3725,10 @@
       "description": "Profile of the managed outbound IP resources of the managed cluster."
     },
     "ManagedClusterLoadBalancerProfile": {
+      "type": "object",
       "properties": {
         "managedOutboundIPs": {
+          "type": "object",
           "properties": {
             "count": {
               "type": "integer",
@@ -3726,6 +3750,7 @@
           "description": "Desired managed outbound IPs for the cluster load balancer."
         },
         "outboundIPPrefixes": {
+          "type": "object",
           "properties": {
             "publicIPPrefixes": {
               "type": "array",
@@ -3738,6 +3763,7 @@
           "description": "Desired outbound IP Prefix resources for the cluster load balancer."
         },
         "outboundIPs": {
+          "type": "object",
           "properties": {
             "publicIPs": {
               "type": "array",
@@ -3780,6 +3806,7 @@
       "description": "Profile of the managed cluster load balancer."
     },
     "ResourceReference": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -3789,6 +3816,7 @@
       "description": "A reference to an Azure resource."
     },
     "ContainerServiceSshConfiguration": {
+      "type": "object",
       "properties": {
         "publicKeys": {
           "type": "array",
@@ -3804,6 +3832,7 @@
       ]
     },
     "ContainerServiceSshPublicKey": {
+      "type": "object",
       "properties": {
         "keyData": {
           "type": "string",
@@ -3816,6 +3845,7 @@
       "description": "Contains information about SSH certificate public key data."
     },
     "ContainerServiceDiagnosticsProfile": {
+      "type": "object",
       "properties": {
         "vmDiagnostics": {
           "$ref": "#/definitions/ContainerServiceVMDiagnostics",
@@ -3828,6 +3858,7 @@
       ]
     },
     "ContainerServiceVMDiagnostics": {
+      "type": "object",
       "properties": {
         "enabled": {
           "type": "boolean",
@@ -3845,6 +3876,7 @@
       ]
     },
     "ManagedClusterListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -3862,6 +3894,7 @@
       "description": "The response from the List Managed Clusters operation."
     },
     "ManagedCluster": {
+      "type": "object",
       "properties": {
         "sku": {
           "$ref": "#/definitions/ManagedClusterSKU",
@@ -3889,6 +3922,7 @@
       "description": "Managed cluster."
     },
     "ManagedClusterProperties": {
+      "type": "object",
       "properties": {
         "provisioningState": {
           "readOnly": true,
@@ -3962,6 +3996,7 @@
           "description": "Information about a service principal identity for the cluster to use for manipulating Azure APIs."
         },
         "addonProfiles": {
+          "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/ManagedClusterAddonProfile"
           },
@@ -4134,6 +4169,7 @@
           "description": "This is of the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{encryptionSetName}'"
         },
         "identityProfile": {
+          "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/UserAssignedIdentity"
           },
@@ -4176,6 +4212,7 @@
       "description": "Properties of the managed cluster."
     },
     "PowerState": {
+      "type": "object",
       "description": "Describes the Power State of the cluster",
       "properties": {
         "code": {
@@ -4203,6 +4240,7 @@
       }
     },
     "ManagedClusterAPIServerAccessProfile": {
+      "type": "object",
       "properties": {
         "authorizedIPRanges": {
           "type": "array",
@@ -4234,6 +4272,7 @@
       "description": "Access profile for managed cluster API server."
     },
     "ManagedClusterIdentity": {
+      "type": "object",
       "properties": {
         "principalId": {
           "readOnly": true,
@@ -4298,6 +4337,7 @@
       "description": "Identity for the managed cluster."
     },
     "UserAssignedIdentity": {
+      "type": "object",
       "properties": {
         "resourceId": {
           "type": "string",
@@ -4343,6 +4383,7 @@
       "description": "Profile for enabling a user to access a managed cluster."
     },
     "ManagedClusterPoolUpgradeProfile": {
+      "type": "object",
       "properties": {
         "kubernetesVersion": {
           "type": "string",
@@ -4380,6 +4421,7 @@
       "description": "The list of available upgrade versions."
     },
     "ManagedClusterUpgradeProfileProperties": {
+      "type": "object",
       "properties": {
         "controlPlaneProfile": {
           "$ref": "#/definitions/ManagedClusterPoolUpgradeProfile",
@@ -4400,6 +4442,7 @@
       "description": "Control plane and agent pool upgrade profiles."
     },
     "ManagedClusterAutoUpgradeProfile": {
+      "type": "object",
       "properties": {
         "upgradeChannel": {
           "type": "string",
@@ -4443,6 +4486,7 @@
       "description": "Auto upgrade profile for a managed cluster."
     },
     "ManagedClusterAADProfile": {
+      "type": "object",
       "properties": {
         "managed": {
           "type": "boolean",
@@ -4480,12 +4524,14 @@
       "description": "For more details see [managed AAD on AKS](https://docs.microsoft.com/azure/aks/managed-aad)."
     },
     "ManagedClusterAddonProfile": {
+      "type": "object",
       "properties": {
         "enabled": {
           "type": "boolean",
           "description": "Whether the add-on is enabled or not."
         },
         "config": {
+          "type": "object",
           "additionalProperties": {
             "type": "string"
           },
@@ -4507,6 +4553,7 @@
       "description": "A Kubernetes add-on profile for a managed cluster."
     },
     "ManagedClusterPodIdentity": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -4540,6 +4587,7 @@
           }
         },
         "provisioningInfo": {
+          "type": "object",
           "readOnly": true,
           "properties": {
             "error": {
@@ -4592,6 +4640,7 @@
       "description": "An error response from the pod identity provisioning."
     },
     "ManagedClusterPodIdentityException": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -4618,6 +4667,7 @@
       "description": "See [disable AAD Pod Identity for a specific Pod/Application](https://azure.github.io/aad-pod-identity/docs/configure/application_exception/) for more details."
     },
     "ManagedClusterPodIdentityProfile": {
+      "type": "object",
       "properties": {
         "enabled": {
           "type": "boolean",
@@ -4662,6 +4712,7 @@
       "description": "The OIDC issuer profile of the Managed Cluster."
     },
     "ManagedClusterUpgradeProfile": {
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -4690,6 +4741,7 @@
       "description": "The list of available upgrades for compute pools."
     },
     "AgentPoolUpgradeProfile": {
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -4718,6 +4770,7 @@
       "description": "The list of available upgrades for an agent pool."
     },
     "AgentPoolUpgradeProfileProperties": {
+      "type": "object",
       "properties": {
         "kubernetesVersion": {
           "type": "string",
@@ -4755,6 +4808,7 @@
       "description": "The list of available upgrade versions."
     },
     "AgentPoolAvailableVersions": {
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -4783,6 +4837,7 @@
       "description": "The list of available versions for an agent pool."
     },
     "AgentPoolAvailableVersionsProperties": {
+      "type": "object",
       "properties": {
         "agentPoolVersions": {
           "type": "array",
@@ -4923,6 +4978,7 @@
       "description": "The ID for Proximity Placement Group."
     },
     "CredentialResults": {
+      "type": "object",
       "properties": {
         "kubeconfigs": {
           "type": "array",
@@ -4953,6 +5009,7 @@
       "description": "The credential result response."
     },
     "CloudError": {
+      "type": "object",
       "x-ms-external": true,
       "properties": {
         "error": {
@@ -4963,6 +5020,7 @@
       "description": "An error response from the Container service."
     },
     "CloudErrorBody": {
+      "type": "object",
       "x-ms-external": true,
       "properties": {
         "code": {
@@ -4988,6 +5046,7 @@
       "description": "An error response from the Container service."
     },
     "ManagedClusterSKU": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -5540,6 +5599,7 @@
       }
     },
     "ExtendedLocation": {
+      "type": "object",
       "description": "The complex type of the extended location.",
       "properties": {
         "name": {
@@ -5553,6 +5613,7 @@
       }
     },
     "OSOptionProperty": {
+      "type": "object",
       "properties": {
         "os-type": {
           "type": "string",
@@ -5570,6 +5631,7 @@
       "description": "OS option property."
     },
     "OSOptionPropertyList": {
+      "type": "object",
       "properties": {
         "osOptionPropertyList": {
           "type": "array",
@@ -5585,6 +5647,7 @@
       "description": "The list of OS option properties."
     },
     "OSOptionProfile": {
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
