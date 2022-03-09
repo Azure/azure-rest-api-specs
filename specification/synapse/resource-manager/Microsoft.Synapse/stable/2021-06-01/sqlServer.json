@@ -1188,6 +1188,185 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/dedicatedSQLminimalTlsSettings/{dedicatedSQLminimalTlsSettingsName}": {
+      "put": {
+        "operationId": "WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings_Update",
+        "summary": "Update server's tls settings.",
+        "description": "Update workspace managed sql server's minimal tls settings.",
+        "tags": [
+          "WorkspaceManagedSqlServer, DedicatedSQLminimalTlsSettings"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "dedicatedSQLminimalTlsSettingsName",
+            "in": "path",
+            "description": "The name of the dedicated sql minimal tls settings.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "DedicatedSQLMinimalTlsSettingsName",
+              "modelAsString": true
+            }
+          },
+          {
+            "schema": {
+              "$ref": "#/definitions/DedicatedSQLminimalTlsSettings"
+            },
+            "in": "body",
+            "name": "parameters",
+            "description": "minimal tls settings",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated dedicated sql minimal tls settings.",
+            "schema": {
+              "$ref": "#/definitions/DedicatedSQLminimalTlsSettings"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 500 InternalServerError - Something went wrong."
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update tls version of the workspace managed sql server": {
+            "$ref": "./examples/UpdateWorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings_Get",
+        "summary": "Get server's minimal tls settings.",
+        "description": "Get workspace managed sql server's minimal tls settings.",
+        "tags": [
+          "WorkspaceManagedSqlServer, DedicatedSQLminimalTlsSettings"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "dedicatedSQLminimalTlsSettingsName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the dedicated sql minimal tls settings."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved dedicated sql minimal tls settings.",
+            "schema": {
+              "$ref": "#/definitions/DedicatedSQLminimalTlsSettings"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 500 InternalServerError - Something went wrong."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get workspace managed sql server dedicated sql minimal tls settings": {
+            "$ref": "./examples/GetWorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/dedicatedSQLminimalTlsSettings": {
+      "get": {
+        "operationId": "WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings_List",
+        "summary": "List workspace server's minimal tls settings.",
+        "description": "List workspace managed sql server's minimal tls settings.",
+        "tags": [
+          "WorkspaceManagedSqlServer, DedicatedSQLminimalTlsSettings"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved dedicated sql minimal tls settings.",
+            "schema": {
+              "$ref": "#/definitions/DedicatedSQLminimalTlsSettingsListResult"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 500 InternalServerError - Something went wrong."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List dedicated sql minimal tls settings of the workspace managed sql server": {
+            "$ref": "./examples/ListWorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1783,6 +1962,67 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RecoverableSqlPool"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DedicatedSQLminimalTlsSettingsPatchInfo": {
+      "type": "object",
+      "title": "Dedicated SQL minimal tls settings patch info",
+      "description": "Dedicated SQL minimal tls settings patch info",
+      "properties": {
+        "minimalTlsVersion": {
+          "type": "string",
+          "description": "minimal tls version"
+        }
+      }
+    },
+    "DedicatedSQLminimalTlsSettingsProperties": {
+      "description": "Properties of a dedicated sql minimal tls settings.",
+      "type": "object",
+      "properties": {
+        "minimalTlsVersion": {
+          "type": "string",
+          "description": "The minimal tls version of the sql server."
+        }
+      }
+    },
+    "DedicatedSQLminimalTlsSettings": {
+      "description": "Dedicated Sql Minimal Tls Settings Info",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "location": {
+          "description": "Resource location.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/DedicatedSQLminimalTlsSettingsProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DedicatedSQLminimalTlsSettingsListResult": {
+      "description": "A list of the server's dedicated sql minimal tls settings.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DedicatedSQLminimalTlsSettings"
           },
           "readOnly": true
         },
