@@ -21,6 +21,7 @@ Generate all API versions currently shipped for this package
 ```yaml $(multiapi)
 clear-output-folder: true
 batch: 
+  - tag: package-preview-2022-04
   - tag: package-2022-03
   - tag: package-preview-2022-01
   - tag: package-preview-2021-11
@@ -37,6 +38,15 @@ batch:
 output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/
 clear-output-folder: false
 perform-load: false
+```
+
+### Tag: package-preview-2022-04 and python
+
+These settings apply only when `--tag=package-preview-2022-04 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-04'
+namespace: azure.mgmt.kubernetesconfiguration.v2022_04_02_preview
+output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/v2022_04_02_preview
 ```
 
 ### Tag: package-2022-03 and python
