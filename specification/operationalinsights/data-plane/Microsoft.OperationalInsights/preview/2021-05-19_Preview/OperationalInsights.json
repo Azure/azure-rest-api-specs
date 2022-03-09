@@ -123,6 +123,40 @@
         }
       }
     },
+    "/{resourceUri}/query": {
+      "post": {
+        "operationId": "Query_Execute",
+        "summary": "Execute an Analytics query using resource URI",
+        "description": "Executes an Analytics query for data. [Here](https://dev.loganalytics.io/documentation/Using-the-API) is an example for using POST with an Analytics query.",
+        "x-ms-examples": {
+          "simple-query": {
+            "$ref": "examples/oms-post-example.json"
+          },
+          "cross-workspace": {
+            "$ref": "examples/oms-post-cross-workspace-example.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The API call succeeded and the Analytics query result is in the response payload",
+            "schema": {
+              "$ref": "#/definitions/queryResults"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
     "/workspaces/{workspaceId}/metadata": {
       "get": {
         "operationId": "Metadata_Get",
@@ -258,6 +292,15 @@
         "$ref": "#/definitions/queryBody"
       },
       "x-ms-parameter-location": "method"
+    },
+    "ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The identifier of the resource.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
     },
     "timespanParam": {
       "name": "timespan",
