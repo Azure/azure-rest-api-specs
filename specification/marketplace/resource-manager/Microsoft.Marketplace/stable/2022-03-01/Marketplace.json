@@ -798,10 +798,10 @@
             "$ref": "#/parameters/PrivateStoreIdParameter"
           },
           {
-            "$ref": "#/parameters/OfferIdPathParameter"
+            "$ref": "#/parameters/CollectionIdParameter"
           },
           {
-            "$ref": "#/parameters/CollectionIdParameter"
+            "$ref": "#/parameters/OfferIdPathParameter"
           }
         ],
         "responses": {
@@ -842,10 +842,10 @@
             "$ref": "#/parameters/PrivateStoreIdParameter"
           },
           {
-            "$ref": "#/parameters/OfferIdPathParameter"
+            "$ref": "#/parameters/CollectionIdParameter"
           },
           {
-            "$ref": "#/parameters/CollectionIdParameter"
+            "$ref": "#/parameters/OfferIdPathParameter"
           }
         ],
         "responses": {
@@ -879,10 +879,10 @@
             "$ref": "#/parameters/PrivateStoreIdParameter"
           },
           {
-            "$ref": "#/parameters/OfferIdPathParameter"
+            "$ref": "#/parameters/CollectionIdParameter"
           },
           {
-            "$ref": "#/parameters/CollectionIdParameter"
+            "$ref": "#/parameters/OfferIdPathParameter"
           }
         ],
         "responses": {
@@ -923,10 +923,10 @@
             "$ref": "#/parameters/PrivateStoreIdParameter"
           },
           {
-            "$ref": "#/parameters/OfferIdPathParameter"
+            "$ref": "#/parameters/CollectionIdParameter"
           },
           {
-            "$ref": "#/parameters/CollectionIdParameter"
+            "$ref": "#/parameters/OfferIdPathParameter"
           }
         ],
         "responses": {
@@ -958,7 +958,7 @@
           "PrivateStores"
         ],
         "operationId": "PrivateStoreCollectionOffer_UpsertOfferWithMultiContext",
-        "description": "Upsert an oofer with multipale context dertails.",
+        "description": "Upsert an offer with multiple context details.",
         "parameters": [
           {
             "$ref": "#/parameters/PrivateStoreIdParameter"
@@ -2171,6 +2171,7 @@
     },
     "PlanRequesterDetails": {
       "description": "Plan with requesters details",
+      "type": "object",
       "properties": {
         "planId": {
           "description": "Gets the plan id",
@@ -2440,12 +2441,14 @@
       "type": "object",
       "properties": {
         "offerIds": {
+          "description": "List of offer IDs",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "subscriptionIds": {
+          "description": "List of subscription IDs",
           "type": "array",
           "items": {
             "type": "string"
@@ -3146,6 +3149,7 @@
         },
         "display": {
           "description": "The object that represents the operation.",
+          "type": "object",
           "properties": {
             "provider": {
               "readOnly": true,
@@ -3190,6 +3194,7 @@
       "properties": {
         "error": {
           "description": "The details of the error.",
+          "type": "object",
           "properties": {
             "code": {
               "description": "Error code.",
@@ -3207,6 +3212,7 @@
     },
     "Resource": {
       "description": "An Azure resource.",
+      "type": "object",
       "properties": {
         "id": {
           "description": "The resource ID.",
