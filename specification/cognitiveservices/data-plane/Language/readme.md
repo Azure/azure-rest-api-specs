@@ -7,8 +7,7 @@ This is the AutoRest configuration file the Cognitive Services Language SDK.
 ## Releases
 
 The current preview release is 2022-02-01-preview
-
-The current stable release of QuestionAnswering is 2021-10-01 and preview release of Luis Deepstack is 2021-07-15-preview
+The current stable release of QuestionAnswering is 2021-10-01 and preview release of Conversational Language Understanding (CLU) service is 2021-11-01-preview
 
 ```yaml
 tag: release_2022_02_01_preview
@@ -65,6 +64,7 @@ These settings apply only when `--tag=release_2021_11_01_preview` is specified o
 ``` yaml $(tag) == 'release_2021_11_01_preview'
 input-file:
 - preview/2021-11-01-preview/textanalytics.json
+- preview/2021-11-01-preview/analyzeconversations.json
 title:
   Microsoft Cognitive Language Service
 modelerfour:
