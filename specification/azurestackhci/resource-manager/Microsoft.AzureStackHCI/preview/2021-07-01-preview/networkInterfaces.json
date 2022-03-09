@@ -3,10 +3,7 @@
   "info": {
     "title": "AzureStackHCI",
     "description": "The Microsoft.AzureStackHCI Rest API spec.",
-    "version": "2021-07-01-preview",
-    "x-ms-code-generation-settings": {
-      "name": "AzureStackHCIClient"
-    }
+    "version": "2021-07-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -405,7 +402,8 @@
         },
         "location": {
           "type": "string",
-          "description": "The resource location"
+          "description": "The resource location",
+          "x-ms-mutability": ["create", "read"]
         },
         "tags": {
           "type": "object",

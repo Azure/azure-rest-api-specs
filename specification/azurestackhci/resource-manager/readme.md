@@ -48,6 +48,12 @@ directive:
       - updateRuns.json
       - updateSummaries.json
       - updates.json
+      - galleryImages.json
+      - networkInterfaces.json
+      - storageContainers.json
+      - virtualHardDisks.json
+      - virtualMachines.json
+      - virtualNetworks.json
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 ```
 
@@ -109,11 +115,14 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2021-07` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-07'
+``` yaml $(tag) == 'package-preview-2021-07'
 input-file:
-  - Microsoft.AzureStackHCI/preview/2021-07-01-preview/arcSettings.json
-  - Microsoft.AzureStackHCI/preview/2021-07-01-preview/clusters.json
-  - Microsoft.AzureStackHCI/preview/2021-07-01-preview/extensions.json
+  - Microsoft.AzureStackHCI/preview/2021-07-01-preview/galleryImages.json
+  - Microsoft.AzureStackHCI/preview/2021-07-01-preview/networkInterfaces.json
+  - Microsoft.AzureStackHCI/preview/2021-07-01-preview/storageContainers.json
+  - Microsoft.AzureStackHCI/preview/2021-07-01-preview/virtualHardDisks.json
+  - Microsoft.AzureStackHCI/preview/2021-07-01-preview/virtualMachines.json
+  - Microsoft.AzureStackHCI/preview/2021-07-01-preview/virtualNetworks.json
   - Microsoft.AzureStackHCI/preview/2021-07-01-preview/operations.json
 ```
 ### Tag: package-2022-01
