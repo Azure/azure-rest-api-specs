@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-03-01",
+    "version": "2022-04-02-preview",
     "title": "ExtensionsClient",
     "description": "Use these APIs to create extension resources through ARM, for Kubernetes Clusters."
   },
@@ -45,6 +45,9 @@
         "x-ms-examples": {
           "Create Extension": {
             "$ref": "./examples/CreateExtension.json"
+          },
+          "Create Extension with Plan": {
+            "$ref": "./examples/CreateExtensionWithPlan.json"
           }
         },
         "parameters": [
@@ -55,13 +58,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterRpParameter"
+            "$ref": "../../common/2022-04-01-preview/parameters.json#/parameters/ClusterRpParameter"
           },
           {
-            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterResourceNameParameter"
+            "$ref": "../../common/2022-04-01-preview/parameters.json#/parameters/ClusterResourceNameParameter"
           },
           {
-            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterNameParameter"
+            "$ref": "../../common/2022-04-01-preview/parameters.json#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/ExtensionNameParameter"
@@ -124,13 +127,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterRpParameter"
+            "$ref": "../../common/2022-04-01-preview/parameters.json#/parameters/ClusterRpParameter"
           },
           {
-            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterResourceNameParameter"
+            "$ref": "../../common/2022-04-01-preview/parameters.json#/parameters/ClusterResourceNameParameter"
           },
           {
-            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterNameParameter"
+            "$ref": "../../common/2022-04-01-preview/parameters.json#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/ExtensionNameParameter"
@@ -174,13 +177,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterRpParameter"
+            "$ref": "../../common/2022-04-01-preview/parameters.json#/parameters/ClusterRpParameter"
           },
           {
-            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterResourceNameParameter"
+            "$ref": "../../common/2022-04-01-preview/parameters.json#/parameters/ClusterResourceNameParameter"
           },
           {
-            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterNameParameter"
+            "$ref": "../../common/2022-04-01-preview/parameters.json#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/ExtensionNameParameter"
@@ -237,13 +240,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterRpParameter"
+            "$ref": "../../common/2022-04-01-preview/parameters.json#/parameters/ClusterRpParameter"
           },
           {
-            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterResourceNameParameter"
+            "$ref": "../../common/2022-04-01-preview/parameters.json#/parameters/ClusterResourceNameParameter"
           },
           {
-            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterNameParameter"
+            "$ref": "../../common/2022-04-01-preview/parameters.json#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/ExtensionNameParameter"
@@ -302,13 +305,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterRpParameter"
+            "$ref": "../../common/2022-04-01-preview/parameters.json#/parameters/ClusterRpParameter"
           },
           {
-            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterResourceNameParameter"
+            "$ref": "../../common/2022-04-01-preview/parameters.json#/parameters/ClusterResourceNameParameter"
           },
           {
-            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterNameParameter"
+            "$ref": "../../common/2022-04-01-preview/parameters.json#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -353,13 +356,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterRpParameter"
+            "$ref": "../../common/2022-04-01-preview/parameters.json#/parameters/ClusterRpParameter"
           },
           {
-            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterResourceNameParameter"
+            "$ref": "../../common/2022-04-01-preview/parameters.json#/parameters/ClusterResourceNameParameter"
           },
           {
-            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterNameParameter"
+            "$ref": "../../common/2022-04-01-preview/parameters.json#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/ExtensionNameParameter"
@@ -379,7 +382,7 @@
           "200": {
             "description": "Extension Operation Status",
             "schema": {
-              "$ref": "../../common/2022-03-01/definitions.json#/definitions/OperationStatusResult"
+              "$ref": "../../common/2022-04-01-preview/definitions.json#/definitions/OperationStatusResult"
             }
           },
           "default": {
@@ -520,7 +523,7 @@
               "description": "Status of installation of this extension.",
               "type": "string",
               "readOnly": true,
-              "$ref": "../../common/2022-03-01/definitions.json#/definitions/ProvisioningStateDefinition"
+              "$ref": "../../common/2022-04-01-preview/definitions.json#/definitions/ProvisioningStateDefinition"
             },
             "statuses": {
               "description": "Status from this extension.",
@@ -592,6 +595,10 @@
         "systemData": {
           "description": "Top level metadata https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "plan": {
+          "description": "The plan information.",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Plan"
         }
       },
       "allOf": [
