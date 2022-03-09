@@ -46,6 +46,11 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/Workspace/operationsList.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
@@ -2016,6 +2021,9 @@
           "items": {
             "$ref": "#/definitions/AmlOperation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of AML workspace operations supported by the AML workspace resource provider."
         }
       }
@@ -2158,6 +2166,9 @@
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of private endpoint connections in the workspace."
         },
         "sharedPrivateLinkResources": {
@@ -2165,6 +2176,9 @@
           "items": {
             "$ref": "#/definitions/SharedPrivateLinkResource"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of shared private link resources in this workspace."
         },
         "notebookInfo": {
@@ -2464,6 +2478,7 @@
           "items": {
             "$ref": "#/definitions/EstimatedVMPrice"
           },
+          "x-ms-identifiers": [],
           "title": "List of estimated VM prices.",
           "description": "The list of estimated prices for using a VM of a particular OS type, tier, etc."
         }
@@ -2527,6 +2542,9 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineSize"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of virtual machine sizes supported by AmlCompute."
         }
       },
@@ -2715,55 +2733,82 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/DiagnoseResult"
-              }
+              },
+              "x-ms-identifiers": [
+                "message"
+              ]
             },
             "networkSecurityRuleResults": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/DiagnoseResult"
-              }
+              },
+              "x-ms-identifiers": [
+                "message"
+              ]
             },
             "resourceLockResults": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/DiagnoseResult"
-              }
+              },
+              "x-ms-identifiers": [
+                "message"
+              ]
             },
             "dnsResolutionResults": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/DiagnoseResult"
-              }
+              },
+              "x-ms-identifiers": [
+                "message"
+              ]
             },
             "storageAccountResults": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/DiagnoseResult"
-              }
+              },
+              "x-ms-identifiers": [
+                "message"
+              ]
             },
             "keyVaultResults": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/DiagnoseResult"
-              }
+              },
+              "x-ms-identifiers": [
+                "message"
+              ]
             },
             "containerRegistryResults": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/DiagnoseResult"
-              }
+              },
+              "x-ms-identifiers": [
+                "message"
+              ]
             },
             "applicationInsightsResults": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/DiagnoseResult"
-              }
+              },
+              "x-ms-identifiers": [
+                "message"
+              ]
             },
             "otherResults": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/DiagnoseResult"
-              }
+              },
+              "x-ms-identifiers": [
+                "message"
+              ]
             }
           }
         }
@@ -3018,7 +3063,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Password"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -3152,6 +3200,9 @@
           "items": {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
           },
+          "x-ms-identifiers": [
+            "/error/code"
+          ],
           "readOnly": true
         },
         "isAttachedCompute": {
@@ -3197,6 +3248,9 @@
               "items": {
                 "$ref": "#/definitions/SystemService"
               },
+              "x-ms-identifiers": [
+                "publicIpAddress"
+              ],
               "readOnly": true
             },
             "agentCount": {
@@ -3417,7 +3471,10 @@
           "type": "array",
           "items": {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
+          },
+          "x-ms-identifiers": [
+            "/error/code"
+          ]
         },
         "currentNodeCount": {
           "type": "integer",
@@ -3516,7 +3573,10 @@
           "description": "Describes available applications and their endpoints on this ComputeInstance.",
           "items": {
             "$ref": "#/definitions/ComputeInstanceApplication"
-          }
+          },
+          "x-ms-identifiers": [
+            "displayName"
+          ]
         },
         "createdBy": {
           "readOnly": true,
@@ -3530,7 +3590,10 @@
           "type": "array",
           "items": {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
+          },
+          "x-ms-identifiers": [
+            "/error/code"
+          ]
         },
         "state": {
           "description": "The current state of this ComputeInstance.",
@@ -4073,6 +4136,9 @@
           "items": {
             "$ref": "#/definitions/AmlComputeNodeInformation"
           },
+          "x-ms-identifiers": [
+            "nodeId"
+          ],
           "description": "The collection of returned AmlCompute nodes details."
         },
         "nextLink": {
@@ -5286,7 +5352,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/FQDNEndpointDetail"
-          }
+          },
+          "x-ms-identifiers": [
+            "port"
+          ]
         }
       }
     },
@@ -5300,7 +5369,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/FQDNEndpoint"
-          }
+          },
+          "x-ms-identifiers": [
+            "domainName"
+          ]
         }
       }
     },
@@ -5319,7 +5391,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/FQDNEndpoints"
-          }
+          },
+          "x-ms-identifiers": [
+            "/properties/category"
+          ]
         }
       }
     }
