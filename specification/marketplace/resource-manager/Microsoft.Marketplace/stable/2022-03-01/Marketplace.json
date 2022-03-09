@@ -947,6 +947,57 @@
         }
       }
     },
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collections/{collectionId}/offers/{offerId}/upsertOfferWithMultiContext": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStoreCollectionOffer_UpsertOfferWithMultiContext",
+        "description": "Upsert an oofer with multipale context dertails.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/PrivateStoreIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CollectionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/OfferIdPathParameter"
+          },
+          {
+            "in": "body",
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/PlansContextMap"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieve offer information with plans under required contexts restrictions.",
+            "schema": {
+              "$ref": "#/definitions/Offer"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpsertOfferWithMultiContext": {
+            "$ref": "./examples/UpsertOfferWithMultiContext.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/requestApprovals": {
       "parameters": [
         {
@@ -2144,6 +2195,16 @@
         }
       }
     },
+    "PlansContextMap": {
+      "description": "List of objects describe the context's plans.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/PlansContextDetails"
+      },
+      "x-ms-identifiers": [
+        "context"
+      ]
+    },
     "UserRequestDetails": {
       "description": "user request details",
       "type": "object",
@@ -2284,6 +2345,23 @@
         "subscriptionName": {
           "description": "Gets or sets the subscription name that the user is requesting to add the plan to",
           "type": "string"
+        }
+      }
+    },
+    "PlansContextDetails": {
+      "description": "Object of plans per context.",
+      "type": "object",
+      "properties": {
+        "context": {
+          "description": "Plan's context, e.g. subscription ID, tenant ID.",
+          "type": "string"
+        },
+        "planIds": {
+          "description": "List of plan IDs.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
