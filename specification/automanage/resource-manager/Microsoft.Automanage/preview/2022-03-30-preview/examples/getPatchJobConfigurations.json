@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroupName",
+    "patchJobConfigurationName": "jobConfigurationName",
+    "api-version": "2022-03-30-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/mySubscription/resourceGroups/myResourceGroup/providers/Microsoft.Automanage/PatchJobConfigurations/jobConfigurationName",
+        "name": "jobConfigurationName",
+        "type": "Microsoft.Automanage/PatchJobConfigurations",
+        "location": "East US",
+        "tags": {
+          "Organization": "Administration"
+        },
+        "properties": {
+          "preJobScript": {
+            "runbookResourceId": "preJobRunbook",
+            "runOn": null
+          },
+          "postJobScript": null,
+          "sequentialPatchTierGroups": [
+            {
+              "parallelPatchTiers": [
+                "patchTier1a",
+                "patchTier1b"
+              ]
+            },
+            {
+              "parallelPatchTiers": [
+                "patchTier2a"
+              ]
+            }
+          ],
+          "defaultPatchSettings": {
+            "maximumDuration": "maxDuration",
+            "rebootSettings": "rebootSettings",
+            "windowsParameters": {
+              "classificationsToInclude": null,
+              "excludeKbsRequiringReboot": null,
+              "kbNumbersToInclude": [
+                "kbNumber1"
+              ],
+              "kbNumbersToExclude": null,
+              "maxPatchPublishDate": null
+            },
+            "linuxParameters": null
+          },
+          "patchSettings": {
+            "patchTier2": {
+              "maximumDuration": "maxDuration",
+              "rebootSettings": "rebootSettings",
+              "windowsParameters": null,
+              "linuxParameters": {
+                "classificationsToInclude": null,
+                "maintenanceRunId": null,
+                "packageNameMasksToInclude": [
+                  "packageNameMask"
+                ],
+                "packageNameMasksToExclude": null
+              }
+            }
+          }
+        },
+        "systemData": {
+          "createdBy": "user1@outlook.com",
+          "createdByType": "User",
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "lastModifiedBy": "user2@outlook.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
+        }
+      }
+    }
+  }
+}

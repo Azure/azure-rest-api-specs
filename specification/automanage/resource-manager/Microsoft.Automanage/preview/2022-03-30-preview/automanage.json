@@ -1122,48 +1122,6 @@
         ]
       }
     },
-    "/providers/Microsoft.Automanage/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "description": "Lists all of the available Automanage REST API operations.",
-        "x-ms-examples": {
-          "Lists all of the available Automanage REST API operations": {
-            "$ref": "./examples/listOperations.json"
-          }
-        },
-        "operationId": "Operations_List",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success. The response describes the list of operations.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}/reports/{reportName}": {
       "get": {
         "tags": [
@@ -1362,6 +1320,934 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/patchTiers/{tierName}": {
+      "put": {
+        "tags": [
+          "PatchTiers"
+        ],
+        "operationId": "PatchTier_CreateOrUpdate",
+        "description": "Updates a PatchTier.",
+        "x-ms-examples": {
+          "Create or update a PatchTier": {
+            "$ref": "./examples/createOrUpdatePatchTier.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "tierName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the specified PatchTier"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchTier"
+            },
+            "description": "Parameters supplied to create or update the patch tier."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created. The PatchTier was created successfully.",
+            "schema": {
+              "$ref": "#/definitions/PatchTier"
+            }
+          },
+          "200": {
+            "description": "OK. The PatchTier was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/PatchTier"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "tags": [
+          "PatchTiers"
+        ],
+        "operationId": "PatchTiers_Get",
+        "description": "Get information about the PatchTier",
+        "x-ms-examples": {
+          "Get a PatchTier": {
+            "$ref": "./examples/getPatchTier.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "tierName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the specified PatchTier"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The PatchTier was returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/PatchTier"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "PatchTiers"
+        ],
+        "operationId": "PatchTiers_Delete",
+        "description": "Delete a patch tier",
+        "x-ms-examples": {
+          "Delete a patch tier": {
+            "$ref": "./examples/deletePatchTier.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "tierName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the patch tier"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "patch": {
+        "tags": [
+          "PatchTiers"
+        ],
+        "operationId": "PatchTiers_Update",
+        "description": "Updates a patch tier",
+        "x-ms-examples": {
+          "Update patch tier": {
+            "$ref": "./examples/updatePatchTier.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "tierName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the patch tier."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchTierUpdate"
+            },
+            "description": "Parameters supplied to update the patch tier."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The patch tier was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/PatchTier"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/patchTiers": {
+      "get": {
+        "tags": [
+          "PatchTiers"
+        ],
+        "operationId": "PatchTiers_ListByResourceGroup",
+        "description": "Retrieve a list of PatchTier within a given resource group",
+        "x-ms-examples": {
+          "List patch tiers by resource group": {
+            "$ref": "./examples/listPatchTierByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. List of patch tiers.",
+            "schema": {
+              "$ref": "#/definitions/PatchTierList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Automanage/patchTiers": {
+      "get": {
+        "tags": [
+          "PatchTiers"
+        ],
+        "operationId": "PatchTiers_ListBySubscription",
+        "description": "Retrieve a list of PatchTier within a given subscription",
+        "x-ms-examples": {
+          "List patch tiers by subscription": {
+            "$ref": "./examples/listPatchTierBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. List of patch tiers.",
+            "schema": {
+              "$ref": "#/definitions/PatchTierList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/patchJobConfigurations/{patchJobConfigurationName}": {
+      "put": {
+        "tags": [
+          "PatchJobConfigurations"
+        ],
+        "operationId": "PatchJobConfigurations_CreateOrUpdate",
+        "description": "Updates a PatchJobConfigurations.",
+        "x-ms-examples": {
+          "Create or update a patch job configurations": {
+            "$ref": "./examples/createOrUpdatePatchJobConfigurations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "patchJobConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the specified PatchJobConfigurations"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchJobConfigurations"
+            },
+            "description": "Parameters supplied to create or update PatchJobConfigurations."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created. The PatchJobConfigurations was created successfully.",
+            "schema": {
+              "$ref": "#/definitions/PatchJobConfigurations"
+            }
+          },
+          "200": {
+            "description": "OK. The PatchJobConfigurations was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/PatchJobConfigurations"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "tags": [
+          "PatchJobConfigurations"
+        ],
+        "operationId": "PatchJobConfigurations_Get",
+        "description": "Get information about the PatchJobConfigurations",
+        "x-ms-examples": {
+          "Get a patch job configurations": {
+            "$ref": "./examples/getPatchJobConfigurations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "patchJobConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the specified PatchJobConfigurations"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The PatchJobConfigurations was returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/PatchJobConfigurations"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "PatchJobConfigurations"
+        ],
+        "operationId": "PatchJobConfigurations_Delete",
+        "description": "Delete a patch tier",
+        "x-ms-examples": {
+          "Delete a patch job configurations": {
+            "$ref": "./examples/deletePatchJobConfigurations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "patchJobConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the patch tier"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "patch": {
+        "tags": [
+          "PatchJobConfigurations"
+        ],
+        "operationId": "PatchJobConfigurations_Update",
+        "description": "Updates a patch tier",
+        "x-ms-examples": {
+          "Update patch job configurations": {
+            "$ref": "./examples/updatePatchJobConfigurations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "patchJobConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the patch job configurations."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchJobConfigurationsUpdate"
+            },
+            "description": "Parameters supplied to update the patch tier."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The patch tier was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/PatchJobConfigurations"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/patchJobConfigurations": {
+      "get": {
+        "tags": [
+          "PatchJobConfigurations"
+        ],
+        "operationId": "PatchJobConfigurations_ListByResourceGroup",
+        "description": "Retrieve a list of PatchJobConfigurations within a given resource group",
+        "x-ms-examples": {
+          "List patch job configurations by resource group": {
+            "$ref": "./examples/listPatchJobConfigurationsByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. List of patch job configurations.",
+            "schema": {
+              "$ref": "#/definitions/PatchJobConfigurationsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Automanage/patchJobConfigurations": {
+      "get": {
+        "tags": [
+          "PatchJobConfigurations"
+        ],
+        "operationId": "PatchJobConfigurations_ListBySubscription",
+        "description": "Retrieve a list of PatchJobConfigurations within a given subscription",
+        "x-ms-examples": {
+          "List Patch Job Configurations by resource group": {
+            "$ref": "./examples/listPatchJobConfigurationsBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. List of patch job configurations.",
+            "schema": {
+              "$ref": "#/definitions/PatchJobConfigurationsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/patchJobConfigurations/{patchJobConfigurationName}/patchJobs/{patchJobName}": {
+      "put": {
+        "tags": [
+          "PatchJobs"
+        ],
+        "operationId": "patchJobs_CreateOrUpdate",
+        "description": "Creates a patch job",
+        "x-ms-examples": {
+          "Create or update patch job": {
+            "$ref": "./examples/createOrUpdatePatchJobs.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "patchJobConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The patch job configuration name."
+          },
+          {
+            "name": "patchJobName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The patch job name."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchJob"
+            },
+            "description": "Parameters supplied to create or update patch job."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The patch job was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/PatchJob"
+            }
+          },
+          "201": {
+            "description": "Created. The patch job was created successfully.",
+            "schema": {
+              "$ref": "#/definitions/PatchJob"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "tags": [
+          "PatchJobs"
+        ],
+        "operationId": "PatchJobs_Get",
+        "description": "Get information about a patch job",
+        "x-ms-examples": {
+          "Get a patch job": {
+            "$ref": "./examples/getPatchJob.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "patchJobConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The patch job configuration name."
+          },
+          {
+            "name": "patchJobName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The patch job name."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The patch job was returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/PatchJob"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "PatchJobs"
+        ],
+        "operationId": "PatchJobs_Delete",
+        "description": "Delete a patch job",
+        "x-ms-examples": {
+          "Delete a patch job": {
+            "$ref": "./examples/deletePatchJobs.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "patchJobConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The patch job configuration name."
+          },
+          {
+            "name": "patchJobName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The patch job name."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/patchJobConfigurations/{patchJobConfigurationName}/patchJobs": {
+      "get": {
+        "tags": [
+          "PatchJobs"
+        ],
+        "operationId": "PatchJobs_ListChildResources",
+        "description": "Retrieve a list of patch jobs for a patch job configuration",
+        "x-ms-examples": {
+          "List patch jobs by patch job configuration": {
+            "$ref": "./examples/listPatchJobs.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "patchJobConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the patch job configuration."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. List of patch jobs.",
+            "schema": {
+              "$ref": "#/definitions/PatchJobList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/providers/Microsoft.Automanage/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available Automanage REST API operations.",
+        "x-ms-examples": {
+          "Lists all of the available Automanage REST API operations": {
+            "$ref": "./examples/listOperations.json"
+          }
+        },
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         },
         "produces": [
           "application/json"
@@ -1748,6 +2634,477 @@
           "type": "boolean",
           "readOnly": true,
           "description": "Returns the contributor RBAC Role exist or not for the Service Principal Id."
+        }
+      }
+    },
+        "PatchTierList": {
+      "description": "The response of the list patch tier operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PatchTier"
+          },
+          "description": "Result of the list PatchTier operation."
+        }
+      }
+    },
+    "PatchTier": {
+      "description": "Describes the configuration of the PatchTier.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/PatchTierProperties",
+          "description": "Properties of the patch tier."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "PatchTierUpdate": {
+      "description": "Describes the configuration of the PatchTier.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/PatchTierProperties",
+          "description": "Properties of the PatchTier."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        }
+      ]
+    },
+    "PatchJobConfigurationsUpdate": {
+      "description": "Describes the configuration of the PatchJobConfigurations.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/PatchJobConfigurationsProperties",
+          "description": "Properties of the PatchTier."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        }
+      ]
+    },
+    "PatchTierProperties": {
+      "description": "Describes the configuration of a PatchTier.",
+      "type": "object",
+      "properties": {
+        "preTierScript": {
+          "title": "PreTierScript",
+          "$ref": "#/definitions/Script",
+          "description": "Script to run before tier execution."
+        },
+        "postTierScript": {
+          "title": "PostTierScript",
+          "$ref": "#/definitions/Script",
+          "description": "Script to run after tier execution."
+        },
+        "preVmScript": {
+          "title": "PreVmScript",
+          "$ref": "#/definitions/Script",
+          "description": "Script to run before machine execution."
+        },
+        "postVmScript": {
+          "title": "PostVmScript",
+          "$ref": "#/definitions/Script",
+          "description": "Script to after before machine execution."
+        },
+        "failureThreshold": {
+          "description": "Tier failure threshold",
+          "type": "integer",
+          "format": "int64"
+        },
+        "patchOffVms": {
+          "description": "Patch off Vms",
+          "type": "boolean"
+        },
+        "machineSelection": {
+          "title": "MachineSelection",
+          "$ref": "#/definitions/MachineSelection",
+          "description": "Status of the preliminary checks."
+        }
+      }
+    },
+    "Script": {
+      "description": "Scheduled script.",
+      "type": "object",
+      "properties": {
+        "runbookResourceId": {
+          "type": "string",
+          "description": "Resource Id of designated arc machine."
+        },
+        "runOn": {
+          "type": "string",
+          "description": "Resource Id of designated virtual machine."
+        }
+      }
+    },
+    "MachineSelection": {
+      "description": "The result of the preliminary checks before execution of the workflow can begin.",
+      "type": "object",
+      "properties": {
+        "arcScopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of scopes from which to include arc machines"
+        },
+        "vmScopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of scopes from which to include virtual machines"
+        },
+        "minAvailability": {
+          "description": "Minimum availability",
+          "type": "integer",
+          "format": "int64"
+        },
+        "argQuery": {
+          "description": "ARG query-based selection",
+          "type": "string"
+        },
+        "includeTags": {
+          "title": "configuration",
+          "$ref": "#/definitions/TagDictionary",
+          "description": "tag dictionary for Tag-based inclusion selection."
+        },
+        "excludeTags": {
+          "title": "configuration",
+          "$ref": "#/definitions/TagDictionary",
+          "description": "tag dictionary for Tag-based exclusion selection."
+        },
+        "sequentialMachineGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SequentialMachines"
+          },
+          "x-ms-identifiers": [],
+          "description": "List of machines for static selection."
+        }
+      }
+    },
+    "TagDictionary": {
+      "description": "Name and value pairs that define the tag based machine selection criteria.",
+      "type": "object",
+      "example": {
+        "tagName": "tagValue"
+      }
+    },
+    "ScriptDictionary": {
+      "description": "Name and value pairs that define script parameters.",
+      "type": "object",
+      "example": {
+        "parameterName": "parameterValue"
+      }
+    },
+    "SequentialMachines": {
+      "description": "List of machines for static selection.",
+      "type": "object",
+      "properties": {
+        "parallelMachines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Machines"
+          },
+          "x-ms-identifiers": [],
+          "description": "List of machines for static selection."
+        }
+      }
+    },
+    "Machines": {
+      "description": "Machine Id.",
+      "type": "object",
+      "properties": {
+        "arcMachineId": {
+          "type": "string",
+          "description": "Resource Id of designated arc machine."
+        },
+        "virtualMachineId": {
+          "type": "string",
+          "description": "Resource Id of designated virtual machine."
+        }
+      }
+    },
+    "PatchJobConfigurations": {
+      "description": "Describes the configuration of the PatchJobConfigurations.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/PatchJobConfigurationsProperties",
+          "description": "Properties of the patch tier."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "PatchJobConfigurationsProperties": {
+      "description": "Describes the configuration of a PatchTier.",
+      "type": "object",
+      "properties": {
+        "preJobScript": {
+          "title": "PreJobScript",
+          "$ref": "#/definitions/Script",
+          "description": "Script to run before job execution."
+        },
+        "postJobScript": {
+          "title": "PostJobScript",
+          "$ref": "#/definitions/Script",
+          "description": "Script to run after job execution."
+        },
+        "sequentialPatchTierGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SequentialPatchTierGroups"
+          },
+          "x-ms-identifiers": [],
+          "description": "List of tier to run in sequence."
+        },
+        "defaultPatchSettings": {
+          "title": "DefaultPatchSettings",
+          "$ref": "#/definitions/PatchSettings",
+          "description": "Default patch settings."
+        },
+        "patchSettings": {
+          "title": "PatchSettings",
+          "$ref": "#/definitions/PatchSettingsDictionary",
+          "description": "Patch settings."
+        }
+      }
+    },
+    "SequentialPatchTierGroups": {
+      "description": "List of tier to run in sequence",
+      "type": "object",
+      "properties": {
+        "parallelPatchTiers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": [],
+          "description": "List of tier to run in sequence."
+        }
+      }
+    },
+    "PatchSettings": {
+      "type": "object",
+      "properties": {
+        "maximumDuration": {
+          "type": "string",
+          "description": "Specifies the maximum amount of time that the operation will run. It must be an ISO 8601-compliant duration string such as PT4H (4 hours)"
+        },
+        "rebootSettings": {
+          "type": "string",
+          "description": "Defines when it is acceptable to reboot a VM during a software update operation."
+        },
+        "windowsParameters": {
+          "title": "WindowsParameters",
+          "$ref": "#/definitions/WindowsParameters",
+          "description": "Windows Parameters."
+        },
+        "linuxParameters": {
+          "title": "LinuxParameters",
+          "$ref": "#/definitions/LinuxParameters",
+          "description": "Linux Parameters."
+        }
+      }
+    },
+    "PatchSettingsDictionary": {
+      "description": "Name and value pairs that define the tag based machine selection criteria.",
+      "type": "object",
+      "example": {
+        "patchId": {}
+      }
+    },
+    "WindowsParameters": {
+      "description": "Windows Parameters.",
+      "type": "object",
+      "properties": {
+        "classificationsToInclude": {
+          "description": "List of categories/classifications to be used for selecting the updates to be installed on the machine. Acceptable values are: Critical, Security, UpdateRollUp, FeaturePack, ServicePack, Definition, Tools, Update",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludeKbsRequiringReboot": {
+          "description": "Filters out Kbs that don't have an InstallationRebootBehavior of 'NeverReboots' when this is set to true.",
+          "type": "boolean"
+        },
+        "kbNumbersToInclude": {
+          "description": "List of Windows Update KB Ids that should be installed. All updates belonging to the classifications provided in classificationsToInclude list will be installed. kbNumbersToInclude is an optional list of specific KBs to be installed in addition to the classifications. For example: 1234",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "kbNumbersToExclude": {
+          "description": "List of Windows Update KB Ids that should not be installed. This parameter overrides windowsParameters - classificationsToInclude, meaning a Windows Update KB Id specified here will not be installed even if it belongs to the classification provided under classificationsToInclude parameter.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "maxPatchPublishDate": {
+          "description": "This is used to install patches that were published on or before this given max published date.",
+          "type": "string"
+        }
+      }
+    },
+    "LinuxParameters": {
+      "description": "Linux Parameters.",
+      "type": "object",
+      "properties": {
+        "classificationsToInclude": {
+          "description": "The update classifications to select when installing patches for Linux",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "maintenanceRunId": {
+          "description": "This is used as a maintenance run identifier for Auto VM Guest Patching in Linux.",
+          "type": "string"
+        },
+        "packageNameMasksToInclude": {
+          "description": "Packages to include in the patch operation. Format: packageName_packageVersion",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "packageNameMasksToExclude": {
+          "description": "Packages to exclude in the patch operation. Format: packageName_packageVersion",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PatchJob": {
+      "description": "Log the output of a patch job.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/PatchJobProperties",
+          "description": "Properties of the patch tier."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PatchJobProperties": {
+      "description": "Properties of the output of a patch job.",
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "description": "Start time of the patch job."
+        },
+        "endTime": {
+          "type": "string",
+          "description": "End time of the patch job."
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Pending",
+            "Skipped",
+            "Succeeded",
+            "Failed",
+            "InProgress"
+          ],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          },
+          "description": "Status of the patch job."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error of the patch job."
+        },
+        "orchestrationId": {
+          "type": "string",
+          "description": "Orchestration Id."
+        },
+        "patchTierReports": {
+          "title": "PatchTierReports",
+          "$ref": "#/definitions/PatchTierReportsDictionary",
+          "description": "."
+        }
+      }
+    },
+    "PatchTierReportsDictionary": {
+      "description": "ResourceId of the PatchTier and a value reporting the patch result.",
+      "type": "object",
+      "example": {
+        "patchId": {}
+      }
+    },
+    "PatchJobsUpdate": {
+      "description": "Describes the PatchJob.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/PatchJobProperties",
+          "description": "Properties of the PatchJobs."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        }
+      ]
+    },
+    "PatchJobConfigurationsList": {
+      "description": "The response of the list patch job configuration operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PatchJobConfigurations"
+          },
+          "description": "Result of the list PatchJobConfigurations operation."
+        }
+      }
+    },
+    "PatchJobList": {
+      "description": "The response of the list patch jobs operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PatchJob"
+          },
+          "description": "Result of the list PatchJob operation."
         }
       }
     }

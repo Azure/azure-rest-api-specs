@@ -1,0 +1,105 @@
+{
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "api-version": "2022-03-30-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Automanage/patchTiers/tierA",
+            "name": "tierA",
+            "type": "Microsoft.Automanage/PatchTiers",
+            "location": "East US",
+            "tags": {
+              "Organization": "Administration"
+            },
+            "properties": {
+              "preTierScript": {
+                "runbookResourceId": "preTierRunbook",
+                "runOn": null
+              },
+              "postTierScript": null,
+              "preVmScript": null,
+              "postVmScript": {
+                "runbookResourceId": "postVmRunbook",
+                "runOn": null
+              },
+              "failureThreshold": 0,
+              "patchOffVms": true,
+              "machineSelection": {
+                "arcScopes": null,
+                "vmScopes": null,
+                "minAvailability": null,
+                "argQuery": null,
+                "includeTags": null,
+                "excludeTags": null,
+                "sequentialMachineGroups": [
+                  {
+                    "parallelMachines": [
+                      {
+                        "arcMachineId": "arcMachine",
+                        "virtualMachineId": null
+                      },
+                      {
+                        "arcMachineId": null,
+                        "virtualMachineId": "virtualMachine"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Automanage/patchTiers/tierB",
+            "name": "tierB",
+            "type": "Microsoft.Automanage/PatchTiers",
+            "location": "East US",
+            "tags": {
+              "Organization": "Administration"
+            },
+            "properties": {
+              "preTierScript": {
+                "runbookResourceId": "preTierRunbook",
+                "runOn": null
+              },
+              "postTierScript": null,
+              "preVmScript": null,
+              "postVmScript": {
+                "runbookResourceId": "postVmRunbook",
+                "runOn": null
+              },
+              "failureThreshold": 0,
+              "patchOffVms": true,
+              "machineSelection": {
+                "arcScopes": null,
+                "vmScopes": null,
+                "minAvailability": null,
+                "argQuery": null,
+                "includeTags": null,
+                "excludeTags": null,
+                "sequentialMachineGroups": [
+                  {
+                    "parallelMachines": [
+                      {
+                        "arcMachineId": "arcMachine",
+                        "virtualMachineId": null
+                      },
+                      {
+                        "arcMachineId": null,
+                        "virtualMachineId": "virtualMachine"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

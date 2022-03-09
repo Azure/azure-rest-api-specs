@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroupName",
+    "patchJobConfigurationName": "configurationName",
+    "patchJobName": "jobName",
+    "api-version": "2022-03-30-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/mySubscription/resourceGroupsmyResourceGroupName/providers/Microsoft.Automanage/patchJobConfigurations/configurationName/patchJobs/jobName",
+        "name": "configurationName/jobName",
+        "type": "Microsoft.Automanage/patchJobConfigurations/jobName",
+        "properties": {
+          "orchestrationId": "orchestrationId",
+          "patchTierReports": {
+            "patchTier1": {
+              "machineReports": {
+                "virtualMachine": {
+                  "startTime": "0001-01-01T00:00:00",
+                  "endTime": "0001-01-01T00:00:00",
+                  "status": "Succeeded",
+                  "error": "patchError",
+                  "patchInstallationResultId": "/subscriptions/mySubscriptionId/resourcegroups/myResourceGroupName/providers/microsoft.compute/virtualmachines/myMachine/patchInstallationResults/c4ba2fc1-c3c2-4917-9d5d-bc5978b75dd5"
+                }
+              },
+              "startTime": "0001-01-01T00:00:00",
+              "endTime": null,
+              "status": "Succeeded",
+              "error": null
+            }
+          },
+          "startTime": "0001-01-01T00:00:00",
+          "endTime": null,
+          "status": "Succeeded",
+          "error": null
+        },
+        "systemData": {
+          "createdBy": "user1@outlook.com",
+          "createdByType": "User",
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "lastModifiedBy": "user2@outlook.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
+        }
+      }
+    }
+  }
+}

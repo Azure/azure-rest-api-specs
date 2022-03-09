@@ -1,0 +1,131 @@
+{
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "api-version": "2022-03-30-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Automanage/patchJobConfigurations/jobConfigurationA",
+            "name": "jobConfigurationA",
+            "type": "Microsoft.Automanage/PatchJobConfigurations",
+            "location": "East US",
+            "tags": {
+              "Organization": "Administration"
+            },
+            "properties": {
+              "preJobScript": {
+                "runbookResourceId": "preJobRunbook",
+                "runOn": null
+              },
+              "postJobScript": null,
+              "sequentialPatchTierGroups": [
+                {
+                  "parallelPatchTiers": [
+                    "patchTier1a",
+                    "patchTier1b"
+                  ]
+                },
+                {
+                  "parallelPatchTiers": [
+                    "patchTier2a"
+                  ]
+                }
+              ],
+              "defaultPatchSettings": {
+                "maximumDuration": "maxDuration",
+                "rebootSettings": "rebootSettings",
+                "windowsParameters": {
+                  "classificationsToInclude": null,
+                  "excludeKbsRequiringReboot": null,
+                  "kbNumbersToInclude": [
+                    "kbNumber1"
+                  ],
+                  "kbNumbersToExclude": null,
+                  "maxPatchPublishDate": null
+                },
+                "linuxParameters": null
+              },
+              "patchSettings": {
+                "patchTier2": {
+                  "maximumDuration": "maxDuration",
+                  "rebootSettings": "rebootSettings",
+                  "windowsParameters": null,
+                  "linuxParameters": {
+                    "classificationsToInclude": null,
+                    "maintenanceRunId": null,
+                    "packageNameMasksToInclude": [
+                      "packageNameMask"
+                    ],
+                    "packageNameMasksToExclude": null
+                  }
+                }
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Automanage/patchJobConfigurations/jobConfigurationB",
+            "name": "jobConfigurationB",
+            "type": "Microsoft.Automanage/PatchJobConfigurations",
+            "location": "East US",
+            "tags": {
+              "Organization": "Administration"
+            },
+            "properties": {
+              "preJobScript": {
+                "runbookResourceId": "preJobRunbook",
+                "runOn": null
+              },
+              "postJobScript": null,
+              "sequentialPatchTierGroups": [
+                {
+                  "parallelPatchTiers": [
+                    "patchTier1a",
+                    "patchTier1b"
+                  ]
+                },
+                {
+                  "parallelPatchTiers": [
+                    "patchTier2a"
+                  ]
+                }
+              ],
+              "defaultPatchSettings": {
+                "maximumDuration": "maxDuration",
+                "rebootSettings": "rebootSettings",
+                "windowsParameters": {
+                  "classificationsToInclude": null,
+                  "excludeKbsRequiringReboot": null,
+                  "kbNumbersToInclude": [
+                    "kbNumber1"
+                  ],
+                  "kbNumbersToExclude": null,
+                  "maxPatchPublishDate": null
+                },
+                "linuxParameters": null
+              },
+              "patchSettings": {
+                "patchTier2": {
+                  "maximumDuration": "maxDuration",
+                  "rebootSettings": "rebootSettings",
+                  "windowsParameters": null,
+                  "linuxParameters": {
+                    "classificationsToInclude": null,
+                    "maintenanceRunId": null,
+                    "packageNameMasksToInclude": [
+                      "packageNameMask"
+                    ],
+                    "packageNameMasksToExclude": null
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
