@@ -28,17 +28,29 @@ These are the global settings for the KubernetesConfiguration.
 title: SourceControlConfigurationClient
 description: KubernetesConfiguration Client
 openapi-type: arm
-tag: package-preview-2022-01
+tag: package-2022-03
 ```
 
 ---
 
 
+### Tag: package-2022-03
+
+These settings apply only when `--tag=package-2022-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-03'
+input-file:
+  - Microsoft.KubernetesConfiguration/stable/2022-03-01/extensions.json
+  - Microsoft.KubernetesConfiguration/stable/2022-03-01/fluxconfiguration.json
+  - Microsoft.KubernetesConfiguration/stable/2022-03-01/kubernetesconfiguration.json
+  - Microsoft.KubernetesConfiguration/stable/2022-03-01/operations.json
+```
+
 ### Tag: package-preview-2022-01
 
 These settings apply only when `--tag=package-preview-2022-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-01'
+``` yaml $(tag) == 'package-preview-2022-01'
 input-file:
   - Microsoft.KubernetesConfiguration/preview/2022-01-01-preview/extensionTypes.json
   - Microsoft.KubernetesConfiguration/preview/2022-01-01-preview/extensions.json
@@ -46,6 +58,20 @@ input-file:
   - Microsoft.KubernetesConfiguration/preview/2022-01-01-preview/kubernetesconfiguration.json
   - Microsoft.KubernetesConfiguration/preview/2022-01-01-preview/operations.json
 ```
+
+### Tag: package-preview-2021-11
+
+These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-11'
+input-file:
+  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/extensions.json
+  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/extensionTypes.json
+  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/kubernetesconfiguration.json
+  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/fluxconfiguration.json
+  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/operations.json
+```
+
 ### Tag: package-2021-09
 
 These settings apply only when `--tag=package-2021-09` is specified on the command line.
@@ -96,28 +122,6 @@ directive:
           "comment": "Resource defined structure"
         }
       }
-```
-
-### Tag: package-preview-2021-11
-
-These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2021-11'
-input-file:
-  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/extensions.json
-  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/extensionTypes.json
-  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/kubernetesconfiguration.json
-  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/fluxconfiguration.json
-  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/operations.json
-```
-
-### Tag: package-2021-09
-
-These settings apply only when `--tag=package-2021-09` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-09'
-input-file:
-  - Microsoft.KubernetesConfiguration/stable/2021-09-01/extensions.json
 ```
 
 ### Tag: package-preview-2021-05
