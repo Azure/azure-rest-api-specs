@@ -35,18 +35,18 @@ title: MonitorManagementClient
 ``` yaml
 description: Monitor Management Client
 openapi-type: arm
-tag: package-2021-09
+tag: package-2022-02
 
 directive:
   - suppress: Example Validations
     reason: There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.
 ```
 
-### Tag: package-2022-04
+### Tag: package-2022-02
 
-These settings apply only when `--tag=package-2022-04` is specified on the command line
+These settings apply only when `--tag=package-2022-02` is specified on the command line
 
-``` yaml $(tag) == 'package-2022-04'
+``` yaml $(tag) == 'package-2022-02'
 input-file:
 - Microsoft.Insights/stable/2015-04-01/autoscale_API.json
 - Microsoft.Insights/stable/2015-04-01/operations_API.json
@@ -931,7 +931,7 @@ directive:
 
 This section is a temporary solution to resolve the failure in those pipeline that is still using modeler v1. 
 
-``` yaml ($(go) && !$(track2) && ($(tag) == 'package-2021-07' || $(tag) == 'package-2021-09' || $(tag) == 'package-2022-04')) || $(csharp) || $(validation)
+``` yaml ($(go) && !$(track2) && ($(tag) == 'package-2021-07' || $(tag) == 'package-2021-09' || $(tag) == 'package-2022-02')) || $(csharp) || $(validation)
 directive:
 - from: activityLogAlerts_API.json
   where: $.definitions
