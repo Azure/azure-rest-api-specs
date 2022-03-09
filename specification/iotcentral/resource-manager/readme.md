@@ -50,6 +50,9 @@ directive:
   - suppress: R3026
     from: privatelinks.json
     reason: privateLink and privateEndpointConnection sub-resources don't have patch operations.
+  - suppress: R3010
+    from: privatelinks.json
+    reason: privateLink and privateEndpointConnection sub-resources don't have list by immediate parent apis.
 ```
 ### Tag: package-2021-06
 
