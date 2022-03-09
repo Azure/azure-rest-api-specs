@@ -30,6 +30,10 @@
           "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "Metadata pertaining to creation and last modification of the resource.",
           "readOnly": true
+        },
+        "eTag": {
+          "type": "string",
+          "description": "HTTP strong entity tag value. This is ignored if submitted."
         }
       },
       "allOf": [
@@ -62,6 +66,10 @@
         "sourcePlatform": {
           "description": "Source platform for the project",
           "$ref": "#/definitions/ProjectSourcePlatform"
+        },
+        "azureAuthenticationInfo": {
+          "description": "Field that defines the Azure active directory application info, used to connect to the target Azure resource",
+          "type": "string"
         },
         "targetPlatform": {
           "description": "Target platform for the project",

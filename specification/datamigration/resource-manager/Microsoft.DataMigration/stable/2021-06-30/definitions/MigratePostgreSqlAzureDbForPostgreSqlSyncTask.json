@@ -35,6 +35,10 @@
         "sourceConnectionInfo": {
           "description": "Connection information for source PostgreSQL",
           "$ref": "./Common.json#/definitions/PostgreSqlConnectionInfo"
+        },
+        "encryptedKeyForSecureFields": {
+          "type": "string",
+          "description": "encrypted key for secure fields"
         }
       },
       "required": [
@@ -349,6 +353,11 @@
         "name": {
           "type": "string",
           "description": "Name of the database"
+        },
+        "id": {
+          "type": "string",
+          "description": "Result identifier",
+          "readOnly": true
         },
         "targetDatabaseName": {
           "type": "string",
