@@ -217,7 +217,7 @@
             "in": "body",
             "name": "payload",
             "schema": {
-              "$ref": "#/definitions/QueryUserOffersPayload"
+              "$ref": "#/definitions/QueryUserOffersProperties"
             }
           }
         ],
@@ -973,7 +973,7 @@
             "in": "body",
             "name": "payload",
             "schema": {
-              "$ref": "#/definitions/PlansContextMap"
+              "$ref": "#/definitions/MultiContextAndPlansProperties"
             }
           }
         ],
@@ -2196,15 +2196,37 @@
         }
       }
     },
-    "PlansContextMap": {
-      "description": "List of objects describe the context's plans.",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/PlansContextDetails"
-      },
-      "x-ms-identifiers": [
-        "context"
-      ]
+    "MultiContextAndPlansProperties": {
+      "description": "Object describes multiple context and plans.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContextAndPlansDetails"
+          },
+          "x-ms-identifiers": [
+            "context"
+          ]
+        }
+      }
+    },
+    "ContextAndPlansDetails": {
+      "description": "Object of plans per context.",
+      "type": "object",
+      "properties": {
+        "context": {
+          "description": "Plan's context, e.g. subscription ID, tenant ID.",
+          "type": "string"
+        },
+        "planIds": {
+          "description": "List of plan IDs.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "UserRequestDetails": {
       "description": "user request details",
@@ -2349,23 +2371,6 @@
         }
       }
     },
-    "PlansContextDetails": {
-      "description": "Object of plans per context.",
-      "type": "object",
-      "properties": {
-        "context": {
-          "description": "Plan's context, e.g. subscription ID, tenant ID.",
-          "type": "string"
-        },
-        "planIds": {
-          "description": "List of plan IDs.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "QueryRequestApproval": {
       "description": "Gets the request plans with indication on each plan whether is approved by the admin, has pending request or not requested yet",
       "type": "object",
@@ -2436,7 +2441,18 @@
         }
       }
     },
-    "QueryUserOffersPayload": {
+    "QueryUserOffersProperties": {
+      "description": "Query user's offers properties",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/QueryUserOffersDetails",
+          "description": "Query user's offers details",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "QueryUserOffersDetails": {
       "description": "List of offers IDs and list of user's subscriptions IDs to query the user's approved offers",
       "type": "object",
       "properties": {
