@@ -21,6 +21,9 @@
       "description": "Azure Data Factory nested object which contains a flow with data movements and transformations.",
       "type": "object",
       "discriminator": "type",
+      "required": [
+        "type"
+      ],
       "properties": {
         "type": {
           "type": "string",
@@ -35,7 +38,8 @@
           "type": "array",
           "items": {
             "type": "object"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "folder": {
           "description": "The folder that this data flow is in. If not specified, Data flow will appear at the root level.",
@@ -66,6 +70,23 @@
         }
       }
     },
+    "Flowlet": {
+      "x-ms-discriminator-value": "Flowlet",
+      "description": "Data flow flowlet",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFlow"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Flowlet type properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FlowletTypeProperties"
+        }
+      }
+    },
     "MappingDataFlowTypeProperties": {
       "description": "Mapping data flow type properties.",
       "properties": {
@@ -74,25 +95,41 @@
           "description": "List of sources in data flow.",
           "items": {
             "$ref": "#/definitions/DataFlowSource"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "sinks": {
           "type": "array",
           "description": "List of sinks in data flow.",
           "items": {
             "$ref": "#/definitions/DataFlowSink"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "transformations": {
           "type": "array",
           "description": "List of transformations in data flow.",
           "items": {
             "$ref": "#/definitions/Transformation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "script": {
           "type": "string",
           "description": "DataFlow script."
+        },
+        "scriptLines": {
+          "type": "array",
+          "description": "Data flow script lines.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -122,11 +159,65 @@
           "description": "List of sources in Power Query.",
           "items": {
             "$ref": "#/definitions/PowerQuerySource"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "script": {
           "type": "string",
           "description": "Power query mashup script."
+        },
+        "documentLocale": {
+          "type": "string",
+          "description": "Locale of the Power query mashup document."
+        }
+      }
+    },
+    "FlowletTypeProperties": {
+      "description": "Flowlet type properties.",
+      "type": "object",
+      "properties": {
+        "sources": {
+          "type": "array",
+          "description": "List of sources in Flowlet.",
+          "items": {
+            "$ref": "#/definitions/DataFlowSource"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "sinks": {
+          "type": "array",
+          "description": "List of sinks in Flowlet.",
+          "items": {
+            "$ref": "#/definitions/DataFlowSink"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "transformations": {
+          "type": "array",
+          "description": "List of transformations in Flowlet.",
+          "items": {
+            "$ref": "#/definitions/Transformation"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "script": {
+          "type": "string",
+          "description": "Flowlet script."
+        },
+        "scriptLines": {
+          "type": "array",
+          "description": "Flowlet script lines.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -141,6 +232,18 @@
         "description": {
           "description": "Transformation description.",
           "type": "string"
+        },
+        "dataset": {
+          "description": "Dataset reference.",
+          "$ref": "../datafactory.json#/definitions/DatasetReference"
+        },
+        "linkedService": {
+          "description": "Linked service reference.",
+          "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
+        },
+        "flowlet": {
+          "description": "Flowlet Reference",
+          "$ref": "../datafactory.json#/definitions/DataFlowReference"
         }
       },
       "required": [
@@ -166,6 +269,10 @@
         "schemaLinkedService": {
           "description": "Schema linked service reference.",
           "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
+        },
+        "flowlet": {
+          "description": "Flowlet Reference",
+          "$ref": "../datafactory.json#/definitions/DataFlowReference"
         }
       }
     },
@@ -188,6 +295,10 @@
         "schemaLinkedService": {
           "description": "Schema linked service reference.",
           "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
+        },
+        "flowlet": {
+          "description": "Flowlet Reference",
+          "$ref": "../datafactory.json#/definitions/DataFlowReference"
         }
       }
     },

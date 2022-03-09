@@ -1,0 +1,86 @@
+{
+  "parameters": {
+    "api-version": "2021-10-01",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "operationalInsightsResourceProvider": "Microsoft.OperationalInsights"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/AlertRuleTemplates/65360bb0-8986-4ade-a89d-af3cf44d28aa",
+            "name": "65360bb0-8986-4ade-a89d-af3cf44d28aa",
+            "type": "Microsoft.SecurityInsights/AlertRuleTemplates",
+            "kind": "Scheduled",
+            "properties": {
+              "severity": "Low",
+              "query": "let timeframe = 1d;\nAWSCloudTrail\n| where TimeGenerated >= ago(timeframe)\n| where EventName == \"CreateNetworkAclEntry\"\n    or EventName == \"CreateRoute\"\n| project TimeGenerated, EventName, EventTypeName, UserIdentityAccountId, UserIdentityPrincipalid, UserAgent, UserIdentityUserName, SessionMfaAuthenticated, SourceIpAddress, AWSRegion, EventSource, AdditionalEventData, ResponseElements\n| extend AccountCustomEntity = UserIdentityUserName, IPCustomEntity = SourceIpAddress",
+              "queryFrequency": "P1D",
+              "queryPeriod": "P1D",
+              "triggerOperator": "GreaterThan",
+              "triggerThreshold": 0,
+              "displayName": "Changes to Amazon VPC settings",
+              "description": "This alert monitors changes to Amazon VPC (Virtual Private Cloud) settings such as new ACL entries and routes in route tables.\nMore information: https://medium.com/@GorillaStack/the-most-important-aws-cloudtrail-security-events-to-track-a5b9873f8255 \nand https://aws.amazon.com/vpc/",
+              "tactics": [
+                "PrivilegeEscalation",
+                "LateralMovement"
+              ],
+              "lastUpdatedDateUTC": "2021-02-27T10:00:00Z",
+              "createdDateUTC": "2019-02-27T00:00:00Z",
+              "status": "Available",
+              "version": "1.0.1",
+              "requiredDataConnectors": [
+                {
+                  "connectorId": "AWS",
+                  "dataTypes": [
+                    "AWSCloudTrail"
+                  ]
+                }
+              ],
+              "alertRulesCreatedByTemplateCount": 0
+            }
+          },
+          {
+            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/AlertRuleTemplates/f71aba3d-28fb-450b-b192-4e76a83015c8",
+            "name": "f71aba3d-28fb-450b-b192-4e76a83015c8",
+            "type": "Microsoft.SecurityInsights/AlertRuleTemplates",
+            "kind": "Fusion",
+            "properties": {
+              "displayName": "Advanced Multi-Stage Attack Detection",
+              "description": "Place holder: Fusion uses graph powered machine learning algorithms to correlate between millions of lower fidelity anomalous activities from different products such as Azure AD Identity Protection, and Microsoft Cloud App Security, to combine them into a manageable number of interesting security cases.\n",
+              "tactics": [
+                "Persistence",
+                "LateralMovement",
+                "Exfiltration",
+                "CommandAndControl"
+              ],
+              "lastUpdatedDateUTC": "2021-03-27T10:00:00Z",
+              "createdDateUTC": "2019-07-25T00:00:00Z",
+              "status": "Available",
+              "severity": "High",
+              "alertRulesCreatedByTemplateCount": 0
+            }
+          },
+          {
+            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/AlertRuleTemplates/b3cfc7c0-092c-481c-a55b-34a3979758cb",
+            "name": "b3cfc7c0-092c-481c-a55b-34a3979758cb",
+            "type": "Microsoft.SecurityInsights/AlertRuleTemplates",
+            "kind": "MicrosoftSecurityIncidentCreation",
+            "properties": {
+              "productFilter": "Microsoft Cloud App Security",
+              "displayName": "Create incidents based on Microsoft Cloud App Security alerts",
+              "description": "Create incidents based on all alerts generated in Microsoft Cloud App Security",
+              "lastUpdatedDateUTC": "2021-05-27T10:00:00Z",
+              "createdDateUTC": "2019-07-16T00:00:00Z",
+              "status": "Available",
+              "alertRulesCreatedByTemplateCount": 0
+            }
+          }
+        ]
+      }
+    }
+  }
+}
