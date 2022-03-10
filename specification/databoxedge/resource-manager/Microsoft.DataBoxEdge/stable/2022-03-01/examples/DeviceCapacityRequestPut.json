@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2022-03-01",
+    "subscriptionId": "4385cf00-2d3a-425a-832f-f4285b1c9dce",
+    "resourceGroupName": "GroupForEdgeAutomation",
+    "deviceName": "testedgedevice",
+    "Content-Type": [
+      "application/json; charset=utf-8"
+    ],
+    "Content-Length": [
+      "200"
+    ],
+    "x-ms-client-request-id": [
+      "a93b39a3-1ff4-42b8-a56f-43368d47e37a"
+    ],
+    "accept-language": [
+      "en-US"
+    ],
+    "parameters": {
+      "properties": {
+        "VmPlacementQuery" : [
+            ["Standard_D2_v2"]
+          ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+          "properties": {
+              "vmPlacementQuery": [
+                  [
+                      "Standard_D2_v2"
+                  ]
+              ],
+              "vmPlacementResults": [
+                  {
+                      "vmSize": [
+                          "Standard_D2_v2"
+                      ],
+                      "isFeasible": true,
+                      "messageCode": "VMPlacementCheckDefaultTrueMsg",
+                      "message": "Your VM can be provisioned."
+                  }
+              ]
+          },
+          "id": "/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/GroupForEdgeAutomation/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/testedgedevice/deviceCapacityCheck/Capacity-613ec863-338e-4026-9b6f-23497fa6a4d7",
+          "name": "Capacity-613ec863-338e-4026-9b6f-23497fa6a4d7",
+          "type": "Microsoft.DataBoxEdge/dataBoxEdgeDevices/deviceCapacityCheck"
+      }
+    },
+    "202": {}
+  }
+}
