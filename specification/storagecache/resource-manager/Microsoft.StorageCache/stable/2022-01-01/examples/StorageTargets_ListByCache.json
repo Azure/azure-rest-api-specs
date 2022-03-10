@@ -2,7 +2,7 @@
   "parameters": {
     "resourceGroupName": "scgroup",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "api-version": "2020-10-01",
+    "api-version": "2022-01-01",
     "cacheName": "sc1"
   },
   "responses": {
@@ -36,6 +36,7 @@
                   "nfsAccessPolicy": "default"
                 }
               ],
+              "state": "Ready",
               "targetType": "nfs3",
               "nfs3": {
                 "target": "10.0.44.44",
@@ -63,9 +64,10 @@
                   "nfsAccessPolicy": "default"
                 }
               ],
+              "state": "Ready",
               "targetType": "clfs",
               "clfs": {
-                "target": "https://contosoads123.blob.core.windows.net/contosoads123"
+                "target": "https://contoso123.blob.core.windows.net/contoso123"
               }
             }
           },
@@ -90,9 +92,10 @@
                   "nfsAccessPolicy": "default"
                 }
               ],
+              "state": "Ready",
               "targetType": "unknown",
               "unknown": {
-                "unknownMap": {
+                "attributes": {
                   "foo": "bar",
                   "foo2": "test"
                 }
