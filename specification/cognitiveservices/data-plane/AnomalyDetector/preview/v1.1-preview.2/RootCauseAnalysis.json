@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Anomaly Detector Client",
-    "description": "Root cause analysis(RCA) helps trace the crucial dimension combinations that contribute to the given anomaly point with aggregated dimension combination. For example, when a point with dimension Country = Sum, version = Sum is detected as anomaly point, using root cause analysis algorithm, we can locate the child dimension combination, for example, it might be Country = CN, version = IOS causes the given anomaly. Our algorithm supports finding root cause  from both single and multiple measures.",
+    "description": "Root cause analysis(RCA) helps drill down the crucial dimension combinations that contribute most to the given anomaly point. By learning the relationship among metrics on tree-based structure, our algorithm supports finding root cause from both single and multiple measures.We search out root cause by genetic algorithms and provide reasonable interpretation.",
     "version": "1.1-preview.2"
   },
   "paths": {
@@ -885,19 +885,19 @@
             },
             "examples": {
               "application/json": {
-                "taskId": "11111111-1111-4444-4444-000000000000",
-                "instanceId": "11111111-2222-3333-4444-000000000000",
-                "modelId": "11223344-5555-6666-7777-000000000000",
-                "displayName": "Model name 1",
-                "kind": "multidimensional",
-                "status": "scheduled",
-                "createdDateTime": "2021-11-30T00:00:00Z",
-                "lastModifiedDateTime": "2021-11-30T00:00:00Z",
-                "parameter": {
-                  "startDateTime": "2021-10-01T00:00:00Z",
-                  "endDateTime": "2021-11-30T00:00:00Z"
-                }
-              }
+  "taskId": "11111111-1111-4444-4444-000000000000",
+  "instanceId": "11111111-2222-3333-4444-000000000000",
+  "modelId": "11223344-5555-6666-7777-000000000000",
+  "displayName": "Model name 1",
+  "kind": "multidimensional",
+  "status": "scheduled",
+  "createdDateTime": "2021-11-30T00:00:00Z",
+  "lastModifiedDateTime": "2021-11-30T00:00:00Z",
+  "parameter": {
+    "startDateTime": "2021-10-01T00:00:00Z",
+    "endDateTime": "2021-11-30T00:00:00Z"
+  }
+}
             },
             "headers": {
               "Location": {
@@ -1155,18 +1155,18 @@
             },
             "examples": {
               "application/json": {
-                "inferenceId": "11111111-1111-1111-1111-000000000000",
-                "instanceId": "11111111-2222-3333-4444-000000000000",
-                "modelId": "11223344-5555-6666-7777-000000000000",
-                "kind": "multidimensional",
-                "status": "scheduled",
-                "createdDateTime": "2021-11-30T00:00:00Z",
-                "lastModifiedDateTime": "2021-11-30T00:00:00Z",
-                "parameter": {
-                  "timestamp": "2021-12-01T00:00:00Z",
-                  "dimensionScope": {}
-                }
-              }
+  "inferenceId": "11111111-1111-1111-1111-000000000000",
+  "instanceId": "11111111-2222-3333-4444-000000000000",
+  "modelId": "11223344-5555-6666-7777-000000000000",
+  "kind": "multidimensional",
+  "status": "scheduled",
+  "createdDateTime": "2021-11-30T00:00:00Z",
+  "lastModifiedDateTime": "2021-11-30T00:00:00Z",
+  "parameter": {
+    "timestamp": "2021-12-01T00:00:00Z",
+    "dimensionScope": {}
+  }
+}
             },
             "headers": {
               "Location": {
@@ -1301,27 +1301,27 @@
       },
       "discriminator": "kind",
       "example": {
-        "granularity": "daily",
-        "customInterval": 0,
-        "dimensionKeys": [
-          "Region",
-          "Version"
-        ],
-        "aggregatedIdentifier": "__SUM__",
-        "measures": [
-          {
-            "displayName": "error rate"
-          },
-          {
-            "displayName": "error count"
-          },
-          {
-            "displayName": "total call count"
-          }
-        ],
-        "displayName": "Sample Multidimensional Root Cause Analysis Dataset Name",
-        "kind": "multidimensional"
-      }
+  "granularity": "daily",
+  "customInterval": 0,
+  "dimensionKeys": [
+    "Region",
+    "Version"
+  ],
+  "aggregatedIdentifier": "__SUM__",
+  "measures": [
+    {
+      "displayName": "error rate"
+    },
+    {
+      "displayName": "error count"
+    },
+    {
+      "displayName": "total call count"
+    }
+  ],
+  "displayName": "Sample Multidimensional Root Cause Analysis Dataset Name",
+  "kind": "multidimensional"
+}
     },
     "MultiDimRCADataSet": {
       "required": [
@@ -1445,17 +1445,17 @@
         }
       },
       "example": {
-        "kind": "multidimensional",
-        "data": [
-          [
-            "CN",
-            "__SUM__",
-            0.38,
-            3800,
-            10000
-          ]
-        ]
-      }
+  "kind": "multidimensional",
+  "data": [
+    [
+      "CN",
+      "__SUM__",
+      0.38,
+      3800,
+      10000
+    ]
+  ]
+}
     },
     "RootCauseAnalysisDataPartition": {
       "required": [
@@ -1514,320 +1514,320 @@
         }
       },
       "example": {
-        "kind": "multidimensional",
-        "value": [
-          {
-            "partitionId": "11111111-2222-3333-4444-000000000000",
-            "timestamp": "2021-12-01T00:00:00Z",
-            "data": [
-              [
-                "CN",
-                "__SUM__",
-                0.38,
-                3800,
-                10000
-              ],
-              [
-                "CN",
-                "ios",
-                0.3,
-                3000,
-                10000
-              ],
-              [
-                "CN",
-                "Android",
-                0.006,
-                60,
-                10000
-              ],
-              [
-                "US",
-                "__SUM__",
-                0.6,
-                6000,
-                10000
-              ],
-              [
-                "JP",
-                "__SUM__",
-                0.001,
-                10,
-                10000
-              ],
-              [
-                "DE",
-                "__SUM__",
-                0.0002,
-                20,
-                10000
-              ],
-              [
-                "CA",
-                "__SUM__",
-                0.006,
-                60,
-                10000
-              ],
-              [
-                "__SUM__",
-                "__SUM__",
-                1,
-                10000,
-                10000
-              ]
-            ]
-          },
-          {
-            "partitionId": "21111111-2222-3333-4444-000000000000",
-            "timestamp": "2021-11-30T00:00:00Z",
-            "data": [
-              [
-                "CN",
-                "__SUM__",
-                0.03,
-                30,
-                1000
-              ],
-              [
-                "CN",
-                "ios",
-                0.02,
-                20,
-                1000
-              ],
-              [
-                "CN",
-                "Android",
-                0.01,
-                10,
-                1000
-              ],
-              [
-                "US",
-                "__SUM__",
-                0.3,
-                300,
-                1000
-              ],
-              [
-                "JP",
-                "__SUM__",
-                0.1,
-                10,
-                1000
-              ],
-              [
-                "DE",
-                "__SUM__",
-                0.01,
-                10,
-                1000
-              ],
-              [
-                "CA",
-                "__SUM__",
-                0.01,
-                10,
-                1000
-              ],
-              [
-                "__SUM__",
-                "__SUM__",
-                1,
-                1000,
-                1000
-              ]
-            ]
-          },
-          {
-            "partitionId": "31111111-2222-3333-4444-000000000000",
-            "timestamp": "2021-11-29T00:00:00Z",
-            "data": [
-              [
-                "CN",
-                "__SUM__",
-                0.3,
-                300,
-                1000
-              ],
-              [
-                "CN",
-                "ios",
-                0.3,
-                300,
-                1000
-              ],
-              [
-                "CN",
-                "Android",
-                0,
-                0,
-                1000
-              ],
-              [
-                "US",
-                "__SUM__",
-                0.4,
-                400,
-                1000
-              ],
-              [
-                "JP",
-                "__SUM__",
-                0.01,
-                10,
-                1000
-              ],
-              [
-                "DE",
-                "__SUM__",
-                0.01,
-                10,
-                1000
-              ],
-              [
-                "CA",
-                "__SUM__",
-                0.01,
-                10,
-                1000
-              ],
-              [
-                "__SUM__",
-                "__SUM__",
-                1,
-                1000,
-                1000
-              ]
-            ]
-          },
-          {
-            "partitionId": "41111111-2222-3333-4444-000000000000",
-            "timestamp": "2021-11-28T00:00:00Z",
-            "data": [
-              [
-                "CN",
-                "__SUM__",
-                0.3,
-                302,
-                1000
-              ],
-              [
-                "CN",
-                "ios",
-                0.3,
-                302,
-                1000
-              ],
-              [
-                "CN",
-                "Android",
-                0,
-                0,
-                1000
-              ],
-              [
-                "US",
-                "__SUM__",
-                0.4,
-                401,
-                1000
-              ],
-              [
-                "JP",
-                "__SUM__",
-                0.009,
-                9,
-                1000
-              ],
-              [
-                "DE",
-                "__SUM__",
-                0.011,
-                11,
-                1000
-              ],
-              [
-                "CA",
-                "__SUM__",
-                0.01,
-                1,
-                1000
-              ],
-              [
-                "__SUM__",
-                "__SUM__",
-                1,
-                1000,
-                1000
-              ]
-            ]
-          },
-          {
-            "partitionId": "51111111-2222-3333-4444-000000000000",
-            "timestamp": "2021-11-27T00:00:00Z",
-            "data": [
-              [
-                "CN",
-                "__SUM__",
-                0.299,
-                299,
-                1000
-              ],
-              [
-                "CN",
-                "ios",
-                0.31,
-                310,
-                1000
-              ],
-              [
-                "CN",
-                "Android",
-                0.001,
-                1,
-                1000
-              ],
-              [
-                "US",
-                "__SUM__",
-                0.401,
-                401,
-                1000
-              ],
-              [
-                "JP",
-                "__SUM__",
-                0.01,
-                10,
-                1000
-              ],
-              [
-                "DE",
-                "__SUM__",
-                0.01,
-                10,
-                1000
-              ],
-              [
-                "CA",
-                "__SUM__",
-                0.01,
-                1,
-                100
-              ],
-              [
-                "__SUM__",
-                "__SUM__",
-                1,
-                1000,
-                1000
-              ]
-            ]
-          }
+  "kind": "multidimensional",
+  "value": [
+    {
+      "partitionId": "11111111-2222-3333-4444-000000000000",
+      "timestamp": "2021-12-01T00:00:00Z",
+      "data": [
+        [
+          "CN",
+          "__SUM__",
+          0.38,
+          3800,
+          10000
+        ],
+        [
+          "CN",
+          "ios",
+          0.3,
+          3000,
+          10000
+        ],
+        [
+          "CN",
+          "Android",
+          0.006,
+          60,
+          10000
+        ],
+        [
+          "US",
+          "__SUM__",
+          0.6,
+          6000,
+          10000
+        ],
+        [
+          "JP",
+          "__SUM__",
+          0.001,
+          10,
+          10000
+        ],
+        [
+          "DE",
+          "__SUM__",
+          0.0002,
+          20,
+          10000
+        ],
+        [
+          "CA",
+          "__SUM__",
+          0.006,
+          60,
+          10000
+        ],
+        [
+          "__SUM__",
+          "__SUM__",
+          1,
+          10000,
+          10000
         ]
-      }
+      ]
+    },
+    {
+      "partitionId": "21111111-2222-3333-4444-000000000000",
+      "timestamp": "2021-11-30T00:00:00Z",
+      "data": [
+        [
+          "CN",
+          "__SUM__",
+          0.03,
+          30,
+          1000
+        ],
+        [
+          "CN",
+          "ios",
+          0.02,
+          20,
+          1000
+        ],
+        [
+          "CN",
+          "Android",
+          0.01,
+          10,
+          1000
+        ],
+        [
+          "US",
+          "__SUM__",
+          0.3,
+          300,
+          1000
+        ],
+        [
+          "JP",
+          "__SUM__",
+          0.1,
+          10,
+          1000
+        ],
+        [
+          "DE",
+          "__SUM__",
+          0.01,
+          10,
+          1000
+        ],
+        [
+          "CA",
+          "__SUM__",
+          0.01,
+          10,
+          1000
+        ],
+        [
+          "__SUM__",
+          "__SUM__",
+          1,
+          1000,
+          1000
+        ]
+      ]
+    },
+    {
+      "partitionId": "31111111-2222-3333-4444-000000000000",
+      "timestamp": "2021-11-29T00:00:00Z",
+      "data": [
+        [
+          "CN",
+          "__SUM__",
+          0.3,
+          300,
+          1000
+        ],
+        [
+          "CN",
+          "ios",
+          0.3,
+          300,
+          1000
+        ],
+        [
+          "CN",
+          "Android",
+          0,
+          0,
+          1000
+        ],
+        [
+          "US",
+          "__SUM__",
+          0.4,
+          400,
+          1000
+        ],
+        [
+          "JP",
+          "__SUM__",
+          0.01,
+          10,
+          1000
+        ],
+        [
+          "DE",
+          "__SUM__",
+          0.01,
+          10,
+          1000
+        ],
+        [
+          "CA",
+          "__SUM__",
+          0.01,
+          10,
+          1000
+        ],
+        [
+          "__SUM__",
+          "__SUM__",
+          1,
+          1000,
+          1000
+        ]
+      ]
+    },
+    {
+      "partitionId": "41111111-2222-3333-4444-000000000000",
+      "timestamp": "2021-11-28T00:00:00Z",
+      "data": [
+        [
+          "CN",
+          "__SUM__",
+          0.3,
+          302,
+          1000
+        ],
+        [
+          "CN",
+          "ios",
+          0.3,
+          302,
+          1000
+        ],
+        [
+          "CN",
+          "Android",
+          0,
+          0,
+          1000
+        ],
+        [
+          "US",
+          "__SUM__",
+          0.4,
+          401,
+          1000
+        ],
+        [
+          "JP",
+          "__SUM__",
+          0.009,
+          9,
+          1000
+        ],
+        [
+          "DE",
+          "__SUM__",
+          0.011,
+          11,
+          1000
+        ],
+        [
+          "CA",
+          "__SUM__",
+          0.01,
+          1,
+          1000
+        ],
+        [
+          "__SUM__",
+          "__SUM__",
+          1,
+          1000,
+          1000
+        ]
+      ]
+    },
+    {
+      "partitionId": "51111111-2222-3333-4444-000000000000",
+      "timestamp": "2021-11-27T00:00:00Z",
+      "data": [
+        [
+          "CN",
+          "__SUM__",
+          0.299,
+          299,
+          1000
+        ],
+        [
+          "CN",
+          "ios",
+          0.31,
+          310,
+          1000
+        ],
+        [
+          "CN",
+          "Android",
+          0.001,
+          1,
+          1000
+        ],
+        [
+          "US",
+          "__SUM__",
+          0.401,
+          401,
+          1000
+        ],
+        [
+          "JP",
+          "__SUM__",
+          0.01,
+          10,
+          1000
+        ],
+        [
+          "DE",
+          "__SUM__",
+          0.01,
+          10,
+          1000
+        ],
+        [
+          "CA",
+          "__SUM__",
+          0.01,
+          1,
+          100
+        ],
+        [
+          "__SUM__",
+          "__SUM__",
+          1,
+          1000,
+          1000
+        ]
+      ]
+    }
+  ]
+}
     },
     "RootCauseAnalysisDataMeta": {
       "required": [
@@ -1928,23 +1928,23 @@
       },
       "discriminator": "kind",
       "example": {
-        "targetMeasure": {
-          "dataSetId": "01234567-8901-2345-6789-012345678901",
-          "measureName": "error rate"
-        },
-        "assistiveMeasures": [
-          {
-            "dataSetId": "01234567-8901-2345-6789-012345678901",
-            "measureName": "error count"
-          },
-          {
-            "dataSetId": "01234567-8901-2345-6789-012345678901",
-            "measureName": "total call count"
-          }
-        ],
-        "displayName": "Sample Root Cause Analysis Instance Name",
-        "kind": "multidimensional"
-      }
+  "targetMeasure": {
+    "dataSetId": "01234567-8901-2345-6789-012345678901",
+    "measureName": "error rate"
+  },
+  "assistiveMeasures": [
+    {
+      "dataSetId": "01234567-8901-2345-6789-012345678901",
+      "measureName": "error count"
+    },
+    {
+      "dataSetId": "01234567-8901-2345-6789-012345678901",
+      "measureName": "total call count"
+    }
+  ],
+  "displayName": "Sample Root Cause Analysis Instance Name",
+  "kind": "multidimensional"
+}
     },
     "MultiRCADimInstance": {
       "required": [
@@ -2077,13 +2077,13 @@
         }
       },
       "example": {
-        "displayName": "Sample Root Cause Analysis Model Name",
-        "kind": "multidimensional",
-        "parameter": {
-          "startDateTime": "2021-10-01T00:00:00Z",
-          "endDateTime": "2021-11-30T00:00:00Z"
-        }
-      }
+  "displayName": "Sample Root Cause Analysis Model Name",
+  "kind": "multidimensional",
+  "parameter": {
+    "startDateTime": "2021-10-01T00:00:00Z",
+    "endDateTime": "2021-11-30T00:00:00Z"
+  }
+}
     },
     "RootCauseAnalysisTrainingTaskInfo": {
       "required": [
@@ -2336,12 +2336,12 @@
         }
       },
       "example": {
-        "kind": "multidimensional",
-        "parameter": {
-          "timestamp": "2021-12-01T00:00:00Z",
-          "dimensionScope": {}
-        }
-      }
+  "kind": "multidimensional",
+  "parameter": {
+    "timestamp": "2021-12-01T00:00:00Z",
+    "dimensionScope": {}
+  }
+}
     },
     "MultiDimRootCauseMeasure": {
       "required": [
@@ -2527,7 +2527,7 @@
   },
   "security": [
     {
-      "apiKeyHeader": []
+      "apiKeyHeader": [ ]
     }
   ],
   "parameters": {
