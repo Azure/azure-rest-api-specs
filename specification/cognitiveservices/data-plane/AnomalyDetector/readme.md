@@ -39,7 +39,7 @@ input-file:
   - preview/v1.1-preview.1/MultivariateAnomalyDetector.json
 ```
 
-### Release 1.2-preview
+### Release 1.1-preview.2
 These settings apply only when `--tag=release_1_1_preview.2` is specified on the command line.
 
 ```yaml $(tag) == 'release_1_1_preview.2'
