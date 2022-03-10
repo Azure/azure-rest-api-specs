@@ -9,7 +9,7 @@ azure-arm: true
 
 directive:
     # dynamically add a DummyOrchestrationServiceName value to the enum 
-  - from: compute.json
+  - from: ComputeRP/virtualMachineScaleSet.json
     where: $..enum
     transform: >-
       if( $.length === 1 && $[0] === "AutomaticRepairs") { 
