@@ -2453,8 +2453,11 @@
       "description": "Query user's offers properties",
       "type": "object",
       "properties": {
-        "$ref": "#/definitions/QueryUserOffersDetails",
-        "description": "Query user's offers details"
+        "properties": {
+          "$ref": "#/definitions/QueryUserOffersDetails",
+          "description": "Query user's offers details",
+          "x-ms-client-flatten": true
+        }
       }
     },
     "QueryUserOffersDetails": {
