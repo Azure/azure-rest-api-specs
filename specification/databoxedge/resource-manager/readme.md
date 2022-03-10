@@ -26,9 +26,9 @@ These are the global settings for the DataBox Edge API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-06-01
+tag: package-2022-03-01
 ```
-### Tag: package-2021-06-01
+### Tag: package-2022-03-01
 
 These settings apply only when `--tag=package-2022-03-01` is specified on the command line.
 
