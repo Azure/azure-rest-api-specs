@@ -1,0 +1,58 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-01-01",
+    "title": "Schema of Azure HealthcareApis events published to Azure Event Grid.",
+    "description": "Describes the schema of the Azure HealthcareApis events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
+  },
+  "paths": {},
+  "definitions": {
+    "FhirResourceCreatedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceCreated event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FhirResourceEventBaseProperties"
+        }
+      ]
+    },
+    "FhirResourceUpdatedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceUpdated event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FhirResourceEventBaseProperties"
+        }
+      ]
+    },
+    "FhirResourceDeletedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceDeleted event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FhirResourceEventBaseProperties"
+        }
+      ]
+    },
+    "FhirResourceEventBaseProperties": {
+      "description": "Schema of common properties of all FhirResource events",
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "description": "Type of HL7 FHIR resource.",
+          "type": "string"
+        },
+        "resourceFhirAccount": {
+          "description": "Domain name of FHIR account for this resource.",
+          "type": "string"
+        },
+        "resourceFhirId": {
+          "description": "Id of HL7 FHIR resource.",
+          "type": "string"
+        },
+        "resourceVersionId": {
+          "description": "VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion).",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    }
+  }
+}
