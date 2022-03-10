@@ -946,6 +946,24 @@
               "properties": {}
             }
           }
+        },
+        "subPlan": {
+          "type": "object",
+          "description": "configuration for the servers offering subPlan",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The avilable sub plans",
+              "enum": [
+                "P1",
+                "P2"
+              ],
+              "x-ms-enum": {
+                "name": "type",
+                "modelAsString": true
+              }
+            }
+          }
         }
       }
     },
