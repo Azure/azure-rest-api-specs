@@ -21,3 +21,7 @@ output-folder: $(python-sdks-folder)/loganalytics/azure-mgmt-loganalytics/azure/
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/loganalytics/azure-mgmt-loganalytics
 ```
+``` yaml $(python) && $(track2)
+modelerfour:
+  lenient-model-deduplication: true
+```
