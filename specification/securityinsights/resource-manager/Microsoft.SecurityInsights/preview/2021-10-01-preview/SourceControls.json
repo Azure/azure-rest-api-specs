@@ -1,0 +1,508 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2021-10-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/listRepositories": {
+      "post": {
+        "x-ms-examples": {
+          "Get repository list.": {
+            "$ref": "./examples/repositories/GetRepositories.json"
+          }
+        },
+        "tags": [
+          "Repositories"
+        ],
+        "description": "Gets a list of repositories metadata.",
+        "operationId": "SourceControl_listRepositories",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/RepoTypeParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RepoList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/sourcecontrols": {
+      "get": {
+        "x-ms-examples": {
+          "Get all source controls.": {
+            "$ref": "./examples/sourcecontrols/GetSourceControls.json"
+          }
+        },
+        "tags": [
+          "SourceControls"
+        ],
+        "description": "Gets all source controls, without source control items.",
+        "operationId": "SourceControls_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SourceControlList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/sourcecontrols/{sourceControlId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a source control.": {
+            "$ref": "./examples/sourcecontrols/GetSourceControlById.json"
+          }
+        },
+        "tags": [
+          "SourceControls"
+        ],
+        "description": "Gets a source control byt its identifier.",
+        "operationId": "SourceControls_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/SourceControlIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SourceControl"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a source control.": {
+            "$ref": "./examples/sourcecontrols/DeleteSourceControl.json"
+          }
+        },
+        "tags": [
+          "SourceControls"
+        ],
+        "description": "Delete a source control.",
+        "operationId": "SourceControls_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/SourceControlIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates a source control.": {
+            "$ref": "./examples/sourcecontrols/CreateSourceControl.json"
+          }
+        },
+        "tags": [
+          "SourceControls"
+        ],
+        "description": "Creates a source control.",
+        "operationId": "SourceControls_Create",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/SourceControlIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceControl"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SourceControl"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SourceControl"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RepoList": {
+      "description": "List all the source controls.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of repositories.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of repositories.",
+          "items": {
+            "$ref": "#/definitions/Repo"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "type": "object"
+    },
+    "Repo": {
+      "description": "Represents a repository.",
+      "properties": {
+        "url": {
+          "description": "The url to access the repository.",
+          "type": "string"
+        },
+        "fullName": {
+          "description": "The name of the repository.",
+          "type": "string"
+        },
+        "branches": {
+          "description": "Array of branches.",
+          "items": {
+            "description": "name of branch.",
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "x-ms-azure-resource": false,
+      "type": "object"
+    },
+    "SourceControlList": {
+      "description": "List all the source controls.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of source controls.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of source controls.",
+          "items": {
+            "$ref": "#/definitions/SourceControl"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "type": "object"
+    },
+    "SourceControl": {
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Represents a SourceControl in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "description": "source control properties",
+          "$ref": "#/definitions/SourceControlProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "SourceControlProperties": {
+      "description": "Describes source control properties",
+      "properties": {
+        "id": {
+          "description": "The id (a Guid) of the source control",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name of the source control",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the source control",
+          "type": "string"
+        },
+        "repoType": {
+          "$ref": "#/definitions/RepoType",
+          "description": "The repository type of the source control",
+          "type": "string"
+        },
+        "contentTypes": {
+          "description": "Array of source control content types.",
+          "items": {
+            "$ref": "#/definitions/ContentType"
+          },
+          "type": "array"
+        },
+        "repository": {
+          "description": "Repository metadata.",
+          "$ref": "#/definitions/Repository"
+        }
+      },
+      "required": [
+        "displayName",
+        "repoType",
+        "contentTypes",
+        "repository"
+      ],
+      "type": "object"
+    },
+    "Repository": {
+      "type": "object",
+      "description": "metadata of a repository.",
+      "properties": {
+        "url": {
+          "description": "Url of repository.",
+          "type": "string"
+        },
+        "branch": {
+          "description": "Branch name of repository.",
+          "type": "string"
+        },
+        "displayUrl": {
+          "description": "Display url of repository.",
+          "type": "string"
+        },
+        "deploymentLogsUrl": {
+          "description": "Url to access repository action logs.",
+          "type": "string"
+        },
+        "pathMapping": {
+          "description": "Dictionary of source control content type and path mapping.",
+          "items": {
+            "$ref": "#/definitions/ContentPathMap"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "ContentPathMap": {
+      "description": "The mapping of content type to a repo path.",
+      "properties": {
+        "contentType": {
+          "$ref": "#/definitions/ContentType",
+          "description": "Content type.",
+          "type": "string"
+        },
+        "path": {
+          "description": "The path to the content.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ContentType": {
+      "description": "The content type of a source control path.",
+      "enum": [
+        "AnalyticRule",
+        "Workbook"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ContentType",
+        "values": [
+          {
+            "value": "AnalyticRule"
+          },
+          {
+            "value": "Workbook"
+          }
+        ]
+      }
+    },
+    "RepoType": {
+      "description": "The type of repository.",
+      "enum": [
+        "Github",
+        "DevOps"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "RepoType",
+        "values": [
+          {
+            "value": "Github"
+          },
+          {
+            "value": "DevOps"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "RepoTypeParameter": {
+      "description": "The repo type.",
+      "in": "body",
+      "name": "repoType",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/RepoType"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "SourceControlIdParameter": {
+      "description": "Source control Id",
+      "in": "path",
+      "name": "sourceControlId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SourceControl": {
+      "description": "The SourceControl",
+      "in": "body",
+      "name": "sourceControl",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/SourceControl"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

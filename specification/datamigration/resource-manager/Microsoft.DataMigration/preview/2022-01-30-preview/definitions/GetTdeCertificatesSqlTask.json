@@ -1,0 +1,90 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2022-01-30-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "GetTdeCertificatesSqlTaskInput": {
+      "type": "object",
+      "description": "Input for the task that gets TDE certificates in Base64 encoded format.",
+      "properties": {
+        "connectionInfo": {
+          "description": "Connection information for SQL Server",
+          "$ref": "./Common.json#/definitions/SqlConnectionInfo"
+        },
+        "backupFileShare": {
+          "$ref": "./TasksCommon.json#/definitions/FileShare",
+          "description": "Backup file share information for file share to be used for temporarily storing files."
+        },
+        "selectedCertificates": {
+          "description": "List containing certificate names and corresponding password to use for encrypting the exported certificate.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SelectedCertificateInput"
+          }
+        }
+      },
+      "required": [
+        "connectionInfo",
+        "backupFileShare",
+        "selectedCertificates"
+      ]
+    },
+    "GetTdeCertificatesSqlTaskOutput": {
+      "type": "object",
+      "description": "Output of the task that gets TDE certificates in Base64 encoded format.",
+      "properties": {
+        "base64EncodedCertificates": {
+          "type": "string",
+          "description": "Mapping from certificate name to base 64 encoded format.",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "readOnly": true
+        },
+        "validationErrors": {
+          "description": "Validation errors",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "SelectedCertificateInput": {
+      "type": "object",
+      "description": "Info for certificate to be exported for TDE enabled databases.",
+      "properties": {
+        "certificateName": {
+          "type": "string",
+          "description": "Name of certificate to be exported."
+        },
+        "password": {
+          "type": "string",
+          "description": "Password to use for encrypting the exported certificate."
+        }
+      },
+      "required": [
+        "certificateName",
+        "password"
+      ]
+    }
+  }
+}

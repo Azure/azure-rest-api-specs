@@ -352,14 +352,15 @@
           "description": "The display name of the alert rule"
         },
         "severity": {
-          "type": "number",
+          "type": "integer",
+          "format": "int64",
           "description": "Severity of the alert. Should be an integer between [0-4]. Value of 0 is severest. Relevant and required only for rules of the kind LogAlert.",
           "enum": [
-            "0",
-            "1",
-            "2",
-            "3",
-            "4"
+            0,
+            1,
+            2,
+            3,
+            4
           ],
           "x-ms-enum": {
             "name": "AlertSeverity",
@@ -524,7 +525,8 @@
           "description": "A list of conditions to evaluate against the specified scopes",
           "items": {
             "$ref": "#/definitions/Condition"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -564,7 +566,8 @@
           "items": {
             "$ref": "#/definitions/Dimension"
           },
-          "description": "List of Dimensions conditions"
+          "description": "List of Dimensions conditions",
+          "x-ms-identifiers": []
         },
         "operator": {
           "type": "string",

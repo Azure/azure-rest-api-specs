@@ -1,0 +1,576 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Monitor Data Collection Endpoints API",
+    "description": "Provides operations for working with Azure Monitor data collection endpoints",
+    "version": "2021-09-01-preview",
+    "x-ms-code-generation-settings": {
+      "name": "MonitorManagementClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/dataCollectionEndpoints": {
+      "get": {
+        "tags": [
+          "DataCollectionEndpoints"
+        ],
+        "summary": "Lists all data collection endpoints in the specified resource group.",
+        "operationId": "DataCollectionEndpoints_ListByResourceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request completed successfully",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionEndpointResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./dataCollectionRules_API.json#/definitions/ErrorResponseCommonV2"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List data collection endpoints by resource group": {
+            "$ref": "./examples/DataCollectionEndpointsListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/dataCollectionEndpoints": {
+      "get": {
+        "tags": [
+          "DataCollectionEndpoints"
+        ],
+        "summary": "Lists all data collection endpoints in the specified subscription",
+        "operationId": "DataCollectionEndpoints_ListBySubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request completed successfully",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionEndpointResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./dataCollectionRules_API.json#/definitions/ErrorResponseCommonV2"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List data collection endpoints by subscription": {
+            "$ref": "./examples/DataCollectionEndpointsListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/dataCollectionEndpoints/{dataCollectionEndpointName}": {
+      "get": {
+        "tags": [
+          "DataCollectionEndpoints"
+        ],
+        "summary": "Returns the specified data collection endpoint.",
+        "operationId": "DataCollectionEndpoints_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataCollectionEndpointNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request completed successfully",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionEndpointResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./dataCollectionRules_API.json#/definitions/ErrorResponseCommonV2"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get data collection endpoint": {
+            "$ref": "./examples/DataCollectionEndpointsGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DataCollectionEndpoints"
+        ],
+        "summary": "Creates or updates a data collection endpoint.",
+        "operationId": "DataCollectionEndpoints_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataCollectionEndpointNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The payload",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionEndpointResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data collection endpoint was successfully updated",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionEndpointResource"
+            }
+          },
+          "201": {
+            "description": "Data collection endpoint was successfully created",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionEndpointResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./dataCollectionRules_API.json#/definitions/ErrorResponseCommonV2"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update data collection endpoint": {
+            "$ref": "./examples/DataCollectionEndpointsCreate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DataCollectionEndpoints"
+        ],
+        "summary": "Updates part of a data collection endpoint.",
+        "operationId": "DataCollectionEndpoints_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataCollectionEndpointNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The payload",
+            "schema": {
+              "$ref": "#/definitions/ResourceForUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data collection endpoint was successfully updated",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionEndpointResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./dataCollectionRules_API.json#/definitions/ErrorResponseCommonV2"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update data collection endpoint": {
+            "$ref": "./examples/DataCollectionEndpointsUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataCollectionEndpoints"
+        ],
+        "summary": "Deletes a data collection endpoint.",
+        "operationId": "DataCollectionEndpoints_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataCollectionEndpointNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data collection endpoint was successfully deleted"
+          },
+          "204": {
+            "description": "Data collection endpoint did not exist"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./dataCollectionRules_API.json#/definitions/ErrorResponseCommonV2"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete data collection endpoint": {
+            "$ref": "./examples/DataCollectionEndpointsDelete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ConfigurationAccessEndpointSpec": {
+      "description": "Definition of the endpoint used for accessing configuration.",
+      "type": "object",
+      "properties": {
+        "endpoint": {
+          "description": "The endpoint. This property is READ-ONLY.",
+          "type": "string",
+          "readOnly": true,
+          "example": "https://mydce-abcd.eastus-1.control.monitor.azure.com",
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "LogsIngestionEndpointSpec": {
+      "description": "Definition of the endpoint used for ingesting logs.",
+      "type": "object",
+      "properties": {
+        "endpoint": {
+          "description": "The endpoint. This property is READ-ONLY.",
+          "type": "string",
+          "readOnly": true,
+          "example": "https://mydce-abcd.eastus-1.ingest.monitor.azure.com",
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "NetworkRuleSet": {
+      "description": "Definition of the network rules.",
+      "type": "object",
+      "properties": {
+        "publicNetworkAccess": {
+          "description": "The configuration to set whether network access from public internet to the endpoints are allowed.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "KnownPublicNetworkAccessOptions",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "DataCollectionEndpoint": {
+      "description": "Definition of data collection endpoint.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description of the data collection endpoint.",
+          "type": "string"
+        },
+        "immutableId": {
+          "description": "The immutable ID of this data collection endpoint resource. This property is READ-ONLY.",
+          "type": "string",
+          "example": "dce-b74e0d383fc9415abaa584ec41adece3"
+        },
+        "configurationAccess": {
+          "description": "The endpoint used by clients to access their configuration.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ConfigurationAccessEndpointSpec"
+            }
+          ]
+        },
+        "logsIngestion": {
+          "description": "The endpoint used by clients to ingest logs.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/LogsIngestionEndpointSpec"
+            }
+          ]
+        },
+        "networkAcls": {
+          "description": "Network access control rules for the endpoints.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/NetworkRuleSet"
+            }
+          ]
+        },
+        "provisioningState": {
+          "description": "The resource provisioning state. This property is READ-ONLY.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "example": "Creating",
+          "x-ms-enum": {
+            "name": "KnownDataCollectionEndpointProvisioningState",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "DataCollectionEndpointResource": {
+      "description": "Definition of ARM tracked top level resource.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Resource properties.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataCollectionEndpoint"
+            }
+          ],
+          "x-ms-client-flatten": true
+        },
+        "location": {
+          "description": "The geo-location where the resource lives.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "kind": {
+          "description": "The kind of the resource.",
+          "enum": [
+            "Linux",
+            "Windows"
+          ],
+          "type": "string",
+          "example": "Linux",
+          "x-ms-enum": {
+            "name": "KnownDataCollectionEndpointResourceKind",
+            "modelAsString": true
+          }
+        },
+        "id": {
+          "description": "Fully qualified ID of the resource.",
+          "type": "string",
+          "readOnly": true,
+          "example": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Insights/dataCollectionEndpoints/myCollectionEndpoint",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true,
+          "example": "myCollectionEndpoint",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true,
+          "example": "Microsoft.Insights/dataCollectionEndpoints",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "etag": {
+          "description": "Resource entity tag (ETag).",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "allOf": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+            }
+          ],
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "DataCollectionEndpointResourceListResult": {
+      "description": "A pageable list of resources.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataCollectionEndpointResource"
+          }
+        },
+        "nextLink": {
+          "description": "The URL to use for getting the next set of results.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceForUpdate": {
+      "description": "Definition of ARM tracked top level resource properties for update operation.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "DataCollectionEndpointNameParameter": {
+      "in": "path",
+      "name": "dataCollectionEndpointName",
+      "description": "The name of the data collection endpoint. The name is case insensitive.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
