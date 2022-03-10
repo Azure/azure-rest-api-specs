@@ -6,13 +6,13 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-testchange
-namespace: azure.mgmt.testchange
+package-name: azure-mgmt-testremove
+namespace: azure.mgmt.testremove
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/testchange/azure-mgmt-testchange/azure/mgmt/testchange
+output-folder: $(python-sdks-folder)/testremove/azure-mgmt-testremove/azure/mgmt/testremove
 ```
