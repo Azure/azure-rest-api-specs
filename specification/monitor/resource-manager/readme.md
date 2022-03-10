@@ -68,9 +68,9 @@ input-file:
 - Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
 - Microsoft.Insights/preview/2019-10-17-preview/privateLinkScopes_API.json
 - Microsoft.Insights/stable/2020-10-01/activityLogAlerts_API.json
-- Microsoft.Insights/stable/2021-04-01/dataCollectionEndpoints_API.json
-- Microsoft.Insights/stable/2021-04-01/dataCollectionRuleAssociations_API.json
-- Microsoft.Insights/stable/2021-04-01/dataCollectionRules_API.json
+- Microsoft.Insights/preview/2021-09-01-preview/dataCollectionEndpoints_API.json
+- Microsoft.Insights/preview/2021-09-01-preview/dataCollectionRuleAssociations_API.json
+- Microsoft.Insights/preview/2021-09-01-preview/dataCollectionRules_API.json
 ```
 
 ### Tag: package-2022-02
