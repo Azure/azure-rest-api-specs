@@ -689,6 +689,10 @@
         }
       ],
       "properties": {
+        "sku": {
+          "description": "Describes the SKU of the streaming job. Required on PUT (CreateOrReplace) requests.",
+          "$ref": "#/definitions/Sku"
+        },
         "properties": {
           "$ref": "#/definitions/StreamingJobProperties",
           "description": "The properties that are associated with a streaming job.  Required on PUT (CreateOrReplace) requests.",
@@ -704,10 +708,6 @@
       "type": "object",
       "description": "The properties that are associated with a streaming job.",
       "properties": {
-        "sku": {
-          "description": "Describes the SKU of the streaming job. Required on PUT (CreateOrReplace) requests.",
-          "$ref": "#/definitions/Sku"
-        },
         "jobId": {
           "readOnly": true,
           "type": "string",
