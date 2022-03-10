@@ -233,7 +233,7 @@
         "certificates": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SecurityDomainJsonWebKey"
+            "$ref": "#/definitions/SecurityDomainCertificateItem"
           },
           "minItems": 3,
           "maxItems": 10,
@@ -250,6 +250,17 @@
       },
       "required": [
         "certificates"
+      ]
+    },
+    "SecurityDomainCertificateItem": {
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/SecurityDomainJsonWebKey",
+          "description": "Customer generated certificate containing public key in JWK format"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "TransferKey": {

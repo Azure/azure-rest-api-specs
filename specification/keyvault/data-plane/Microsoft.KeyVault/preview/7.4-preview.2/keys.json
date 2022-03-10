@@ -850,6 +850,64 @@
         }
       }
     },
+    "/keys/{key-name}/{key-version}/export": {
+      "post": {
+        "tags": [
+          "Keys"
+        ],
+        "operationId": "export",
+        "summary": "Exports a key.",
+        "description": "The export key operation is applicable to all key types. The target key must be marked exportable. This operation requires the keys/export permission.",
+        "parameters": [
+          {
+            "name": "key-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the key to get."
+          },
+          {
+            "name": "key-version",
+            "required": true,
+            "in": "path",
+            "type": "string",
+            "description": "Adding the version parameter retrieves a specific version of a key."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/KeyExportParameters"
+            },
+            "description": "The parameters for the key export operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A key bundle containing the key and its attributes.",
+            "schema": {
+              "$ref": "#/definitions/KeyBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Export": {
+            "$ref": "./examples/export-example.json"
+          }
+        }
+      }
+    },
     "/keys/{key-name}/{key-version}/release": {
       "post": {
         "tags": [
@@ -889,7 +947,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A JWS containing the key, its attributes, the result of the key release, and information about the request.",
+            "description": "A key bundle containing the key and its attributes.",
             "schema": {
               "$ref": "#/definitions/KeyReleaseResult"
             }
@@ -1243,15 +1301,10 @@
           "type": "string",
           "default": "application/json; charset=utf-8"
         },
-        "immutable": {
-          "description": "Defines the mutability state of the policy. Once marked immutable, this flag cannot be reset and the policy cannot be changed under any circumstances.",
-          "type": "boolean"
-        },
         "data": {
           "description": "Blob encoding the policy rules under which the key can be released.",
           "type": "string",
-          "format": "base64url",
-          "x-ms-client-name": "encodedPolicy"
+          "format": "base64url"
         }
       }
     },
@@ -1270,7 +1323,9 @@
             "RSA",
             "RSA-HSM",
             "oct",
-            "oct-HSM"
+            "oct-HSM",
+            "OKP",
+            "OKP-HSM"
           ],
           "x-ms-enum": {
             "name": "JsonWebKeyType",
@@ -1299,6 +1354,14 @@
               {
                 "value": "oct-HSM",
                 "description": "Octet sequence (used to represent symmetric keys) which is stored the HSM."
+              },
+              {
+                "value": "OKP",
+                "description": "Octet key pair (https://tools.ietf.org/html/rfc8037)"
+              },
+              {
+                "value": "OKP-HSM",
+                "description": "Octet key pair (https://tools.ietf.org/html/rfc8037) with a private key which is stored in the HSM."
               }
             ]
           }
@@ -1323,7 +1386,7 @@
         "d": {
           "type": "string",
           "format": "base64url",
-          "description": "RSA private exponent, or the D component of an EC private key."
+          "description": "RSA private exponent, or the D component of an EC or OKP private key."
         },
         "dp": {
           "x-ms-client-name": "DP",
@@ -1371,7 +1434,8 @@
             "P-256",
             "P-384",
             "P-521",
-            "P-256K"
+            "P-256K",
+            "Ed25519"
           ],
           "x-ms-enum": {
             "name": "JsonWebKeyCurveName",
@@ -1392,6 +1456,10 @@
               {
                 "value": "P-256K",
                 "description": "The SECG SECP256K1 elliptic curve."
+              },
+              {
+                "value": "Ed25519",
+                "description": "The Ed25519 Edwards curve."
               }
             ]
           }
@@ -1399,7 +1467,7 @@
         "x": {
           "type": "string",
           "format": "base64url",
-          "description": "X component of an EC public key."
+          "description": "X component of an EC or OKP public key."
         },
         "y": {
           "type": "string",
@@ -1504,6 +1572,11 @@
           "$ref": "#/definitions/KeyReleasePolicy",
           "x-nullable": true,
           "description": "The policy rules under which the key can be exported."
+        },
+        "entityId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The system-generated ID for this key."
         }
       },
       "description": "A KeyBundle consisting of a WebKey plus its attributes."
@@ -1529,6 +1602,11 @@
           "type": "boolean",
           "readOnly": true,
           "description": "True if the key's lifetime is managed by key vault. If this is a key backing a certificate, then managed will be true."
+        },
+        "entityId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The system-generated ID for this key."
         }
       },
       "description": "The key item containing key metadata."
@@ -1601,7 +1679,9 @@
             "RSA",
             "RSA-HSM",
             "oct",
-            "oct-HSM"
+            "oct-HSM",
+            "OKP",
+            "OKP-HSM"
           ],
           "x-ms-enum": {
             "name": "JsonWebKeyType",
@@ -1625,7 +1705,8 @@
             "P-256",
             "P-384",
             "P-521",
-            "P-256K"
+            "P-256K",
+            "Ed25519"
           ],
           "x-ms-enum": {
             "name": "JsonWebKeyCurveName",
@@ -1647,7 +1728,9 @@
             "RSA",
             "RSA-HSM",
             "oct",
-            "oct-HSM"
+            "oct-HSM",
+            "OKP",
+            "OKP-HSM"
           ],
           "x-ms-enum": {
             "name": "JsonWebKeyType",
@@ -1704,7 +1787,8 @@
             "P-256",
             "P-384",
             "P-521",
-            "P-256K"
+            "P-256K",
+            "Ed25519"
           ],
           "x-ms-enum": {
             "name": "JsonWebKeyCurveName",
@@ -1787,8 +1871,7 @@
         "target": {
           "type": "string",
           "minLength": 1,
-          "description": "The attestation assertion for the target of the key release.",
-          "x-ms-client-name": "targetAttestationToken"
+          "description": "The attestation assertion for the target of the key release."
         },
         "nonce": {
           "type": "string",
@@ -1887,7 +1970,8 @@
             "ES256",
             "ES384",
             "ES512",
-            "ES256K"
+            "ES256K",
+            "EdDSA"
           ],
           "x-ms-enum": {
             "name": "JsonWebKeySignatureAlgorithm",
@@ -1936,6 +2020,10 @@
               {
                 "value": "ES256K",
                 "description": "ECDSA using P-256K and SHA-256, as described in https://tools.ietf.org/html/rfc7518"
+              },
+              {
+                "value": "EdDSA",
+                "description": "Edwards-Curve Digital Signature Algorithm, as described in https://tools.ietf.org/html/rfc8032."
               }
             ]
           }
@@ -1969,7 +2057,8 @@
             "ES256",
             "ES384",
             "ES512",
-            "ES256K"
+            "ES256K",
+            "EdDSA"
           ],
           "x-ms-enum": {
             "name": "JsonWebKeySignatureAlgorithm",
@@ -2180,11 +2269,11 @@
       "properties": {
         "timeAfterCreate": {
           "type": "string",
-          "description": "Time after creation to attempt to rotate. It only applies to rotate. It will be in ISO 8601 duration format. Example: 90 days : \"P90D\" "
+          "description": "Time after creation to attempt rotate. It will be in ISO 8601 format. Example: 90 days : \"P90D\" "
         },
         "timeBeforeExpiry": {
           "type": "string",
-          "description": "Time before expiry to attempt to rotate or notify. It will be in ISO 8601 duration format. Example: 90 days : \"P90D\""
+          "description": "Time before expiry to attempt rotate. It will be in ISO 8601 format. Example: 90 days : \"P90D\""
         }
       },
       "description": "A condition to be satisfied for an action to be executed."
