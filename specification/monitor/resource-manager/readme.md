@@ -35,7 +35,7 @@ title: MonitorManagementClient
 ``` yaml
 description: Monitor Management Client
 openapi-type: arm
-tag: package-2022-02
+tag: package-2022-04
 
 directive:
   - suppress: Example Validations
