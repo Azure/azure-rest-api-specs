@@ -68,6 +68,12 @@
               "$ref": "#/definitions/PrivateLinkAssociation"
             }
           },
+          "201": {
+            "description": "Created - Returns information about the new private link association.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkAssociation"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -230,7 +236,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. The request has succeeded.",
+            "description": "OK. Returns information about the Resource Management Private Link.",
+            "schema": {
+              "$ref": "#/definitions/ResourceManagementPrivateLink"
+            }
+          },
+          "201": {
+            "description": "Created. Returns information about the Resource Management Private Link.",
             "schema": {
               "$ref": "#/definitions/ResourceManagementPrivateLink"
             }
