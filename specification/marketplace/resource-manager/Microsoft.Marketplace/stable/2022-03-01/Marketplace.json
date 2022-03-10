@@ -2200,7 +2200,15 @@
       "description": "Object describes multiple context and plans.",
       "type": "object",
       "properties": {
-        "properties": {
+        "offerId": {
+          "description": "The offer ID which contains the plans.",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "The offer's eTag.",
+          "type": "string"
+        },
+        "plansContext": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ContextAndPlansDetails"
@@ -2445,11 +2453,8 @@
       "description": "Query user's offers properties",
       "type": "object",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/QueryUserOffersDetails",
-          "description": "Query user's offers details",
-          "x-ms-client-flatten": true
-        }
+        "$ref": "#/definitions/QueryUserOffersDetails",
+        "description": "Query user's offers details"
       }
     },
     "QueryUserOffersDetails": {
