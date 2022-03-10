@@ -2732,28 +2732,22 @@
     "ReservationReportSchema": {
       "description": "The CSV file from the reportUrl blob link is consists of reservation usage data with the following schema at daily granularity",
       "type": "string",
-      "properties": {
-        "reportSchema": {
-          "description": "",
-          "type": "string",
-          "enum": [
-            "InstanceFlexibilityGroup",
-            "InstanceFlexibilityRatio",
-            "InstanceId",
-            "Kind",
-            "ReservationId",
-            "ReservationOrderId",
-            "ReservedHours",
-            "SkuName",
-            "TotalReservedQuantity",
-            "UsageDate",
-            "UsedHours"
-          ],
-          "x-ms-enum": {
-            "name": "Schema",
-            "modelAsString": true
-          }
-        }
+      "enum": [
+        "InstanceFlexibilityGroup",
+        "InstanceFlexibilityRatio",
+        "InstanceId",
+        "Kind",
+        "ReservationId",
+        "ReservationOrderId",
+        "ReservedHours",
+        "SkuName",
+        "TotalReservedQuantity",
+        "UsageDate",
+        "UsedHours"
+      ],
+      "x-ms-enum": {
+        "name": "Schema",
+        "modelAsString": true
       }
     }
   },
