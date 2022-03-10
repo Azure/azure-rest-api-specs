@@ -56,7 +56,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateLinkAssociationProperties"
+              "$ref": "#/definitions/PrivateLinkAssociationObject"
             },
             "description": "Parameters supplied to create the private link association."
           }
@@ -424,24 +424,30 @@
     }
   },
   "definitions": {
+    "PrivateLinkAssociationObject": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkAssociationProperties",
+          "description": "The properties of the PrivateLinkAssociation."
+        }
+      }
+    },
     "PrivateLinkAssociationProperties": {
       "type": "object",
       "properties": {
-        "properties": {
-          "privateLink": {
-            "type": "string",
-            "description": "The rmpl Resource ID."
-          },
-          "publicNetworkAccess": {
-            "type": "string",
-            "enum": [
-              "Enabled",
-              "Disabled"
-            ],
-            "x-ms-enum": {
-              "name": "publicNetworkAccessOptions",
-              "modelAsString": true
-            }
+        "privateLink": {
+          "type": "string",
+          "description": "The rmpl Resource ID."
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "publicNetworkAccessOptions",
+            "modelAsString": true
           }
         }
       }
