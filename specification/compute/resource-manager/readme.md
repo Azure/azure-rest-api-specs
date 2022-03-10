@@ -252,6 +252,18 @@ input-file:
 - Microsoft.Compute/stable/2021-03-01/cloudService.json
 ```
 
+### Tag: package-2022-01-03-only
+
+These settings apply only when `--tag=package-2022-01-03-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-01-03-only'
+input-file:
+- Microsoft.Compute/stable/2022-01-03/GalleryRP/galleryRPCommon.json
+- Microsoft.Compute/stable/2022-01-03/GalleryRP/gallery.json
+- Microsoft.Compute/stable/2022-01-03/GalleryRP/sharedGallery.json
+- Microsoft.Compute/stable/2022-01-03/GalleryRP/communityGallery.json
+```
+
 ### Tag: package-2021-11-01
 
 These settings apply only when `--tag=package-2021-11-01` is specified on the command line.
