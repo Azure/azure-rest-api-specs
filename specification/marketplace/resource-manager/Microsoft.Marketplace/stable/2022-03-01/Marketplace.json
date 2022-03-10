@@ -973,7 +973,7 @@
             "in": "body",
             "name": "payload",
             "schema": {
-              "$ref": "#/definitions/MultiContextAndPlansProperties"
+              "$ref": "#/definitions/MultiContextAndPlansPayload"
             }
           }
         ],
@@ -2193,6 +2193,17 @@
           "x-ms-identifiers": [
             "user"
           ]
+        }
+      }
+    },
+    "MultiContextAndPlansPayload": {
+      "description": "Payload object for upsert offer with multiple context and plans.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MultiContextAndPlansProperties",
+          "description": "Object describes multiple context and plans.",
+          "x-ms-client-flatten": true
         }
       }
     },
