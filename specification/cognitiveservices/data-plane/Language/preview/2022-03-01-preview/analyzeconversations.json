@@ -208,7 +208,7 @@
           "type": "string"
         },
         "language": {
-          "description": "The input language of a ConversationItem",
+          "description": "The input language of a ConversationItem in BCP 47 language representation.",
           "type": "string"
         },
         "modality": {
@@ -219,7 +219,7 @@
           ],
           "x-ms-enum": {
             "name": "modality",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -680,7 +680,7 @@
           "type": "string",
           "enum": [
             "EntitySubtype",
-            "ListKeys"
+            "ListKey"
           ],
           "x-ms-enum": {
             "name": "ExtraInformationKind",
@@ -708,22 +708,19 @@
         }
       }
     },
-    "ListKeys": {
-      "description": "The concrete entity list key's model of extra information.",
+    "ListKey": {
+      "description": "The list key extra data kind.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseExtraInformation"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "ListKeys",
+      "x-ms-discriminator-value": "ListKey",
       "properties": {
-        "keys": {
-          "type": "array",
-          "description": "A Collection of keys that the extracted entity was mapped to.",
-          "items": {
-            "type": "string"
-          }
+        "key": {
+          "type": "string",
+          "description": "The canonical form of the extracted entity."
         }
       }
     },
