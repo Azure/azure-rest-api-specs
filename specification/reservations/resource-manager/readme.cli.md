@@ -2,7 +2,7 @@
 
 These settings apply only when `--cli` is specified on the command line.
 
-``` yaml $(cli)
+```yaml $(cli)
 cli:
   cli-name: reservations
   package-name: azure-mgmt-reservations
@@ -25,7 +25,7 @@ cli:
     - name: /QuotaRequestStatus/get/QuotaRequestHistory
     - name: /QuotaRequestStatus/get/QuotaRequestInProgress
       disabled: true
-    - name: /QuotaRequestStatus/get/QuotaRequestStatus  
+    - name: /QuotaRequestStatus/get/QuotaRequestStatus
     - split: exchange
     - name: /CalculateExchange/post/CalculateExchange
       disabled: true
@@ -37,25 +37,25 @@ cli:
     - name: /Reservation/get/GetReservation
       disabled: true
     - name: /Reservation/get/ReservationList
-      disabled: true    
+      disabled: true
     - name: /Reservation/get/ReservationRevisions
-      disabled: true    
+      disabled: true
     - name: /Reservation/patch/PatchReservation
-      disabled: true    
+      disabled: true
     - name: /Reservation/post/AvailableScopes
-      disabled: true    
+      disabled: true
     - name: /Reservation/post/Merge
-      disabled: true    
+      disabled: true
     - name: /Reservation/post/Split
-      disabled: true    
+      disabled: true
     - name: /ReservationOrder/put/Purchase
-      disabled: true    
+      disabled: true
     - name: /ReservationOrder/get/GetReservation
-      disabled: true    
+      disabled: true
     - name: /ReservationOrder/get/GetReservationWithExpandPayments
-      disabled: true    
+      disabled: true
     - name: /ReservationOrder/get/ReservationOrderList
-      disabled: true    
-    - name: /ReservationOrder/post/Purchase  
-      disabled: true    
+      disabled: true
+    - name: /ReservationOrder/post/Purchase
+      disabled: true
 ```
