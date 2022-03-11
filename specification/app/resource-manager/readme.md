@@ -72,6 +72,12 @@ directive:
 - suppress: R3018
   from: ContainerApps.json
   reason: Use of boolean type is required
+- suppress: R3018
+  from: AuthConfigs.json
+  reason: Use of boolean type is required
+- suppress: R3016
+  from: AuthConfigs.json
+  reason: Use disableWWWAuthenticate to align with AuthSettingV2
 ```
 
 ---
