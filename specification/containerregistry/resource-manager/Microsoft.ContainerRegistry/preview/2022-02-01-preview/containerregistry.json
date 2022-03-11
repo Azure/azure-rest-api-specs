@@ -2974,9 +2974,6 @@
           "items": {
             "$ref": "#/definitions/StatusDetailProperties"
           },
-          "x-ms-identifiers": [
-            "correlationId"
-          ],
           "readOnly": true
         },
         "notificationsList": {
@@ -3720,10 +3717,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationDefinition"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          }
         },
         "nextLink": {
           "description": "The URI that can be used to request the next list of container registry operations.",
@@ -3799,20 +3793,14 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationMetricSpecificationDefinition"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          }
         },
         "logSpecifications": {
           "description": "A list of Azure Monitoring log definitions.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationLogSpecificationDefinition"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          }
         }
       }
     },
@@ -4463,6 +4451,19 @@
         }
       }
     },
+    "StorageAccountProperties": {
+      "description": "The properties of a storage account for a container registry. Only applicable to Classic SKU.",
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource ID of the storage account.",
+          "type": "string"
+        }
+      }
+    },
     "NetworkRuleSet": {
       "description": "The network rule set for a container registry.",
       "required": [
@@ -4483,20 +4484,12 @@
             "modelAsString": true
           }
         },
-        "virtualNetworkRules": {
-          "description": "The virtual network rules.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VirtualNetworkRule"
-          }
-        },
         "ipRules": {
           "description": "The IP ACL rules.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/IPRule"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -4519,6 +4512,10 @@
         "exportPolicy": {
           "$ref": "#/definitions/ExportPolicy",
           "description": "The export policy for a container registry."
+        },
+        "softDeletePolicy": {
+          "$ref": "#/definitions/SoftDeletePolicy",
+          "description": "The soft delete policy for a container registry."
         }
       }
     },
@@ -4543,29 +4540,18 @@
         }
       }
     },
-    "VirtualNetworkRule": {
-      "description": "Virtual network rule.",
-      "required": [
-        "id"
-      ],
+    "PackageType": {
+      "description": "The properties of a package type.",
       "type": "object",
       "properties": {
-        "action": {
-          "description": "The action of virtual network rule.",
-          "default": "Allow",
-          "enum": [
-            "Allow"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "Action",
-            "modelAsString": true
-          }
+        "name": {
+          "description": "The name of the package type.",
+          "type": "string"
         },
-        "id": {
-          "description": "Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}.",
+        "endpoint": {
+          "description": "The endpoint of the package type.",
           "type": "string",
-          "x-ms-client-name": "VirtualNetworkResourceId"
+          "readOnly": true
         }
       }
     },
@@ -4695,6 +4681,37 @@
         }
       }
     },
+    "SoftDeletePolicy": {
+      "description": "The soft delete policy for a container registry",
+      "type": "object",
+      "properties": {
+        "retentionDays": {
+          "format": "int32",
+          "description": "The number of days after which a soft-deleted item is permanently deleted.",
+          "default": 7,
+          "type": "integer"
+        },
+        "lastUpdatedTime": {
+          "format": "date-time",
+          "description": "The timestamp when the policy was last updated.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The value that indicates whether the policy is enabled or not.",
+          "default": "disabled",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PolicyStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "KeyVaultProperties": {
       "type": "object",
       "properties": {
@@ -4814,10 +4831,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RegistryUsage"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          }
         }
       }
     },
@@ -4931,8 +4945,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RegistryPassword"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -5284,17 +5297,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/TokenCertificate"
-          },
-          "x-ms-identifiers": [
-            "thumbprint"
-          ]
+          }
         },
         "passwords": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/TokenPassword"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -5452,8 +5461,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/TokenPassword"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -5989,11 +5997,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/InnerErrorDescription"
-          },
-          "x-ms-identifiers": [
-            "message",
-            "target"
-          ]
+          }
         }
       }
     },
