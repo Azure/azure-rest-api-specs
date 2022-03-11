@@ -9066,9 +9066,18 @@
           "readOnly": true
         },
         "createdByType": {
-          "description": "The type of identity that created the resource: user, application, managedIdentity.",
           "type": "string",
-          "readOnly": true
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
         },
         "createdAt": {
           "format": "date-time",
