@@ -3,7 +3,7 @@
   "info": {
     "title": "MobileNetworkManagementClient",
     "description": "The resources in this swagger specification will be used to manage the virtual network functions deployed using mobile network",
-    "version": "2021-04-01-preview"
+    "version": "2022-03-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -62,6 +62,21 @@
         "id"
       ],
       "description": "Reference to a Data Network resource.",
+      "x-ms-azure-resource": true
+    },
+    "AttachedDataNetworkResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[pP][aA][cC][kK][eE][tT][cC][oO][rR][eE][cC][oO][nN][tT][rR][oO][lL][pP][lL][aA][nN][eE][sS]/[^/?#]+/[pP][aA][cC][kK][eE][tT][cC][oO][rR][eE][dD][aA][tT][aA][pP][lL][aA][nN][eE][sS]/[^/?#]+/[aA][tT][tT][aA][cC][hH][eE][dD][dD][aA][tT][aA][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+$",
+          "description": "Attached Data Network resource ID."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Reference to an Attached Data Network resource.",
       "x-ms-azure-resource": true
     },
     "MobileNetworkResourceId": {
@@ -154,7 +169,30 @@
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Unknown"
+          },
+          {
+            "value": "Succeeded"
+          },
+          {
+            "value": "Accepted"
+          },
+          {
+            "value": "Deleting"
+          },
+          {
+            "value": "Failed"
+          },
+          {
+            "value": "Canceled"
+          },
+          {
+            "value": "Deleted"
+          }
+        ]
       }
     },
     "TagsObject": {
@@ -181,7 +219,21 @@
       ],
       "x-ms-enum": {
         "name": "SimState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Disabled",
+            "description": "The sim is disabled because not all configuration required for enabling is present."
+          },
+          {
+            "value": "Enabled",
+            "description": "The sim is enabled."
+          },
+          {
+            "value": "Invalid",
+            "description": "The sim cannot be enabled because some of the associated configuration is invalid."
+          }
+        ]
       }
     },
     "ActivationState": {
@@ -198,12 +250,42 @@
       ],
       "x-ms-enum": {
         "name": "ActivationState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "NotActivated",
+            "description": "The sim has not been activated and will not receive service."
+          },
+          {
+            "value": "Activated",
+            "description": "The sim is activated and will receive service."
+          },
+          {
+            "value": "Activating",
+            "description": "The sim is in the process of being activated."
+          },
+          {
+            "value": "Deactivating",
+            "description": "The sim is in the process of being deactivated."
+          },
+          {
+            "value": "Deactivated",
+            "description": "The sim has been deactivated and will not longer receive service."
+          },
+          {
+            "value": "Failed",
+            "description": "Activation failed for this sim."
+          }
+        ]
       }
     },
     "InterfaceProperties": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The logical name for this interface. This should match one of the interfaces configured on your Azure Stack Edge machine."
+        },
         "ipv4Address": {
           "$ref": "./ts29571.json#/definitions/Ipv4Addr",
           "description": "The IPv4 address."
@@ -218,11 +300,9 @@
         }
       },
       "required": [
-        "ipv4Address",
-        "ipv4Subnet",
-        "ipv4Gateway"
+        "name"
       ],
-      "description": "IP address and subnet."
+      "description": "Interface properties"
     }
   },
   "parameters": {

@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2021-04-01-preview",
+    "api-version": "2022-03-01-preview",
     "subscriptionId": "subid"
   },
   "responses": {
@@ -8,9 +8,9 @@
       "body": {
         "value": [
           {
-            "name": "testSim",
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/sims/testSim",
-            "type": "Microsoft.MobileNetwork/sims",
+            "name": "TestPacketCoreCP",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP",
+            "type": "Microsoft.MobileNetwork/packetCoreControlPlane",
             "systemData": {
               "createdBy": "user1",
               "createdByType": "User",
@@ -19,22 +19,25 @@
               "lastModifiedByType": "User",
               "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
             },
-            "location": "testLocation",
+            "location": "eastus",
+            "tags": {},
             "properties": {
               "provisioningState": "Succeeded",
-              "simState": "Enabled",
-              "integratedCircuitCardIdentifier": "8900000000000000000",
-              "internationalMobileSubscriberIdentity": "00000",
               "mobileNetwork": {
                 "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork"
               },
-              "deviceType": "Video camera",
-              "simPolicy": {
-                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/simPolicies/MySimPolicy"
+              "customLocation": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ExtendedLocation/customLocations/TestCustomLocation"
+              },
+              "coreNetworkTechnology": "5GC",
+              "version": "0.2.0",
+              "controlPlaneAccessInterface": {
+                "name": "N2"
               }
             }
           }
-        ]
+        ],
+        "nextLink": "nextLink"
       }
     }
   }
