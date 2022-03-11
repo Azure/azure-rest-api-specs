@@ -28,6 +28,11 @@
       "azure_auth": [
         "user_impersonation"
       ]
+    },
+    {
+      "AADToken": [
+        "https://api.adu.microsoft.com/.default"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -39,6 +44,12 @@
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
+    },
+    "AADToken": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/v2.0/oauth2/authorize",
+      "tokenUrl": "https://login.microsoftonline.com/common/v2.0/oauth2/token"
     }
   },
   "paths": {
@@ -1195,56 +1206,6 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        }
-      }
-    },
-    "/deviceupdate/{instanceId}/management/groups/{groupId}/bestUpdates": {
-      "get": {
-        "tags": [
-          "Device and deployment management"
-        ],
-        "description": "Get the best available updates for a group and a count of how many devices need each update.",
-        "operationId": "DeviceManagement_ListBestUpdatesForGroup",
-        "x-ms-examples": {
-          "DeviceManagement_ListBestUpdatesForGroup": {
-            "$ref": "./examples/DeviceManagement_ListBestUpdatesForGroup.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/InstanceIdParameter"
-          },
-          {
-            "$ref": "#/parameters/GroupIdParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Restricts the set of bestUpdates returned. You can filter on update Provider, Name and Version property."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The best available updates for a group and a count of how many devices need each update.",
-            "schema": {
-              "$ref": "#/definitions/UpdatableDevicesList"
-            }
-          },
-          "default": {
-            "description": "Default response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-odata": "#/definitions/GroupBestUpdatesFilter",
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
