@@ -3,13 +3,12 @@
 These settings apply only when `--python` is specified on the command line.
 
 ```yaml $(python)
-python-mode: create
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-applicationinsights
 package-version: 1.0.0b1
 clear-output-folder: true
-namespace: azure.mgmt.applicationinsights
+no-namespace-folders: true
 ```
 ### Python multi-api
 
