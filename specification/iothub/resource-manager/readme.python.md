@@ -38,7 +38,6 @@ batch:
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/iothub/azure-mgmt-iothub/azure/mgmt/iothub/
-clear-output-folder: false
 perform-load: false
 
 ```
