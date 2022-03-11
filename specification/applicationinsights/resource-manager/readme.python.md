@@ -33,7 +33,6 @@ batch:
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/
-clear-output-folder: false
 perform-load: false
 ```
 
