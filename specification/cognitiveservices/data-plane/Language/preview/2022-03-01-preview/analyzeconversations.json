@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Cognitive Language Service - Analyze Conversations",
-    "description": "This API accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversation, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service.",
+    "description": "This API accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversational Language Understanding, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service.",
     "version": "2022-03-01-preview"
   },
   "securityDefinitions": {
@@ -156,7 +156,7 @@
     },
     "CustomConversationTaskParameters": {
       "type": "object",
-      "description": "Input parameters necessary for a Custom Conversation Task.",
+      "description": "Input parameters necessary for a CustomConversation task.",
       "properties": {
         "projectName": {
           "type": "string",
@@ -164,7 +164,7 @@
         },
         "deploymentName": {
           "type": "string",
-          "description": "The name of the specific deployment of the project to use."
+          "description": "The name of the deployment to use."
         },
         "verbose": {
           "type": "boolean",
@@ -177,7 +177,7 @@
       ]
     },
     "CustomConversationalTaskResult": {
-      "description": "The results of a custom conversation task.",
+      "description": "The results of a CustomConversation task.",
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeConversationTaskResult"
@@ -200,19 +200,19 @@
       "description": "The abstract base for a user input formatted conversation (e.g., Text, Transcript).",
       "properties": {
         "participantId": {
-          "description": "The user input unique identifier corresponding each participant in the conversation",
+          "description": "The participant Id of a ConversationItem",
           "type": "string"
         },
         "id": {
-          "description": "The user input unique identifier corresponding the conversation Item (utterance)",
+          "description": "The Id of a ConversationItem",
           "type": "string"
         },
         "language": {
-          "description": "The input language of the conversation item",
+          "description": "The input language of a ConversationItem",
           "type": "string"
         },
         "modality": {
-          "description": "The modality (format) of the conversation item (e.g., Text, Transcript)",
+          "description": "The modality (format) of ConversationItem (e.g., Text, Transcript)",
           "type": "string",
           "enum": [
             "text"
@@ -230,7 +230,7 @@
       ]
     },
     "TextConversationItem": {
-      "description": "The Text modality of an input conversation.",
+      "description": "The text modality of an input conversation.",
       "x-ms-discriminator-value": "text",
       "allOf": [
         {
@@ -249,7 +249,7 @@
     },
     "ConversationAnalysisOptions": {
       "type": "object",
-      "description": "The input conversation item and its optional parameters",
+      "description": "The input ConversationItem and its optional parameters",
       "required": [
         "conversationItem"
       ],
@@ -262,7 +262,7 @@
           "description": "The name of the target project this request is sending to directly."
         },
         "isLoggingEnabled": {
-          "description": "If true, the query will be kept by the service for customers to further review, to improve the model quality.",
+          "description": "If true, the query will be kept by the service for customers to further review.",
           "type": "boolean"
         },
         "parameters": {
@@ -684,7 +684,7 @@
           ],
           "x-ms-enum": {
             "name": "ExtraInformationKind",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -1162,7 +1162,7 @@
       ]
     },
     "DateTimeResolution": {
-      "description": "A resolution for date/time entity instances.",
+      "description": "A resolution for datetime entity instances.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -1187,7 +1187,7 @@
             "name": "DateTimeSubKind",
             "modelAsString": false
           },
-          "description": "The date time SubKind"
+          "description": "The DateTime SubKind"
         },
         "value": {
           "type": "string",
