@@ -5451,7 +5451,22 @@
       "properties": {
         "oldestRecoveryPoint": {
           "format": "date-time",
-          "description": "The oldest backup copy available for this backup item.",
+          "description": "The oldest backup copy available for this backup item across all tiers.",
+          "type": "string"
+        },
+        "oldestRecoveryPointInVault": {
+          "format": "date-time",
+          "description": "The oldest backup copy available for this backup item in vault tier",
+          "type": "string"
+        },
+        "oldestRecoveryPointInArchive": {
+          "format": "date-time",
+          "description": "The oldest backup copy available for this backup item in archive tier",
+          "type": "string"
+        },
+        "newestRecoveryPointInArchive": {
+          "format": "date-time",
+          "description": "The latest backup copy available for this backup item in archive tier",
           "type": "string"
         },
         "recoveryPointCount": {
@@ -5484,6 +5499,13 @@
         "retentionPolicy": {
           "$ref": "#/definitions/RetentionPolicy",
           "description": "Retention policy with the details on backup copy retention ranges."
+        },
+        "tieringPolicy": {
+          "description": "Tiering policy to automatically move RPs to another tier\r\nKey is Target Tier, defined in RecoveryPointTierType enum.\r\nTiering policy specifies the criteria to move RP to the target tier.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/TieringPolicy"
+          }
         },
         "instantRpRetentionRangeInDays": {
           "format": "int32",
@@ -5804,7 +5826,22 @@
       "properties": {
         "oldestRecoveryPoint": {
           "format": "date-time",
-          "description": "The oldest backup copy available for this backup item.",
+          "description": "The oldest backup copy available for this backup item across all tiers.",
+          "type": "string"
+        },
+        "oldestRecoveryPointInVault": {
+          "format": "date-time",
+          "description": "The oldest backup copy available for this backup item in vault tier",
+          "type": "string"
+        },
+        "oldestRecoveryPointInArchive": {
+          "format": "date-time",
+          "description": "The oldest backup copy available for this backup item in archive tier",
+          "type": "string"
+        },
+        "newestRecoveryPointInArchive": {
+          "format": "date-time",
+          "description": "The latest backup copy available for this backup item in archive tier",
           "type": "string"
         },
         "recoveryPointCount": {
@@ -9001,6 +9038,13 @@
         "retentionPolicy": {
           "$ref": "#/definitions/RetentionPolicy",
           "description": "Retention policy with the details on backup copy retention ranges."
+        },
+        "tieringPolicy": {
+          "description": "Tiering policy to automatically move RPs to another tier.\r\nKey is Target Tier, defined in RecoveryPointTierType enum.\r\nTiering policy specifies the criteria to move RP to the target tier.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/TieringPolicy"
+          }
         }
       }
     },
@@ -11346,7 +11390,7 @@
           "type": "string"
         }
       },
-      "x-ms-discriminator-value": "IaaSVMContainer"
+      "x-ms-discriminator-value": "IaasVMContainer"
     },
     "IaasVMILRRegistrationRequest": {
       "description": "Restore files/folders from a backup copy of IaaS VM.",
@@ -11936,7 +11980,10 @@
             "VMAppContainer",
             "SQLAGWorkLoadContainer",
             "StorageContainer",
-            "GenericContainer"
+            "GenericContainer",
+            "AzureWorkloadContainer",
+            "Microsoft.ClassicCompute/virtualMachines",
+            "Microsoft.Compute/virtualMachines"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -12431,6 +12478,46 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceGuardProxyBaseResource"
+          }
+        }
+      }
+    },
+    "TieringPolicy": {
+      "description": "Tiering Policy for a target tier.\r\nIf the policy is not specified for a given target tier, service retains the existing configured tiering policy for that tier",
+      "type": "object",
+      "properties": {
+        "tieringMode": {
+          "description": "Tiering Mode to control automatic tiering of recovery points. Supported values are:\r\n1. TierRecommended: Tier all recovery points recommended to be tiered\r\n2. TierAfter: Tier all recovery points after a fixed period, as specified in duration + durationType below.\r\n3. DoNotTier: Do not tier any recovery points",
+          "enum": [
+            "Invalid",
+            "TierRecommended",
+            "TierAfter",
+            "DoNotTier"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TieringMode",
+            "modelAsString": true
+          }
+        },
+        "duration": {
+          "format": "int32",
+          "description": "Number of days/weeks/months/years to retain backups in current tier before tiering.\r\nUsed only if TieringMode is set to TierAfter",
+          "type": "integer"
+        },
+        "durationType": {
+          "description": "Retention duration type: days/weeks/months/years\r\nUsed only if TieringMode is set to TierAfter",
+          "enum": [
+            "Invalid",
+            "Days",
+            "Weeks",
+            "Months",
+            "Years"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RetentionDurationType",
+            "modelAsString": true
           }
         }
       }
