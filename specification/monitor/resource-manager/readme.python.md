@@ -49,7 +49,6 @@ batch:
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/monitor/azure-mgmt-monitor/azure/mgmt/monitor/
-clear-output-folder: false
 perform-load: false
 ```
 
