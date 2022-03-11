@@ -1,11 +1,11 @@
-# yaml-language-server: $schema=/home/me/workspace/azure-rest-api-specs/documentation/api-scenario/references/v1.2/schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/apiscenario/documentation/api-scenario/references/v1.2/schema.json
 scope: ResourceGroup
 
 swaggers:
   - ../signalr.json
 
 variables:
-  resourceName: signalrswaggertest4
+  resourceName: signalrswaggertest6
   parameters:
     type: object
     value:
@@ -64,6 +64,9 @@ variables:
 
 scenarios:
   - steps:
+      - step: Generate_Unique_Name
+        armTemplate: ./peArmTemplate/Generate_Unique_name_template.json
+
       - operationId: SignalR_CheckNameAvailability
         parameters:
           parameters:
