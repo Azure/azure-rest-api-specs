@@ -495,8 +495,9 @@
               "default": "Stable"
             },
             "version": {
-              "description": "Version of the extension for this extension, if it is 'pinned' to a specific version. autoUpgradeMinorVersion must be 'false'.",
-              "type": "string"
+              "description": "User-specified version of the extension for this extension to 'pin'. To use 'version', autoUpgradeMinorVersion must be 'false'.",
+              "type": "string",
+              "x-nullable": true
             },
             "scope": {
               "description": "Scope at which the extension is installed.",
@@ -518,6 +519,12 @@
               "additionalProperties": {
                 "type": "string"
               }
+            },
+            "installedVersion": {
+              "description": "Installed version of the extension.",
+              "type": "string",
+              "readOnly": true,
+              "x-nullable": true
             },
             "provisioningState": {
               "description": "Status of installation of this extension.",
@@ -647,7 +654,8 @@
             },
             "version": {
               "description": "Version of the extension for this extension, if it is 'pinned' to a specific version. autoUpgradeMinorVersion must be 'false'.",
-              "type": "string"
+              "type": "string",
+              "x-nullable": true
             },
             "configurationSettings": {
               "description": "Configuration settings, as name-value pairs for configuring this extension.",

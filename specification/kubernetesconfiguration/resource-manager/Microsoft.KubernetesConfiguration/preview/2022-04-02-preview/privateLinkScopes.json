@@ -300,9 +300,6 @@
         ],
         "description": "Gets the private link resources that need to be created for a Azure Monitor PrivateLinkScope.",
         "operationId": "PrivateLinkResources_ListByPrivateLinkScope",
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -404,7 +401,7 @@
             "$ref": "#/parameters/PrivateLinkScopeName"
           },
           {
-            "$ref":"../../../../../common-types/resource-management/v3/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
@@ -566,9 +563,6 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Gets list of private endpoint connections on a private link scope.": {
             "$ref": "./examples/PrivateEndpointConnectionList.json"
@@ -695,7 +689,6 @@
       "description": "The name of the Azure Arc PrivateLinkScope resource.",
       "x-ms-parameter-location": "method"
     },
-
     "GroupNameParameter": {
       "name": "groupName",
       "in": "path",
