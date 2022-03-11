@@ -131,7 +131,8 @@
             "UploadTransientError",
             "ConfigurationUnsupported",
             "ContentMalformed",
-            "ContentUnsupported"
+            "ContentUnsupported",
+            "IdentityUnsupported"
           ],
           "x-ms-enum": {
             "name": "MediaJobErrorCode",
@@ -171,6 +172,10 @@
               {
                 "value": "ContentUnsupported",
                 "description": "There was a problem with the format of the input (not valid media file, or an unsupported file/codec), check the validity of the input files."
+              },
+              {
+                "value": "IdentityUnsupported",
+                "description": "There is an error verifying to the account identity. Check and fix the identity configurations and retry. If unsuccessful, please contact support."
               }
             ],
             "modelAsExtensible": true
@@ -191,7 +196,8 @@
             "Download",
             "Upload",
             "Configuration",
-            "Content"
+            "Content",
+            "Account"
           ],
           "x-ms-enum": {
             "name": "MediaJobErrorCategory",
@@ -215,6 +221,10 @@
               {
                 "value": "Content",
                 "description": "The error is related to data in the input files."
+              },
+              {
+                "value": "Account",
+                "description": "The error is related to account information."
               }
             ],
             "modelAsExtensible": true

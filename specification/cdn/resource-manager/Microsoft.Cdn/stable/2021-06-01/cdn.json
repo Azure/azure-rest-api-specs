@@ -2593,9 +2593,30 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ProfilePropertiesUpdateParameters"
         }
       },
       "x-ms-azure-resource": true
+    },
+    "ProfilePropertiesUpdateParameters": {
+      "type": "object",
+      "description": "The JSON object containing profile update parameters.",
+      "properties": {
+        "originResponseTimeoutSeconds": {
+          "description": "Send and receive timeout on forwarding request to the origin. When timeout is reached, the request fails and returns.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 16,
+          "exclusiveMinimum": false
+        },
+        "identity": {
+          "description": "Managed service identity.",
+          "$ref": "#/definitions/ManagedServiceIdentity"
+        }
+      }
     },
     "SsoUri": {
       "description": "The URI required to login to the supplemental portal from the Azure portal.",

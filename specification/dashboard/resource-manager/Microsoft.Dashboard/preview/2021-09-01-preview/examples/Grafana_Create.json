@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "api-version": "2021-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "workspaceName": "myWorkspace",
+    "requestBody": {
+      "sku": {
+        "name": "Standard"
+      },
+      "properties": {
+        "provisioningState": "Accepted",
+        "zoneRedundancy": "Enabled"
+      },
+      "identity": {
+        "type": "systemAssigned"
+      },
+      "tags": {
+        "Environment": "Dev"
+      },
+      "location": "West US"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/grafana/myWorkspace",
+        "name": "myWorkspace",
+        "type": "Microsoft.Dashboard/grafana",
+        "sku": {
+          "name": "Standard"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "grafanaVersion": "7.1",
+          "endpoint": "my.azgrafana.io",
+          "zoneRedundancy": "Enabled"
+        },
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "tags": {
+          "Environment": "Dev"
+        },
+        "location": "West US",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/grafana/myWorkspace",
+        "name": "myWorkspace",
+        "type": "Microsoft.Dashboard/grafana",
+        "sku": {
+          "name": "Standard"
+        },
+        "properties": {
+          "provisioningState": "Accepted",
+          "grafanaVersion": "7.1",
+          "endpoint": "my.azgrafana.io",
+          "zoneRedundancy": "Enabled"
+        },
+        "tags": {
+          "Environment": "Dev"
+        },
+        "location": "West US",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
+        }
+      }
+    }
+  }
+}
