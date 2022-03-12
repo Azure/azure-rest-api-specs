@@ -35,10 +35,8 @@ These settings apply only when `--tag=package-2022-03-01` is specified on the co
 
 ```yaml $(tag) == 'package-2022-03-01'
 input-file:
-  - Microsoft.Capacity/preview/2022-03-01/reservations.json
+  - Microsoft.Capacity/stable/2022-03-01/reservations.json
   - Microsoft.Capacity/stable/2020-10-25/quota.json
-  - Microsoft.Capacity/preview/2019-07-19/quota.json
-  - Microsoft.Capacity/preview/2019-04-01/reservations.json
 ```
 
 ### Tag: package-2021-07-01
