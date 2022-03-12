@@ -17,6 +17,17 @@
             "properties": {
               "provisioningState": "Succeeded",
               "hostName": "contoso.api.adu.microsoft.com",
+              "sku": "Free",
+              "locations": [
+                {
+                  "name": "westus2",
+                  "role": "Primary"
+                },
+                {
+                  "name": "westcentralus",
+                  "role": "Failover"
+                }
+              ],
               "privateEndpointConnections": [
                 {
                   "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DeviceUpdate/accounts/contoso/privateEndpointConnections/peexample01",
@@ -34,17 +45,6 @@
                     },
                     "groupIds": [
                       "groupId"
-                    ],
-                    "sku": "Free",
-                    "locations": [
-                      {
-                        "name": "westus2",
-                        "role": "Primary"
-                      },
-                      {
-                        "name": "westcentralus",
-                        "role": "Failover"
-                      }
                     ]
                   }
                 }
