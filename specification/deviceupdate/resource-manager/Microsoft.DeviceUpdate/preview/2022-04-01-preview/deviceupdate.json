@@ -1272,6 +1272,27 @@
               "items": {
                 "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
               }
+            },
+            "sku": {
+              "description": "Device Update Sku",
+              "type": "string",
+              "enum": [
+                "Free",
+                "Standard"
+              ],
+              "readOnly": false,
+              "x-ms-enum": {
+                "name": "SKU",
+                "modelAsString": true
+              }
+            },
+            "locations": {
+              "description": "Device Update account primary and failover location details",
+              "readOnly": true,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Location"
+              }
             }
           }
         },
@@ -1280,6 +1301,28 @@
           "description": "The type of identity used for the resource."
         }
       }
+    },
+    "Location": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "role": {
+          "description": "Whether the location is primary or failover",
+          "default": "Enabled",
+          "enum": [
+            "Primary",
+            "Failover"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Role",
+            "modelAsString": true
+          }
+        }
+      },
+      "additionalProperties": false
     },
     "AccountList": {
       "description": "List of Accounts.",
@@ -1824,4 +1867,3 @@
     }
   }
 }
-
