@@ -10,7 +10,7 @@ python:
   payload-flattening-threshold: 2
   namespace: Microsoft.LoadTestService
   package-name: loadtestservice
-  package-version: 2022-03-01-preview
+  package-version: 2022-04-01-preview
   clear-output-folder: true
 ```
 
