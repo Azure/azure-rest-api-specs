@@ -2178,7 +2178,10 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VirtualIPMapping"
-              }
+              },
+              "x-ms-identifiers": [
+                "virtualIP"
+              ]
             }
           },
           "x-ms-client-flatten": true
@@ -2303,7 +2306,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/EndpointDetail"
-          }
+          },
+          "x-ms-identifiers": [
+            "ipAddress",
+            "port"
+          ]
         }
       }
     },
@@ -2381,7 +2388,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/InboundEnvironmentEndpoint"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link to next page of resources.",
@@ -2403,7 +2411,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/EndpointDependency"
-          }
+          },
+          "x-ms-identifiers": [
+            "domainName"
+          ]
         }
       }
     },
@@ -2419,7 +2430,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OutboundEnvironmentEndpoint"
-          }
+          },
+          "x-ms-identifiers": [
+            "category"
+          ]
         },
         "nextLink": {
           "description": "Link to next page of resources.",
@@ -2473,7 +2487,8 @@
               "items": {
                 "$ref": "#/definitions/ResourceMetricAvailability"
               },
-              "readOnly": true
+              "readOnly": true,
+              "x-ms-identifiers": []
             },
             "resourceUri": {
               "description": "Resource URI.",
@@ -2544,7 +2559,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SkuInfo"
-          }
+          },
+          "x-ms-identifiers": [
+            "/sku/name",
+            "resourceType"
+          ]
         },
         "nextLink": {
           "description": "Link to next page of resources.",
@@ -2645,7 +2664,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/StampCapacity"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "Link to next page of resources.",

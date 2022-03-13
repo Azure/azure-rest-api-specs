@@ -40,7 +40,7 @@ tag: package-passivestamp-2021-11-15
 ```
 
 ``` yaml $(package-activestamp)
-tag: package-2021-12
+tag: package-2022-01
 ```
 
 ### Validations
@@ -55,14 +55,23 @@ message-format: json
 ```
 
 
+### Tag: package-2022-01
+
+These settings apply only when `--tag=package-2022-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-01'
+input-file:
+  - Microsoft.RecoveryServices/stable/2022-01-01/bms.json
+```
 ### Tag: package-2021-12
 
 These settings apply only when `--tag=package-2021-12` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-12'
+``` yaml $(tag) == 'package-2021-12'
 input-file:
   - Microsoft.RecoveryServices/stable/2021-12-01/bms.json
 ```
+
 ### Tag: package-passivestamp-2021-11-15
 
 These settings apply only when `--tag=package-passivestamp-2021-11-15` is specified on the command line.
@@ -306,7 +315,7 @@ csharp:
   payload-flattening-threshold: 1
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.RecoveryServices.Backup
-  output-folder: $(csharp-sdks-folder)/recoveryservices-backup/Microsoft.Azure.Management.RecoveryServices.Backup/src/Generated
+  output-folder: $(csharp-sdks-folder)/recoveryservices-backup/Microsoft.Azure.Management.RecoveryServices.Backup/src/recoveryservicesbackup/Generated
   clear-output-folder: true
 ```
 

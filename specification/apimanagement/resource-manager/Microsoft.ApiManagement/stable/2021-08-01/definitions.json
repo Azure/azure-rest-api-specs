@@ -686,6 +686,9 @@
           "items": {
             "$ref": "#/definitions/ApiRevisionContract"
           },
+          "x-ms-identifiers": [
+            "apiId"
+          ],
           "description": "Page values.",
           "readOnly": true
         },
@@ -1176,6 +1179,9 @@
           "items": {
             "$ref": "#/definitions/TokenBodyParameterContract"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "Additional parameters required by the token endpoint of this authorization server represented as an array of JSON objects with name and value string properties, i.e. {\"name\" : \"name value\", \"value\": \"a value\"}."
         },
         "tokenEndpoint": {
@@ -1686,6 +1692,9 @@
           "items": {
             "$ref": "#/definitions/X509CertificateName"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "Server X509 Certificate Names Collection"
         }
       },
@@ -1987,6 +1996,7 @@
           "items": {
             "$ref": "#/definitions/DataMaskingEntity"
           },
+          "x-ms-identifiers": [],
           "description": "Masking settings for Url query parameters"
         },
         "headers": {
@@ -1994,6 +2004,7 @@
           "items": {
             "$ref": "#/definitions/DataMaskingEntity"
           },
+          "x-ms-identifiers": [],
           "description": "Masking settings for headers"
         }
       }
@@ -2278,6 +2289,9 @@
           "items": {
             "$ref": "#/definitions/EmailTemplateParametersContractProperties"
           },
+          "x-ms-identifiers": [
+            "title"
+          ],
           "description": "Email Template Parameter values."
         }
       },
@@ -2338,6 +2352,9 @@
           "items": {
             "$ref": "#/definitions/EmailTemplateParametersContractProperties"
           },
+          "x-ms-identifiers": [
+            "title"
+          ],
           "description": "Email Template Parameter values."
         }
       },
@@ -3497,6 +3514,10 @@
           "items": {
             "$ref": "#/definitions/ParameterContract"
           },
+          "x-ms-identifiers": [
+            "name",
+            "type"
+          ],
           "description": "Collection of URL template parameters."
         },
         "description": {
@@ -3513,6 +3534,7 @@
           "items": {
             "$ref": "#/definitions/ResponseContract"
           },
+          "x-ms-identifiers": [],
           "description": "Array of Operation responses."
         },
         "policies": {
@@ -3580,6 +3602,9 @@
           "items": {
             "$ref": "#/definitions/OperationResultLogItemContract"
           },
+          "x-ms-identifiers": [
+            "objectKey"
+          ],
           "readOnly": true,
           "description": "This property if only provided as part of the TenantConfiguration_Validate operation. It contains the log the entities which will be updated/created/deleted as part of the TenantConfiguration_Deploy operation."
         }
@@ -4375,6 +4400,10 @@
           "items": {
             "$ref": "#/definitions/QuotaCounterContract"
           },
+          "x-ms-identifiers": [
+            "counterKey",
+            "periodKey"
+          ],
           "description": "Quota counter values."
         },
         "count": {
@@ -4584,6 +4613,10 @@
           "items": {
             "$ref": "#/definitions/ReportRecordContract"
           },
+          "x-ms-identifiers": [
+            "name",
+            "userId"
+          ],
           "description": "Page values."
         },
         "count": {
@@ -4743,6 +4776,10 @@
           "items": {
             "$ref": "#/definitions/ParameterContract"
           },
+          "x-ms-identifiers": [
+            "name",
+            "type"
+          ],
           "description": "Collection of form parameters. Required if 'contentType' value is either 'application/x-www-form-urlencoded' or 'multipart/form-data'.."
         },
         "examples": {
@@ -4766,6 +4803,10 @@
           "items": {
             "$ref": "#/definitions/ParameterContract"
           },
+          "x-ms-identifiers": [
+            "name",
+            "type"
+          ],
           "description": "Collection of operation request query parameters."
         },
         "headers": {
@@ -4773,6 +4814,10 @@
           "items": {
             "$ref": "#/definitions/ParameterContract"
           },
+          "x-ms-identifiers": [
+            "name",
+            "type"
+          ],
           "description": "Collection of operation request headers."
         },
         "representations": {
@@ -4780,6 +4825,7 @@
           "items": {
             "$ref": "#/definitions/RepresentationContract"
           },
+          "x-ms-identifiers": [],
           "description": "Collection of operation request representations."
         }
       },
@@ -4792,6 +4838,9 @@
           "items": {
             "$ref": "#/definitions/RequestReportRecordContract"
           },
+          "x-ms-identifiers": [
+            "url"
+          ],
           "description": "Page values."
         },
         "count": {
@@ -4903,6 +4952,7 @@
           "items": {
             "$ref": "#/definitions/RepresentationContract"
           },
+          "x-ms-identifiers": [],
           "description": "Collection of operation response representations."
         },
         "headers": {
@@ -4910,6 +4960,10 @@
           "items": {
             "$ref": "#/definitions/ParameterContract"
           },
+          "x-ms-identifiers": [
+            "name",
+            "type"
+          ],
           "description": "Collection of operation response headers."
         }
       },
@@ -5568,6 +5622,9 @@
           "items": {
             "$ref": "#/definitions/TagResourceContract"
           },
+          "x-ms-identifiers": [
+            "tag/id"
+          ],
           "description": "Page values."
         },
         "count": {
@@ -5770,6 +5827,9 @@
           "items": {
             "$ref": "./definitions.json#/definitions/GroupContractProperties"
           },
+          "x-ms-identifiers": [
+            "displayName"
+          ],
           "description": "Collection of groups user is part of."
         }
       },
@@ -6817,7 +6877,10 @@
                   "description": "List of headers to be included in the request.",
                   "items": {
                     "$ref": "#/definitions/HTTPHeader"
-                  }
+                  },
+                  "x-ms-identifiers": [
+                    "name"
+                  ]
                 }
               }
             }
@@ -6940,7 +7003,8 @@
           "description": "List of issues.",
           "items": {
             "$ref": "#/definitions/ConnectivityIssue"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -7001,7 +7065,8 @@
           "description": "Provides additional context on the issue.",
           "items": {
             "$ref": "#/definitions/IssueContext"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
