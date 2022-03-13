@@ -677,7 +677,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Retrieve the updated collection details.",
+            "description": "OK, all items are approved and the response is the updated collection.",
             "schema": {
               "$ref": "#/definitions/Collection"
             }
@@ -718,7 +718,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Retrieve the updated collection details.",
+            "description": "OK, approve all items is disabled and the response is the updated collection.",
             "schema": {
               "$ref": "#/definitions/Collection"
             }
@@ -1884,6 +1884,7 @@
         },
         "allItemsApprovedModifiedAt": {
           "description": "Gets the modified date of all items approved.",
+          "format": "date-time",
           "type": "string",
           "readOnly": true
         },
