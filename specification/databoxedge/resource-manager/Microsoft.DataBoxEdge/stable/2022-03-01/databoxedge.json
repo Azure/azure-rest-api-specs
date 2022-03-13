@@ -720,6 +720,15 @@
         "operationId": "DeviceCapacityCheck_CheckResourceCreationFeasibility",
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
             "name": "deviceName",
             "in": "path",
             "description": "The device name.",
@@ -734,15 +743,6 @@
             "schema": {
               "$ref": "#/definitions/DeviceCapacityRequestInfo"
             }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -779,6 +779,15 @@
         "operationId": "DeviceCapacityCheck_GetVMCreationFeasibilityCheck",
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
             "name": "deviceName",
             "in": "path",
             "description": "The device name.",
@@ -791,15 +800,6 @@
             "description": "The capacity check request name.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -1131,13 +1131,6 @@
         "operationId": "DeviceCapacityInfo_GetDeviceCapacityInfo",
         "parameters": [
           {
-            "name": "deviceName",
-            "in": "path",
-            "description": "The device name.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -1145,6 +1138,13 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -9053,62 +9053,6 @@
         "connectionString": {
           "$ref": "#/definitions/AsymmetricEncryptedSecret",
           "description": "Connection string based on the symmetric key."
-        }
-      }
-    },
-    "SystemData": {
-      "description": "Provides details about resource creation and updation time",
-      "type": "object",
-      "properties": {
-        "createdBy": {
-          "description": "A string identifier for the identity that created the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "createdByType": {
-          "type": "string",
-          "description": "The type of identity that created the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "createdAt": {
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC).",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastModifiedBy": {
-          "description": "A string identifier for the identity that last modified the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastModifiedByType": {
-          "type": "string",
-          "description": "The type of identity that last modified the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "lastModifiedAt": {
-          "format": "date-time",
-          "description": "The timestamp of resource last modification (UTC).",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
