@@ -333,13 +333,27 @@
     "EntityAnalyticsProperties": {
       "description": "EntityAnalytics property bag.",
       "properties": {
-        "isEnabled": {
-          "description": "Determines whether the setting is enable or disabled.",
-          "readOnly": true,
-          "type": "boolean"
+        "entityProviders": {
+          "description": "The relevant entity providers that are synced",
+          "items": {
+            "$ref": "#/definitions/UebaEntityProviders"
+          },
+          "type": "array"
         }
       },
       "type": "object"
+    },
+    "UebaEntityProviders": {
+      "description": "The entity provider that is synced.",
+      "enum": [
+        "ActiveDirectory",
+        "AzureActiveDirectory"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "UebaEntityProviders"
+      }
     },
     "Ueba": {
       "allOf": [
