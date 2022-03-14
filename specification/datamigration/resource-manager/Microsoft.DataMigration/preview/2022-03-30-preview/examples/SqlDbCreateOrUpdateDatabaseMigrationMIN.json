@@ -2,31 +2,22 @@
   "parameters": {
     "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "resourceGroupName": "testrg",
-    "sqlVirtualMachineName": "testvm",
+    "sqlDbInstanceName": "sqldbinstance",
     "targetDbName": "db1",
     "api-version": "2022-03-30-preview",
     "parameters": {
       "properties": {
-        "kind": "SqlVm",
+        "kind": "SqlDb",
         "sourceDatabaseName": "aaa",
-        "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm",
+        "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/servers/sqldbinstance",
         "migrationService": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DataMigration/sqlMigrationServices/testagent",
-        "offlineConfiguration": {
-          "offline": true,
-          "lastBackupName": "last_backup_file_name"
-        },
-        "backupConfiguration": {
-          "targetLocation": {
-            "storageAccountResourceId": "account.database.windows.net",
-            "accountKey": "abcd"
-          },
-          "sourceLocation": {
-            "fileShare": {
-              "path": "C:\\aaa\\bbb\\ccc",
-              "username": "name",
-              "password": "placeholder"
-            }
-          }
+        "targetSqlConnection": {
+          "dataSource": "sqldbinstance",
+          "userName": "bbb",
+          "password": "placeholder",
+          "encryptConnection": true,
+          "trustServerCertificate": true,
+          "authentication": "SqlAuthentication"
         },
         "sourceSqlConnection": {
           "dataSource": "aaa",
@@ -37,20 +28,23 @@
           "authentication": "WindowsAuthentication"
         }
       }
+
     }
   },
   "responses": {
     "200": {
       "body": {
         "properties": {
-          "kind": "SqlVm",
-          "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm",
-          "migrationStatus": "InProgress",
-          "migrationStatusDetails": {
-            "migrationState": "WaitForFullBackupUploadOperation",
-            "activeBackupSets": [],
-            "isFullBackupRestored": false
+          "offlineConfiguration": {
+            "offline": true
           },
+          "backupConfiguration": {
+            "sourceLocation": {
+              "fileStorageType": "None"
+            }
+          },
+          "migrationStatus": "InProgress",
+          "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/servers/sqldbinstance",
           "startedOn": "0001-01-01T08:00:00Z",
           "endedOn": "0001-01-01T08:00:00Z",
           "sourceServerName": "sourceserver",
@@ -65,14 +59,16 @@
     "201": {
       "body": {
         "properties": {
-          "kind": "SqlVm",
-          "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm",
-          "migrationStatus": "InProgress",
-          "migrationStatusDetails": {
-            "migrationState": "WaitForFullBackupUploadOperation",
-            "activeBackupSets": [],
-            "isFullBackupRestored": false
+          "offlineConfiguration": {
+            "offline": true
           },
+          "backupConfiguration": {
+            "sourceLocation": {
+              "fileStorageType": "None"
+            }
+          },
+          "migrationStatus": "InProgress",
+          "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/servers/sqldbinstance",
           "startedOn": "0001-01-01T08:00:00Z",
           "endedOn": "0001-01-01T08:00:00Z",
           "sourceServerName": "sourceserver",
