@@ -45,6 +45,13 @@ input-file:
   - Microsoft.App/stable/2022-03-01/ManagedEnvironments.json
   - Microsoft.App/stable/2022-03-01/ManagedEnvironmentsStorages.json
   - Microsoft.App/stable/2022-03-01/SourceControls.json
+directive:
+- suppress: R3018
+  from: AuthConfigs.json
+  reason: Use of boolean type is required
+- suppress: R3016
+  from: AuthConfigs.json
+  reason: Use disableWWWAuthenticate to align with AuthSettingV2
 ```
 ### Tag: package-2022-01-01-preview
 
