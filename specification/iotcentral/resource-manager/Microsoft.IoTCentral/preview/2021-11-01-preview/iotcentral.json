@@ -112,8 +112,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "This is returned as a response to the status polling request for the create or update operation. The body contains the resource representation that indicates a transitional provisioning state.",
+          "200": {
+            "description": "The create or update request is being processed. The body contains the resource representation that indicates a transitional provisioning state.",
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "URL to query for status of the operation.",
@@ -237,11 +237,8 @@
               }
             }
           },
-          "200": {
-            "description": "Once the long running delete operation completes successfully, a 200 OK status code is returned."
-          },
           "204": {
-            "description": "If no metadata on the provided application exists, a 204 No Content status code is returned."
+            "description": "If the resource does not exist, a 204 No Content status code is returned."
           },
           "default": {
             "description": "DefaultErrorResponse",
@@ -380,8 +377,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "This is returned as a response to the status polling request for the create or update operation. The body contains the resource representation that indicates a transitional provisioning state.",
+          "200": {
+            "description": "The update request is being processed. The body contains the resource representation that indicates a transitional provisioning state.",
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "URL to query for status of the operation.",
@@ -449,11 +446,8 @@
               }
             }
           },
-          "200": {
-            "description": "Once the long running delete operation completes successfully, a 200 OK status code is returned."
-          },
           "204": {
-            "description": "If no metadata on the provided application exists, a 204 No Content status code is returned."
+            "description": "If the resource does not exist, a 204 No Content status code is returned."
           },
           "default": {
             "description": "DefaultErrorResponse",
