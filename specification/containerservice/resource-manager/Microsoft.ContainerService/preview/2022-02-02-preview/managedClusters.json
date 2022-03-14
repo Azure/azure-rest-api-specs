@@ -3454,7 +3454,7 @@
       },
       "description": "The response from the List maintenance configurations operation."
     },
-    "SystemData": {
+    "systemData": {
       "description": "Metadata pertaining to creation and last modification of the resource.",
       "type": "object",
       "readOnly": true,
@@ -3480,7 +3480,7 @@
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The UTC timestamp of resource creation."
+          "description": "The timestamp of resource creation (UTC)."
         },
         "lastModifiedBy": {
           "type": "string",
@@ -3503,7 +3503,7 @@
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The type of identity that last modified the resource."
+          "description": "The timestamp of resource last modification (UTC)"
         }
       }
     },
@@ -3516,7 +3516,7 @@
       ],
       "properties": {
         "systemData": {
-          "$ref": "#/definitions/SystemData",
+          "$ref": "#/definitions/systemData",
           "readOnly": true,
           "description": "The system metadata relating to this resource."
         },
@@ -5845,7 +5845,7 @@
       "type": "object",
       "properties": {
         "systemData": {
-          "$ref": "#/definitions/SystemData",
+          "$ref": "#/definitions/systemData",
           "readOnly": true,
           "description": "The system metadata relating to this snapshot."
         },
@@ -5866,7 +5866,7 @@
       "type": "object",
       "properties": {
         "systemData": {
-          "$ref": "#/definitions/SystemData",
+          "$ref": "#/definitions/systemData",
           "readOnly": true,
           "description": "The system metadata relating to this snapshot."
         },
@@ -6119,24 +6119,25 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
-      "x-ms-parameter-location": "client"
+      "description": "The ID of the target subscription.",
+      "minLength": 1
     },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Client Api Version.",
-      "x-ms-parameter-location": "client"
+      "description": "The API version to use for this operation.",
+      "minLength": 1
     },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
       "in": "path",
       "required": true,
       "type": "string",
+      "description": "The name of the resource group. The name is case insensitive.",
       "minLength": 1,
-      "description": "The name of the resource group.",
+      "maxLength": 90,
       "x-ms-parameter-location": "method"
     },
     "ResourceNameParameter": {
@@ -6155,7 +6156,8 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of a supported Azure region.",
+      "description": "The name of Azure region.",
+      "minLength": 1,
       "x-ms-parameter-location": "method"
     },
     "ResourceTypeParameter": {
