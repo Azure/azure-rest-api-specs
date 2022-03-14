@@ -8,17 +8,13 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 python-mode: create
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-namespace: azure.mgmt.billing
+namespace: azure.mgmt.[[billing]]
 package-name: azure-mgmt-billing
 package-version: 0.3.0
 clear-output-folder: true
 ```
-``` yaml $(python) && $(python-mode) == 'update'
+``` yaml $(python)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/billing/azure-mgmt-billing/azure/mgmt/billing
 ```
 
-``` yaml $(python) && $(python-mode) == 'create'
-basic-setup-py: true
-output-folder: $(python-sdks-folder)/billing/azure-mgmt-billing
-```
