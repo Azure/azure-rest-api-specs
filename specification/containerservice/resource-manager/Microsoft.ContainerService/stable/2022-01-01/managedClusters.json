@@ -485,6 +485,9 @@
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
+            "$ref": "#/parameters/CustomHeadersParameter"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
@@ -5656,6 +5659,18 @@
         ]
       },
       "description": "Only apply to AAD clusters, specifies the format of returned kubeconfig. Format 'azure' will return azure auth-provider kubeconfig; format 'exec' will return exec format kubeconfig, which requires kubelogin binary in the path.",
+      "x-ms-parameter-location": "method"
+    },
+    "CustomHeadersParameter": {
+      "name": "AKSHTTPCustomFeatures",
+      "in": "header",
+      "description": "A list of Custom Features which should be enabled on this AKS Cluster.",
+      "required": false,
+      "type": "array",
+      "collectionFormat": "csv",
+      "items": {
+        "type": "string"
+      },
       "x-ms-parameter-location": "method"
     }
   }
