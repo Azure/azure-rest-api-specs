@@ -56,6 +56,10 @@ directive:
     where: $.paths
     from: standards.json
     reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
+  - suppress: OperationsAPIImplementation
+    where: $.paths
+    from: securityConnectors.json
+    reason: Suppression of OperationsAPI as it doesn't apply to this specific file
 ```
 
 ### Basic Information
