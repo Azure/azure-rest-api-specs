@@ -1,0 +1,252 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Update location operation endpoints and objects.",
+    "title": "UpdateAdminClient",
+    "version": "2021-07-01"
+  },
+  "host": "adminmanagement.local.azurestack.external",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Update.Admin/updateLocations/": {
+      "get": {
+        "x-ms-examples": {
+          "Get the list of update locations.": {
+            "$ref": "./examples/UpdateLocations/List.json"
+          }
+        },
+        "tags": [
+          "UpdateLocations"
+        ],
+        "description": "Get the list of update locations.",
+        "operationId": "UpdateLocations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UpdateLocationList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Update.Admin/updateLocations/{updateLocation}": {
+      "get": {
+        "x-ms-examples": {
+          "Get an update location based on name.": {
+            "$ref": "./examples/UpdateLocations/Get.json"
+          }
+        },
+        "tags": [
+          "UpdateLocations"
+        ],
+        "description": "Get an update location based on name.",
+        "operationId": "UpdateLocations_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateLocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UpdateLocation"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "UpdateLocation": {
+      "description": "Information related to a location's update status.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Model which holds information related to update location.",
+          "$ref": "#/definitions/UpdateLocationModel",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Update.json#/definitions/Resource"
+        }
+      ]
+    },
+    "UpdateLocationModel": {
+      "description": "Model which holds information related to update location.",
+      "type": "object",
+      "properties": {
+        "oemFamily": {
+          "description": "OEM family of your Azure Stack Hub deployment.",
+          "type": "string"
+        },
+        "hardwareModel": {
+          "description": "Hardware model of your Azure Stack Hub deployment.",
+          "type": "string"
+        },
+        "packageVersions": {
+          "description": "Package map of your Azure Stack Hub deployment.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PackageVersionInfo"
+          },
+          "x-ms-identifiers": [
+            "packageType",
+            "version"
+          ]
+        },
+        "currentVersion": {
+          "description": "Current version of your Azure Stack Hub deployment.",
+          "type": "string"
+        },
+        "currentOemVersion": {
+          "description": "Current OEM version of your Azure Stack Hub deployment.",
+          "type": "string"
+        },
+        "lastUpdated": {
+          "description": "Date of last update.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastChecked": {
+          "description": "Time of last successful check for new available updates.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "state": {
+          "description": "State with respect to the update.",
+          "$ref": "#/definitions/RegionUpdateState"
+        }
+      }
+    },
+    "PackageVersionInfo": {
+      "description": "Package information of your Azure Stack Hub deployment.",
+      "type": "object",
+      "properties": {
+        "packageType": {
+          "description": "Type of the update.",
+          "type": "string"
+        },
+        "version": {
+          "description": "Version of the update.",
+          "type": "string"
+        },
+        "lastUpdated": {
+          "description": "Date of last update.",
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "RegionUpdateState": {
+      "description": "State of the region in regard to update.",
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "UpdateAvailable",
+        "PreparationInProgress",
+        "PreparationFailed",
+        "AppliedSuccessfully",
+        "AppliedUpdateAvailableSuccessfully",
+        "UpdateInProgress",
+        "UpdateFailed",
+        "NeedsAttention"
+      ],
+      "x-ms-enum": {
+        "name": "RegionUpdateState",
+        "modelAsString": true
+      }
+    },
+    "UpdateLocationList": {
+      "description": "The list of update locations.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to get the next page of update locations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of update locations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateLocation"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "UpdateLocationParameter": {
+      "name": "updateLocation",
+      "description": "The name of the update location.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

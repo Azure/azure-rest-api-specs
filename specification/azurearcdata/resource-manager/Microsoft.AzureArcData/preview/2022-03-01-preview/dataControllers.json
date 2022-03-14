@@ -1,0 +1,248 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-03-01-preview",
+    "title": "AzureArcDataManagementClient",
+    "description": "The AzureArcData management API provides a RESTful set of web APIs to manage Azure Data Services on Azure Arc Resources."
+  },
+  "paths": {},
+  "definitions": {
+    "DataControllerResource": {
+      "description": "Data controller resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "extendedLocation": {
+          "$ref": "./common.json#/definitions/ExtendedLocation",
+          "description": "The extendedLocation of the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/DataControllerProperties",
+          "description": "The data controller's properties",
+          "x-ms-client-flatten": false
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "PageOfDataControllerResource": {
+      "type": "object",
+      "description": "A list of data controllers.",
+      "properties": {
+        "value": {
+          "items": {
+            "$ref": "#/definitions/DataControllerResource"
+          },
+          "type": "array",
+          "description": "Array of results."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to retrieve next page of results."
+        }
+      }
+    },
+    "DataControllerUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "Used for updating a data controller resource."
+    },
+    "DataControllerProperties": {
+      "description": "The data controller properties.",
+      "type": "object",
+      "properties": {
+        "infrastructure": {
+          "type": "string",
+          "enum": [
+            "azure",
+            "gcp",
+            "aws",
+            "alibaba",
+            "onpremises",
+            "other"
+          ],
+          "x-ms-enum": {
+            "name": "infrastructure",
+            "modelAsString": false
+          },
+          "default": "other",
+          "description": "The infrastructure the data controller is running on."
+        },
+        "onPremiseProperty": {
+          "$ref": "#/definitions/OnPremiseProperty"
+        },
+        "k8sRaw": {
+          "type": "object",
+          "description": "The raw kubernetes information"
+        },
+        "uploadWatermark": {
+          "$ref": "#/definitions/UploadWatermark"
+        },
+        "lastUploadedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last uploaded date from Kubernetes cluster. Defaults to current date time"
+        },
+        "basicLoginInformation": {
+          "$ref": "./common.json#/definitions/BasicLoginInformation",
+          "description": "Deprecated. Azure Arc Data Services data controller no longer expose any endpoint. All traffic are exposed through Kubernetes native API."
+        },
+        "metricsDashboardCredential": {
+          "$ref": "./common.json#/definitions/BasicLoginInformation",
+          "description": "Login credential for metrics dashboard on the Kubernetes cluster."
+        },
+        "logsDashboardCredential": {
+          "$ref": "./common.json#/definitions/BasicLoginInformation",
+          "description": "Login credential for logs dashboard on the Kubernetes cluster."
+        },
+        "logAnalyticsWorkspaceConfig": {
+          "$ref": "#/definitions/LogAnalyticsWorkspaceConfig"
+        },
+        "uploadServicePrincipal": {
+          "$ref": "#/definitions/UploadServicePrincipal",
+          "description": "Deprecated. Service principal is deprecated in favor of Arc Kubernetes service extension managed identity."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the Arc Data Controller resource.",
+          "readOnly": true
+        },
+        "clusterId": {
+          "type": "string",
+          "description": "If a CustomLocation is provided, this contains the ARM id of the connected cluster the custom location belongs to."
+        },
+        "extensionId": {
+          "type": "string",
+          "description": "If a CustomLocation is provided, this contains the ARM id of the extension the custom location belongs to."
+        }
+      }
+    },
+    "UploadWatermark": {
+      "description": "Properties on upload watermark.  Mostly timestamp for each upload data type",
+      "type": "object",
+      "properties": {
+        "metrics": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last uploaded date for metrics from kubernetes cluster. Defaults to current date time"
+        },
+        "logs": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last uploaded date for logs from kubernetes cluster. Defaults to current date time"
+        },
+        "usages": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last uploaded date for usages from kubernetes cluster. Defaults to current date time"
+        }
+      }
+    },
+    "OnPremiseProperty": {
+      "description": "Properties from the Kubernetes data controller",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "A globally unique ID identifying the associated Kubernetes cluster"
+        },
+        "publicSigningKey": {
+          "type": "string",
+          "description": "Certificate that contains the Kubernetes cluster public key used to verify signing"
+        },
+        "signingCertificateThumbprint": {
+          "type": "string",
+          "description": "Unique thumbprint returned to customer to verify the certificate being uploaded"
+        }
+      },
+      "required": [
+        "id",
+        "publicSigningKey"
+      ]
+    },
+    "LogAnalyticsWorkspaceConfig": {
+      "type": "object",
+      "description": "Log analytics workspace id and primary key",
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Azure Log Analytics workspace ID"
+        },
+        "primaryKey": {
+          "type": "string",
+          "description": "Primary key of the workspace",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
+        }
+      }
+    },
+    "UploadServicePrincipal": {
+      "type": "object",
+      "description": "Service principal for uploading billing, metrics and logs.",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Client ID of the service principal for uploading data."
+        },
+        "tenantId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Tenant ID of the service principal."
+        },
+        "authority": {
+          "type": "string",
+          "description": "Authority for the service principal. Example: https://login.microsoftonline.com/"
+        },
+        "clientSecret": {
+          "type": "string",
+          "description": "Secret of the service principal",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "apiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for the request",
+      "x-ms-parameter-location": "client"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
