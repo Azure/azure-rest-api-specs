@@ -2590,8 +2590,26 @@
           "type": "object",
           "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
           "$ref": "#/definitions/systemData"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
         }
       },
+      "required": [
+        "location"
+      ],
       "x-ms-azure-resource": true
     },
     "SubResource": {
@@ -3901,30 +3919,12 @@
           "description": "Properties of a managed cluster.",
           "$ref": "#/definitions/ManagedClusterProperties",
           "x-ms-client-flatten": true
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
         }
       },
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
         }
-      ],
-      "required": [
-        "location"
       ],
       "description": "Managed cluster."
     },
@@ -4373,26 +4373,8 @@
           "description": "AccessProfile of a managed cluster.",
           "$ref": "#/definitions/AccessProfile",
           "x-ms-client-flatten": true
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
         }
       },
-      "required": [
-        "location"
-      ],
       "description": "Managed cluster Access Profile.",
       "x-ms-azure-resource": false
     },
@@ -5873,30 +5855,12 @@
           "description": "Properties of a snapshot.",
           "$ref": "#/definitions/SnapshotProperties",
           "x-ms-client-flatten": true
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
         }
       },
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
         }
-      ],
-      "required": [
-        "location"
       ],
       "description": "A node pool snapshot resource."
     },
@@ -5907,30 +5871,12 @@
           "description": "Properties of a managed cluster snapshot.",
           "$ref": "#/definitions/ManagedClusterSnapshotProperties",
           "x-ms-client-flatten": true
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
         }
       },
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
         }
-      ],
-      "required": [
-        "location"
       ],
       "description": "A managed cluster snapshot resource."
     },
