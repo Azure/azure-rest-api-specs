@@ -632,42 +632,13 @@
     },
     "virtualmachines": {
       "type": "object",
+      "description": "The virtualmachines resource definition.",
       "x-ms-client-flatten": true,
       "x-ms-azure-resource": true,
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/virtualmachinesProperties"
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Type"
-        },
-        "location": {
-          "type": "string",
-          "description": "The resource location",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
@@ -686,10 +657,11 @@
           }
         }
       },
-      "required": [
-        "location"
-      ],
-      "description": "The virtualmachines resource definition."
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ]
     },
     "hardwareProfileUpdate": {
       "type": "object",
