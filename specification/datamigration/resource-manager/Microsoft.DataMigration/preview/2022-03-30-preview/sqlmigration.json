@@ -160,6 +160,13 @@
             "$ref": "#/parameters/TargetDbNameParameter"
           },
           {
+            "name": "force",
+            "in": "query",
+            "description": "Optional force delete boolean. If this is provided as true, migration will be deleted even if active.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -1402,6 +1409,13 @@
           "$ref": "#/definitions/SqlDbBackupConfiguration",
           "description": "Source Location details of backups.",
           "readOnly": true
+        },
+        "tableList": {
+          "description": "List of tables to copy.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "targetDatabaseCollation": {
           "description": "Database collation to be used for the target database.",
