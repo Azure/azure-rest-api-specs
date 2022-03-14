@@ -320,7 +320,15 @@
           "description": "DNS Settings for the interface"
         },
         "provisioningState": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningStateEnum",
+            "modelAsString": true
+          }
         },
         "resourceName": {
           "type": "string",

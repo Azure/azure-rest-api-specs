@@ -319,7 +319,15 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Provisioning state of the gallery image."
+          "description": "Provisioning state of the gallery image.",
+          "enum": [
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningStateEnum",
+            "modelAsString": true
+          }
         },
         "resourceName": {
           "type": "string",

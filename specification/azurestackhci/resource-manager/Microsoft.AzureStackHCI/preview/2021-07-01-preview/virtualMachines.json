@@ -613,7 +613,15 @@
           "description": "StorageProfile - contains information about the disks and storage information for the virtual machine"
         },
         "provisioningState": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningStateEnum",
+            "modelAsString": true
+          }
         },
         "status": {
           "type": "object",

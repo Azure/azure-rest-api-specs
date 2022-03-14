@@ -296,7 +296,15 @@
           "description": "location of the image the gallery image should be created from"
         },
         "provisioningState": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningStateEnum",
+            "modelAsString": true
+          }
         },
         "resourceName": {
           "type": "string",
