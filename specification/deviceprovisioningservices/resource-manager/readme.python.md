@@ -5,22 +5,18 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
 
-``` yaml $(python) && $(track2)
+``` yaml $(python) 
 python-mode: create
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-namespace: azure.mgmt.iothubprovisioningservices
+namespace: azure.mgmt.[[iothubprovisioningservices]]
 package-name: azure-mgmt-iothubprovisioningservices
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
-``` yaml $(python) && $(python-mode) == 'update' && $(track2)
+``` yaml $(python)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/iothub/azure-mgmt-iothubprovisioningservices/azure/mgmt/iothubprovisioningservices
 ```
 
-``` yaml $(python) && $(python-mode) == 'create' && $(track2)
-basic-setup-py: true
-output-folder: $(python-sdks-folder)/iothub/azure-mgmt-iothubprovisioningservices
-```
