@@ -7,7 +7,7 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-namespace: azure.mgmt.[[netapp]]
+namespace: azure.mgmt.netapp
 package-name: azure-mgmt-netapp
 package-version: 5.1.0
 clear-output-folder: true
