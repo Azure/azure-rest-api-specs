@@ -26,8 +26,8 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 
 ``` yaml $(tag) == 'package-2022-02-01' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.recommendationsservice.v2021_02_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/recommendationsservice/mgmt-2021_02_01_preview
+  namespace: com.microsoft.azure.management.recommendationsservice.v2022_02_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/recommendationsservice/mgmt-2022_02_01
 regenerate-manager: true
 generate-interface: true
 ```

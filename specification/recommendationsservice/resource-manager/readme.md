@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2022-02-01` is specified on the co
 
 ```yaml $(tag) == 'package-2022-02-01'
 input-file:
-  - Microsoft.RecommendationsService/preview/2022-02-01/recommendationsservice.json
+  - Microsoft.RecommendationsService/stable/2022-02-01/recommendationsservice.json
 ```
 
 ---
@@ -71,4 +71,3 @@ See configuration in [readme.go.md](./readme.go.md)
 See configuration in [readme.java.md](./readme.java.md)
 ## TypeScript
 See configuration in [readme.typescript.md](./readme.typescript.md)
-
