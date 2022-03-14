@@ -330,7 +330,15 @@
                   },
                   "ipAllocationMethod": {
                     "type": "string",
-                    "description": "IPAllocationMethod - The IP address allocation method. Possible values include: 'Static', 'Dynamic'"
+                    "description": "IPAllocationMethod - The IP address allocation method. Possible values include: 'Static', 'Dynamic'",
+                    "enum": [
+                      "Dynamic",
+                      "Static"
+                    ],
+                    "x-ms-enum": {
+                      "name": "IpAllocationMethodEnum",
+                      "modelAsString": true
+                    }
                   },
                   "ipConfigurationReferences": {
                     "type": "array",
@@ -478,11 +486,11 @@
         },
         "start": {
           "type": "string",
-          "description": "start of the ip address pool"
+          "description": "First IP of the pool"
         },
         "end": {
           "type": "string",
-          "description": "end of the ip address pool"
+          "description": "Last IP of the pool"
         },
         "info": {
           "$ref": "#/definitions/IPPoolInfo"
