@@ -988,6 +988,7 @@
       "description": "Firewall Policy definition."
     },
     "FirewallPolicyRuleCollectionGroup": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1649,7 +1650,8 @@
           "description": "List of rules for traffic to bypass.",
           "items": {
             "$ref": "#/definitions/FirewallPolicyIntrusionDetectionBypassTrafficSpecifications"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1746,6 +1748,7 @@
       "description": "Configuration needed to perform TLS termination & initiation."
     },
     "FirewallPolicyCertificateAuthority": {
+      "type": "object",
       "properties": {
         "keyVaultSecretId": {
           "type": "string",
