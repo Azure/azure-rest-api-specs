@@ -6,7 +6,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-namespace: azure.mgmt.[[fluidrelay]]
+namespace: azure.mgmt.fluidrelay
 no-namespace-folders: true
 package-version: 1.0.0b1
 clear-output-folder: true
