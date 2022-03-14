@@ -7,7 +7,7 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-namespace: azure.mgmt.[[timeseriesinsights]]
+namespace: azure.mgmt.timeseriesinsights
 package-name: azure-mgmt-timeseriesinsights
 package-version: 1.0.0b1
 clear-output-folder: true
