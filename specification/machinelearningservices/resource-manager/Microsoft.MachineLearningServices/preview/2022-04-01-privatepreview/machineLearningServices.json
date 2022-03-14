@@ -1,0 +1,449 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Machine Learning Workspaces",
+    "version": "2022-04-01-privatepreview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/registries": {
+      "get": {
+        "tags": [
+          "RegistryManagement"
+        ],
+        "summary": "List registries",
+        "operationId": "Registries_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RegistryResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List registries.": {
+            "$ref": "./examples/Registries/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/registries/{registryName}": {
+      "delete": {
+        "tags": [
+          "RegistryManagement"
+        ],
+        "summary": "Delete registry.",
+        "operationId": "Registries_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of registry. This is case-insensitive",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Registry.": {
+            "$ref": "./examples/Registries/delete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "RegistryManagement"
+        ],
+        "summary": "Get registry",
+        "operationId": "Registries_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of registry. This is case-insensitive",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RegistryResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Registry.": {
+            "$ref": "./examples/Registries/get.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "RegistryManagement"
+        ],
+        "summary": "Update tags",
+        "operationId": "Registries_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of registry. This is case-insensitive",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Details required to create the registry.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegistryPartialResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RegistryResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Registry.": {
+            "$ref": "./examples/Registries/update.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "RegistryManagement"
+        ],
+        "summary": "Create or update registry",
+        "operationId": "Registries_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of registry. This is case-insensitive",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Details required to create the registry.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegistryResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RegistryResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/RegistryResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Registry.": {
+            "$ref": "./examples/Registries/createOrUpdate.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ArmScopeDto": {
+      "description": "ARM scope of a resource",
+      "type": "object",
+      "properties": {
+        "armScope": {
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "Registry": {
+      "description": "Details of the Registry",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBase"
+        }
+      ],
+      "properties": {
+        "regionDetails": {
+          "description": "Details of each region the registry is in",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegistryRegionArmDetails"
+          },
+          "x-nullable": true
+        }
+      },
+      "x-ms-client-name": "RegistryDetails",
+      "additionalProperties": false
+    },
+    "RegistryPartialResource": {
+      "description": "Azure Resource Manager resource envelope strictly used in update requests.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Additional attributes of the entity.",
+          "$ref": "#/definitions/Registry"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RegistryRegionArmDetails": {
+      "description": "Details for each region the registry is in",
+      "type": "object",
+      "properties": {
+        "acrArmScope": {
+          "description": "Arm scope of all the ACR accounts to be used for this registry\r\nArm scope is in the format \"/subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{AcrName}\"",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArmScopeDto"
+          },
+          "x-nullable": true
+        },
+        "location": {
+          "description": "The location where the registry exists",
+          "type": "string",
+          "x-nullable": true
+        },
+        "storageArmScope": {
+          "description": "Arm scope of all the storage accounts to be used for this registry\r\nArm scope is in the format \"/subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Storage/storageAccounts/{StorageAccountName}\"",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArmScopeDto"
+          },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RegistryResource": {
+      "description": "Azure Resource Manager resource envelope.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Additional attributes of the entity.",
+          "$ref": "#/definitions/Registry"
+        }
+      },
+      "x-ms-client-name": "RegistryData",
+      "additionalProperties": false
+    },
+    "RegistryResourceArmPaginatedResult": {
+      "description": "A paginated list of Registry entities.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page of Registry objects. If null, there are no additional pages.",
+          "type": "string"
+        },
+        "value": {
+          "description": "An array of objects of type Registry.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegistryResource"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "ResourceBase": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The asset description text.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "properties": {
+          "description": "The asset property dictionary.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
+        },
+        "tags": {
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  }
+}
