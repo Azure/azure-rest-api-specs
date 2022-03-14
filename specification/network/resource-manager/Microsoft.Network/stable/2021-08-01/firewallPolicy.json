@@ -597,6 +597,9 @@
             "schema": {
               "$ref": "#/definitions/IDPSQueryObject"
             }
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -650,6 +653,9 @@
           },
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -701,6 +707,9 @@
           },
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -743,6 +752,9 @@
           },
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -795,6 +807,9 @@
           },
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -839,6 +854,9 @@
           },
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -865,6 +883,7 @@
   },
   "definitions": {
     "FirewallPolicy": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -889,6 +908,7 @@
       "description": "FirewallPolicy Resource."
     },
     "FirewallPolicyPropertiesFormat": {
+      "type": "object",
       "properties": {
         "ruleCollectionGroups": {
           "type": "array",
@@ -997,6 +1017,7 @@
       "description": "Rule Collection Group resource."
     },
     "FirewallPolicyRuleCollectionGroupProperties": {
+      "type": "object",
       "properties": {
         "priority": {
           "type": "integer",
@@ -1012,7 +1033,8 @@
           "items": {
             "$ref": "#/definitions/FirewallPolicyRuleCollection"
           },
-          "description": "Group of Firewall Policy rule collections."
+          "description": "Group of Firewall Policy rule collections.",
+          "x-ms-identifiers": []
         },
         "provisioningState": {
           "readOnly": true,
@@ -1023,6 +1045,7 @@
       "description": "Properties of the rule collection group."
     },
     "FirewallPolicyRuleCollection": {
+      "type": "object",
       "description": "Properties of the rule collection.",
       "discriminator": "ruleCollectionType",
       "required": [
@@ -1057,6 +1080,7 @@
       }
     },
     "FirewallPolicyNatRuleCollection": {
+      "type": "object",
       "properties": {
         "action": {
           "$ref": "#/definitions/FirewallPolicyNatRuleCollectionAction",
@@ -1067,7 +1091,8 @@
           "items": {
             "$ref": "#/definitions/FirewallPolicyRule"
           },
-          "description": "List of rules included in a rule collection."
+          "description": "List of rules included in a rule collection.",
+          "x-ms-identifiers": []
         }
       },
       "allOf": [
@@ -1079,6 +1104,7 @@
       "description": "Firewall Policy NAT Rule Collection."
     },
     "FirewallPolicyFilterRuleCollection": {
+      "type": "object",
       "properties": {
         "action": {
           "$ref": "#/definitions/FirewallPolicyFilterRuleCollectionAction",
@@ -1089,7 +1115,8 @@
           "items": {
             "$ref": "#/definitions/FirewallPolicyRule"
           },
-          "description": "List of rules included in a rule collection."
+          "description": "List of rules included in a rule collection.",
+          "x-ms-identifiers": []
         }
       },
       "allOf": [
@@ -1101,6 +1128,7 @@
       "description": "Firewall Policy Filter Rule Collection."
     },
     "FirewallPolicyRule": {
+      "type": "object",
       "description": "Properties of a rule.",
       "discriminator": "ruleType",
       "required": [
@@ -1131,6 +1159,7 @@
       }
     },
     "ApplicationRule": {
+      "type": "object",
       "x-ms-discriminator-value": "ApplicationRule",
       "allOf": [
         {
@@ -1143,20 +1172,23 @@
           "description": "List of source IP addresses for this rule.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "destinationAddresses": {
           "type": "array",
           "description": "List of destination IP addresses or Service Tags.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "protocols": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/FirewallPolicyRuleApplicationProtocol"
           },
+          "x-ms-identifiers": [],
           "description": "Array of Application Protocols."
         },
         "targetFqdns": {
@@ -1164,28 +1196,32 @@
           "description": "List of FQDNs for this rule.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "targetUrls": {
           "type": "array",
           "description": "List of Urls for this rule condition.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "fqdnTags": {
           "type": "array",
           "description": "List of FQDN Tags for this rule.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "sourceIpGroups": {
           "type": "array",
           "description": "List of source IpGroups for this rule.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "terminateTLS": {
           "type": "boolean",
@@ -1196,12 +1232,14 @@
           "description": "List of destination azure web categories.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "description": "Rule of type application."
     },
     "NatRule": {
+      "type": "object",
       "description": "Rule of type nat.",
       "x-ms-discriminator-value": "NatRule",
       "allOf": [
@@ -1260,6 +1298,7 @@
       }
     },
     "NetworkRule": {
+      "type": "object",
       "description": "Rule of type network.",
       "x-ms-discriminator-value": "NetworkRule",
       "allOf": [
@@ -1320,6 +1359,7 @@
       }
     },
     "FirewallPolicyRuleApplicationProtocol": {
+      "type": "object",
       "properties": {
         "protocolType": {
           "description": "Protocol type.",
@@ -1361,6 +1401,7 @@
       }
     },
     "FirewallPolicyNatRuleCollectionAction": {
+      "type": "object",
       "properties": {
         "type": {
           "description": "The type of action.",
@@ -1382,6 +1423,7 @@
       }
     },
     "FirewallPolicyFilterRuleCollectionAction": {
+      "type": "object",
       "properties": {
         "type": {
           "description": "The type of action.",
@@ -1405,6 +1447,7 @@
       }
     },
     "FirewallPolicyListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1421,6 +1464,7 @@
       "description": "Response for ListFirewallPolicies API service call."
     },
     "FirewallPolicyRuleCollectionGroupListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1437,8 +1481,8 @@
       "description": "Response for ListFirewallPolicyRuleCollectionGroups API service call."
     },
     "FirewallPolicyThreatIntelWhitelist": {
+      "type": "object",
       "description": "ThreatIntel Whitelist for Firewall Policy.",
-      "x-ms-discriminator-value": "FirewallPolicyThreatIntelWhitelist",
       "properties": {
         "ipAddresses": {
           "type": "array",
@@ -1457,8 +1501,8 @@
       }
     },
     "FirewallPolicyInsights": {
+      "type": "object",
       "description": "Firewall Policy Insights.",
-      "x-ms-discriminator-value": "FirewallPolicyInsights",
       "properties": {
         "isEnabled": {
           "type": "boolean",
@@ -1476,8 +1520,8 @@
       }
     },
     "FirewallPolicySNAT": {
+      "type": "object",
       "description": "The private IP addresses/IP ranges to which traffic will not be SNAT.",
-      "x-ms-discriminator-value": "FirewallPolicySNAT",
       "properties": {
         "privateRanges": {
           "type": "array",
@@ -1491,7 +1535,6 @@
     "FirewallPolicySQL": {
       "type": "object",
       "description": "SQL Settings in Firewall Policy.",
-      "x-ms-discriminator-value": "FirewallPolicySQL",
       "properties": {
         "allowSqlRedirect": {
           "type": "boolean",
@@ -1500,8 +1543,8 @@
       }
     },
     "DnsSettings": {
+      "type": "object",
       "description": "DNS Proxy Settings in Firewall Policy.",
-      "x-ms-discriminator-value": "DnsSettings",
       "properties": {
         "servers": {
           "type": "array",
@@ -1523,7 +1566,6 @@
     },
     "ExplicitProxySettings": {
       "description": "Explicit Proxy Settings in Firewall Policy.",
-      "x-ms-discriminator-value": "ExplicitProxySettings",
       "type": "object",
       "properties": {
         "enableExplicitProxy": {
@@ -1565,6 +1607,7 @@
       }
     },
     "FirewallPolicyIntrusionDetection": {
+      "type": "object",
       "description": "Configuration for intrusion detection mode and rules.",
       "properties": {
         "mode": {
@@ -1591,6 +1634,7 @@
       }
     },
     "FirewallPolicyIntrusionDetectionConfiguration": {
+      "type": "object",
       "description": "The operation for configuring intrusion detection.",
       "properties": {
         "signatureOverrides": {
@@ -1610,6 +1654,7 @@
       }
     },
     "FirewallPolicyIntrusionDetectionSignatureSpecification": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -1623,6 +1668,7 @@
       "description": "Intrusion detection signatures specification states."
     },
     "FirewallPolicyIntrusionDetectionBypassTrafficSpecifications": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1690,6 +1736,7 @@
       }
     },
     "FirewallPolicyTransportSecurity": {
+      "type": "object",
       "properties": {
         "certificateAuthority": {
           "$ref": "#/definitions/FirewallPolicyCertificateAuthority",
@@ -1712,6 +1759,7 @@
       "description": "Trusted Root certificates properties for tls."
     },
     "FirewallPolicySku": {
+      "type": "object",
       "properties": {
         "tier": {
           "type": "string",
@@ -1730,15 +1778,16 @@
       "description": "SKU of Firewall policy."
     },
     "FirewallPolicyLogAnalyticsResources": {
+      "type": "object",
       "description": "Log Analytics Resources for Firewall Policy Insights.",
-      "x-ms-discriminator-value": "FirewallPolicyLogAnalyticsResources",
       "properties": {
         "workspaces": {
           "type": "array",
           "description": "List of workspaces for Firewall Policy Insights.",
           "items": {
             "$ref": "#/definitions/FirewallPolicyLogAnalyticsWorkspace"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "defaultWorkspaceId": {
           "$ref": "./network.json#/definitions/SubResource",
@@ -1747,8 +1796,8 @@
       }
     },
     "FirewallPolicyLogAnalyticsWorkspace": {
+      "type": "object",
       "description": "Log Analytics Workspace for Firewall Policy Insights.",
-      "x-ms-discriminator-value": "FirewallPolicyLogAnalyticsWorkspace",
       "properties": {
         "region": {
           "type": "string",
@@ -1797,7 +1846,8 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/FilterItems"
-      }
+      },
+      "x-ms-identifiers": []
     },
     "FilterItems": {
       "description": "Will contain the filter name and values to operate on",
@@ -1831,7 +1881,11 @@
           "enum": [
             "Ascending",
             "Descending"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "Order",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -1849,7 +1903,8 @@
           "items": {
             "$ref": "#/definitions/SingleQueryResult"
           },
-          "description": "Array containing the results of the query"
+          "description": "Array containing the results of the query",
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1869,7 +1924,11 @@
             0,
             1,
             2
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "Mode",
+            "modelAsString": false
+          }
         },
         "severity": {
           "type": "integer",
@@ -1879,7 +1938,11 @@
             1,
             2,
             3
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "Severity",
+            "modelAsString": false
+          }
         },
         "direction": {
           "type": "integer",
@@ -1889,7 +1952,11 @@
             0,
             1,
             2
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "Direction",
+            "modelAsString": false
+          }
         },
         "group": {
           "type": "string",
