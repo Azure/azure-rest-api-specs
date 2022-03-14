@@ -8,17 +8,13 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 python-mode: create
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-namespace: azure.mgmt.operationsmanagement
+namespace: azure.mgmt.[[operationsmanagement]]
 package-name: azure-mgmt-operationsmanagement
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
-``` yaml $(python) && $(python-mode) == 'update' && $(track2)
+``` yaml $(python) 
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/operationsmanagement/azure-mgmt-operationsmanagement/azure/mgmt/operationsmanagement
-```
-``` yaml $(python) && $(python-mode) == 'create' && $(track2)
-basic-setup-py: true
-output-folder: $(python-sdks-folder)/operationsmanagement/azure-mgmt-operationsmanagement
 ```
