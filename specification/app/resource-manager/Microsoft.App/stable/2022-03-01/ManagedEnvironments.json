@@ -587,7 +587,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.App/managedEnvironments/{managedEnvironmentName}/checkNameAvailability": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{managedEnvironmentName}/checkNameAvailability": {
       "post": {
         "tags": [
           "ManagedEnvironments"
@@ -598,6 +598,9 @@
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "managedEnvironmentName",
