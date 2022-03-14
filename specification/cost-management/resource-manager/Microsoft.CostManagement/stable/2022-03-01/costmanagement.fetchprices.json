@@ -1,0 +1,465 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-03-01",
+    "title": "CostManagementClient"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/fetchPrices": {
+      "post": {
+        "tags": [
+          "Prices"
+        ],
+        "operationId": "FetchPrices",
+        "description": "Get meter agnostic discounted prices based on billing account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "FetchPricesByBillingAccountId": {
+            "$ref": "./examples/FetchPricesByBillingAccountId.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "$skip",
+            "description": "Skips the first n results.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 500
+          },
+          {
+            "name": "$top",
+            "description": "Returns only the first n results",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 500
+          },
+          {
+            "name": "$orderBy",
+            "description": "Sorts the results",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "description": "Filters the results, based on a Boolean condition",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/PriceConfiguration"
+            },
+            "description": "Parameters supplied to configure the prices response."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request processing completed.",
+            "schema": {
+              "$ref": "#/definitions/PricesResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.CostManagement/fetchPrices": {
+      "post": {
+        "tags": [
+          "Prices"
+        ],
+        "operationId": "FetchPrices",
+        "description": "Get meter agnostic discounted prices based on billing profile.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "FetchPricesByBillingProfileId": {
+            "$ref": "./examples/FetchPricesByBillingProfileId.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "$skip",
+            "description": "Skips the first n results.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 500
+          },
+          {
+            "name": "$top",
+            "description": "Returns only the first n results",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 500
+          },
+          {
+            "name": "$orderBy",
+            "description": "Sorts the results",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "description": "Filters the results, based on a Boolean condition",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/PriceConfiguration"
+            },
+            "description": "Parameters supplied to configure the prices response."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request processing completed.",
+            "schema": {
+              "$ref": "#/definitions/PricesResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "PriceConfiguration": {
+      "description": "Parameters supplied to the configure the prices response.",
+      "type": "object",
+      "properties": {
+        "keys": {
+          "description": "Additional properties needed on top of default response",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PricesResponse": {
+      "description": "Prices response.",
+      "type": "object",
+      "properties": {
+        "BillingCurrency": {
+          "description": "Billing Currency",
+          "type": "string",
+          "readOnly": true
+        },
+        "CustomerEntityId": {
+          "description": "Customer Entity",
+          "type": "string",
+          "readOnly": true
+        },
+        "CustomerEntityType": {
+          "description": "Customer Entity type",
+          "type": "string",
+          "readOnly": true
+        },
+        "Items": {
+          "description": "Collection of Prices",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Price"
+          }
+        },
+        "NextPageLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        },
+        "Count": {
+          "description": "The number of results in this page.",
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32"
+        }
+      }
+    },
+    "Price": {
+      "description": "Properties of Price",
+      "required": [
+        "retailPrice",
+        "unitPrice",
+        "location",
+        "currencyCode",
+        "serviceName",
+        "skuName",
+        "armSkuName",
+        "armRegionName",
+        "skuId",
+        "meterId",
+        "serviceFamily"
+      ],
+      "properties": {
+        "retailPrice": {
+          "description": "Retail price",
+          "type": "number",
+          "format": "double"
+        },
+        "unitPrice": {
+          "description": "Discounted Price",
+          "type": "number",
+          "format": "double"
+        },
+        "location": {
+          "description": "Location in which the azure service is available",
+          "type": "string"
+        },
+        "serviceName": {
+          "description": "Service name",
+          "type": "string"
+        },
+        "skuName": {
+          "description": "SKU name",
+          "type": "string"
+        },
+        "armSkuName": {
+          "description": "ARM SKU name",
+          "type": "string"
+        },
+        "armRegionName": {
+          "description": "ARM Region Name maximum",
+          "type": "string"
+        },
+        "skuId": {
+          "description": "SKU Id",
+          "type": "string"
+        },
+        "currencyCode": {
+          "description": "Currency Code",
+          "type": "string"
+        },
+        "meterId": {
+          "description": "Meter Id",
+          "type": "string"
+        },
+        "serviceFamily": {
+          "description": "Service family",
+          "type": "string"
+        },
+        "effectiveStartDate": {
+          "description": "Effective start date of the meter",
+          "type": "string",
+          "readOnly": true
+        },
+        "effectiveEndDate": {
+          "description": "Effective end date of the meter",
+          "type": "string",
+          "readOnly": true
+        },
+        "includedQuantity": {
+          "description": "Included quantity",
+          "type": "string",
+          "readOnly": true
+        },
+        "reservationTerm": {
+          "description": "Reservation term",
+          "type": "string",
+          "readOnly": true
+        },
+        "tierMinimumUnits": {
+          "description": "Tier minimum units",
+          "type": "string",
+          "readOnly": true
+        },
+        "priceType": {
+          "description": "Price type",
+          "type": "string",
+          "readOnly": true
+        },
+        "productName": {
+          "description": "Product name",
+          "type": "string",
+          "readOnly": true
+        },
+        "serviceId": {
+          "description": "Service Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterName": {
+          "description": "Meter name",
+          "type": "string",
+          "readOnly": true
+        },
+        "isPrimaryMeterRegion": {
+          "description": "Is the meter in primary region",
+          "type": "string",
+          "readOnly": true
+        },
+        "termUnits": {
+          "description": "Term Units",
+          "type": "string",
+          "readOnly": true
+        },
+        "tierMaximumUnits": {
+          "description": "Tier maximum units",
+          "type": "string",
+          "readOnly": true
+        },
+        "chargeType": {
+          "description": "Charge type",
+          "type": "string",
+          "readOnly": true
+        },
+        "percentUnitPrice": {
+          "description": "Percentage unit price",
+          "type": "string",
+          "readOnly": true
+        },
+        "partNumber": {
+          "description": "Part number",
+          "type": "string",
+          "readOnly": true
+        },
+        "platform": {
+          "description": "Platform or Operating System",
+          "type": "string",
+          "readOnly": true
+        },
+        "skuType": {
+          "description": "SKU Type",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterState": {
+          "description": "State of the meter",
+          "type": "string",
+          "readOnly": true
+        },
+        "unitOfMeasure": {
+          "description": "Unit of measure",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorDetails": {
+      "description": "The details of the error.",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request. The current version is 2022-03-01."
+    },
+    "billingAccountIdParameter": {
+      "name": "billingAccountId",
+      "in": "path",
+      "description": "Azure Billing Account Id.",
+      "required": true,
+      "type": "string"
+    },
+    "billingProfileIdParameter": {
+      "name": "billingProfileId",
+      "in": "path",
+      "description": "Azure Billing Profile Id.",
+      "required": true,
+      "type": "string"
+    }
+  }
+}

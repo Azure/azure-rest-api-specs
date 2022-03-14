@@ -1,0 +1,395 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-03-01",
+    "title": "CostManagementClient"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/calculatePrice": {
+      "post": {
+        "tags": [
+          "CalculatePrice"
+        ],
+        "operationId": "CalculatePrice",
+        "description": "The operation to calculate the price for a specific armSkuId and commitment.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "CalculatePriceForSavingsPlanUpfrontP3Y": {
+            "$ref": "./examples/CalculatePriceForSavingsPlanUpfrontP3YSubId.json"
+          },
+          "CalculatePriceForSavingsPlanMonthlyP1Y": {
+            "$ref": "./examples/CalculatePriceForSavingsPlanMonthlyP1YSubId.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CalculatePriceRequestParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CalculatePriceResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Unhandled Exception",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/calculatePrice": {
+      "post": {
+        "tags": [
+          "CalculatePrice"
+        ],
+        "operationId": "CalculatePriceByBillingAccountId",
+        "description": "The operation to calculate the price for a specific armSkuId and commitment.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "CalculatePriceForSavingsPlanUpfrontP3Y": {
+            "$ref": "./examples/CalculatePriceForSavingsPlanUpfrontP3YBA.json"
+          },
+          "CalculatePriceForSavingsPlanMonthlyP1Y": {
+            "$ref": "./examples/CalculatePriceForSavingsPlanMonthlyP1YBA.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CalculatePriceRequestParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CalculatePriceResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Unhandled Exception",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.CostManagement/calculatePrice": {
+      "post": {
+        "tags": [
+          "CalculatePrice"
+        ],
+        "operationId": "CalculatePriceByBillingAcountAndProfileId",
+        "description": "The operation to calculate the price for a specific armSkuId and commitment.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "CalculatePriceForSavingsPlanUpfrontP3Y": {
+            "$ref": "./examples/CalculatePriceForSavingsPlanUpfrontP3YBABP.json"
+          },
+          "CalculatePriceForSavingsPlanMonthlyP1Y": {
+            "$ref": "./examples/CalculatePriceForSavingsPlanMonthlyP1YBABP.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CalculatePriceRequestParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CalculatePriceResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Unhandled Exception",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"x-ms-ratelimit-microsoft.consumption-retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "ErrorDetails": {
+      "description": "The details of the error.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CalculatePriceRequest": {
+      "description": "The Calculate Price Request object",
+      "type": "object",
+      "properties": {
+        "armSkuName": {
+          "type": "string",
+          "description": "The Arm Sku Name of the desired product",
+          "example": "Compute_Savings_Plan"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "example": "global"
+        },
+        "properties": {
+          "description": "Readonly pricing properties for the request.",
+          "$ref": "#/definitions/SavingsPlanProperties"
+        }
+      }
+    },
+    "PricingProperties": {
+      "description": "The Pricing Properties.",
+      "type": "object",
+      "properties": {
+        "term": {
+          "type": "string",
+          "description": "The term of the request",
+          "enum": [
+            "P1Y",
+            "P3Y"
+          ],
+          "x-ms-enum": {
+            "name": "Term",
+            "modelAsString": true
+          },
+          "example": "P1Y"
+        }
+      }
+    },
+    "SavingsPlanProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/PricingProperties"
+        }
+      ],
+      "description": "The Savings Plan specific Pricing Properties",
+      "type": "object",
+      "properties": {
+        "commitment": {
+          "description": "Readonly pricing properties for the request.",
+          "$ref": "#/definitions/CurrencyValue"
+        },
+        "billingPlan": {
+          "type": "string",
+          "description": "The billing plan of the request",
+          "enum": [
+            "Monthly",
+            "Upfront"
+          ],
+          "x-ms-enum": {
+            "name": "BillingPlan",
+            "modelAsString": true
+          },
+          "example": "Monthly"
+        }
+      }
+    },
+    "CurrencyValue": {
+      "description": "Paired currency code and amount",
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "number",
+          "description": "The amount in the associated currency code",
+          "example": "5.68"
+        },
+        "currencyCode": {
+          "type": "string",
+          "description": "The ISO 4217 3-letter currency code",
+          "example": "USD"
+        }
+      }
+    },
+    "CalculatePriceResponse": {
+      "description": "The Resource model definition.",
+      "type": "object",
+      "properties": {
+        "armSkuName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Arm Sku Name of the desired product",
+          "example": "Compute_Savings_Plan"
+        },
+        "billingPlanTotal": {
+          "description": "The total amount in currency code for the billing plan.",
+          "$ref": "#/definitions/CurrencyValue"
+        },
+        "pricingTotal": {
+          "description": "The total amount in currency code for the term.",
+          "$ref": "#/definitions/CurrencyValue"
+        },
+        "properties": {
+          "description": "Readonly pricing properties from the request.",
+          "readOnly": true,
+          "$ref": "#/definitions/SavingsPlanProperties"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request."
+    },
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Azure Subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "billingAccountIdParameter": {
+      "name": "billingAccountId",
+      "in": "path",
+      "description": "BillingAccount ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "billingProfileIdParameter": {
+      "name": "billingProfileId",
+      "in": "path",
+      "description": "Azure Billing Profile ID.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CalculatePriceRequestParameter": {
+      "name": "calculatePriceRequest",
+      "in": "body",
+      "required": true,
+      "description": "The calculate price request parameters",
+      "schema": {
+        "$ref": "#/definitions/CalculatePriceRequest"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

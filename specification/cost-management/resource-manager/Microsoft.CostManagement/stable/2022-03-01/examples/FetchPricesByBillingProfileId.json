@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2022-03-01",
+    "billingAccountId": "00000000-0000-0000-0000-000000000000",
+    "billingProfileId": "00000000-0000-0000-0000-000000000000",
+    "$filter": "armRegionName eq 'uksouth' and serviceFamily eq 'Compute'",
+    "parameters": {
+      "keys": [
+        "skuType",
+        "platform"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "BillingCurrency": "USD",
+        "CustomerEntityId": "00000000-0000-0000-0000-000000000000",
+        "CustomerEntityType": "BillingProfileId",
+        "Items": [
+          {
+            "currencyCode": "USD",
+            "retailPrice": 0.145,
+            "unitPrice": 0.145,
+            "armRegionName": "uksouth",
+            "location": "UK South",
+            "meterId": "003d6f45-5d78-46af-97e7-d40ab47649a5",
+            "skuId": "DZH318Z0BQ4V/004Z",
+            "skuName": "L8s Low Priority",
+            "serviceFamily": "Compute",
+            "armSkuName": "Standard_L8s",
+            "skuType": "spot",
+            "platform": "windows",
+            "serviceName": "service Name"
+          }
+        ],
+        "NextPageLink": null,
+        "Count": 1
+      }
+    }
+  }
+}

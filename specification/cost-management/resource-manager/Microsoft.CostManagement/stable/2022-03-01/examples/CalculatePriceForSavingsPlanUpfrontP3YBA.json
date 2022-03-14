@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "api-version": "2022-03-01",
+    "billingAccountId": "00000000-0000-0000-0000-000000000000",
+    "calculatePriceRequest": {
+      "armSkuName": "Compute_Savings_Plan",
+      "location": "global",
+      "properties": {
+        "commitment": {
+          "amount": 5.68,
+          "currencyCode": "USD"
+        },
+        "billingPlan": "Upfront",
+        "term": "P3Y"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "armSkuName": "Compute_Savings_Plan",
+        "billingPlanTotal": {
+          "amount": 149270.40,
+          "currencyCode": "USD"
+        },
+        "pricingTotal": {
+          "amount": 149270.40,
+          "currencyCode": "USD"
+        },
+        "properties": {
+          "commitment": {
+            "amount": 5.68,
+            "currencyCode": "USD"
+          },
+          "billingPlan": "Upfront",
+          "term": "P3Y"
+        }
+      }
+    },
+    "400": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "error": {
+          "code": "BadRequest",
+          "message": "Invalid Model."
+        }
+      }
+    },
+    "500": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "Exception in calculate price logic."
+        }
+      }
+    }
+  }
+}
