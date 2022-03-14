@@ -768,60 +768,6 @@
             "$ref": "./examples/DeviceCapacityRequestPut.json"
           }
         }
-      },
-      "get": {
-        "tags": [
-          "DeviceCapacityCheck"
-        ],
-        "description": "Gets all the device capacity checks done on a Data Box Edge/Data Box Gateway device.",
-        "operationId": "DeviceCapacityCheck_ListByDataBoxEdgeDevice",
-        "parameters": [
-          {
-            "name": "deviceName",
-            "in": "path",
-            "description": "The device name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "Specify $filter='Type eq <type>' to filter on device capacity request info type property",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The collection of all device capacity checks on the device.",
-            "schema": {
-              "$ref": "#/definitions/DeviceCapacityChecksList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "UserGetAllInDevice": {
-            "$ref": "./examples/DeviceCapacityChecksGetAllInDevice.json"
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/deviceCapacityCheck/{name}": {
@@ -5953,27 +5899,6 @@
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "Metadata pertaining to device capacity request",
-          "readOnly": true
-        }
-      }
-    },
-    "DeviceCapacityChecksList": {
-      "description": "Collection of device capacity checks.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of device capacity checks.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeviceCapacityRequestInfo"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "description": "Link to the next set of results.",
-          "type": "string",
           "readOnly": true
         }
       }
