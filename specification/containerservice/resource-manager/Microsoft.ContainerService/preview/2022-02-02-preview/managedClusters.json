@@ -2566,43 +2566,32 @@
       "description": "Describes the properties of a Operation Value Display."
     },
     "Resource": {
+      "title": "Resource",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
       "type": "object",
-      "description": "The Resource model definition.",
       "properties": {
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource Id"
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
         },
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource name"
+          "description": "The name of the resource"
         },
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource type"
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
         },
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
+        "systemData": {
+          "readOnly": true,
           "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "#/definitions/systemData"
         }
       },
-      "required": [
-        "location"
-      ],
       "x-ms-azure-resource": true
     },
     "SubResource": {
@@ -3912,12 +3901,23 @@
           "description": "Properties of a managed cluster.",
           "$ref": "#/definitions/ManagedClusterProperties",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
         }
+      ],
+      "required": [
+        "location"
       ],
       "description": "Managed cluster."
     },
@@ -4366,8 +4366,19 @@
           "description": "AccessProfile of a managed cluster.",
           "$ref": "#/definitions/AccessProfile",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
+      "required": [
+        "location"
+      ],
       "description": "Managed cluster Access Profile.",
       "x-ms-azure-resource": false
     },
@@ -5844,15 +5855,18 @@
     "Snapshot": {
       "type": "object",
       "properties": {
-        "systemData": {
-          "$ref": "#/definitions/systemData",
-          "readOnly": true,
-          "description": "The system metadata relating to this snapshot."
-        },
         "properties": {
           "description": "Properties of a snapshot.",
           "$ref": "#/definitions/SnapshotProperties",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -5860,26 +5874,35 @@
           "$ref": "#/definitions/Resource"
         }
       ],
+      "required": [
+        "location"
+      ],
       "description": "A node pool snapshot resource."
     },
     "ManagedClusterSnapshot": {
       "type": "object",
       "properties": {
-        "systemData": {
-          "$ref": "#/definitions/systemData",
-          "readOnly": true,
-          "description": "The system metadata relating to this snapshot."
-        },
         "properties": {
           "description": "Properties of a managed cluster snapshot.",
           "$ref": "#/definitions/ManagedClusterSnapshotProperties",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
         }
+      ],
+      "required": [
+        "location"
       ],
       "description": "A managed cluster snapshot resource."
     },
