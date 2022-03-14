@@ -30,15 +30,6 @@ use-internal-constructors: true
 add-credentials: true
 ```
 
-### Tag: package-2018-11
-
-These settings apply only when `--tag=package-2018-11` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-11'
-input-file:
-- stable/2018-11-09/DataLakeStorage.json
-```
-
 ### Tag: package-2018-06-preview
 
 These settings apply only when `--tag=package-2018-06-preview` is specified on the command line.
@@ -46,15 +37,6 @@ These settings apply only when `--tag=package-2018-06-preview` is specified on t
 ``` yaml $(tag) == 'package-2018-06-preview'
 input-file:
 - preview/2018-06-17/DataLakeStorage.json
-```
-
-### Tag: package-2019-10
-
-These settings apply only when `--tag=package-2019-10` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-10'
-input-file:
-- stable/2019-10-31/DataLakeStorage.json
 ```
 
 ### Tag: package-2020-06
