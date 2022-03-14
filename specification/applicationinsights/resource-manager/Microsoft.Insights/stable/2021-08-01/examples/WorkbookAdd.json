@@ -1,15 +1,15 @@
 {
   "parameters": {
     "api-version": "2021-08-01",
-    "resourceGroupName": "my-resource-group",
-    "resourceName": "deadb33f-8bee-4d3b-a059-9be8dac93960",
     "subscriptionId": "6b643656-33eb-422f-aee8-3ac145d124af",
-    "sourceId": "/subscriptions/6b643656-33eb-422f-aee8-3ac145d124af/resourcegroups/MyGroup",
+    "resourceGroupName": "my-resource-group",
+    "resourceName": "deadb33f-5e0d-4064-8ebb-1a4ed0313eb2",
+    "sourceId": "/subscriptions/6b643656-33eb-422f-aee8-3ac145d124af/resourcegroups/my-resource-group",
     "workbookProperties": {
-      "location": "west us",
+      "location": "westus",
       "kind": "shared",
       "properties": {
-        "displayName": "tttt",
+        "displayName": "Sample workbook",
         "serializedData": "{\"version\":\"Notebook/1.0\",\"items\":[{\"type\":1,\"content\":\"{\"json\":\"## New workbook\\r\\n---\\r\\n\\r\\nWelcome to your new workbook.  This area will display text formatted as markdown.\\r\\n\\r\\n\\r\\nWe've included a basic analytics query to get you started. Use the `Edit` button below each section to configure it or add more sections.\"}\",\"halfWidth\":null,\"conditionalVisibility\":null},{\"type\":3,\"content\":\"{\"version\":\"KqlItem/1.0\",\"query\":\"union withsource=TableName *\\n| summarize Count=count() by TableName\\n| render barchart\",\"showQuery\":false,\"size\":1,\"aggregation\":0,\"showAnnotations\":false}\",\"halfWidth\":null,\"conditionalVisibility\":null}],\"isLocked\":false}",
         "category": "workbook",
         "description": "Sample workbook"
@@ -23,17 +23,18 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/6b643656-33eb-422f-aee8-3ac145d124af/resourcegroups/my-resource-group/providers/microsoft.insights/workbooks/deadb33f-8bee-4d3b-a059-9be8dac93960",
+        "id": "/subscriptions/6b643656-33eb-422f-aee8-3ac145d124af/resourcegroups/my-resource-group/providers/microsoft.insights/workbooks/deadb33f-5e0d-4064-8ebb-1a4ed0313eb2",
         "type": "Microsoft.Insights/workbooks",
         "location": "westus",
-        "name": "deadb33f-8bee-4d3b-a059-9be8dac93960",
+        "name": "deadb33f-5e0d-4064-8ebb-1a4ed0313eb2",
         "kind": "shared",
         "properties": {
-          "displayName": "Blah Blah Blah",
+          "displayName": "Sample workbook",
           "userId": "userId",
           "serializedData": "{\"version\":\"Notebook/1.0\",\"items\":[{\"type\":1,\"content\":\"{\"json\":\"## New workbook\\r\\n---\\r\\n\\r\\nWelcome to your new workbook.  This area will display text formatted as markdown.\\r\\n\\r\\n\\r\\nWe've included a basic analytics query to get you started. Use the `Edit` button below each section to configure it or add more sections.\"}\",\"halfWidth\":null,\"conditionalVisibility\":null},{\"type\":3,\"content\":\"{\"version\":\"KqlItem/1.0\",\"query\":\"union withsource=TableName *\\n| summarize Count=count() by TableName\\n| render barchart\",\"showQuery\":false,\"size\":1,\"aggregation\":0,\"showAnnotations\":false}\",\"halfWidth\":null,\"conditionalVisibility\":null}],\"isLocked\":false}",
           "version": "Notebook/1.0",
           "category": "workbook",
+          "sourceId": "/subscriptions/6b643656-33eb-422f-aee8-3ac145d124af/resourcegroups/my-resource-group",
           "timeModified": "2021-08-24T06:56:31.6301521Z",
           "storageUri": null,
           "description": "Sample workbook",
@@ -47,17 +48,18 @@
     },
     "201": {
       "body": {
-        "id": "/subscriptions/6b643656-33eb-422f-aee8-3ac145d124af/resourcegroups/my-resource-group/providers/microsoft.insights/workbooks/deadb33f-8bee-4d3b-a059-9be8dac93960",
+        "id": "/subscriptions/6b643656-33eb-422f-aee8-3ac145d124af/resourcegroups/my-resource-group/providers/microsoft.insights/workbooks/deadb33f-5e0d-4064-8ebb-1a4ed0313eb2",
         "type": "Microsoft.Insights/workbooks",
         "location": "westus",
-        "name": "deadb33f-8bee-4d3b-a059-9be8dac93960",
+        "name": "deadb33f-5e0d-4064-8ebb-1a4ed0313eb2",
         "kind": "shared",
         "properties": {
-          "displayName": "Blah Blah Blah",
+          "displayName": "Sample workbook",
           "userId": "userId",
           "serializedData": "{\"version\":\"Notebook/1.0\",\"items\":[{\"type\":1,\"content\":\"{\"json\":\"## New workbook\\r\\n---\\r\\n\\r\\nWelcome to your new workbook.  This area will display text formatted as markdown.\\r\\n\\r\\n\\r\\nWe've included a basic analytics query to get you started. Use the `Edit` button below each section to configure it or add more sections.\"}\",\"halfWidth\":null,\"conditionalVisibility\":null},{\"type\":3,\"content\":\"{\"version\":\"KqlItem/1.0\",\"query\":\"union withsource=TableName *\\n| summarize Count=count() by TableName\\n| render barchart\",\"showQuery\":false,\"size\":1,\"aggregation\":0,\"showAnnotations\":false}\",\"halfWidth\":null,\"conditionalVisibility\":null}],\"isLocked\":false}",
           "version": "Notebook/1.0",
           "category": "workbook",
+          "sourceId": "/subscriptions/6b643656-33eb-422f-aee8-3ac145d124af/resourcegroups/my-resource-group",
           "timeModified": "2021-08-24T06:56:31.6301521Z",
           "storageUri": null,
           "description": "Sample workbook",
