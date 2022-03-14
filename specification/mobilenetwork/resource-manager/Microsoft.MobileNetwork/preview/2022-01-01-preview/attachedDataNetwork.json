@@ -3,7 +3,7 @@
   "info": {
     "title": "MobileNetworkManagementClient",
     "description": "The resources in this swagger specification will be used to manage attached data network resources in mobile network attached to a particular packet core instance",
-    "version": "2022-01-01-preview"
+    "version": "2022-03-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -43,7 +43,10 @@
         "description": "Deletes the specified attached data network.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
@@ -55,10 +58,7 @@
             "$ref": "./common.json#/parameters/AttachedDataNetworkNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -74,7 +74,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -96,7 +96,10 @@
         "description": "Gets information about the specified attached data network.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
@@ -108,10 +111,7 @@
             "$ref": "./common.json#/parameters/AttachedDataNetworkNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -124,7 +124,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -142,7 +142,10 @@
         "description": "Creates or updates an attached data network.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
@@ -154,6 +157,9 @@
             "$ref": "./common.json#/parameters/AttachedDataNetworkNameParameter"
           },
           {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
@@ -161,12 +167,6 @@
               "$ref": "#/definitions/AttachedDataNetwork"
             },
             "description": "Parameters supplied to the create or update attached data network operation."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -185,7 +185,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -207,7 +207,10 @@
         "description": "Updates an attached data network update tags.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
@@ -219,6 +222,9 @@
             "$ref": "./common.json#/parameters/AttachedDataNetworkNameParameter"
           },
           {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
@@ -226,12 +232,6 @@
               "$ref": "./common.json#/definitions/TagsObject"
             },
             "description": "Parameters supplied to update attached data network tags."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -244,7 +244,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -264,7 +264,10 @@
         "description": "Gets all the data networks associated with a packet core data plane.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
@@ -273,10 +276,7 @@
             "$ref": "./common.json#/parameters/PacketCoreDataPlaneNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -289,7 +289,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -315,14 +315,14 @@
         },
         "systemData": {
           "x-ms-client-flatten": true,
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
           "readOnly": true,
           "description": "Metadata pertaining to creation and last modification of the resource."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ],
       "required": [
@@ -427,7 +427,17 @@
       ],
       "x-ms-enum": {
         "name": "NaptEnabled",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Enabled",
+            "description": "NAPT is enabled"
+          },
+          {
+            "value": "Disabled",
+            "description": "NAPT is disabled"
+          }
+        ]
       },
       "default": "Enabled"
     },

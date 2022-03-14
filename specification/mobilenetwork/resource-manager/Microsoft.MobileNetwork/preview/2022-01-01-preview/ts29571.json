@@ -3,7 +3,7 @@
   "info": {
     "title": "MobileNetworkManagementClient",
     "description": "The resources in this swagger specification will be used to manage the virtual network functions deployed using mobile network. They are standard mobile network properties defined by 3GPP in TS 29.571 v16.6.0.",
-    "version": "2022-01-01-preview"
+    "version": "2022-03-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -147,7 +147,17 @@
       ],
       "x-ms-enum": {
         "name": "PreemptionCapability",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "NotPreempt",
+            "description": "Cannot preempt"
+          },
+          {
+            "value": "MayPreempt",
+            "description": "May preempt"
+          }
+        ]
       }
     },
     "PreemptionVulnerability": {
@@ -159,7 +169,17 @@
       ],
       "x-ms-enum": {
         "name": "PreemptionVulnerability",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "NotPreemptable",
+            "description": "Cannot be preempted"
+          },
+          {
+            "value": "Preemptable",
+            "description": "May be preempted"
+          }
+        ]
       }
     },
     "Arp": {
@@ -247,7 +267,17 @@
       ],
       "x-ms-enum": {
         "name": "CoreNetworkType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "5GC",
+            "description": "5G core"
+          },
+          {
+            "value": "EPC",
+            "description": "EPC / 4G core"
+          }
+        ]
       }
     },
     "CoreNetworkTypeRm": {
@@ -264,7 +294,15 @@
       ],
       "x-ms-enum": {
         "name": "PduSessionType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "IPv4"
+          },
+          {
+            "value": "IPv6"
+          }
+        ]
       }
     },
     "PduSessionTypeRm": {
