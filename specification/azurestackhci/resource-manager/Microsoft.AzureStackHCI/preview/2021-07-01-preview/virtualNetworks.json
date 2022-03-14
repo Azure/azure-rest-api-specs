@@ -202,12 +202,6 @@
             "schema": {
               "$ref": "#/definitions/virtualnetworks"
             }
-          },
-          "201": {
-            "description": "Updates the virtualnetworks resource.",
-            "schema": {
-              "$ref": "#/definitions/virtualnetworks"
-            }
           }
         }
       }
@@ -293,7 +287,22 @@
       "properties": {
         "networkType": {
           "type": "string",
-          "description": "Type of the network"
+          "description": "Type of the network",
+          "enum": [
+            "NAT",
+            "Transparent",
+            "L2Bridge",
+            "L2Tunnel",
+            "ICS",
+            "Private",
+            "Overlay",
+            "Internal",
+            "Mirrored"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkTypeEnum",
+            "modelAsString": true
+          }
         },
         "subnets": {
           "type": "array",
