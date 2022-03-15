@@ -16,12 +16,7 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
-``` yaml $(python) && $(python-mode) == 'update'
+``` yaml $(python)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/mixedreality/azure-mgmt-mixedreality/azure/mgmt/mixedreality
-```
-
-``` yaml $(python) && $(python-mode) == 'create'
-basic-setup-py: true
-output-folder: $(python-sdks-folder)/mixedreality/azure-mgmt-mixedreality
 ```
