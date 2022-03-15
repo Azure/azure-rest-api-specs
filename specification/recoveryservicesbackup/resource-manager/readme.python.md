@@ -2,7 +2,7 @@
 
 These settings apply only when `--track2` is specified on the command line.
 
-``` yaml $(track2)
+``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-recoveryservicesbackup
@@ -14,7 +14,7 @@ no-namespace-folders: true
 
 Generate all API versions currently shipped for this package
 
-```yaml $(track2)
+```yaml $(python)
 clear-output-folder: true
 batch:
   - tag: package-passivestamp-2021-11-15
@@ -42,7 +42,7 @@ namespace: azure.mgmt.recoveryservicesbackup.activestamp
 output-folder: $(python-sdks-folder)/recoveryservices/azure-mgmt-recoveryservicesbackup/azure/mgmt/recoveryservicesbackup/activestamp
 ```
 
-``` yaml $(python) && $(track2)
+``` yaml $(python)
 modelerfour:
   lenient-model-deduplication: true
 directive:
