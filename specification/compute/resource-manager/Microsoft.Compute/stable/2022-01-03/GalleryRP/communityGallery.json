@@ -70,7 +70,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a gallery.": {
+          "Get a community gallery.": {
             "$ref": "./examples/communityGalleryExamples/CommunityGallery_Get.json"
           }
         }
@@ -115,7 +115,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a gallery.": {
+          "Get a community gallery image.": {
             "$ref": "./examples/communityGalleryExamples/CommunityGalleryImage_Get.json"
           }
         }
@@ -163,9 +163,102 @@
           }
         },
         "x-ms-examples": {
-          "Get a gallery.": {
+          "Get a community gallery image version.": {
             "$ref": "./examples/communityGalleryExamples/CommunityGalleryImageVersion_Get.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images": {
+      "get": {
+        "tags": [
+          "CommunityGalleryImages"
+        ],
+        "operationId": "CommunityGalleryImages_List",
+        "description": "List community gallery images inside a gallery.",
+        "parameters": [
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./galleryRPCommon.json#/parameters/LocationNameParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PublicGalleryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CommunityGalleryImageList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List community gallery images.": {
+            "$ref": "./examples/communityGalleryExamples/CommunityGalleryImage_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images/{galleryImageName}/versions": {
+      "get": {
+        "tags": [
+          "CommunityGalleryImageVersions"
+        ],
+        "operationId": "CommunityGalleryImageVersions_List",
+        "description": "List community gallery image versions inside an image.",
+        "parameters": [
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./galleryRPCommon.json#/parameters/LocationNameParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PublicGalleryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GalleryImageNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CommunityGalleryImageVersionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List community gallery image versions.": {
+            "$ref": "./examples/communityGalleryExamples/CommunityGalleryImageVersion_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -212,6 +305,27 @@
         }
       ],
       "description": "Specifies information about the Community Gallery that you want to create or update."
+    },
+    "CommunityGalleryImageList": {
+      "type": "object",
+      "description": "The List Community Gallery Images operation response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunityGalleryImage"
+          },
+          "x-ms-identifiers": [],
+          "description": "A list of community gallery images."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of community gallery images. Call ListNext() with this to fetch the next page of community gallery images."
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "CommunityGalleryImage": {
       "properties": {
@@ -291,6 +405,9 @@
         },
         "purchasePlan": {
           "$ref": "./galleryRPCommon.json#/definitions/ImagePurchasePlan"
+        },
+        "architecture": {
+          "$ref": "./galleryRPCommon.json#/definitions/Architecture"
         }
       },
       "required": [
@@ -299,6 +416,27 @@
         "identifier"
       ],
       "description": "Describes the properties of a gallery image definition."
+    },
+    "CommunityGalleryImageVersionList": {
+      "type": "object",
+      "description": "The List Community Gallery Image versions operation response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunityGalleryImageVersion"
+          },
+          "x-ms-identifiers": [],
+          "description": "A list of community gallery image versions."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of community gallery image versions. Call ListNext() with this to fetch the next page of community gallery image versions."
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "CommunityGalleryImageVersion": {
       "properties": {
@@ -325,6 +463,14 @@
           "type": "string",
           "format": "date-time",
           "description": "The end of life date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable."
+        },
+        "excludeFromLatest": {
+          "type": "boolean",
+          "description": "If set to true, Virtual Machines deployed from the latest version of the Image Definition won't use this Image Version."
+        },
+        "storageProfile": {
+          "$ref": "./galleryRPCommon.json#/definitions/SharedGalleryImageVersionStorageProfile",
+          "description": "Describes the storage profile of the image version."
         }
       },
       "description": "Describes the properties of a gallery image version."
