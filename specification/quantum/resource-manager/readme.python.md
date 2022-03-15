@@ -13,12 +13,7 @@ package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
-``` yaml $(python) && $(python-mode) == 'update'
+``` yaml $(python)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/quantum/azure-mgmt-quantum/azure/mgmt/quantum
-```
-
-``` yaml $(python) && $(python-mode) == 'create'
-basic-setup-py: true
-output-folder: $(python-sdks-folder)/quantum/azure-mgmt-quantum
 ```
