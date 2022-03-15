@@ -948,7 +948,7 @@
           "Entity"
         ],
         "description": "Remove business metadata from an entity.",
-        "operationId": "removeBusinessMetadata",
+        "operationId": "Entity_DeleteBusinessMetadata",
         "consumes":
         [
           "application/json"
@@ -991,7 +991,7 @@
           "Entity"
         ],
         "description": "Add business metadata to an entity.",
-        "operationId": "addOrUpdateBusinessMetadata",
+        "operationId": "Entity_AddOrUpdateBusinessMetadata",
         "consumes":
         [
           "application/json"
@@ -1041,7 +1041,7 @@
         [
           "Entity"
         ],
-        "operationId": "removeBusinessAttributes",
+        "operationId": "Entity_DeleteBusinessAttributes",
         "consumes":
         [
           "application/json"
@@ -1093,7 +1093,7 @@
         [
           "Entity"
         ],
-        "operationId": "addOrUpdateBusinessAttributes",
+        "operationId": "Entity_AddOrUpdateBusinessAttributes",
         "consumes":
         [
           "application/json"
@@ -1149,7 +1149,7 @@
           "Entity"
         ],
         "description": "Get the sample Template for uploading/creating bulk BusinessMetaData",
-        "operationId": "produceTemplate",
+        "operationId": "Entity_GetSampleBusinessMetadataTemplate",
         "produces":
         [
           "application/octet-stream"
@@ -1183,7 +1183,7 @@
           "Entity"
         ],
         "description": "Upload the file for creating Business Metadata in BULK",
-        "operationId": "importBMAttributes",
+        "operationId": "Entity_ImportBusinessAttributes",
         "consumes":
         [
           "multipart/form-data"
@@ -1346,7 +1346,7 @@
           "Entity"
         ],
         "description": "delete given labels to a given entity",
-        "operationId": "removeLabels",
+        "operationId": "Entity_DeleteLabels",
         "consumes":
         [
           "application/json"
@@ -1392,7 +1392,7 @@
           "Entity"
         ],
         "description": "Set labels to a given entity",
-        "operationId": "setLabels",
+        "operationId": "Entity_SetLabels",
         "consumes":
         [
           "application/json"
@@ -1438,7 +1438,7 @@
           "Entity"
         ],
         "description": "add given labels to a given entity",
-        "operationId": "addLabels",
+        "operationId": "Entity_AddLabel",
         "consumes":
         [
           "application/json"
@@ -1486,7 +1486,7 @@
         [
           "Entity"
         ],
-        "operationId": "removeLabelsByUniqueAttribute",
+        "operationId": "Entity_DeleteLabelsByUniqueAttribute",
         "description": "Delete given labels to a given entity identified by its type and unique attributes, if labels is null/empty, no lables will be removed. If any labels in labels set are non-existing labels, they will be ignored, only existing labels will be removed. In addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format: attr:<attrName>=<attrValue>. NOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName. The REST request would look something like this: DELETE /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue. ",
         "consumes":
         [
@@ -1534,7 +1534,7 @@
         [
           "Entity"
         ],
-        "operationId": "setLabelsByUniqueAttribute",
+        "operationId": "Entity_SetLabelsByUniqueAttribute",
         "description": "Set labels to a given entity identified by its type and unique attributes, if labels is null/empty, existing labels will all be removed. In addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format: attr:<attrName>=<attrValue>. NOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName. The REST request would look something like this: POST /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
         "consumes":
         [
@@ -1582,7 +1582,7 @@
         [
           "Entity"
         ],
-        "operationId": "addLabelsByUniqueAttribute",
+        "operationId": "Entity_AddLabelsByUniqueAttribute",
         "description": "Add given labels to a given entity identified by its type and unique attributes, if lables is null/empty, no labels will be added. In addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format: attr:<attrName>=<attrValue>. NOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName. The REST request would look something like this: PUT /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
         "consumes":
         [
