@@ -56,10 +56,6 @@ directive:
     where: $.paths
     from: standards.json
     reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
-  - suppress: OperationsAPIImplementation
-    where: $.paths
-    from: securityConnectors.json
-    reason: Suppression of OperationsAPI as it doesn't apply to this specific file
 ```
 
 ### Basic Information
@@ -93,6 +89,7 @@ These settings apply only when `--tag=package-preview-2021-12` is specified on t
 ```yaml $(tag) == 'package-preview-2021-12'
 input-file:
   - Microsoft.Security/preview/2021-12-01-preview/securityConnectors.json
+  - Microsoft.Security/preview/2015-06-01-preview/operations.json
 ```
 
 ### Tag: package-preview-2021-08
