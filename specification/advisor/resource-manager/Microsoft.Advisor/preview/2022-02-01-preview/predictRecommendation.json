@@ -145,47 +145,11 @@
           "description": "The list of operations.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/OperationEntity"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Operation"
           },
           "x-ms-identifiers": [
             "name"
           ]
-        }
-      }
-    },
-    "OperationEntity": {
-      "description": "The operation supported by Advisor.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}.",
-          "type": "string"
-        },
-        "display": {
-          "$ref": "#/definitions/OperationDisplayInfo",
-          "description": "The operation supported by Advisor."
-        }
-      }
-    },
-    "OperationDisplayInfo": {
-      "description": "The operation supported by Advisor.",
-      "type": "object",
-      "properties": {
-        "description": {
-          "description": "The description of the operation.",
-          "type": "string"
-        },
-        "operation": {
-          "description": "The action that users can perform, based on their permission level.",
-          "type": "string"
-        },
-        "provider": {
-          "description": "Service provider: Microsoft Advisor.",
-          "type": "string"
-        },
-        "resource": {
-          "description": "Resource on which the operation is performed.",
-          "type": "string"
         }
       }
     },
