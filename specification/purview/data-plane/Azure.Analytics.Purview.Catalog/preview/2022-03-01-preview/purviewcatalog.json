@@ -3,7 +3,7 @@
   "info": {
     "title": "Purview Catalog Service REST API Document",
     "description": "Purview Catalog Service is a fully managed cloud service whose users can discover the data sources they need and understand the data sources they find. At the same time, Data Catalog helps organizations get more value from their existing investments. This spec defines REST API of Purview Catalog Service.",
-    "version": "2021-05-01-preview"
+    "version": "2022-03-01-preview"
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{Endpoint}",
@@ -942,15 +942,14 @@
         }
       }
     },
-    "/atlas/v2/entity/guid/{guid}/businessmetadata" : {
+    "/atlas/v2/entity/guid/{guid}/businessmetadata": {
       "delete": {
         "tags": [
           "Entity"
         ],
         "description": "Remove business metadata from an entity.",
         "operationId": "Entity_DeleteBusinessMetadata",
-        "consumes":
-        [
+        "consumes": [
           "application/json"
         ],
         "x-ms-examples": {
@@ -966,34 +965,29 @@
             "name": "body",
             "required": false,
             "in": "body",
-            "schema":
-            {
+            "schema": {
               "description": "",
               "type": "object",
-              "additionalProperties":
-              {
+              "additionalProperties": {
                 "type": "object"
               }
             },
             "description": ""
           }
         ],
-        "responses":
-        {
-          "204":
-          {
+        "responses": {
+          "204": {
             "description": "Success"
           }
         }
       },
-      "post" : {
+      "post": {
         "tags": [
           "Entity"
         ],
         "description": "Add business metadata to an entity.",
         "operationId": "Entity_AddOrUpdateBusinessMetadata",
-        "consumes":
-        [
+        "consumes": [
           "application/json"
         ],
         "x-ms-examples": {
@@ -1019,8 +1013,7 @@
             "required": false,
             "schema": {
               "type": "object",
-              "additionalProperties":
-              {
+              "additionalProperties": {
                 "type": "object"
               }
             }
@@ -1033,17 +1026,13 @@
         }
       }
     },
-    "/atlas/v2/entity/guid/{guid}/businessmetadata/{bmName}":
-    {
-      "delete":
-      {
-        "tags":
-        [
+    "/atlas/v2/entity/guid/{guid}/businessmetadata/{bmName}": {
+      "delete": {
+        "tags": [
           "Entity"
         ],
         "operationId": "Entity_DeleteBusinessAttributes",
-        "consumes":
-        [
+        "consumes": [
           "application/json"
         ],
         "x-ms-examples": {
@@ -1051,8 +1040,7 @@
             "$ref": "./examples/Entity_BusinessAttribute.json"
           }
         },
-        "parameters":
-        [
+        "parameters": [
           {
             "name": "bmName",
             "in": "path",
@@ -1067,35 +1055,28 @@
             "name": "body",
             "required": false,
             "in": "body",
-            "schema":
-            {
+            "schema": {
               "description": "",
               "type": "object",
-              "additionalProperties":
-              {
+              "additionalProperties": {
                 "type": "object"
               }
             },
             "description": ""
           }
         ],
-        "responses":
-        {
-          "204":
-          {
+        "responses": {
+          "204": {
             "description": "Success"
           }
         }
       },
-      "post":
-      {
-        "tags":
-        [
+      "post": {
+        "tags": [
           "Entity"
         ],
         "operationId": "Entity_AddOrUpdateBusinessAttributes",
-        "consumes":
-        [
+        "consumes": [
           "application/json"
         ],
         "x-ms-examples": {
@@ -1103,8 +1084,7 @@
             "$ref": "./examples/Entity_BusinessAttribute.json"
           }
         },
-        "parameters":
-        [
+        "parameters": [
           {
             "name": "bmName",
             "in": "path",
@@ -1119,87 +1099,62 @@
             "name": "body",
             "required": false,
             "in": "body",
-            "schema":
-            {
+            "schema": {
               "description": "",
               "type": "object",
-              "additionalProperties":
-              {
+              "additionalProperties": {
                 "type": "object"
               }
             },
             "description": ""
           }
         ],
-        "responses":
-        {
-          "204":
-          {
+        "responses": {
+          "204": {
             "description": "Success"
           }
         }
       }
     },
-    "/atlas/v2/entity/businessmetadata/import/template":
-    {
-      "get":
-      {
-        "tags":
-        [
+    "/atlas/v2/entity/businessmetadata/import/template": {
+      "get": {
+        "tags": [
           "Entity"
         ],
         "description": "Get the sample Template for uploading/creating bulk BusinessMetaData",
         "operationId": "Entity_GetSampleBusinessMetadataTemplate",
-        "produces":
-        [
+        "produces": [
           "application/octet-stream"
         ],
-        "parameters":
-        [],
-        "responses":
-        {
-          "200":
-          {
-            "schema":
-            {
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
               "description": "Template File",
               "type": "file"
             },
             "description": "Template File"
           },
-          "400":
-          {
+          "400": {
             "description": "If the provided fileType is not supported"
           }
         }
       }
     },
-    "/atlas/v2/entity/businessmetadata/import":
-    {
-      "post":
-      {
-        "tags":
-        [
+    "/atlas/v2/entity/businessmetadata/import": {
+      "post": {
+        "tags": [
           "Entity"
         ],
         "description": "Upload the file for creating Business Metadata in BULK",
         "operationId": "Entity_ImportBusinessAttributes",
-        "consumes":
-        [
+        "consumes": [
           "multipart/form-data"
         ],
-        "produces":
-        [
+        "produces": [
           "application/json"
         ],
-        "parameters":
-        [
-          {
-            "name": "fileDetail",
-            "in": "formData",
-            "type": "file",
-            "description": "FormDataContentDisposition metadata of file"
-          },
+        "parameters": [
           {
             "name": "uploadedInputStream",
             "in": "formData",
@@ -1207,21 +1162,15 @@
             "description": "InputStream of file"
           }
         ],
-        "responses":
-        {
-          "200":
-          {
-            "schema":
-            {
+        "responses": {
+          "200": {
+            "schema": {
               "$ref": "#/definitions/BulkImportResponse",
               "description": "If Business Metadata creation was successful"
             },
-            "examples":
-            {
-              "application/json":
-              {
-                "failedImportInfoList":
-                [
+            "examples": {
+              "application/json": {
+                "failedImportInfoList": [
                   {
                     "childObjectName": "...",
                     "importStatus": "SUCCESS",
@@ -1235,8 +1184,7 @@
                     "remarks": "..."
                   }
                 ],
-                "successImportInfoList":
-                [
+                "successImportInfoList": [
                   {
                     "childObjectName": "...",
                     "importStatus": "SUCCESS",
@@ -1254,14 +1202,10 @@
             },
             "description": "If Business Metadata creation was successful"
           },
-          "400":
-          {
-            "examples":
-            {
-              "application/json":
-              {
-                "failedImportInfoList":
-                [
+          "400": {
+            "examples": {
+              "application/json": {
+                "failedImportInfoList": [
                   {
                     "childObjectName": "...",
                     "importStatus": "SUCCESS",
@@ -1275,8 +1219,7 @@
                     "remarks": "..."
                   }
                 ],
-                "successImportInfoList":
-                [
+                "successImportInfoList": [
                   {
                     "childObjectName": "...",
                     "importStatus": "FAILED",
@@ -1294,14 +1237,10 @@
             },
             "description": "If Business Metadata definition has invalid or missing information"
           },
-          "409":
-          {
-            "examples":
-            {
-              "application/json":
-              {
-                "failedImportInfoList":
-                [
+          "409": {
+            "examples": {
+              "application/json": {
+                "failedImportInfoList": [
                   {
                     "childObjectName": "...",
                     "importStatus": "FAILED",
@@ -1315,8 +1254,7 @@
                     "remarks": "..."
                   }
                 ],
-                "successImportInfoList":
-                [
+                "successImportInfoList": [
                   {
                     "childObjectName": "...",
                     "importStatus": "FAILED",
@@ -1337,18 +1275,14 @@
         }
       }
     },
-    "/atlas/v2/entity/guid/{guid}/labels":
-    {
-      "delete":
-      {
-        "tags":
-        [
+    "/atlas/v2/entity/guid/{guid}/labels": {
+      "delete": {
+        "tags": [
           "Entity"
         ],
         "description": "delete given labels to a given entity",
         "operationId": "Entity_DeleteLabels",
-        "consumes":
-        [
+        "consumes": [
           "application/json"
         ],
         "x-ms-examples": {
@@ -1356,8 +1290,7 @@
             "$ref": "./examples/Entity_Label.json"
           }
         },
-        "parameters":
-        [
+        "parameters": [
           {
             "$ref": "#/parameters/guid"
           },
@@ -1365,36 +1298,29 @@
             "name": "body",
             "required": false,
             "in": "body",
-            "schema":
-            {
+            "schema": {
               "description": "",
               "type": "array",
-              "items":
-              {
+              "items": {
                 "type": "string"
               }
             },
             "description": ""
           }
         ],
-        "responses":
-        {
-          "204":
-          {
+        "responses": {
+          "204": {
             "description": "Success"
           }
         }
       },
-      "post":
-      {
-        "tags":
-        [
+      "post": {
+        "tags": [
           "Entity"
         ],
         "description": "Set labels to a given entity",
         "operationId": "Entity_SetLabels",
-        "consumes":
-        [
+        "consumes": [
           "application/json"
         ],
         "x-ms-examples": {
@@ -1402,8 +1328,7 @@
             "$ref": "./examples/Entity_Label.json"
           }
         },
-        "parameters":
-        [
+        "parameters": [
           {
             "$ref": "#/parameters/guid"
           },
@@ -1411,36 +1336,29 @@
             "name": "body",
             "required": false,
             "in": "body",
-            "schema":
-            {
+            "schema": {
               "description": "set of labels to be set to the entity",
               "type": "array",
-              "items":
-              {
+              "items": {
                 "type": "string"
               }
             },
             "description": "set of labels to be set to the entity"
           }
         ],
-        "responses":
-        {
-          "204":
-          {
+        "responses": {
+          "204": {
             "description": "Success"
           }
         }
       },
-      "put":
-      {
-        "tags":
-        [
+      "put": {
+        "tags": [
           "Entity"
         ],
         "description": "add given labels to a given entity",
         "operationId": "Entity_AddLabel",
-        "consumes":
-        [
+        "consumes": [
           "application/json"
         ],
         "x-ms-examples": {
@@ -1448,8 +1366,7 @@
             "$ref": "./examples/Entity_Label.json"
           }
         },
-        "parameters":
-        [
+        "parameters": [
           {
             "$ref": "#/parameters/guid"
           },
@@ -1457,43 +1374,34 @@
             "name": "body",
             "required": false,
             "in": "body",
-            "schema":
-            {
+            "schema": {
               "description": "",
               "type": "array",
-              "items":
-              {
+              "items": {
                 "type": "string"
               }
             },
             "description": ""
           }
         ],
-        "responses":
-        {
-          "204":
-          {
+        "responses": {
+          "204": {
             "description": "Success"
           }
         }
       }
     },
-    "/atlas/v2/entity/uniqueAttribute/type/{typeName}/labels":
-    {
-      "delete":
-      {
-        "tags":
-        [
+    "/atlas/v2/entity/uniqueAttribute/type/{typeName}/labels": {
+      "delete": {
+        "tags": [
           "Entity"
         ],
         "operationId": "Entity_DeleteLabelsByUniqueAttribute",
         "description": "Delete given labels to a given entity identified by its type and unique attributes, if labels is null/empty, no lables will be removed. If any labels in labels set are non-existing labels, they will be ignored, only existing labels will be removed. In addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format: attr:<attrName>=<attrValue>. NOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName. The REST request would look something like this: DELETE /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue. ",
-        "consumes":
-        [
+        "consumes": [
           "application/json"
         ],
-        "parameters":
-        [
+        "parameters": [
           {
             "$ref": "#/parameters/typeName"
           },
@@ -1508,40 +1416,32 @@
             "name": "body",
             "required": false,
             "in": "body",
-            "schema":
-            {
+            "schema": {
               "description": "",
               "type": "array",
-              "items":
-              {
+              "items": {
                 "type": "string"
               }
             },
             "description": ""
           }
         ],
-        "responses":
-        {
-          "204":
-          {
+        "responses": {
+          "204": {
             "description": "Success"
           }
         }
       },
-      "post":
-      {
-        "tags":
-        [
+      "post": {
+        "tags": [
           "Entity"
         ],
         "operationId": "Entity_SetLabelsByUniqueAttribute",
         "description": "Set labels to a given entity identified by its type and unique attributes, if labels is null/empty, existing labels will all be removed. In addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format: attr:<attrName>=<attrValue>. NOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName. The REST request would look something like this: POST /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
-        "consumes":
-        [
+        "consumes": [
           "application/json"
         ],
-        "parameters":
-        [
+        "parameters": [
           {
             "$ref": "#/parameters/typeName"
           },
@@ -1556,40 +1456,32 @@
             "name": "body",
             "required": false,
             "in": "body",
-            "schema":
-            {
+            "schema": {
               "description": "",
               "type": "array",
-              "items":
-              {
+              "items": {
                 "type": "string"
               }
             },
             "description": ""
           }
         ],
-        "responses":
-        {
-          "204":
-          {
+        "responses": {
+          "204": {
             "description": "Success"
           }
         }
       },
-      "put":
-      {
-        "tags":
-        [
+      "put": {
+        "tags": [
           "Entity"
         ],
         "operationId": "Entity_AddLabelsByUniqueAttribute",
         "description": "Add given labels to a given entity identified by its type and unique attributes, if lables is null/empty, no labels will be added. In addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format: attr:<attrName>=<attrValue>. NOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName. The REST request would look something like this: PUT /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
-        "consumes":
-        [
+        "consumes": [
           "application/json"
         ],
-        "parameters":
-        [
+        "parameters": [
           {
             "$ref": "#/parameters/typeName"
           },
@@ -1604,22 +1496,18 @@
             "name": "body",
             "required": false,
             "in": "body",
-            "schema":
-            {
+            "schema": {
               "description": "",
               "type": "array",
-              "items":
-              {
+              "items": {
                 "type": "string"
               }
             },
             "description": ""
           }
         ],
-        "responses":
-        {
-          "204":
-          {
+        "responses": {
+          "204": {
             "description": "Success"
           }
         }
@@ -3424,22 +3312,17 @@
         }
       }
     },
-    "/atlas/v2/lineage/uniqueAttribute/type/{typeName}":
-    {
-      "get":
-      {
-        "tags":
-        [
+    "/atlas/v2/lineage/uniqueAttribute/type/{typeName}": {
+      "get": {
+        "tags": [
           "Lineage"
         ],
         "description": "Returns lineage info about entity.\n\nIn addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format\n\nattr:[attrName]=[attrValue]\n\nNOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName",
         "operationId": "Lineage_GetLineageByUniqueAttribute",
-        "produces":
-        [
+        "produces": [
           "application/json"
         ],
-        "parameters":
-        [
+        "parameters": [
           {
             "$ref": "#/parameters/typeName"
           },
@@ -3459,62 +3342,45 @@
             "$ref": "#/parameters/getDerivedLineage"
           }
         ],
-        "responses":
-        {
-          "200":
-          {
-            "schema":
-            {
+        "responses": {
+          "200": {
+            "schema": {
               "$ref": "#/definitions/AtlasLineageInfo",
               "description": "If Lineage exists for the given entity"
             },
-            "examples":
-            {
-              "application/json":
-              {
+            "examples": {
+              "application/json": {
                 "baseEntityGuid": "...",
-                "guidEntityMap":
-                {
-                  "property1":
-                  {
-                    "classificationNames":
-                    [
+                "guidEntityMap": {
+                  "property1": {
+                    "classificationNames": [
                       "...",
                       "..."
                     ],
-                    "classifications":
-                    [
+                    "classifications": [
                       {
                         "entityGuid": "...",
                         "entityStatus": "DELETED",
-                        "validityPeriods":
-                        [
+                        "validityPeriods": [
                           {},
                           {}
                         ],
-                        "attributes":
-                        {
-                          "property1":
-                          {},
-                          "property2":
-                          {}
+                        "attributes": {
+                          "property1": {},
+                          "property2": {}
                         },
                         "typeName": "..."
                       },
                       {
                         "entityGuid": "...",
                         "entityStatus": "PURGED",
-                        "validityPeriods":
-                        [
+                        "validityPeriods": [
                           {},
                           {}
                         ],
-                        "attributes":
-                        {
-                          "property1":
-                          {},
-                          "property2":
-                          {}
+                        "attributes": {
+                          "property1": {},
+                          "property2": {}
                         },
                         "typeName": "..."
                       }
@@ -3522,18 +3388,15 @@
                     "displayText": "...",
                     "guid": "...",
                     "isIncomplete": true,
-                    "labels":
-                    [
+                    "labels": [
                       "...",
                       "..."
                     ],
-                    "meaningNames":
-                    [
+                    "meaningNames": [
                       "...",
                       "..."
                     ],
-                    "meanings":
-                    [
+                    "meanings": [
                       {
                         "confidence": 12345,
                         "createdBy": "...",
@@ -3560,55 +3423,41 @@
                       }
                     ],
                     "status": "PURGED",
-                    "attributes":
-                    {
-                      "property1":
-                      {},
-                      "property2":
-                      {}
+                    "attributes": {
+                      "property1": {},
+                      "property2": {}
                     },
                     "typeName": "..."
                   },
-                  "property2":
-                  {
-                    "classificationNames":
-                    [
+                  "property2": {
+                    "classificationNames": [
                       "...",
                       "..."
                     ],
-                    "classifications":
-                    [
+                    "classifications": [
                       {
                         "entityGuid": "...",
                         "entityStatus": "ACTIVE",
-                        "validityPeriods":
-                        [
+                        "validityPeriods": [
                           {},
                           {}
                         ],
-                        "attributes":
-                        {
-                          "property1":
-                          {},
-                          "property2":
-                          {}
+                        "attributes": {
+                          "property1": {},
+                          "property2": {}
                         },
                         "typeName": "..."
                       },
                       {
                         "entityGuid": "...",
                         "entityStatus": "ACTIVE",
-                        "validityPeriods":
-                        [
+                        "validityPeriods": [
                           {},
                           {}
                         ],
-                        "attributes":
-                        {
-                          "property1":
-                          {},
-                          "property2":
-                          {}
+                        "attributes": {
+                          "property1": {},
+                          "property2": {}
                         },
                         "typeName": "..."
                       }
@@ -3616,18 +3465,15 @@
                     "displayText": "...",
                     "guid": "...",
                     "isIncomplete": true,
-                    "labels":
-                    [
+                    "labels": [
                       "...",
                       "..."
                     ],
-                    "meaningNames":
-                    [
+                    "meaningNames": [
                       "...",
                       "..."
                     ],
-                    "meanings":
-                    [
+                    "meanings": [
                       {
                         "confidence": 12345,
                         "createdBy": "...",
@@ -3654,20 +3500,16 @@
                       }
                     ],
                     "status": "ACTIVE",
-                    "attributes":
-                    {
-                      "property1":
-                      {},
-                      "property2":
-                      {}
+                    "attributes": {
+                      "property1": {},
+                      "property2": {}
                     },
                     "typeName": "..."
                   }
                 },
                 "lineageDepth": 12345,
                 "lineageDirection": "BOTH",
-                "relations":
-                [
+                "relations": [
                   {
                     "fromEntityId": "...",
                     "relationshipId": "...",
@@ -3683,55 +3525,40 @@
             },
             "description": "If Lineage exists for the given entity"
           },
-          "400":
-          {
-            "examples":
-            {
-              "application/json":
-              {
+          "400": {
+            "examples": {
+              "application/json": {
                 "baseEntityGuid": "...",
-                "guidEntityMap":
-                {
-                  "property1":
-                  {
-                    "classificationNames":
-                    [
+                "guidEntityMap": {
+                  "property1": {
+                    "classificationNames": [
                       "...",
                       "..."
                     ],
-                    "classifications":
-                    [
+                    "classifications": [
                       {
                         "entityGuid": "...",
                         "entityStatus": "DELETED",
-                        "validityPeriods":
-                        [
+                        "validityPeriods": [
                           {},
                           {}
                         ],
-                        "attributes":
-                        {
-                          "property1":
-                          {},
-                          "property2":
-                          {}
+                        "attributes": {
+                          "property1": {},
+                          "property2": {}
                         },
                         "typeName": "..."
                       },
                       {
                         "entityGuid": "...",
                         "entityStatus": "ACTIVE",
-                        "validityPeriods":
-                        [
+                        "validityPeriods": [
                           {},
                           {}
                         ],
-                        "attributes":
-                        {
-                          "property1":
-                          {},
-                          "property2":
-                          {}
+                        "attributes": {
+                          "property1": {},
+                          "property2": {}
                         },
                         "typeName": "..."
                       }
@@ -3739,18 +3566,15 @@
                     "displayText": "...",
                     "guid": "...",
                     "isIncomplete": true,
-                    "labels":
-                    [
+                    "labels": [
                       "...",
                       "..."
                     ],
-                    "meaningNames":
-                    [
+                    "meaningNames": [
                       "...",
                       "..."
                     ],
-                    "meanings":
-                    [
+                    "meanings": [
                       {
                         "confidence": 12345,
                         "createdBy": "...",
@@ -3777,55 +3601,41 @@
                       }
                     ],
                     "status": "PURGED",
-                    "attributes":
-                    {
-                      "property1":
-                      {},
-                      "property2":
-                      {}
+                    "attributes": {
+                      "property1": {},
+                      "property2": {}
                     },
                     "typeName": "..."
                   },
-                  "property2":
-                  {
-                    "classificationNames":
-                    [
+                  "property2": {
+                    "classificationNames": [
                       "...",
                       "..."
                     ],
-                    "classifications":
-                    [
+                    "classifications": [
                       {
                         "entityGuid": "...",
                         "entityStatus": "PURGED",
-                        "validityPeriods":
-                        [
+                        "validityPeriods": [
                           {},
                           {}
                         ],
-                        "attributes":
-                        {
-                          "property1":
-                          {},
-                          "property2":
-                          {}
+                        "attributes": {
+                          "property1": {},
+                          "property2": {}
                         },
                         "typeName": "..."
                       },
                       {
                         "entityGuid": "...",
                         "entityStatus": "PURGED",
-                        "validityPeriods":
-                        [
+                        "validityPeriods": [
                           {},
                           {}
                         ],
-                        "attributes":
-                        {
-                          "property1":
-                          {},
-                          "property2":
-                          {}
+                        "attributes": {
+                          "property1": {},
+                          "property2": {}
                         },
                         "typeName": "..."
                       }
@@ -3833,18 +3643,15 @@
                     "displayText": "...",
                     "guid": "...",
                     "isIncomplete": true,
-                    "labels":
-                    [
+                    "labels": [
                       "...",
                       "..."
                     ],
-                    "meaningNames":
-                    [
+                    "meaningNames": [
                       "...",
                       "..."
                     ],
-                    "meanings":
-                    [
+                    "meanings": [
                       {
                         "confidence": 12345,
                         "createdBy": "...",
@@ -3871,20 +3678,16 @@
                       }
                     ],
                     "status": "DELETED",
-                    "attributes":
-                    {
-                      "property1":
-                      {},
-                      "property2":
-                      {}
+                    "attributes": {
+                      "property1": {},
+                      "property2": {}
                     },
                     "typeName": "..."
                   }
                 },
                 "lineageDepth": 12345,
                 "lineageDirection": "INPUT",
-                "relations":
-                [
+                "relations": [
                   {
                     "fromEntityId": "...",
                     "relationshipId": "...",
@@ -3900,55 +3703,40 @@
             },
             "description": "Bad query parameters"
           },
-          "404":
-          {
-            "examples":
-            {
-              "application/json":
-              {
+          "404": {
+            "examples": {
+              "application/json": {
                 "baseEntityGuid": "...",
-                "guidEntityMap":
-                {
-                  "property1":
-                  {
-                    "classificationNames":
-                    [
+                "guidEntityMap": {
+                  "property1": {
+                    "classificationNames": [
                       "...",
                       "..."
                     ],
-                    "classifications":
-                    [
+                    "classifications": [
                       {
                         "entityGuid": "...",
                         "entityStatus": "ACTIVE",
-                        "validityPeriods":
-                        [
+                        "validityPeriods": [
                           {},
                           {}
                         ],
-                        "attributes":
-                        {
-                          "property1":
-                          {},
-                          "property2":
-                          {}
+                        "attributes": {
+                          "property1": {},
+                          "property2": {}
                         },
                         "typeName": "..."
                       },
                       {
                         "entityGuid": "...",
                         "entityStatus": "PURGED",
-                        "validityPeriods":
-                        [
+                        "validityPeriods": [
                           {},
                           {}
                         ],
-                        "attributes":
-                        {
-                          "property1":
-                          {},
-                          "property2":
-                          {}
+                        "attributes": {
+                          "property1": {},
+                          "property2": {}
                         },
                         "typeName": "..."
                       }
@@ -3956,18 +3744,15 @@
                     "displayText": "...",
                     "guid": "...",
                     "isIncomplete": true,
-                    "labels":
-                    [
+                    "labels": [
                       "...",
                       "..."
                     ],
-                    "meaningNames":
-                    [
+                    "meaningNames": [
                       "...",
                       "..."
                     ],
-                    "meanings":
-                    [
+                    "meanings": [
                       {
                         "confidence": 12345,
                         "createdBy": "...",
@@ -3994,55 +3779,41 @@
                       }
                     ],
                     "status": "PURGED",
-                    "attributes":
-                    {
-                      "property1":
-                      {},
-                      "property2":
-                      {}
+                    "attributes": {
+                      "property1": {},
+                      "property2": {}
                     },
                     "typeName": "..."
                   },
-                  "property2":
-                  {
-                    "classificationNames":
-                    [
+                  "property2": {
+                    "classificationNames": [
                       "...",
                       "..."
                     ],
-                    "classifications":
-                    [
+                    "classifications": [
                       {
                         "entityGuid": "...",
                         "entityStatus": "DELETED",
-                        "validityPeriods":
-                        [
+                        "validityPeriods": [
                           {},
                           {}
                         ],
-                        "attributes":
-                        {
-                          "property1":
-                          {},
-                          "property2":
-                          {}
+                        "attributes": {
+                          "property1": {},
+                          "property2": {}
                         },
                         "typeName": "..."
                       },
                       {
                         "entityGuid": "...",
                         "entityStatus": "PURGED",
-                        "validityPeriods":
-                        [
+                        "validityPeriods": [
                           {},
                           {}
                         ],
-                        "attributes":
-                        {
-                          "property1":
-                          {},
-                          "property2":
-                          {}
+                        "attributes": {
+                          "property1": {},
+                          "property2": {}
                         },
                         "typeName": "..."
                       }
@@ -4050,18 +3821,15 @@
                     "displayText": "...",
                     "guid": "...",
                     "isIncomplete": true,
-                    "labels":
-                    [
+                    "labels": [
                       "...",
                       "..."
                     ],
-                    "meaningNames":
-                    [
+                    "meaningNames": [
                       "...",
                       "..."
                     ],
-                    "meanings":
-                    [
+                    "meanings": [
                       {
                         "confidence": 12345,
                         "createdBy": "...",
@@ -4088,20 +3856,16 @@
                       }
                     ],
                     "status": "ACTIVE",
-                    "attributes":
-                    {
-                      "property1":
-                      {},
-                      "property2":
-                      {}
+                    "attributes": {
+                      "property1": {},
+                      "property2": {}
                     },
                     "typeName": "..."
                   }
                 },
                 "lineageDepth": 12345,
                 "lineageDirection": "OUTPUT",
-                "relations":
-                [
+                "relations": [
                   {
                     "fromEntityId": "...",
                     "relationshipId": "...",
@@ -4260,22 +4024,17 @@
         }
       }
     },
-    "/atlas//v2/types/businessmetadatadef/guid/{guid}":
-    {
-      "get":
-      {
-        "tags":
-        [
+    "/atlas//v2/types/businessmetadatadef/guid/{guid}": {
+      "get": {
+        "tags": [
           "TypesREST"
         ],
         "description": "Get the businessMetadata definition for the given guid",
         "operationId": "Types_GetBusinessMetadataDefByGuid",
-        "produces":
-        [
+        "produces": [
           "application/json"
         ],
-        "parameters":
-        [
+        "parameters": [
           {
             "name": "guid",
             "in": "path",
@@ -4284,40 +4043,31 @@
             "required": true
           }
         ],
-        "responses":
-        {
-          "200":
-          {
-            "schema":
-            {
+        "responses": {
+          "200": {
+            "schema": {
               "$ref": "#/definitions/AtlasBusinessMetadataDef",
               "description": "On successful lookup of the the businessMetadata definition by it's guid"
             },
             "description": "On successful lookup of the the businessMetadata definition by it's guid"
           },
-          "404":
-          {
+          "404": {
             "description": "On Failed lookup for the given guid"
           }
         }
       }
     },
-    "/atlas/v2/types/businessmetadatadef/name/{name}":
-    {
-      "get":
-      {
-        "tags":
-        [
+    "/atlas/v2/types/businessmetadatadef/name/{name}": {
+      "get": {
+        "tags": [
           "Types"
         ],
         "description": "Get the businessMetadata definition by it's name (unique)",
         "operationId": "Types_GetBusinessMetadataDefByName",
-        "produces":
-        [
+        "produces": [
           "application/json"
         ],
-        "parameters":
-        [
+        "parameters": [
           {
             "name": "name",
             "in": "path",
@@ -4326,19 +4076,15 @@
             "required": true
           }
         ],
-        "responses":
-        {
-          "200":
-          {
-            "schema":
-            {
+        "responses": {
+          "200": {
+            "schema": {
               "$ref": "#/definitions/AtlasBusinessMetadataDef",
               "description": "On successful lookup of the the businessMetadata definition by it's name"
             },
             "description": "On successful lookup of the the businessMetadata definition by it's name"
           },
-          "404":
-          {
+          "404": {
             "description": "On Failed lookup for the given name"
           }
         }
@@ -5311,42 +5057,31 @@
       "title": "AtlasBaseTypeDef",
       "description": "Base class that captures common-attributes for all Atlas types."
     },
-    "AtlasBusinessMetadataDef":
-    {
+    "AtlasBusinessMetadataDef": {
       "type": "object",
       "title": "AtlasBusinessMetadataDef",
-      "allOf":
-      [
+      "allOf": [
         {
           "$ref": "#/definitions/AtlasStructDef"
         },
         {}
       ],
-      "example":
-      {
-        "attributeDefs":
-        [
+      "example": {
+        "attributeDefs": [
           {
             "cardinality": "SINGLE",
-            "constraints":
-            [
+            "constraints": [
               {
-                "params":
-                {
-                  "property1":
-                  {},
-                  "property2":
-                  {}
+                "params": {
+                  "property1": {},
+                  "property2": {}
                 },
                 "type": "..."
               },
               {
-                "params":
-                {
-                  "property1":
-                  {},
-                  "property2":
-                  {}
+                "params": {
+                  "property1": {},
+                  "property2": {}
                 },
                 "type": "..."
               }
@@ -5359,8 +5094,7 @@
             "isOptional": true,
             "isUnique": true,
             "name": "...",
-            "options":
-            {
+            "options": {
               "property1": "...",
               "property2": "..."
             },
@@ -5370,25 +5104,18 @@
           },
           {
             "cardinality": "SINGLE",
-            "constraints":
-            [
+            "constraints": [
               {
-                "params":
-                {
-                  "property1":
-                  {},
-                  "property2":
-                  {}
+                "params": {
+                  "property1": {},
+                  "property2": {}
                 },
                 "type": "..."
               },
               {
-                "params":
-                {
-                  "property1":
-                  {},
-                  "property2":
-                  {}
+                "params": {
+                  "property1": {},
+                  "property2": {}
                 },
                 "type": "..."
               }
@@ -5401,8 +5128,7 @@
             "isOptional": true,
             "isUnique": true,
             "name": "...",
-            "options":
-            {
+            "options": {
               "property1": "...",
               "property2": "..."
             },
@@ -5414,60 +5140,44 @@
         "category": "ARRAY",
         "createTime": 12345,
         "createdBy": "...",
-        "dateFormatter":
-        {
-          "availableLocales":
-          [
+        "dateFormatter": {
+          "availableLocales": [
             "...",
             "..."
           ],
           "calendar": 12345,
-          "dateInstance":
-          {},
-          "dateTimeInstance":
-          {},
-          "instance":
-          {},
+          "dateInstance": {},
+          "dateTimeInstance": {},
+          "instance": {},
           "lenient": true,
-          "numberFormat":
-          {
-            "availableLocales":
-            [
+          "numberFormat": {
+            "availableLocales": [
               "...",
               "..."
             ],
             "currency": "...",
-            "currencyInstance":
-            {},
+            "currencyInstance": {},
             "groupingUsed": true,
-            "instance":
-            {},
-            "integerInstance":
-            {},
+            "instance": {},
+            "integerInstance": {},
             "maximumFractionDigits": 12345,
             "maximumIntegerDigits": 12345,
             "minimumFractionDigits": 12345,
             "minimumIntegerDigits": 12345,
-            "numberInstance":
-            {},
+            "numberInstance": {},
             "parseIntegerOnly": true,
-            "percentInstance":
-            {},
+            "percentInstance": {},
             "roundingMode": "DOWN"
           },
-          "timeInstance":
-          {},
-          "timeZone":
-          {
+          "timeInstance": {},
+          "timeZone": {
             "DSTSavings": 12345,
             "ID": "...",
-            "availableIDs":
-            [
+            "availableIDs": [
               "...",
               "..."
             ],
-            "default":
-            {},
+            "default": {},
             "displayName": "...",
             "rawOffset": 12345
           }
@@ -5475,8 +5185,7 @@
         "description": "...",
         "guid": "...",
         "name": "...",
-        "options":
-        {
+        "options": {
           "property1": "...",
           "property2": "..."
         },
@@ -5626,13 +5335,11 @@
         },
         {
           "properties": {
-            "businessAttributes":
-            {
+            "businessAttributes": {
               "readOnly": false,
               "description": "Business Attributes",
               "type": "object",
-              "additionalProperties":
-              {
+              "additionalProperties": {
                 "type": "object"
               }
             },
@@ -5651,13 +5358,11 @@
               "type": "string",
               "description": "The user who created the record."
             },
-            "customAttributes":
-            {
+            "customAttributes": {
               "readOnly": false,
               "description": "Custom Attribute",
               "type": "object",
-              "additionalProperties":
-              {
+              "additionalProperties": {
                 "type": "string"
               }
             },
@@ -5669,19 +5374,16 @@
               "type": "string",
               "description": "The home ID of the entity."
             },
-            "isIncomplete":
-            {
+            "isIncomplete": {
               "readOnly": false,
               "description": "",
               "type": "boolean"
             },
-            "labels":
-            {
+            "labels": {
               "readOnly": false,
               "description": "",
               "type": "array",
-              "items":
-              {
+              "items": {
                 "type": "string"
               }
             },
@@ -5841,19 +5543,16 @@
               "type": "string",
               "description": "The GUID of the record."
             },
-            "isIncomplete":
-            {
+            "isIncomplete": {
               "readOnly": false,
               "description": "",
               "type": "boolean"
             },
-            "labels":
-            {
+            "labels": {
               "readOnly": false,
               "description": "",
               "type": "array",
-              "items":
-              {
+              "items": {
                 "type": "string"
               }
             },
@@ -6871,13 +6570,11 @@
     "AtlasTypesDef": {
       "type": "object",
       "properties": {
-        "businessMetadataDefs":
-        {
+        "businessMetadataDefs": {
           "readOnly": false,
           "description": "",
           "type": "array",
-          "items":
-          {
+          "items": {
             "$ref": "#/definitions/AtlasBusinessMetadataDef"
           }
         },
@@ -7006,39 +6703,32 @@
       "title": "AtlasTypeDef",
       "description": "The definitions of type."
     },
-    "ImportInfo":
-    {
+    "ImportInfo": {
       "type": "object",
       "title": "ImportInfo",
-      "properties":
-      {
-        "childObjectName":
-        {
+      "properties": {
+        "childObjectName": {
           "readOnly": false,
           "description": "",
           "type": "string"
         },
-        "importStatus":
-        {
+        "importStatus": {
           "readOnly": false,
           "$ref": "#/definitions/ImportStatus",
           "description": ""
         },
-        "parentObjectName":
-        {
+        "parentObjectName": {
           "readOnly": false,
           "description": "",
           "type": "string"
         },
-        "remarks":
-        {
+        "remarks": {
           "readOnly": false,
           "description": "",
           "type": "string"
         }
       },
-      "example":
-      {
+      "example": {
         "childObjectName": "...",
         "importStatus": "SUCCESS",
         "parentObjectName": "...",
@@ -7046,48 +6736,38 @@
       },
       "description": ""
     },
-    "ImportStatus":
-    {
+    "ImportStatus": {
       "type": "string",
       "title": "ImportStatus",
-      "enum":
-      [
+      "enum": [
         "SUCCESS",
         "FAILED"
       ],
       "description": ""
     },
-    "BulkImportResponse":
-    {
+    "BulkImportResponse": {
       "type": "object",
       "title": "BulkImportResponse",
-      "properties":
-      {
-        "failedImportInfoList":
-        {
+      "properties": {
+        "failedImportInfoList": {
           "readOnly": false,
           "description": "",
           "type": "array",
-          "items":
-          {
+          "items": {
             "$ref": "#/definitions/ImportInfo"
           }
         },
-        "successImportInfoList":
-        {
+        "successImportInfoList": {
           "readOnly": false,
           "description": "",
           "type": "array",
-          "items":
-          {
+          "items": {
             "$ref": "#/definitions/ImportInfo"
           }
         }
       },
-      "example":
-      {
-        "failedImportInfoList":
-        [
+      "example": {
+        "failedImportInfoList": [
           {
             "childObjectName": "...",
             "importStatus": "SUCCESS",
@@ -7101,8 +6781,7 @@
             "remarks": "..."
           }
         ],
-        "successImportInfoList":
-        [
+        "successImportInfoList": [
           {
             "childObjectName": "...",
             "importStatus": "FAILED",
