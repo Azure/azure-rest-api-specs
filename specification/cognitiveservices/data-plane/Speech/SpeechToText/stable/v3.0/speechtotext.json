@@ -3862,6 +3862,7 @@
     },
     "DatasetKind": {
       "title": "DatasetKind",
+      "description": "Type of data import.",
       "enum": [
         "Language",
         "Acoustic",
@@ -3871,7 +3872,25 @@
       "type": "string",
       "x-ms-enum": {
         "name": "DatasetKind",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "Language",
+            "description": "A language data import."
+          },
+          {
+            "value": "Acoustic",
+            "description": "An acoustic data import."
+          },
+          {
+            "value": "Pronunciation",
+            "description": "A pronunciation data import."
+          },
+          {
+            "value": "AudioFiles",
+            "description": "An audio files data import."
+          }
+        ]
       }
     },
     "DatasetLocales": {
@@ -4014,7 +4033,281 @@
       "type": "string",
       "x-ms-enum": {
         "name": "DetailedErrorCode",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "InvalidParameterValue",
+            "description": "Invalid parameter value."
+          },
+          {
+            "value": "InvalidRequestBodyFormat",
+            "description": "Invalid request body format."
+          },
+          {
+            "value": "EmptyRequest",
+            "description": "Empty Request."
+          },
+          {
+            "value": "MissingInputRecords",
+            "description": "Missing Input Records."
+          },
+          {
+            "value": "InvalidDocument",
+            "description": "Invalid Document."
+          },
+          {
+            "value": "ModelVersionIncorrect",
+            "description": "Model Version Incorrect."
+          },
+          {
+            "value": "InvalidDocumentBatch",
+            "description": "Invalid Document Batch."
+          },
+          {
+            "value": "UnsupportedLanguageCode",
+            "description": "Unsupported language code."
+          },
+          {
+            "value": "DataImportFailed",
+            "description": "Data import failed."
+          },
+          {
+            "value": "InUseViolation",
+            "description": "In use violation."
+          },
+          {
+            "value": "InvalidLocale",
+            "description": "Invalid locale."
+          },
+          {
+            "value": "InvalidBaseModel",
+            "description": "Invalid base model."
+          },
+          {
+            "value": "InvalidAdaptationMapping",
+            "description": "Invalid adaptation mapping."
+          },
+          {
+            "value": "InvalidDataset",
+            "description": "Invalid dataset."
+          },
+          {
+            "value": "InvalidTest",
+            "description": "Invalid test."
+          },
+          {
+            "value": "FailedDataset",
+            "description": "Failed dataset."
+          },
+          {
+            "value": "InvalidModel",
+            "description": "Invalid model."
+          },
+          {
+            "value": "InvalidTranscription",
+            "description": "Invalid transcription."
+          },
+          {
+            "value": "InvalidPayload",
+            "description": "Invalid payload."
+          },
+          {
+            "value": "InvalidParameter",
+            "description": "Invalid parameter."
+          },
+          {
+            "value": "EndpointWithoutLogging",
+            "description": "Endpoint without logging."
+          },
+          {
+            "value": "InvalidPermissions",
+            "description": "Invalid permissions."
+          },
+          {
+            "value": "InvalidPrerequisite",
+            "description": "Invalid prerequisite."
+          },
+          {
+            "value": "InvalidProductId",
+            "description": "Invalid product id."
+          },
+          {
+            "value": "InvalidSubscription",
+            "description": "Invalid subscription."
+          },
+          {
+            "value": "InvalidProject",
+            "description": "Invalid project."
+          },
+          {
+            "value": "InvalidProjectKind",
+            "description": "Invalid project kind."
+          },
+          {
+            "value": "InvalidRecordingsUri",
+            "description": "Invalid recordings uri."
+          },
+          {
+            "value": "OnlyOneOfUrlsOrContainerOrDataset",
+            "description": "Only one of urls or container or dataset."
+          },
+          {
+            "value": "ExceededNumberOfRecordingsUris",
+            "description": "Exceeded number of recordings uris."
+          },
+          {
+            "value": "ModelMismatch",
+            "description": "Model mismatch."
+          },
+          {
+            "value": "ProjectGenderMismatch",
+            "description": "Project gender mismatch."
+          },
+          {
+            "value": "ModelDeprecated",
+            "description": "Model deprecated."
+          },
+          {
+            "value": "ModelExists",
+            "description": "Model exists."
+          },
+          {
+            "value": "ModelNotDeployable",
+            "description": "Model not deployable."
+          },
+          {
+            "value": "EndpointNotUpdatable",
+            "description": "Endpoint not updatable."
+          },
+          {
+            "value": "SingleDefaultEndpoint",
+            "description": "Single default endpoint."
+          },
+          {
+            "value": "EndpointCannotBeDefault",
+            "description": "Endpoint cannot be default."
+          },
+          {
+            "value": "InvalidModelUri",
+            "description": "Invalid model uri."
+          },
+          {
+            "value": "SubscriptionNotFound",
+            "description": "Subscription not found."
+          },
+          {
+            "value": "QuotaViolation",
+            "description": "Quota violation."
+          },
+          {
+            "value": "UnsupportedDelta",
+            "description": "Unsupported delta."
+          },
+          {
+            "value": "UnsupportedFilter",
+            "description": "Unsupported filter."
+          },
+          {
+            "value": "UnsupportedPagination",
+            "description": "Unsupported pagination."
+          },
+          {
+            "value": "UnsupportedDynamicConfiguration",
+            "description": "Unsupported dynamic configuration."
+          },
+          {
+            "value": "UnsupportedOrderBy",
+            "description": "Unsupported order by."
+          },
+          {
+            "value": "NoUtf8WithBom",
+            "description": "No utf8 with bom."
+          },
+          {
+            "value": "ModelDeploymentNotCompleteState",
+            "description": "Model deployment not complete state."
+          },
+          {
+            "value": "SkuLimitsExist",
+            "description": "Sku limits exist."
+          },
+          {
+            "value": "DeployingFailedModel",
+            "description": "Deploying failed model."
+          },
+          {
+            "value": "UnsupportedTimeRange",
+            "description": "Unsupported time range."
+          },
+          {
+            "value": "InvalidLogDate",
+            "description": "Invalid log date."
+          },
+          {
+            "value": "InvalidLogId",
+            "description": "Invalid log id."
+          },
+          {
+            "value": "InvalidLogStartTime",
+            "description": "Invalid log start time."
+          },
+          {
+            "value": "InvalidLogEndTime",
+            "description": "Invalid log end time."
+          },
+          {
+            "value": "InvalidTopForLogs",
+            "description": "Invalid top for logs."
+          },
+          {
+            "value": "InvalidSkipTokenForLogs",
+            "description": "Invalid skip token for logs."
+          },
+          {
+            "value": "DeleteNotAllowed",
+            "description": "Delete not allowed."
+          },
+          {
+            "value": "Forbidden",
+            "description": "Forbidden."
+          },
+          {
+            "value": "DeployNotAllowed",
+            "description": "Deploy not allowed."
+          },
+          {
+            "value": "UnexpectedError",
+            "description": "Unexpected error."
+          },
+          {
+            "value": "InvalidCollection",
+            "description": "Invalid collection."
+          },
+          {
+            "value": "InvalidCallbackUri",
+            "description": "Invalid callback uri."
+          },
+          {
+            "value": "InvalidSasValidityDuration",
+            "description": "Invalid sas validity duration."
+          },
+          {
+            "value": "InaccessibleCustomerStorage",
+            "description": "Inaccessible customer storage."
+          },
+          {
+            "value": "UnsupportedClassBasedAdaptation",
+            "description": "Unsupported class based adaptation."
+          },
+          {
+            "value": "InvalidWebHookEventKind",
+            "description": "Invalid web hook event kind."
+          },
+          {
+            "value": "InvalidTimeToLive",
+            "description": "Invalid time to live."
+          }
+        ]
       }
     },
     "Endpoint": {
@@ -4252,7 +4545,7 @@
     },
     "ErrorCode": {
       "title": "ErrorCode",
-      "description": "Enums containing high level error codes.",
+      "description": "High level error codes.",
       "enum": [
         "InvalidRequest",
         "InvalidArgument",
@@ -4272,7 +4565,65 @@
       "type": "string",
       "x-ms-enum": {
         "name": "ErrorCode",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "InvalidRequest",
+            "description": "Representing the invalid request error code."
+          },
+          {
+            "value": "InvalidArgument",
+            "description": "Representing the invalid argument error code."
+          },
+          {
+            "value": "InternalServerError",
+            "description": "Representing the internal server error error code."
+          },
+          {
+            "value": "ServiceUnavailable",
+            "description": "Representing the service unavailable error code."
+          },
+          {
+            "value": "NotFound",
+            "description": "Representing the not found error code."
+          },
+          {
+            "value": "PipelineError",
+            "description": "Representing the pipeline error error code."
+          },
+          {
+            "value": "Conflict",
+            "description": "Representing the conflict error code."
+          },
+          {
+            "value": "InternalCommunicationFailed",
+            "description": "Representing the internal communication failed error code."
+          },
+          {
+            "value": "Forbidden",
+            "description": "Representing the forbidden error code."
+          },
+          {
+            "value": "NotAllowed",
+            "description": "Representing the not allowed error code."
+          },
+          {
+            "value": "Unauthorized",
+            "description": "Representing the unauthorized error code."
+          },
+          {
+            "value": "UnsupportedMediaType",
+            "description": "Representing the unsupported media type error code."
+          },
+          {
+            "value": "TooManyRequests",
+            "description": "Representing the too many requests error code."
+          },
+          {
+            "value": "UnprocessableEntity",
+            "description": "Representing the unprocessable entity error code."
+          }
+        ]
       }
     },
     "Evaluation": {
@@ -4519,6 +4870,7 @@
     },
     "FileKind": {
       "title": "FileKind",
+      "description": "Type of data.",
       "enum": [
         "DatasetReport",
         "Audio",
@@ -4534,7 +4886,45 @@
       "readOnly": true,
       "x-ms-enum": {
         "name": "FileKind",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "DatasetReport",
+            "description": "Type of data is dataset report."
+          },
+          {
+            "value": "Audio",
+            "description": "Type of data is audio."
+          },
+          {
+            "value": "LanguageData",
+            "description": "Type of data is language data."
+          },
+          {
+            "value": "PronunciationData",
+            "description": "Type of data is pronunciation data."
+          },
+          {
+            "value": "AcousticDataArchive",
+            "description": "Type of data is acoustic data archive."
+          },
+          {
+            "value": "AcousticDataTranscriptionV2",
+            "description": "Type of data is acoustic data transcription v2."
+          },
+          {
+            "value": "Transcription",
+            "description": "Type of data is transcription."
+          },
+          {
+            "value": "TranscriptionReport",
+            "description": "Type of data is transcription report."
+          },
+          {
+            "value": "EvaluationDetails",
+            "description": "Type of data is evaluation details."
+          }
+        ]
       }
     },
     "FileLinks": {
@@ -4568,6 +4958,7 @@
     },
     "HealthStatus": {
       "title": "HealthStatus",
+      "description": "Health status of the service.",
       "enum": [
         "Unhealthy",
         "Degraded",
@@ -4577,7 +4968,21 @@
       "readOnly": true,
       "x-ms-enum": {
         "name": "HealthStatus",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "Unhealthy",
+            "description": "Unhealthy."
+          },
+          {
+            "value": "Degraded",
+            "description": "Degraded."
+          },
+          {
+            "value": "Healthy",
+            "description": "Healthy."
+          }
+        ]
       }
     },
     "InnerError": {
@@ -4987,6 +5392,7 @@
     },
     "ProfanityFilterMode": {
       "title": "ProfanityFilterMode",
+      "description": "Mode of profanity filtering.",
       "enum": [
         "None",
         "Removed",
@@ -4996,7 +5402,25 @@
       "type": "string",
       "x-ms-enum": {
         "name": "ProfanityFilterMode",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "None",
+            "description": "Disable profanity filtering."
+          },
+          {
+            "value": "Removed",
+            "description": "Remove profanity."
+          },
+          {
+            "value": "Tags",
+            "description": "Add \"profanity\" XML tags&lt;/Profanit&gt;"
+          },
+          {
+            "value": "Masked",
+            "description": "Mask the profanity with * except of the first letter, e.g., f***"
+          }
+        ]
       }
     },
     "Project": {
@@ -5151,7 +5575,25 @@
       "type": "string",
       "x-ms-enum": {
         "name": "PunctuationMode",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "None",
+            "description": "No punctuation."
+          },
+          {
+            "value": "Dictated",
+            "description": "Dictated punctuation marks only, i.e., explicit punctuation."
+          },
+          {
+            "value": "Automatic",
+            "description": "Automatic punctuation."
+          },
+          {
+            "value": "DictatedAndAutomatic",
+            "description": "Dictated punctuation marks or automatic punctuation."
+          }
+        ]
       }
     },
     "ServiceHealth": {
@@ -5178,6 +5620,7 @@
     },
     "Status": {
       "title": "Status",
+      "description": "Describe the current state of the API",
       "enum": [
         "NotStarted",
         "Running",
@@ -5188,7 +5631,25 @@
       "readOnly": true,
       "x-ms-enum": {
         "name": "Status",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "NotStarted",
+            "description": "The long running operation has not yet started."
+          },
+          {
+            "value": "Running",
+            "description": "The long running operation is currently processing."
+          },
+          {
+            "value": "Succeeded",
+            "description": "The long running operation has successfully completed."
+          },
+          {
+            "value": "Failed",
+            "description": "The long running operation has failed."
+          }
+        ]
       }
     },
     "Transcription": {

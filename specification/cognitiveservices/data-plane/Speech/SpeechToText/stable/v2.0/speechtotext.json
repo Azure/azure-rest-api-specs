@@ -2301,6 +2301,7 @@
     },
     "DatasetKind": {
       "title": "DatasetKind",
+      "description": "Kind of data import.",
       "enum": [
         "Language",
         "Acoustic",
@@ -2309,7 +2310,21 @@
       "type": "string",
       "x-ms-enum": {
         "name": "DatasetKind",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "Language",
+            "description": "A language dataset."
+          },
+          {
+            "value": "Acoustic",
+            "description": "An acoustic dataset."
+          },
+          {
+            "value": "Pronunciation",
+            "description": "A pronunciation dataset."
+          }
+        ]
       }
     },
     "DatasetLocales": {
@@ -2507,7 +2522,17 @@
       "type": "string",
       "x-ms-enum": {
         "name": "EndpointKind",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "SpeechRecognition",
+            "description": "A SpeechRecognition model deployment."
+          },
+          {
+            "value": "PronunciationScore",
+            "description": "A PronunciationScore model deployment."
+          }
+        ]
       }
     },
     "EndpointMetadataUpdate": {
@@ -2681,6 +2706,7 @@
     },
     "ModelKind": {
       "title": "ModelKind",
+      "description": "Type of speech model.",
       "enum": [
         "Acoustic",
         "Language",
@@ -2689,7 +2715,21 @@
       "type": "string",
       "x-ms-enum": {
         "name": "ModelKind",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "Acoustic",
+            "description": "An acoustic model."
+          },
+          {
+            "value": "Language",
+            "description": "A language model."
+          },
+          {
+            "value": "AcousticAndLanguage",
+            "description": "An acoustic and language model."
+          }
+        ]
       }
     },
     "ModelLocales": {
@@ -2830,6 +2870,7 @@
     },
     "Status": {
       "title": "Status",
+      "description": "Describe the current state of the API",
       "enum": [
         "NotStarted",
         "Running",
@@ -2840,7 +2881,25 @@
       "readOnly": true,
       "x-ms-enum": {
         "name": "Status",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "NotStarted",
+            "description": "The long running operation has not yet started."
+          },
+          {
+            "value": "Running",
+            "description": "The long running operation is currently processing."
+          },
+          {
+            "value": "Succeeded",
+            "description": "The long running operation has successfully completed."
+          },
+          {
+            "value": "Failed",
+            "description": "The long running operation has failed."
+          }
+        ]
       }
     },
     "Test": {
