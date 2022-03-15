@@ -7,12 +7,15 @@
       "properties": {
         "targetService": {
           "type": "AzureResource",
-          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DocumentDb/databaseAccounts/test-acc/mongodbDatabases/test-db"
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DBforPostgreSQL/servers/test-pg/databases/test-db"
         },
         "authInfo": {
           "authType": "secret",
           "name": "name",
-          "secret": "secret"
+          "secret": {
+            "secretType": "rawValue",
+            "value": "secret"
+          }
         }
       }
     }
@@ -29,7 +32,7 @@
           },
           "targetService": {
             "type": "AzureResource",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DocumentDb/databaseAccounts/test-acc/mongodbDatabases/test-db"
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DBforPostgreSQL/servers/test-pg/databases/test-db"
           }
         }
       }
@@ -45,7 +48,7 @@
           },
           "targetService": {
             "type": "AzureResource",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DocumentDb/databaseAccounts/test-acc/mongodbDatabases/test-db"
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DBforPostgreSQL/servers/test-pg/databases/test-db"
           }
         }
       }
