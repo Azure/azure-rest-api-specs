@@ -8,7 +8,7 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 python-mode: create
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-namespace: azure.mgmt.[[cdn]]
+namespace: azure.mgmt.cdn
 package-name: azure-mgmt-cdn
 package-version: 2.0.0
 clear-output-folder: true
