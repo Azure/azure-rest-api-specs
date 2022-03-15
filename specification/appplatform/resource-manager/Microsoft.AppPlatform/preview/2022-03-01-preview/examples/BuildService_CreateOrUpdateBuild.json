@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2022-03-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myservice",
+    "buildServiceName": "default",
+    "buildName": "mybuild",
+    "build": {
+      "properties": {
+        "builder": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/buildServices/default/builders/default",
+        "agentPool": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/buildServices/default/agentPools/default",
+        "relativePath": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855-20210601-3ed9f4a2-986b-4bbd-b833-a42dccb2f777",
+        "env": {
+          "environmentVariable": "test"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "builder": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/buildServices/default/builders/default",
+          "agentPool": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/buildServices/default/agentPools/default",
+          "provisioningState": "Succeeded",
+          "relativePath": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855-20210601-3ed9f4a2-986b-4bbd-b833-a42dccb2f777",
+          "env": {
+            "environmentVariable": "test"
+          }
+        },
+        "systemData": {
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+        },
+        "type": "Microsoft.AppPlatform/Spring/buildServices/builds",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/buildServices/default/builds/mybuild",
+        "name": "mybuild"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "builder": "default-builder",
+          "relativePath": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855-20210601-3ed9f4a2-986b-4bbd-b833-a42dccb2f777",
+          "env": {
+            "environmentVariable": "test"
+          },
+          "triggeredBuildResult": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/buildServices/default/builds/mybuild/results/123"
+          }
+        },
+        "systemData": {
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+        },
+        "type": "Microsoft.AppPlatform/Spring/buildServices/builds",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/buildServices/default/builds/mybuild",
+        "name": "mybuild"
+      }
+    }
+  }
+}
