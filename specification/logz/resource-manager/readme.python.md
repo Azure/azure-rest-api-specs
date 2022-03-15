@@ -7,7 +7,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-logz
-namespace: azure.mgmt.[[logz]]
+namespace: azure.mgmt.logz
 package-version: 1.0.0b1
 ```
 
