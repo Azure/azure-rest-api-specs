@@ -4,7 +4,7 @@ These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
-``` yaml $(python) && $(track2)
+``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.kubernetesconfiguration
@@ -21,6 +21,7 @@ Generate all API versions currently shipped for this package
 ```yaml $(multiapi)
 clear-output-folder: true
 batch: 
+  - tag: package-2022-03
   - tag: package-preview-2022-01
   - tag: package-preview-2021-11
   - tag: package-2021-09
@@ -34,8 +35,16 @@ batch:
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/
-clear-output-folder: false
 perform-load: false
+```
+
+### Tag: package-2022-03 and python
+
+These settings apply only when `--tag=package-2022-03 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-03'
+namespace: azure.mgmt.kubernetesconfiguration.v2022_03_01
+output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/v2022_03_01
 ```
 
 ### Tag: package-preview-2022-01 and python
