@@ -81,7 +81,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a gallery.": {
+          "List shared galleries.": {
             "$ref": "./examples/sharedGalleryExamples/SharedGallery_List.json"
           }
         },
@@ -144,7 +144,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a gallery.": {
+          "List shared gallery images.": {
             "$ref": "./examples/sharedGalleryExamples/SharedGalleryImages_List.json"
           }
         },
@@ -214,7 +214,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a gallery.": {
+          "List shared gallery image versions.": {
             "$ref": "./examples/sharedGalleryExamples/SharedGalleryImageVersions_List.json"
           }
         },
@@ -263,7 +263,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a gallery.": {
+          "Get a shared gallery.": {
             "$ref": "./examples/sharedGalleryExamples/SharedGallery_Get.json"
           }
         }
@@ -316,7 +316,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a gallery.": {
+          "Get a shared gallery image.": {
             "$ref": "./examples/sharedGalleryExamples/SharedGalleryImage_Get.json"
           }
         }
@@ -376,7 +376,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a gallery.": {
+          "Get a shared gallery image version.": {
             "$ref": "./examples/sharedGalleryExamples/SharedGalleryImageVersion_Get.json"
           }
         }
@@ -551,6 +551,9 @@
         },
         "purchasePlan": {
           "$ref": "./galleryRPCommon.json#/definitions/ImagePurchasePlan"
+        },
+        "architecture": {
+          "$ref": "./galleryRPCommon.json#/definitions/Architecture"
         }
       },
       "required": [
@@ -605,6 +608,14 @@
           "type": "string",
           "format": "date-time",
           "description": "The end of life date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable."
+        },
+        "excludeFromLatest": {
+          "type": "boolean",
+          "description": "If set to true, Virtual Machines deployed from the latest version of the Image Definition won't use this Image Version."
+        },
+        "storageProfile": {
+          "$ref": "./galleryRPCommon.json#/definitions/SharedGalleryImageVersionStorageProfile",
+          "description": "Describes the storage profile of the image version."
         }
       },
       "description": "Describes the properties of a gallery image version."

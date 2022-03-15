@@ -259,6 +259,7 @@ These settings apply only when `--tag=package-2022-01-03-only` is specified on t
 
 ``` yaml $(tag) == 'package-2022-01-03-only'
 input-file:
+- Microsoft.Compute/stable/2022-01-03/common.json
 - Microsoft.Compute/stable/2022-01-03/GalleryRP/galleryRPCommon.json
 - Microsoft.Compute/stable/2022-01-03/GalleryRP/gallery.json
 - Microsoft.Compute/stable/2022-01-03/GalleryRP/sharedGallery.json
@@ -283,7 +284,7 @@ input-file:
 
 ### Tag: package-2021-12-01-only
 
-These settings apply only when `--tag=package-2021-12-01-oly` is specified on the command line.
+These settings apply only when `--tag=package-2021-12-01-only` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2021-12-01-only'
 input-file:
