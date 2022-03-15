@@ -6,7 +6,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ```yaml $(python) 
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-namespace: azure.mgmt.[[managementgroups]]
+namespace: azure.mgmt.managementgroups
 package-name: azure-mgmt-managementgroups
 package-version: 2019-05-01
 clear-output-folder: true
