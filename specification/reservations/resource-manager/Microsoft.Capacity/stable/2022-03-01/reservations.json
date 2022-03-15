@@ -92,6 +92,27 @@
           },
           {
             "$ref": "#/parameters/LocationIdParameter"
+          },
+          {
+            "name": "$publisherId",
+            "description": "Publisher id used to get the third party products",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$offerId",
+            "description": "Offer id used to get the third party products",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$planId",
+            "description": "Plan id used to get the third party products",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -1397,6 +1418,11 @@
           "format": "date",
           "description": "This is the date when the Reservation will expire."
         },
+        "fulfillmentCreatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is the DateTime when the reservation was created in fulfillment."
+        },
         "originalQuantity": {
           "type": "integer",
           "format": "int32",
@@ -1963,6 +1989,11 @@
           "type": "string",
           "format": "date-time",
           "description": "DateTime of the Reservation starting when this version is effective from."
+        },
+        "fulfillmentCreatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is the DateTime when the reservation was created in fulfillment."
         },
         "lastUpdatedDateTime": {
           "type": "string",
