@@ -9,7 +9,7 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 python-mode: create
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-namespace: azure.mgmt.[[iothubprovisioningservices]]
+namespace: azure.mgmt.iothubprovisioningservices
 package-name: azure-mgmt-iothubprovisioningservices
 package-version: 1.0.0b1
 clear-output-folder: true
