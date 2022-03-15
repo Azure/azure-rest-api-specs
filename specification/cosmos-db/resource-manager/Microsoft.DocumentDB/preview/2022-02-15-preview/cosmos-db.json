@@ -9874,6 +9874,13 @@
           "$ref": "#/definitions/BackupPolicy"
         }
       ],
+      "properties": {
+        "continuousModeProperties": {
+          "type": "object",
+          "description": "Configuration values for continuous mode backup",
+          "$ref": "#/definitions/ContinuousModeProperties"
+        }
+      },
       "x-ms-discriminator-value": "Continuous"
     },
     "PeriodicModeProperties": {
@@ -9896,6 +9903,17 @@
           "description": "Enum to indicate type of backup residency",
           "type": "string",
           "$ref": "#/definitions/BackupStorageRedundancy"
+        }
+      }
+    },
+    "ContinuousModeProperties": {
+      "type": "object",
+      "description": "Configuration values for periodic mode backup",
+      "properties": {
+        "tier": {
+          "description": "Enum to indicate type of Continuos backup mode",
+          "type": "string",
+          "$ref": "#/definitions/ContinuousTier"
         }
       }
     },
@@ -10009,6 +10027,18 @@
       ],
       "x-ms-enum": {
         "name": "BackupStorageRedundancy",
+        "modelAsString": true
+      }
+    },
+    "ContinuousTier": {
+      "description": "Enum to indicate type of Continuous backup tier.",
+      "type": "string",
+      "enum": [
+        "Continuous7Days",
+        "Continuous30Days"
+      ],
+      "x-ms-enum": {
+        "name": "ContinuousTier",
         "modelAsString": true
       }
     }
