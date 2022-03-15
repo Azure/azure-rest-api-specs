@@ -119,6 +119,9 @@
           },
           "PutLinkWithServiceEndpoint": {
             "$ref": "./examples/PutLinkWithServiceEndpoint.json"
+          },
+          "PutLinkWithSecretStore": {
+            "$ref": "./examples/PutLinkWithSecretStore.json"
           }
         },
         "parameters": [
@@ -521,6 +524,86 @@
         "modelAsString": true
       }
     },
+    "SecretType": {
+      "description": "The secret type.",
+      "type": "string",
+      "enum": [
+        "rawValue",
+        "keyVaultSecretUri",
+        "keyVaultSecretReference"
+      ],
+      "x-ms-enum": {
+        "name": "SecretType",
+        "modelAsString": true
+      }
+    },
+    "SecretInfoBase": {
+      "description": "The secret info",
+      "discriminator": "secretType",
+      "type": "object",
+      "properties": {
+        "secretType": {
+          "description": "The secret type.",
+          "$ref": "#/definitions/SecretType"
+        }
+      },
+      "required": [
+        "secretType"
+      ]
+    },
+    "ValueSecretInfo": {
+      "x-ms-discriminator-value": "rawValue",
+      "type": "object",
+      "description": "The secret info when type is rawValue. It's for scenarios that user input the secret.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretInfoBase"
+        }
+      ],
+      "properties": {
+        "value": {
+          "description": "The actual value of the secret.",
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "KeyVaultSecretReferenceSecretInfo": {
+      "x-ms-discriminator-value": "keyVaultSecretReference",
+      "type": "object",
+      "description": "The secret info when type is keyVaultSecretReference. It's for scenario that user provides a secret stored in user's keyvault and source is Azure Kubernetes. The key Vault's resource id is linked to secretStore.keyVaultId.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretInfoBase"
+        }
+      ],
+      "properties": {
+        "name": {
+          "description": "Name of the Key Vault secret.",
+          "type": "string"
+        },
+        "version": {
+          "description": "Version of the Key Vault secret.",
+          "type": "string"
+        }
+      }
+    },
+    "KeyVaultSecretUriSecretInfo": {
+      "x-ms-discriminator-value": "keyVaultSecretUri",
+      "type": "object",
+      "description": "The secret info when type is keyVaultSecretUri. It's for scenario that user provides a secret stored in user's keyvault and source is Web App, Spring Cloud or Container App.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretInfoBase"
+        }
+      ],
+      "properties": {
+        "value": {
+          "description": "URI to the keyvault secret",
+          "type": "string"
+        }
+      }
+    },
     "AuthInfoBase": {
       "description": "The authentication info",
       "discriminator": "authType",
@@ -551,8 +634,7 @@
         },
         "secret": {
           "description": "Password or account key for secret auth.",
-          "type": "string",
-          "x-ms-secret": true
+          "$ref": "#/definitions/SecretInfoBase"
         }
       }
     },
