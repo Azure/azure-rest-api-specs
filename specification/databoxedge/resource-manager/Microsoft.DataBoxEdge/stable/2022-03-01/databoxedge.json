@@ -770,59 +770,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/deviceCapacityCheck/{name}": {
-      "get": {
-        "tags": [
-          "DeviceCapacityCheck"
-        ],
-        "description": "Gets the properties of the specified device capacity check request.",
-        "operationId": "DeviceCapacityCheck_GetVMCreationFeasibilityCheck",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "deviceName",
-            "in": "path",
-            "description": "The device name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The capacity check request name.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The device capacity check result.",
-            "schema": {
-              "$ref": "#/definitions/DeviceCapacityRequestInfo"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DeviceCapacityRequestGet": {
-            "$ref": "./examples/DeviceCapacityRequestGet.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/diagnosticProactiveLogCollectionSettings/default": {
       "get": {
         "tags": [
