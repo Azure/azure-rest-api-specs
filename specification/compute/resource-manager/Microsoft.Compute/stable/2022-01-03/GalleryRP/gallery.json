@@ -608,7 +608,7 @@
             "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithSnapshotsAsSource.json"
           },
           "Create or update a simple Gallery Image Version using VM as source.": {
-            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithVMAsSource.json"
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithVmAsSource.json"
           },
           "Create or update a simple Gallery Image Version using shared image as source.": {
             "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithImageVersionAsSource.json"
@@ -1811,10 +1811,11 @@
       "properties": {
         "permissions": {
           "type": "string",
-          "description": "This property allows you to specify the permission of sharing gallery. <br><br> Possible values are: <br><br> **Private** <br><br> **Groups**",
+          "description": "This property allows you to specify the permission of sharing gallery. <br><br> Possible values are: <br><br> **Private** <br><br> **Groups** <br><br> **Community**",
           "enum": [
             "Private",
-            "Groups"
+            "Groups",
+            "Community"
           ],
           "x-ms-enum": {
             "name": "GallerySharingPermissionTypes",
@@ -1843,11 +1844,10 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "This property allows you to specify the type of sharing group. <br><br> Possible values are: <br><br> **Subscriptions** <br><br> **AADTenants** <br><br> **Community**",
+          "description": "This property allows you to specify the type of sharing group. <br><br> Possible values are: <br><br> **Subscriptions** <br><br> **AADTenants**",
           "enum": [
             "Subscriptions",
-            "AADTenants",
-            "Community"
+            "AADTenants"
           ],
           "x-ms-enum": {
             "name": "SharingProfileGroupTypes",
@@ -2271,6 +2271,9 @@
             "name"
           ],
           "description": "A list of gallery image features."
+        },
+        "architecture": {
+          "$ref": "./galleryRPCommon.json#/definitions/Architecture"
         }
       },
       "required": [
