@@ -1,0 +1,79 @@
+# yaml-language-server: $schema=/home/leni/workspace/azure-rest-api-specs/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+swaggers:
+  - ../cdn.json
+  - ../afdx.json
+
+prepareSteps:
+  - armTemplate: ./templates/Generate_Unique_name_template.json
+
+scenarios:
+  - variables:
+      profile:
+        type: object
+        value:
+          location: Global
+          sku:
+            name: Standard_AzureFrontDoor
+          properties:
+            originResponseTimeoutSeconds: 60
+      endpoint:
+        type: object
+        value:
+          location: Global
+          properties:
+            enabledState: Enabled
+      originGroup:
+        type: object
+        value:
+          properties: 
+            loadBalancingSettings:
+              sampleSize: 4
+              successfulSamplesRequired: 3
+              additionalLatencyInMilliseconds: 50
+            healthProbeSettings:
+              probePath: /
+              probeRequestType: HEAD
+              probeProtocol: Http
+              probeIntervalInSeconds: 100
+            sessionAffinityState: Disabled
+      origin:
+        type: object
+        value:
+          properties:
+            hostName: portal.azure-devex-tools.com
+            httpPort: 80
+            httpsPort: 443
+            originHostHeader: portal.azure-devex-tools.com
+            priority: 1
+            weight: 1000
+            enabledState: Enabled
+            enforceCertificateNameCheck: true
+      route:
+        type: object
+        value:
+          properties:
+            customDomains: []
+            originGroup:
+              id: /subscriptions/$(subscriptionId)/resourceGroup/$(resourceGroupName)/Microsoft.Cdn/profiles/$(profileName)/originGroups/$(originGroupName)
+            ruleSets: []
+            supportedProtocols:
+              - Http
+              - Https
+            patternsToMatch:
+              - "/*"
+            forwardingProtocol: MatchRequest
+            linkToDefaultDomain: Enabled
+            httpsRedirect: Enabled
+            enabledState: Enabled
+    steps:
+      - operationId: Profiles_Create
+      - operationId: Profiles_Get
+      - operationId: AFDEndpoints_Create
+      - operationId: AFDEndpoints_Get
+      - operationId: AFDOriginGroups_Create
+      - operationId: AFDOriginGroups_Get
+      - operationId: AFDOrigins_Create
+      - operationId: AFDOrigins_Get
+      - operationId: Routes_Create
+      - operationId: Routes_Get

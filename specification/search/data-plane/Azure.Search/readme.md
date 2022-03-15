@@ -113,6 +113,10 @@ directive:
     suppress:
       - RequiredReadOnlyProperties
   - where:
+      -  $.definitions.ListAliasesResult.properties.value
+    suppress:
+      - RequiredReadOnlyProperties
+  - where:
       -  $.definitions.ListSkillsetsResult.properties.value
     suppress:
       - RequiredReadOnlyProperties

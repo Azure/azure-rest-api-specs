@@ -12,7 +12,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.botservice
   package-name: azure-mgmt-botservice
-  package-version: 0.2.0
+  package-version: 1.0.0
   clear-output-folder: true
 ```
 

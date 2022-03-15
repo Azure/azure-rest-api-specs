@@ -811,14 +811,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ContainerPort"
-          }
+          },
+          "x-ms-identifiers": [
+            "port"
+          ]
         },
         "environmentVariables": {
           "description": "The environment variables to set in the container instance.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/EnvironmentVariable"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "instanceView": {
           "description": "The instance view of the container instance. Only valid in response.",
@@ -847,7 +853,11 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/Event"
-              }
+              },
+              "x-ms-identifiers": [
+                "name",
+                "type"
+              ]
             }
           }
         },
@@ -860,7 +870,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VolumeMount"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "livenessProbe": {
           "description": "The liveness probe.",
@@ -1188,7 +1201,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/HttpHeader"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [
@@ -1265,14 +1281,20 @@
                   "description": "The containers within the container group.",
                   "items": {
                     "$ref": "#/definitions/Container"
-                  }
+                  },
+                  "x-ms-identifiers": [
+                    "name"
+                  ]
                 },
                 "imageRegistryCredentials": {
                   "type": "array",
                   "description": "The image registry credentials by which the container group is created from.",
                   "items": {
                     "$ref": "#/definitions/ImageRegistryCredential"
-                  }
+                  },
+                  "x-ms-identifiers": [
+                    "username"
+                  ]
                 },
                 "restartPolicy": {
                   "type": "string",
@@ -1308,7 +1330,10 @@
                   "description": "The list of volumes that can be mounted by containers in this container group.",
                   "items": {
                     "$ref": "#/definitions/Volume"
-                  }
+                  },
+                  "x-ms-identifiers": [
+                    "name"
+                  ]
                 },
                 "instanceView": {
                   "description": "The instance view of the container group. Only valid in response.",
@@ -1321,7 +1346,11 @@
                       "type": "array",
                       "items": {
                         "$ref": "#/definitions/Event"
-                      }
+                      },
+                      "x-ms-identifiers": [
+                        "name",
+                        "type"
+                      ]
                     },
                     "state": {
                       "readOnly": true,
@@ -1358,7 +1387,10 @@
                   "description": "The init containers for a container group.",
                   "items": {
                     "$ref": "#/definitions/InitContainerDefinition"
-                  }
+                  },
+                  "x-ms-identifiers": [
+                    "name"
+                  ]
                 }
               },
               "required": [
@@ -1525,7 +1557,10 @@
           "description": "The list of ports exposed on the container group.",
           "items": {
             "$ref": "#/definitions/Port"
-          }
+          },
+          "x-ms-identifiers": [
+            "port"
+          ]
         },
         "type": {
           "type": "string",
@@ -1655,6 +1690,9 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of operations."
         },
         "nextLink": {
@@ -1726,7 +1764,10 @@
           "description": "The usage data.",
           "items": {
             "$ref": "#/definitions/Usage"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -1938,6 +1979,9 @@
           "items": {
             "$ref": "#/definitions/cachedImages"
           },
+          "x-ms-identifiers": [
+            "image"
+          ],
           "description": "The list of cached images."
         },
         "nextLink": {
@@ -1973,6 +2017,10 @@
           "items": {
             "$ref": "#/definitions/Capabilities"
           },
+          "x-ms-identifiers": [
+            "resourceType",
+            "location"
+          ],
           "description": "The list of capabilities."
         },
         "nextLink": {
@@ -2108,7 +2156,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/EnvironmentVariable"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "instanceView": {
           "description": "The instance view of the init container. Only valid in response.",
@@ -2137,7 +2188,11 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/Event"
-              }
+              },
+              "x-ms-identifiers": [
+                "name",
+                "type"
+              ]
             }
           }
         },
@@ -2146,7 +2201,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VolumeMount"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -2179,6 +2237,10 @@
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
           },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ],
           "description": "A list of additional details about the error."
         }
       },

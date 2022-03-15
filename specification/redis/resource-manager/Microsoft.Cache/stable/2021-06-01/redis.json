@@ -1775,6 +1775,56 @@
           "nextLinkName": null
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/locations/{location}/asyncOperations/{operationId}": {
+      "get": {
+        "tags": [
+          "AsyncOperationStatus"
+        ],
+        "operationId": "AsyncOperationStatus_Get",
+        "description": "For checking the ongoing status of an operation",
+        "x-ms-examples": {
+          "RedisCacheAsyncOperationStatus": {
+            "$ref": "./examples/RedisCacheAsyncOperationStatus.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location at which operation was triggered"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of asynchronous operation"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Asynchronous operation status response",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1876,6 +1926,11 @@
             "preferred-data-persistence-auth-method": {
               "type": "string",
               "description": "Preferred auth method to communicate to storage account used for data persistence, specify SAS or ManagedIdentity, default value is SAS",
+              "readOnly": true
+            },
+            "zonal-configuration": {
+              "type": "string",
+              "description": "Zonal Configuration",
               "readOnly": true
             }
           },
@@ -2051,6 +2106,9 @@
           "items": {
             "$ref": "#/definitions/RedisInstanceDetails"
           },
+          "x-ms-identifiers": [
+            "shardId"
+          ],
           "description": "List of the Redis instances associated with the cache"
         },
         "privateEndpointConnections": {
@@ -2426,6 +2484,7 @@
           "items": {
             "$ref": "#/definitions/ScheduleEntry"
           },
+          "x-ms-identifiers": [],
           "description": "List of patch schedules for a Redis cache."
         }
       },
@@ -2440,6 +2499,11 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ScheduleEntries",
           "description": "List of patch schedules for a Redis cache."
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
         }
       },
       "required": [
@@ -2622,6 +2686,9 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of operations supported by the resource provider."
         },
         "nextLink": {
@@ -2679,6 +2746,10 @@
           "items": {
             "$ref": "#/definitions/UpgradeNotification"
           },
+          "x-ms-identifiers": [
+            "name",
+            "timestamp"
+          ],
           "description": "List of all notifications."
         },
         "nextLink": {
@@ -2688,6 +2759,23 @@
         }
       },
       "description": "The response of listUpgradeNotifications."
+    },
+    "OperationStatus": {
+      "type": "object",
+      "description": "Asynchronous operation status",
+      "properties": {
+        "properties": {
+          "description": "Additional properties from RP, only when operation is successful",
+          "type": "object",
+          "additionalProperties": {}
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
+        }
+      ],
+      "x-ms-external": true
     }
   },
   "parameters": {

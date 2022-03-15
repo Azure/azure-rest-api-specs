@@ -10,7 +10,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.notificationhubs
 package-name: azure-mgmt-notificationhubs
-package-version: 7.0.0b1
+package-version: 7.0.0
 clear-output-folder: true
 ```
 
