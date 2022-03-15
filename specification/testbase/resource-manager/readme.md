@@ -27,7 +27,7 @@ These are the global settings for the testbase.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2020-12-16-preview
+tag: package-2022-03-01-preview
 ```
 
 ### Tag: package-2020-12-16-preview
@@ -37,6 +37,19 @@ These settings apply only when `--tag=package-2020-12-16-preview` is specified o
 ```yaml $(tag) == 'package-2020-12-16-preview'
 input-file:
   - Microsoft.TestBase/preview/2020-12-16-preview/testbase.json
+```
+
+### Tag: package-2022-03-01-preview
+
+These settings apply only when `--tag=package-2022-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-03-01-preview'
+input-file:
+  - Microsoft.TestBase/preview/2022-03-01-preview/testbase.json
+```
+## Suppression
+
+``` yaml
 directive:
 - suppress: R4031
   from: testbase.json
@@ -57,16 +70,17 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js testbase/resource-manager
 ```
 ## Suppression
 ```
 directive:
   - suppress: SECRET_PROPERTY
     from:
-      - Microsoft.TestBase/preview/2020-12-16-preview/testbase.json
+      - testbase.json
     where:
       - $.definitions.DownloadURLResponse.properties.downloadUrl
     reason: Secrets are OK to return in a POST response according to ARM.
@@ -88,4 +102,6 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
 
+## AzureResourceSchema
 
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
