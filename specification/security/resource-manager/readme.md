@@ -84,7 +84,7 @@ input-file:
 
 ### Tag: package-preview-2021-12
 
-These settings apply only when `--tag=package-preview-2021-12` is specified on the command line.
+These settings apply only when `--tag=package-preview-2021-12-only` is specified on the command line.
 
 ```yaml $(tag) == 'package-preview-2021-12'
 input-file:
@@ -111,7 +111,7 @@ These settings apply only when `--tag=package-composite-v1` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v1'
 input-file:
-- Microsoft.Security/preview/2021-07-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2021-12-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2021-10-01-preview/mdeOnboardings.json
 - Microsoft.Security/preview/2021-07-01-preview/customAssessmentAutomation.json
 - Microsoft.Security/preview/2021-07-01-preview/customEntityStoreAssignment.json
