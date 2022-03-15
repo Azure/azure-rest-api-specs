@@ -7,7 +7,7 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-namespace: azure.mgmt.[[labservices]]
+namespace: azure.mgmt.labservices
 package-name: azure-mgmt-labservices
 package-version: 1.0.0
 clear-output-folder: true
