@@ -868,6 +868,49 @@
             "type": "string"
           },
           {
+            "name": "x-ms-owner",
+            "description": "Optional and only valid if Hierarchical Namespace is enabled for the account. Sets the owner of the file or directory. ",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-group",
+            "description": "Optional and only valid if Hierarchical Namespace is enabled for the account. Sets the owning group of the file or directory.",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-acl",
+            "description": "Optional and only valid if Hierarchical Namespace is enabled for the account. Sets POSIX access control rights on files and directories. Each access control entry (ACE) consists of a scope, a type, a user or group identifier, and permissions in the format \"[scope:][type]:[id]:[permissions]\". The scope must be \"default\" to indicate the ACE belongs to the default ACL for a directory; otherwise scope is implicit and the ACE belongs to the access ACL.  There are four ACE types: \"user\" grants rights to the owner or a named user, \"group\" grants rights to the owning group or a named group, \"mask\" restricts rights granted to named users and the members of groups, and \"other\" grants rights to all users not found in any of the other entries. The user or group identifier is omitted for entries of type \"mask\" and \"other\".  The user or group identifier is also omitted for the owner and owning group.  The permission field is a 3-character sequence where the first character is 'r' to grant read access, the second character is 'w' to grant write access, and the third character is 'x' to grant execute permission.  If access is not granted, the '-' character is used to denote that the permission is denied. For example, the following ACL grants read, write, and execute rights to the file owner and john.doe@contoso, the read right to the owning group, and nothing to everyone else: \"user::rwx,user:john.doe@contoso:rwx,group::r--,other::---,mask=rwx\". Invalid in conjunction with x-ms-permissions.",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-proposed-lease-id",
+            "in": "header",
+            "description": "Optonal. Specify a proposed lease id if you want to acquire a lease during craeion of a file or directory.  A lease will be acquired with this lease ID if the craetion is successful.",
+            "pattern": "^[{(]?[0-9a-f]{8}[-]?([0-9a-f]{4}[-]?){3}[0-9a-f]{12}[)}]?$",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-expiry-option",
+            "description": "Optional and only valid if Hierarchical Namespace is enabled for the account and only supported on files. Specify one of the following expiry option if you want to set expiry time on a file while creation. \"RelativeToNow\" Set the expiry relative to the current time. User will pass the number of milliseconds elapsed from now. \"Absolute\" Absolute time in RFC 1123 Format. \"Neverexpire\" Set the file to never expire, expiry-time does not need to be specified with this option.",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-expiry-time",
+            "description": "Optional and only valid if Hierarchical Namespace is enabled for the account and only supported on files. Specify the expiry time when toe xpire the file. Given as RFC 1123 HTTP Time String or number of milliseconds according to the expiry-option.",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "If-Match",
             "description": "Optional.  An ETag value. Specify this header to perform the operation only if the resource's ETag matches the value specified. The ETag must be specified in quotes.",
             "in": "header",
