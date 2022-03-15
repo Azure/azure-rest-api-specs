@@ -8,7 +8,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-resourcemover
 clear-output-folder: true
-namespace: azure-mgmt-resourcemover
+namespace: azure.mgmt.resourcemover
 package-version: 1.0.0b1
 ```
 
