@@ -1091,4 +1091,3 @@ input-file:
 - Microsoft.Compute/stable/2019-07-01/disk.json
 ```
 
-

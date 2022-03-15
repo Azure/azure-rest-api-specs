@@ -3674,7 +3674,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationEntity"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -3763,6 +3766,9 @@
           "items": {
             "$ref": "#/definitions/OperationResourceMetricSpecification"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of metric specifications."
         }
       }
@@ -3807,6 +3813,9 @@
           "items": {
             "$ref": "#/definitions/OperationResourceMetricSpecificationDimension"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "Dimensions for the metric specification."
         }
       }
@@ -3919,7 +3928,10 @@
           "items": {
             "$ref": "#/definitions/RestoreFileSpec",
             "description": "Post Restore restore file spec items array."
-          }
+          },
+          "x-ms-identifiers": [
+            "path"
+          ]
         }
       }
     },
@@ -3961,7 +3973,10 @@
           "items": {
             "$ref": "#/definitions/RestoreFileSpec",
             "description": "Pre Restore restore file spec items array."
-          }
+          },
+          "x-ms-identifiers": [
+            "path"
+          ]
         },
         "pauseWaitForSyncDrainTimePeriodInSeconds": {
           "type": "integer",
@@ -4630,6 +4645,9 @@
           "items": {
             "$ref": "#/definitions/ServerEndpointFilesNotSyncingError"
           },
+          "x-ms-identifiers": [
+            "errorCode"
+          ],
           "description": "Array of per-item errors coming from the last sync session.",
           "readOnly": true
         },
@@ -5170,6 +5188,9 @@
           "items": {
             "$ref": "#/definitions/FilesNotTieringError"
           },
+          "x-ms-identifiers": [
+            "errorCode"
+          ],
           "description": "Array of tiering errors",
           "readOnly": true
         }
@@ -5262,6 +5283,9 @@
           "items": {
             "$ref": "#/definitions/ServerEndpointRecallError"
           },
+          "x-ms-identifiers": [
+            "errorCode"
+          ],
           "description": "Array of recall errors",
           "readOnly": true
         }
