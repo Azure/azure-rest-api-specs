@@ -36,7 +36,6 @@ batch:
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/databoxedge/azure-mgmt-databoxedge/azure/mgmt/databoxedge/
-
 perform-load: false
 ```
 ### Tag: package-2021-02-01 and python
