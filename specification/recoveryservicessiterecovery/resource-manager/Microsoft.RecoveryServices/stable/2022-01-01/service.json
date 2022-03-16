@@ -69,18 +69,18 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [
+        "parameters": [ 
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "#/parameters/SubscriptionId"
           },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },,
           {
             "$ref": "#/parameters/ResourceName"
           },
           {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
+            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "responses": {
@@ -24468,7 +24468,7 @@
       "description": "The name of the resource group where the recovery services vault is present.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "method"
     },
     "ResourceName": {
       "name": "resourceName",
@@ -24476,7 +24476,7 @@
       "description": "The name of the recovery services vault.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "method"
     },
     "ApiVersion": {
       "name": "api-version",
