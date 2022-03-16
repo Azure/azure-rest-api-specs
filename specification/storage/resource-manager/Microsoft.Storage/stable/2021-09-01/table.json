@@ -456,7 +456,7 @@
         "signedIdentifiers": {
           "type": "array",
           "items": {
-            "$ref": "./common.json#/definitions/SignedIdentifier"
+            "$ref": "#/definitions/TableSignedIdentifier"
           },
           "description": "List of stored access policies specified on the table."
         }
@@ -479,6 +479,42 @@
         }
       },
       "description": "Response schema. Contains list of tables returned"
+    },
+    "TableSignedIdentifier": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "unique-64-character-value of the stored access policy."
+        },
+        "accessPolicy": {
+          "$ref": "#/definitions/TableAccessPolicy",
+          "description": "Access policy"
+        }
+      },
+      "required":[
+        "id"
+      ]
+    },
+    "TableAccessPolicy": {
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the access policy"
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiry time of the access policy"
+        },
+        "permission": {
+          "type": "string",
+          "description": "Required. List of abbreviated permissions. Supported permission values include 'r','a','u','d'"
+        }
+      },
+      "required":[
+        "permission"
+      ]
     }
   },
   "parameters": {
