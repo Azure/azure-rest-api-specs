@@ -422,6 +422,20 @@
           "description": "The Azure Container Registry the application container will be pushed to.",
           "title": "The Azure Container Registry resource."
         },
+        "oidcCredentials": {
+          "type": "object",
+          "description": "The fields needed for OIDC with GitHub.",
+          "properties": {
+            "azureClientId": {
+              "type": "string",
+              "description": "Azure Application Client ID"
+            },
+            "azureTenantId": {
+              "type": "string",
+              "description": "Azure Directory (tenant) ID"
+            }
+          }
+        },
         "aksResourceId": {
           "type": "string",
           "description": "The Azure Kubernetes Cluster Resource the application will be deployed to.",
