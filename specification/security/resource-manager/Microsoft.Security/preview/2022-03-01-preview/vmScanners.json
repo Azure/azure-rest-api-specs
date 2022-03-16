@@ -1,0 +1,210 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2022-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/vmScanners/{vmScannerName}": {
+      "get": {
+        "description": "Gets the subscription's VM scanner configuration.",
+        "operationId": "VmScanners_Get",
+        "x-ms-examples": {
+          "Gets the subscription's VM scanner configuration": {
+            "$ref": "./examples/VmScanners/GetVmScanner_example.json"
+          }
+        },
+        "tags": [
+          "VmScanners"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "name": "vmScannerName",
+            "in": "path",
+            "description": "Name of the VM scanner.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ScannerConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create or update a VM scanner configuration": {
+            "$ref": "./examples/VmScanners/CreateVmScanner_example.json"
+          }
+        },
+        "tags": [
+          "VmScanners"
+        ],
+        "description": "Create a VM scanner",
+        "operationId": "VmScanners_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "name": "vmScannerName",
+            "in": "path",
+            "description": "Name of the VM scanner.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ScannerConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a VM scanner configuration": {
+            "$ref": "./examples/VmScanners/DeleteVmScanner_example.json"
+          }
+        },
+        "tags": [
+          "VmScanners"
+        ],
+        "description": "Delete a VM scanner configuration.",
+        "operationId": "VmScanners_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "name": "vmScannerName",
+            "in": "path",
+            "description": "Name of the VM scanner.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Resource was deleted"
+          },
+          "204": {
+            "description": "No Content - Resource does not exist"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ScannerConfiguration": {
+      "type": "object",
+      "description": "Represents the configuration of the VM scanner",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "description": "Properties of the VM Scanner resource",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ScannerProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ScannerProperties": {
+      "description": "VM Scanner resource properties",
+      "properties": {
+        "scanningMode": {
+          "type": "string",
+          "description": "The scanning mode.",
+          "enum": [
+            "Saas"
+          ],
+          "x-ms-enum": {
+            "name": "ScanningMode",
+            "modelAsString": true
+          }
+        },
+        "exclusionTag ": {
+          "type": "string",
+          "description": "The tag used to exclude resources."
+        }
+      }
+    }
+  }
+}
