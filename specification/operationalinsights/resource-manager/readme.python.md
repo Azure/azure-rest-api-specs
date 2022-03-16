@@ -17,3 +17,8 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/loganalytics/azure-mgmt-loganalytics/azure/mgmt/loganalytics
 ```
+
+``` yaml $(python)
+modelerfour:
+  lenient-model-deduplication: true
+```
