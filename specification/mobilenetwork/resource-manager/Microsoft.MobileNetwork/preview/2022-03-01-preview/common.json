@@ -3,7 +3,7 @@
   "info": {
     "title": "MobileNetworkManagementClient",
     "description": "The resources in this swagger specification will be used to manage the virtual network functions deployed using mobile network",
-    "version": "2022-01-01-preview"
+    "version": "2022-03-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -169,7 +169,30 @@
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Unknown"
+          },
+          {
+            "value": "Succeeded"
+          },
+          {
+            "value": "Accepted"
+          },
+          {
+            "value": "Deleting"
+          },
+          {
+            "value": "Failed"
+          },
+          {
+            "value": "Canceled"
+          },
+          {
+            "value": "Deleted"
+          }
+        ]
       }
     },
     "TagsObject": {
@@ -185,17 +208,32 @@
       },
       "description": "Tags object for patch operations."
     },
-    "ConfigurationState": {
+    "SimState": {
       "type": "string",
       "readOnly": true,
-      "description": "The configuration state of the resource - complete or incomplete.",
+      "description": "The state of the sim resource.",
       "enum": [
-        "Incomplete",
-        "Complete"
+        "Disabled",
+        "Enabled",
+        "Invalid"
       ],
       "x-ms-enum": {
-        "name": "ConfigurationState",
-        "modelAsString": true
+        "name": "SimState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Disabled",
+            "description": "The sim is disabled because not all configuration required for enabling is present."
+          },
+          {
+            "value": "Enabled",
+            "description": "The sim is enabled."
+          },
+          {
+            "value": "Invalid",
+            "description": "The sim cannot be enabled because some of the associated configuration is invalid."
+          }
+        ]
       }
     },
     "InterfaceProperties": {
@@ -204,6 +242,18 @@
         "name": {
           "type": "string",
           "description": "The logical name for this interface. This should match one of the interfaces configured on your Azure Stack Edge machine."
+        },
+        "ipv4Address": {
+          "$ref": "./ts29571.json#/definitions/Ipv4Addr",
+          "description": "The IPv4 address."
+        },
+        "ipv4Subnet": {
+          "$ref": "./ts29571.json#/definitions/Ipv4AddrMask",
+          "description": "The IPv4 subnet."
+        },
+        "ipv4Gateway": {
+          "$ref": "./ts29571.json#/definitions/Ipv4Addr",
+          "description": "The default IPv4 gateway (router)."
         }
       },
       "required": [
