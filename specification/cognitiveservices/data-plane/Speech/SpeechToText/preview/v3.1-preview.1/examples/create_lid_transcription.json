@@ -4,17 +4,33 @@
     "Ocp-Apim-Subscription-Key": "{API Key}",
     "transcription": {
       "contentUrls": [
-        "https://contoso.com/mystoragelocation",
-        "https://contoso.com/myotherstoragelocation"
+        "https://contoso.com/mystoragelocation"
       ],
       "properties": {
         "diarizationEnabled": false,
         "wordLevelTimestampsEnabled": false,
+        "displayFormWordLevelTimestampsEnabled": false,
+        "channels": [
+          0,
+          1
+        ],
         "punctuationMode": "DictatedAndAutomatic",
-        "profanityFilterMode": "Masked"
+        "profanityFilterMode": "Masked",
+        "languageIdentification": {
+          "candidateLocales": [
+            "fr-FR",
+            "nl-NL",
+            "el-GR"
+          ],
+          "speechModelMapping": {
+            "nl-NL": {
+              "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.1-preview.1/models/827712a5-f942-4997-91c3-7c6cde35600b"
+            }
+          }
+        }
       },
-      "locale": "en-US",
-      "displayName": "Transcription using default model for en-US"
+      "locale": "fr-FR",
+      "displayName": "Transcription using language identification with three candidate languages, 'fr-FR' as fallback locale and a custom model for transcribing utterances that were classified as 'nl-NL' locale."
     },
     "Content-Type": "application/json"
   },
@@ -39,13 +55,25 @@
           ],
           "punctuationMode": "DictatedAndAutomatic",
           "profanityFilterMode": "Masked",
-          "duration": "PT42S"
+          "duration": "PT42S",
+          "languageIdentification": {
+            "candidateLocales": [
+              "fr-FR",
+              "nl-NL",
+              "el-GR"
+            ],
+            "speechModelMapping": {
+              "nl-NL": {
+                "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.1-preview.1/models/827712a5-f942-4997-91c3-7c6cde35600b"
+              }
+            }
+          }
         },
         "lastActionDateTime": "2019-01-07T11:36:07Z",
         "status": "Succeeded",
         "createdDateTime": "2019-01-07T11:34:12Z",
-        "locale": "en-US",
-        "displayName": "Transcription using adapted model en-US",
+        "locale": "fr-FR",
+        "displayName": "Transcription using language identification with three candidate languages, 'fr-FR' as fallback locale and a custom model for transcribing utterances that were classified as 'nl-NL' locale.",
         "customProperties": {
           "key": "value"
         }

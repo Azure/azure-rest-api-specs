@@ -2,19 +2,31 @@
   "parameters": {
     "Endpoint": "https://westus.api.cognitive.microsoft.com/",
     "Ocp-Apim-Subscription-Key": "{API Key}",
-    "id": "827712a5-f942-4997-91c3-7c6cde35600b",
-    "modelUpdate": {
-      "displayName": "Language model update",
-      "description": "This is a language model update",
-      "customProperties": {
-        "key": "value"
-      }
+    "model": {
+      "baseModel": {
+        "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.1-preview.1/models/base/8a043172-65b7-4cf3-a8b5-4449efa5a0f1"
+      },
+      "datasets": [
+        {
+          "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.1-preview.1/datasets/9d5f4100-5f8e-4dd6-bd83-9bbbf50d57f1"
+        },
+        {
+          "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.1-preview.1/datasets/cdc91c24-3972-496d-a12f-209c35f4cc6c"
+        }
+      ],
+      "properties": {
+        "customModelWeight": 30
+      },
+      "locale": "en-US",
+      "displayName": "Model with acoustic and language datasets"
     },
     "Content-Type": "application/json"
   },
   "responses": {
-    "200": {
-      "headers": {},
+    "201": {
+      "headers": {
+        "Location": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.1-preview.1/models/827712a5-f942-4997-91c3-7c6cde35600b"
+      },
       "body": {
         "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.1-preview.1/models/827712a5-f942-4997-91c3-7c6cde35600b",
         "baseModel": {
@@ -35,6 +47,7 @@
             "adaptationDateTime": "2022-11-04T00:00:00Z",
             "transcriptionDateTime": "2023-05-04T00:00:00Z"
           },
+          "customModelWeight": 30,
           "capabilities": [
             "Transcription",
             "AdaptationWithText"

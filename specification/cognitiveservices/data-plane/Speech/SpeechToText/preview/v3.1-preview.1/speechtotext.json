@@ -1,13 +1,13 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Speech Services API v3.0",
-    "description": "Speech Services API v3.0.",
+    "title": "Speech Services API v3.1-preview.1",
+    "description": "Speech Services API v3.1-preview.1.",
     "contact": {
       "name": "Cognitive Services - Speech Services",
       "url": "https://docs.microsoft.com/azure/cognitive-services/speech-service/support"
     },
-    "version": "v3.0"
+    "version": "v3.1-preview.1"
   },
   "paths": {
     "/datasets/locales": {
@@ -63,6 +63,12 @@
           },
           {
             "$ref": "#/parameters/topQueryParameter"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "A filtering expression for selecting a subset of the available datasets.\r\n            <ul><li><b>Supported properties:</b> self, displayName, description, createdDateTime, lastActionDateTime, status, locale, kind.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for all properties with the exception of self, status.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=createdDateTime gt 2022-02-01T11:00:00Z and displayName eq 'My dataset'```</li></ul>",
+            "type": "string"
           }
         ],
         "responses": {
@@ -98,6 +104,9 @@
         "x-ms-examples": {
           "Get all datasets": {
             "$ref": "./examples/get_datasets.json"
+          },
+          "Get all acoustic datasets": {
+            "$ref": "./examples/get_acoustic_datasets.json"
           }
         }
       },
@@ -360,7 +369,7 @@
           {
             "in": "formData",
             "name": "kind",
-            "description": "The kind of the dataset (required). Possible values are \"Language\", \"Acoustic\", \"Pronunciation\", \"AudioFiles\".",
+            "description": "The kind of the dataset (required). Possible values are \"Language\", \"Acoustic\", \"Pronunciation\", \"AudioFiles\", \"LanguageMarkdown\".",
             "required": true,
             "type": "string"
           },
@@ -418,6 +427,183 @@
         }
       }
     },
+    "/datasets/uploadsessions": {
+      "post": {
+        "tags": [
+          "Custom Speech datasets for model adaptation:"
+        ],
+        "summary": "Create upload session.",
+        "operationId": "CreateUploadSession",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "dataset",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The response contains information about the entity as payload and its location as header.",
+            "schema": {
+              "$ref": "#/definitions/UploadSession"
+            },
+            "headers": {
+              "Location": {
+                "description": "The location of the created resource.",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "subscription_key": [],
+            "token": []
+          }
+        ],
+        "x-ms-examples": {
+          "Create session to upload a dataset": {
+            "$ref": "./examples/create_upload_session.json"
+          }
+        }
+      }
+    },
+    "/datasets/uploadsessions/{id}": {
+      "put": {
+        "tags": [
+          "Custom Speech datasets for model adaptation:"
+        ],
+        "summary": "Upload a chunk of data.",
+        "operationId": "UploadChunk",
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "format": "binary",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Once all chunks have been uploaded, the data import process is started and the response contains the handle of the created data import entity. The response contains the location of the data import entity as header.",
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            },
+            "headers": {
+              "Location": {
+                "description": "The location of the created resource.",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "202": {
+            "description": "The data chunk was uploaded successfully and further data chunks are expected as reported in the response. The response contains the location of the upload session as header.",
+            "schema": {
+              "$ref": "#/definitions/UploadSession"
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "The minimum number of seconds to wait before accessing the resource created in this operation.",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "subscription_key": [],
+            "token": []
+          }
+        ],
+        "x-ms-examples": {
+          "Upload a dataset with a session": {
+            "$ref": "./examples/upload_session.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Custom Speech datasets for model adaptation:"
+        ],
+        "summary": "Get upload session.",
+        "operationId": "GetUploadSession",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UploadSession"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "subscription_key": [],
+            "token": []
+          }
+        ],
+        "x-ms-examples": {
+          "Get upload session": {
+            "$ref": "./examples/get_upload_session.json"
+          }
+        }
+      }
+    },
     "/datasets/{id}/files": {
       "get": {
         "tags": [
@@ -445,6 +631,12 @@
           },
           {
             "$ref": "#/parameters/topQueryParameter"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "A filtering expression for selecting a subset of the available files.\r\n            <ul><li><b>Supported properties:</b> self, name, createdDateTime, kind.</li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for name, createdDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=name eq 'myaudio.wav' and kind eq 'Audio'```</li></ul>",
+            "type": "string"
           }
         ],
         "responses": {
@@ -480,6 +672,9 @@
         "x-ms-examples": {
           "Get all files": {
             "$ref": "./examples/get_dataset_files.json"
+          },
+          "Get all dataset report files": {
+            "$ref": "./examples/get_dataset_report_files.json"
           }
         }
       }
@@ -598,6 +793,12 @@
           },
           {
             "$ref": "#/parameters/topQueryParameter"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "A filtering expression for selecting a subset of the available endpoints.\r\n            <ul><li><b>Supported properties:</b> self, displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for all properties with the exception of self, status.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=locale eq 'en-US'```</li></ul>",
+            "type": "string"
           }
         ],
         "responses": {
@@ -633,6 +834,9 @@
         "x-ms-examples": {
           "Get all endpoints": {
             "$ref": "./examples/get_endpoints.json"
+          },
+          "Get all queued endpoints.": {
+            "$ref": "./examples/get_not_started_endpoints.json"
           }
         }
       },
@@ -1346,6 +1550,12 @@
           },
           {
             "$ref": "#/parameters/topQueryParameter"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "A filtering expression for selecting a subset of the available evaluations.\r\n            <ul><li><b>Supported properties:</b> self, displayName, description, createdDateTime.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for all properties with the exception of self, status.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=displayName eq 'My evaluation'```</li></ul>",
+            "type": "string"
           }
         ],
         "responses": {
@@ -1381,6 +1591,9 @@
         "x-ms-examples": {
           "Get all evaluations": {
             "$ref": "./examples/get_evaluations.json"
+          },
+          "Get all evaluations with the specified error rate": {
+            "$ref": "./examples/get_evaluations_with_error_rate.json"
           }
         }
       },
@@ -1468,6 +1681,12 @@
           },
           {
             "$ref": "#/parameters/topQueryParameter"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "A filtering expression for selecting a subset of the available files.\r\n            <ul><li><b>Supported properties:</b> self, name, createdDateTime, kind.</li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for name, createdDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=name eq 'myaudio.wav' and kind eq 'Audio'```</li></ul>",
+            "type": "string"
           }
         ],
         "responses": {
@@ -1780,6 +1999,12 @@
           },
           {
             "$ref": "#/parameters/topQueryParameter"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "A filtering expression for selecting a subset of the available models.\r\n            <ul><li><b>Supported properties: </b> self, displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=status eq 'NotStarted' or status eq 'Running'```</li></ul>",
+            "type": "string"
           }
         ],
         "responses": {
@@ -1813,8 +2038,8 @@
           "nextLinkName": "@nextLink"
         },
         "x-ms-examples": {
-          "Get all models": {
-            "$ref": "./examples/get_models.json"
+          "Get all models in state 'Running'": {
+            "$ref": "./examples/get_running_models.json"
           }
         }
       },
@@ -1871,6 +2096,9 @@
         "x-ms-examples": {
           "Create a model": {
             "$ref": "./examples/create_model.json"
+          },
+          "Create a model with custom model weight": {
+            "$ref": "./examples/create_model_with_weight.json"
           }
         }
       }
@@ -1891,6 +2119,12 @@
           },
           {
             "$ref": "#/parameters/topQueryParameter"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "A filtering expression for selecting a subset of the available base models.\r\n            <ul><li><b>Supported properties: </b> self, displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for all properties with the exception of self, status.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=status eq 'NotStarted' or status eq 'Running'```</li></ul>",
+            "type": "string"
           }
         ],
         "responses": {
@@ -1918,8 +2152,8 @@
           "nextLinkName": "@nextLink"
         },
         "x-ms-examples": {
-          "Get all base models": {
-            "$ref": "./examples/get_base_models.json"
+          "Get all english base models": {
+            "$ref": "./examples/get_english_base_models.json"
           }
         }
       }
@@ -1973,6 +2207,9 @@
         "x-ms-examples": {
           "Get a model": {
             "$ref": "./examples/get_model.json"
+          },
+          "Get a model with custom model weight": {
+            "$ref": "./examples/get_model_with_weight.json"
           }
         }
       },
@@ -2297,6 +2534,136 @@
         }
       }
     },
+    "/models/{id}/files": {
+      "get": {
+        "tags": [
+          "Custom Speech models:"
+        ],
+        "summary": "Gets the files of the model identified by the given ID.",
+        "operationId": "GetModelFiles",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The identifier of the model.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/sasValidityQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/skipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/topQueryParameter"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "A filtering expression for selecting a subset of the available files.\r\n            <ul><li><b>Supported properties:</b> self, name, createdDateTime, kind.</li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for name, createdDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=name eq 'myaudio.wav' and kind eq 'Audio'```</li></ul>",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PaginatedFiles"
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "subscription_key": [],
+            "token": []
+          }
+        ],
+        "x-ms-pageable": {
+          "itemName": "values",
+          "nextLinkName": "@nextLink"
+        },
+        "x-ms-examples": {
+          "Get all files": {
+            "$ref": "./examples/get_model_files.json"
+          }
+        }
+      }
+    },
+    "/models/{id}/files/{fileId}": {
+      "get": {
+        "tags": [
+          "Custom Speech models:"
+        ],
+        "summary": "Gets one specific file (identified with fileId) from a model (identified with id).",
+        "operationId": "GetModelFile",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The identifier of the model.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "path",
+            "name": "fileId",
+            "description": "The identifier of the file.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/sasValidityQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/File"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "subscription_key": [],
+            "token": []
+          }
+        ],
+        "x-ms-examples": {
+          "Get a file": {
+            "$ref": "./examples/get_model_file.json"
+          }
+        }
+      }
+    },
     "/projects/locales": {
       "get": {
         "tags": [
@@ -2353,6 +2720,12 @@
           },
           {
             "$ref": "#/parameters/topQueryParameter"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "A filtering expression for selecting a subset of the available projects.\r\n            <ul><li><b>Supported properties:</b> self, displayName, description, createdDateTime, lastActionDateTime, locale.</li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for all properties with the exception of self.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=displayName eq 'My test'```</li></ul>",
+            "type": "string"
           }
         ],
         "responses": {
@@ -2382,6 +2755,9 @@
         "x-ms-examples": {
           "Get all projects": {
             "$ref": "./examples/get_projects.json"
+          },
+          "Get all projects created in 2018 or 2019": {
+            "$ref": "./examples/get_projects_from_2018_and_2019.json"
           }
         }
       },
@@ -2613,6 +2989,12 @@
           },
           {
             "$ref": "#/parameters/topQueryParameter"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "A filtering expression for selecting a subset of the available evaluations.\r\n            <ul><li><b>Supported properties:</b> self, displayName, description, createdDateTime.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for all properties with the exception of self, status.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=displayName eq 'My evaluation'```</li></ul>",
+            "type": "string"
           }
         ],
         "responses": {
@@ -2676,6 +3058,12 @@
           },
           {
             "$ref": "#/parameters/topQueryParameter"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "A filtering expression for selecting a subset of the available datasets.\r\n            <ul><li><b>Supported properties:</b> self, displayName, description, createdDateTime, lastActionDateTime, status, locale, kind.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for all properties with the exception of self, status.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=createdDateTime gt 2022-02-01T11:00:00Z```</li></ul>",
+            "type": "string"
           }
         ],
         "responses": {
@@ -2739,6 +3127,12 @@
           },
           {
             "$ref": "#/parameters/topQueryParameter"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "A filtering expression for selecting a subset of the available endpoints.\r\n            <ul><li><b>Supported properties:</b> self, displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for all properties with the exception of self, status.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=locale eq 'en-US'```</li></ul>",
+            "type": "string"
           }
         ],
         "responses": {
@@ -2802,6 +3196,12 @@
           },
           {
             "$ref": "#/parameters/topQueryParameter"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "A filtering expression for selecting a subset of the available models.\r\n            <ul><li><b>Supported properties: </b> self, displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for all properties with the exception of self, status.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=status eq 'NotStarted' or status eq 'Running'```</li></ul>",
+            "type": "string"
           }
         ],
         "responses": {
@@ -2865,6 +3265,12 @@
           },
           {
             "$ref": "#/parameters/topQueryParameter"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "A filtering expression for selecting a subset of the available transcriptions.\r\n            <ul><li><b>Supported properties:</b> self, displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for all properties but self, status.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=createdDateTime gt 2022-02-01T11:00:00Z```</li></ul>",
+            "type": "string"
           }
         ],
         "responses": {
@@ -2960,6 +3366,12 @@
           },
           {
             "$ref": "#/parameters/topQueryParameter"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "A filtering expression for selecting a subset of the available transcriptions.\r\n            <ul><li><b>Supported properties:</b> self, displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for all properties but self, status.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=createdDateTime gt 2022-02-01T11:00:00Z```</li></ul>",
+            "type": "string"
           }
         ],
         "responses": {
@@ -2995,6 +3407,9 @@
         "x-ms-examples": {
           "Get all transcriptions": {
             "$ref": "./examples/get_transcriptions.json"
+          },
+          "Get all failed transcriptions": {
+            "$ref": "./examples/get_failed_transcriptions.json"
           }
         }
       },
@@ -3051,6 +3466,15 @@
         "x-ms-examples": {
           "Create a transcription for URIs": {
             "$ref": "./examples/create_uri_transcription.json"
+          },
+          "Create a transcription with basic two-speaker diarization": {
+            "$ref": "./examples/create_simple_diarization_transcription.json"
+          },
+          "Create a transcription with multispeaker diarization": {
+            "$ref": "./examples/create_multispeaker_diarization_transcription.json"
+          },
+          "Create a transcription with language identification": {
+            "$ref": "./examples/create_lid_transcription.json"
           },
           "Create a transcription from blob container": {
             "$ref": "./examples/create_container_transcription.json"
@@ -3244,6 +3668,12 @@
           },
           {
             "$ref": "#/parameters/topQueryParameter"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "A filtering expression for selecting a subset of the available files.\r\n            <ul><li><b>Supported properties:</b> self, name, createdDateTime, kind.</li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for name, createdDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=name eq 'myaudio.wav.json' and kind eq 'Transcription'```</li></ul>",
+            "type": "string"
           }
         ],
         "responses": {
@@ -3279,6 +3709,9 @@
         "x-ms-examples": {
           "Get all files": {
             "$ref": "./examples/get_transcription_files.json"
+          },
+          "Get all transcription files the name of which starts with the specified string": {
+            "$ref": "./examples/get_transcription_files_filtered_by_name.json"
           }
         }
       }
@@ -3346,7 +3779,7 @@
         "tags": [
           "Custom Speech web hooks:"
         ],
-        "summary": "Gets the list of web hooks for the authenticated subscription.",
+        "summary": "Gets the list of web hook registrations for the authenticated subscription.",
         "operationId": "GetHooks",
         "produces": [
           "application/json"
@@ -3357,6 +3790,12 @@
           },
           {
             "$ref": "#/parameters/topQueryParameter"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "A filtering expression for selecting a subset of the available hooks.\r\n            <ul><li><b>Supported properties:</b> self, displayName, description, createdDateTime, lastActionDateTime, status, locale, webUrl.</li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for all properties with the exception of self, status.\r\n                - in, and, or, not are supported.\r\n              </li><li><b>Functions:</b>\r\n                - contains, startswith, endswith are supported for displayName, description, status, locale, webUrl.\r\n                - tolower, toupper, trim are supported for displayName, description, status, locale, webUrl.\r\n                - concat, indexof, length are supported for displayName, description, locale, webUrl.\r\n                - day, month, year, hour, minute, second, time, date, now are supported for createdDateTime, lastActionDateTime.\r\n                - cast is supported for all properties.\r\n              </li><li><b>Example:</b>```filter=contains(displayName, 'test')```</li></ul>",
+            "type": "string"
           }
         ],
         "responses": {
@@ -3392,6 +3831,9 @@
         "x-ms-examples": {
           "Get all web hooks": {
             "$ref": "./examples/get_web_hooks.json"
+          },
+          "Get all web hooks created in 03/2020 ordered by their name": {
+            "$ref": "./examples/get_web_hooks_from_march_2020.json"
           }
         }
       },
@@ -3399,7 +3841,7 @@
         "tags": [
           "Custom Speech web hooks:"
         ],
-        "summary": "Creates a new web hook.",
+        "summary": "Creates a new web hook registration.",
         "description": "If the property secret in the configuration is present and contains a non-empty string, it will be used to create a SHA256 hash of the payload with\r\nthe secret as HMAC key. This hash will be set as X-MicrosoftSpeechServices-Signature header when calling back into the registered URL.\r\n            \r\nWhen calling back into the registered URL, the request will contain a X-MicrosoftSpeechServices-Event header containing one of the registered event\r\ntypes. There will be one request per registered event type.\r\n            \r\nAfter successfully registering the web hook, it will not be usable until a challenge/response is completed. To do this, a request with the event type\r\nchallenge will be made with a query parameter called validationToken. Respond to the challenge with a 200 OK containing the value of the validationToken\r\nquery parameter as the response body. When the challenge/response is successfully completed, the web hook will begin receiving events.",
         "operationId": "CreateHook",
         "consumes": [
@@ -3458,7 +3900,7 @@
         "tags": [
           "Custom Speech web hooks:"
         ],
-        "summary": "Gets the web hook identified by the given ID.",
+        "summary": "Gets the web hook registration identified by the given ID.",
         "operationId": "GetHook",
         "produces": [
           "application/json"
@@ -3509,7 +3951,7 @@
         "tags": [
           "Custom Speech web hooks:"
         ],
-        "summary": "Updates the web hook identified by the given ID.",
+        "summary": "Updates the web hook registration identified by the given ID.",
         "description": "If the property secret in the configuration is omitted or contains an empty string, future callbacks won't contain X-MicrosoftSpeechServices-Signature\r\nheaders. If the property contains a non-empty string, it will be used to create a SHA256 hash of the payload with the secret as HMAC key. This hash\r\nwill be set as X-MicrosoftSpeechServices-Signature header when calling back into the registered URL.\r\n            \r\nIf the URL changes,  the web hook will stop receiving events until a\r\nchallenge/response is completed. To do this, a request with the event type challenge will be made with a query parameter called validationToken.\r\nRespond to the challenge with a 200 OK containing the value of the validationToken query parameter as the response body. When the challenge/response\r\nis successfully completed, the web hook will begin receiving events.",
         "operationId": "UpdateHook",
         "consumes": [
@@ -3574,7 +4016,7 @@
         "tags": [
           "Custom Speech web hooks:"
         ],
-        "summary": "Deletes the web hook identified by the given ID.",
+        "summary": "Deletes the web hook registration identified by the given ID.",
         "operationId": "DeleteHook",
         "produces": [
           "application/json"
@@ -3853,7 +4295,8 @@
         "Language",
         "Acoustic",
         "Pronunciation",
-        "AudioFiles"
+        "AudioFiles",
+        "LanguageMarkdown"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -3875,6 +4318,10 @@
           {
             "value": "AudioFiles",
             "description": "An audio files data import."
+          },
+          {
+            "value": "LanguageMarkdown",
+            "description": "A language markdown data import."
           }
         ]
       }
@@ -4294,6 +4741,31 @@
             "description": "Invalid time to live."
           }
         ]
+      }
+    },
+    "DiarizationProperties": {
+      "title": "DiarizationProperties",
+      "type": "object",
+      "properties": {
+        "speakers": {
+          "$ref": "#/definitions/DiarizationSpeakers"
+        }
+      }
+    },
+    "DiarizationSpeakers": {
+      "title": "DiarizationSpeakers",
+      "type": "object",
+      "properties": {
+        "minCount": {
+          "format": "int32",
+          "description": "A hint for the minimum number of speakers for diarization. Specify 0 if unknown. Must be smaller than or equal to the maxSpeakers property. The default value is 1.",
+          "type": "integer"
+        },
+        "maxCount": {
+          "format": "int32",
+          "description": "A hint for the maximum number of speakers for diarization. Specify 0 if unknown. Must be larger than or equal to the minSpeakers property. The default value is 2.",
+          "type": "integer"
+        }
       }
     },
     "Endpoint": {
@@ -4856,7 +5328,6 @@
     },
     "FileKind": {
       "title": "FileKind",
-      "description": "Type of data.",
       "enum": [
         "DatasetReport",
         "Audio",
@@ -4866,7 +5337,8 @@
         "AcousticDataTranscriptionV2",
         "Transcription",
         "TranscriptionReport",
-        "EvaluationDetails"
+        "EvaluationDetails",
+        "ModelReport"
       ],
       "type": "string",
       "readOnly": true,
@@ -4876,39 +5348,43 @@
         "values": [
           {
             "value": "DatasetReport",
-            "description": "Type of data is dataset report."
+            "description": "Artifact is DatasetReport."
           },
           {
             "value": "Audio",
-            "description": "Type of data is audio."
+            "description": "Artifact is Audio."
           },
           {
             "value": "LanguageData",
-            "description": "Type of data is language data."
+            "description": "Artifact is LanguageData."
           },
           {
             "value": "PronunciationData",
-            "description": "Type of data is pronunciation data."
+            "description": "Artifact is PronunciationData."
           },
           {
             "value": "AcousticDataArchive",
-            "description": "Type of data is acoustic data archive."
+            "description": "Artifact is AcousticDataArchive."
           },
           {
             "value": "AcousticDataTranscriptionV2",
-            "description": "Type of data is acoustic data transcription v2."
+            "description": "Artifact is AcousticDataTranscriptionV2."
           },
           {
             "value": "Transcription",
-            "description": "Type of data is transcription."
+            "description": "Artifact is Transcription."
           },
           {
             "value": "TranscriptionReport",
-            "description": "Type of data is transcription report."
+            "description": "Artifact is TranscriptionReport."
           },
           {
             "value": "EvaluationDetails",
-            "description": "Type of data is evaluation details."
+            "description": "Artifact is EvaluationDetails."
+          },
+          {
+            "value": "ModelReport",
+            "description": "Artifact is ModelReport."
           }
         ]
       }
@@ -4999,6 +5475,29 @@
         }
       }
     },
+    "LanguageIdentificationProperties": {
+      "title": "LanguageIdentificationProperties",
+      "required": [
+        "candidateLocales"
+      ],
+      "type": "object",
+      "properties": {
+        "candidateLocales": {
+          "description": "The candidate locales for language identification (example [\"en-US\", \"de-DE\", \"es-ES\"]). A minimum of 2 and a maximum of 10 candidate locales, including the main locale for the transcription, is supported.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "speechModelMapping": {
+          "description": "An optional mapping of locales to speech model entities. If no model is given for a locale, the default base model is used.\r\nKeys must be locales contained in the candidate locales, values are entities for models of the respective locales.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/EntityReference"
+          }
+        }
+      }
+    },
     "Links": {
       "title": "Links",
       "type": "object",
@@ -5084,6 +5583,49 @@
         }
       }
     },
+    "ModelCapabilities": {
+      "title": "ModelCapabilities",
+      "description": "Capabilities the model has.",
+      "enum": [
+        "Transcription",
+        "AdaptationWithText",
+        "AdaptationWithAudio",
+        "AdaptationWithClasses",
+        "AdaptationWithPronunciation",
+        "TranscriptionOnContainer"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ModelCapabilities",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Transcription",
+            "description": "This model can be used for realtime and batch transcription."
+          },
+          {
+            "value": "AdaptationWithText",
+            "description": "This model can be adapted with text."
+          },
+          {
+            "value": "AdaptationWithAudio",
+            "description": "This model can be adapted with audio and reference transcription."
+          },
+          {
+            "value": "AdaptationWithClasses",
+            "description": "This model can be adapted with text and classes."
+          },
+          {
+            "value": "AdaptationWithPronunciation",
+            "description": "This model can be adapted with custom pronunciation."
+          },
+          {
+            "value": "TranscriptionOnContainer",
+            "description": "This model can be used for transcription on container. This capabality can be added on existing models when it becomes usable on container."
+          }
+        ]
+      }
+    },
     "ModelCopy": {
       "title": "ModelCopy",
       "required": [
@@ -5145,6 +5687,12 @@
           "description": "The location to the model copy action.",
           "type": "string",
           "readOnly": true
+        },
+        "files": {
+          "format": "uri",
+          "description": "The location to get all files of this entity.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -5180,6 +5728,21 @@
       "title": "ModelProperties",
       "type": "object",
       "properties": {
+        "customModelWeight": {
+          "format": "int32",
+          "description": "The weight of custom model between 0 (0% custom model and 100% base model) and 100 (100% custom model and 0% base model).\r\nDefault value (20, i.e. 20%) is used when this property is not set.",
+          "maximum": 100,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "capabilities": {
+          "description": "The capabilities of the model.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModelCapabilities"
+          },
+          "readOnly": true
+        },
         "deprecationDates": {
           "$ref": "#/definitions/ModelDeprecationDates"
         },
@@ -5680,6 +6243,10 @@
           "description": "A URL for an Azure blob container that contains the audio files. A container is allowed to have a maximum size of 5GB and a maximum number of 10000 blobs.\r\nThe maximum size for a blob is 2.5GB.\r\nContainer SAS should contain 'r' (read) and 'l' (list) permissions.\r\nThis property will not be returned in a response.",
           "type": "string"
         },
+        "locale": {
+          "description": "The locale of the contained data. If Language Identification is used, this locale is used to transcribe speech for which no language could be detected.",
+          "type": "string"
+        },
         "displayName": {
           "description": "The display name of the object.",
           "type": "string"
@@ -5694,10 +6261,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "locale": {
-          "description": "The locale of the contained data.",
-          "type": "string"
         },
         "lastActionDateTime": {
           "format": "date-time",
@@ -5721,11 +6284,15 @@
       "type": "object",
       "properties": {
         "diarizationEnabled": {
-          "description": "A value indicating whether diarization (speaker identification) is requested. The default value\r\nis `false`.",
+          "description": "A value indicating whether diarization (speaker identification) is requested. The default value\r\nis `false`.\r\nIf only this field is set to true and the improved diarization system is not enabled by specifying\r\n`DiarizationProperties`, a basic diarization engine will distinguish between two speakers. No extra\r\ncharges are applied in this case. The improved diarization system provides diarization for a configurable\r\nrange of speakers. It can be configured in the `DiarizationProperties` field.\r\n            \r\nDEPRECATED: The basic diarization system is deprecated and will be removed along with the `diarizationEnabled` setting in the next major version of the API.",
           "type": "boolean"
         },
         "wordLevelTimestampsEnabled": {
           "description": "A value indicating whether word level timestamps are requested. The default value is\r\n`false`.",
+          "type": "boolean"
+        },
+        "displayFormWordLevelTimestampsEnabled": {
+          "description": "A value indicating whether word level timestamps for the display form are requested. The default value is `false`.",
           "type": "boolean"
         },
         "duration": {
@@ -5755,6 +6322,12 @@
         "timeToLive": {
           "description": "How long the transcription will be kept in the system after it has completed. Once the\r\ntranscription reaches the time to live after completion (successful or failed) it will be automatically\r\ndeleted. Not setting this value or setting it to 0 will disable automatic deletion. The longest supported\r\nduration is 31 days.\r\nThe duration is encoded as ISO 8601 duration (\"PnYnMnDTnHnMnS\", see https://en.wikipedia.org/wiki/ISO_8601#Durations).",
           "type": "string"
+        },
+        "diarization": {
+          "$ref": "#/definitions/DiarizationProperties"
+        },
+        "languageIdentification": {
+          "$ref": "#/definitions/LanguageIdentificationProperties"
         },
         "email": {
           "description": "The email address to send email notifications to in case the operation completes.\r\nThe value will be removed after successfully sending the email.",
@@ -5786,6 +6359,29 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "UploadSession": {
+      "title": "UploadSession",
+      "type": "object",
+      "properties": {
+        "self": {
+          "format": "uri",
+          "type": "string",
+          "readOnly": true
+        },
+        "expirationDateTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "nextExpectedRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       }
     },
@@ -6195,7 +6791,7 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/speechtotext/v3.0",
+    "hostTemplate": "{Endpoint}/speechtotext/v3.1-preview.1",
     "useSchemePrefix": false,
     "parameters": [
       {
