@@ -3,7 +3,7 @@
     "subscriptionId": "subid",
     "resourceGroupName": "rg",
     "workspaceName": "myWorkspace",
-    "api-version": "2021-04-01-preview",
+    "api-version": "2022-04-01-preview",
     "parameters": {
       "properties": {
         "managedResourceGroupId": "/subscriptions/subid/resourceGroups/myManagedRG"
@@ -23,6 +23,19 @@
         },
         "properties": {
           "managedResourceGroupId": "/subscriptions/subid/resourceGroups/myManagedRG",
+          "encryption": {
+            "entities": {
+              "managedDisk": {
+                "keySource": "Microsoft.Keyvault",
+                "keyVaultProperties": {
+                  "keyVaultUri": "https://test-vault-name.vault.azure.net/",
+                  "keyName": "test-cmk-key",
+                  "keyVersion": "00000000000000000000000000000000"
+                },
+                "rotationToLatestKeyVersionEnabled": "true"
+              }
+            }
+          },
           "parameters": null,
           "provisioningState": "Accepted",
           "uiDefinitionUri": "https://path/to/workspaceCreateUiDefinition.json",

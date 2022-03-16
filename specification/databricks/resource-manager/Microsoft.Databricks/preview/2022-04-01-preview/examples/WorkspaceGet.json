@@ -3,7 +3,7 @@
     "subscriptionId": "subid",
     "resourceGroupName": "rg",
     "workspaceName": "myWorkspace",
-    "api-version": "2021-04-01-preview"
+    "api-version": "2022-04-01-preview"
   },
   "responses": {
     "200": {
@@ -18,6 +18,19 @@
         "location": "East US 2",
         "properties": {
           "managedResourceGroupId": "/subscriptions/subid/resourceGroups/myManagedRG",
+          "encryption": {
+            "entities": {
+              "managedDisk": {
+                "keySource": "Microsoft.Keyvault",
+                "keyVaultProperties": {
+                  "keyVaultUri": "https://test-vault-name.vault.azure.net/",
+                  "keyName": "test-cmk-key",
+                  "keyVersion": "00000000000000000000000000000000"
+                },
+                "rotationToLatestKeyVersionEnabled": "true"
+              }
+            }
+          },
           "parameters": null,
           "provisioningState": "Succeeded",
           "uiDefinitionUri": "https://path/to/workspaceCreateUiDefinition.json",
@@ -36,6 +49,11 @@
             "oid": "22222222-2222-2222-2222-222222222222",
             "puid": "33333333",
             "applicationId": "44444444-4444-4444-4444-444444444444"
+          },
+          "managedDiskIdentity": {
+            "principalId": "22222222-2222-2222-2222-222222222222",
+            "tenantId": "44444444-4444-4444-4444-444444444444",
+            "type": "SystemAssigned"
           },
           "createdDateTime": "2020-02-20T00:10:29.2858439Z",
           "workspaceId": "5555555555555555",

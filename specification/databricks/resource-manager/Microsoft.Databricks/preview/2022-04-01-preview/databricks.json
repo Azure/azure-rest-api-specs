@@ -1173,17 +1173,17 @@
         "managedServices": {
           "type": "object",
           "description": "Encryption properties for the databricks managed services.",
-          "$ref": "#/definitions/EncryptionV2"
+          "$ref": "#/definitions/ManagedServicesEncryption"
         },
         "managedDisk": {
           "type": "object",
           "description": "Encryption properties for the databricks managed disks.",
-          "$ref": "#/definitions/EncryptionV2"
+          "$ref": "#/definitions/ManagedDiskEncryption"
         }
       },
       "description": "Encryption entities for databricks workspace resource."
     },
-    "EncryptionV2": {
+    "ManagedServicesEncryption": {
       "properties": {
         "keySource": {
           "type": "string",
@@ -1201,6 +1201,47 @@
             "keyVaultUri": {
               "type": "string",
               "description": "The Uri of KeyVault."
+            },
+            "keyName": {
+              "type": "string",
+              "description": "The name of KeyVault key."
+            },
+            "keyVersion": {
+              "type": "string",
+              "description": "The version of KeyVault key."
+            }
+          },
+          "required": [
+            "keyVaultUri",
+            "keyName",
+            "keyVersion"
+          ],
+          "description": "Key Vault input properties for encryption."
+        }
+      },
+      "required": [
+        "keySource"
+      ],
+      "description": "The object that contains details of encryption used on the workspace."
+    },
+    "ManagedDiskEncryption": {
+      "properties": {
+        "keySource": {
+          "type": "string",
+          "description": "The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Keyvault",
+          "enum": [
+            "Microsoft.Keyvault"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionKeySource",
+            "modelAsString": true
+          }
+        },
+        "keyVaultProperties": {
+          "properties": {
+            "keyVaultUri": {
+              "type": "string",
+              "description": "The URI of KeyVault."
             },
             "keyName": {
               "type": "string",
