@@ -18,7 +18,3 @@ no-namespace-folders: true
 output-folder: $(python-sdks-folder)/synapse/azure-mgmt-synapse/azure/mgmt/synapse
 ```
 
-``` yaml $(python)
-modelerfour:
-  lenient-model-deduplication: true
-```
