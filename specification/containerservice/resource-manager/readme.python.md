@@ -2,7 +2,7 @@
 
 These settings apply only when `--python` is specified on the command line.
 
-```yaml $(python) && $(track2)
+```yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-containerservice
@@ -15,7 +15,7 @@ no-namespace-folders: true
 
 Generate all API versions currently shipped for this package
 
-```yaml $(python) && $(multiapi) && $(track2)
+```yaml $(python) && $(multiapi)
 batch:
   - tag: package-2022-01-01-only
   - tag: package-2022-01-02-preview-only
@@ -54,7 +54,6 @@ batch:
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/
-clear-output-folder: false
 perform-load: false
 ```
 
@@ -378,7 +377,7 @@ namespace: azure.mgmt.containerservice.v2019_09_30_preview
 output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2019_09_30_preview
 ```
 
-``` yaml $(track2)
+``` yaml $(python)
 directive:
   - from: swagger-document
     where: $.definitions.ManagedClusterLoadBalancerProfile.properties.managedOutboundIPs.properties["countIPv6"]
