@@ -1030,6 +1030,55 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyId}/updatePrivateEndpointProperties": {
+      "post": {
+        "description": "(INTERNAL - DO NOT USE) Validates a private endpoint connection proxy object.",
+        "operationId": "PrivateEndpointConnectionProxies_Validate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionProxyIdParameter"
+          },
+          {
+            "name": "privateEndpointUpdate",
+            "in": "body",
+            "description": "The parameters for updating a private endpoint connection proxy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Validate private endpoint connection proxy empty response."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionProxyValidate": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies/PrivateEndpointConnectionProxy_PrivateEndpointUpdate.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyId}": {
       "get": {
         "tags": [
@@ -1614,6 +1663,36 @@
           "items": {
             "$ref": "#/definitions/ConnectionDetails"
           }
+        }
+      }
+    },
+    "PrivateEndpointUpdate": {
+      "description": "Private endpoint update details.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Remote endpoint resource ID.",
+          "type": "string"
+        },
+        "location": {
+          "description": "ARM location of the remote private endpoint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "immutableSubscriptionId": {
+          "description": "Original subscription ID needed by Microsoft.Network.",
+          "type": "string",
+          "readOnly": true
+        },
+        "immutableResourceId": {
+          "description": "Original resource ID needed by Microsoft.Network.",
+          "type": "string",
+          "readOnly": true
+        },
+        "vnetTrafficTag": {
+          "description": "Virtual network traffic tag.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
