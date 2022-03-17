@@ -306,7 +306,16 @@
           "format": "int32"
         },
         "provisioningState": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "InProgress"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningStateEnum",
+            "modelAsString": true
+          }
         },
         "resourceName": {
           "type": "string",
