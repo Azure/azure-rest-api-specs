@@ -1,0 +1,2063 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MetaverseManagementClient",
+    "description": "Metaverse Provider",
+    "version": "2022-02-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/events/{eventId}/accessPolicies": {
+      "get": {
+        "tags": [
+          "AccessPolicies"
+        ],
+        "description": "Returns list of access policies.",
+        "operationId": "AccessPolicy_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EventIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Access policy details.",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResourceList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "AccessPolicy_List": {
+            "$ref": "./examples/AccessPolicy_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/events/{eventId}/accessPolicies/{accessPolicyName}": {
+      "get": {
+        "tags": [
+          "AccessPolicies"
+        ],
+        "description": "Returns access policy resource for a given name.",
+        "operationId": "AccessPolicy_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EventIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessPolicyNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Access policy details.",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccessPolicy_Get": {
+            "$ref": "./examples/AccessPolicy_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AccessPolicies"
+        ],
+        "description": "Update an access policy resource.",
+        "operationId": "AccessPolicy_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EventIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessPolicyNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Access policy updated.",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResource"
+            }
+          },
+          "201": {
+            "description": "Access policy created.",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResource"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "AccessPolicy_Update": {
+            "$ref": "./examples/AccessPolicy_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/events": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "description": "Returns list of events.",
+        "operationId": "Event_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Event details.",
+            "schema": {
+              "$ref": "#/definitions/EventResourceList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Event_List": {
+            "$ref": "./examples/Event_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/events/{eventId}": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "description": "Returns event resource for a given id.",
+        "operationId": "Event_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EventIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Event details.",
+            "schema": {
+              "$ref": "#/definitions/EventResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Event_Get": {
+            "$ref": "./examples/Event_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Events"
+        ],
+        "description": "Create event resource.",
+        "operationId": "Event_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EventIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/EventResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Event updated.",
+            "schema": {
+              "$ref": "#/definitions/EventResource"
+            }
+          },
+          "201": {
+            "description": "Event created.",
+            "schema": {
+              "$ref": "#/definitions/EventResource"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Event_Create": {
+            "$ref": "./examples/Event_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Events"
+        ],
+        "description": "Update an event resource.",
+        "operationId": "Event_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EventIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/EventResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/EventResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Event_Update": {
+            "$ref": "./examples/Event_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Events"
+        ],
+        "description": "Deletes event resource for a given id.",
+        "operationId": "Event_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EventIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Deletes the event."
+          },
+          "204": {
+            "description": "The event doesn't exist."
+          }
+        },
+        "x-ms-examples": {
+          "Event_Delete": {
+            "$ref": "./examples/Event_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/events/{eventId}/uploadImage": {
+      "post": {
+        "tags": [
+          "Events"
+        ],
+        "description": "Upload an image and return its corresponding image id.",
+        "operationId": "Event_UploadImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EventIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ImageData"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/ImageReference"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Event_UploadImage": {
+            "$ref": "./examples/Event_UploadImage.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/events/{eventId}/previewImage": {
+      "post": {
+        "tags": [
+          "Events"
+        ],
+        "description": "Preview an image.",
+        "operationId": "Event_PreviewImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EventIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ImageReference"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/ImageData"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Event_PreviewImage": {
+            "$ref": "./examples/Event_PreviewImage.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Metaverse/metaverses": {
+      "get": {
+        "tags": [
+          "Metaverse"
+        ],
+        "description": "Returns list of metaverses.",
+        "operationId": "Metaverse_ListBySubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Metaverse details.",
+            "schema": {
+              "$ref": "#/definitions/MetaverseResourceList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Metaverse_ListBySubscription": {
+            "$ref": "./examples/Metaverse_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses": {
+      "get": {
+        "tags": [
+          "Metaverse"
+        ],
+        "description": "Returns list of metaverses.",
+        "operationId": "Metaverse_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Metaverse details.",
+            "schema": {
+              "$ref": "#/definitions/MetaverseResourceList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Metaverse_List": {
+            "$ref": "./examples/Metaverse_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}": {
+      "get": {
+        "tags": [
+          "Metaverse"
+        ],
+        "description": "Returns metaverse resource for a given id.",
+        "operationId": "Metaverse_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Metaverse details.",
+            "schema": {
+              "$ref": "#/definitions/MetaverseResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Metaverse_Get": {
+            "$ref": "./examples/Metaverse_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Metaverse"
+        ],
+        "description": "Deletes metaverse resource for a given id.",
+        "operationId": "Metaverse_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Deletes the metaverse."
+          },
+          "202": {
+            "description": "Long-running."
+          },
+          "204": {
+            "description": "The metaverse doesn't exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Metaverse_Delete": {
+            "$ref": "./examples/Metaverse_Delete.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Metaverse"
+        ],
+        "description": "Create metaverse resource.",
+        "operationId": "Metaverse_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MetaverseResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/MetaverseResource"
+            }
+          },
+          "201": {
+            "description": "Long-running.",
+            "schema": {
+              "$ref": "#/definitions/MetaverseResource"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Metaverse_Create": {
+            "$ref": "./examples/Metaverse_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Metaverse"
+        ],
+        "description": "Update a metaverse resource.",
+        "operationId": "Metaverse_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MetaverseResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/MetaverseResource"
+            }
+          },
+          "202": {
+            "description": "Long-running."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Metaverse_Update": {
+            "$ref": "./examples/Metaverse_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/uploadImage": {
+      "post": {
+        "tags": [
+          "Metaverse"
+        ],
+        "description": "Upload an image and return its corresponding image id.",
+        "operationId": "Metaverse_UploadImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ImageData"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/ImageReference"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Metaverse_UploadImage": {
+            "$ref": "./examples/Metaverse_UploadImage.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/previewImage": {
+      "post": {
+        "tags": [
+          "Metaverse"
+        ],
+        "description": "Preview an image.",
+        "operationId": "Metaverse_PreviewImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ImageReference"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/ImageData"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Metaverse_PreviewImage": {
+            "$ref": "./examples/Metaverse_PreviewImage.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Metaverse/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Returns list of operations.",
+        "operationId": "Operations_List",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Operation details.",
+            "schema": {
+              "$ref": "#/definitions/OperationsList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/spaces": {
+      "get": {
+        "tags": [
+          "Spaces"
+        ],
+        "description": "Returns list of spaces.",
+        "operationId": "Space_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Space details.",
+            "schema": {
+              "$ref": "#/definitions/SpaceResourceList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Space_List": {
+            "$ref": "./examples/Space_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/spaces/{spaceId}": {
+      "get": {
+        "tags": [
+          "Spaces"
+        ],
+        "description": "Returns space resource for a given id.",
+        "operationId": "Space_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SpaceIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Space details.",
+            "schema": {
+              "$ref": "#/definitions/SpaceResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Space_Get": {
+            "$ref": "./examples/Space_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Spaces"
+        ],
+        "description": "Create space resource.",
+        "operationId": "Space_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SpaceIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SpaceResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Space updated.",
+            "schema": {
+              "$ref": "#/definitions/SpaceResource"
+            }
+          },
+          "201": {
+            "description": "Space created.",
+            "schema": {
+              "$ref": "#/definitions/SpaceResource"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Space_Create": {
+            "$ref": "./examples/Space_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Spaces"
+        ],
+        "description": "Update a space resource.",
+        "operationId": "Space_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SpaceIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SpaceResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/SpaceResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Space_Update": {
+            "$ref": "./examples/Space_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Spaces"
+        ],
+        "description": "Deletes space resource for a given id.",
+        "operationId": "Space_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SpaceIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Deletes the space."
+          },
+          "204": {
+            "description": "Deletes the space."
+          }
+        },
+        "x-ms-examples": {
+          "Space_Delete": {
+            "$ref": "./examples/Space_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/templates": {
+      "get": {
+        "tags": [
+          "SpaceTemplates"
+        ],
+        "description": "Returns list of templates.",
+        "operationId": "Template_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "List of templates.",
+            "schema": {
+              "$ref": "#/definitions/SpaceTemplateResourceList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Template_List": {
+            "$ref": "./examples/Template_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/templates/{templateId}": {
+      "get": {
+        "tags": [
+          "SpaceTemplates"
+        ],
+        "description": "Returns template resource for a given id.",
+        "operationId": "Template_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Template details.",
+            "schema": {
+              "$ref": "#/definitions/SpaceTemplateResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Template_Get": {
+            "$ref": "./examples/Template_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/templates/{templateId}/previewImage": {
+      "post": {
+        "tags": [
+          "SpaceTemplates"
+        ],
+        "description": "Preview an image.",
+        "operationId": "Template_PreviewImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ImageReference"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/ImageData"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Template_PreviewImage": {
+            "$ref": "./examples/Template_PreviewImage.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccessPolicyBase": {
+      "type": "object",
+      "properties": {
+        "members": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessPolicyMember"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "AccessPolicyMember": {
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "type": "string"
+        },
+        "roleName": {
+          "type": "string"
+        }
+      }
+    },
+    "AccessPolicyProperties": {
+      "required": [
+        "accessScope"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AccessPolicyBase"
+        }
+      ],
+      "properties": {
+        "accessScope": {
+          "$ref": "#/definitions/AccessScope"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "AccessPolicyResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AccessPolicyProperties"
+        }
+      }
+    },
+    "AccessPolicyResourceList": {
+      "description": "The list of access policies.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessPolicyResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "AccessScope": {
+      "enum": [
+        "Private",
+        "Public"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AccessScope"
+      }
+    },
+    "EventBase": {
+      "type": "object",
+      "properties": {
+        "eventName": {
+          "description": "The name of the event.",
+          "type": "string"
+        },
+        "eventType": {
+          "description": "The type of the event.",
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "The start time of the event.",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "The end time of the event.",
+          "type": "string"
+        },
+        "defaultPrimaryUrl": {
+          "description": "The default primary URL of the event.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the event.",
+          "type": "string"
+        },
+        "code": {
+          "description": "The code of the event.",
+          "type": "string"
+        },
+        "instructions": {
+          "description": "The instructions to join the event.",
+          "type": "string"
+        },
+        "openTime": {
+          "format": "date-time",
+          "description": "The open time of the event.",
+          "type": "string"
+        },
+        "closeTime": {
+          "format": "date-time",
+          "description": "The close time of the event.",
+          "type": "string"
+        },
+        "spaceTemplateId": {
+          "description": "The id of the template associated with the event.",
+          "type": "string"
+        },
+        "metaverseId": {
+          "description": "The id of the metaverse associated with the event.",
+          "type": "string"
+        },
+        "supportedPlatform": {
+          "description": "The supported platform of the event.",
+          "type": "string"
+        },
+        "titleImage": {
+          "description": "The title image of the event.",
+          "type": "string"
+        },
+        "bannerImage": {
+          "description": "The banner image of the event.",
+          "type": "string"
+        }
+      }
+    },
+    "EventProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventBase"
+        }
+      ],
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "EventResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EventProperties"
+        }
+      }
+    },
+    "EventResourceList": {
+      "description": "The list of events.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EventResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "ImageData": {
+      "description": "Contains data for an image upload request.",
+      "type": "object",
+      "properties": {
+        "base64Image": {
+          "description": "The base-64 encoded contents of the image.",
+          "type": "string"
+        }
+      }
+    },
+    "ImageReference": {
+      "description": "Contains an image id reference. This is not an Azure Resource Manager reference.",
+      "type": "object",
+      "properties": {
+        "imageId": {
+          "description": "A unique identifier for the image. This is not an Azure Resource Manager identifier.",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedResourceGroupConfiguration": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The resource group name.",
+          "type": "string"
+        },
+        "location": {
+          "description": "The resource group location.",
+          "type": "string"
+        }
+      }
+    },
+    "MeshSpaceTemplate": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SpaceTemplateBase"
+        }
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "createdDate": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "MetaverseBase": {
+      "required": [
+        "title"
+      ],
+      "type": "object",
+      "properties": {
+        "title": {
+          "description": "Metaverse title.",
+          "type": "string"
+        },
+        "layout": {
+          "description": "Metaverse layout.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Metaverse description.",
+          "type": "string"
+        },
+        "iconImageId": {
+          "description": "The id for the metaverse icon image. This is not an Azure Resource Manager id.",
+          "type": "string"
+        },
+        "backgroundImageId": {
+          "description": "The id for the metaverse background image. This is not an Azure Resource Manager id.",
+          "type": "string"
+        }
+      }
+    },
+    "MetaverseProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetaverseBase"
+        }
+      ],
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "managedResourceGroupConfiguration": {
+          "$ref": "#/definitions/ManagedResourceGroupConfiguration"
+        }
+      }
+    },
+    "MetaverseResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MetaverseProperties"
+        }
+      }
+    },
+    "MetaverseResourceList": {
+      "description": "The list of metaverses.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetaverseResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "Operation": {
+      "description": "Operation provided by provider.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation.",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationBase"
+        },
+        "isDataAction": {
+          "type": "boolean"
+        }
+      }
+    },
+    "OperationBase": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Provider name.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource name.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Operation name.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the operation.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationsList": {
+      "description": "Lists the operations available.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "Url to follow for getting next page of operations.",
+          "type": "string"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProvisioningState"
+      }
+    },
+    "SpaceBase": {
+      "type": "object",
+      "properties": {
+        "metaverseId": {
+          "description": "ID of the metaverse corresponding to the space.",
+          "type": "string"
+        },
+        "spaceId": {
+          "description": "Space ID.",
+          "type": "string"
+        },
+        "spaceName": {
+          "description": "Space name.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Space description.",
+          "type": "string"
+        },
+        "templateId": {
+          "description": "Space template id.",
+          "type": "string"
+        },
+        "author": {
+          "type": "string"
+        }
+      }
+    },
+    "SpaceInternalMetadata": {
+      "type": "object",
+      "properties": {
+        "eTag": {
+          "type": "string"
+        }
+      }
+    },
+    "SpaceProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SpaceBase"
+        }
+      ],
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "SpaceResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SpaceProperties"
+        }
+      }
+    },
+    "SpaceResourceList": {
+      "description": "The list of spaces.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SpaceResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "SpaceTemplateBase": {
+      "type": "object",
+      "properties": {
+        "creator": {
+          "description": "The creator of the template.",
+          "type": "string"
+        },
+        "title": {
+          "description": "The title of the template.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the template.",
+          "type": "string"
+        },
+        "imageInfo": {
+          "description": "The image information of the template.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "x-ms-identifiers": []
+        },
+        "assetInfo": {
+          "description": "The asset information of the template.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "x-ms-identifiers": []
+        },
+        "capacity": {
+          "format": "int32",
+          "description": "The capacity of the template.",
+          "type": "integer"
+        },
+        "entitySpecificMetadata": {
+          "description": "The entity specific metadata of the template.",
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "SpaceTemplateProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SpaceTemplateBase"
+        }
+      ],
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "SpaceTemplateResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SpaceTemplateProperties"
+        }
+      }
+    },
+    "SpaceTemplateResourceList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SpaceTemplateResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "MetaverseNameParameter": {
+      "in": "path",
+      "name": "metaverseName",
+      "description": "The name referring to the metaverse resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "EventIdParameter": {
+      "in": "path",
+      "name": "eventId",
+      "description": "The id referring to the event resource. This id must be a GUID.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "TemplateIdParameter": {
+      "in": "path",
+      "name": "templateId",
+      "description": "The id referring to the template resource. This id must be a GUID.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SpaceIdParameter": {
+      "in": "path",
+      "name": "spaceId",
+      "description": "The id referring to the space resource. This id must be a GUID.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AccessPolicyNameParameter": {
+      "in": "path",
+      "name": "accessPolicyName",
+      "description": "The name of the access policy.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "default"
+      ],
+      "x-ms-parameter-location": "method",
+      "x-ms-enum": {
+        "name": "AccessPolicyName"
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
