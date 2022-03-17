@@ -16,7 +16,7 @@
           "Custom Speech accuracy tests:"
         ],
         "summary": "Gets the list of accuracy tests for the authenticated subscription.",
-        "operationId": "GetAccuracyTests",
+        "operationId": "AccuracyTests_List",
         "produces": [
           "application/json"
         ],
@@ -62,7 +62,7 @@
           "Custom Speech accuracy tests:"
         ],
         "summary": "Creates a new accuracy test.",
-        "operationId": "CreateAccuracyTest",
+        "operationId": "AccuracyTests_Create",
         "consumes": [
           "application/json"
         ],
@@ -136,7 +136,7 @@
           "Custom Speech accuracy tests:"
         ],
         "summary": "Gets the accuracy test identified by the given ID.",
-        "operationId": "GetAccuracyTest",
+        "operationId": "AccuracyTests_Get",
         "produces": [
           "application/json"
         ],
@@ -193,7 +193,7 @@
           "Custom Speech accuracy tests:"
         ],
         "summary": "Updates the mutable details of the test identified by its id.",
-        "operationId": "UpdateAccuracyTest",
+        "operationId": "AccuracyTests_Update",
         "consumes": [
           "application/json"
         ],
@@ -258,7 +258,7 @@
           "Custom Speech accuracy tests:"
         ],
         "summary": "Deletes the accuracy test identified by the given ID.",
-        "operationId": "DeleteAccuracyTest",
+        "operationId": "AccuracyTests_Delete",
         "produces": [
           "application/json"
         ],
@@ -310,7 +310,7 @@
           "Custom Speech datasets for model adaptation:"
         ],
         "summary": "Gets a list of supported locales for datasets.",
-        "operationId": "GetSupportedLocalesForDatasets",
+        "operationId": "Datasets_ListSupportedLocales",
         "produces": [
           "application/json"
         ],
@@ -355,7 +355,7 @@
           "Custom Speech datasets for model adaptation:"
         ],
         "summary": "Gets a list of datasets for the authenticated subscription.",
-        "operationId": "GetDatasets",
+        "operationId": "Datasets_List",
         "produces": [
           "application/json"
         ],
@@ -403,7 +403,7 @@
           "Custom Speech datasets for model adaptation:"
         ],
         "summary": "Gets the dataset identified by the given ID.",
-        "operationId": "GetDataset",
+        "operationId": "Datasets_Get",
         "produces": [
           "application/json"
         ],
@@ -460,7 +460,7 @@
           "Custom Speech datasets for model adaptation:"
         ],
         "summary": "Updates the mutable details of the dataset identified by its ID.",
-        "operationId": "UpdateDataset",
+        "operationId": "Datasets_Update",
         "consumes": [
           "application/json"
         ],
@@ -525,7 +525,7 @@
           "Custom Speech datasets for model adaptation:"
         ],
         "summary": "Deletes the specified dataset.",
-        "operationId": "DeleteDataset",
+        "operationId": "Datasets_Delete",
         "produces": [
           "application/json"
         ],
@@ -577,7 +577,7 @@
           "Custom Speech datasets for model adaptation:"
         ],
         "summary": "Uploads data and creates a new dataset.",
-        "operationId": "UploadDataset",
+        "operationId": "Datasets_Upload",
         "consumes": [
           "multipart/form-data"
         ],
@@ -690,7 +690,7 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Gets a list of supported locales for endpoint creations.",
-        "operationId": "GetSupportedLocalesForEndpoints",
+        "operationId": "Endpoints_ListSupportedLocales",
         "produces": [
           "application/json"
         ],
@@ -738,7 +738,7 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Gets the list of endpoints for the authenticated subscription.",
-        "operationId": "GetEndpoints",
+        "operationId": "Endpoints_List",
         "produces": [
           "application/json"
         ],
@@ -784,7 +784,7 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Creates a new endpoint.",
-        "operationId": "CreateEndpoint",
+        "operationId": "Endpoints_Create",
         "consumes": [
           "application/json"
         ],
@@ -858,7 +858,7 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Gets the endpoint identified by the given ID.",
-        "operationId": "GetEndpoint",
+        "operationId": "Endpoints_Get",
         "produces": [
           "application/json"
         ],
@@ -915,7 +915,7 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Deletes the endpoint identified by the given ID.",
-        "operationId": "DeleteEndpoint",
+        "operationId": "Endpoints_Delete",
         "produces": [
           "application/json"
         ],
@@ -965,7 +965,7 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Updates the metadata of the endpoint identified by the given ID.",
-        "operationId": "UpdateEndpoint",
+        "operationId": "Endpoints_Update",
         "consumes": [
           "application/json"
         ],
@@ -1033,7 +1033,7 @@
         ],
         "summary": "Deletes the transcriptions and captured audio files associated with the endpoint identified by the given ID.",
         "description": "Deletion will happen in the background and can take up to a day.",
-        "operationId": "DeleteEndpointData",
+        "operationId": "Endpoints_DeleteDataExports",
         "produces": [
           "application/json"
         ],
@@ -1083,7 +1083,7 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Gets the list of endpoint data export tasks for the authenticated user.",
-        "operationId": "GetEndpointDataExports",
+        "operationId": "Endpoints_ListDataExports",
         "produces": [
           "application/json"
         ],
@@ -1139,7 +1139,7 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Create a new endpoint data export task.",
-        "operationId": "CreateEndpointDataExport",
+        "operationId": "Endpoints_CreateDataExport",
         "consumes": [
           "application/json"
         ],
@@ -1221,7 +1221,7 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Deletes the endpoint data export task identified by the given ID.",
-        "operationId": "DeleteEndpointDataExport",
+        "operationId": "Endpoints_DeleteDataExport",
         "produces": [
           "application/json"
         ],
@@ -1279,7 +1279,7 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Gets the specified endpoint data export task for the authenticated user.",
-        "operationId": "GetEndpointDataExport",
+        "operationId": "Endpoints_GetDataExport",
         "produces": [
           "application/json"
         ],
@@ -1342,7 +1342,7 @@
           "Custom Speech models:"
         ],
         "summary": "Gets a list of supported locales for model adaptation.",
-        "operationId": "GetSupportedLocalesForModels",
+        "operationId": "Models_ListSupportedLocales",
         "produces": [
           "application/json"
         ],
@@ -1387,7 +1387,7 @@
           "Custom Speech models:"
         ],
         "summary": "Gets the list of models for the authenticated subscription.",
-        "operationId": "GetModels",
+        "operationId": "Models_List",
         "produces": [
           "application/json"
         ],
@@ -1433,7 +1433,7 @@
           "Custom Speech models:"
         ],
         "summary": "Creates a new model.",
-        "operationId": "CreateModel",
+        "operationId": "Models_Create",
         "consumes": [
           "application/json"
         ],
@@ -1507,7 +1507,7 @@
           "Custom Speech models:"
         ],
         "summary": "Gets the model identified by the given ID.",
-        "operationId": "GetModel",
+        "operationId": "Models_Get",
         "produces": [
           "application/json"
         ],
@@ -1564,7 +1564,7 @@
           "Custom Speech models:"
         ],
         "summary": "Updates the metadata of the model identified by the given ID.",
-        "operationId": "UpdateModel",
+        "operationId": "Models_Update",
         "consumes": [
           "application/json"
         ],
@@ -1629,7 +1629,7 @@
           "Custom Speech models:"
         ],
         "summary": "Deletes the model identified by the given ID.",
-        "operationId": "DeleteModel",
+        "operationId": "Models_Delete",
         "produces": [
           "application/json"
         ],
@@ -1681,7 +1681,7 @@
           "Custom Speech transcriptions:"
         ],
         "summary": "Gets a list of supported locales for offline transcriptions.",
-        "operationId": "GetSupportedLocalesForTranscriptions",
+        "operationId": "Transcriptions_ListSupportedLocales",
         "produces": [
           "application/json"
         ],
@@ -1729,7 +1729,7 @@
           "Custom Speech transcriptions:"
         ],
         "summary": "Gets a list of transcriptions for the authenticated subscription.",
-        "operationId": "GetTranscriptions",
+        "operationId": "Transcriptions_List",
         "produces": [
           "application/json"
         ],
@@ -1783,7 +1783,7 @@
           "Custom Speech transcriptions:"
         ],
         "summary": "Creates a new transcription.",
-        "operationId": "CreateTranscription",
+        "operationId": "Transcriptions_Create",
         "consumes": [
           "application/json"
         ],
@@ -1857,7 +1857,7 @@
           "Custom Speech transcriptions:"
         ],
         "summary": "Gets the transcription identified by the given ID.",
-        "operationId": "GetTranscription",
+        "operationId": "Transcriptions_Get",
         "produces": [
           "application/json"
         ],
@@ -1914,7 +1914,7 @@
           "Custom Speech transcriptions:"
         ],
         "summary": "Updates the mutable details of the transcription identified by its ID.",
-        "operationId": "UpdateTranscription",
+        "operationId": "Transcriptions_Update",
         "consumes": [
           "application/json"
         ],
@@ -1979,7 +1979,7 @@
           "Custom Speech transcriptions:"
         ],
         "summary": "Deletes the specified transcription task.",
-        "operationId": "DeleteTranscription",
+        "operationId": "Transcriptions_Delete",
         "produces": [
           "application/json"
         ],
@@ -2958,9 +2958,9 @@
     }
   },
   "parameters": {
-    "Endpoint": {
+    "endpoint": {
       "in": "path",
-      "name": "Endpoint",
+      "name": "endpoint",
       "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
       "required": true,
       "type": "string",
@@ -3008,11 +3008,11 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/speechtotext/v2.0",
+    "hostTemplate": "{endpoint}/speechtotext/v2.0",
     "useSchemePrefix": false,
     "parameters": [
       {
-        "$ref": "#/parameters/Endpoint"
+        "$ref": "#/parameters/endpoint"
       }
     ]
   }

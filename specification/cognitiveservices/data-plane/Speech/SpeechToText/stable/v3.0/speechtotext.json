@@ -16,7 +16,7 @@
           "Custom Speech datasets for model adaptation:"
         ],
         "summary": "Gets a list of supported locales for datasets.",
-        "operationId": "GetSupportedLocalesForDatasets",
+        "operationId": "Datasets_ListSupportedLocales",
         "produces": [
           "application/json"
         ],
@@ -47,7 +47,7 @@
           "Custom Speech datasets for model adaptation:"
         ],
         "summary": "Gets a list of datasets for the authenticated subscription.",
-        "operationId": "GetDatasets",
+        "operationId": "Datasets_List",
         "produces": [
           "application/json"
         ],
@@ -94,7 +94,7 @@
           "Custom Speech datasets for model adaptation:"
         ],
         "summary": "Uploads and creates a new dataset by getting the data from a specified URL.",
-        "operationId": "CreateDataset",
+        "operationId": "Datasets_Create",
         "consumes": [
           "application/json"
         ],
@@ -146,7 +146,7 @@
           "Custom Speech datasets for model adaptation:"
         ],
         "summary": "Gets the dataset identified by the given ID.",
-        "operationId": "GetDataset",
+        "operationId": "Datasets_Get",
         "produces": [
           "application/json"
         ],
@@ -191,7 +191,7 @@
           "Custom Speech datasets for model adaptation:"
         ],
         "summary": "Updates the mutable details of the dataset identified by its ID.",
-        "operationId": "UpdateDataset",
+        "operationId": "Datasets_Update",
         "consumes": [
           "application/json",
           "application/merge-patch+json"
@@ -249,7 +249,7 @@
           "Custom Speech datasets for model adaptation:"
         ],
         "summary": "Deletes the specified dataset.",
-        "operationId": "DeleteDataset",
+        "operationId": "Datasets_Delete",
         "produces": [
           "application/json"
         ],
@@ -287,7 +287,7 @@
           "Custom Speech datasets for model adaptation:"
         ],
         "summary": "Uploads data and creates a new dataset.",
-        "operationId": "UploadDatasetFromForm",
+        "operationId": "Datasets_Upload",
         "consumes": [
           "multipart/form-data"
         ],
@@ -382,7 +382,7 @@
           "Custom Speech datasets for model adaptation:"
         ],
         "summary": "Gets the files of the dataset identified by the given ID.",
-        "operationId": "GetDatasetFiles",
+        "operationId": "Datasets_ListFiles",
         "produces": [
           "application/json"
         ],
@@ -442,7 +442,7 @@
           "Custom Speech datasets for model adaptation:"
         ],
         "summary": "Gets one specific file (identified with fileId) from a dataset (identified with id).",
-        "operationId": "GetDatasetFile",
+        "operationId": "Datasets_GetFile",
         "produces": [
           "application/json"
         ],
@@ -494,7 +494,7 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Gets a list of supported locales for endpoint creations.",
-        "operationId": "GetSupportedLocalesForEndpoints",
+        "operationId": "Endpoints_ListSupportedLocales",
         "produces": [
           "application/json"
         ],
@@ -528,7 +528,7 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Gets the list of endpoints for the authenticated subscription.",
-        "operationId": "GetEndpoints",
+        "operationId": "Endpoints_List",
         "produces": [
           "application/json"
         ],
@@ -575,7 +575,7 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Creates a new endpoint.",
-        "operationId": "CreateEndpoint",
+        "operationId": "Endpoints_Create",
         "consumes": [
           "application/json"
         ],
@@ -627,7 +627,7 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Gets the endpoint identified by the given ID.",
-        "operationId": "GetEndpoint",
+        "operationId": "Endpoints_Get",
         "produces": [
           "application/json"
         ],
@@ -672,7 +672,7 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Deletes the endpoint identified by the given ID.",
-        "operationId": "DeleteEndpoint",
+        "operationId": "Endpoints_Delete",
         "produces": [
           "application/json"
         ],
@@ -708,7 +708,7 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Updates the metadata of the endpoint identified by the given ID.",
-        "operationId": "UpdateEndpoint",
+        "operationId": "Endpoints_Update",
         "consumes": [
           "application/json",
           "application/merge-patch+json"
@@ -768,7 +768,7 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Gets the list of audio and transcription logs that have been stored for a given endpoint.",
-        "operationId": "GetEndpointLogs",
+        "operationId": "Endpoints_ListLogs",
         "produces": [
           "application/json"
         ],
@@ -830,7 +830,7 @@
         ],
         "summary": "Deletes the specified audio and transcription logs that have been stored for a given endpoint. It deletes all logs before (and including) a specific day.",
         "description": "The deletion process is done asynchronously and can take up to one day depending on the amount of log files.",
-        "operationId": "DeleteEndpointLogs",
+        "operationId": "Endpoints_DeleteLogs",
         "produces": [
           "application/json"
         ],
@@ -874,7 +874,7 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Gets a specific audio or transcription log for a given endpoint.",
-        "operationId": "GetEndpointLog",
+        "operationId": "Endpoints_GetLog",
         "produces": [
           "application/json"
         ],
@@ -923,7 +923,7 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Deletes one audio or transcription log that have been stored for a given endpoint.",
-        "operationId": "DeleteEndpointLog",
+        "operationId": "Endpoints_DeleteLog",
         "produces": [
           "application/json"
         ],
@@ -968,7 +968,7 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Gets the list of audio and transcription logs that have been stored when using the default base model of a given language.",
-        "operationId": "GetBaseModelLogs",
+        "operationId": "Endpoints_ListBaseModelLogs",
         "produces": [
           "application/json"
         ],
@@ -1023,7 +1023,7 @@
         ],
         "summary": "Deletes the specified audio and transcription logs that have been stored when using the default base model of a given language. It deletes all logs before (and including) a specific day.",
         "description": "Deletion process is done asynchronously and can take up to one day depending on the amount of log files.",
-        "operationId": "DeleteBaseModelLogs",
+        "operationId": "Endpoints_DeleteBaseModelLogs",
         "produces": [
           "application/json"
         ],
@@ -1066,7 +1066,7 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Gets a specific audio or transcription log for the default base model in a given language.",
-        "operationId": "GetBaseModelLog",
+        "operationId": "Endpoints_GetBaseModelLog",
         "produces": [
           "application/json"
         ],
@@ -1114,7 +1114,7 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Deletes one audio or transcription log that have been stored when using the default base model of a given language.",
-        "operationId": "DeleteBaseModelLog",
+        "operationId": "Endpoints_DeleteBaseModelLog",
         "produces": [
           "application/json"
         ],
@@ -1158,7 +1158,7 @@
           "Custom Speech model evaluations:"
         ],
         "summary": "Gets a list of supported locales for evaluations.",
-        "operationId": "GetSupportedLocalesForEvaluations",
+        "operationId": "Evaluations_ListSupportedLocales",
         "produces": [
           "application/json"
         ],
@@ -1192,7 +1192,7 @@
           "Custom Speech model evaluations:"
         ],
         "summary": "Gets the list of evaluations for the authenticated subscription.",
-        "operationId": "GetEvaluations",
+        "operationId": "Evaluations_List",
         "produces": [
           "application/json"
         ],
@@ -1239,7 +1239,7 @@
           "Custom Speech model evaluations:"
         ],
         "summary": "Creates a new evaluation.",
-        "operationId": "CreateEvaluation",
+        "operationId": "Evaluations_Create",
         "consumes": [
           "application/json"
         ],
@@ -1291,7 +1291,7 @@
           "Custom Speech model evaluations:"
         ],
         "summary": "Gets the files of the evaluation identified by the given ID.",
-        "operationId": "GetEvaluationFiles",
+        "operationId": "Evaluations_ListFiles",
         "produces": [
           "application/json"
         ],
@@ -1351,7 +1351,7 @@
           "Custom Speech model evaluations:"
         ],
         "summary": "Gets one specific file (identified with fileId) from an evaluation (identified with id).",
-        "operationId": "GetEvaluationFile",
+        "operationId": "Evaluations_GetFile",
         "produces": [
           "application/json"
         ],
@@ -1403,7 +1403,7 @@
           "Custom Speech model evaluations:"
         ],
         "summary": "Gets the evaluation identified by the given ID.",
-        "operationId": "GetEvaluation",
+        "operationId": "Evaluations_Get",
         "produces": [
           "application/json"
         ],
@@ -1448,7 +1448,7 @@
           "Custom Speech model evaluations:"
         ],
         "summary": "Updates the mutable details of the evaluation identified by its id.",
-        "operationId": "UpdateEvaluation",
+        "operationId": "Evaluations_Update",
         "consumes": [
           "application/json",
           "application/merge-patch+json"
@@ -1506,7 +1506,7 @@
           "Custom Speech model evaluations:"
         ],
         "summary": "Deletes the evaluation identified by the given ID.",
-        "operationId": "DeleteEvaluation",
+        "operationId": "Evaluations_Delete",
         "produces": [
           "application/json"
         ],
@@ -1544,7 +1544,7 @@
           "Custom Speech models:"
         ],
         "summary": "Gets a list of supported locales for model adaptation.",
-        "operationId": "GetSupportedLocalesForModels",
+        "operationId": "Models_ListSupportedLocales",
         "produces": [
           "application/json"
         ],
@@ -1578,7 +1578,7 @@
           "Custom Speech models:"
         ],
         "summary": "Gets the list of custom models for the authenticated subscription.",
-        "operationId": "GetModels",
+        "operationId": "Models_ListCustomModels",
         "produces": [
           "application/json"
         ],
@@ -1625,7 +1625,7 @@
           "Custom Speech models:"
         ],
         "summary": "Creates a new model.",
-        "operationId": "CreateModel",
+        "operationId": "Models_Create",
         "consumes": [
           "application/json"
         ],
@@ -1677,7 +1677,7 @@
           "Custom Speech models:"
         ],
         "summary": "Gets the list of base models for the authenticated subscription.",
-        "operationId": "GetBaseModels",
+        "operationId": "Models_ListBaseModels",
         "produces": [
           "application/json"
         ],
@@ -1720,7 +1720,7 @@
           "Custom Speech models:"
         ],
         "summary": "Gets the model identified by the given ID.",
-        "operationId": "GetModel",
+        "operationId": "Models_GetCustomModel",
         "produces": [
           "application/json"
         ],
@@ -1765,7 +1765,7 @@
           "Custom Speech models:"
         ],
         "summary": "Updates the metadata of the model identified by the given ID.",
-        "operationId": "UpdateModel",
+        "operationId": "Models_Update",
         "consumes": [
           "application/json",
           "application/merge-patch+json"
@@ -1823,7 +1823,7 @@
           "Custom Speech models:"
         ],
         "summary": "Deletes the model identified by the given ID.",
-        "operationId": "DeleteModel",
+        "operationId": "Models_Delete",
         "produces": [
           "application/json"
         ],
@@ -1861,7 +1861,7 @@
           "Custom Speech models:"
         ],
         "summary": "Gets the base model identified by the given ID.",
-        "operationId": "GetBaseModel",
+        "operationId": "Models_GetBaseModel",
         "produces": [
           "application/json"
         ],
@@ -1903,7 +1903,7 @@
         ],
         "summary": "Copies a model from one subscription to another.",
         "description": "This method can be used to copy a model from one location to another. If the target subscription\r\nkey belongs to a subscription created for another location, the model will be copied to that location.\r\nOnly adapted models are allowed to copy to another subscription.",
-        "operationId": "CopyModelToSubscription",
+        "operationId": "Models_CopyTo",
         "consumes": [
           "application/json"
         ],
@@ -1963,7 +1963,7 @@
           "Custom Speech models:"
         ],
         "summary": "Returns an manifest for this model which can be used in an on-premise container.",
-        "operationId": "GetModelManifest",
+        "operationId": "Models_GetCustomModelManifest",
         "produces": [
           "application/json"
         ],
@@ -2007,7 +2007,7 @@
           "Custom Speech models:"
         ],
         "summary": "Returns an manifest for this base model which can be used in an on-premise container.",
-        "operationId": "GetBaseModelManifest",
+        "operationId": "Models_GetBaseModelManifest",
         "produces": [
           "application/json"
         ],
@@ -2051,7 +2051,7 @@
           "Custom Speech projects:"
         ],
         "summary": "Gets the list of supported locales.",
-        "operationId": "GetSupportedProjectLocales",
+        "operationId": "Projects_ListSupportedLocales",
         "produces": [
           "application/json"
         ],
@@ -2085,7 +2085,7 @@
           "Custom Speech projects:"
         ],
         "summary": "Gets the list of projects for the authenticated subscription.",
-        "operationId": "GetProjects",
+        "operationId": "Projects_List",
         "produces": [
           "application/json"
         ],
@@ -2126,7 +2126,7 @@
           "Custom Speech projects:"
         ],
         "summary": "Creates a new project.",
-        "operationId": "CreateProject",
+        "operationId": "Projects_Create",
         "consumes": [
           "application/json"
         ],
@@ -2178,7 +2178,7 @@
           "Custom Speech projects:"
         ],
         "summary": "Gets the project identified by the given ID.",
-        "operationId": "GetProject",
+        "operationId": "Projects_Get",
         "produces": [
           "application/json"
         ],
@@ -2217,7 +2217,7 @@
           "Custom Speech projects:"
         ],
         "summary": "Updates the project identified by the given ID.",
-        "operationId": "UpdateProject",
+        "operationId": "Projects_Update",
         "consumes": [
           "application/json",
           "application/merge-patch+json"
@@ -2269,7 +2269,7 @@
           "Custom Speech projects:"
         ],
         "summary": "Deletes the project identified by the given ID.",
-        "operationId": "DeleteProject",
+        "operationId": "Projects_Delete",
         "produces": [
           "application/json"
         ],
@@ -2307,7 +2307,7 @@
           "Custom Speech projects:"
         ],
         "summary": "Gets the list of evaluations for specified project.",
-        "operationId": "GetEvaluationsForProject",
+        "operationId": "Projects_ListEvaluations",
         "produces": [
           "application/json"
         ],
@@ -2364,7 +2364,7 @@
           "Custom Speech projects:"
         ],
         "summary": "Gets the list of datasets for specified project.",
-        "operationId": "GetDatasetsForProject",
+        "operationId": "Projects_ListDatasets",
         "produces": [
           "application/json"
         ],
@@ -2421,7 +2421,7 @@
           "Custom Speech projects:"
         ],
         "summary": "Gets the list of endpoints for specified project.",
-        "operationId": "GetEndpointsForProject",
+        "operationId": "Projects_ListEndpoints",
         "produces": [
           "application/json"
         ],
@@ -2478,7 +2478,7 @@
           "Custom Speech projects:"
         ],
         "summary": "Gets the list of models for specified project.",
-        "operationId": "GetModelsForProject",
+        "operationId": "Projects_ListModels",
         "produces": [
           "application/json"
         ],
@@ -2535,7 +2535,7 @@
           "Custom Speech projects:"
         ],
         "summary": "Gets the list of transcriptions for specified project.",
-        "operationId": "GetTranscriptionsForProject",
+        "operationId": "Projects_ListTranscriptions",
         "produces": [
           "application/json"
         ],
@@ -2592,7 +2592,7 @@
           "Custom Speech transcriptions:"
         ],
         "summary": "Gets a list of supported locales for offline transcriptions.",
-        "operationId": "GetSupportedLocalesForTranscriptions",
+        "operationId": "Transcriptions_ListSupportedLocales",
         "produces": [
           "application/json"
         ],
@@ -2626,7 +2626,7 @@
           "Custom Speech transcriptions:"
         ],
         "summary": "Gets a list of transcriptions for the authenticated subscription.",
-        "operationId": "GetTranscriptions",
+        "operationId": "Transcriptions_List",
         "produces": [
           "application/json"
         ],
@@ -2673,7 +2673,7 @@
           "Custom Speech transcriptions:"
         ],
         "summary": "Creates a new transcription.",
-        "operationId": "CreateTranscription",
+        "operationId": "Transcriptions_Create",
         "consumes": [
           "application/json"
         ],
@@ -2728,7 +2728,7 @@
           "Custom Speech transcriptions:"
         ],
         "summary": "Gets the transcription identified by the given ID.",
-        "operationId": "GetTranscription",
+        "operationId": "Transcriptions_Get",
         "produces": [
           "application/json"
         ],
@@ -2773,7 +2773,7 @@
           "Custom Speech transcriptions:"
         ],
         "summary": "Updates the mutable details of the transcription identified by its ID.",
-        "operationId": "UpdateTranscription",
+        "operationId": "Transcriptions_Update",
         "consumes": [
           "application/json",
           "application/merge-patch+json"
@@ -2831,7 +2831,7 @@
           "Custom Speech transcriptions:"
         ],
         "summary": "Deletes the specified transcription task.",
-        "operationId": "DeleteTranscription",
+        "operationId": "Transcriptions_Delete",
         "produces": [
           "application/json"
         ],
@@ -2869,7 +2869,7 @@
           "Custom Speech transcriptions:"
         ],
         "summary": "Gets the files of the transcription identified by the given ID.",
-        "operationId": "GetTranscriptionFiles",
+        "operationId": "Transcriptions_ListFiles",
         "produces": [
           "application/json"
         ],
@@ -2929,7 +2929,7 @@
           "Custom Speech transcriptions:"
         ],
         "summary": "Gets one specific file (identified with fileId) from a transcription (identified with id).",
-        "operationId": "GetTranscriptionFile",
+        "operationId": "Transcriptions_GetFile",
         "produces": [
           "application/json"
         ],
@@ -2981,7 +2981,7 @@
           "Custom Speech web hooks:"
         ],
         "summary": "Gets the list of web hooks for the authenticated subscription.",
-        "operationId": "GetHooks",
+        "operationId": "WebHooks_List",
         "produces": [
           "application/json"
         ],
@@ -3029,7 +3029,7 @@
         ],
         "summary": "Creates a new web hook.",
         "description": "If the property secret in the configuration is present and contains a non-empty string, it will be used to create a SHA256 hash of the payload with\r\nthe secret as HMAC key. This hash will be set as X-MicrosoftSpeechServices-Signature header when calling back into the registered URL.\r\n            \r\nWhen calling back into the registered URL, the request will contain a X-MicrosoftSpeechServices-Event header containing one of the registered event\r\ntypes. There will be one request per registered event type.\r\n            \r\nAfter successfully registering the web hook, it will not be usable until a challenge/response is completed. To do this, a request with the event type\r\nchallenge will be made with a query parameter called validationToken. Respond to the challenge with a 200 OK containing the value of the validationToken\r\nquery parameter as the response body. When the challenge/response is successfully completed, the web hook will begin receiving events.",
-        "operationId": "CreateHook",
+        "operationId": "WebHooks_Create",
         "consumes": [
           "application/json"
         ],
@@ -3081,7 +3081,7 @@
           "Custom Speech web hooks:"
         ],
         "summary": "Gets the web hook identified by the given ID.",
-        "operationId": "GetHook",
+        "operationId": "WebHooks_Get",
         "produces": [
           "application/json"
         ],
@@ -3127,7 +3127,7 @@
         ],
         "summary": "Updates the web hook identified by the given ID.",
         "description": "If the property secret in the configuration is omitted or contains an empty string, future callbacks won't contain X-MicrosoftSpeechServices-Signature\r\nheaders. If the property contains a non-empty string, it will be used to create a SHA256 hash of the payload with the secret as HMAC key. This hash\r\nwill be set as X-MicrosoftSpeechServices-Signature header when calling back into the registered URL.\r\n            \r\nIf the URL changes,  the web hook will stop receiving events until a\r\nchallenge/response is completed. To do this, a request with the event type challenge will be made with a query parameter called validationToken.\r\nRespond to the challenge with a 200 OK containing the value of the validationToken query parameter as the response body. When the challenge/response\r\nis successfully completed, the web hook will begin receiving events.",
-        "operationId": "UpdateHook",
+        "operationId": "WebHooks_Update",
         "consumes": [
           "application/json",
           "application/merge-patch+json"
@@ -3185,7 +3185,7 @@
           "Custom Speech web hooks:"
         ],
         "summary": "Deletes the web hook identified by the given ID.",
-        "operationId": "DeleteHook",
+        "operationId": "WebHooks_Delete",
         "produces": [
           "application/json"
         ],
@@ -3224,7 +3224,7 @@
         ],
         "summary": "Sends a ping event to the registered URL.",
         "description": "The request body of the POST request sent to the registered web hook URL is of the same shape as in the GET request for a specific hook.\r\nThe Swagger Schema ID of the model is WebHookV3.\r\n            \r\nThe request will contain a X-MicrosoftSpeechServices-Event header with the value ping. If the web hook was registered with\r\na secret it will contain a X-MicrosoftSpeechServices-Signature header with an SHA256 hash of the payload with\r\nthe secret as HMAC key. The hash is base64 encoded.",
-        "operationId": "PingHook",
+        "operationId": "WebHooks_Ping",
         "produces": [
           "application/json"
         ],
@@ -3269,7 +3269,7 @@
         ],
         "summary": "Sends a request for each registered event type to the registered URL.",
         "description": "The payload will be generated from the last entity that would have invoked the web hook. If no entity is present for none of the registered event types,\r\nthe POST will respond with 204. If a test request can be made, it will respond with 200.\r\nThe request will contain a X-MicrosoftSpeechServices-Event header with the respective registered event type.\r\nIf the web hook was registered with a secret it will contain a X-MicrosoftSpeechServices-Signature header with an SHA256 hash of the payload with\r\nthe secret as HMAC key. The hash is base64 encoded.",
-        "operationId": "TestHook",
+        "operationId": "WebHooks_Test",
         "produces": [
           "application/json"
         ],
@@ -5729,9 +5729,9 @@
     }
   },
   "parameters": {
-    "Endpoint": {
+    "endpoint": {
       "in": "path",
-      "name": "Endpoint",
+      "name": "endpoint",
       "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
       "required": true,
       "type": "string",
@@ -5787,11 +5787,11 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/speechtotext/v3.0",
+    "hostTemplate": "{endpoint}/speechtotext/v3.0",
     "useSchemePrefix": false,
     "parameters": [
       {
-        "$ref": "#/parameters/Endpoint"
+        "$ref": "#/parameters/endpoint"
       }
     ]
   }
