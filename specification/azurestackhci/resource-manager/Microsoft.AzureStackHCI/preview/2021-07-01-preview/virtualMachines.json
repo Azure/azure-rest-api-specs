@@ -636,11 +636,42 @@
           }
         },
         "status": {
-          "type": "object",
-          "description": "MOCVirtualMachineStatus defines the observed state of MOCVirtualMachine"
+          "$ref": "#/definitions/MOCVirtualMachineStatus"
         }
       },
       "description": "MOCVirtualMachineSpec defines the desired state of MOCVirtualMachine"
+    },
+    "MOCVirtualMachineStatus": {
+      "type": "object",
+      "description": "MOCVirtualMachineSpec defines the desired state of MOCVirtualMachine",
+      "x-mx-client-flatten": true,
+      "properties": {
+        "powerState": {
+          "type": "string",
+          "description": "PowerState of the VM",
+          "enum": [
+            "Deallocated",
+            "Deallocating",
+            "Running",
+            "Starting",
+            "Stopped",
+            "Stopping",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "PowerStateEnum",
+            "modelAsString": true
+          }
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "VM provisioning error code"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Descriptive error message"
+        }
+      }
     },
     "virtualmachines": {
       "type": "object",
