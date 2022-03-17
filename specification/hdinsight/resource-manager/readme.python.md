@@ -22,8 +22,3 @@ output-folder: $(python-sdks-folder)/hdinsight/azure-mgmt-hdinsight/azure/mgmt/h
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/hdinsight/azure-mgmt-hdinsight
 ```
-
-``` yaml $(python)
-modelerfour:
-  lenient-model-deduplication: true
-```
