@@ -359,6 +359,27 @@
           "type": "object",
           "additionalProperties": true
         },
+        "responses": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": false,
+          "patternProperties": {
+            "^([0-9]{3})$": {
+              "type": "object",
+              "properties": {
+                "headers": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "body":{
+                  "type": ["object", "number", "array", "integer", "string", "boolean", "null"]
+                }
+              }
+            }
+          }
+        },
         "step": {},
         "description": {},
         "variables": {},
