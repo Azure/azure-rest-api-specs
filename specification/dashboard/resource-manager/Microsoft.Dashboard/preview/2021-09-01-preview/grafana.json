@@ -67,7 +67,7 @@
           "200": {
             "description": "OK. Return all resources of workspaces for Grafana under the specified subscription.",
             "schema": {
-              "$ref": "#/definitions/GrafanaResourceListResponse"
+              "$ref": "#/definitions/ManagedGrafanaListResponse"
             }
           },
           "default": {
@@ -112,7 +112,7 @@
           "200": {
             "description": "OK. Return all resources of workspaces for Grafana under the given resource group.",
             "schema": {
-              "$ref": "#/definitions/GrafanaResourceListResponse"
+              "$ref": "#/definitions/ManagedGrafanaListResponse"
             }
           },
           "default": {
@@ -160,7 +160,7 @@
           "200": {
             "description": "OK. Return the properties of the required workspace for Grafana resource.",
             "schema": {
-              "$ref": "#/definitions/GrafanaResource"
+              "$ref": "#/definitions/ManagedGrafana"
             }
           },
           "default": {
@@ -203,9 +203,10 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "requestBodyParameters",
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/GrafanaResource"
+              "$ref": "#/definitions/ManagedGrafana"
             }
           }
         ],
@@ -213,13 +214,13 @@
           "200": {
             "description": "OK. Successfully create a workspace for Grafana resource.",
             "schema": {
-              "$ref": "#/definitions/GrafanaResource"
+              "$ref": "#/definitions/ManagedGrafana"
             }
           },
           "201": {
             "description": "Created. The operation was successfully started and will complete asynchronously.",
             "schema": {
-              "$ref": "#/definitions/GrafanaResource"
+              "$ref": "#/definitions/ManagedGrafana"
             }
           },
           "default": {
@@ -266,9 +267,10 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "requestBodyParameters",
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/GrafanaResourceUpdateParameters"
+              "$ref": "#/definitions/ManagedGrafanaUpdateParameters"
             }
           }
         ],
@@ -276,7 +278,7 @@
           "200": {
             "description": "OK. Successfully update the workspace for Grafana resource.",
             "schema": {
-              "$ref": "#/definitions/GrafanaResource"
+              "$ref": "#/definitions/ManagedGrafana"
             }
           },
           "default": {
@@ -371,7 +373,7 @@
         "name": "CreatedByType"
       }
     },
-    "GrafanaResource": {
+    "ManagedGrafana": {
       "type": "object",
       "description": "The grafana resource type.",
       "x-ms-azure-resource": true,
@@ -397,7 +399,7 @@
         },
         "properties": {
           "description": "Properties specific to the grafana resource.",
-          "$ref": "#/definitions/GrafanaResourceProperties"
+          "$ref": "#/definitions/ManagedGrafanaProperties"
         },
         "identity": {
           "description": "The managed identity of the grafana resource.",
@@ -429,13 +431,13 @@
         }
       }
     },
-    "GrafanaResourceListResponse": {
+    "ManagedGrafanaListResponse": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/GrafanaResource"
+            "$ref": "#/definitions/ManagedGrafana"
           }
         },
         "nextLink": {
@@ -443,7 +445,7 @@
         }
       }
     },
-    "GrafanaResourceProperties": {
+    "ManagedGrafanaProperties": {
       "type": "object",
       "description": "Properties specific to the grafana resource.",
       "properties": {
@@ -466,7 +468,7 @@
         }
       }
     },
-    "GrafanaResourceUpdateParameters": {
+    "ManagedGrafanaUpdateParameters": {
       "type": "object",
       "description": "The parameters for a PATCH request to a grafana resource.",
       "properties": {
@@ -717,7 +719,7 @@
     "WorkspaceNameParameter": {
       "in": "path",
       "name": "workspaceName",
-      "description": "The name of Azure Managed Grafana.",
+      "description": "The workspace name of Azure Managed Grafana.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
