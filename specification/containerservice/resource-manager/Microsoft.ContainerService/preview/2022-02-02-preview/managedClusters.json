@@ -2566,23 +2566,30 @@
       "description": "Describes the properties of a Operation Value Display."
     },
     "Resource": {
+      "title": "Resource",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
       "type": "object",
-      "description": "The Resource model definition.",
       "properties": {
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource Id"
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
         },
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource name"
+          "description": "The name of the resource"
         },
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource type"
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "#/definitions/SystemData"
         },
         "location": {
           "type": "string",
@@ -3480,7 +3487,7 @@
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The UTC timestamp of resource creation."
+          "description": "The timestamp of resource creation (UTC)."
         },
         "lastModifiedBy": {
           "type": "string",
@@ -3503,7 +3510,7 @@
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The type of identity that last modified the resource."
+          "description": "The timestamp of resource last modification (UTC)"
         }
       }
     },
@@ -5844,11 +5851,6 @@
     "Snapshot": {
       "type": "object",
       "properties": {
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "readOnly": true,
-          "description": "The system metadata relating to this snapshot."
-        },
         "properties": {
           "description": "Properties of a snapshot.",
           "$ref": "#/definitions/SnapshotProperties",
@@ -5865,11 +5867,6 @@
     "ManagedClusterSnapshot": {
       "type": "object",
       "properties": {
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "readOnly": true,
-          "description": "The system metadata relating to this snapshot."
-        },
         "properties": {
           "description": "Properties of a managed cluster snapshot.",
           "$ref": "#/definitions/ManagedClusterSnapshotProperties",
@@ -6119,24 +6116,25 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
-      "x-ms-parameter-location": "client"
+      "description": "The ID of the target subscription.",
+      "minLength": 1
     },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Client Api Version.",
-      "x-ms-parameter-location": "client"
+      "description": "The API version to use for this operation.",
+      "minLength": 1
     },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
       "in": "path",
       "required": true,
       "type": "string",
+      "description": "The name of the resource group. The name is case insensitive.",
       "minLength": 1,
-      "description": "The name of the resource group.",
+      "maxLength": 90,
       "x-ms-parameter-location": "method"
     },
     "ResourceNameParameter": {
@@ -6155,7 +6153,8 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of a supported Azure region.",
+      "description": "The name of Azure region.",
+      "minLength": 1,
       "x-ms-parameter-location": "method"
     },
     "ResourceTypeParameter": {
