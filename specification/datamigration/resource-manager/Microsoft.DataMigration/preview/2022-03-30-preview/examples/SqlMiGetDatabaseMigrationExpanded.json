@@ -11,8 +11,15 @@
     "200": {
       "body": {
         "properties": {
+          "backupConfiguration": {
+            "sourceLocation": {
+              "fileStorageType": "FileShare"
+            }
+          },
           "kind": "SqlMi",
           "scope": "subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/managedInstance1",
+          "migrationService": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DataMigration/sqlMigrationServices/testagent",
+          "provisioningState": "Succeeded",
           "migrationStatus": "InProgress",
           "migrationStatusDetails": {
             "migrationState": "WaitForFullBackupUploadOperation",
@@ -25,9 +32,9 @@
           "sourceDatabaseName": "sourcename",
           "migrationOperationId": "858ba109-5ab7-4fa1-8aea-bea487cacdcd"
         },
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/miname/providers/Microsoft.DataMigration/databaseMigrations/targetdb",
-        "name": "targetdb",
-        "type": "Microsoft.DataMigration/dataMigrations"
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/miname/providers/Microsoft.DataMigration/databaseMigrations/db1",
+        "name": "db1",
+        "type": "Microsoft.DataMigration/databaseMigrations"
       }
     }
   }
