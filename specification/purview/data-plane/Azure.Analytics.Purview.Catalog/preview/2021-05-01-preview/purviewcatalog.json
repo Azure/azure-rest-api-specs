@@ -2468,10 +2468,7 @@
             "$ref": "./examples/Discovery_Query_AssetType.json"
           },
           "Discovery_Query_Term": {
-            "$ref": "./examples/Discovery_Query_Term.json"
-          },
-          "Discovery_Query_TermOfGlossary": {
-            "$ref": "./examples/Discovery_Query_TermOfGlossary.json"
+            "$ref": "./examples/Discovery_Query_TermAssignment.json"
           },
           "Discovery_Query_Facet": {
             "$ref": "./examples/Discovery_Query_Facet.json"
@@ -5760,9 +5757,17 @@
           "type": "string",
           "description": "The target text that contains the keyword as prefix. The keyword is wrapped with emphasis mark."
         },
-        "description": {
+        "objectType": {
           "type": "string",
-          "description": "The description of the record."
+          "description": "The object type of the record. Object type is the top-level property to distinguish whether a record is an asset or a term."
+        },
+        "createTime": {
+          "type": "number",
+          "description": "The create time of the record. The Unix epoch format."
+        },
+        "updateTime": {
+          "type": "number",
+          "description": "The last update time of the record. The Unix epoch format."
         },
         "id": {
           "type": "string",
@@ -5772,17 +5777,25 @@
           "type": "string",
           "description": "The name of the record."
         },
-        "owner": {
-          "type": "string",
-          "description": "The owner of the record. This is an Atlas native attribute."
-        },
         "qualifiedName": {
           "type": "string",
           "description": "The qualified name of the record."
         },
         "entityType": {
           "type": "string",
-          "description": "The type name of the record."
+          "description": "The type name of the asset."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the asset."
+        },
+        "endorsement": {
+          "type": "string",
+          "description": "The endorsement of the asset."
+        },
+        "owner": {
+          "type": "string",
+          "description": "The owner of the record. This is an Atlas native attribute."
         },
         "classification": {
           "type": "array",
@@ -5793,31 +5806,54 @@
         },
         "label": {
           "type": "array",
-          "description": "The labels of the record.",
+          "description": "The labels of the asset.",
           "items": {
             "type": "string"
           }
         },
         "term": {
           "type": "array",
-          "description": "The terms assigned to the record.",
+          "description": "The terms assigned to the asset.",
           "items": {
             "$ref": "#/definitions/TermSearchResultValue"
           }
         },
         "contact": {
           "type": "array",
-          "description": "The contacts of the record.",
+          "description": "The contacts of the asset.",
           "items": {
             "$ref": "#/definitions/ContactSearchResultValue"
           }
         },
         "assetType": {
           "type": "array",
-          "description": "The asset types of the record.",
+          "description": "The asset types of the asset.",
           "items": {
             "type": "string"
           }
+        },
+        "glossaryType": {
+          "type": "string",
+          "description": "The type name of the term. Could be AtlasGlossary, AtlasGlossaryTerm or AtlasGlossaryCategory."
+        },
+        "glossary": {
+          "type": "string",
+          "description": "The glossary name of the term."
+        },
+        "termStatus": {
+          "type": "string",
+          "description": "The status of the term."
+        },
+        "termTemplate": {
+          "type": "array",
+          "description": "The term template names used by the term.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "longDescription": {
+          "type": "string",
+          "description": "The definition of the term."
         }
       },
       "title": "SuggestResultValue",
@@ -5908,6 +5944,12 @@
     "SearchFacetResultValue": {
       "type": "object",
       "properties": {
+        "entityType": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchFacetItemValue"
+          }
+        },
         "assetType": {
           "type": "array",
           "items": {
@@ -5920,7 +5962,7 @@
             "$ref": "#/definitions/SearchFacetItemValue"
           }
         },
-        "classificationCategory": {
+        "term": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SearchFacetItemValue"
@@ -5932,7 +5974,7 @@
             "$ref": "#/definitions/SearchFacetItemValue"
           }
         },
-        "fileExtension": {
+        "contactType": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SearchFacetItemValue"
@@ -5944,7 +5986,19 @@
             "$ref": "#/definitions/SearchFacetItemValue"
           }
         },
-        "term": {
+        "glossaryType": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchFacetItemValue"
+          }
+        },
+        "termStatus": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchFacetItemValue"
+          }
+        },
+        "termTemplate": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SearchFacetItemValue"
@@ -6000,13 +6054,17 @@
         "@search.highlights": {
           "$ref": "#/definitions/SearchHighlights"
         },
-        "@search.text": {
+        "objectType": {
           "type": "string",
-          "description": "The target text that contains the keyword as prefix. The keyword is wrapped with emphasis mark."
+          "description": "The object type of the record. Object type is the top-level property to distinguish whether a record is an asset or a term."
         },
-        "description": {
-          "type": "string",
-          "description": "The description of the record."
+        "createTime": {
+          "type": "number",
+          "description": "The create time of the record. The Unix epoch format."
+        },
+        "updateTime": {
+          "type": "number",
+          "description": "The last update time of the record. The Unix epoch format."
         },
         "id": {
           "type": "string",
@@ -6016,17 +6074,25 @@
           "type": "string",
           "description": "The name of the record."
         },
-        "owner": {
-          "type": "string",
-          "description": "The owner of the record. This is an Atlas native attribute."
-        },
         "qualifiedName": {
           "type": "string",
           "description": "The qualified name of the record."
         },
         "entityType": {
           "type": "string",
-          "description": "The type name of the record."
+          "description": "The type name of the asset."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the asset."
+        },
+        "endorsement": {
+          "type": "string",
+          "description": "The endorsement of the asset."
+        },
+        "owner": {
+          "type": "string",
+          "description": "The owner of the record. This is an Atlas native attribute."
         },
         "classification": {
           "type": "array",
@@ -6037,31 +6103,54 @@
         },
         "label": {
           "type": "array",
-          "description": "The labels of the record.",
+          "description": "The labels of the asset.",
           "items": {
             "type": "string"
           }
         },
         "term": {
           "type": "array",
-          "description": "The terms assigned to the record.",
+          "description": "The terms assigned to the asset.",
           "items": {
             "$ref": "#/definitions/TermSearchResultValue"
           }
         },
         "contact": {
           "type": "array",
-          "description": "The contacts of the record.",
+          "description": "The contacts of the asset.",
           "items": {
             "$ref": "#/definitions/ContactSearchResultValue"
           }
         },
         "assetType": {
           "type": "array",
-          "description": "The asset types of the record.",
+          "description": "The asset types of the asset.",
           "items": {
             "type": "string"
           }
+        },
+        "glossaryType": {
+          "type": "string",
+          "description": "The type name of the term. Could be AtlasGlossary, AtlasGlossaryTerm or AtlasGlossaryCategory."
+        },
+        "glossary": {
+          "type": "string",
+          "description": "The glossary name of the term."
+        },
+        "termStatus": {
+          "type": "string",
+          "description": "The status of the term."
+        },
+        "termTemplate": {
+          "type": "array",
+          "description": "The term template names used by the term.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "longDescription": {
+          "type": "string",
+          "description": "The definition of the term."
         }
       },
       "title": "SearchResultValue",
@@ -6835,6 +6924,11 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    }
+  },
+  "examples": {
+    "Discovery_Query_TermOfGlossary": {
+      "description": "Find assets by the term assigned."
     }
   }
 }
