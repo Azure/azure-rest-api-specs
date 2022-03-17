@@ -235,8 +235,7 @@
           "enum": [
             "CSV",
             "JSON",
-            "XML",
-            "Other"
+            "Unspecified"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -252,12 +251,8 @@
                 "value": "JSON"
               },
               {
-                "description": "An XML file.",
-                "value": "XML"
-              },
-              {
                 "description": "A file of other format.",
-                "value": "Other"
+                "value": "Unspecified"
               }
             ]
           }
@@ -275,9 +270,32 @@
           "description": "A URI with a valid SAS token to allow uploading / downloading the file.",
           "type": "string"
         },
-        "isDeleted": {
-          "description": "Indicates wwhether the backing file was deleted from the storge account.",
-          "type": "boolean"
+        "deleteStatus": {
+          "description": "Indicates whether the file was deleted from the storge account.",
+          "enum": [
+            "Deleted",
+            "NotDeleted",
+            "Unspecified"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "DeleteStatus",
+            "values": [
+              {
+                "description": "The file was deleted.",
+                "value": "Deleted"
+              },
+              {
+                "description": "The file was not deleted.",
+                "value": "NotDeleted"
+              },
+              {
+                "description": "Unspecified",
+                "value": "Unspecified"
+              }
+            ]
+          }
         }
       },
       "type": "object"
@@ -322,15 +340,38 @@
     "FileImportProperties": {
       "description": "Describes the FileImport's properties",
       "properties": {
-        "allowPartialIngestion": {
-          "description": "Indicates whether valid records should still be ingested when invalid records are detected.",
-          "type": "boolean"
+        "ingestionMode": {
+          "description": "Describes how to ingest the records in the file.",
+          "enum": [
+            "IngestOnlyIfAllAreValid",
+            "IngestAnyValidRecords",
+            "Unspecified"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "IngestionMode",
+            "values": [
+              {
+                "description": "No records should be ingested when invalid records are detected.",
+                "value": "IngestOnlyIfAllAreValid"
+              },
+              {
+                "description": "Valid records should still be ingested when invalid records are detected.",
+                "value": "IngestAnyValidRecords"
+              },
+              {
+                "description": "Unspecified",
+                "value": "Unspecified"
+              }
+            ]
+          }
         },
         "contentType": {
           "description": "The content type of this file.",
           "enum": [
             "Indicator",
-            "Other"
+            "Unspecified"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -338,12 +379,12 @@
             "name": "FileImportContentType",
             "values": [
               {
-                "description": "File containing STIX indicators",
+                "description": "File containing STIX indicators.",
                 "value": "Indicator"
               },
               {
-                "description": "File containing other records",
-                "value": "Other"
+                "description": "File containing other records.",
+                "value": "Unspecified"
               }
             ]
           }
@@ -391,7 +432,7 @@
             "InProgress",
             "Invalid",
             "WaitingForUpload",
-            "Other"
+            "Unspecified"
           ],
           "readOnly": true,
           "type": "string",
@@ -424,8 +465,8 @@
                 "value": "WaitingForUpload"
               },
               {
-                "description": "Other state.",
-                "value": "Other"
+                "description": "Unspecified state.",
+                "value": "Unspecified"
               }
             ]
           }
@@ -450,7 +491,7 @@
         }
       },
       "required": [
-        "allowPartialIngestion",
+        "ingestionMode",
         "contentType",
         "importFile",
         "source"
