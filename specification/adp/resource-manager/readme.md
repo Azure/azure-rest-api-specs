@@ -28,7 +28,7 @@ These are the global settings for the adp.
 title: AdpManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2021-11-01-preview
+tag: package-2022-03-01-preview
 ```
 
 ### Tag: package-2020-07-01-preview
@@ -56,6 +56,16 @@ version: 2021-11-01-preview
 version-with-underscores: 2021_11_01_preview
 input-file:
   - Microsoft.AutonomousDevelopmentPlatform/preview/2021-11-01-preview/adp.json
+```
+
+### Tag: package-2022-03-01-preview
+
+```yaml $(tag) == 'package-2022-03-01-preview'
+version: 2022-03-01-preview
+version-with-underscores: 2022_03_01_preview
+input-file:
+  - Microsoft.AutonomousDevelopmentPlatform/preview/2022-03-01-preview/adp.json
+  - Microsoft.AutonomousDevelopmentPlatform/preview/2022-03-01-preview/workspaces.json
 ```
 
 ---

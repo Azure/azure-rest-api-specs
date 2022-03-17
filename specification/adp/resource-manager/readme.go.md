@@ -16,6 +16,7 @@ batch:
   - tag: package-2020-07-01-preview
   - tag: package-2021-02-01-preview
   - tag: package-2021-11-01-preview
+  - tag: package-2022-03-01-preview
 ```
 
 Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
