@@ -1,0 +1,38 @@
+{
+  "operationId": "AccountQuotaPolicy_ListByAccount",
+  "description": "This example shows how to create or update an account resource.",
+  "parameters": {
+    "api-version": "2020-12-01-preview",
+    "subscriptionId": "mysubscriptionId",
+    "resourceGroupName": "myresourceGroupName",
+    "accountName": "myaccountName",
+    "continuationToken": "mycontinuationToken"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "type": "Microsoft.Singularity/accounts/accountQuotaPolicies",
+            "id": "/subscriptions/mysubscriptionId/resourcegroups/myresourceGroupName/providers/Microsoft.Singularity/accounts/myaccountName/accountQuotaPolicies",
+            "name": "myAccountQuotaPolicyResourceDescriptionList",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "status": "Creating",
+              "description": "User-friendly description of an AccountQuotaPolicy.",
+              "quotas": [
+                {
+                  "id": "The identifier for instance type series quota.",
+                  "name": "User friendly description for the instance type series.",
+                  "slaTier": "Premium",
+                  "limit": 1,
+                  "used": 1
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
