@@ -1430,8 +1430,8 @@
           "Get all evaluations": {
             "$ref": "./examples/get_evaluations.json"
           },
-          "Get all evaluations with the specified error rate": {
-            "$ref": "./examples/get_evaluations_with_error_rate.json"
+          "Get all evaluations with where status is equal to 'Running'": {
+            "$ref": "./examples/get_evaluations_with_status_running.json"
           }
         }
       },
@@ -3404,7 +3404,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available hooks.\r\n            <ul><li><b>Supported properties:</b> self, displayName, description, createdDateTime, lastActionDateTime, status, locale, webUrl.</li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for all properties with the exception of self, status.\r\n                - in, and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=contains(displayName, 'test')```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available hooks.\r\n            <ul><li><b>Supported properties:</b> self, displayName, description, createdDateTime, lastActionDateTime, status, locale, webUrl.</li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for all properties with the exception of self, status.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=displayName eq 'test'```</li></ul>",
             "type": "string"
           }
         ],
