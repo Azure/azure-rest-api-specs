@@ -39,7 +39,7 @@
         "operationId": "Operations_List",
         "x-ms-examples": {
           "OperationsList": {
-            "$ref": "./examples/OperationsList.json"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Operation"
           }
         },
         "parameters": [
@@ -51,7 +51,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -1296,59 +1296,6 @@
       "x-ms-azure-resource": true,
       "description": "Resource Reference"
     },
-    "OperationListResult": {
-      "type": "object",
-      "description": "Result of the request to list Orbital operations. It contains a list of operations and a URL link to get the next set of results.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "List of Orbital operations supported by the Orbital resource provider."
-        }
-      }
-    },
-    "Operation": {
-      "description": "Orbital REST API operation definition.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
-          "type": "string"
-        },
-        "isDataAction": {
-          "type": "boolean",
-          "default": false,
-          "description": "Indicates whether the operation applies to data-plane."
-        },
-        "display": {
-          "description": "Display metadata associated with the operation.",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft Orbital.",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed etc.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Type of operation: get, read, delete, etc.",
-              "type": "string"
-            },
-            "description": {
-              "description": "Description of the operation.",
-              "type": "string"
-            }
-          }
-        },
-        "origin": {
-          "type": "string",
-          "description": "The origin of operations."
-        }
-      }
-    },
     "EndPoint": {
       "type": "object",
       "required": [
@@ -1674,7 +1621,11 @@
             "LHCP",
             "linearVertical",
             "linearHorizontal"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "polarization",
+            "modelAsString": true
+          }
         },
         "direction": {
           "type": "string",
@@ -1682,7 +1633,11 @@
           "enum": [
             "uplink",
             "downlink"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "direction",
+            "modelAsString": true
+          }
         },
         "gainOverTemperature": {
           "type": "number",
@@ -2191,6 +2146,10 @@
         "2021-04-04-preview",
         "2022-03-01"
       ],
+      "x-ms-enum": {
+        "name": "apiVersionParameter",
+        "modelAsString": true
+      },
       "default": "2022-03-01",
       "description": "Version of the API to be used with the client request."
     },
@@ -2248,7 +2207,8 @@
       "description": "An opaque string that the resource provider uses to skip over previously-returned results. This is used when a previous list operation call returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
       "in": "query",
       "required": false,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location":"method"
     }
   }
 }
