@@ -322,11 +322,25 @@
           "description": "name of the object to be used in moc"
         },
         "status": {
-          "type": "object",
-          "description": "MOCVirtualHardDiskStatus defines the observed state of MOCVirtualHardDisk"
+          "$ref": "#/definitions/MOCVirtualHardDiskStatus"
         }
       },
       "description": "MOCVirtualHardDiskSpec defines the desired state of MOCVirtualHardDisk"
+    },
+    "MOCVirtualHardDiskStatus": {
+      "type": "object",
+      "description": "MOCVirtualHardDiskStatus defines the desired state of MocVirtualHardDisk",
+      "x-mx-client-flatten": true,
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "NetworkInterface provisioning error code"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Descriptive error message"
+        }
+      }
     },
     "virtualharddisks": {
       "type": "object",

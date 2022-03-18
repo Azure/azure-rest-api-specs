@@ -335,8 +335,22 @@
           "description": "name of the object to be used in moc"
         },
         "status": {
-          "type": "object",
-          "description": "MOCGalleryImageStatus defines the observed state of MOCGalleryImage"
+          "$ref": "#/definitions/MOCGalleryImageStatus"
+        }
+      }
+    },
+    "MOCGalleryImageStatus": {
+      "type": "object",
+      "description": "MOCGalleryImageStatus defines the desired state of MOCGalleryImage",
+      "x-mx-client-flatten": true,
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "GalleryImage provisioning error code"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Descriptive error message"
         }
       }
     },

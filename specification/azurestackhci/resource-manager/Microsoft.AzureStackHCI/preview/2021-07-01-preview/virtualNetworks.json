@@ -449,11 +449,25 @@
           "description": "name of the object to be used in moc"
         },
         "status": {
-          "type": "object",
-          "description": "MOCVirtualNetworkStatus defines the observed state of MOCVirtualNetwork"
+          "$ref": "#/definitions/MOCVirtualNetworkStatus"
         }
       },
       "description": "MOCVirtualNetworkSpec defines the desired state of MOCVirtualNetwork"
+    },
+    "MOCVirtualNetworkStatus": {
+      "type": "object",
+      "description": "MOCVirtualNetworkStatus defines the desired state of MOCVirtualNetwork",
+      "x-mx-client-flatten": true,
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "VirtualNetwork provisioning error code"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Descriptive error message"
+        }
+      }
     },
     "IPPoolInfo": {
       "type": "object",
