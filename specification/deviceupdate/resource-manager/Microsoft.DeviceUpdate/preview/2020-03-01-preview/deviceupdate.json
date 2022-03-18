@@ -1033,7 +1033,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyId}/updatePrivateEndpointProperties": {
       "post": {
         "description": "(INTERNAL - DO NOT USE) Updates a private endpoint inside the private endpoint connection proxy object.",
-        "operationId": "PrivateEndpointConnectionProxies_PrivateEndpointUpdate",
+        "operationId": "PrivateEndpointConnectionProxies_UpdatePrivateEndpointProperties",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1601,6 +1601,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProxyProvisioningState",
+          "x-ms-client-flatten": true,
           "description": "The provisioning state of the private endpoint connection proxy resource."
         }
       }
