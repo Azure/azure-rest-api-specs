@@ -971,47 +971,6 @@
         }
       }
     },
-      "get": {
-        "tags": [
-          "Ground Station"
-        ],
-        "description": "Return list of ground stations",
-        "operationId": "GroundStations_ListBySubscription",
-        "x-ms-examples": {
-          "List of Ground Stations by Subscription": {
-            "$ref": "./examples/GroundStationsBySubscription.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/skipTokenParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. The operation returns a list of Ground Station resources.",
-            "schema": {
-              "$ref": "#/definitions/GroundStationListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed. If the resource group does not exist, 404 (NotFound) will be returned.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Orbital/availableGroundStations": {
       "get": {
         "tags": [
