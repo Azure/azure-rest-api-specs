@@ -638,6 +638,14 @@
             },
             "clusterArmId": {
               "type": "string",
+              "format": "arm-id",
+              "x-ms-arm-id-details": {
+                "allowedResources": [
+                  {
+                    "type": "Microsoft.EventHub/clusters"
+                  }
+                ]
+              },
               "description": "Cluster ARM ID of the Namespace."
             },
             "metricId": {
@@ -895,7 +903,15 @@
       "properties": {
         "id": {
           "description": "The ARM identifier for Private Endpoint.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/privateEndpoints"
+              }
+            ]
+          }
         }
       }
     },
@@ -1005,6 +1021,14 @@
       "properties": {
         "userAssignedIdentity": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          },
           "description": "ARM ID of user Identity selected for encryption"
         }
       }

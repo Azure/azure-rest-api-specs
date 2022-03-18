@@ -369,6 +369,14 @@
           "properties": {
             "storageAccountResourceId": {
               "type": "string",
+              "format": "arm-id",
+              "x-ms-arm-id-details": {
+                "allowedResources": [
+                  {
+                    "type": "Microsoft.Storage/storageAccounts"
+                  }
+                ]
+              },
               "description": "Resource id of the storage account to be used to create the blobs"
             },
             "blobContainer": {
