@@ -474,6 +474,7 @@
             "Domain",
             "SPF",
             "DKIM",
+            "DKIM2",
             "DMARC"
           ],
           "type": "string",
@@ -540,7 +541,7 @@
       }
     },
     "ValidSenderUsernameCollection": {
-      "description": "Collection of valid sender usernames. This is a key-value pair where key=username and value=default display name.",
+      "description": "Collection of valid sender usernames. This is a key-value pair where key=username and value=display name.",
       "type": "object",
       "additionalProperties": {
         "type": "string"
@@ -585,13 +586,11 @@
         },
         "mailFromSenderDomain": {
           "description": "P1 sender domain that is present on the email envelope [RFC 5321].",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "domainManagement": {
           "$ref": "#/definitions/DomainManagement"
-        },
-        "spfManagement": {
-          "$ref": "#/definitions/SPFManagement"
         },
         "verificationStates": {
           "description": "List of VerificationStatusRecord",
@@ -604,6 +603,9 @@
               "$ref": "#/definitions/VerificationStatusRecord"
             },
             "DKIM": {
+              "$ref": "#/definitions/VerificationStatusRecord"
+            },
+            "DKIM2": {
               "$ref": "#/definitions/VerificationStatusRecord"
             },
             "DMARC": {
@@ -625,6 +627,9 @@
             "DKIM": {
               "$ref": "#/definitions/DnsRecord"
             },
+            "DKIM2": {
+              "$ref": "#/definitions/DnsRecord"
+            },
             "DMARC": {
               "$ref": "#/definitions/DnsRecord"
             }
@@ -633,6 +638,9 @@
         },
         "validSenderUsernames": {
           "$ref": "#/definitions/ValidSenderUsernameCollection"
+        },
+        "userEngagementTracking": {
+          "$ref": "#/definitions/UserEngagementTracking"
         }
       }
     },
@@ -649,16 +657,15 @@
         "modelAsString": true
       }
     },
-    "SPFManagement": {
-      "description": "Describes how SPF is being managed.",
+    "UserEngagementTracking": {
+      "description": "Describes whether user engagement tracking is enabled or disabled.",
       "enum": [
-        "NotConfigured",
-        "AzureManaged",
-        "CustomerManaged"
+        "Disabled",
+        "Enabled"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "SPFManagement",
+        "name": "UserEngagementTracking",
         "modelAsString": true
       }
     },
@@ -685,15 +692,11 @@
       "description": "A class that describes the updatable properties of a Domains resource.",
       "type": "object",
       "properties": {
-        "mailFromSenderDomain": {
-          "description": "P1 sender domain that is present on the email envelope [RFC 5321].",
-          "type": "string"
-        },
-        "spfManagement": {
-          "$ref": "#/definitions/SPFManagement"
-        },
         "validSenderUsernames": {
           "$ref": "#/definitions/ValidSenderUsernameCollection"
+        },
+        "userEngagementTracking": {
+          "$ref": "#/definitions/UserEngagementTracking"
         }
       }
     },
