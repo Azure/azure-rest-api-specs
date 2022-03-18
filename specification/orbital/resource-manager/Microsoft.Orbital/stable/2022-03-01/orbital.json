@@ -934,7 +934,7 @@
         "description": "Returns list of contact profiles by Resource Group",
         "operationId": "ContactProfiles_List",
         "x-ms-examples": {
-          "List of Contact Profiles": {
+          "List of Contact Profiles  by Resource Group": {
             "$ref": "./examples/ContactProfilesByResourceGroupList.json"
           }
         },
@@ -1100,7 +1100,8 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -1252,6 +1253,7 @@
         },
         "authorizations": {
           "type": "array",
+          "description": "Authorized Ground Stations",
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/AuthorizedGroundstation"
@@ -1266,11 +1268,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/SpacecraftsProperties"
-            }
-          ]
+          "$ref": "#/definitions/SpacecraftsProperties",
+          "description": "Spacecraft Properties"
         },
         "etag": {
           "readOnly": true,
@@ -1584,21 +1583,22 @@
         },
         "modulationConfiguration": {
           "type": "string",
-          "description": ""
+          "description": "Configuration for modulation"
         },
         "demodulationConfiguration": {
           "type": "string",
-          "description": ""
+          "description": "Configuration for demodulation"
         },
         "encodingConfiguration": {
           "type": "string",
-          "description": ""
+          "description": "Configuration for encoding"
         },
         "decodingConfiguration": {
           "type": "string",
-          "description": ""
+          "description": "Configuration for decoding"
         }
-      }
+      },
+      "description": "Contact Profile Link Channel"
     },
     "ContactProfileLink": {
       "type": "object",
@@ -1651,7 +1651,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ContactProfileLinkChannel"
-          }
+          },
+          "x-ms-identifiers": [
+            "centerFrequencyMHz",
+            "bandwidthMHz",
+            "/endPoint/endPointName"
+          ],
+          "description": "Contact Profile Link Channel"
         }
       }
     },
@@ -1791,6 +1797,7 @@
       "type": "object",
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ContactsProperties"
         },
         "etag": {
@@ -1827,6 +1834,9 @@
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
           },
+          "x-ms-identifiers": [
+            "code"
+          ],
           "description": "A list of additional details about the error."
         }
       },
@@ -1850,6 +1860,7 @@
           "items": {
             "$ref": "#/definitions/AvailableContacts"
           },
+          "x-ms-identifiers": [],
           "description": "A list of available contacts"
         },
         "nextLink": {
@@ -2091,6 +2102,7 @@
           "readOnly": true
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/OperationResultProperties"
         },
         "error": {
