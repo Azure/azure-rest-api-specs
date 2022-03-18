@@ -133,6 +133,9 @@
         "x-ms-examples": {
           "Create a new or update an existing dedicated HSM": {
             "$ref": "./examples//DedicatedHsm_CreateOrUpdate.json"
+          },
+          "Create a new or update an existing payment HSM": {
+            "$ref": "./examples//PaymentHsm_CreateOrUpdate.json"
           }
         }
       },
@@ -193,6 +196,9 @@
         "x-ms-examples": {
           "Update an existing dedicated HSM": {
             "$ref": "./examples//DedicatedHsm_Update.json"
+          },
+          "Update an existing payment HSM": {
+            "$ref": "./examples//PaymentHsm_Update.json"
           }
         }
       },
@@ -293,6 +299,9 @@
         "x-ms-examples": {
           "Get a dedicated HSM": {
             "$ref": "./examples//DedicatedHsm_Get.json"
+          },
+          "Get a payment HSM": {
+            "$ref": "./examples//PaymentHsm_Get.json"
           }
         }
       }
@@ -484,16 +493,53 @@
       }
     },
     "Sku": {
+      "description": "SKU of the dedicated HSM",
       "properties": {
         "name": {
           "type": "string",
           "description": "SKU of the dedicated HSM",
           "enum": [
-            "SafeNet Luna Network HSM A790"
+            "SafeNet Luna Network HSM A790",
+            "payShield10K_LMK1_CPS60",
+            "payShield10K_LMK1_CPS250",
+            "payShield10K_LMK1_CPS2500",
+            "payShield10K_LMK2_CPS60",
+            "payShield10K_LMK2_CPS250",
+            "payShield10K_LMK2_CPS2500"
           ],
           "x-ms-enum": {
             "name": "SkuName",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "SafeNet Luna Network HSM A790",
+                "description": "The dedicated HSM is a Safenet Luna Network HSM A790 device."
+              },
+              {
+                "value": "payShield10K_LMK1_CPS60",
+                "description": "The dedicated HSM is a payShield 10K, model PS10-D, 10Gb Ethernet Hardware Platform device with 1 local master key which supports up to 60 calls per second."
+              },
+              {
+                "value": "payShield10K_LMK1_CPS250",
+                "description": "The dedicated HSM is a payShield 10K, model PS10-D, 10Gb Ethernet Hardware Platform device with 1 local master key which supports up to 250 calls per second."
+              },
+              {
+                "value": "payShield10K_LMK1_CPS2500",
+                "description": "The dedicated HSM is a payShield 10K, model PS10-D, 10Gb Ethernet Hardware Platform device with 1 local master key which supports up to 2500 calls per second."
+              },
+              {
+                "value": "payShield10K_LMK2_CPS60",
+                "description": "The dedicated HSM is a payShield 10K, model PS10-D, 10Gb Ethernet Hardware Platform device with 2 local master keys which supports up to 60 calls per second."
+              },
+              {
+                "value": "payShield10K_LMK2_CPS250",
+                "description": "The dedicated HSM is a payShield 10K, model PS10-D, 10Gb Ethernet Hardware Platform device with 2 local master keys which supports up to 250 calls per second."
+              },
+              {
+                "value": "payShield10K_LMK2_CPS2500",
+                "description": "The dedicated HSM is a payShield 10K, model PS10-D, 10Gb Ethernet Hardware Platform device with 2 local master keys which supports up to 2500 calls per second."
+              }
+            ]
           }
         }
       }

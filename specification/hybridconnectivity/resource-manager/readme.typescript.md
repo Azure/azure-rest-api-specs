@@ -9,6 +9,5 @@ typescript:
   package-name: "@azure/arm-hybridconnectivity"
   output-folder: "$(typescript-sdks-folder)/sdk/hybridconnectivity/arm-hybridconnectivity"
   payload-flattening-threshold: 1
-  clear-output-folder: true
   generate-metadata: true
 ```

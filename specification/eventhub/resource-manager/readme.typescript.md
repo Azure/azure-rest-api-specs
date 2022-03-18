@@ -8,7 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-eventhub"
   output-folder: "$(typescript-sdks-folder)/sdk/eventhub/arm-eventhub"
-  clear-output-folder: true
   generate-metadata: true
 ```
 
@@ -20,7 +19,6 @@ These settings apply only when `--profile-content=profile-hybrid-2020-09-01` is 
 typescript:
   package-name: "@azure/arm-eventhub-profile-2020-09-01-hybrid"
   output-folder: "$(typescript-sdks-folder)/sdk/eventhub/arm-eventhub-profile-2020-09-01-hybrid"
-  clear-output-folder: true
   azure-arm: true
   generate-metadata: true
   batch:

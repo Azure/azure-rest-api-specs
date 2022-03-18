@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-servicebus"
   output-folder: "$(typescript-sdks-folder)/sdk/servicebus/arm-servicebus"
-  clear-output-folder: true
   generate-metadata: true
 ```

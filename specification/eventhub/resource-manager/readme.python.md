@@ -1,5 +1,6 @@
 ## Python
 
+
 These settings apply only when `--track2` is specified on the command line.
 
 ``` yaml $(python) && $(track2)
@@ -31,7 +32,6 @@ batch:
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/
-clear-output-folder: false
 perform-load: false
 ```
 
