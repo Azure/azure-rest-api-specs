@@ -56,7 +56,7 @@ directive:
 These settings apply only when `--tag=release_3_1_preview_1` is specified on the command line.
 
 ``` yaml $(tag) == 'release_3_1_preview_1'
-input-file: stable/v3.1-preview.1/speechtotext.json
+input-file: preview/v3.1-preview.1/speechtotext.json
 ```
 
 AutoRest-Linter Suppressions
