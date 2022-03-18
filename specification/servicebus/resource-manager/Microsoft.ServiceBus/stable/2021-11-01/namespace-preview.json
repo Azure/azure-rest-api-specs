@@ -1124,6 +1124,14 @@
       "properties": {
         "userAssignedIdentity": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          },
           "description": "ARM ID of user Identity selected for encryption"
         }
       }
