@@ -830,6 +830,10 @@
       "description": "The properties of an IoT Central application.",
       "type": "object",
       "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the application.",
+          "$ref": "#/definitions/ProvisioningState"
+        },
         "applicationId": {
           "description": "The ID of the application.",
           "type": "string",
@@ -871,6 +875,23 @@
           },
           "readOnly": true
         }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The provisioning state of the application.",
+      "enum": [
+        "Creating",
+        "Deleting",
+        "Updating",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
       }
     },
     "PublicNetworkAccess": {
