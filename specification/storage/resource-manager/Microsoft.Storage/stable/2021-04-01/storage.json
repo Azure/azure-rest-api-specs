@@ -2248,6 +2248,14 @@
       "properties": {
         "userAssignedIdentity": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          },
           "description": "Resource identifier of the UserAssigned identity to be associated with server-side encryption on the storage account.",
           "x-ms-client-name": "EncryptionUserAssignedIdentity"
         }
@@ -2277,6 +2285,7 @@
         },
         "resourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Resource Id"
         }
       },
@@ -2286,6 +2295,14 @@
       "properties": {
         "id": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          },
           "x-ms-client-name": "VirtualNetworkResourceId",
           "description": "Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}."
         },
