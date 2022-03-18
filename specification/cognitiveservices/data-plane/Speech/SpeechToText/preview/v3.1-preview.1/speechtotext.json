@@ -4313,22 +4313,24 @@
       "type": "object",
       "properties": {
         "speakers": {
-          "$ref": "#/definitions/DiarizationSpeakers"
+          "$ref": "#/definitions/DiarizationSpeakersProperties"
         }
       }
     },
-    "DiarizationSpeakers": {
-      "title": "DiarizationSpeakers",
+    "DiarizationSpeakersProperties": {
+      "title": "DiarizationSpeakersProperties",
       "type": "object",
       "properties": {
         "minCount": {
           "format": "int32",
           "description": "A hint for the minimum number of speakers for diarization. Specify 0 if unknown. Must be smaller than or equal to the maxSpeakers property. The default value is 1.",
+          "minimum": 0,
           "type": "integer"
         },
         "maxCount": {
           "format": "int32",
           "description": "A hint for the maximum number of speakers for diarization. Specify 0 if unknown. Must be larger than or equal to the minSpeakers property. The default value is 2.",
+          "minimum": 0,
           "type": "integer"
         }
       }
