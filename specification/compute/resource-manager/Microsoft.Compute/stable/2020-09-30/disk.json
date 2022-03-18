@@ -1713,13 +1713,15 @@
         "managedBy": {
           "readOnly": true,
           "type": "string",
+          "format": "arm-id",
           "description": "A relative URI containing the ID of the VM that has the disk attached."
         },
         "managedByExtended": {
           "readOnly": true,
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id"
           },
           "description": "List of relative URIs containing the IDs of the VMs that have the disk attached. maxShares should be set to a value greater than one for disks to allow attaching them to multiple VMs."
         },
@@ -1977,6 +1979,14 @@
         },
         "diskAccessId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/diskAccesses"
+              }
+            ]
+          },
           "description": "ARM id of the DiskAccess resource for using private endpoints on disks."
         },
         "tier": {
@@ -2075,6 +2085,14 @@
         },
         "diskAccessId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/diskAccesses"
+              }
+            ]
+          },
           "description": "ARM id of the DiskAccess resource for using private endpoints on disks."
         }
       },
@@ -2206,6 +2224,14 @@
       "properties": {
         "id": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVault/vaults"
+              }
+            ]
+          },
           "description": "Resource Id"
         }
       },
@@ -2264,6 +2290,14 @@
       "properties": {
         "diskEncryptionSetId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/diskEncryptionSets"
+              }
+            ]
+          },
           "description": "ResourceId of the disk encryption set to use for enabling encryption at rest."
         },
         "type": {
@@ -2356,6 +2390,14 @@
         },
         "diskAccessId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/diskAccesses"
+              }
+            ]
+          },
           "description": "ARM id of the DiskAccess resource for using private endpoints on disks."
         },
         "tier": {
@@ -2405,6 +2447,14 @@
         },
         "diskAccessId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/diskAccesses"
+              }
+            ]
+          },
           "description": "ARM id of the DiskAccess resource for using private endpoints on disks."
         }
       },
@@ -2515,6 +2565,14 @@
         },
         "storageAccountId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          },
           "description": "Required if createOption is Import. The Azure Resource Manager identifier of the storage account containing the blob to import as a disk."
         },
         "imageReference": {
@@ -2531,6 +2589,7 @@
         },
         "sourceResourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "If createOption is Copy, this is the ARM id of the source snapshot or disk."
         },
         "sourceUniqueId": {
@@ -2558,6 +2617,7 @@
       "properties": {
         "id": {
           "type": "string",
+          "format": "arm-id",
           "description": "A relative uri containing either a Platform Image Repository or user image reference."
         },
         "lun": {
@@ -3057,6 +3117,7 @@
         },
         "sourceResourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "arm id of source disk",
           "readOnly": true
         },

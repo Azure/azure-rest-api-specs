@@ -112,6 +112,14 @@
       "properties": {
         "id": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVault/vaults"
+              }
+            ]
+          },
           "description": "Resource Id"
         }
       },
@@ -148,6 +156,14 @@
       "properties": {
         "diskEncryptionSetId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/diskEncryptionSets"
+              }
+            ]
+          },
           "description": "ResourceId of the disk encryption set to use for enabling encryption at rest."
         },
         "type": {
@@ -324,6 +340,14 @@
         },
         "storageAccountId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccount"
+              }
+            ]
+          },
           "description": "Required if createOption is Import. The Azure Resource Manager identifier of the storage account containing the blob to import as a disk."
         },
         "imageReference": {
@@ -340,6 +364,7 @@
         },
         "sourceResourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "If createOption is Copy, this is the ARM id of the source snapshot or disk."
         },
         "sourceUniqueId": {
@@ -371,6 +396,7 @@
       "properties": {
         "id": {
           "type": "string",
+          "format": "arm-id",
           "description": "A relative uri containing either a Platform Image Repository, user image, or Azure Compute Gallery image reference."
         },
         "sharedGalleryImageId": {
@@ -507,6 +533,14 @@
         },
         "secureVMDiskEncryptionSetId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/diskEncryptionSets"
+              }
+            ]
+          },
           "description": "ResourceId of the disk encryption set associated to Confidential VM supported disk encrypted with customer managed key"
         }
       },
