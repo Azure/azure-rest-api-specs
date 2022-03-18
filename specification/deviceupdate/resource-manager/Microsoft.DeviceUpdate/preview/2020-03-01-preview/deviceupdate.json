@@ -1597,7 +1597,15 @@
         {
           "$ref": "#/definitions/PrivateEndpointConnectionProxyProperties"
         }
-      ]
+      ],
+      "properties": {
+        "properties": {
+          "provisioningState": {
+            "$ref": "#/definitions/PrivateEndpointConnectionProxyProvisioningState",
+            "description": "The provisioning state of the private endpoint connection proxy resource."
+          }
+        }
+      }
     },
     "PrivateEndpointConnectionProxyProperties": {
       "description": "Private endpoint connection proxy object properties.",
@@ -1612,10 +1620,6 @@
         "remotePrivateEndpoint": {
           "description": "Remote private endpoint details.",
           "$ref": "#/definitions/RemotePrivateEndpoint"
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProxyProvisioningState",
-          "description": "The provisioning state of the private endpoint connection proxy resource."
         },
         "status": {
           "description": "Operation status.",
