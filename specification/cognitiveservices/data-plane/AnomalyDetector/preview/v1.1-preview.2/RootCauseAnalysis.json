@@ -34,7 +34,7 @@
             "description": "create a root cause analysis data set request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RootCauseAnalysisDataSet"
+              "$ref": "#/definitions/CreateRootCauseAnalysisDataSet"
             }
           }
         ],
@@ -618,7 +618,7 @@
             "description": "Create a root cause analysis instance request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RootCauseAnalysisInstance"
+              "$ref": "#/definitions/CreateRootCauseAnalysisInstance"
             }
           }
         ],
@@ -1270,7 +1270,7 @@
         }
       }
     },
-    "RootCauseAnalysisDataSet": {
+    "CreateRootCauseAnalysisDataSet": {
       "required": [
         "displayName",
         "kind"
@@ -1287,12 +1287,6 @@
             "name": "RootCauseAnalysisType",
             "modelAsString": true
           }
-        },
-        "dataSetId": {
-          "format": "uuid",
-          "description": "Root cause analysis data set unique ID",
-          "type": "string",
-          "readOnly": true
         },
         "displayName": {
           "description": "Root cause analysis data set name",
@@ -1323,7 +1317,7 @@
   "kind": "multidimensional"
 }
     },
-    "MultiDimRCADataSet": {
+    "CreateMultiDimRCADataSet": {
       "required": [
         "aggregatedIdentifier",
         "customInterval",
@@ -1334,7 +1328,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/RootCauseAnalysisDataSet"
+          "$ref": "#/definitions/CreateRootCauseAnalysisDataSet"
         }
       ],
       "properties": {
@@ -1395,6 +1389,97 @@
           "type": "string"
         }
       }
+    },
+    "RootCauseAnalysisDataSet": {
+      "required": [
+        "displayName",
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Root cause analysis kind",
+          "enum": [
+            "multidimensional"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RootCauseAnalysisType",
+            "modelAsString": true
+          }
+        },
+        "dataSetId": {
+          "format": "uuid",
+          "description": "Root cause analysis data set unique ID",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Root cause analysis data set name",
+          "type": "string"
+        }
+      },
+      "discriminator": "kind"
+    },
+    "MultiDimRCADataSet": {
+      "required": [
+        "aggregatedIdentifier",
+        "customInterval",
+        "dimensionKeys",
+        "granularity",
+        "measures"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RootCauseAnalysisDataSet"
+        }
+      ],
+      "properties": {
+        "granularity": {
+          "description": "Multidimensional root cause data set granularity",
+          "enum": [
+            "yearly",
+            "monthly",
+            "weekly",
+            "daily",
+            "hourly",
+            "minutely",
+            "secondly",
+            "microsecond",
+            "none"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Granularity",
+            "modelAsString": true
+          }
+        },
+        "customInterval": {
+          "format": "int32",
+          "description": "Multidimensional root cause data set customized granularity interval. For example, if the granularity is daily and customInterval is 3, it means the data interval should be 3 days.",
+          "type": "integer"
+        },
+        "dimensionKeys": {
+          "description": "Multidimensional root cause data set dimension keys",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "aggregatedIdentifier": {
+          "description": "Identifier to describe the aggregated dimension for this data set. Only one identifier should be used.",
+          "type": "string"
+        },
+        "measures": {
+          "description": "Measures for the data",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RootCauseAnalysisMeasure"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "multidimensional"
     },
     "RootCauseAnalysisDataSetList": {
       "required": [
@@ -1897,7 +1982,7 @@
         }
       }
     },
-    "RootCauseAnalysisInstance": {
+    "CreateRootCauseAnalysisInstance": {
       "required": [
         "displayName",
         "kind"
@@ -1942,9 +2027,66 @@
       "measureName": "total call count"
     }
   ],
+  "instanceId": "00000000-0000-0000-0000-000000000000",
   "displayName": "Sample Root Cause Analysis Instance Name",
   "kind": "multidimensional"
 }
+    },
+    "CreateMultiRCADimInstance": {
+      "required": [
+        "assistiveMeasures",
+        "targetMeasure"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CreateRootCauseAnalysisInstance"
+        }
+      ],
+      "properties": {
+        "targetMeasure": {
+          "$ref": "#/definitions/MultiDimRCAMeasure"
+        },
+        "assistiveMeasures": {
+          "description": "Data sets for root cause analysis",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MultiDimRCAMeasure"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "multidimensional"
+    },
+    "RootCauseAnalysisInstance": {
+      "required": [
+        "displayName",
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Root cause analysis type",
+          "enum": [
+            "multidimensional"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RootCauseAnalysisType",
+            "modelAsString": true
+          }
+        },
+        "instanceId": {
+          "format": "uuid",
+          "description": "Instance unique ID for root cause analysis",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Instance name for root cause analysis",
+          "type": "string"
+        }
+      },
+      "discriminator": "kind"
     },
     "MultiRCADimInstance": {
       "required": [
