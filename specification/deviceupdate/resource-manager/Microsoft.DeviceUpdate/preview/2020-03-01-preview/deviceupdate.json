@@ -1030,6 +1030,55 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyId}/updatePrivateEndpointProperties": {
+      "post": {
+        "description": "(INTERNAL - DO NOT USE) Updates a private endpoint inside the private endpoint connection proxy object.",
+        "operationId": "PrivateEndpointConnectionProxies_UpdatePrivateEndpointProperties",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionProxyIdParameter"
+          },
+          {
+            "name": "privateEndpointUpdate",
+            "in": "body",
+            "description": "The parameters for updating a private endpoint connection proxy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update private endpoint in private endpoint connection proxy empty response."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionProxyPrivateEndpointUpdate": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies/PrivateEndpointConnectionProxy_PrivateEndpointUpdate.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyId}": {
       "get": {
         "tags": [
@@ -1582,10 +1631,21 @@
           "description": "Remote endpoint resource ID.",
           "type": "string"
         },
+        "location": {
+          "description": "ARM location of the remote private endpoint.",
+          "type": "string"
+        },
+        "immutableSubscriptionId": {
+          "description": "Original subscription ID needed by Microsoft.Network.",
+          "type": "string"
+        },
+        "immutableResourceId": {
+          "description": "Original resource ID needed by Microsoft.Network.",
+          "type": "string"
+        },
         "vnetTrafficTag": {
           "description": "Virtual network traffic tag.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "manualPrivateLinkServiceConnections": {
           "description": "List of private link service connections that need manual approval.",
@@ -1614,6 +1674,32 @@
           "items": {
             "$ref": "#/definitions/ConnectionDetails"
           }
+        }
+      }
+    },
+    "PrivateEndpointUpdate": {
+      "description": "Private endpoint update details.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Remote endpoint resource ID.",
+          "type": "string"
+        },
+        "location": {
+          "description": "ARM location of the remote private endpoint.",
+          "type": "string"
+        },
+        "immutableSubscriptionId": {
+          "description": "Original subscription ID needed by Microsoft.Network.",
+          "type": "string"
+        },
+        "immutableResourceId": {
+          "description": "Original resource ID needed by Microsoft.Network.",
+          "type": "string"
+        },
+        "vnetTrafficTag": {
+          "description": "Virtual network traffic tag.",
+          "type": "string"
         }
       }
     },
