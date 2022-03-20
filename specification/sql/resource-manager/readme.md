@@ -31,6 +31,13 @@ tag: package-composite-v5
 
 The following packages may be composed from multiple api-versions.
 
+### Tag: package-preview-2022-02
+These settings apply only when `--tag=package-preview-2022-02` is specified on the command line.
+```yaml $(tag) == 'package-preview-2022-02'
+input-file:
+  - Microsoft.Sql/preview/2022-02-01-preview/ManagedDatabaseAdvancedThreatProtectionSettings.json
+  - Microsoft.Sql/preview/2022-02-01-preview/ManagedServerAdvancedThreatProtectionSettings.json
+```
 ### Tag: package-composite-v5
 
 These settings apply only when `--tag=package-composite-v5` is specified on the command line.
