@@ -3,7 +3,7 @@
   "info": {
     "description": "Fabric location operation endpoints and objects.",
     "title": "FabricAdminClient",
-    "version": "2016-05-01"
+    "version": "2022-03-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -30,16 +30,16 @@
         "operationId": "FabricLocations_Get",
         "parameters": [
           {
-            "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/FabricLocationParameter"
           },
           {
-            "$ref": "Fabric.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -69,16 +69,16 @@
         "operationId": "FabricLocations_List",
         "parameters": [
           {
-            "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "Fabric.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "Fabric.json#/parameters/FilterParameter"
+            "$ref": "../../preview/2016-05-01/Fabric.json#/parameters/FilterParameter"
           }
         ],
         "responses": {
@@ -109,7 +109,7 @@
       },
       "allOf": [
         {
-          "$ref": "Fabric.json#/definitions/Resource"
+          "$ref": "../../preview/2016-05-01/Fabric.json#/definitions/Resource"
         }
       ]
     },
@@ -130,6 +130,10 @@
         },
         "stampInformationId": {
           "description": "The deployment id of the stamp.",
+          "type": "string"
+        },
+        "stampCloudId": {
+          "description": "The cloud id of the stamp.",
           "type": "string"
         },
         "externalDNSIPAddress01": {
@@ -167,6 +171,10 @@
           "description": "Last known stamp stop time for the shut down action plan.",
           "type": "string",
           "format": "date-time"
+        },
+        "dataGeoLocation": {
+          "description": "Data storage geo location for compliance.",
+          "type": "string"
         }
       }
     },
