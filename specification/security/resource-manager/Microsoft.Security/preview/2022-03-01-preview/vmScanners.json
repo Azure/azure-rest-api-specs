@@ -77,9 +77,6 @@
               "$ref": "../../../common/v1/types.json#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       },
       "put": {
@@ -164,9 +161,60 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/vmScanners": {
+      "get": {
+        "description": "Gets the subscription's VM scanner configurations.",
+        "operationId": "VmScanners_ListBySubscription",
+        "x-ms-examples": {
+          "Gets the subscription's VM scanner configurations": {
+            "$ref": "./examples/VmScanners/ListBySubscriptionVmScanners_example.json"
+          }
+        },
+        "tags": [
+          "vmScanners"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ScannerConfigurationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "ScannerConfigurationList": {
+      "type": "object",
+      "description": "Represents a list of VM scanners configurations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScannerConfiguration"
+          }
+        }
+      }
+    },
     "ScannerConfiguration": {
       "type": "object",
       "description": "Represents the configuration of the VM scanner",
@@ -187,6 +235,7 @@
       ]
     },
     "ScannerProperties": {
+      "type": "object",
       "description": "VM Scanner resource properties",
       "properties": {
         "scanningMode": {
@@ -200,7 +249,7 @@
             "modelAsString": true
           }
         },
-        "exclusionTag ": {
+        "exclusionTag": {
           "type": "string",
           "description": "The tag used to exclude resources."
         }
