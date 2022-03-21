@@ -3,7 +3,7 @@
   "info": {
     "description": "Azure Data Lake Storage provides storage for Hadoop and other big data workloads.",
     "title": "Azure Data Lake Storage REST API",
-    "version": "2019-12-12",
+    "version": "2021-04-10",
     "x-ms-code-generation-settings": {
       "internalConstructors": true,
       "name": "DataLakeStorageClient"
@@ -145,6 +145,18 @@
           "type": "string"
         },
         "permissions": {
+          "type": "string"
+        },
+        "x-ms-server-encrypted: true/false": {
+          "description": "The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm.",
+          "type": "boolean"
+        },
+        "x-ms-encryption-key-sha256": {
+          "description": "The server will echo the SHA256 of the customer-provided encryption key to validate the key used in the operation.",
+          "type": "string"
+        },
+        "x-ms-encryption-context": {
+          "description": " If the encryption context property value is set it will return the set value.",
           "type": "string"
         }
       }
@@ -352,7 +364,7 @@
                 "type": "string"
               },
               "x-ms-namespace-enabled": {
-                "description": "A bool string indicates whether the namespace feature is enabled. If \"true\", the namespace is enabled for the filesystem.  ",
+                "description": "A boolean string indicates whether the namespace feature is enabled. If \"true\", the namespace is enabled for the filesystem.  ",
                 "type": "string"
               }
             }
@@ -559,7 +571,7 @@
                 "type": "string"
               },
               "x-ms-namespace-enabled": {
-                "description": "A bool string indicates whether the namespace feature is enabled. If \"true\", the namespace is enabled for the filesystem.  ",
+                "description": "A boolean string indicates whether the namespace feature is enabled. If \"true\", the namespace is enabled for the filesystem.  ",
                 "type": "string"
               }
             }
@@ -715,6 +727,14 @@
                 "description": "The size of the resource in bytes.",
                 "type": "integer",
                 "format": "int64"
+              },
+              "x-ms-request-server-encrypted: true/false": {
+                "description": "The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm.",
+                "type": "boolean"
+              },
+              "x-ms-encryption-key-sha256": {
+                "description": "The server will echo the SHA256 of the customer-provided encryption key to validate the key used in the operation.",
+                "type": "string"
               }
             }
           },
@@ -965,6 +985,34 @@
             "in": "header",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "x-ms-encryption-key",
+            "description": "Optional. The Base64-encoded AES-256 encryption key.",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-encryption-key-sha256",
+            "description": "Optional. The Base64-encoded SHA256 hash of the encryption key.",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-encryption-algorithm: AES256",
+            "description": "Optional. Specifies the algorithm to use for encryption. The value of this header must be AES256.",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-encryption-context",
+            "description": "Optional. Default is “Empty”. If the value is set it will set Blob / File system metadata.  Max length- 1024",
+            "in": "header",
+            "required": false,
+            "type": "string"
           }
         ]
       },
@@ -1047,6 +1095,14 @@
               },
               "x-ms-version": {
                 "description": "The version of the REST protocol used to process the request.",
+                "type": "string"
+              },
+              "x-ms-request-server-encrypted: true/false": {
+                "description": "The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm.",
+                "type": "boolean"
+              },
+              "x-ms-encryption-key-sha256": {
+                "description": "The server will echo the SHA256 of the customer-provided encryption key to validate the key used in the operation.",
                 "type": "string"
               }
             },
@@ -1281,6 +1337,34 @@
           {
             "name": "If-Unmodified-Since",
             "description": "Optional for Flush Data and Set Properties, but invalid for Append Data and Set Access Control Recursive. A date and time value. Specify this header to perform the operation only if the resource has not been modified since the specified date and time.",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-encryption-key",
+            "description": "Optional. The Base64-encoded AES-256 encryption key.",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-encryption-key-sha256",
+            "description": "Optional. The Base64-encoded SHA256 hash of the encryption key.",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-encryption-algorithm: AES256",
+            "description": "Optional. Specifies the algorithm to use for encryption. The value of this header must be AES256.",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-encryption-context",
+            "description": "Optional. Default is “Empty”. If the value is set it will set Blob / File system metadata.  Max length- 1024",
             "in": "header",
             "required": false,
             "type": "string"
@@ -1571,6 +1655,18 @@
               "x-ms-lease-status": {
                 "description": "The lease status of the resource.",
                 "type": "string"
+              },
+              "x-ms-server-encrypted: true/false": {
+                "description": "The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm.",
+                "type": "boolean"
+              },
+              "x-ms-encryption-key-sha256": {
+                "description": "The server will echo the SHA256 of the customer-provided encryption key to validate the key used in the operation.",
+                "type": "string"
+              },
+              "x-ms-encryption-context": {
+                "description": " If the encryption context property value is set it will return the set value.",
+                "type": "string"
               }
             },
             "schema": {
@@ -1661,6 +1757,18 @@
               "x-ms-lease-status": {
                 "description": "The lease status of the resource.",
                 "type": "string"
+              },
+              "x-ms-server-encrypted: true/false": {
+                "description": "The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm.",
+                "type": "boolean"
+              },
+              "x-ms-encryption-key-sha256": {
+                "description": "The server will echo the SHA256 of the customer-provided encryption key to validate the key used in the operation.",
+                "type": "string"
+              },
+              "x-ms-encryption-context": {
+                "description": " If the encryption context property value is set it will return the set value.",
+                "type": "string"
               }
             },
             "schema": {
@@ -1718,6 +1826,27 @@
           {
             "name": "If-Unmodified-Since",
             "description": "Optional. A date and time value. Specify this header to perform the operation only if the resource has not been modified since the specified date and time.",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-encryption-key",
+            "description": "Optional. The Base64-encoded AES-256 encryption key.",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-encryption-key-sha256",
+            "description": "Optional. The Base64-encoded SHA256 hash of the encryption key.",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-encryption-algorithm: AES256",
+            "description": "Optional. Specifies the algorithm to use for encryption. The value of this header must be AES256.",
             "in": "header",
             "required": false,
             "type": "string"
@@ -1828,6 +1957,18 @@
               "x-ms-lease-status": {
                 "description": "The lease status of the resource.",
                 "type": "string"
+              },
+              "x-ms-server-encrypted: true/false": {
+                "description": "The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm.",
+                "type": "boolean"
+              },
+              "x-ms-encryption-key-sha256": {
+                "description": "The server will echo the SHA256 of the customer-provided encryption key to validate the key used in the operation.",
+                "type": "string"
+              },
+              "x-ms-encryption-context": {
+                "description": " If the encryption context property value is set it will return the set value.",
+                "type": "string"
               }
             }
           },
@@ -1898,6 +2039,27 @@
           {
             "name": "If-Unmodified-Since",
             "description": "Optional. A date and time value. Specify this header to perform the operation only if the resource has not been modified since the specified date and time.",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-encryption-key",
+            "description": "Optional. The Base64-encoded AES-256 encryption key.",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-encryption-key-sha256",
+            "description": "Optional. The Base64-encoded SHA256 hash of the encryption key.",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-encryption-algorithm: AES256",
+            "description": "Optional. Specifies the algorithm to use for encryption. The value of this header must be AES256.",
             "in": "header",
             "required": false,
             "type": "string"
