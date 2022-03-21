@@ -533,17 +533,18 @@
           "type": "string",
           "description": "The current entity tag for the output. This is an opaque string. You can use it to detect whether the resource has changed between requests. You can also use it in the If-Match or If-None-Match headers for write operations for optimistic concurrency."
         },
-        "lastOutputEventTimestamps":{
+        "lastOutputEventTimestamps": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/LastOutputEventTimestamp"
           },
           "readOnly": true,
-          "description": "A list of the last output event times for each output partition. The index of the array corresponds to the partition number."
+          "description": "A list of the last output event times for each output partition. The index of the array corresponds to the partition number.",
+          "x-ms-identifiers": []
         },
         "watermarkSettings": {
           "$ref": "#/definitions/OutputWatermarkProperties",
-          "description": "Settings which determine whether to send watermarks to downstreams."
+          "description": "Settings which determine whether to send watermarks to downstream."
         }
       }
     },
@@ -1296,7 +1297,7 @@
     },
     "OutputWatermarkProperties": {
       "type": "object",
-      "description": "Settings which determine whether to send watermarks to downstreams.",
+      "description": "Settings which determine whether to send watermarks to downstream.",
       "properties": {
         "watermarkMode": {
           "$ref": "#/definitions/OutputWatermarkMode",
