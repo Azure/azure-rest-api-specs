@@ -370,7 +370,8 @@
         "contentType": {
           "description": "The content type of this file.",
           "enum": [
-            "Indicator",
+            "BasicIndicator",
+            "StixIndicator",
             "Unspecified"
           ],
           "type": "string",
@@ -379,8 +380,12 @@
             "name": "FileImportContentType",
             "values": [
               {
+                "description": "File containing records with the core fields of an indicator, plus the observables to construct the STIX pattern.",
+                "value": "BasicIndicator"
+              },
+              {
                 "description": "File containing STIX indicators.",
-                "value": "Indicator"
+                "value": "StixIndicator"
               },
               {
                 "description": "File containing other records.",
@@ -422,7 +427,10 @@
           "type": "integer",
           "format": "int32"
         },
-        "source": {},
+        "source": {
+          "description": "The source for the data in the file.",
+          "type": "string"
+        },
         "state": {
           "description": "The state of the file import.",
           "enum": [
@@ -483,8 +491,14 @@
           "type": "integer",
           "format": "int32"
         },
-        "validUntilTimeUTC": {
-          "description": "The time the file import is valid until.",
+        "filesValidUntilTimeUTC": {
+          "description": "The time the files associated with this import are deleted from the storage account.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "importValidUntilTimeUTC": {
+          "description": "The time the file import record is soft deleted from the database and history.",
           "format": "date-time",
           "readOnly": true,
           "type": "string"
