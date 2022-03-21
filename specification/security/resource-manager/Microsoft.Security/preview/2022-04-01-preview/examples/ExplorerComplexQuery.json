@@ -1,0 +1,35 @@
+{
+  "title": "Basic Query",
+  "description": "A simple explorer query.",
+  "parameters": {
+    "api-version": "2022-04-01-preview",
+    "query": {
+      "scopes": [
+        "cfbbd179-59d2-4052-aa06-9270a38aa9d6"
+      ],
+      "query": "Nodes | project ComponentId, CloudProvider, Name, PrimaryAzureResource, Label | where CloudProvider =~ 'Azure' | summarize count() by Label | top 3 by count_"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "totalRecords": 3,
+        "count": 3,
+        "data": [
+          {
+            "Label": "AadIdentity",
+			"count_": "39,114,761"
+          },
+          {
+            "Label": "microsoft.compute/virtualmachines",
+			"count_": "15,909,854"
+          },
+          {
+            "Label": "resourcegroups",
+			"count_": "10,680,594"
+          }
+        ]
+      }
+    }
+  }
+}
