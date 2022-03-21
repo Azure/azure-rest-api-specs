@@ -34,13 +34,13 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.Security/explorer": {
+    "/providers/Microsoft.Security/explore": {
       "post": {
         "tags": [
-          "Explorer"
+          "Explore"
         ],
-        "description": "Queries the resources managed by Azure Security for scopes specified in the request.",
-        "operationId": "Explorer",
+        "description": "Queries the Azure Security cloud map for scopes specified in the request.",
+        "operationId": "Explore",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -71,10 +71,10 @@
         },
         "x-ms-examples": {
           "Basic query": {
-            "$ref": "./examples/ExplorerBasicQuery.json"
+            "$ref": "./examples/ExploreBasicQuery.json"
           },
           "Complex query": {
-            "$ref": "./examples/ExplorerComplexQuery.json"
+            "$ref": "./examples/ExploreComplexQuery.json"
           }
         }
       }
@@ -94,7 +94,7 @@
           }
         },
         "query": {
-          "description": "The explorer query.",
+          "description": "The map explore query.",
           "type": "string"
         },
         "options": {
