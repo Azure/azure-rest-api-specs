@@ -8,12 +8,6 @@
         "ResourceGroup"
       ]
     },
-    "swaggers": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
     "variables": {
       "$ref": "#/definitions/Variables"
     },
@@ -41,7 +35,6 @@
     }
   },
   "required": [
-    "swaggers",
     "scenarios"
   ],
   "additionalProperties": false,
@@ -264,12 +257,6 @@
           "type": "string",
           "description": "A long description of the scenario"
         },
-        "swaggers": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
         "variables": {
           "$ref": "#/definitions/Variables"
         },
@@ -317,9 +304,6 @@
           "type": "string",
           "description": "A brief explanation about the step"
         },
-        "variables": {
-          "$ref": "#/definitions/Variables"
-        },
         "outputVariables": {
           "type": "object",
           "propertyNames": {
@@ -352,8 +336,9 @@
         "operationId": {
           "type": "string"
         },
-        "swagger": {
-          "type": "string"
+        "readmeTag": {
+          "type": "string",
+          "format": "uri-reference"
         },
         "parameters": {
           "type": "object",
@@ -382,7 +367,6 @@
         },
         "step": {},
         "description": {},
-        "variables": {},
         "outputVariables": {}
       },
       "required": [
@@ -427,7 +411,6 @@
         },
         "step": {},
         "description": {},
-        "variables": {},
         "outputVariables": {}
       },
       "required": [
@@ -448,7 +431,6 @@
         },
         "step": {},
         "description": {},
-        "variables": {},
         "outputVariables": {}
       },
       "required": [
@@ -490,7 +472,6 @@
         },
         "step": {},
         "description": {},
-        "variables": {},
         "outputVariables": {}
       },
       "required": [
