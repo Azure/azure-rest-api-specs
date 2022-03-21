@@ -26,7 +26,7 @@ These are the global settings for the AppPlatform API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2022-01
+tag: package-preview-2022-03
 ```
 
 ### Suppression
@@ -47,6 +47,13 @@ directive:
     #where:
     #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/configServers/default"]
     #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/monitoringSettings/default"]
+```
+### Tag: package-preview-2022-03
+These settings apply only when `--tag=package-preview-2022-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-03'
+input-file:
+  - Microsoft.AppPlatform/preview/2022-03-01-preview/appplatform.json
 ```
 
 ### Tag: package-preview-2022-01
