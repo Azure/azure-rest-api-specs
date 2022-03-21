@@ -6050,6 +6050,10 @@
       "title": "SearchFacetItemValue",
       "description": "The content of a search facet result item."
     },
+    "SearchOrderItem": {
+      "type": "object",
+      "description": "See examples for the usage of search order."
+      },
     "SearchResultValue": {
       "type": "object",
       "properties": {
@@ -6307,19 +6311,7 @@
           "type": "array",
           "description": "The sort order of search results, can specify multiple fields.",
           "items": {
-            "type": "object",
-            "properties": {
-              "field": {
-                "type": "string",
-                "description": "The field to sort."
-              },
-              "order": {
-                "type": "string",
-                "description": "Order of sort, ASC (default) or DESC.",
-                "enum": [ "ASC", "DESC" ],
-                "default": "ASC"
-              }
-            }
+            "$ref": "#/definitions/SearchOrderItem"
           }
         },
         "filter": {
