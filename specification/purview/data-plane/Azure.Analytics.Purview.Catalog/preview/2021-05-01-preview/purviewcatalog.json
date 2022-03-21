@@ -6303,6 +6303,25 @@
           "format": "int32",
           "description": "The limit of the number of the search result. default value is 50; maximum value is 1000."
         },
+        "orderby": {
+          "type": "array",
+          "description": "The sort order of search results, can specify multiple fields.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "field": {
+                "type": "string",
+                "description": "The field to sort."
+              },
+              "order": {
+                "type": "string",
+                "description": "Order of sort, ASC (default) or DESC.",
+                "enum": [ "ASC", "DESC" ],
+                "default": "ASC"
+              }
+            }
+          }
+        },
         "filter": {
           "type": "object",
           "description": "The filter for the search. See examples for the usage of supported filters."
