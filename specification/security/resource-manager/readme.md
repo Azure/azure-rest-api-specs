@@ -73,7 +73,6 @@ tag: package-2022-03
 
 The following packages may be composed from multiple api-versions.
 
-
 ### Tag: package-2022-03
 
 These settings apply only when `--tag=package-2022-03` is specified on the command line.
@@ -82,6 +81,17 @@ These settings apply only when `--tag=package-2022-03` is specified on the comma
 input-file:
   - Microsoft.Security/stable/2022-03-01/pricings.json
 ```
+
+### Tag: package-preview-2021-12
+
+These settings apply only when `--tag=package-preview-2021-12-only` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-12'
+input-file:
+  - Microsoft.Security/preview/2021-12-01-preview/securityConnectors.json
+  - Microsoft.Security/preview/2015-06-01-preview/operations.json
+```
+
 ### Tag: package-preview-2021-08
 
 These settings apply only when `--tag=package-preview-2021-08` is specified on the command line.
@@ -101,7 +111,7 @@ These settings apply only when `--tag=package-composite-v1` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v1'
 input-file:
-- Microsoft.Security/preview/2021-07-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2021-12-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2021-10-01-preview/mdeOnboardings.json
 - Microsoft.Security/preview/2021-07-01-preview/customAssessmentAutomation.json
 - Microsoft.Security/preview/2021-07-01-preview/customEntityStoreAssignment.json
