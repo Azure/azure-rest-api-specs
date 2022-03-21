@@ -6,7 +6,6 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 
 
 ``` yaml $(python)
-python-mode: create
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.eventgrid
@@ -15,12 +14,8 @@ package-version: 2.2.0
 clear-output-folder: true
 ```
 
-``` yaml $(python) && $(python-mode) == 'update' && $(track2)
+``` yaml $(python)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/eventgrid/azure-mgmt-eventgrid/azure/mgmt/eventgrid
 ```
 
-``` yaml $(python) && $(python-mode) == 'create' && $(track2)
-basic-setup-py: true
-output-folder: $(python-sdks-folder)/eventgrid/azure-mgmt-eventgrid
-```
