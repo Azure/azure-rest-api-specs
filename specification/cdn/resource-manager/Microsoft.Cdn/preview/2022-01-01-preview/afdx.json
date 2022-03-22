@@ -6053,16 +6053,18 @@
         }
       ],
       "required": [
-        "PolicyData"
+        "PolicyData",
+        "ServiceType",
+        "PolicyVersion"
       ],
       "properties": {
-        "PolicyData":{
+        "PolicyData": {
           "description": "Policy to be applied",
           "type": "string"
         }
       }
     },
-    "PolicyGetParameters":{
+    "PolicyGetParameters": {
       "description": "The JSON object that contains the properties of the Policy to update.",
       "type": "object",
       "allOf": [
@@ -6070,11 +6072,7 @@
           "$ref": "#/definitions/AFDStateProperties"
         }
       ],
-      "required": [
-        "ServiceType",
-        "PolicyVersion"
-      ],
-      "PolicyVersion":{
+      "PolicyVersion": {
         "description": "Schema version of the policy",
         "type": "string"
       },
@@ -6083,7 +6081,7 @@
         "type": "string"
       }
     },
-    "PolicyUpdateParameters":{
+    "PolicyUpdateParameters": {
       "description": "The JSON object that contains the properties of the Policy to update.",
       "type": "object",
       "allOf": [
@@ -6095,11 +6093,11 @@
         "PolicyData",
         "PolicyVersion"
       ],
-      "PolicyVersion":{
+      "PolicyVersion": {
         "description": "Schema version of the policy",
         "type": "string"
       },
-      "PolicyData":{
+      "PolicyData": {
         "description": "Policy to be applied",
         "type": "string"
       }
