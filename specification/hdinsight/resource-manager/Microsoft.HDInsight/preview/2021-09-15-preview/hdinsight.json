@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "HDInsight Management Client",
-    "description": "The HDInsight Management Client.",
+    "title": "HDInsight AKS Management Client",
+    "description": "The HDInsight AKS Management Client.",
     "version": "2021-09-15-preview"
   },
   "host": "management.azure.com",
@@ -39,7 +39,7 @@
         "description": "Gets a cluster pool.",
         "operationId": "ClusterPools_Get",
         "x-ms-examples": {
-          "HDInsightClusterPoolGet": {
+          "ClusterPoolGet": {
             "$ref": "./examples/GetClusterPool.json"
           }
         },
@@ -61,7 +61,7 @@
           "200": {
             "description": "Clusterpool details.",
             "schema": {
-              "$ref": "#/definitions/HDInsightClusterPool"
+              "$ref": "#/definitions/ClusterPool"
             }
           },
           "default": {
@@ -76,7 +76,7 @@
         "description": "Creates or updates a cluster pool.",
         "operationId": "ClusterPools_CreateOrUpdate",
         "x-ms-examples": {
-          "HDInsightClusterPoolPut": {
+          "ClusterPoolPut": {
             "$ref": "./examples/CreateClusterPool.json"
           }
         },
@@ -94,12 +94,12 @@
             "$ref": "#/parameters/ClusterPoolNameParameter"
           },
           {
-            "name": "HDInsightClusterPool",
+            "name": "ClusterPool",
             "description": "The Cluster Pool to create.",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HDInsightClusterPool"
+              "$ref": "#/definitions/ClusterPool"
             }
           }
         ],
@@ -107,13 +107,13 @@
           "201": {
             "description": "ClusterPool create/update request accepted.",
             "schema": {
-              "$ref": "#/definitions/HDInsightClusterPool"
+              "$ref": "#/definitions/ClusterPool"
             }
           },
           "200": {
             "description": "Successful.",
             "schema": {
-              "$ref": "#/definitions/HDInsightClusterPool"
+              "$ref": "#/definitions/ClusterPool"
             }
           },
           "default": {
@@ -132,7 +132,7 @@
         "description": "Updates an existing Cluster Pool Tags.",
         "operationId": "ClusterPool_UpdateTags",
         "x-ms-examples": {
-          "HDInsightClusterPoolsPatchTags": {
+          "ClusterPoolsPatchTags": {
             "$ref": "./examples/PatchClusterPool.json"
           }
         },
@@ -163,7 +163,13 @@
           "200": {
             "description": "Successful.",
             "schema": {
-              "$ref": "#/definitions/HDInsightClusterPool"
+              "$ref": "#/definitions/ClusterPool"
+            }
+          },
+          "202": {
+            "description": "Accepted.",
+            "schema": {
+              "$ref": "#/definitions/ClusterPool"
             }
           },
           "default": {
@@ -178,7 +184,7 @@
         "description": "Deletes a Cluster Pool.",
         "operationId": "ClusterPools_Delete",
         "x-ms-examples": {
-          "HDInsightClusterPoolDelete": {
+          "ClusterPoolDelete": {
             "$ref": "./examples/DeleteClusterPool.json"
           }
         },
@@ -220,7 +226,7 @@
       "get": {
         "operationId": "ClusterPools_ListBySubscription",
         "x-ms-examples": {
-          "HDInsightClusterPoolsListBySubscription": {
+          "ClusterPoolsListBySubscription": {
             "$ref": "./examples/ListClusterPoolsSubscription.json"
           }
         },
@@ -256,7 +262,7 @@
       "get": {
         "operationId": "ClusterPools_ListByResourceGroup",
         "x-ms-examples": {
-          "HDInsightClusterPoolsListByResourceGroup": {
+          "ClusterPoolsListByResourceGroup": {
             "$ref": "./examples/ListClusterPools.json"
           }
         },
@@ -473,6 +479,12 @@
         "responses": {
           "200": {
             "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "Accepted.",
             "schema": {
               "$ref": "#/definitions/Cluster"
             }
@@ -817,6 +829,12 @@
         "responses": {
           "200": {
             "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/SessionCluster"
+            }
+          },
+          "202": {
+            "description": "Accepted.",
             "schema": {
               "$ref": "#/definitions/SessionCluster"
             }
@@ -1185,7 +1203,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/HDInsightClusterPool"
+            "$ref": "#/definitions/ClusterPool"
           },
           "description": "The list of cluster pools."
         },
@@ -1306,7 +1324,7 @@
       },
       "description": "Cluster pool resource properties."
     },
-    "HDInsightClusterPool": {
+    "ClusterPool": {
       "type": "object",
       "description": "Cluster pool.",
       "properties": {
@@ -1756,32 +1774,36 @@
           "readOnly": true
         },
         "computeProfile": {
-          "type": "object",
           "description": "The compute profile.",
-          "required": [
-            "vmSize",
-            "count"
-          ],
-          "properties": {
-            "vmSize": {
-              "type": "string",
-              "description": "The virtual machine SKU.",
-              "pattern": "^[a-zA-Z0-9_]{0,256}$"
-            },
-            "count": {
-              "description": "The number of virtual machines.",
-              "type": "integer",
-              "format": "int32",
-              "maximum": 100.0,
-              "minimum": 1.0
-            }
-          }
+          "$ref": "#/definitions/ComputeProfile"
         },
         "clusterProfile": {
           "$ref": "#/definitions/ClusterProfile"
         }
       },
       "description": "Cluster resource properties."
+    },
+    "ComputeProfile": {
+      "type": "object",
+      "description": "The compute profile.",
+      "required": [
+        "vmSize",
+        "count"
+      ],
+      "properties": {
+        "vmSize": {
+          "type": "string",
+          "description": "The virtual machine SKU.",
+          "pattern": "^[a-zA-Z0-9_]{0,256}$"
+        },
+        "count": {
+          "description": "The number of virtual machines.",
+          "type": "integer",
+          "format": "int32",
+          "maximum": 100.0,
+          "minimum": 1.0
+        }
+      }
     },
     "Cluster": {
       "type": "object",
