@@ -6032,11 +6032,6 @@
     "Policy": {
       "description": "A policy is a logical grouping of policies",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "./cdn.json#/definitions/ProxyResource"
-        }
-      ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -6070,6 +6065,9 @@
       "allOf": [
         {
           "$ref": "#/definitions/AFDStateProperties"
+        },
+        {
+          "$ref": "./cdn.json#/definitions/ProxyResource"
         }
       ],
       "PolicyVersion": {
