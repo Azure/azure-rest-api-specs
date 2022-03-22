@@ -77,7 +77,8 @@
           "x-ms-pageable": {
             "nextLinkName": "nextLink"
           }
-        },
+        }
+      },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings/{settingsResourceName}": {
           "get": {
             "x-ms-examples": {
@@ -218,8 +219,7 @@
             }
           }
         }
-      }
-    },
+      },
     "parameters": {
       "SecurityMLAnalyticsSetting": {
         "description": "The security ML Analytics setting",
@@ -305,7 +305,7 @@
         "description": "Represents Anomaly Security ML Analytics Setting",
         "properties": {
           "properties": {
-            "$ref": "#definitions/AnomalySecurityMLAnalyticsSettingProperties",
+            "$ref": "#/definitions/AnomalySecurityMLAnalyticsSettingProperties",
             "description": "Anomaly Security ML Analytics Setting properties",
             "x-ms-client-flatten": true
           }
@@ -340,7 +340,7 @@
             "items": {
               "$ref": "#/definitions/SecurityMLAnalyticsSettingsDataSource"
             },
-            "x-ms-identifers": [
+            "x-ms-identifiers": [
               "connectorId"
             ],
             "type": "array"
@@ -377,8 +377,8 @@
             "type": "string"
           },
           "settingsStatus": {
-            "description": "The anomaly SecurityMLAnalyticsSetting status",
-            "$ref": "#/definitions/AnomalySecurityMLAnalyticsSettingsStatus"
+            "$ref": "#/definitions/AnomalySecurityMLAnalyticsSettingsStatus",
+            "description": "The anomaly SecurityMLAnalyticsSetting status"
           },
           "isDefaultRule": {
             "description": "Determines whether this anomaly security ml analytics setting is a default rule",
@@ -418,27 +418,27 @@
           }
         },
         "type": "object"
-      }
-    },
-    "AnomalySecurityMLAnalyticsSettingsStatus": {
-      "description": "The anomaly SecurityMLAnalyticsSetting status",
-      "enum": [
-        "Production",
-        "Flighting"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "values": [
-          {
-            "description": "Anomaly setting status in Production mode",
-            "value": "Production"
-          },
-          {
-            "description": "Anomaly setting status in Flighting mode",
-            "value": "Flighting"
-          }
-        ]
+      },
+      "AnomalySecurityMLAnalyticsSettingsStatus": {
+        "description": "The anomaly SecurityMLAnalyticsSetting status",
+        "enum": [
+          "Production",
+          "Flighting"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "modelAsString": true,
+          "values": [
+            {
+              "description": "Anomaly setting status in Production mode",
+              "value": "Production"
+            },
+            {
+              "description": "Anomaly setting status in Flighting mode",
+              "value": "Flighting"
+            }
+          ]
+        }
       }
     }
 }
