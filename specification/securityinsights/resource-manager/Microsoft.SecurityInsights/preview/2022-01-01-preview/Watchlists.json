@@ -692,28 +692,6 @@
       ],
       "type": "object"
     },
-    "UserInfo": {
-      "description": "User information that made some action",
-      "properties": {
-        "email": {
-          "description": "The email of the user.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the user.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "objectId": {
-          "description": "The object id of the user.",
-          "format": "uuid",
-          "type": "string",
-          "x-nullable": true
-        }
-      },
-      "type": "object"
-    },
     "Label": {
       "description": "Label that will be used to tag and filter on.",
       "type": "string"
@@ -732,17 +710,6 @@
         "name": "ProvisioningState",
         "modelAsString": true
       }
-    },
-    "CloudError": {
-      "x-ms-external": true,
-      "properties": {
-        "error": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
-          "description": "The error object of the CloudError response"
-        }
-      },
-      "type": "object",
-      "description": "An error response for a resource management request."
     }
   },
   "parameters": {
