@@ -82,14 +82,14 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings/{settingsResourceName}": {
       "get": {
         "x-ms-examples": {
-          "Get a Anomaly Security ML Analytics Setting.": {
-            "$ref": "./examples/securityMLAnalyticsSettings/GetAnomalySecurityMLAnalyticsSetting.json"
+          "Get a Anomaly Security ML Analytics Settings.": {
+            "$ref": "./examples/securityMLAnalyticsSettings/GetAnomalySecurityMLAnalyticsSettings.json"
           }
         },
         "tags": [
           "Security ML Analytics Settings"
         ],
-        "description": "Gets the Security ML Analytics Setting.",
+        "description": "Gets the Security ML Analytics Settings.",
         "operationId": "SecurityMLAnalyticsSettings_Get",
         "parameters": [
           {
@@ -112,7 +112,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SecurityMLAnalyticsSetting"
+              "$ref": "#/definitions/SecurityMLAnalyticsSettings"
             }
           },
           "default": {
@@ -126,7 +126,7 @@
       "put": {
         "x-ms-examples": {
           "Creates or updates a Anomaly Security ML Analytics Settings.": {
-            "$ref": "./examples/securityMLAnalyticsSettings/CreateAnomalySecurityMLAnalyticsSetting.json"
+            "$ref": "./examples/securityMLAnalyticsSettings/CreateAnomalySecurityMLAnalyticsSettings.json"
           }
         },
         "tags": [
@@ -151,20 +151,20 @@
             "$ref": "#/parameters/SettingsResourceName"
           },
           {
-            "$ref": "#/parameters/SecurityMLAnalyticsSetting"
+            "$ref": "#/parameters/SecurityMLAnalyticsSettings"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SecurityMLAnalyticsSetting"
+              "$ref": "#/definitions/SecurityMLAnalyticsSettings"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/SecurityMLAnalyticsSetting"
+              "$ref": "#/definitions/SecurityMLAnalyticsSettings"
             }
           },
           "default": {
@@ -177,14 +177,14 @@
       },
       "delete": {
         "x-ms-examples": {
-          "Delete a Security ML Analytics Setting.": {
-            "$ref": "./examples/securityMLAnalyticsSettings/DeleteSecurityMLAnalyticsSetting.json"
+          "Delete a Security ML Analytics Settings.": {
+            "$ref": "./examples/securityMLAnalyticsSettings/DeleteSecurityMLAnalyticsSettings.json"
           }
         },
         "tags": [
           "Security ML Analytics Settings"
         ],
-        "description": "Delete the Security ML Analytics Setting.",
+        "description": "Delete the Security ML Analytics Settings.",
         "operationId": "SecurityMLAnalyticsSettings_Delete",
         "parameters": [
           {
@@ -221,13 +221,13 @@
     }
   },
   "parameters": {
-    "SecurityMLAnalyticsSetting": {
-      "description": "The security ML Analytics setting",
+    "SecurityMLAnalyticsSettings": {
+      "description": "The security ML Analytics settings",
       "in": "body",
-      "name": "securityMLAnalyticsSetting",
+      "name": "securityMLAnalyticsSettings",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/SecurityMLAnalyticsSetting"
+        "$ref": "#/definitions/SecurityMLAnalyticsSettings"
       },
       "x-ms-parameter-location": "method"
     },
@@ -241,17 +241,17 @@
     }
   },
   "definitions": {
-    "SecurityMLAnalyticsSetting": {
+    "SecurityMLAnalyticsSettings": {
       "allOf": [
         {
           "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
         }
       ],
-      "description": "Security ML Analytics Setting",
+      "description": "Security ML Analytics Settings",
       "properties": {
         "kind": {
           "$ref": "#/definitions/SecurityMLAnalyticsSettingsKindEnum",
-          "description": "The kind of security ML Analytics Setting"
+          "description": "The kind of security ML Analytics Settings"
         }
       },
       "discriminator": "kind",
@@ -261,14 +261,14 @@
       ]
     },
     "SecurityMLAnalyticsSettingsKindEnum": {
-      "description": "The kind of security ML analytics setting",
+      "description": "The kind of security ML analytics settings",
       "enum": [
         "Anomaly"
       ],
       "type": "string",
       "x-ms-enum": {
         "modelAsString": true,
-        "name": "SecurityMLAnalyticsSettingKind",
+        "name": "SecurityMLAnalyticsSettingsKind",
         "values": [
           {
             "value": "Anomaly"
@@ -287,7 +287,7 @@
         "value": {
           "description": "Array of SecurityMLAnalyticsSettings",
           "items": {
-            "$ref": "#/definitions/SecurityMLAnalyticsSetting"
+            "$ref": "#/definitions/SecurityMLAnalyticsSettings"
           },
           "type": "array"
         }
@@ -297,46 +297,46 @@
         "value"
       ]
     },
-    "AnomalySecurityMLAnalyticsSetting": {
+    "AnomalySecurityMLAnalyticsSettings": {
       "allOf": [
         {
-          "$ref": "#/definitions/SecurityMLAnalyticsSetting"
+          "$ref": "#/definitions/SecurityMLAnalyticsSettings"
         }
       ],
-      "description": "Represents Anomaly Security ML Analytics Setting",
+      "description": "Represents Anomaly Security ML Analytics Settings",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AnomalySecurityMLAnalyticsSettingProperties",
-          "description": "Anomaly Security ML Analytics Setting properties",
+          "$ref": "#/definitions/AnomalySecurityMLAnalyticsSettingsProperties",
+          "description": "Anomaly Security ML Analytics Settings properties",
           "x-ms-client-flatten": true
         }
       },
       "type": "object",
       "x-ms-discriminator-value": "Anomaly"
     },
-    "AnomalySecurityMLAnalyticsSettingProperties": {
-      "description": "AnomalySecurityMLAnalytics setting base property bag.",
+    "AnomalySecurityMLAnalyticsSettingsProperties": {
+      "description": "AnomalySecurityMLAnalytics settings base property bag.",
       "properties": {
         "description": {
-          "description": "The description of the SecurityMLAnalyticsSetting.",
+          "description": "The description of the SecurityMLAnalyticsSettings.",
           "type": "string"
         },
         "displayName": {
-          "description": "The display name for settings created by this SecurityMLAnalyticsSetting.",
+          "description": "The display name for settings created by this SecurityMLAnalyticsSettings.",
           "type": "string"
         },
         "enabled": {
-          "description": "Determines whether this setting is enabled or disabled.",
+          "description": "Determines whether this settings is enabled or disabled.",
           "type": "boolean"
         },
         "lastModifiedUtc": {
-          "description": "The last time that this SecurityMLAnalyticsSetting has been modified.",
+          "description": "The last time that this SecurityMLAnalyticsSettings has been modified.",
           "format": "date-time",
           "readOnly": true,
           "type": "string"
         },
         "requiredDataConnectors": {
-          "description": "The required data sources for this SecurityMLAnalyticsSetting",
+          "description": "The required data sources for this SecurityMLAnalyticsSettings",
           "items": {
             "$ref": "#/definitions/SecurityMLAnalyticsSettingsDataSource"
           },
@@ -346,42 +346,42 @@
           "type": "array"
         },
         "tactics": {
-          "description": "The tactics of the SecurityMLAnalyticsSetting",
+          "description": "The tactics of the SecurityMLAnalyticsSettings",
           "items": {
             "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
           },
           "type": "array"
         },
         "techniques": {
-          "description": "The techniques of the SecurityMLAnalyticsSetting",
+          "description": "The techniques of the SecurityMLAnalyticsSettings",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "anomalyVersion": {
-          "description": "The anomaly version of the AnomalySecurityMLAnalyticsSetting.",
+          "description": "The anomaly version of the AnomalySecurityMLAnalyticsSettings.",
           "type": "string"
         },
         "customizableObservations": {
-          "description": "The customizable observations of the AnomalySecurityMLAnalyticsSetting.",
+          "description": "The customizable observations of the AnomalySecurityMLAnalyticsSettings.",
           "type": "object"
         },
         "frequency": {
-          "description": "The frequency that this SecurityMLAnalyticsSetting will be run.",
+          "description": "The frequency that this SecurityMLAnalyticsSettings will be run.",
           "format": "duration",
           "type": "string"
         },
         "settingsStatus": {
           "$ref": "#/definitions/AnomalySecurityMLAnalyticsSettingsStatus",
-          "description": "The anomaly SecurityMLAnalyticsSetting status"
+          "description": "The anomaly SecurityMLAnalyticsSettings status"
         },
-        "isDefaultRule": {
-          "description": "Determines whether this anomaly security ml analytics setting is a default rule",
+        "isDefaultSettings": {
+          "description": "Determines whether this anomaly security ml analytics settings is a default settings",
           "type": "boolean"
         },
-        "anomalyRuleVersion": {
-          "description": "The anomaly rule version of the Anomaly security ml analytics setting that dictates whether job version gets updated or not.",
+        "anomalySettingsVersion": {
+          "description": "The anomaly settings version of the Anomaly security ml analytics settings that dictates whether job version gets updated or not.",
           "type": "integer",
           "format": "int32"
         }
@@ -404,7 +404,7 @@
           "type": "string"
         },
         "dataTypes": {
-          "description": "The data types used by the security ml analytics setting",
+          "description": "The data types used by the security ml analytics settings",
           "items": {
             "type": "string"
           },
@@ -414,7 +414,7 @@
       "type": "object"
     },
     "AnomalySecurityMLAnalyticsSettingsStatus": {
-      "description": "The anomaly SecurityMLAnalyticsSetting status",
+      "description": "The anomaly SecurityMLAnalyticsSettings status",
       "enum": [
         "Production",
         "Flighting"
@@ -425,11 +425,11 @@
         "modelAsString": true,
         "values": [
           {
-            "description": "Anomaly setting status in Production mode",
+            "description": "Anomaly settings status in Production mode",
             "value": "Production"
           },
           {
-            "description": "Anomaly setting status in Flighting mode",
+            "description": "Anomaly settings status in Flighting mode",
             "value": "Flighting"
           }
         ]
