@@ -2,7 +2,7 @@
 
 These settings apply only when `--track2` is specified on the command line.
 
-``` yaml $(track2)
+``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-monitor
@@ -15,7 +15,7 @@ python-base-folder: monitor/azure-mgmt-monitor/azure/mgmt/monitor
 
 Generate all API versions currently shipped for this package
 
-```yaml $(multiapi) && $(track2)
+```yaml $(multiapi) && $(python)
 clear-output-folder: true
 batch:
   - tag: package-2022-02-01-preview-only
@@ -49,7 +49,6 @@ batch:
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/monitor/azure-mgmt-monitor/azure/mgmt/monitor/
-clear-output-folder: false
 perform-load: false
 ```
 
