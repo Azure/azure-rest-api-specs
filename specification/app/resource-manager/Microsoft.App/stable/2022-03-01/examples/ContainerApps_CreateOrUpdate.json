@@ -23,6 +23,13 @@
                 "bindingType": "SniEnabled",
                 "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube/certificates/my-certificate-for-my-other-name-dot-com"
               }
+            ],
+            "traffic": [
+              {
+                "weight": 100,
+                "revisionName": "testcontainerApp0-ab1234",
+                "label": "production"
+              }
             ]
           },
           "dapr": {
@@ -103,6 +110,13 @@
                   "bindingType": "SniEnabled",
                   "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube/certificates/my-certificate-for-my-other-name-dot-com"
                 }
+              ],
+              "traffic": [
+                {
+                  "weight": 100,
+                  "revisionName": "testcontainerApp0-ab1234",
+                  "label": "production"
+                }
               ]
             },
             "dapr": {
@@ -173,7 +187,14 @@
               "fqdn": "testcontainerApp0.demokube-t24clv0g.eastus.containerApps.k4apps.io",
               "external": true,
               "targetPort": 3000,
-              "transport": "auto"
+              "transport": "auto",
+              "traffic": [
+                {
+                  "weight": 100,
+                  "revisionName": "testcontainerApp0-ab1234",
+                  "label": "production"
+                }
+              ]
             },
             "dapr": {
               "enabled": true,
