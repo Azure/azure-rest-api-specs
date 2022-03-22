@@ -58,6 +58,12 @@
           },
           {
             "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+<<<<<<< HEAD
+=======
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+>>>>>>> upstream/dev-Sentinel-2022-04-01-preview
           }
         ],
         "responses": {
@@ -153,7 +159,17 @@
         ],
         "responses": {
           "200": {
+<<<<<<< HEAD
             "description": "OK"
+=======
+            "description": "OK",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Contains the status URL on which clients are expected to poll the status of the delete operation.",
+                "type": "string"
+              }
+            }
+>>>>>>> upstream/dev-Sentinel-2022-04-01-preview
           },
           "204": {
             "description": "No Content"
@@ -178,7 +194,11 @@
         "tags": [
           "Watchlists"
         ],
+<<<<<<< HEAD
         "description": "Creates or updates a watchlist and its watchlist items (bulk creation, e.g. through text/csv content type). To create a Watchlist and its items, we should call this endpoint with rawContent and contentType properties.",
+=======
+        "description": "Create or update a Watchlist and its Watchlist Items (bulk creation, e.g. through text/csv content type). To create a Watchlist and its Items, we should call this endpoint with either rawContent or a valid SAR URI and contentType properties. The rawContent is mainly used for small watchlist (content size below 3.8 MB). The SAS URI enables the creation of large watchlist, where the content size can go up to 500 MB. The status of processing such large file can be polled through the URL returned in Azure-AsyncOperation header.",
+>>>>>>> upstream/dev-Sentinel-2022-04-01-preview
         "operationId": "Watchlists_CreateOrUpdate",
         "parameters": [
           {
@@ -208,9 +228,21 @@
             }
           },
           "201": {
+<<<<<<< HEAD
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/Watchlist"
+=======
+            "description": "Created. The response includes the Provisioning State and the Azure-AsyncOperation header. To get the progress of the operation, call GET operation on the URL in Azure-AsyncOperation header field.",
+            "schema": {
+              "$ref": "#/definitions/Watchlist"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Contains the status URL on which clients are expected to poll the status of the operation.",
+                "type": "string"
+              }
+>>>>>>> upstream/dev-Sentinel-2022-04-01-preview
             }
           },
           "default": {
@@ -248,6 +280,12 @@
             "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
           },
           {
+<<<<<<< HEAD
+=======
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+          },
+          {
+>>>>>>> upstream/dev-Sentinel-2022-04-01-preview
             "$ref": "#/parameters/WatchlistAlias"
           }
         ],
@@ -423,6 +461,10 @@
   "definitions": {
     "WatchlistList": {
       "description": "List all the watchlists.",
+<<<<<<< HEAD
+=======
+      "type": "object",
+>>>>>>> upstream/dev-Sentinel-2022-04-01-preview
       "properties": {
         "nextLink": {
           "description": "URL to fetch the next set of watchlists.",
@@ -437,7 +479,10 @@
           "type": "array"
         }
       },
+<<<<<<< HEAD
       "type": "object",
+=======
+>>>>>>> upstream/dev-Sentinel-2022-04-01-preview
       "required": [
         "value"
       ]
@@ -474,7 +519,15 @@
           "type": "string"
         },
         "source": {
+<<<<<<< HEAD
           "description": "The source of the watchlist",
+=======
+          "description": "The filename of the watchlist, called 'source'",
+          "type": "string"
+        },
+        "sourceType": {
+          "description": "The sourceType of the watchlist",
+>>>>>>> upstream/dev-Sentinel-2022-04-01-preview
           "enum": [
             "Local file",
             "Remote storage"
@@ -482,7 +535,11 @@
           "type": "string",
           "x-ms-enum": {
             "modelAsString": true,
+<<<<<<< HEAD
             "name": "source"
+=======
+            "name": "sourceType"
+>>>>>>> upstream/dev-Sentinel-2022-04-01-preview
           }
         },
         "created": {
@@ -557,16 +614,22 @@
         "uploadStatus": {
           "description": "The status of the Watchlist upload : New, InProgress or Complete. Pls note : When a Watchlist upload status is equal to InProgress, the Watchlist cannot be deleted",
           "type": "string"
+<<<<<<< HEAD
         },
         "watchlistItemsCount": {
           "description": "The number of Watchlist Items in the Watchlist",
           "type": "integer",
           "format": "int32"
+=======
+>>>>>>> upstream/dev-Sentinel-2022-04-01-preview
         }
       },
       "required": [
         "displayName",
+<<<<<<< HEAD
         "source",
+=======
+>>>>>>> upstream/dev-Sentinel-2022-04-01-preview
         "provider",
         "itemsSearchKey"
       ],
