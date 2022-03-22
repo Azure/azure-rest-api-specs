@@ -4519,6 +4519,10 @@
           "$ref": "#/definitions/ExportPolicy",
           "description": "The export policy for a container registry."
         },
+        "azureADAuthenticationAsArmPolicy": {
+          "$ref": "#/definitions/AzureADAuthenticationAsArmPolicy",
+          "description": "The policy for using ARM audienced token for a container registry."
+        },
         "softDeletePolicy": {
           "$ref": "#/definitions/SoftDeletePolicy",
           "description": "The soft delete policy for a container registry."
@@ -4682,6 +4686,25 @@
           "type": "string",
           "x-ms-enum": {
             "name": "ExportPolicyStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AzureADAuthenticationAsArmPolicy": {
+      "description": "The policy for using ARM audienced token for a container registry.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The value that indicates whether the policy is enabled or not.",
+          "default": "enabled",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AzureADAuthenticationAsArmPolicyStatus",
             "modelAsString": true
           }
         }
