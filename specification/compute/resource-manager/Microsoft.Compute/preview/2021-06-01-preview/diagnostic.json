@@ -213,7 +213,7 @@
           "registerStorageConfiguration"
         ],
         "operationId": "DiskInspectionStorageConfiguration_Register",
-        "x-ms-long-running-operation": false,        
+        "x-ms-long-running-operation": false,
         "description": "Register a storageAccount for a subscription used for DiskInspection",
         "consumes": [
           "application/json"
@@ -240,7 +240,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Succeeded"          
+            "description": "Succeeded"
           },
           "default": {
             "description": "Error response describing why the register operation failed.",
@@ -262,7 +262,7 @@
           "validateStorageConfiguration"
         ],
         "operationId": "DiskInspectionStorageConfiguration_Validate",
-        "x-ms-long-running-operation": false,        
+        "x-ms-long-running-operation": false,
         "description": "Validate if a storageAccount configuration exists for a subscription used for DiskInspection.",
         "consumes": [
           "application/json"
@@ -276,7 +276,7 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          }          
+          }
         ],
         "responses": {
           "200": {
@@ -407,17 +407,12 @@
     "StorageConfigurationInput": {
       "type": "object",
       "properties": {
-        "resourceId": {
-          "description": "Qualified name of the resource.",
-          "type": "string"
-        },
         "storageAccountId": {
           "description": "Qualified name of the storage account",
           "type": "string"
         }
       },
       "required": [
-        "resourceId",
         "storageAccountId"
       ],
       "description": "Data used for registering a Storage Account for a Subscription."
