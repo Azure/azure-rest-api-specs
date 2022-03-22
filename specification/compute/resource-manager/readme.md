@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2021-12-01
+tag: package-2022-04-04
 
 directive:
   - where:
@@ -233,6 +233,33 @@ directive:
       - $.definitions.SubResourceWithColocationStatus
     suppress:
       - RequiredPropertiesMissingInResourceModel
+```
+
+### Tag: package-2022-04-04
+
+These settings apply only when `--tag=package-2022-04-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-04-04'
+input-file:
+- Microsoft.Compute/stable/2022-04-04/common.json
+- Microsoft.Compute/stable/2021-11-01/compute.json
+- Microsoft.Compute/stable/2021-11-01/runCommands.json
+- Microsoft.Compute/stable/2021-07-01/skus.json
+- Microsoft.Compute/stable/2021-12-01/disk.json
+- Microsoft.Compute/stable/2021-10-01/gallery.json
+- Microsoft.Compute/stable/2021-07-01/sharedGallery.json
+- Microsoft.Compute/stable/2021-07-01/communityGallery.json
+- Microsoft.Compute/stable/2022-04-04/CloudServiceRP/cloudService.json
+```
+
+### Tag: package-2022-04-04-only
+
+These settings apply only when `--tag=package-2022-04-04-oly` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-04-04-only'
+input-file:
+- Microsoft.Compute/stable/2022-04-04/common.json
+- Microsoft.Compute/stable/2022-04-04/CloudServiceRP/cloudService.json
 ```
 
 ### Tag: package-2021-12-01
