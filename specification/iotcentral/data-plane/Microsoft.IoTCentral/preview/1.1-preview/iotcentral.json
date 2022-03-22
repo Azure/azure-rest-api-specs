@@ -544,6 +544,18 @@
           "description": "Display name of the device group.",
           "type": "string"
         },
+        "filter": {
+          "description": "Query defining which devices should be in this group.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Short summary of device group.",
+          "type": "string"
+        },
+        "etag": {
+          "description": "ETag used to prevent conflict in device group updates.",
+          "type": "string"
+        },
         "organizations": {
           "description": "List of organization IDs of the device group.",
           "type": "array",
@@ -552,7 +564,11 @@
           },
           "maxItems": 1
         }
-      }
+      },
+      "required": [
+        "displayName",
+        "filter"
+      ]
     },
     "DeviceGroupCollection": {
       "type": "object",
@@ -691,6 +707,25 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "DeviceTemplateMigrationJobData": {
+      "x-ms-discriminator-value": "deviceTemplateMigration",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobData"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "template": {
+          "description": "The target device template to which devices will be migrated.",
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "template"
       ]
     },
     "EmailUser": {
@@ -2322,6 +2357,15 @@
         "parameters": [
           {
             "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/Filter"
+          },
+          {
+            "$ref": "#/parameters/Top"
+          },
+          {
+            "$ref": "#/parameters/OrderBy"
           }
         ],
         "x-ms-pageable": {
@@ -2333,6 +2377,129 @@
             "schema": {
               "$ref": "#/definitions/DeviceGroupCollection"
             }
+          }
+        }
+      }
+    },
+    "/deviceGroups/{deviceGroupId}": {
+      "get": {
+        "operationId": "DeviceGroups_Get",
+        "summary": "Get the device group by ID.",
+        "x-ms-examples": {
+          "Get device group by ID": {
+            "$ref": "./examples/devicegroups_get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DeviceGroupId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceGroup"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DeviceGroups_Create",
+        "summary": "Create or update a device group",
+        "description": "Create or update a device group.",
+        "x-ms-examples": {
+          "Create device group": {
+            "$ref": "./examples/devicegroups_create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DeviceGroupId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Device group body.",
+            "schema": {
+              "$ref": "#/definitions/DeviceGroup"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceGroup"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "DeviceGroups_Update",
+        "summary": "Update a device group via patch",
+        "description": "Update an existing device group by ID.",
+        "x-ms-examples": {
+          "Update device device group": {
+            "$ref": "./examples/devicegroups_update.json"
+          }
+        },
+        "consumes": [
+          "application/json",
+          "application/json-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DeviceGroupId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Device group patch body.",
+            "schema": {
+              "type": "object"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceGroup"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeviceGroups_Remove",
+        "summary": "Delete a device group.",
+        "x-ms-examples": {
+          "Delete device group": {
+            "$ref": "./examples/devicegroups_delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DeviceGroupId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
           }
         }
       }
@@ -4722,6 +4889,14 @@
       "in": "path",
       "name": "exportId",
       "description": "Unique ID for the export.",
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "required": true
+    },
+    "DeviceGroupId": {
+      "in": "path",
+      "name": "deviceGroupId",
+      "description": "Unique ID for the device group.",
       "x-ms-parameter-location": "method",
       "type": "string",
       "required": true
