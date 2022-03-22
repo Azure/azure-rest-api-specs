@@ -80,7 +80,7 @@ These settings apply only when `--tag=package-preview-2022-04` is specified on t
 
 ```yaml $(tag) == 'package-preview-2022-04'
 input-file:
-  - Microsoft.Security/preview/2022-04-01-preview/explorer.json
+  - Microsoft.Security/preview/2022-04-01-preview/query.json
 ```
 ### Tag: package-2022-03
 
@@ -110,7 +110,7 @@ These settings apply only when `--tag=package-composite-v1` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v1'
 input-file:
-- Microsoft.Security/preview/2022-04-01-preview/explorer.json
+- Microsoft.Security/preview/2022-04-01-preview/query.json
 - Microsoft.Security/preview/2021-07-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2021-10-01-preview/mdeOnboardings.json
 - Microsoft.Security/preview/2021-07-01-preview/customAssessmentAutomation.json
@@ -158,7 +158,7 @@ These settings apply only when `--tag=package-composite-v2` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v2'
 input-file:
-- Microsoft.Security/preview/2022-04-01-preview/explorer.json
+- Microsoft.Security/preview/2022-04-01-preview/query.json
 - Microsoft.Security/preview/2021-07-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2021-10-01-preview/mdeOnboardings.json
 - Microsoft.Security/preview/2021-07-01-preview/customAssessmentAutomation.json
@@ -251,7 +251,7 @@ input-file:
 - Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
 - Microsoft.Security/preview/2021-07-01-preview/securityConnectors.json
-- Microsoft.Security/preview/2022-04-01-preview/explorer.json
+- Microsoft.Security/preview/2022-04-01-preview/query.json
 
 # Needed when there is more than one input file
 override-info:

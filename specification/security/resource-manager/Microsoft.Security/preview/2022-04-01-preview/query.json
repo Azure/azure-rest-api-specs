@@ -34,13 +34,13 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.Security/explore": {
+    "/providers/Microsoft.Security/query": {
       "post": {
         "tags": [
-          "Explore"
+          "Query"
         ],
-        "description": "Queries the Azure Security cloud map for scopes specified in the request.",
-        "operationId": "Explore",
+        "description": "Run KQL query against Microsoft.Security data types for scopes specified in the request. Supported types: Nodes, edges, insights, recommendations, vulnerabilities.",
+        "operationId": "Query",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -71,10 +71,10 @@
         },
         "x-ms-examples": {
           "Basic query": {
-            "$ref": "./examples/ExploreBasicQuery.json"
+            "$ref": "./examples/BasicQuery.json"
           },
           "Complex query": {
-            "$ref": "./examples/ExploreComplexQuery.json"
+            "$ref": "./examples/ComplexQuery.json"
           }
         }
       }
@@ -86,7 +86,7 @@
       "type": "object",
       "properties": {
         "scopes": {
-          "description": "Azure scopes against which to execute the query.",
+          "description": "The scopes in which the query will be executed - List of subscription IDs for Azure environments, and list of Account IDs for AWS environments.",
           "type": "array",
           "items": {
             "type": "string",
@@ -94,7 +94,7 @@
           }
         },
         "query": {
-          "description": "The map explore query.",
+          "description": "The KQL query to execute.",
           "type": "string"
         },
         "options": {
@@ -147,7 +147,7 @@
           "type": "string"
         },
         "data": {
-          "description": "Query output in JObject array or Table format.",
+          "description": "Query output in JObject array.",
           "type": "object"
         },
       },
