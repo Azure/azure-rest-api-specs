@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2022-03-01-privatepreview",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "rg1",
+    "projectName": "{projectName}",
+    "body": {
+      "properties": {
+        "description": "This is my first project."
+      },
+      "tags": {
+        "CostCenter": "R&D"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.Fidalgo/projects/{projectName}",
+        "name": "myproject",
+        "type": "Microsoft.Fidalgo/projects",
+        "properties": {
+          "devCenterId": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.Fidalgo/devcenters/{devCenterName}",
+          "description": "This is my first project. Very exciting.",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-11-18T18:00:36.993Z",
+          "lastModifiedBy": "user1",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-11-18T18:30:36.993Z"
+        },
+        "location": "centralus",
+        "tags": {
+          "CostCenter": "R&D"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.Fidalgo/projects/{projectName}",
+        "name": "myproject",
+        "type": "Microsoft.Fidalgo/projects",
+        "properties": {
+          "devCenterId": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.Fidalgo/devcenters/{devCenterName}",
+          "description": "This is my first project.",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-11-18T18:00:36.993Z",
+          "lastModifiedBy": "user1",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-11-18T18:30:36.993Z"
+        },
+        "location": "centralus",
+        "tags": {
+          "CostCenter": "R&D"
+        }
+      }
+    }
+  }
+}
