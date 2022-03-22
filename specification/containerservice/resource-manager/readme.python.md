@@ -2,7 +2,7 @@
 
 These settings apply only when `--python` is specified on the command line.
 
-```yaml $(python) && $(track2)
+```yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-containerservice
@@ -15,7 +15,7 @@ no-namespace-folders: true
 
 Generate all API versions currently shipped for this package
 
-```yaml $(python) && $(multiapi) && $(track2)
+```yaml $(python) && $(multiapi)
 batch:
   - tag: package-preview-2022-02
   - tag: package-2022-01
@@ -55,7 +55,6 @@ batch:
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/
-clear-output-folder: false
 perform-load: false
 ```
 
