@@ -126,7 +126,7 @@
           "put": {
             "x-ms-examples": {
               "Creates or updates a Anomaly Security ML Analytics Settings.": {
-                "$ref": "./examples/securityMLAnalyticsSetting/CreateAnomalySecurityMLAnalyticsSetting.json"
+                "$ref": "./examples/securityMLAnalyticsSettings/CreateAnomalySecurityMLAnalyticsSetting.json"
               }
             },
             "tags": [
@@ -178,7 +178,7 @@
           "delete": {
             "x-ms-examples": {
               "Delete a Security ML Analytics Setting.": {
-                "$ref": "./examples/alertRules/DeleteSecurityMLAnalyticsSetting.json"
+                "$ref": "./examples/securityMLAnalyticsSettings/DeleteSecurityMLAnalyticsSetting.json"
               }
             },
             "tags": [
@@ -349,7 +349,8 @@
             "description": "The tactics of the SecurityMLAnalyticsSetting",
             "items": {
               "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
-            }
+            },
+            "type": "array"
           },
           "techniques": {
             "description": "The techniques of the SecurityMLAnalyticsSetting",
@@ -361,15 +362,11 @@
           },
           "anomalyVersion": {
             "description": "The anomaly version of the AnomalySecurityMLAnalyticsSetting.",
-            "items": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "customizableObservations": {
             "description": "The customizable observations of the AnomalySecurityMLAnalyticsSetting.",
-            "items": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "frequency":  {
             "description": "The frequency that this SecurityMLAnalyticsSetting will be run.",
@@ -386,10 +383,8 @@
           },
           "anomalyRuleVersion": {
             "description": "The anomaly rule version of the Anomaly security ml analytics setting that dictates whether job version gets updated or not.",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            }
+            "type": "integer",
+            "format": "int32"
           }
         },
         "required": [
