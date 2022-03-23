@@ -1354,9 +1354,6 @@
         }
       },
       "description": "A PlayerAccountPool",
-      "required": [
-        "properties"
-      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
@@ -1989,7 +1986,7 @@
         },
         "settings": {
           "$ref": "#/definitions/TitleSettings",
-          "description": "Setting pertaining to a Title"
+          "description": "Settings pertaining to a Title."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -2005,6 +2002,10 @@
     "TitleResourceUpdate": {
       "type": "object",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/TitleUpdateProperties",
+          "description": "The updatable resource-specific properties for a Title."
+        },
         "identity": {
           "$ref": "#/definitions/Azure.ARM.ManagedSystemIdentityProperties",
           "description": "The managed service identities assigned to this resource."
@@ -2020,10 +2021,6 @@
             "update",
             "create"
           ]
-        },
-        "properties": {
-          "$ref": "#/definitions/TitleUpdateProperties",
-          "description": "The updatable resource-specific properties for a Title."
         }
       },
       "description": "The Update model for a Title Resource"
@@ -2051,7 +2048,7 @@
         },
         "settings": {
           "$ref": "#/definitions/TitleSettings",
-          "description": "Setting pertaining to a Title"
+          "description": "Settings pertaining to a Title."
         }
       },
       "description": "The updatable resource-specific properties for a title"
