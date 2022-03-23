@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-06-01",
+    "version": "2022-03-01",
     "title": "DataBoxEdgeManagementClient"
   },
   "host": "management.azure.com",
@@ -316,9 +316,6 @@
         "responses": {
           "200": {
             "description": "Successfully deleted the resource."
-          },
-          "202": {
-            "description": "Accepted the request to delete the resource."
           },
           "204": {
             "description": "The resource is already deleted."
@@ -714,6 +711,65 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/deviceCapacityCheck": {
+      "post": {
+        "tags": [
+          "DeviceCapacityCheck"
+        ],
+        "description": "Posts the device capacity request info to check feasibility.",
+        "operationId": "DeviceCapacityCheck_CheckResourceCreationFeasibility",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceCapacityRequestInfo",
+            "in": "body",
+            "description": "The device capacity request info.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceCapacityRequestInfo"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to check the feasibility of resource creation."
+          },
+          "200": {
+            "description": "Successfully checked the feasibility of resource creation."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "DeviceCapacityRequestPost": {
+            "$ref": "./examples/DeviceCapacityRequestPost.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/diagnosticProactiveLogCollectionSettings/default": {
       "get": {
         "tags": [
@@ -896,14 +952,14 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted the request to update the diagnostic remote support settings."
+          },
           "200": {
             "description": "Successfully updated the diagnostic remote support settings.",
             "schema": {
               "$ref": "#/definitions/DiagnosticRemoteSupportSettings"
             }
-          },
-          "202": {
-            "description": "Accepted the request to update the diagnostic remote support settings."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1009,6 +1065,52 @@
         "x-ms-examples": {
           "GenerateCertificate": {
             "$ref": "./examples/GenerateCertificate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/getDeviceCapacityInfo": {
+      "get": {
+        "tags": [
+          "DeviceCapacityInfo"
+        ],
+        "description": "Gets the properties of the specified device capacity info.",
+        "operationId": "DeviceCapacityInfo_GetDeviceCapacityInfo",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The device capacity info result.",
+            "schema": {
+              "$ref": "#/definitions/DeviceCapacityInfo"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceCapacityGet": {
+            "$ref": "./examples/DeviceCapacityGet.json"
           }
         }
       }
@@ -4070,8 +4172,9 @@
           }
         },
         "systemData": {
-          "description": "Addon type",
-          "$ref": "#/definitions/SystemData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of Addon",
+          "readOnly": true
         }
       },
       "discriminator": "kind"
@@ -4087,7 +4190,8 @@
           "items": {
             "$ref": "#/definitions/Addon"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link to the next set of results.",
@@ -4142,15 +4246,16 @@
         }
       ],
       "properties": {
-        "systemData": {
-          "description": "Alert generated in the resource",
-          "$ref": "#/definitions/SystemData"
-        },
         "properties": {
           "$ref": "#/definitions/AlertProperties",
           "description": "Properties of alert.",
           "readOnly": true,
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of Alert",
+          "readOnly": true
         }
       }
     },
@@ -4187,7 +4292,8 @@
           "items": {
             "$ref": "#/definitions/Alert"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link to the next set of results.",
@@ -4471,14 +4577,15 @@
         }
       ],
       "properties": {
-        "systemData": {
-          "description": "Bandwidth object related to ASE resource",
-          "$ref": "#/definitions/SystemData"
-        },
         "properties": {
           "$ref": "#/definitions/BandwidthScheduleProperties",
           "description": "The properties of the bandwidth schedule.",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of BandwidthSchedule",
+          "readOnly": true
         }
       }
     },
@@ -4523,7 +4630,8 @@
             "x-ms-enum": {
               "name": "DayOfWeek",
               "modelAsString": true
-            }
+            },
+            "x-ms-identifiers": []
           }
         }
       }
@@ -4539,6 +4647,7 @@
           "items": {
             "$ref": "#/definitions/BandwidthSchedule"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         },
         "nextLink": {
@@ -4576,7 +4685,7 @@
       }
     },
     "CloudEdgeManagementRole": {
-      "description": "CloudEdgeManagementRole role.",
+      "description": "The preview of Virtual Machine Cloud Management from the Azure supports deploying and managing VMs on your Azure Stack Edge device from Azure Portal. \r\nFor more information, refer to: https://docs.microsoft.com/en-us/azure/databox-online/azure-stack-edge-gpu-virtual-machine-overview\r\nBy using this feature, you agree to the preview legal terms. See the https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/ for additional details.",
       "required": [
         "kind"
       ],
@@ -4683,6 +4792,131 @@
       },
       "x-ms-external": true
     },
+    "ClusterCapacityViewData": {
+      "description": "Cluster Compute Data.",
+      "type": "object",
+      "properties": {
+        "fqdn": {
+          "description": "The FQDN of the cluster.",
+          "type": "string"
+        },
+        "gpuCapacity": {
+          "$ref": "#/definitions/ClusterGpuCapacity",
+          "description": "The cluster's GPU capacity."
+        },
+        "memoryCapacity": {
+          "$ref": "#/definitions/ClusterMemoryCapacity",
+          "description": "The cluster's memory capacity."
+        },
+        "lastRefreshedTime": {
+          "format": "date-time",
+          "description": "The last time at which the ClusterCapacityViewData was set.",
+          "type": "string"
+        },
+        "totalProvisionedNonHpnCores": {
+          "format": "int64",
+          "description": "The total # of vCPUs provisioned by non-HPN VM per appliance.",
+          "type": "integer"
+        }
+      }
+    },
+    "ClusterGpuCapacity": {
+      "description": "Cluster GPU Data.",
+      "type": "object",
+      "properties": {
+        "gpuType": {
+          "description": "The cluster GPU Type.",
+          "type": "string"
+        },
+        "gpuUsedUnitsCount": {
+          "format": "int32",
+          "description": "The used GPU units count in the cluster.",
+          "type": "integer"
+        },
+        "gpuFreeUnitsCount": {
+          "format": "int32",
+          "description": "The free GPU units count in the cluster.",
+          "type": "integer"
+        },
+        "gpuReservedForFailoverUnitsCount": {
+          "format": "int32",
+          "description": "The GPU units count reserved for failover in the cluster.",
+          "type": "integer"
+        },
+        "gpuTotalUnitsCount": {
+          "format": "int32",
+          "description": "The total GPU units count in the cluster.",
+          "type": "integer"
+        }
+      }
+    },
+    "ClusterMemoryCapacity": {
+      "description": "NodeCapacityInfo defines the required information to determine the placement of a VM.",
+      "type": "object",
+      "properties": {
+        "clusterFreeMemoryMb": {
+          "format": "double",
+          "description": "The free memory in the cluster in MB.",
+          "type": "number"
+        },
+        "clusterUsedMemoryMb": {
+          "format": "double",
+          "description": "The used memory in the cluster in MB.",
+          "type": "number"
+        },
+        "clusterFailoverMemoryMb": {
+          "format": "double",
+          "description": "The failover memory in the cluster in MB.",
+          "type": "number"
+        },
+        "clusterFragmentationMemoryMb": {
+          "format": "double",
+          "description": "The fragmentation memory in the cluster in MB.",
+          "type": "number"
+        },
+        "clusterHypervReserveMemoryMb": {
+          "format": "double",
+          "description": "The memory reserved for Hyper-V in the cluster in MB.",
+          "type": "number"
+        },
+        "clusterInfraVmMemoryMb": {
+          "format": "double",
+          "description": "The memory of the Infra VM in the cluster in MB.",
+          "type": "number"
+        },
+        "clusterTotalMemoryMb": {
+          "format": "double",
+          "description": "The total memory in the cluster in MB.",
+          "type": "number"
+        },
+        "clusterNonFailoverVmMb": {
+          "format": "double",
+          "description": "The non-failover memory in the cluster in MB.",
+          "type": "number"
+        },
+        "clusterMemoryUsedByVmsMb": {
+          "format": "double",
+          "description": "The memory used by VMs in the cluster in MB.",
+          "type": "number"
+        }
+      }
+    },
+    "ClusterStorageViewData": {
+      "description": "Cluster Storage Data.",
+      "type": "object",
+      "properties": {
+        "clusterTotalStorageMb": {
+          "format": "double",
+          "description": "Total storage on the cluster in MB.",
+          "type": "number"
+        },
+        "clusterFreeStorageMb": {
+          "format": "double",
+          "description": "The available or free storage on the cluster in MB.",
+          "type": "number"
+        }
+      }
+    },
     "CniConfig": {
       "description": "Cni configuration",
       "type": "object",
@@ -4757,7 +4991,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -4773,14 +5008,15 @@
         }
       ],
       "properties": {
-        "systemData": {
-          "description": "Container in DataBoxEdge Resource",
-          "$ref": "#/definitions/SystemData"
-        },
         "properties": {
           "$ref": "#/definitions/ContainerProperties",
           "description": "The container properties.",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of Container",
+          "readOnly": true
         }
       }
     },
@@ -4795,6 +5031,7 @@
           "items": {
             "$ref": "#/definitions/Container"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         },
         "nextLink": {
@@ -4901,14 +5138,16 @@
             "AzureModularDataCentre"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "DataBoxEdgeDeviceKind",
             "modelAsString": true
           }
         },
         "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "DataBoxEdge Resource",
-          "$ref": "#/definitions/SystemData"
+          "readOnly": true
         },
         "properties": {
           "$ref": "#/definitions/DataBoxEdgeDeviceProperties",
@@ -4930,6 +5169,11 @@
           "$ref": "#/definitions/DataBoxEdgeDeviceExtendedInfoProperties",
           "description": "The extended info properties.",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of DataBoxEdgeDevice",
+          "readOnly": true
         }
       }
     },
@@ -5027,6 +5271,45 @@
             "$ref": "#/definitions/Secret"
           },
           "readOnly": true
+        },
+        "clusterWitnessType": {
+          "description": "Cluster Witness Type",
+          "enum": [
+            "None",
+            "Cloud",
+            "FileShare"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ClusterWitnessType",
+            "modelAsString": true
+          }
+        },
+        "fileShareWitnessLocation": {
+          "description": "The witness location of file share.",
+          "type": "string",
+          "readOnly": true
+        },
+        "fileShareWitnessUsername": {
+          "description": "The username of file share.",
+          "type": "string",
+          "readOnly": true
+        },
+        "cloudWitnessStorageAccountName": {
+          "description": "The Cloud Witness Storage account name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "cloudWitnessContainerName": {
+          "description": "The Container for cloud witness in the storage account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "cloudWitnessStorageEndpoint": {
+          "description": "The Azure service endpoint of the cloud witness storage account.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -5041,6 +5324,7 @@
           "items": {
             "$ref": "#/definitions/DataBoxEdgeDevice"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         },
         "nextLink": {
@@ -5077,8 +5361,9 @@
       "type": "object",
       "properties": {
         "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "DataBoxEdge Device Properties",
-          "$ref": "#/definitions/SystemData"
+          "readOnly": true
         },
         "dataBoxEdgeDeviceStatus": {
           "description": "The status of the Data Box Edge/Gateway device.",
@@ -5092,6 +5377,7 @@
             "Maintenance"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "DataBoxEdgeDeviceStatus",
             "modelAsString": true
@@ -5178,7 +5464,8 @@
             "x-ms-enum": {
               "name": "RoleTypes",
               "modelAsString": true
-            }
+            },
+            "x-ms-identifiers": []
           },
           "readOnly": true
         },
@@ -5232,7 +5519,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -5272,7 +5560,11 @@
             "RCA_Small",
             "RCA_Large",
             "RDC",
-            "Management"
+            "Management",
+            "EP2_64_Mx1_W",
+            "EP2_128_GPU1_Mx1_W",
+            "EP2_256_GPU2_Mx1",
+            "EdgeMR_TCP"
           ],
           "type": "string",
           "readOnly": true,
@@ -5315,7 +5607,8 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "apiVersions": {
           "description": "The API versions in which Sku is available.",
@@ -5324,7 +5617,8 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "locationInfo": {
           "description": "Availability of the Sku for the location/zone/site.",
@@ -5405,7 +5699,8 @@
               "modelAsString": true
             }
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "capabilities": {
           "description": "The capability info of the SKU.",
@@ -5484,6 +5779,104 @@
         }
       }
     },
+    "DeviceCapacityInfo": {
+      "description": "Object for Capturing DeviceCapacityInfo",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMBaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeviceCapacityInfoProperties",
+          "description": "The device capacity properties.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to device capacity info.",
+          "readOnly": true
+        }
+      }
+    },
+    "DeviceCapacityInfoProperties": {
+      "description": "The properties of Device Capacity Info",
+      "type": "object",
+      "properties": {
+        "timeStamp": {
+          "format": "date-time",
+          "description": "Timestamp of request in UTC",
+          "type": "string"
+        },
+        "clusterStorageCapacityInfo": {
+          "$ref": "#/definitions/ClusterStorageViewData",
+          "description": "Cluster capacity data for storage resources (CSV)."
+        },
+        "clusterComputeCapacityInfo": {
+          "$ref": "#/definitions/ClusterCapacityViewData",
+          "description": "Cluster capacity data for compute resources (Memory and GPU)."
+        },
+        "nodeCapacityInfos": {
+          "description": "The dictionary of individual node names and node capacities in the cluster.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/HostCapacity"
+          }
+        }
+      }
+    },
+    "DeviceCapacityRequestInfo": {
+      "description": "Object for Capturing DeviceCapacityRequestInfo",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeviceCapacityRequestInfoProperties",
+          "description": "The properties of the Device Capacity Request.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to device capacity request",
+          "readOnly": true
+        }
+      }
+    },
+    "DeviceCapacityRequestInfoProperties": {
+      "description": "Properties of Device Capacity Request Info containing VM's to be checked and their corresponding results.",
+      "required": [
+        "vmPlacementQuery"
+      ],
+      "type": "object",
+      "properties": {
+        "vmPlacementQuery": {
+          "description": "Array containing the sizes of the VMs for checking if its feasible to create them on the appliance.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "x-ms-identifiers": []
+        },
+        "vmPlacementResults": {
+          "description": "Array of the VMs of the sizes in VmSizes can be provisioned on the appliance.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VmPlacementRequestResult"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "DiagnosticProactiveLogCollectionSettings": {
       "description": "The diagnostic proactive log collection settings of a device.",
       "required": [
@@ -5496,14 +5889,15 @@
         }
       ],
       "properties": {
-        "systemData": {
-          "description": "DiagnosticProactiveLogCollectionSettings",
-          "$ref": "#/definitions/SystemData"
-        },
         "properties": {
           "$ref": "#/definitions/ProactiveLogCollectionSettingsProperties",
           "description": "Properties of the diagnostic proactive log collection settings.",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of DiagnosticProactiveLogCollectionSettings",
+          "readOnly": true
         }
       }
     },
@@ -5519,14 +5913,15 @@
         }
       ],
       "properties": {
-        "systemData": {
-          "description": "DiagnosticRemoteSupportSettings",
-          "$ref": "#/definitions/SystemData"
-        },
         "properties": {
           "$ref": "#/definitions/DiagnosticRemoteSupportSettingsProperties",
           "description": "Properties of the remote support  settings.",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Represents resource creation and updation time",
+          "readOnly": true
         }
       }
     },
@@ -5713,12 +6108,52 @@
         },
         "privateKey": {
           "description": "Gets or sets base64 encoded private part of the certificate,\r\nneeded to form the activation key",
-          "x-ms-secret": true,
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "expiryTimeInUTC": {
           "description": "Gets or sets expiry time in UTC",
           "type": "string"
+        }
+      }
+    },
+    "HostCapacity": {
+      "description": "Host Capacity Data.",
+      "type": "object",
+      "properties": {
+        "hostName": {
+          "description": "The name of the host.",
+          "type": "string"
+        },
+        "effectiveAvailableMemoryMbOnHost": {
+          "format": "int64",
+          "description": "The available memory on the host accounting for VM placement size and any host VM reservations.",
+          "type": "integer"
+        },
+        "availableGpuCount": {
+          "format": "int32",
+          "description": "The available amount of GPUs on the host to use after accounting for GPUS used by reservations on the host.",
+          "type": "integer"
+        },
+        "vmUsedMemory": {
+          "description": "The VM used memory per VmId.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/VmMemory"
+          }
+        },
+        "gpuType": {
+          "description": "The GPU type of the VM.",
+          "type": "string"
+        },
+        "numaNodesData": {
+          "description": "The numa nodes information for Hpn VMs.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NumaNodeData"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6154,7 +6589,8 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "code": {
           "description": "The code intended for programmatic access.",
@@ -6299,7 +6735,7 @@
       }
     },
     "KubernetesRole": {
-      "description": "Kubernetes role.",
+      "description": "The limited preview of Kubernetes Cluster Management from the Azure supports:\r\n1. Using a simple turn-key option in Azure Portal, deploy a Kubernetes cluster on your Azure Stack Edge device. \r\n2. Configure Kubernetes cluster running on your device with Arc enabled Kubernetes with a click of a button in the Azure Portal. \r\n Azure Arc enables organizations to view, manage, and govern their on-premises Kubernetes clusters using the Azure Portal, command line tools, and APIs.\r\n3. Easily configure Persistent Volumes using SMB and NFS shares for storing container data. \r\n For more information, refer to the document here: https://databoxupdatepackages.blob.core.windows.net/documentation/Microsoft-Azure-Stack-Edge-K8-Cloud-Management-20210323.pdf \r\n Or Demo: https://databoxupdatepackages.blob.core.windows.net/documentation/Microsoft-Azure-Stack-Edge-K8S-Cloud-Management-20210323.mp4\r\n By using this feature, you agree to the preview legal terms. See the https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/",
       "required": [
         "kind"
       ],
@@ -6880,14 +7316,15 @@
         }
       ],
       "properties": {
-        "systemData": {
-          "description": "MonitoringConfiguration on ASE device",
-          "$ref": "#/definitions/SystemData"
-        },
         "properties": {
           "$ref": "#/definitions/MonitoringMetricConfigurationProperties",
           "description": "The metric setting properties.",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of MonitoringConfiguration",
+          "readOnly": true
         }
       }
     },
@@ -6902,7 +7339,8 @@
           "items": {
             "$ref": "#/definitions/MonitoringMetricConfiguration"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link to the next set of results.",
@@ -7088,7 +7526,8 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
@@ -7127,15 +7566,16 @@
         }
       ],
       "properties": {
-        "systemData": {
-          "description": "NetworkSettings on ASE device",
-          "$ref": "#/definitions/SystemData"
-        },
         "properties": {
           "$ref": "#/definitions/NetworkSettingsProperties",
           "description": "The properties of network settings of a device.",
           "readOnly": true,
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of NetworkSettings",
+          "readOnly": true
         }
       }
     },
@@ -7222,7 +7662,8 @@
           "items": {
             "$ref": "#/definitions/Node"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link to the next set of results.",
@@ -7280,6 +7721,59 @@
           "description": "Guid instance id of the node",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "NumaNodeData": {
+      "description": "NUMA node data.",
+      "type": "object",
+      "properties": {
+        "numaNodeIndex": {
+          "format": "int32",
+          "description": "The NUMA node index.",
+          "type": "integer"
+        },
+        "totalMemoryInMb": {
+          "format": "int64",
+          "description": "The total memory on the NUMA node.",
+          "type": "integer"
+        },
+        "logicalCoreCountPerCore": {
+          "format": "int32",
+          "description": "The logical cores per core count.",
+          "type": "integer"
+        },
+        "effectiveAvailableMemoryInMb": {
+          "format": "int64",
+          "description": "The effective available memory on the NUMA node in MB.",
+          "type": "integer"
+        },
+        "freeVCpuIndexesForHpn": {
+          "description": "The free VCPU indices for the Hpn VMs.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "vCpuIndexesForHpn": {
+          "description": "The VCPU indices for Hpn VMs",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "vCpuIndexesForRoot": {
+          "description": "The VCPU indices for the root.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
         }
       }
     },
@@ -7375,9 +7869,15 @@
         }
       ],
       "properties": {
+        "kind": {
+          "description": "It specify the order api version.",
+          "type": "string",
+          "readOnly": true
+        },
         "systemData": {
-          "description": "Order configured on ASE resource",
-          "$ref": "#/definitions/SystemData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of Order",
+          "readOnly": true
         },
         "properties": {
           "$ref": "#/definitions/OrderProperties",
@@ -7397,7 +7897,8 @@
           "items": {
             "$ref": "#/definitions/Order"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link to the next set of results.",
@@ -7408,11 +7909,17 @@
     },
     "OrderProperties": {
       "description": "Order properties.",
-      "required": [
-        "contactInformation"
-      ],
       "type": "object",
+      "required": [
+        "contactInformation",
+        "shippingAddress"
+      ],
       "properties": {
+        "orderId": {
+          "description": "It specify the order resource id.",
+          "type": "string",
+          "readOnly": true
+        },
         "contactInformation": {
           "$ref": "#/definitions/ContactDetails",
           "description": "The contact details."
@@ -7784,29 +8291,6 @@
         }
       }
     },
-    "ResourceTypeSku": {
-      "description": "Resource type Sku object",
-      "type": "object",
-      "properties": {
-        "resourceType": {
-          "description": "The resource type.",
-          "type": "string",
-          "readOnly": true
-        },
-        "skus": {
-          "description": "The skus.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SkuInformation"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ],
-          "readOnly": true
-        }
-      }
-    },
     "Role": {
       "description": "Compute role.",
       "required": [
@@ -7837,8 +8321,9 @@
           }
         },
         "systemData": {
-          "description": "Role configured on ASE resource",
-          "$ref": "#/definitions/SystemData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of Role",
+          "readOnly": true
         }
       },
       "discriminator": "kind"
@@ -7854,7 +8339,8 @@
           "items": {
             "$ref": "#/definitions/Role"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link to the next set of results.",
@@ -7951,14 +8437,15 @@
         }
       ],
       "properties": {
-        "systemData": {
-          "description": "Share on ASE device",
-          "$ref": "#/definitions/SystemData"
-        },
         "properties": {
           "$ref": "#/definitions/ShareProperties",
           "description": "The share properties.",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of Share",
+          "readOnly": true
         }
       }
     },
@@ -8000,7 +8487,8 @@
           "items": {
             "$ref": "#/definitions/Share"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link to the next set of results.",
@@ -8148,7 +8636,11 @@
             "RCA_Small",
             "RCA_Large",
             "RDC",
-            "Management"
+            "Management",
+            "EP2_64_Mx1_W",
+            "EP2_128_GPU1_Mx1_W",
+            "EP2_256_GPU2_Mx1",
+            "EdgeMR_TCP"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -8207,106 +8699,6 @@
         }
       }
     },
-    "SkuInformation": {
-      "description": "Sku information",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The sku name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "tier": {
-          "description": "The sku tier.",
-          "type": "string",
-          "readOnly": true
-        },
-        "kind": {
-          "description": "The sku kind.",
-          "type": "string",
-          "readOnly": true
-        },
-        "family": {
-          "description": "The Sku family.",
-          "type": "string",
-          "readOnly": true
-        },
-        "costs": {
-          "description": "The pricing info of the Sku.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SkuCost"
-          },
-          "x-ms-identifiers": [
-            "meterId"
-          ],
-          "readOnly": true
-        },
-        "locations": {
-          "description": "The locations where Sku is available.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "locationInfo": {
-          "description": "The locations where Sku is available with zones and sites info",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SkuLocationInfo"
-          },
-          "x-ms-identifiers": [
-            "location"
-          ],
-          "readOnly": true
-        },
-        "requiredQuotaIds": {
-          "description": "The required quotaIds for the sku to be available.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "requiredFeatures": {
-          "description": "The required features for the sku to be available.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "SkuInformationList": {
-      "description": "List of SKU Information objects",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "List of ResourceTypeSku objects",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceTypeSku"
-          },
-          "x-ms-identifiers": [
-            "resourceType"
-          ],
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Links to the next set of results",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "SkuLocationInfo": {
       "description": "The location info.",
       "type": "object",
@@ -8323,7 +8715,8 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "sites": {
           "description": "The sites.",
@@ -8332,7 +8725,8 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
@@ -8348,14 +8742,15 @@
         }
       ],
       "properties": {
-        "systemData": {
-          "description": "StorageAccount object on ASE device",
-          "$ref": "#/definitions/SystemData"
-        },
         "properties": {
           "$ref": "#/definitions/StorageAccountProperties",
           "description": "The Storage Account properties.",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of StorageAccount",
+          "readOnly": true
         }
       }
     },
@@ -8371,14 +8766,15 @@
         }
       ],
       "properties": {
-        "systemData": {
-          "description": "StorageAccountCredential object",
-          "$ref": "#/definitions/SystemData"
-        },
         "properties": {
           "$ref": "#/definitions/StorageAccountCredentialProperties",
           "description": "The storage account credential properties.",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of StorageAccountCredential",
+          "readOnly": true
         }
       }
     },
@@ -8393,7 +8789,8 @@
           "items": {
             "$ref": "#/definitions/StorageAccountCredential"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link to the next set of results.",
@@ -8472,7 +8869,8 @@
           "items": {
             "$ref": "#/definitions/StorageAccount"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link to the next set of results.",
@@ -8580,12 +8978,12 @@
       "properties": {
         "minimumTimeStamp": {
           "format": "date-time",
-          "description": "Start of the timespan of the log collection",
+          "description": "MinimumTimeStamp from where logs need to be collected",
           "type": "string"
         },
         "maximumTimeStamp": {
           "format": "date-time",
-          "description": "MaximumTimeStamp until where logs need to be collected",
+          "description": "Start of the timespan of the log collection",
           "type": "string"
         },
         "include": {
@@ -8691,10 +9089,6 @@
         }
       ],
       "properties": {
-        "systemData": {
-          "description": "Trigger in DataBoxEdge Resource",
-          "$ref": "#/definitions/SystemData"
-        },
         "kind": {
           "description": "Trigger Kind.",
           "enum": [
@@ -8706,6 +9100,11 @@
             "name": "TriggerEventType",
             "modelAsString": true
           }
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of Trigger",
+          "readOnly": true
         }
       },
       "discriminator": "kind"
@@ -8721,7 +9120,8 @@
           "items": {
             "$ref": "#/definitions/Trigger"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link to the next set of results.",
@@ -8915,14 +9315,15 @@
         }
       ],
       "properties": {
-        "systemData": {
-          "description": "UpdateSummary Result",
-          "$ref": "#/definitions/SystemData"
-        },
         "properties": {
           "$ref": "#/definitions/UpdateSummaryProperties",
           "description": "The device update information summary.",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of UpdateSummary",
+          "readOnly": true
         }
       }
     },
@@ -9199,14 +9600,15 @@
         }
       ],
       "properties": {
-        "systemData": {
-          "description": "User in DataBoxEdge Resource",
-          "$ref": "#/definitions/SystemData"
-        },
         "properties": {
           "$ref": "#/definitions/UserProperties",
           "description": "The storage account credential properties.",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of User",
+          "readOnly": true
         }
       }
     },
@@ -9248,7 +9650,8 @@
           "items": {
             "$ref": "#/definitions/User"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link to the next set of results.",
@@ -9292,6 +9695,48 @@
             "name": "UserType",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "VmMemory": {
+      "description": "VmMemory Data.",
+      "type": "object",
+      "properties": {
+        "startupMemoryMB": {
+          "format": "int64",
+          "description": "The total amount of RAM in the virtual machine, as seen by the guest  operating system. For a virtual machine with dynamic memory enabled, this represents the initial memory available at startup.",
+          "type": "integer"
+        },
+        "currentMemoryUsageMB": {
+          "format": "int64",
+          "description": "The current memory used by the virtual machine.",
+          "type": "integer"
+        }
+      }
+    },
+    "VmPlacementRequestResult": {
+      "description": "List of VM sizes being checked for creation on appliance along with corresponding result.",
+      "type": "object",
+      "properties": {
+        "vmSize": {
+          "description": "List of VM sizes being checked.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isFeasible": {
+          "description": "Boolean value indicating if the VM(s) in VmSize can be created.",
+          "type": "boolean"
+        },
+        "messageCode": {
+          "description": "MessageCode indicating reason for success or failure.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Localized message to be displayed to the user to explain the check result.",
+          "type": "string"
         }
       }
     }
