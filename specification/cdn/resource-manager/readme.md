@@ -40,7 +40,6 @@ input-file:
   - Microsoft.Cdn/preview/2022-01-01-preview/cdn.json
   - Microsoft.Cdn/preview/2022-01-01-preview/cdnwebapplicationfirewall.json
 ```
-
 ### Tag: package-2021-06
 
 These settings apply only when `--tag=package-2021-06` is specified on the command line.
