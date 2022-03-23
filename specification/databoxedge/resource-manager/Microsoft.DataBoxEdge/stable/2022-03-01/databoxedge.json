@@ -7915,6 +7915,11 @@
         "shippingAddress"
       ],
       "properties": {
+        "orderId": {
+          "description": "It specify the order resource id.",
+          "type": "string",
+          "readOnly": true
+        },
         "contactInformation": {
           "$ref": "#/definitions/ContactDetails",
           "description": "The contact details."
@@ -7926,11 +7931,6 @@
         "currentStatus": {
           "$ref": "#/definitions/OrderStatus",
           "description": "Current status of the order.",
-          "readOnly": true
-        },
-        "orderId": {
-          "description": "It specify the order resource id.",
-          "type": "string",
           "readOnly": true
         },
         "orderHistory": {
