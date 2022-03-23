@@ -1,27 +1,18 @@
 {
   "parameters": {
-    "resourceName": "myHub",
+    "resourceName": "testHub",
     "resourceGroupName": "myResourceGroup",
     "api-version": "2021-07-02-preview",
-    "subscriptionId": "91d12660-3dec-467a-be2a-213b5544ddc0",
-    "location": "East US",
-    "type": "Microsoft.Devices/IotHubs",
-    "IotHubTags": {
-      "tags": {
-        "foo": "bar"
-      }
-    }
+    "subscriptionId": "91d12660-3dec-467a-be2a-213b5544ddc0"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/ae24ff83-d2ca-4fc8-9717-05dae4bba489/resourceGroups/myResourceGroup/providers/Microsoft.Devices/IotHubs/testHub",
+        "id": "/subscriptions/91d12660-3dec-467a-be2a-213b5544ddc0/resourceGroups/myResourceGroup/providers/Microsoft.Devices/IotHubs/testHub",
         "name": "testHub",
         "type": "Microsoft.Devices/IotHubs",
         "location": "centraluseuap",
-        "tags": {
-          "foo": "bar"
-        },
+        "tags": {},
         "etag": "AAAAAAFD6M4=",
         "properties": {
           "state": "Active",
@@ -69,6 +60,7 @@
           },
           "routing": {
             "endpoints": {
+              "azureDigitalTwinsInstances": [],
               "serviceBusQueues": [],
               "serviceBusTopics": [],
               "eventHubs": [],
@@ -76,7 +68,6 @@
             },
             "routes": [],
             "fallbackRoute": {
-              "name": "$fallback",
               "source": "DeviceMessages",
               "condition": "true",
               "endpointNames": [
@@ -109,7 +100,23 @@
               "maxDeliveryCount": 10
             }
           },
-          "features": "None"
+          "features": "None",
+          "deviceStreams": {
+            "streamingEndpoints": [
+              "https://streams.azure-devices-int.net:9443"
+            ]
+          },
+          "locations": [
+            {
+              "location": "West US",
+              "role": "primary"
+            },
+            {
+              "location": "East US",
+              "role": "secondary"
+            }
+          ],
+          "minTlsVersion": "1.2"
         },
         "sku": {
           "name": "S1",

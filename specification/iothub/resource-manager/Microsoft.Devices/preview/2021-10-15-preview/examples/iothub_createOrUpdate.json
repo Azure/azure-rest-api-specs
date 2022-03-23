@@ -3,12 +3,92 @@
     "resourceName": "testHub",
     "resourceGroupName": "myResourceGroup",
     "api-version": "2021-07-02-preview",
-    "subscriptionId": "91d12660-3dec-467a-be2a-213b5544ddc0"
+    "subscriptionId": "91d12660-3dec-467a-be2a-213b5544ddc0",
+    "iotHubDescription": {
+      "location": "centraluseuap",
+      "tags": {},
+      "etag": "AAAAAAFD6M4=",
+      "properties": {
+        "ipFilterRules": [],
+        "networkRuleSets": {
+          "defaultAction": "Deny",
+          "applyToBuiltInEventHubEndpoint": true,
+          "ipRules": [
+            {
+              "filterName": "rule1",
+              "action": "Allow",
+              "ipMask": "131.117.159.53"
+            },
+            {
+              "filterName": "rule2",
+              "action": "Allow",
+              "ipMask": "157.55.59.128/25"
+            }
+          ]
+        },
+        "eventHubEndpoints": {
+          "events": {
+            "retentionTimeInDays": 1,
+            "partitionCount": 2
+          }
+        },
+        "routing": {
+          "endpoints": {
+            "azureDigitalTwinsInstances": [],
+            "serviceBusQueues": [],
+            "serviceBusTopics": [],
+            "eventHubs": [],
+            "storageContainers": []
+          },
+          "routes": [],
+          "fallbackRoute": {
+            "name": "$fallback",
+            "source": "DeviceMessages",
+            "condition": "true",
+            "endpointNames": [
+              "events"
+            ],
+            "isEnabled": true
+          }
+        },
+        "storageEndpoints": {
+          "$default": {
+            "sasTtlAsIso8601": "PT1H",
+            "connectionString": "",
+            "containerName": ""
+          }
+        },
+        "messagingEndpoints": {
+          "fileNotifications": {
+            "lockDurationAsIso8601": "PT1M",
+            "ttlAsIso8601": "PT1H",
+            "maxDeliveryCount": 10
+          }
+        },
+        "enableFileUploadNotifications": false,
+        "cloudToDevice": {
+          "maxDeliveryCount": 10,
+          "defaultTtlAsIso8601": "PT1H",
+          "feedback": {
+            "lockDurationAsIso8601": "PT1M",
+            "ttlAsIso8601": "PT1H",
+            "maxDeliveryCount": 10
+          }
+        },
+        "features": "None",
+        "minTlsVersion": "1.2",
+        "enableDataResidency": true
+      },
+      "sku": {
+        "name": "S1",
+        "capacity": 1
+      }
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/91d12660-3dec-467a-be2a-213b5544ddc0/resourceGroups/myResourceGroup/providers/Microsoft.Devices/IotHubs/testHub",
+        "id": "/subscriptions/ae24ff83-d2ca-4fc8-9717-05dae4bba489/resourceGroups/myResourceGroup/providers/Microsoft.Devices/IotHubs/testHub",
         "name": "testHub",
         "type": "Microsoft.Devices/IotHubs",
         "location": "centraluseuap",
@@ -60,6 +140,7 @@
           },
           "routing": {
             "endpoints": {
+              "azureDigitalTwinsInstances": [],
               "serviceBusQueues": [],
               "serviceBusTopics": [],
               "eventHubs": [],
@@ -67,6 +148,7 @@
             },
             "routes": [],
             "fallbackRoute": {
+              "name": "$fallback",
               "source": "DeviceMessages",
               "condition": "true",
               "endpointNames": [
@@ -99,7 +181,9 @@
               "maxDeliveryCount": 10
             }
           },
-          "features": "None"
+          "features": "None",
+          "minTlsVersion": "1.2",
+          "enableDataResidency": true
         },
         "sku": {
           "name": "S1",
@@ -111,10 +195,9 @@
         }
       }
     },
-    "204": {},
-    "202": {
+    "201": {
       "body": {
-        "id": "/subscriptions/91d12660-3dec-467a-be2a-213b5544ddc0/resourceGroups/myResourceGroup/providers/Microsoft.Devices/IotHubs/testHub",
+        "id": "/subscriptions/ae24ff83-d2ca-4fc8-9717-05dae4bba489/resourceGroups/myResourceGroup/providers/Microsoft.Devices/IotHubs/testHub",
         "name": "testHub",
         "type": "Microsoft.Devices/IotHubs",
         "location": "centraluseuap",
@@ -166,6 +249,7 @@
           },
           "routing": {
             "endpoints": {
+              "azureDigitalTwinsInstances": [],
               "serviceBusQueues": [],
               "serviceBusTopics": [],
               "eventHubs": [],
@@ -173,6 +257,7 @@
             },
             "routes": [],
             "fallbackRoute": {
+              "name": "$fallback",
               "source": "DeviceMessages",
               "condition": "true",
               "endpointNames": [
@@ -205,7 +290,9 @@
               "maxDeliveryCount": 10
             }
           },
-          "features": "None"
+          "features": "None",
+          "minTlsVersion": "1.2",
+          "enableDataResidency": true
         },
         "sku": {
           "name": "S1",
@@ -216,9 +303,6 @@
           "createdAt": "2021-01-30T00:28:38.963Z"
         }
       }
-    },
-    "404": {
-      "body": {}
     }
   }
 }
