@@ -6044,7 +6044,10 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/PolicyGetParameters"
+          "$ref": "#/definitions/AFDStateProperties"
+        },
+        {
+          "$ref": "./cdn.json#/definitions/ProxyResource"
         }
       ],
       "required": [
@@ -6055,6 +6058,14 @@
       "properties": {
         "PolicyData": {
           "description": "Policy to be applied",
+          "type": "string"
+        },
+        "PolicyVersion": {
+          "description": "Schema version of the policy",
+          "type": "string"
+        },
+        "ServiceType": {
+          "description": "Service type of the policy",
           "type": "string"
         }
       }
