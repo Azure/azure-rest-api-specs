@@ -42,11 +42,11 @@ directive:
     reason: There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.
 ```
 
-### Tag: package-2022-03-part1
+### Tag: package-2022-03-preview-part1
 
-These settings apply only when `--tag=package-2022-03-part1` is specified on the command line
+These settings apply only when `--tag=package-2022-03-preview-part1` is specified on the command line
 
-``` yaml $(tag) == 'package-2022-03-part1'
+``` yaml $(tag) == 'package-2022-03-preview-part1'
 input-file:
 - Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
 - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
@@ -60,11 +60,11 @@ input-file:
 - Microsoft.Insights/stable/2019-03-01/metricBaselines_API.json
 ```
 
-### Tag: package-2022-03-part2
+### Tag: package-2022-03-preview-part2
 
-These settings apply only when `--tag=package-2022-03-part2` is specified on the command line
+These settings apply only when `--tag=package-2022-03-preview-part2` is specified on the command line
 
-``` yaml $(tag) == 'package-2022-03-part2'
+``` yaml $(tag) == 'package-2022-03-preview-part2'
 input-file:
 - Microsoft.Insights/preview/2021-05-01-preview/autoscale_API.json
 - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettings_API.json
@@ -75,42 +75,41 @@ input-file:
 - Microsoft.Insights/stable/2021-09-01/actionGroups_API.json 
 ```
 
-### Tag: package-2022-03-part3
+### Tag: package-2022-03-preview-part3
 
-These settings apply only when `--tag=package-2022-03-part3` is specified on the command line
+These settings apply only when `--tag=package-2022-03-preview-part3` is specified on the command line
 
-``` yaml $(tag) == 'package-2022-03-part3'
+``` yaml $(tag) == 'package-2022-03-preview-part3'
 input-file:
 - Microsoft.Insights/stable/2020-10-01/activityLogAlerts_API.json
 ```
 
-### Tag: package-2022-03-part4
+### Tag: package-2022-03-preview-part4
 
-These settings apply only when `--tag=package-2022-03-part4` is specified on the command line
+These settings apply only when `--tag=package-2022-03-preview-part4` is specified on the command line
 
-``` yaml $(tag) == 'package-2022-03-part4'
+``` yaml $(tag) == 'package-2022-03-preview-part4'
 input-file:
 - Microsoft.Insights/stable/2021-05-01/metricDefinitions_API.json
 - Microsoft.Insights/stable/2021-05-01/metrics_API.json
 - Microsoft.Insights/stable/2021-05-01/operations_API.json
 ```
 
-### Tag: package-2022-03-part5
+### Tag: package-2022-03-preview-part5
 
-These settings apply only when `--tag=package-2022-03-part5` is specified on the command line
+These settings apply only when `--tag=package-2022-03-preview-part5` is specified on the command line
 
-``` yaml $(tag) == 'package-2022-03-part5'
+``` yaml $(tag) == 'package-2022-03-preview-part5'
 input-file:
 - Microsoft.Insights/stable/2021-08-01/scheduledQueryRule_API.json
 ```
 
-### Tag: package-2022-03-datacollection
+### Tag: package-2022-03-preview-datacollection
 
-These settings apply only when `--tag=package-2022-03-datacollection` is specified on the command line
+These settings apply only when `--tag=package-2022-03-preview-datacollection` is specified on the command line
 
-``` yaml $(tag) == 'package-2022-03-datacollection'
+``` yaml $(tag) == 'package-2022-03-preview-datacollection'
 input-file:
-
 - Microsoft.Insights/preview/2021-09-01-preview/dataCollectionEndpoints_API.json
 - Microsoft.Insights/preview/2021-09-01-preview/dataCollectionRuleAssociations_API.json
 - Microsoft.Insights/preview/2021-09-01-preview/dataCollectionRules_API.json
