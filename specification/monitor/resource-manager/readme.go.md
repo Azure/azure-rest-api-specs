@@ -144,7 +144,7 @@ These settings apply only when `--tag=package-2022-03-preview-datacollection --g
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2022-03-preview-datacollection' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/package-2022-03-26/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2022-03-26-preview/$(namespace)
 ```
 
 ### Tag: package-2022-03-preview-part5 and go
@@ -153,7 +153,7 @@ These settings apply only when `--tag=package-2022-03-preview-part5 --go` is spe
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2022-03-preview-part5' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/package-2022-03-25/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2022-03-25-preview/$(namespace)
 ```
 
 ### Tag: package-2022-03-preview-part4 and go
@@ -162,7 +162,7 @@ These settings apply only when `--tag=package-2022-03-preview-part4 --go` is spe
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2022-03-preview-part4' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/package-2022-03-24/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2022-03-24-preview/$(namespace)
 ```
 
 ### Tag: package-2022-03-preview-part3 and go
@@ -171,7 +171,7 @@ These settings apply only when `--tag=package-2022-03-preview-part3 --go` is spe
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2022-03-preview-part3' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/package-2022-03-23/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2022-03-23-preview/$(namespace)
 ```
 
 ### Tag: package-2022-03-preview-part2 and go
@@ -180,7 +180,7 @@ These settings apply only when `--tag=package-2022-03-preview-part2 --go` is spe
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2022-03-preview-part2' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/package-2022-03-22/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2022-03-22-preview/$(namespace)
 ```
 
 ### Tag: package-2022-03-preview-part1 and go
@@ -189,5 +189,5 @@ These settings apply only when `--tag=package-2022-03-preview-part1 --go` is spe
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2022-03-preview-part1' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/package-2022-03-21/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2022-03-21-preview/$(namespace)
 ```
