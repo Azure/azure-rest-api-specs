@@ -5770,6 +5770,10 @@
         "azureKeyVaultKms": {
           "$ref": "#/definitions/AzureKeyVaultKms",
           "description": "Azure Key Vault [key management service](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) settings for the security profile."
+        },
+        "workloadIdentity": {
+          "$ref": "#/definitions/ManagedClusterSecurityProfileWorkloadIdentity",
+          "description": "[Workload Identity](https://azure.github.io/azure-workload-identity/docs/) settings for the security profile."
         }
       },
       "description": "Security profile for the container service cluster."
@@ -5801,6 +5805,16 @@
         }
       },
       "description": "Azure Key Vault key management service settings for the security profile."
+    },
+    "ManagedClusterSecurityProfileWorkloadIdentity": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether to enable Workload Identity"
+        }
+      },
+      "description": "Workload Identity settings for the security profile."
     },
     "CreationData": {
       "description": "Data used when creating a target resource from a source resource.",
