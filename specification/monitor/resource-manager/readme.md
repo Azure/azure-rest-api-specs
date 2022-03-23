@@ -75,31 +75,31 @@ input-file:
 - Microsoft.Insights/stable/2021-09-01/actionGroups_API.json 
 ```
 
-### Tag: package-2022-03-preview-part3
+### Tag: package-2022-03-part3
 
-These settings apply only when `--tag=package-2022-03-preview-part3` is specified on the command line
+These settings apply only when `--tag=package-2022-03-part3` is specified on the command line
 
-``` yaml $(tag) == 'package-2022-03-preview-part3'
+``` yaml $(tag) == 'package-2022-03-part3'
 input-file:
 - Microsoft.Insights/stable/2020-10-01/activityLogAlerts_API.json
 ```
 
-### Tag: package-2022-03-preview-part4
+### Tag: package-2022-03-part4
 
-These settings apply only when `--tag=package-2022-03-preview-part4` is specified on the command line
+These settings apply only when `--tag=package-2022-03-part4` is specified on the command line
 
-``` yaml $(tag) == 'package-2022-03-preview-part4'
+``` yaml $(tag) == 'package-2022-03-part4'
 input-file:
 - Microsoft.Insights/stable/2021-05-01/metricDefinitions_API.json
 - Microsoft.Insights/stable/2021-05-01/metrics_API.json
 - Microsoft.Insights/stable/2021-05-01/operations_API.json
 ```
 
-### Tag: package-2022-03-preview-part5
+### Tag: package-2022-03-part5
 
-These settings apply only when `--tag=package-2022-03-preview-part5` is specified on the command line
+These settings apply only when `--tag=package-2022-03-part5` is specified on the command line
 
-``` yaml $(tag) == 'package-2022-03-preview-part5'
+``` yaml $(tag) == 'package-2022-03-part5'
 input-file:
 - Microsoft.Insights/stable/2021-08-01/scheduledQueryRule_API.json
 ```
