@@ -40,7 +40,9 @@ batch:
   - tag: package-2020-10-only
   - tag: package-2021-07
   - tag: package-2021-09
-  - tag: package-2022-03
+  - tag: package-2022-03-beforecommontypes
+  - tag: package-2022-03-track2ready
+  - tag: package-2022-03-datacollection
 ```
 
 ### Tag: package-2017-09 and go
