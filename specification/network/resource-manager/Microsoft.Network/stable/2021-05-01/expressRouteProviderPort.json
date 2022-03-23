@@ -67,9 +67,6 @@
           "ExpressRouteProviderPortList": {
             "$ref": "./examples/ExpressRouteProviderPortList.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -79,7 +76,7 @@
           "ExpressRouteProviderPorts"
         ],
         "operationId": "ExpressRouteProviderPortsLocation_List",
-        "description": "Retrieves all the ExpressRouteProviderPorts in a subscription.",
+        "description": "Retrieves all the ExpressRouteProviderPorts in a subscription for a particular location.",
         "parameters": [
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -88,7 +85,7 @@
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "locationName",
+            "name": "location",
             "in": "path",
             "required": true,
             "type": "string",
@@ -113,12 +110,48 @@
           "ExpressRouteProviderPortList": {
             "$ref": "./examples/ExpressRouteProviderPortLocationList.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
-    }    
+    },
+   "/subscriptions/{subscriptionId}/providers/Microsoft.Network/expressRouteProviderPorts/{providerport}": {
+      "get": {
+        "tags": [
+          "ExpressRouteProviderPorts"
+        ],
+        "operationId": "ExpressRouteProviderPort",
+        "description": "Retrieves detail of a provider port.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ProviderPortParameter"
+          },
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of ExpressRouteProviderPort resources. If there are no ports for the provider, an empty list is returned.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteProviderPort"
+            }
+          },
+          "default": { 
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteProviderPort": {
+            "$ref": "./examples/ExpressRouteProviderPort.json"
+          }
+        }
+      }
+    },
   },
 	"definitions": {
     "ExpressRouteProviderPortProperties": {
