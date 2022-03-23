@@ -83,7 +83,7 @@
             }
           },
           "204": {
-            "description": "Success"
+            "description": "No Content"
           }
         },
         "x-ms-examples": {
@@ -123,7 +123,7 @@
             }
           },
           "204": {
-            "description": "Success"
+            "description": "No Content"
           }
         },
         "x-ms-examples": {
@@ -133,13 +133,13 @@
         }
       }
     },
-    "/teamsUser/:getToken": {
+    "/teamsUser/:exchangeAccessToken": {
       "post": {
         "tags": [
           "TeamsUser"
         ],
         "summary": "Exchange an Azure Active Directory (Azure AD) access token of a Teams user for a new Communication Identity access token with a matching expiration time.",
-        "operationId": "CommunicationIdentity_GetTeamsUserAccessToken",
+        "operationId": "CommunicationIdentity_ExchangeTeamsUserAccessToken",
         "consumes": [
           "application/json"
         ],
@@ -156,7 +156,7 @@
             "description": "Request payload for the token exchange.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TeamsUserGetTokenRequest"
+              "$ref": "#/definitions/TeamsUserExchangeTokenRequest"
             }
           }
         ],
@@ -176,7 +176,7 @@
         },
         "x-ms-examples": {
           "Exchange a Teams user access token": {
-            "$ref": "./examples/GetTeamsUserAccessToken.json"
+            "$ref": "./examples/ExchangeTeamsUserAccessToken.json"
           }
         }
       }
@@ -324,7 +324,7 @@
         "modelAsString": true
       }
     },
-    "TeamsUserGetTokenRequest": {
+    "TeamsUserExchangeTokenRequest": {
       "required": [
         "appId",
         "token",
