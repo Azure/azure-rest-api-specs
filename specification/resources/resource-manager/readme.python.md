@@ -573,3 +573,9 @@ namespace: azure.mgmt.resource.templatespecs.v2021_05_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/templatespecs/v2021_05_01
 ```
 
+``` yaml $(python)
+modelerfour:
+  lenient-model-deduplication: true
+```
+
+
