@@ -1113,14 +1113,14 @@
             "$ref": "#/parameters/EnvironmentNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
           },
           {
             "name": "privateEndpointConnection",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "#/definitions/PrivateEndpointConnection"
             },
             "description": "The definition of the private endpoint connection to update."
           },
@@ -1132,7 +1132,7 @@
           "200": {
             "description": "The existing private endpoint connection definition was successfully updated.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -1165,7 +1165,7 @@
             "$ref": "#/parameters/EnvironmentNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1175,7 +1175,7 @@
           "200": {
             "description": "The definition of the private endpoint connection was successfully retrieved and is in the response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -1208,7 +1208,7 @@
             "$ref": "#/parameters/EnvironmentNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1264,7 +1264,7 @@
           "200": {
             "description": "The operation succeeded. The response contains the list of all private endpoint connections for the given environment.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
@@ -1309,7 +1309,7 @@
           "200": {
             "description": "The operation succeeded. The response contains the list of all supported private link resource types for the given environment.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateLinkResourceListResult"
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
@@ -1960,7 +1960,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateEndpointConnection"
+            "$ref": "#/definitions/PrivateEndpointConnection"
           },
           "description": "The list of private endpoint connections to the environment."
         }
@@ -2027,6 +2027,27 @@
           "x-ms-client-flatten": false,
           "$ref": "#/definitions/WarmStoreConfigurationProperties",
           "description": "The warm store configuration provides the details to create a warm store cache that will retain a copy of the environment's data available for faster query."
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "default": "enabled",
+          "description": "If 'enabled', public network access is allowed. If 'disabled', traffic over public interface is not allowed, and private endpoint connections would be the exclusive access method.",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        },
+        "privateEndpointConnections": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "description": "The list of private endpoint connections to the environment."
         }
       },
       "required": [
@@ -2873,6 +2894,185 @@
         }
       }
     },
+    "PrivateEndpoint": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ARM identifier for Private Endpoint"
+        }
+      },
+      "description": "The Private Endpoint resource."
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "x-ms-client-flatten": true,
+          "description": "Resource properties."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ARM identifier for Private Endpoint Connection"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "The Private Endpoint Connection resource."
+    },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
+          "description": "Provisioning state of the private endpoint connection."
+        },
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "The resource of private end point."
+        },
+        "groupIds": {
+          "$ref": "#/definitions/PrivateEndpointGroupIds",
+          "description": "The provisioning state of the private endpoint connection resource."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "description": "A collection of information about the state of the connection between service consumer and provider."
+        }
+      },
+      "required": [
+        "privateLinkServiceConnectionState"
+      ],
+      "description": "Properties of the PrivateEndpointConnectProperties."
+    },
+    "PrivateEndpointGroupIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "Private Links resource group id."
+      },
+      "description": "A list of private links resource group ids"
+    },
+    "PrivateLinkServiceConnectionState": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus",
+          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
+        },
+        "description": {
+          "type": "string",
+          "description": "The reason for approval/rejection of the connection."
+        },
+        "actionsRequired": {
+          "type": "string",
+          "description": "A message indicating if changes on the service provider require any updates on the consumer."
+        }
+      },
+      "description": "A collection of information about the state of the connection between service consumer and provider."
+    },
+    "PrivateEndpointServiceConnectionStatus": {
+      "type": "string",
+      "description": "The private endpoint connection status.",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointServiceConnectionStatus",
+        "modelAsString": true
+      }
+    },
+    "PrivateEndpointConnectionProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Creating",
+        "Deleting",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointConnectionProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "A private link resource"
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "description": "The private link resource group id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "description": "The private link resource required member names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The private link resource Private link DNS zone name."
+        }
+      },
+      "description": "Properties of a private link resource."
+    },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private endpoint connections",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        }
+      },
+      "description": "List of private endpoint connection associated with the specified storage account"
+    },
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private link resources",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        }
+      },
+      "description": "A list of private link resources"
+    },
     "CloudError": {
       "type": "object",
       "properties": {
@@ -2973,6 +3173,14 @@
       "required": true,
       "type": "string",
       "description": "The name of the Time Series Insights access policy associated with the specified environment.",
+      "x-ms-parameter-location": "method"
+    },
+    "PrivateEndpointConnectionNameParameter": {
+      "name": "privateEndpointConnectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the private endpoint connection associated with the Azure resource",
       "x-ms-parameter-location": "method"
     }
   }

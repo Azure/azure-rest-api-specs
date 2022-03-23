@@ -41,11 +41,14 @@
         },
         "authorization": {
           "description": "The requested authorization for the operation.",
-          "type": "string"
+          "$ref": "#/definitions/ResourceAuthorization"
         },
         "claims": {
           "description": "The properties of the claims.",
-          "type": "string"
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "correlationId": {
           "description": "An operation ID used for troubleshooting.",
@@ -53,7 +56,7 @@
         },
         "httpRequest": {
           "description": "The details of the operation.",
-          "type": "string"
+          "$ref": "#/definitions/ResourceHttpRequest"
         }
       }
     },
@@ -91,11 +94,14 @@
         },
         "authorization": {
           "description": "The requested authorization for the operation.",
-          "type": "string"
+          "$ref": "#/definitions/ResourceAuthorization"
         },
         "claims": {
           "description": "The properties of the claims.",
-          "type": "string"
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "correlationId": {
           "description": "An operation ID used for troubleshooting.",
@@ -103,7 +109,7 @@
         },
         "httpRequest": {
           "description": "The details of the operation.",
-          "type": "string"
+          "$ref": "#/definitions/ResourceHttpRequest"
         }
       }
     },
@@ -141,11 +147,14 @@
         },
         "authorization": {
           "description": "The requested authorization for the operation.",
-          "type": "string"
+          "$ref": "#/definitions/ResourceAuthorization"
         },
         "claims": {
           "description": "The properties of the claims.",
-          "type": "string"
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "correlationId": {
           "description": "An operation ID used for troubleshooting.",
@@ -153,7 +162,7 @@
         },
         "httpRequest": {
           "description": "The details of the operation.",
-          "type": "string"
+          "$ref": "#/definitions/ResourceHttpRequest"
         }
       }
     },
@@ -191,11 +200,14 @@
         },
         "authorization": {
           "description": "The requested authorization for the operation.",
-          "type": "string"
+          "$ref": "#/definitions/ResourceAuthorization"
         },
         "claims": {
           "description": "The properties of the claims.",
-          "type": "string"
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "correlationId": {
           "description": "An operation ID used for troubleshooting.",
@@ -203,7 +215,7 @@
         },
         "httpRequest": {
           "description": "The details of the operation.",
-          "type": "string"
+          "$ref": "#/definitions/ResourceHttpRequest"
         }
       }
     },
@@ -241,11 +253,14 @@
         },
         "authorization": {
           "description": "The requested authorization for the operation.",
-          "type": "string"
+          "$ref": "#/definitions/ResourceAuthorization"
         },
         "claims": {
           "description": "The properties of the claims.",
-          "type": "string"
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "correlationId": {
           "description": "An operation ID used for troubleshooting.",
@@ -253,7 +268,7 @@
         },
         "httpRequest": {
           "description": "The details of the operation.",
-          "type": "string"
+          "$ref": "#/definitions/ResourceHttpRequest"
         }
       }
     },
@@ -291,11 +306,14 @@
         },
         "authorization": {
           "description": "The requested authorization for the operation.",
-          "type": "string"
+          "$ref": "#/definitions/ResourceAuthorization"
         },
         "claims": {
           "description": "The properties of the claims.",
-          "type": "string"
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "correlationId": {
           "description": "An operation ID used for troubleshooting.",
@@ -303,7 +321,7 @@
         },
         "httpRequest": {
           "description": "The details of the operation.",
-          "type": "string"
+          "$ref": "#/definitions/ResourceHttpRequest"
         }
       }
     },
@@ -341,11 +359,14 @@
         },
         "authorization": {
           "description": "The requested authorization for the operation.",
-          "type": "string"
+          "$ref": "#/definitions/ResourceAuthorization"
         },
         "claims": {
           "description": "The properties of the claims.",
-          "type": "string"
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "correlationId": {
           "description": "An operation ID used for troubleshooting.",
@@ -353,7 +374,7 @@
         },
         "httpRequest": {
           "description": "The details of the operation.",
-          "type": "string"
+          "$ref": "#/definitions/ResourceHttpRequest"
         }
       }
     },
@@ -391,11 +412,14 @@
         },
         "authorization": {
           "description": "The requested authorization for the operation.",
-          "type": "string"
+          "$ref": "#/definitions/ResourceAuthorization"
         },
         "claims": {
           "description": "The properties of the claims.",
-          "type": "string"
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "correlationId": {
           "description": "An operation ID used for troubleshooting.",
@@ -403,7 +427,7 @@
         },
         "httpRequest": {
           "description": "The details of the operation.",
-          "type": "string"
+          "$ref": "#/definitions/ResourceHttpRequest"
         }
       }
     },
@@ -441,11 +465,14 @@
         },
         "authorization": {
           "description": "The requested authorization for the operation.",
-          "type": "string"
+          "$ref": "#/definitions/ResourceAuthorization"
         },
         "claims": {
           "description": "The properties of the claims.",
-          "type": "string"
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "correlationId": {
           "description": "An operation ID used for troubleshooting.",
@@ -453,7 +480,50 @@
         },
         "httpRequest": {
           "description": "The details of the operation.",
+          "$ref": "#/definitions/ResourceHttpRequest"
+        }
+      }
+    },
+    "ResourceHttpRequest": {
+      "description": "The details of the HTTP request.",
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "description": "The client request ID.",
           "type": "string"
+        },
+        "clientIpAddress": {
+          "description": "The client IP address.",
+          "type": "string"
+        },
+        "method": {
+          "description": "The request method.",
+          "type": "string"
+        },
+        "url": {
+          "description": "The url used in the request.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceAuthorization": {
+      "description": "The details of the authorization for the resource.",
+      "type": "object",
+      "properties": {
+        "scope": {
+          "description": "The scope of the authorization.",
+          "type": "string"
+        },
+        "action": {
+          "description": "The action being requested.",
+          "type": "string"
+        },
+        "evidence": {
+          "description": "The evidence for the authorization.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     }

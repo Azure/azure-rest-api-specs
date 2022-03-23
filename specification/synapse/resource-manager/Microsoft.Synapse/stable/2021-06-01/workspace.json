@@ -87,7 +87,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
@@ -132,7 +132,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "schema": {
@@ -198,7 +198,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "description": "Workspace create or update request properties",
@@ -264,7 +264,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
@@ -368,7 +368,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
@@ -413,7 +413,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "description": "Workspace active directory administrator properties",
@@ -479,7 +479,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
@@ -533,7 +533,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
@@ -578,7 +578,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "description": "Workspace active directory administrator properties",
@@ -644,7 +644,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
@@ -694,7 +694,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
@@ -734,7 +734,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "description": "Managed Identity Sql Control Settings",
@@ -800,7 +800,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "name": "restorableDroppedSqlPoolId",
@@ -853,7 +853,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "consumes": [],
@@ -926,7 +926,11 @@
       "properties": {
         "accountUrl": {
           "description": "Account URL",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "filesystem": {
           "description": "Filesystem name",
@@ -938,7 +942,11 @@
         },
         "createManagedPrivateEndpoint": {
           "description": "Create managed private endpoint to this storage account or not",
-          "type": "boolean"
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         }
       }
     },
@@ -1208,7 +1216,11 @@
         },
         "managedResourceGroupName": {
           "description": "Workspace managed resource group. The resource group name uniquely identifies the resource group within the user subscriptionId. The resource group name must be no longer than 90 characters long, and must be alphanumeric characters (Char.IsLetterOrDigit()) and '-', '_', '(', ')' and'.'. Note that the name cannot end with '.'",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "provisioningState": {
           "description": "Resource provisioning state",
@@ -1282,6 +1294,7 @@
             "Disabled"
           ],
           "description": "Enable or Disable public network access to workspace",
+          "default": "Enabled",
           "type": "string",
           "x-ms-enum": {
             "name": "WorkspacePublicNetworkAccess",
@@ -1303,6 +1316,11 @@
         "azureADOnlyAuthentication": {
           "description": "Enable or Disable AzureADOnlyAuthentication on All Workspace subresource",
           "type": "boolean"
+        },
+        "trustedServiceBypassEnabled": {
+          "description": "Is trustedServiceBypassEnabled for the workspace",
+          "type": "boolean",
+          "default": false
         }
       }
     },
@@ -1498,16 +1516,6 @@
         "value"
       ],
       "description": "The response to a list restorable dropped Sql pools request"
-    }
-  },
-  "parameters": {
-    "workspaceNameParameter": {
-      "name": "workspaceName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the workspace",
-      "x-ms-parameter-location": "method"
     }
   }
 }

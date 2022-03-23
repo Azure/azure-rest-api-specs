@@ -28,15 +28,24 @@ These are the global settings for the Azure Video Analyzer edge API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-ava-edge-1-0-0-preview
-
+tag: package-preview-1.1.0
 directive:
   - where:
-      -  $.definitions.MethodRequest.properties.methodName
+      - $.definitions.MethodRequest.properties.methodName
     suppress:
       - RequiredReadOnlyProperties
 ```
 
+
+### Tag: package-preview-1.1.0
+
+These settings apply only when `--tag=package-preview-1.1.0` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-1.1.0'
+input-file:
+  - VideoAnalyzer.Edge/preview/1.1.0/AzureVideoAnalyzer.json
+  - VideoAnalyzer.Edge/preview/1.1.0/AzureVideoAnalyzerSdkDefinitions.json
+```
 ### Tag: package-ava-edge-1-0-0-preview
 
 These settings apply only when `--tag=package-ava-edge-1-0-0-preview` is specified on the command line.
@@ -81,6 +90,7 @@ csharp:
   override-client-name: AzureVideoAnalyzerEdgeClient
   use-datetimeoffset: true
 ```
+
 ## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.

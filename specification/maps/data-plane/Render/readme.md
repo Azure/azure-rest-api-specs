@@ -27,31 +27,44 @@ These are the global settings for Render Client.
 ``` yaml
 title: RenderClient
 openapi-type: data-plane
-tag: 2.1-preview
+tag: 2.1 # removed "preview" as it started causing validation errors from v0.26 of the Swagger Lintdiff.
 # at some point those credentials will move away to Swagger according to [this](https://github.com/Azure/autorest/issues/3718)
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: https://atlas.microsoft.com/.default
+track2: true
+verbose: true
+sdk-integration: true
+modelerfour:
+  additional-checks: false
+  lenient-model-deduplication: true
 ```
 
 ### Tag: 2.1-preview
 
-These settings apply only when `--tag=2.1-preview` is specified on the command line.
+These settings apply only when `--tag=2.1` is specified on the command line.
 
-``` yaml $(tag) == '2.1-preview'
+``` yaml $(tag) == '2.1'
 input-file:
-  - preview/1.0/render.json
   - preview/2.1/render.json
 ```
 
 ### Tag: 2.0-preview
 
-These settings apply only when `--tag=2.0-preview` is specified on the command line.
+These settings apply only when `--tag=2.0` is specified on the command line.
 
-``` yaml $(tag) == '2.0-preview'
+``` yaml $(tag) == '2.0'
+input-file:
+  - preview/2.0/render.json
+```
+
+### Tag: 1.0-preview
+
+These settings apply only when `--tag=1.0` is specified on the command line.
+
+``` yaml $(tag) == '1.0'
 input-file:
   - preview/1.0/render.json
-  - preview/2.0/render.json
 ```
 
 # Code Generation

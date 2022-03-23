@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2021-12-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "dummyrg",
+    "loadTestName": "myLoadTest",
+    "LoadTestResource": {
+      "location": "westus",
+      "tags": {
+        "Team": "Dev Exp"
+      },
+      "properties": {
+        "description": "This is new load test resource"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "westus",
+        "properties": {
+          "description": "This is new load test resource",
+          "dataPlaneURI": "https://myLoadTest.00000000-0000-0000-0000-000000000000.cnt-dp.domain.com",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.LoadTestService/loadTests/myLoadTest",
+        "name": "myLoadTest",
+        "type": "Microsoft.LoadTestService/loadTests",
+        "tags": {
+          "Team": "Dev Exp"
+        },
+        "systemData": {
+          "createdBy": "userId1001",
+          "createdByType": "User",
+          "createdAt": "2021-09-28T12:32:33Z",
+          "lastModifiedBy": "userId1001",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-09-28T12:32:33Z"
+        }
+      }
+    }
+  }
+}

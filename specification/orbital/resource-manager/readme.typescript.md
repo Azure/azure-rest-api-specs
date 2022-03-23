@@ -9,6 +9,5 @@ typescript:
   package-name: "@azure/arm-orbital"
   output-folder: "$(typescript-sdks-folder)/sdk/orbital/arm-orbital"
   payload-flattening-threshold: 1
-  clear-output-folder: true
   generate-metadata: true
 ```

@@ -1024,6 +1024,7 @@
           "items": {
             "$ref": "#/definitions/SpacecraftLink"
           },
+          "x-ms-identifiers": [],
           "description": "Links of the Spacecraft"
         }
       },
@@ -1289,11 +1290,16 @@
           },
           "description": "Auto track configuration."
         },
+        "eventHubUri": {
+          "type": "string",
+          "description": "The URI of the Event Hub used for telemetry"
+        },
         "links": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ContactProfileLink"
           },
+          "x-ms-identifiers": [],
           "description": "Links of the Contact Profile"
         }
       },
@@ -1403,6 +1409,11 @@
           "items": {
             "$ref": "#/definitions/ContactProfileLinkChannel"
           },
+          "x-ms-identifiers": [
+            "centerFrequencyMHz",
+            "bandwidthMHz",
+            "/endPoint/endPointName"
+          ],
           "description": "Contact Profile Link Channel"
         }
       },
@@ -1573,6 +1584,9 @@
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
           },
+          "x-ms-identifiers": [
+            "code"
+          ],
           "description": "A list of additional details about the error."
         }
       },
@@ -1596,6 +1610,7 @@
           "items": {
             "$ref": "#/definitions/AvailableContacts"
           },
+          "x-ms-identifiers": [],
           "description": "A list of available contacts"
         },
         "nextLink": {
@@ -1781,6 +1796,10 @@
         "EarthObservation",
         "Communication"
       ],
+      "x-ms-enum": {
+        "name": "CapabilityType",
+        "modelAsString": true
+      },
       "default": "EarthObservation",
       "description": "Ground Station Capability",
       "x-ms-parameter-location": "method"
