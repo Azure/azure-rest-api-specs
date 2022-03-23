@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Confluent.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Confluent, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,22 +15,31 @@ To build the SDK for Confluent, simply [Install AutoRest](https://aka.ms/autores
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Confluent API.
 
 ``` yaml
 title: ConfluentManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2020-03-01
+tag: package-2022-03
 ```
 
+
+### Tag: package-2022-03
+
+These settings apply only when `--tag=package-2022-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-03'
+input-file:
+  - Microsoft.Confluent/stable/2022-03-01/confluent.json
+```
 ### Tag: package-2020-03-01
 
 These settings apply only when `--tag=package-2020-03-01` is specified on the command line.
@@ -131,4 +140,3 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-
