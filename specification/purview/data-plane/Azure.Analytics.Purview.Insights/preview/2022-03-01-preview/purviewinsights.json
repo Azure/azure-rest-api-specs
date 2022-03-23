@@ -1,0 +1,1221 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Purview Insights Service REST API Document",
+    "description": "This spec defines REST API of Purview Insights Service.",
+    "version": "2022-03-01-preview"
+  },
+  "host": "purview.azure.com",
+  "basePath": "/insights",
+  "schemes": ["https"],
+  "paths": {
+    "/assets/snapshots": {
+      "get": {
+        "tags": ["Assets"],
+        "description": "Get asset snapshots",
+        "operationId": "AssetSnapshots_List",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "kind",
+            "type": "string",
+            "enum": [
+              "AssetFilesAggregation",
+              "AssetDistribution",
+              "FilesWithoutResourceSet",
+              "AllAssetsDistribution",
+              "AssetCurationDistribution",
+              "DeletedAssetsDistribution",
+              "NetNewAssetsDistribution",
+              "Tags"
+            ],
+            "x-ms-enum": {
+              "name": "AssetType",
+              "modelAsString": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Insights Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AssetSnapshots_List": {
+            "$ref": "./examples/AssetSnapshots_List.json"
+          }
+        }
+      }
+    },
+    "/assets/details": {
+      "get": {
+        "tags": ["Assets"],
+        "description": "Get asset details",
+        "operationId": "AssetDetails_List",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "kind",
+            "type": "string",
+            "enum": [
+              "AssetFilesAggregation",
+              "AssetDistribution",
+              "FilesWithoutResourceSet",
+              "AllAssetsDistribution",
+              "AssetCurationDistribution",
+              "DeletedAssetsDistribution",
+              "NetNewAssetsDistribution",
+              "Tags"
+            ],
+            "x-ms-enum": {
+              "name": "AssetType",
+              "modelAsString": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "classification",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "classificationCategory",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "collectionName",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "dataOwner",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "instance",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "sourceType",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Details"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Insights Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AssetDetails_List": {
+            "$ref": "./examples/AssetDetails_List.json"
+          }
+        }
+      }
+    },
+    "/assets/timeSeries/tags": {
+      "get": {
+        "tags": ["Assets"],
+        "description": "Get classification and label tags time series",
+        "operationId": "AssetTagsTimeSeries_List",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TagsTimeSeriesResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Insights Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AssetTagsTimeSeries_List": {
+            "$ref": "./examples/AssetTagsTimeSeries_List.json"
+          }
+        }
+      }
+    },
+    "/assets/timeSeries/filesAggregation": {
+      "get": {
+        "tags": ["Assets"],
+        "description": "Get file type size time series",
+        "operationId": "AssetFilesAggregationTimeSeries_List",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FilesAggregationTimeSeriesResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Insights Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AssetFilesAggregationTimeSeries_List": {
+            "$ref": "./examples/AssetFilesAggregationTimeSeries_List.json"
+          }
+        }
+      }
+    },
+    "/scanstatus/summaries": {
+      "get": {
+        "tags": ["ScanStatus"],
+        "description": "Get the scan summaries",
+        "operationId": "ScanStatusSummaries_List",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "collectionId",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "window",
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScanSummariesResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Insights Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScanStatusSummaries_List": {
+            "$ref": "./examples/ScanStatusSummaries_List.json"
+          }
+        }
+      }
+    },
+    "/scanstatus/summariesbytes": {
+      "get": {
+        "tags": ["ScanStatus"],
+        "description": "Get scan summaries by timeseries",
+        "operationId": "ScanStatusSummariesByTimeseries_List",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "collectionId",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "window",
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScanSummariesByTimeseriesResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Insights Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScanStatusSummariesByTimeseries_List": {
+            "$ref": "./examples/ScanStatusSummariesByTimeseries_List.json"
+          }
+        }
+      }
+    },
+    "/scanstatus/details": {
+      "get": {
+        "tags": ["ScanStatus"],
+        "description": "Get the scan details",
+        "operationId": "ScanStatusDetails_List",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "collectionId",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "sourceTypes",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "window",
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScanDetailsResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Insights Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScanStatusDetails_List": {
+            "$ref": "./examples/ScanStatusDetails_List.json"
+          }
+        }
+      }
+    },
+    "/scanstatus/sourcetypes": {
+      "get": {
+        "tags": ["ScanStatus"],
+        "description": "Get the scan source types",
+        "operationId": "ScanStatusSourceTypes_List",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "collectionId",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "window",
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScanSourceTypesResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Insights Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScanStatusSourceTypes_List": {
+            "$ref": "./examples/ScanStatusSourceTypes_List.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SnapshotRecord": {
+      "required": ["kind"],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "AssetFilesAggregation",
+            "AssetDistribution",
+            "FilesWithoutResourceSet",
+            "AllAssetsDistribution",
+            "AssetCurationDistribution",
+            "DeletedAssetsDistribution",
+            "NetNewAssetsDistribution",
+            "Tags"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AssetType",
+            "modelAsString": true
+          }
+        },
+        "snapshotTime": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "discriminator": "kind"
+    },
+    "Snapshot": {
+      "type": "object",
+      "properties": {
+        "snapshotTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SnapshotRecord"
+          }
+        },
+        "count": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "ErrorModel": {
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "exceptionCulprit": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorModel"
+          }
+        }
+      }
+    },
+    "ErrorResponseModel": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          ]
+        }
+      }
+    },
+    "DetailsRecord": {
+      "required": ["kind"],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "AssetFilesAggregation",
+            "AssetDistribution",
+            "FilesWithoutResourceSet",
+            "AllAssetsDistribution",
+            "AssetCurationDistribution",
+            "DeletedAssetsDistribution",
+            "NetNewAssetsDistribution",
+            "Tags"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AssetType",
+            "modelAsString": true
+          }
+        },
+        "snapshotTime": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "discriminator": "kind"
+    },
+    "Details": {
+      "type": "object",
+      "properties": {
+        "snapshotTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DetailsRecord"
+          }
+        },
+        "count": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "TagValuesByTime": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "sources": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "TagsTimesSeriesRecord": {
+      "type": "object",
+      "properties": {
+        "sourceType": {
+          "type": "string"
+        },
+        "tagType": {
+          "type": "string"
+        },
+        "series": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagValuesByTime"
+          }
+        }
+      }
+    },
+    "TagsTimeSeriesResponse": {
+      "type": "object",
+      "properties": {
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagsTimesSeriesRecord"
+          }
+        }
+      }
+    },
+    "FileTypeValuesByTime": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "bytes": {
+          "format": "int64",
+          "type": "integer"
+        }
+      }
+    },
+    "FilesAggregationTimesSeriesRecord": {
+      "type": "object",
+      "properties": {
+        "sourceType": {
+          "type": "string"
+        },
+        "fileType": {
+          "type": "string"
+        },
+        "series": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FileTypeValuesByTime"
+          }
+        }
+      }
+    },
+    "FilesAggregationTimeSeriesResponse": {
+      "type": "object",
+      "properties": {
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilesAggregationTimesSeriesRecord"
+          }
+        }
+      }
+    },
+    "ScanSummary": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": ["Succeeded", "Failed", "Canceled"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ScanStatusType",
+            "modelAsString": true
+          }
+        },
+        "count": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "ScanSummariesResponse": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScanSummary"
+          }
+        }
+      }
+    },
+    "ScanSummaryByTimeseries": {
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "summaries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScanSummary"
+          }
+        }
+      }
+    },
+    "ScanSummariesByTimeseriesResponse": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScanSummaryByTimeseries"
+          }
+        }
+      }
+    },
+    "ScanDetail": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "sourceName": {
+          "type": "string"
+        },
+        "sourceTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "countSuccess": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "countFailed": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "countCanceled": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "lastRunStatus": {
+          "enum": ["Succeeded", "Failed", "Canceled"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ScanStatusType",
+            "modelAsString": true
+          }
+        },
+        "lastRunStartTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastRunPipelineStartTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastRunEndTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "hasChildren": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ScanDetailsResponse": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScanDetail"
+          }
+        }
+      }
+    },
+    "ScanSourceTypesResponse": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AllAssetsDistributionDetailsRecord": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DetailsRecord"
+        }
+      ],
+      "properties": {
+        "assetDisplayName": {
+          "type": "string"
+        },
+        "classifications": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "classificationCategories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "collectionName": {
+          "type": "string"
+        },
+        "dataOwners": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "guid": {
+          "type": "string"
+        },
+        "instance": {
+          "type": "string"
+        },
+        "objectType": {
+          "type": "string"
+        },
+        "qualifiedName": {
+          "type": "string"
+        },
+        "sourceType": {
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AssetFilesAggregation"
+    },
+    "AssetCurationDistributionDetailsRecord": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DetailsRecord"
+        }
+      ],
+      "properties": {
+        "assetDisplayName": {
+          "type": "string"
+        },
+        "classifications": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "collectionName": {
+          "type": "string"
+        },
+        "dataOwners": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "guid": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "instance": {
+          "type": "string"
+        },
+        "qualifiedName": {
+          "type": "string"
+        },
+        "sourceType": {
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AssetFilesAggregation"
+    },
+    "DeletedAssetsDistributionDetailsRecord": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DetailsRecord"
+        }
+      ],
+      "properties": {
+        "classifications": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "classificationCategories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "collectionName": {
+          "type": "string"
+        },
+        "count": {
+          "type": "string"
+        },
+        "dataOwners": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "instance": {
+          "type": "string"
+        },
+        "objectType": {
+          "type": "string"
+        },
+        "sourceType": {
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AssetFilesAggregation"
+    },
+    "NetNewAssetsDistributionDetailsRecord": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DetailsRecord"
+        }
+      ],
+      "properties": {
+        "assetDisplayName": {
+          "type": "string"
+        },
+        "classifications": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "classificationCategories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "collectionName": {
+          "type": "string"
+        },
+        "dataOwners": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "guid": {
+          "type": "string"
+        },
+        "instance": {
+          "type": "string"
+        },
+        "objectType": {
+          "type": "string"
+        },
+        "qualifiedName": {
+          "type": "string"
+        },
+        "sourceType": {
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AssetFilesAggregation"
+    },
+    "AllAssetsDistributionSnapshotRecord": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SnapshotRecord"
+        }
+      ],
+      "properties": {
+        "classification": {
+          "type": "string"
+        },
+        "classificationCategory": {
+          "type": "string"
+        },
+        "collectionName": {
+          "type": "string"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "dataOwnerAssigned": {
+          "type": "boolean"
+        }
+      },
+      "x-ms-discriminator-value": "AllAssetsDistribution"
+    },
+    "AssetCurationDistributionSnapshotRecord": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SnapshotRecord"
+        }
+      ],
+      "properties": {
+        "collectionName": {
+          "type": "string"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "fullyCurated": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "partiallyCurated": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "notCurated": {
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "AssetCurationDistribution"
+    },
+    "AssetDistributionSnapshotRecord": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SnapshotRecord"
+        }
+      ],
+      "properties": {
+        "sourceType": {
+          "type": "string"
+        },
+        "collectionName": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "classificationCategory": {
+          "type": "string"
+        },
+        "classification": {
+          "type": "string"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "AssetDistribution"
+    },
+    "AssetFilesAggregationSnapshotRecord": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SnapshotRecord"
+        }
+      ],
+      "properties": {
+        "sourceType": {
+          "type": "string"
+        },
+        "fileType": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "collection": {
+          "type": "string"
+        },
+        "prev7dBytes": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "prev30dBytes": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "currBytes": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "prev7dCount": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "prev30dCount": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "currCount": {
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "AssetFilesAggregation"
+    },
+    "DeletedAssetsDistributionSnapshotRecord": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SnapshotRecord"
+        }
+      ],
+      "properties": {
+        "classification": {
+          "type": "string"
+        },
+        "classificationCategory": {
+          "type": "string"
+        },
+        "collectionName": {
+          "type": "string"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "dataOwnerAssigned": {
+          "type": "boolean"
+        }
+      },
+      "x-ms-discriminator-value": "DeletedAssetsDistribution"
+    },
+    "FilesWithoutResourceSetSnapshotRecord": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SnapshotRecord"
+        }
+      ],
+      "properties": {
+        "sourceType": {
+          "type": "string"
+        },
+        "collectionName": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "resourceSetCount": {
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "FilesWithoutResourceSet"
+    },
+    "NetNewAssetsDistributionSnapshotRecord": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SnapshotRecord"
+        }
+      ],
+      "properties": {
+        "classification": {
+          "type": "string"
+        },
+        "classificationCategory": {
+          "type": "string"
+        },
+        "collectionName": {
+          "type": "string"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "dataOwnerAssigned": {
+          "type": "boolean"
+        }
+      },
+      "x-ms-discriminator-value": "NetNewAssetsDistribution"
+    }
+  },
+  "parameters": {
+    "x-ms-account-name": {
+      "in": "header",
+      "name": "x-ms-account-name",
+      "description": "The Account Id",
+      "type": "string",
+      "x-ms-client-name": "AccountName"
+    },
+    "x-ms-account-id": {
+      "in": "header",
+      "name": "x-ms-account-id",
+      "description": "The Account Id",
+      "type": "string",
+      "x-ms-client-name": "AccountId"
+    },
+    "api-version": {
+      "in": "query",
+      "name": "api-version",
+      "description": "The api version to use.",
+      "required": true,
+      "type": "string",
+      "x-ms-client-name": "ApiVersion"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  }
+}
