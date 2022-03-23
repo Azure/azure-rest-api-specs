@@ -275,6 +275,9 @@
           },
           {
             "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/IgnoreStrongConsistencyLock"
           }
         ],
         "responses": {
@@ -11811,6 +11814,15 @@
       },
       "x-ms-parameter-location": "method",
       "description": "Specifies the immutability policy mode to set on the blob."
+    },
+    "IgnoreStrongConsistencyLock": {
+      "name": "x-ms-ignore-strong-consistency-lock",
+      "x-ms-client-name": "ignoreStrongConsistencyLock",
+      "in": "header",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method",
+      "description": "Geo-redundant storage (GRS) and Geo-zone-redundant storage (GZRS) accounts only.  Allows client to ignore replication lock o primary and read current state anyway."
     },
     "KeyInfo": {
       "description": "Key information",
