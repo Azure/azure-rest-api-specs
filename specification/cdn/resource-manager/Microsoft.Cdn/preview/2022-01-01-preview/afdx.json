@@ -6051,19 +6051,19 @@
       "description": "The JSON object that contains the properties of the Policy to create.",
       "type": "object",
       "required": [
-        "PolicyData",
-        "ServiceType",
-        "PolicyVersion"
+        "policyData",
+        "serviceType",
+        "policyVersion"
       ],
-      "PolicyData": {
+      "policyData": {
         "description": "Policy to be applied",
         "type": "string"
       },
-      "PolicyVersion": {
+      "policyVersion": {
         "description": "Schema version of the policy",
         "type": "string"
       },
-      "ServiceType": {
+      "serviceType": {
         "description": "Service type of the policy",
         "type": "string"
       }
@@ -6080,11 +6080,11 @@
         }
       ],
       "properties": {
-        "PolicyVersion": {
+        "policyVersion": {
           "description": "Schema version of the policy",
           "type": "string"
         },
-        "ServiceType": {
+        "serviceType": {
           "description": "Service type of the policy",
           "type": "string"
         }
@@ -6093,19 +6093,28 @@
     "PolicyUpdateParameters": {
       "description": "The JSON object that contains the properties of the Policy to update.",
       "type": "object",
-      "required": [
-        "PolicyData",
-        "PolicyVersion"
-      ],
       "properties": {
-        "PolicyVersion": {
-          "description": "Schema version of the policy",
-          "type": "string"
-        },
-        "PolicyData": {
-          "description": "Policy to be applied",
-          "type": "string"
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PolicyUpdatePropertiesParameters"
         }
+      }
+    }
+  },
+  "PolicyUpdatePropertiesParameters": {
+    "description": "The JSON object that contains the properties of the Policy to update.",
+    "required": [
+      "policyData",
+      "policyVersion"
+    ],
+    "properties": {
+      "policyVersion": {
+        "description": "Schema version of the policy",
+        "type": "string"
+      },
+      "policyData": {
+        "description": "Policy to be applied",
+        "type": "string"
       }
     }
   },
