@@ -4151,7 +4151,9 @@
             "Rejected",
             "TimedOut",
             "PendingRevalidation",
-            "Approved"
+            "Approved",
+            "RefreshingValidationToken",
+            "InternalError"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4889,7 +4891,8 @@
         },
         "enforceCertificateNameCheck": {
           "description": "Whether to enable certificate name check at origin level",
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         }
       }
     },
@@ -5008,11 +5011,6 @@
           "format": "int32",
           "maximum": 50,
           "minimum": 0
-        },
-        "responseBasedAfdOriginErrorDetectionSettings": {
-          "description": "The JSON object that contains the properties to determine origin health using real requests/responses. This property is currently not supported.",
-          "type": "object",
-          "$ref": "./cdn.json#/definitions/ResponseBasedOriginErrorDetectionParameters"
         },
         "sessionAffinityState": {
           "description": "Whether to allow session affinity on this host. Valid options are 'Enabled' or 'Disabled'",
