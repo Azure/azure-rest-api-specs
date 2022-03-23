@@ -6032,6 +6032,14 @@
     "Policy": {
       "description": "A policy is a logical grouping of policies",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AFDStateProperties"
+        },
+        {
+          "$ref": "./cdn.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -6042,32 +6050,22 @@
     "PolicyProperties": {
       "description": "The JSON object that contains the properties of the Policy to create.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AFDStateProperties"
-        },
-        {
-          "$ref": "./cdn.json#/definitions/ProxyResource"
-        }
-      ],
       "required": [
         "PolicyData",
         "ServiceType",
         "PolicyVersion"
       ],
-      "properties": {
-        "PolicyData": {
-          "description": "Policy to be applied",
-          "type": "string"
-        },
-        "PolicyVersion": {
-          "description": "Schema version of the policy",
-          "type": "string"
-        },
-        "ServiceType": {
-          "description": "Service type of the policy",
-          "type": "string"
-        }
+      "PolicyData": {
+        "description": "Policy to be applied",
+        "type": "string"
+      },
+      "PolicyVersion": {
+        "description": "Schema version of the policy",
+        "type": "string"
+      },
+      "ServiceType": {
+        "description": "Service type of the policy",
+        "type": "string"
       }
     },
     "PolicyGetParameters": {
@@ -6095,11 +6093,6 @@
     "PolicyUpdateParameters": {
       "description": "The JSON object that contains the properties of the Policy to update.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AFDStateProperties"
-        }
-      ],
       "required": [
         "PolicyData",
         "PolicyVersion"
