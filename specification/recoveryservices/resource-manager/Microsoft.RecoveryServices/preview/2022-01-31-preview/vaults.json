@@ -184,7 +184,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/locations/{location}/capabilities": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{location}/capabilities": {
       "post": {
         "tags": [
           "RecoveryServices"
@@ -884,13 +884,16 @@
     "ResourceCapabilitiesBase": {
       "description": "Base class for request and response capabilities information for Microsoft.RecoveryServices",
       "type": "object",
+      "required": [
+        "type"
+      ],
       "properties": {
         "type": {
           "description": "Describes the Resource type: Microsoft.RecoveryServices/Vaults",
-          "type": "string",
-          "required": true
+          "type": "string"
         }
-      }
+      },
+      "x-ms-discriminator-value": "ResourceCapabilitiesBase"
     },
     "ResourceCapabilities": {
       "allOf": [
@@ -956,7 +959,8 @@
             "modelAsString": true
           }
         }
-      }
+      },
+      "x-ms-discriminator-value": "DNSZone"
     },
     "DNSZoneResponse":{
       "allOf": [
