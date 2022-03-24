@@ -17,7 +17,15 @@ These are the global settings for the IoT Central API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-1.1-preview
+tag: package-1.2-preview
+```
+
+### Tag: package-1.2-preview
+These settings apply only when `--tag=package-1.2-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-1.2-preview'
+input-file:
+  - Microsoft.IoTCentral/preview/1.2-preview/iotcentral.json
 ```
 
 ### Tag: package-1.1-preview
