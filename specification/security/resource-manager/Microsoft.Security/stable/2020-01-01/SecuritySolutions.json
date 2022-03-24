@@ -73,6 +73,49 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securitySolutions/{securitySolutionName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a security solution from a security data location": {
+            "$ref": "./examples/SecuritySolutions/GetSecuritySolutionsResourceGroupLocation_example.json"
+          }
+        },
+        "tags": [
+          "SecuritySolutions"
+        ],
+        "description": "Gets a specific Security Solution.",
+        "operationId": "SecuritySolutions_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SecuritySolutionName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecuritySolution"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
   "definitions": {
     "SecuritySolutionList": {
       "type": "object",
