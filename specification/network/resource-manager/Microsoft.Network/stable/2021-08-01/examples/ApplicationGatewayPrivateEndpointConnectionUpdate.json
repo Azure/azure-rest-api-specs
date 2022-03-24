@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "applicationGatewayName": "appgw",
+    "connectionName": "connection1",
+    "parameters": {
+      "name": "connection1",
+      "properties": {
+        "privateEndpoint": {
+          "id": "/subscriptions/subId2/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testPe"
+        },
+        "privateLinkServiceConnectionState": {
+          "status": "Approved",
+          "description": "approved it for some reason."
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testPlePeConnection",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testPe"
+          },
+          "privateLinkServiceConnectionState": {
+            "status": "Approved",
+            "description": "approved it for some reason."
+          },
+          "linkIdentifier": "linkId"
+        }
+      }
+    },
+    "202": {}
+  }
+}
