@@ -6,7 +6,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-payload-flattening-threshold: 2
 namespace: azure.mgmt.windowsiot
 package-name: azure-mgmt-windowsiot
 package-version: 0.1.0
