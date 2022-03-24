@@ -371,12 +371,13 @@ These settings apply only when `--tag=2021-06-01-preview` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-06-01-preview'
 input-file:
-- Microsoft.Compute/stable/2021-03-01/compute.json
-- Microsoft.Compute/stable/2021-03-01/runCommands.json
-- Microsoft.Compute/stable/2019-04-01/skus.json
-- Microsoft.Compute/stable/2020-12-01/disk.json
-- Microsoft.Compute/stable/2020-09-30/gallery.json
-- Microsoft.Compute/stable/2020-09-30/sharedGallery.json
+- Microsoft.Compute/stable/2021-11-01/compute.json
+- Microsoft.Compute/stable/2021-11-01/runCommands.json
+- Microsoft.Compute/stable/2021-07-01/skus.json
+- Microsoft.Compute/stable/2021-12-01/disk.json
+- Microsoft.Compute/stable/2021-10-01/gallery.json
+- Microsoft.Compute/stable/2021-07-01/sharedGallery.json
+- Microsoft.Compute/stable/2021-07-01/communityGallery.json
 - Microsoft.Compute/stable/2021-03-01/cloudService.json
 - Microsoft.Compute/preview/2021-06-01-preview/diagnostic.json
 ```
