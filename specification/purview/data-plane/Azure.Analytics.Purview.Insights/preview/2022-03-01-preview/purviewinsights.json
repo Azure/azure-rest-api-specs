@@ -1,34 +1,42 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Purview Insights Service REST API Document",
-    "description": "This spec defines REST API of Purview Insights Service.",
+    "title": "MicrosoftAzurePurviewInsightsClient",
+    "description": "Creates a Microsoft.Azure.Purview.Insights management client.",
     "version": "2022-03-01-preview"
   },
   "host": "purview.azure.com",
   "basePath": "/insights",
-  "schemes": ["https"],
+  "schemes": [
+    "https"
+  ],
   "paths": {
     "/assets/snapshots": {
       "get": {
-        "tags": ["Assets"],
-        "description": "Get asset snapshots",
+        "tags": [
+          "Assets"
+        ],
+        "summary": "List asset snapshots",
+        "description": "List asset snapshots",
         "operationId": "AssetSnapshots_List",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "query",
             "name": "kind",
+            "description": "The asset type.",
             "type": "string",
             "enum": [
               "AssetFilesAggregation",
               "AssetDistribution",
+              "DataEstateHealth",
               "FilesWithoutResourceSet",
               "AllAssetsDistribution",
               "AssetCurationDistribution",
               "DeletedAssetsDistribution",
-              "NetNewAssetsDistribution",
-              "Tags"
+              "NetNewAssetsDistribution"
             ],
             "x-ms-enum": {
               "name": "AssetType",
@@ -65,24 +73,30 @@
     },
     "/assets/details": {
       "get": {
-        "tags": ["Assets"],
-        "description": "Get asset details",
+        "tags": [
+          "Assets"
+        ],
+        "summary": "List asset details",
+        "description": "List asset details",
         "operationId": "AssetDetails_List",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "query",
             "name": "kind",
+            "description": "The type of asset.",
             "type": "string",
             "enum": [
               "AssetFilesAggregation",
               "AssetDistribution",
+              "DataEstateHealth",
               "FilesWithoutResourceSet",
               "AllAssetsDistribution",
               "AssetCurationDistribution",
               "DeletedAssetsDistribution",
-              "NetNewAssetsDistribution",
-              "Tags"
+              "NetNewAssetsDistribution"
             ],
             "x-ms-enum": {
               "name": "AssetType",
@@ -92,47 +106,59 @@
           {
             "in": "query",
             "name": "classification",
+            "description": "The classification name.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "classificationCategory",
+            "description": "The classification category.",
             "type": "string"
           },
           {
             "in": "query",
-            "name": "collectionName",
-            "type": "string"
+            "name": "collectionNames",
+            "description": "The collection names.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "in": "query",
             "name": "dataOwner",
+            "description": "The data owner.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "instance",
+            "description": "The instance.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "sourceType",
+            "description": "The source type.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "$orderby",
+            "description": "",
             "type": "string"
           },
           {
             "in": "query",
             "name": "$skip",
+            "description": "",
             "type": "integer",
             "format": "int32"
           },
           {
             "in": "query",
             "name": "$top",
+            "description": "",
             "type": "integer",
             "format": "int32"
           }
@@ -161,15 +187,122 @@
           "AssetDetails_List": {
             "$ref": "./examples/AssetDetails_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/assets/details/filters": {
+      "get": {
+        "tags": [
+          "Assets"
+        ],
+        "summary": "Get asset details filters",
+        "description": "Get asset details filters",
+        "operationId": "AssetDetailsFilters_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "kind",
+            "description": "The asset type/",
+            "type": "string",
+            "enum": [
+              "AssetFilesAggregation",
+              "AssetDistribution",
+              "DataEstateHealth",
+              "FilesWithoutResourceSet",
+              "AllAssetsDistribution",
+              "AssetCurationDistribution",
+              "DeletedAssetsDistribution",
+              "NetNewAssetsDistribution"
+            ],
+            "x-ms-enum": {
+              "name": "AssetType",
+              "modelAsString": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "classification",
+            "description": "The classification.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "classificationCategory",
+            "description": "The classification categories.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "collectionNames",
+            "description": "The collection names.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "dataOwner",
+            "description": "The data owner.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "instance",
+            "description": "The instance.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "sourceType",
+            "description": "The source type.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AssetInsightsDetailsFilters"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Insights Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AssetDetailsFilters_Get": {
+            "$ref": "./examples/AssetDetailsFilters_Get.json"
+          }
         }
       }
     },
     "/assets/timeSeries/tags": {
       "get": {
-        "tags": ["Assets"],
-        "description": "Get classification and label tags time series",
+        "tags": [
+          "Assets"
+        ],
+        "summary": "List classification and label tags time series",
+        "description": "List classification and label tags time series",
         "operationId": "AssetTagsTimeSeries_List",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -199,10 +332,15 @@
     },
     "/assets/timeSeries/filesAggregation": {
       "get": {
-        "tags": ["Assets"],
-        "description": "Get file type size time series",
+        "tags": [
+          "Assets"
+        ],
+        "summary": "List file type size time series",
+        "description": "List file type size time series",
         "operationId": "AssetFilesAggregationTimeSeries_List",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -232,19 +370,26 @@
     },
     "/scanstatus/summaries": {
       "get": {
-        "tags": ["ScanStatus"],
-        "description": "Get the scan summaries",
+        "tags": [
+          "ScanStatus"
+        ],
+        "summary": "List the scan summaries",
+        "description": "List the scan summaries",
         "operationId": "ScanStatusSummaries_List",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "query",
             "name": "collectionId",
+            "description": "The collection id.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "window",
+            "description": "The time window.",
             "type": "integer",
             "format": "int32",
             "default": 0
@@ -279,19 +424,26 @@
     },
     "/scanstatus/summariesbytes": {
       "get": {
-        "tags": ["ScanStatus"],
-        "description": "Get scan summaries by timeseries",
+        "tags": [
+          "ScanStatus"
+        ],
+        "summary": "List scan summaries by timeseries",
+        "description": "List scan summaries by timeseries",
         "operationId": "ScanStatusSummariesByTimeseries_List",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "query",
             "name": "collectionId",
+            "description": "The collection id.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "window",
+            "description": "The time window.",
             "type": "integer",
             "format": "int32",
             "default": 0
@@ -326,19 +478,26 @@
     },
     "/scanstatus/details": {
       "get": {
-        "tags": ["ScanStatus"],
-        "description": "Get the scan details",
+        "tags": [
+          "ScanStatus"
+        ],
+        "summary": "List the scan details",
+        "description": "List the scan details",
         "operationId": "ScanStatusDetails_List",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "query",
             "name": "collectionId",
+            "description": "The collection id.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "sourceTypes",
+            "description": "The source types.",
             "type": "array",
             "items": {
               "type": "string"
@@ -347,6 +506,7 @@
           {
             "in": "query",
             "name": "window",
+            "description": "The time window.",
             "type": "integer",
             "format": "int32",
             "default": 0
@@ -381,19 +541,26 @@
     },
     "/scanstatus/sourcetypes": {
       "get": {
-        "tags": ["ScanStatus"],
-        "description": "Get the scan source types",
+        "tags": [
+          "ScanStatus"
+        ],
+        "summary": "List the scan source types",
+        "description": "List the scan source types",
         "operationId": "ScanStatusSourceTypes_List",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "query",
             "name": "collectionId",
+            "description": "The collection id.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "window",
+            "description": "The time window.",
             "type": "integer",
             "format": "int32",
             "default": 0
@@ -429,19 +596,21 @@
   },
   "definitions": {
     "SnapshotRecord": {
-      "required": ["kind"],
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "properties": {
         "kind": {
           "enum": [
             "AssetFilesAggregation",
             "AssetDistribution",
+            "DataEstateHealth",
             "FilesWithoutResourceSet",
             "AllAssetsDistribution",
             "AssetCurationDistribution",
             "DeletedAssetsDistribution",
-            "NetNewAssetsDistribution",
-            "Tags"
+            "NetNewAssetsDistribution"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -469,7 +638,7 @@
             "$ref": "#/definitions/SnapshotRecord"
           }
         },
-        "count": {
+        "totalResultCount": {
           "format": "int32",
           "type": "integer"
         }
@@ -511,19 +680,21 @@
       }
     },
     "DetailsRecord": {
-      "required": ["kind"],
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "properties": {
         "kind": {
           "enum": [
             "AssetFilesAggregation",
             "AssetDistribution",
+            "DataEstateHealth",
             "FilesWithoutResourceSet",
             "AllAssetsDistribution",
             "AssetCurationDistribution",
             "DeletedAssetsDistribution",
-            "NetNewAssetsDistribution",
-            "Tags"
+            "NetNewAssetsDistribution"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -545,15 +716,63 @@
           "format": "date-time",
           "type": "string"
         },
+        "totalResultCount": {
+          "format": "int64",
+          "type": "integer"
+        },
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/DetailsRecord"
           }
         },
+        "nextLink": {
+          "type": "string"
+        },
         "count": {
           "format": "int32",
           "type": "integer"
+        }
+      }
+    },
+    "AssetInsightsDetailsFilters": {
+      "type": "object",
+      "properties": {
+        "classifications": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "classificationCategories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "collectionNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dataOwners": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "instances": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sourceTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -647,7 +866,11 @@
       "type": "object",
       "properties": {
         "type": {
-          "enum": ["Succeeded", "Failed", "Canceled"],
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "ScanStatusType",
@@ -732,7 +955,11 @@
           "type": "integer"
         },
         "lastRunStatus": {
-          "enum": ["Succeeded", "Failed", "Canceled"],
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "ScanStatusType",
@@ -826,7 +1053,7 @@
           "type": "string"
         }
       },
-      "x-ms-discriminator-value": "AssetFilesAggregation"
+      "x-ms-discriminator-value": "AllAssetsDistribution"
     },
     "AssetCurationDistributionDetailsRecord": {
       "type": "object",
@@ -870,7 +1097,7 @@
           "type": "string"
         }
       },
-      "x-ms-discriminator-value": "AssetFilesAggregation"
+      "x-ms-discriminator-value": "AssetCurationDistribution"
     },
     "DeletedAssetsDistributionDetailsRecord": {
       "type": "object",
@@ -914,7 +1141,7 @@
           "type": "string"
         }
       },
-      "x-ms-discriminator-value": "AssetFilesAggregation"
+      "x-ms-discriminator-value": "DeletedAssetsDistribution"
     },
     "NetNewAssetsDistributionDetailsRecord": {
       "type": "object",
@@ -964,7 +1191,7 @@
           "type": "string"
         }
       },
-      "x-ms-discriminator-value": "AssetFilesAggregation"
+      "x-ms-discriminator-value": "NetNewAssetsDistribution"
     },
     "AllAssetsDistributionSnapshotRecord": {
       "type": "object",
@@ -1181,23 +1408,55 @@
         }
       },
       "x-ms-discriminator-value": "NetNewAssetsDistribution"
+    },
+    "DataEstateHealthSnapshotRecord": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SnapshotRecord"
+        }
+      ],
+      "properties": {
+        "collectionName": {
+          "type": "string"
+        },
+        "total": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "financialClassifiedAssets": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "fullyCuratedAssets": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "dataOwnerAssigned": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "netNewAssets": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "staleAssets": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "unclassified": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "updated": {
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "DataEstateHealth"
     }
   },
   "parameters": {
-    "x-ms-account-name": {
-      "in": "header",
-      "name": "x-ms-account-name",
-      "description": "The Account Id",
-      "type": "string",
-      "x-ms-client-name": "AccountName"
-    },
-    "x-ms-account-id": {
-      "in": "header",
-      "name": "x-ms-account-id",
-      "description": "The Account Id",
-      "type": "string",
-      "x-ms-client-name": "AccountId"
-    },
     "api-version": {
       "in": "query",
       "name": "api-version",
@@ -1205,6 +1464,15 @@
       "required": true,
       "type": "string",
       "x-ms-client-name": "ApiVersion"
+    },
+    "Endpoint": {
+      "in": "path",
+      "name": "Endpoint",
+      "description": "The endpoint of your purview account. Example: https://{accountName}.purview.azure.com",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client",
+      "x-ms-skip-url-encoding": true
     }
   },
   "securityDefinitions": {
@@ -1214,8 +1482,14 @@
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
-      },
-      "description": "Azure Active Directory OAuth2 Flow."
+      }
     }
-  }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }

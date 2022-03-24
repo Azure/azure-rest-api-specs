@@ -1,4 +1,4 @@
-****# Purview
+# Purview
 
 > see https://aka.ms/autorest
 
