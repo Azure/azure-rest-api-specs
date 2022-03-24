@@ -1,0 +1,205 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NetworkManagementClient",
+    "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
+    "version": "2021-05-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/ApplicationGatewayWafDynamicManifest": {
+      "get": {
+        "operationId": "ApplicationGatewayWafDynamicManifest_Get",
+        "description": "Gets the regional application gateway waf manifet.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the regional application gateway waf manifet",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayWafDynamicManifestResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get list of service tags": {
+            "$ref": "./examples/GetApplicationGatewayWafDynamicManifest.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApplicationGatewayWafDynamicManifestResult": {
+      "type": "object",
+      "required": [
+        "DefaultRuleSetProperty",
+        "AvailableRuleSetsProperty"
+      ],
+      "properties": {
+        "DefaultRuleSet": {
+          "type": "object",
+          "description": "The default ruleset.",
+          "items": {
+            "$ref": "#/definitions/DefaultRuleSetProperty"
+          }
+        },
+        "AvailableRuleSets": {
+          "type": "object",
+          "description": "The default ruleset.",
+          "items": {
+            "$ref": "#/definitions/AvailableRuleSetsProperty"
+          }
+        }
+      },
+      "description": "Response for ApplicationGatewayWafDynamicManifest API service call."
+    },
+    "DefaultRuleSetProperty": {
+      "type": "object",
+      "properties": {
+        "ruleSetType": {
+          "type": "string",
+          "description": "The type of the web application firewall rule set."
+        },
+        "ruleSetVersion": {
+          "type": "string",
+          "description": "The version of the web application firewall rule set type."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the web application firewall rule set type."
+        }
+      },
+      "required": [
+        "ruleSetType",
+        "ruleSetVersion"
+      ],
+      "description": "the dafault web application firewall rule set."
+    },
+    "AvailableRuleSetsProperty": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayFirewallRuleSet"
+          },
+          "description": "The list of avalable application gateway rule sets."
+        }
+      },
+      "description": "A web application firewall available rule sets."
+    },
+    "ApplicationGatewayFirewallRuleSet": {
+      "properties": {
+        "ruleSetType": {
+          "type": "string",
+          "description": "The type of the web application firewall rule set."
+        },
+        "ruleSetVersion": {
+          "type": "string",
+          "description": "The version of the web application firewall rule set type."
+        },
+        "ruleGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayFirewallRuleGroup"
+          },
+          "description": "The rule groups of the web application firewall rule set."
+        }
+      },
+      "required": [
+        "ruleSetType",
+        "ruleSetVersion",
+        "ruleGroups"
+      ],
+      "description": "Properties of the web application firewall rule set."
+    },
+    "ApplicationGatewayFirewallRuleGroup": {
+      "properties": {
+        "ruleGroupName": {
+          "type": "string",
+          "description": "The name of the web application firewall rule group."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the web application firewall rule group."
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayFirewallRule"
+          },
+          "description": "The rules of the web application firewall rule group."
+        }
+      },
+      "required": [
+        "ruleGroupName",
+        "rules"
+      ],
+      "description": "A web application firewall rule group."
+    },
+    "ApplicationGatewayFirewallRule": {
+      "properties": {
+        "ruleId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The identifier of the web application firewall rule."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the web application firewall rule."
+        }
+      },
+      "required": [
+        "ruleId"
+      ],
+      "description": "A web application firewall rule."
+    }
+  }
+}
