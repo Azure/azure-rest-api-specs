@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft Cognitive Language Service - Analyze Conversations",
     "description": "This API accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversational Language Understanding, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service.",
-    "version": "2022-03-01-preview"
+    "version": "2022-05-01-preview"
   },
   "securityDefinitions": {
     "apim_key": {
@@ -170,11 +170,11 @@
           }
         },
         "x-ms-examples": {
-          "Successful Get Transcript Conversation Analysis Job Status Request": {
-            "$ref": "./examples/conversations/SuccessfulAnalyzeConversationTranscriptJobsTaskStatusRequest.json"
+          "Successful Get Conversation PII Analysis Job Status Request": {
+            "$ref": "./examples/conversations/SuccessfulConversationPIITaskStatusRequest.json"
           },
           "Successful Get Text Conversation Analysis Job Status Request": {
-            "$ref": "./examples/conversations/SuccessfulAnalyzeConversationTextJobsTaskStatusRequest.json"
+            "$ref": "./examples/conversations/SuccessfulConversationSummarizationTaskStatusRequest.json"
           }
         }
       }
@@ -1480,163 +1480,6 @@
           "description": "The generated answer by a Question Answering KB."
         }
       }
-    },"MultiLanguageConversationAnalysisInput": {
-      "required": [
-        "conversations"
-      ],
-      "properties": {
-        "conversations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Conversation"
-          }
-        }
-      }
-    },
-    "Conversation": {
-      "required": [
-        "id",
-        "language",
-        "modality",
-        "conversationItems"
-      ],
-      "properties": {
-        "id": {
-          "description": "Identifier for the conversation",
-          "type": "string"
-        },
-        "language": {
-          "description": "Default language of the conversation item in BCP-47 format",
-          "type": "string"
-        },
-        "modality": {
-          "$ref": "#/definitions/Modality"
-        },
-        "domain": {
-          "$ref": "#/definitions/ConversationDomain"
-        },
-        "conversationItems": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ConversationItemBase"
-          }
-        }
-      }
-    },
-    "Modality": {
-      "type": "string",
-      "description": "Enumeration of supported conversation modalities.",
-      "enum": [
-        "transcript",
-        "text"
-      ],
-      "x-ms-enum": {
-        "name": "Modality",
-        "modelAsString": true
-      }
-    },
-    "ConversationDomain":{
-      "type": "string",
-      "description": "Enumeration of supported conversation domains.",
-      "enum": [
-        "unknown",
-        "finance",
-        "healthcare",
-        "generic"
-      ],
-      "x-ms-enum": {
-        "name": "ConversationDomain",
-        "modelAsString": true
-      }
-    },
-    "TranscriptConversationItem": {
-      "type": "object",
-      "description": "Extra properties for supporting additional parameters for transcript conversation.",
-      "required": [
-        "content"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConversationItemBase"
-        }
-      ],
-      "properties": {
-        "content": {
-          "type": "object",
-          "$ref": "#/definitions/TranscriptContent"
-        }
-      },
-      "x-ms-discriminator-value": "transcript"
-    },
-    "TranscriptContent": {
-      "type":"object",
-      "properties": {
-        "itn": {
-          "type": "string",
-          "description": "Inverse Text Normalization representation of input. The inverse-text-normalized form is the recognized text from Microsoft’s Speech to Text API, with phone numbers, numbers, abbreviations, and other transformations applied."
-        },
-        "maskedItn": {
-          "type": "string",
-          "description": "The ITN form with profanity masking applied."
-        },
-        "text": {
-          "type": "string",
-          "description": "The display form of the recognized text from Microsoft's speech to text API, with punctuation and capitalization added."
-        },
-        "lexical": {
-          "type": "string",
-          "description": "The lexical form of the recognized text from Microsoft's Speech to Text. The actual words recognized."
-        },
-        "audioTimings": {
-          "type":"array",
-          "description": "The list of word level audio timing information",
-          "items": {
-            "$ref": "#/definitions/WordLevelTiming"
-          }
-        }
-      }
-    },
-    "RedactedTranscriptContent": {
-      "type":"object",
-      "properties": {
-        "itn": {
-          "type": "string",
-          "description": "The redacted output for ITN format input."
-        },
-        "maskedItn": {
-          "type": "string",
-          "description": "The redacted output for masked itn format input."
-        },
-        "text": {
-          "type": "string",
-          "description": "The redacted output for text format input."
-        },
-        "lexical": {
-          "type": "string",
-          "description": "The redacted output for lexical format input."
-        },
-        "audioTimings": {
-          "type":"array",
-          "description": "The list of redacted audio segments",
-          "items": {
-            "$ref": "#/definitions/AudioTiming"
-          }
-        }
-      }
-    },
-    "WordLevelTiming": {
-      "type": "object",
-      "properties": {
-        "word": {
-          "type": "string",
-          "description": "The word recognized."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AudioTiming"
-        }
-      ]
     },
     "AnalyzeConversationJobsInput": {
       "properties": {
@@ -1680,23 +1523,23 @@
       "type": "string",
       "description": "Enumeration of supported analysis tasks on a collection of conversations.",
       "enum": [
-        "ConversationPII",
-        "IssueResolutionSummarization"
+        "ConversationalPII",
+        "ConversationalSummarization"
       ],
       "x-ms-enum": {
         "name": "AnalyzeConversationLROTaskKind",
         "modelAsString": true
       }
     },
-    "AnalyzeConversationLROResultsKind": {
+    "AnalyzeConversationResultsKind": {
       "type": "string",
       "description": "Enumeration of supported Conversation Analysis task results.",
       "enum": [
-        "ConversationPIIResults",
-        "IssueResolutionSummarizationResults"
+        "ConversationalPIIResults",
+        "ConversationalSummarizationResults"
       ],
       "x-ms-enum": {
-        "name": "AnalyzeConversationLROResultsKind",
+        "name": "AnalyzeConversationResultsKind",
         "modelAsString": true
       }
     },
@@ -1713,7 +1556,7 @@
           "$ref": "#/definitions/AnalyzeConversationTask"
         }
       ],
-      "x-ms-discriminator-value": "ConversationPII"
+      "x-ms-discriminator-value": "ConversationalPII"
     },
     "ConversationPIIItemResult": {
       "type": "object",
@@ -1735,6 +1578,186 @@
           "items": {
             "$ref": "#/definitions/Entity"
           }
+        }
+      }
+    },
+    "MultiLanguageConversationAnalysisInput": {
+      "required": [
+        "conversations"
+      ],
+      "properties": {
+        "conversations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Conversation"
+          }
+        }
+      }
+    },
+    "Conversation": {
+      "type":"object",
+      "description": "A complete ordered set of utterances (spoken or written), by one or more speakers to be used for analysis.",
+      "required": [
+        "id",
+        "language",
+        "modality",
+        "conversationItems"
+      ],
+      "properties": {
+        "id": {
+          "description": "Unique identifier for the conversation.",
+          "type": "string"
+        },
+        "language": {
+          "description": "Default language of the conversation item in BCP-47 format.",
+          "type": "string"
+        },
+        "modality": {
+          "$ref": "#/definitions/Modality"
+        },
+        "domain": {
+          "$ref": "#/definitions/ConversationDomain"
+        },
+        "conversationItems": {
+          "description": "Ordered list of conversation items for the conversation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConversationItemBase"
+          }
+        }
+      }
+    },
+    "Modality": {
+      "type": "string",
+      "description": "Enumeration of supported conversational modalities.",
+      "enum": [
+        "transcript",
+        "text"
+      ],
+      "x-ms-enum": {
+        "name": "Modality",
+        "modelAsString": true
+      }
+    },
+    "ConversationDomain":{
+      "type": "string",
+      "description": "Enumeration of supported conversational domains.",
+      "enum": [
+        "unknown",
+        "finance",
+        "healthcare",
+        "generic"
+      ],
+      "x-ms-enum": {
+        "name": "ConversationDomain",
+        "modelAsString": true
+      }
+    },
+    "TranscriptConversationItem": {
+      "type": "object",
+      "description": "Additional properties for supporting transcript conversation.",
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationItemBase"
+        }
+      ],
+      "properties": {
+        "content": {
+          "type": "object",
+          "$ref": "#/definitions/TranscriptContent"
+        }
+      },
+      "x-ms-discriminator-value": "transcript"
+    },
+    "TranscriptContent": {
+      "type":"object",
+      "description": "The content generated by a speech to text provider.",
+      "properties": {
+        "itn": {
+          "type": "string",
+          "description": "Inverse Text Normalization representation of input. The inverse-text-normalized form is the recognized text from Microsoft’s Speech to Text API, with phone numbers, numbers, abbreviations, and other transformations applied."
+        },
+        "maskedItn": {
+          "type": "string",
+          "description": "The Inverse Text Normalized format with profanity masking applied."
+        },
+        "text": {
+          "type": "string",
+          "description": "The display form of the recognized text from speech to text API, with punctuation and capitalization added."
+        },
+        "lexical": {
+          "type": "string",
+          "description": "The lexical form of the recognized text from speech to text API with the actual words recognized."
+        },
+        "audioTimings": {
+          "type":"array",
+          "description": "The list of word level audio timing information",
+          "items": {
+            "$ref": "#/definitions/WordLevelTiming"
+          }
+        }
+      }
+    },
+    "RedactedTranscriptContent": {
+      "type":"object",
+      "description": "The transcript content response generated by the service with all necessary personally identifiable information redacted.",
+      "properties": {
+        "itn": {
+          "type": "string",
+          "description": "The redacted output for inverse text normalized format input."
+        },
+        "maskedItn": {
+          "type": "string",
+          "description": "The redacted output for masked inverse text normalized format input."
+        },
+        "text": {
+          "type": "string",
+          "description": "The redacted output for text (Microsoft's Speech to Text 'display') format input."
+        },
+        "lexical": {
+          "type": "string",
+          "description": "The redacted output for lexical format input."
+        },
+        "audioTimings": {
+          "type":"array",
+          "description": "The list of redacted audio segments.",
+          "items": {
+            "$ref": "#/definitions/AudioTiming"
+          }
+        }
+      }
+    },
+    "WordLevelTiming": {
+      "type": "object",
+      "description": "Word level timing information generated by the speech to text API. The words in this object should have 1:1 correspondence with the 'lexical' input to allow for audio redaction.",
+      "properties": {
+        "word": {
+          "type": "string",
+          "description": "The word recognized."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AudioTiming"
+        }
+      ]
+    },
+    "AudioTiming": {
+      "type": "object",
+      "description": "The audio timing information.",
+      "properties": {
+        "offset": {
+          "description": "Offset from start of speech audio, in ticks. 1 tick = 100 ns.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "duration": {
+          "description": "Duration of word articulation, in ticks. 1 tick = 100 ns.",
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
@@ -1777,33 +1800,20 @@
         }
       }
     },
-    "AudioTiming": {
+    "AnalyzeConversationConversationPIIResult": {
       "type": "object",
-      "properties": {
-        "offset": {
-          "description": "Offset from start of speech audio, in ticks. 1 tick = 100 ns.",
-          "type": "integer",
-          "format": "int64"
-        },
-        "duration": {
-          "description": "Duration of word articulation, in ticks. 1 tick = 100 ns.",
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
-    "AnalyzeConversationConversationPiiResult": {
-      "type": "object",
+      "description": "Result from the personally identifiable information detection and redaction operation performed on a list of conversations.",
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeConversationLROResult"
+          "$ref": "#/definitions/AnalyzeConversationJobResult"
         }
       ],
       "properties": {
         "results": {
+          "description": "Enumeration of personally identifiable information detection and redaction operation results for each conversation.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ConversationPiiResult"
+            "$ref": "#/definitions/ConversationPIIResult"
           }
         }
       },
@@ -1812,12 +1822,14 @@
       ],
       "x-ms-discriminator-value": "ConversationPIIResults"
     },
-    "ConversationPiiResult": {
+    "ConversationPIIResult": {
+      "description": "The result from PII detection and redaction operation for each conversation",
       "required": [
         "conversationItems"
       ],
       "properties": {
         "conversationItems": {
+          "description": "Enumeration of PII detection and redaction operation results for all the conversation items in a conversation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConversationPIIItemResult"
@@ -1830,22 +1842,20 @@
     },
     "ConversationPIITaskParameters": {
       "type": "object",
-      "description": "Supported parameters for a Conversation PII task.",
+      "description": "Supported parameters for a Conversational PII detection and redaction task.",
       "properties": {
         "piiCategories": {
           "$ref": "#/definitions/ConversationPIICategories"
         },
         "includeAudioRedaction": {
           "type": "boolean",
-          "default": false
-        },
-        "showDetectedEntityTypes": {
-          "type": "boolean",
+          "description": "Flag to indicate if audio redaction is requested. By default audio redaction will not be performed.",
           "default": false
         },
         "redactionSource":{
           "type": "string",
-          "$ref": "#/definitions/ContentSource"
+          "description": "For transcript conversations, this parameter provides information regarding which content type (ITN, Text, Lexical, Masked ITN) should be used for redaction. The entities detected the service in will correspond to the text type selected here.",
+          "$ref": "#/definitions/TranscriptContentType"
         }
       },
       "allOf": [
@@ -1858,7 +1868,7 @@
       ]
     },
     "ConversationPIICategories": {
-      "description": "(Optional) Describes the PII categories to return for detection. By default default categories will be returned which will vary with languages.",
+      "description": "(Optional) Describes the PII categories to return for detection. If not provided, 'default' categories will be returned which will vary with languages.",
       "items": {
         "type": "string",
         "x-ms-enum": {
@@ -1881,9 +1891,9 @@
       "type": "array",
       "uniqueItems": true
     },
-    "ContentSource": {
+    "TranscriptContentType": {
       "type": "string",
-      "description": "Enumeration of supported transcript content source types.",
+      "description": "Enumeration of supported transcript content types.",
       "enum": [
         "lexical",
         "itn",
@@ -1891,16 +1901,16 @@
         "text"
       ],
       "x-ms-enum": {
-        "name": "ContentSource",
+        "name": "TranscriptContentType",
         "modelAsString": true
       }
     },
-    "AnalyzeConversationIssueResolutionSummarizationLROTask": {
+    "AnalyzeConversationSummarizationTask": {
       "type": "object",
-      "description": "Task definition for Issue Resolution Summarization in conversation.",
+      "description": "Task definition for conversational summarization.",
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/IssueResolutionSummarizationTaskParameters"
+          "$ref": "#/definitions/ConversationSummarizationTaskParameters"
         }
       },
       "allOf": [
@@ -1908,11 +1918,14 @@
           "$ref": "#/definitions/AnalyzeConversationTask"
         }
       ],
-      "x-ms-discriminator-value": "IssueResolutionSummarizationTasks"
+      "x-ms-discriminator-value": "ConversationalSummarization"
     },
-    "IssueResolutionSummarizationTaskParameters": {
+    "ConversationSummarizationTaskParameters": {
       "type": "object",
-      "description": "Supported parameters for an Issue Resolution Summarization task.",
+      "description": "Supported parameters for an conversational summarization task.",
+      "required": [
+        "summaryAspects"
+      ],
       "properties": {
         "summaryAspects": {
           "type": "string"
@@ -1927,8 +1940,9 @@
         }
       ]
     },
-    "AnalyzeConversationIssueResolutionSummarizationLROResult": {
+    "AnalyzeConversationSummarizationResult": {
       "type": "object",
+      "description": "Result for the summarization task on the conversation.",
       "properties": {
         "results": {
           "$ref": "#/definitions/SummaryResult"
@@ -1936,13 +1950,13 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeConversationLROResult"
+          "$ref": "#/definitions/AnalyzeConversationJobResult"
         }
       ],
       "required": [
         "results"
       ],
-      "x-ms-discriminator-value": "IssueResolutionSummarizationResults"
+      "x-ms-discriminator-value": "ConversationalSummarizationResults"
     },
     "SummaryResult": {
       "type": "object",
@@ -2001,6 +2015,7 @@
       ]
     },
     "AnalyzeConversationJobState": {
+      "description": "Contains the status of the analyze conversations job submitted along with related statistics.",
       "allOf": [
         {
           "$ref": "common.json#/definitions/JobState"
@@ -2014,6 +2029,7 @@
       ]
     },
     "AnalyzeConversationJobStatistics": {
+      "description": "Contains the statistics for the job submitted.",
       "properties": {
         "statistics": {
           "$ref": "#/definitions/ConversationRequestStatistics"
@@ -2022,25 +2038,31 @@
       "type": "object"
     },
     "ConversationTasksState": {
+      "description": "Contains the state for the tasks being executed as part of the analyze conversation job submitted.",
       "properties": {
         "tasks": {
           "properties": {
             "completed": {
+              "description": "Count of tasks completed successfully.",
               "type": "integer"
             },
             "failed": {
+              "description": "Count of tasks that failed.",
               "type": "integer"
             },
             "inProgress": {
+              "description": "Count of tasks in progress currently.",
               "type": "integer"
             },
             "total": {
+              "description": "Total count of tasks submitted as part of the job.",
               "type": "integer"
             },
             "items": {
+              "description": "List of results from tasks (if available).",
               "type": "array",
               "items": {
-                "$ref": "#/definitions/AnalyzeConversationLROResult"
+                "$ref": "#/definitions/AnalyzeConversationResult"
               }
             }
           },
@@ -2058,12 +2080,13 @@
       ],
       "type": "object"
     },
-    "AnalyzeConversationLROResult": {
+    "AnalyzeConversationJobResult": {
       "type": "object",
+      "description": "Container for results for all tasks in the conversation job.",
       "discriminator": "kind",
       "properties": {
         "kind": {
-          "$ref": "#/definitions/AnalyzeConversationLROResultsKind"
+          "$ref": "#/definitions/AnalyzeConversationResultsKind"
         }
       },
       "allOf": [
@@ -2080,6 +2103,7 @@
     },
     "ConversationResultBase": {
       "type": "object",
+      "description": "Shared attributes for all conversational task results.",
       "required": [
         "id",
         "warnings"
@@ -2103,6 +2127,7 @@
     },
     "ConversationError": {
       "type": "object",
+      "description": "Contains details of errors encountered during a job execution.",
       "required": [
         "id",
         "error"
@@ -2121,6 +2146,7 @@
     },
     "ConversationWarning": {
       "type": "object",
+      "description": "Contains details of warnings encountered during a job execution.",
       "required": [
         "code",
         "message"
@@ -2129,7 +2155,11 @@
         "code": {
           "type": "string",
           "enum": [
-            "ConversationTruncated"
+            "ConversationTruncated",
+            "IssueGenerationFailure",
+            "MissingRedactionSourceText",
+            "MisalignedAudioTiming",
+            "ResolutionGenerationFailure"
           ],
           "x-ms-enum": {
             "name": "WarningCodeValue",
@@ -2149,6 +2179,7 @@
     },
     "ConversationStatistics": {
       "type": "object",
+      "description": "If showStats=true was specified in the request this field will contain information about the conversation payload.",
       "required": [
         "transactionsCount"
       ],
@@ -2158,11 +2189,11 @@
           "format": "int32",
           "description": "Number of transactions for the conversation."
         }
-      },
-      "description": "If showStats=true was specified in the request this field will contain information about the conversation payload."
+      }
     },
     "ConversationRequestStatistics": {
       "type": "object",
+      "description": "if showStats=true was specified in the request this field will contain information about the request payload.",
       "required": [
         "conversationsCount",
         "validConversationsCount",
@@ -2190,8 +2221,7 @@
           "format": "int64",
           "description": "Number of transactions for the request."
         }
-      },
-      "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+      }
     }
   },
   "parameters": {

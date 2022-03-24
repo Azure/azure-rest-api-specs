@@ -1,7 +1,7 @@
 {
   "parameters": {
     "Ocp-Apim-Subscription-Key": "{API key}",
-    "api-version": "2022-04-01-preview",
+    "api-version": "2022-05-01-preview",
     "Endpoint": "{Endpoint}",
     "jobId": "{Job ID}",
     "body": {
@@ -9,14 +9,14 @@
       "analysisInput": {
         "conversations": [
           {
-            "id": "01",
+            "id": "1",
             "language": "en",
             "modality": "transcript",
             "domain": "neutral",
             "conversationItems": [
               {
                 "participantId": "1",
-                "id": "01",
+                "id": "1",
                 "modality": "transcript",
                 "content":{
                   "text": "Good morning John Doe.",
@@ -53,14 +53,13 @@
       },
       "tasks": [
         {
-          "taskName": "Transcription PII",
-          "kind": "TranscriptionPII",
+          "taskName": "Conversation PII",
+          "kind": "ConversationalPII",
           "parameters": {
             "modelVersion": "latest",
             "piiCategories": "all",
             "redactionSource": "lexical",
-            "includeAudioRedaction": true,
-            "showDetectedEntityTypes": true
+            "includeAudioRedaction": true
           }
         }
       ]
@@ -69,7 +68,7 @@
   "responses": {
     "202": {
       "headers": {
-        "Operation-Location": "{Endpoint}/language/analyze-conversation/jobs/{jobId}?api-version=2022-04-01-preview"
+        "Operation-Location": "{Endpoint}/language/analyze-conversation/jobs/{jobId}?api-version=2022-05-01-preview"
       }
     }
   }

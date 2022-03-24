@@ -1,11 +1,11 @@
 {
   "parameters": {
     "Ocp-Apim-Subscription-Key": "{API key}",
-    "api-version": "2022-04-01-preview",
+    "api-version": "2022-05-01-preview",
     "Endpoint": "{Endpoint}",
     "jobId": "{Job ID}",
     "body": {
-      "displayName": "Analyze conversations from xxx",
+      "displayName": "Analyze conversations from Contoso meeting",
       "analysisInput": {
         "conversations": [
           {
@@ -38,9 +38,9 @@
         "tasks": [
           {
             "taskName": "analyze 1",
-            "kind": "IssueResolutionSummarization",
+            "kind": "ConversationalSummarization",
             "parameters": {
-              "modelVersion": "2022-04-01",
+              "modelVersion": "2022-05-01-preview",
               "summaryAspects ": "issue, resolution"
             }
           }
@@ -51,7 +51,7 @@
   "responses": {
     "202": {
       "headers": {
-        "Operation-Location": "{Endpoint}/language/analyze-conversation/jobs/{jobId}?api-version=2022-04-01-preview"
+        "Operation-Location": "{Endpoint}/language/analyze-conversation/jobs/{jobId}?api-version=2022-05-01-preview"
       }
     }
   }
