@@ -1298,10 +1298,12 @@
 		  "type":"object",
 		  "properties":{
 			 "InputFormat":{
-				"$ref":"#/definitions/InputFormat"
+				"description": "Input Format to be used", 
+				"type": "string"
 			 },
 			 "OutputFormat":{
-				"$ref":"#/definitions/OutputFormat"
+				"description": "Input Format to be used", 
+				"type": "string"
 			 },
 			 "FormatType":{
 				"$ref":"#/definitions/FormatType"
@@ -1989,30 +1991,6 @@
 		  ],
 		  "x-ms-enum":{
 			 "name":"SortOrder",
-			 "modelAsString":false
-		  }
-	   },
-	   "InputFormat":{
-		  "description":"Input Format to be used",
-		  "type":"string",
-		  "enum":[
-			 "org.apache.hadoop.mapred.SequenceFileInputFormat",
-			 "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat"
-		  ],
-		  "x-ms-enum":{
-			 "name":"InputFormat",
-			 "modelAsString":false
-		  }
-	   },
-	   "OutputFormat":{
-		  "description":"Output Format to be used",
-		  "type":"string",
-		  "enum":[
-			 "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-			 "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat"
-		  ],
-		  "x-ms-enum":{
-			 "name":"OutputFormat",
 			 "modelAsString":false
 		  }
 	   },
