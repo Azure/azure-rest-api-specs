@@ -45,6 +45,7 @@ These settings apply only when `--tag=package-2022-03` is specified on the comma
 ``` yaml $(tag) == 'package-2022-03'
 input-file:
   - Microsoft.ContainerService/stable/2022-03-01/managedClusters.json
+  - Microsoft.ContainerService/stable/2022-03-01/location.json
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
