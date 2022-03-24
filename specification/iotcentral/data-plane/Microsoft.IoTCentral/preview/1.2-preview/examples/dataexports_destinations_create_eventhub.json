@@ -1,0 +1,32 @@
+{
+  "title": "Create data export Event Hub destination",
+  "description": "Create an Event hub destination with an Id.",
+  "parameters": {
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "destinationId": "destination1",
+    "api-version": "1.2-preview",
+    "body": {
+      "displayName": "Event Hub",
+      "type": "eventhubs@v1",
+      "authorization": {
+        "type": "connectionString",
+        "connectionString": "Endpoint=sb://[hubName].servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=[Key];EntityPath=entityPath1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "destination1",
+        "displayName": "Event Hub",
+        "type": "eventhubs@v1",
+        "authorization": {
+          "type": "connectionString",
+          "connectionString": "Endpoint=sb://[hubName].servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=*****;EntityPath=entityPath1"
+        },
+        "status": "waiting"
+      }
+    }
+  }
+}
