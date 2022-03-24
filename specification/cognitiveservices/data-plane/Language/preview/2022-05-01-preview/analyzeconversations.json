@@ -85,7 +85,7 @@
         }
       }
     },
-    "/analyze-conversation/jobs": {
+    "/analyze-conversations/jobs": {
       "post": {
         "consumes": [
           "application/json"
@@ -136,7 +136,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/analyze-conversation/jobs/{jobId}": {
+    "/analyze-conversations/jobs/{jobId}": {
       "get": {
         "produces": [
           "application/json"
@@ -289,20 +289,8 @@
           "description": "The Id of a ConversationItem",
           "type": "string"
         },
-        "language": {
-          "description": "The input language of a ConversationItem in BCP 47 language representation.",
-          "type": "string"
-        },
         "modality": {
-          "description": "The modality (format) of ConversationItem (e.g., Text, Transcript)",
-          "type": "string",
-          "enum": [
-            "text"
-          ],
-          "x-ms-enum": {
-            "name": "modality",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/Modality"
         }
       },
       "required": [
@@ -1530,7 +1518,7 @@
         "conversationItems": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ConversationItem"
+            "$ref": "#/definitions/ConversationItemBase"
           }
         }
       }
@@ -1561,38 +1549,16 @@
         "modelAsString": true
       }
     },
-    "ConversationItem": {
-      "description": "One single conversation item.",
-      "discriminator": "modality",
-      "required": [
-        "id",
-        "participantId",
-        "modality"
-      ],
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the conversation item."
-        },
-        "participantId": {
-          "type": "string",
-          "description": "Identifier for the participant."
-        },
-        "language": {
-          "type": "string",
-          "description": "Optional property to override the language of the conversation item in BCP-47 format. If the property is missing the language will be defaulted to one specified in the parent conversation object."
-        },
-        "modality": {
-          "description": "Property to set the modality of the conversation item.",
-          "$ref": "#/definitions/Modality"
-        }
-      }
-    },
     "TranscriptConversationItem": {
       "type": "object",
       "description": "Extra properties for supporting additional parameters for transcript conversation.",
       "required": [
         "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationItemBase"
+        }
       ],
       "properties": {
         "content": {
@@ -1714,7 +1680,7 @@
       "type": "string",
       "description": "Enumeration of supported analysis tasks on a collection of conversations.",
       "enum": [
-        "TranscriptionPii",
+        "ConversationPII",
         "IssueResolutionSummarization"
       ],
       "x-ms-enum": {
@@ -1726,7 +1692,7 @@
       "type": "string",
       "description": "Enumeration of supported Conversation Analysis task results.",
       "enum": [
-        "TranscriptionPiiResults",
+        "ConversationPIIResults",
         "IssueResolutionSummarizationResults"
       ],
       "x-ms-enum": {
@@ -1734,12 +1700,12 @@
         "modelAsString": true
       }
     },
-    "AnalyzeConversationTranscriptionPiiLROTask": {
+    "AnalyzeConversationPIITask": {
       "type": "object",
-      "description": "Task definition for a PII redaction in transcriptions.",
+      "description": "Task definition for a PII redaction in conversations.",
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/TranscriptionPiiTaskParameters"
+          "$ref": "#/definitions/ConversationPIITaskParameters"
         }
       },
       "allOf": [
@@ -1747,9 +1713,9 @@
           "$ref": "#/definitions/AnalyzeConversationTask"
         }
       ],
-      "x-ms-discriminator-value": "TranscriptionPii"
+      "x-ms-discriminator-value": "ConversationPII"
     },
-    "TranscriptionPiiConversationItemResult": {
+    "ConversationPIIItemResult": {
       "type": "object",
       "required": [
         "id",
@@ -1826,7 +1792,7 @@
         }
       }
     },
-    "AnalyzeConversationTranscriptionPiiLROResult": {
+    "AnalyzeConversationConversationPiiResult": {
       "type": "object",
       "allOf": [
         {
@@ -1837,16 +1803,16 @@
         "results": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TranscriptionPiiResult"
+            "$ref": "#/definitions/ConversationPiiResult"
           }
         }
       },
       "required": [
         "results"
       ],
-      "x-ms-discriminator-value": "TranscriptionPiiResults"
+      "x-ms-discriminator-value": "ConversationPIIResults"
     },
-    "TranscriptionPiiResult": {
+    "ConversationPiiResult": {
       "required": [
         "conversationItems"
       ],
@@ -1854,7 +1820,7 @@
         "conversationItems": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TranscriptionPiiConversationItemResult"
+            "$ref": "#/definitions/ConversationPIIItemResult"
           }
         },
         "allOf": {
@@ -1862,12 +1828,12 @@
         }
       }
     },
-    "TranscriptionPiiTaskParameters": {
+    "ConversationPIITaskParameters": {
       "type": "object",
-      "description": "Supported parameters for a Transcription PII task.",
+      "description": "Supported parameters for a Conversation PII task.",
       "properties": {
         "piiCategories": {
-          "$ref": "#/definitions/TranscriptionPiiCategories"
+          "$ref": "#/definitions/ConversationPIICategories"
         },
         "includeAudioRedaction": {
           "type": "boolean",
@@ -1891,12 +1857,12 @@
         }
       ]
     },
-    "TranscriptionPiiCategories": {
+    "ConversationPIICategories": {
       "description": "(Optional) Describes the PII categories to return for detection. By default default categories will be returned which will vary with languages.",
       "items": {
         "type": "string",
         "x-ms-enum": {
-          "name": "TranscriptionPiiCategory",
+          "name": "ConversationPIICategory",
           "modelAsString": true
         },
         "enum": [
