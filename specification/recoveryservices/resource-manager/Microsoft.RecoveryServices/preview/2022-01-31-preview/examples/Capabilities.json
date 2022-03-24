@@ -6,9 +6,14 @@
     "input": {
       "type": "Microsoft.RecoveryServices/Vaults",
       "properties": {
-        "dnsZones": {
-          "subResource": "AzureBackup"
-        }
+        "dnsZones": [
+          {
+            "subResource": "AzureBackup"
+          },
+          {
+            "subResource": "AzureSiteRecovery"
+          }
+        ]
       }
     }
   },
@@ -17,14 +22,22 @@
       "body": {
         "type": "Microsoft.RecoveryServices/Vaults",
         "properties": {
-          "dnsZones": {
-            "subResource": "AzureBackup",
-            "requiredZoneNames": [
-              "privatelink.wus.backup.windowsazure.com",
-              "privatelink.queue.core.windows.net",
-              "privatelink.blob.core.windows.net"
-            ]
-          }
+          "dnsZones": [
+            {
+              "subResource": "AzureBackup",
+              "requiredZoneNames": [
+                "privatelink.wus.backup.windowsazure.com",
+                "privatelink.queue.core.windows.net",
+                "privatelink.blob.core.windows.net"
+              ]
+            },
+            {
+              "subResource": "AzureSiteRecovery",
+              "requiredZoneNames": [
+                "privatelink.siterecovery.windowsazure.com"
+              ]
+            }
+          ]
         }
       }
     }
