@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "exclusionTestRG",
+    "migratorName": "exclusionTestMigrator",
+    "api-version": "2022-01-01-preview",
+    "exclusionTemplateName": "exclusionName",
+    "exclusion": {
+      "location": "East US",
+      "properties": {
+        "exclusionKind": "DateExclusion",
+        "description": "Explains what this exclusion does",
+        "dateForExclusion": "2018-12-10T13:45:00.000Z"
+      },
+      "tags": {
+        "tagKey1": "TagValue1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/exclusionTestRG/providers/Wandisco.Fusion/migrators/migratorName/exclusionTemplates/exclusionName",
+        "name": "exclusionName",
+        "properties": {
+          "exclusionKind": "DateExclusion",
+          "description": "Explains what this exclusion does",
+          "dateForExclusion": "2018-12-10T13:45:00.000Z",
+          "provisioningState": "Accepted"
+        },
+        "location": "East US",
+        "type": "Wandisco.Fusion/migrators/exclusionTemplates",
+        "tags": {
+          "tagKey1": "TagValue1"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/exclusionTestRG/providers/Wandisco.Fusion/migrators/migratorName/exclusionTemplates/exclusionName",
+        "name": "exclusionName",
+        "properties": {
+          "exclusionKind": "DateExclusion",
+          "description": "Explains what this exclusion does",
+          "dateForExclusion": "2018-12-10T13:45:00.000Z",
+          "provisioningState": "Accepted"
+        },
+        "location": "East US",
+        "type": "Wandisco.Fusion/migrators/exclusionTemplates",
+        "tags": {
+          "tagKey1": "TagValue1"
+        },
+        "systemData": {
+          "createdBy": "00000000-1111-2222-3333-444444444444",
+          "createdByType": "User",
+          "createdAt": "2021-01-13T18:40:37.4690314Z",
+          "lastModifiedBy": "00000000-1111-2222-3333-444444444444",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-01-13T18:40:37.4690314Z"
+        }
+      }
+    }
+  }
+}
