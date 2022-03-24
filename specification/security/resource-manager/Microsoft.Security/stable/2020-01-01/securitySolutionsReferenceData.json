@@ -69,45 +69,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/securitySolutionsReferenceData": {
-      "get": {
-        "x-ms-examples": {
-          "Get security solutions from a security data location": {
-            "$ref": "./examples/SecuritySolutionsReferenceData/GetSecuritySolutionsReferenceDataSubscriptionLocation_example.json"
-          }
-        },
-        "tags": [
-          "SecuritySolutionsReferenceData"
-        ],
-        "description": "Gets list of all supported Security Solutions for subscription and location.",
-        "operationId": "SecuritySolutionsReferenceData_ListByHomeRegion",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/securitySolutionsReferenceDataList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -136,9 +97,6 @@
       "allOf": [
         {
           "$ref": "../../../common/v1/types.json#/definitions/Resource"
-        },
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/Location"
         }
       ]
     },
