@@ -6,7 +6,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ```yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-payload-flattening-threshold: 2
 namespace: azure.mgmt.providerhub
 package-name: azure-mgmt-providerhub
 package-version: 2020-11-20
