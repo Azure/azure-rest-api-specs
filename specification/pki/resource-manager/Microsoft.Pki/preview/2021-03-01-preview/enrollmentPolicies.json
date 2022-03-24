@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "MicrosoftPki",
-    "description": "Describes PKI (Private Key Infrastructure) resource and operations.",
+    "description": "Describes an enrollment policy resource and operations.",
     "version": "2021-03-01-preview"
   },
   "host": "management.azure.com",
@@ -34,47 +34,14 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.Pki/operations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pki/pkis/{pkiName}/enrollmentPolicies/{enrollmentPolicyName}": {
       "get": {
-        "description": "Lists all of the available RP operations.",
-        "operationId": "Operations_List",
+        "operationId": "EnrollmentPolicy_Get",
+        "description": "Gets the specified enrollment policy.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
-            }
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
-          "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ListOperations_MaximumSet": {
-            "$ref": "./examples/ListOperations_MaximumSet.json"
-          },
-          "ListOperations_MinimumSet": {
-            "$ref": "./examples/ListOperations_MinimumSet.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pki/pkis/{pkiName}": {
-      "get": {
-        "operationId": "Pki_Get",
-        "description": "Gets the specified PKI resource.",
-        "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
@@ -86,17 +53,21 @@
             "description": "The name of the PKI resource."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "name": "enrollmentPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the enrollment policy resource."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "The definition of the requested PKI resource is returned in the response.",
+            "description": "The definition of the requested enrollment policy resource is returned in the response.",
             "schema": {
-              "$ref": "#/definitions/ApiPki"
+              "$ref": "#/definitions/ApiEnrollmentPolicy"
             }
           },
           "default": {
@@ -107,15 +78,18 @@
           }
         },
         "x-ms-examples": {
-          "Get a PKI resource": {
-            "$ref": "./examples/Pkis_Get.json"
+          "Get an enrollment policy": {
+            "$ref": "./examples/EnrollmentPolicies_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "Pki_Create",
-        "description": "Creates or updates a PKI resource.",
+        "operationId": "EnrollmentPolicy_Create",
+        "description": "Creates or updates an enrollment policy.",
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
@@ -125,34 +99,38 @@
             "required": true,
             "type": "string",
             "description": "The name of the PKI resource."
+          },
+          {
+            "name": "enrollmentPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the enrollment policy resource."
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ApiPki"
+              "$ref": "#/definitions/ApiEnrollmentPolicy"
             },
-            "description": "The requested definition of the PKI resource being created or updated."
+            "description": "The requested definition of the enrollment policy resource being created or updated."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The specified resource was created or updated and its definition is returned in the response.",
             "schema": {
-              "$ref": "#/definitions/ApiPki"
+              "$ref": "#/definitions/ApiEnrollmentPolicy"
             }
           },
           "201": {
             "description": "The request has been accepted. The response contains an operation URI that can be queried to find the current state of the operation.",
             "schema": {
-              "$ref": "#/definitions/ApiPki"
+              "$ref": "#/definitions/ApiEnrollmentPolicy"
             }
           },
           "default": {
@@ -163,8 +141,8 @@
           }
         },
         "x-ms-examples": {
-          "Create a new PKI resource or update an existing one": {
-            "$ref": "./examples/Pkis_Create.json"
+          "Create a new enrollment policy or update an existing one": {
+            "$ref": "./examples/EnrollmentPolicies_Create.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -173,9 +151,12 @@
         }
       },
       "patch": {
-        "operationId": "Pki_Update",
-        "description": "Updates some properties of a PKI resource, while not touching other properties.",
+        "operationId": "EnrollmentPolicy_Update",
+        "description": "Updates some properties of an enrollment policy, while not touching other properties.",
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
@@ -187,26 +168,30 @@
             "description": "The name of the PKI resource."
           },
           {
+            "name": "enrollmentPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the enrollment policy."
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ApiPki_Patch"
+              "$ref": "#/definitions/ApiEnrollmentPolicy_Patch"
             },
-            "description": "The requested definition of the PKI resource being patched. Properties that are not being modified must be absent or null."
+            "description": "The requested definition of the enrollment policy being patched. Properties that are not being modified must be absent or null."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The specified resource was created or updated and its definition is returned in the response.",
             "schema": {
-              "$ref": "#/definitions/ApiPki"
+              "$ref": "#/definitions/ApiEnrollmentPolicy"
             }
           },
           "202": {
@@ -226,8 +211,8 @@
           }
         },
         "x-ms-examples": {
-          "Update properties of an existing PKI": {
-            "$ref": "./examples/Pkis_Update.json"
+          "Update properties of an existing enrollment policy": {
+            "$ref": "./examples/EnrollmentPolicies_Update.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -236,9 +221,12 @@
         }
       },
       "delete": {
-        "operationId": "Pki_Delete",
-        "description": "Deletes the specified PKI resource.",
+        "operationId": "EnrollmentPolicy_Delete",
+        "description": "Deletes the specified enrollment policy.",
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
@@ -250,10 +238,14 @@
             "description": "The name of the PKI resource."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "name": "enrollmentPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the enrollment policy."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -280,8 +272,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete an existing PKI": {
-            "$ref": "./examples/Pkis_Delete.json"
+          "Delete an existing enrollment policy": {
+            "$ref": "./examples/EnrollmentPolicies_Delete.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -290,62 +282,33 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Pki/pkis": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pki/pkis/{pkiName}/enrollmentPolicies": {
       "get": {
-        "operationId": "Pki_ListBySubscription",
-        "description": "Lists all the PKI resources in a subscription.",
+        "operationId": "EnrollmentPolicy_ListByPki",
+        "description": "Lists all the enrollment policies in a PKI resource.",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The list of PKI resources is returned in the response.",
-            "schema": {
-              "$ref": "#/definitions/ApiPkiList"
-            }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List PKIs by Subscription Id": {
-            "$ref": "./examples/Pkis_ListBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pki/pkis": {
-      "get": {
-        "operationId": "Pki_ListByResourceGroup",
-        "description": "Lists all the PKI resources in a resource group.",
-        "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "name": "pkiName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the PKI resource."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "The list of PKI resources is returned in the response.",
+            "description": "The list of enrollment policies is returned in the response.",
             "schema": {
-              "$ref": "#/definitions/ApiPkiList"
+              "$ref": "#/definitions/ApiEnrollmentPolicyList"
             }
           },
           "default": {
@@ -356,8 +319,8 @@
           }
         },
         "x-ms-examples": {
-          "List PKIs by Resource Group": {
-            "$ref": "./examples/Pkis_ListByResourceGroup.json"
+          "List enrollment policies by PKI": {
+            "$ref": "./examples/EnrollmentPolicies_ListByPki.json"
           }
         },
         "x-ms-pageable": {
@@ -367,8 +330,8 @@
     }
   },
   "definitions": {
-    "ApiPki": {
-      "description": "Represents a PKI resource.",
+    "ApiEnrollmentPolicy": {
+      "description": "Represents an enrollment policy.",
       "type": "object",
       "properties": {
         "systemData": {
@@ -376,25 +339,23 @@
           "description": "Resource system data."
         },
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ApiPkiProperties",
-          "description": "The PKI properties."
+          "$ref": "#/definitions/ApiEnrollmentPolicyProperties",
+          "description": "Free-text description of this enrollment policy."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ]
     },
-    "ApiPki_Patch": {
-      "description": "Contains the properties that must be updated in a PKI resource.",
+    "ApiEnrollmentPolicy_Patch": {
+      "description": "Contains the properties that must be updated in an enrollment policy.",
       "type": "object",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ApiPkiProperties",
-          "description": "The PKI properties."
+          "$ref": "#/definitions/ApiEnrollmentPolicyProperties",
+          "description": "Free-text description of this enrollment policy."
         },
         "tags": {
           "type": "object",
@@ -410,13 +371,13 @@
         }
       }
     },
-    "ApiPkiProperties": {
-      "description": "The properties of a PKI resource.",
+    "ApiEnrollmentPolicyProperties": {
+      "description": "Represents the properties of an enrollment policy.",
       "type": "object",
       "properties": {
         "description": {
           "type": "string",
-          "description": "Free-text description of this PKI resource."
+          "description": "Free-text description of this enrollment policy."
         },
         "provisioningState": {
           "type": "string",
@@ -435,28 +396,44 @@
             "modelAsString": true
           }
         },
-        "uri": {
+        "certificateAuthorityResource": {
           "type": "string",
-          "description": "The base URI for requests to this PKI.",
+          "description": "The resource identifier of the CA that issues certificates for this policy."
+        },
+        "enrollmentUri": {
+          "type": "string",
+          "description": "The base URI for enrollment operations.",
           "readOnly": true
+        },
+        "banners": {
+          "type": "array",
+          "description": "The list of active banners for this enrollment policy.",
+          "readOnly": true,
+          "items": {
+            "$ref": "definitions.json#/definitions/ResourceBanner"
+          },
+          "maxItems": 100,
+          "x-ms-identifiers": []
         }
       }
     },
-    "ApiPkiList": {
-      "description": "The response of a list PKI resources operation.",
+    "ApiEnrollmentPolicyList": {
+      "description": "The response of a list enrollment policies operation.",
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ApiPki"
+            "$ref": "#/definitions/ApiEnrollmentPolicy"
           },
-          "description": "A list of PKI resources."
+          "description": "A list of enrollment policies.",
+          "maxItems": 100
         },
         "nextLink": {
           "type": "string",
           "readOnly": true,
-          "description": "The URL to get the next set of results."
+          "description": "The URL to get the next set of results.",
+          "maxLength": 1000
         }
       }
     }

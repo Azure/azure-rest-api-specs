@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2021-03-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "pkiName": "TestPki",
+    "enrollmentPolicyName": "TestPolicy"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Pki/pkis/TestPki/enrollmentPolicies/TestPolicy",
+        "name": "TestPolicy",
+        "type": "Microsoft.Pki/pkis/enrollmentPolicies",
+        "systemData": {
+          "createdBy": "saruman",
+          "createdByType": "User",
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "lastModifiedBy": "gandalf",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
+        },
+        "properties": {
+          "provisioningState": "Success",
+          "description": "This is a test enrollment policy.",
+          "certificateAuthorityResource": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Pki/pkis/TestPki/enrollmentPolicies/Ca1.2",
+          "enrollmentUri": "http://testpki.eastus.pki.azure.net/enrollmentPolicies/testpolicy/enroll",
+          "banners": [
+            {
+              "createdAt": "2021-06-14T17:51:12.654Z",
+              "category": "warning",
+              "code": "CannotIssueEndEntityCertificates",
+              "properties": {
+                "caName": "Ca1.2",
+                "expires": "2023-06-14T18:00:00.0Z"
+              },
+              "description": "The specified certificate authority Ca1.2 is not allowed to issue end-entity certificates."
+            }
+          ]
+        }
+      }
+    }
+  }
+}

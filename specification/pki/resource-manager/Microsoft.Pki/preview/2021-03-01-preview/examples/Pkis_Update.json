@@ -3,7 +3,12 @@
     "api-version": "2021-03-01-preview",
     "subscriptionId": "subid",
     "resourceGroupName": "rg1",
-    "pkiName": "TestPki"
+    "pkiName": "TestPki",
+    "parameters": {
+      "properties": {
+        "description": "This is a patched PKI"
+      }
+    }
   },
   "responses": {
     "200": {
@@ -21,10 +26,15 @@
           "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
         },
         "properties": {
-          "description": "This is a test PKI",
+          "description": "This is a patched PKI",
           "provisioningState": "Success",
           "uri": "https://testpki.eastus.pki.azure.net/"
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "http://eastus.management.pki.azure-int.net/api/RequestStatus/reqid"
       }
     }
   }

@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2021-03-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "pkiName": "TestPki",
+    "enrollmentPolicyName": "TestPolicy",
+    "parameters": {
+      "properties": {
+        "description": "This is a patched enrollment policy."
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Pki/pkis/TestPki/enrollmentPolicies/TestPolicy",
+        "name": "TestPolicy",
+        "type": "Microsoft.Pki/pkis/enrollmentPolicies",
+        "systemData": {
+          "createdBy": "saruman",
+          "createdByType": "User",
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "lastModifiedBy": "gandalf",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "description": "This is a patched enrollment policy.",
+          "certificateAuthorityResource": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Pki/pkis/TestPki/enrollmentPolicies/Ca1.2",
+          "enrollmentUri": "http://testpki.eastus.pki.azure.net/enrollmentPolicies/testpolicy/enroll"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "http://eastus.management.pki.azure-int.net/api/RequestStatus/reqid"
+      }
+    }
+  }
+}
