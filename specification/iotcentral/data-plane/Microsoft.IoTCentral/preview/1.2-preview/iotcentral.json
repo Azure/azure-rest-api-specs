@@ -27,6 +27,29 @@
     "application/json"
   ],
   "definitions": {
+    "ADGroupUser": {
+      "x-ms-discriminator-value": "adGroup",
+      "allOf": [
+        {
+          "$ref": "#/definitions/User"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "description": "The AAD tenant ID of the AD Group.",
+          "type": "string"
+        },
+        "objectId": {
+          "description": "The AAD object ID of the AD Group.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tenantId",
+        "objectId"
+      ]
+    },
     "ApiToken": {
       "allOf": [
         {
