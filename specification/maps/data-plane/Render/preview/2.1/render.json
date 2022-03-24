@@ -119,7 +119,9 @@
           "200": {
             "description": "The tile returned from a successful API call.",
             "schema": {
-              "$ref": "../2.0/render.json#/definitions/MapTile"
+              "type": "object",
+              "format": "file",
+              "readOnly": true
             },
             "headers": {
               "Content-Type": {
@@ -268,7 +270,9 @@
           "200": {
             "description": "This tile is returned from a successful Get Map State Tile call",
             "schema": {
-              "$ref": "../2.0/render.json#/definitions/MapTile"
+              "type": "object",
+              "format": "file",
+              "readOnly": true
             },
             "headers": {
               "Content-Type": {
@@ -410,7 +414,7 @@
           },
           {
             "name": "bbox",
-            "x-ms-client-name": "boundingBox",
+            "x-ms-client-name": "boundingBoxPrivate",
             "in": "query",
             "description": "Bounding box. Projection used - EPSG:3857. Format : 'minLon, minLat,\nmaxLon, maxLat'. \n\nNote: Either bbox or center are required\nparameters. They are mutually exclusive. It shouldn’t be used with\nheight or width.\n\nThe maximum allowed ranges for Lat and Lon are defined for each zoom level\nin the table at the top of this page.",
             "type": "array",

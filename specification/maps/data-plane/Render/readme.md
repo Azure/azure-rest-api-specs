@@ -32,6 +32,12 @@ tag: 2.1-preview
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: https://atlas.microsoft.com/.default
+track2: true
+verbose: true
+sdk-integration: true
+modelerfour:
+  additional-checks: false
+  lenient-model-deduplication: true
 ```
 
 ### Tag: 2.1-preview
