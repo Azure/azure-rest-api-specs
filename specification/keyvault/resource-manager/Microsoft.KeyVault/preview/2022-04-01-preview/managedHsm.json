@@ -814,7 +814,7 @@
           }
         },
         "x-ms-examples": {
-          "Validate a vault name": {
+          "Validate a managed hsm name": {
             "$ref": "./examples/ManagedHsm_checkMhsmNameAvailability.json"
           }
         },
@@ -1441,6 +1441,7 @@
       "description": "Properties of a private link resource."
     },
     "CheckMhsmNameAvailabilityResult": {
+      "type": "object",
       "properties": {
         "nameAvailable": {
           "readOnly": true,
@@ -1469,6 +1470,7 @@
       "description": "The CheckMhsmNameAvailability operation response."
     },
     "MHSMSecurityDomainProperties": {
+      "type": "object",
       "properties": {
         "activationStatus": {
           "readOnly": true,
@@ -1508,7 +1510,8 @@
           "type": "string",
           "description": "Activation Status Message."
         }
-      }
+      },
+      "description": "The security domain properties of the managed hsm."
     }
   },
   "parameters": {
