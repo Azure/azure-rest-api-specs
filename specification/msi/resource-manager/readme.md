@@ -29,6 +29,9 @@ openapi-type: arm
 tag: package-preview-2021-09
 ```
 
+``` yaml $(python)
+tag: package-2018-11-30
+```
 
 ### Tag: package-preview-2021-09
 
