@@ -2415,7 +2415,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/throughputSettings/default/retrieveThroughputDistribution": {
       "post": {
-        "operationId": "SqlResources_RetrieveSqlContainerThroughputDistribution",
+        "operationId": "SqlResources_SqlContainerRetrieveThroughputDistribution",
         "x-ms-examples": {
           "CosmosDBSqlContainerRetrieveThroughputDistribution": {
             "$ref": "./examples/CosmosDBSqlContainerRetrieveThroughputDistribution.json"
@@ -2423,6 +2423,9 @@
         },
         "description": "Retrieve throughput distribution for an Azure Cosmos DB SQL container",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -2459,7 +2462,7 @@
           "200": {
             "description": "The retrieve throughput distribution for SQL container operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PhysicalPartitionThroughputInfo"
+              "$ref": "#/definitions/PhysicalPartitionThroughputInfoResult"
             }
           },
           "default": {
@@ -2473,7 +2476,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/throughputSettings/default/redistributeThroughput": {
       "post": {
-        "operationId": "SqlResources_RedistributeSqlContainerThroughput",
+        "operationId": "SqlResources_SqlContainerRedistributeThroughput",
         "x-ms-examples": {
           "CosmosDBSqlContainerRedistributeThroughput": {
             "$ref": "./examples/CosmosDBSqlContainerRedistributeThroughput.json"
@@ -2481,6 +2484,9 @@
         },
         "description": "Redistribute throughput for an Azure Cosmos DB SQL container",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -2505,7 +2511,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RedistributeThroughput"
+              "$ref": "#/definitions/RedistributeThroughputParameters"
             },
             "description": "The parameters to provide for redistributing throughput for the current SQL container."
           }
@@ -2517,7 +2523,7 @@
           "200": {
             "description": "The redistribution throughput for SQL container operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PhysicalPartitionThroughputInfo"
+              "$ref": "#/definitions/PhysicalPartitionThroughputInfoResult"
             }
           },
           "default": {
@@ -3406,7 +3412,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}/throughputSettings/default/retrieveThroughputDistribution": {
       "post": {
-        "operationId": "MongoDBResources_RetrieveSqlContainerThroughputDistribution",
+        "operationId": "MongoDBResources_SqlContainerRetrieveThroughputDistribution",
         "x-ms-examples": {
           "CosmosDBMongoDBCollectionRetrieveThroughputDistribution": {
             "$ref": "./examples/CosmosDBMongoDBCollectionRetrieveThroughputDistribution.json"
@@ -3414,6 +3420,9 @@
         },
         "description": "Retrieve throughput distribution for an Azure Cosmos DB MongoDB container",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -3428,7 +3437,7 @@
             "$ref": "#/parameters/databaseNameParameter"
           },
           {
-            "$ref": "#/parameters/containerNameParameter"
+            "$ref": "#/parameters/collectionNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -3450,7 +3459,7 @@
           "200": {
             "description": "The retrieve throughput distribution for MongoDB container operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PhysicalPartitionThroughputInfo"
+              "$ref": "#/definitions/PhysicalPartitionThroughputInfoResult"
             }
           },
           "default": {
@@ -3464,7 +3473,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}/throughputSettings/default/redistributeThroughput": {
       "post": {
-        "operationId": "MongoDBResources_RedistributeMongoDBContainerThroughput",
+        "operationId": "MongoDBResources_MongoDBContainerRedistributeThroughput",
         "x-ms-examples": {
           "CosmosDBMongoDBCollectionRedistributeThroughput": {
             "$ref": "./examples/CosmosDBMongoDBCollectionRedistributeThroughput.json"
@@ -3472,6 +3481,9 @@
         },
         "description": "Redistribute throughput for an Azure Cosmos DB MongoDB container",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -3486,7 +3498,7 @@
             "$ref": "#/parameters/databaseNameParameter"
           },
           {
-            "$ref": "#/parameters/containerNameParameter"
+            "$ref": "#/parameters/collectionNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -3496,7 +3508,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RedistributeThroughput"
+              "$ref": "#/definitions/RedistributeThroughputParameters"
             },
             "description": "The parameters to provide for redistributing throughput for the current MongoDB container."
           }
@@ -3508,7 +3520,7 @@
           "200": {
             "description": "The redistribution throughput for MongoDB container operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PhysicalPartitionThroughputInfo"
+              "$ref": "#/definitions/PhysicalPartitionThroughputInfoResult"
             }
           },
           "default": {
@@ -8374,8 +8386,40 @@
       }
     },
     "RedistributeThroughputParameters": {
+      "description": "Cosmos DB redistribute throughput parameters object",
       "type": "object",
-      "description": "Cosmos DB retrieve throughput parameters object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties to redistribute throughput parameters object",
+          "$ref": "#/definitions/RedistributeThroughputProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMResourceProperties"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "RedistributeThroughputProperties": {
+      "description": "Properties to redistribute throughput for Azure Cosmos DB resource.",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The standard JSON format of a resource throughput",
+          "$ref": "#/definitions/RedistributeThroughputPropertiesResource"
+        }
+      },
+      "required": [
+        "resource"
+      ]
+    },
+    "RedistributeThroughputPropertiesResource": {
+      "type": "object",
+      "description": "Resource to redistribute throughput for Azure Cosmos DB resource",
       "properties": {
         "throughputPolicy": {
           "type": "string",
@@ -8383,26 +8427,60 @@
         },
         "targetPartitionInfo": {
           "type": "array",
-          "description": "Array of PhysicalPartitionThroughputInfo objects.",
+          "description": "Array of PhysicalPartitionThroughputInfoResource objects.",
           "items": {
-            "$ref": "#/definitions/PhysicalPartitionThroughputInfo"
+            "$ref": "#/definitions/PhysicalPartitionThroughputInfoResource"
           }
         },
         "sourcePartitionInfo": {
           "type": "array",
-          "description": "Array of PhysicalPartitionThroughputInfo objects.",
+          "description": "Array of PhysicalPartitionThroughputInfoResource objects.",
           "items": {
-            "$ref": "#/definitions/PhysicalPartitionThroughputInfo"
+            "$ref": "#/definitions/PhysicalPartitionThroughputInfoResource"
           }
-        },        
-        "required": [
-          "throughputPolicy"
-        ]
-      }
+        }
+      },
+      "required": [
+        "throughputPolicy",
+        "targetPartitionInfo",
+        "sourcePartitionInfo"
+      ]
     },
     "RetrieveThroughputParameters": {
-      "type": "object",
       "description": "Cosmos DB retrieve throughput parameters object",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties to retrieve throughput parameters object",
+          "$ref": "#/definitions/RetrieveThroughputProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMResourceProperties"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "RetrieveThroughputProperties": {
+      "description": "Properties to retrieve throughput for Azure Cosmos DB resource.",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The standard JSON format of a resource throughput",
+          "$ref": "#/definitions/RetrieveThroughputPropertiesResource"
+        }
+      },
+      "required": [
+        "resource"
+      ]
+    },
+    "RetrieveThroughputPropertiesResource": {
+      "type": "object",
+      "description": "Resource to retrieve throughput information for Cosmos DB resource",
       "properties": {
         "physicalPartitionIds": {
           "type": "array",
@@ -8410,11 +8488,11 @@
           "items": {
             "$ref": "#/definitions/PhysicalPartitionId"
           }
-        },        
-        "required": [
-          "physicalPartitionIds"
-        ]
-      }
+        }
+      },
+      "required": [
+        "physicalPartitionIds"
+      ]
     },
     "PhysicalPartitionId": {
       "type": "object",
@@ -8423,13 +8501,56 @@
         "id": {
           "type": "string",
           "description": "Id of a physical partition"
-        },
-        "required": [
-          "id"
-        ]
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "PhysicalPartitionThroughputInfoResult": {
+      "description": "An Azure Cosmos DB PhysicalPartitionThroughputInfoResult object.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of an Azure Cosmos DB PhysicalPartitionThroughputInfoResult object",
+          "$ref": "#/definitions/PhysicalPartitionThroughputInfoResultProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMResourceProperties"
+        }
+      ]
+    },
+    "PhysicalPartitionThroughputInfoResultProperties": {
+      "description": "The properties of an Azure Cosmos DB PhysicalPartitionThroughputInfoResult object",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "properties of physical partition throughput info",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PhysicalPartitionThroughputInfoProperties"
+            }
+          ]
+        }
       }
     },
-    "PhysicalPartitionThroughputInfo": {
+    "PhysicalPartitionThroughputInfoProperties": {
+      "description": "The properties of an Azure Cosmos DB PhysicalPartitionThroughputInfoProperties object",
+      "type": "object",
+      "properties": {
+        "physicalPartitionThroughputInfo": {
+          "type": "array",
+          "description": "Array of physical partition throughput info objects",
+          "items": {
+            "$ref": "#/definitions/PhysicalPartitionThroughputInfoResource"
+          }
+        }
+      }
+    },
+    "PhysicalPartitionThroughputInfoResource": {
       "type": "object",
       "description": "PhysicalPartitionThroughputInfo object",
       "properties": {
@@ -8441,12 +8562,11 @@
           "type": "number",
           "format": "double",
           "description": "Throughput of a physical partition"
-        },
-        "required": [
-          "id",
-          "throughput"
-        ]
-      }
+        }
+      },
+      "required": [
+        "id"
+      ]
     },
     "ClientEncryptionKeyResource": {
       "type": "object",
