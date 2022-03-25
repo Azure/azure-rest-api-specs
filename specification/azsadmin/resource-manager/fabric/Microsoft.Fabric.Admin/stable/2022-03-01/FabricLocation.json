@@ -30,16 +30,16 @@
         "operationId": "FabricLocations_Get",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../preview/2016-05-01/Fabric.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../preview/2016-05-01/Fabric.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/FabricLocationParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../preview/2016-05-01/Fabric.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -49,8 +49,11 @@
               "$ref": "#/definitions/FabricLocation"
             }
           },
-          "404": {
-            "description": "NOT FOUND"
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -69,13 +72,13 @@
         "operationId": "FabricLocations_List",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../preview/2016-05-01/Fabric.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../preview/2016-05-01/Fabric.json#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../preview/2016-05-01/Fabric.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "../../preview/2016-05-01/Fabric.json#/parameters/FilterParameter"
@@ -86,6 +89,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/FabricLocationList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
