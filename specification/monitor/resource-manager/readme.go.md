@@ -144,7 +144,7 @@ These settings apply only when `--tag=package-2022-02-01-preview-only --go` is s
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2022-02-01-preview-only' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2021-09-01-preview/datacollection
+output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2021-09-01-preview/datacollection/$(namespace)
 ```
 
 ### Tag: package-2021-08-scheduledqueryrules and go
@@ -153,7 +153,7 @@ These settings apply only when `--tag=package-2021-08-scheduledqueryrules --go` 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2021-08-scheduledqueryrules' && $(go)
-output-folder: $(go-sdk-folder)/services/monitor/mgmt/2021-08-01/scheduledqueryrules
+output-folder: $(go-sdk-folder)/services/monitor/mgmt/2021-08-01/scheduledqueryrules/$(namespace)
 ```
 
 ### Tag: package-2021-05-metrics and go
@@ -162,7 +162,7 @@ These settings apply only when `--tag=package-2021-05-metrics --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2021-05-metrics' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2021-05-01-preview/metrics
+output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2021-05-01-preview/metrics/$(namespace)
 ```
 
 ### Tag: package-2020-10-activityLogs and go
@@ -171,7 +171,7 @@ These settings apply only when `--tag=package-2020-10-activityLogs --go` is spec
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2020-10-activityLogs' && $(go)
-output-folder: $(go-sdk-folder)/services/monitor/mgmt/2020-10-01/activitylogs
+output-folder: $(go-sdk-folder)/services/monitor/mgmt/2020-10-01/activitylogs/$(namespace)
 ```
 
 ### Tag: package-2021-05-preview-diagnostics and go
@@ -180,7 +180,7 @@ These settings apply only when `--tag=package-2021-05-preview-diagnostics --go` 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2021-05-preview-diagnostics' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2021-05-01-preview/diagnostics
+output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2021-05-01-preview/diagnostics/$(namespace)
 ```
 
 ### Tag: package-2016-03-preview-monitorlegacy and go
@@ -189,5 +189,5 @@ These settings apply only when `--tag=package-2016-03-preview-monitorlegacy --go
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2016-03-preview-monitorlegacy' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2016-03-01-preview/monitorlegacy
+output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2016-03-01-preview/monitorlegacy/$(namespace)
 ```
