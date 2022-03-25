@@ -327,7 +327,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "DataBoxEdgeDeviceDelete": {
             "$ref": "./examples/DataBoxEdgeDeviceDelete.json"
@@ -1076,7 +1075,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/getDeviceCapacityInfo": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/deviceCapacityInfo/default": {
       "get": {
         "tags": [
           "DeviceCapacityInfo"
@@ -5842,11 +5841,6 @@
           "$ref": "#/definitions/DeviceCapacityRequestInfoProperties",
           "description": "The properties of the Device Capacity Request.",
           "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "Metadata pertaining to device capacity request",
-          "readOnly": true
         }
       }
     },
@@ -5877,7 +5871,6 @@
           "items": {
             "$ref": "#/definitions/VmPlacementRequestResult"
           },
-          "readOnly": true,
           "x-ms-identifiers": []
         }
       }
