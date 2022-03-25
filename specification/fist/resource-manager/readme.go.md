@@ -1,6 +1,6 @@
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
+These settings only apply when `--go` is specified on the command line.
 
 ```yaml $(go) && $(track2)
 azure-arm: true

@@ -652,10 +652,12 @@
           "type": "string",
           "description": "The status of file uploading.",
           "enum": [
-            "Processing",
-            "Complete",
+            "Pending",
+            "Analyzing",
+            "Ready",
             "Error"
           ],
+          "default": "Pending",
           "x-ms-enum": {
             "name": "status",
             "modelAsString": true
@@ -742,25 +744,25 @@
         "extractedFileCount": {
           "description": "Extracted file count.",
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "x-nullable": true
         },
         "componentCount": {
           "description": "Components count.",
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "x-nullable": true
         },
         "binaryCount": {
           "description": "Binary count",
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "x-nullable": true
         },
         "analysisTimeSeconds": {
           "description": "Time used for analysis",
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "x-nullable": true
         }
       },
