@@ -30,45 +30,6 @@
     "application/json"
   ],
   "paths": {
-    "/api/events": {
-      "post": {
-        "tags": [
-          "Events"
-        ],
-        "description": "Publishes a batch of events to an Azure Event Grid topic.",
-        "operationId": "PublishEvents",
-        "parameters": [
-          {
-            "name": "events",
-            "description": "An array of events to be published to Event Grid.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/EventGridEvent"
-              }
-            }
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error.\n\n * 429 Too Many Events\n\n * 404 Not Found."
-          }
-        },
-        "x-ms-examples": {
-          "PublishEventsToEventGridTopic": {
-            "$ref": "./examples/PublishEventsToEventGridTopic.json"
-          }
-        }
-      }
-    }
   },
   "x-ms-paths": {
     "?overload=EventGridEvent": {
