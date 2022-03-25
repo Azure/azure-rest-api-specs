@@ -1951,7 +1951,7 @@
           "EventSubscriptions"
         ],
         "summary": "Get an event subscription of a topic.",
-        "description": "Get an event subscription of a topic.",
+        "description": "Get properties of an event subscription of a topic.",
         "operationId": "TopicEventSubscriptions_Get",
         "consumes": [],
         "produces": [
@@ -2215,7 +2215,7 @@
           "EventSubscriptions"
         ],
         "summary": "Get an event subscription of a domain.",
-        "description": "Get an event subscription of a domain.",
+        "description": "Get properties of an event subscription of a domain.",
         "operationId": "DomainEventSubscriptions_Get",
         "consumes": [],
         "produces": [
@@ -2605,7 +2605,7 @@
           "EventSubscriptions"
         ],
         "summary": "Delete an event subscription of a system topic.",
-        "description": "Delete an event subscription of a system topic.",
+        "description": "Delete an existing event subscription of a system topic.",
         "operationId": "SystemTopicEventSubscriptions_Delete",
         "consumes": [],
         "produces": [
@@ -2666,7 +2666,7 @@
           "EventSubscriptions"
         ],
         "summary": "Update event subscription of a system topic.",
-        "description": "Update event subscription of a system topic.",
+        "description": "Update an existing event subscription of a system topic.",
         "operationId": "SystemTopicEventSubscriptions_Update",
         "consumes": [
           "application/json"
@@ -2916,7 +2916,7 @@
           "EventSubscriptions"
         ],
         "summary": "Get an event subscription of a partner topic.",
-        "description": "Get an event subscription of a partner topic.",
+        "description": "Get properties of an event subscription of a partner topic.",
         "operationId": "PartnerTopicEventSubscriptions_Get",
         "consumes": [],
         "produces": [
@@ -3048,7 +3048,7 @@
           "EventSubscriptions"
         ],
         "summary": "Delete an event subscription of a partner topic.",
-        "description": "Delete an event subscription of a partner topic.",
+        "description": "Delete an existing event subscription of a partner topic.",
         "operationId": "PartnerTopicEventSubscriptions_Delete",
         "consumes": [],
         "produces": [
@@ -3109,7 +3109,7 @@
           "EventSubscriptions"
         ],
         "summary": "Update event subscription of a partner topic.",
-        "description": "Update event subscription of a partner topic.",
+        "description": "Update an existing event subscription of a partner topic.",
         "operationId": "PartnerTopicEventSubscriptions_Update",
         "consumes": [
           "application/json"
@@ -4745,7 +4745,8 @@
           "PartnerConfigurations_CreateOrUpdate": {
             "$ref": "./examples/PartnerConfigurations_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -4791,7 +4792,8 @@
           "PartnerConfigurations_Delete": {
             "$ref": "./examples/PartnerConfigurations_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "tags": [
@@ -4851,7 +4853,8 @@
           "PartnerConfigurations_Update": {
             "$ref": "./examples/PartnerConfigurations_Update.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerConfigurations": {
@@ -6016,7 +6019,8 @@
           "PartnerRegistrations_CreateOrUpdate": {
             "$ref": "./examples/PartnerRegistrations_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -6069,7 +6073,8 @@
           "PartnerRegistrations_Delete": {
             "$ref": "./examples/PartnerRegistrations_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "tags": [
@@ -6133,7 +6138,8 @@
           "PartnerRegistrations_Update": {
             "$ref": "./examples/PartnerRegistrations_Update.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.EventGrid/partnerRegistrations": {
@@ -6712,7 +6718,11 @@
               "topics",
               "domains",
               "partnerNamespaces"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "ParentType",
+              "modelAsString": true
+            }
           },
           {
             "name": "parentName",
@@ -6783,7 +6793,11 @@
               "topics",
               "domains",
               "partnerNamespaces"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "ParentType",
+              "modelAsString": true
+            }
           },
           {
             "name": "parentName",
@@ -6868,7 +6882,11 @@
               "topics",
               "domains",
               "partnerNamespaces"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "ParentType",
+              "modelAsString": true
+            }
           },
           {
             "name": "parentName",
@@ -6940,7 +6958,11 @@
               "topics",
               "domains",
               "partnerNamespaces"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "ParentType",
+              "modelAsString": true
+            }
           },
           {
             "name": "parentName",
@@ -8194,7 +8216,7 @@
           "VerifiedPartners"
         ],
         "summary": "List all verified partners.",
-        "description": "List all verified partners.",
+        "description": "Get a list of all verified partners.",
         "operationId": "VerifiedPartners_List",
         "consumes": [],
         "produces": [
@@ -8348,16 +8370,20 @@
       }
     },
     "ResourceMoveChangeHistory": {
+      "description": "The change history of the resource move.",
       "type": "object",
       "properties": {
         "azureSubscriptionId": {
+          "description": "Azure subscription ID of the resource.",
           "type": "string"
         },
         "resourceGroupName": {
+          "description": "Azure Resource Group of the resource.",
           "type": "string"
         },
         "changedTimeUtc": {
           "format": "date-time",
+          "description": "UTC timestamp of when the resource was changed.",
           "type": "string"
         }
       }
@@ -8381,6 +8407,7 @@
       }
     },
     "WebhookPartnerDestinationProperties": {
+      "description": "Properties of a partner destination webhook.",
       "type": "object",
       "properties": {
         "endpointUrl": {
@@ -8397,6 +8424,7 @@
       }
     },
     "AzureADPartnerClientAuthenticationProperties": {
+      "description": "Properties of an Azure Active Directory Partner Client Authentication.",
       "type": "object",
       "properties": {
         "azureActiveDirectoryTenantId": {
@@ -8410,6 +8438,7 @@
       }
     },
     "AzureADPartnerClientAuthentication": {
+      "description": "Azure Active Directory Partner Client Authentication",
       "type": "object",
       "allOf": [
         {
@@ -8426,6 +8455,7 @@
       "x-ms-discriminator-value": "AzureAD"
     },
     "PartnerClientAuthentication": {
+      "description": "Partner client authentication",
       "required": [
         "clientAuthenticationType"
       ],
@@ -8447,6 +8477,7 @@
       "discriminator": "clientAuthenticationType"
     },
     "WebhookPartnerDestinationInfo": {
+      "description": "Information about the WebHook of the partner destination.",
       "type": "object",
       "allOf": [
         {
@@ -8460,10 +8491,12 @@
           "x-ms-client-flatten": true
         },
         "resourceMoveChangeHistory": {
+          "description": "Change history of the resource move.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceMoveChangeHistory"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "x-ms-discriminator-value": "WebHook"
@@ -8504,10 +8537,12 @@
           "type": "string"
         },
         "resourceMoveChangeHistory": {
+          "description": "Change history of the resource move.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceMoveChangeHistory"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "discriminator": "endpointType"
@@ -8545,6 +8580,7 @@
       }
     },
     "ChannelUpdateParametersProperties": {
+      "description": "Properties of the channel update parameters.",
       "type": "object",
       "properties": {
         "expirationTimeIfNotActivatedUtc": {
@@ -8573,6 +8609,7 @@
       }
     },
     "WebhookUpdatePartnerDestinationInfo": {
+      "description": "Information about the update of the WebHook of the partner destination.",
       "type": "object",
       "allOf": [
         {
@@ -8702,7 +8739,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/InboundIpRule"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "disableLocalAuth": {
           "description": "This boolean is used to enable or disable local auth. Default value is false. When the property is set to true, only AAD token will be used to authenticate if user is allowed to publish to the domain.",
@@ -9136,14 +9174,16 @@
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
             "modelAsString": true
-          }
+          },
+          "default": "Enabled"
         },
         "inboundIpRules": {
           "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/InboundIpRule"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "disableLocalAuth": {
           "description": "This boolean is used to enable or disable local auth. Default value is false. When the property is set to true, only AAD token will be used to authenticate if user is allowed to publish to the domain.",
@@ -9367,7 +9407,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AdvancedFilter"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -9923,7 +9964,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AdvancedFilter"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -10668,7 +10710,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Partner"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -10934,7 +10977,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/InboundIpRule"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "disableLocalAuth": {
           "description": "This boolean is used to enable or disable local auth. Default value is false. When the property is set to true, only AAD token will be used to authenticate if user is allowed to publish to the partner namespace.",
@@ -11010,14 +11054,16 @@
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
             "modelAsString": true
-          }
+          },
+          "default": "Enabled"
         },
         "inboundIpRules": {
           "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/InboundIpRule"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "disableLocalAuth": {
           "description": "This boolean is used to enable or disable local auth. Default value is false. When the property is set to true, only AAD token will be used to authenticate if user is allowed to publish to the partner namespace.",
@@ -11659,7 +11705,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/InboundIpRule"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "disableLocalAuth": {
           "description": "This boolean is used to enable or disable local auth. Default value is false. When the property is set to true, only AAD token will be used to authenticate if user is allowed to publish to the topic.",
@@ -11793,14 +11840,16 @@
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
             "modelAsString": true
-          }
+          },
+          "default": "Enabled"
         },
         "inboundIpRules": {
           "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/InboundIpRule"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "disableLocalAuth": {
           "description": "This boolean is used to enable or disable local auth. Default value is false. When the property is set to true, only AAD token will be used to authenticate if user is allowed to publish to the topic.",
