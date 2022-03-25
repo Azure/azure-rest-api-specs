@@ -51,6 +51,65 @@
         }
       }
     },
+     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/deviceCapacityCheck": {
+      "post": {
+        "tags": [
+          "DeviceCapacityCheck"
+        ],
+        "description": "Posts the device capacity request info to check feasibility.",
+        "operationId": "DeviceCapacityCheck_CheckResourceCreationFeasibility",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceCapacityRequestInfo",
+            "in": "body",
+            "description": "The device capacity request info.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceCapacityRequestInfo"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to check the feasibility of resource creation."
+          },
+          "200": {
+            "description": "Successfully checked the feasibility of resource creation."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "DeviceCapacityRequestPost": {
+            "$ref": "./examples/DeviceCapacityRequestPost.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataBoxEdge/availableSkus": {
       "get": {
         "tags": [
@@ -8006,6 +8065,57 @@
           "description": "Link to the next set of results.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "DeviceCapacityRequestInfo": {
+      "description": "Object for Capturing DeviceCapacityRequestInfo",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeviceCapacityRequestInfoProperties",
+          "description": "The properties of the Device Capacity Request.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to device capacity request",
+          "readOnly": true
+        }
+      }
+    },
+    "DeviceCapacityRequestInfoProperties": {
+      "description": "Properties of Device Capacity Request Info containing VM's to be checked and their corresponding results.",
+      "required": [
+        "vmPlacementQuery"
+      ],
+      "type": "object",
+      "properties": {
+        "vmPlacementQuery": {
+          "description": "Array containing the sizes of the VMs for checking if its feasible to create them on the appliance.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "x-ms-identifiers": []
+        },
+        "vmPlacementResults": {
+          "description": "Array of the VMs of the sizes in VmSizes can be provisioned on the appliance.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VmPlacementRequestResult"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
