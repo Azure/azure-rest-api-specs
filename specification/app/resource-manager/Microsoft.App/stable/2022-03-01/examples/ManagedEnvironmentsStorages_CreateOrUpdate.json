@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "envName": "managedEnv",
+    "name": "jlaw-demo1",
+    "api-version": "2022-03-01",
+    "storageEnvelope": {
+      "properties": {
+        "azureFile": {
+          "accountName": "account1",
+          "accountKey": "key",
+          "shareName": "share1",
+          "accessMode": "ReadOnly"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/managedEnv/storages/jlaw-demo1",
+        "name": "jlaw-demo1",
+        "type": "Microsoft.App/managedEnvironments/storages",
+        "properties": {
+          "azureFile": {
+            "accountName": "account1",
+            "shareName": "share1",
+            "accessMode": "ReadOnly"
+          }
+        }
+      }
+    }
+  }
+}

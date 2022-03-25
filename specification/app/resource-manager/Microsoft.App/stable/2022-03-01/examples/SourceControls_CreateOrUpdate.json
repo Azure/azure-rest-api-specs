@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "subscriptionId": "651f8027-33e8-4ec4-97b4-f6e9f3dc8744",
+    "resourceGroupName": "workerapps-rg-xj",
+    "containerAppName": "testcanadacentral",
+    "name": "current",
+    "api-version": "2022-03-01",
+    "sourceControlEnvelope": {
+      "properties": {
+        "repoUrl": "https://github.com/xwang971/ghatest",
+        "branch": "master",
+        "githubActionConfiguration": {
+          "registryInfo": {
+            "registryUrl": "xwang971reg.azurecr.io",
+            "registryUserName": "xwang971reg",
+            "registryPassword": "<registrypassword>"
+          },
+          "azureCredentials": {
+            "clientId": "<clientid>",
+            "clientSecret": "<clientsecret>",
+            "tenantId": "<tenantid>"
+          },
+          "contextPath": "./",
+          "image": "image/tag"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/651f8027-33e8-4ec4-97b4-f6e9f3dc8744/resourceGroups/workerapps-rg-xj/providers/Microsoft.App/containerApps/myapp/sourcecontrols/current",
+        "name": "current",
+        "type": "Microsoft.App/containerapps/sourcecontrols",
+        "properties": {
+          "operationState": "InProgress",
+          "repoUrl": "https://github.com/xwang971/ghatest",
+          "branch": "master",
+          "githubActionConfiguration": {
+            "registryInfo": {
+              "registryUrl": "xwang971reg.azurecr.io",
+              "registryUserName": "xwang971reg"
+            },
+            "contextPath": "./",
+            "image": "image/tag"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://localhost/subscriptions/651f8027-33e8-4ec4-97b4-f6e9f3dc8744/resourceGroups/workerapps-rg-xj/providers/Microsoft.App/containerApps/myapp/sourcecontrols/currentInOperationModel/operationresults/5a7f31af-8ae5-489b-a67e-f0a2d11df796?api-version=2021-03-01"
+      },
+      "body": {
+        "id": "/subscriptions/651f8027-33e8-4ec4-97b4-f6e9f3dc8744/resourceGroups/workerapps-rg-xj/providers/Microsoft.App/containerApps/myapp/sourcecontrols/current",
+        "name": "current",
+        "type": "Microsoft.App/containerapps/sourcecontrols",
+        "properties": {
+          "operationState": "InProgress",
+          "repoUrl": "https://github.com/xwang971/ghatest",
+          "branch": "master",
+          "githubActionConfiguration": {
+            "registryInfo": {
+              "registryUrl": "xwang971reg.azurecr.io",
+              "registryUserName": "xwang971reg"
+            },
+            "contextPath": "./",
+            "image": "image/tag"
+          }
+        }
+      }
+    }
+  }
+}
