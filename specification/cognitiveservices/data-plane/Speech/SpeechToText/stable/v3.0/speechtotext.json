@@ -3316,7 +3316,7 @@
           "Service Health:"
         ],
         "summary": "Returns the overall health of the service and optionally of the different subcomponents.",
-        "operationId": "HealthStatus_Get",
+        "operationId": "GetHealthStatus",
         "produces": [
           "application/json"
         ],
@@ -5591,9 +5591,9 @@
     }
   },
   "parameters": {
-    "endpoint": {
+    "Endpoint": {
       "in": "path",
-      "name": "endpoint",
+      "name": "Endpoint",
       "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
       "required": true,
       "type": "string",
@@ -5651,11 +5651,11 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}/speechtotext/v3.0",
+    "hostTemplate": "{Endpoint}/speechtotext/v3.0",
     "useSchemePrefix": false,
     "parameters": [
       {
-        "$ref": "#/parameters/endpoint"
+        "$ref": "#/parameters/Endpoint"
       }
     ]
   }
