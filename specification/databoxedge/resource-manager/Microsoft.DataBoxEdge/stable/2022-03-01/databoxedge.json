@@ -9404,6 +9404,32 @@
           }
         }
       }
+    },
+    "VmPlacementRequestResult": {
+      "description": "List of VM sizes being checked for creation on appliance along with corresponding result.",
+      "type": "object",
+      "properties": {
+        "vmSize": {
+          "description": "List of VM sizes being checked.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isFeasible": {
+          "description": "Boolean value indicating if the VM(s) in VmSize can be created.",
+          "type": "boolean"
+        },
+        "messageCode": {
+          "description": "MessageCode indicating reason for success or failure.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Localized message to be displayed to the user to explain the check result.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
