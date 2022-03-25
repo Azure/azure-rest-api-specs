@@ -2,7 +2,7 @@
 
 These settings apply only when `--track2` is specified on the command line.
 
-``` yaml $(track2)
+``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-monitor
@@ -15,7 +15,7 @@ python-base-folder: monitor/azure-mgmt-monitor/azure/mgmt/monitor
 
 Generate all API versions currently shipped for this package
 
-```yaml $(multiapi) && $(track2)
+```yaml $(multiapi) && $(python)
 clear-output-folder: true
 batch:
   - tag: package-2022-02-01-preview-only
@@ -36,7 +36,6 @@ batch:
   - tag: package-2018-03-01-only
   - tag: package-2018-01-01-only
   - tag: package-2017-12-01-preview-only
-  - tag: package-2017-11-01-preview-only
   - tag: package-2017-05-01-preview-only
   - tag: package-2017-04-01-only
   - tag: package-2017-03-01-preview-only
@@ -49,7 +48,6 @@ batch:
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/monitor/azure-mgmt-monitor/azure/mgmt/monitor/
-clear-output-folder: false
 perform-load: false
 ```
 
@@ -240,16 +238,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2017-12-01-preview-only'
 namespace: $(python-base-namespace).v2017_12_01_preview
 output-folder: $(python-sdks-folder)/$(python-base-folder)/v2017_12_01_preview
-```
-
-### Tag: package-2017-11-01-preview-only and python
-
-These settings apply only when `--tag=package-2017-11-01-preview-only --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2017-11-01-preview-only'
-namespace: $(python-base-namespace).v2017_11_01_preview
-output-folder: $(python-sdks-folder)/$(python-base-folder)/v2017_11_01_preview
 ```
 
 ### Tag: package-2017-05-01-preview-only and python
