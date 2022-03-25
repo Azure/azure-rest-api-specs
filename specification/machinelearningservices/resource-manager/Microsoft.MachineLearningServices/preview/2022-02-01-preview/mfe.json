@@ -10277,6 +10277,7 @@
         },
         "featurizationSettings": {
           "description": "Featurization inputs needed for AutoML job.",
+          "$ref": "#/definitions/NlpVerticalFeaturizationSettings",
           "x-nullable": true
         },
         "limitSettings": {
@@ -10298,9 +10299,19 @@
       "properties": {
         "validationData": {
           "description": "Validation data inputs.",
+          "$ref": "#/definitions/NlpVerticalValidationDataSettings",
           "x-nullable": true
         }
       },
+      "additionalProperties": false
+    },
+    "NlpVerticalFeaturizationSettings": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FeaturizationSettings"
+        }
+      ],
       "additionalProperties": false
     },
     "NlpVerticalLimitSettings": {
@@ -10325,6 +10336,15 @@
           "type": "string"
         }
       },
+      "additionalProperties": false
+    },
+    "NlpVerticalValidationDataSettings": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValidationDataSettings"
+        }
+      ],
       "additionalProperties": false
     },
     "NoneDatastoreCredentials": {
