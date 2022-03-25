@@ -6205,6 +6205,11 @@
     "PolicyGetParameters": {
       "description": "The JSON object that contains the properties of the Policy to get.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./cdn.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -6218,9 +6223,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/AFDStateProperties"
-        },
-        {
-          "$ref": "./cdn.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
