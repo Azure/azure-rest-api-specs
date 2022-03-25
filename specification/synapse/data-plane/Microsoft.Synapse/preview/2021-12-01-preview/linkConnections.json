@@ -1,0 +1,931 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-12-01-preview",
+    "title": "ArtifactsClient",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/linkconnections": {
+      "get": {
+        "tags": [
+          "linkConnections"
+        ],
+        "operationId": "LinkConnection_ListLinkConnectionsByWorkspace",
+        "description": "List link connections",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LinkConnectionListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LinkConnections_ListByWorkspace": {
+            "$ref": "./examples/LinkConnections_ListByWorkspace.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/linkconnections/{linkConnectionName}": {
+      "put": {
+        "tags": [
+          "linkConnections"
+        ],
+        "operationId": "LinkConnection_CreateOrUpdateLinkConnection",
+        "description": "Creates or updates a link connection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/LinkConnectionName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "linkConnection",
+            "description": "Link connection resource definition",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkConnectionResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LinkConnectionResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LinkConnection_CreateOrUpdate": {
+            "$ref": "./examples/LinkConnection_CreateOrUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "linkConnections"
+        ],
+        "operationId": "LinkConnection_GetLinkConnection",
+        "description": "Get a link connection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/LinkConnectionName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LinkConnectionResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LinkConnection_Get": {
+            "$ref": "./examples/LinkConnection_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "linkConnections"
+        ],
+        "operationId": "LinkConnection_DeleteLinkConnection",
+        "description": "Delete a link connection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/LinkConnectionName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LinkConnection_Delete": {
+            "$ref": "./examples/LinkConnection_Delete.json"
+          }
+        }
+      }
+    },
+    "/linkconnections/{linkConnectionName}/edittables": {
+      "post": {
+        "tags": [
+          "linkConnections"
+        ],
+        "operationId": "LinkConnection_EditTables",
+        "description": "Edit tables for a link connection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/LinkConnectionName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "editTablesRequest",
+            "description": "Edit tables request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EditTablesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LinkConnection_EditTables": {
+            "$ref": "./examples/LinkConnection_EditTables.json"
+          }
+        }
+      }
+    },
+    "/linkconnections/{linkConnectionName}/start": {
+      "post": {
+        "tags": [
+          "linkConnections"
+        ],
+        "operationId": "LinkConnection_Start",
+        "description": "Start a link connection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/LinkConnectionName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LinkConnection_Start": {
+            "$ref": "./examples/LinkConnection_Start.json"
+          }
+        }
+      }
+    },
+    "/linkconnections/{linkConnectionName}/stop": {
+      "post": {
+        "tags": [
+          "linkConnections"
+        ],
+        "operationId": "LinkConnection_Stop",
+        "description": "Stop a link connection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/LinkConnectionName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LinkConnection_Stop": {
+            "$ref": "./examples/LinkConnection_Stop.json"
+          }
+        }
+      }
+    },
+    "/linkconnections/{linkConnectionName}/detailedstatus": {
+      "get": {
+        "tags": [
+          "linkConnections"
+        ],
+        "operationId": "LinkConnection_GetDetailedStatus",
+        "description": "Get the detailed status of a link connection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/LinkConnectionName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LinkConnectionDetailedStatus"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LinkConnection_GetDetailedStatus": {
+            "$ref": "./examples/LinkConnection_GetDetailedStatus.json"
+          }
+        }
+      }
+    },
+    "/linkconnections/{linkConnectionName}/linktables": {
+      "get": {
+        "tags": [
+          "linkConnections"
+        ],
+        "operationId": "LinkConnection_ListLinkTables",
+        "description": "List the link tables of a link connection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/LinkConnectionName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LinkTableListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LinkConnection_ListLinkTables": {
+            "$ref": "./examples/LinkConnection_ListLinkTables.json"
+          }
+        }
+      }
+    },
+    "/linkconnections/{linkConnectionName}/querytablestatus": {
+      "post": {
+        "tags": [
+          "linkConnections"
+        ],
+        "operationId": "LinkConnection_QueryTableStatus",
+        "description": "Query the link table status of a link connection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/LinkConnectionName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "queryTableStatusRequest",
+            "description": "Query table status request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueryTableStatusRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LinkConnectionQueryTableStatus"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LinkConnection_QueryTableStatus": {
+            "$ref": "./examples/LinkConnection_QueryTableStatus.json"
+          }
+        }
+      }
+    },
+    "/linkconnections/{linkConnectionName}/updateLandingZoneCredential": {
+      "post": {
+        "tags": [
+          "linkConnections"
+        ],
+        "operationId": "LinkConnection_UpdateLandingZoneCredential",
+        "description": "Update landing zone credential of a link connection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/LinkConnectionName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "updateLandingZoneCredentialRequest",
+            "description": "update landing zone credential request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateLandingZoneCredential"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LinkConnection_UpdateLandingZoneCredential": {
+            "$ref": "./examples/LinkConnection_UpdateLandingZoneCredential.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LinkConnectionListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List link connection value",
+          "items": {
+            "$ref": "#/definitions/LinkConnectionResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "List link connections next link"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LinkTableListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List link table value",
+          "items": {
+            "$ref": "#/definitions/LinkTableResource"
+          }
+        }
+      }
+    },
+    "LinkConnectionResource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Link connection id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Link connection name"
+        },
+        "type": {
+          "type": "string",
+          "description": "Link connection type"
+        },
+        "properties": {
+          "$ref": "#/definitions/LinkConnection",
+          "description": "Properties of link connection"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "LinkTableResource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Link table id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Link table name"
+        },
+        "source": {
+          "$ref": "#/definitions/LinkTableRequestSource",
+          "description": "Source table properties for link table request"
+        },
+        "target": {
+          "$ref": "#/definitions/LinkTableRequestTarget",
+          "description": "Target table properties for link table request"
+        }
+      }
+    },
+    "LinkConnection": {
+      "type": "object",
+      "properties": {
+        "sourceDatabase": {
+          "$ref": "#/definitions/LinkConnectionSourceDatabase",
+          "description": "Properties of link connection's source database"
+        },
+        "targetDatabase": {
+          "$ref": "#/definitions/LinkConnectionTargetDatabase",
+          "description": "Properties of link connection's target database"
+        },
+        "landingZone": {
+          "$ref": "#/definitions/LinkConnectionLandingZone",
+          "description": "Properties of link connection's landing zone"
+        },
+        "compute": {
+          "$ref": "#/definitions/LinkConnectionCompute",
+          "description": "Properties of link connection's compute"
+        }
+      }
+    },
+    "LinkConnectionSourceDatabase": {
+      "type": "object",
+      "properties": {
+        "linkedService": {
+          "$ref": "#/definitions/LinkedServiceReference",
+          "description": "Linked service reference"
+        },
+        "typeProperties": {
+          "$ref": "#/definitions/LinkConnectionSourceDatabaseTypeProperties",
+          "description": "Source database type properties"
+        }
+      }
+    },
+    "LinkConnectionSourceDatabaseTypeProperties": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Link connection source database server's resource id"
+        },
+        "principalId": {
+          "type": "string",
+          "description": "Link connection source database server's principal id"
+        }
+      }
+    },
+    "LinkConnectionTargetDatabase": {
+      "type": "object",
+      "properties": {
+        "linkedService": {
+          "$ref": "#/definitions/LinkedServiceReference",
+          "description": "Linked service reference"
+        }
+      }
+    },
+    "LinkConnectionLandingZone": {
+      "type": "object",
+      "properties": {
+        "linkedService": {
+          "$ref": "#/definitions/LinkedServiceReference",
+          "description": "Linked service reference"
+        },
+        "fileSystem": {
+          "type": "string",
+          "description": "Landing zone's file system name"
+        },
+        "folderPath": {
+          "type": "string",
+          "description": "Landing zone's folder path name"
+        },
+        "sasToken": {
+          "$ref": "#/definitions/SecureString",
+          "description": "Landing zone's sas token"
+        }
+      }
+    },
+    "LinkConnectionCompute": {
+      "type": "object",
+      "properties": {
+        "coreCount": {
+          "type": "integer",
+          "description": "Link connection's compute core count"
+        },
+        "computeType": {
+          "type": "string",
+          "description": "Link connection's compute type"
+        }
+      }
+    },
+    "EditTablesRequest": {
+      "type": "object",
+      "properties": {
+        "linkTables": {
+          "type": "array",
+          "description": "Edit link tables request",
+          "items": {
+            "$ref": "#/definitions/LinkTableRequest"
+          }
+        }
+      }
+    },
+    "LinkTableRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Link table id"
+        },
+        "source": {
+          "$ref": "#/definitions/LinkTableRequestSource",
+          "description": "Source table properties for link table request"
+        },
+        "target": {
+          "$ref": "#/definitions/LinkTableRequestTarget",
+          "description": "Target table properties for link table request"
+        },
+        "operationType": {
+          "type": "string",
+          "description": "Link table operation type"
+        }
+      }
+    },
+    "LinkTableRequestSource": {
+      "type": "object",
+      "properties": {
+        "tableName": {
+          "type": "string",
+          "description": "Source table table name"
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "Source table schema name"
+        }
+      }
+    },
+    "LinkTableRequestTarget": {
+      "type": "object",
+      "properties": {
+        "tableName": {
+          "type": "string",
+          "description": "Target table table name"
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "Target table schema name"
+        },
+        "distributionOptions": {
+          "$ref": "#/definitions/LinkTableRequestTargetDistributionOptions",
+          "description": "Target table distribution options for link table request"
+        }
+      }
+    },
+    "LinkTableRequestTargetDistributionOptions": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Target table distribution type"
+        },
+        "distributionColumn": {
+          "type": "string",
+          "description": "Target table distribution column"
+        }
+      }
+    },
+    "LinkConnectionDetailedStatus": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Link connection id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Link connection name"
+        },
+        "isApplyingChanges": {
+          "type": "boolean",
+          "description": "Is link connection applying changes"
+        },
+        "isPartiallyFailed": {
+          "type": "boolean",
+          "description": "Is link connection partially failed"
+        },
+        "startTime": {
+          "type": "object",
+          "description": "Link connection start time"
+        },
+        "stopTime": {
+          "type": "object",
+          "description": "Link connection stop time"
+        },
+        "status": {
+          "type": "string",
+          "description": "Link connection status"
+        },
+        "continuousRunId": {
+          "type": "string",
+          "description": "Link connection's corresponding continuous run id"
+        },
+        "error": {
+          "type": "object",
+          "description": "Link connection error"
+        }
+      }
+    },
+    "LinkConnectionQueryTableStatus": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Link tables' status",
+          "items": {
+            "$ref": "#/definitions/LinkTableStatus"
+          }
+        },
+        "continuationToken": {
+          "type": "object",
+          "description": "Continuation token to query table status"
+        }
+      }
+    },
+    "LinkTableStatus": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Link table id"
+        },
+        "status": {
+          "type": "string",
+          "description": "Link table status"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Link table error message"
+        },
+        "startTime": {
+          "type": "object",
+          "description": "Link table start time"
+        },
+        "stopTime": {
+          "type": "object",
+          "description": "Link table stop time"
+        }
+      }
+    },
+    "QueryTableStatusRequest": {
+      "type": "object",
+      "properties": {
+        "maxSegmentCount": {
+          "type": "integer",
+          "description": "Max segment count to query table status"
+        },
+        "continuationToken": {
+          "type": "object",
+          "description": "Continuation token to query table status"
+        }
+      }
+    },
+    "UpdateLandingZoneCredential": {
+      "type": "object",
+      "properties": {
+        "sasToken": {
+          "$ref": "#/definitions/SecureString",
+          "description": "Landing zone's sas token"
+        }
+      }
+    },
+    "SecureString": {
+      "x-ms-discriminator-value": "SecureString",
+      "description": "Azure Synapse secure string definition. The string value will be masked with asterisks '*' during Get or List API calls.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretBase"
+        }
+      ],
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Value of secure string."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SecretBase": {
+      "description": "The base definition of a secret type.",
+      "discriminator": "type",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the secret."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "description": "The object that defines the structure of an Azure Synapse error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "x-ms-client-flatten": true,
+          "description": "Error data",
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "description": "The object that defines the structure of an Azure Synapse error.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Property name/path in request associated with error.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Array with additional error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudError"
+          }
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "LinkedServiceReference": {
+      "description": "Linked service reference type.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Linked service reference type.",
+          "enum": [
+            "LinkedServiceReference"
+          ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference LinkedService name."
+        },
+        "parameters": {
+          "$ref": "#/definitions/ParameterValueSpecification",
+          "description": "Arguments for LinkedService."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "ParameterValueSpecification": {
+      "description": "An object mapping parameter names to argument values.",
+      "type": "object"
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The Synapse client API Version."
+    },
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "The workspace development endpoint, for example https://myworkspace.dev.azuresynapse.net.",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
+    "LinkConnectionName": {
+      "name": "linkConnectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The link connection name",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
