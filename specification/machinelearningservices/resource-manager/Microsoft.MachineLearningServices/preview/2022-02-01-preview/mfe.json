@@ -5362,9 +5362,6 @@
     },
     "AssetJobOutput": {
       "description": "Asset output type.",
-      "required": [
-        "uri"
-      ],
       "type": "object",
       "properties": {
         "mode": {
@@ -5377,9 +5374,9 @@
           ]
         },
         "uri": {
-          "description": "Output Asset URI.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string"
+          "description": "Output Asset URI. This will have a default value of \"azureml/{jobId}/{outputName}\" if omitted.",
+          "type": "string",
+          "x-nullable": true
         }
       },
       "additionalProperties": false
