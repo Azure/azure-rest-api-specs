@@ -2045,7 +2045,7 @@
         "tags": [
           "DataVersion"
         ],
-        "summary": "List data versions.",
+        "summary": "List data versions in the data container",
         "operationId": "DataVersions_List",
         "produces": [
           "application/json"
@@ -2063,7 +2063,7 @@
           {
             "in": "path",
             "name": "name",
-            "description": "Data name.",
+            "description": "Data container's name",
             "required": true,
             "type": "string"
           },
@@ -2073,13 +2073,13 @@
           {
             "in": "query",
             "name": "$orderBy",
-            "description": "Ordering of list.",
+            "description": "Please choose OrderBy value from ['createdtime', 'modifiedtime']",
             "type": "string"
           },
           {
             "in": "query",
             "name": "$top",
-            "description": "Maximum number of records to return.",
+            "description": "Top count of results, top count cannot be greater than the page size.\r\n                              If topCount > page size, results with be default page size count will be returned",
             "type": "integer",
             "format": "int32"
           },
@@ -2095,7 +2095,7 @@
           {
             "in": "query",
             "name": "listViewType",
-            "description": "View type for including/excluding (for example) archived entities.",
+            "description": "[ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.",
             "type": "string",
             "default": "ActiveOnly",
             "enum": [
@@ -8677,7 +8677,7 @@
           "x-nullable": true
         },
         "nmsIouThreshold": {
-          "description": "IOU threshold used during inference in NMS post processing. Must be a float in the range [0, 1].",
+          "description": "IOU threshold used during inference in NMS post processing. Must be float in the range [0, 1].",
           "type": "string",
           "example": "uniform(0.1, 0.2)",
           "x-nullable": true
@@ -8685,7 +8685,7 @@
         "tileGridSize": {
           "description": "The grid size to use for tiling each image. Note: TileGridSize must not be\r\nNone to enable small object detection logic A tuple of two integers passed as a string.\r\nNote: This settings is not supported for the 'yolov5' algorithm.",
           "type": "string",
-          "example": "choice('(3, 2)', '(2, 2)')",
+          "example": "choice('[3;2]', '[2;2]')",
           "x-nullable": true
         },
         "tileOverlapRatio": {
@@ -8709,7 +8709,7 @@
         "validationMetricType": {
           "description": "Metric computation method to use for validation metrics. Must be 'none', 'coco', 'voc', or 'coco_voc'.",
           "type": "string",
-          "example": "choice(none, coco, voc, coco_voc)",
+          "example": "choice('none', 'coco', 'voc', 'coco_voc')",
           "x-nullable": true
         }
       },
@@ -9007,9 +9007,9 @@
           "x-nullable": true
         },
         "tileGridSize": {
-          "description": "The grid size to use for tiling each image. Note: TileGridSize must not be\r\nNone to enable small object detection logic. A tuple of two integers passed as a string.\r\n<example>For example:\r\n<code>\r\nTileGridSize = \"(3, 2)\";\r\n</code></example>\r\nNote: This settings is not supported for the 'yolov5' algorithm.",
+          "description": "The grid size to use for tiling each image. Note: TileGridSize must not be\r\nNone to enable small object detection logic. A tuple of two integers passed as a string.\r\nNote: This settings is not supported for the 'yolov5' algorithm.",
           "type": "string",
-          "example": "(3, 2)",
+          "example": "[3;2]",
           "x-nullable": true
         },
         "tileOverlapRatio": {
@@ -12701,8 +12701,16 @@
             "description": "Image Instance Segmentation. Instance segmentation is used to identify objects in an image at the pixel level,\ndrawing a polygon around each object in the image."
           },
           {
+            "value": "TextClassification",
+            "description": "Text classification (also known as text tagging or text categorization) is the process of sorting texts into categories.\nCategories are mutually exclusive."
+          },
+          {
+            "value": "TextClassificationMultilabel",
+            "description": "Multilabel classification task assigns each sample to a group (zero or more) of target labels."
+          },
+          {
             "value": "TextNER",
-            "description": "Text Named Entity Recognition a.k.a. TextNER."
+            "description": "Text Named Entity Recognition a.k.a. TextNER.\nNamed Entity Recognition (NER) is the ability to take free-form text and identify the occurrences of entities such as people, locations, organizations, and more."
           }
         ]
       },
