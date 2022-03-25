@@ -8,15 +8,9 @@
     "output": {
       "properties": {
         "datasource": {
-          "type": "Microsoft.Storage/DocumentDB",
+          "type": "GatewayMessageBus",
           "properties": {
-            "accountId": "someAccountId",
-            "accountKey": "accountKey==",
-            "database": "db01",
-            "collectionNamePattern": "collection",
-            "partitionKey": "key",
-            "documentId": "documentId",
-            "authenticationMode": "Msi"
+            "topic": "EdgeTopic1"
           }
         }
       }
@@ -33,13 +27,9 @@
         "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
         "properties": {
           "datasource": {
-            "type": "Microsoft.Storage/DocumentDB",
+            "type": "GatewayMessageBus",
             "properties": {
-              "accountId": "someAccountId",
-              "database": "db01",
-              "collectionNamePattern": "collection",
-              "partitionKey": "key",
-              "documentId": "documentId"
+              "topic": "EdgeTopic1"
             }
           }
         }
@@ -55,13 +45,9 @@
         "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
         "properties": {
           "datasource": {
-            "type": "Microsoft.Storage/DocumentDB",
+            "type": "GatewayMessageBus",
             "properties": {
-              "accountId": "someAccountId",
-              "database": "db01",
-              "collectionNamePattern": "collection",
-              "partitionKey": "key",
-              "documentId": "documentId"
+              "topic": "EdgeTopic1"
             }
           }
         }

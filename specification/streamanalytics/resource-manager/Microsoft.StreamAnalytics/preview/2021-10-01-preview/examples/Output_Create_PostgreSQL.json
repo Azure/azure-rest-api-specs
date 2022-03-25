@@ -8,14 +8,14 @@
     "output": {
       "properties": {
         "datasource": {
-          "type": "Microsoft.Storage/DocumentDB",
+          "type": "Microsoft.DBForPostgreSQL/servers/databases",
           "properties": {
-            "accountId": "someAccountId",
-            "accountKey": "accountKey==",
-            "database": "db01",
-            "collectionNamePattern": "collection",
-            "partitionKey": "key",
-            "documentId": "documentId",
+            "server": "someServer",
+            "database": "someDatabase",
+            "user": "user",
+            "password": "somePassword",
+            "table": "someTable",
+            "maxWriterCount": 1,
             "authenticationMode": "Msi"
           }
         }
@@ -33,13 +33,14 @@
         "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
         "properties": {
           "datasource": {
-            "type": "Microsoft.Storage/DocumentDB",
+            "type": "Microsoft.DBForPostgreSQL/servers/databases",
             "properties": {
-              "accountId": "someAccountId",
-              "database": "db01",
-              "collectionNamePattern": "collection",
-              "partitionKey": "key",
-              "documentId": "documentId"
+              "server": "someServer",
+              "database": "someDatabase",
+              "user": "user",
+              "table": "someTable",
+              "maxWriterCount": 1,
+              "authenticationMode": "Msi"
             }
           }
         }
@@ -55,13 +56,14 @@
         "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
         "properties": {
           "datasource": {
-            "type": "Microsoft.Storage/DocumentDB",
+            "type": "Microsoft.DBForPostgreSQL/servers/databases",
             "properties": {
-              "accountId": "someAccountId",
-              "database": "db01",
-              "collectionNamePattern": "collection",
-              "partitionKey": "key",
-              "documentId": "documentId"
+              "server": "someServer",
+              "database": "someDatabase",
+              "user": "user",
+              "table": "someTable",
+              "maxWriterCount": 1,
+              "authenticationMode": "Msi"
             }
           }
         }
