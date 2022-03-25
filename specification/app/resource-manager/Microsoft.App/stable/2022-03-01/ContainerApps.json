@@ -260,7 +260,7 @@
           "ContainerApps"
         ],
         "summary": "Update properties of a Container App",
-        "description": "Patches a Container App. Currently only patching of tags is supported",
+        "description": "Patches a Container App using JSON Merge Patch",
         "operationId": "ContainerApps_Update",
         "parameters": [
           {
@@ -280,9 +280,9 @@
             "name": "containerAppEnvelope",
             "in": "body",
             "required": true,
-            "description": "Properties of a container app that need to be updated",
+            "description": "Properties of a Container App that need to be updated",
             "schema": {
-              "$ref": "#/definitions/ContainerAppPatch"
+              "$ref": "#/definitions/ContainerApp"
             }
           },
           {
@@ -290,11 +290,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Container App updated successfully.",
-            "schema": {
-              "$ref": "#/definitions/ContainerApp"
-            }
+          "202": {
+            "description": "Patch operation is in progress."
           },
           "default": {
             "description": "Common error response.",
@@ -307,7 +304,8 @@
           "Patch Container App": {
             "$ref": "./examples/ContainerApps_Patch.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/listCustomHostNameAnalysis": {
@@ -550,19 +548,6 @@
           "description": "Link to next page of resources.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "ContainerAppPatch": {
-      "description": "Container App Patch.",
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Application-specific metadata in the form of key-value pairs."
         }
       }
     },

@@ -259,7 +259,7 @@
           "ManagedEnvironments"
         ],
         "summary": "Update Managed Environment's properties.",
-        "description": "Patches a Managed Environment. Only patching of tags is supported currently",
+        "description": "Patches a Managed Environment using JSON Merge Patch",
         "operationId": "ManagedEnvironments_Update",
         "parameters": [
           {
@@ -281,7 +281,7 @@
             "description": "Configuration details of the Environment.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ManagedEnvironmentPatch"
+              "$ref": "#/definitions/ManagedEnvironment"
             }
           },
           {
@@ -289,11 +289,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ManagedEnvironment"
-            }
+          "202": {
+            "description": "Patch operation is in progress."
           },
           "default": {
             "description": "Common error response.",
@@ -306,7 +303,8 @@
           "Patch Managed Environment": {
             "$ref": "./examples/ManagedEnvironments_Patch.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{managedEnvironmentName}/certificates": {
@@ -804,19 +802,6 @@
           "description": "Link to next page of resources.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "ManagedEnvironmentPatch": {
-      "description": "An environment for hosting container apps",
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Application-specific metadata in the form of key-value pairs."
         }
       }
     },
