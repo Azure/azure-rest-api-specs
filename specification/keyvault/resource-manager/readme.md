@@ -29,12 +29,11 @@ openapi-type: arm
 tag: package-preview-2022-04
 ```
 
-
 ### Tag: package-preview-2022-04
 
 These settings apply only when `--tag=package-preview-2022-04` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-04'
+``` yaml $(tag) == 'package-preview-2022-04'
 input-file:
   - Microsoft.KeyVault/preview/2022-04-01-preview/common.json
   - Microsoft.KeyVault/preview/2022-04-01-preview/keys.json
@@ -43,6 +42,7 @@ input-file:
   - Microsoft.KeyVault/preview/2022-04-01-preview/providers.json
   - Microsoft.KeyVault/preview/2022-04-01-preview/secrets.json
 ```
+
 ### Tag: package-preview-2021-11
 
 These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
@@ -246,3 +246,13 @@ See configuration in [readme.python.md](./readme.python.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: IntegerTypeMustHaveFormat
+    where: $.definitions.Attributes.properties.nbf
+    from: secrets.json
+    reason: All fields of type integer do have format associated. Maybe a false positive.
+```
