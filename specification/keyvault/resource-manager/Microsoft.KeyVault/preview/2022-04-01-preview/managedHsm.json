@@ -1002,6 +1002,10 @@
           "type": "string",
           "format": "date-time",
           "description": "The scheduled purge date in UTC."
+        },
+        "securityDomainProperties":{
+          "$ref": "#/definitions/MHSMSecurityDomainProperties",
+          "description": "Security domain properties of the managed hsm."
         }
       },
       "description": "Properties of the managed HSM Pool"
@@ -1463,6 +1467,48 @@
         }
       },
       "description": "The CheckMhsmNameAvailability operation response."
+    },
+    "MHSMSecurityDomainProperties":{
+      "properties":{
+        "activationStatus":{
+          "readOnly": true,
+          "type": "string",
+          "description": "Activation Status",
+          "enum": [
+            "Active",
+            "NotActivated",
+            "Unknown",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ActivationStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Active",
+                "description": "The managed HSM Pool is active."
+              },
+              {
+                "value": "NotActivated",
+                "description": "The managed HSM Pool is not yet activated."
+              },
+              {
+                "value": "Unknown",
+                "description": "An unknown error occurred while activating managed hsm."
+              },
+              {
+                "value": "Failed",
+                "description": "Failed to activate managed hsm."
+              }
+            ]
+          }
+        },
+        "activationStatusMessage": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Activation Status Message."
+        }
+      }
     }
   },
   "parameters": {
