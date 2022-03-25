@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/ApplicationGatewayWafDynamicManifest": {
       "get": {
         "operationId": "ApplicationGatewayWafDynamicManifest_Get",
-        "description": "Gets the regional application gateway waf manifet.",
+        "description": "Gets the regional application gateway waf manifest.",
         "parameters": [
           {
             "name": "location",
@@ -55,7 +55,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. Returns the regional application gateway waf manifet",
+            "description": "Request successful. Returns the regional application gateway waf manifest",
             "schema": {
               "$ref": "#/definitions/ApplicationGatewayWafDynamicManifestResult"
             }
@@ -92,7 +92,7 @@
         },
         "AvailableRuleSets": {
           "type": "object",
-          "description": "The default ruleset.",
+          "description": "The available ruleset.",
           "items": {
             "$ref": "#/definitions/AvailableRuleSetsProperty"
           }
@@ -110,17 +110,13 @@
         "ruleSetVersion": {
           "type": "string",
           "description": "The version of the web application firewall rule set type."
-        },
-        "status": {
-          "type": "string",
-          "description": "The status of the web application firewall rule set type."
         }
       },
       "required": [
         "ruleSetType",
         "ruleSetVersion"
       ],
-      "description": "the dafault web application firewall rule set."
+      "description": "the default web application firewall rule set."
     },
     "AvailableRuleSetsProperty": {
       "type": "object",
@@ -130,7 +126,7 @@
           "items": {
             "$ref": "#/definitions/ApplicationGatewayFirewallRuleSet"
           },
-          "description": "The list of avalable application gateway rule sets."
+          "description": "The list of available application gateway rule sets."
         }
       },
       "description": "A web application firewall available rule sets."
