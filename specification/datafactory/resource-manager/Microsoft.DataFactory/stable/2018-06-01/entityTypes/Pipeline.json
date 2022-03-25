@@ -2363,7 +2363,10 @@
         },
         "storedProcedureParameters": {
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
-          "$ref": "#/definitions/StoredProcedureParameters"
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StoredProcedureParameter"
+          }
         },
         "isolationLevel": {
           "description": "Specifies the transaction locking behavior for the SQL source. Allowed values: ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is ReadCommitted. Type: string (or Expression with resultType string).",
@@ -2398,7 +2401,10 @@
         },
         "storedProcedureParameters": {
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
-          "$ref": "#/definitions/StoredProcedureParameters"
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StoredProcedureParameter"
+          }
         },
         "produceAdditionalTypes": {
           "description": "Which additional types to produce.",
@@ -2433,7 +2439,10 @@
         },
         "storedProcedureParameters": {
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
-          "$ref": "#/definitions/StoredProcedureParameters"
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StoredProcedureParameter"
+          }
         },
         "produceAdditionalTypes": {
           "description": "Which additional types to produce.",
@@ -2468,7 +2477,10 @@
         },
         "storedProcedureParameters": {
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
-          "$ref": "#/definitions/StoredProcedureParameters"
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StoredProcedureParameter"
+          }
         },
         "produceAdditionalTypes": {
           "description": "Which additional types to produce.",
@@ -2503,7 +2515,10 @@
         },
         "storedProcedureParameters": {
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
-          "$ref": "#/definitions/StoredProcedureParameters"
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StoredProcedureParameter"
+          }
         },
         "produceAdditionalTypes": {
           "description": "Which additional types to produce.",
@@ -4170,7 +4185,10 @@
         },
         "storedProcedureParameters": {
           "description": "SQL stored procedure parameters.",
-          "$ref": "#/definitions/StoredProcedureParameters"
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StoredProcedureParameter"
+          }
         },
         "storedProcedureTableTypeParameterName": {
           "type": "object",
@@ -4218,7 +4236,10 @@
         },
         "storedProcedureParameters": {
           "description": "SQL stored procedure parameters.",
-          "$ref": "#/definitions/StoredProcedureParameters"
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StoredProcedureParameter"
+          }
         },
         "storedProcedureTableTypeParameterName": {
           "type": "object",
@@ -4266,7 +4287,10 @@
         },
         "storedProcedureParameters": {
           "description": "SQL stored procedure parameters.",
-          "$ref": "#/definitions/StoredProcedureParameters"
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StoredProcedureParameter"
+          }
         },
         "storedProcedureTableTypeParameterName": {
           "type": "object",
@@ -4314,7 +4338,10 @@
         },
         "storedProcedureParameters": {
           "description": "SQL stored procedure parameters.",
-          "$ref": "#/definitions/StoredProcedureParameters"
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StoredProcedureParameter"
+          }
         },
         "storedProcedureTableTypeParameterName": {
           "type": "object",
@@ -5995,44 +6022,11 @@
         },
         "storedProcedureParameters": {
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
-          "$ref": "#/definitions/StoredProcedureParameters"
+          "type": "object"
         }
       },
       "required": [
         "storedProcedureName"
-      ]
-    },
-    "StoredProcedureParameters": {
-      "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\". Can be either StoredProcedureParameter or Expression with resultType string",
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "value": {
-              "type": "string",
-              "description": "Value to be set. Could be an Expression.",
-              "required": true
-            },
-            "type": {
-              "description": "Stored procedure parameters type. Always 'Expression'.",
-              "type": "string",
-              "enum": [
-                "Expression"
-              ],
-              "x-ms-enum": {
-                "name": "StoredProcedureParametersType",
-                "modelAsString": true
-              },
-              "required": true
-            }
-          }
-        },
-        {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/StoredProcedureParameter"
-          }
-        }
       ]
     },
     "ExecutePipelineActivity": {
@@ -6289,10 +6283,6 @@
         "authentication": {
           "description": "Authentication method used for calling the endpoint.",
           "$ref": "#/definitions/WebActivityAuthentication"
-        },
-        "disableCertValidation": {
-          "type": "boolean",
-          "description": "When set to true, Certificate validation will be disabled."
         },
         "datasets": {
           "type": "array",
