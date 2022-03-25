@@ -8648,9 +8648,10 @@
           }
         },
         "policyFormatVersion": {
-          "description": "Version of the client encryption policy definition. User passed value is ignored. Default policy version is 1.",
+          "description": "Version of the client encryption policy definition. Please note, user passed value is ignored. Default policy version is 1.",
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": 1
         }
       },
 	  "required": [
@@ -8662,7 +8663,7 @@
       "description": ".",
       "properties": {
         "path": {
-          "description": "List of paths that need encryption",
+          "description": "Path that needs to be encrypted.",
           "type": "string"
         },
         "clientEncryptionKeyId": {
