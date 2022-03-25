@@ -189,5 +189,5 @@ These settings apply only when `--tag=package-2016-03-preview-monitorlegacy --go
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2016-03-preview-monitorlegacy' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2016-03-01-preview-monitorlegacy/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/monitorlegacy-2016-03-01-preview/$(namespace)
 ```
