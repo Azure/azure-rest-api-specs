@@ -8344,22 +8344,6 @@
       "x-ms-discriminator-value": "ImageClassificationMultilabel",
       "additionalProperties": false
     },
-    "ImageDataSettings": {
-      "description": "Collection of registered Tabular Dataset Ids and other data settings required for training and validating models.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataSettings"
-        }
-      ],
-      "properties": {
-        "validationData": {
-          "description": "Settings for the validation dataset.",
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": false
-    },
     "ImageInstanceSegmentation": {
       "description": "Image Instance Segmentation. Instance segmentation is used to identify objects in an image at the pixel level,\r\ndrawing a polygon around each object in the image.",
       "type": "object",
@@ -9135,7 +9119,7 @@
       "properties": {
         "dataSettings": {
           "description": "Collection of registered Tabular Dataset Ids and other data settings required for training and validating models.",
-          "$ref": "#/definitions/ImageDataSettings"
+          "$ref": "#/definitions/ImageVerticalDataSettings"
         },
         "limitSettings": {
           "description": "Limit settings for the AutoML job.",
@@ -9147,6 +9131,32 @@
           "x-nullable": true
         }
       },
+      "additionalProperties": false
+    },
+    "ImageVerticalDataSettings": {
+      "description": "Collection of registered Tabular Dataset Ids and other data settings required for training and validating models.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSettings"
+        }
+      ],
+      "properties": {
+        "validationData": {
+          "description": "Settings for the validation dataset.",
+          "$ref": "#/definitions/ImageVerticalValidationDataSettings",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "ImageVerticalValidationDataSettings": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValidationDataSettings"
+        }
+      ],
       "additionalProperties": false
     },
     "InferenceContainerProperties": {
