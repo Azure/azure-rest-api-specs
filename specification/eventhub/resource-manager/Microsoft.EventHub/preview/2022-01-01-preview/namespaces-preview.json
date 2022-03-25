@@ -1202,6 +1202,21 @@
             "name": {
               "description": "Name of the resource association",
               "type": "string"
+            },
+            "accessMode": {
+              "description": "Access Mode of the resource association",
+              "enum": [
+                "NoAssociationMode",
+                "EnforcedMode",
+                "LearningMode",
+                "AuditMode",
+                "UnspecifiedMode"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "ResourceAssociationAccessMode",
+                "modelAsString": true
+              }
             }
           }
         },
