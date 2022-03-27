@@ -159,6 +159,44 @@
         }
       }
     },
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/anyActiveOffer": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStore_AnyActiveOffer",
+        "description": "Query whether the private store has any active offer.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/PrivateStoreIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AnyActiveOfferResponse"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AnyActiveOffer": {
+            "$ref": "./examples/AnyActiveOffer.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/queryOffers": {
       "parameters": [
         {
@@ -1782,6 +1820,16 @@
           "description": "Gets or sets notifications settings",
           "$ref": "#/definitions/NotificationsSettingsProperties",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AnyActiveOfferResponse": {
+      "description": "Any active offer query response object",
+      "type": "object",
+      "properties": {
+        "anyActiveOffer": {
+          "description": "Boolean answer, true if the private store has at leaset a single active offer, otherwise, false.",
+          "type": "boolean"
         }
       }
     },
