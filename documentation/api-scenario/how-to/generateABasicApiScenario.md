@@ -17,7 +17,7 @@ OR
 - readme: swagger readme file.
 - tag: which tag to generate. oav will analyze swagger file under the tag and generate API scenario.
 - specs: one or more spec file paths. type: array.
-- dependency: The file path of the RESTler dependency. It conflicts with `rules`.
+- dependency: The file path of the RESTler dependency. It cannot be used with `rules`.
 - rules: Currently support two types. `resource-put-delete`, `operations-list`. Default: `resource-put-delete`
   - `resource-put-delete`: generate resource put and delete API scenario.
   - `operations-list`: generate operations list API scenario. `operations-list` is the simplest API which must be defined in swagger.
