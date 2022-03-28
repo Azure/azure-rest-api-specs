@@ -18,7 +18,3 @@ no-namespace-folders: true
 output-folder: $(python-sdks-folder)/hdinsight/azure-mgmt-hdinsight/azure/mgmt/hdinsight
 ```
 
-``` yaml $(python)
-modelerfour:
-  lenient-model-deduplication: true
-```
