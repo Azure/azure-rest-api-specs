@@ -15,12 +15,17 @@ module-name: sdk/resourcemanager/cdn/armcdn
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
+directive:
+- rename-model:
+    from: 'CdnEndpoint'
+    to: 'LinkedEndpoint'
 ```
 
 ### Go multi-api
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2021-06
   - tag: package-2020-09
   - tag: package-2020-04
   - tag: package-2019-06
@@ -30,6 +35,15 @@ batch:
   - tag: package-2016-10
   - tag: package-2016-04
   - tag: package-2015-06
+```
+
+### Tag: package-2021-06 and go
+
+These settings apply only when `--tag=package-2021-06 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2021-06' && $(go)
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2021-06-01/$(namespace)
 ```
 
 ### Tag: package-2020-09 and go

@@ -318,16 +318,15 @@
       "enum": [
         "Active",
         "Deleted"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "ManagementPartnerState",
+        "modelAsString": true
+      }
     },
     "ErrorResponseCode": {
       "type": "string",
-      "description": "this is the error response code that management partner operations may return",
-      "enum": [
-        "NotFound",
-        "Conflict",
-        "BadRequest"
-      ]
+      "description": "this is the error response code that management partner operations may return"
     },
     "Error": {
       "type": "object",
@@ -336,6 +335,14 @@
         "error": {
           "$ref": "#/definitions/ExtendedErrorInfo",
           "description": "this is the ExtendedErrorInfo property"
+        },
+        "code": {
+          "$ref": "#/definitions/ErrorResponseCode",
+          "description": "this is the error response code"
+        },
+        "message": {
+          "type": "string",
+          "description": "this is the extended error info message"
         }
       }
     },
@@ -363,6 +370,9 @@
             "$ref": "#/definitions/OperationResponse",
             "description": "this is the operation response property"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "this is the operation response list"
         },
         "nextLink": {

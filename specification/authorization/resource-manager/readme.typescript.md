@@ -16,7 +16,6 @@ typescript:
 typescript:
   package-name: "@azure/arm-authorization"
   output-folder: "$(typescript-sdks-folder)/sdk/authorization/arm-authorization"
-  clear-output-folder: true
 ```
 
 ### Profile: profile-hybrid-2019-03-01
@@ -27,7 +26,6 @@ These settings apply only when `--profile-content=profile-hybrid-2019-03-01` is 
 typescript:
   package-name: "@azure/arm-authorization-profile-2019-03-01-hybrid"
   output-folder: "$(typescript-sdks-folder)/sdk/authorization/arm-authorization-profile-2019-03-01-hybrid"
-  clear-output-folder: true
   batch:
     - tag: profile-hybrid-2019-03-01
 ```
@@ -40,7 +38,6 @@ These settings apply only when `--profile-content=profile-hybrid-2020-09-01` is 
 typescript:
   package-name: "@azure/arm-authorization-profile-2020-09-01-hybrid"
   output-folder: "$(typescript-sdks-folder)/sdk/authorization/arm-authorization-profile-2020-09-01-hybrid"
-  clear-output-folder: true
   batch:
     - tag: profile-hybrid-2020-09-01
 ```
@@ -53,7 +50,6 @@ These settings apply only when `--profile-content=package-2020-10-01-preview` is
 typescript:
   package-name: "@azure/arm-authorization-package-2020-10-01-preview"
   output-folder: "$(typescript-sdks-folder)/sdk/authorization/arm-authorization-package-2020-10-01-preview"
-  clear-output-folder: true
   batch:
     - tag: package-2020-10-01-preview
 ```

@@ -776,8 +776,8 @@
           }
         },
         "referenceName": {
-          "type": "string",
-          "description": "Reference notebook name."
+          "type": "object",
+          "description": "Reference notebook name. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
@@ -828,6 +828,31 @@
         "referenceName": {
           "type": "string",
           "description": "Reference SQL pool name."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "BigDataPoolParametrizationReference": {
+      "description": "Big data pool reference type.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Big data pool reference type.",
+          "enum": [
+            "BigDataPoolReference"
+          ],
+          "x-ms-enum": {
+            "name": "BigDataPoolReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "object",
+          "description": "Reference big data pool name. Type: string (or Expression with resultType string)."
         }
       },
       "required": [

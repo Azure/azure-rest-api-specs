@@ -612,6 +612,10 @@
           "items": {
             "$ref": "#/definitions/Authorization"
           },
+          "x-ms-identifiers": [
+            "principalId",
+            "roleDefinitionId"
+          ],
           "description": "The collection of authorization objects describing the access Azure Active Directory principals in the managedBy tenant will receive on the delegated resource in the managed tenant."
         },
         "eligibleAuthorizations": {
@@ -619,6 +623,9 @@
           "items": {
             "$ref": "#/definitions/EligibleAuthorization"
           },
+          "x-ms-identifiers": [
+            "principalId"
+          ],
           "description": "The collection of eligible authorization objects describing the just-in-time access Azure Active Directory principals in the managedBy tenant will receive on the delegated resource in the managed tenant."
         },
         "registrationDefinitionName": {
@@ -762,6 +769,10 @@
                   "items": {
                     "$ref": "#/definitions/Authorization"
                   },
+                  "x-ms-identifiers": [
+                    "principalId",
+                    "roleDefinitionId"
+                  ],
                   "description": "The collection of authorization objects describing the access Azure Active Directory principals in the managedBy tenant will receive on the delegated resource in the managed tenant."
                 },
                 "eligibleAuthorizations": {
@@ -769,6 +780,9 @@
                   "items": {
                     "$ref": "#/definitions/EligibleAuthorization"
                   },
+                  "x-ms-identifiers": [
+                    "principalId"
+                  ],
                   "description": "The collection of eligible authorization objects describing the just-in-time access Azure Active Directory principals in the managedBy tenant will receive on the delegated resource in the managed tenant."
                 },
                 "registrationDefinitionName": {
@@ -904,6 +918,10 @@
           "items": {
             "$ref": "#/definitions/Authorization"
           },
+          "x-ms-identifiers": [
+            "principalId",
+            "roleDefinitionId"
+          ],
           "description": "The collection of authorization objects describing the access Azure Active Directory principals in the managedBy tenant will receive on the delegated resource in the managed tenant."
         },
         "eligibleAuthorizations": {
@@ -911,6 +929,9 @@
           "items": {
             "$ref": "#/definitions/EligibleAuthorization"
           },
+          "x-ms-identifiers": [
+            "principalId"
+          ],
           "description": "The collection of eligible authorization objects describing the just-in-time access Azure Active Directory principals in the managedBy tenant will receive on the delegated resource in the managed tenant."
         },
         "offerDisplayName": {
@@ -1020,6 +1041,9 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of Microsoft.ManagedServices operations."
         }
       },
@@ -1125,6 +1149,9 @@
           "items": {
             "$ref": "#/definitions/EligibleApprover"
           },
+          "x-ms-identifiers": [
+            "principalId"
+          ],
           "description": "The list of managedByTenant approvers for the eligible authorization."
         }
       },
@@ -1149,7 +1176,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorDefinition"
-          }
+          },
+          "x-ms-identifiers": [
+            "code"
+          ]
         }
       },
       "required": [

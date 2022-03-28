@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-azurearcdata"
   output-folder: "$(typescript-sdks-folder)/sdk/azurearcdata/arm-azurearcdata"
-  clear-output-folder: true
   generate-metadata: true
 ```

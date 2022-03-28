@@ -820,6 +820,16 @@
             }
           }
         },
+        "msrp": {
+          "type": "object",
+          "description": "The sku's MSRP values for each term",
+          "additionalProperties": {
+            "type": "object",
+            "items": {
+              "$ref": "#/definitions/MsrpProperty"
+            }
+          }
+        },
         "terms": {
           "type": "array",
           "readOnly": true,
@@ -849,6 +859,19 @@
           "items": {
             "$ref": "#/definitions/SkuRestriction"
           }
+        }
+      }
+    },
+    "MsrpProperty": {
+      "type": "object",
+      "properties": {
+        "currencyCode": {
+          "type": "string",
+          "description": "Represents the currency code - 3 character ISO."
+        },
+        "amount": {
+          "type": "number",
+          "description": "Represents the amount of money in the currency."
         }
       }
     },
@@ -1253,6 +1276,12 @@
         "mergeProperties": {
           "$ref": "#/definitions/ReservationMergeProperties"
         },
+        "swapProperties": {
+          "$ref": "#/definitions/ReservationSwapProperties"
+        },
+        "appliedScopeProperties": {
+          "$ref": "#/definitions/AppliedScopeProperties"
+        },
         "billingScopeId": {
           "$ref": "#/definitions/BillingScopeId"
         },
@@ -1280,6 +1309,23 @@
         "capabilities": {
           "type": "string",
           "description": "List the Capabilities of a reservation"
+        }
+      }
+    },
+    "AppliedScopeProperties": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID of the applied scope type"
+        },
+        "managementGroupId": {
+          "type": "string",
+          "description": "Management group ID of the format /providers/Microsoft.Management/managementGroups/{managementGroupId}"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Management group display name"
         }
       }
     },
@@ -1312,6 +1358,19 @@
             "type": "string"
           },
           "description": "Resource Ids of the Source Reservation's merged to form this Reservation. Format of the resource Id is /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
+        }
+      }
+    },
+    "ReservationSwapProperties": {
+      "type": "object",
+      "properties": {
+        "swapSource": {
+          "type": "string",
+          "description": "Resource Id of the Source Reservation that gets swapped. Format of the resource Id is /providers/microsoft.capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
+        },
+        "swapDestination": {
+          "type": "string",
+          "description": "Reservation Resource Id that the original resource gets swapped to. Format of the resource Id is /providers/microsoft.capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
         }
       }
     },
