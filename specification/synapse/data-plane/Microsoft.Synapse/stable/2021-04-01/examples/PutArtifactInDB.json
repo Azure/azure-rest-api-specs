@@ -2,7 +2,7 @@
   "parameters": {
     "endpoint": "exampleWorkspace.dev.azuresynapse.net",
     "databaseName": "exampleDatabase",
-    "artifacType": "exampleArtifactType",
+    "artifacType": "TABLE",
     "artifactName": "exampleArtifactName",
     "createArtifactsPayload": "artifactPayload",
     "api-version": "2021-04-01"
@@ -17,7 +17,6 @@
           "Origin": {
             "Type": "originType(SQLOD/ADLS/SPARK/etc)"
           },
-          "Properties": {},
           "Source": {
             "Provider": "ADLS",
             "Location": "abfss://exampleBlobContainer@exampleStorageName.dfs.core.windows.net/exampleDatabase",
@@ -29,8 +28,7 @@
           "PublishStatus": "PUBLISHED",
           "ObjectVersion": 1,
           "ObjectId": "exampleObjectIdGuid"
-        },
-        "id": "/subscriptions/exampleSubscriptionIdGuid/resourcegroups/exampleResourceGroup/providers/microsoft.synapse/workspaces/exampleWorkspace/databases/exampleDatabase/artifactTypes/artifactName"
+        }
       }
     },
     "default": {
