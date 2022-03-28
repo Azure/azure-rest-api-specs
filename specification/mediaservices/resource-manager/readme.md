@@ -62,6 +62,21 @@ directive:
     from: Accounts.json
 ```
 
+### Tag: package-2021-11-Account
+
+These settings apply only when `--tag=package-2021-11-Account` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-11-Account'
+input-file:
+  - Microsoft.Media/stable/2021-11-01/AccountFilters.json
+  - Microsoft.Media/stable/2021-11-01/Accounts.json
+  - Microsoft.Media/stable/2021-11-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/stable/2021-11-01/ContentKeyPolicies.json
+  - Microsoft.Media/stable/2021-11-01/Encoding.json
+  - Microsoft.Media/stable/2021-11-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/stable/2021-11-01/streamingservice.json
+```
+
 ### Tag: package-2021-11
 
 These settings apply only when `--tag=package-2021-11` is specified on the command line.

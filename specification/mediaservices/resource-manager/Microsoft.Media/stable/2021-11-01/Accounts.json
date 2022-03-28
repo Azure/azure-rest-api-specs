@@ -282,7 +282,6 @@
       "description": "A diagnostic log emitted by service."
     },
     "Operation": {
-      "description": "An operation.",
       "properties": {
         "name": {
           "type": "string",
@@ -327,7 +326,8 @@
       "type": "object",
       "required": [
         "name"
-      ]
+      ],
+      "description": "An operation."
     },
     "EntityNameAvailabilityCheckOutput": {
       "properties": {
@@ -472,6 +472,42 @@
           },
           "description": "Whether or not public network access is allowed for resources under the Media Services account.",
           "x-nullable": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Failed",
+            "InProgress",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "values": [
+              {
+                "value": "Failed",
+                "description": "Provisioning state failed."
+              },
+              {
+                "value": "InProgress",
+                "description": "Provisioning state in progress."
+              },
+              {
+                "value": "Succeeded",
+                "description": "Provisioning state succeeded."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Provisioning state of the Media Services account.",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "privateEndpointConnections": {
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateEndpointConnection"
+          },
+          "description": "The Private Endpoint Connections created for the Media Service account.",
+          "readOnly": true
         }
       },
       "type": "object",
@@ -490,14 +526,14 @@
           "description": "The resource properties.",
           "x-ms-client-flatten": true
         },
-        "identity": {
-          "$ref": "#/definitions/MediaServiceIdentity",
-          "description": "The Managed Identity for the Media Services account."
-        },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "The system metadata relating to this resource.",
           "readOnly": true
+        },
+        "identity": {
+          "$ref": "#/definitions/MediaServiceIdentity",
+          "description": "The Managed Identity for the Media Services account."
         }
       },
       "type": "object"
@@ -756,6 +792,42 @@
       },
       "type": "object"
     },
+    "MediaServiceOperationStatus": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation identifier."
+        },
+        "id": {
+          "type": "string",
+          "description": "Operation resource ID."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Operation start time."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Operation end time."
+        },
+        "status": {
+          "type": "string",
+          "description": "Operation status."
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail",
+          "x-nullable": true
+        }
+      },
+      "type": "object",
+      "required": [
+        "name",
+        "status"
+      ],
+      "description": "Status of media service operation."
+    },
     "OperationCollection": {
       "properties": {
         "value": {
@@ -928,12 +1000,42 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/MediaService"
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
             }
           },
           "201": {
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/MediaService"
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -970,9 +1072,10 @@
             "$ref": "#/parameters/ApiVersion"
           }
         ],
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create a Media Services account": {
-            "$ref": "examples/accounts-create.json"
+            "$ref": "examples/async-accounts-create.json"
           }
         }
       },
@@ -1023,10 +1126,25 @@
         "description": "Updates an existing Media Services account",
         "operationId": "Mediaservices_Update",
         "responses": {
-          "200": {
-            "description": "OK",
+          "202": {
+            "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/MediaService"
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1063,9 +1181,10 @@
             "$ref": "#/parameters/ApiVersion"
           }
         ],
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Update a Media Services accounts": {
-            "$ref": "examples/accounts-update.json"
+            "$ref": "examples/async-accounts-update.json"
           }
         }
       }
@@ -1123,7 +1242,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/listEdgePolicies": {
       "post": {
         "summary": "List the media edge policies associated with the Media Services account.",
-        "description": "List the media edge policies associated with the Media Services account.",
+        "description": "List all the media edge policies associated with the Media Services account.",
         "operationId": "Mediaservices_ListEdgePolicies",
         "responses": {
           "200": {
@@ -1176,7 +1295,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/privateLinkResources": {
       "get": {
         "summary": "Get list of group IDs.",
-        "description": "Get list of group IDs.",
+        "description": "List supported group IDs.",
         "operationId": "PrivateLinkResources_List",
         "responses": {
           "200": {
@@ -1220,7 +1339,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/privateLinkResources/{name}": {
       "get": {
         "summary": "Get group ID.",
-        "description": "Get group ID.",
+        "description": "Get details of a group ID.",
         "operationId": "PrivateLinkResources_Get",
         "responses": {
           "200": {
@@ -1269,8 +1388,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/privateEndpointConnections": {
       "get": {
-        "summary": "Get all private endpoint connections.",
-        "description": "Get all private endpoint connections.",
+        "summary": "List private endpoint connections.",
+        "description": "List all private endpoint connections.",
         "operationId": "PrivateEndpointConnections_List",
         "responses": {
           "200": {
@@ -1314,7 +1433,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/privateEndpointConnections/{name}": {
       "get": {
         "summary": "Get private endpoint connection.",
-        "description": "Get private endpoint connection.",
+        "description": "Get the details of a private endpoint connection.",
         "operationId": "PrivateEndpointConnections_Get",
         "responses": {
           "200": {
@@ -1361,8 +1480,8 @@
         }
       },
       "put": {
-        "summary": "Update private endpoint connection.",
-        "description": "Update private endpoint connection.",
+        "summary": "Update a private endpoint connection.",
+        "description": "Update an existing private endpoint connection.",
         "operationId": "PrivateEndpointConnections_CreateOrUpdate",
         "responses": {
           "200": {
@@ -1418,8 +1537,8 @@
         }
       },
       "delete": {
-        "summary": "Delete private endpoint connection.",
-        "description": "Delete private endpoint connection.",
+        "summary": "Delete a private endpoint connection.",
+        "description": "Deletes a private endpoint connection.",
         "operationId": "PrivateEndpointConnections_Delete",
         "responses": {
           "200": {
@@ -1494,7 +1613,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the location"
+            "description": "Location name."
           },
           {
             "name": "parameters",
@@ -1512,6 +1631,126 @@
         "x-ms-examples": {
           "Check Name Availability": {
             "$ref": "examples/accounts-check-name-availability.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Media/locations/{locationName}/mediaServiceOperationStatuses/{operationId}": {
+      "get": {
+        "summary": "Get operation status.",
+        "description": "Get media service operation status.",
+        "operationId": "MediaServiceOperationStatuses_Get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MediaServiceOperationStatus"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Location name."
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Operation ID."
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "x-ms-examples": {
+          "Get status of asynchronous operation when it is completed.": {
+            "$ref": "examples/media-service-operation-status-by-id-terminal-state.json"
+          },
+          "Get status of asynchronous operation when it is ongoing.": {
+            "$ref": "examples/media-service-operation-status-by-id-non-terminal-state.json"
+          },
+          "Get status of asynchronous operation when it is completed with error.": {
+            "$ref": "examples/media-service-operation-status-by-id-non-terminal-state-failed.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Media/locations/{locationName}/mediaServiceOperationResults/{operationId}": {
+      "get": {
+        "summary": "Get operation result.",
+        "description": "Get media service operation result.",
+        "operationId": "MediaServiceOperationResults_Get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MediaService"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Location name."
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Operation Id."
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "x-ms-examples": {
+          "Get status of asynchronous operation.": {
+            "$ref": "examples/media-service-operation-result-by-id.json"
           }
         }
       }
