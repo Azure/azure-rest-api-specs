@@ -1004,7 +1004,7 @@
           "description": "The scheduled purge date in UTC."
         },
         "securityDomainProperties": {
-          "$ref": "#/definitions/MHSMSecurityDomainProperties",
+          "$ref": "#/definitions/ManagedHSMSecurityDomainProperties",
           "description": "Security domain properties of the managed hsm."
         }
       },
@@ -1458,7 +1458,7 @@
           ],
           "x-ms-enum": {
             "name": "Reason",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "message": {
@@ -1469,7 +1469,7 @@
       },
       "description": "The CheckMhsmNameAvailability operation response."
     },
-    "MHSMSecurityDomainProperties": {
+    "ManagedHSMSecurityDomainProperties": {
       "type": "object",
       "properties": {
         "activationStatus": {
