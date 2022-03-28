@@ -1,0 +1,57 @@
+{
+  "title": "Create/Update NSP association",
+  "parameters": {
+    "api-version": "2021-02-01-preview",
+    "subscriptionId": "subId",
+    "resourceGroupName": "rg1",
+    "networkSecurityPerimeterName": "nsp1",
+    "associationName": "association1",
+    "parameters": {
+      "properties": {
+        "privateLinkResource": {
+          "id": "/subscriptions/{paasSubscriptionId}/resourceGroups/{paasResourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}"
+        },
+        "profile": {
+          "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/{profileName}"
+        },
+        "accessMode": "EnforceMode"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "association1",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/resourceAssociations/association1",
+        "type": "Microsoft.Network/networkSecurityPerimeters/resourceAssociations",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "privateLinkResource": {
+            "id": "/subscriptions/{paasSubscriptionId}/resourceGroups/{paasResourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}"
+          },
+          "profile": {
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/{profileName}"
+          },
+          "accessMode": "EnforceMode"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "association1",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/resourceAssociations/association1",
+        "type": "Microsoft.Network/networkSecurityPerimeters/resourceAssociations",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "privateLinkResource": {
+            "id": "/subscriptions/{paasSubscriptionId}/resourceGroups/{paasResourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}"
+          },
+          "profile": {
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/{profileName}"
+          },
+          "accessMode": "EnforceMode"
+        }
+      }
+    }
+  }
+}
