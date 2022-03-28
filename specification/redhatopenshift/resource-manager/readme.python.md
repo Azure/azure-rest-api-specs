@@ -53,13 +53,8 @@ output-folder: $(python-sdks-folder)/redhatopenshift/azure-mgmt-redhatopenshift/
 These settings apply only when `--tag=package-2022-04-01 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2021-09-01-preview' && $(python) && !$(track2)
-python:
-  namespace: azure.mgmt.redhatopenshift.v2022_04_01
-  output-folder: $(python-sdks-folder)/redhatopenshift/azure-mgmt-redhatopenshift/azure/mgmt/redhatopenshift/v2022_04_01
-```
 
-``` yaml $(tag) == 'package-2022-04-01' && $(python) && $(track2)
+``` yaml $(tag) == 'package-2022-04-01' && $(python)
 namespace: azure.mgmt.redhatopenshift.v2022_04_01
 output-folder: $(python-sdks-folder)/redhatopenshift/azure-mgmt-redhatopenshift/azure/mgmt/redhatopenshift/v2022_04_01
 ```
