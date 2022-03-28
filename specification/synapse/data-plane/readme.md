@@ -57,6 +57,7 @@ These settings apply only when `--tag=package-artifacts-composite-v3` is specifi
 input-file:
   - Microsoft.Synapse/preview/2021-11-01-preview/kqlScripts.json
   - Microsoft.Synapse/preview/2021-07-01-preview/symsSync.json
+  - Microsoft.Synapse/preview/2021-04-01/symsAPI.json
   - Microsoft.Synapse/preview/2021-06-01-preview/sparkConfigurations.json
   - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/SparkConfiguration.json
   - Microsoft.Synapse/stable/2020-12-01/artifacts.json
@@ -358,7 +359,7 @@ directive:
       - $.definitions.SparkStatementOutput.properties.execution_count
 
   - suppress: DefinitionsPropertiesNamesCamelCase
-    reason: These properties need to keep the same with jupyter Notebook. Rp can't change these proeprties.
+    reason: These properties need to keep the same with jupyter Notebook. Rp can't change these properties.
     from: Notebook.json
     where:
       - $.definitions.NotebookCellOutputItem.properties.execution_count
