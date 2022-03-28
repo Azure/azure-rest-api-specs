@@ -269,6 +269,14 @@
           "type": "string",
           "description": "The policy id role management policy assignment."
         },
+        "effectiveRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoleManagementPolicyRule"
+          },
+          "readOnly": true,
+          "description": "The readonly computed rule applied to the policy."
+        },
         "policyAssignmentProperties": {
           "readOnly": true,
           "type": "object",
@@ -354,6 +362,85 @@
         }
       },
       "type": "object"
+    },
+    "RoleManagementPolicyRule": {
+      "description": "The role management policy rule.",
+      "type": "object",
+      "required": [
+        "ruleType"
+      ],
+      "discriminator": "ruleType",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the rule."
+        },
+        "ruleType": {
+          "description": "The type of rule",
+          "$ref": "#/definitions/RoleManagementPolicyRuleType"
+        },
+        "target": {
+          "$ref": "#/definitions/RoleManagementPolicyRuleTarget",
+          "description": "The target of the current rule."
+        }
+      }
+    },
+    "RoleManagementPolicyRuleType": {
+      "type": "string",
+      "description": "The type of rule",
+      "enum": [
+        "RoleManagementPolicyApprovalRule",
+        "RoleManagementPolicyAuthenticationContextRule",
+        "RoleManagementPolicyEnablementRule",
+        "RoleManagementPolicyExpirationRule",
+        "RoleManagementPolicyNotificationRule"
+      ],
+      "x-ms-enum": {
+        "name": "RoleManagementPolicyRuleType",
+        "modelAsString": true
+      }
+    },
+    "RoleManagementPolicyRuleTarget": {
+      "description": "The role management policy rule target.",
+      "type": "object",
+      "properties": {
+        "caller": {
+          "type": "string",
+          "description": "The caller of the setting."
+        },
+        "operations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The type of operation."
+        },
+        "level": {
+          "type": "string",
+          "description": "The assignment level to which it is applied."
+        },
+        "targetObjects": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of target objects."
+        },
+        "inheritableSettings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of inheritable settings."
+        },
+        "enforcedSettings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of enforced settings."
+        }
+      }
     },
     "CloudError": {
       "x-ms-external": true,
