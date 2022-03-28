@@ -659,10 +659,12 @@
         "value": {
           "description": "List of Confluent operations supported by the Microsoft.Confluent provider.",
           "type": "array",
-          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/OperationResult"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "URL to get the next set of operation list results if there are any.",
@@ -693,11 +695,14 @@
         "details": {
           "description": "Error detail",
           "type": "array",
-          "x-ms-identifiers": [],
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/ErrorResponseBody"
-          }
+          },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ]
         }
       }
     },
@@ -944,10 +949,7 @@
       "in": "query",
       "description": "Client Api Version.",
       "required": true,
-      "type": "string",
-      "enum": [
-        "2021-12-01"
-      ]
+      "type": "string"
     },
     "SubscriptionIdParameter": {
       "in": "path",
