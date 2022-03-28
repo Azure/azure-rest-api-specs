@@ -16,6 +16,96 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/firewallRules": {
+      "get": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "description": "Gets a list of firewall rules.",
+        "operationId": "FirewallRules_ListByServer",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of firewall rules.",
+            "schema": {
+              "$ref": "#/definitions/FirewallRuleListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Firewall Rules": {
+            "$ref": "./examples/FirewallRuleList.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "description": "Replaces all firewall rules on the server.",
+        "operationId": "FirewallRules_Replace",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FirewallRuleList"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the firewall rules.",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 InvalidServerFirewallRuleResourceRequest - The server firewall rule resource request is invalid.\n\n * 400 InvalidServerFirewallRuleResourceParameters - The server firewall rule resource parameter is invalid.\n\n * 400 FirewallRuleNotIPv4Address - The provided firewall rule address is not IPv4\n\n * 400 TooManyFirewallRules - The provided firewall rules are over the limit.\n\n * 400 FirewallRuleInvalidRange - The specified firewall rule range is invalid.\n\n * 400 FirewallRuleNameTooLong - The provided firewall rule name is too long\n\n * 400 FirewallRuleNameEmpty - The provided firewall rule name is empty\n\n * 400 DenyPublicEndpointEnabled - Unable to create or modify firewall rules when public network interface for the server is disabled. To manage server or database level firewall rules, please enable the public network interface.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources."
+          },
+          "202": {
+            "description": "Creating or updating the Server Firewall Rules is in progress."
+          }
+        },
+        "x-ms-examples": {
+          "Replace firewall rules": {
+            "$ref": "./examples/FirewallRuleReplace.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/firewallRules/{firewallRuleName}": {
       "get": {
         "tags": [
@@ -105,7 +195,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 InvalidServerFirewallRuleResourceRequest - The server firewall rule resource request is invalid.\n\n * 400 InvalidServerFirewallRuleResourceParameters - The server firewall rule resource parameter is invalid.\n\n * 400 TooManyFirewallRules - The provided firewall rules are over the limit.\n\n * 400 DenyPublicEndpointEnabled - Unable to create or modify firewall rules when public network interface for the server is disabled. To manage server or database level firewall rules, please enable the public network interface.\n\n * 400 FirewallRuleInvalidRange - The specified firewall rule range is invalid.\n\n * 400 FirewallRuleNameTooLong - The provided firewall rule name is too long\n\n * 400 FirewallRuleNameEmpty - The provided firewall rule name is empty\n\n * 400 FirewallRuleNotIPv4Address - The provided firewall rule address is not IPv4\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 InvalidServerFirewallRuleResourceRequest - The server firewall rule resource request is invalid.\n\n * 400 InvalidServerFirewallRuleResourceParameters - The server firewall rule resource parameter is invalid.\n\n * 400 FirewallRuleNotIPv4Address - The provided firewall rule address is not IPv4\n\n * 400 TooManyFirewallRules - The provided firewall rules are over the limit.\n\n * 400 FirewallRuleInvalidRange - The specified firewall rule range is invalid.\n\n * 400 FirewallRuleNameTooLong - The provided firewall rule name is too long\n\n * 400 FirewallRuleNameEmpty - The provided firewall rule name is empty\n\n * 400 DenyPublicEndpointEnabled - Unable to create or modify firewall rules when public network interface for the server is disabled. To manage server or database level firewall rules, please enable the public network interface.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources."
           },
           "201": {
             "description": "Successfully created the firewall rule.",
@@ -167,144 +257,9 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/firewallRules": {
-      "get": {
-        "tags": [
-          "FirewallRules"
-        ],
-        "description": "Gets a list of firewall rules.",
-        "operationId": "FirewallRules_ListByServer",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of firewall rules.",
-            "schema": {
-              "$ref": "#/definitions/FirewallRuleListResult"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found."
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List Firewall Rules": {
-            "$ref": "./examples/FirewallRuleList.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "FirewallRules"
-        ],
-        "description": "Replaces all firewall rules on the server.",
-        "operationId": "FirewallRules_Replace",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FirewallRuleList"
-            }
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully updated the firewall rules.",
-            "schema": {
-              "$ref": "#/definitions/FirewallRule"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 InvalidServerFirewallRuleResourceRequest - The server firewall rule resource request is invalid.\n\n * 400 InvalidServerFirewallRuleResourceParameters - The server firewall rule resource parameter is invalid.\n\n * 400 TooManyFirewallRules - The provided firewall rules are over the limit.\n\n * 400 DenyPublicEndpointEnabled - Unable to create or modify firewall rules when public network interface for the server is disabled. To manage server or database level firewall rules, please enable the public network interface.\n\n * 400 FirewallRuleInvalidRange - The specified firewall rule range is invalid.\n\n * 400 FirewallRuleNameTooLong - The provided firewall rule name is too long\n\n * 400 FirewallRuleNameEmpty - The provided firewall rule name is empty\n\n * 400 FirewallRuleNotIPv4Address - The provided firewall rule address is not IPv4\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
-          },
-          "202": {
-            "description": "Creating or updating the Server Firewall Rules is in progress."
-          }
-        },
-        "x-ms-examples": {
-          "Replace firewall rules": {
-            "$ref": "./examples/FirewallRuleReplace.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
-    "ServerFirewallRuleProperties": {
-      "description": "The properties of a server firewall rule.",
-      "type": "object",
-      "properties": {
-        "startIpAddress": {
-          "description": "The start IP address of the firewall rule. Must be IPv4 format. Use value '0.0.0.0' for all Azure-internal IP addresses.",
-          "type": "string"
-        },
-        "endIpAddress": {
-          "description": "The end IP address of the firewall rule. Must be IPv4 format. Must be greater than or equal to startIpAddress. Use value '0.0.0.0' for all Azure-internal IP addresses.",
-          "type": "string"
-        }
-      }
-    },
-    "ResourceWithWritableName": {
-      "description": "ARM resource.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource name.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Resource type.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "ProxyResourceWithWritableName": {
-      "description": "ARM proxy resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceWithWritableName"
-        }
-      ],
-      "properties": {}
-    },
     "FirewallRule": {
       "description": "A server firewall rule.",
       "type": "object",
@@ -318,6 +273,18 @@
           "$ref": "#/definitions/ServerFirewallRuleProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "FirewallRuleList": {
+      "description": "A list of server firewall rules.",
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FirewallRule"
+          }
         }
       }
     },
@@ -340,15 +307,48 @@
         }
       }
     },
-    "FirewallRuleList": {
-      "description": "A list of server firewall rules.",
+    "ProxyResourceWithWritableName": {
+      "description": "ARM proxy resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceWithWritableName"
+        }
+      ],
+      "properties": {}
+    },
+    "ResourceWithWritableName": {
+      "description": "ARM resource.",
       "type": "object",
       "properties": {
-        "values": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FirewallRule"
-          }
+        "id": {
+          "description": "Resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource name.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ServerFirewallRuleProperties": {
+      "description": "The properties of a server firewall rule.",
+      "type": "object",
+      "properties": {
+        "startIpAddress": {
+          "description": "The start IP address of the firewall rule. Must be IPv4 format. Use value '0.0.0.0' for all Azure-internal IP addresses.",
+          "type": "string"
+        },
+        "endIpAddress": {
+          "description": "The end IP address of the firewall rule. Must be IPv4 format. Must be greater than or equal to startIpAddress. Use value '0.0.0.0' for all Azure-internal IP addresses.",
+          "type": "string"
         }
       }
     }

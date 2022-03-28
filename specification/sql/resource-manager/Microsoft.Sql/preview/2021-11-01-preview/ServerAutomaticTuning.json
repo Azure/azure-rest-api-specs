@@ -106,46 +106,6 @@
     }
   },
   "definitions": {
-    "AutomaticTuningServerProperties": {
-      "description": "Server-level Automatic Tuning properties.",
-      "type": "object",
-      "properties": {
-        "desiredState": {
-          "description": "Automatic tuning desired state.",
-          "enum": [
-            "Custom",
-            "Auto",
-            "Unspecified"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AutomaticTuningServerMode",
-            "modelAsString": false
-          }
-        },
-        "actualState": {
-          "description": "Automatic tuning actual state.",
-          "enum": [
-            "Custom",
-            "Auto",
-            "Unspecified"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "AutomaticTuningServerMode",
-            "modelAsString": false
-          }
-        },
-        "options": {
-          "description": "Automatic tuning options definition.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/AutomaticTuningServerOptions"
-          }
-        }
-      }
-    },
     "AutomaticTuningServerOptions": {
       "description": "Automatic tuning properties for individual advisors.",
       "type": "object",
@@ -194,6 +154,46 @@
           "x-ms-enum": {
             "name": "AutomaticTuningServerReason",
             "modelAsString": false
+          }
+        }
+      }
+    },
+    "AutomaticTuningServerProperties": {
+      "description": "Server-level Automatic Tuning properties.",
+      "type": "object",
+      "properties": {
+        "desiredState": {
+          "description": "Automatic tuning desired state.",
+          "enum": [
+            "Custom",
+            "Auto",
+            "Unspecified"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AutomaticTuningServerMode",
+            "modelAsString": false
+          }
+        },
+        "actualState": {
+          "description": "Automatic tuning actual state.",
+          "enum": [
+            "Custom",
+            "Auto",
+            "Unspecified"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AutomaticTuningServerMode",
+            "modelAsString": false
+          }
+        },
+        "options": {
+          "description": "Automatic tuning options definition.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/AutomaticTuningServerOptions"
           }
         }
       }

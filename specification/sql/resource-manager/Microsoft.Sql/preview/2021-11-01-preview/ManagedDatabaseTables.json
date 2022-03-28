@@ -142,29 +142,6 @@
     }
   },
   "definitions": {
-    "DatabaseTableProperties": {
-      "description": "Database table properties.",
-      "type": "object",
-      "properties": {
-        "temporalType": {
-          "description": "The table temporal type.",
-          "enum": [
-            "NonTemporalTable",
-            "HistoryTable",
-            "SystemVersionedTemporalTable"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "TableTemporalType",
-            "modelAsString": true
-          }
-        },
-        "memoryOptimized": {
-          "description": "Whether or not the table is memory optimized.",
-          "type": "boolean"
-        }
-      }
-    },
     "DatabaseTable": {
       "description": "A database table resource.",
       "type": "object",
@@ -197,6 +174,29 @@
           "description": "Link to retrieve next page of results.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "DatabaseTableProperties": {
+      "description": "Database table properties.",
+      "type": "object",
+      "properties": {
+        "temporalType": {
+          "description": "The table temporal type.",
+          "enum": [
+            "NonTemporalTable",
+            "HistoryTable",
+            "SystemVersionedTemporalTable"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TableTemporalType",
+            "modelAsString": true
+          }
+        },
+        "memoryOptimized": {
+          "description": "Whether or not the table is memory optimized.",
+          "type": "boolean"
         }
       }
     }

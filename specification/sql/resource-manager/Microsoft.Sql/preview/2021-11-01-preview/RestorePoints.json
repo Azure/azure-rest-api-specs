@@ -221,6 +221,40 @@
     }
   },
   "definitions": {
+    "CreateDatabaseRestorePointDefinition": {
+      "description": "Contains the information necessary to perform a create database restore point operation.",
+      "required": [
+        "restorePointLabel"
+      ],
+      "type": "object",
+      "properties": {
+        "restorePointLabel": {
+          "description": "The restore point label to apply",
+          "type": "string"
+        }
+      }
+    },
+    "RestorePoint": {
+      "description": "Database restore points.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "location": {
+          "description": "Resource location.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/RestorePointProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "RestorePointListResult": {
       "description": "A list of long term retention backups.",
       "type": "object",
@@ -275,55 +309,21 @@
           "readOnly": true
         }
       }
-    },
-    "RestorePoint": {
-      "description": "Database restore points.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "location": {
-          "description": "Resource location.",
-          "type": "string",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/RestorePointProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "CreateDatabaseRestorePointDefinition": {
-      "description": "Contains the information necessary to perform a create database restore point operation.",
-      "required": [
-        "restorePointLabel"
-      ],
-      "type": "object",
-      "properties": {
-        "restorePointLabel": {
-          "description": "The restore point label to apply",
-          "type": "string"
-        }
-      }
     }
   },
   "parameters": {
-    "ServerNameParameter": {
-      "name": "serverName",
-      "in": "path",
-      "description": "The name of the server.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "DatabaseNameParameter": {
       "name": "databaseName",
       "in": "path",
       "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

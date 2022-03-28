@@ -16,6 +16,62 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/syncMembers": {
+      "get": {
+        "tags": [
+          "SyncMembers"
+        ],
+        "description": "Lists sync members in the given sync group.",
+        "operationId": "SyncMembers_ListBySyncGroup",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database on which the sync group is hosted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "syncGroupName",
+            "in": "path",
+            "description": "The name of the sync group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of sync members.",
+            "schema": {
+              "$ref": "#/definitions/SyncMemberListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidSyncGroupCreateOrUpdateRequest - The create or update sync group request body is empty.\n\n * 400 InvalidSyncMemberCreateOrUpdateRequest - The create or update sync member request body is empty.\n\n * 400 InvalidSyncAgentCreateOrUpdateRequest - The create or update sync agent request body is empty.\n\n * 400 InvalidDatabaseResourceId - Invalid database resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 InvalidSyncAgentResourceId - Invalid sync agent resource identifier.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 SyncOperation_GenericFailure - Failed to perform data sync operation.\n\n * 400 InvalidSyncGroup - Sync group is invalid.\n\n * 400 InvalidSyncMember - Sync member is invalid.\n\n * 400 InvalidSyncAgent - Sync agent is invalid.\n\n * 400 CannotCreateSyncMemberDueToQuotaExceeded - Cannot create sync member due to quota exceeded.\n\n * 400 SyncOperation_DuplicateSyncMemberDrop - The sync member is already being dropped.\n\n * 400 SyncOperation_WrongSyncDatabase - The sync database specified does not match the existing one.\n\n * 400 SyncOperation_DwInSyncGroup - Cannot use datawarehouse edition in data sync.\n\n * 400 SyncOperation_MasterDbInSyncGroup - Cannot use logical master in data sync.\n\n * 400 SyncOperation_InvalidCredential - Credential of database is invalid.\n\n * 400 InvalidSyncMetadataDatabase - Sync metadata database is invalid.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SyncOperation_HubServerNotFound - Hub logical server does not exist.\n\n * 404 SyncOperation_InvalidHubDatabase - Hub database is invalid.\n\n * 409 SyncOperation_DuplicateSyncMemberName - Cannot create sync member because the sync member with the same name already exists."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List sync members under a sync group": {
+            "$ref": "./examples/SyncMemberListBySyncGroup.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/syncMembers/{syncMemberName}": {
       "get": {
         "tags": [
@@ -289,13 +345,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/syncMembers": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/syncMembers/{syncMemberName}/refreshSchema": {
+      "post": {
         "tags": [
           "SyncMembers"
         ],
-        "description": "Lists sync members in the given sync group.",
-        "operationId": "SyncMembers_ListBySyncGroup",
+        "description": "Refreshes a sync member database schema.",
+        "operationId": "SyncMembers_RefreshMemberSchema",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
@@ -313,7 +369,14 @@
           {
             "name": "syncGroupName",
             "in": "path",
-            "description": "The name of the sync group.",
+            "description": "The name of the sync group on which the sync member is hosted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "syncMemberName",
+            "in": "path",
+            "description": "The name of the sync member.",
             "required": true,
             "type": "string"
           },
@@ -326,21 +389,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the list of sync members.",
-            "schema": {
-              "$ref": "#/definitions/SyncMemberListResult"
-            }
+            "description": "Successfully refreshed a sync member schema."
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidSyncGroupCreateOrUpdateRequest - The create or update sync group request body is empty.\n\n * 400 InvalidSyncMemberCreateOrUpdateRequest - The create or update sync member request body is empty.\n\n * 400 InvalidSyncAgentCreateOrUpdateRequest - The create or update sync agent request body is empty.\n\n * 400 InvalidDatabaseResourceId - Invalid database resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 InvalidSyncAgentResourceId - Invalid sync agent resource identifier.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 SyncOperation_GenericFailure - Failed to perform data sync operation.\n\n * 400 InvalidSyncGroup - Sync group is invalid.\n\n * 400 InvalidSyncMember - Sync member is invalid.\n\n * 400 InvalidSyncAgent - Sync agent is invalid.\n\n * 400 CannotCreateSyncMemberDueToQuotaExceeded - Cannot create sync member due to quota exceeded.\n\n * 400 SyncOperation_DuplicateSyncMemberDrop - The sync member is already being dropped.\n\n * 400 SyncOperation_WrongSyncDatabase - The sync database specified does not match the existing one.\n\n * 400 SyncOperation_DwInSyncGroup - Cannot use datawarehouse edition in data sync.\n\n * 400 SyncOperation_MasterDbInSyncGroup - Cannot use logical master in data sync.\n\n * 400 SyncOperation_InvalidCredential - Credential of database is invalid.\n\n * 400 InvalidSyncMetadataDatabase - Sync metadata database is invalid.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SyncOperation_HubServerNotFound - Hub logical server does not exist.\n\n * 404 SyncOperation_InvalidHubDatabase - Hub database is invalid.\n\n * 409 SyncOperation_DuplicateSyncMemberName - Cannot create sync member because the sync member with the same name already exists."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidSyncGroupCreateOrUpdateRequest - The create or update sync group request body is empty.\n\n * 400 InvalidSyncMemberCreateOrUpdateRequest - The create or update sync member request body is empty.\n\n * 400 InvalidSyncAgentCreateOrUpdateRequest - The create or update sync agent request body is empty.\n\n * 400 InvalidDatabaseResourceId - Invalid database resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 InvalidSyncAgentResourceId - Invalid sync agent resource identifier.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 SyncOperation_GenericFailure - Failed to perform data sync operation.\n\n * 400 InvalidSyncGroup - Sync group is invalid.\n\n * 400 InvalidSyncMember - Sync member is invalid.\n\n * 400 InvalidSyncAgent - Sync agent is invalid.\n\n * 400 CannotCreateSyncMemberDueToQuotaExceeded - Cannot create sync member due to quota exceeded.\n\n * 400 SyncOperation_DuplicateSyncMemberDrop - The sync member is already being dropped.\n\n * 400 SyncOperation_WrongSyncDatabase - The sync database specified does not match the existing one.\n\n * 400 SyncOperation_DwInSyncGroup - Cannot use datawarehouse edition in data sync.\n\n * 400 SyncOperation_MasterDbInSyncGroup - Cannot use logical master in data sync.\n\n * 400 SyncOperation_InvalidCredential - Credential of database is invalid.\n\n * 400 InvalidSyncMetadataDatabase - Sync metadata database is invalid.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SyncOperation_HubServerNotFound - Hub logical server does not exist.\n\n * 404 SyncOperation_InvalidHubDatabase - Hub database is invalid.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 SyncOperation_DuplicateSyncMemberName - Cannot create sync member because the sync member with the same name already exists.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
+          },
+          "202": {
+            "description": "The sync member schema refresh operation is on going."
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "List sync members under a sync group": {
-            "$ref": "./examples/SyncMemberListBySyncGroup.json"
+          "Refresh a sync member database schema": {
+            "$ref": "./examples/SyncMemberRefreshSchema.json"
           }
         }
       }
@@ -407,70 +468,158 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/syncMembers/{syncMemberName}/refreshSchema": {
-      "post": {
-        "tags": [
-          "SyncMembers"
-        ],
-        "description": "Refreshes a sync member database schema.",
-        "operationId": "SyncMembers_RefreshMemberSchema",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "name": "databaseName",
-            "in": "path",
-            "description": "The name of the database on which the sync group is hosted.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "syncGroupName",
-            "in": "path",
-            "description": "The name of the sync group on which the sync member is hosted.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "syncMemberName",
-            "in": "path",
-            "description": "The name of the sync member.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully refreshed a sync member schema."
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidSyncGroupCreateOrUpdateRequest - The create or update sync group request body is empty.\n\n * 400 InvalidSyncMemberCreateOrUpdateRequest - The create or update sync member request body is empty.\n\n * 400 InvalidSyncAgentCreateOrUpdateRequest - The create or update sync agent request body is empty.\n\n * 400 InvalidDatabaseResourceId - Invalid database resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 InvalidSyncAgentResourceId - Invalid sync agent resource identifier.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 SyncOperation_GenericFailure - Failed to perform data sync operation.\n\n * 400 InvalidSyncGroup - Sync group is invalid.\n\n * 400 InvalidSyncMember - Sync member is invalid.\n\n * 400 InvalidSyncAgent - Sync agent is invalid.\n\n * 400 CannotCreateSyncMemberDueToQuotaExceeded - Cannot create sync member due to quota exceeded.\n\n * 400 SyncOperation_DuplicateSyncMemberDrop - The sync member is already being dropped.\n\n * 400 SyncOperation_WrongSyncDatabase - The sync database specified does not match the existing one.\n\n * 400 SyncOperation_DwInSyncGroup - Cannot use datawarehouse edition in data sync.\n\n * 400 SyncOperation_MasterDbInSyncGroup - Cannot use logical master in data sync.\n\n * 400 SyncOperation_InvalidCredential - Credential of database is invalid.\n\n * 400 InvalidSyncMetadataDatabase - Sync metadata database is invalid.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SyncOperation_HubServerNotFound - Hub logical server does not exist.\n\n * 404 SyncOperation_InvalidHubDatabase - Hub database is invalid.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 SyncOperation_DuplicateSyncMemberName - Cannot create sync member because the sync member with the same name already exists.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
-          },
-          "202": {
-            "description": "The sync member schema refresh operation is on going."
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Refresh a sync member database schema": {
-            "$ref": "./examples/SyncMemberRefreshSchema.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
+    "SyncFullSchemaProperties": {
+      "description": "Properties of the database full schema.",
+      "type": "object",
+      "properties": {
+        "tables": {
+          "description": "List of tables in the database full schema.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SyncFullSchemaTable"
+          },
+          "readOnly": true
+        },
+        "lastUpdateTime": {
+          "format": "date-time",
+          "description": "Last update time of the database schema.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SyncFullSchemaPropertiesListResult": {
+      "description": "A list of sync schema properties.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SyncFullSchemaProperties"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SyncFullSchemaTable": {
+      "description": "Properties of the table in the database full schema.",
+      "type": "object",
+      "properties": {
+        "columns": {
+          "description": "List of columns in the table of database full schema.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SyncFullSchemaTableColumn"
+          },
+          "readOnly": true
+        },
+        "errorId": {
+          "description": "Error id of the table.",
+          "type": "string",
+          "readOnly": true
+        },
+        "hasError": {
+          "description": "If there is error in the table.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the table.",
+          "type": "string",
+          "readOnly": true
+        },
+        "quotedName": {
+          "description": "Quoted name of the table.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SyncFullSchemaTableColumn": {
+      "description": "Properties of the column in the table of database full schema.",
+      "type": "object",
+      "properties": {
+        "dataSize": {
+          "description": "Data size of the column.",
+          "type": "string",
+          "readOnly": true
+        },
+        "dataType": {
+          "description": "Data type of the column.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorId": {
+          "description": "Error id of the column.",
+          "type": "string",
+          "readOnly": true
+        },
+        "hasError": {
+          "description": "If there is error in the table.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "isPrimaryKey": {
+          "description": "If it is the primary key of the table.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the column.",
+          "type": "string",
+          "readOnly": true
+        },
+        "quotedName": {
+          "description": "Quoted name of the column.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SyncMember": {
+      "description": "An Azure SQL Database sync member.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SyncMemberProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SyncMemberListResult": {
+      "description": "A list of Azure SQL Database sync members.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SyncMember"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "SyncMemberProperties": {
       "description": "Properties of a sync member.",
       "type": "object",
@@ -570,155 +719,6 @@
             "name": "SyncMemberState",
             "modelAsString": true
           }
-        }
-      }
-    },
-    "SyncMember": {
-      "description": "An Azure SQL Database sync member.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SyncMemberProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "SyncMemberListResult": {
-      "description": "A list of Azure SQL Database sync members.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Array of results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SyncMember"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "SyncFullSchemaPropertiesListResult": {
-      "description": "A list of sync schema properties.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Array of results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SyncFullSchemaProperties"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "SyncFullSchemaProperties": {
-      "description": "Properties of the database full schema.",
-      "type": "object",
-      "properties": {
-        "tables": {
-          "description": "List of tables in the database full schema.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SyncFullSchemaTable"
-          },
-          "readOnly": true
-        },
-        "lastUpdateTime": {
-          "format": "date-time",
-          "description": "Last update time of the database schema.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "SyncFullSchemaTable": {
-      "description": "Properties of the table in the database full schema.",
-      "type": "object",
-      "properties": {
-        "columns": {
-          "description": "List of columns in the table of database full schema.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SyncFullSchemaTableColumn"
-          },
-          "readOnly": true
-        },
-        "errorId": {
-          "description": "Error id of the table.",
-          "type": "string",
-          "readOnly": true
-        },
-        "hasError": {
-          "description": "If there is error in the table.",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Name of the table.",
-          "type": "string",
-          "readOnly": true
-        },
-        "quotedName": {
-          "description": "Quoted name of the table.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "SyncFullSchemaTableColumn": {
-      "description": "Properties of the column in the table of database full schema.",
-      "type": "object",
-      "properties": {
-        "dataSize": {
-          "description": "Data size of the column.",
-          "type": "string",
-          "readOnly": true
-        },
-        "dataType": {
-          "description": "Data type of the column.",
-          "type": "string",
-          "readOnly": true
-        },
-        "errorId": {
-          "description": "Error id of the column.",
-          "type": "string",
-          "readOnly": true
-        },
-        "hasError": {
-          "description": "If there is error in the table.",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "isPrimaryKey": {
-          "description": "If it is the primary key of the table.",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Name of the column.",
-          "type": "string",
-          "readOnly": true
-        },
-        "quotedName": {
-          "description": "Quoted name of the column.",
-          "type": "string",
-          "readOnly": true
         }
       }
     }

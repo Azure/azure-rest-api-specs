@@ -152,16 +152,6 @@
     }
   },
   "definitions": {
-    "QueryProperties": {
-      "description": "Properties of a database query.",
-      "type": "object",
-      "properties": {
-        "queryText": {
-          "description": "Query text.",
-          "type": "string"
-        }
-      }
-    },
     "ManagedInstanceQuery": {
       "description": "Database query.",
       "type": "object",
@@ -194,39 +184,6 @@
           "description": "Link to retrieve next page of results.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "QueryStatisticsProperties": {
-      "description": "Properties of a query execution statistics.",
-      "type": "object",
-      "properties": {
-        "databaseName": {
-          "description": "Database name of the database in which this query was executed.",
-          "type": "string",
-          "readOnly": true
-        },
-        "queryId": {
-          "description": "Unique query id (unique within one database).",
-          "type": "string",
-          "readOnly": true
-        },
-        "startTime": {
-          "description": "The start time for the metric (ISO-8601 format).",
-          "type": "string",
-          "readOnly": true
-        },
-        "endTime": {
-          "description": "The end time for the metric (ISO-8601 format).",
-          "type": "string",
-          "readOnly": true
-        },
-        "intervals": {
-          "description": "List of intervals with appropriate metric data",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/QueryMetricInterval"
-          }
         }
       }
     },
@@ -334,6 +291,16 @@
         }
       }
     },
+    "QueryProperties": {
+      "description": "Properties of a database query.",
+      "type": "object",
+      "properties": {
+        "queryText": {
+          "description": "Query text.",
+          "type": "string"
+        }
+      }
+    },
     "QueryStatistics": {
       "type": "object",
       "allOf": [
@@ -348,21 +315,54 @@
           "x-ms-client-flatten": true
         }
       }
+    },
+    "QueryStatisticsProperties": {
+      "description": "Properties of a query execution statistics.",
+      "type": "object",
+      "properties": {
+        "databaseName": {
+          "description": "Database name of the database in which this query was executed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "queryId": {
+          "description": "Unique query id (unique within one database).",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "description": "The start time for the metric (ISO-8601 format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "endTime": {
+          "description": "The end time for the metric (ISO-8601 format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "intervals": {
+          "description": "List of intervals with appropriate metric data",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryMetricInterval"
+          }
+        }
+      }
     }
   },
   "parameters": {
-    "ManagedInstanceNameParameter": {
-      "name": "managedInstanceName",
-      "in": "path",
-      "description": "The name of the managed instance.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "DatabaseNameParameter": {
       "name": "databaseName",
       "in": "path",
       "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ManagedInstanceNameParameter": {
+      "name": "managedInstanceName",
+      "in": "path",
+      "description": "The name of the managed instance.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
