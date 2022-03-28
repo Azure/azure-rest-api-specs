@@ -1,0 +1,50 @@
+scope: ResourceGroup
+
+prepareSteps:
+  - step: Generate_Unique_Name
+    armTemplate: ./peArmTemplate/Generate_Unique_name_template.json
+
+scenarios:
+  - scenario: StorageAccount
+    description: Microsoft.Storage/storageAccounts
+    variables:
+      accountName: scenarioaccount
+    steps:
+      - step: StorageAccount_CheckNameAvailability
+        exampleFile: ../examples/StorageAccountCheckNameAvailability.json
+        requestUpdate:
+          - replace: /accountName/name
+            value: $(accountName)
+
+      - step: StorageAccount_Create
+        exampleFile: ../examples/StorageAccountCreate.json
+
+      - step: StorageAccount_Update
+        exampleFile: ../examples/StorageAccountEnableAD.json
+
+      - step: StorageAccount_GetProperties
+        exampleFile: ../examples/StorageAccountGetProperties.json
+
+      - step: StorageAccount_List
+        exampleFile: ../examples/StorageAccountList.json
+
+      - step: StorageAccount_ListByResourceGroup
+        exampleFile: ../examples/StorageAccountListByResourceGroup.json
+
+      - step: StorageAccount_ListKeys
+        exampleFile: ../examples/StorageAccountListKeys.json
+
+      - step: StorageAccount_ListAccountSAS
+        exampleFile: ../examples/StorageAccountListAccountSAS.json
+
+      - step: StorageAccount_ListServiceSAS
+        exampleFile: ../examples/StorageAccountListServiceSAS.json
+
+      - step: StorageAccount_RegenerateKey
+        exampleFile: ../examples/StorageAccountRegenerateKerbKey.json
+
+      - step: StorageAccount_RevokeUserDelegationKeys
+        exampleFile: ../examples/StorageAccountRevokeUserDelegationKeys.json
+
+      - step: StorageAccount_Delete
+        exampleFile: ../examples/StorageAccountDelete.json
