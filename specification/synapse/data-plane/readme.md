@@ -57,7 +57,6 @@ These settings apply only when `--tag=package-artifacts-composite-v3` is specifi
 input-file:
   - Microsoft.Synapse/preview/2021-11-01-preview/kqlScripts.json
   - Microsoft.Synapse/preview/2021-07-01-preview/symsSync.json
-  - Microsoft.Synapse/preview/2021-04-01/symsAPI.json
   - Microsoft.Synapse/preview/2021-06-01-preview/sparkConfigurations.json
   - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/SparkConfiguration.json
   - Microsoft.Synapse/stable/2020-12-01/artifacts.json
@@ -83,6 +82,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+  - Microsoft.Synapse/stable/2021-04-01/symsAPI.json
 ```
 
 ### Tag: package-artifacts-composite-v2
