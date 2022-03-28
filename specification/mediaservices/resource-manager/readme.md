@@ -26,7 +26,7 @@ These are the global settings for the MediaServices API.
 
 ```yaml
 openapi-type: arm
-tag: package-2021-11
+tag: package-account-2021-11
 opt-in-extensible-enums: true
 ```
 
@@ -62,11 +62,11 @@ directive:
     from: Accounts.json
 ```
 
-### Tag: package-2021-11-Account
+### Tag: package-account-2021-11
 
-These settings apply only when `--tag=package-2021-11-Account` is specified on the command line.
+These settings apply only when `--tag=package-account-2021-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-11-Account'
+```yaml $(tag) == 'package-account-2021-11'
 input-file:
   - Microsoft.Media/stable/2021-11-01/AccountFilters.json
   - Microsoft.Media/stable/2021-11-01/Accounts.json
