@@ -2522,7 +2522,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : The delete operation is defined without a 200 or 204 error response implementation,please add it. 
 
-**Description** : Per ARM Specs, all DELETE methods must have responses code implementation: 200, 204.   
+**Description** : Per ARM Specs, all DELETE methods (non-async) must have responses code implementation: 200, 204.   
 
 **CreatedAt**: May 21, 2020
 
