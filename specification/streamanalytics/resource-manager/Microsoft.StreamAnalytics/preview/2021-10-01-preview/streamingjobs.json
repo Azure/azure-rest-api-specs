@@ -960,11 +960,55 @@
           "$ref": "./inputs.json#/definitions/StorageAccount"
         },
         "container": {
-          "type": "string"
+          "type": "string",
+          "description": "The UserCustomCode container."
         },
         "path": {
-          "type": "string"
+          "type": "string",
+          "description": "The UserCustomCode path."
+        },
+        "refreshConfiguration": {
+          "$ref": "#/definitions/RefreshConfiguration",
+          "description": "The refresh parameters for any/all updatable user defined functions present in the job config."
         }
+      }
+    },
+    "RefreshConfiguration": {
+      "description": "The refresh parameters for any/all updatable user defined functions present in the job config.",
+      "type": "object",
+      "properties": {
+        "pathPattern": {
+          "type": "string",
+          "description": "The blob path pattern. Not a regular expression. It represents a pattern against which blob names will be matched to determine whether or not they should be included as input or output to the job. See https://docs.microsoft.com/en-us/rest/api/streamanalytics/stream-analytics-input or https://docs.microsoft.com/en-us/rest/api/streamanalytics/stream-analytics-output for a more detailed explanation and example."
+        },
+        "dateFormat": {
+          "type": "string",
+          "description": "The date format. Wherever {date} appears in pathPattern, the value of this property is used as the date format instead."
+        },
+        "timeFormat": {
+          "type": "string",
+          "description": "The time format. Wherever {time} appears in pathPattern, the value of this property is used as the time format instead."
+        },
+        "refreshInterval": {
+          "type": "string",
+          "description": "The refresh interval."
+        },
+        "refreshType": {
+          "$ref": "#/definitions/UpdatableUdfRefreshType",
+          "description": "This property indicates which data refresh option to use, Blocking or Nonblocking."
+        }
+      }
+    },
+    "UpdatableUdfRefreshType": {
+      "type": "string",
+      "description": "This property indicates which data refresh option to use, Blocking or Nonblocking.",
+      "enum": [
+        "Blocking",
+        "Nonblocking"
+      ],
+      "x-ms-enum": {
+        "name": "RefreshType",
+        "modelAsString": true
       }
     }
   }
