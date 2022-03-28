@@ -78,7 +78,7 @@ title:
   Microsoft Cognitive Language Service
 modelerfour:
   lenient-model-deduplication: true
-
+```
 ### Release 2022-03-01-preview
 
 These settings apply only when `--tag=release_2022_03_01_preview` is specified on the command line.
