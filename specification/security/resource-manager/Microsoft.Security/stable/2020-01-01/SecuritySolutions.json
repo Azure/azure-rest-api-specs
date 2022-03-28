@@ -3,7 +3,7 @@
   "info": {
     "title": "Security Center",
     "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
-    "version": "2020-01-01"
+    "version": "2015-06-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -73,7 +73,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/securitySolutions/{securitySolutionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securitySolutions/{securitySolutionName}": {
       "get": {
         "x-ms-examples": {
           "Get a security solution from a security data location": {
@@ -91,9 +91,6 @@
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
           },
           {
             "$ref": "#/parameters/SecuritySolutionName"
@@ -147,9 +144,6 @@
       "allOf": [
         {
           "$ref": "../../../common/v1/types.json#/definitions/Resource"
-        },
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/Location"
         }
       ]
     },
