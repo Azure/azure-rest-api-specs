@@ -576,6 +576,9 @@
           "Create Managed Cluster using an agent pool snapshot": {
             "$ref": "./examples/ManagedClustersCreate_Snapshot.json"
           },
+          "Create Managed Cluster using a managed cluster snapshot": {
+            "$ref": "./examples/ManagedClustersCreate_MCSnapshot.json"
+          },
           "Create/Update Managed Cluster with Windows gMSA enabled": {
             "$ref": "./examples/ManagedClustersCreate_UpdateWindowsGmsa.json"
           },
@@ -3983,6 +3986,10 @@
           "$ref": "#/definitions/PowerState",
           "description": "The Power State of the cluster.",
           "readOnly": true
+        },
+        "creationData": {
+          "$ref": "#/definitions/CreationData",
+          "description": "CreationData to be used to specify the source Snapshot ID if the cluster will be created/upgraded using a snapshot."
         },
         "maxAgentPools": {
           "readOnly": true,
