@@ -5,7 +5,20 @@
     "schemaName": "exampleSchemaName",
     "artifactType": "TABLE",
     "artifactName": "exampleArtifactName",
-    "createArtifactsPayload": "artifactPayload",
+    "createArtifactsPayload": {
+      "name": "exampleTable",
+      "type": "TABLE",
+      "properties": {
+        "Source": {
+          "Provider": "ADLS",
+          "Location": "abfss://exampleBlobContainer@exampleStorageName.dfs.core.windows.net/exampleDatabase/schemas/exmapleSchemaName",
+          "Properties": {
+            "FormatType": "csv",
+            "LinkedServiceName": "exampleWorkspaceWorkspaceDefaultStorage"
+          }
+        }
+      }
+    },
     "api-version": "2021-04-01"
   },
   "responses": {
