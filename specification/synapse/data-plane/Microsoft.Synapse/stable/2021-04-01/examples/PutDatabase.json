@@ -2,7 +2,20 @@
   "parameters": {
     "endpoint": "exampleWorkspace.dev.azuresynapse.net",
     "databaseName": "exampleDatabase",
-    "createArtifactsPayload": "databaseEntityObjectPayload",
+    "createArtifactsPayload": {
+      "name": "databaseName",
+      "type": "DATABASE",
+      "properties": {
+        "Source": {
+          "Provider": "ADLS",
+          "Location": "abfss://exampleBlobContainer@exampleStorageName.dfs.core.windows.net/exampleDatabase",
+          "Properties": {
+            "FormatType": "csv",
+            "LinkedServiceName": "exampleWorkspaceWorkspaceDefaultStorage"
+          }
+        }
+      }
+    },
     "api-version": "2021-04-01"
   },
   "responses": {
@@ -11,20 +24,10 @@
         "EntityName": "exampleDatabase",
         "DDLType": "CREATE",
         "EntityType": "DATABASE",
-        "properties": {
-          "Source": {
-            "Provider": "ADLS",
-            "Location": "abfss://exampleBlobContainer@exampleStorageName.dfs.core.windows.net/exampleDatabase",
-            "Properties": {
-              "FormatType": "csv",
-              "LinkedServiceName": "exampleWorkspaceWorkspaceDefaultStorage"
-            }
-          },
-          "PublishStatus": "PUBLISHED",
-          "ObjectVersion": 1,
-          "OriginObjectId": "1111",
-          "ObjectId": "exampleObjectIdGuid"
-        }
+        "PublishStatus": "PUBLISHED",
+        "ObjectVersion": 1,
+        "OriginObjectId": "1111",
+        "ObjectId": "exampleObjectIdGuid"
       }
     },
     "default": {

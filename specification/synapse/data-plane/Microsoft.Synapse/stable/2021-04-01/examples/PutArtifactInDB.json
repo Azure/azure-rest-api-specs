@@ -4,7 +4,20 @@
     "databaseName": "exampleDatabase",
     "artifacType": "TABLE",
     "artifactName": "exampleArtifactName",
-    "createArtifactsPayload": "artifactPayload",
+    "createArtifactsPayload": {
+      "name": "exampleTableName",
+      "type": "TABLE",
+      "properties": {
+        "Source": {
+          "Provider": "ADLS",
+          "Location": "abfss://exampleBlobContainer@exampleStorageName.dfs.core.windows.net/exampleDatabase/tables/exampleTableName",
+          "Properties": {
+            "FormatType": "csv",
+            "LinkedServiceName": "exampleWorkspaceWorkspaceDefaultStorage"
+          }
+        }
+      }
+    },
     "api-version": "2021-04-01"
   },
   "responses": {
@@ -12,23 +25,10 @@
       "body": {
         "EntityName": "exampleArtifact",
         "DDLType": "CREATE",
-        "EntityType": "ArtifactType(TABLE/VIEW/SCHEMA)",
-        "properties": {
-          "Origin": {
-            "Type": "originType(SQLOD/ADLS/SPARK/etc)"
-          },
-          "Source": {
-            "Provider": "ADLS",
-            "Location": "abfss://exampleBlobContainer@exampleStorageName.dfs.core.windows.net/exampleDatabase",
-            "Properties": {
-              "FormatType": "csv",
-              "LinkedServiceName": "exampleWorkspaceWorkspaceDefaultStorage"
-            }
-          },
-          "PublishStatus": "PUBLISHED",
-          "ObjectVersion": 1,
-          "ObjectId": "exampleObjectIdGuid"
-        }
+        "EntityType": "TABLE",
+        "PublishStatus": "PUBLISHED",
+        "ObjectVersion": 1,
+        "ObjectId": "exampleObjectIdGuid"
       }
     },
     "default": {
