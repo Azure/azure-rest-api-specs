@@ -6166,9 +6166,6 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/AFDStateProperties"
-        },
-        {
           "$ref": "./cdn.json#/definitions/ProxyResource"
         }
       ],
@@ -6182,6 +6179,11 @@
     "PolicyProperties": {
       "description": "The JSON object that contains the properties of the Policy to create.",
       "type": "object",
+       "allOf": [
+        {
+          "$ref": "#/definitions/AFDStateProperties"
+        }
+      ],
       "required": [
         "policyData",
         "serviceType",
@@ -6248,6 +6250,7 @@
     },
     "PolicyUpdatePropertiesParameters": {
       "description": "The JSON object that contains the properties of the Policy to update.",
+      "type": "object",
       "required": [
         "policyData",
         "policyVersion"
