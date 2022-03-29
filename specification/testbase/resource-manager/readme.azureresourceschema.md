@@ -11,6 +11,7 @@ batch:
   - tag: schema-testbase-2021-09-01
   - tag: schema-testbase-2021-12-01
   - tag: schema-testbase-2022-03-01-preview
+  - tag: schema-testbase-2022-04-01-preview
   
 ```
 
@@ -61,4 +62,13 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.TestBase/preview/2022-03-01-preview/testbase.json
+```
+
+### Tag: schema-testbase-2022-04-01-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-testbase-2022-04-01-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.TestBase/preview/2022-04-01-preview/testbase.json
 ```
