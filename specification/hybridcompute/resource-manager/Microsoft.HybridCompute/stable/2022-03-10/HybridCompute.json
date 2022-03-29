@@ -813,7 +813,7 @@
           "items": {
             "$ref": "#/definitions/ConfigurationExtension"
           },
-          "description": "TODO.",
+          "description": "Array of extensions that are allowed to be installed or updated.",
           "x-ms-identifiers": []
         },
         "extensionsBlockList": {
@@ -822,13 +822,13 @@
           "items": {
             "$ref": "#/definitions/ConfigurationExtension"
           },
-          "description": "TODO.",
+          "description": "Array of extensions that are blocked (cannot be installed or updated)",
           "x-ms-identifiers": []
         },
         "proxyBypass": {
           "type": "array",
           "readOnly": true,
-          "description": "TODO.",
+          "description": "List of service names which should not use the specified proxy server.",
           "items": {
             "type": "string"
           }
@@ -836,12 +836,12 @@
         "extensionsEnabled": {
           "type": "string",
           "readOnly": true,
-          "description": "TODO."
+          "description": "Specifies whether the extension service is enabled or disabled."
         },
         "guestConfigurationEnabled": {
           "type": "string",
           "readOnly": true,
-          "description": "TODO."
+          "description": "Specified whether the guest configuration service is enabled or disabled."
         }
       },
       "description": "Configurable properties that the user can set locally via the azcmagent config command, or remotely via ARM."
@@ -852,43 +852,43 @@
         "publisher": {
           "type": "string",
           "readOnly": true,
-          "description": "TODO."
+          "description": "Publisher of the extension."
         },
         "type": {
           "type": "string",
           "readOnly": true,
-          "description": "TODO."
+          "description": "Type of the extension."
         }
       },
-      "description": "TODO."
+      "description": "Describes properties that can identify extensions."
     },
     "ServiceStatuses": {
       "type": "object",
       "properties": {
         "extensionService": {
           "$ref": "#/definitions/ServiceStatus",
-          "description": "TODO."
+          "description": "The state of the extension service on the Arc-enabled machine."
         },
         "guestConfigurationService": {
           "$ref": "#/definitions/ServiceStatus",
-          "description": "TODO."
+          "description": "The state of the extension service on the Arc-enabled machine."
         }
       },
-      "description": "TODO."
+      "description": "Reports the state and behavior of dependent services."
     },
     "ServiceStatus": {
       "type": "object",
       "properties": {
         "state": {
           "type": "string",
-          "description": "TODO."
+          "description": "The current state of the service."
         },
         "startupType": {
           "type": "string",
-          "description": "TODO."
+          "description": "The behavior of the service when the Arc-enabled machine starts up."
         }
       },
-      "description": "TODO."
+      "description": "Describes the state and behavior of a service."
     },
     "CloudMetadata": {
       "type": "object",
@@ -952,7 +952,7 @@
         },
         "serviceStatuses": {
           "$ref": "#/definitions/ServiceStatuses",
-          "description": "TODO."
+          "description": "Statuses of dependent services that are reported back to ARM."
         },
         "cloudMetadata": {
           "$ref": "#/definitions/CloudMetadata",
