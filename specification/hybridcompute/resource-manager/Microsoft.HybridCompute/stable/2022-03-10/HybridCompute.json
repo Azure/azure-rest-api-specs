@@ -741,6 +741,11 @@
         "display": {
           "$ref": "#/definitions/OperationValueDisplay",
           "description": "Display properties"
+        },
+        "isDataAction": {
+          "type":"boolean",
+          "readOnly": true,
+          "description": "This property indicates if the operation is an action or a data action"
         }
       },
       "description": "Describes the properties of a Compute Operation value."
@@ -800,9 +805,87 @@
           "items": {
             "type": "string"
           }
+        },
+        "extensionsAllowList": {
+          "type": "array",
+          "readonly": true,
+          "items": {
+            "$ref": "#/definitions/ConfigurationExtension"
+          },
+          "description": "TODO."
+        },
+        "extensionsBlockList": {
+          "type": "array",
+          "readonly": true,
+          "items": {
+            "$ref": "#/definitions/ConfigurationExtension"
+          },
+          "description": "TODO."
+        },
+        "proxyBypass": {
+          "type": "array",
+          "readOnly": true,
+          "description": "TODO.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "extensionsEnabled": {
+          "type": "string",
+          "readOnly": true,
+          "description": "TODO."
+        },
+        "guestConfigurationEnabled": {
+          "type": "string",
+          "readOnly": true,
+          "description": "TODO."
         }
       },
       "description": "Configurable properties that the user can set locally via the azcmagent config command, or remotely via ARM."
+    },
+    "ConfigurationExtension": {
+      "type": "object",
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "readOnly": true,
+          "description": "TODO."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "TODO."
+        }
+      },
+      "description": "TODO."
+    },
+    "ServiceStatuses": {
+      "type": "object",
+      "properties": {
+        "extensionService": {
+          "$ref": "#/definitions/ServiceStatus",
+          "description": "TODO."
+        },
+        "guestConfigurationService": {
+          "$ref": "#/definitions/ServiceStatus",
+          "description": "TODO."
+        }
+      },
+      "description": "TODO."
+    },
+    "ServiceStatus": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "TODO."
+        },
+        "startupType": {
+          "type": "string",
+          "description": "TODO."
+        }
+      },
+      "description": "TODO."
     },
     "CloudMetadata": {
       "type": "object",
@@ -863,6 +946,10 @@
         "agentConfiguration": {
           "$ref": "#/definitions/AgentConfiguration",
           "description": "Configurable properties that the user can set locally via the azcmagent config command, or remotely via ARM."
+        },
+        "serviceStatuses": {
+          "$ref": "#/definitions/ServiceStatuses",
+          "description": "TODO."
         },
         "cloudMetadata": {
           "$ref": "#/definitions/CloudMetadata",
@@ -1027,6 +1114,13 @@
         "properties": {
           "$ref": "#/definitions/MachineProperties",
           "description": "Hybrid Compute Machine properties"
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MachineExtension"
+          },
+          "description": "List of machine extensions"
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity"
