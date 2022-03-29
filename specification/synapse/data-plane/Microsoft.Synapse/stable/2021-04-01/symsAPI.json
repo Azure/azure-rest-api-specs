@@ -117,8 +117,8 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        }, 
-		"x-ms-long-running-operation": true
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/databases": {
@@ -2159,12 +2159,12 @@
     },
     "CloudError": {
       "x-ms-external": true,
-      "description": "SyMS error response",
+      "description": "The object that defines the structure of an Azure Synapse error response.",
       "type": "object",
       "properties": {
         "error": {
           "x-ms-client-flatten": true,
-          "description": "Error data.",
+          "description": "Error data",
           "$ref": "#/definitions/CloudErrorBody"
         }
       },
@@ -2174,33 +2174,28 @@
     },
     "CloudErrorBody": {
       "x-ms-external": true,
-      "description": "SAS Error object body",
-      "type": "object",
       "properties": {
         "code": {
-          "description": "Error code",
-          "type": "string"
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
         },
         "message": {
-          "description": "Error message",
-          "type": "string"
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
         },
         "target": {
-          "description": "Property name/path in request associated with error",
-          "type": "string"
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
         },
         "details": {
-          "description": "Array with additional error details",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CloudError"
-          }
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
         }
       },
-      "required": [
-        "code",
-        "message"
-      ]
+      "description": "An error response from the Batch service."
     }
   },
   "parameters": {
@@ -2216,7 +2211,7 @@
       "type": "string",
       "in": "header",
       "required": true,
-	  "x-ms-parameter-location": "client",
+      "x-ms-parameter-location": "client",
       "description": "User-Agent request header for servers to identify application"
     },
     "Endpoint": {
