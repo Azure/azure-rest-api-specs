@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "subscriptionId": "14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7",
+    "resourceGroupName": "giladstest",
+    "ruleGroupName": "myPrometheusRuleGroup",
+    "api-version": "2021-07-22-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/giladstest/providers/providers/Microsoft.AlertsManagement/prometheusRuleGroups/myPrometheusRuleGroup",
+        "type": "Microsoft.AlertsManagement/prometheusRuleGroups",
+        "location": "global",
+        "properties": {
+          "description": "This is the description of the first rule group",
+          "scopes": [
+            "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/giladstest/providers/Microsoft.Observability/monitoringAcount/myMonitoringAccount"
+          ],
+          "rules": [
+            {
+              "record": "job_type:billing_jobs_duration_seconds:99p5m",
+              "expression": "histogram_quantile(0.99, sum(rate(jobs_duration_seconds_bucket{service=\"billing-processing\"}[5m])) by (job_type))"
+            },
+            {
+              "alert": "Billing_Processing_Very_Slow",
+              "expression": "job_type:billing_jobs_duration_seconds:99p5m > 30",
+              "severity": 2,
+              "for": "5m",
+              "labels": {
+                "team": "prod"
+              },
+              "resolveConfiguration": {
+                "autoResolved": true,
+                "timeToResolve": "10m"
+              },
+              "actions": [
+                {
+                  "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourcegroups/giladstest/providers/microsoft.insights/notificationgroups/group2",
+                  "actionProperties": {
+                    "key11": "value11",
+                    "key12": "value12"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "abc@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2018-06-12T22:05:09Z",
+          "lastModifiedBy": "xyz@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2018-06-12T22:05:09Z"
+        }
+      }
+    }
+  }
+}

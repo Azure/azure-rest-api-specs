@@ -4,27 +4,143 @@
 
 This is the AutoRest configuration file for Machine Learning Services.
 
-
-
 ---
+
 ## Getting Started
-To build the SDK for EventHub, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+
+To build the SDK for Azure Machine Learning, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
 ### Basic Information
+
 These are the global settings for the Machine Learning Services API.
+
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-05-01
+tag: package-2021-07-01
+```
+
+### Tag: package-2021-07-01
+
+These settings apply only when `--tag=package-2021-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-07-01'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2021-07-01/machineLearningServices.json
+  - Microsoft.MachineLearningServices/stable/2021-07-01/workspaceFeatures.json
+  - Microsoft.MachineLearningServices/stable/2021-07-01/workspaceSkus.json
+```
+
+### Tag: package-2021-04-01
+
+These settings apply only when `--tag=package-2021-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-04-01'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2021-04-01/machineLearningServices.json
+```
+
+### Tag: package-2021-01-01
+
+These settings apply only when `--tag=package-2021-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-01-01'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2021-01-01/machineLearningServices.json
+```
+
+
+### Tag: package-2021-03-01-preview
+
+These settings apply only when `--tag=package-2021-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-03-01-preview'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2021-03-01-preview/machineLearningServices.json
+  - Microsoft.MachineLearningServices/preview/2021-03-01-preview/mfe.json
+  - Microsoft.MachineLearningServices/preview/2021-03-01-preview/workspaceFeatures.json
+  - Microsoft.MachineLearningServices/preview/2021-03-01-preview/workspaceSkus.json
+```
+### Tag: package-2020-08-01
+
+These settings apply only when `--tag=package-2020-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-08-01'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2020-08-01/machineLearningServices.json
+```
+
+### Tag: package-2020-06-01
+
+These settings apply only when `--tag=package-2020-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-06-01'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2020-06-01/machineLearningServices.json
+```
+
+### Tag: package-preview-2020-05
+
+These settings apply only when `--tag=package-preview-2020-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2020-05'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2020-05-15-preview/machineLearningServices.json
+```
+
+### Tag: package-2020-04-01
+
+These settings apply only when `--tag=package-2020-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-04-01'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2020-04-01/machineLearningServices.json
+```
+
+### Tag: package-2020-03-01
+
+These settings apply only when `--tag=package-2020-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-03-01'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2020-03-01/machineLearningServices.json
+```
+
+### Tag: package-2020-01-01
+
+These settings apply only when `--tag=package-2020-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-01-01'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2020-01-01/machineLearningServices.json
+```
+
+### Tag: package-2019-11-01
+
+These settings apply only when `--tag=package-2019-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-11-01'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2019-11-01/machineLearningServices.json
+```
+
+### Tag: package-2019-06-01
+
+These settings apply only when `--tag=package-2019-06-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06-01'
+input-file:
+- Microsoft.MachineLearningServices/stable/2019-06-01/machineLearningServices.json
 ```
 
 ### Tag: package-2019-05-01
@@ -45,6 +161,43 @@ input-file:
 - Microsoft.MachineLearningServices/stable/2018-11-19/machineLearningServices.json
 ```
 
+### Tag: package-2020-09-01-preview
+
+These settings apply only when `--tag=package-2020-09-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-09-01-preview'
+input-file:
+- Microsoft.MachineLearningServices/preview/2020-09-01-preview/jobs.json
+- Microsoft.MachineLearningServices/preview/2020-09-01-preview/machineLearningServices.json
+```
+
+### Tag: package-2020-05-01-preview
+
+These settings apply only when `--tag=package-2020-05-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-05-01-preview'
+input-file:
+- Microsoft.MachineLearningServices/preview/2020-05-01-preview/machineLearningServices.json
+```
+
+### Tag: package-2020-04-01-preview
+
+These settings apply only when `--tag=package-2020-04-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-04-01-preview'
+input-file:
+- Microsoft.MachineLearningServices/preview/2020-04-01-preview/machineLearningServices.json
+```
+
+### Tag: package-2020-02-18-preview
+
+These settings apply only when `--tag=package-2020-02-18-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-02-18-preview'
+input-file:
+- Microsoft.MachineLearningServices/preview/2020-02-18-preview/machineLearningServices.json
+```
+
 ### Tag: package-2018-03-preview
 
 These settings apply only when `--tag=package-2018-03-preview` is specified on the command line.
@@ -55,8 +208,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -66,12 +219,15 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
 ```
-
 
 ## C#
 
@@ -87,96 +243,12 @@ csharp:
   clear-output-folder: true
 ```
 
-
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+See configuration in [readme.java.md](./readme.java.md)
 
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.machinelearning.services
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-machinelearning/services
-```
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2019-05-01
-  - tag: package-2018-11-19
-  - tag: package-2018-03-preview
-```
-
-### Tag: package-2019-05-01 and java
-
-These settings apply only when `--tag=package-2019-05-01 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2019-05-01' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.machinelearningservices.v2019_05_01
-  output-folder: $(azure-libraries-for-java-folder)/machinelearningservices/resource-manager/v2019_05_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2018-11-19 and java
-
-These settings apply only when `--tag=package-2018-11-19 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-11-19' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.machinelearningservices.v2018_11_19
-  output-folder: $(azure-libraries-for-java-folder)/machinelearningservices/resource-manager/v2018_11_19
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2018-03-preview and java
-
-These settings apply only when `--tag=package-2018-03-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-03-preview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.machinelearningservices.v2018_03_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/machinelearningservices/resource-manager/v2018_03_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-## Multi-API/Profile support for AutoRest v3 generators 
-
-AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
-
-This block is updated by an automatic script. Edits may be lost!
-
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
-# include the azure profile definitions from the standard location
-require: $(this-folder)/../../../profiles/readme.md
-
-# all the input files across all versions
-input-file:
-  - $(this-folder)/Microsoft.MachineLearningServices/stable/2019-05-01/machineLearningServices.json
-  - $(this-folder)/Microsoft.MachineLearningServices/stable/2018-11-19/machineLearningServices.json
-  - $(this-folder)/Microsoft.MachineLearningServices/preview/2018-03-01-preview/machineLearningServices.json
-
-```
-
-If there are files that should not be in the `all-api-versions` set, 
-uncomment the  `exclude-file` section below and add the file paths.
-
-``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
-```
 

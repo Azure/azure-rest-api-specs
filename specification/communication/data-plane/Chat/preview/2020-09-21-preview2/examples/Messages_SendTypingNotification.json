@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "x-skypetoken": "token",
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2020-09-21-preview2",
+    "chatThreadId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {},
+    "401": {
+      "body": {
+        "code": "Unauthorized",
+        "message": "Request is not authorized."
+      }
+    },
+    "403": {
+      "body": {
+        "code": "Forbidden",
+        "message": "User is not allowed to perform specified action."
+      }
+    },
+    "429": {
+      "body": {
+        "code": "TooManyRequests",
+        "message": "Rate limit exceeded."
+      }
+    },
+    "503": {
+      "body": {
+        "code": "ServiceUnavailable",
+        "message": "The server is currently unable to handle the request."
+      }
+    }
+  }
+}

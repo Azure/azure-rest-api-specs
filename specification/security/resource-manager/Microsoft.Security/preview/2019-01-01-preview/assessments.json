@@ -1,0 +1,374 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2019-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{scope}/providers/Microsoft.Security/assessments": {
+      "get": {
+        "x-ms-examples": {
+          "List security assessments": {
+            "$ref": "./examples/Assessments/ListAssessments_example.json"
+          }
+        },
+        "tags": [
+          "Assessments"
+        ],
+        "description": "Get security assessments on all your scanned resources inside a scope",
+        "operationId": "Assessments_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/Scope"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityAssessmentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceId}/providers/Microsoft.Security/assessments/{assessmentName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get security recommendation task from security data location": {
+            "$ref": "./examples/Assessments/GetAssessment_example.json"
+          },
+          "Get security recommendation task from security data location with expand parameter": {
+            "$ref": "./examples/Assessments/GetAssessmentWithExpand_example.json"
+          }
+        },
+        "tags": [
+          "Assessments"
+        ],
+        "description": "Get a security assessment on your scanned resource",
+        "operationId": "Assessments_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceId"
+          },
+          {
+            "$ref": "#/parameters/AssessmentName"
+          },
+          {
+            "$ref": "#/parameters/ExpandAssessments"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityAssessment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create security recommendation task on a resource": {
+            "$ref": "./examples/Assessments/PutAssessment_example.json"
+          }
+        },
+        "tags": [
+          "Assessments"
+        ],
+        "description": "Create a security assessment on your resource. An assessment metadata that describes this assessment must be predefined with the same name before inserting the assessment result",
+        "operationId": "Assessments_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceId"
+          },
+          {
+            "$ref": "#/parameters/AssessmentName"
+          },
+          {
+            "$ref": "#/parameters/AssessmentBody"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SecurityAssessment"
+            }
+          },
+          "200": {
+            "description": "OK - Updated",
+            "schema": {
+              "$ref": "#/definitions/SecurityAssessment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a security recommendation task on a resource": {
+            "$ref": "./examples/Assessments/DeleteAssessment_example.json"
+          }
+        },
+        "tags": [
+          "Assessments"
+        ],
+        "description": "Delete a security assessment on your resource. An assessment metadata that describes this assessment must be predefined with the same name before inserting the assessment result",
+        "operationId": "Assessments_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceId"
+          },
+          {
+            "$ref": "#/parameters/AssessmentName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Assessment was deleted"
+          },
+          "204": {
+            "description": "No Content - Assessment does not exist"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SecurityAssessmentList": {
+      "type": "object",
+      "description": "Page of a security assessments list",
+      "properties": {
+        "value": {
+          "description": "Collection of security assessments in this page",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecurityAssessment"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "SecurityAssessment": {
+      "type": "object",
+      "description": "Security assessment on a resource",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SecurityAssessmentProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "SecurityAssessmentProperties": {
+      "type": "object",
+      "description": "Describes properties of an assessment.",
+      "properties": {
+        "resourceDetails": {
+          "$ref": "../../../common/v1/types.json#/definitions/ResourceDetails"
+        },
+        "displayName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "User friendly display name of the assessment"
+        },
+        "status": {
+          "$ref": "#/definitions/AssessmentStatus"
+        },
+        "additionalData": {
+          "type": "object",
+          "description": "Additional data regarding the assessment",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "links": {
+          "$ref": "#/definitions/AssessmentLinks"
+        }
+      },
+      "required": [
+        "resourceDetails",
+        "status"
+      ]
+    },
+    "AssessmentLinks": {
+      "type": "object",
+      "description": "Links relevant to the assessment",
+      "readOnly": true,
+      "properties": {
+        "azurePortalUri": {
+          "type": "string",
+          "description": "Link to assessment in Azure Portal",
+          "readOnly": true
+        }
+      }
+    },
+    "AssessmentStatus": {
+      "type": "object",
+      "description": "The result of the assessment",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Programmatic code for the status of the assessment",
+          "enum": [
+            "Healthy",
+            "Unhealthy",
+            "NotApplicable"
+          ],
+          "x-ms-enum": {
+            "name": "AssessmentStatusCode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Healthy",
+                "description": "The resource is healthy"
+              },
+              {
+                "value": "Unhealthy",
+                "description": "The resource has a security issue that needs to be addressed"
+              },
+              {
+                "value": "NotApplicable",
+                "description": "Assessment for this resource did not happen"
+              }
+            ]
+          }
+        },
+        "cause": {
+          "type": "string",
+          "description": "Programmatic code for the cause of the assessment status"
+        },
+        "description": {
+          "type": "string",
+          "description": "Human readable description of the assessment status"
+        }
+      },
+      "required": [
+        "code"
+      ]
+    }
+  },
+  "parameters": {
+    "ExpandAssessments": {
+      "name": "$expand",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "OData expand. Optional.",
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "links",
+        "metadata"
+      ],
+      "x-ms-enum": {
+        "name": "ExpandEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "links",
+            "description": "All links associated with an assessment"
+          },
+          {
+            "value": "metadata",
+            "description": "Assessment metadata"
+          }
+        ]
+      }
+    },
+    "AssessmentName": {
+      "name": "assessmentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Assessment Key - Unique key for the assessment type",
+      "x-ms-parameter-location": "method"
+    },
+    "AssessmentBody": {
+      "name": "assessment",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/SecurityAssessment"
+      },
+      "description": "Calculated assessment on a pre-defined assessment metadata",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

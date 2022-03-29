@@ -1,0 +1,86 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Content-Type": "audio/wav; codecs=audio/pcm",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "profileId": "49a36324-fc4b-4387-aa06-090cfbf0064f",
+    "audioData": "{binary file date}"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "recognitionResult": "accept",
+        "score": 0.63
+      }
+    },
+    "400": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "error": {
+          "code": "InvalidRequest",
+          "message": "Profile is not enrolled."
+        }
+      }
+    },
+    "401": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "error": {
+          "code": "Unauthorized",
+          "message": "Request is not authorized. Make sure subscription key is included and valid."
+        }
+      }
+    },
+    "404": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "error": {
+          "code": "Not Found",
+          "message": "Requested profile doesn't exist"
+        }
+      }
+    },
+    "415": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "error": {
+          "code": "UnsupportedMediaType",
+          "message": "Unsupported media type. Only 'audio/wav; codecs=audio/pcm' is accepted."
+        }
+      }
+    },
+    "429": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "error": {
+          "code": "RateLimit",
+          "message": "Rate limit is exceeded."
+        }
+      }
+    },
+    "500": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "Internal Server Error."
+        }
+      }
+    }
+  }
+}

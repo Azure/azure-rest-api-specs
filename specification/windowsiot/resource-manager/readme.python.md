@@ -12,6 +12,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.windowsiot
   package-name: azure-mgmt-windowsiot
+  package-version: 0.1.0
   clear-output-folder: true
 ```
 

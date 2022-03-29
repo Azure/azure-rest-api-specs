@@ -1,0 +1,200 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HDInsightManagementClient",
+    "description": "The HDInsight Management Client.",
+    "version": "2021-06-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "operationId": "PrivateLinkResources_ListByCluster",
+        "description": "Lists the private link resources in a HDInsight cluster.",
+        "x-ms-examples": {
+          "Get all private link resources in a specific HDInsight cluster.": {
+            "$ref": "./examples/GetAllPrivateLinkResourcesInCluster.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "operationId": "PrivateLinkResources_Get",
+        "description": "Gets the specific private link resource.",
+        "x-ms-examples": {
+          "Get specific private link resource in a specific HDInsight cluster.": {
+            "$ref": "./examples/GetPrivateLinkResource.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateLinkResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PrivateLinkResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateLinkResourceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "A private link resource"
+    },
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private link resources",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        }
+      },
+      "description": "A list of private link resources"
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "ClusterNameParameter": {
+      "name": "clusterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the cluster.",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The HDInsight client API Version."
+    },
+    "PrivateLinkResourceNameParameter": {
+      "name": "privateLinkResourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the private link resource.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

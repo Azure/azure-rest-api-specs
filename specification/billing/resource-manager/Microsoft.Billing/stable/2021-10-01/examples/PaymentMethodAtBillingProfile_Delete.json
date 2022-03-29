@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2021-10-01",
+    "billingAccountName": "00000000-0000-0000-0000-000000000032:00000000-0000-0000-0000-000000000099_2019-05-31",
+    "billingProfileName": "ABC1-A1CD-AB1-BP1",
+    "paymentMethodName": "ABCDABCDABC0"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/paymentMethodLinks/operationResults/ed2975a8-8f77-43bb-a717-ace54326b14b?api-version=2021-10-01",
+        "Retry-After": "60"
+      }
+    },
+    "200": {},
+    "204": {},
+    "409": {
+      "body": {
+        "error": {
+          "code": "PaymentMethodNotEligibleForDetach",
+          "message": "Payment method cannot be detached from billing group.",
+          "details": [
+            {
+              "code": "AzureSubscriptions",
+              "message": "Payment method cannot be detached as there are active or disabled azure subscriptions on this billing profile."
+            },
+            {
+              "code": "RecurringCharges",
+              "message": "Payment method cannot be detached as there are recurring charges on this billing profile."
+            },
+            {
+              "code": "ReservedInstances",
+              "message": "Payment method cannot be detached as there are reserved instances on this billing profile."
+            },
+            {
+              "code": "OutstandingCharges",
+              "message": "Payment method cannot be detached as there are unpaid outstanding charges on this billing profile."
+            },
+            {
+              "code": "PendingCharges",
+              "message": "Payment method cannot be detached as there are pending charges accumulating on this billing profile."
+            }
+          ]
+        }
+      }
+    }
+  }
+}

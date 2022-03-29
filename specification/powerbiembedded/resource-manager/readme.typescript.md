@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-powerbiembedded"
   output-folder: "$(typescript-sdks-folder)/sdk/powerbiembedded/arm-powerbiembedded"
+  clear-output-folder: true
   generate-metadata: true
 ```
