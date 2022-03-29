@@ -720,7 +720,8 @@
           "items": {
             "$ref": "#/definitions/OperationValue"
           },
-          "description": "The list of compute operations"
+          "description": "The list of compute operations",
+          "x-ms-identifiers": ["operationValue"]
         }
       },
       "description": "The List Compute Operation operation response."
@@ -812,7 +813,8 @@
           "items": {
             "$ref": "#/definitions/ConfigurationExtension"
           },
-          "description": "TODO."
+          "description": "TODO.",
+          "x-ms-identifiers": ["agentConfiguration/extensionsAllowList"]
         },
         "extensionsBlockList": {
           "type": "array",
@@ -820,7 +822,8 @@
           "items": {
             "$ref": "#/definitions/ConfigurationExtension"
           },
-          "description": "TODO."
+          "description": "TODO.",
+          "x-ms-identifiers": ["agentConfiguration/extensionsBlockList"]
         },
         "proxyBypass": {
           "type": "array",
@@ -990,7 +993,8 @@
           "items": {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
           },
-          "description": "Details about the error state."
+          "description": "Details about the error state.",
+          "x-ms-identifiers": ["errorDetails"]
         },
         "agentVersion": {
           "readOnly": true,
@@ -1043,7 +1047,8 @@
           "items": {
             "$ref": "#/definitions/MachineExtensionInstanceView"
           },
-          "description": "Machine Extensions information"
+          "description": "Machine Extensions information",
+          "x-ms-identifiers": ["extensions"]
         },
         "osSku": {
           "readOnly": true,
@@ -1321,6 +1326,7 @@
           "description": "Specifies the version of the script handler."
         },
         "status": {
+          "type": "object",
           "properties": {
             "code": {
               "type": "string",
