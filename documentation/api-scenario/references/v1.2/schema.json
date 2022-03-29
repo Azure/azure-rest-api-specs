@@ -309,11 +309,38 @@
         }
       }
     },
+    "StepRestBase": {
+      "type": "object",
+      "allOf": [{
+        "$ref": "#/definitions/StepBase"
+      }],
+      "properties": {
+        "outputVariables": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/definitions/Name"
+          },
+          "additionalProperties": {
+            "properties": {
+              "type": {
+                "$ref": "#/definitions/VariableType"
+              },
+              "fromRequest": {
+                "$ref": "#/definitions/JsonPointer"
+              },
+              "fromResponse": {
+                "$ref": "#/definitions/JsonPointer"
+              }
+            }
+          }
+        }
+      }
+    },
     "StepOperation": {
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/StepBase"
+          "$ref": "#/definitions/StepRestBase"
         }
       ],
       "properties": {
@@ -349,28 +376,10 @@
             }
           }
         },
-        "outputVariables": {
-          "type": "object",
-          "propertyNames": {
-            "$ref": "#/definitions/Name"
-          },
-          "additionalProperties": {
-            "properties": {
-              "type": {
-                "$ref": "#/definitions/VariableType"
-              },
-              "fromRequest": {
-                "$ref": "#/definitions/JsonPointer"
-              },
-              "fromResponse": {
-                "$ref": "#/definitions/JsonPointer"
-              }
-            }
-          }
-        },
         "step": {},
         "description": {},
-        "variables": {}
+        "variables": {},
+        "outputVariables": {}
       },
       "required": [
         "operationId"
@@ -381,7 +390,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/StepBase"
+          "$ref": "#/definitions/StepRestBase"
         }
       ],
       "properties": {
@@ -413,28 +422,10 @@
           },
           "minItems": 1
         },
-        "outputVariables": {
-          "type": "object",
-          "propertyNames": {
-            "$ref": "#/definitions/Name"
-          },
-          "additionalProperties": {
-            "properties": {
-              "type": {
-                "$ref": "#/definitions/VariableType"
-              },
-              "fromRequest": {
-                "$ref": "#/definitions/JsonPointer"
-              },
-              "fromResponse": {
-                "$ref": "#/definitions/JsonPointer"
-              }
-            }
-          }
-        },
         "step": {},
         "description": {},
-        "variables": {}
+        "variables": {},
+        "outputVariables": {}
       },
       "required": [
         "exampleFile"
