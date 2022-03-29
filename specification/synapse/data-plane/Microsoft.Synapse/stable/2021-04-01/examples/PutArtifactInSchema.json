@@ -3,7 +3,7 @@
     "endpoint": "exampleWorkspace.dev.azuresynapse.net",
     "databaseName": "exampleDatabase",
     "schemaName": "exampleSchemaName",
-    "artifacType": "exampleArtifactType",
+    "artifactType": "TABLE",
     "artifactName": "exampleArtifactName",
     "createArtifactsPayload": "artifactPayload",
     "api-version": "2021-04-01"
@@ -11,25 +11,13 @@
   "responses": {
     "200": {
       "body": {
-        "EntityName": "exampleArtifact",
+        "EntityName": "exampleTableName",
         "DDLType": "CREATE",
-        "EntityType": "ArtifactType(TABLE/VIEW) etc",
-        "properties": {
-          "Origin": {
-            "Type": "originType(SQLOD/ADLS/SPARK/etc)"
-          },
-          "Source": {
-            "Provider": "ADLS",
-            "Location": "abfss://exampleBlobContainer@exampleStorageName.dfs.core.windows.net/exampleDatabase/schemas/schemaName",
-            "Properties": {
-              "FormatType": "csv",
-              "LinkedServiceName": "exampleWorkspaceWorkspaceDefaultStorage"
-            }
-          },
-          "PublishStatus": "PUBLISHED",
-          "ObjectVersion": 1,
-          "ObjectId": "exampleObjectIdGuid"
-        }
+        "EntityType": "TABLE",
+        "PublishStatus": "PUBLISHED",
+        "ObjectVersion": 1,
+        "OriginObjectId": "1111",
+        "ObjectId": "exampleObjectIdGuid"
       }
     },
     "default": {
