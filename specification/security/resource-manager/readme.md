@@ -102,7 +102,7 @@ These settings apply only when `--tag=package-composite-v1` is specified on the 
 ``` yaml $(tag) == 'package-composite-v1'
 input-file:
 - Microsoft.Security/preview/2022-03-01-preview/vmScanners.json
-- Microsoft.Security/preview/2021-07-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2021-12-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2021-10-01-preview/mdeOnboardings.json
 - Microsoft.Security/preview/2021-07-01-preview/customAssessmentAutomation.json
 - Microsoft.Security/preview/2021-07-01-preview/customEntityStoreAssignment.json
