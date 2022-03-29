@@ -5927,13 +5927,6 @@
           "type": "integer",
           "format": "int32",
           "readOnly": true
-        },
-        "hosts": {
-          "description": "The hosts",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
@@ -5947,7 +5940,17 @@
         {
           "$ref": "#/definitions/CommonClusterProperties"
         }
-      ]
+      ],
+      "properties": {
+        "hosts": {
+          "description": "The hosts",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "ClusterProperties": {
       "type": "object",
@@ -5957,7 +5960,15 @@
           "$ref": "#/definitions/CommonClusterProperties"
         }
       ],
-      "properties": {}
+      "properties": {
+        "hosts": {
+          "description": "The hosts",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "PrivateCloudList": {
       "type": "object",
