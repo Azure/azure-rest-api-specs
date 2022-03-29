@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "SyMSAPIServiceClient",
+    "title": "ArtifactsClient",
     "description": "SyMS API Service Client.",
     "version": "2021-04-01"
   },
@@ -117,7 +117,8 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        }
+        }, 
+		"x-ms-long-running-operation": true
       }
     },
     "/databases": {
@@ -2215,6 +2216,7 @@
       "type": "string",
       "in": "header",
       "required": true,
+	  "x-ms-parameter-location": "client",
       "description": "User-Agent request header for servers to identify application"
     },
     "Endpoint": {
