@@ -261,7 +261,6 @@ input-file:
 - ./Microsoft.Sql/preview/2021-02-01-preview/DatabaseUsages.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/LedgerDigestUploads.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/OutboundFirewallRules.json
-- ./Microsoft.Sql/preview/2021-02-01-preview/ReplicationLinks.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/Servers.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/Usages.json
 - ./Microsoft.Sql/preview/2021-05-01-preview/Databases.json
@@ -275,6 +274,7 @@ input-file:
 - ./Microsoft.Sql/preview/2021-05-01-preview/ServerTrustCertificates.json
 - ./Microsoft.Sql/preview/2021-08-01-preview/ElasticPools.json
 - ./Microsoft.Sql/preview/2021-08-01-preview/IPv6FirewallRules.json
+- ./Microsoft.Sql/preview/2021-11-01-preview/ReplicationLinks.json
 
 
 # Needed when there is more than one input file
