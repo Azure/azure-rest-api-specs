@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "MetaverseManagementClient",
-    "description": "Metaverse Provider",
+    "description": "Metaverse provider",
     "version": "2022-02-01-preview"
   },
   "host": "management.azure.com",
@@ -13,10 +13,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/events/{eventId}/accessPolicies": {
       "get": {
         "tags": [
-          "AccessPolicies"
+          "EventAccessPolicies"
         ],
         "description": "Returns list of access policies.",
-        "operationId": "AccessPolicy_List",
+        "operationId": "EventAccessPolicy_List",
         "produces": [
           "application/json"
         ],
@@ -55,8 +55,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "AccessPolicy_List": {
-            "$ref": "./examples/AccessPolicy_List.json"
+          "EventAccessPolicy_List": {
+            "$ref": "./examples/EventAccessPolicy_List.json"
           }
         }
       }
@@ -64,10 +64,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/events/{eventId}/accessPolicies/{accessPolicyName}": {
       "get": {
         "tags": [
-          "AccessPolicies"
+          "EventAccessPolicies"
         ],
         "description": "Returns access policy resource for a given name.",
-        "operationId": "AccessPolicy_Get",
+        "operationId": "EventAccessPolicy_Get",
         "produces": [
           "application/json"
         ],
@@ -106,17 +106,17 @@
           }
         },
         "x-ms-examples": {
-          "AccessPolicy_Get": {
-            "$ref": "./examples/AccessPolicy_Get.json"
+          "EventAccessPolicy_Get": {
+            "$ref": "./examples/EventAccessPolicy_Get.json"
           }
         }
       },
       "put": {
         "tags": [
-          "AccessPolicies"
+          "EventAccessPolicies"
         ],
         "description": "Update an access policy resource.",
-        "operationId": "AccessPolicy_Update",
+        "operationId": "EventAccessPolicy_Update",
         "consumes": [
           "application/json"
         ],
@@ -175,8 +175,8 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "AccessPolicy_Update": {
-            "$ref": "./examples/AccessPolicy_Update.json"
+          "EventAccessPolicy_Update": {
+            "$ref": "./examples/EventAccessPolicy_Update.json"
           }
         }
       }
@@ -1017,6 +1017,177 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/spaces/{spaceId}/accessPolicies": {
+      "get": {
+        "tags": [
+          "SpaceAccessPolicies"
+        ],
+        "description": "Returns list of access policies.",
+        "operationId": "SpaceAccessPolicy_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SpaceIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Access policy details.",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResourceList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SpaceAccessPolicy_List": {
+            "$ref": "./examples/SpaceAccessPolicy_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/spaces/{spaceId}/accessPolicies/{accessPolicyName}": {
+      "get": {
+        "tags": [
+          "SpaceAccessPolicies"
+        ],
+        "description": "Returns access policy resource for a given name.",
+        "operationId": "SpaceAccessPolicy_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SpaceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessPolicyNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Access policy details.",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SpaceAccessPolicy_Get": {
+            "$ref": "./examples/SpaceAccessPolicy_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SpaceAccessPolicies"
+        ],
+        "description": "Update an access policy resource.",
+        "operationId": "SpaceAccessPolicy_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SpaceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessPolicyNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Access policy updated.",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResource"
+            }
+          },
+          "201": {
+            "description": "Access policy created.",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResource"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "SpaceAccessPolicy_Update": {
+            "$ref": "./examples/SpaceAccessPolicy_Update.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/spaces": {
       "get": {
         "tags": [
@@ -1662,27 +1833,7 @@
         }
       }
     },
-    "MeshSpaceTemplate": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SpaceTemplateBase"
-        }
-      ],
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "createdDate": {
-          "format": "date-time",
-          "type": "string"
-        }
-      }
-    },
     "MetaverseBase": {
-      "required": [
-        "title"
-      ],
       "type": "object",
       "properties": {
         "title": {
@@ -1853,14 +2004,6 @@
         }
       }
     },
-    "SpaceInternalMetadata": {
-      "type": "object",
-      "properties": {
-        "eTag": {
-          "type": "string"
-        }
-      }
-    },
     "SpaceProperties": {
       "type": "object",
       "allOf": [
@@ -1949,6 +2092,14 @@
           "description": "The entity specific metadata of the template.",
           "type": "object",
           "additionalProperties": {}
+        },
+        "meshTags": {
+          "description": "The mesh tags of the template.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
