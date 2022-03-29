@@ -169,6 +169,21 @@
         "verbose": {
           "type": "boolean",
           "description": "If true, the service will return more detailed information in the response."
+        },
+        "isLoggingEnabled": {
+          "type": "boolean",
+          "description": "If true, the service will keep the query for further review."
+        },
+        "directTarget": {
+          "type": "string",
+          "description": "The name of a target project to forward the request to."
+        },
+        "targetProjectParameters": {
+          "type": "object",
+          "description": "A dictionary representing the parameters for each target project.",
+          "additionalProperties": {
+            "$ref": "#/definitions/AnalysisParameters"
+          }
         }
       },
       "required": [
@@ -256,21 +271,6 @@
       "properties": {
         "conversationItem": {
           "$ref": "#/definitions/ConversationItemBase"
-        },
-        "directTarget": {
-          "type": "string",
-          "description": "The name of the target project this request is sending to directly."
-        },
-        "isLoggingEnabled": {
-          "description": "If true, the query will be kept by the service for customers to further review.",
-          "type": "boolean"
-        },
-        "parameters": {
-          "type": "object",
-          "description": "A dictionary representing the input for each target project.",
-          "additionalProperties": {
-            "$ref": "#/definitions/AnalysisParameters"
-          }
         }
       }
     },
