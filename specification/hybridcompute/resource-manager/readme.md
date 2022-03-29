@@ -39,6 +39,7 @@ input-file:
   - Microsoft.HybridCompute/stable/2022-03-10/HybridCompute.json
   - Microsoft.HybridCompute/stable/2022-03-10/privateLinkScopes.json
 ```
+
 ### Tag: package-preview-2021-12
 
 These settings apply only when `--tag=package-preview-2021-12` is specified on the command line.
@@ -168,7 +169,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-12-12` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-08-02'
+``` yaml $(tag) == 'package-2020-12-12'
 input-file:
 - Microsoft.HybridCompute/stable/2019-12-12/HybridCompute.json
 ```
