@@ -233,6 +233,63 @@
           }
         }
       }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleAssignmentScheduleRequests/{roleAssignmentScheduleRequestName}/validate": {
+      "post": {
+        "tags": [
+          "RoleAssignmentScheduleRequests"
+        ],
+        "operationId": "RoleAssignmentScheduleRequests_Validate",
+        "description": "Validates a new role assignment schedule request.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope of the role assignment request to validate.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "roleAssignmentScheduleRequestName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the role assignment request to validate."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentScheduleRequest"
+            },
+            "description": "Parameters for the role assignment schedule request."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the role assignment request.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentScheduleRequest"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidateRoleAssignmentScheduleRequestByName": {
+            "$ref": "./examples/ValidateRoleAssignmentScheduleRequestByName.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
