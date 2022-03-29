@@ -165,15 +165,6 @@ input-file:
 - Microsoft.HybridCompute/stable/2020-08-02/HybridCompute.json
 ```
 
-### Tag: package-2019-12-12
-
-These settings apply only when `--tag=package-2019-12-12` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-12-12'
-input-file:
-- Microsoft.HybridCompute/stable/2019-12-12/HybridCompute.json
-```
-
 ---
 
 # Code Generation
