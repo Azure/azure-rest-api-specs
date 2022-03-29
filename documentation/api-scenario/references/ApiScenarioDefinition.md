@@ -2,7 +2,7 @@
 
 ## API Scenario Definition File
 
-See [API Scenario Definition File Schema](./v1.1/schema.json#L1)
+See [API Scenario Definition File Schema](./v1.2/schema.json#L1)
 
 File should be in format of yaml.
 
@@ -19,9 +19,7 @@ scenarios:
   - description: test_network_public_ip
     steps:
       - step: Create_publicIPAddresses_pubipdns
-        resourceName: publicIPAddresses_pubipdns
         exampleFile: ../examples/Create_publicIPAddresses_pubipdns_Generated.json
-        operationId: PublicIPAddresses_CreateOrUpdate
     variables:
       publicIpAddressName: pubipdns
 ```
@@ -40,7 +38,7 @@ scenarios:
         - **location**
       - For details of how variables works please see [Variables](./Variables.md)
 - **variables**
-  - **Type:** Optional, Map of strings
+  - **Type:** Optional, Map of strings or variable containers
   - See [Variables](./Variables.md)
 - **prepareSteps**
   - **Type:** Optional, Array of [Step](#step)
@@ -50,7 +48,7 @@ scenarios:
 
 ## Scenario
 
-See [Scenario Schema](./v1.1/schema.json#L83).
+See [Scenario Schema](./v1.2/schema.json#L83).
 
 It defines one API scenario that could go through on its own.
 
@@ -61,7 +59,6 @@ description: test_network_public_ip
 shareScope: true
 steps:
   - step: Create_publicIPAddresses_pubipdns
-    resourceName: publicIPAddresses_pubipdns
     exampleFile: ../examples/Create_publicIPAddresses_pubipdns_Generated.json
     operationId: PublicIPAddresses_CreateOrUpdate
 variables:
@@ -89,30 +86,33 @@ variables:
 
 ## Step
 
-See [Step Schema](./v1.1/schema.json#L114).
+See [Step Schema](./v1.2/schema.json#L114).
 
 Defines one step in API scenario.
 
 Should be one of the following:
 
 - [Step REST Call](#step-rest-call)
-  - [REST Call](#rest-call)
-  - [REST Call by ResourceName Tracking and Update](#rest-call-by-resourcename-tracking-and-update)
+  - [REST Operation](#rest-operation)
+  - [REST Example](#rest-example)
 - [Step ARM Template](#step-arm-template)
 - [Step ARM Deployment Script](#step-arm-deployment-script)
 
 All of the above definitions share the following fields:
 
-- **variables**
-  - **Type:** Optional, Map of Strings
-  - See [Variables](./Variables.md)
 - **step**
   - **Type:** Required, String
   - Step name. Must be unique in the same file.
+- **description**
+  - **Type:** Optional, String
+  - A brief explanation about the step
+- **variables**
+  - **Type:** Optional, Map of Strings or variables
+  - See [Variables](./Variables.md)
 
 ## Step ARM Template
 
-See [Step ARM Template Schema](./v1.1/schema.json#L250).
+See [Step ARM Template Schema](./v1.2/schema.json#L250).
 
 Step to deploy ARM template to the scope. Template parameters and outputs will also interact with variables automatically, see [Variables](./Variables.md).
 
@@ -132,7 +132,7 @@ Step to deploy ARM template to the scope. Template parameters and outputs will a
 
 ## Step ARM Deployment Script
 
-See [Step ARM Deployment Script Schema](./v1.1/schema.json#L266).
+See [Step ARM Deployment Script Schema](./v1.2/schema.json#L266).
 
 Step to deploy ARM deployment script to the scope. Template parameters and outputs will also interact with variables automatically, see [Variables](./Variables.md).
 
@@ -186,7 +186,7 @@ Step to deploy ARM deployment script to the scope. Template parameters and outpu
 
 ## Step REST Call
 
-See [Step REST Call Schema](./v1.1/schema.json#L208)
+See [Step REST Call Schema](./v1.2/schema.json#L208)
 
 Step to run a swagger operation defined rest call. This may not be just one http call.
 
@@ -195,85 +195,61 @@ Step to run a swagger operation defined rest call. This may not be just one http
   - If the LRO is PUT/PATCH, the runner should automatically insert a GET after the polling to verify the resource update result.
 - If the operation is DELETE, then after the operation, the runner should automatically insert a GET to verify resource cannot be found.
 
-Rest call step could be defined either by an example file, or by resourceName tracking and update.
+Rest call step could be defined either by an example file, or by an operation. Both share the following fields:
+
+- **outputVariables**
+  - **Type:** Optional, Map from variable name to object with property:
+    - **type**: Required, String
+    - **fromRequest**
+      - **Type:** Required, String
+      - Path to the request field to be used as variable.
+    - **fromResponse**
+      - **Type:** Required, String
+      - Path to the response field to be used as variable.
 
 Rest call will have computed **requestParameter** and **responseExpected** after parsing and loading:
 
 - **requestParameter**
 
-### REST Call
+### REST Operation
+
+**Example:**
+```yml
+- step: createPublicIPAddress
+  operationId: PublicIPAddresses_CreateOrUpdate
+```
+
+**Fields:**
+
+- **operationId:**
+  - **Type:** Required, String
+  - OperationId defined in Swagger.
+- **parameters:**
+  - **Type:** Optional, Map from parameter name to parameter value
+- **responses:**
+  - **Type:** Optional, Map from response code to response headers and body.
+
+
+### REST Example
 
 **Example:**
 
 ```yaml
 - step: Create_publicIPAddresses_pubipdns
-  resourceName: publicIPAddresses_pubipdns
   exampleFile: ../examples/Create_publicIPAddresses_pubipdns_Generated.json
-  operationId: PublicIPAddresses_CreateOrUpdate
-  statusCode: 200
 ```
 
 **Fields:**
 
 - **exampleFile**
-  - **Type:** Optional, String
+  - **Type:** Required, String
   - Path to example file. Should be in format of "x-ms-example" files.
-- **operationId**
-  - **Type:** Optional, String
-  - OperationId defined in swagger operation. It could be skipped if the example file is referenced by only one operation so we could detect the operationId.
-- **statusCode:**
-  - **Type:** Optional, Number
-  - **Default:** 200
-  - Expected response code.
-  - For LRO it must be 200 to indicate succeeded result, and must be 400 to indicate failed result.
 - **requestUpdate**
   - **Type:** Optional, Array of [JsonPatchOp](#jsonpatchop)
   - Updates that applied to the requestParameters before sending it.
 - **responseUpdate**
   - **Type:** Optional, Array of [JsonPatchOp](#jsonpatchop)
   - Updates that applied to the responseExpected.
-- **outputVariables**
-  - **Type:** Optional, Map from variable name to object with property:
-    - **fromResponse**
-      - **Type:** Required, String
-      - Path to the response field to be used as variable.
-
-### Rest Call by ResourceName Tracking and Update
-
-**Example**
-
-```yaml
-- step: Create_publicIPAddresses_pubipdns
-  resourceName: publicIPAddresses_pubipdns
-  exampleFile: ../examples/Create_publicIPAddresses_pubipdns_Generated.json
-  operationId: PublicIPAddresses_CreateOrUpdate
-  statusCode: 200
-
-- step: Update_publicIPAddresses
-  resourceName: publicIPAddresses_pubipdns
-  resourceUpdate:
-    - replace: /properties/location
-      value: westus
-```
-
-Different steps with the same resourceName will be tracked by the API scenario. It knows that you are trying to update the same resource. You can use the first request with example to specify the request and resource id, then the following step with the same resourceName will use the same resource id to update the resource. For the
-
-**Fields:**
-
-- **resourceName**
-  - **Type:** Required, String
-  - The user-defined resource name of the resource to be tracked. It's only used as a name of that resource and do not need to be same as the actual resource name.
-- **resourceUpdate**
-  - **Type:** Optional, Array of [JsonPatchOp](#jsonpatchop)
-  - Array of changes to be applied to the resource.
-
-resourceUpdate will help to automate compute the request body and the expected response body. The algorithm will be:
-
-- Get the expected response body from previous step with same `resourceName`, or from current step with example loaded.
-- For each change in `resourceUpdate`, apply the change to the expected response body, mark as `computedAllProperties`.
-- Let new request body parameter value to be: `computedAllProperties` without `readOnly` fields and `x-ms-mutability` fields that don't contains `update`.
-- Let new response expected to be: `computedAllProperties` without `x-ms-secrets` fields and `x-ms-mutability` fields that don't contain `read`.
-- Let the operationId to be: resource PUT operationId.
 
 ### JsonPatchOp
 

@@ -251,7 +251,7 @@
       "properties": {
         "scenario": {
           "$ref": "#/definitions/Name",
-          "description": "Name of the scenario"
+          "description": "Name of the scenario that uniquely identifies it"
         },
         "description": {
           "type": "string",
@@ -306,25 +306,6 @@
         },
         "variables": {
           "$ref": "#/definitions/Variables"
-        },
-        "outputVariables": {
-          "type": "object",
-          "propertyNames": {
-            "$ref": "#/definitions/Name"
-          },
-          "additionalProperties": {
-            "properties": {
-              "type": {
-                "$ref": "#/definitions/VariableType"
-              },
-              "fromRequest": {
-                "$ref": "#/definitions/JsonPointer"
-              },
-              "fromResponse": {
-                "$ref": "#/definitions/JsonPointer"
-              }
-            }
-          }
         }
       }
     },
@@ -368,10 +349,28 @@
             }
           }
         },
+        "outputVariables": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/definitions/Name"
+          },
+          "additionalProperties": {
+            "properties": {
+              "type": {
+                "$ref": "#/definitions/VariableType"
+              },
+              "fromRequest": {
+                "$ref": "#/definitions/JsonPointer"
+              },
+              "fromResponse": {
+                "$ref": "#/definitions/JsonPointer"
+              }
+            }
+          }
+        },
         "step": {},
         "description": {},
-        "variables": {},
-        "outputVariables": {}
+        "variables": {}
       },
       "required": [
         "operationId"
@@ -414,10 +413,28 @@
           },
           "minItems": 1
         },
+        "outputVariables": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/definitions/Name"
+          },
+          "additionalProperties": {
+            "properties": {
+              "type": {
+                "$ref": "#/definitions/VariableType"
+              },
+              "fromRequest": {
+                "$ref": "#/definitions/JsonPointer"
+              },
+              "fromResponse": {
+                "$ref": "#/definitions/JsonPointer"
+              }
+            }
+          }
+        },
         "step": {},
         "description": {},
-        "variables": {},
-        "outputVariables": {}
+        "variables": {}
       },
       "required": [
         "exampleFile"
@@ -438,8 +455,7 @@
         },
         "step": {},
         "description": {},
-        "variables": {},
-        "outputVariables": {}
+        "variables": {}
       },
       "required": [
         "armTemplate"
@@ -481,8 +497,7 @@
         },
         "step": {},
         "description": {},
-        "variables": {},
-        "outputVariables": {}
+        "variables": {}
       },
       "required": [
         "armDeploymentScript"
