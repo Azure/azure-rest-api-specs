@@ -37,7 +37,7 @@
       "properties": {
         "resourceType": {
           "description": "Type of HL7 FHIR resource.",
-          "type": "string"
+          "$ref": "#/definitions/FhirResourceType"
         },
         "resourceFhirAccount": {
           "description": "Domain name of FHIR account for this resource.",
@@ -52,6 +52,823 @@
           "type": "integer",
           "format": "int64"
         }
+      }
+    },
+    "FhirResourceType": {
+      "description": "Schema of FHIR resource type enumeration.",
+      "type": "string",
+      "enum": [
+        "Account",
+        "ActivityDefinition",
+        "AdverseEvent",
+        "AllergyIntolerance",
+        "Appointment",
+        "AppointmentResponse",
+        "AuditEvent",
+        "Basic",
+        "Binary",
+        "BiologicallyDerivedProduct",
+        "BodySite",
+        "BodyStructure",
+        "Bundle",
+        "CapabilityStatement",
+        "CarePlan",
+        "CareTeam",
+        "CatalogEntry",
+        "ChargeItem",
+        "ChargeItemDefinition",
+        "Claim",
+        "ClaimResponse",
+        "ClinicalImpression",
+        "CodeSystem",
+        "Communication",
+        "CommunicationRequest",
+        "CompartmentDefinition",
+        "Composition",
+        "ConceptMap",
+        "Condition",
+        "Consent",
+        "Contract",
+        "Coverage",
+        "CoverageEligibilityRequest",
+        "CoverageEligibilityResponse",
+        "DataElement",
+        "DetectedIssue",
+        "Device",
+        "DeviceComponent",
+        "DeviceDefinition",
+        "DeviceMetric",
+        "DeviceRequest",
+        "DeviceUseStatement",
+        "DiagnosticReport",
+        "DocumentManifest",
+        "DocumentReference",
+        "DomainResource",
+        "EffectEvidenceSynthesis",
+        "EligibilityRequest",
+        "EligibilityResponse",
+        "Encounter",
+        "Endpoint",
+        "EnrollmentRequest",
+        "EnrollmentResponse",
+        "EpisodeOfCare",
+        "EventDefinition",
+        "Evidence",
+        "EvidenceVariable",
+        "ExampleScenario",
+        "ExpansionProfile",
+        "ExplanationOfBenefit",
+        "FamilyMemberHistory",
+        "Flag",
+        "Goal",
+        "GraphDefinition",
+        "Group",
+        "GuidanceResponse",
+        "HealthcareService",
+        "ImagingManifest",
+        "ImagingStudy",
+        "Immunization",
+        "ImmunizationEvaluation",
+        "ImmunizationRecommendation",
+        "ImplementationGuide",
+        "InsurancePlan",
+        "Invoice",
+        "Library",
+        "Linkage",
+        "List",
+        "Location",
+        "Measure",
+        "MeasureReport",
+        "Media",
+        "Medication",
+        "MedicationAdministration",
+        "MedicationDispense",
+        "MedicationKnowledge",
+        "MedicationRequest",
+        "MedicationStatement",
+        "MedicinalProduct",
+        "MedicinalProductAuthorization",
+        "MedicinalProductContraindication",
+        "MedicinalProductIndication",
+        "MedicinalProductIngredient",
+        "MedicinalProductInteraction",
+        "MedicinalProductManufactured",
+        "MedicinalProductPackaged",
+        "MedicinalProductPharmaceutical",
+        "MedicinalProductUndesirableEffect",
+        "MessageDefinition",
+        "MessageHeader",
+        "MolecularSequence",
+        "NamingSystem",
+        "NutritionOrder",
+        "Observation",
+        "ObservationDefinition",
+        "OperationDefinition",
+        "OperationOutcome",
+        "Organization",
+        "OrganizationAffiliation",
+        "Parameters",
+        "Patient",
+        "PaymentNotice",
+        "PaymentReconciliation",
+        "Person",
+        "PlanDefinition",
+        "Practitioner",
+        "PractitionerRole",
+        "Procedure",
+        "ProcedureRequest",
+        "ProcessRequest",
+        "ProcessResponse",
+        "Provenance",
+        "Questionnaire",
+        "QuestionnaireResponse",
+        "ReferralRequest",
+        "RelatedPerson",
+        "RequestGroup",
+        "ResearchDefinition",
+        "ResearchElementDefinition",
+        "ResearchStudy",
+        "ResearchSubject",
+        "Resource",
+        "RiskAssessment",
+        "RiskEvidenceSynthesis",
+        "Schedule",
+        "SearchParameter",
+        "Sequence",
+        "ServiceDefinition",
+        "ServiceRequest",
+        "Slot",
+        "Specimen",
+        "SpecimenDefinition",
+        "StructureDefinition",
+        "StructureMap",
+        "Subscription",
+        "Substance",
+        "SubstanceNucleicAcid",
+        "SubstancePolymer",
+        "SubstanceProtein",
+        "SubstanceReferenceInformation",
+        "SubstanceSourceMaterial",
+        "SubstanceSpecification",
+        "SupplyDelivery",
+        "SupplyRequest",
+        "Task",
+        "TerminologyCapabilities",
+        "TestReport",
+        "TestScript",
+        "ValueSet",
+        "VerificationResult",
+        "VisionPrescription"
+      ],
+      "x-ms-enum": {
+        "name": "FhirResourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Account",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "ActivityDefinition",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "AdverseEvent",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "AllergyIntolerance",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Appointment",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "AppointmentResponse",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "AuditEvent",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Basic",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Binary",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "BiologicallyDerivedProduct",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "BodySite",
+            "description": "The FHIR resource type defined in STU3."
+          },
+          {
+            "value": "BodyStructure",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "Bundle",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "CapabilityStatement",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "CarePlan",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "CareTeam",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "CatalogEntry",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "ChargeItem",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "ChargeItemDefinition",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "Claim",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "ClaimResponse",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "ClinicalImpression",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "CodeSystem",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Communication",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "CommunicationRequest",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "CompartmentDefinition",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Composition",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "ConceptMap",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Condition",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Consent",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Contract",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Coverage",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "CoverageEligibilityRequest",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "CoverageEligibilityResponse",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "DataElement",
+            "description": "The FHIR resource type defined in STU3."
+          },
+          {
+            "value": "DetectedIssue",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Device",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "DeviceComponent",
+            "description": "The FHIR resource type defined in STU3."
+          },
+          {
+            "value": "DeviceDefinition",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "DeviceMetric",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "DeviceRequest",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "DeviceUseStatement",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "DiagnosticReport",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "DocumentManifest",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "DocumentReference",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "DomainResource",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "EffectEvidenceSynthesis",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "EligibilityRequest",
+            "description": "The FHIR resource type defined in STU3."
+          },
+          {
+            "value": "EligibilityResponse",
+            "description": "The FHIR resource type defined in STU3."
+          },
+          {
+            "value": "Encounter",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Endpoint",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "EnrollmentRequest",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "EnrollmentResponse",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "EpisodeOfCare",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "EventDefinition",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "Evidence",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "EvidenceVariable",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "ExampleScenario",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "ExpansionProfile",
+            "description": "The FHIR resource type defined in STU3."
+          },
+          {
+            "value": "ExplanationOfBenefit",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "FamilyMemberHistory",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Flag",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Goal",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "GraphDefinition",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Group",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "GuidanceResponse",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "HealthcareService",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "ImagingManifest",
+            "description": "The FHIR resource type defined in STU3."
+          },
+          {
+            "value": "ImagingStudy",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Immunization",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "ImmunizationEvaluation",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "ImmunizationRecommendation",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "ImplementationGuide",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "InsurancePlan",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "Invoice",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "Library",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Linkage",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "List",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Location",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Measure",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "MeasureReport",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Media",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Medication",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "MedicationAdministration",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "MedicationDispense",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "MedicationKnowledge",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "MedicationRequest",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "MedicationStatement",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "MedicinalProduct",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "MedicinalProductAuthorization",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "MedicinalProductContraindication",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "MedicinalProductIndication",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "MedicinalProductIngredient",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "MedicinalProductInteraction",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "MedicinalProductManufactured",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "MedicinalProductPackaged",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "MedicinalProductPharmaceutical",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "MedicinalProductUndesirableEffect",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "MessageDefinition",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "MessageHeader",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "MolecularSequence",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "NamingSystem",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "NutritionOrder",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Observation",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "ObservationDefinition",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "OperationDefinition",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "OperationOutcome",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Organization",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "OrganizationAffiliation",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "Parameters",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Patient",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "PaymentNotice",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "PaymentReconciliation",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Person",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "PlanDefinition",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Practitioner",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "PractitionerRole",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Procedure",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "ProcedureRequest",
+            "description": "The FHIR resource type defined in STU3."
+          },
+          {
+            "value": "ProcessRequest",
+            "description": "The FHIR resource type defined in STU3."
+          },
+          {
+            "value": "ProcessResponse",
+            "description": "The FHIR resource type defined in STU3."
+          },
+          {
+            "value": "Provenance",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Questionnaire",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "QuestionnaireResponse",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "ReferralRequest",
+            "description": "The FHIR resource type defined in STU3."
+          },
+          {
+            "value": "RelatedPerson",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "RequestGroup",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "ResearchDefinition",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "ResearchElementDefinition",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "ResearchStudy",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "ResearchSubject",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Resource",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "RiskAssessment",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "RiskEvidenceSynthesis",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "Schedule",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "SearchParameter",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Sequence",
+            "description": "The FHIR resource type defined in STU3."
+          },
+          {
+            "value": "ServiceDefinition",
+            "description": "The FHIR resource type defined in STU3."
+          },
+          {
+            "value": "ServiceRequest",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "Slot",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Specimen",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "SpecimenDefinition",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "StructureDefinition",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "StructureMap",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Subscription",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Substance",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "SubstanceNucleicAcid",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "SubstancePolymer",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "SubstanceProtein",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "SubstanceReferenceInformation",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "SubstanceSourceMaterial",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "SubstanceSpecification",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "SupplyDelivery",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "SupplyRequest",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "Task",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "TerminologyCapabilities",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "TestReport",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "TestScript",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "ValueSet",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          },
+          {
+            "value": "VerificationResult",
+            "description": "The FHIR resource type defined in R4."
+          },
+          {
+            "value": "VisionPrescription",
+            "description": "The FHIR resource type defined in STU3 and R4."
+          }
+        ]
       }
     }
   }
