@@ -19,10 +19,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/advancedThreatProtectionSettings": {
       "get": {
         "tags": [
-          "ManagedServerAdvancedThreatProtectionSettings"
+          "ManagedInstanceAdvancedThreatProtectionSettings"
         ],
-        "description": "Get the managed server's Advanced Threat Protection settings.",
-        "operationId": "ManagedServerAdvancedThreatProtectionSettings_ListByInstance",
+        "description": "Get the managed instance's Advanced Threat Protection settings.",
+        "operationId": "ManagedInstanceAdvancedThreatProtectionSettings_ListByInstance",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
@@ -39,9 +39,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the managed server Advanced Threat Protection states.",
+            "description": "Successfully retrieved the managed instance Advanced Threat Protection states.",
             "schema": {
-              "$ref": "#/definitions/ManagedServerAdvancedThreatProtectionListResult"
+              "$ref": "#/definitions/ManagedInstanceAdvancedThreatProtectionListResult"
             }
           },
           "default": {
@@ -52,8 +52,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List the managed server's Advanced Threat Protection settings.": {
-            "$ref": "./examples/ManagedServerAdvancedThreatProtectionSettingsListByInstance.json"
+          "List the managed instance's Advanced Threat Protection settings.": {
+            "$ref": "./examples/ManagedInstanceAdvancedThreatProtectionSettingsListByInstance.json"
           }
         }
       }
@@ -61,10 +61,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/advancedThreatProtectionSettings/{advancedThreatProtectionName}": {
       "get": {
         "tags": [
-          "ManagedServerAdvancedThreatProtectionSettings"
+          "ManagedInstanceAdvancedThreatProtectionSettings"
         ],
-        "description": "Get a managed server's Advanced Threat Protection state.",
-        "operationId": "ManagedServerAdvancedThreatProtectionSettings_Get",
+        "description": "Get a managed instance's Advanced Threat Protection state.",
+        "operationId": "ManagedInstanceAdvancedThreatProtectionSettings_Get",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
@@ -95,9 +95,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the managed server Advanced Threat Protection state.",
+            "description": "Successfully retrieved the managed instance Advanced Threat Protection state.",
             "schema": {
-              "$ref": "#/definitions/ManagedServerAdvancedThreatProtection"
+              "$ref": "#/definitions/ManagedInstanceAdvancedThreatProtection"
             }
           },
           "default": {
@@ -105,17 +105,17 @@
           }
         },
         "x-ms-examples": {
-          "Get a managed server's Advanced Threat Protection settings": {
-            "$ref": "./examples/ManagedServerAdvancedThreatProtectionSettingsGet.json"
+          "Get a managed instance's Advanced Threat Protection settings": {
+            "$ref": "./examples/ManagedInstanceAdvancedThreatProtectionSettingsGet.json"
           }
         }
       },
       "put": {
         "tags": [
-          "ManagedServerAdvancedThreatProtectionSettings"
+          "ManagedInstanceAdvancedThreatProtectionSettings"
         ],
         "description": "Creates or updates Advanced Threat Protection settings.",
-        "operationId": "ManagedServerAdvancedThreatProtectionSettings_CreateOrUpdate",
+        "operationId": "ManagedInstanceAdvancedThreatProtectionSettings_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
@@ -140,10 +140,10 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "The managed server Advanced Threat Protection state.",
+            "description": "The managed instance Advanced Threat Protection state.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ManagedServerAdvancedThreatProtection"
+              "$ref": "#/definitions/ManagedInstanceAdvancedThreatProtection"
             }
           },
           {
@@ -157,7 +157,7 @@
           "200": {
             "description": "Successfully created or updated the Advanced Threat Protection state.",
             "schema": {
-              "$ref": "#/definitions/ManagedServerAdvancedThreatProtection"
+              "$ref": "#/definitions/ManagedInstanceAdvancedThreatProtection"
             }
           },
           "default": {
@@ -169,11 +169,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Update a managed server's Advanced Threat Protection settings with minimal parameters.": {
-            "$ref": "./examples/ManagedServerAdvancedThreatProtectionSettingsCreateMin.json"
+          "Update a managed instance's Advanced Threat Protection settings with minimal parameters.": {
+            "$ref": "./examples/ManagedInstanceAdvancedThreatProtectionSettingsCreateMin.json"
           },
-          "Update a managed server's Advanced Threat Protection settings with all parameters.": {
-            "$ref": "./examples/ManagedServerAdvancedThreatProtectionSettingsCreateMax.json"
+          "Update a managed instance's Advanced Threat Protection settings with all parameters.": {
+            "$ref": "./examples/ManagedInstanceAdvancedThreatProtectionSettingsCreateMax.json"
           }
         }
       }
@@ -208,8 +208,8 @@
         }
       }
     },
-    "ManagedServerAdvancedThreatProtection": {
-      "description": "A managed server Advanced Threat Protection.",
+    "ManagedInstanceAdvancedThreatProtection": {
+      "description": "A managed instance Advanced Threat Protection.",
       "type": "object",
       "allOf": [
         {
@@ -229,15 +229,15 @@
         }
       }
     },
-    "ManagedServerAdvancedThreatProtectionListResult": {
-      "description": "A list of the managed server's Advanced Threat Protection settings.",
+    "ManagedInstanceAdvancedThreatProtectionListResult": {
+      "description": "A list of the managed instance's Advanced Threat Protection settings.",
       "type": "object",
       "properties": {
         "value": {
           "description": "Array of results.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ManagedServerAdvancedThreatProtection"
+            "$ref": "#/definitions/ManagedInstanceAdvancedThreatProtection"
           },
           "readOnly": true
         },
