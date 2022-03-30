@@ -17,16 +17,17 @@ modelerfour:
 Generate all API versions currently shipped for this package
 
 ```yaml $(multiapi) && !$(track2)
+clear-output-folder: true
 batch:
   - tag: package-2021-11
   - tag: package-2018-01-preview
   - tag: package-2017-04
   - tag: package-2016-07
+  - multiapiscript: true
 ```
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/relay/azure-mgmt-relay/azure/mgmt/relay/
-clear-output-folder: false
 perform-load: false
 ```
 
