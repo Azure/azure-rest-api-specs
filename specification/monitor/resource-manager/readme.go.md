@@ -5,7 +5,6 @@ These settings apply only when `--go` is specified on the command line.
 ``` yaml $(go) && !$(track2)
 go:
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: insights
   clear-output-folder: true
 ```
 
@@ -54,6 +53,7 @@ These settings apply only when `--tag=package-2017-09 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-09' && $(go)
+namespace: insights
 output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2017-05-01-preview/$(namespace)
 ```
 
@@ -63,6 +63,7 @@ These settings apply only when `--tag=package-2018-03 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2018-03' && $(go)
+namespace: insights
 output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2018-03-01/$(namespace)
 ```
 
@@ -72,6 +73,7 @@ These settings apply only when `--tag=package-2018-09 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2018-09' && $(go)
+namespace: insights
 output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2018-09-01/$(namespace)
 ```
 
@@ -81,6 +83,7 @@ These settings apply only when `--tag=package-2018-11-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2018-11-preview' && $(go)
+namespace: insights
 output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2018-11-01-preview/$(namespace)
 ```
 
@@ -90,6 +93,7 @@ These settings apply only when `--tag=package-2019-03 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2019-03' && $(go)
+namespace: insights
 output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2019-03-01/$(namespace)
 ```
 
@@ -99,6 +103,7 @@ These settings apply only when `--tag=package-2019-06 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2019-06' && $(go)
+namespace: insights
 output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2019-06-01/$(namespace)
 ```
 
@@ -108,6 +113,7 @@ These settings apply only when `--tag=package-2019-11 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2019-11' && $(go)
+namespace: insights
 output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2019-11-01-preview/$(namespace)
 ```
 
@@ -117,6 +123,7 @@ These settings apply only when `--tag=package-2020-10-only --go` is specified on
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2020-10-only' && $(go)
+namespace: insights
 output-folder: $(go-sdk-folder)/services/monitor/mgmt/2020-10-01/$(namespace)
 ```
 
@@ -126,6 +133,7 @@ These settings apply only when `--tag=package-2021-07 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2021-07' && $(go)
+namespace: insights
 output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2021-07-01-preview/$(namespace)
 ```
 
@@ -135,6 +143,7 @@ These settings apply only when `--tag=package-2021-09 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2021-09' && $(go)
+namespace: insights
 output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2021-09-01-preview/$(namespace)
 ```
 
