@@ -1,3 +1,5 @@
+<deprecated. For internal contributor, please refer to https://aka.ms/AzBreakingChangesPolicy for the topic>
+
 # Azure REST API version change guide
 
 ## Overview

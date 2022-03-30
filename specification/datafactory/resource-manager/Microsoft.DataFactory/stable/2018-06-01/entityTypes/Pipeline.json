@@ -6022,10 +6022,7 @@
         },
         "storedProcedureParameters": {
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/StoredProcedureParameter"
-          }
+          "type": "object"
         }
       },
       "required": [
@@ -6286,6 +6283,10 @@
         "authentication": {
           "description": "Authentication method used for calling the endpoint.",
           "$ref": "#/definitions/WebActivityAuthentication"
+        },
+        "disableCertValidation": {
+          "type": "boolean",
+          "description": "When set to true, Certificate validation will be disabled."
         },
         "datasets": {
           "type": "array",
