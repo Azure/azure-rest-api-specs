@@ -39,7 +39,7 @@ These settings apply only when `--tag=package-preview-2022-04` is specified on t
 
 ```yaml $(tag) == 'package-preview-2022-04'
 input-file:
-  - Microsoft.KubernetesConfiguration/preview/2022-01-01-preview/extensionTypes.json
+  - Microsoft.KubernetesConfiguration/preview/2022-04-02-preview/extensionTypes.json
   - Microsoft.KubernetesConfiguration/preview/2022-04-02-preview/extensions.json
   - Microsoft.KubernetesConfiguration/stable/2022-03-01/fluxconfiguration.json
   - Microsoft.KubernetesConfiguration/stable/2022-03-01/kubernetesconfiguration.json
