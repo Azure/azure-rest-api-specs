@@ -671,6 +671,10 @@
     },
     "PrivateEndpointProperties": {
       "properties": {
+        "resourceGuid": {
+          "type": "string",
+          "description": "The resource id of private endpoint."
+        },
         "subnet": {
           "$ref": "./virtualNetwork.json#/definitions/Subnet",
           "description": "The ID of the subnet from which the private IP will be allocated."
@@ -767,6 +771,10 @@
         "privateLinkServiceId": {
           "type": "string",
           "description": "The resource id of private link service."
+        },
+        "resolvedPrivateLinkServiceLocation": {
+          "type": "string",
+          "description": "The location for the resolved private link service."
         },
         "groupIds": {
           "type": "array",
@@ -868,6 +876,10 @@
           "type": "string",
           "description": "Name of the resource that is unique within a resource group. This name can be used to access the resource."
         },
+        "type": {
+          "type": "string",
+          "description": "Type of resource. Will be specified as private dns zone groups."
+        },
         "etag": {
           "readOnly": true,
           "type": "string",
@@ -909,6 +921,21 @@
           "type": "string",
           "description": "Name of the resource that is unique within a resource group. This name can be used to access the resource."
         },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The id of the privateDnsZoneConfig."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Type of resource. Will be specified as private dns zone configurations."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/PrivateDnsZonePropertiesFormat",
@@ -922,6 +949,11 @@
         "privateDnsZoneId": {
           "type": "string",
           "description": "The resource id of the private dns zone."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the private dns zone group resource."
         },
         "recordSets": {
           "type": "array",

@@ -26,7 +26,7 @@ These are the global settings for the Authorization API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-10-01-preview
+tag: package-preview-2021-11
 ```
 
 ### Suppression
@@ -82,6 +82,24 @@ directive:
     reason: common-types doesn't need to reference api version.
 ```
 
+### Tag: package-2022-04-01-preview-only
+
+These settings apply only when `--tag=package-2022-04-01-preview-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-04-01-preview-only'
+input-file:
+- Microsoft.Authorization/preview/2022-04-01-preview/RoleAssignmentScheduleRequest.json
+- Microsoft.Authorization/preview/2022-04-01-preview/RoleEligibilityScheduleRequest.json
+```
+
+### Tag: package-preview-2021-11
+
+These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-11'
+input-file:
+  - Microsoft.Authorization/preview/2021-11-16-preview/authorization-AccessReviewCalls.json
+```
 ### Tag: package-2021-07-01-preview-only
 
 These settings apply only when `--tag=package-2021-07-01-preview-only` is specified on the command line.
@@ -379,6 +397,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby

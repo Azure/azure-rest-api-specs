@@ -1,0 +1,87 @@
+{
+  "parameters": {
+    "bestPracticeName": "azureBestPracticesProduction",
+    "api-version": "2021-04-30-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "name": "azureBestPracticesProduction/version1",
+            "id": "/providers/Microsoft.Automanage/bestPractices/azureBestPracticesProduction/versions/version1",
+            "type": "Microsoft.Automanage/bestPractices/versions",
+            "properties": {
+              "configuration": {
+                "Antimalware/Enable": true,
+                "Antimalware/EnableRealTimeProtection": true,
+                "Antimalware/RunScheduledScan": true,
+                "Antimalware/ScanType": "Quick",
+                "Antimalware/ScanDay": "7",
+                "Antimalware/ScanTimeInMinutes": "120",
+                "Backup/Enable": true,
+                "Backup/PolicyName": "dailyBackupPolicy",
+                "Backup/TimeZone": "UTC",
+                "Backup/InstantRpRetentionRangeInDays": "2",
+                "Backup/SchedulePolicy/ScheduleRunFrequency": "Daily",
+                "Backup/SchedulePolicy/ScheduleRunTimes": "[ 2017-01-26T00:00:00Z ]",
+                "Backup/SchedulePolicy/SchedulePolicyType": "SimpleSchedulePolicy",
+                "Backup/RetentionPolicy/RetentionPolicyType": "LongTermRetentionPolicy",
+                "Backup/RetentionPolicy/DailySchedule/RetentionTimes": "[ 2017-01-26T00:00:00Z ]",
+                "Backup/RetentionPolicy/DailySchedule/RetentionDuration/Count": "180",
+                "Backup/RetentionPolicy/DailySchedule/RetentionDuration/DurationType": "Days",
+                "VMInsights/Enable": true,
+                "AzureSecurityCenter/Enable": true,
+                "UpdateManagement/Enable": true,
+                "ChangeTrackingAndInventory/Enable": true,
+                "GuestConfiguration/Enable": true,
+                "LogAnalytics/Enable": true,
+                "BootDiagnostics/Enable": true
+              }
+            },
+            "systemData": {
+              "createdBy": "user1@outlook.com",
+              "createdByType": "User",
+              "createdAt": "2020-02-03T01:01:01.1075056Z",
+              "lastModifiedBy": "user2@outlook.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
+            }
+          },
+          {
+            "name": "azureBestPracticesProduction/version2",
+            "id": "/providers/Microsoft.Automanage/bestPractices/azureBestPracticesProduction/versions/version2",
+            "type": "Microsoft.Automanage/bestPractices/versions",
+            "properties": {
+              "configuration": {
+                "Antimalware/Enable": true,
+                "Antimalware/EnableRealTimeProtection": true,
+                "Antimalware/RunScheduledScan": true,
+                "Antimalware/ScanType": "Quick",
+                "Antimalware/ScanDay": "7",
+                "Antimalware/ScanTimeInMinutes": "120",
+                "Backup/Enable": false,
+                "VMInsights/Enable": false,
+                "AzureSecurityCenter/Enable": true,
+                "UpdateManagement/Enable": true,
+                "ChangeTrackingAndInventory/Enable": true,
+                "GuestConfiguration/Enable": true,
+                "LogAnalytics/Enable": true,
+                "BootDiagnostics/Enable": true
+              }
+            },
+            "systemData": {
+              "createdBy": "user1@outlook.com",
+              "createdByType": "User",
+              "createdAt": "2020-02-03T01:01:01.1075056Z",
+              "lastModifiedBy": "user2@outlook.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

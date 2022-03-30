@@ -26,7 +26,7 @@ These are the global settings for the azureactivedirectory.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2017-04
+tag: package-2020-03
 ```
 
 
@@ -120,6 +120,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:

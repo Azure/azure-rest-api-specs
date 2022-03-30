@@ -1,0 +1,317 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "api-version": "2021-10-01",
+    "resourceGroupName": "demo",
+    "containerGroupName": "demo1",
+    "zones": [
+      "1"
+    ],
+    "containerGroup": {
+      "location": "west us",
+      "identity": {
+        "type": "SystemAssigned, UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity-name": {}
+        }
+      },
+      "properties": {
+        "containers": [
+          {
+            "name": "demo1",
+            "properties": {
+              "command": [],
+              "environmentVariables": [],
+              "image": "nginx",
+              "ports": [
+                {
+                  "port": 80
+                }
+              ],
+              "resources": {
+                "requests": {
+                  "cpu": 1,
+                  "memoryInGB": 1.5,
+                  "gpu": {
+                    "count": 1,
+                    "sku": "K80"
+                  }
+                }
+              },
+              "volumeMounts": [
+                {
+                  "name": "volume1",
+                  "mountPath": "/mnt/volume1",
+                  "readOnly": false
+                },
+                {
+                  "name": "volume2",
+                  "mountPath": "/mnt/volume2",
+                  "readOnly": false
+                },
+                {
+                  "name": "volume3",
+                  "mountPath": "/mnt/volume3",
+                  "readOnly": true
+                }
+              ]
+            }
+          }
+        ],
+        "diagnostics": {
+          "logAnalytics": {
+            "workspaceId": "workspaceid",
+            "workspaceKey": "workspaceKey",
+            "logType": "ContainerInsights",
+            "metadata": {
+              "test-key": "test-metadata-value"
+            },
+            "workspaceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg/providers/microsoft.operationalinsights/workspaces/workspace"
+          }
+        },
+        "subnetIds": [
+          {
+            "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('subnetName'))]"
+          }
+        ],
+        "dnsConfig": {
+          "nameServers": [
+            "1.1.1.1"
+          ],
+          "searchDomains": "cluster.local svc.cluster.local",
+          "options": "ndots:2"
+        },
+        "imageRegistryCredentials": [],
+        "ipAddress": {
+          "ports": [
+            {
+              "protocol": "TCP",
+              "port": 80
+            }
+          ],
+          "type": "Public",
+          "dnsNameLabel": "dnsnamelabel1",
+          "dnsNameLabelReusePolicy": "Unsecure"
+        },
+        "osType": "Linux",
+        "volumes": [
+          {
+            "name": "volume1",
+            "azureFile": {
+              "shareName": "shareName",
+              "storageAccountName": "accountName",
+              "storageAccountKey": "accountKey"
+            }
+          },
+          {
+            "name": "volume2",
+            "emptyDir": {}
+          },
+          {
+            "name": "volume3",
+            "secret": {
+              "secretKey1": "SecretValue1InBase64",
+              "secretKey2": "SecretValue2InBase64"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
+        "location": "WestUs",
+        "zones": [
+          "1"
+        ],
+        "name": "demo1",
+        "properties": {
+          "containers": [
+            {
+              "name": "demo1",
+              "properties": {
+                "command": [],
+                "environmentVariables": [],
+                "image": "nginx",
+                "ports": [
+                  {
+                    "port": 80
+                  }
+                ],
+                "resources": {
+                  "requests": {
+                    "cpu": 1,
+                    "memoryInGB": 1.5,
+                    "gpu": {
+                      "count": 1,
+                      "sku": "K80"
+                    }
+                  }
+                },
+                "volumeMounts": [
+                  {
+                    "name": "volume1",
+                    "mountPath": "/mnt/volume1",
+                    "readOnly": false
+                  },
+                  {
+                    "name": "volume2",
+                    "mountPath": "/mnt/volume2",
+                    "readOnly": false
+                  },
+                  {
+                    "name": "volume3",
+                    "mountPath": "/mnt/volume3",
+                    "readOnly": true
+                  }
+                ]
+              }
+            }
+          ],
+          "diagnostics": {
+            "logAnalytics": {
+              "workspaceId": "workspaceid",
+              "workspaceKey": ""
+            }
+          },
+          "dnsConfig": {
+            "nameServers": [
+              "1.1.1.1"
+            ],
+            "searchDomains": "cluster.local svc.cluster.local",
+            "options": "ndots:2"
+          },
+          "imageRegistryCredentials": [],
+          "ipAddress": {
+            "ip": "10.0.0.1",
+            "ports": [
+              {
+                "port": 80,
+                "protocol": "TCP"
+              }
+            ],
+            "type": "Public",
+            "dnsNameLabel": "dnsnamelabel1",
+            "dnsNameLabelReusePolicy": "Unsecure",
+            "fqdn": "dnsnamelabel1.azure-container.io"
+          },
+          "osType": "Linux",
+          "provisioningState": "Succeeded",
+          "volumes": [
+            {
+              "name": "volume1",
+              "azureFile": {
+                "shareName": "shareName",
+                "storageAccountName": "accountName"
+              }
+            },
+            {
+              "name": "volume2",
+              "emptyDir": {}
+            },
+            {
+              "name": "volume3",
+              "secret": {}
+            }
+          ]
+        },
+        "type": "Microsoft.ContainerInstance/containerGroups"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
+        "location": "WestUs",
+        "zones": [
+          "1"
+        ],
+        "name": "demo1",
+        "properties": {
+          "containers": [
+            {
+              "name": "demo1",
+              "properties": {
+                "command": [],
+                "environmentVariables": [],
+                "image": "nginx",
+                "ports": [
+                  {
+                    "port": 80
+                  }
+                ],
+                "resources": {
+                  "requests": {
+                    "cpu": 1,
+                    "memoryInGB": 1.5,
+                    "gpu": {
+                      "count": 1,
+                      "sku": "K80"
+                    }
+                  }
+                },
+                "volumeMounts": [
+                  {
+                    "name": "volume1",
+                    "mountPath": "/mnt/volume1",
+                    "readOnly": false
+                  },
+                  {
+                    "name": "volume2",
+                    "mountPath": "/mnt/volume2",
+                    "readOnly": false
+                  },
+                  {
+                    "name": "volume3",
+                    "mountPath": "/mnt/volume3",
+                    "readOnly": true
+                  }
+                ]
+              }
+            }
+          ],
+          "dnsConfig": {
+            "nameServers": [
+              "1.1.1.1"
+            ]
+          },
+          "imageRegistryCredentials": [],
+          "ipAddress": {
+            "ip": "10.0.0.1",
+            "ports": [
+              {
+                "port": 80,
+                "protocol": "TCP"
+              }
+            ],
+            "type": "Public",
+            "dnsNameLabel": "dnsnamelabel1",
+            "dnsNameLabelReusePolicy": "Unsecure",
+            "fqdn": "dnsnamelabel1.azure-container.io"
+          },
+          "osType": "Linux",
+          "provisioningState": "Succeeded",
+          "volumes": [
+            {
+              "name": "volume1",
+              "azureFile": {
+                "shareName": "shareName",
+                "storageAccountName": "accountName"
+              }
+            },
+            {
+              "name": "volume2",
+              "emptyDir": {}
+            },
+            {
+              "name": "volume3",
+              "secret": {}
+            }
+          ]
+        },
+        "type": "Microsoft.ContainerInstance/containerGroups"
+      }
+    }
+  }
+}

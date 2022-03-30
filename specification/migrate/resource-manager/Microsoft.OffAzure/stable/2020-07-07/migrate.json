@@ -13,6 +13,33 @@
   "schemes": [
     "https"
   ],
+  "parameters": {
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "description": "Azure Subscription Id in which project was created.",
+      "type": "string",
+      "in": "path",
+      "required": true
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/clusters/{clusterName}": {
       "get": {
@@ -27,11 +54,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -68,6 +91,12 @@
             "schema": {
               "$ref": "#/definitions/HyperVCluster"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -91,11 +120,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -144,6 +169,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -167,11 +198,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -207,6 +234,12 @@
             "schema": {
               "$ref": "#/definitions/HyperVClusterCollection"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -233,11 +266,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -274,6 +303,12 @@
             "schema": {
               "$ref": "#/definitions/HyperVHost"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -297,11 +332,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -350,6 +381,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -373,11 +410,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -413,6 +446,12 @@
             "schema": {
               "$ref": "#/definitions/HyperVHostCollection"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -439,11 +478,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -480,6 +515,17 @@
             "schema": {
               "$ref": "#/definitions/HyperVJob"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get job by job name.": {
+            "$ref": "./examples/HyperVJob_Get.json"
           }
         },
         "deprecated": false
@@ -498,11 +544,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -532,10 +574,21 @@
             "schema": {
               "$ref": "#/definitions/HyperVJobCollection"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List jobs by site": {
+            "$ref": "./examples/HyperVJobs_ListBySite.json"
+          }
         },
         "deprecated": false
       }
@@ -553,11 +606,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -594,6 +643,12 @@
             "schema": {
               "$ref": "#/definitions/HyperVMachine"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -617,11 +672,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -679,6 +730,12 @@
             "schema": {
               "$ref": "#/definitions/HyperVMachineCollection"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -705,11 +762,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -746,6 +799,12 @@
             "schema": {
               "$ref": "#/definitions/OperationStatus"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -769,11 +828,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -810,6 +865,12 @@
             "schema": {
               "$ref": "#/definitions/HyperVRunAsAccount"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -833,11 +894,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -867,6 +924,12 @@
             "schema": {
               "$ref": "#/definitions/HyperVRunAsAccountCollection"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -893,11 +956,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -927,6 +986,12 @@
             "schema": {
               "$ref": "#/definitions/HyperVSite"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -950,11 +1015,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -999,6 +1060,12 @@
             "schema": {
               "$ref": "#/definitions/HyperVSite"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -1020,11 +1087,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -1054,6 +1117,12 @@
           },
           "204": {
             "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -1077,11 +1146,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -1093,7 +1158,7 @@
           {
             "name": "siteName",
             "in": "path",
-            "description": "Site name.",
+            "description": "The site name.",
             "required": true,
             "type": "string"
           },
@@ -1126,6 +1191,12 @@
             "schema": {
               "$ref": "#/definitions/HyperVSite"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -1149,11 +1220,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -1186,6 +1253,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -1209,11 +1282,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -1243,6 +1312,12 @@
             "schema": {
               "$ref": "#/definitions/SiteHealthSummaryCollection"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -1269,11 +1344,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -1310,6 +1381,17 @@
             "schema": {
               "$ref": "#/definitions/VMwareJob"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get job by job name.": {
+            "$ref": "./examples/VMwareJob_Get.json"
           }
         },
         "deprecated": false
@@ -1328,11 +1410,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -1362,10 +1440,21 @@
             "schema": {
               "$ref": "#/definitions/VMwareJobCollection"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List jobs by site": {
+            "$ref": "./examples/VMwareJobs_ListBySite.json"
+          }
         },
         "deprecated": false
       }
@@ -1383,11 +1472,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -1424,6 +1509,12 @@
             "schema": {
               "$ref": "#/definitions/VMwareMachine"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -1447,11 +1538,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -1509,6 +1596,12 @@
             "schema": {
               "$ref": "#/definitions/VMwareMachineCollection"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -1535,11 +1628,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -1579,6 +1668,17 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start VMware machine": {
+            "$ref": "./examples/VMwareMachine_Stop.json"
           }
         },
         "deprecated": false
@@ -1597,11 +1697,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -1641,6 +1737,17 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Stop VMware machine": {
+            "$ref": "./examples/VMwareMachine_Start.json"
           }
         },
         "deprecated": false
@@ -1659,11 +1766,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -1700,6 +1803,12 @@
             "schema": {
               "$ref": "#/definitions/VMwareRunAsAccount"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -1723,11 +1832,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -1757,6 +1862,12 @@
             "schema": {
               "$ref": "#/definitions/VMwareRunAsAccountCollection"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -1783,11 +1894,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -1817,6 +1924,12 @@
             "schema": {
               "$ref": "#/definitions/VMwareSite"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -1840,11 +1953,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -1889,6 +1998,12 @@
             "schema": {
               "$ref": "#/definitions/VMwareSite"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -1910,11 +2025,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -1944,6 +2055,12 @@
           },
           "204": {
             "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -1967,11 +2084,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -2016,6 +2129,12 @@
             "schema": {
               "$ref": "#/definitions/VMwareSite"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -2039,11 +2158,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -2076,6 +2191,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -2099,11 +2220,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -2133,6 +2250,12 @@
             "schema": {
               "$ref": "#/definitions/SiteHealthSummaryCollection"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -2159,11 +2282,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -2200,6 +2319,12 @@
             "schema": {
               "$ref": "#/definitions/VCenter"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -2223,11 +2348,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -2276,6 +2397,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -2297,11 +2424,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -2338,6 +2461,12 @@
           },
           "204": {
             "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -2361,11 +2490,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -2401,6 +2526,12 @@
             "schema": {
               "$ref": "#/definitions/VCenterCollection"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -2427,11 +2558,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -2468,6 +2595,12 @@
             "schema": {
               "$ref": "#/definitions/OperationStatus"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -2491,11 +2624,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -2524,6 +2653,12 @@
             "schema": {
               "$ref": "#/definitions/HyperVSiteUsage"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -2547,11 +2682,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -2580,6 +2711,12 @@
             "schema": {
               "$ref": "#/definitions/VMwareSiteUsage"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -2604,11 +2741,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "api-version",
@@ -2623,6 +2756,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/MasterSiteList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2651,11 +2790,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -2677,6 +2812,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/MasterSiteList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2704,11 +2845,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -2720,7 +2857,7 @@
           {
             "name": "siteName",
             "in": "path",
-            "description": "Site name.",
+            "description": "The site name.",
             "required": true,
             "type": "string"
           },
@@ -2737,6 +2874,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/MasterSite"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2761,11 +2904,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -2799,16 +2938,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/MasterSite"
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
             }
           },
-          "201": {
-            "description": "Created",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/MasterSite"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2831,11 +2973,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -2865,6 +3003,12 @@
           },
           "204": {
             "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -2888,11 +3032,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "name": "resourceGroupName",
@@ -2932,10 +3072,19 @@
               "$ref": "#/definitions/MasterSite"
             }
           },
-          "201": {
-            "description": "Created",
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/MasterSite"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2950,12 +3099,72 @@
     "/providers/Microsoft.OffAzure/operations": {
       "get": {
         "summary": "Get list of operations supported in the API.",
+        "description": "Get a list of REST API supported by Microsoft.OffAzure provider.",
         "operationId": "Operations_List",
         "consumes": [],
         "produces": [
           "application/json"
         ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AvailableOperations"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/privateEndpointConnections/{peConnectionName}": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnection"
+        ],
+        "summary": "Gets the private link resource.",
+        "operationId": "PrivateEndpointConnection_GetPrivateEndpointConnection",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peConnectionName",
+            "in": "path",
+            "description": "Private link resource name.",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "api-version",
             "in": "query",
@@ -2968,7 +3177,383 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/OperationResultList"
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get privateEndpointConnection": {
+            "$ref": "./examples/PrivateEndpointConnections_Get.json"
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "PrivateEndpointConnection"
+        ],
+        "operationId": "PrivateEndpointConnection_PutPrivateEndpointConnection",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peConnectionName",
+            "in": "path",
+            "description": "Private link resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Put privateEndpointConnection": {
+            "$ref": "./examples/PrivateEndpointConnections_Create.json"
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnection"
+        ],
+        "summary": "Gets the private link resource.",
+        "operationId": "PrivateEndpointConnection_DeletePrivateEndpointConnection",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peConnectionName",
+            "in": "path",
+            "description": "Private link resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete privateEndpointConnection": {
+            "$ref": "./examples/PrivateEndpointConnections_Delete.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnection"
+        ],
+        "summary": "Gets the private link resource.",
+        "operationId": "PrivateEndpointConnection_GetPrivateEndpointConnections",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get privateEndpointConnections per site": {
+            "$ref": "./examples/PrivateEndpointConnections_ListBySite.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "summary": "Gets the private link resource.",
+        "operationId": "PrivateLinkResources_GetPrivateLinkResource",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateLinkResourceName",
+            "in": "path",
+            "description": "Private link resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Private link resources": {
+            "$ref": "./examples/PrivateLinkResources_Get.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "summary": "Gets the private link resource.",
+        "operationId": "PrivateLinkResources_GetPrivateLinkResources",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Private link resources per site": {
+            "$ref": "./examples/PrivateLinkResources_ListBySite.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OffAzure/VMwareSites": {
+      "get": {
+        "summary": "Get all vmware sites.",
+        "description": "Get all the vmware sites in the subscription.",
+        "operationId": "VMwareSites_ListBySubscription",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/VMWareSitesResultList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2976,8 +3561,175 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List.json"
+          "Projects_List": {
+            "$ref": "./examples/VMwareSitesInSubscription_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites": {
+      "get": {
+        "summary": "Get all vmware sites.",
+        "description": "Get all the vmware sites in the resource group.",
+        "operationId": "VMwareSites_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/VMWareSitesResultList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Projects_List": {
+            "$ref": "./examples/VMwareSites_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OffAzure/HyperVSites": {
+      "get": {
+        "summary": "Get all hyperv sites.",
+        "description": "Get all the hyperv sites in the subscription.",
+        "operationId": "HyperVSites_ListBySubscription",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/HyperVSitesResultList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "HyperVSites_List": {
+            "$ref": "./examples/HyperVSitesInSubscription_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites": {
+      "get": {
+        "summary": "Get all hyperv sites.",
+        "description": "Get all the hyperv sites in the subscription.",
+        "operationId": "HyperVSites_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/HyperVSitesResultList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Projects_List": {
+            "$ref": "./examples/HyperVSites_List.json"
           }
         }
       }
@@ -3277,7 +4029,7 @@
           "readOnly": true
         },
         "errors": {
-          "description": "Errors.",
+          "description": "Error details.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorDetails"
@@ -3695,6 +4447,38 @@
             "$ref": "#/definitions/OtherDatabase"
           },
           "readOnly": true
+        }
+      }
+    },
+    "HyperVSitesResultList": {
+      "type": "object",
+      "description": "List of sites.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of sites.",
+          "items": {
+            "$ref": "#/definitions/HyperVSite"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "VMWareSitesResultList": {
+      "type": "object",
+      "description": "List of sites.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of sites.",
+          "items": {
+            "$ref": "#/definitions/VMwareSite"
+          }
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -4198,6 +4982,7 @@
     },
     "HyperVSite": {
       "description": "Site REST Resource.",
+      "x-ms-azure-resource": true,
       "type": "object",
       "properties": {
         "id": {
@@ -4231,6 +5016,10 @@
         "properties": {
           "$ref": "#/definitions/SiteProperties",
           "description": "Nested properties of Hyper-V site."
+        },
+        "systemData": {
+          "$ref": "#/definitions/systemData",
+          "readOnly": true
         }
       }
     },
@@ -4877,6 +5666,7 @@
     },
     "VMwareSite": {
       "description": "Site REST Resource.",
+      "x-ms-azure-resource": true,
       "type": "object",
       "properties": {
         "id": {
@@ -4910,6 +5700,10 @@
         "properties": {
           "$ref": "#/definitions/SiteProperties",
           "description": "Nested properties of VMWare site."
+        },
+        "systemData": {
+          "$ref": "#/definitions/systemData",
+          "readOnly": true
         }
       }
     },
@@ -4936,6 +5730,7 @@
     },
     "MasterSite": {
       "description": "Site REST Resource.",
+      "x-ms-azure-resource": true,
       "type": "object",
       "properties": {
         "id": {
@@ -4963,6 +5758,10 @@
         "properties": {
           "$ref": "#/definitions/MasterSiteProperties",
           "description": "Nested properties of Master site."
+        },
+        "systemData": {
+          "$ref": "#/definitions/systemData",
+          "readOnly": true
         }
       }
     },
@@ -4971,7 +5770,12 @@
       "type": "object",
       "properties": {
         "publicNetworkAccess": {
-          "description": "State of public network access.",
+          "description": "Gets or sets the state of public network access.",
+          "enum": [
+            "NotSpecified",
+            "Enabled",
+            "Disabled"
+          ],
           "type": "string"
         },
         "allowMultipleSites": {
@@ -4984,6 +5788,189 @@
           "items": {
             "type": "string"
           }
+        },
+        "customerStorageAccountArmId": {
+          "description": "Gets or sets a value for customer storage account ARM id.",
+          "type": "string"
+        },
+        "privateEndpointConnections": {
+          "description": "Gets the private endpoint connections.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "description": "REST model used to encapsulate the user visible state of a PrivateEndpoint.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "description": "Relative URL to get this Sites.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Gets the name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Gets the resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "eTag": {
+          "description": "Gets the tag for optimistic concurrency control.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Gets the properties of the object.",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "enum": [
+            "Accepted",
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true
+        },
+        "privateEndpoint": {
+          "$ref": "#/definitions/ResourceId",
+          "readOnly": true
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
+        }
+      }
+    },
+    "ResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "Approved",
+            "Pending",
+            "Rejected",
+            "Disconnected"
+          ],
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "actionsRequired": {
+          "type": "string"
+        }
+      }
+    },
+    "PrivateEndpointConnectionCollection": {
+      "description": "Collection of PrivateLink resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets the list of machines.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Gets the value of next link.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "description": "REST model used to encapsulate Private Link properties for tracked resources.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Relative URL to get this Sites.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Gets the name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Gets the resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Gets nested properties.",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "properties": {
+        "requiredMembers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "groupId": {
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkResourceCollection": {
+      "description": "Collection of PrivateLink resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets the list of machines.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Gets the value of next link.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -5372,69 +6359,152 @@
         }
       }
     },
-    "OperationDisplay": {
+    "AvailableOperations": {
+      "description": "Available operations of the service",
       "type": "object",
-      "description": "Displayable properties of the operation.",
-      "readOnly": true,
-      "properties": {
-        "provider": {
-          "type": "string",
-          "description": "Provider of the operation.",
-          "readOnly": true
-        },
-        "resource": {
-          "type": "string",
-          "description": "Resource operated on by the operation.",
-          "readOnly": true
-        },
-        "operation": {
-          "type": "string",
-          "description": "Operation Type.",
-          "readOnly": true
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the operation.",
-          "readOnly": true
-        }
-      }
-    },
-    "Operation": {
-      "type": "object",
-      "description": "A REST API operation supported by the provider.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the operation.",
-          "readOnly": true
-        },
-        "display": {
-          "description": "Displayable properties of the operation.",
-          "$ref": "#/definitions/OperationDisplay"
-        },
-        "origin": {
-          "type": "string",
-          "description": "Origin of the operation.",
-          "readOnly": true
-        }
-      }
-    },
-    "OperationResultList": {
-      "type": "object",
-      "description": "List of API operations.",
       "properties": {
         "value": {
+          "description": "Collection of available operation details",
+          "uniqueItems": false,
           "type": "array",
-          "description": "List of operations.",
           "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "readOnly": true
+            "$ref": "#/definitions/OperationDetail"
+          }
         },
         "nextLink": {
-          "description": "Value of next link.",
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationDetail": {
+      "description": "Operation detail payload",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "Operation display payload",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Resource provider of the operation",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource of the operation",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Localized friendly name for the operation",
+          "type": "string"
+        },
+        "description": {
+          "description": "Localized friendly description for the operation",
+          "type": "string"
+        }
+      }
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "description": "An error response from the Azure Migrate service."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
           "type": "string",
-          "readOnly": true
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the Azure Migrate service."
+    },
+    "systemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The type of identity that last modified the resource."
         }
       }
     }

@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "sjrg",
+    "clusterName": "testcluster",
+    "api-version": "2020-03-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/clusters/testcluster/privateEndpoints/AnExamplePrivateEndpoint",
+            "name": "An Example Private Endpoint",
+            "type": "Microsoft.StreamAnalytics/clusters/privateEndpoints",
+            "properties": {
+              "createdDate": "2020-03-01T01:00Z",
+              "manualPrivateLinkServiceConnections": [
+                {
+                  "properties": {
+                    "privateLinkServiceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls",
+                    "groupIds": [
+                      "groupIdFromResource"
+                    ],
+                    "requestMessage": "Please approve my connection.",
+                    "privateLinkServiceConnectionState": {
+                      "status": "Pending",
+                      "description": "Awaiting approval",
+                      "actionsRequired": "None"
+                    }
+                  }
+                }
+              ]
+            },
+            "etag": "F86B9B70-D5B1-451D-AFC8-0B42D4729B8C"
+          },
+          {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/clusters/testcluster/privateEndpoints/ADifferentPrivateEndpoint",
+            "name": "A Different Private Endpoint",
+            "type": "Microsoft.StreamAnalytics/clusters/privateEndpoints",
+            "properties": {
+              "createdDate": "2020-03-01T01:00Z",
+              "manualPrivateLinkServiceConnections": [
+                {
+                  "properties": {
+                    "privateLinkServiceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls",
+                    "groupIds": [
+                      "groupIdFromResource"
+                    ],
+                    "requestMessage": "Please approve my connection.",
+                    "privateLinkServiceConnectionState": {
+                      "status": "Pending",
+                      "description": "Awaiting approval",
+                      "actionsRequired": "None"
+                    }
+                  }
+                }
+              ]
+            },
+            "etag": "G97C0C81-D5B1-451D-AFC8-0B42D4729B8C"
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}
