@@ -121,7 +121,7 @@
           "PUT"
         ],
         "summary": "Create or update the metadata of an IoT hub.",
-        "description": "Create or update the metadata of an Iot hub. The usual pattern to modify a property is to retrieve the IoT hub metadata and security metadata, and then combine them with the modified values in a new body to update the IoT hub.",
+        "description": "Create or update the metadata of an Iot hub. The usual pattern to modify a property is to retrieve the IoT hub metadata and security metadata, and then combine them with the modified values in a new body to update the IoT hub. If certain properties are missing in the JSON, updating IoT Hub may cause these values to fallback to default, which may lead to unexpected behavior.",
         "operationId": "IotHubResource_CreateOrUpdate",
         "x-ms-examples": {
           "IotHubResource_CreateOrUpdate": {
@@ -2950,7 +2950,7 @@
           "x-ms-enum": {
             "name": "authenticationType",
             "modelAsString": true
-          }
+        }
         },
         "identity": {
           "description": "Managed identity properties of routing Azure Digital Twins endpoint.",
@@ -2968,8 +2968,8 @@
         "resourceGroup": {
           "description": "The name of the resource group of the Azure Digital Twins endpoint.",
           "type": "string"
-        }
-      },
+      }
+    },
       "required": [
         "name"
       ]
@@ -3235,9 +3235,7 @@
             "TwinChangeEvents",
             "DeviceLifecycleEvents",
             "DeviceJobLifecycleEvents",
-            "DigitalTwinChangeEvents",
-            "DeviceConnectionStateEvents",
-            "MqttBrokerMessages"
+            "DeviceConnectionStateEvents"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4030,9 +4028,7 @@
             "TwinChangeEvents",
             "DeviceLifecycleEvents",
             "DeviceJobLifecycleEvents",
-            "DigitalTwinChangeEvents",
-            "DeviceConnectionStateEvents",
-            "MqttBrokerMessages"
+            "DeviceConnectionStateEvents"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4377,7 +4373,7 @@
           "readOnly": true
         },
         "type": {
-          "description": "The type of identity used for the resource. The type 'SystemAssigned,UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the service.",
+          "description": "The type of identity used for the resource. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the service.",
           "type": "string",
           "enum": [
             "SystemAssigned",
