@@ -140,7 +140,6 @@ input-file:
 - ./Microsoft.Sql/preview/2021-02-01-preview/DatabaseUsages.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/LedgerDigestUploads.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/OutboundFirewallRules.json
-- ./Microsoft.Sql/preview/2021-02-01-preview/Servers.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/Usages.json
 - ./Microsoft.Sql/preview/2021-05-01-preview/Databases.json
 - ./Microsoft.Sql/preview/2021-05-01-preview/LongTermRetentionBackups.json
@@ -157,6 +156,7 @@ input-file:
 - ./Microsoft.Sql/preview/2021-11-01-preview/ManagedInstances.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/ManagedServerDnsAliases.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/SensitivityLabels.json
+- ./Microsoft.Sql/preview/2021-11-01-preview/Servers.json
 
 
 # Needed when there is more than one input file
