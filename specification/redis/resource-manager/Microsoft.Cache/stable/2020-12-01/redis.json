@@ -1663,6 +1663,9 @@
               "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
+          "204": {
+            "description": "No Content -- The private endpoint connection does not exist."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -2394,7 +2397,8 @@
         "maintenanceWindow": {
           "type": "string",
           "format": "duration",
-          "description": "ISO8601 timespan specifying how much time cache patching can take. "
+          "description": "ISO8601 timespan specifying how much time cache patching can take.",
+          "default": "PT5H"
         }
       },
       "required": [

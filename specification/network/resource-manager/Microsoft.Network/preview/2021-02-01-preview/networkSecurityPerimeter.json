@@ -238,10 +238,511 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ProfileNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "NspProfiles"
+        ],
+        "operationId": "NspProfiles_Get",
+        "description": "Gets the specified NSP profile.",
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the NSP profile.",
+            "schema": {
+              "$ref": "#/definitions/NspProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspProfilesGet": {
+            "$ref": "./examples/NspProfileGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NspProfiles"
+        ],
+        "operationId": "NspProfiles_CreateOrUpdate",
+        "description": "Creates or updates a network profile.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NspProfile"
+            },
+            "description": "Parameters that hold the NspProfile resource to be created/updated."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update - Profile is immutable resource. Returns the existing profile resource.",
+            "schema": {
+              "$ref": "#/definitions/NspProfile"
+            }
+          },
+          "201": {
+            "description": "Create - Returns the NspProfile resource created.",
+            "schema": {
+              "$ref": "#/definitions/NspProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspProfilesPut": {
+            "$ref": "./examples/NspProfilePut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NspProfiles"
+        ],
+        "operationId": "NspProfiles_Delete",
+        "description": "Deletes an NSP profile.",
+        "responses": {
+          "200": {
+            "description": "Delete Succeed."
+          },
+          "204": {
+            "description": "Request successful. The resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspProfilesDelete": {
+            "$ref": "./examples/NspProfileDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles": {
+      "get": {
+        "tags": [
+          "NspProfiles"
+        ],
+        "operationId": "NspProfiles_List",
+        "description": "Lists the NSP profiles in the specified network security perimeter.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ListTopParameter"
+          },
+          {
+            "$ref": "#/parameters/ListSkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the list of NSP profiles.",
+            "schema": {
+              "$ref": "#/definitions/NspProfileListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspProfilesList": {
+            "$ref": "./examples/NspProfileList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules/{accessRuleName}": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ProfileNameParameter"
+        },
+        {
+          "$ref": "#/parameters/AccessRuleNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "NspAccessRules"
+        ],
+        "operationId": "NspAccessRules_Get",
+        "description": "Gets the specified NSP access rule by name.",
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the NSP access rule.",
+            "schema": {
+              "$ref": "#/definitions/NspAccessRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspAccessRuleGet": {
+            "$ref": "./examples/NspAccessRuleGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NspAccessRules"
+        ],
+        "operationId": "NspAccessRules_CreateOrUpdate",
+        "description": "Creates or updates a network access rule.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NspAccessRule"
+            },
+            "description": "Parameters that hold the NspAccessRule resource to be created/updated."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Existing access rule is updated. Returns the resource.",
+            "schema": {
+              "$ref": "#/definitions/NspAccessRule"
+            }
+          },
+          "201": {
+            "description": "Create - Returns the NspAccessRule resource created.",
+            "schema": {
+              "$ref": "#/definitions/NspAccessRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspAccessRulePut": {
+            "$ref": "./examples/NspAccessRulePut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NspAccessRules"
+        ],
+        "operationId": "NspAccessRules_Delete",
+        "description": "Deletes an NSP access rule.",
+        "responses": {
+          "200": {
+            "description": "Delete Succeed."
+          },
+          "204": {
+            "description": "Request successful. The resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspAccessRulesDelete": {
+            "$ref": "./examples/NspAccessRuleDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules": {
+      "get": {
+        "tags": [
+          "NspAccessRules"
+        ],
+        "operationId": "NspAccessRules_List",
+        "description": "Lists the NSP access rules in the specified NSP profile.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ListTopParameter"
+          },
+          {
+            "$ref": "#/parameters/ListSkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the list of NSP access rules.",
+            "schema": {
+              "$ref": "#/definitions/NspAccessRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspAccessRulesList": {
+            "$ref": "./examples/NspAccessRuleList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/AssociationNameParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "NspAssociations"
+        ],
+        "operationId": "NspAssociations_Get",
+        "description": "Gets the specified NSP association by name.",
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the NSP resource association.",
+            "schema": {
+              "$ref": "#/definitions/NspAssociation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspAssociationGet": {
+            "$ref": "./examples/NspAssociationGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NspAssociations"
+        ],
+        "operationId": "NspAssociations_CreateOrUpdate",
+        "description": "Creates or updates a NSP resource association.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NspAssociation"
+            },
+            "description": "Parameters that hold the NspAssociation resource to be created/updated."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Existing resource association is updated. Returns the resource.",
+            "schema": {
+              "$ref": "#/definitions/NspAssociation"
+            }
+          },
+          "201": {
+            "description": "Create - Returns the NspAssociation resource created.",
+            "schema": {
+              "$ref": "#/definitions/NspAssociation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspAssociationPut": {
+            "$ref": "./examples/NspAssociationPut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NspAssociations"
+        ],
+        "operationId": "NspAssociations_Delete",
+        "description": "Deletes an NSP association resource.",
+        "responses": {
+          "200": {
+            "description": "Delete Succeed."
+          },
+          "204": {
+            "description": "Request successful. The resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspAssociationDelete": {
+            "$ref": "./examples/NspAssociationDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations": {
+      "get": {
+        "tags": [
+          "NspAssociations"
+        ],
+        "operationId": "NspAssociations_List",
+        "description": "Lists the NSP resource associations in the specified perimeter.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ListTopParameter"
+          },
+          {
+            "$ref": "#/parameters/ListSkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the list of NSP resource associations.",
+            "schema": {
+              "$ref": "#/definitions/NspAssociationsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspAssociationList": {
+            "$ref": "./examples/NspAssociationList.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/perimeterAssociableResourceTypes": {
       "get": {
-        "operationId": "PerimeterAssociableResourceTypes_Get",
+        "operationId": "PerimeterAssociableResourceTypes_List",
         "description": "Gets the list of resources that are onboarded with NSP. These resources can be associated with a network security perimeter",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "parameters": [
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -351,6 +852,261 @@
       },
       "description": "Properties of network security perimeter."
     },
+    "NspProfile": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NspProfileProperties",
+          "description": "Properties of the network security perimeter profile"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the profile resource that is unique within a perimeter. This name can be used to access the resource."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Identifier of the network security perimeter profile in ARM id format."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "The network security perimeter profile resource"
+    },
+    "NspProfileListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NspProfile"
+          },
+          "description": "Gets a page of NSP profile"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next page of results."
+        }
+      },
+      "description": "Result of the request to list NSP profiles. Contains a list of NSP profiles and a URL link to get the next set of results."
+    },
+    "NspProfileProperties": {
+      "type": "object",
+      "properties": {
+        "accessRulesVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Version number that increases with every update to access rules within the profile."
+        }
+      },
+      "description": "Properties of NSP profile."
+    },
+    "NspAccessRule": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NspAccessRuleProperties",
+          "description": "Properties of the NSP access rule."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the access rule that is unique within a profile. This name can be used to access the resource."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "NSP access rule identifier."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "The NSP access rule resource"
+    },
+    "NspAccessRuleListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NspAccessRule"
+          },
+          "description": "Gets a page of NSP access rule"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next page of results."
+        }
+      },
+      "description": "Result of the request to list NSP access rules. Contains a list of NSP access rules and a URL link to get the next set of results."
+    },
+    "NspAccessRuleProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the scope assignment resource."
+        },
+        "direction": {
+          "type": "string",
+          "enum": [
+            "Inbound",
+            "Outbound"
+          ],
+          "x-ms-enum": {
+            "name": "AccessRuleDirection",
+            "modelAsString": true
+          },
+          "description": "Direction that specifies whether the access rules is inbound/outbound."
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Inbound address prefixes (IPv4/IPv6)"
+        },
+        "fullyQualifiedDomainNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Outbound rules fully qualified domain name format."
+        },
+        "subscriptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Subscription id in the ARM id format."
+        },
+        "networkSecurityPerimeters": {
+          "type": "array",
+          "items": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/PerimeterBasedAccessRule"
+          },
+          "description": "Inbound rule specified by the perimeter id."
+        }
+      },
+      "description": "Properties of NSP access rule."
+    },
+    "PerimeterBasedAccessRule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "NSP id in the ARM id format."
+        },
+        "perimeterGuid": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource guid of the NSP supplied."
+        },
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Location of the NSP supplied."
+        }
+      }
+    },
+    "NspAssociation": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NspAssociationProperties",
+          "description": "Properties of the NSP resource association."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "NSP resource association identifier."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "The NSP resource association resource"
+    },
+    "NspAssociationsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NspAssociation"
+          },
+          "description": "Gets a page of NSP resource associations"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next page of results."
+        }
+      },
+      "description": "Result of the request to list NSP resource associations. Contains a list of NSP resource associations and a URL link to get the next set of results."
+    },
+    "NspAssociationProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource  association resource."
+        },
+        "privateLinkResource": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The PaaS resource to be associated."
+        },
+        "profile": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Profile id to which the PaaS resource is associated."
+        },
+        "accessMode": {
+          "type": "string",
+          "enum": [
+            "Unspecified",
+            "EnforceMode",
+            "LearningMode",
+            "DryRunMode"
+          ],
+          "x-ms-enum": {
+            "name": "AssociationAccessMode",
+            "modelAsString": true
+          },
+          "description": "Access mode on the association."
+        }
+      }
+    },
     "PerimeterAssociableResource": {
       "type": "object",
       "properties": {
@@ -438,6 +1194,30 @@
       "required": true,
       "type": "string",
       "description": "The name of the network security perimeter.",
+      "x-ms-parameter-location": "method"
+    },
+    "ProfileNameParameter": {
+      "name": "profileName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the NSP profile.",
+      "x-ms-parameter-location": "method"
+    },
+    "AccessRuleNameParameter": {
+      "name": "accessRuleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the NSP access rule.",
+      "x-ms-parameter-location": "method"
+    },
+    "AssociationNameParameter": {
+      "name": "associationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the NSP association.",
       "x-ms-parameter-location": "method"
     },
     "ListTopParameter": {
