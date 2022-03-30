@@ -1396,18 +1396,9 @@
           "$ref": "#/definitions/SqlConnectionInformation",
           "description": "Target SQL DB connection details."
         },
-        "sqlDataCopyThresholds": {
-          "$ref": "#/definitions/SqlDataCopyThresholds",
-          "description": "Minimum Row count and size of a table with a clustered index required to perform parallel data copy"
-        },
         "offlineConfiguration": {
           "$ref": "#/definitions/SqlDbOfflineConfiguration",
           "description": "Offline configuration.",
-          "readOnly": true
-        },
-        "backupConfiguration": {
-          "$ref": "#/definitions/SqlDbBackupConfiguration",
-          "description": "Source Location details of backups.",
           "readOnly": true
         },
         "tableList": {
@@ -1472,22 +1463,6 @@
         }
       }
     },
-    "SqlDataCopyThresholds": {
-      "description": "Minimum Row count and size of a table with a clustered index required to perform parallel data copy",
-      "type": "object",
-      "properties": {
-        "cidxRowThreshold": {
-          "format": "int32",
-          "description": "Minimum row count of a table with clustered index to perform parallel data copy",
-          "type": "integer"
-        },
-        "cidxKbsThreshold": {
-          "format": "int32",
-          "description": "Minimum required size in kbs of a table with a clustered index to perform parallel data copy",
-          "type": "integer"
-        }
-      }
-    },
     "SqlDbOfflineConfiguration": {
       "description": "Offline configuration",
       "type": "object",
@@ -1495,17 +1470,6 @@
         "offline": {
           "description": "Offline migration",
           "type": "boolean",
-          "readOnly": true
-        }
-      }
-    },
-    "SqlDbBackupConfiguration": {
-      "description": "Backup Configuration",
-      "type": "object",
-      "properties": {
-        "sourceLocation": {
-          "$ref": "#/definitions/SqlDbSourceBackupLocation",
-          "description": "Source location of backups.",
           "readOnly": true
         }
       }
@@ -1575,17 +1539,6 @@
           "format": "int32",
           "description": "Copy Duration in seconds",
           "type": "integer",
-          "readOnly": true
-        }
-      }
-    },
-    "SqlDbSourceBackupLocation": {
-      "description": "Source Location details of backups.",
-      "type": "object",
-      "properties": {
-        "fileStorageType": {
-          "description": "Backup storage Type.",
-          "type": "string",
           "readOnly": true
         }
       }
