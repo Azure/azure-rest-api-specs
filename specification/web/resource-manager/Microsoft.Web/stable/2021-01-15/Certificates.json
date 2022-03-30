@@ -442,7 +442,15 @@
             },
             "domainValidationMethod": {
               "description": "Method of domain validation for free cert",
-              "type": "string"
+              "enum": [
+                "CNameValidationValue",
+                "HttpTokenValidationValue"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "ValidationMethod",
+                "modelAsString": false
+              }
             }
           },
           "x-ms-client-flatten": true
