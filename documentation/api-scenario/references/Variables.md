@@ -1,6 +1,17 @@
 # Variables in API scenario
 
-## Variable definition and replacement
+## Variable types
+
+Variables could be of different types:
+- `array`
+- `bool`
+- `int`
+- `object`
+- `secureString`
+- `secureObject`
+- `string`
+
+## Variable definition
 
 Variables could be defined in different level of API scenario:
 
@@ -10,7 +21,7 @@ Variables could be defined in different level of API scenario:
 - `scenario`: API scenario level variable definition
 - `step`: Step level variable definition
 
-Variable could be referenced by `$(variableName)`. Currently variable type must be string.
+Variable could be referenced by `$(variableName)`.
 
 For example, in the following API scenario:
 
@@ -42,8 +53,6 @@ variables:
 ```
 
 Then `$(resourceId)` would be resolved to `Microsoft.Contoso/abc`.
-
-Variable resolving is limited to at most 100 times for certain string.
 
 ## Convention: parameter name in example
 

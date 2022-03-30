@@ -207,9 +207,7 @@ Rest call step could be defined either by an example file, or by an operation. B
       - **Type:** Required, String
       - Path to the response field to be used as variable.
 
-Rest call will have computed **requestParameter** and **responseExpected** after parsing and loading:
-
-- **requestParameter**
+Rest call will have computed **requestParameter** and **responseExpected** after parsing and loading.
 
 ### REST Operation
 
@@ -227,7 +225,7 @@ Rest call will have computed **requestParameter** and **responseExpected** after
 - **parameters:**
   - **Type:** Optional, Map from parameter name to parameter value
 - **responses:**
-  - **Type:** Optional, Map from response code to response headers and body.
+  - **Type:** Optional, Map from expected response code to response headers and body.
 
 
 ### REST Example
@@ -250,6 +248,9 @@ Rest call will have computed **requestParameter** and **responseExpected** after
 - **responseUpdate**
   - **Type:** Optional, Array of [JsonPatchOp](#jsonpatchop)
   - Updates that applied to the responseExpected.
+- **resourceUpdate**
+  - **Type:** Optional, Array of [JsonPatchOp](#jsonpatchop)
+  - Updates that applied to the resource.
 
 ### JsonPatchOp
 
