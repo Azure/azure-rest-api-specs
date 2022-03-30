@@ -5,10 +5,10 @@ These settings apply only when `--track2` is specified on the command line.
 ```yaml $(track2)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-azureadb2c
+package-name: azure-mgmt-azureadexternalidentities
 package-version: 1.0.0b2
 no-namespace-folders: true
-python-base-folder: azureadb2c/azure-mgmt-azureadb2c/azure/mgmt/azureadb2c
+python-base-folder: azureadexternalidentities/azure-mgmt-azureadexternalidentities/azure/mgmt/azureadexternalidentities
 ```
 
 ### Python multi-api
@@ -24,9 +24,18 @@ batch:
 ```
 
 ``` yaml $(multiapiscript)
-output-folder: $(python-sdks-folder)/azureadb2c/azure-mgmt-azureadb2c/azure/mgmt/azureadb2c/
+output-folder: $(python-sdks-folder)/azureadexternalidentities/azure-mgmt-azureadexternalidentities/azure/mgmt/azureadexternalidentities/
 clear-output-folder: false
 perform-load: false
+```
+
+### Tag: package-2021-04-01 and python
+
+These settings apply only when `--tag=package-2021-04-01 --python` is specified on the command line. Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+```yaml $(tag) =='package-2021-04-01'
+namespace: $(python-base-namespace).v2021_04_01
+output-folder: $(python-sdks-folder)/$(python-base-folder)/v2021_04_01
 ```
 
 ### Tag: package-2020-05-01-preview and python
