@@ -73,6 +73,45 @@
         }
       }
     },
+      "/subscriptions/{subscriptionId}/providers/Microsoft.SaaS/eligibilityCheck":{
+         "POST":{
+            "tags":[
+               "SubscriptionLevelSaaSResources"
+            ],
+            "operationId":"EligibilityCheck_SubscriptionLevel",
+            "description":"Perform eligibility check to the Azure subscription to be purchased.",
+            "produces":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "$ref":"#/parameters/SubscriptionIdParameter"
+               },
+               {
+                  "$ref":"#/parameters/ApiVersionParameter"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"Request successful. The request returns the resulting eligibility check reaponse.",
+                  "schema":{
+                     "$ref":"#/definitions/EligibilityCheckResponse"
+                  }
+               },
+               "default":{
+                  "description":"A response indicating an error.",
+                  "schema":{
+                     "$ref":"../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+                  }
+               }
+            }
+            "x-ms-examples":{
+               "Eligibility check for subscription level saas resources":{
+                  "$ref":"./examples/saasV2/EligibilityCheck.json"
+               }
+            }
+         }
+      },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/applications": {
       "get": {
         "tags": [
@@ -1306,6 +1345,20 @@
         }
       }
     },
+    "EligibilityCheckResponse": {
+      "description": "eligibility check resoponse.",
+      "type": "object",
+      "properties": {
+        "isEligible": {
+          "description": "Indication if check is eligible or not.",
+          "type": "boolean"
+        },
+        "errorMessage": {
+          "description": "the error message in case check is not eligible.",
+          "type": "string"
+        }
+      }
+    },	
     "SaasResourceResponseWithContinuation": {
       "description": "saas resources response with continuation.",
       "type": "object",
