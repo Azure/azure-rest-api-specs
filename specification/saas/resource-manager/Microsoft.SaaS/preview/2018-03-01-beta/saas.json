@@ -73,45 +73,45 @@
         }
       }
     },
-      "/subscriptions/{subscriptionId}/providers/Microsoft.SaaS/eligibilityCheck":{
-         "POST":{
-            "tags":[
-               "SubscriptionLevelSaaSResources"
-            ],
-            "operationId":"EligibilityCheck_SubscriptionLevel",
-            "description":"Perform eligibility check to the Azure subscription to be purchased.",
-            "produces":[
-               "application/json"
-            ],
-            "parameters":[
-               {
-                  "$ref":"#/parameters/SubscriptionIdParameter"
-               },
-               {
-                  "$ref":"#/parameters/ApiVersionParameter"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"Request successful. The request returns the resulting eligibility check reaponse.",
-                  "schema":{
-                     "$ref":"#/definitions/EligibilityCheckResponse"
-                  }
-               },
-               "default":{
-                  "description":"A response indicating an error.",
-                  "schema":{
-                     "$ref":"../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-                  }
-               }
-            },
-            "x-ms-examples":{
-               "Eligibility check for subscription level saas resources":{
-                  "$ref":"./examples/saasV2/EligibilityCheck.json"
-               }
-            }
-         }
-      },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SaaS/eligibilityCheck": {
+      "post":{
+        "tags":[
+           "SubscriptionLevelSaaSResources"
+        ],
+        "operationId":"EligibilityCheck_SubscriptionLevel",
+        "description":"Perform eligibility check to the Azure subscription to be purchased.",
+        "produces":[
+           "application/json"
+        ],
+        "parameters":[
+           {
+              "$ref":"#/parameters/SubscriptionIdParameter"
+           },
+           {
+              "$ref":"#/parameters/ApiVersionParameter"
+           }
+        ],
+        "responses": {
+           "200": {
+              "description":"Request successful. The request returns the resulting eligibility check reaponse.",
+              "schema": {
+                 "$ref":"#/definitions/EligibilityCheckResponse"
+              }
+           },
+           "default": {
+              "description":"A response indicating an error.",
+              "schema": {
+                 "$ref":"../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              }
+           }
+        },
+        "x-ms-examples":{
+           "Eligibility check for subscription level saas resources": {
+              "$ref":"./examples/saasV2/EligibilityCheck.json"
+           }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/applications": {
       "get": {
         "tags": [
@@ -1453,7 +1453,7 @@
     "Tags": {
       "type": "object",
       "description": "the resource tags.",
-      "additionalProperties": {
+      "eadditionalProperties": {
         "type": "string"
       }
     },
