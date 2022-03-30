@@ -45,10 +45,13 @@ scenarios:
   - Steps that should run before every API scenario steps.
 - **scenarios**
   - **Type:** Required, Array of [Scenario](#scenario)
+- **cleanUpSteps**
+  - **Type:** Optional, Array of [Step](#step)
+  - Steps that should run after every API scenario steps.
 
 ## Scenario
 
-See [Scenario Schema](./v1.2/schema.json#L83).
+See [Scenario Schema](./v1.2/schema.json#L249).
 
 It defines one API scenario that could go through on its own.
 
@@ -73,10 +76,10 @@ variables:
 - **shareScope**
   - **Type:** Optional, Boolean or String
   - **Default:** true
-  - Describe how the scope (ResourceGroup if scope is ResourceGroup) could be shared with other tests. If it's true or it's the same string setting for different API scenario, then they share the same scope, which means:
-    - These tests will run under the same scope (e.g. ResourceGroup). They may launch in parallel.
-    - **prepareSteps** will only run once in the scope. The variables will be shared.
-  - By default all the API scenario in one definition file will be launched in the same scope. If shareScope is false then it will not share anything with other API scenarios in the same file.
+  - Describe how the scope (ResourceGroup if scope is ResourceGroup) could be shared with other scenarios.  If true or the same string value for different API scenario, they share the same scope, which means:
+    - These API scenarios will run under the same scope (e.g. ResourceGroup).
+    - **prepareSteps** and **cleanUpSteps** will run only once in the scope. The variables will be shared.
+  - By default all the API scenario in one definition file will be launched in the same scope.  If shareScope is false, the API scenarios will not share anything with others in the same file.
 - **variables**
   - **Type:** Optional, Map of strings
   - See [Variables](./Variables.md)
@@ -86,7 +89,7 @@ variables:
 
 ## Step
 
-See [Step Schema](./v1.2/schema.json#L114).
+See [Step Schema](./v1.2/schema.json#L280).
 
 Defines one step in API scenario.
 
@@ -112,7 +115,7 @@ All of the above definitions share the following fields:
 
 ## Step ARM Template
 
-See [Step ARM Template Schema](./v1.2/schema.json#L250).
+See [Step ARM Template Schema](./v1.2/schema.json#L435).
 
 Step to deploy ARM template to the scope. Template parameters and outputs will also interact with variables automatically, see [Variables](./Variables.md).
 
@@ -132,7 +135,7 @@ Step to deploy ARM template to the scope. Template parameters and outputs will a
 
 ## Step ARM Deployment Script
 
-See [Step ARM Deployment Script Schema](./v1.2/schema.json#L266).
+See [Step ARM Deployment Script Schema](./v1.2/schema.json#L456).
 
 Step to deploy ARM deployment script to the scope. Template parameters and outputs will also interact with variables automatically, see [Variables](./Variables.md).
 
@@ -186,30 +189,18 @@ Step to deploy ARM deployment script to the scope. Template parameters and outpu
 
 ## Step REST Call
 
-See [Step REST Call Schema](./v1.2/schema.json#L208)
+Step to run a rest call defined in swagger operation. This may not be just one http call.
 
-Step to run a swagger operation defined rest call. This may not be just one http call.
-
-- If the operation is a long running operation (LRO), then follow the LRO polling strategy.
+- If the operation is a long running operation (LRO), then follow the LRO polling strategy:
   - Response statusCode must be 200 if the LRO succeeded, no matter what code the initial response is.
   - If the LRO is PUT/PATCH, the runner should automatically insert a GET after the polling to verify the resource update result.
 - If the operation is DELETE, then after the operation, the runner should automatically insert a GET to verify resource cannot be found.
 
-Rest call step could be defined either by an example file, or by an operation. Both share the following fields:
-
-- **outputVariables**
-  - **Type:** Optional, Map from variable name to object with property:
-    - **type**: Required, String
-    - **fromRequest**
-      - **Type:** Required, String
-      - Path to the request field to be used as variable.
-    - **fromResponse**
-      - **Type:** Required, String
-      - Path to the response field to be used as variable.
-
-Rest call will have computed **requestParameter** and **responseExpected** after parsing and loading.
+REST call step could be defined either by an operation, or by an example file. REST call will have computed **requestParameter** and **responseExpected** after parsing and loading.
 
 ### REST Operation
+
+See [Step Operation Schema](./v1.2/schema.json#L339)
 
 **Example:**
 ```yml
@@ -226,9 +217,19 @@ Rest call will have computed **requestParameter** and **responseExpected** after
   - **Type:** Optional, Map from parameter name to parameter value
 - **responses:**
   - **Type:** Optional, Map from expected response code to response headers and body.
-
+- **outputVariables**
+  - **Type:** Optional, Map from variable name to object with property:
+    - **type**: Required, String
+    - **fromRequest**
+      - **Type:** Required, String
+      - Path to the request field to be used as variable.
+    - **fromResponse**
+      - **Type:** Required, String
+      - Path to the response field to be used as variable.
 
 ### REST Example
+
+See [Step Example Schema](./v1.2/schema.json#L389)
 
 **Example:**
 
@@ -244,17 +245,28 @@ Rest call will have computed **requestParameter** and **responseExpected** after
   - Path to example file. Should be in format of "x-ms-example" files.
 - **requestUpdate**
   - **Type:** Optional, Array of [JsonPatchOp](#jsonpatchop)
-  - Updates that applied to the requestParameters before sending it.
+  - Updates that applies to the requestParameters before sending it.
 - **responseUpdate**
   - **Type:** Optional, Array of [JsonPatchOp](#jsonpatchop)
-  - Updates that applied to the responseExpected.
+  - Updates that applies to the responseExpected.
 - **resourceUpdate**
   - **Type:** Optional, Array of [JsonPatchOp](#jsonpatchop)
-  - Updates that applied to the resource.
+  - Updates that applies to the resource in both request and response body.
+- **outputVariables**
+  - **Type:** Optional, Map from variable name to object with property:
+    - **type**: Required, String
+    - **fromRequest**
+      - **Type:** Required, String
+      - Path to the request field to be used as variable.
+    - **fromResponse**
+      - **Type:** Required, String
+      - Path to the response field to be used as variable.
 
 ### JsonPatchOp
 
-JsonPatchOp is used to define the update operation on json. You could add, remove, replace, move, copy and merge on json path.
+See [Json Patch Operation Schema](./v1.2/schema.json#L498)
+
+JsonPatchOp is used to define the update operation on json. You could add, remove, replace, copy, move, and test on json path.
 All the json path used in JsonPatchOp is in format of [JsonPointer](https://datatracker.ietf.org/doc/html/rfc6901).
 
 - [JsonPatchOp](#jsonpatchop)
