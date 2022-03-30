@@ -246,13 +246,3 @@ See configuration in [readme.python.md](./readme.python.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-## Suppression
-
-``` yaml
-directive:
-  - suppress: IntegerTypeMustHaveFormat
-    where: $.definitions.Attributes.properties.nbf
-    from: secrets.json
-    reason: All fields of type integer do have format associated. Maybe a false positive.
-```
