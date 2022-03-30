@@ -871,7 +871,7 @@
         },
         "guestConfigurationService": {
           "$ref": "#/definitions/ServiceStatus",
-          "description": "The state of the extension service on the Arc-enabled machine."
+          "description": "The state of the guest configuration service on the Arc-enabled machine."
         }
       },
       "description": "Reports the state and behavior of dependent services."
@@ -1119,13 +1119,6 @@
         "properties": {
           "$ref": "#/definitions/MachineProperties",
           "description": "Hybrid Compute Machine properties"
-        },
-        "resources": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MachineExtension"
-          },
-          "description": "List of machine extensions"
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity"
