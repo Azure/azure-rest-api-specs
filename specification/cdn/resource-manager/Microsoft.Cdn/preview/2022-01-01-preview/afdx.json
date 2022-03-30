@@ -4235,7 +4235,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PolicyGetParameters"
+              "$ref": "#/definitions/PolicyListResult"
             }
           },
           "default": {
@@ -6312,6 +6312,23 @@
         "policyData": {
           "description": "Policy to be applied",
           "type": "string"
+        }
+      }
+    },
+    "PolicyListResult": {
+      "description": "Result of the request to list policies. It contains a list of policy objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PolicyGetParameters"
+          },
+          "description": "List of policies within a profile."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of route objects if there are any."
         }
       }
     }
