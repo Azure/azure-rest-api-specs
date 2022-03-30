@@ -3,7 +3,7 @@
   "info": {
     "title": "PostgreSQLServerManagementClient",
     "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.",
-    "version": "2021-06-01"
+    "version": "2022-03-08-privatepreview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1392,6 +1392,7 @@
           "items": {
             "$ref": "#/definitions/FastProvisioningCapability"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         },
         "status": {
@@ -2185,6 +2186,7 @@
       "description": "Represents server restart parameters."
     },
     "CachedServerNameRequest": {
+      "type": "object",
       "required": [
         "version",
         "storage",
@@ -2208,6 +2210,7 @@
       "description": "Request from client to get available cached server name"
     },
     "CachedServerName": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
