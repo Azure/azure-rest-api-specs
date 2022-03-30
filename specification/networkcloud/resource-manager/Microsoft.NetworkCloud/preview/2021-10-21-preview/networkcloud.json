@@ -1,0 +1,4325 @@
+{
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "schemes": ["https"],
+  "swagger": "2.0",
+  "info": {
+    "description": "The Network Cloud APIs provide management of the on-premises clusters and their resources, such as, racks, bare metal hosts, virtual machines, workload networks and more.",
+    "title": "NetworkCloud",
+    "version": "2021-10-21-preview"
+  },
+  "host": "management.azure.com",
+  "paths": {
+    "/providers/Microsoft.NetworkCloud/operations": {
+      "get": {
+        "description": "Get a list of all available resource provider operations. It contains a URL link to get the next set of results.",
+        "summary": "List resource provider operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List resource provider operations": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkCloud/bareMetalMachines": {
+      "get": {
+        "description": "Get a list of all bare metal machines for a specific subscription. The API returns 200 OK when the API is successful.",
+        "summary": "Retrieve all bare metal machines for a specific subscription.",
+        "operationId": "BareMetalMachines_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BareMetalMachineList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List bare metal machines for subscription": {
+            "$ref": "./examples/BareMetalMachines_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkCloud/clusterManagers": {
+      "get": {
+        "description": "Get a list of all cluster managers in a given subscription.",
+        "summary": "List cluster managers in a subscription.",
+        "operationId": "ClusterManagers_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClusterManagerList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List cluster manager for the subscription": {
+            "$ref": "./examples/ClusterManagers_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkCloud/clusters": {
+      "get": {
+        "description": "Get a list of all clusters in a given subscription.",
+        "summary": "List clusters in a subscription.",
+        "operationId": "Clusters_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClusterList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List clusters for subscription": {
+            "$ref": "./examples/Clusters_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkCloud/locations/{location}/operationStatuses/{operationId}": {
+      "get": {
+        "description": "Get the latest details of the long running operation.",
+        "summary": "Get the long running operation status.",
+        "operationId": "OperationStatuses_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get log running operation status": {
+            "$ref": "./examples/OperationStatuses_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkCloud/rackManifests": {
+      "get": {
+        "description": "Get a list of all rack manifests for a specific subscription. The API returns 200 OK when the API is successful.",
+        "summary": "Retrieve all rack manifests for a specific subscription.",
+        "operationId": "RackManifests_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RackManifestList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List rack manifests for subscription": {
+            "$ref": "./examples/RackManifests_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkCloud/racks": {
+      "get": {
+        "description": "Get a list of all racks for a specific subscription. The API returns 200 OK when the API is successful.",
+        "summary": "Retrieve all racks for a specific subscription.",
+        "operationId": "Racks_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RackList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List racks for subscription": {
+            "$ref": "./examples/Racks_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkCloud/virtualMachines": {
+      "get": {
+        "description": "Get a list of all virtual machines for a specific subscription. The API returns 200 OK when the API is successful.",
+        "summary": "Retrieve all virtual machines for a specific subscription.",
+        "operationId": "VirtualMachines_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List virtual machines for subscription": {
+            "$ref": "./examples/VirtualMachines_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkCloud/workloadNetworks": {
+      "get": {
+        "description": "Get a list of all workload networks in a given subscription.  The API returns 200 OK when the API is successful.",
+        "summary": "List workload networks in a subscription.",
+        "operationId": "WorkloadNetworks_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkloadNetworkList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List workload networks for subscription": {
+            "$ref": "./examples/WorkloadNetworks_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines": {
+      "get": {
+        "description": "Get a list of all bare metal machines in a given resource group. The API returns 200 OK when the API is successful.",
+        "summary": "List bare metal machines in a resource group.",
+        "operationId": "BareMetalMachines_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BareMetalMachineList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List bare metal machines for resource group": {
+            "$ref": "./examples/BareMetalMachines_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines/{bareMetalMachineName}": {
+      "get": {
+        "description": "Get the properties of a specific bare metal machine. The API returns 200 OK when the operation is successful.",
+        "summary": "Retrieve a specific bare metal machine.",
+        "operationId": "BareMetalMachines_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BareMetalMachineNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BareMetalMachine"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get bare metal machine": {
+            "$ref": "./examples/BareMetalMachines_Get.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Updates the properties of the existing bare metal machine. The API returns 200 OK in case of the successful update. 201 Created is returned when the operation is performed asynchronously.",
+        "summary": "Update a specific bare metal machine.",
+        "operationId": "BareMetalMachines_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BareMetalMachineNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "bareMetalMachineParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/BareMetalMachine"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BareMetalMachine"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/BareMetalMachine"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a bare metal machine": {
+            "$ref": "./examples/BareMetalMachines_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "description": "Delete a provided bare metal machine. The API returns 200 OK when the deletion is successful. 202 Accepted is returned when the operation is performed asynchronously.",
+        "summary": "Delete a specific bare metal machine.",
+        "operationId": "BareMetalMachines_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BareMetalMachineNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete bare metal machine": {
+            "$ref": "./examples/BareMetalMachines_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "description": "Patch the properties of a specific bare metal machine, or update the tags assigned to the bare metal machine. Properties and tag updates can be done independently. The API returns 200 OK when the API is successful. 202 Accepted is returned when the operation is performed asynchronously.",
+        "summary": "Patch a specific bare metal machine.",
+        "operationId": "BareMetalMachines_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BareMetalMachineNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "bareMetalMachineUpdateParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/BareMetalMachinePatchParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BareMetalMachine"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/BareMetalMachine"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch bare metal machine": {
+            "$ref": "./examples/BareMetalMachines_Patch.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines/{bareMetalMachineName}/cordon": {
+      "post": {
+        "description": "Cordon a provided network cloud bare metal machine's Kubernetes node. The API returns 202 Accepted as the operation is performed.",
+        "summary": "Cordon a specific network cloud bare metal machine.",
+        "operationId": "BareMetalMachines_Cordon",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BareMetalMachineNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "bareMetalMachineCordonParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/BareMetalMachineCordonParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Cordon a bare metal machine": {
+            "$ref": "./examples/BareMetalMachines_Cordon.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines/{bareMetalMachineName}/powerOff": {
+      "post": {
+        "description": "Power off a provided bare metal machine. The API returns 202 Accepted as the operation is performed asynchronously.",
+        "summary": "Power off a specific bare metal machine.",
+        "operationId": "BareMetalMachines_PowerOff",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BareMetalMachineNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "bareMetalMachinePowerOffParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/BareMetalMachinePowerOffParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Power off a bare metal machine": {
+            "$ref": "./examples/BareMetalMachines_PowerOff.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines/{bareMetalMachineName}/reimage": {
+      "post": {
+        "description": "Reimage a specific bare metal machine. The API returns 202 Accepted as the operation is performed asynchronously.",
+        "summary": "Reimage a specific bare metal machine.",
+        "operationId": "BareMetalMachines_Reimage",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BareMetalMachineNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reimage a Bare Metal Machine": {
+            "$ref": "./examples/BareMetalMachines_Reimage.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines/{bareMetalMachineName}/restart": {
+      "post": {
+        "description": "Restart a specific bare metal machine. The API returns 202 Accepted as the operation is performed asynchronously.",
+        "summary": "Restart a specific bare metal machine.",
+        "operationId": "BareMetalMachines_Restart",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BareMetalMachineNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Restart a bare metal machine": {
+            "$ref": "./examples/BareMetalMachines_Restart.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines/{bareMetalMachineName}/start": {
+      "post": {
+        "description": "Start a provided cloud bare metal machine. The API returns 202 Accepted as the operation is performed asynchronously.",
+        "summary": "Start a specific bare metal machine.",
+        "operationId": "BareMetalMachines_Start",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BareMetalMachineNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start a bare metal machine": {
+            "$ref": "./examples/BareMetalMachines_Start.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines/{bareMetalMachineName}/uncordon": {
+      "post": {
+        "description": "Uncordon a provided bare metal machine's Kubernetes node. The API returns 202 Accepted as the operation is performed.",
+        "summary": "Uncordon a specific bare metal machine.",
+        "operationId": "BareMetalMachines_Uncordon",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BareMetalMachineNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Uncordon a bare metal machine": {
+            "$ref": "./examples/BareMetalMachines_Uncordon.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusterManagers": {
+      "get": {
+        "description": "Get a list of all cluster managers in a given resource group.",
+        "summary": "List cluster managers from a specific resource group.",
+        "operationId": "ClusterManagers_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClusterManagerList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List cluster manager for the resource group": {
+            "$ref": "./examples/ClusterManagers_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusterManagers/{clusterManagerName}": {
+      "get": {
+        "description": "Get the properties of a specific cluster manager.",
+        "summary": "Retrieve a specific cluster manager.",
+        "operationId": "ClusterManagers_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterManagerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClusterManager"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get cluster manager": {
+            "$ref": "./examples/ClusterManagers_Get.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create a new cluster manager or update the properties of cluster manager if it exists. The API returns 200 OK in case of the successful creation or update. 201 Created is returned when the operation is performed asynchronously.",
+        "summary": "Create or update a specific cluster manager.",
+        "operationId": "ClusterManagers_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterManagerNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "clusterManagerParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ClusterManager"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClusterManager"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ClusterManager"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update cluster manager": {
+            "$ref": "./examples/ClusterManagers_Create.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "description": "Delete a specific cluster manager.The API returns 200 OK when the cluster manager is deleted successfully. 202 Accepted is returned when the operation is performed asynchronously.",
+        "summary": "Delete a specific cluster manager.",
+        "operationId": "ClusterManagers_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterManagerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete cluster manager": {
+            "$ref": "./examples/ClusterManagers_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "description": "Patch the properties of a specific cluster manager, or update the tags assigned to the cluster manager. Properties and tag updates can be done independently. The API returns 200 OK when the API is successful.",
+        "summary": "Patch a specific cluster manager.",
+        "operationId": "ClusterManagers_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterManagerNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "clusterManagerUpdateParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TagsParameter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClusterManager"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch cluster manager": {
+            "$ref": "./examples/ClusterManagers_Patch.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters": {
+      "get": {
+        "description": "Get a list of all clusters in a given resource group.",
+        "summary": "List clusters in a resource group.",
+        "operationId": "Clusters_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClusterList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List clusters for resource group": {
+            "$ref": "./examples/Clusters_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}": {
+      "get": {
+        "description": "Get the properties of a specific cluster.",
+        "summary": "Retrieve a specific cluster.",
+        "operationId": "Clusters_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get cluster": {
+            "$ref": "./examples/Clusters_Get.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create a new cluster or update the properties of the cluster if it exists. The API returns 200 OK in case of the successful creation or update. 201 Created is returned when the operation is performed asynchronously.",
+        "summary": "Create or update a specific cluster.",
+        "operationId": "Clusters_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "clusterParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update cluster": {
+            "$ref": "./examples/Clusters_Create.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "description": "Delete a specific cluster. The API returns 200 OK when the deletion is successful. 202 Accepted is returned when the operation is performed asynchronously.",
+        "summary": "Delete a specific cluster.",
+        "operationId": "Clusters_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete cluster": {
+            "$ref": "./examples/Clusters_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "description": "Patch the properties of a specific cluster, or update the tags assigned to the cluster. Properties and tag updates can be done independently. The API returns 200 OK when the update is successful. 202 Accepted is returned when the operation is performed asynchronously.",
+        "summary": "Patch a specific cluster.",
+        "operationId": "Clusters_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "clusterUpdateParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ClusterPatchParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch cluster": {
+            "$ref": "./examples/Clusters_Patch.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}/applyRackManifests": {
+      "post": {
+        "description": "Apply rack manifests to a cluster. This would update the existing cluster by applying rack manifests that have no rack associated yet.\nThe API returns 202 Accepted as the operation is performed asynchronously.",
+        "summary": "Apply rack manifests to a cluster.",
+        "operationId": "Clusters_ApplyRackManifests",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Apply rack manifests to cluster": {
+            "$ref": "./examples/Clusters_ApplyRackManifests.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}/deploy": {
+      "post": {
+        "description": "Deploy a cluster to a provided rack. The API returns 202 Accepted as the operation is performed asynchronously.",
+        "summary": "Deploy a cluster to a provided rack.",
+        "operationId": "Clusters_Deploy",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "clusterDeployParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ClusterDeployParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deploy cluster": {
+            "$ref": "./examples/Clusters_Deploy.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}/updateVersion": {
+      "post": {
+        "description": "Update a version of a provided cluster to one of the available supported versions. The API returns 202 Accepted as the operation is performed asynchronously.",
+        "summary": "Update a cluster version.",
+        "operationId": "Clusters_UpdateVersion",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "clusterUpdateVersionParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ClusterUpdateVersionParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update cluster version": {
+            "$ref": "./examples/Clusters_UpdateVersion.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/rackManifests/{rackManifestName}": {
+      "get": {
+        "description": "Get the properties of a specific rack manifest. The API returns 200 OK when the operation is successful.",
+        "summary": "Retrieve a specific rack manifest.",
+        "operationId": "RackManifests_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RackManifestNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RackManifest"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get rack manifest": {
+            "$ref": "./examples/RackManifests_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/racks": {
+      "get": {
+        "description": "Get a list of all racks in a given resource group. The API returns 200 OK when the API is successful.",
+        "summary": "List racks in a resource group.",
+        "operationId": "Racks_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RackList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List racks for resource group": {
+            "$ref": "./examples/Racks_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/racks/{rackName}": {
+      "get": {
+        "description": "Get the properties of a specific rack. The API returns 200 OK when the operation is successful.",
+        "summary": "Retrieve a specific rack.",
+        "operationId": "Racks_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RackNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Rack"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get rack resource": {
+            "$ref": "./examples/Racks_Get.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Update the properties of the rack if it exists. The API returns 200 OK in case of the successful update. 201 Created is returned when the operation is performed asynchronously.",
+        "summary": "Update a specific rack.",
+        "operationId": "Racks_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RackNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "rackParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Rack"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Rack"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Rack"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update rack": {
+            "$ref": "./examples/Racks_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "description": "Delete a provided rack. The API returns 200 OK when the deletion is successful. 202 Accepted is returned when the operation is performed asynchronously.",
+        "summary": "Delete a specific rack.",
+        "operationId": "Racks_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RackNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete rack resource": {
+            "$ref": "./examples/Racks_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "description": "Patch the properties of a specific rack, or update the tags assigned to the rack. Properties and tag updates can be done independently. The API returns 200 OK when the update is successful. 202 Accepted is returned when the operation is performed asynchronously.",
+        "summary": "Patch a specific rack.",
+        "operationId": "Racks_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RackNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "rackUpdateParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/RackPatchParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Rack"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Rack"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch rack": {
+            "$ref": "./examples/Racks_Patch.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines": {
+      "get": {
+        "description": "Get a list of all virtual machines in a given resource group. The API returns 200 OK when the API is successful.",
+        "summary": "List virtual machines in a resource group.",
+        "operationId": "VirtualMachines_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List virtual machines for resource group": {
+            "$ref": "./examples/VirtualMachines_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines/{virtualMachineName}": {
+      "get": {
+        "description": "Get the properties of a specific virtual machine. The API returns 200 OK when the operation is successful.",
+        "summary": "Retrieve a specific virtual machine.",
+        "operationId": "VirtualMachines_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VirtualMachineNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get virtual machine": {
+            "$ref": "./examples/VirtualMachines_Get.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create a new virtual machine or update the properties of the existing virtual machine. The API returns 200 OK in case of the successful creation or update. 201 Created is returned when the operation is performed asynchronously.",
+        "summary": "Creates or updates a specific virtual machine.",
+        "operationId": "VirtualMachines_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VirtualMachineNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "virtualMachineParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update virtual machine": {
+            "$ref": "./examples/VirtualMachines_Create.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "description": "Delete a provided virtual machine. The API returns 200 OK when the deletion is successful. 202 Accepted is returned when the operation is performed asynchronously.",
+        "summary": "Delete a specific virtual machine.",
+        "operationId": "VirtualMachines_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VirtualMachineNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete virtual machine": {
+            "$ref": "./examples/VirtualMachines_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "description": "Patch the properties of a specific virtual machine, or update the tags assigned to the virtual machine. Properties and tag updates can be done independently. The API returns 200 OK when the API is successful.",
+        "summary": "Patch a specific virtual machine.",
+        "operationId": "VirtualMachines_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VirtualMachineNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "virtualMachineUpdateParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TagsParameter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch virtual machine": {
+            "$ref": "./examples/VirtualMachines_Patch.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines/{virtualMachineName}/powerOff": {
+      "post": {
+        "description": "Power off a provided Network Cloud Virtual Machine. The API returns 202 Accepted as the operation is performed asynchronously.",
+        "summary": "Power off a specific Network Cloud Virtual Machine.",
+        "operationId": "VirtualMachines_PowerOff",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VirtualMachineNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "virtualMachinePowerOffParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachinePowerOffParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Power off a virtual machine": {
+            "$ref": "./examples/VirtualMachines_PowerOff.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines/{virtualMachineName}/reimage": {
+      "post": {
+        "description": "Reimage a specific virtual Machine. The API returns 202 Accepted as the operation is performed asynchronously.",
+        "summary": "Reimage a specific virtual machine.",
+        "operationId": "VirtualMachines_Reimage",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VirtualMachineNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reimage a Network Cloud Virtual Machine": {
+            "$ref": "./examples/VirtualMachines_Reimage.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines/{virtualMachineName}/restart": {
+      "post": {
+        "description": "Restart a specific virtual machine. The API returns 202 Accepted as the operation is performed asynchronously.",
+        "summary": "Restart a specific virtual machine.",
+        "operationId": "VirtualMachines_Restart",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VirtualMachineNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Restart a virtual machine": {
+            "$ref": "./examples/VirtualMachines_Restart.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines/{virtualMachineName}/start": {
+      "post": {
+        "description": "Start a provided Network Cloud Virtual Machine. The API returns 202 Accepted as the operation is performed asynchronously.",
+        "summary": "Start a specific Network Cloud Virtual Machine.",
+        "operationId": "VirtualMachines_Start",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VirtualMachineNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start a virtual machine": {
+            "$ref": "./examples/VirtualMachines_Start.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/workloadNetworks": {
+      "get": {
+        "description": "Get a list of all workload networks in a given resource group.  The API returns 200 OK when the API is successful.",
+        "summary": "List workload networks in a resource group.",
+        "operationId": "WorkloadNetworks_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkloadNetworkList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List workload networks for resource group": {
+            "$ref": "./examples/WorkloadNetworks_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/workloadNetworks/{workloadNetworkName}": {
+      "get": {
+        "description": "Get the properties of a specific workload network. The API returns 200 OK when the API operation is successful.",
+        "summary": "Retrieve a specific workload network.",
+        "operationId": "WorkloadNetworks_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkloadNetworkNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkloadNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get workload network": {
+            "$ref": "./examples/WorkloadNetworks_Get.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create a new workload network or update the properties of the existing workload network. The API returns 200 OK in case of the successful creation or update. 201 Created is returned when the operation is performed asynchronously.",
+        "summary": "Create or update a specific workload network.",
+        "operationId": "WorkloadNetworks_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkloadNetworkNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "workloadNetworkParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/WorkloadNetwork"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkloadNetwork"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/WorkloadNetwork"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update workload network": {
+            "$ref": "./examples/WorkloadNetworks_Create.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "description": "Delete a provided workload network. The API returns 200 OK when the deletion is successful. 202 Accepted is returned when the operation is performed asynchronously.",
+        "summary": "Delete a specific workload network.",
+        "operationId": "WorkloadNetworks_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkloadNetworkNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete workload network": {
+            "$ref": "./examples/WorkloadNetworks_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "description": "Patch the properties of a specific workload network, or update the tags assigned to the workload network. Properties and tag updates can be done independently. The API returns 200 OK when the API is successful.",
+        "summary": "Patch a specific workload network.",
+        "operationId": "WorkloadNetworks_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkloadNetworkNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "workloadNetworkUpdateParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TagsParameter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkloadNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch workload network": {
+            "$ref": "./examples/WorkloadNetworks_Patch.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/rackManifests": {
+      "get": {
+        "description": "Get a list of all rack manifests in a given resource group. The API returns 200 OK when the API is successful.",
+        "summary": "List rack manifests in a resource group.",
+        "operationId": "RackManifests_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RackManifestList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List rack manifests for resource group": {
+            "$ref": "./examples/RackManifests_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/rackManifests/{rackManifestName}": {
+      "put": {
+        "description": "Create a new rack manifest or update the properties of the existing rack manifest. The API returns 200 OK in case of the successful creation or update. 201 Created is returned when the operation is performed asynchronously.",
+        "summary": "Creates or updates a specific rack manifest.",
+        "operationId": "RackManifests_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RackManifestNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "rackManifestParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/RackManifest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RackManifest"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/RackManifest"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update rack manifest": {
+            "$ref": "./examples/RackManifests_Create.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "description": "Delete a provided rack manifest. The API returns 200 OK when the deletion is successful. 202 Accepted is returned when the operation is performed asynchronously.",
+        "summary": "Delete a specific rack manifest.",
+        "operationId": "RackManifests_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RackManifestNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete rack manifest": {
+            "$ref": "./examples/RackManifests_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "description": "Patch the properties of a specific rack manifest, or update the tags assigned to the rack manifest. Properties and tag updates can be done independently. The API returns 200 OK when the API is successful.",
+        "summary": "Patch a specific rack manifest.",
+        "operationId": "RackManifests_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RackManifestNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "rackManifestUpdateParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/RackManifestPatchParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RackManifest"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/RackManifest"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch rack manifest": {
+            "$ref": "./examples/RackManifests_Patch.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AggregatorRackSkuSupported": {
+      "description": "Note that this will only contain references to the aggregator rack.\nA secondary lookup of that aggregator rack SKU will provide the references to the Compute rack SKU information.",
+      "type": "object",
+      "title": "Aggregator rack SKU details supported by the cluster manager.",
+      "properties": {
+        "id": {
+          "description": "Resource ID of the Rack SKU",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "A descriptive name of the rack sku",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BareMetalMachine": {
+      "type": "object",
+      "title": "BareMetalMachine represents the physical machine in the rack.",
+      "required": ["location", "extendedLocation", "properties"],
+      "properties": {
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location of the cluster associated with the resource."
+        },
+        "id": {
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "The geo-location where the resource lives",
+          "type": "string",
+          "x-ms-mutability": ["read", "create"]
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/BareMetalMachineProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The Azure system data generated for the resource."
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "BareMetalMachineCordonParameters": {
+      "type": "object",
+      "title": "BareMetalMachineCordonParameters represents the body of the request to evacuate workloads from node on a bare metal machine.",
+      "properties": {
+        "evacuate": {
+          "description": "Allows to bypass evacuation of node workload and cordon bare metal machine immediately.",
+          "type": "string",
+          "default": "False",
+          "enum": ["True", "False"],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "BareMetalMachineEvacuate"
+          }
+        }
+      }
+    },
+    "BareMetalMachineList": {
+      "type": "object",
+      "title": "BareMetalMachineList represents a list of bare metal machines.",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of bare metal machines.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BareMetalMachine"
+          }
+        }
+      }
+    },
+    "BareMetalMachinePatchParameters": {
+      "type": "object",
+      "title": "BareMetalMachinePatchParameters represents the body of the request to patch bare metal machine properties.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BareMetalMachinePatchProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "Azure resource tags that will replace the existing ones.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "BareMetalMachinePatchProperties": {
+      "type": "object",
+      "title": "BareMetalMachinePatchProperties represents the properties of a bare metal machine that can be patched.",
+      "properties": {
+        "bootMacAddress": {
+          "description": "This is the MAC address of a NIC connected to the PXE network.",
+          "type": "string"
+        },
+        "machineLocation": {
+          "description": "This is the name of the location of network cloud bare metal machine.",
+          "type": "string"
+        }
+      }
+    },
+    "BareMetalMachinePowerOffParameters": {
+      "type": "object",
+      "title": "BareMetalMachinePowerOffParameters represents the body of the request to power off bare metal machine.",
+      "properties": {
+        "skipShutdown": {
+          "description": "Allows to bypass OS shutdown and power bare metal machine off immediately.",
+          "type": "string",
+          "default": "False",
+          "enum": ["True", "False"],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "BareMetalMachineSkipShutdown"
+          }
+        }
+      }
+    },
+    "BareMetalMachineProperties": {
+      "type": "object",
+      "title": "BareMetalMachineProperties represents the properties of a bare metal machine.",
+      "required": ["bootMacAddress"],
+      "properties": {
+        "adminStatus": {
+          "description": "Admin status of the bare metal machine.",
+          "type": "string",
+          "enum": ["Enabled", "Disabled"],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "BareMetalMachineAdminStatus"
+          },
+          "readOnly": true
+        },
+        "bmcConnectionString": {
+          "description": "The connection string for the bare metal controller on this bare metal machine.",
+          "type": "string",
+          "readOnly": true
+        },
+        "bmcCredentials": {
+          "$ref": "#/definitions/BmcCredentials"
+        },
+        "bootMacAddress": {
+          "description": "The MAC address of a NIC connected to the PXE network.",
+          "type": "string"
+        },
+        "clusterId": {
+          "description": "The resource ID of the cluster this bare metal machine is associated with.",
+          "type": "string",
+          "readOnly": true
+        },
+        "cordonStatus": {
+          "description": "Cordon status of the bare metal machine.",
+          "type": "string",
+          "enum": ["Cordoned", "Uncordoned"],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "BareMetalMachineCordonStatus"
+          },
+          "readOnly": true
+        },
+        "detailedStatus": {
+          "description": "A more detailed status of the bare metal machine.",
+          "type": "string",
+          "enum": [
+            "Preparing",
+            "Error",
+            "Available",
+            "Provisioning",
+            "Provisioned",
+            "Deprovisioning"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "BareMetalMachineDetailedStatus"
+          },
+          "readOnly": true
+        },
+        "detailedStatusMessage": {
+          "description": "A descriptive message about the current detailed status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "hardwareInventory": {
+          "$ref": "#/definitions/HardwareInventory"
+        },
+        "machineDetails": {
+          "description": "The details provided by the customer during the creation of rack manifests\nthat allows for “custom data” to be associated with this machine",
+          "type": "string",
+          "readOnly": true
+        },
+        "machineLocation": {
+          "description": "A user-friendly description of the bare metal machine's location.",
+          "type": "string"
+        },
+        "machineSkuId": {
+          "description": "A unique internal identifier of the bare metal machine SKU.",
+          "type": "string",
+          "readOnly": true
+        },
+        "powerState": {
+          "description": "Power state of the bare metal machine.",
+          "type": "string",
+          "enum": ["On", "Off"],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "BareMetalMachinePowerState"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the bare metal machine.",
+          "type": "string",
+          "enum": ["Succeeded", "Failed", "Canceled", "Pending", "Accepted"],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "BareMetalMachineProvisioningState"
+          },
+          "readOnly": true
+        },
+        "rackId": {
+          "description": "The resource ID of the rack where this bare metal machine resides.",
+          "type": "string",
+          "readOnly": true
+        },
+        "rackSlot": {
+          "description": "The rack slot in which this bare metal machine is located, ordered from the bottom up i.e. the lowest slot is 1.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "readyState": {
+          "description": "Indicator of whether the bare metal machine is ready to receive workloads.",
+          "type": "string",
+          "enum": ["True", "False"],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "BareMetalMachineReadyState"
+          },
+          "readOnly": true
+        },
+        "tpmEndorsementKey": {
+          "description": "A thumbprint or SHA of the TPM endorsement key that ensures authenticity of the bare metal machine.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BareMetalMachineUserData": {
+      "type": "object",
+      "title": "Bare metal machine user data for the rack.",
+      "required": [
+        "rackSlot",
+        "bootMacAddress",
+        "bmcCredentials",
+        "tpmEndorsementKey",
+        "bmcMacAddress"
+      ],
+      "properties": {
+        "bmcConnectionString": {
+          "description": "The connection string for the bare metal controller on this bare metal machine.",
+          "type": "string",
+          "readOnly": true
+        },
+        "bmcCredentials": {
+          "$ref": "#/definitions/RackManifestBmcCredentials"
+        },
+        "bmcMacAddress": {
+          "description": "MAC address of the bare metal controller on this machine.",
+          "type": "string"
+        },
+        "bootMacAddress": {
+          "description": "The MAC address of a network interface card connected to the PXE network.",
+          "type": "string"
+        },
+        "machineDetails": {
+          "description": "Additional optional details such as serial number, asset tag, etc.",
+          "type": "string"
+        },
+        "machineName": {
+          "description": "A user provided name for the bare metal machine created from this user data.\nIf not provided, a name will be generated programmatically.",
+          "type": "string"
+        },
+        "rackSlot": {
+          "description": "The slot in which this physical machine is located, ordered from the bottom up i.e. the lowest slot is 1.\nIt is positional, so the first machine at the bottom is rackSlot: 1, the second machine up is rackSlot: 2.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "tpmEndorsementKey": {
+          "description": "The thumbprint or SHA of the TPM endorsement key that allows the resource provider to ensure authenticity of the machine.",
+          "type": "string"
+        }
+      }
+    },
+    "BmcCredentials": {
+      "type": "object",
+      "title": "Credentials for the baseboard management controller device on this bare metal machine.",
+      "properties": {
+        "password": {
+          "description": "The baseboard management controller device server password.",
+          "type": "string",
+          "x-ms-secret": true,
+          "readOnly": true
+        },
+        "username": {
+          "description": "The baseboard management controller device user name",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Cluster": {
+      "description": "A cluster is the top level object for the on-premise environment.",
+      "type": "object",
+      "title": "Cluster represents an on-Premise Network Cloud cluster",
+      "required": ["location", "extendedLocation", "properties"],
+      "properties": {
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location of the cluster associated with the resource."
+        },
+        "id": {
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "The geo-location where the resource lives",
+          "type": "string",
+          "x-ms-mutability": ["read", "create"]
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ClusterProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The Azure system data generated for the resource."
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ClusterAvailableUpgradeVersion": {
+      "description": "ClusterAvailableUpgradeVersion represents the various cluster upgrade parameters",
+      "type": "object",
+      "properties": {
+        "controlImpact": {
+          "description": "The indicator of whether the control plane will be impacted during the upgrade.",
+          "type": "string",
+          "enum": ["True", "False"],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ControlImpact"
+          },
+          "readOnly": true
+        },
+        "expectedDuration": {
+          "description": "The expected duration needed for this upgrade.",
+          "type": "string",
+          "readOnly": true
+        },
+        "impactDescription": {
+          "description": "The impact description including the specific details and release notes.",
+          "type": "string",
+          "readOnly": true
+        },
+        "targetClusterVersion": {
+          "description": "The target version this cluster will be upgraded to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "workloadImpact": {
+          "description": "The indicator of whether the workload will be impacted during the upgrade.",
+          "type": "string",
+          "enum": ["True", "False"],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "WorkloadImpact"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterDeployParameters": {
+      "type": "object",
+      "title": "ClusterDeployParameters represents the body of the request to deploy cluster.",
+      "properties": {
+        "rackName": {
+          "description": "The name of the rack (rack-manifest) to use for bootstrapping the deployment. The system will determine which rack to use if this is not provided.",
+          "type": "string"
+        }
+      }
+    },
+    "ClusterList": {
+      "type": "object",
+      "title": "ClusterList represents a list of Clusters.",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of clusters.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Cluster"
+          }
+        }
+      }
+    },
+    "ClusterManager": {
+      "description": "A ClusterManager creates and  manages customer manager instances on demand.",
+      "type": "object",
+      "title": "ClusterManager represents a control-plane to manage one or more on-premises clusters.",
+      "required": ["location", "properties"],
+      "properties": {
+        "id": {
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "The geo-location where the resource lives",
+          "type": "string",
+          "x-ms-mutability": ["read", "create"]
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ClusterManagerProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The Azure system data generated for the resource."
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ClusterManagerList": {
+      "description": "ClusterManagerList represents a list of cluster manager objects.",
+      "type": "object",
+      "title": "List of cluster manager objects.",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of cluster managers.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClusterManager"
+          }
+        }
+      }
+    },
+    "ClusterManagerProperties": {
+      "description": "ClusterManagerProperties represents the properties of a cluster manager",
+      "type": "object",
+      "required": ["fabricControllerId", "analyticsWorkspaceId"],
+      "properties": {
+        "aggregatorRackSkusSupported": {
+          "description": "A list of the aggregator rack SKUs supported by the cluster manager.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AggregatorRackSkuSupported"
+          },
+          "readOnly": true
+        },
+        "analyticsWorkspaceId": {
+          "description": "AnalyticsWorkspace is where any logs relevant to customer will be relayed for example \"/microsoft.operationalinsights/workspaces/{logAnalyticsWorkspaceName}\"",
+          "type": "string"
+        },
+        "clusterVersions": {
+          "description": "ClusterVersions represents all the cluster versions the manager supports which would be used as input in the cluster clusterVersion property.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "fabricControllerId": {
+          "description": "URI reference to the fabric controller that is 1:1 with the cluster manager",
+          "type": "string"
+        },
+        "managerExtendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "ManagerExtendedLocation is the ExtendedLocation associated with the cluster manager's cluster operator and is used when creating cluster and rack manifest resources.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Cluster manager provisioning status.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Provisioning",
+            "Accepted"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ClusterManagerProvisioningState"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterPatchParameters": {
+      "type": "object",
+      "title": "ClusterPatchParameters represents the body of the request to patch cluster properties.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterPatchProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "Azure resource tags that will replace the existing ones.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ClusterPatchProperties": {
+      "type": "object",
+      "title": "ClusterPatchProperties represents the properties of a cluster during Patch.",
+      "properties": {
+        "clusterLocation": {
+          "description": "The customer-provided location information to identify where the cluster resides.",
+          "type": "string"
+        }
+      }
+    },
+    "ClusterProperties": {
+      "description": "https://armwiki.azurewebsites.net/rpaas/arc-rp/conversion/SchemaTranslation.html#default-kubernetes-bridge-mapping\n\nfor now, we'll align on the same concept for our RPaaS\nobjects as well\n\nClusterProperties represents the properties of a cluster.",
+      "type": "object",
+      "title": "Note, k8s bridge resource types will default to\na singular status field under properties",
+      "required": [
+        "networkFabricId",
+        "clusterType",
+        "analyticsWorkspaceId",
+        "clusterVersion"
+      ],
+      "properties": {
+        "analyticsWorkspaceId": {
+          "description": "The customer must specify a Log Analytics Workspace upon creation. This workspace will be where any logs that are relevant to",
+          "type": "string"
+        },
+        "availableUpgradeVersions": {
+          "description": "The list of cluster runtime version upgrades available for this cluster.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClusterAvailableUpgradeVersion"
+          },
+          "x-ms-identifiers": ["targetClusterVersion"],
+          "readOnly": true
+        },
+        "clusterExtendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location (custom location) that represents the cluster's control plane location.\nThis extended location is used to route the requests of child objects of the cluster that are handled by the platform operator.",
+          "readOnly": true
+        },
+        "clusterLocation": {
+          "description": "The customer-provided location information to identify where the cluster resides.",
+          "type": "string"
+        },
+        "clusterManagerId": {
+          "description": "The resource ID of the cluster manager that manages this cluster.\nThis is set by the Cluster Manager when the cluster is created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "clusterType": {
+          "description": "The type of rack configuration for this cluster.",
+          "type": "string",
+          "enum": ["SingleRack", "MultiRack"],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ClusterType"
+          }
+        },
+        "clusterVersion": {
+          "description": "The current version of the cluster runtime.",
+          "type": "string"
+        },
+        "deploymentState": {
+          "description": "The state of the cluster's deployment.",
+          "type": "string",
+          "enum": ["PendingDeployment", "Deployed"],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ClusterDeploymentState"
+          },
+          "readOnly": true
+        },
+        "hybridAksExtendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location (custom location) that is used when creating provisioned clusters (Hybrid AKS clusters).",
+          "readOnly": true
+        },
+        "networkFabricId": {
+          "description": "The resource ID of the network fabric associated with the cluster.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the cluster.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Validating",
+            "Provisioning",
+            "Accepted"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ClusterProvisioningState"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterUpdateVersionParameters": {
+      "type": "object",
+      "title": "ClusterUpdateVersionParameters represents the body of the request to update cluster version.",
+      "properties": {
+        "targetClusterVersion": {
+          "description": "Version to be applied to the cluster during update.",
+          "type": "string"
+        }
+      }
+    },
+    "ExtendedLocation": {
+      "type": "object",
+      "title": "ExtendedLocation is the Azure custom location where this resource will be created.",
+      "required": ["type", "name"],
+      "properties": {
+        "name": {
+          "description": "ResourceId of the custom location on which resource will be created.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Extended location type e.g CustomLocation.",
+          "type": "string"
+        }
+      }
+    },
+    "HardwareInventory": {
+      "description": "including information acquired from the model/sku information and from the ironic inspector.",
+      "type": "object",
+      "title": "HardwareInventory is the hardware configuration of this machine as exposed to the customer,",
+      "properties": {
+        "nics": {
+          "description": "A list of network interface cards and associated details for the bare metal machine.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Nic"
+          },
+          "x-ms-identifiers": ["name"],
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkAttachment": {
+      "description": "NetworkAttachment represents a single network attachment",
+      "type": "object",
+      "required": ["workloadNetworkId", "ipAllocationMethod"],
+      "properties": {
+        "ipAllocationMethod": {
+          "description": "The IP allocation mechanism for the virtual machine.",
+          "type": "string",
+          "enum": ["Dynamic", "Static", "Disabled"],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "VirtualMachineIPAllocationMethod"
+          }
+        },
+        "ipv4Address": {
+          "description": "The IPv4 address of the virtual machine.\n\nThis field is used only if the associated Workload network has a IPAllocationType of IPv4 or Dual-Stack.\n\nIf IPAllocationMethod is:\nStatic - this field must contain a user specified IPv4 address from within the subnet specified in the WorkloadNetwork.\nDynamic - this field is read-only, but will be populated with an address from within the subnet specified in the WorkloadNetwork.\nDisabled - this field will be empty.",
+          "type": "string"
+        },
+        "ipv6Address": {
+          "description": "The IPv6 address of the virtual machine.\n\nThis field is used only if the associated WorkloadNetwork has a IPAllocationType of IPv6 or Dual-Stack.\n\nIf IPAllocationMethod is:\nStatic - this field must contain an IPv6 address range from within the range specified in the WorkloadNetwork.\nDynamic - this field is read-only, but will be populated with an range from within the subnet specified in the WorkloadNetwork.\nDisabled - this field will be empty.",
+          "type": "string"
+        },
+        "workloadNetworkId": {
+          "description": "The resource ID of the workload network attached to the VM.",
+          "type": "string"
+        }
+      }
+    },
+    "Nic": {
+      "type": "object",
+      "title": "Nic is the network interface card details.",
+      "properties": {
+        "macAddress": {
+          "description": "The MAC address associated with this NIC.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the NIC/interface.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PlacementHint": {
+      "description": "PlacementHint represents a single scheduling hint of virtual machine",
+      "type": "object",
+      "required": ["key", "value"],
+      "properties": {
+        "key": {
+          "description": "The key for the virtual machine placement hint.",
+          "type": "string",
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "value": {
+          "description": "The value for the virtual machine placement hint.",
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 1
+        }
+      }
+    },
+    "Rack": {
+      "type": "object",
+      "title": "The rack represents the hardware of a rack and is dependent upon the Cluster for lifecycle.",
+      "required": ["location", "extendedLocation", "properties"],
+      "properties": {
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location of the cluster associated with the resource."
+        },
+        "id": {
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "The geo-location where the resource lives",
+          "type": "string",
+          "x-ms-mutability": ["read", "create"]
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/RackProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The Azure system data generated for the resource."
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "RackList": {
+      "type": "object",
+      "title": "RackList represents a list of rack.",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of Rack.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Rack"
+          }
+        }
+      }
+    },
+    "RackManifest": {
+      "type": "object",
+      "title": "Rack Manifest represents the intentions for the hardware of a rack in a cluster. Rack Manifest is dependent upon the cluster for its lifecycle.",
+      "required": ["location", "extendedLocation", "properties"],
+      "properties": {
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location of the cluster associated with the resource."
+        },
+        "id": {
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "The geo-location where the resource lives",
+          "type": "string",
+          "x-ms-mutability": ["read", "create"]
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/RackManifestProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The Azure system data generated for the resource."
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "RackManifestBmcCredentials": {
+      "type": "object",
+      "title": "Credentials for the baseboard management controller device on this bare metal machine of the rack.",
+      "required": ["username", "password"],
+      "properties": {
+        "password": {
+          "description": "The baseboard management controller device server password.",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "username": {
+          "description": "The baseboard management controller device user name",
+          "type": "string"
+        }
+      }
+    },
+    "RackManifestList": {
+      "type": "object",
+      "title": "RackManifestList represents a list of Rack Manifests.",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of Rack Manifests.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RackManifest"
+          }
+        }
+      }
+    },
+    "RackManifestPatchParameters": {
+      "type": "object",
+      "title": "RackManifestPatchParameters represents the body of the request to patch rack manifest properties.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RackManifestPatchProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "Azure resource tags that will replace the existing ones.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RackManifestPatchProperties": {
+      "type": "object",
+      "title": "RackManifestPatchProperties represents the properties of a rack manifest that can be patched.",
+      "properties": {
+        "rackLocation": {
+          "description": "A free-form customer description of this rack location. For example, \"Datacenter, Floor 3, Aisle 9, Rack 2\".",
+          "type": "string"
+        }
+      }
+    },
+    "RackManifestProperties": {
+      "type": "object",
+      "title": "RackManifestProperties represents the properties of a rack manifest.",
+      "required": [
+        "clusterId",
+        "networkRackId",
+        "rackSkuId",
+        "rackSerialNumber",
+        "baremetalMachineUserData"
+      ],
+      "properties": {
+        "baremetalMachineUserData": {
+          "description": "A list of bare metal machine objects in this rack (not ordered).",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BareMetalMachineUserData"
+          },
+          "x-ms-identifiers": ["rackSlot"]
+        },
+        "clusterId": {
+          "description": "The resource ID of the cluster to which this rack is associated.",
+          "type": "string"
+        },
+        "clusterManagerId": {
+          "description": "The resource ID of the cluster manager that manages this rack manifest.\nThis is set by the Cluster Manager when the rack manifest is created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "networkRackId": {
+          "description": "The resource ID of the associated network rack resource.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the rack manifest.",
+          "type": "string",
+          "enum": ["Succeeded", "Failed", "Canceled", "Accepted"],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "RackManifestProvisioningState"
+          },
+          "readOnly": true
+        },
+        "rackId": {
+          "description": "The resource ID of the rack that was realized by the deployment of this rack manifest.\nOnce assigned, this rack manifest can no longer be used in a future deployment or update operations.\nIt is effectively “used up”.",
+          "type": "string",
+          "readOnly": true
+        },
+        "rackLocation": {
+          "description": "A free-form customer description of this rack location. For example, \"Datacenter, Floor 3, Aisle 9, Rack 2\".",
+          "type": "string"
+        },
+        "rackSerialNumber": {
+          "description": "A globally unique identifier for the rack.",
+          "type": "string"
+        },
+        "rackSkuId": {
+          "description": "The resource ID of the SKU for the rack being added.",
+          "type": "string"
+        }
+      }
+    },
+    "RackPatchParameters": {
+      "type": "object",
+      "title": "RackPatchParameters represents the body of the request to patch rack properties.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RacksPatchProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "Azure resource tags that will replace the existing ones.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RackProperties": {
+      "type": "object",
+      "title": "RackProperties represents the properties of a rack.",
+      "properties": {
+        "clusterId": {
+          "description": "The resource ID of the cluster the rack is created for. This value is set when the Rack is created by the Cluster and derived from the extended location above.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the rack resource.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Provisioning",
+            "Accepted"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "RackProvisioningState"
+          },
+          "readOnly": true
+        },
+        "rackLocation": {
+          "description": "This is a customer description of the rack. (e.g. “DTN Datacenter, Floor 3, Isle 9, Rack 2B”)",
+          "type": "string"
+        },
+        "rackManifestId": {
+          "description": "A reference to the rack manifest used to deploy this Rack.",
+          "type": "string",
+          "readOnly": true
+        },
+        "rackSerialNumber": {
+          "description": "This is a globally unique identifier for an network cloud rack.",
+          "type": "string"
+        },
+        "rackSkuId": {
+          "description": "The SKU for this rack",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RacksPatchProperties": {
+      "type": "object",
+      "title": "RacksPatchProperties represents the properties of a rack during Patch.",
+      "properties": {
+        "rackLocation": {
+          "description": "This is a customer description of the rack. (e.g. “Datacenter, Floor 3, Isle 9, Rack 2B”)",
+          "type": "string"
+        },
+        "rackSerialNumber": {
+          "description": "This is a globally unique identifier for an network cloud rack.",
+          "type": "string"
+        }
+      }
+    },
+    "TagsParameter": {
+      "type": "object",
+      "title": "TagsParameter represents the resource tags.",
+      "properties": {
+        "tags": {
+          "description": "Azure resource tags that will replace the existing ones.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "VirtualMachine": {
+      "description": "VirtualMachine represents an on-Premises Network Cloud Virtual Machine",
+      "type": "object",
+      "required": ["location", "extendedLocation", "properties"],
+      "properties": {
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location of the cluster associated with the resource."
+        },
+        "id": {
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "The geo-location where the resource lives",
+          "type": "string",
+          "x-ms-mutability": ["read", "create"]
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/VirtualMachineProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The Azure system data generated for the resource."
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "VirtualMachineList": {
+      "type": "object",
+      "title": "VirtualMachineList represents a list of Virtual Machines.",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of Virtual Machines.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachine"
+          }
+        }
+      }
+    },
+    "VirtualMachinePowerOffParameters": {
+      "type": "object",
+      "title": "VirtualMachinePowerOffParameters represents the body of the request to power off virtual machine.",
+      "properties": {
+        "skipShutdown": {
+          "description": "Allows to bypass OS shutdown and power virtual machine off immediately.",
+          "type": "string",
+          "default": "False",
+          "enum": ["True", "False"],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "SkipShutdown"
+          }
+        }
+      }
+    },
+    "VirtualMachineProperties": {
+      "type": "object",
+      "title": "VirtualMachineProperties represents the properties of a virtual machine.",
+      "required": [
+        "vmImage",
+        "cpuCores",
+        "memorySizeGB",
+        "diskSizeGB",
+        "networkAttachments",
+        "sshKey"
+      ],
+      "properties": {
+        "bareMetalMachineId": {
+          "description": "The resource ID of the bare metal machine the virtual machine has landed to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "clusterId": {
+          "description": "The resource ID of the cluster the virtual machine is created for.",
+          "type": "string",
+          "readOnly": true
+        },
+        "cpuCores": {
+          "description": "The number of CPU cores in the virtual machine.",
+          "type": "integer",
+          "format": "int64",
+          "minimum": 1
+        },
+        "diskSizeGB": {
+          "description": "The root disk size of the virtual machine in GB.",
+          "type": "integer",
+          "format": "int64",
+          "minimum": 1
+        },
+        "memorySizeGB": {
+          "description": "The memory size of the virtual machine in GB.",
+          "type": "integer",
+          "format": "int64",
+          "minimum": 1
+        },
+        "networkAttachments": {
+          "description": "The list of network attachments to the virtual machine.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkAttachment"
+          },
+          "x-ms-identifiers": []
+        },
+        "networkData": {
+          "description": "The Base64 encoded cloud-init network data.",
+          "type": "string"
+        },
+        "placementHints": {
+          "description": "The scheduling hints for the virtual machine.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlacementHint"
+          },
+          "x-ms-identifiers": ["key"]
+        },
+        "powerState": {
+          "description": "The power state of the virtual machine.",
+          "type": "string",
+          "enum": ["On", "Off"],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "VirtualMachinePowerState"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the virtual machine.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Provisioning",
+            "Accepted"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "VirtualMachineProvisioningState"
+          },
+          "readOnly": true
+        },
+        "sshKey": {
+          "description": "The Base64 encoded public ssh key of the user.",
+          "type": "string"
+        },
+        "userData": {
+          "description": "The Base64 encoded cloud-init user data.",
+          "type": "string"
+        },
+        "vmImage": {
+          "description": "The URL to virtual machine OCI image, could be from ACR or other OCI repository.",
+          "type": "string"
+        }
+      }
+    },
+    "WorkloadNetwork": {
+      "description": "WorkloadNetwork represents an on-premises workload network",
+      "type": "object",
+      "required": ["location", "extendedLocation", "properties"],
+      "properties": {
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location of the cluster associated with the resource."
+        },
+        "id": {
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "The geo-location where the resource lives",
+          "type": "string",
+          "x-ms-mutability": ["read", "create"]
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/WorkloadNetworkProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The Azure system data generated for the resource."
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "WorkloadNetworkList": {
+      "type": "object",
+      "title": "WorkloadNetworkList represents a list of WorkloadNetworks.",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of workload networks.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkloadNetwork"
+          }
+        }
+      }
+    },
+    "WorkloadNetworkProperties": {
+      "type": "object",
+      "title": "WorkloadNetworkProperties represents the properties of a workload network.",
+      "required": ["routingDomainIds"],
+      "properties": {
+        "clusterId": {
+          "description": "The resourceId of the Network Cloud cluster this workload network is associated with.",
+          "type": "string",
+          "readOnly": true
+        },
+        "hybridAksClustersAssociatedIds": {
+          "description": "The list of Hybrid AKS cluster ID(s) that are associated with this workload network.",
+          "type": "array",
+          "minItems": 0,
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "hybridAksIpamEnabled": {
+          "description": "Denotes whether or not to enable IP Address Management(IPAM) allocation on this network attachment definition. By default, IPAM is enabled.",
+          "type": "string",
+          "default": "True",
+          "enum": ["True", "False"],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "HybridAksIpamEnabled"
+          }
+        },
+        "hybridAksPluginType": {
+          "description": "The network plugin type for HybridAKS, defaults to \"HostDevice\".",
+          "type": "string",
+          "default": "HostDevice",
+          "enum": ["HostDevice", "MACVLAN", "DPDK", "IPVLAN"],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "WorkloadNetworkHybridAksPluginType"
+          }
+        },
+        "interfaceName": {
+          "description": "The interface related to the workload network.",
+          "type": "string",
+          "readOnly": true
+        },
+        "ipAllocationType": {
+          "description": "The type of the IP address allocation, defaulted to \"DualStack\".",
+          "type": "string",
+          "default": "DualStack",
+          "enum": ["IPV4", "IPV6", "DualStack"],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "WorkloadNetworkIPAllocationType"
+          }
+        },
+        "ipv4AddressPrefixIndex": {
+          "description": "The index of IPv4AddressPrefix list to be used for this workload network. Given a routing domain can have multiple IPv4 prefixes assigned to it, this parameter defines the prefix this workload network is associated with. The index value is zero-based, with the first entry being an index value of 0.",
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0
+        },
+        "ipv6AddressRangeIndex": {
+          "description": "The index of the IPv6RangePrefix list to be used for this Workload Network. Given a routing domain can have multiple IPv6 ranges assigned to it, this parameter defines the range this workload network is associated with.The index value is zero-based, with the first entry being an index value of 0.",
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the workload network.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Provisioning",
+            "Accepted"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "WorkloadNetworkProvisioningState"
+          },
+          "readOnly": true
+        },
+        "routingDomainIds": {
+          "description": "The list of routing domain ID(s) associated with this workload network.",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "trunkRoutingDomains": {
+          "description": "The parameter indicates if the routing domains should be trunked. If more than one routing domain is supplied, and this value is set to \"False\", only the first Routing Domain will be utilized.",
+          "type": "string",
+          "default": "False",
+          "enum": ["True", "False"],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "TrunkRoutingDomains"
+          }
+        },
+        "virtualMachinesAssociatedIds": {
+          "description": "The list of virtual machine ID(s), excluding any Hybrid AKS virtual machines, that are currently using this workload network.",
+          "type": "array",
+          "minItems": 0,
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "BareMetalMachineNameParameter": {
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The name of the bare metal machine network.",
+      "name": "bareMetalMachineName",
+      "in": "path",
+      "required": true
+    },
+    "ClusterManagerNameParameter": {
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The name of the cluster manager.",
+      "name": "clusterManagerName",
+      "in": "path",
+      "required": true
+    },
+    "ClusterNameParameter": {
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The name of the cluster.",
+      "name": "clusterName",
+      "in": "path",
+      "required": true
+    },
+    "RackManifestNameParameter": {
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The name of the rack manifest.",
+      "name": "rackManifestName",
+      "in": "path",
+      "required": true
+    },
+    "RackNameParameter": {
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The name of the rack.",
+      "name": "rackName",
+      "in": "path",
+      "required": true
+    },
+    "VirtualMachineNameParameter": {
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The name of the virtual machine.",
+      "name": "virtualMachineName",
+      "in": "path",
+      "required": true
+    },
+    "WorkloadNetworkNameParameter": {
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The name of the workload network.",
+      "name": "workloadNetworkName",
+      "in": "path",
+      "required": true
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "description": "Azure Active Directory OAuth2 Flow",
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": ["user_impersonation"]
+    }
+  ]
+}
