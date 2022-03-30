@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "test-rg",
+    "api-version": "2022-04-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "string",
+        "value": [
+          {
+            "name": "contoso",
+            "location": "westus2",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DeviceUpdate/accounts/contoso",
+            "type": "Microsoft.DeviceUpdate/accounts",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "hostName": "contoso.api.adu.microsoft.com",
+              "sku": "Standard",
+              "locations": [
+                {
+                  "name": "westus2",
+                  "role": "Primary"
+                },
+                {
+                  "name": "westcentralus",
+                  "role": "Failover"
+                }
+              ],
+              "privateEndpointConnections": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DeviceUpdate/accounts/contoso/privateEndpointConnections/peexample01",
+                  "name": "peexample01",
+                  "type": "Microsoft.DeviceUpdate/accounts/privateEndpointConnections",
+                  "properties": {
+                    "provisioningState": "Succeeded",
+                    "privateEndpoint": {
+                      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Network/privateEndpoints/peexample01"
+                    },
+                    "privateLinkServiceConnectionState": {
+                      "status": "Approved",
+                      "description": "Auto-Approved",
+                      "actionsRequired": "None"
+                    },
+                    "groupIds": [
+                      "groupId"
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
