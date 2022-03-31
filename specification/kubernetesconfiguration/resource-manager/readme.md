@@ -46,6 +46,12 @@ input-file:
   - Microsoft.KubernetesConfiguration/preview/2022-04-02-preview/privateLinkScopes.json
 ```
 
+```yaml $(tag) == 'package-preview-2022-04-only'
+input-file:
+  - Microsoft.KubernetesConfiguration/preview/2022-04-02-preview/extensions.json
+  - Microsoft.KubernetesConfiguration/preview/2022-04-02-preview/privateLinkScopes.json
+```
+
 ### Tag: package-2022-03
 
 These settings apply only when `--tag=package-2022-03` is specified on the command line.

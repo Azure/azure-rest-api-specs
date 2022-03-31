@@ -4,7 +4,7 @@ These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
-``` yaml $(python) && $(track2)
+``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.kubernetesconfiguration
@@ -21,7 +21,7 @@ Generate all API versions currently shipped for this package
 ```yaml $(multiapi)
 clear-output-folder: true
 batch: 
-  - tag: package-preview-2022-04
+  - tag: package-preview-2022-04-only
   - tag: package-2022-03
   - tag: package-preview-2022-01
   - tag: package-preview-2021-11
@@ -40,11 +40,11 @@ clear-output-folder: false
 perform-load: false
 ```
 
-### Tag: package-preview-2022-04 and python
+### Tag: package-preview-2022-04-only and python
 
-These settings apply only when `--tag=package-preview-2022-04 --python` is specified on the command line.
+These settings apply only when `--tag=package-preview-2022-04-only --python` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2022-04'
+``` yaml $(tag) == 'package-preview-2022-04-only'
 namespace: azure.mgmt.kubernetesconfiguration.v2022_04_02_preview
 output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/v2022_04_02_preview
 ```
@@ -128,4 +128,9 @@ These settings apply only when `--tag=package-2019-11-01-preview  --python` is s
 ``` yaml $(tag) == 'package-2019-11-01-preview '
 namespace: azure.mgmt.kubernetesconfiguration.v2019_11_01_preview
 output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/v2019_11_01_preview
+```
+
+``` yaml $(python)
+modelerfour:
+  lenient-model-deduplication: true
 ```
