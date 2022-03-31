@@ -111,6 +111,7 @@ These settings apply only when `--tag=package-2020-10-01-only` is specified on t
 
 ``` yaml $(tag) == 'package-2020-10-01-only'
 input-file:
+- Microsoft.Authorization/stable/2020-10-01/common-types.json
 - Microsoft.Authorization/stable/2020-10-01/EligibleChildResources.json
 - Microsoft.Authorization/stable/2020-10-01/RoleAssignmentSchedule.json
 - Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleInstance.json
