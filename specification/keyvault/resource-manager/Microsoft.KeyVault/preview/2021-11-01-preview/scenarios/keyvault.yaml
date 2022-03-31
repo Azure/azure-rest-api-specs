@@ -11,10 +11,10 @@ prepareSteps:
     armTemplate: ./peArmTemplate/Generate_Unique_name_template.json
   - step: Vault_Create
     exampleFile: ../examples/createVault.json
-    resourceUpdate:
-      - replace: /properties/tenantId
+    requestUpdate:
+      - replace: /parameters/properties/tenantId
         value: $(azureTenantId)
-      - replace: /properties/accessPolicies/0/tenantId
+      - replace: /parameters/properties/accessPolicies/0/tenantId
         value: $(azureTenantId)
 
 scenarios:
@@ -25,14 +25,14 @@ scenarios:
         exampleFile: ../examples/checkVaultNameAvailability.json
       - step: Vault_Update
         exampleFile: ../examples/updateVault.json
-        resourceUpdate:
-          - replace: /properties/tenantId
+        requestUpdate:
+          - replace: /parameters/properties/tenantId
             value: $(azureTenantId)
-          - replace: /properties/accessPolicies/0/tenantId
+          - replace: /parameters/properties/accessPolicies/0/tenantId
             value: $(azureTenantId)
       - step: Vault_UpdateAccessPoliciesAdd
         exampleFile: ../examples/updateAccessPoliciesAdd.json
-        resourceUpdate:
+        requestUpdate:
           - replace: /properties/accessPolicies/0/tenantId
             value: $(azureTenantId)
       - step: Vault_Get

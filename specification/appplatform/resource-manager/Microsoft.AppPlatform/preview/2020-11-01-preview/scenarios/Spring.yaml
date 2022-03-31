@@ -60,8 +60,8 @@ scenarios:
 
       - step: Services_Update
         exampleFile: ../examples/Services_Update.json
-        resourceUpdate:
-          - replace: /tags
+        requestUpdate:
+          - replace: /resource/tags
             value:
               hello: world
               created-by: api-test
@@ -82,8 +82,8 @@ scenarios:
         exampleFile: ../examples/Certificates_CreateOrUpdate.json
         variables:
           certificateName: asc-certificate
-        resourceUpdate:
-          - replace: /properties
+        requestUpdate:
+          - replace: /certificateResource/properties
             value:
               vaultUri: https://integration-test-prod.vault.azure.net/
               keyVaultCertName: pfx-cert
@@ -108,8 +108,8 @@ scenarios:
 
       - step: ConfigServers_UpdatePut
         exampleFile: ../examples/ConfigServers_UpdatePut.json
-        resourceUpdate:
-          - replace: /properties/configServer/gitProperty
+        requestUpdate:
+          - replace: /configServerResource/properties/configServer/gitProperty
             value:
               uri: https://github.com/VSChina/asc-config-server-test-public.git
               label: master
@@ -117,8 +117,8 @@ scenarios:
 
       - step: ConfigServers_UpdatePatch
         exampleFile: ../examples/ConfigServers_UpdatePatch.json
-        resourceUpdate:
-          - replace: /properties/configServer/gitProperty
+        requestUpdate:
+          - replace: /configServerResource/properties/configServer/gitProperty
             value:
               uri: https://github.com/azure-samples/spring-petclinic-microservices-config
 
@@ -128,8 +128,8 @@ scenarios:
       # Monitoring
       - step: MonitoringSettings_UpdatePut
         exampleFile: ../examples/MonitoringSettings_UpdatePut.json
-        resourceUpdate:
-          - replace: /properties
+        requestUpdate:
+          - replace: /monitorSettingResource/properties
             value:
               traceEnabled: true
               appInsightsInstrumentationKey: "$(insightsInstrumentationKey)"
@@ -140,17 +140,17 @@ scenarios:
 
       - step: MonitoringSettings_UpdatePatch
         exampleFile: ../examples/MonitoringSettings_UpdatePatch.json
-        resourceUpdate:
-          - replace: /properties/appInsightsSamplingRate
+        requestUpdate:
+          - replace: /monitorSettingResource/properties/appInsightsSamplingRate
             value: 100
 
       # Apps
       - step: Apps_Create
         exampleFile: ../examples/Apps_CreateOrUpdate.json
-        resourceUpdate:
-          - remove: /properties/temporaryDisk
-          - remove: /properties/persistentDisk
-          - replace: /properties/public
+        requestUpdate:
+          - remove: /appResource/properties/temporaryDisk
+          - remove: /appResource/properties/persistentDisk
+          - replace: /appResource/properties/public
             value: false
 
       - step: Apps_Get
@@ -160,10 +160,10 @@ scenarios:
         exampleFile: ../examples/Deployments_CreateOrUpdate.json
         variables:
           deploymentName: default
-        resourceUpdate:
-          - replace: /properties/source/type
+        requestUpdate:
+          - replace: /deploymentResource/properties/source/type
             value: Jar
-          - replace: /properties/source/relativePath
+          - replace: /deploymentResource/properties/source/relativePath
             value: "<default>"
 
       - step: Deployments_Get
@@ -173,18 +173,18 @@ scenarios:
 
       - step: Apps_Update_ActiveDeployment # PATCH
         exampleFile: ../examples/Apps_Update.json
-        resourceUpdate:
-          - replace: /properties/activeDeploymentName
+        requestUpdate:
+          - replace: /appResource/properties/activeDeploymentName
             value: default
 
       - step: Apps_Update_Disk # PATCH
         exampleFile: ../examples/Apps_Update.json
-        resourceUpdate:
-          - replace: /properties/temporaryDisk
+        requestUpdate:
+          - replace: /appResource/properties/temporaryDisk
             value: { "sizeInGB": 3, "mountPath": "/tmpdisk" }
-          - replace: /properties/persistentDisk
+          - replace: /appResource/properties/persistentDisk
             value: { "sizeInGB": 10, "mountPath": "/data" }
-          - replace: /properties/public
+          - replace: /appResource/properties/public
             value: true
 
       - step: Apps_List
@@ -195,22 +195,22 @@ scenarios:
         exampleFile: ../examples/Bindings_CreateOrUpdate.json
         variables:
           bindingName: mysql-binding
-        resourceUpdate:
-          - replace: /properties/resourceId
+        requestUpdate:
+          - replace: /bindingResource/properties/resourceId
             value: "/subscriptions/b46590cb-a111-4b84-935f-c305aaf1f424/resourceGroups/mary-west/providers/Microsoft.DBforMySQL/servers/fake-sql"
-          - replace: /properties/key
+          - replace: /bindingResource/properties/key
             value: $(mysqlKey)
-          - replace: /properties/bindingParameters
+          - replace: /bindingResource/properties/bindingParameters
             value: { "databaseName": "mysqldb", "username": "test" }
 
       - step: Bindings_Update # PATCH
         exampleFile: ../examples/Bindings_Update.json
         variables:
           bindingName: mysql-binding
-        resourceUpdate:
-          - replace: /properties/key
+        requestUpdate:
+          - replace: /bindingResource/properties/key
             value: $(mysqlKey)
-          - replace: /properties/bindingParameters
+          - replace: /bindingResource/properties/bindingParameters
             value: { "databaseName": "mysqldb2", "username": "test2" }
 
       - step: Bindings_Get
@@ -237,16 +237,16 @@ scenarios:
         exampleFile: ../examples/CustomDomains_CreateOrUpdate.json
         variables:
           domainName: $(dnsCname).$(customDomainName)
-        resourceUpdate:
-          - replace: /properties
+        requestUpdate:
+          - replace: /domainResource/properties
             value: { "certName": "asc-certificate" }
 
       - step: CustomDomains_Update
         exampleFile: ../examples/CustomDomains_Update.json
         variables:
           domainName: $(dnsCname).$(customDomainName)
-        resourceUpdate:
-          - replace: /properties
+        requestUpdate:
+          - replace: /domainResource/properties
             value: { "certName": "asc-certificate" } # TODO: use another cert
 
       - step: CustomDomains_Get
@@ -279,18 +279,18 @@ scenarios:
         exampleFile: ../examples/Deployments_CreateOrUpdate.json
         variables:
           deploymentName: blue
-        resourceUpdate:
-          - replace: /sku/capacity
+        requestUpdate:
+          - replace: /deploymentResource/sku/capacity
             value: 2
-          - replace: /properties/source/type
+          - replace: /deploymentResource/properties/source/type
             value: Jar
-          - replace: /properties/source/relativePath
+          - replace: /deploymentResource/properties/source/relativePath
             value: $(relativePath)
 
       - step: Apps_Update # PATCH
         exampleFile: ../examples/Apps_Update.json
-        resourceUpdate:
-          - replace: /properties/activeDeploymentName
+        requestUpdate:
+          - replace: /appResource/properties/activeDeploymentName
             value: blue
 
       - step: Deployments_Restart
