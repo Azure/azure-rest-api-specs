@@ -16,11 +16,6 @@ scenarios:
       - step: Get cat Rococo
         exampleFile: ../examples/CatsGet.json
 
-      - step: Update full name
-        resourceUpdate:
-          - replace: /properties/fullName
-            value: Rococo the Cat
-
   - description: Microsoft.YourService Test Cat mate link
     steps:
       - step: Create cat Rococo
@@ -37,7 +32,3 @@ scenarios:
           cat1Id:
             fromResponse: /id
       
-      - step: Link cat Baroque to cat Rococo
-        resourceUpdate:
-          - add: /properties/mateId
-            value: $(cat1Id)
