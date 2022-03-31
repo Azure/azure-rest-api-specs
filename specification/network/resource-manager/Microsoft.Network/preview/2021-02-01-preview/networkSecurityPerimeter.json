@@ -685,13 +685,127 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociationProxies/{associationName}": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/AssociationNameParameter"
+        }
+      ],
       "get": {
         "tags": [
           "NspAssociations"
         ],
-        "operationId": "NspAssociations_List",
-        "description": "Lists the NSP resource associations in the specified perimeter.",
+        "operationId": "NspAssociations_Get",
+        "description": "Gets the specified NSP association by name.",
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the NSP resource association.",
+            "schema": {
+              "$ref": "#/definitions/NspAssociation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspAssociationGet": {
+            "$ref": "./examples/NspAssociationGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NspAssociations"
+        ],
+        "operationId": "NspAssociations_CreateOrUpdate",
+        "description": "Creates or updates a NSP resource association.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NspAssociation"
+            },
+            "description": "Parameters that hold the NspAssociation resource to be created/updated."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Existing resource association is updated. Returns the resource.",
+            "schema": {
+              "$ref": "#/definitions/NspAssociation"
+            }
+          },
+          "201": {
+            "description": "Create - Returns the NspAssociation resource created.",
+            "schema": {
+              "$ref": "#/definitions/NspAssociation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspAssociationPut": {
+            "$ref": "./examples/NspAssociationPut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NspAssociations"
+        ],
+        "operationId": "NspAssociations_Delete",
+        "description": "Deletes an NSP association resource.",
+        "responses": {
+          "200": {
+            "description": "Delete Succeed."
+          },
+          "202": {
+            "description": "Delete in progress."
+          },
+          "204": {
+            "description": "Request successful. The resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspAssociationDelete": {
+            "$ref": "./examples/NspAssociationDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations": {
+      "get": {
+        "tags": [
+          "NspAssociationsProxy"
+        ],
+        "operationId": "NspAssociationsProxy_List",
+        "description": "Lists the NSP resource associations proxy.",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -717,9 +831,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns the list of NSP resource associations.",
+            "description": "OK - Returns the list of NSP resource associations proxy.",
             "schema": {
-              "$ref": "#/definitions/NspAssociationsListResult"
+              "$ref": "#/definitions/NspAssociationsProxyListResult"
             }
           },
           "default": {
@@ -731,7 +845,58 @@
         },
         "x-ms-examples": {
           "NspAssociationList": {
-            "$ref": "./examples/NspAssociationList.json"
+            "$ref": "./examples/NspAssociationProxyList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociationsProxy": {
+      "get": {
+        "tags": [
+          "NspAssociationsProxy"
+        ],
+        "operationId": "NspAssociationsProxy_List",
+        "description": "Lists the NSP resource associations proxy.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ListTopParameter"
+          },
+          {
+            "$ref": "#/parameters/ListSkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the list of NSP resource associations proxy.",
+            "schema": {
+              "$ref": "#/definitions/NspAssociationsProxyListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspAssociationList": {
+            "$ref": "./examples/NspAssociationProxyList.json"
           }
         }
       }
@@ -775,6 +940,68 @@
         "x-ms-examples": {
           "Check Dns Name Availability": {
             "$ref": "./examples/PerimeterAssociableResourcesList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{networkSecurityPerimeterProfile}/checkMembers": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/networkSecurityPerimeterProfileParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "NetworkSecurityPerimeters"
+        ],
+        "operationId": "NetworkSecurityPerimeters_CheckMembers",
+        "description": "Action to check members associated to an NSP Profile",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckMembers"
+            },
+            "description": "Parameter supplied to create or update the network security perimeter."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource Updated. Returns the network security perimeter.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeter"
+            }
+          },
+          "201": {
+            "description": "Resource Created. Returns the network security perimeter.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeter"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Post Check Members": {
+            "$ref": "./examples/NetworkSecurityPerimeterCheckMembersPost.json"
           }
         }
       }
@@ -1177,6 +1404,26 @@
         }
       },
       "description": "Properties of the perimeter associable resources."
+    },
+    "CheckMembers": {
+      "type": "object",
+      "properties": {
+        "memberDestinations": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/PrivateLinkResourceId"}
+        }
+      },
+      "description": "Request object for check members API."
+    },
+    "PrivateLinkResourceId": {
+      "type": "object",
+      "properties": {
+        "privateLinkResourceId": {
+          "type": "string",
+          "description": "Private Link Resource Id."
+        }
+      },
+      "description": "Properties of network security perimeter."
     }
   },
   "parameters": {
