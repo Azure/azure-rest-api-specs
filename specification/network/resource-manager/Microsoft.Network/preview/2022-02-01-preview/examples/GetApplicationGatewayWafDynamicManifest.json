@@ -1,5 +1,6 @@
 {
   "parameters": {
+    "location": "westus",
     "api-version": "2021-05-01",
     "subscriptionId": "subid"
   },
@@ -7,19 +8,16 @@
     "200": {
       "body": {
         "value": {
-          "DefaultRuleSetProperty": {
-            "ruleSetType": "OWASP",
-            "ruleSetVersion": "3.0"
-          },
-          "AvailableRuleSets": [
-            {
-              "name": "OWASP_3.0",
-              "id": "/subscriptions//resourceGroups//providers/Microsoft.Network/applicationGatewayAvailableWafRuleSets/",
-              "type": "Microsoft.Network/applicationGatewayAvailableWafRuleSets",
-              "properties": {
+            "DefaultRuleSetProperty": {
+              "ruleSetType": "OWASP",
+              "ruleSetVersion": "3.0"
+            },
+            "AvailableRuleSets": [
+              {
                 "ruleSetType": "OWASP",
                 "ruleSetVersion": "3.0",
                 "status": "preview",
+                "tier": ["WAF_v2"],
                 "ruleGroups": [
                   {
                     "ruleGroupName": "General",
@@ -33,8 +31,7 @@
                   }
                 ]
               }
-            }
-          ]
+            ]
         }
       }
     }

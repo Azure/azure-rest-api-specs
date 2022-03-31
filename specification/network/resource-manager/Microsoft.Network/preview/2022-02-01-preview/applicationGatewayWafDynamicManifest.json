@@ -3,7 +3,7 @@
   "info": {
     "title": "NetworkManagementClient",
     "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
-    "version": "2021-05-01"
+    "version": "2022-02-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/ApplicationGatewayWafDynamicManifest": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/applicationGatewayWafDynamicManifest": {
       "get": {
         "operationId": "ApplicationGatewayWafDynamicManifest_Get",
         "description": "Gets the regional application gateway waf manifest.",
@@ -44,7 +44,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The location"
+            "description": "The region where the nrp are located at."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -84,18 +84,12 @@
       ],
       "properties": {
         "DefaultRuleSet": {
-          "type": "object",
+          "$ref": "#/definitions/DefaultRuleSetProperty",
           "description": "The default ruleset.",
-          "items": {
-            "$ref": "#/definitions/DefaultRuleSetProperty"
-          }
         },
         "AvailableRuleSets": {
-          "type": "object",
+          "$ref": "#/definitions/AvailableRuleSetsProperty",
           "description": "The available ruleset.",
-          "items": {
-            "$ref": "#/definitions/AvailableRuleSetsProperty"
-          }
         }
       },
       "description": "Response for ApplicationGatewayWafDynamicManifest API service call."
@@ -126,26 +120,60 @@
           "items": {
             "$ref": "#/definitions/ApplicationGatewayFirewallRuleSet"
           },
+          "x-ms-identifiers": [],
           "description": "The list of available application gateway rule sets."
         }
       },
       "description": "A web application firewall available rule sets."
     },
     "ApplicationGatewayFirewallRuleSet": {
+      "type": "object",
       "properties": {
-        "ruleSetType": {
+        "RuleSetType": {
           "type": "string",
           "description": "The type of the web application firewall rule set."
         },
-        "ruleSetVersion": {
+        "RuleSetVersion": {
           "type": "string",
           "description": "The version of the web application firewall rule set type."
+        },
+        "Status": {
+          "type": "string",
+          "description": "The rule set status",
+          "enum": [
+            "Preview",
+            "GA",
+            "Supported",
+            "Deprecated"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayRuleetStatusOptions",
+            "modelAsString": true
+          }
+        },
+        "Tier": {
+          "type": "array",
+          "description": "Tier of an application gateway that support the rule set.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Standard",
+              "WAF",
+              "Standard_v2",
+              "WAF_v2"
+              ],
+              "x-ms-enum": {
+                "name": "ApplicationGatewayTierTypes",
+                "modelAsString": true
+              }
+            }
         },
         "ruleGroups": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationGatewayFirewallRuleGroup"
           },
+          "x-ms-identifiers": [],
           "description": "The rule groups of the web application firewall rule set."
         }
       },
@@ -157,6 +185,7 @@
       "description": "Properties of the web application firewall rule set."
     },
     "ApplicationGatewayFirewallRuleGroup": {
+      "type": "object",
       "properties": {
         "ruleGroupName": {
           "type": "string",
@@ -181,6 +210,7 @@
       "description": "A web application firewall rule group."
     },
     "ApplicationGatewayFirewallRule": {
+      "type": "object",
       "properties": {
         "ruleId": {
           "type": "integer",
