@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "searchRequest": {
+      "keywords": null,
+      "limit": 2,
+      "filter": {
+        "not": {
+          "classification": "MICROSOFT.SYSTEM.TEMP_FILE"
+        }
+      }
+    },
+    "api-version": "2021-09-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@search.count": 5158,
+        "value": [
+          {
+            "@search.score": 1.0,
+            "id": "11fd6e94-2dc6-4ebd-822c-caf6f6f60000",
+            "qualifiedName": "mssql://exampleaccount.database.windows.net:3342/exampledb/dbo/exampledata",
+            "name": "exampledata",
+            "description": null,
+            "owner": null,
+            "entityType": "azure_sql_mi_table",
+            "classification": [],
+            "label": [],
+            "assetType": [
+              "Azure SQL Managed Instance"
+            ],
+            "term": [],
+            "contact": []
+          },
+          {
+            "@search.score": 1.0,
+            "id": "1af82c87-798c-41a2-abab-93f6f6f60000",
+            "qualifiedName": "mssql://exampleaccount.database.windows.net:3342/exampledb/dbo/exampledata2",
+            "name": "exampledata2",
+            "description": null,
+            "owner": null,
+            "entityType": "azure_sql_mi_table",
+            "classification": [],
+            "label": [],
+            "assetType": [
+              "Azure SQL Managed Instance"
+            ],
+            "term": [],
+            "contact": []
+          }
+        ]
+      }
+    }
+  }
+}

@@ -135,6 +135,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         }
       },
@@ -219,6 +225,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         }
       },
@@ -256,6 +268,12 @@
           },
           "204": {
             "description": "The output does not exist."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         }
       },
@@ -323,6 +341,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         }
       }
@@ -365,6 +389,12 @@
             "description": "Successfully listed the outputs under the specified streaming job.",
             "schema": {
               "$ref": "#/definitions/OutputListResult"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
             }
           }
         },
@@ -420,6 +450,12 @@
           },
           "202": {
             "description": "The test request was successfully initiated."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -473,7 +509,10 @@
           "type": "string",
           "description": "Indicates the type of data source output will be written to. Required on PUT (CreateOrReplace) requests."
         }
-      }
+      },
+      "required": [
+        "type"
+      ]
     },
     "BlobOutputDataSource": {
       "description": "Describes a blob output data source.",

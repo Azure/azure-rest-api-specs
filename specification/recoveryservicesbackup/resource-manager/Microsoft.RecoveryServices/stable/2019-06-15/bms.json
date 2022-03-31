@@ -1302,32 +1302,6 @@
             "modelAsString": true
           }
         },
-        "healthStatus": {
-          "description": "Health status of protected item.",
-          "enum": [
-            "Passed",
-            "ActionRequired",
-            "ActionSuggested",
-            "Healthy",
-            "TransientDegraded",
-            "PersistentDegraded",
-            "TransientUnhealthy",
-            "PersistentUnhealthy",
-            "Invalid"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "HealthStatus",
-            "modelAsString": true
-          }
-        },
-        "healthDetails": {
-          "description": "Health details on this backup item.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HealthDetails"
-          }
-        },
         "lastBackupStatus": {
           "description": "Last backup operation status. Possible values: Healthy, Unhealthy.",
           "type": "string"
@@ -1336,6 +1310,13 @@
           "format": "date-time",
           "description": "Timestamp of the last backup operation on this backup item.",
           "type": "string"
+        },
+        "kpisHealths": {
+          "description": "Health details of different KPIs",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/KPIResourceHealthDetails"
+          }
         },
         "extendedInfo": {
           "$ref": "#/definitions/AzureFileshareProtectedItemExtendedInfo",
@@ -1630,7 +1611,7 @@
         }
       }
     },
-    "HealthDetails": {
+    "ResourceHealthDetails": {
       "description": "Health Details for backup items.",
       "type": "object",
       "properties": {
@@ -1665,7 +1646,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/HealthDetails"
+          "$ref": "#/definitions/ResourceHealthDetails"
         }
       ]
     },
@@ -1837,16 +1818,11 @@
           }
         },
         "healthStatus": {
-          "description": "Health status of protected item",
+          "description": "Health status of protected item.",
           "enum": [
             "Passed",
             "ActionRequired",
             "ActionSuggested",
-            "Healthy",
-            "TransientDegraded",
-            "PersistentDegraded",
-            "TransientUnhealthy",
-            "PersistentUnhealthy",
             "Invalid"
           ],
           "type": "string",
@@ -1860,6 +1836,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AzureIaaSVMHealthDetails"
+          }
+        },
+        "kpisHealths": {
+          "description": "Health details of different KPIs",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/KPIResourceHealthDetails"
           }
         },
         "lastBackupStatus": {
@@ -2208,35 +2191,16 @@
             "modelAsString": true
           }
         },
-        "healthStatus": {
-          "description": "Health status of protected item.",
-          "enum": [
-            "Passed",
-            "ActionRequired",
-            "ActionSuggested",
-            "Healthy",
-            "TransientDegraded",
-            "PersistentDegraded",
-            "TransientUnhealthy",
-            "PersistentUnhealthy",
-            "Invalid"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "HealthStatus",
-            "modelAsString": true
-          }
-        },
-        "healthDetails": {
-          "description": "Health details on this backup item.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HealthDetails"
-          }
-        },
         "extendedInfo": {
           "$ref": "#/definitions/AzureVmWorkloadProtectedItemExtendedInfo",
           "description": "Additional information for this backup item."
+        },
+        "kpisHealths": {
+          "description": "Health details of different KPIs",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/KPIResourceHealthDetails"
+          }
         }
       },
       "x-ms-discriminator-value": "AzureVmWorkloadProtectedItem"
@@ -4092,6 +4056,35 @@
         }
       },
       "discriminator": "objectType"
+    },
+    "KPIResourceHealthDetails": {
+      "description": "KPI Resource Health Details",
+      "type": "object",
+      "properties": {
+        "resourceHealthStatus": {
+          "description": "Resource Health Status",
+          "enum": [
+            "Healthy",
+            "TransientDegraded",
+            "PersistentDegraded",
+            "TransientUnhealthy",
+            "PersistentUnhealthy",
+            "Invalid"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceHealthStatus",
+            "modelAsString": true
+          }
+        },
+        "resourceHealthDetails": {
+          "description": "Resource Health Status",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceHealthDetails"
+          }
+        }
+      }
     },
     "OperationResultInfoBaseResource": {
       "description": "Base class for operation result info.",

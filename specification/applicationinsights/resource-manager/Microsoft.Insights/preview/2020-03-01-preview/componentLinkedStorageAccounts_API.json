@@ -59,7 +59,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseLinkedStorage"
             }
           },
           "200": {
@@ -108,7 +108,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseLinkedStorage"
             }
           },
           "200": {
@@ -157,7 +157,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseLinkedStorage"
             }
           },
           "200": {
@@ -197,7 +197,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseLinkedStorage"
             }
           },
           "200": {
@@ -216,17 +216,24 @@
     }
   },
   "definitions": {
-    "ErrorResponse": {
-      "description": "Error response indicates Insights service is not able to process the incoming request. The reason is provided in the error message.",
+    "ErrorResponseLinkedStorage": {
       "type": "object",
       "properties": {
-        "code": {
-          "description": "Error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
+        "error": {
+          "description": "Error response indicates Insights service is not able to process the incoming request. The reason is provided in the error message.",
+          "type": "object",
+          "properties": {
+            "code": {
+              "readOnly": true,
+              "description": "Error code.",
+              "type": "string"
+            },
+            "message": {
+              "readOnly": true,
+              "description": "Error message indicating why the operation failed.",
+              "type": "string"
+            }
+          }
         }
       }
     },

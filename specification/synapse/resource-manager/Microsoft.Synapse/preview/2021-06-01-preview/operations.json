@@ -1,0 +1,402 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-06-01-preview",
+    "title": "SynapseManagementClient",
+    "description": "Azure Synapse Analytics APIs"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "type": "oauth2",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Synapse/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "summary": "All operations",
+        "description": "Get all available operations",
+        "tags": [
+          "Operations"
+        ],
+        "deprecated": false,
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AvailableRpOperation"
+              }
+            },
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-examples": {
+          "Get available operations": {
+            "$ref": "./examples/GetAvailableOperations.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/operationResults/{operationId}": {
+      "get": {
+        "operationId": "Operations_GetLocationHeaderResult",
+        "summary": "Get operation result",
+        "description": "Get the result of an operation",
+        "tags": [
+          "Operations"
+        ],
+        "deprecated": false,
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "operationId",
+            "description": "Operation ID",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "201": {
+            "description": ""
+          },
+          "202": {
+            "description": ""
+          },
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-examples": {
+          "Get location header result": {
+            "$ref": "./examples/GetLocationHeader.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/operationStatuses/{operationId}": {
+      "get": {
+        "operationId": "Operations_GetAzureAsyncHeaderResult",
+        "summary": "Get operation status",
+        "description": "Get the status of an operation",
+        "tags": [
+          "Operations"
+        ],
+        "deprecated": false,
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "operationId",
+            "description": "Operation ID",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/OperationResource"
+            },
+            "description": ""
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-examples": {
+          "Get azure async operation header result": {
+            "$ref": "./examples/GetAzureAsyncOperationHeader.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AvailableRpOperation": {
+      "type": "object",
+      "description": "An operation that is available in this resource provider",
+      "properties": {
+        "display": {
+          "$ref": "#/definitions/AvailableRpOperationDisplayInfo",
+          "description": "Display properties of the operation"
+        },
+        "isDataAction": {
+          "type": "string",
+          "description": "Whether this operation is a data action"
+        },
+        "name": {
+          "type": "string",
+          "description": "Operation name"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationMetaPropertyInfo",
+          "description": "Operation properties",
+          "x-ms-client-flatten": true
+        },
+        "origin": {
+          "type": "string",
+          "description": "Operation origin"
+        }
+      }
+    },
+    "OperationResource": {
+      "type": "object",
+      "description": "An operation",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Operation ID"
+        },
+        "name": {
+          "type": "string",
+          "description": "Operation name"
+        },
+        "status": {
+          "enum": [
+            "InProgress",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "description": "Operation status",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OperationStatus",
+            "modelAsString": true
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Operation properties",
+          "x-ms-client-flatten": true
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail",
+          "description": "Errors from the operation"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Operation start time"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Operation start time"
+        },
+        "percentComplete": {
+          "type": "number",
+          "description": "Completion percentage of the operation"
+        }
+      }
+    },
+    "AvailableRpOperationDisplayInfo": {
+      "type": "object",
+      "description": "Description of an available operation",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Operation description"
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource type"
+        },
+        "provider": {
+          "type": "string",
+          "description": "Resource provider name"
+        },
+        "operation": {
+          "type": "string",
+          "description": "Operation name"
+        }
+      }
+    },
+    "OperationMetaPropertyInfo": {
+      "type": "object",
+      "description": "What is this?",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/OperationMetaServiceSpecification",
+          "description": "Operation service specification"
+        }
+      }
+    },
+    "OperationMetaServiceSpecification": {
+      "type": "object",
+      "description": "What is this?",
+      "properties": {
+        "metricSpecifications": {
+          "type": "array",
+          "description": "Service metric specifications",
+          "items": {
+            "$ref": "#/definitions/OperationMetaMetricSpecification"
+          }
+        },
+        "logSpecifications": {
+          "type": "array",
+          "description": "Service log specifications",
+          "items": {
+            "$ref": "#/definitions/OperationMetaLogSpecification"
+          }
+        }
+      }
+    },
+    "OperationMetaMetricSpecification": {
+      "type": "object",
+      "description": "What is this?",
+      "properties": {
+        "sourceMdmNamespace": {
+          "type": "string",
+          "description": "The source MDM namespace"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Metric display name"
+        },
+        "name": {
+          "type": "string",
+          "description": "Metric unique name"
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "Metric aggregation type"
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Metric description"
+        },
+        "sourceMdmAccount": {
+          "type": "string",
+          "description": "The source MDM account"
+        },
+        "enableRegionalMdmAccount": {
+          "type": "boolean",
+          "description": "Whether the regional MDM account is enabled"
+        },
+        "unit": {
+          "type": "string",
+          "description": "Metric units"
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "Metric dimensions",
+          "items": {
+            "$ref": "#/definitions/OperationMetaMetricDimensionSpecification"
+          }
+        },
+        "supportsInstanceLevelAggregation": {
+          "type": "boolean",
+          "description": "Whether the metric supports instance-level aggregation"
+        },
+        "metricFilterPattern": {
+          "type": "string",
+          "description": "Metric filter"
+        }
+      }
+    },
+    "OperationMetaLogSpecification": {
+      "type": "object",
+      "description": "What is this?",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Log display name"
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "Time range the log covers"
+        },
+        "name": {
+          "type": "string",
+          "description": "Log unique name"
+        }
+      }
+    },
+    "OperationMetaMetricDimensionSpecification": {
+      "type": "object",
+      "description": "What is this?",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Dimension display name"
+        },
+        "name": {
+          "type": "string",
+          "description": "Dimension unique name"
+        },
+        "toBeExportedForShoebox": {
+          "type": "boolean",
+          "description": "Whether this metric should be exported for Shoebox"
+        }
+      }
+    }
+  }
+}

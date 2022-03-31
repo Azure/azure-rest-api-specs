@@ -16,6 +16,8 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-eventgrid
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2021-06-preview
+  - tag: package-2020-10-preview
   - tag: package-2020-06
   - tag: package-2020-04-preview
   - tag: package-2020-01-preview
@@ -26,6 +28,35 @@ batch:
   - tag: package-2018-05-preview
   - tag: package-2018-01
 ```
+### Tag: package-2021-06-preview and java
+
+These settings apply only when `--tag=package-2021-06-preview --java` is specified on the command line.
+
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2021-06-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.eventgrid.v2021_06_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/eventgrid/mgmt-v2021_06_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2020-10-preview and java
+
+These settings apply only when `--tag=package-2020-10-preview --java` is specified on the command line.
+
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-10-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.eventgrid.v2020_10_15_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/eventgrid/mgmt-v2020_10_15_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+
 
 ### Tag: package-2020-06 and java
 

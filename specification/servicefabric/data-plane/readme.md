@@ -25,7 +25,7 @@ These are the global settings for the ServiceFabricClient API.
 
 ``` yaml
 openapi-type: data-plane
-tag: '7.1'
+tag: '8.1'
 ```
 
 ### Suppression
@@ -125,7 +125,34 @@ input-file:
 
 ```
 
+### Tag: 7.2
+
+These settings apply only when `--tag=7.2` is specified on the command line.
+
+``` yaml $(tag) == '7.2'
+input-file:
+- Microsoft.ServiceFabric/stable/7.2/servicefabric.json
+
+```
+
+### Tag: 8.0
+
+These settings apply only when `--tag=8.0` is specified on the command line.
+
+``` yaml $(tag) == '8.0'
+input-file:
+- Microsoft.ServiceFabric/stable/8.0/servicefabric.json
+```
+
+### Tag: 8.1
+These settings apply only when `--tag=8.1` is specified on the command line.
+
+``` yaml $(tag) == '8.1'
+input-file:
+- Microsoft.ServiceFabric/stable/8.1/servicefabric.json
+```
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -137,7 +164,6 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
 ```
@@ -179,7 +205,9 @@ input-file:
   - $(this-folder)/Microsoft.ServiceFabric/stable/6.5/servicefabric.json
   - $(this-folder)/Microsoft.ServiceFabric/stable/7.0/servicefabric.json
   - $(this-folder)/Microsoft.ServiceFabric/stable/7.1/servicefabric.json
-
+  - $(this-folder)/Microsoft.ServiceFabric/stable/7.2/servicefabric.json
+  - $(this-folder)/Microsoft.ServiceFabric/stable/8.0/servicefabric.json
+  - $(this-folder)/Microsoft.ServiceFabric/stable/8.1/servicefabric.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 

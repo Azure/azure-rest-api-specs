@@ -1,0 +1,46 @@
+{
+  "title": "Update export",
+  "description": "Update parts of an existing continuous data export, specifying its Id.",
+  "parameters": {
+    "centralDnsSuffixInPath": "azureiotcentral.com",
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "exportId": "abc",
+    "api-version": "preview",
+    "body": {
+      "displayName": "Updated export name",
+      "endpoint": {
+        "type": "StorageEndpoint",
+        "connectionString": "<updated connection string>",
+        "name": "Blob 1"
+      },
+      "enabled": false,
+      "sources": [
+        "devices",
+        "deviceTemplates",
+        "telemetry"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "abc",
+        "etag": "493aface-4c5e-4318-89e9-f6586f687009",
+        "displayName": "Updated export name",
+        "endpoint": {
+          "type": "StorageEndpoint",
+          "connectionString": "<updated connection string",
+          "name": "Blob 1"
+        },
+        "status": "stopped",
+        "enabled": false,
+        "sources": [
+          "devices",
+          "deviceTemplates",
+          "telemetry"
+        ]
+      }
+    }
+  }
+}

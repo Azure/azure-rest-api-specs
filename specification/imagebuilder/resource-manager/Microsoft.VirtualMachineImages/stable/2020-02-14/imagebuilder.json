@@ -598,7 +598,7 @@
         },
         "version": {
           "type": "string",
-          "description": "Image version from the [Azure Gallery Images](https://docs.microsoft.com/en-us/rest/api/compute/virtualmachineimages)."
+          "description": "Image version from the [Azure Gallery Images](https://docs.microsoft.com/en-us/rest/api/compute/virtualmachineimages). If 'latest' is specified here, the version is evaluated when the image build takes place, not when the template is submitted. Specifying 'latest' could cause ROUNDTRIP_INCONSISTENT_PROPERTY issue which will be fixed."
         },
         "planInfo": {
           "$ref": "#/definitions/PlatformImagePurchasePlan",
@@ -674,6 +674,7 @@
         },
         "sha256Checksum": {
           "type": "string",
+          "default": "",
           "description": "SHA256 checksum of the shell script provided in the scriptUri field"
         },
         "inline": {
@@ -750,6 +751,7 @@
         },
         "sha256Checksum": {
           "type": "string",
+          "default": "",
           "description": "SHA256 checksum of the power shell script provided in the scriptUri field above"
         },
         "inline": {
@@ -761,7 +763,13 @@
         },
         "runElevated": {
           "type": "boolean",
+          "default": false,
           "description": "If specified, the PowerShell script will be run with elevated privileges"
+        },
+        "runAsSystem": {
+          "type": "boolean",
+          "default": false,
+          "description": "If specified, the PowerShell script will be run with elevated privileges using the Local System user. Can only be true when the runElevated field above is set to true."
         },
         "validExitCodes": {
           "type": "array",
@@ -787,6 +795,7 @@
         },
         "sha256Checksum": {
           "type": "string",
+          "default": "",
           "description": "SHA256 checksum of the file provided in the sourceUri field above"
         },
         "destination": {
@@ -869,6 +878,7 @@
         },
         "excludeFromLatest": {
           "type": "boolean",
+          "default": false,
           "description": "Flag that indicates whether created image version should be excluded from latest. Omit to use the default (false)."
         },
         "storageAccountType": {
@@ -935,11 +945,13 @@
       "properties": {
         "vmSize": {
           "type": "string",
+          "default": "",
           "description": "Size of the virtual machine used to build, customize and capture images. Omit or specify empty string to use the default (Standard_D1_v2)."
         },
         "osDiskSizeGB": {
           "type": "integer",
           "minimum": 0,
+          "default": 0,
           "description": "Size of the OS disk in GB. Omit or specify 0 to use Azure's default OS disk size."
         },
         "vnetConfig": {
@@ -1082,6 +1094,7 @@
           "type": "integer",
           "minimum": 0,
           "maximum": 960,
+          "default": 0,
           "description": "Maximum duration to wait while building the image template. Omit or specify 0 to use the default (4 hours)."
         },
         "vmProfile": {

@@ -12,6 +12,7 @@ azure-arm: true
 
 ``` yaml $(ruby) && $(multiapi)
 batch:
+  - tag: package-2020-05
   - tag: package-2017-04-preview
   - tag: package-2017-02-preview
 ```
@@ -22,7 +23,7 @@ These settings apply only when `--tag=package-2020-05 --ruby` is specified on th
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
 ``` yaml $(tag) == 'package-2020-05' && $(ruby)
-namespace: "Azure::Billing::Mgmt::V2020_05"
+namespace: "Azure::Billing::Mgmt::V2020_05_01"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_billing/lib
 ```
 

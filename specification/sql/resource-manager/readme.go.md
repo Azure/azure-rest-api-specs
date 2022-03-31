@@ -2,9 +2,17 @@
 
 These settings apply only when `--go` is specified on the command line.
 
-``` yaml $(go)
+``` yaml $(go) && $(track2)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/sql/armsql
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
+```
+
+``` yaml $(go) && !$(track2)
 go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
+  license-header: MICROSOFT_MIT_NO_VERSION
   namespace: sql
   clear-output-folder: true
 ```
@@ -15,12 +23,32 @@ From api-version 2017-10 and onwards, only pure package versions should be used.
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-composite-v5
+  - tag: package-composite-v4
   - tag: package-composite-v3
   - tag: package-pure-2018-06-preview
   - tag: package-pure-2017-10-preview
   - tag: package-2017-03-preview
   - tag: package-2015-05-preview
   - tag: package-pure-2014-04
+```
+
+#### Tag: package-composite-v5 and go
+
+These settings apply only when `--tag=package-composite-v5 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-composite-v5' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/v5.0/$(namespace)
+```
+
+#### Tag: package-composite-v4 and go
+
+These settings apply only when `--tag=package-composite-v4 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-composite-v4' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/v4.0/$(namespace)
 ```
 
 #### Tag: package-composite-v3 and go
