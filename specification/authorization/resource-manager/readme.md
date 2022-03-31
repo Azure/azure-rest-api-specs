@@ -82,19 +82,19 @@ directive:
     reason: common-types doesn't need to reference api version.
 ```
 
-### Tag: package-2022-03-01
+### Tag: package-2022-04-01
 
-These settings apply only when `--tag=package-2022-03-01` is specified on the command line.
+These settings apply only when `--tag=package-2022-04-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-03-01'
+``` yaml $(tag) == 'package-2022-04-01'
 input-file:
 - Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
 - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
-- Microsoft.Authorization/stable/2022-03-01/authorization-DenyAssignmentCalls.json
-- Microsoft.Authorization/stable/2022-03-01/authorization-ProviderOperationsCalls.json
-- Microsoft.Authorization/stable/2022-03-01/authorization-RoleAssignmentsCalls.json
-- Microsoft.Authorization/stable/2022-03-01/authorization-RoleDefinitionsCalls.json
-- Microsoft.Authorization/stable/2022-03-01/common-types.json
+- Microsoft.Authorization/stable/2022-04-01/authorization-DenyAssignmentCalls.json
+- Microsoft.Authorization/stable/2022-04-01/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/stable/2022-04-01/authorization-RoleAssignmentsCalls.json
+- Microsoft.Authorization/stable/2022-04-01/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/stable/2022-04-01/common-types.json
 ```
 
 ### Tag: package-preview-2021-11
