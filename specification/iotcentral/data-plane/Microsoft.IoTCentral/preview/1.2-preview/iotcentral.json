@@ -50,6 +50,9 @@
         "objectId"
       ]
     },
+    "AnyValue": {
+      "description": "Can be anything: string, number, array, object, etc. (except `null`)"
+    },
     "ApiToken": {
       "allOf": [
         {
@@ -196,7 +199,8 @@
           "type": "string"
         },
         "value": {
-          "description": "The value used to update the target capability, if any."
+          "description": "The value used to update the target capability, if any.",
+          "$ref": "#/definitions/AnyValue"
         }
       },
       "required": [
@@ -594,7 +598,7 @@
           "type": "string"
         },
         "filter": {
-          "description": "Query defining which devices should be in this group.",
+          "description": "Query defining which devices should be in this group, [Query Language Reference](https://aka.ms/iotcquery).",
           "type": "string"
         },
         "description": {
@@ -809,6 +813,36 @@
         },
         "value": {
           "description": "The raw value used for the enrichment."
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Error details for current request.",
+          "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "ErrorDetails": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message details."
+        },
+        "requestId": {
+          "type": "string",
+          "description": "Correlation Id for current request."
+        },
+        "time": {
+          "type": "string",
+          "description": "The time that request failed."
         }
       }
     },
@@ -1924,6 +1958,12 @@
             "schema": {
               "$ref": "#/definitions/ApiTokenCollection"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -1954,6 +1994,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/ApiToken"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -1993,6 +2039,12 @@
             "schema": {
               "$ref": "#/definitions/ApiToken"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       },
@@ -2019,6 +2071,12 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -2046,6 +2104,12 @@
             "schema": {
               "$ref": "#/definitions/DestinationCollection"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -2072,6 +2136,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Destination"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -2123,6 +2193,12 @@
             "schema": {
               "$ref": "#/definitions/Destination"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       },
@@ -2162,6 +2238,12 @@
             "schema": {
               "$ref": "#/definitions/Destination"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       },
@@ -2184,6 +2266,12 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -2214,6 +2302,12 @@
             "schema": {
               "$ref": "#/definitions/ExportCollection"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -2241,6 +2335,12 @@
             "schema": {
               "$ref": "#/definitions/ExportCollection"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -2267,6 +2367,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Export"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -2302,6 +2408,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Export"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -2342,6 +2454,12 @@
             "schema": {
               "$ref": "#/definitions/Export"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       },
@@ -2364,6 +2482,12 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -2393,6 +2517,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DestinationCollection"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -2430,6 +2560,12 @@
             "schema": {
               "$ref": "#/definitions/DeviceGroupCollection"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -2456,6 +2592,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceGroup"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -2491,6 +2633,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceGroup"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -2531,6 +2679,12 @@
             "schema": {
               "$ref": "#/definitions/DeviceGroup"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       },
@@ -2553,6 +2707,12 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -2589,6 +2749,12 @@
             "schema": {
               "$ref": "#/definitions/DeviceTemplateCollection"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -2615,6 +2781,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceTemplate"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -2650,6 +2822,12 @@
             "schema": {
               "$ref": "#/definitions/DeviceTemplate"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       },
@@ -2684,6 +2862,12 @@
             "schema": {
               "$ref": "#/definitions/DeviceTemplate"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       },
@@ -2707,6 +2891,12 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -2743,6 +2933,12 @@
             "schema": {
               "$ref": "#/definitions/DeviceCollection"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -2770,6 +2966,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Device"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -2805,6 +3007,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Device"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -2845,6 +3053,12 @@
             "schema": {
               "$ref": "#/definitions/Device"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       },
@@ -2868,6 +3082,12 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -2894,6 +3114,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Attestation"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -2934,6 +3160,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Attestation"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -2979,6 +3211,12 @@
             "schema": {
               "$ref": "#/definitions/Attestation"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       },
@@ -3001,6 +3239,12 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -3033,6 +3277,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceCommandCollection"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -3072,6 +3322,12 @@
             "schema": {
               "$ref": "#/definitions/DeviceCommand"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -3098,6 +3354,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Collection"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -3134,6 +3396,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceCommandCollection"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -3176,6 +3444,12 @@
             "schema": {
               "$ref": "#/definitions/DeviceCommand"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -3205,6 +3479,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceProperties"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -3242,6 +3522,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceProperties"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -3284,6 +3570,12 @@
             "schema": {
               "$ref": "#/definitions/DeviceProperties"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -3318,6 +3610,12 @@
             "schema": {
               "$ref": "#/definitions/DeviceTelemetry"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -3345,6 +3643,12 @@
             "schema": {
               "$ref": "#/definitions/DeviceCredentials"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -3371,6 +3675,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Collection"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -3407,6 +3717,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceCommandCollection"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -3449,6 +3765,12 @@
             "schema": {
               "$ref": "#/definitions/DeviceCommand"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -3478,6 +3800,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Collection"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -3517,6 +3845,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceCommandCollection"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -3562,6 +3896,12 @@
             "schema": {
               "$ref": "#/definitions/DeviceCommand"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -3594,6 +3934,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceProperties"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -3634,6 +3980,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceProperties"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -3679,6 +4031,12 @@
             "schema": {
               "$ref": "#/definitions/DeviceProperties"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -3716,6 +4074,12 @@
             "schema": {
               "$ref": "#/definitions/DeviceTelemetry"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -3746,6 +4110,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceProperties"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -3784,6 +4154,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceProperties"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -3827,6 +4203,12 @@
             "schema": {
               "$ref": "#/definitions/DeviceProperties"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -3861,6 +4243,12 @@
             "schema": {
               "$ref": "#/definitions/DeviceTelemetry"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -3888,6 +4276,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceProperties"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -3923,6 +4317,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceProperties"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -3963,6 +4363,12 @@
             "schema": {
               "$ref": "#/definitions/DeviceProperties"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -3990,6 +4396,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceRelationshipCollection"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -4021,6 +4433,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceRelationship"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -4059,6 +4477,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DeviceRelationship"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -4102,6 +4526,12 @@
             "schema": {
               "$ref": "#/definitions/DeviceRelationship"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       },
@@ -4128,6 +4558,12 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -4159,6 +4595,12 @@
             "schema": {
               "$ref": "#/definitions/DeviceTelemetry"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -4182,6 +4624,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/FileUpload"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -4213,6 +4661,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/FileUpload"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -4249,6 +4703,12 @@
             "schema": {
               "$ref": "#/definitions/FileUpload"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       },
@@ -4268,6 +4728,12 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -4294,6 +4760,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/JobCollection"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -4322,6 +4794,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Job"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -4358,6 +4836,12 @@
             "schema": {
               "$ref": "#/definitions/Job"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -4385,6 +4869,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/JobDeviceStatusCollection"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -4422,6 +4912,12 @@
             "schema": {
               "$ref": "#/definitions/Job"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -4447,6 +4943,12 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -4472,6 +4974,12 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -4498,6 +5006,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/OrganizationCollection"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -4529,6 +5043,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Organization"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -4567,6 +5087,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Organization"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -4610,6 +5136,12 @@
             "schema": {
               "$ref": "#/definitions/Organization"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       },
@@ -4636,6 +5168,12 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -4669,6 +5207,12 @@
             "schema": {
               "$ref": "#/definitions/QueryResponse"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -4695,6 +5239,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/RoleCollection"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -4727,6 +5277,12 @@
             "schema": {
               "$ref": "#/definitions/Role"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -4753,6 +5309,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/UserCollection"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -4784,6 +5346,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/User"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -4826,6 +5394,12 @@
             "schema": {
               "$ref": "#/definitions/User"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       },
@@ -4867,6 +5441,12 @@
             "schema": {
               "$ref": "#/definitions/User"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       },
@@ -4893,6 +5473,12 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
