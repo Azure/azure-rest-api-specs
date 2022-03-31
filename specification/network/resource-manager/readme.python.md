@@ -18,6 +18,7 @@ Generate all API versions currently shipped for this package
 clear-output-folder: true
 batch:
   - tag: package-2022-02-preview-only
+  - tag: package-2021-05
   - multiapiscript: true
 
 ```
@@ -366,4 +367,9 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2015-06split'
 namespace: azure.mgmt.network.v2015_06_15
 output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2015_06_15
+```
+
+``` yaml $(python)
+modelerfour:
+  lenient-model-deduplication: true
 ```
