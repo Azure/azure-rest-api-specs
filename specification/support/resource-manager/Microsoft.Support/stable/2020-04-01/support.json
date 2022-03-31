@@ -294,7 +294,8 @@
             "in": "query",
             "description": "The number of values to return in the collection. Default is 25 and max is 100.",
             "required": false,
-            "type": "integer"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "$filter",
@@ -616,7 +617,8 @@
             "in": "query",
             "description": "The number of values to return in the collection. Default is 10 and max is 10.",
             "required": false,
-            "type": "integer"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "$filter",
@@ -786,7 +788,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -1253,6 +1258,7 @@
         "slaMinutes": {
           "description": "Service Level Agreement in minutes.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         }
       }
@@ -1298,6 +1304,7 @@
           "items": {
             "$ref": "#/definitions/ServiceErrorDetail"
           },
+          "x-ms-identifiers": [],
           "description": "The list of error details.",
           "readOnly": true
         }
@@ -1466,7 +1473,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/QuotaChangeRequest"
-          }
+          },
+          "x-ms-identifiers": [
+            "region"
+          ]
         }
       }
     },

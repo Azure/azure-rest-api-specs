@@ -2091,7 +2091,6 @@
       "type": "object",
       "required": [
         "hostPoolType",
-        "personalDesktopAssignmentType",
         "loadBalancerType",
         "preferredAppGroupType"
       ],
@@ -2275,6 +2274,10 @@
         "registrationInfo": {
           "$ref": "#/definitions/RegistrationInfoPatch",
           "description": "The registration info of HostPool."
+        },
+        "vmTemplate": {
+          "type": "string",
+          "description": "VM template for sessionhosts configuration within hostpool."
         },
         "ssoContext": {
           "type": "string",

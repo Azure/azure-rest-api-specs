@@ -27,32 +27,18 @@
     "application/json"
   ],
   "paths": {
-    "/securitydomain/download": {
-      "post": {
+    "/securitydomain/download/pending": {
+      "get": {
         "tags": [
           "HSMSecurityDomain"
         ],
-        "operationId": "HSMSecurityDomain_Download",
-        "description": "Retrieves Security domain from HSM enclave",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "Certificates",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CertificateSet"
-            },
-            "description": "Security domain download operation requires customer to provide three certificates containing public key in JWK format."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
+        "operationId": "HSMSecurityDomain_DownloadPending",
+        "description": "Retrieves the Security Domain download operation status",
         "responses": {
           "200": {
-            "description": "Security domain download response",
+            "description": "Security Domain download operation status",
             "schema": {
-              "$ref": "#/definitions/SecurityDomainObject"
+              "$ref": "#/definitions/SecurityDomainOperationStatus"
             }
           },
           "default": {
@@ -63,13 +49,69 @@
           }
         },
         "x-ms-examples": {
-          "Retrieve Security domain": {
+          "Find Security Domain download operation status": {
+            "$ref": "./examples/securitydomainoperationstatus-example.json"
+          }
+        }
+      }
+    },
+    "/securitydomain/download": {
+      "post": {
+        "tags": [
+          "HSMSecurityDomain"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "operationId": "HSMSecurityDomain_Download",
+        "description": "Retrieves the Security Domain from the managed HSM. Calling this endpoint can be used to activate a provisioned managed HSM resource.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "CertificateInfoObject",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateInfoObject"
+            },
+            "description": "The Security Domain download operation requires customer to provide N certificates (minimum 3 and maximum 10) containing a public key in JWK format."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The response contains the Security Domain that is being confirmed.",
+            "schema": {
+              "$ref": "#/definitions/SecurityDomainObject"
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve Security Domain": {
             "$ref": "./examples/securitydomaindownloadpost-example.json"
           }
         }
       }
     },
-    "/securitydomain/transferkey": {
+    "/securitydomain/upload": {
       "get": {
         "tags": [
           "HSMSecurityDomain"
@@ -80,10 +122,10 @@
           }
         ],
         "operationId": "HSMSecurityDomain_TransferKey",
-        "description": "Retrieve security domain transfer key",
+        "description": "Retrieve Security Domain transfer key",
         "responses": {
           "200": {
-            "description": "Security domain transfer key operation",
+            "description": "Security Domain transfer key response",
             "schema": {
               "$ref": "#/definitions/TransferKey"
             }
@@ -96,13 +138,11 @@
           }
         },
         "x-ms-examples": {
-          "Retrieve security domain transfer key": {
+          "Retrieve Security Domain transfer key": {
             "$ref": "./examples/securitydomaintransferkey-example.json"
           }
         }
-      }
-    },
-    "/securitydomain/upload": {
+      },
       "post": {
         "tags": [
           "HSMSecurityDomain"
@@ -112,12 +152,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "description": "Request Security domain upload operation",
+        "description": "Restore the provided Security Domain.",
         "parameters": [
           {
             "in": "body",
             "name": "security_domain",
-            "description": "security domain",
+            "description": "The Security Domain to be restored.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SecurityDomainObject"
@@ -126,7 +166,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Security domain upload operation started",
+            "description": "Restore of the Security Domain started.",
             "headers": {
               "Retry-After": {
                 "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
@@ -141,6 +181,9 @@
               "$ref": "#/definitions/SecurityDomainOperationStatus"
             }
           },
+          "204": {
+            "description": "Final response"
+          },
           "default": {
             "description": "Key Vault error response describing why the operation failed.",
             "schema": {
@@ -149,7 +192,7 @@
           }
         },
         "x-ms-examples": {
-          "Security domain upload operation": {
+          "Security Domain upload operation": {
             "$ref": "./examples/securitydomainuploadoperation-example.json"
           }
         }
@@ -161,10 +204,10 @@
           "HSMSecurityDomain"
         ],
         "operationId": "HSMSecurityDomain_UploadPending",
-        "description": "Get Security domain upload operation status",
+        "description": "Get Security Domain upload operation status",
         "responses": {
           "200": {
-            "description": "Security domain upload operation status",
+            "description": "Security Domain upload operation status",
             "schema": {
               "$ref": "#/definitions/SecurityDomainOperationStatus"
             }
@@ -177,7 +220,7 @@
           }
         },
         "x-ms-examples": {
-          "Find security domain upload operation status": {
+          "Find Security Domain upload operation status": {
             "$ref": "./examples/securitydomainoperationstatus-example.json"
           }
         }
@@ -185,7 +228,7 @@
     }
   },
   "definitions": {
-    "CertificateSet": {
+    "CertificateInfoObject": {
       "properties": {
         "certificates": {
           "type": "array",
@@ -193,9 +236,16 @@
             "$ref": "#/definitions/SecurityDomainCertificateItem"
           },
           "minItems": 3,
-          "maxItems": 3,
+          "maxItems": 10,
           "uniqueItems": true,
-          "description": "Three certificates needed from customer"
+          "description": "Certificates needed from customer"
+        },
+        "required": {
+          "description": "Customer to specify the number of certificates (minimum 2 and maximum 10) to restore Security Domain",
+          "type": "integer",
+          "default": 2,
+          "minimum": 2,
+          "maximum": 10
         }
       },
       "required": [
@@ -215,8 +265,14 @@
     },
     "TransferKey": {
       "properties": {
+        "key_format": {
+          "type": "string",
+          "default": "jwk",
+          "description": "Specifies the format of the transfer key"
+        },
         "transfer_key": {
-          "$ref": "#/definitions/SecurityDomainJsonWebKey"
+          "$ref": "#/definitions/SecurityDomainJsonWebKey",
+          "description": "Specifies the transfer key in JWK format"
         }
       },
       "required": [
@@ -226,9 +282,14 @@
     "SecurityDomainObject": {
       "properties": {
         "value": {
-          "type": "string"
+          "type": "string",
+          "description": "The Security Domain."
         }
-      }
+      },
+      "description": "The Security Domain.",
+      "required": [
+        "value"
+      ]
     },
     "SecurityDomainOperationStatus": {
       "properties": {
@@ -258,15 +319,7 @@
         },
         "kty": {
           "type": "string",
-          "description": "JsonWebKey Key Type (kty), as defined in https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40. For security domain this value must be RSA",
-          "enum": [
-            "RSA",
-            "RSA-HSM"
-          ],
-          "x-ms-enum": {
-            "name": "JsonWebKeyType",
-            "modelAsString": true
-          }
+          "description": "JsonWebKey Key Type (kty), as defined in https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40. For Security Domain this value must be RSA."
         },
         "key_ops": {
           "type": "array",
@@ -310,6 +363,7 @@
       "required": [
         "kty",
         "key_ops",
+        "alg",
         "kid",
         "x5c",
         "x5t#S256",

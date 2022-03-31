@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "group1",
+    "instancePoolName": "testIP",
+    "api-version": "2021-08-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/instancePools/testIP/usages/vcore_utilization",
+            "name": {
+              "value": "VCore utilization",
+              "localizedValue": "VCore utilization"
+            },
+            "type": "Microsoft.Sql/instancePools/usages",
+            "unit": "VCores",
+            "currentValue": 12,
+            "limit": 16,
+            "requestedLimit": 40
+          },
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/instancePools/testIP/usages/storage_utilization",
+            "name": {
+              "value": "Storage utilization",
+              "localizedValue": "Storage utilization"
+            },
+            "type": "Microsoft.Sql/instancePools/usages",
+            "unit": "VCores",
+            "currentValue": 384,
+            "limit": 8196,
+            "requestedLimit": null
+          },
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/instancePools/testIP/usages/database_utilization",
+            "name": {
+              "value": "Database utilization",
+              "localizedValue": "Database utilization"
+            },
+            "type": "Microsoft.Sql/instancePools/usages",
+            "unit": "Number Of Databases",
+            "currentValue": 5,
+            "limit": 100,
+            "requestedLimit": null
+          }
+        ]
+      }
+    }
+  }
+}

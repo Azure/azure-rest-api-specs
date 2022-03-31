@@ -1,0 +1,171 @@
+{
+  "parameters": {
+    "clusterName": "cluster1",
+    "resourceGroupName": "rg1",
+    "api-version": "2015-03-01-preview",
+    "subscriptionId": "subid",
+    "parameters": {
+      "properties": {
+        "clusterVersion": "3.6",
+        "osType": "Linux",
+        "tier": "Standard",
+        "clusterDefinition": {
+          "kind": "Hadoop",
+          "configurations": {
+            "gateway": {
+              "restAuthCredential.isEnabled": true,
+              "restAuthCredential.username": "admin",
+              "restAuthCredential.password": "**********"
+            }
+          }
+        },
+        "computeProfile": {
+          "roles": [
+            {
+              "name": "headnode",
+              "targetInstanceCount": 2,
+              "hardwareProfile": {
+                "vmSize": "Large"
+              },
+              "osProfile": {
+                "linuxOperatingSystemProfile": {
+                  "username": "sshuser",
+                  "password": "**********"
+                }
+              }
+            },
+            {
+              "name": "workernode",
+              "targetInstanceCount": 3,
+              "hardwareProfile": {
+                "vmSize": "Large"
+              },
+              "osProfile": {
+                "linuxOperatingSystemProfile": {
+                  "username": "sshuser",
+                  "password": "**********"
+                }
+              }
+            },
+            {
+              "name": "zookeepernode",
+              "targetInstanceCount": 3,
+              "hardwareProfile": {
+                "vmSize": "Small"
+              },
+              "osProfile": {
+                "linuxOperatingSystemProfile": {
+                  "username": "sshuser",
+                  "password": "**********"
+                }
+              }
+            }
+          ]
+        },
+        "storageProfile": {
+          "storageaccounts": [
+            {
+              "name": "mystorage.blob.core.windows.net",
+              "isDefault": true,
+              "container": "default8525",
+              "key": "storagekey"
+            }
+          ]
+        },
+        "encryptionInTransitProperties": {
+          "isEncryptionInTransitEnabled": true
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.HDInsight/pathToOperationResult"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1",
+        "name": "cluster1",
+        "type": "Microsoft.HDInsight/clusters",
+        "location": "South Central US",
+        "etag": "3b76ce3d-892c-4036-9d8b-8ade18ba7a4b",
+        "tags": null,
+        "properties": {
+          "clusterVersion": "3.6.1000.67",
+          "osType": "Linux",
+          "clusterDefinition": {
+            "blueprint": "https://blueprints.azurehdinsight.net/hadoop-3.6.1000.67.2001080246.json",
+            "kind": "Hadoop",
+            "componentVersion": {
+              "Hadoop": "2.7"
+            }
+          },
+          "computeProfile": {
+            "roles": [
+              {
+                "name": "headnode",
+                "targetInstanceCount": 2,
+                "hardwareProfile": {
+                  "vmSize": "standard_a4_v2"
+                },
+                "osProfile": {
+                  "linuxOperatingSystemProfile": {
+                    "username": "sshuser"
+                  }
+                }
+              },
+              {
+                "name": "workernode",
+                "targetInstanceCount": 3,
+                "hardwareProfile": {
+                  "vmSize": "standard_a4_v2"
+                },
+                "osProfile": {
+                  "linuxOperatingSystemProfile": {
+                    "username": "sshuser"
+                  }
+                }
+              },
+              {
+                "name": "zookeepernode",
+                "targetInstanceCount": 3,
+                "hardwareProfile": {
+                  "vmSize": "standard_a2_v2"
+                },
+                "osProfile": {
+                  "linuxOperatingSystemProfile": {
+                    "username": "sshuser"
+                  }
+                }
+              }
+            ]
+          },
+          "provisioningState": "Succeeded",
+          "clusterState": "Running",
+          "createdDate": "2020-01-10T08:36:39.153",
+          "quotaInfo": {
+            "coresUsed": 20
+          },
+          "connectivityEndpoints": [
+            {
+              "name": "SSH",
+              "protocol": "TCP",
+              "location": "cluster1-ssh.azurehdinsight.net",
+              "port": 22
+            },
+            {
+              "name": "HTTPS",
+              "protocol": "TCP",
+              "location": "cluster1.azurehdinsight.net",
+              "port": 443
+            }
+          ],
+          "tier": "Standard",
+          "encryptionInTransitProperties": {
+            "isEncryptionInTransitEnabled": true
+          }
+        }
+      }
+    }
+  }
+}

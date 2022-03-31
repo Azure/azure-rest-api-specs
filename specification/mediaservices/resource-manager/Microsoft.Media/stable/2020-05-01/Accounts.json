@@ -159,6 +159,35 @@
           "readOnly": true,
           "x-nullable": false
         },
+        "lockAggregationType": {
+          "type": "string",
+          "enum": [
+            "Average",
+            "Count",
+            "Total"
+          ],
+          "x-ms-enum": {
+            "name": "MetricAggregationType",
+            "values": [
+              {
+                "value": "Average",
+                "description": "The average."
+              },
+              {
+                "value": "Count",
+                "description": "The count of a number of items, usually requests."
+              },
+              {
+                "value": "Total",
+                "description": "The sum."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "The metric lock aggregation type",
+          "readOnly": true,
+          "x-nullable": true
+        },
         "supportedAggregationTypes": {
           "type": "array",
           "items": {
@@ -396,6 +425,11 @@
         "identity": {
           "$ref": "#/definitions/MediaServiceIdentity",
           "description": "The Managed Identity for the Media Services account."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "description": "The system metadata relating to this resource.",
+          "readOnly": true
         }
       },
       "type": "object"
@@ -1404,7 +1438,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "The Version of the API to be used with the client request."
+      "description": "The version of the API to be used with the client request."
     }
   }
 }

@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceName": "vault1",
+    "resourceGroupName": "resourceGroupPS1",
+    "subscriptionId": "c183865e-6077-46f2-a3b1-deb0f4f4650a",
+    "recoveryPlanName": "RPtest1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationRecoveryPlans/RPtest1",
+        "name": "RPtest1",
+        "type": "Microsoft.RecoveryServices/vaults/replicationRecoveryPlans",
+        "properties": {
+          "friendlyName": "RPtest1",
+          "primaryFabricId": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/cloud1",
+          "primaryFabricFriendlyName": "cloud1",
+          "recoveryFabricId": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/cloud1",
+          "recoveryFabricFriendlyName": "cloud1",
+          "failoverDeploymentModel": "ResourceManager",
+          "replicationProviders": [
+            "InMageRcmFailback"
+          ],
+          "allowedOperations": [
+            "PlannedFailover"
+          ],
+          "lastPlannedFailoverTime": "2021-02-24T07:33:49.1372448Z",
+          "lastTestFailoverTime": "1601-01-01T00:00:00.0000000Z",
+          "currentScenario": {
+            "scenarioName": "CancelFailover",
+            "jobId": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationJobs/5276a7bc-12a3-43a1-bc53-9bf80e0be87b",
+            "startTime": "2021-02-24T08:52:42.1587592Z"
+          },
+          "currentScenarioStatus": "Succeeded",
+          "currentScenarioStatusDescription": "Completed",
+          "groups": []
+        }
+      }
+    },
+    "202": {}
+  }
+}

@@ -1,17 +1,16 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "myResourceGroup",
-    "name": "{devtestlab-name}",
     "api-version": "2018-09-15",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "resourceGroupName",
+    "name": "{labName}",
     "labVirtualMachineCreationParameter": {
       "properties": {
-        "osType": "Linux",
         "size": "Standard_A2_v2",
-        "userName": "{user-name}",
-        "password": "{user-password}",
+        "userName": "{userName}",
+        "password": "{userPassword}",
         "labSubnetName": "{virtualnetwork-subnet-name}",
-        "labVirtualNetworkId": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/microsoft.devtestlab/labs/{devtestlab-name}/virtualnetworks/{virtualnetwork-name}",
+        "labVirtualNetworkId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualnetworks/{virtualNetworkName}",
         "disallowPublicIpAddress": true,
         "galleryImageReference": {
           "offer": "UbuntuServer",
@@ -23,10 +22,10 @@
         "allowClaim": true,
         "storageType": "Standard"
       },
-      "name": "{virtualmachine-name}",
-      "location": "{azure-location}",
+      "name": "{vmName}",
+      "location": "{location}",
       "tags": {
-        "MyTag": "MyValue"
+        "tagName1": "tagValue1"
       }
     }
   },
