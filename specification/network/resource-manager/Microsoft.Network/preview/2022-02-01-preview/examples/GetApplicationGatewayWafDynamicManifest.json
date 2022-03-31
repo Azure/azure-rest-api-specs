@@ -8,30 +8,32 @@
     "200": {
       "body": {
         "value": {
-            "DefaultRuleSetProperty": {
+          "DefaultRuleSetProperty": {
+            "ruleSetType": "OWASP",
+            "ruleSetVersion": "3.0"
+          },
+          "AvailableRuleSets": [
+            {
               "ruleSetType": "OWASP",
-              "ruleSetVersion": "3.0"
-            },
-            "AvailableRuleSets": [
-              {
-                "ruleSetType": "OWASP",
-                "ruleSetVersion": "3.0",
-                "status": "preview",
-                "tier": ["WAF_v2"],
-                "ruleGroups": [
-                  {
-                    "ruleGroupName": "General",
-                    "description": "",
-                    "rules": [
-                      {
-                        "ruleId": 200004,
-                        "description": "Possible Multipart Unmatched Boundary."
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
+              "ruleSetVersion": "3.0",
+              "status": "preview",
+              "tier": [
+                "WAF_v2"
+              ],
+              "ruleGroups": [
+                {
+                  "ruleGroupName": "General",
+                  "description": "",
+                  "rules": [
+                    {
+                      "ruleId": 200004,
+                      "description": "Possible Multipart Unmatched Boundary."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       }
     }
