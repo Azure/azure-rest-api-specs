@@ -115,7 +115,7 @@ All of the above definitions share the following fields:
 
 ## Step ARM Template
 
-See [Step ARM Template Schema](./v1.2/schema.json#L435).
+See [Step ARM Template Schema](./v1.2/schema.json#L427).
 
 Step to deploy ARM template to the scope. Template parameters and outputs will also interact with variables automatically, see [Variables](./Variables.md).
 
@@ -135,7 +135,7 @@ Step to deploy ARM template to the scope. Template parameters and outputs will a
 
 ## Step ARM Deployment Script
 
-See [Step ARM Deployment Script Schema](./v1.2/schema.json#L456).
+See [Step ARM Deployment Script Schema](./v1.2/schema.json#L448).
 
 Step to deploy ARM deployment script to the scope. Template parameters and outputs will also interact with variables automatically, see [Variables](./Variables.md).
 
@@ -249,9 +249,6 @@ See [Step Example Schema](./v1.2/schema.json#L389)
 - **responseUpdate**
   - **Type:** Optional, Array of [JsonPatchOp](#jsonpatchop)
   - Updates that applies to the responseExpected.
-- **resourceUpdate**
-  - **Type:** Optional, Array of [JsonPatchOp](#jsonpatchop)
-  - Updates that applies to the resource in both request and response body.
 - **outputVariables**
   - **Type:** Optional, Map from variable name to object with property:
     - **type**: Required, String
@@ -264,7 +261,7 @@ See [Step Example Schema](./v1.2/schema.json#L389)
 
 ### JsonPatchOp
 
-See [Json Patch Operation Schema](./v1.2/schema.json#L498)
+See [Json Patch Operation Schema](./v1.2/schema.json#L490)
 
 JsonPatchOp is used to define the update operation on json. You could add, remove, replace, copy, move, and test on json path.
 All the json path used in JsonPatchOp is in format of [JsonPointer](https://datatracker.ietf.org/doc/html/rfc6901).
