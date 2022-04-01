@@ -909,6 +909,13 @@
           "readOnly": true,
           "type": "string",
           "description": "Version number that increases with every update to access rules within the profile."
+        },
+        "enabledLogCategories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoggingCategory"
+          },
+          "description": "Gets the enabled log categories."
         }
       },
       "description": "Properties of NSP profile."
@@ -1184,6 +1191,16 @@
         }
       },
       "description": "Properties of the perimeter associable resources."
+    },
+    "LoggingCategory": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the profile resource that is unique within a perimeter. This name can be used to access the resource."
+        }
+      },
+      "description": "Logging Category"
     }
   },
   "parameters": {
