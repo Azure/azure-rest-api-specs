@@ -418,6 +418,386 @@
         }
       }
     },
+    "/contactAssignments/{contactAssignmentId}": {
+      "get": {
+        "tags": [
+          "ContactAssignment"
+        ],
+        "description": "Get a contactAssignment",
+        "operationId": "ContactAssignments_GetContactAssignment",
+        "parameters": [
+          {
+            "name": "contactAssignmentId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ContactAssignment"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContactAssignments_Get": {
+            "$ref": "./examples/ContactAssignments_GetContactAssignment.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ContactAssignment"
+        ],
+        "description": "Creates or updates a contactAssignment entity.",
+        "operationId": "ContactAssignments_CreateOrUpdateContactAssignment",
+        "parameters": [
+          {
+            "name": "contactAssignmentId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "contactAssignment",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContactAssignment"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ContactAssignment"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContactAssignments_CreateOrUpdate": {
+            "$ref": "./examples/ContactAssignments_CreateOrUpdateContactAssignment.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ContactAssignment"
+        ],
+        "description": "Deletes a ContactAssignment entity.",
+        "operationId": "ContactAssignments_DeleteContactAssignment",
+        "parameters": [
+          {
+            "name": "contactAssignmentId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContactAssignments_Delete": {
+            "$ref": "./examples/ContactAssignments_DeleteContactAssignment.json"
+          }
+        }
+      }
+    },
+    "/contactAssignments": {
+      "get": {
+        "tags": [
+          "ContactAssignment"
+        ],
+        "description": "List the contactAssignments in the account.",
+        "operationId": "ContactAssignments_ListContactAssignments",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "contactGroupDefinition",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ContactAssignmentList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ContactAssignments_ListByAccount": {
+            "$ref": "./examples/ContactAssignments_ListContactAssignments.json"
+          }
+        }
+      }
+    },
+    "/getScopedContactGroupNames": {
+      "get": {
+        "tags": [
+          "ContactAssignment"
+        ],
+        "description": "Gets the distinct list of contact group names for the provided scope.",
+        "operationId": "ContactAssignments_ListScopedContactGroupNames",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ContactGroupNameList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ContactAssignments_ListScopedContactGroupNames": {
+            "$ref": "./examples/ContactAssignments_ListScopedContactGroupNames.json"
+          }
+        }
+      }
+    },
+    "/contactGroupDefinitions/{contactGroupDefinitionName}": {
+      "get": {
+        "tags": [
+          "ContactGroupDefinition"
+        ],
+        "description": "Get a contactGroupDefinition",
+        "operationId": "ContactGroupDefinitions_GetContactGroupDefinition",
+        "parameters": [
+          {
+            "name": "contactGroupDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ContactGroupDefinition"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContactGroupDefinitions_Get": {
+            "$ref": "./examples/ContactGroupDefinitions_GetContactGroupDefinition.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ContactGroupDefinition"
+        ],
+        "description": "Creates or updates a contact group definition entity.",
+        "operationId": "ContactGroupDefinitions_CreateOrUpdateContactGroupDefinition",
+        "parameters": [
+          {
+            "name": "contactGroupDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "contactGroupDefinition",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContactGroupDefinition"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ContactGroupDefinition"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContactGroupDefinitions_CreateOrUpdate": {
+            "$ref": "./examples/ContactGroupDefinitions_CreateOrUpdateContactGroupDefinition.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ContactGroupDefinition"
+        ],
+        "description": "Deletes a ContactGroupDefinition entity.",
+        "operationId": "ContactGroupDefinitions_DeleteContactGroupDefinition",
+        "parameters": [
+          {
+            "name": "contactGroupDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContactGroupDefinitions_Delete": {
+            "$ref": "./examples/ContactGroupDefinitions_DeleteContactGroupDefinition.json"
+          }
+        }
+      }
+    },
+    "/contactGroupDefinitions": {
+      "get": {
+        "tags": [
+          "ContactGroupDefinition"
+        ],
+        "description": "List the contactGroupDefinitions in the account.",
+        "operationId": "ContactGroupDefinitions_ListContactGroupDefinitions",
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ContactGroupDefinitionList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ContactGroupDefinitions_ListByAccount": {
+            "$ref": "./examples/ContactGroupDefinitions_ListContactGroupDefinitions.json"
+          }
+        }
+      }
+    },
     "/resourceSetRuleConfigs/defaultResourceSetRuleConfig": {
       "get": {
         "tags": [
@@ -1200,6 +1580,164 @@
             "type": "string"
           },
           "readOnly": true
+        }
+      }
+    },
+    "ContactAssignment": {
+      "description": "ContactAssignment resource.",
+      "type": "object",
+      "properties": {
+        "assignmentId": {
+          "format": "uuid",
+          "description": "Gets or sets the id of the assignment.",
+          "type": "string"
+        },
+        "contactGroup": {
+          "$ref": "#/definitions/EntityReference",
+          "description": "Gets or sets the contact group definition reference."
+        },
+        "principalId": {
+          "description": "Gets or sets the principal Id.",
+          "type": "string"
+        },
+        "scope": {
+          "$ref": "#/definitions/EntityReference",
+          "description": "Gets or sets the scope for assignment."
+        }
+      }
+    },
+    "EntityReference": {
+      "description": "Entity reference type.",
+      "type": "object",
+      "properties": {
+        "referenceName": {
+          "description": "Gets or sets the reference name.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Gets or sets the reference type property.",
+          "enum": [
+            "Unknown",
+            "CollectionReference",
+            "ContactGroupDefinitionReference",
+            "DatasourceReference",
+            "ScanReference"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EntityReferenceType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ContactAssignmentList": {
+      "description": "Paged list of contactAssignment.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int64",
+          "description": "Total item count.",
+          "type": "integer"
+        },
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type results.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContactAssignment"
+          }
+        }
+      }
+    },
+    "ContactGroupNameList": {
+      "description": "Paged list of contact group names.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int64",
+          "description": "Total item count.",
+          "type": "integer"
+        },
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type results.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ContactGroupDefinition": {
+      "description": "ContactGroupDefinition resource.",
+      "type": "object",
+      "properties": {
+        "contactGroupType": {
+          "description": "Gets or sets the contact group definition type.",
+          "enum": [
+            "Custom",
+            "System"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "contactGroupType",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "description": "Gets or sets the description.",
+          "type": "string"
+        },
+        "friendlyName": {
+          "description": "Gets or sets the friendly name.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Gets the name.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ContactGroupDefinitionList": {
+      "description": "Paged list of contactGroupDefinition.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int64",
+          "description": "Total item count.",
+          "type": "integer"
+        },
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type results.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContactGroupDefinition"
+          }
         }
       }
     },
