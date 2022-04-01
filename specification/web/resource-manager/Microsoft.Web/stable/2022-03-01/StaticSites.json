@@ -2713,7 +2713,7 @@
             "type": "string"
           },
           {
-            "name": "staticSiteBackendEnvelope",
+            "name": "staticSiteLinkedBackendEnvelope",
             "in": "body",
             "description": "A JSON representation of the linked backend request properties",
             "required": true,
@@ -2781,7 +2781,7 @@
             "type": "string"
           },
           {
-            "name": "staticSiteBackendEnvelope",
+            "name": "staticSiteLinkedBackendEnvelope",
             "in": "body",
             "description": "A JSON representation of the linked backend request properties",
             "required": true,
@@ -2998,7 +2998,7 @@
             "type": "string"
           },
           {
-            "name": "staticSiteBackendEnvelope",
+            "name": "staticSiteLinkedBackendEnvelope",
             "in": "body",
             "description": "A JSON representation of the linked backend request properties",
             "required": true,
@@ -3181,7 +3181,7 @@
             "type": "string"
           },
           {
-            "name": "staticSiteBackendEnvelope",
+            "name": "staticSiteLinkedBackendEnvelope",
             "in": "body",
             "description": "A JSON representation of the linked backend request properties",
             "required": true,
@@ -3486,7 +3486,7 @@
           "description": "Backends linked to the static side",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/StaticSiteLinkedBackendsCollection"
+            "$ref": "#/definitions/StaticSiteLinkedBackend"
           },
           "readOnly": true
         },
@@ -3608,7 +3608,7 @@
               "description": "Backends linked to the static side build",
               "type": "array",
               "items": {
-                "$ref": "#/definitions/StaticSiteLinkedBackendsCollection"
+                "$ref": "#/definitions/StaticSiteLinkedBackend"
               },
               "readOnly": true
             }
@@ -4286,6 +4286,31 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StaticSiteLinkedBackend": {
+      "description": "Static Site Linked Backend ARM resource.",
+      "type": "object",
+      "properties": {
+        "backendResourceId": {
+          "description": "The resource id of the backend linked to the static site",
+          "type": "string"
+        },
+        "region": {
+          "description": "The region of the backend linked to the static site",
+          "type": "string"
+        },
+        "createdOn": {
+          "format": "date-time",
+          "description": "The date and time on which the backend was linked to the static site.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the linking process.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
