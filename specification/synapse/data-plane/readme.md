@@ -206,6 +206,17 @@ input-file:
   - Microsoft.Synapse/preview/2021-06-01-preview/kqlScripts.json
 ```
 
+### Tag: package-link-connection-2021-12-01-preview
+
+These settings apply only when `--tag=package-link-connection-2021-12-01-preview` is specified on the command line.
+
+**ATTENTION**: Please DO NOT generate SDK based on this tag. Link connection API set is not ready to be widely used.
+
+``` yaml $(tag) == 'package-link-connection-2021-12-01-preview'
+input-file:
+  - Microsoft.Synapse/preview/2021-12-01-preview/linkConnections.json
+```
+
 ### Tag: package-artifacts-2020-12-01
 
 These settings apply only when `--tag=package-artifacts-2020-12-01` is specified on the command line.

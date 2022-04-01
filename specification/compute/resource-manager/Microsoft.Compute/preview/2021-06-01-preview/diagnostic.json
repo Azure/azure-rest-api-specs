@@ -206,6 +206,98 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnostics/diskInspection/registerStorageConfiguration": {
+      "post": {
+        "tags": [
+          "registerStorageConfiguration"
+        ],
+        "operationId": "DiskInspectionStorageConfiguration_Register",
+        "x-ms-long-running-operation": false,
+        "description": "Register a storageAccount for a subscription used for DiskInspection",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageConfigurationInput",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageConfigurationInput"
+            },
+            "description": "Storage Configuration object supplied in the body of the Post to cache storageAccount for a given subscription."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succeeded"
+          },
+          "default": {
+            "description": "Error response describing why the register operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a request for registering a storageAccount information.": {
+            "$ref": "./examples/RegisterStorageConfiguration.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnostics/diskInspection/validateStorageConfiguration": {
+      "post": {
+        "tags": [
+          "validateStorageConfiguration"
+        ],
+        "operationId": "DiskInspectionStorageConfiguration_Validate",
+        "x-ms-long-running-operation": false,
+        "description": "Validate if a storageAccount configuration exists for a subscription used for DiskInspection.",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/StorageConfigurationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the get call failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Returns storageAccount value for an existing configuration entry": {
+            "$ref": "./examples/ValidateStorageConfiguration.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -311,6 +403,28 @@
         }
       },
       "description": "Api output result when disk inspection result is completed."
+    },
+    "StorageConfigurationInput": {
+      "type": "object",
+      "properties": {
+        "storageAccountId": {
+          "description": "Qualified name of the storage account",
+          "type": "string"
+        }
+      },
+      "required": [
+        "storageAccountId"
+      ],
+      "description": "Data used for registering a Storage Account for a Subscription."
+    },
+    "StorageConfigurationResponse": {
+      "type": "object",
+      "properties": {
+        "storageAccountId": {
+          "type": "string"
+        }
+      },
+      "description": "Api output result when there is an existing storage configuration entry."
     },
     "ErrorResponse": {
       "type": "object",
