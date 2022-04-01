@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Cognitive Language Service - Analyze Conversations",
-    "description": "This API accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversational Language Understanding, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service.",
+    "description": "The language service conversations API is a suite of natural language processing (NLP) skills that can be used to analyze structured conversations (textual or spoken). The synchronous API in this suite accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversational Language Understanding, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service. The asynchronous APIs in this suite enable tasks like Conversation Summarization and Conversational PII detection.",
     "version": "2022-05-01-preview"
   },
   "securityDefinitions": {
@@ -126,11 +126,11 @@
           }
         },
         "x-ms-examples": {
-          "Successful Transcript Conversation Analysis Job Request": {
-            "$ref": "./examples/conversations/SuccessfulConversationSummarySubmit.json"
-          },
-          "Successful Text Conversation Analysis Job Request": {
+          "Successful Conversational PII Analysis Job Request": {
             "$ref": "./examples/conversations/SuccessfulConversationPIISubmit.json"
+          },
+          "Successful Conversation Summarization Analysis Job Request": {
+            "$ref": "./examples/conversations/SuccessfulConversationSummarySubmit.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -281,40 +281,31 @@
       "discriminator": "modality",
       "description": "The abstract base for a user input formatted conversation (e.g., Text, Transcript).",
       "properties": {
-        "participantId": {
-          "description": "The participant Id of a ConversationItem",
-          "type": "string"
-        },
         "id": {
-          "description": "The Id of a ConversationItem",
+          "description": "The ID of a ConversationItem",
           "type": "string"
         },
-        "modality": {
-          "$ref": "#/definitions/Modality"
+        "participantId": {
+          "description": "The participant ID of a ConversationItem",
+          "type": "string"
+        },
+        "role": {
+          "type": "string",
+          "description": "The role of the participant.",
+          "enum": [
+            "agent",
+            "customer",
+            "generic"
+          ],
+          "x-ms-enum": {
+            "name": "role",
+            "modelAsString": true
+          }
         }
       },
       "required": [
         "participantId",
-        "id",
-        "modality"
-      ]
-    },
-    "TextConversationItem": {
-      "description": "The text modality of an input conversation.",
-      "x-ms-discriminator-value": "text",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConversationItemBase"
-        }
-      ],
-      "properties": {
-        "text": {
-          "description": "The single input query",
-          "type": "string"
-        }
-      },
-      "required": [
-        "text"
+        "id"
       ]
     },
     "ConversationAnalysisOptions": {
@@ -1494,7 +1485,7 @@
           "description": "The set of tasks to execute on the input conversation.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AnalyzeConversationTask"
+            "$ref": "#/definitions/AnalyzeConversationLROTask"
           }
         }
       },
@@ -1504,6 +1495,19 @@
       ]
     },
     "AnalyzeConversationTask": {
+      "description": "The base class of a conversation input task.",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AnalyzeConversationTaskKind"
+        }
+      }
+    },
+    "AnalyzeConversationLROTask": {
+      "description": "The base class for an long running conversation input task.",
       "discriminator": "kind",
       "required": [
         "kind"
@@ -1523,8 +1527,8 @@
       "type": "string",
       "description": "Enumeration of supported analysis tasks on a collection of conversations.",
       "enum": [
-        "ConversationalPII",
-        "ConversationalSummarization"
+        "ConversationalPIITask",
+        "ConversationalSummarizationTask"
       ],
       "x-ms-enum": {
         "name": "AnalyzeConversationLROTaskKind",
@@ -1556,7 +1560,7 @@
           "$ref": "#/definitions/AnalyzeConversationTask"
         }
       ],
-      "x-ms-discriminator-value": "ConversationalPII"
+      "x-ms-discriminator-value": "ConversationalPIITask"
     },
     "ConversationPIIItemResult": {
       "type": "object",
@@ -1595,8 +1599,9 @@
       }
     },
     "Conversation": {
-      "type":"object",
+      "type": "object",
       "description": "A complete ordered set of utterances (spoken or written), by one or more speakers to be used for analysis.",
+      "discriminator": "modality",
       "required": [
         "id",
         "language",
@@ -1617,13 +1622,6 @@
         },
         "domain": {
           "$ref": "#/definitions/ConversationDomain"
-        },
-        "conversationItems": {
-          "description": "Ordered list of conversation items for the conversation.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ConversationItemBase"
-          }
         }
       }
     },
@@ -1639,11 +1637,10 @@
         "modelAsString": true
       }
     },
-    "ConversationDomain":{
+    "ConversationDomain": {
       "type": "string",
       "description": "Enumeration of supported conversational domains.",
       "enum": [
-        "unknown",
         "finance",
         "healthcare",
         "generic"
@@ -1652,6 +1649,57 @@
         "name": "ConversationDomain",
         "modelAsString": true
       }
+    },
+    "TextConversation": {
+      "x-ms-discriminator-value": "text",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Conversation"
+        }
+      ],
+      "properties": {
+        "conversationItems": {
+          "description": "Ordered list of text conversation items in the conversation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextConversationItem"
+          }
+        }
+      }
+    },
+    "TranscriptConversation": {
+      "x-ms-discriminator-value": "transcript",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Conversation"
+        }
+      ],
+      "properties": {
+        "conversationItems": {
+          "description": "Ordered list of transcript conversation items in the conversation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TranscriptConversationItem"
+          }
+        }
+      }
+    },
+    "TextConversationItem": {
+      "description": "The conversation item in text modality.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationItemBase"
+        }
+      ],
+      "properties": {
+        "text": {
+          "description": "The input text.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text"
+      ]
     },
     "TranscriptConversationItem": {
       "type": "object",
@@ -1669,11 +1717,10 @@
           "type": "object",
           "$ref": "#/definitions/TranscriptContent"
         }
-      },
-      "x-ms-discriminator-value": "transcript"
+      }
     },
     "TranscriptContent": {
-      "type":"object",
+      "type": "object",
       "description": "The content generated by a speech to text provider.",
       "properties": {
         "itn": {
@@ -1693,7 +1740,7 @@
           "description": "The lexical form of the recognized text from speech to text API with the actual words recognized."
         },
         "audioTimings": {
-          "type":"array",
+          "type": "array",
           "description": "The list of word level audio timing information",
           "items": {
             "$ref": "#/definitions/WordLevelTiming"
@@ -1702,7 +1749,7 @@
       }
     },
     "RedactedTranscriptContent": {
-      "type":"object",
+      "type": "object",
       "description": "The transcript content response generated by the service with all necessary personally identifiable information redacted.",
       "properties": {
         "itn": {
@@ -1722,7 +1769,7 @@
           "description": "The redacted output for lexical format input."
         },
         "audioTimings": {
-          "type":"array",
+          "type": "array",
           "description": "The list of redacted audio segments.",
           "items": {
             "$ref": "#/definitions/AudioTiming"
@@ -1852,7 +1899,7 @@
           "description": "Flag to indicate if audio redaction is requested. By default audio redaction will not be performed.",
           "default": false
         },
-        "redactionSource":{
+        "redactionSource": {
           "type": "string",
           "description": "For transcript conversations, this parameter provides information regarding which content type (ITN, Text, Lexical, Masked ITN) should be used for redaction. The entities detected the service in will correspond to the text type selected here.",
           "$ref": "#/definitions/TranscriptContentType"
@@ -1918,7 +1965,7 @@
           "$ref": "#/definitions/AnalyzeConversationTask"
         }
       ],
-      "x-ms-discriminator-value": "ConversationalSummarization"
+      "x-ms-discriminator-value": "ConversationalSummarizationTask"
     },
     "ConversationSummarizationTaskParameters": {
       "type": "object",
@@ -1928,7 +1975,18 @@
       ],
       "properties": {
         "summaryAspects": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "summary",
+              "resolutions"
+            ],
+            "x-ms-enum": {
+              "name": "SummaryAspect",
+              "modelAsString": true
+            }
+          }
         }
       },
       "allOf": [
@@ -2187,7 +2245,7 @@
         "transactionsCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of transactions for the conversation."
+          "description": "Number of text units for the request."
         }
       }
     },
@@ -2218,8 +2276,8 @@
         },
         "transactionsCount": {
           "type": "integer",
-          "format": "int64",
-          "description": "Number of transactions for the request."
+          "format": "int32",
+          "description": "Number of text units for the request."
         }
       }
     }
