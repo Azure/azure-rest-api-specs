@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft NetApp",
     "description": "Microsoft NetApp Azure Resource Provider specification",
-    "version": "2021-10-01",
+    "version": "2022-01-01",
     "x-ms-code-generation-settings": {
       "name": "AzureNetAppFilesManagementClient"
     }
@@ -288,6 +288,43 @@
         "x-ms-examples": {
           "QuotaLimits": {
             "$ref": "examples/QuotaLimits_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/regionInfo": {
+      "get": {
+        "summary": "Describes region specific information.",
+        "description": "Provides storage to network proximity and logical zone mapping information.",
+        "tags": [
+          "NetApp Resource"
+        ],
+        "operationId": "NetAppResource_QueryRegionInfo",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/location"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/regionInfo"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "RegionInfo_Query": {
+            "$ref": "examples/RegionInfo.json"
           }
         }
       }
@@ -1151,6 +1188,53 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/resetCifsPassword": {
+      "post": {
+        "tags": [
+          "Reset Cifs Password"
+        ],
+        "summary": "Reset cifs password",
+        "description": "Reset cifs password from volume",
+        "operationId": "Volumes_ResetCifsPassword",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - terminal state"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Volumes_ResetCifsPassword": {
+            "$ref": "examples/Volumes_ResetCifsPassword.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/breakReplication": {
       "post": {
         "tags": [
@@ -1252,6 +1336,52 @@
         "x-ms-examples": {
           "Volumes_ReplicationStatus": {
             "$ref": "examples/Volumes_ReplicationStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/listReplications": {
+      "post": {
+        "tags": [
+          "Volumes Replication"
+        ],
+        "summary": "List replications for volume",
+        "description": "List all replications for a specified volume",
+        "operationId": "Volumes_ListReplications",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/listReplications"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_ListReplications": {
+            "$ref": "examples/Volumes_ListReplications.json"
           }
         }
       }
@@ -1520,6 +1650,147 @@
         "x-ms-examples": {
           "Volumes_AuthorizeReplication": {
             "$ref": "examples/Volumes_PoolChange.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/relocate": {
+      "post": {
+        "tags": [
+          "Volumes Relocation"
+        ],
+        "summary": "Relocate volume",
+        "description": "Relocates volume to a new stamp",
+        "operationId": "Volumes_Relocate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - terminal state"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Volumes_Relocate": {
+            "$ref": "examples/Volumes_Relocate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/finalizeRelocation": {
+      "post": {
+        "tags": [
+          "Volumes Relocation"
+        ],
+        "summary": "Finalize volume relocation",
+        "description": "Finalizes the relocation of the volume and cleans up the old volume.",
+        "operationId": "Volumes_FinalizeRelocation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - terminal state"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Volumes_FinalizeRelocation": {
+            "$ref": "examples/Volumes_FinalizeRelocation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/revertRelocation": {
+      "post": {
+        "tags": [
+          "Volumes Relocation"
+        ],
+        "summary": "Revert volume relocation",
+        "description": "Reverts the volume relocation process, cleans up the new volume and starts using the former-existing volume.",
+        "operationId": "Volumes_RevertRelocation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - terminal state"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Volumes_RevertRelocation": {
+            "$ref": "examples/Volumes_RevertRelocation.json"
           }
         }
       }
@@ -2919,6 +3190,284 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/volumeQuotaRules": {
+      "get": {
+        "tags": [
+          "VolumeQuotaRules"
+        ],
+        "operationId": "VolumeQuotaRules_ListByVolume",
+        "summary": "Get all quota rules for a volume",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "description": "List all quota rules associated with the volume",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/volumeQuotaRulesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "VolumeQuotaRules_List": {
+            "$ref": "examples/VolumeQuotaRules_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/volumeQuotaRules/{volumeQuotaRuleName}": {
+      "get": {
+        "tags": [
+          "VolumeQuotaRules"
+        ],
+        "operationId": "VolumeQuotaRules_Get",
+        "summary": "Describe a quota rule",
+        "description": "Get details of the specified quota rule",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/VolumeQuotaRuleName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/volumeQuotaRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "VolumeQuotaRules_Get": {
+            "$ref": "examples/VolumeQuotaRules_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "VolumeQuotaRules"
+        ],
+        "operationId": "VolumeQuotaRules_Create",
+        "summary": "Create a quota rule",
+        "description": "Create the specified quota rule within the given volume",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Quota rule object supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/volumeQuotaRule"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/VolumeQuotaRuleName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Quota rule created",
+            "schema": {
+              "$ref": "#/definitions/volumeQuotaRule"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Create request accepted; operation will complete asynchronously"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "VolumeQuotaRules_Create": {
+            "$ref": "examples/VolumeQuotaRules_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "VolumeQuotaRules"
+        ],
+        "operationId": "VolumeQuotaRules_Update",
+        "summary": "Update a quota rule",
+        "description": "Patch a quota rule",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Quota rule object supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/volumeQuotaRule"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/VolumeQuotaRuleName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/volumeQuotaRule"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Update request accepted; operation will complete asynchronously"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "VolumeQuotaRules_Update": {
+            "$ref": "examples/VolumeQuotaRules_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VolumeQuotaRules"
+        ],
+        "operationId": "VolumeQuotaRules_Delete",
+        "summary": "Delete a quota rule",
+        "description": "Delete quota rule",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/VolumeQuotaRuleName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted -- Delete request accepted; operation will complete asynchronously"
+          },
+          "204": {
+            "description": "NoContent -- Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "VolumeQuotaRules_Delete": {
+            "$ref": "examples/VolumeQuotaRules_Delete.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/vaults": {
       "get": {
         "tags": [
@@ -3705,6 +4254,66 @@
         }
       }
     },
+    "regionInfo": {
+      "description": "Provides region specific information.",
+      "type": "object",
+      "properties": {
+        "storageToNetworkProximity": {
+          "title": "Storage to Network Proximity",
+          "description": "Provides storage to network proximity information in the region.",
+          "type": "string",
+          "enum": [
+            "Default",
+            "T1",
+            "T2",
+            "T1AndT2"
+          ],
+          "x-ms-enum": {
+            "name": "RegionStorageToNetworkProximity",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Default",
+                "description": "Basic network connectivity."
+              },
+              {
+                "value": "T1",
+                "description": "Standard T1 network connectivity."
+              },
+              {
+                "value": "T2",
+                "description": "Standard T2 network connectivity."
+              },
+              {
+                "value": "T1AndT2",
+                "description": "Standard T1 and T2 network connectivity."
+              }
+            ]
+          },
+          "example": "T2"
+        },
+        "availabilityZoneMappings": {
+          "title": "Logical availability zone mappings.",
+          "description": "Provides logical availability zone mappings for the subscription for a region.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "availabilityZone": {
+                "description": "Logical availability zone.",
+                "type": "string",
+                "example": "1"
+              },
+              "isAvailable": {
+                "description": "Available availability zone",
+                "type": "boolean",
+                "example": true
+              }
+            }
+          }
+        }
+      }
+    },
     "ResourceNameAvailabilityRequest": {
       "description": "Resource name availability request content.",
       "required": [
@@ -4481,6 +5090,20 @@
           "description": "Resource tags",
           "$ref": "#/definitions/resourceTags"
         },
+        "zones": {
+          "type": "array",
+          "description": "Availability Zone",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "items": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1,
+            "example": "1"
+          }
+        },
         "properties": {
           "description": "Volume properties",
           "$ref": "#/definitions/volumeProperties",
@@ -4889,6 +5512,11 @@
           "description": "Volume spec name is the application specific designation or identifier for the particular volume in a volume group for e.g. data, log",
           "example": "Data"
         },
+        "encrypted": {
+          "type": "boolean",
+          "description": "Specifies if the volume is encrypted or not. Only available on volumes created or updated after 2022-01-01.",
+          "readOnly": true
+        },
         "placementRules": {
           "title": "Volume placement rules",
           "description": "Application specific placement rules for the particular volume",
@@ -5081,6 +5709,66 @@
         }
       }
     },
+    "replication": {
+      "description": "Replication properties",
+      "type": "object",
+      "required": [
+        "remoteVolumeResourceId"
+      ],
+      "properties": {
+        "endpointType": {
+          "type": "string",
+          "description": "Indicates whether the local volume is the source or destination for the Volume Replication",
+          "enum": [
+            "src",
+            "dst"
+          ],
+          "x-ms-enum": {
+            "name": "EndpointType",
+            "modelAsString": true
+          }
+        },
+        "replicationSchedule": {
+          "type": "string",
+          "description": "Schedule",
+          "enum": [
+            "_10minutely",
+            "hourly",
+            "daily"
+          ],
+          "x-ms-enum": {
+            "name": "ReplicationSchedule",
+            "modelAsString": true
+          }
+        },
+        "remoteVolumeResourceId": {
+          "type": "string",
+          "description": "The resource ID of the remote volume."
+        },
+        "remoteVolumeRegion": {
+          "type": "string",
+          "description": "The remote region for the other end of the Volume Replication."
+        }
+      }
+    },
+    "volumeRelocationProperties": {
+      "description": "Volume relocation properties",
+      "type": "object",
+      "properties": {
+        "oldVolumeId": {
+          "type": "string",
+          "description": "The id of the old volume that is being relocated"
+        },
+        "oldBareMetalTenantId": {
+          "type": "string",
+          "description": "The id of the bare metal tenant owned by the existing volume"
+        },
+        "relocationRequested": {
+          "type": "boolean",
+          "description": "Has relocation been requested for this volume"
+        }
+      }
+    },
     "volumeSnapshotProperties": {
       "description": "Volume Snapshot Properties",
       "type": "object",
@@ -5131,6 +5819,19 @@
         "errorMessage": {
           "type": "string",
           "description": "Displays error message if the replication is in an error state"
+        }
+      }
+    },
+    "listReplications": {
+      "description": "List Replications",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of replications",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/replication"
+          }
         }
       }
     },
@@ -6370,6 +7071,131 @@
         ]
       }
     },
+    "volumeQuotaRulesList": {
+      "description": "List of Volume Quota Rules",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of Volume Quota Rules",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/volumeQuotaRule"
+          }
+        }
+      }
+    },
+    "volumeQuotaRule": {
+      "description": "Quota Rule of a Volume",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource name"
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
+        },
+        "tags": {
+          "description": "Resource tags",
+          "$ref": "#/definitions/resourceTags"
+        },
+        "properties": {
+          "description": "Volume Quota Rule Properties",
+          "$ref": "#/definitions/volumeQuotaRulesProperties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "volumeQuotaRulesProperties": {
+      "description": "Volume Quota Rule properties",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure lifecycle management"
+        },
+        "quotaSizeInKiBs": {
+          "type": "integer",
+          "description": "Size of quota",
+          "format": "int64",
+          "example": "100006"
+        },
+        "quotaType": {
+          "title": "quotaType",
+          "type": "string",
+          "description": "Type of quota",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "enum": [
+            "DefaultUserQuota",
+            "DefaultGroupQuota",
+            "IndividualUserQuota",
+            "IndividualGroupQuota"
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "DefaultUserQuota",
+                "description": "Default user quota"
+              },
+              {
+                "value": "DefaultGroupQuota",
+                "description": "Default group quota"
+              },
+              {
+                "value": "IndividualUserQuota",
+                "description": "Individual user quota"
+              },
+              {
+                "value": "IndividualGroupQuota",
+                "description": "Individual group quota"
+              }
+            ]
+          },
+          "example": "DefaultUserQuota"
+        },
+        "quotaTarget": {
+          "type": "string",
+          "description": "UserID/GroupID/SID based on the quota target type. UserID and groupID can be found by running ‘id’ or ‘getent’ command for the user or group and SID can be found by running <wmic useraccount where name='user-name' get sid>",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
     "volumeGroupList": {
       "description": "List of volume group resources",
       "type": "object",
@@ -6963,6 +7789,14 @@
       "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]{0,63}$",
       "minLength": 1,
       "maxLength": 64,
+      "x-ms-parameter-location": "method"
+    },
+    "VolumeQuotaRuleName": {
+      "name": "volumeQuotaRuleName",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "description": "The name of volume quota rule",
       "x-ms-parameter-location": "method"
     }
   }
