@@ -6038,6 +6038,10 @@
         }
       ],
       "properties": {
+        "policy": {
+          "description": "Execute pipeline activity policy.",
+          "$ref": "#/definitions/ExecutePipelineActivityPolicy"
+        },
         "typeProperties": {
           "description": "Execute pipeline activity properties.",
           "x-ms-client-flatten": true,
@@ -6047,6 +6051,19 @@
       "required": [
         "typeProperties"
       ]
+    },
+    "ExecutePipelineActivityPolicy": {
+      "description": "Execution policy for an execute pipeline activity.",
+      "type": "object",
+      "properties": {
+        "secureInput": {
+          "type": "boolean",
+          "description": "When set to true, Input from activity is considered as secure and will not be logged to monitoring."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
     },
     "ExecutePipelineActivityTypeProperties": {
       "description": "Execute pipeline activity properties.",

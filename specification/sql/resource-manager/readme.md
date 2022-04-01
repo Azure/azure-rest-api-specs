@@ -271,7 +271,7 @@ input-file:
 - ./Microsoft.Sql/preview/2021-05-01-preview/DistributedAvailabilityGroups.json
 - ./Microsoft.Sql/preview/2021-05-01-preview/ServerTrustCertificates.json
 - ./Microsoft.Sql/preview/2021-08-01-preview/ElasticPools.json
-- ./Microsoft.Sql/preview/2021-08-01-preview/IPv6FirewallRules.json
+- ./Microsoft.Sql/preview/2021-11-01-preview/IPv6FirewallRules.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/ReplicationLinks.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/ManagedDatabaseSensitivityLabels.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/ManagedServerDnsAliases.json
