@@ -7,37 +7,37 @@
   },
   "paths": {},
   "definitions": {
-    "FhirResourceCreatedEventData": {
+    "HealthcareFhirResourceCreatedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceCreated event.",
       "allOf": [
         {
-          "$ref": "#/definitions/FhirResourceEventBaseProperties"
+          "$ref": "#/definitions/HealthcareFhirResourceEventBaseProperties"
         }
       ]
     },
-    "FhirResourceUpdatedEventData": {
+    "HealthcareFhirResourceUpdatedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceUpdated event.",
       "allOf": [
         {
-          "$ref": "#/definitions/FhirResourceEventBaseProperties"
+          "$ref": "#/definitions/HealthcareFhirResourceEventBaseProperties"
         }
       ]
     },
-    "FhirResourceDeletedEventData": {
+    "HealthcareFhirResourceDeletedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceDeleted event.",
       "allOf": [
         {
-          "$ref": "#/definitions/FhirResourceEventBaseProperties"
+          "$ref": "#/definitions/HealthcareFhirResourceEventBaseProperties"
         }
       ]
     },
-    "FhirResourceEventBaseProperties": {
+    "HealthcareFhirResourceEventBaseProperties": {
       "description": "Schema of common properties of all FhirResource events",
       "type": "object",
       "properties": {
         "resourceType": {
           "description": "Type of HL7 FHIR resource.",
-          "$ref": "#/definitions/FhirResourceType"
+          "$ref": "#/definitions/HealthcareFhirResourceType"
         },
         "resourceFhirAccount": {
           "description": "Domain name of FHIR account for this resource.",
@@ -54,7 +54,7 @@
         }
       }
     },
-    "FhirResourceType": {
+    "HealthcareFhirResourceType": {
       "description": "Schema of FHIR resource type enumeration.",
       "type": "string",
       "enum": [
@@ -221,7 +221,7 @@
         "VisionPrescription"
       ],
       "x-ms-enum": {
-        "name": "FhirResourceType",
+        "name": "HealthcareFhirResourceType",
         "modelAsString": true,
         "values": [
           {
