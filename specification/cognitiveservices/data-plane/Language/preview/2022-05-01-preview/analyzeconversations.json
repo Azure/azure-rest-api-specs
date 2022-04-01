@@ -1614,7 +1614,7 @@
           "type": "string"
         },
         "language": {
-          "description": "Default language of the conversation item in BCP-47 format.",
+          "description": "The language of the conversation item in BCP-47 format.",
           "type": "string"
         },
         "modality": {
@@ -1915,7 +1915,7 @@
       ]
     },
     "ConversationPIICategories": {
-      "description": "(Optional) Describes the PII categories to return for detection. If not provided, 'default' categories will be returned which will vary with languages.",
+      "description": "Describes the PII categories to return for detection. If not provided, 'default' categories will be returned which will vary with the language.",
       "items": {
         "type": "string",
         "x-ms-enum": {
@@ -2212,18 +2212,7 @@
       "properties": {
         "code": {
           "type": "string",
-          "enum": [
-            "ConversationTruncated",
-            "IssueGenerationFailure",
-            "MissingRedactionSourceText",
-            "MisalignedAudioTiming",
-            "ResolutionGenerationFailure"
-          ],
-          "x-ms-enum": {
-            "name": "WarningCodeValue",
-            "modelAsString": true
-          },
-          "description": "Error code."
+          "description": "Warning code."
         },
         "message": {
           "type": "string",

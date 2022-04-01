@@ -12,24 +12,24 @@
             "id": "20220101meeting",
             "language": "en",
             "modality": "text",
-            "domain": "neutral",
+            "domain": "generic",
             "conversationItems": [
               {
                 "participantId": "user",
+                "role":"customer",
                 "id": "1",
-                "modality": "text",
                 "text": "Hi!"
               },
               {
                 "participantId": "agent",
+                "role":"agent",
                 "id": "2",
-                "modality": "text",
                 "text": "Hello, how can I help you?"
               },
               {
                 "participantId": "user",
+                "role":"customer",
                 "id": "3",
-                "modality": "text",
                 "text": "I am having trouble issuing a return of a game on my xbox: call of duty"
               }
             ]
@@ -38,10 +38,13 @@
         "tasks": [
           {
             "taskName": "analyze 1",
-            "kind": "ConversationalSummarization",
+            "kind": "ConversationalSummarizationTask",
             "parameters": {
               "modelVersion": "2022-05-01-preview",
-              "summaryAspects ": "issue, resolution"
+              "summaryAspects ": [
+                "issue",
+                "resolution"
+              ]
             }
           }
         ]
