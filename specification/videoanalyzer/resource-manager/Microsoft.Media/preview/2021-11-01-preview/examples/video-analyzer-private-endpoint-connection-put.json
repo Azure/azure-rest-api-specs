@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contoso",
+    "accountName": "contososports",
+    "name": "10000000-0000-0000-0000-000000000000",
+    "api-version": "2021-11-01-Preview",
+    "parameters": {
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "status": "Approved",
+          "description": "Test description."
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "10000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fabrikam/providers/Microsoft.Media/videoanalyzers/contososports/privateEndpointConnections/10000000-0000-0000-0000-000000000000",
+        "type": "Microsoft.Media/videoanalyzers/privateEndpointConnections",
+        "properties": {
+          "provisioningState": "InProgress",
+          "privateLinkServiceConnectionState": {
+            "status": "Approved",
+            "description": "Test description."
+          },
+          "privateEndpoint": {
+            "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/reosuceGroup1/providers/Microsoft.Network/privateEndpoints/privateEndpointName1"
+          }
+        },
+        "systemData": {
+          "createdBy": "user@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "0001-01-01T00:00:00Z",
+          "lastModifiedBy": "user@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "0001-01-01T00:00:00Z"
+        }
+      }
+    }
+  }
+}

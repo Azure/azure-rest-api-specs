@@ -1,0 +1,652 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-02-01",
+    "title": "KubeEnvironments API Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/kubeEnvironments": {
+      "get": {
+        "tags": [
+          "KubeEnvironments"
+        ],
+        "summary": "Get all Kubernetes Environments for a subscription.",
+        "description": "Description for Get all Kubernetes Environments for a subscription.",
+        "operationId": "KubeEnvironments_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/KubeEnvironmentCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List kube environments by subscription": {
+            "$ref": "./examples/KubeEnvironments_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/kubeEnvironments": {
+      "get": {
+        "tags": [
+          "KubeEnvironments"
+        ],
+        "summary": "Get all the Kubernetes Environments in a resource group.",
+        "description": "Description for Get all the Kubernetes Environments in a resource group.",
+        "operationId": "KubeEnvironments_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/KubeEnvironmentCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List kube environments by resource group": {
+            "$ref": "./examples/KubeEnvironments_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/kubeEnvironments/{name}": {
+      "get": {
+        "tags": [
+          "KubeEnvironments"
+        ],
+        "summary": "Get the properties of a Kubernetes Environment.",
+        "description": "Description for Get the properties of a Kubernetes Environment.",
+        "operationId": "KubeEnvironments_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the Kubernetes Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/KubeEnvironment"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get kube environments by name": {
+            "$ref": "./examples/KubeEnvironments_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "KubeEnvironments"
+        ],
+        "summary": "Creates or updates a Kubernetes Environment.",
+        "description": "Description for Creates or updates a Kubernetes Environment.",
+        "operationId": "KubeEnvironments_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the Kubernetes Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "kubeEnvironmentEnvelope",
+            "in": "body",
+            "description": "Configuration details of the Kubernetes Environment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KubeEnvironment"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/KubeEnvironment"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/KubeEnvironment"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create kube environments": {
+            "$ref": "./examples/KubeEnvironments_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "KubeEnvironments"
+        ],
+        "summary": "Delete a Kubernetes Environment.",
+        "description": "Description for Delete a Kubernetes Environment.",
+        "operationId": "KubeEnvironments_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the Kubernetes Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete operation completed"
+          },
+          "202": {
+            "description": "Delete operation is in progress"
+          },
+          "204": {
+            "description": "Kubernetes Environment does not exist"
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete kube environment by name": {
+            "$ref": "./examples/KubeEnvironments_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "KubeEnvironments"
+        ],
+        "summary": "Creates or updates a Kubernetes Environment.",
+        "description": "Description for Creates or updates a Kubernetes Environment.",
+        "operationId": "KubeEnvironments_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the Kubernetes Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "kubeEnvironmentEnvelope",
+            "in": "body",
+            "description": "Configuration details of the Kubernetes Environment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KubeEnvironmentPatchResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/KubeEnvironment"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/KubeEnvironment"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update kube environments": {
+            "$ref": "./examples/KubeEnvironments_Update.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AppLogsConfiguration": {
+      "type": "object",
+      "properties": {
+        "destination": {
+          "type": "string"
+        },
+        "logAnalyticsConfiguration": {
+          "$ref": "#/definitions/LogAnalyticsConfiguration"
+        }
+      }
+    },
+    "ArcConfiguration": {
+      "type": "object",
+      "properties": {
+        "artifactsStorageType": {
+          "enum": [
+            "LocalNode",
+            "NetworkFileSystem"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageType",
+            "modelAsString": false
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "artifactStorageClassName": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "artifactStorageMountPath": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "artifactStorageNodeName": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "artifactStorageAccessMode": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "frontEndServiceConfiguration": {
+          "$ref": "#/definitions/FrontEndConfiguration"
+        },
+        "kubeConfig": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
+        }
+      }
+    },
+    "FrontEndConfiguration": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "NodePort",
+            "LoadBalancer"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FrontEndServiceType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "KubeEnvironment": {
+      "description": "A Kubernetes cluster specialized for web workloads by Azure App Service",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "KubeEnvironment resource specific properties",
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "description": "Provisioning state of the Kubernetes Environment.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "Waiting",
+                "InitializationInProgress",
+                "InfrastructureSetupInProgress",
+                "InfrastructureSetupComplete",
+                "ScheduledForDelete",
+                "UpgradeRequested",
+                "UpgradeFailed"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "KubeEnvironmentProvisioningState",
+                "modelAsString": false
+              }
+            },
+            "deploymentErrors": {
+              "description": "Any errors that occurred during deployment or deployment validation",
+              "type": "string",
+              "readOnly": true
+            },
+            "internalLoadBalancerEnabled": {
+              "description": "Only visible within Vnet/Subnet",
+              "type": "boolean",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "defaultDomain": {
+              "description": "Default Domain Name for the cluster",
+              "type": "string",
+              "readOnly": true
+            },
+            "staticIp": {
+              "description": "Static IP of the KubeEnvironment",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "arcConfiguration": {
+              "$ref": "#/definitions/ArcConfiguration",
+              "description": "Cluster configuration which determines the ARC cluster\ncomponents types. Eg: Choosing between BuildService kind,\nFrontEnd Service ArtifactsStorageType etc."
+            },
+            "appLogsConfiguration": {
+              "$ref": "#/definitions/AppLogsConfiguration",
+              "description": "Cluster configuration which enables the log daemon to export\napp logs to a destination. Currently only \"log-analytics\" is\nsupported"
+            },
+            "aksResourceID": {
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            }
+          },
+          "x-ms-client-flatten": true
+        },
+        "extendedLocation": {
+          "$ref": "./CommonDefinitions.json#/definitions/ExtendedLocation"
+        }
+      }
+    },
+    "KubeEnvironmentCollection": {
+      "description": "Collection of Kubernetes Environments",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KubeEnvironment"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "KubeEnvironmentPatchResource": {
+      "description": "ARM resource for a KubeEnvironment when patching",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "KubeEnvironmentPatchResource resource specific properties",
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "description": "Provisioning state of the Kubernetes Environment.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "Waiting",
+                "InitializationInProgress",
+                "InfrastructureSetupInProgress",
+                "InfrastructureSetupComplete",
+                "ScheduledForDelete",
+                "UpgradeRequested",
+                "UpgradeFailed"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "KubeEnvironmentProvisioningState",
+                "modelAsString": false
+              }
+            },
+            "deploymentErrors": {
+              "description": "Any errors that occurred during deployment or deployment validation",
+              "type": "string",
+              "readOnly": true
+            },
+            "internalLoadBalancerEnabled": {
+              "description": "Only visible within Vnet/Subnet",
+              "type": "boolean",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "defaultDomain": {
+              "description": "Default Domain Name for the cluster",
+              "type": "string",
+              "readOnly": true
+            },
+            "staticIp": {
+              "description": "Static IP of the KubeEnvironment",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "arcConfiguration": {
+              "$ref": "#/definitions/ArcConfiguration",
+              "description": "Cluster configuration which determines the ARC cluster\ncomponents types. Eg: Choosing between BuildService kind,\nFrontEnd Service ArtifactsStorageType etc."
+            },
+            "appLogsConfiguration": {
+              "$ref": "#/definitions/AppLogsConfiguration",
+              "description": "Cluster configuration which enables the log daemon to export\napp logs to a destination. Currently only \"log-analytics\" is\nsupported"
+            },
+            "aksResourceID": {
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "LogAnalyticsConfiguration": {
+      "type": "object",
+      "properties": {
+        "customerId": {
+          "type": "string"
+        },
+        "sharedKey": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Your Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+      "required": true,
+      "type": "string"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "Name of the resource group to which the resource belongs.",
+      "required": true,
+      "type": "string",
+      "maxLength": 90,
+      "minLength": 1,
+      "pattern": "^[-\\w\\._\\(\\)]+[^\\.]$",
+      "x-ms-parameter-location": "method"
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "API Version",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2021-04-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "diskPoolName": "myDiskPool"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.StoragePool/diskPools/myDiskPool",
+        "location": "westus2",
+        "name": "myDiskPool",
+        "type": "Microsoft.StoragePool/diskPools",
+        "sku": {
+          "name": "Basic_0",
+          "tier": "Basic"
+        },
+        "properties": {
+          "availabilityZones": [
+            "1"
+          ],
+          "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myvnet/subnets/mysubnet",
+          "provisioningState": "Succeeded",
+          "status": "Healthy",
+          "disks": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDataDisk_0"
+            }
+          ]
+        },
+        "systemData": {
+          "createdAt": "2020-06-24T06:53:57+00:00",
+          "createdBy": "alias",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-06-24T06:53:57+00:00",
+          "lastModifiedBy": "alias",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "env": "int"
+        }
+      }
+    }
+  }
+}

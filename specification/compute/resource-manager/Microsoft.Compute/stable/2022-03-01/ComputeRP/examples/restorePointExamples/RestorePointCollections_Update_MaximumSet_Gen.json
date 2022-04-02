@@ -1,0 +1,194 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "rgcompute",
+    "restorePointCollectionName": "aaaaaaaaaaaaaaaaaaaa",
+    "parameters": {
+      "properties": {
+        "source": {
+          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM"
+        }
+      },
+      "tags": {
+        "key8536": "aaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    "api-version": "2022-03-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "norwayeast",
+        "properties": {
+          "source": {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+            "location": "eastus"
+          },
+          "provisioningState": "Successful",
+          "restorePointCollectionId": "638f052b-a7c2-450c-89e7-6a3b8f1d6a7c",
+          "restorePoints": [
+            {
+              "properties": {
+                "excludeDisks": [
+                  {
+                    "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/rpcName/restorePoints/restorePointName/diskRestorePoints/testingexcludedisk_OsDisk_1_74cdaedcea50483d9833c96adefa100f_22b4bdfe-6c54-4f72-84d8-85d8860f0c57"
+                  }
+                ],
+                "sourceMetadata": {
+                  "hardwareProfile": {
+                    "vmSize": "Standard_B1s",
+                    "vmSizeProperties": {
+                      "vCPUsAvailable": 9,
+                      "vCPUsPerCore": 12
+                    }
+                  },
+                  "storageProfile": {
+                    "osDisk": {
+                      "osType": "Windows",
+                      "encryptionSettings": {
+                        "diskEncryptionKey": {
+                          "secretUrl": "aaaaaaaa",
+                          "sourceVault": {
+                            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}"
+                          }
+                        },
+                        "keyEncryptionKey": {
+                          "keyUrl": "aaaaaaaaaaaaaa",
+                          "sourceVault": {
+                            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}"
+                          }
+                        },
+                        "enabled": true
+                      },
+                      "name": "testingexcludedisk_OsDisk_1_74cdaedcea50483d9833c96adefa100f",
+                      "caching": "ReadWrite",
+                      "diskSizeGB": 3,
+                      "managedDisk": {
+                        "storageAccountType": "Standard_LRS",
+                        "diskEncryptionSet": {
+                          "id": "aaaaaaaaaaaa"
+                        },
+                        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/testingexcludedisk_OsDisk_1_74cdaedcea50483d9833c96adefa100f"
+                      },
+                      "diskRestorePoint": {
+                        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/rpcName/restorePoints/restorePointName/diskRestorePoints/testingexcludedisk_OsDisk_1_74cdaedcea50483d9833c96adefa100f_22b4bdfe-6c54-4f72-84d8-85d8860f0c57"
+                      }
+                    },
+                    "dataDisks": [
+                      {
+                        "lun": 1,
+                        "name": "testingexcludedisk_DataDisk_1",
+                        "caching": "None",
+                        "managedDisk": {
+                          "storageAccountType": "Standard_LRS",
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/testingexcludedisk_DataDisk_1",
+                          "diskEncryptionSet": {
+                            "id": "aaaaaaaaaaaa"
+                          }
+                        },
+                        "diskRestorePoint": {
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/rpcName/restorePoints/restorePointName/diskRestorePoints/testingexcludedisk_DataDisk_1_68785190-1acb-4d5e-a8ae-705b45f3dca5"
+                        },
+                        "diskSizeGB": 24
+                      }
+                    ]
+                  },
+                  "osProfile": {
+                    "computerName": "computerName",
+                    "adminUsername": "admin",
+                    "adminPassword": "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                    "customData": "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                    "windowsConfiguration": {
+                      "provisionVMAgent": true,
+                      "enableAutomaticUpdates": true,
+                      "timeZone": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                      "additionalUnattendContent": [
+                        {
+                          "passName": "OobeSystem",
+                          "componentName": "Microsoft-Windows-Shell-Setup",
+                          "settingName": "AutoLogon",
+                          "content": "aaaaaaaaaaaaaaaaaaaa"
+                        }
+                      ],
+                      "patchSettings": {
+                        "patchMode": "Manual",
+                        "enableHotpatching": true,
+                        "assessmentMode": "ImageDefault"
+                      },
+                      "winRM": {
+                        "listeners": [
+                          {
+                            "protocol": "Http",
+                            "certificateUrl": "aaaaaaaaaaaaaaaaaaaaaa"
+                          }
+                        ]
+                      }
+                    },
+                    "linuxConfiguration": {
+                      "disablePasswordAuthentication": true,
+                      "ssh": {
+                        "publicKeys": [
+                          {
+                            "path": "aaa",
+                            "keyData": "aaaaaa"
+                          }
+                        ]
+                      },
+                      "provisionVMAgent": true,
+                      "patchSettings": {
+                        "patchMode": "ImageDefault",
+                        "assessmentMode": "ImageDefault"
+                      }
+                    },
+                    "secrets": [
+                      {
+                        "sourceVault": {
+                          "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}"
+                        },
+                        "vaultCertificates": [
+                          {
+                            "certificateUrl": "aaaaaaa",
+                            "certificateStore": "aaaaaaaaaaaaaaaaaaaaaaaaa"
+                          }
+                        ]
+                      }
+                    ],
+                    "allowExtensionOperations": true,
+                    "requireGuestProvisionSignal": true
+                  },
+                  "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                      "enabled": true,
+                      "storageUri": "aaaaaaaaaaaaaaaaaaa"
+                    }
+                  },
+                  "licenseType": "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                  "vmId": "76d6541e-80bd-4dc1-932b-3cae4cfb80e7",
+                  "securityProfile": {
+                    "uefiSettings": {
+                      "secureBootEnabled": true,
+                      "vTpmEnabled": true
+                    },
+                    "encryptionAtHost": true,
+                    "securityType": "TrustedLaunch"
+                  },
+                  "location": "westus"
+                },
+                "provisioningState": "aaaaaaaaaaaaaaaaa",
+                "consistencyMode": "CrashConsistent",
+                "timeCreated": "2021-11-30T12:58:26.593Z"
+              },
+              "id": "aaaaaaaaaaa",
+              "name": "aaaaaaaaaaaaaaaaaa",
+              "type": "aaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          ]
+        },
+        "tags": {},
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/myRpc",
+        "name": "myRpc",
+        "type": "Microsoft.Compute/restorePointCollections"
+      }
+    }
+  }
+}

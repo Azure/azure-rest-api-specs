@@ -1,0 +1,35 @@
+{
+  "title": "List Azure Virtual Network Manager Static Members",
+  "parameters": {
+    "api-version": "2021-05-01-preview",
+    "subscriptionId": "subscriptionC",
+    "resourceGroupName": "rg1",
+    "networkManagerName": "testNetworkManager",
+    "networkGroupName": "testNetworkGroup"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "testStaticMember",
+            "id": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/testNetworkGroup/staticMembers/testStaticMember",
+            "type": "Microsoft.Network/networkManagers/networkGroups/staticMembers",
+            "systemData": {
+              "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+              "createdByType": "User",
+              "createdAt": "2021-01-11T18:52:27Z",
+              "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-01-11T18:52:27Z"
+            },
+            "properties": {
+              "resourceId": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/virtualnetworks/vnet1"
+            }
+          }
+        ],
+        "nextLink": "{baseurl}/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/testNetworkGroup/staticMembers?api-version=2021-02-01-preview&$skipToken=10"
+      }
+    }
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ServiceBusManagementClient",
+    "description": "Azure Service Bus client",
+    "version": "2017-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/sku/{sku}/regions": {
+      "get": {
+        "tags": [
+          "Regions"
+        ],
+        "operationId": "Regions_ListBySku",
+        "x-ms-examples": {
+          "RegionsListBySku": {
+            "$ref": "./examples/SkuRegions/SkuRegions.json"
+          }
+        },
+        "description": "Gets the available Regions for a given sku",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SkuNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Regions successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/PremiumMessagingRegionsListResult"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ResourceNamespacePatch": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/definitions.json#/definitions/Resource"
+        }
+      ],
+      "description": "The Resource definition."
+    },
+    "PremiumMessagingRegions": {
+      "properties": {
+        "properties": {
+          "properties": {
+            "code": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Region code"
+            },
+            "fullName": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Full name of the region"
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceNamespacePatch"
+        }
+      ],
+      "description": "Premium Messaging Region"
+    },
+    "PremiumMessagingRegionsListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PremiumMessagingRegions"
+          },
+          "description": "Result of the List PremiumMessagingRegions type."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of PremiumMessagingRegions."
+        }
+      },
+      "description": "The response of the List PremiumMessagingRegions operation."
+    }
+  },
+  "parameters": {}
+}

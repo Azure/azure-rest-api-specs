@@ -1,0 +1,753 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Dashboard",
+    "description": "The Microsoft.Dashboard Rest API spec.",
+    "version": "2021-09-01-preview"
+  },
+  "paths": {
+    "/providers/Microsoft.Dashboard/operations": {
+      "get": {
+        "tags": [
+          "GrafanaResource"
+        ],
+        "summary": "List all available API operations provided by Microsoft.Dashboard.",
+        "operationId": "Operations_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Return all available API operations provided by Microsoft.Dashboard.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Dashboard/grafana": {
+      "get": {
+        "tags": [
+          "GrafanaResource"
+        ],
+        "summary": "List all resources of workspaces for Grafana under the specified subscription.",
+        "operationId": "Grafana_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Return all resources of workspaces for Grafana under the specified subscription.",
+            "schema": {
+              "$ref": "#/definitions/GrafanaResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Grafana_List": {
+            "$ref": "./examples/Grafana_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana": {
+      "get": {
+        "tags": [
+          "GrafanaResource"
+        ],
+        "summary": "List all resources of workspaces for Grafana under the specified resource group.",
+        "operationId": "Grafana_ListByResourceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Return all resources of workspaces for Grafana under the given resource group.",
+            "schema": {
+              "$ref": "#/definitions/GrafanaResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Grafana_ListByResourceGroup": {
+            "$ref": "./examples/Grafana_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana/{workspaceName}": {
+      "get": {
+        "tags": [
+          "GrafanaResource"
+        ],
+        "summary": "Get the properties of a specific workspace for Grafana resource.",
+        "operationId": "Grafana_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Return the properties of the required workspace for Grafana resource.",
+            "schema": {
+              "$ref": "#/definitions/GrafanaResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Grafana_Get": {
+            "$ref": "./examples/Grafana_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "GrafanaResource"
+        ],
+        "summary": "Create or update a workspace for Grafana resource. This API is idempotent, so user can either create a new grafana or update an existing grafana.",
+        "operationId": "Grafana_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/GrafanaResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully create a workspace for Grafana resource.",
+            "schema": {
+              "$ref": "#/definitions/GrafanaResource"
+            }
+          },
+          "201": {
+            "description": "Created. The operation was successfully started and will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/GrafanaResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Grafana_Create": {
+            "$ref": "./examples/Grafana_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "GrafanaResource"
+        ],
+        "summary": "Update a workspace for Grafana resource.",
+        "operationId": "Grafana_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/GrafanaResourceUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully update the workspace for Grafana resource.",
+            "schema": {
+              "$ref": "#/definitions/GrafanaResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Grafana_Update": {
+            "$ref": "./examples/Grafana_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "GrafanaResource"
+        ],
+        "summary": "Delete a workspace for Grafana resource.",
+        "operationId": "Grafana_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The workspace for Grafana resource is deleted."
+          },
+          "202": {
+            "description": "Accepted. The operation is accepted and will be completed asynchronously."
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Grafana_Delete": {
+            "$ref": "./examples/Grafana_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ActionType": {
+      "description": "Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.",
+      "enum": [
+        "Internal"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ActionType"
+      }
+    },
+    "CreatedByType": {
+      "description": "The type of identity that created the resource.",
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "CreatedByType"
+      }
+    },
+    "GrafanaResource": {
+      "type": "object",
+      "description": "The grafana resource type.",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "description": "ARM id of the grafana resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the grafana resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the grafana resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sku": {
+          "description": "The Sku of the grafana resource.",
+          "$ref": "#/definitions/ResourceSku"
+        },
+        "properties": {
+          "description": "Properties specific to the grafana resource.",
+          "$ref": "#/definitions/GrafanaResourceProperties"
+        },
+        "identity": {
+          "description": "The managed identity of the grafana resource.",
+          "$ref": "#/definitions/ManagedIdentity"
+        },
+        "systemData": {
+          "description": "The system meta data relating to this grafana resource.",
+          "$ref": "#/definitions/SystemData"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "The tags for grafana resource."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the grafana resource lives"
+        }
+      }
+    },
+    "GrafanaResourceListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GrafanaResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "GrafanaResourceProperties": {
+      "type": "object",
+      "description": "Properties specific to the grafana resource.",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "grafanaVersion": {
+          "description": "The Grafana software version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "endpoint": {
+          "description": "The endpoint of the Grafana instance.",
+          "type": "string",
+          "readOnly": true
+        },
+        "zoneRedundancy": {
+          "$ref": "#/definitions/ZoneRedundancy"
+        }
+      }
+    },
+    "GrafanaResourceUpdateParameters": {
+      "type": "object",
+      "description": "The parameters for a PATCH request to a grafana resource.",
+      "properties": {
+        "identity": {
+          "description": "The managed identity of the grafana resource.",
+          "$ref": "#/definitions/ManagedIdentity"
+        },
+        "tags": {
+          "type": "object",
+          "description": "The new tags of the grafana resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "LastModifiedByType": {
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "LastModifiedByType"
+      }
+    },
+    "ManagedIdentity": {
+      "description": "The managed identity of a resource.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ManagedIdentityTypes"
+        },
+        "principalId": {
+          "description": "The principal id of the system assigned identity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "The tenant id of the system assigned identity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "userAssignedIdentities": {
+          "description": "Dictionary of user assigned identities.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
+          }
+        }
+      }
+    },
+    "ManagedIdentityTypes": {
+      "description": "The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the resource.",
+      "enum": [
+        "None",
+        "SystemAssigned"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "IdentityType",
+        "modelAsString": true
+      }
+    },
+    "OperationDisplay": {
+      "description": "Localized display information for this particular operation.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "The localized friendly form of the resource provider name, i.e., Microsoft.Dashboard.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "description": "The localized friendly name of the resource type related to this operation, e.g., 'grafana'.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "description": "Operation type, e.g., read, write, delete, etc.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "Description of the operation, e.g., 'Read grafana'.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "A list of REST API operations supported by Microsoft.Dashboard provider. It contains an URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of operations supported by the Microsoft.Dashboard provider.",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/OperationResult"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationResult": {
+      "description": "A Microsoft.Dashboard REST API operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name, i.e., {provider}/{resource}/{operation}.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation applies to data-plane. Set \"true\" for data-plane operations and \"false\" for ARM/control-plane operations.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay"
+        },
+        "origin": {
+          "$ref": "#/definitions/Origin"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ActionType"
+        }
+      }
+    },
+    "Origin": {
+      "description": "The intended executor of the operation.",
+      "enum": [
+        "user",
+        "system",
+        "user,system"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "Origin"
+      }
+    },
+    "ProvisioningState": {
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleted",
+        "NotSpecified"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ProvisioningState"
+      }
+    },
+    "ResourceSku": {
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "SystemData": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string"
+        },
+        "createdByType": {
+          "$ref": "#/definitions/CreatedByType"
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastModifiedBy": {
+          "type": "string"
+        },
+        "lastModifiedByType": {
+          "$ref": "#/definitions/LastModifiedByType"
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "ZoneRedundancy": {
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "default": "Disabled",
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ZoneRedundancy"
+      }
+    },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "The principal id of user assigned identity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientId": {
+          "description": "The client id of user assigned identity.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "parameters": {
+    "WorkspaceNameParameter": {
+      "in": "path",
+      "name": "workspaceName",
+      "description": "The name of Azure Managed Workspace for Grafana.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "default": "2021-09-01-preview",
+      "description": "The API version to be used with the HTTP request (e.g. YYYY-MM-DD).",
+      "minLength": 1
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group. The name is case insensitive."
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    }
+  }
+}

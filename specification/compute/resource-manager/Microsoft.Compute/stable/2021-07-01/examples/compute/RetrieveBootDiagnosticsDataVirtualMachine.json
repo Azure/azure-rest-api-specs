@@ -1,0 +1,17 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "ResourceGroup",
+    "api-version": "2021-07-01",
+    "vmName": "VMName",
+    "sasUriExpirationTimeInMinutes": 60
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "consoleScreenshotBlobUri": "https://storageuri/vm.screenshot.bmp?{sasKey}",
+        "serialConsoleLogBlobUri": "https://storageuri/vm.serialconsole.log?{sasKey}"
+      }
+    }
+  }
+}
