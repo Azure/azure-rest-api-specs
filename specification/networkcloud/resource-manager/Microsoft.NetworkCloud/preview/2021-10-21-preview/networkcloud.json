@@ -1574,6 +1574,46 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/rackManifests": {
+      "get": {
+        "description": "Get a list of all rack manifests in a given resource group. The API returns 200 OK when the API is successful.",
+        "summary": "List rack manifests in a resource group.",
+        "operationId": "RackManifests_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RackManifestList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List rack manifests for resource group": {
+            "$ref": "./examples/RackManifests_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/rackManifests/{rackManifestName}": {
       "get": {
         "description": "Get the properties of a specific rack manifest. The API returns 200 OK when the operation is successful.",
@@ -1611,6 +1651,181 @@
           "Get rack manifest": {
             "$ref": "./examples/RackManifests_Get.json"
           }
+        }
+      },
+      "put": {
+        "description": "Create a new rack manifest or update the properties of the existing rack manifest. The API returns 200 OK in case of the successful creation or update. 201 Created is returned when the operation is performed asynchronously.",
+        "summary": "Creates or updates a specific rack manifest.",
+        "operationId": "RackManifests_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RackManifestNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "rackManifestParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/RackManifest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RackManifest"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/RackManifest"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update rack manifest": {
+            "$ref": "./examples/RackManifests_Create.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "description": "Delete a provided rack manifest. The API returns 200 OK when the deletion is successful. 202 Accepted is returned when the operation is performed asynchronously.",
+        "summary": "Delete a specific rack manifest.",
+        "operationId": "RackManifests_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RackManifestNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete rack manifest": {
+            "$ref": "./examples/RackManifests_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "description": "Patch the properties of a specific rack manifest, or update the tags assigned to the rack manifest. Properties and tag updates can be done independently. The API returns 200 OK when the API is successful.",
+        "summary": "Patch a specific rack manifest.",
+        "operationId": "RackManifests_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RackManifestNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "rackManifestUpdateParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/RackManifestPatchParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RackManifest"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/RackManifest"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch rack manifest": {
+            "$ref": "./examples/RackManifests_Patch.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -2554,223 +2769,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/rackManifests": {
-      "get": {
-        "description": "Get a list of all rack manifests in a given resource group. The API returns 200 OK when the API is successful.",
-        "summary": "List rack manifests in a resource group.",
-        "operationId": "RackManifests_ListByResourceGroup",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RackManifestList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List rack manifests for resource group": {
-            "$ref": "./examples/RackManifests_ListByResourceGroup.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/rackManifests/{rackManifestName}": {
-      "put": {
-        "description": "Create a new rack manifest or update the properties of the existing rack manifest. The API returns 200 OK in case of the successful creation or update. 201 Created is returned when the operation is performed asynchronously.",
-        "summary": "Creates or updates a specific rack manifest.",
-        "operationId": "RackManifests_CreateOrUpdate",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/RackManifestNameParameter"
-          },
-          {
-            "description": "The request body.",
-            "name": "rackManifestParameters",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/RackManifest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RackManifest"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/RackManifest"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "The URL to retrieve the status of the asynchronous operation."
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create or Update rack manifest": {
-            "$ref": "./examples/RackManifests_Create.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
-      },
-      "delete": {
-        "description": "Delete a provided rack manifest. The API returns 200 OK when the deletion is successful. 202 Accepted is returned when the operation is performed asynchronously.",
-        "summary": "Delete a specific rack manifest.",
-        "operationId": "RackManifests_Delete",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/RackManifestNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "The URL to retrieve the status of the asynchronous operation."
-              }
-            }
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete rack manifest": {
-            "$ref": "./examples/RackManifests_Delete.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
-      },
-      "patch": {
-        "description": "Patch the properties of a specific rack manifest, or update the tags assigned to the rack manifest. Properties and tag updates can be done independently. The API returns 200 OK when the API is successful.",
-        "summary": "Patch a specific rack manifest.",
-        "operationId": "RackManifests_Update",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/RackManifestNameParameter"
-          },
-          {
-            "description": "The request body.",
-            "name": "rackManifestUpdateParameters",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/RackManifestPatchParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RackManifest"
-            }
-          },
-          "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/RackManifest"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "The URL to retrieve the status of the asynchronous operation."
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Patch rack manifest": {
-            "$ref": "./examples/RackManifests_Patch.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
-      }
     }
   },
   "definitions": {
@@ -2811,7 +2809,7 @@
           "x-ms-mutability": ["read", "create"]
         },
         "name": {
-          "description": "The name of the resource.",
+          "description": "The name of the resource",
           "type": "string",
           "readOnly": true
         },
@@ -3133,7 +3131,7 @@
           "x-ms-mutability": ["read", "create"]
         },
         "name": {
-          "description": "The name of the resource.",
+          "description": "The name of the resource",
           "type": "string",
           "readOnly": true
         },
@@ -3246,7 +3244,7 @@
           "x-ms-mutability": ["read", "create"]
         },
         "name": {
-          "description": "The name of the resource.",
+          "description": "The name of the resource",
           "type": "string",
           "readOnly": true
         },
@@ -3585,7 +3583,7 @@
           "x-ms-mutability": ["read", "create"]
         },
         "name": {
-          "description": "The name of the resource.",
+          "description": "The name of the resource",
           "type": "string",
           "readOnly": true
         },
@@ -3650,7 +3648,7 @@
           "x-ms-mutability": ["read", "create"]
         },
         "name": {
-          "description": "The name of the resource.",
+          "description": "The name of the resource",
           "type": "string",
           "readOnly": true
         },
@@ -3910,7 +3908,7 @@
           "x-ms-mutability": ["read", "create"]
         },
         "name": {
-          "description": "The name of the resource.",
+          "description": "The name of the resource",
           "type": "string",
           "readOnly": true
         },
@@ -4091,7 +4089,7 @@
           "x-ms-mutability": ["read", "create"]
         },
         "name": {
-          "description": "The name of the resource.",
+          "description": "The name of the resource",
           "type": "string",
           "readOnly": true
         },
