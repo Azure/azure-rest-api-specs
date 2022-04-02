@@ -1,0 +1,219 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-11-01-preview",
+    "title": "ContainerRegistryManagementClient",
+    "description": "Admin Container Registry Management Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry.Setup/locations/{location}/setup": {
+      "post": {
+        "x-ms-examples": {
+          "Invokes container registry certificate uploading and ACR service deployment.": {
+            "$ref": "./examples/Setup/Start.json"
+          }
+        },
+        "tags": [
+          "ContainerRegistrySetupStart"
+        ],
+        "description": "Invokes container registry certificate uploading and service deployment.",
+        "operationId": "ContainerRegistry_StartSetup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/StartSetupParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created -- Container registry certificate was uploaded successfully and deployment started.",
+            "schema": {
+              "$ref": "#/definitions/ContainerRegistrySetup"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "x-ms-examples": {
+          "Returns the status of the container registry setup.": {
+            "$ref": "./examples/Setup/Get.json"
+          }
+        },
+        "tags": [
+          "ContainerRegistrySetupStatus"
+        ],
+        "description": "Returns the status of the container registry setup.",
+        "operationId": "ContainerRegistry_GetSetupStatus",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- The status of the container registry setup has been returned.",
+            "schema": {
+              "$ref": "#/definitions/SetupResult"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ContainerRegistrySetupProperty": {
+      "description": "Container registry setup properties.",
+      "type": "object",
+      "properties": {
+        "password": {
+          "description": "Ssl certificate password.",
+          "type": "string",
+          "format": "password"
+        },
+        "sslCertBase64": {
+          "description": "Ssl certificate in base64 format.",
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "ContainerRegistrySetup": {
+      "description": "Container registry start setup return.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Container registry start setup return properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SetupProperty"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "SetupProperty": {
+      "description": "Container registry start setup return property.",
+      "type": "object",
+      "properties": {
+        "statusUri": {
+          "description": "The uri to poll status of the container registry setup.",
+          "type": "string"
+        }
+      }
+    },
+    "SetupResult": {
+      "description": "Container registry setup result.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Container registry setup result properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SetupResultProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "SetupResultProperties": {
+      "description": "Container registry setup result properties.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The status of the container registry setup.",
+          "$ref": "#/definitions/SetupStatus",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "description": "Error message if previous setup was failed.",
+          "type": "string"
+        }
+      }
+    },
+    "SetupStatus": {
+      "description": "The status of the container registry setup.",
+      "type": "string",
+      "enum": [
+        "ReadyToSetup",
+        "Running",
+        "Failed",
+        "Cancelled",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "SetupStatus",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "StartSetupParameter": {
+      "name": "startSetupRequest",
+      "in": "body",
+      "description": "The object containing information for the configuration request.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ContainerRegistrySetupProperty"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

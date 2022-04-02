@@ -39,30 +39,30 @@ cli:
         hidden: true
       - select: 'parameter'
         where:
-            operationGroup: 'agent_pools'
-            operation: '^(get|create_or_update|delete)$'
-            parameter: 'resource_name'
+            operationGroup: 'agentPools'
+            operation: '^(get|createOrUpdate|delete)$'
+            parameter: 'resourceName'
         set:
             name: 'aks_name'
             alias: 'resource_name'
       - select: 'parameter'
         where:
-            operationGroup: '(managed_clusters|container_services|open_shift_managed_clusters|operations)'
-            parameter: 'resource_name'
+            operationGroup: '(managedClusters|containerServices|openShiftManagedClusters|operations)'
+            parameter: 'resourceName'
         set:
             name: 'name'
-            alias: 'resource_name'
+            alias: 'resourceName'
       - select: 'parameter'
         where:
-            operationGroup: 'agent_pools'
-            operation: '(get_available_agent_pool_versions|get_upgrade_profile)'
-            parameter: 'resource_name'
+            operationGroup: 'agentPools'
+            operation: '(getAvailableAgentPoolVersions|getUpgradeProfile)'
+            parameter: 'resourceName'
         set:
             name: 'name'
             alias: 'resource_name'
       - select: 'operationGroup'
         where:
-            operationGroup: 'managed_clusters'
+            operationGroup: 'managedClusters'
         formatTable:
             properties:
               - Name

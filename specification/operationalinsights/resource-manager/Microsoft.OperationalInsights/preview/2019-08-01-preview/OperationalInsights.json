@@ -457,10 +457,6 @@
           "type": "string",
           "description": "The data export rule ID."
         },
-        "allTables": {
-          "type": "boolean",
-          "description": "When ‘true’, all workspace's tables are exported."
-        },
         "tableNames": {
           "type": "array",
           "items": {
@@ -486,6 +482,9 @@
           "description": "Date and time when the export was last modified."
         }
       },
+      "required": [
+        "tableNames"
+      ],
       "description": "Data Export properties."
     },
     "Destination": {
@@ -578,8 +577,9 @@
       "type": "object",
       "properties": {
         "dataSourceType": {
-          "description": "linked storage accounts type.",
+          "description": "Linked storage accounts type.",
           "type": "string",
+          "readOnly": true,
           "enum": [
             "CustomLogs",
             "AzureWatson"
@@ -590,7 +590,7 @@
           }
         },
         "storageAccountIds": {
-          "description": "linked storage accounts resource ids.",
+          "description": "Linked storage accounts resources ids.",
           "type": "array",
           "items": {
             "type": "string"
@@ -636,7 +636,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The workspace's resource subscription ID."
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
     "ApiVersionParameter": {
       "name": "api-version",
@@ -651,7 +651,7 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "The workspace's resource group name.",
+      "description": "The name of the resource group to get. The name is case insensitive.",
       "pattern": "^[-\\w\\._\\(\\)]+$",
       "minLength": 1,
       "maxLength": 90
@@ -677,7 +677,7 @@
         "name": "DataSourceType",
         "modelAsString": false
       },
-      "description": "Linked storage account type.",
+      "description": "Linked storage accounts type.",
       "x-ms-parameter-location": "method"
     }
   }

@@ -1,0 +1,89 @@
+{
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroupName",
+    "machineName": "myMachineName",
+    "guestConfigurationAssignmentName": "WhitelistedApplication",
+    "api-version": "2021-01-25",
+    "parameters": {
+      "location": "westcentralus",
+      "name": "WhitelistedApplication",
+      "properties": {
+        "context": "Azure policy",
+        "guestConfiguration": {
+          "name": "WhitelistedApplication",
+          "version": "1.*",
+          "contentUri": "https://thisisfake/pacakge",
+          "contentHash": "123contenthash",
+          "assignmentType": "ApplyAndAutoCorrect",
+          "configurationParameter": [
+            {
+              "name": "[InstalledApplication]bwhitelistedapp;Name",
+              "value": "NotePad,sql"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {},
+      "body": {
+        "location": "westcentralus",
+        "id": "/subscriptions/mysubscriptionid/resourceGroups/myResourceGroupName/providers/HybridRP.Compute/virtualMachines/myvm/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/WhitelistedApplication",
+        "name": "WhitelistedApplication",
+        "properties": {
+          "complianceStatus": "Pending",
+          "assignmentHash": "abcdr453g",
+          "latestReportId": "a2a64e5d-a1a9-4344-a866-fb9e1541f723",
+          "lastComplianceStatusChecked": null,
+          "context": "Azure policy",
+          "guestConfiguration": {
+            "kind": null,
+            "name": "WhitelistedApplication",
+            "version": "1.0.0.3",
+            "contentUri": null,
+            "contentHash": null,
+            "configurationParameter": [
+              {
+                "name": "[InstalledApplication]bwhitelistedapp;Name",
+                "value": "NotePad,sql"
+              }
+            ]
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "200": {
+      "headers": {},
+      "body": {
+        "location": "westcentralus",
+        "id": "/subscriptions/mysubscriptionid/resourceGroups/myResourceGroupName/providers/HybridRP.Compute/virtualMachines/myvm/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/WhitelistedApplication",
+        "name": "WhitelistedApplication",
+        "properties": {
+          "complianceStatus": "Pending",
+          "assignmentHash": "abcdr453g",
+          "latestReportId": "a2a64e5d-a1a9-4344-a866-fb9e1541f723",
+          "lastComplianceStatusChecked": null,
+          "context": "Azure policy",
+          "guestConfiguration": {
+            "kind": null,
+            "name": "WhitelistedApplication",
+            "version": "1.0.0.3",
+            "contentUri": null,
+            "contentHash": null,
+            "configurationParameter": [
+              {
+                "name": "[InstalledApplication]bwhitelistedapp;Name",
+                "value": "NotePad,sql"
+              }
+            ]
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

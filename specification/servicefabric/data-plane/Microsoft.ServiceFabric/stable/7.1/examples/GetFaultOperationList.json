@@ -1,0 +1,51 @@
+{
+  "operationId": "GetFaultOperationList",
+  "description": "This shows an example of possible output for GetFaultOperationList",
+  "parameters": {
+    "TypeFilter": "0xFF",
+    "StateFilter": "0xFF",
+    "api-version": "6.0"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": [
+        {
+          "OperationId": "00000000-0000-0000-0000-000000000010",
+          "State": "Completed",
+          "Type": "PartitionDataLoss"
+        },
+        {
+          "OperationId": "00000000-0000-0000-0000-000000000020",
+          "State": "Completed",
+          "Type": "PartitionQuorumLoss"
+        },
+        {
+          "OperationId": "00000000-0000-0000-0000-000000000030",
+          "State": "Completed",
+          "Type": "PartitionRestart"
+        },
+        {
+          "OperationId": "00000000-0000-0000-0000-000000000500",
+          "State": "Faulted",
+          "Type": "NodeTransition"
+        },
+        {
+          "OperationId": "00000000-0000-0000-0000-000000000700",
+          "State": "Completed",
+          "Type": "NodeTransition"
+        },
+        {
+          "OperationId": "00000000-0000-0000-0000-000000000710",
+          "State": "Completed",
+          "Type": "NodeTransition"
+        },
+        {
+          "OperationId": "88ef90f9-0b94-46b0-b817-a6ea20c07f8a",
+          "State": "Completed",
+          "Type": "PartitionRestart"
+        }
+      ]
+    }
+  }
+}

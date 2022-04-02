@@ -41,4 +41,7 @@ cli:
     - name: FirewallRuleDelete
     - name: DatabaseDelete
     - name: ServerDelete
+    - name: ServerStart
+    - name: ServerStop
+    - name: ServerUpgrade
 ```

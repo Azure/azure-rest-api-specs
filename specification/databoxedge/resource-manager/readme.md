@@ -26,7 +26,55 @@ These are the global settings for the DataBox Edge API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-08
+tag: package-2021-02-01
+```
+### Tag: package-2021-02-01
+
+These settings apply only when `--tag=package-2021-02-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-02-01'
+input-file:
+- Microsoft.DataBoxEdge/stable/2021-02-01/databoxedge.json
+```
+### Tag: package-2021-02-01-preview
+
+These settings apply only when `--tag=package-2021-02-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-02-01-preview'
+input-file:
+- Microsoft.DataBoxEdge/preview/2021-02-01-preview/databoxedge.json
+```
+### Tag: package-2020-12-01
+
+These settings apply only when `--tag=package-2020-12-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-12-01'
+input-file:
+- Microsoft.DataBoxEdge/stable/2020-12-01/databoxedge.json
+```
+### Tag: package-2020-09-01-preview
+
+These settings apply only when `--tag=package-2020-09-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-09-01-preview'
+input-file:
+- Microsoft.DataBoxEdge/preview/2020-09-01-preview/databoxedge.json
+```
+### Tag: package-2020-09-01
+
+These settings apply only when `--tag=package-2020-09-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-09-01'
+input-file:
+- Microsoft.DataBoxEdge/stable/2020-09-01/databoxedge.json
+```
+### Tag: package-2020-05-preview
+
+These settings apply only when `--tag=package-2020-05-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-05-preview'
+input-file:
+- Microsoft.DataBoxEdge/preview/2020-05-01-preview/databoxedge.json
 ```
 
 ### Tag: package-2019-08
@@ -55,6 +103,16 @@ These settings apply only when `--tag=package-2019-03` is specified on the comma
 input-file:
 - Microsoft.DataBoxEdge/stable/2019-03-01/databoxedge.json
 ```
+
+### Tag: profile-hybrid-2020-09-01
+
+These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on the command line.
+
+``` yaml $(tag) == 'profile-hybrid-2020-09-01'
+input-file:
+- Microsoft.DataBoxEdge/stable/2019-08-01/databoxedge.json
+```
+
 ---
 # Code Generation
 
@@ -67,15 +125,15 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
-    after_scripts:
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-databoxedge
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_databoxedge']
+  - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
 ```
 
 ## C#
@@ -107,89 +165,7 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+See configuration in [readme.java.md](./readme.java.md)
 
-``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.databoxedge
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 0
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-databoxedge
-```
 
-### Java multi-api
 
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2019-03
-  - tag: package-2019-07
-  - tag: package-2019-08
-```
-
-### Tag: package-2019-08 and java
-
-These settings apply only when `--tag=package-2019-08 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2019-08' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.databoxedge.v2019_08_01
-  output-folder: $(azure-libraries-for-java-folder)/databoxedge/resource-manager/v2019_08_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2019-07 and java
-
-These settings apply only when `--tag=package-2019-07 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2019-07' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.databoxedge.v2019_07_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/databoxedge/mgmt-v2019_07_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2019-03 and java
-
-These settings apply only when `--tag=package-2019-03 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2019-03' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.databoxedge.v2019_03_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/databoxedge/mgmt-v2019_03_01
-regenerate-manager: true
-generate-interface: true
-```
-
-## Multi-API/Profile support for AutoRest v3 generators 
-
-AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
-
-This block is updated by an automatic script. Edits may be lost!
-
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
-# include the azure profile definitions from the standard location
-require: $(this-folder)/../../../profiles/readme.md
-
-# all the input files across all versions
-input-file:
-  - $(this-folder)/Microsoft.DataBoxEdge/stable/2019-08-01/databoxedge.json
-  - $(this-folder)/Microsoft.DataBoxEdge/stable/2019-07-01/databoxedge.json
-  - $(this-folder)/Microsoft.DataBoxEdge/stable/2019-03-01/databoxedge.json
-
-```
-
-If there are files that should not be in the `all-api-versions` set, 
-uncomment the  `exclude-file` section below and add the file paths.
-
-``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
-```

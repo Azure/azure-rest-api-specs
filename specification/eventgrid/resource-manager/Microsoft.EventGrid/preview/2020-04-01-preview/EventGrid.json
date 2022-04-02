@@ -163,6 +163,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
           },
@@ -619,6 +622,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
           },
@@ -882,7 +888,8 @@
           "EventChannels_Delete": {
             "$ref": "./examples/EventChannels_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerNamespaces/{partnerNamespaceName}/eventChannels": {
@@ -1381,6 +1388,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
           },
@@ -1618,6 +1628,12 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
           }
         ],
         "responses": {
@@ -1637,7 +1653,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1809,6 +1825,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
           },
@@ -1987,6 +2006,12 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
           }
         ],
         "responses": {
@@ -2006,7 +2031,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2798,6 +2823,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
           },
@@ -3462,13 +3490,13 @@
             "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
         "x-ms-examples": {
-          "PartnerTopics_Get": {
+          "PartnerRegistrations_List": {
             "$ref": "./examples/PartnerRegistrations_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -3875,7 +3903,11 @@
             "in": "path",
             "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains"
+            ]
           },
           {
             "name": "parentName",
@@ -3919,7 +3951,9 @@
         "summary": "Update a specific private endpoint connection.",
         "description": "Update a specific private endpoint connection under a topic or domain.",
         "operationId": "PrivateEndpointConnections_Update",
-        "consumes": [],
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
         ],
@@ -3939,7 +3973,11 @@
             "in": "path",
             "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains"
+            ]
           },
           {
             "name": "parentName",
@@ -3954,6 +3992,15 @@
             "description": "The name of the private endpoint connection connection.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "privateEndpointConnection",
+            "in": "body",
+            "description": "The private endpoint connection object to update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -3977,7 +4024,7 @@
           }
         },
         "x-ms-examples": {
-          "PartnerTopics_Delete": {
+          "PrivateEndpointConnections_Update": {
             "$ref": "./examples/PrivateEndpointConnections_Update.json"
           }
         },
@@ -4010,7 +4057,11 @@
             "in": "path",
             "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains"
+            ]
           },
           {
             "name": "parentName",
@@ -4077,7 +4128,11 @@
             "in": "path",
             "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains"
+            ]
           },
           {
             "name": "parentName",
@@ -4404,6 +4459,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
           },
@@ -5136,6 +5194,9 @@
             "schema": {
               "$ref": "#/definitions/ExtensionTopic"
             }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
           }
         },
         "x-ms-examples": {
@@ -5338,7 +5399,8 @@
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
             "modelAsString": true
-          }
+          },
+          "default": "Enabled"
         },
         "inboundIpRules": {
           "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
@@ -5354,7 +5416,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "the Sku name of the resource.\r\nthe possible values: Basic; Premium",
+          "description": "The Sku name of the resource. The possible values are: Basic or Premium.",
           "enum": [
             "Basic",
             "Premium"
@@ -5404,7 +5466,6 @@
     },
     "PrivateEndpointConnection": {
       "type": "object",
-      "description": "PrivateEndpointConnection resource information.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -5462,12 +5523,12 @@
           "readOnly": true
         },
         "name": {
-          "description": "Name of the resource",
+          "description": "Name of the resource.",
           "type": "string",
           "readOnly": true
         },
         "type": {
-          "description": "Type of the resource",
+          "description": "Type of the resource.",
           "type": "string",
           "readOnly": true
         }
@@ -5475,7 +5536,7 @@
       "x-ms-azure-resource": true
     },
     "PrivateEndpointConnectionProperties": {
-      "description": "Properties of the private endpoint connection resource",
+      "description": "Properties of the private endpoint connection resource.",
       "type": "object",
       "properties": {
         "privateEndpoint": {
@@ -5522,7 +5583,7 @@
       }
     },
     "ConnectionState": {
-      "description": "ConnectionState Information.",
+      "description": "ConnectionState information.",
       "type": "object",
       "properties": {
         "status": {
@@ -5686,7 +5747,8 @@
         },
         "sku": {
           "$ref": "#/definitions/ResourceSku",
-          "description": "The Sku pricing tier for the domain."
+          "description": "The Sku pricing tier for the domain.",
+          "default": "Basic"
         },
         "identity": {
           "$ref": "#/definitions/IdentityInfo",
@@ -5721,8 +5783,8 @@
       }
     },
     "DomainUpdateParameterProperties": {
-      "type": "object",
       "description": "Information of domain update parameter properties.",
+      "type": "object",
       "properties": {
         "publicNetworkAccess": {
           "description": "This determines if traffic is allowed over public network. By default it is enabled. \r\nYou can further restrict to specific IPs by configuring <seealso cref=\"P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.DomainUpdateParameterProperties.InboundIpRules\" />",
@@ -5734,7 +5796,8 @@
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
             "modelAsString": true
-          }
+          },
+          "default": "Enabled"
         },
         "inboundIpRules": {
           "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
@@ -5872,6 +5935,34 @@
             "name": "EventChannelProvisioningState",
             "modelAsString": true
           }
+        },
+        "partnerTopicReadinessState": {
+          "description": "The readiness state of the corresponding partner topic.",
+          "enum": [
+            "NotActivatedByUserYet",
+            "ActivatedByUser",
+            "DeactivatedByUser",
+            "DeletedByUser"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PartnerTopicReadinessState",
+            "modelAsString": true
+          }
+        },
+        "expirationTimeIfNotActivatedUtc": {
+          "format": "date-time",
+          "description": "Expiration time of the event channel. If this timer expires while the corresponding partner topic is never activated,\r\nthe event channel and corresponding partner topic are deleted.",
+          "type": "string"
+        },
+        "filter": {
+          "$ref": "#/definitions/EventChannelFilter",
+          "description": "Information about the filter for the event channel."
+        },
+        "partnerTopicFriendlyDescription": {
+          "description": "Friendly description about the topic. This can be set by the publisher/partner to show custom description for the customer partner topic.\r\nThis will be helpful to remove any ambiguity of the origin of creation of the partner topic for the customer.",
+          "type": "string"
         }
       }
     },
@@ -5903,260 +5994,16 @@
         }
       }
     },
-    "EventChannel": {
-      "description": "Event Channel.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/EventChannelProperties",
-          "description": "Properties of the EventChannel.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "EventChannelsListResult": {
-      "description": "Result of the List Event Channels operation",
+    "EventChannelFilter": {
+      "description": "Filter for the Event Channel.",
       "type": "object",
       "properties": {
-        "value": {
-          "description": "A collection of Event Channels",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EventChannel"
-          }
-        },
-        "nextLink": {
-          "description": "A link for the next page of event channels",
-          "type": "string"
-        }
-      }
-    },
-    "EventSubscriptionProperties": {
-      "description": "Properties of the Event Subscription.",
-      "type": "object",
-      "properties": {
-        "topic": {
-          "description": "Name of the topic of the event subscription.",
-          "type": "string",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "description": "Provisioning state of the event subscription.",
-          "enum": [
-            "Creating",
-            "Updating",
-            "Deleting",
-            "Succeeded",
-            "Canceled",
-            "Failed",
-            "AwaitingManualAction"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "EventSubscriptionProvisioningState",
-            "modelAsString": true
-          }
-        },
-        "destination": {
-          "$ref": "#/definitions/EventSubscriptionDestination",
-          "description": "Information about the destination where events have to be delivered for the event subscription.\r\nUses Azure Event Grid's identity to acquire the authentication tokens being used during delivery / dead-lettering."
-        },
-        "deliveryWithResourceIdentity": {
-          "$ref": "#/definitions/DeliveryWithResourceIdentity",
-          "description": "Information about the destination where events have to be delivered for the event subscription.\r\nUses the managed identity setup on the parent resource (namely, topic or domain) to acquire the authentication tokens being used during delivery / dead-lettering."
-        },
-        "filter": {
-          "$ref": "#/definitions/EventSubscriptionFilter",
-          "description": "Information about the filter for the event subscription."
-        },
-        "labels": {
-          "description": "List of user defined labels.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "expirationTimeUtc": {
-          "format": "date-time",
-          "description": "Expiration time of the event subscription.",
-          "type": "string"
-        },
-        "eventDeliverySchema": {
-          "description": "The event delivery schema for the event subscription.",
-          "enum": [
-            "EventGridSchema",
-            "CustomInputSchema",
-            "CloudEventSchemaV1_0"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "EventDeliverySchema",
-            "modelAsString": true
-          }
-        },
-        "retryPolicy": {
-          "$ref": "#/definitions/RetryPolicy",
-          "description": "The retry policy for events. This can be used to configure maximum number of delivery attempts and time to live for events."
-        },
-        "deadLetterDestination": {
-          "$ref": "#/definitions/DeadLetterDestination",
-          "description": "The dead letter destination of the event subscription. Any event that cannot be delivered to its' destination is sent to the dead letter destination.\r\nUses Azure Event Grid's identity to acquire the authentication tokens being used during delivery / dead-lettering."
-        },
-        "deadLetterWithResourceIdentity": {
-          "$ref": "#/definitions/DeadLetterWithResourceIdentity",
-          "description": "The dead letter destination of the event subscription. Any event that cannot be delivered to its' destination is sent to the dead letter destination.\r\nUses the managed identity setup on the parent resource (namely, topic or domain) to acquire the authentication tokens being used during delivery / dead-lettering."
-        }
-      }
-    },
-    "DeliveryWithResourceIdentity": {
-      "description": "Information about the delivery for an event subscription with resource identity.",
-      "type": "object",
-      "properties": {
-        "identity": {
-          "$ref": "#/definitions/EventSubscriptionIdentity",
-          "description": "The identity to use when delivering events."
-        },
-        "destination": {
-          "$ref": "#/definitions/EventSubscriptionDestination",
-          "description": "Information about the destination where events have to be delivered for the event subscription.\r\nUses Azure Event Grid's identity to acquire the authentication tokens being used during delivery / dead-lettering."
-        }
-      }
-    },
-    "EventSubscriptionFilter": {
-      "description": "Filter for the Event Subscription.",
-      "type": "object",
-      "properties": {
-        "subjectBeginsWith": {
-          "description": "An optional string to filter events for an event subscription based on a resource path prefix.\r\nThe format of this depends on the publisher of the events.\r\nWildcard characters are not supported in this path.",
-          "type": "string"
-        },
-        "subjectEndsWith": {
-          "description": "An optional string to filter events for an event subscription based on a resource path suffix.\r\nWildcard characters are not supported in this path.",
-          "type": "string"
-        },
-        "includedEventTypes": {
-          "description": "A list of applicable event types that need to be part of the event subscription. If it is desired to subscribe to all default event types, set the IncludedEventTypes to null.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "isSubjectCaseSensitive": {
-          "description": "Specifies if the SubjectBeginsWith and SubjectEndsWith properties of the filter\r\nshould be compared in a case sensitive manner.",
-          "default": false,
-          "type": "boolean"
-        },
         "advancedFilters": {
-          "description": "An array of advanced filters that are used for filtering event subscriptions.",
+          "description": "An array of advanced filters that are used for filtering event channels.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AdvancedFilter"
           }
-        }
-      }
-    },
-    "RetryPolicy": {
-      "description": "Information about the retry policy for an event subscription.",
-      "type": "object",
-      "properties": {
-        "maxDeliveryAttempts": {
-          "format": "int32",
-          "description": "Maximum number of delivery retry attempts for events.",
-          "type": "integer"
-        },
-        "eventTimeToLiveInMinutes": {
-          "format": "int32",
-          "description": "Time To Live (in minutes) for events.",
-          "type": "integer"
-        }
-      }
-    },
-    "DeadLetterWithResourceIdentity": {
-      "description": "Information about the deadletter destination with resource identity.",
-      "type": "object",
-      "properties": {
-        "identity": {
-          "$ref": "#/definitions/EventSubscriptionIdentity",
-          "description": "The identity to use when dead-lettering events."
-        },
-        "deadLetterDestination": {
-          "$ref": "#/definitions/DeadLetterDestination",
-          "description": "Information about the destination where events have to be delivered for the event subscription.\r\nUses the managed identity setup on the parent resource (namely, topic or domain) to acquire the authentication tokens being used during delivery / dead-lettering."
-        }
-      }
-    },
-    "EventSubscriptionIdentity": {
-      "description": "The identity information with the event subscription.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "The type of managed identity used. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user-assigned identities. The type 'None' will remove any identity.",
-          "enum": [
-            "SystemAssigned",
-            "UserAssigned"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "EventSubscriptionIdentityType",
-            "modelAsString": true
-          }
-        },
-        "userAssignedIdentity": {
-          "description": "The user identity associated with the resource.",
-          "type": "string"
-        }
-      }
-    },
-    "WebHookEventSubscriptionDestinationProperties": {
-      "description": "Information about the webhook destination properties for an event subscription.",
-      "type": "object",
-      "properties": {
-        "endpointUrl": {
-          "description": "The URL that represents the endpoint of the destination of an event subscription.",
-          "type": "string"
-        },
-        "endpointBaseUrl": {
-          "description": "The base URL that represents the endpoint of the destination of an event subscription.",
-          "type": "string",
-          "readOnly": true
-        },
-        "maxEventsPerBatch": {
-          "format": "int32",
-          "description": "Maximum number of events per batch.",
-          "type": "integer"
-        },
-        "preferredBatchSizeInKilobytes": {
-          "format": "int32",
-          "description": "Preferred batch size in Kilobytes.",
-          "type": "integer"
-        },
-        "azureActiveDirectoryTenantId": {
-          "description": "The Azure Active Directory Tenant ID to get the access token that will be included as the bearer token in delivery requests.",
-          "type": "string"
-        },
-        "azureActiveDirectoryApplicationIdOrUri": {
-          "description": "The Azure Active Directory Application ID or URI to get the access token that will be included as the bearer token in delivery requests.",
-          "type": "string"
-        }
-      }
-    },
-    "StorageBlobDeadLetterDestinationProperties": {
-      "description": "Properties of the storage blob based dead letter destination.",
-      "type": "object",
-      "properties": {
-        "resourceId": {
-          "description": "The Azure Resource ID of the storage account that is the destination of the deadletter events",
-          "type": "string"
-        },
-        "blobContainerName": {
-          "description": "The name of the Storage blob container that is the destination of the deadletter events",
-          "type": "string"
         }
       }
     },
@@ -6179,23 +6026,6 @@
         }
       },
       "x-ms-discriminator-value": "NumberIn"
-    },
-    "StorageBlobDeadLetterDestination": {
-      "description": "Information about the storage blob based dead letter destination.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DeadLetterDestination"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/StorageBlobDeadLetterDestinationProperties",
-          "description": "The properties of the Storage Blob based deadletter destination",
-          "x-ms-client-flatten": true
-        }
-      },
-      "x-ms-discriminator-value": "StorageBlob"
     },
     "NumberNotInAdvancedFilter": {
       "description": "NumberNotIn Advanced Filter.",
@@ -6432,6 +6262,290 @@
       },
       "discriminator": "operatorType"
     },
+    "EventChannel": {
+      "description": "Event Channel.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EventChannelProperties",
+          "description": "Properties of the EventChannel.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "description": "The system metadata relating to Event Channel resource.",
+          "type": "object",
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "EventChannelsListResult": {
+      "description": "Result of the List Event Channels operation",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of Event Channels",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EventChannel"
+          }
+        },
+        "nextLink": {
+          "description": "A link for the next page of event channels",
+          "type": "string"
+        }
+      }
+    },
+    "EventSubscriptionProperties": {
+      "description": "Properties of the Event Subscription.",
+      "type": "object",
+      "properties": {
+        "topic": {
+          "description": "Name of the topic of the event subscription.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the event subscription.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Canceled",
+            "Failed",
+            "AwaitingManualAction"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "EventSubscriptionProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "destination": {
+          "$ref": "#/definitions/EventSubscriptionDestination",
+          "description": "Information about the destination where events have to be delivered for the event subscription.\r\nUses Azure Event Grid's identity to acquire the authentication tokens being used during delivery / dead-lettering."
+        },
+        "deliveryWithResourceIdentity": {
+          "$ref": "#/definitions/DeliveryWithResourceIdentity",
+          "description": "Information about the destination where events have to be delivered for the event subscription.\r\nUses the managed identity setup on the parent resource (namely, topic or domain) to acquire the authentication tokens being used during delivery / dead-lettering."
+        },
+        "filter": {
+          "$ref": "#/definitions/EventSubscriptionFilter",
+          "description": "Information about the filter for the event subscription."
+        },
+        "labels": {
+          "description": "List of user defined labels.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "expirationTimeUtc": {
+          "format": "date-time",
+          "description": "Expiration time of the event subscription.",
+          "type": "string"
+        },
+        "eventDeliverySchema": {
+          "description": "The event delivery schema for the event subscription.",
+          "default": "EventGridSchema",
+          "enum": [
+            "EventGridSchema",
+            "CustomInputSchema",
+            "CloudEventSchemaV1_0"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EventDeliverySchema",
+            "modelAsString": true
+          }
+        },
+        "retryPolicy": {
+          "$ref": "#/definitions/RetryPolicy",
+          "description": "The retry policy for events. This can be used to configure maximum number of delivery attempts and time to live for events."
+        },
+        "deadLetterDestination": {
+          "$ref": "#/definitions/DeadLetterDestination",
+          "description": "The dead letter destination of the event subscription. Any event that cannot be delivered to its' destination is sent to the dead letter destination.\r\nUses Azure Event Grid's identity to acquire the authentication tokens being used during delivery / dead-lettering."
+        },
+        "deadLetterWithResourceIdentity": {
+          "$ref": "#/definitions/DeadLetterWithResourceIdentity",
+          "description": "The dead letter destination of the event subscription. Any event that cannot be delivered to its' destination is sent to the dead letter destination.\r\nUses the managed identity setup on the parent resource (namely, topic or domain) to acquire the authentication tokens being used during delivery / dead-lettering."
+        }
+      }
+    },
+    "DeliveryWithResourceIdentity": {
+      "description": "Information about the delivery for an event subscription with resource identity.",
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/EventSubscriptionIdentity",
+          "description": "The identity to use when delivering events."
+        },
+        "destination": {
+          "$ref": "#/definitions/EventSubscriptionDestination",
+          "description": "Information about the destination where events have to be delivered for the event subscription.\r\nUses Azure Event Grid's identity to acquire the authentication tokens being used during delivery / dead-lettering."
+        }
+      }
+    },
+    "EventSubscriptionFilter": {
+      "description": "Filter for the Event Subscription.",
+      "type": "object",
+      "properties": {
+        "subjectBeginsWith": {
+          "description": "An optional string to filter events for an event subscription based on a resource path prefix.\r\nThe format of this depends on the publisher of the events.\r\nWildcard characters are not supported in this path.",
+          "type": "string"
+        },
+        "subjectEndsWith": {
+          "description": "An optional string to filter events for an event subscription based on a resource path suffix.\r\nWildcard characters are not supported in this path.",
+          "type": "string"
+        },
+        "includedEventTypes": {
+          "description": "A list of applicable event types that need to be part of the event subscription. If it is desired to subscribe to all default event types, set the IncludedEventTypes to null.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isSubjectCaseSensitive": {
+          "description": "Specifies if the SubjectBeginsWith and SubjectEndsWith properties of the filter\r\nshould be compared in a case sensitive manner.",
+          "default": false,
+          "type": "boolean"
+        },
+        "advancedFilters": {
+          "description": "An array of advanced filters that are used for filtering event subscriptions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdvancedFilter"
+          }
+        }
+      }
+    },
+    "RetryPolicy": {
+      "description": "Information about the retry policy for an event subscription.",
+      "type": "object",
+      "properties": {
+        "maxDeliveryAttempts": {
+          "format": "int32",
+          "description": "Maximum number of delivery retry attempts for events.",
+          "type": "integer"
+        },
+        "eventTimeToLiveInMinutes": {
+          "format": "int32",
+          "description": "Time To Live (in minutes) for events.",
+          "type": "integer"
+        }
+      }
+    },
+    "DeadLetterWithResourceIdentity": {
+      "description": "Information about the deadletter destination with resource identity.",
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/EventSubscriptionIdentity",
+          "description": "The identity to use when dead-lettering events."
+        },
+        "deadLetterDestination": {
+          "$ref": "#/definitions/DeadLetterDestination",
+          "description": "Information about the destination where events have to be delivered for the event subscription.\r\nUses the managed identity setup on the parent resource (namely, topic or domain) to acquire the authentication tokens being used during delivery / dead-lettering."
+        }
+      }
+    },
+    "EventSubscriptionIdentity": {
+      "description": "The identity information with the event subscription.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of managed identity used. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user-assigned identities. The type 'None' will remove any identity.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EventSubscriptionIdentityType",
+            "modelAsString": true
+          }
+        },
+        "userAssignedIdentity": {
+          "description": "The user identity associated with the resource.",
+          "type": "string"
+        }
+      }
+    },
+    "WebHookEventSubscriptionDestinationProperties": {
+      "description": "Information about the webhook destination properties for an event subscription.",
+      "type": "object",
+      "properties": {
+        "endpointUrl": {
+          "description": "The URL that represents the endpoint of the destination of an event subscription.",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "endpointBaseUrl": {
+          "description": "The base URL that represents the endpoint of the destination of an event subscription.",
+          "type": "string",
+          "readOnly": true
+        },
+        "maxEventsPerBatch": {
+          "format": "int32",
+          "description": "Maximum number of events per batch.",
+          "default": 1,
+          "type": "integer"
+        },
+        "preferredBatchSizeInKilobytes": {
+          "format": "int32",
+          "description": "Preferred batch size in Kilobytes.",
+          "default": 64,
+          "type": "integer"
+        },
+        "azureActiveDirectoryTenantId": {
+          "description": "The Azure Active Directory Tenant ID to get the access token that will be included as the bearer token in delivery requests.",
+          "type": "string"
+        },
+        "azureActiveDirectoryApplicationIdOrUri": {
+          "description": "The Azure Active Directory Application ID or URI to get the access token that will be included as the bearer token in delivery requests.",
+          "type": "string"
+        }
+      }
+    },
+    "StorageBlobDeadLetterDestinationProperties": {
+      "description": "Properties of the storage blob based dead letter destination.",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "The Azure Resource ID of the storage account that is the destination of the deadletter events",
+          "type": "string"
+        },
+        "blobContainerName": {
+          "description": "The name of the Storage blob container that is the destination of the deadletter events",
+          "type": "string"
+        }
+      }
+    },
+    "StorageBlobDeadLetterDestination": {
+      "description": "Information about the storage blob based dead letter destination.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeadLetterDestination"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageBlobDeadLetterDestinationProperties",
+          "description": "The properties of the Storage Blob based deadletter destination",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "StorageBlob"
+    },
     "WebHookEventSubscriptionDestination": {
       "description": "Information about the webhook destination for an event subscription.",
       "type": "object",
@@ -6620,11 +6734,13 @@
         "maxEventsPerBatch": {
           "format": "int32",
           "description": "Maximum number of events per batch.",
+          "default": 1,
           "type": "integer"
         },
         "preferredBatchSizeInKilobytes": {
           "format": "int32",
           "description": "Preferred batch size in Kilobytes.",
+          "default": 64,
           "type": "integer"
         }
       }
@@ -6686,6 +6802,12 @@
           "$ref": "#/definitions/EventSubscriptionProperties",
           "description": "Properties of the event subscription.",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "description": "The system metadata relating to Event Subscription resource.",
+          "type": "object",
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
@@ -6874,6 +6996,12 @@
           "$ref": "#/definitions/PartnerNamespaceProperties",
           "description": "Properties of the partner namespace.",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "description": "The system metadata relating to Partner Namespace resource.",
+          "type": "object",
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
@@ -6968,7 +7096,23 @@
           "type": "string"
         },
         "partnerResourceTypeDescription": {
-          "description": "Description of the partner resource type.",
+          "description": "Short description of the partner resource type. The length of this description should not exceed 256 characters.",
+          "type": "string"
+        },
+        "longDescription": {
+          "description": "Long description for the custom scenarios and integration to be displayed in the portal if needed.\r\nLength of this description should not exceed 2048 characters.",
+          "type": "string"
+        },
+        "partnerCustomerServiceNumber": {
+          "description": "The customer service number of the publisher. The expected phone format should start with a '+' sign \r\nfollowed by the country code. The remaining digits are then followed. Only digits and spaces are allowed and its\r\nlength cannot exceed 16 digits including country code. Examples of valid phone numbers are: +1 515 123 4567 and\r\n+966 7 5115 2471. Examples of invalid phone numbers are: +1 (515) 123-4567, 1 515 123 4567 and +966 121 5115 24 7 551 1234 43",
+          "type": "string"
+        },
+        "partnerCustomerServiceExtension": {
+          "description": "The extension of the customer service number of the publisher. Only digits are allowed and number of digits should not exceed 10.",
+          "type": "string"
+        },
+        "customerServiceUri": {
+          "description": "The extension of the customer service URI of the publisher.",
           "type": "string"
         },
         "setupUri": {
@@ -7014,6 +7158,12 @@
           "$ref": "#/definitions/PartnerRegistrationProperties",
           "description": "Properties of the partner registration.",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "description": "The system metadata relating to Partner Registration resource.",
+          "type": "object",
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
@@ -7021,6 +7171,13 @@
       "description": "Properties of the Partner Registration update.",
       "type": "object",
       "properties": {
+        "tags": {
+          "description": "Tags of the partner registration resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "partnerTopicTypeName": {
           "description": "Name of the partner topic type.",
           "type": "string"
@@ -7122,12 +7279,30 @@
         }
       }
     },
+    "PartnerTopicUpdateParameters": {
+      "description": "Properties of the Partner Topic update.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Tags of the partner topic.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "PartnerTopicProperties": {
       "description": "Properties of the Partner Topic.",
       "type": "object",
       "properties": {
         "source": {
           "description": "Source associated with this partner topic. This represents a unique partner resource.",
+          "type": "string"
+        },
+        "expirationTimeIfNotActivatedUtc": {
+          "format": "date-time",
+          "description": "Expiration time of the partner topic. If this timer expires while the partner topic is still never activated,\r\nthe partner topic and corresponding event channel are deleted.",
           "type": "string"
         },
         "provisioningState": {
@@ -7159,6 +7334,10 @@
             "name": "PartnerTopicActivationState",
             "modelAsString": true
           }
+        },
+        "partnerTopicFriendlyDescription": {
+          "description": "Friendly description about the topic. This can be set by the publisher/partner to show custom description for the customer partner topic.\r\nThis will be helpful to remove any ambiguity of the origin of creation of the partner topic for the customer.",
+          "type": "string"
         }
       }
     },
@@ -7175,19 +7354,12 @@
           "$ref": "#/definitions/PartnerTopicProperties",
           "description": "Properties of the partner topic.",
           "x-ms-client-flatten": true
-        }
-      }
-    },
-    "PartnerTopicUpdateParameters": {
-      "description": "Properties of the Partner Topic update.",
-      "type": "object",
-      "properties": {
-        "tags": {
-          "description": "Tags of the partner topic.",
+        },
+        "systemData": {
+          "description": "The system metadata relating to Partner Topic resource.",
           "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
@@ -7307,8 +7479,8 @@
       }
     },
     "PrivateLinkResource": {
-      "type": "object",
       "description": "Information of the private link resource.",
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties",
@@ -7320,11 +7492,11 @@
           "type": "string"
         },
         "name": {
-          "description": "Name of the resource",
+          "description": "Name of the resource.",
           "type": "string"
         },
         "type": {
-          "description": "Type of the resource",
+          "description": "Type of the resource.",
           "type": "string"
         }
       }
@@ -7366,40 +7538,6 @@
         "nextLink": {
           "description": "A link for the next page of private link resources.",
           "type": "string"
-        }
-      }
-    },
-    "SkuDefinitionsForResourceTypeListResult": {
-      "description": "List collection of Sku Definitions for each Resource Type.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "A collection of Sku Definitions for each Resource Type.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SkuDefinitionsForResourceType"
-          }
-        },
-        "nextLink": {
-          "description": "A link for the next page of Sku Definitions.",
-          "type": "string"
-        }
-      }
-    },
-    "SkuDefinitionsForResourceType": {
-      "description": "Describes an EventGrid Resource Sku Definition.",
-      "type": "object",
-      "properties": {
-        "resourceType": {
-          "description": "The Resource Type applicable for the Sku.",
-          "type": "string"
-        },
-        "skus": {
-          "description": "The Sku pricing tiers for the resource type.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceSku"
-          }
         }
       }
     },
@@ -7452,6 +7590,12 @@
           "$ref": "#/definitions/SystemTopicProperties",
           "description": "Properties of the system topic.",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "description": "The system metadata relating to System Topic resource.",
+          "type": "object",
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
@@ -7490,7 +7634,6 @@
       "type": "object",
       "properties": {
         "privateEndpointConnections": {
-          "description": "List of private endpoint connections.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
@@ -7551,7 +7694,8 @@
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
             "modelAsString": true
-          }
+          },
+          "default": "Enabled"
         },
         "inboundIpRules": {
           "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
@@ -7578,7 +7722,8 @@
         },
         "sku": {
           "$ref": "#/definitions/ResourceSku",
-          "description": "The Sku pricing tier for the topic."
+          "description": "The Sku pricing tier for the topic.",
+          "default": "Basic"
         },
         "identity": {
           "$ref": "#/definitions/IdentityInfo",
@@ -7598,8 +7743,8 @@
           }
         },
         "identity": {
-          "description": "Resource identity information.",
-          "$ref": "#/definitions/IdentityInfo"
+          "$ref": "#/definitions/IdentityInfo",
+          "description": "Resource identity information."
         },
         "properties": {
           "$ref": "#/definitions/TopicUpdateParameterProperties",
@@ -7626,7 +7771,8 @@
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
             "modelAsString": true
-          }
+          },
+          "default": "Enabled"
         },
         "inboundIpRules": {
           "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
@@ -7827,6 +7973,7 @@
       "description": "The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.",
       "required": false,
       "type": "integer",
+      "format": "int32",
       "x-ms-parameter-location": "method"
     }
   },

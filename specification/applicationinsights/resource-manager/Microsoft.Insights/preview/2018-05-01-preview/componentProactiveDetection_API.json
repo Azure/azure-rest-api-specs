@@ -1,0 +1,288 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApplicationInsightsManagementClient",
+    "description": "Azure Application Insights client for ProactiveDetection configurations of a component.",
+    "version": "2018-05-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/ProactiveDetectionConfigs": {
+      "get": {
+        "description": "Gets a list of ProactiveDetection configurations of an Application Insights component.",
+        "operationId": "ProactiveDetectionConfigurations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list containing 0 or more ProactiveDetection configurations of an Application Insights component.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentProactiveDetectionConfigurationListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProactiveDetectionConfigurationsList": {
+            "$ref": "./examples/ProactiveDetectionConfigurationsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/ProactiveDetectionConfigs/{ConfigurationId}": {
+      "get": {
+        "description": "Get the ProactiveDetection configuration for this configuration id.",
+        "operationId": "ProactiveDetectionConfigurations_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The ProactiveDetection configuration for this configuration id.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentProactiveDetectionConfiguration"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProactiveDetectionConfigurationGet": {
+            "$ref": "./examples/ProactiveDetectionConfigurationGet.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Update the ProactiveDetection configuration for this configuration id.",
+        "operationId": "ProactiveDetectionConfigurations_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationId"
+          },
+          {
+            "name": "ProactiveDetectionProperties",
+            "description": "Properties that need to be specified to update the ProactiveDetection configuration.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentProactiveDetectionConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The ProactiveDetection configuration that was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentProactiveDetectionConfiguration"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProactiveDetectionConfigurationUpdate": {
+            "$ref": "./examples/ProactiveDetectionConfigurationUpdate.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApplicationInsightsComponentProactiveDetectionConfigurationListResult": {
+      "description": "A list of ProactiveDetection configurations.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ApplicationInsightsComponentProactiveDetectionConfiguration"
+      }
+    },
+    "ApplicationInsightsComponentProactiveDetectionConfiguration": {
+      "description": "A ProactiveDetection configuration definition.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "properties": {
+          "description": "Properties that define a ProactiveDetection configuration.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationInsightsComponentProactiveDetectionConfigurationProperties"
+        }
+      }
+    },
+    "ApplicationInsightsComponentProactiveDetectionConfigurationProperties": {
+      "description": "Properties that define a ProactiveDetection configuration.",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The rule name"
+        },
+        "Enabled": {
+          "type": "boolean",
+          "readOnly": false,
+          "description": "A flag that indicates whether this rule is enabled by the user"
+        },
+        "SendEmailsToSubscriptionOwners": {
+          "type": "boolean",
+          "readOnly": false,
+          "description": "A flag that indicated whether notifications on this rule should be sent to subscription owners"
+        },
+        "CustomEmails": {
+          "type": "array",
+          "readOnly": false,
+          "description": "Custom email addresses for this rule notifications",
+          "items": {
+            "type": "string"
+          }
+        },
+        "LastUpdatedTime": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The last time this rule was updated"
+        },
+        "RuleDefinitions": {
+          "type": "object",
+          "readOnly": false,
+          "description": "Static definitions of the ProactiveDetection configuration rule (same values for all components).",
+          "properties": {
+            "Name": {
+              "type": "string",
+              "readOnly": false,
+              "description": "The rule name"
+            },
+            "DisplayName": {
+              "type": "string",
+              "readOnly": false,
+              "description": "The rule name as it is displayed in UI"
+            },
+            "Description": {
+              "type": "string",
+              "readOnly": false,
+              "description": "The rule description"
+            },
+            "HelpUrl": {
+              "type": "string",
+              "readOnly": false,
+              "description": "URL which displays additional info about the proactive detection rule"
+            },
+            "IsHidden": {
+              "type": "boolean",
+              "readOnly": false,
+              "description": "A flag indicating whether the rule is hidden (from the UI)"
+            },
+            "IsEnabledByDefault": {
+              "type": "boolean",
+              "readOnly": false,
+              "description": "A flag indicating whether the rule is enabled by default"
+            },
+            "IsInPreview": {
+              "type": "boolean",
+              "readOnly": false,
+              "description": "A flag indicating whether the rule is in preview"
+            },
+            "SupportsEmailNotifications": {
+              "type": "boolean",
+              "readOnly": false,
+              "description": "A flag indicating whether email notifications are supported for detections for this rule"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ResourceNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Application Insights component resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "ConfigurationId": {
+      "name": "ConfigurationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ProactiveDetection configuration ID. This is unique within a Application Insights component.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -1,0 +1,176 @@
+{
+  "parameters": {
+    "Endpoint": "https://westus.api.cognitive.microsoft.com",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "visualFeatures": [
+      "Categories",
+      "Adult",
+      "Tags",
+      "Description",
+      "Faces",
+      "Color",
+      "ImageType",
+      "Objects",
+      "Brands"
+    ],
+    "details": [
+      "Celebrities",
+      "Landmarks"
+    ],
+    "language": "en",
+    "Image": "{binary}"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "categories": [
+          {
+            "name": "abstract_",
+            "score": 0.00390625
+          },
+          {
+            "name": "people_",
+            "score": 0.83984375,
+            "detail": {
+              "celebrities": [
+                {
+                  "name": "Satya Nadella",
+                  "faceRectangle": {
+                    "left": 597,
+                    "top": 162,
+                    "width": 248,
+                    "height": 248
+                  },
+                  "confidence": 0.999028444
+                }
+              ],
+              "landmarks": [
+                {
+                  "name": "Forbidden City",
+                  "confidence": 0.9978346
+                }
+              ]
+            }
+          }
+        ],
+        "adult": {
+          "isAdultContent": false,
+          "isRacyContent": false,
+          "isGoryContent": false,
+          "adultScore": 0.0934349000453949,
+          "racyScore": 0.068613491952419281,
+          "goreScore": 0.012872257380997575
+        },
+        "tags": [
+          {
+            "name": "person",
+            "confidence": 0.98979085683822632
+          },
+          {
+            "name": "man",
+            "confidence": 0.94493889808654785
+          },
+          {
+            "name": "outdoor",
+            "confidence": 0.938492476940155
+          },
+          {
+            "name": "window",
+            "confidence": 0.89513939619064331
+          },
+          {
+            "name": "pangolin",
+            "confidence": 0.7250059783791661,
+            "hint": "mammal"
+          }
+        ],
+        "description": {
+          "tags": [
+            "person",
+            "man",
+            "outdoor",
+            "window",
+            "glasses"
+          ],
+          "captions": [
+            {
+              "text": "Satya Nadella sitting on a bench",
+              "confidence": 0.48293603002174407
+            }
+          ]
+        },
+        "requestId": "0dbec5ad-a3d3-4f7e-96b4-dfd57efe967d",
+        "metadata": {
+          "width": 1500,
+          "height": 1000,
+          "format": "Jpeg"
+        },
+        "faces": [
+          {
+            "age": 44,
+            "gender": "Male",
+            "faceRectangle": {
+              "left": 593,
+              "top": 160,
+              "width": 250,
+              "height": 250
+            }
+          }
+        ],
+        "color": {
+          "dominantColorForeground": "Brown",
+          "dominantColorBackground": "Brown",
+          "dominantColors": [
+            "Brown",
+            "Black"
+          ],
+          "accentColor": "873B59",
+          "isBWImg": false
+        },
+        "imageType": {
+          "clipArtType": 0,
+          "lineDrawingType": 0
+        },
+        "objects": [
+          {
+            "rectangle": {
+              "x": 0,
+              "y": 0,
+              "w": 50,
+              "h": 50
+            },
+            "object": "tree",
+            "confidence": 0.9,
+            "parent": {
+              "object": "plant",
+              "confidence": 0.95
+            }
+          }
+        ],
+        "brands": [
+          {
+            "name": "Pepsi",
+            "confidence": 0.857,
+            "rectangle": {
+              "x": 489,
+              "y": 79,
+              "w": 161,
+              "h": 177
+            }
+          },
+          {
+            "name": "Coca-Cola",
+            "confidence": 0.893,
+            "rectangle": {
+              "x": 216,
+              "y": 55,
+              "w": 171,
+              "h": 372
+            }
+          }
+        ]
+      }
+    }
+  }
+}
