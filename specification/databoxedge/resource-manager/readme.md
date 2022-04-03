@@ -36,10 +36,6 @@ These settings apply only when `--tag=package-2022-04-01-preview` is specified o
 input-file:
 - Microsoft.DataBoxEdge/preview/2022-04-01-preview/databoxedge.json
 ```
-``` yaml
-openapi-type: arm
-tag: package-2022-03-01
-```
 ### Tag: package-2022-03-01
 
 These settings apply only when `--tag=package-2022-03-01` is specified on the command line.
