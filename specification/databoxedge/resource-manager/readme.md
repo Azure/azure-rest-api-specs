@@ -26,6 +26,18 @@ These are the global settings for the DataBox Edge API.
 
 ``` yaml
 openapi-type: arm
+tag: package-2022-04-01-preview
+```
+### Tag: package-2022-04-01-preview
+
+These settings apply only when `--tag=package-2022-04-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-04-01-preview'
+input-file:
+- Microsoft.DataBoxEdge/preview/2022-04-01-preview/databoxedge.json
+```
+``` yaml
+openapi-type: arm
 tag: package-2022-03-01
 ```
 ### Tag: package-2022-03-01
