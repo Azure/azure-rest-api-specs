@@ -7653,7 +7653,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/KubernetesIPConfiguration"
-          }
+          },
+          "x-ms-identifiers": [
+            "ipAddress",
+            "port"
+          ]
         },
         "componentType": {
           "description": "ComponentType of the Kubernetes node.",
@@ -7670,11 +7674,7 @@
           "x-ms-enum": {
             "name": "KubernetesComponentType",
             "modelAsString": true
-          },
-          "x-ms-identifiers": [
-            "ipAddress",
-            "port"
-          ]
+          }
         }
       }
     },
