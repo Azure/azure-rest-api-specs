@@ -113,3 +113,11 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
 ```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: MISSING_APIS_IN_DEFAULT_TAG
+    reason: Not every service will ship new versions within the Language pillar.
+```
