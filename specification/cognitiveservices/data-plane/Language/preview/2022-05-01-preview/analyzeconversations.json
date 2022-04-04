@@ -301,11 +301,15 @@
             "name": "role",
             "modelAsString": true
           }
+        },
+        "modality": {
+          "$ref": "#/definitions/Modality"
         }
       },
       "required": [
         "participantId",
-        "id"
+        "id",
+        "modality"
       ]
     },
     "ConversationAnalysisOptions": {
@@ -1605,8 +1609,7 @@
       "required": [
         "id",
         "language",
-        "modality",
-        "conversationItems"
+        "modality"
       ],
       "properties": {
         "id": {
@@ -1652,6 +1655,9 @@
     },
     "TextConversation": {
       "x-ms-discriminator-value": "text",
+      "required": [
+        "conversationItems"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/Conversation"
@@ -1669,6 +1675,9 @@
     },
     "TranscriptConversation": {
       "x-ms-discriminator-value": "transcript",
+      "required": [
+        "conversationItems"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/Conversation"
@@ -1867,7 +1876,7 @@
       "required": [
         "results"
       ],
-      "x-ms-discriminator-value": "ConversationPIIResults"
+      "x-ms-discriminator-value": "ConversationalPIIResults"
     },
     "ConversationPIIResult": {
       "description": "The result from PII detection and redaction operation for each conversation",
@@ -2042,7 +2051,7 @@
     "ConversationsSummaryResult": {
       "type": "object",
       "required": [
-        "summary"
+        "summaries"
       ],
       "properties": {
         "summaries": {
