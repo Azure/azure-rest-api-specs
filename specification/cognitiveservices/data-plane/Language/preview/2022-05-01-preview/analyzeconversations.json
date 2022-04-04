@@ -1882,16 +1882,14 @@
             "allOf": [
               {
                 "$ref": "#/definitions/ConversationPIIResult"
+              },
+              {
+                "$ref": "#/definitions/ConversationResultBase"
               }
             ]
           }
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConversationResultBase"
-        }
-      ]
+      }
     },
     "ConversationPIIResult": {
       "description": "The result from PII detection and redaction operation for each conversation.",
@@ -2012,9 +2010,6 @@
       },
       "allOf": [
         {
-          "$ref": "common.json#/definitions/TaskParameters"
-        },
-        {
           "$ref": "common.json#/definitions/PreBuiltTaskParameters"
         }
       ]
@@ -2049,16 +2044,14 @@
             "allOf": [
               {
                 "$ref": "#/definitions/ConversationsSummaryResult"
+              },
+              {
+                "$ref": "#/definitions/ConversationResultBase"
               }
             ]
           }
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConversationResultBase"
-        }
-      ]
+      }
     },
     "ConversationsSummaryResult": {
       "type": "object",
