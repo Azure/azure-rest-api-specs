@@ -1861,11 +1861,7 @@
       ],
       "properties": {
         "results": {
-          "description": "Enumeration of personally identifiable information detection and redaction operation results for each conversation.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ConversationPIIResult"
-          }
+          "$ref": "#/definitions/ConversationPIIResults"
         }
       },
       "required": [
@@ -1873,8 +1869,32 @@
       ],
       "x-ms-discriminator-value": "ConversationalPIIResults"
     },
+    "ConversationPIIResults": {
+      "type": "object",
+      "description": "The result from PII detection and redaction operation for each conversation.",
+      "required": [
+        "conversations"
+      ],
+      "properties": {
+        "conversations": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/ConversationPIIResult"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationResultBase"
+        }
+      ]
+    },
     "ConversationPIIResult": {
-      "description": "The result from PII detection and redaction operation for each conversation",
+      "description": "The result from PII detection and redaction operation for each conversation.",
       "required": [
         "conversationItems"
       ],
@@ -1885,9 +1905,6 @@
           "items": {
             "$ref": "#/definitions/ConversationPIIItemResult"
           }
-        },
-        "allOf": {
-          "$ref": "#/definitions/ConversationResult"
         }
       }
     },
