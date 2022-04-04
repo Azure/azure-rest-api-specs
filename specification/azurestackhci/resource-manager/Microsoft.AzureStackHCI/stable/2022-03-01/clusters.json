@@ -294,6 +294,107 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/uploadCertificate": {
+      "post": {
+        "tags": [
+          "Cluster"
+        ],
+        "operationId": "Clusters_UploadCertificate",
+        "x-ms-examples": {
+          "Upload certificate": {
+            "$ref": "./examples/UploadCertificate.json"
+          }
+        },
+        "description": "Upload certificate.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "uploadCertificateRequest",
+            "in": "body",
+            "description": "Upload certificate request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UploadCertificateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/createClusterIdentity": {
+      "post": {
+        "tags": [
+          "Cluster"
+        ],
+        "operationId": "Clusters_CreateIdentity",
+        "description": "Create cluster identity.",
+        "x-ms-examples": {
+          "Create cluster Identity": {
+            "$ref": "./examples/CreateClusterIdentity.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClusterIdentityResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
     }
   },
   "definitions": {
@@ -358,10 +459,6 @@
     "ClusterProperties": {
       "description": "Cluster properties.",
       "type": "object",
-      "required": [
-        "aadClientId",
-        "aadTenantId"
-      ],
       "properties": {
         "provisioningState": {
           "description": "Provisioning state.",
@@ -412,6 +509,14 @@
           "description": "Tenant id of cluster AAD identity.",
           "type": "string"
         },
+        "aadApplicationObjectId": {
+          "description": "Object id of cluster AAD identity.",
+          "type": "string"
+        },
+        "servicePrincipalClientId": {
+          "description": "Id of cluster identity service principal.",
+          "type": "string"
+        },
         "desiredProperties": {
           "description": "Desired properties of the cluster.",
           "$ref": "#/definitions/ClusterDesiredProperties"
@@ -447,6 +552,11 @@
           "description": "Most recent billing meter timestamp.",
           "type": "string",
           "format": "date-time",
+          "readOnly": true
+        },
+        "serviceEndpoint": {
+          "description": "Region specific DataPath Endpoint of the cluster.",
+          "type": "string",
           "readOnly": true
         }
       }
@@ -628,6 +738,57 @@
           "readOnly": true
         }
       }
+    },
+    "RawCertificateData": {
+      "type": "object",
+      "properties": {
+        "certificates": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "UploadCertificateRequest": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RawCertificateData"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ClusterIdentityResponse": {
+      "description": "Cluster Identity details.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Cluster identity properties.",
+          "$ref": "#/definitions/ClusterIdentityResponseProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ClusterIdentityResponseProperties": {
+      "type": "object",
+      "properties": {
+        "aadClientId": {
+          "type": "string"
+        },
+        "aadTenantId": {
+          "type": "string"
+        },
+        "aadServicePrincipalObjectId": {
+          "type": "string"
+        },
+        "aadApplicationObjectId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "readOnly": true
     }
   },
   "parameters": {

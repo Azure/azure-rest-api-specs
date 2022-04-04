@@ -191,7 +191,7 @@
             "description": "OK"
           },
           "202": {
-            "description": "OK"
+            "description": "Accepted"
           },
           "204": {
             "description": "No content"
@@ -210,6 +210,103 @@
         "x-ms-examples": {
           "Delete ArcSetting": {
             "$ref": "./examples/DeleteArcSetting.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/generatePassword": {
+      "post": {
+        "tags": [
+          "ArcSettings"
+        ],
+        "operationId": "ArcSettings_GeneratePassword",
+        "description": "Generate password for arc settings.",
+        "x-ms-examples": {
+          "Generate Password": {
+            "$ref": "./examples/GeneratePassword.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArcSettingNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PasswordCredential"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/createArcIdentity": {
+      "post": {
+        "tags": [
+          "ArcSettings"
+        ],
+        "operationId": "ArcSettings_CreateIdentity",
+        "description": "Create Aad identity for arc settings.",
+        "x-ms-examples": {
+          "Create Arc Identity": {
+            "$ref": "./examples/CreateArcIdentity.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArcSettingNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ArcIdentityResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -279,6 +376,18 @@
         },
         "arcInstanceResourceGroup": {
           "description": "The resource group that hosts the Arc agents, ie. Hybrid Compute Machine resources.",
+          "type": "string"
+        },
+        "arcApplicationClientId": {
+          "description": "App id of arc AAD identity.",
+          "type": "string"
+        },
+        "arcServicePrincipalObjectId": {
+          "description": "Object id of arc AAD service principal.",
+          "type": "string"
+        },
+        "arcApplicationObjectId": {
+          "description": "Object id of arc AAD identity.",
           "type": "string"
         },
         "aggregateState": {
@@ -355,6 +464,57 @@
           "readOnly": true
         }
       }
+    },
+    "PasswordCredential": {
+      "type": "object",
+      "properties": {
+        "secretText": {
+          "type": "string"
+        },
+        "keyId": {
+          "type": "string"
+        },
+        "startDateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endDateTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "additionalProperties": false,
+      "readOnly": true
+    },
+    "ArcIdentityResponse": {
+      "description": "ArcIdentity details.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "ArcIdentity properties.",
+          "$ref": "#/definitions/ArcIdentityResponseProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ArcIdentityResponseProperties": {
+      "type": "object",
+      "properties": {
+        "arcApplicationClientId": {
+          "type": "string"
+        },
+        "arcApplicationTenantId": {
+          "type": "string"
+        },
+        "arcServicePrincipalObjectId": {
+          "type": "string"
+        },
+        "arcApplicationObjectId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "readOnly": true
     }
   },
   "parameters": {
