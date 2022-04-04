@@ -2732,6 +2732,9 @@
           "204": {
             "description": "No content"
           },
+          "200": {
+            "description": "OK."
+          },
           "default": {
             "description": "App Service error response.",
             "schema": {
@@ -2799,6 +2802,9 @@
         "responses": {
           "204": {
             "description": "No content"
+          },
+          "200": {
+            "description": "OK."
           },
           "default": {
             "description": "App Service error response.",
@@ -3075,6 +3081,9 @@
           "204": {
             "description": "No content"
           },
+          "200": {
+            "description": "OK."
+          },
           "default": {
             "description": "App Service error response.",
             "schema": {
@@ -3251,7 +3260,7 @@
           {
             "name": "isCleaningAuthConfig",
             "in": "query",
-            "description": "Decides if Easy Auth configuration will be removed from backend configuration",
+            "description": "Decides if auth will be removed from backend configuration",
             "type": "boolean"
           },
           {
@@ -3264,6 +3273,9 @@
         "responses": {
           "204": {
             "description": "No content"
+          },
+          "200": {
+            "description": "OK."
           },
           "default": {
             "description": "App Service error response.",
@@ -3488,6 +3500,7 @@
           "items": {
             "$ref": "#/definitions/StaticSiteLinkedBackend"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         },
         "provider": {
@@ -3610,6 +3623,7 @@
               "items": {
                 "$ref": "#/definitions/StaticSiteLinkedBackend"
               },
+              "x-ms-identifiers": [],
               "readOnly": true
             }
           },
