@@ -382,6 +382,10 @@
           {
             "description": "Entity represents submission mail in the system.",
             "value": "SubmissionMail"
+          },
+          {
+            "description": "Entity represents network interface for an IoT device in the system.",
+            "value": "Nic"
           }
         ]
       }
@@ -2397,6 +2401,55 @@
           "description": "A full URL the entity points to",
           "readOnly": true,
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "NicEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents an network interface entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NicEntityProperties",
+          "description": "Network interface entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Nic"
+    },
+    "NicEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "Nic entity property bag.",
+      "properties": {
+        
+        "macAddress": {
+          "description": "The MAC address of this network interface",
+          "readOnly": true,
+          "type": "string"
+        },
+        "ipAddressEntityId": {
+          "description": "The IP entity id of this network interface",
+          "readOnly": true,
+          "type": "string"
+        },
+
+        "vlans": {
+          "description": "A list of VLANs of the network interface entity.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array",
+          "x-ms-identifiers": []
         }
       },
       "type": "object"
