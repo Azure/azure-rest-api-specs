@@ -26,7 +26,7 @@ These are the global settings for the DataBox Edge API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-04-01-preview
+tag: package-2022-03-01
 ```
 ### Tag: package-2022-04-01-preview
 
@@ -100,38 +100,38 @@ These settings apply only when `--tag=package-2020-09-01` is specified on the co
 input-file:
 - Microsoft.DataBoxEdge/stable/2020-09-01/databoxedge.json
 ```
-### Tag: package-2020-05-preview
+### Tag: package-2020-05-01-preview
 
-These settings apply only when `--tag=package-2020-05-preview` is specified on the command line.
+These settings apply only when `--tag=package-2020-05-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-05-preview'
+``` yaml $(tag) == 'package-2020-05-01-preview'
 input-file:
 - Microsoft.DataBoxEdge/preview/2020-05-01-preview/databoxedge.json
 ```
 
-### Tag: package-2019-08
+### Tag: package-2019-08-01
 
-These settings apply only when `--tag=package-2019-08` is specified on the command line.
+These settings apply only when `--tag=package-2019-08-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-08'
+``` yaml $(tag) == 'package-2019-08-01'
 input-file:
 - Microsoft.DataBoxEdge/stable/2019-08-01/databoxedge.json
 ```
 
-### Tag: package-2019-07
+### Tag: package-2019-07-01
 
-These settings apply only when `--tag=package-2019-07` is specified on the command line.
+These settings apply only when `--tag=package-2019-07-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-07'
+``` yaml $(tag) == 'package-2019-07-01'
 input-file:
 - Microsoft.DataBoxEdge/stable/2019-07-01/databoxedge.json
 ```
 
-### Tag: package-2019-03
+### Tag: package-2019-03-01
 
-These settings apply only when `--tag=package-2019-03` is specified on the command line.
+These settings apply only when `--tag=package-2019-03-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-03'
+``` yaml $(tag) == 'package-2019-03-01'
 input-file:
 - Microsoft.DataBoxEdge/stable/2019-03-01/databoxedge.json
 ```
