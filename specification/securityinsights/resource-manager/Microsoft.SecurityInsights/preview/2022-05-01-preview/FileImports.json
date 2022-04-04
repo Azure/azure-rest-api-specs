@@ -161,9 +161,6 @@
           },
           {
             "$ref": "#/parameters/FileImportId"
-          },
-          {
-            "$ref": "#/parameters/FileImport"
           }
         ],
         "responses": {
@@ -211,7 +208,10 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/FileImport"
+            }
           },
           "204": {
             "description": "No Content"
