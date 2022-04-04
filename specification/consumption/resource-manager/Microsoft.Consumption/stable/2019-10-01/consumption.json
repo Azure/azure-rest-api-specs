@@ -308,9 +308,24 @@
         ],
         "responses": {
           "202": {
-            "description": "OK. Accepted.",
-            "schema": {
-              "$ref": "#/definitions/ArmReport"
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "To get the progress of the operation, call GET operation on the URL in Azure-AsyncOperation header field.",
+                "type": "string"
+              },
+              "OData-EntityId": {
+                "description": "The operation entity Id GUID.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -754,10 +769,24 @@
         ],
         "responses": {
           "202": {
-            "description": "OK. Accepted.",
-            "schema": {
-              "$ref": "#/definitions/ArmReport"
-            }
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "To get the progress of the operation, call GET operation on the URL in Azure-AsyncOperation header field.",
+                "type": "string"
+              },
+              "OData-EntityId": {
+                "description": "The operation entity Id GUID.",
+                "type": "string"
+              }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1507,10 +1536,24 @@
         ],
         "responses": {
           "202": {
-            "description": "OK. Accepted.",
-            "schema": {
-              "$ref": "#/definitions/ArmReport"
-            }
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "To get the progress of the operation, call GET operation on the URL in Azure-AsyncOperation header field.",
+                "type": "string"
+              },
+              "OData-EntityId": {
+                "description": "The operation entity Id GUID.",
+                "type": "string"
+              }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
