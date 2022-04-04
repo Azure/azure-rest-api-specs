@@ -1010,6 +1010,87 @@
           "readOnly": true,
           "type": "array",
           "x-ms-identifiers": []
+        },
+        "nicEntityIds": {
+          "description": "A list of Nic entity ids of the IoTDevice entity.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array",
+          "x-ms-identifiers": []
+        },
+        "site": {
+          "description": "The site of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "zone": {
+          "description": "The zone location of the device within a site",
+          "readOnly": true,
+          "type": "string"
+        },
+        "sensor": {
+          "description": "The sensor the device is monitored by",
+          "readOnly": true,
+          "type": "string"
+        },
+        "deviceSubType": {
+          "description": "The subType of the device ('PLC', 'HMI', 'EWS', etc.)",
+          "readOnly": true,
+          "type": "string"
+        },
+        "importance": {
+          "description": "Device importance, determines if the device classified as 'crown jewel'",
+          "enum": [
+            "Unknown",
+            "Low",
+            "Normal",
+            "High"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "DeviceImportance",
+            "values": [
+              {
+                "description": "Unknown - Default value",
+                "value": "Unknown"
+              },
+              {
+                "description": "Low",
+                "value": "Low"
+              },
+              {
+                "description": "Normal",
+                "value": "Normal"
+              },
+              {
+                "description": "High",
+                "value": "High"
+              }
+            ]
+          }
+        },
+        "purdueLayer": {
+          "description": "The Purdue Layer of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "isAuthorized": {
+          "description": "Determines whether the device classified as authorized device",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "isProgramming": {
+          "description": "Determines whether the device classified as programming device",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "isScanner": {
+          "description": "Is the device classified as a scanner device",
+          "readOnly": true,
+          "type": "boolean"
         }
       },
       "type": "object"
