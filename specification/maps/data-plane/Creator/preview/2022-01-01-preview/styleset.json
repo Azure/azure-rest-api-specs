@@ -122,7 +122,8 @@
             "description": "ZIP style format."
           }
         ]
-      }
+      },
+      "x-ms-parameter-location": "method"
     },
     "StyleFormat": {
       "name": "styleFormat",
@@ -144,14 +145,16 @@
             "description": "mapbox style data format."
           }
         ]
-      }
+      },
+      "x-ms-parameter-location": "method"
     },
     "Alias": {
       "name": "alias",
       "description": "The alias of the style set.",
       "type": "string",
       "in": "query",
-      "required": false
+      "required": false,
+      "x-ms-parameter-location": "method"
     }
   },
   "paths": {
@@ -186,9 +189,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/200AsyncV2"
-          },
           "202": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/202AsyncV2"
           },
@@ -404,7 +404,7 @@
           "description": "The thumbnail for the style.",
           "type": "object",
           "readOnly": true
-        }, 
+        },
         "url": {
           "description": "The url for the style.",
           "type": "object",

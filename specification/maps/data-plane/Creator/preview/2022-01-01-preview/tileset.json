@@ -133,13 +133,10 @@
             "required": false,
             "schema": {
               "$ref": "#/definitions/TilesetRecipe"
-            }      
+            }
           }
         ],
         "responses": {
-          "200": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/200AsyncV2"
-          },
           "202": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/202AsyncV2"
           },
@@ -301,7 +298,7 @@
             "required": false,
             "schema": {
               "$ref": "#/definitions/TilesetRecipe"
-            }      
+            }
           }
         ],
         "responses": {
@@ -414,7 +411,8 @@
       "description": "A tileset recipe object. Please refer to [Tileset Recipe Specification]() for details.",
       "type": "object",
       "required": [
-        "version", "layers"
+        "version",
+        "layers"
       ],
       "properties": {
         "version": {
@@ -434,7 +432,9 @@
       "description": "Layer object for tileset recipe.",
       "type": "object",
       "required": [
-        "features", "minzoom", "maxzoom"
+        "features",
+        "minzoom",
+        "maxzoom"
       ],
       "properties": {
         "features": {
@@ -461,7 +461,7 @@
         "featureClasses": {
           "description": "The list of featureClasses that will be used to build the layer.",
           "type": "array",
-          "items":{
+          "items": {
             "type": "string"
           }
         },
@@ -482,14 +482,14 @@
         "warnings": {
           "description": "The list of validation warnings.",
           "type": "array",
-          "items":{
+          "items": {
             "type": "string"
           }
         },
         "errors": {
           "description": "The list of validation errors",
           "type": "array",
-          "items":{
+          "items": {
             "type": "string"
           }
         }

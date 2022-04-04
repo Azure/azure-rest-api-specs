@@ -122,7 +122,8 @@
             "description": "ZIP style format."
           }
         ]
-      }
+      },
+      "x-ms-parameter-location": "method"
     },
     "StyleFormat": {
       "name": "styleFormat",
@@ -148,14 +149,16 @@
             "description": "Azure Maps style recipe data format."
           }
         ]
-      }
+      },
+      "x-ms-parameter-location": "method"
     },
     "Alias": {
       "name": "alias",
       "description": "The alias of the style recipe.",
       "type": "string",
       "in": "query",
-      "required": false
+      "required": false,
+      "x-ms-parameter-location": "method"
     }
   },
   "paths": {
@@ -202,9 +205,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/200AsyncV2"
-          },
           "202": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/202AsyncV2"
           },
@@ -418,7 +418,7 @@
           "description": "The layout of the layer.",
           "type": "object",
           "readOnly": true
-        }, 
+        },
         "paint": {
           "description": "The paint configuration of the layer.",
           "type": "object",
