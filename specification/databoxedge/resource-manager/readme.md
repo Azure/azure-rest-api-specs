@@ -32,7 +32,7 @@ tag: package-2022-04-01-preview
 
 These settings apply only when `--tag=package-2022-04-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-03-01'
+``` yaml $(tag) == 'package-2022-04-01-preview'
 input-file:
 - Microsoft.DataBoxEdge/preview/2022-04-01-preview/databoxedge.json
 ```
