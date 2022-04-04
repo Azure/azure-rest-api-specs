@@ -2109,7 +2109,7 @@
       "properties": {
         "code": {
           "description": "One of a server-defined set of error codes.",
-          "$ref": "#/definitions/ErrorCode"
+          "$ref": "common.json#/definitions/ErrorCode"
         },
         "message": {
           "type": "string",
@@ -2143,7 +2143,7 @@
       "properties": {
         "code": {
           "description": "One of a server-defined set of error codes.",
-          "$ref": "#/definitions/InnerErrorCode"
+          "$ref": "common.json#/definitions/InnerErrorCode"
         },
         "message": {
           "type": "string",
@@ -2165,48 +2165,6 @@
           "$ref": "#/definitions/InnerErrorModel"
         }
       }
-    },
-    "ErrorCode": {
-      "type": "string",
-      "description": "Human-readable error code.",
-      "x-ms-enum": {
-        "name": "ErrorCode",
-        "modelAsString": true
-      },
-      "enum": [
-        "InvalidRequest",
-        "InvalidArgument",
-        "Unauthorized",
-        "Forbidden",
-        "NotFound",
-        "TooManyRequests",
-        "InternalServerError",
-        "ServiceUnavailable"
-      ]
-    },
-    "InnerErrorCode": {
-      "type": "string",
-      "description": "Human-readable error code.",
-      "x-ms-enum": {
-        "name": "InnerErrorCode",
-        "modelAsString": true
-      },
-      "enum": [
-        "InvalidRequest",
-        "InvalidParameterValue",
-        "KnowledgeBaseNotFound",
-        "AzureCognitiveSearchNotFound",
-        "AzureCognitiveSearchThrottling",
-        "ExtractionFailure",
-        "InvalidRequestBodyFormat",
-        "EmptyRequest",
-        "MissingInputDocuments",
-        "InvalidDocument",
-        "ModelVersionIncorrect",
-        "InvalidDocumentBatch",
-        "UnsupportedLanguageCode",
-        "InvalidCountryHint"
-      ]
     }
   },
   "parameters": {

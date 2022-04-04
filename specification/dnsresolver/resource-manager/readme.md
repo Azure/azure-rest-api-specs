@@ -48,6 +48,8 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-go-track2
 ```
 
 ## C#
@@ -64,6 +66,14 @@ csharp:
   output-folder: $(csharp-sdks-folder)/dnsresolver/Microsoft.Azure.Management.DnsResolver/src/Generated
   clear-output-folder: true
 ```
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Suppression
 
