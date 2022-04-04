@@ -216,12 +216,14 @@
           "204": {
             "description": "No Content"
           },
+          "200": {},
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
             }
-          }
+          },
+          "x-ms-long-running-operation": true
         }
       }
     }
@@ -413,7 +415,8 @@
             "$ref": "#/definitions/ValidationError"
           },
           "readOnly": true,
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         },
         "importFile": {
           "description": "Represents the imported file.",
@@ -528,7 +531,8 @@
           "readOnly": true,
           "type": "array"
         }
-      }
+      },
+      "type": "object"
     }
   },
   "parameters": {
