@@ -5165,7 +5165,8 @@
         },
         "hostPoolType": {
           "enum": [
-            "Pooled"
+            "Pooled",
+            "Personal"
           ],
           "x-ms-enum": {
             "name": "ScalingHostPoolType",
@@ -5174,9 +5175,38 @@
               {
                 "value": "Pooled",
                 "description": "Users get a new (random) SessionHost every time it connects to the HostPool."
+              },
+              {
+                "value": "Personal",
+                "description": "For Personal HostPools and ScalingPlanSchedules."
               }
             ]
           },
+          "default": "Pooled",
+          "type": "string",
+          "description": "HostPool type for desktop.",
+          "x-nullable": false
+        },
+        "scalingPlanType": {
+          "enum": [
+            "Pooled",
+            "Personal"
+          ],
+          "x-ms-enum": {
+            "name": "ScalingHostPoolType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Pooled",
+                "description": "For Pooled HostPools and ScalingPlanSchedules."
+              },
+              {
+                "value": "Personal",
+                "description": "For Personal HostPools and ScalingPlanSchedules."
+              }
+            ]
+          },
+          "default": "Pooled",
           "type": "string",
           "description": "HostPool type for desktop.",
           "x-nullable": false
