@@ -45,6 +45,17 @@ directive:
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 ```
 
+### Tag: package-2022-03
+
+These settings apply only when `--tag=package-2022-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-01'
+input-file:
+  - Microsoft.AzureStackHCI/stable/2022-03-01/arcSettings.json
+  - Microsoft.AzureStackHCI/stable/2022-03-01/clusters.json
+  - Microsoft.AzureStackHCI/stable/2022-03-01/extensions.json
+  - Microsoft.AzureStackHCI/stable/2022-03-01/operations.json
+```
 
 ### Tag: package-2022-01
 
