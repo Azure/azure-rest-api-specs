@@ -258,6 +258,70 @@
         }
       }
     },
+    "/{scope}/providers/Microsoft.Consumption/marketplaces/download": {
+      "get": {
+        "tags": [
+          "Marketplaces"
+        ],
+        "x-ms-odata": "#/definitions/Marketplace",
+        "operationId": "Marketplaces_Download",
+        "description": "Lists the marketplaces for a scope at the defined scope. Marketplaces are available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "Balances": {
+            "$ref": "./examples/MarketplacesDownloadForBillingPeriod.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "$filter",
+            "description": "May be used to filter marketplaces by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName or properties/instanceId. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N marketplaces.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/scopeMarketplaceParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "OK. Accepted.",
+            "schema": {
+              "$ref": "#/definitions/ArmReport"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/{scope}/providers/Microsoft.Consumption/budgets": {
       "get": {
         "tags": [
@@ -651,6 +715,48 @@
             "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Balance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/balances/download": {
+      "get": {
+        "tags": [
+          "Balances"
+        ],
+        "operationId": "Balances_DownloadForBillingPeriodByBillingAccount",
+        "description": "Downloads the balances for a scope by billing period and billingAccountId. Balances are available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "Balances": {
+            "$ref": "./examples/BalancesDownloadByBillingAccountForBillingPeriod.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingPeriodNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "OK. Accepted.",
+            "schema": {
+              "$ref": "#/definitions/ArmReport"
             }
           },
           "default": {
@@ -1349,6 +1455,72 @@
         }
       }
     },
+    "providers/microsoft.billing/billingaccounts/{billingAccountId}/billingperiods/{billingPeriod}/providers/microsoft.consumption/pricesheets/download": {
+      "get": {
+        "tags": [
+          "PriceSheet"
+        ],
+        "operationId": "PriceSheet_Download",
+        "description": "Downloads the price sheet for a scope by subscriptionId. Price sheet is available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "PriceSheet": {
+            "$ref": "./examples/PriceSheetDownload.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/meterDetails within a price sheet. By default, these fields are not included when returning price sheet.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the top N results.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingPeriodNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "OK. Accepted.",
+            "schema": {
+              "$ref": "#/definitions/ArmResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/pricesheets/default": {
       "get": {
         "tags": [
@@ -1724,6 +1896,9 @@
             "schema": {
               "$ref": "#/definitions/CreditSummary"
             }
+          },
+          "204": {
+            "description": "An empty response is sent when there is no information available within the selected scope."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -4526,7 +4701,7 @@
       "discriminator": "kind",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -4600,6 +4775,12 @@
         },
         "marketplaceCharges": {
           "description": "Marketplace Charges.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "azureMarketplaceCharges": {
+          "description": "Azure Marketplace Charges.",
           "type": "number",
           "format": "decimal",
           "readOnly": true
@@ -4854,7 +5035,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -4991,7 +5172,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -5077,7 +5258,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -5305,6 +5486,27 @@
         "eTag": {
           "type": "string",
           "description": "eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ArmReport": {
+      "description": "The Arm Report definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "operationResultUrl": {
+          "readOnly": true,
+          "type": "string",
+          "description": "OperationResultUrl."
+        },
+        "operationStatusUrl": {
+          "readOnly": true,
+          "type": "string",
+          "description": "OperationStatusUrl."
         }
       },
       "x-ms-azure-resource": true
