@@ -278,7 +278,6 @@
     },
     "ConversationItemBase": {
       "type": "object",
-      "discriminator": "modality",
       "description": "The abstract base for a user input formatted conversation (e.g., Text, Transcript).",
       "properties": {
         "id": {
@@ -301,15 +300,11 @@
             "name": "role",
             "modelAsString": true
           }
-        },
-        "modality": {
-          "$ref": "#/definitions/Modality"
         }
       },
       "required": [
         "participantId",
-        "id",
-        "modality"
+        "id"
       ]
     },
     "ConversationAnalysisOptions": {
@@ -2129,7 +2124,7 @@
               "description": "List of results from tasks (if available).",
               "type": "array",
               "items": {
-                "$ref": "#/definitions/AnalyzeConversationResult"
+                "$ref": "#/definitions/AnalyzeConversationJobResult"
               }
             }
           },
