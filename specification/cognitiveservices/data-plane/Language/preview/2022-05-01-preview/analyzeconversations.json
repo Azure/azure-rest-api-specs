@@ -281,31 +281,34 @@
       "type": "object",
       "description": "The abstract base for a user input formatted conversation (e.g., Text, Transcript).",
       "properties": {
-        "id": {
-          "description": "The ID of a ConversationItem",
-          "type": "string"
-        },
         "participantId": {
-          "description": "The participant ID of a ConversationItem",
+          "description": "The participant Id of a ConversationItem",
           "type": "string"
         },
-        "role": {
+        "id": {
+          "description": "The Id of a ConversationItem",
+          "type": "string"
+        },
+        "language": {
+          "description": "The input language of a ConversationItem in BCP 47 language representation.",
+          "type": "string"
+        },
+        "modality": {
+          "description": "The modality (format) of ConversationItem (e.g., Text, Transcript)",
           "type": "string",
-          "description": "The role of the participant.",
           "enum": [
-            "agent",
-            "customer",
-            "generic"
+            "text"
           ],
           "x-ms-enum": {
-            "name": "role",
+            "name": "modality",
             "modelAsString": true
           }
         }
       },
       "required": [
         "participantId",
-        "id"
+        "id",
+        "modality"
       ]
     },
     "ConversationAnalysisOptions": {
@@ -1636,6 +1639,37 @@
         "modelAsString": true
       }
     },
+    "ConversationItem": {
+      "type": "object",
+      "description": "The abase class for conversation item.",
+      "properties": {
+        "id": {
+          "description": "The ID of a conversation item.",
+          "type": "string"
+        },
+        "participantId": {
+          "description": "The participant ID of a conversation item.",
+          "type": "string"
+        },
+        "role": {
+          "type": "string",
+          "description": "The role of the participant.",
+          "enum": [
+            "agent",
+            "customer",
+            "generic"
+          ],
+          "x-ms-enum": {
+            "name": "role",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "participantId",
+        "id"
+      ]
+    },
     "ConversationDomain": {
       "type": "string",
       "description": "Enumeration of supported conversational domains.",
@@ -1693,7 +1727,7 @@
       "description": "The conversation item in text modality.",
       "allOf": [
         {
-          "$ref": "#/definitions/ConversationItemBase"
+          "$ref": "#/definitions/ConversationItem"
         }
       ],
       "properties": {
@@ -1714,7 +1748,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConversationItemBase"
+          "$ref": "#/definitions/ConversationItem"
         }
       ],
       "properties": {
@@ -2024,7 +2058,7 @@
             "type": "string",
             "enum": [
               "summary",
-              "resolutions"
+              "resolution"
             ],
             "x-ms-enum": {
               "name": "SummaryAspect",
