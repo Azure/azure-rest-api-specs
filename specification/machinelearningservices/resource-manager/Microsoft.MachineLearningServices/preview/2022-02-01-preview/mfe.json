@@ -11862,8 +11862,7 @@
       "description": "Recurrence schedule definition",
       "required": [
         "frequency",
-        "interval",
-        "pattern"
+        "interval"
       ],
       "type": "object",
       "allOf": [
@@ -11883,7 +11882,8 @@
         },
         "pattern": {
           "description": "Specifies the recurrence schedule pattern",
-          "$ref": "#/definitions/RecurrencePattern"
+          "$ref": "#/definitions/RecurrencePattern",
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "Recurrence",
