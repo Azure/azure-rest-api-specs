@@ -633,6 +633,9 @@
           },
           {
             "$ref": "#/parameters/MaxResults"
+          },
+          {
+            "$ref": "#/parameters/FilterBlobsInclude"
           }
         ],
         "responses": {
@@ -1597,6 +1600,9 @@
           },
           {
             "$ref": "#/parameters/MaxResults"
+          },
+          {
+            "$ref": "#/parameters/FilterBlobsInclude"
           }
         ],
         "responses": {
@@ -10583,6 +10589,12 @@
         },
         "Tags": {
           "$ref": "#/definitions/BlobTags"
+        },
+        "VersionId": {
+          "type": "string"
+        },
+        "IsCurrentVersion": {
+          "type": "boolean"
         }
       }
     },
@@ -11658,6 +11670,26 @@
         "name": "container-cpk-scope-info"
       },
       "description": "Optional.  Version 2019-07-07 and newer.  If true, prevents any request from specifying a different encryption scope than the scope set on the container."
+    },
+    "FilterBlobsInclude": {
+      "name": "include",
+      "in": "query",
+      "required": false,
+      "type": "array",
+      "collectionFormat": "csv",
+      "items": {
+        "type": "string",
+        "enum": [
+          "none",
+          "versions"
+        ],
+        "x-ms-enum": {
+          "name": "FilterBlobsIncludeItem",
+          "modelAsString": false
+        }
+      },
+      "x-ms-parameter-location": "method",
+      "description": "Include this parameter to specify one or more datasets to include in the response."
     },
     "FilterBlobsWhere": {
       "name": "where",
