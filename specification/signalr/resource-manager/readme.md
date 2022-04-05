@@ -26,7 +26,7 @@ These are the global settings for the SignalR API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-10-01
+tag: package-2022-02-01
 ```
 
 ### Suppression
@@ -69,6 +69,15 @@ directive:
     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}"].put
     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}"].delete
     reason: It can introduce a breaking change when updating parameter order, since SignalR service has already shipped public versions.
+```
+
+### Tag: package-2022-02-01
+
+These settings apply only when `--tag=package-2022-02-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-02-01'
+input-file:
+- Microsoft.SignalRService/stable/2022-02-01/signalr.json
 ```
 
 ### Tag: package-2021-09-01-preview

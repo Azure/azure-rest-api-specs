@@ -34,9 +34,22 @@ These are the global settings for the ContainerServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2022-02
+tag: package-2022-02
 ```
 
+
+### Tag: package-2022-02
+
+These settings apply only when `--tag=package-2022-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-02'
+input-file:
+  - Microsoft.ContainerService/stable/2022-02-01/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
+```
 
 ### Tag: package-preview-2022-02
 
