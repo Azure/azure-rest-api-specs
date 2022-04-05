@@ -438,6 +438,11 @@
       "type": "object",
       "description": "Resources created in user's repository for the source-control.",
       "properties": {
+        "oauthInfo": {
+          "type": "object",
+          "description": "The repository access authentication info.",
+          "$ref": "#/definitions/OauthDetail"
+        },
         "webhook": {
           "type": "object",
           "description": "The webhook object created for the source-control.",
@@ -474,6 +479,24 @@
         "rotateWebhookSecret": {
           "description": "A flag to instruct the backend service to rotate webhook secret.",
           "type": "boolean"
+        }
+      }
+    },
+    "OauthDetail": {
+      "description": "Resources created in GitHub repository.",
+      "type": "object",
+      "properties": {
+        "accessCode": {
+          "description": "Repository access authentication code.",
+          "type": "string"
+        },
+        "state": {
+          "description": "Repository access authentication state.",
+          "type": "string"
+        },
+        "clientId": {
+          "description": "Repository access authentication client id.",
+          "type": "string"
         }
       }
     },
