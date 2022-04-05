@@ -259,7 +259,6 @@ input-file:
 - Microsoft.Compute/stable/2022-03-01/ComputeRP/gallery.json
 - Microsoft.Compute/stable/2021-07-01/skus.json
 - Microsoft.Compute/stable/2021-08-01/disk.json
-
 - Microsoft.Compute/stable/2021-07-01/sharedGallery.json
 - Microsoft.Compute/stable/2021-07-01/communityGallery.json
 - Microsoft.Compute/stable/2021-03-01/cloudService.json
