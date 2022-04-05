@@ -3014,6 +3014,43 @@
         "apiToken"
       ]
     },
+    "AsanaLinkedService": {
+      "x-ms-discriminator-value": "Asana",
+      "description": "Linked service for Asana.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Asana linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AsanaLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AsanaLinkedServiceTypeProperties": {
+      "description": "Asana linked service type properties.",
+      "type": "object",
+      "properties": {
+        "apiToken": {
+          "$ref": "../artifacts.json#/definitions/SecretBase",
+          "description": "The api token for the Asana source."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "apiToken"
+      ]
+    },
     "AmazonS3LinkedService": {
       "x-ms-discriminator-value": "AmazonS3",
       "description": "Linked service for Amazon S3.",
