@@ -172,13 +172,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "header",
-            "name": "x-ms-azure-force-delete",
-            "description": "Forces the resource to be deleted from azure. The corresponding CR would be attempted to be deleted too.",
-            "required": false,
-            "type": "boolean"
           }
         ],
         "responses": {
@@ -528,13 +521,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "header",
-            "name": "x-ms-azure-force-delete",
-            "description": "Forces the resource to be deleted from azure. The corresponding CR would be attempted to be deleted too.",
-            "required": false,
-            "type": "boolean"
           }
         ],
         "responses": {
@@ -710,7 +696,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/virtualNetworks/{virtualNetworkName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScMmm/VirtualNetworks/{virtualNetworkName}": {
       "get": {
         "tags": [
           "VirtualNetworks"
@@ -848,13 +834,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "header",
-            "name": "x-ms-azure-force-delete",
-            "description": "Forces the resource to be deleted from azure. The corresponding CR would be attempted to be deleted too.",
-            "required": false,
-            "type": "boolean"
           }
         ],
         "responses": {
@@ -947,7 +926,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/virtualNetworks": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScMmm/VirtualNetworks": {
       "get": {
         "tags": [
           "VirtualNetworks"
@@ -990,7 +969,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ScVmm/virtualNetworks": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ScMmm/VirtualNetworks": {
       "get": {
         "tags": [
           "VirtualNetworks"
@@ -1173,13 +1152,6 @@
             "in": "query",
             "name": "retain",
             "description": "Whether to just disable the VM from azure and retain the VM in the VMM.",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "in": "header",
-            "name": "x-ms-azure-force-delete",
-            "description": "Forces the resource to be deleted from azure. The corresponding CR would be attempted to be deleted too.",
             "required": false,
             "type": "boolean"
           }
@@ -1740,7 +1712,7 @@
           "VirtualMachineTemplates"
         ],
         "operationId": "VirtualMachineTemplates_CreateOrUpdate",
-        "description": "Onboards the ScVmm vmtemplate as an Azure vmtemplate resource.",
+        "description": "Onboards the ScVmm VM Template as an Azure VM Template resource.",
         "summary": "Implements VirtualMachineTemplates PUT method.",
         "x-ms-examples": {
           "CreateVirtualMachineTemplate": {
@@ -1804,7 +1776,7 @@
           "VirtualMachineTemplates"
         ],
         "operationId": "VirtualMachineTemplates_Delete",
-        "description": "Deregisters the ScVmm vmtemplate from Azure.",
+        "description": "Deregisters the ScVmm VM Template from Azure.",
         "summary": "Implements VirtualMachineTemplate DELETE method.",
         "x-ms-examples": {
           "DeleteVirtualMachineTemplate": {
@@ -1827,13 +1799,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "header",
-            "name": "x-ms-azure-force-delete",
-            "description": "Forces the resource to be deleted from azure. The corresponding CR would be attempted to be deleted too.",
-            "required": false,
-            "type": "boolean"
           }
         ],
         "responses": {
@@ -2153,13 +2118,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "header",
-            "name": "x-ms-azure-force-delete",
-            "description": "Forces the resource to be deleted from azure. The corresponding CR would be attempted to be deleted too.",
-            "required": false,
-            "type": "boolean"
           }
         ],
         "responses": {
@@ -2731,7 +2689,8 @@
           "description": "List of Operations.",
           "items": {
             "$ref": "#/definitions/ResourceProviderOperation"
-          }
+          },
+          "x-ms-identifiers": ["name"]
         },
         "nextLink": {
           "type": "string",
@@ -3041,7 +3000,7 @@
         }
       }
     },
-    "AvailabilitySets": {
+    "AvailabilitySetList": {
       "description": "Availability Sets in vm.",
       "type": "array",
       "items": {
@@ -3061,6 +3020,7 @@
     },
     "VirtualMachineProperties": {
       "description": "Defines the resource properties.",
+      "type": "object",
       "properties": {
         "inventoryItemId": {
           "description": "Gets or sets the inventory Item ID for the resource.",
@@ -3095,7 +3055,7 @@
           ]
         },
         "availabilitySets": {
-          "$ref": "#/definitions/AvailabilitySets"
+          "$ref": "#/definitions/AvailabilitySetList"
         },
         "osProfile": {
           "description": "OS properties.",
@@ -3317,7 +3277,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NetworkInterfacesUpdate"
-          }
+          },
+          "x-ms-identifiers": ["name", "nicId"]
         }
       }
     },
@@ -3330,7 +3291,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NetworkInterfaces"
-          }
+          },
+          "x-ms-identifiers": ["name", "nicId"]
         }
       }
     },
@@ -3380,7 +3342,7 @@
           "type": "string"
         },
         "virtualNetworkId": {
-          "description": "Gets or sets the ARM Id of the microsoft.scvmm/virtualnetwork resource to connect the nic.",
+          "description": "Gets or sets the ARM Id of the Microsoft.ScMmm/VirtualNetwork resource to connect the nic.",
           "type": "string"
         },
         "nicUuid": {
@@ -3429,7 +3391,7 @@
           "type": "string"
         },
         "virtualNetworkId": {
-          "description": "Gets or sets the ARM Id of the microsoft.scvmm/virtualnetwork resource to connect the nic.",
+          "description": "Gets or sets the ARM Id of the Microsoft.ScMmm/VirtualNetwork resource to connect the nic.",
           "type": "string"
         },
         "ipv4AddressType": {
@@ -3474,6 +3436,7 @@
     },
     "StorageQoSPolicyDetails": {
       "description": "The StorageQoSPolicyDetails definition.",
+      "type": "object",
       "properties": {
         "name": {
           "description": "The name of the policy.",
@@ -3618,7 +3581,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualDiskUpdate"
-          }
+          },
+          "x-ms-identifiers": ["name", "diskId"]
         }
       }
     },
@@ -3631,7 +3595,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualDisk"
-          }
+          },
+          "x-ms-identifiers": ["name", "diskId"]
         }
       }
     },
@@ -3766,7 +3731,7 @@
           "$ref": "#/definitions/NetworkProfileUpdate"
         },
         "availabilitySets": {
-          "$ref": "#/definitions/AvailabilitySets"
+          "$ref": "#/definitions/AvailabilitySetList"
         }
       }
     },
@@ -3898,6 +3863,7 @@
           "items": {
             "$ref": "#/definitions/NetworkInterfaces"
           },
+          "x-ms-identifiers": ["name", "nicId"],
           "readOnly": true
         },
         "disks": {
@@ -3906,6 +3872,7 @@
           "items": {
             "$ref": "#/definitions/VirtualDisk"
           },
+          "x-ms-identifiers": ["name", "diskId"],
           "readOnly": true
         },
         "provisioningState": {
@@ -4228,6 +4195,7 @@
     },
     "ErrorResponse": {
       "description": "Error response.",
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorDefinition",
@@ -4237,6 +4205,7 @@
     },
     "ErrorDefinition": {
       "description": "Error definition.",
+      "type": "object",
       "properties": {
         "code": {
           "description": "Service specific error code which serves as the substatus for the HTTP error code.",
@@ -4254,12 +4223,14 @@
           "items": {
             "$ref": "#/definitions/ErrorDefinition"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         }
       }
     },
     "StorageQoSPolicy": {
       "description": "The StorageQoSPolicy definition.",
+      "type": "object",
       "properties": {
         "name": {
           "description": "The name of the policy.",
