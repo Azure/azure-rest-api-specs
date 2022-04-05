@@ -256,7 +256,7 @@ input-file:
 - Microsoft.Compute/stable/2022-03-01/ComputeRP/capacityReservation.json
 - Microsoft.Compute/stable/2022-03-01/ComputeRP/logAnalytic.json
 - Microsoft.Compute/stable/2022-03-01/ComputeRP/runCommand.json
-- Microsoft.Compute/stable/2022-03-01/gallery.json
+- Microsoft.Compute/stable/2022-03-01/ComputeRP/gallery.json
 - Microsoft.Compute/stable/2021-07-01/skus.json
 - Microsoft.Compute/stable/2021-08-01/disk.json
 
