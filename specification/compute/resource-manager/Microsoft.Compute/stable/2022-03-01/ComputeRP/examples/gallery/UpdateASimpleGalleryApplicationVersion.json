@@ -5,7 +5,30 @@
     "api-version": "2021-10-01",
     "galleryName": "myGalleryName",
     "galleryApplicationName": "myGalleryApplicationName",
-    "galleryApplicationVersionName": "1.0.0"
+    "galleryApplicationVersionName": "1.0.0",
+    "galleryApplicationVersion": {
+      "properties": {
+        "publishingProfile": {
+          "source": {
+            "mediaLink": "https://mystorageaccount.blob.core.windows.net/mycontainer/package.zip?{sasKey}"
+          },
+          "manageActions": {
+            "install": "powershell -command \"Expand-Archive -Path package.zip -DestinationPath C:\\package\"",
+            "remove": "del C:\\package "
+          },
+          "targetRegions": [
+            {
+              "name": "West US",
+              "regionalReplicaCount": 1,
+              "storageAccountType": "Standard_LRS"
+            }
+          ],
+          "replicaCount": 1,
+          "endOfLifeDate": "2019-07-01T07:00:00Z",
+          "storageAccountType": "Standard_LRS"
+        }
+      }
+    }
   },
   "responses": {
     "200": {
@@ -37,7 +60,7 @@
             "endOfLifeDate": "2019-07-01T07:00:00+00:00",
             "storageAccountType": "Standard_LRS"
           },
-          "provisioningState": "Succeeded"
+          "provisioningState": "Updating"
         }
       }
     }
