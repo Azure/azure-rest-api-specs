@@ -5325,7 +5325,7 @@
       ],
       "properties": {
         "secrets": {
-          "description": "Storage account secrets.",
+          "description": "[Required] Storage account secrets.",
           "$ref": "#/definitions/AccountKeyDatastoreSecrets",
           "x-ms-mutability": [
             "create",
@@ -5452,7 +5452,7 @@
           ]
         },
         "uri": {
-          "description": "Input Asset URI.",
+          "description": "[Required] Input Asset URI.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         }
@@ -5488,7 +5488,7 @@
       "type": "object",
       "properties": {
         "referenceType": {
-          "description": "Specifies the type of asset reference.",
+          "description": "[Required] Specifies the type of asset reference.",
           "$ref": "#/definitions/ReferenceType"
         }
       },
@@ -5564,7 +5564,7 @@
           "x-nullable": true
         },
         "taskDetails": {
-          "description": "This represents scenario which can be one of Tables/NLP/Image",
+          "description": "[Required] This represents scenario which can be one of Tables/NLP/Image",
           "$ref": "#/definitions/AutoMLVertical"
         }
       },
@@ -5584,7 +5584,7 @@
           "$ref": "#/definitions/LogVerbosity"
         },
         "taskType": {
-          "description": "Task type for AutoMLJob.",
+          "description": "[Required] Task type for AutoMLJob.",
           "$ref": "#/definitions/TaskType",
           "x-ms-mutability": [
             "create",
@@ -5718,7 +5718,7 @@
           ]
         },
         "storeName": {
-          "description": "Azure Data Lake store name.",
+          "description": "[Required] Azure Data Lake store name.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -5744,7 +5744,7 @@
       ],
       "properties": {
         "accountName": {
-          "description": "Storage account name.",
+          "description": "[Required] Storage account name.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -5763,7 +5763,7 @@
           "x-nullable": true
         },
         "filesystem": {
-          "description": "The name of the Data Lake Gen2 filesystem.",
+          "description": "[Required] The name of the Data Lake Gen2 filesystem.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -5808,7 +5808,7 @@
       ],
       "properties": {
         "accountName": {
-          "description": "Storage account name.",
+          "description": "[Required] Storage account name.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -5827,7 +5827,7 @@
           "x-nullable": true
         },
         "fileShareName": {
-          "description": "TODO - File share name.",
+          "description": "[Required] TODO - File share name.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -5979,7 +5979,7 @@
           "type": "string"
         },
         "properties": {
-          "description": "Additional attributes of the entity.",
+          "description": "[Required] Additional attributes of the entity.",
           "$ref": "#/definitions/BatchDeployment"
         },
         "sku": {
@@ -6067,7 +6067,7 @@
           "type": "string"
         },
         "properties": {
-          "description": "Additional attributes of the entity.",
+          "description": "[Required] Additional attributes of the entity.",
           "$ref": "#/definitions/BatchEndpoint"
         },
         "sku": {
@@ -6180,7 +6180,7 @@
       "type": "object",
       "properties": {
         "contextUri": {
-          "description": "URI of the Docker build context used to build the image. Supports blob URIs on environment creation and may return blob or Git URIs.\r\n<seealso href=\"https://docs.docker.com/engine/reference/commandline/build/#extended-description\" />",
+          "description": "[Required] URI of the Docker build context used to build the image. Supports blob URIs on environment creation and may return blob or Git URIs.\r\n<seealso href=\"https://docs.docker.com/engine/reference/commandline/build/#extended-description\" />",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "example": "https://storage-account.blob.core.windows.net/azureml/DockerBuildContext/95ddede6b9b8c4e90472db3acd0a8d28/",
@@ -6225,7 +6225,7 @@
         },
         "clientId": {
           "format": "uuid",
-          "description": "Service principal client ID.",
+          "description": "[Required] Service principal client ID.",
           "type": "string"
         },
         "resourceUrl": {
@@ -6234,7 +6234,7 @@
           "x-nullable": true
         },
         "secrets": {
-          "description": "Service principal secrets.",
+          "description": "[Required] Service principal secrets.",
           "$ref": "#/definitions/CertificateDatastoreSecrets",
           "x-ms-mutability": [
             "create",
@@ -6244,11 +6244,11 @@
         },
         "tenantId": {
           "format": "uuid",
-          "description": "ID of the tenant to which the service principal belongs.",
+          "description": "[Required] ID of the tenant to which the service principal belongs.",
           "type": "string"
         },
         "thumbprint": {
-          "description": "Thumbprint of the certificate used for authentication.",
+          "description": "[Required] Thumbprint of the certificate used for authentication.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         }
@@ -6487,7 +6487,7 @@
           "x-nullable": true
         },
         "scoringScript": {
-          "description": "The script to execute on startup. eg. \"score.py\"",
+          "description": "[Required] The script to execute on startup. eg. \"score.py\"",
           "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
@@ -6523,7 +6523,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "Additional attributes of the entity.",
+          "description": "[Required] Additional attributes of the entity.",
           "$ref": "#/definitions/CodeContainer"
         }
       },
@@ -6580,7 +6580,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "Additional attributes of the entity.",
+          "description": "[Required] Additional attributes of the entity.",
           "$ref": "#/definitions/CodeVersion"
         }
       },
@@ -6648,7 +6648,7 @@
           "x-nullable": true
         },
         "command": {
-          "description": "The command to execute on startup of the job. eg. \"python train.py\"",
+          "description": "[Required] The command to execute on startup of the job. eg. \"python train.py\"",
           "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
@@ -6667,7 +6667,7 @@
           "x-nullable": true
         },
         "environmentId": {
-          "description": "The ARM resource ID of the Environment specification for the job.",
+          "description": "[Required] The ARM resource ID of the Environment specification for the job.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -6783,7 +6783,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "Additional attributes of the entity.",
+          "description": "[Required] Additional attributes of the entity.",
           "$ref": "#/definitions/ComponentContainer"
         }
       },
@@ -6852,7 +6852,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "Additional attributes of the entity.",
+          "description": "[Required] Additional attributes of the entity.",
           "$ref": "#/definitions/ComponentVersion"
         }
       },
@@ -6992,7 +6992,7 @@
       ],
       "properties": {
         "expression": {
-          "description": "Specifies cron expression of schedule.\r\nThe expression should follow NCronTab format.",
+          "description": "[Required] Specifies cron expression of schedule.\r\nThe expression should follow NCronTab format.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         }
@@ -7014,7 +7014,7 @@
       "properties": {
         "value": {
           "format": "int32",
-          "description": "Forecast horizon value.",
+          "description": "[Required] Forecast horizon value.",
           "type": "integer"
         }
       },
@@ -7061,7 +7061,7 @@
       "properties": {
         "value": {
           "format": "int32",
-          "description": "N-Cross validations value.",
+          "description": "[Required] N-Cross validations value.",
           "type": "integer"
         }
       },
@@ -7081,7 +7081,7 @@
       "properties": {
         "value": {
           "format": "int32",
-          "description": "Seasonality value.",
+          "description": "[Required] Seasonality value.",
           "type": "integer"
         }
       },
@@ -7100,7 +7100,7 @@
       ],
       "properties": {
         "values": {
-          "description": "Set target lags values.",
+          "description": "[Required] Set target lags values.",
           "type": "array",
           "items": {
             "format": "int32",
@@ -7124,7 +7124,7 @@
       "properties": {
         "value": {
           "format": "int32",
-          "description": "TargetRollingWindowSize value.",
+          "description": "[Required] TargetRollingWindowSize value.",
           "type": "integer"
         }
       },
@@ -7144,7 +7144,7 @@
       ],
       "properties": {
         "dataType": {
-          "description": "Specifies the type of data.",
+          "description": "[Required] Specifies the type of data.",
           "$ref": "#/definitions/DataType",
           "x-ms-mutability": [
             "create",
@@ -7168,7 +7168,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "Additional attributes of the entity.",
+          "description": "[Required] Additional attributes of the entity.",
           "$ref": "#/definitions/DataContainer"
         }
       },
@@ -7225,7 +7225,7 @@
       "type": "object",
       "properties": {
         "targetColumnName": {
-          "description": "Target column name: This is prediction values column.\r\nAlso known as label column name in context of classification tasks.",
+          "description": "[Required] Target column name: This is prediction values column.\r\nAlso known as label column name in context of classification tasks.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         },
@@ -7235,7 +7235,7 @@
           "x-nullable": true
         },
         "trainingData": {
-          "description": "Training data input.",
+          "description": "[Required] Training data input.",
           "$ref": "#/definitions/TrainingDataSettings"
         }
       },
@@ -7255,11 +7255,11 @@
       ],
       "properties": {
         "credentials": {
-          "description": "Account credentials.",
+          "description": "[Required] Account credentials.",
           "$ref": "#/definitions/DatastoreCredentials"
         },
         "datastoreType": {
-          "description": "Storage type backing the datastore.",
+          "description": "[Required] Storage type backing the datastore.",
           "$ref": "#/definitions/DatastoreType"
         },
         "isDefault": {
@@ -7282,7 +7282,7 @@
       "type": "object",
       "properties": {
         "credentialsType": {
-          "description": "Credential type used to authentication with storage.",
+          "description": "[Required] Credential type used to authentication with storage.",
           "$ref": "#/definitions/CredentialsType"
         }
       },
@@ -7301,7 +7301,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "Additional attributes of the entity.",
+          "description": "[Required] Additional attributes of the entity.",
           "$ref": "#/definitions/Datastore"
         }
       },
@@ -7334,7 +7334,7 @@
       "type": "object",
       "properties": {
         "secretsType": {
-          "description": "Credential type used to authentication with storage.",
+          "description": "[Required] Credential type used to authentication with storage.",
           "$ref": "#/definitions/SecretsType"
         }
       },
@@ -7412,7 +7412,7 @@
       ],
       "properties": {
         "dataType": {
-          "description": "Specifies the type of data.",
+          "description": "[Required] Specifies the type of data.",
           "$ref": "#/definitions/DataType",
           "x-ms-mutability": [
             "create",
@@ -7420,7 +7420,7 @@
           ]
         },
         "dataUri": {
-          "description": "Uri of the data. Usage/meaning depends on Microsoft.MachineLearning.ManagementFrontEnd.Contracts.V20220201Preview.Assets.DataVersionBase.DataType",
+          "description": "[Required] Uri of the data. Usage/meaning depends on Microsoft.MachineLearning.ManagementFrontEnd.Contracts.V20220201Preview.Assets.DataVersionBase.DataType",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -7445,7 +7445,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "Additional attributes of the entity.",
+          "description": "[Required] Additional attributes of the entity.",
           "$ref": "#/definitions/DataVersionBase"
         }
       },
@@ -7557,7 +7557,7 @@
       "type": "object",
       "properties": {
         "distributionType": {
-          "description": "Specifies the type of distribution framework.",
+          "description": "[Required] Specifies the type of distribution framework.",
           "$ref": "#/definitions/DistributionType",
           "x-ms-mutability": [
             "create",
@@ -7612,7 +7612,7 @@
           "type": "integer"
         },
         "policyType": {
-          "description": "Name of policy configuration",
+          "description": "[Required] Name of policy configuration",
           "$ref": "#/definitions/EarlyTerminationPolicyType"
         }
       },
@@ -7794,7 +7794,7 @@
       "type": "object",
       "properties": {
         "authMode": {
-          "description": "Use 'Key' for key based authentication and 'AMLToken' for Azure Machine Learning token-based authentication. 'Key' doesn't expire but 'AMLToken' does.",
+          "description": "[Required] Use 'Key' for key based authentication and 'AMLToken' for Azure Machine Learning token-based authentication. 'Key' doesn't expire but 'AMLToken' does.",
           "$ref": "#/definitions/EndpointAuthMode"
         },
         "description": {
@@ -7904,7 +7904,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "Additional attributes of the entity.",
+          "description": "[Required] Additional attributes of the entity.",
           "$ref": "#/definitions/EnvironmentContainer"
         }
       },
@@ -8026,7 +8026,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "Additional attributes of the entity.",
+          "description": "[Required] Additional attributes of the entity.",
           "$ref": "#/definitions/EnvironmentVersion"
         }
       },
@@ -8137,7 +8137,7 @@
       "type": "object",
       "properties": {
         "mode": {
-          "description": "Set forecast horizon value selection mode.",
+          "description": "[Required] Set forecast horizon value selection mode.",
           "$ref": "#/definitions/ForecastHorizonMode",
           "x-ms-mutability": [
             "create",
@@ -8481,7 +8481,7 @@
           "x-nullable": true
         },
         "nameNodeAddress": {
-          "description": "IP Address or DNS HostName.",
+          "description": "[Required] IP Address or DNS HostName.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -8517,7 +8517,7 @@
       ],
       "properties": {
         "assetId": {
-          "description": "ARM resource ID of the asset.",
+          "description": "[Required] ARM resource ID of the asset.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         }
@@ -8533,7 +8533,7 @@
       "type": "object",
       "properties": {
         "identityType": {
-          "description": "Specifies the type of identity framework.",
+          "description": "[Required] Specifies the type of identity framework.",
           "$ref": "#/definitions/IdentityConfigurationType",
           "x-ms-mutability": [
             "create",
@@ -9389,11 +9389,11 @@
           "x-nullable": true
         },
         "limits": {
-          "description": "Limit settings for model sweeping and hyperparameter sweeping.",
+          "description": "[Required] Limit settings for model sweeping and hyperparameter sweeping.",
           "$ref": "#/definitions/ImageSweepLimitSettings"
         },
         "samplingAlgorithm": {
-          "description": "Type of the hyperparameter sampling algorithms.",
+          "description": "[Required] Type of the hyperparameter sampling algorithms.",
           "$ref": "#/definitions/SamplingAlgorithmType"
         }
       },
@@ -9408,11 +9408,11 @@
       "type": "object",
       "properties": {
         "dataSettings": {
-          "description": "Collection of registered Tabular Dataset Ids and other data settings required for training and validating models.",
+          "description": "[Required] Collection of registered Tabular Dataset Ids and other data settings required for training and validating models.",
           "$ref": "#/definitions/ImageVerticalDataSettings"
         },
         "limitSettings": {
-          "description": "Limit settings for the AutoML job.",
+          "description": "[Required] Limit settings for the AutoML job.",
           "$ref": "#/definitions/ImageLimitSettings"
         },
         "sweepSettings": {
@@ -9582,7 +9582,7 @@
           ]
         },
         "jobType": {
-          "description": "Specifies the type of job.",
+          "description": "[Required] Specifies the type of job.",
           "$ref": "#/definitions/JobType",
           "x-ms-mutability": [
             "create",
@@ -9628,7 +9628,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "Additional attributes of the entity.",
+          "description": "[Required] Additional attributes of the entity.",
           "$ref": "#/definitions/JobBase"
         }
       },
@@ -9670,7 +9670,7 @@
           "x-nullable": true
         },
         "jobInputType": {
-          "description": "Specifies the type of job.",
+          "description": "[Required] Specifies the type of job.",
           "$ref": "#/definitions/JobInputType",
           "x-ms-mutability": [
             "create",
@@ -9728,7 +9728,7 @@
       "type": "object",
       "properties": {
         "jobLimitsType": {
-          "description": "JobLimit type.",
+          "description": "[Required] JobLimit type.",
           "$ref": "#/definitions/JobLimitsType"
         },
         "timeout": {
@@ -9777,7 +9777,7 @@
           "x-nullable": true
         },
         "jobOutputType": {
-          "description": "Specifies the type of job.",
+          "description": "[Required] Specifies the type of job.",
           "$ref": "#/definitions/JobOutputType",
           "x-ms-mutability": [
             "create",
@@ -10012,7 +10012,7 @@
       "type": "object",
       "properties": {
         "kerberosKdcAddress": {
-          "description": "IP Address or DNS HostName.",
+          "description": "[Required] IP Address or DNS HostName.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -10021,7 +10021,7 @@
           ]
         },
         "kerberosPrincipal": {
-          "description": "Kerberos Username",
+          "description": "[Required] Kerberos Username",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -10030,7 +10030,7 @@
           ]
         },
         "kerberosRealm": {
-          "description": "Domain over which a Kerberos authentication server has the authority to authenticate a user, host or service.",
+          "description": "[Required] Domain over which a Kerberos authentication server has the authority to authenticate a user, host or service.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -10056,7 +10056,7 @@
       ],
       "properties": {
         "secrets": {
-          "description": "Keytab secrets.",
+          "description": "[Required] Keytab secrets.",
           "$ref": "#/definitions/KerberosKeytabSecrets",
           "x-ms-mutability": [
             "create",
@@ -10100,7 +10100,7 @@
       ],
       "properties": {
         "secrets": {
-          "description": "Kerberos password secrets.",
+          "description": "[Required] Kerberos password secrets.",
           "$ref": "#/definitions/KerberosPasswordSecrets",
           "x-ms-mutability": [
             "create",
@@ -10232,7 +10232,7 @@
       ],
       "properties": {
         "value": {
-          "description": "Literal value for the input.",
+          "description": "[Required] Literal value for the input.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         }
@@ -10447,7 +10447,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "Additional attributes of the entity.",
+          "description": "[Required] Additional attributes of the entity.",
           "$ref": "#/definitions/ModelContainer"
         }
       },
@@ -10585,7 +10585,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "Additional attributes of the entity.",
+          "description": "[Required] Additional attributes of the entity.",
           "$ref": "#/definitions/ModelVersion"
         }
       },
@@ -10641,7 +10641,7 @@
       "type": "object",
       "properties": {
         "mode": {
-          "description": "Mode for determining N-Cross validations.",
+          "description": "[Required] Mode for determining N-Cross validations.",
           "$ref": "#/definitions/NCrossValidationsMode",
           "x-ms-mutability": [
             "create",
@@ -10793,11 +10793,11 @@
       "type": "object",
       "properties": {
         "goal": {
-          "description": "Defines supported metric goals for hyperparameter tuning",
+          "description": "[Required] Defines supported metric goals for hyperparameter tuning",
           "$ref": "#/definitions/Goal"
         },
         "primaryMetric": {
-          "description": "Name of the metric to optimize.",
+          "description": "[Required] Name of the metric to optimize.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         }
@@ -10821,7 +10821,7 @@
           "type": "boolean"
         },
         "endpointComputeType": {
-          "description": "The compute type of the endpoint.",
+          "description": "[Required] The compute type of the endpoint.",
           "$ref": "#/definitions/EndpointComputeType"
         },
         "instanceType": {
@@ -10901,7 +10901,7 @@
           "type": "string"
         },
         "properties": {
-          "description": "Additional attributes of the entity.",
+          "description": "[Required] Additional attributes of the entity.",
           "$ref": "#/definitions/OnlineDeployment"
         },
         "sku": {
@@ -10995,7 +10995,7 @@
           "type": "string"
         },
         "properties": {
-          "description": "Additional attributes of the entity.",
+          "description": "[Required] Additional attributes of the entity.",
           "$ref": "#/definitions/OnlineEndpoint"
         },
         "sku": {
@@ -11057,7 +11057,7 @@
       "type": "object",
       "properties": {
         "scaleType": {
-          "description": "Type of deployment scaling algorithm",
+          "description": "[Required] Type of deployment scaling algorithm",
           "$ref": "#/definitions/ScaleType"
         }
       },
@@ -11164,7 +11164,7 @@
       "type": "object",
       "properties": {
         "referenceType": {
-          "description": "Specifies the type of asset reference.",
+          "description": "[Required] Specifies the type of asset reference.",
           "$ref": "#/definitions/ReferenceType"
         }
       },
@@ -11465,7 +11465,7 @@
       "type": "object",
       "properties": {
         "endpointComputeType": {
-          "description": "The compute type of the endpoint.",
+          "description": "[Required] The compute type of the endpoint.",
           "$ref": "#/definitions/EndpointComputeType"
         }
       },
@@ -11832,7 +11832,7 @@
       "type": "object",
       "properties": {
         "hours": {
-          "description": "List of hours for recurrence schedule pattern",
+          "description": "[Required] List of hours for recurrence schedule pattern",
           "type": "array",
           "items": {
             "format": "int32",
@@ -11840,7 +11840,7 @@
           }
         },
         "minutes": {
-          "description": "List of minutes for recurrence schedule pattern",
+          "description": "[Required] List of minutes for recurrence schedule pattern",
           "type": "array",
           "items": {
             "format": "int32",
@@ -11873,12 +11873,12 @@
       ],
       "properties": {
         "frequency": {
-          "description": "Specifies frequency with with which to trigger schedule",
+          "description": "[Required] Specifies frequency with with which to trigger schedule",
           "$ref": "#/definitions/RecurrenceFrequency"
         },
         "interval": {
           "format": "int32",
-          "description": "Specifies schedule interval in conjunction with frequency",
+          "description": "[Required] Specifies schedule interval in conjunction with frequency",
           "type": "integer"
         },
         "pattern": {
@@ -11921,7 +11921,7 @@
       "type": "object",
       "properties": {
         "keyType": {
-          "description": "Specification for which type of key to generate. Primary or Secondary.",
+          "description": "[Required] Specification for which type of key to generate. Primary or Secondary.",
           "$ref": "#/definitions/KeyType",
           "example": "Primary"
         },
@@ -12141,13 +12141,13 @@
       "type": "object",
       "properties": {
         "path": {
-          "description": "The path for the route.",
+          "description": "[Required] The path for the route.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         },
         "port": {
           "format": "int32",
-          "description": "The port for the route.",
+          "description": "[Required] The port for the route.",
           "type": "integer"
         }
       },
@@ -12161,7 +12161,7 @@
       "type": "object",
       "properties": {
         "samplingAlgorithmType": {
-          "description": "The algorithm used for generating hyperparameter values, along with configuration properties",
+          "description": "[Required] The algorithm used for generating hyperparameter values, along with configuration properties",
           "$ref": "#/definitions/SamplingAlgorithmType"
         }
       },
@@ -12204,7 +12204,7 @@
       ],
       "properties": {
         "secrets": {
-          "description": "Storage container secrets.",
+          "description": "[Required] Storage container secrets.",
           "$ref": "#/definitions/SasDatastoreSecrets",
           "x-ms-mutability": [
             "create",
@@ -12273,7 +12273,7 @@
           "$ref": "#/definitions/ScheduleStatus"
         },
         "scheduleType": {
-          "description": "Specifies the schedule type",
+          "description": "[Required] Specifies the schedule type",
           "$ref": "#/definitions/ScheduleType",
           "x-ms-mutability": [
             "create",
@@ -12349,7 +12349,7 @@
       "type": "object",
       "properties": {
         "mode": {
-          "description": "Seasonality mode.",
+          "description": "[Required] Seasonality mode.",
           "$ref": "#/definitions/SeasonalityMode",
           "x-ms-mutability": [
             "create",
@@ -12467,7 +12467,7 @@
         },
         "clientId": {
           "format": "uuid",
-          "description": "Service principal client ID.",
+          "description": "[Required] Service principal client ID.",
           "type": "string"
         },
         "resourceUrl": {
@@ -12476,7 +12476,7 @@
           "x-nullable": true
         },
         "secrets": {
-          "description": "Service principal secrets.",
+          "description": "[Required] Service principal secrets.",
           "$ref": "#/definitions/ServicePrincipalDatastoreSecrets",
           "x-ms-mutability": [
             "create",
@@ -12486,7 +12486,7 @@
         },
         "tenantId": {
           "format": "uuid",
-          "description": "ID of the tenant to which the service principal belongs.",
+          "description": "[Required] ID of the tenant to which the service principal belongs.",
           "type": "string"
         }
       },
@@ -12652,7 +12652,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "The name of the SKU. Ex - P3. It is typically a letter+number code.",
+          "description": "[Required] The name of the SKU. Ex - P3. It is typically a letter+number code.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         },
@@ -12814,7 +12814,7 @@
           "x-nullable": true
         },
         "objective": {
-          "description": "Optimization objective.",
+          "description": "[Required] Optimization objective.",
           "$ref": "#/definitions/Objective"
         },
         "outputs": {
@@ -12832,15 +12832,15 @@
           "x-nullable": true
         },
         "samplingAlgorithm": {
-          "description": "The hyperparameter sampling algorithm",
+          "description": "[Required] The hyperparameter sampling algorithm",
           "$ref": "#/definitions/SamplingAlgorithm"
         },
         "searchSpace": {
-          "description": "A dictionary containing each parameter and its distribution. The dictionary key is the name of the parameter",
+          "description": "[Required] A dictionary containing each parameter and its distribution. The dictionary key is the name of the parameter",
           "type": "object"
         },
         "trial": {
-          "description": "Trial component definition.",
+          "description": "[Required] Trial component definition.",
           "$ref": "#/definitions/TrialComponent"
         }
       },
@@ -13101,7 +13101,7 @@
       "type": "object",
       "properties": {
         "mode": {
-          "description": "Set target lags mode - Auto/Custom",
+          "description": "[Required] Set target lags mode - Auto/Custom",
           "$ref": "#/definitions/TargetLagsMode",
           "x-ms-mutability": [
             "create",
@@ -13142,7 +13142,7 @@
       "type": "object",
       "properties": {
         "mode": {
-          "description": "TargetRollingWindowSiz detection mode.",
+          "description": "[Required] TargetRollingWindowSiz detection mode.",
           "$ref": "#/definitions/TargetRollingWindowSizeMode",
           "x-ms-mutability": [
             "create",
@@ -13396,7 +13396,7 @@
       "type": "object",
       "properties": {
         "data": {
-          "description": "Training data MLTable.",
+          "description": "[Required] Training data MLTable.",
           "$ref": "#/definitions/MLTableJobInput"
         }
       },
@@ -13463,7 +13463,7 @@
           "x-nullable": true
         },
         "command": {
-          "description": "The command to execute on startup of the job. eg. \"python train.py\"",
+          "description": "[Required] The command to execute on startup of the job. eg. \"python train.py\"",
           "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
@@ -13482,7 +13482,7 @@
           "x-nullable": true
         },
         "environmentId": {
-          "description": "The ARM resource ID of the Environment specification for the job.",
+          "description": "[Required] The ARM resource ID of the Environment specification for the job.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         },
