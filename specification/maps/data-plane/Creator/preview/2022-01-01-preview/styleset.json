@@ -160,7 +160,7 @@
   "paths": {
     "/styles/stylesets": {
       "post": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe StyleSet Create API allows the caller to create a styleSet from their styleSet configuration file.\n\n## Submit Create Request\n\nTo create your styleset you will make a `POST` request with a styleSet configration file. \n\nThe Create StyleSet API is a \n[long-running request](https://aka.ms/am-creator-lrt-v2).",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe StyleSet Create API allows the caller to create a styleSet from their styleSet configuration file.\n\n## Submit Create Request\n\nTo create your styleset you will make a `POST` request with a styleSet configuration file. \n\nThe Create StyleSet API is a \n[long-running request](https://aka.ms/am-creator-lrt-v2).",
         "operationId": "StyleSet_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -321,7 +321,7 @@
           "200": {
             "description": "Get composed styleSet style request completed successfully. The response body contains a single style.",
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/StyleSetStyle"
             }
           },
           "default": {
@@ -448,6 +448,81 @@
           "items": {
             "$ref": "#/definitions/StyleObject"
           }
+        }
+      }
+    },
+    "StyleSetStyle": {
+      "description": "A style configuration in a styleSet.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name for the style.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "The version of the mapbox style.",
+          "type": "number",
+          "readOnly": true
+        },
+        "sources": {
+          "description": "Data source specifications.",
+          "type": "object",
+          "readOnly": true
+        },
+        "sprite": {
+          "description": "A base URL for retrieving the sprite image and metadata.",
+          "type": "string",
+          "readOnly": true
+        },
+        "glyphs": {
+          "description": "A base URL for retrieving the glyphs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "layers": {
+          "description": "A style's layers property lists all the layers available in that style",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/StyleLayerObject"
+          }
+        }
+      }
+    },
+    "StyleLayerObject": {
+      "description": "Layer object for style recipe.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The unique id for the layer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the layer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "source-layer": {
+          "description": "The source layer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "source": {
+          "description": "The source.",
+          "type": "string",
+          "readOnly": true
+        },
+        "layout": {
+          "description": "The layout of the layer.",
+          "type": "object",
+          "readOnly": true
+        },
+        "paint": {
+          "description": "The paint configuration of the layer.",
+          "type": "object",
+          "readOnly": true
         }
       }
     },
