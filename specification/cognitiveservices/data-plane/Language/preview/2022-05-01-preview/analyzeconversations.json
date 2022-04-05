@@ -279,14 +279,15 @@
     },
     "ConversationItemBase": {
       "type": "object",
+      "discriminator": "modality",
       "description": "The abstract base for a user input formatted conversation (e.g., Text, Transcript).",
       "properties": {
         "participantId": {
-          "description": "The participant Id of a ConversationItem",
+          "description": "The participant ID of a ConversationItem",
           "type": "string"
         },
         "id": {
-          "description": "The Id of a ConversationItem",
+          "description": "The ID of a ConversationItem",
           "type": "string"
         },
         "language": {
@@ -309,6 +310,24 @@
         "participantId",
         "id",
         "modality"
+      ]
+    },
+    "TextConversationItem": {
+      "description": "The text modality of an input conversation.",
+      "x-ms-discriminator-value": "text",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationItemBase"
+        }
+      ],
+      "properties": {
+        "text": {
+          "description": "The single input query",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text"
       ]
     },
     "ConversationAnalysisOptions": {
@@ -1698,7 +1717,7 @@
           "description": "Ordered list of text conversation items in the conversation.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TextConversationItem"
+            "$ref": "#/definitions/TextConversationItemInput"
           }
         }
       }
@@ -1723,7 +1742,7 @@
         }
       }
     },
-    "TextConversationItem": {
+    "TextConversationItemInput": {
       "description": "The conversation item in text modality.",
       "allOf": [
         {
