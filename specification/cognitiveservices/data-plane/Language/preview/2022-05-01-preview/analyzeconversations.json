@@ -1870,6 +1870,25 @@
       ],
       "x-ms-discriminator-value": "ConversationalPIIResults"
     },
+    "PreBuiltResult": {
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by conversation id.",
+          "items": {
+            "$ref": "#/definitions/ConversationError"
+          }
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
+        }
+      },
+      "required": [
+        "errors",
+        "modelVersion"
+      ]
+    },
     "ConversationPIIResults": {
       "type": "object",
       "description": "The result from PII detection and redaction operation for each conversation.",
@@ -1890,7 +1909,12 @@
             ]
           }
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PreBuiltResult"
+        }
+      ]
     },
     "ConversationPIIResult": {
       "description": "The result from PII detection and redaction operation for each conversation.",
@@ -2052,7 +2076,12 @@
             ]
           }
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PreBuiltResult"
+        }
+      ]
     },
     "ConversationsSummaryResult": {
       "type": "object",
