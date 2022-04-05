@@ -10,7 +10,14 @@
         "Division": "LT"
       },
       "properties": {
-        "description": "This is new load test resource"
+        "description": "This is new load test resource",
+        "encryption": {
+          "identity": {
+            "type": "SystemAssigned",
+            "resourceId": null
+          },
+          "keyUrl": "https://dummy.vault.azure.net/keys/dummykey1"
+        }
       }
     }
   },
@@ -21,7 +28,14 @@
         "properties": {
           "description": "This is new load test resource",
           "dataPlaneURI": "https://myLoadTest.00000000-0000-0000-0000-000000000000.cnt-dp.domain.com",
-          "provisioningState": "Succeeded"
+          "provisioningState": "Succeeded",
+          "encryption": {
+            "identity": {
+              "type": "SystemAssigned",
+              "resourceId": null
+            },
+            "keyUrl": "https://dummy.vault.azure.net/keys/dummykey1"
+          }
         },
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.LoadTestService/loadTests/myLoadTest",
         "name": "myLoadTest",
