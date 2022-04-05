@@ -41,6 +41,11 @@
         ],
         "description": "Lists all of the available Azure Notebooks REST API operations.",
         "operationId": "Operations_List",
+        "x-ms-examples": {
+          "List Operations": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/APIVersionParameter"
@@ -888,6 +893,20 @@
               "description": "The description for the operation.",
               "type": "string"
             }
+          }
+        },
+        "origin": {
+          "description": "The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "user",
+            "system",
+            "user,system"
+          ],
+          "x-ms-enum": {
+            "name": "Origin",
+            "modelAsString": true
           }
         }
       }
