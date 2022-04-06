@@ -27,40 +27,13 @@
               "$ref": "#/definitions/DatasetLocales"
             }
           },
-          "401": {
-            "description": "In case the user isn't authorized.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get the supported locales": {
             "$ref": "./examples/get_supported_dataset_locales.json"
@@ -80,18 +53,10 @@
         ],
         "parameters": [
           {
-            "in": "query",
-            "name": "skip",
-            "description": "Number of datasets that will be skipped.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/skipQueryParameter"
           },
           {
-            "in": "query",
-            "name": "top",
-            "description": "Number of datasets that will be included after skipping.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/topQueryParameter"
           }
         ],
         "responses": {
@@ -107,47 +72,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
@@ -195,47 +126,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Create a dataset": {
             "$ref": "./examples/create_dataset.json"
@@ -276,54 +173,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get a dataset": {
             "$ref": "./examples/get_dataset.json"
@@ -375,54 +231,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "409": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Update a dataset": {
             "$ref": "./examples/update_dataset.json"
@@ -452,54 +267,13 @@
           "204": {
             "description": "The dataset was successfully deleted or did not exist."
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Delete a dataset": {
             "$ref": "./examples/delete_dataset.json"
@@ -587,55 +361,14 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "415": {
-            "description": "In case the media type of a file part is not supported.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
         "deprecated": true,
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Upload a dataset": {
             "$ref": "./examples/upload_dataset.json"
@@ -663,25 +396,13 @@
             "format": "uuid"
           },
           {
-            "in": "query",
-            "name": "sasValidityInSeconds",
-            "description": "The duration in seconds that an SAS url should be valid. The default duration is 12 hours.\r\n            When using BYOS (https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/speech-encryption-of-data-at-rest#bring-your-own-storage-byos-for-customization-and-logging): A value of 0 means that a plain blob URI without SAS token will be generated.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/sasValidityQueryParameter"
           },
           {
-            "in": "query",
-            "name": "skip",
-            "description": "Number of files that will be skipped.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/skipQueryParameter"
           },
           {
-            "in": "query",
-            "name": "top",
-            "description": "Number of files that will be included after skipping.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/topQueryParameter"
           }
         ],
         "responses": {
@@ -697,54 +418,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
@@ -784,11 +464,7 @@
             "format": "uuid"
           },
           {
-            "in": "query",
-            "name": "sasValidityInSeconds",
-            "description": "The duration in seconds that an SAS url should be valid. The default duration is 12 hours.\r\n            When using BYOS (https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/speech-encryption-of-data-at-rest#bring-your-own-storage-byos-for-customization-and-logging): A value of 0 means that a plain blob URI without SAS token will be generated.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/sasValidityQueryParameter"
           }
         ],
         "responses": {
@@ -798,54 +474,13 @@
               "$ref": "#/definitions/File"
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get a file": {
             "$ref": "./examples/get_dataset_file.json"
@@ -873,40 +508,13 @@
               }
             }
           },
-          "401": {
-            "description": "In case the user isn't authorized.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get the supported locales": {
             "$ref": "./examples/get_supported_endpoint_locales.json"
@@ -926,18 +534,10 @@
         ],
         "parameters": [
           {
-            "in": "query",
-            "name": "skip",
-            "description": "Number of endpoints that will be skipped.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/skipQueryParameter"
           },
           {
-            "in": "query",
-            "name": "top",
-            "description": "Number of endpoints that will be included after skipping.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/topQueryParameter"
           }
         ],
         "responses": {
@@ -953,47 +553,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
@@ -1041,47 +607,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Create an endpoint": {
             "$ref": "./examples/create_endpoint.json"
@@ -1122,54 +654,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get an endpoint": {
             "$ref": "./examples/get_endpoint.json"
@@ -1199,54 +690,13 @@
           "204": {
             "description": "The model endpoint was successfully deleted."
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Delete an endpoint": {
             "$ref": "./examples/delete_endpoint.json"
@@ -1298,54 +748,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "409": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Update an endpoint": {
             "$ref": "./examples/update_endpoint.json"
@@ -1373,11 +782,7 @@
             "format": "uuid"
           },
           {
-            "in": "query",
-            "name": "sasValidityInSeconds",
-            "description": "The duration in seconds that an SAS url should be valid. The default duration is 12 hours.\r\n            When using BYOS (https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/speech-encryption-of-data-at-rest#bring-your-own-storage-byos-for-customization-and-logging): A value of 0 means that a plain blob URI without SAS token will be generated.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/sasValidityQueryParameter"
           },
           {
             "in": "query",
@@ -1386,11 +791,7 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "top",
-            "description": "Number of files that will be included (between 1 and 5000).",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/topQueryParameter"
           }
         ],
         "responses": {
@@ -1406,54 +807,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
@@ -1494,54 +854,13 @@
           "202": {
             "description": "The logs will be deleted."
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Delete all endpoint logs": {
             "$ref": "./examples/delete_endpoint_logs.json"
@@ -1576,11 +895,7 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "sasValidityInSeconds",
-            "description": "The duration in seconds that an SAS url should be valid. The default duration is 12 hours.\r\n            When using BYOS (https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/speech-encryption-of-data-at-rest#bring-your-own-storage-byos-for-customization-and-logging): A value of 0 means that a plain blob URI without SAS token will be generated.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/sasValidityQueryParameter"
           }
         ],
         "responses": {
@@ -1590,54 +905,13 @@
               "$ref": "#/definitions/File"
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get an endpoint log": {
             "$ref": "./examples/get_endpoint_log.json"
@@ -1674,54 +948,13 @@
           "204": {
             "description": "The log was successfully deleted."
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Delete an endpoint log": {
             "$ref": "./examples/delete_endpoint_log.json"
@@ -1748,11 +981,7 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "sasValidityInSeconds",
-            "description": "The duration in seconds that an SAS url should be valid. The default duration is 12 hours.\r\n            When using BYOS (https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/speech-encryption-of-data-at-rest#bring-your-own-storage-byos-for-customization-and-logging): A value of 0 means that a plain blob URI without SAS token will be generated.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/sasValidityQueryParameter"
           },
           {
             "in": "query",
@@ -1761,11 +990,7 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "top",
-            "description": "Number of files that will be included (between 1 and 5000).",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/topQueryParameter"
           }
         ],
         "responses": {
@@ -1775,54 +1000,13 @@
               "$ref": "#/definitions/PaginatedFiles"
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
@@ -1862,54 +1046,13 @@
           "202": {
             "description": "The logs will be deleted."
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Delete all base model logs": {
             "$ref": "./examples/delete_base_model_logs.json"
@@ -1943,11 +1086,7 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "sasValidityInSeconds",
-            "description": "The duration in seconds that an SAS url should be valid. The default duration is 12 hours.\r\n            When using BYOS (https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/speech-encryption-of-data-at-rest#bring-your-own-storage-byos-for-customization-and-logging): A value of 0 means that a plain blob URI without SAS token will be generated.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/sasValidityQueryParameter"
           }
         ],
         "responses": {
@@ -1957,54 +1096,13 @@
               "$ref": "#/definitions/File"
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get a base model log": {
             "$ref": "./examples/get_base_model_log.json"
@@ -2040,54 +1138,13 @@
           "204": {
             "description": "The log was successfully deleted."
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Delete a base model log": {
             "$ref": "./examples/delete_base_model_log.json"
@@ -2115,40 +1172,13 @@
               }
             }
           },
-          "401": {
-            "description": "In case the user isn't authorized.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get the supported locales": {
             "$ref": "./examples/get_supported_evaluations_locales.json"
@@ -2168,18 +1198,10 @@
         ],
         "parameters": [
           {
-            "in": "query",
-            "name": "skip",
-            "description": "Number of evaluations that will be skipped.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/skipQueryParameter"
           },
           {
-            "in": "query",
-            "name": "top",
-            "description": "Number of evaluations that will be included after skipping.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/topQueryParameter"
           }
         ],
         "responses": {
@@ -2195,47 +1217,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
@@ -2283,47 +1271,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Create a evaluation": {
             "$ref": "./examples/create_evaluation.json"
@@ -2351,25 +1305,13 @@
             "format": "uuid"
           },
           {
-            "in": "query",
-            "name": "sasValidityInSeconds",
-            "description": "The duration in seconds that an SAS url should be valid. The default duration is 12 hours.\r\n            When using BYOS (https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/speech-encryption-of-data-at-rest#bring-your-own-storage-byos-for-customization-and-logging): A value of 0 means that a plain blob URI without SAS token will be generated.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/sasValidityQueryParameter"
           },
           {
-            "in": "query",
-            "name": "skip",
-            "description": "Number of files that will be skipped.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/skipQueryParameter"
           },
           {
-            "in": "query",
-            "name": "top",
-            "description": "Number of files that will be included after skipping.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/topQueryParameter"
           }
         ],
         "responses": {
@@ -2385,54 +1327,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
@@ -2472,11 +1373,7 @@
             "format": "uuid"
           },
           {
-            "in": "query",
-            "name": "sasValidityInSeconds",
-            "description": "The duration in seconds that an SAS url should be valid. The default duration is 12 hours.\r\n            When using BYOS (https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/speech-encryption-of-data-at-rest#bring-your-own-storage-byos-for-customization-and-logging): A value of 0 means that a plain blob URI without SAS token will be generated.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/sasValidityQueryParameter"
           }
         ],
         "responses": {
@@ -2486,54 +1383,13 @@
               "$ref": "#/definitions/File"
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get a file": {
             "$ref": "./examples/get_evaluation_file.json"
@@ -2574,54 +1430,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get a evaluation": {
             "$ref": "./examples/get_evaluation.json"
@@ -2673,54 +1488,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "409": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Update a evaluation": {
             "$ref": "./examples/update_evaluation.json"
@@ -2750,54 +1524,13 @@
           "204": {
             "description": "The evaluation was successfully deleted or did not exist."
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Delete a evaluation": {
             "$ref": "./examples/delete_evaluation.json"
@@ -2825,40 +1558,13 @@
               }
             }
           },
-          "401": {
-            "description": "In case the user isn't authorized.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get the supported locales": {
             "$ref": "./examples/get_supported_model_locales.json"
@@ -2878,18 +1584,10 @@
         ],
         "parameters": [
           {
-            "in": "query",
-            "name": "skip",
-            "description": "Number of models that will be skipped.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/skipQueryParameter"
           },
           {
-            "in": "query",
-            "name": "top",
-            "description": "Number of models that will be included after skipping.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/topQueryParameter"
           }
         ],
         "responses": {
@@ -2905,47 +1603,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
@@ -2993,47 +1657,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Create a model": {
             "$ref": "./examples/create_model.json"
@@ -3053,18 +1683,10 @@
         ],
         "parameters": [
           {
-            "in": "query",
-            "name": "skip",
-            "description": "Number of base models that will be skipped.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/skipQueryParameter"
           },
           {
-            "in": "query",
-            "name": "top",
-            "description": "Number of base models that will be included after skipping.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/topQueryParameter"
           }
         ],
         "responses": {
@@ -3074,47 +1696,13 @@
               "$ref": "#/definitions/PaginatedModels"
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
@@ -3159,54 +1747,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get a model": {
             "$ref": "./examples/get_model.json"
@@ -3258,54 +1805,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "409": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Update a model": {
             "$ref": "./examples/update_model.json"
@@ -3335,54 +1841,13 @@
           "204": {
             "description": "The model was successfully deleted or did not exist."
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Delete a model": {
             "$ref": "./examples/delete_model.json"
@@ -3417,54 +1882,13 @@
               "$ref": "#/definitions/Model"
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get a base model": {
             "$ref": "./examples/get_base_model.json"
@@ -3519,54 +1943,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Copy a model": {
             "$ref": "./examples/copy_model.json"
@@ -3594,11 +1977,7 @@
             "format": "uuid"
           },
           {
-            "in": "query",
-            "name": "sasValidityInSeconds",
-            "description": "The duration in seconds that an SAS url should be valid. The default duration is 12 hours.\r\n            When using BYOS (https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/speech-encryption-of-data-at-rest#bring-your-own-storage-byos-for-customization-and-logging): A value of 0 means that a plain blob URI without SAS token will be generated for blobs on own storage. For all other blobs, SAS urls with a validity of 12 hours will be generated.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/sasValidityQueryParameter"
           }
         ],
         "responses": {
@@ -3608,54 +1987,13 @@
               "$ref": "#/definitions/ModelManifest"
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get a model manifest": {
             "$ref": "./examples/get_model_manifest.json"
@@ -3683,11 +2021,7 @@
             "format": "uuid"
           },
           {
-            "in": "query",
-            "name": "sasValidityInSeconds",
-            "description": "The duration in seconds that an SAS url should be valid. The default duration is 12 hours.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/sasValidityQueryParameter"
           }
         ],
         "responses": {
@@ -3697,54 +2031,13 @@
               "$ref": "#/definitions/ModelManifest"
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get a base model manifest": {
             "$ref": "./examples/get_base_model_manifest.json"
@@ -3772,40 +2065,13 @@
               }
             }
           },
-          "401": {
-            "description": "In case the user isn't authorized.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get the supported locales": {
             "$ref": "./examples/get_supported_project_locales.json"
@@ -3825,18 +2091,10 @@
         ],
         "parameters": [
           {
-            "in": "query",
-            "name": "skip",
-            "description": "Number of projects that will be skipped.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/skipQueryParameter"
           },
           {
-            "in": "query",
-            "name": "top",
-            "description": "Number of projects that will be included after skipping.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/topQueryParameter"
           }
         ],
         "responses": {
@@ -3846,47 +2104,13 @@
               "$ref": "#/definitions/PaginatedProjects"
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
@@ -3934,47 +2158,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Create a project": {
             "$ref": "./examples/create_project.json"
@@ -4009,54 +2199,13 @@
               "$ref": "#/definitions/Project"
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get a project": {
             "$ref": "./examples/get_project.json"
@@ -4102,54 +2251,13 @@
               "$ref": "#/definitions/Project"
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "409": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Update a project": {
             "$ref": "./examples/update_project.json"
@@ -4179,54 +2287,13 @@
           "204": {
             "description": "The project was successfully deleted or did not exist."
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Delete a project": {
             "$ref": "./examples/delete_project.json"
@@ -4254,18 +2321,10 @@
             "format": "uuid"
           },
           {
-            "in": "query",
-            "name": "skip",
-            "description": "Number of evaluations that will be skipped.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/skipQueryParameter"
           },
           {
-            "in": "query",
-            "name": "top",
-            "description": "Number of evaluations that will be included after skipping.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/topQueryParameter"
           }
         ],
         "responses": {
@@ -4281,54 +2340,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
@@ -4360,18 +2378,10 @@
             "format": "uuid"
           },
           {
-            "in": "query",
-            "name": "skip",
-            "description": "Number of datasets that will be skipped.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/skipQueryParameter"
           },
           {
-            "in": "query",
-            "name": "top",
-            "description": "Number of datasets that will be included after skipping.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/topQueryParameter"
           }
         ],
         "responses": {
@@ -4387,54 +2397,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
@@ -4466,18 +2435,10 @@
             "format": "uuid"
           },
           {
-            "in": "query",
-            "name": "skip",
-            "description": "Number of endpoints that will be skipped.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/skipQueryParameter"
           },
           {
-            "in": "query",
-            "name": "top",
-            "description": "Number of endpoints that will be included after skipping.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/topQueryParameter"
           }
         ],
         "responses": {
@@ -4493,54 +2454,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
@@ -4572,18 +2492,10 @@
             "format": "uuid"
           },
           {
-            "in": "query",
-            "name": "skip",
-            "description": "Number of models that will be skipped.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/skipQueryParameter"
           },
           {
-            "in": "query",
-            "name": "top",
-            "description": "Number of models that will be included after skipping.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/topQueryParameter"
           }
         ],
         "responses": {
@@ -4599,54 +2511,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
@@ -4678,18 +2549,10 @@
             "format": "uuid"
           },
           {
-            "in": "query",
-            "name": "skip",
-            "description": "Number of transcriptions that will be skipped.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/skipQueryParameter"
           },
           {
-            "in": "query",
-            "name": "top",
-            "description": "Number of transcriptions that will be included after skipping.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/topQueryParameter"
           }
         ],
         "responses": {
@@ -4705,54 +2568,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
@@ -4784,40 +2606,13 @@
               }
             }
           },
-          "401": {
-            "description": "In case the user isn't authorized.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get the supported locales": {
             "$ref": "./examples/get_supported_transcription_locales.json"
@@ -4837,18 +2632,10 @@
         ],
         "parameters": [
           {
-            "in": "query",
-            "name": "skip",
-            "description": "Number of transcriptions that will be skipped.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/skipQueryParameter"
           },
           {
-            "in": "query",
-            "name": "top",
-            "description": "Number of transcriptions that will be included after skipping.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/topQueryParameter"
           }
         ],
         "responses": {
@@ -4864,47 +2651,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
@@ -4952,47 +2705,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Create a transcription for URIs": {
             "$ref": "./examples/create_uri_transcription.json"
@@ -5036,54 +2755,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get a transcription": {
             "$ref": "./examples/get_transcription.json"
@@ -5135,54 +2813,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "409": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Update a transcription": {
             "$ref": "./examples/update_transcription.json"
@@ -5212,54 +2849,13 @@
           "204": {
             "description": "The transcription was successfully deleted or did not exist."
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Delete a transcription": {
             "$ref": "./examples/delete_transcription.json"
@@ -5287,25 +2883,13 @@
             "format": "uuid"
           },
           {
-            "in": "query",
-            "name": "sasValidityInSeconds",
-            "description": "The duration in seconds that an SAS url should be valid. The default duration is 12 hours.\r\n            When using BYOS (https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/speech-encryption-of-data-at-rest#bring-your-own-storage-byos-for-customization-and-logging): A value of 0 means that a plain blob URI without SAS token will be generated.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/sasValidityQueryParameter"
           },
           {
-            "in": "query",
-            "name": "skip",
-            "description": "Number of files that will be skipped.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/skipQueryParameter"
           },
           {
-            "in": "query",
-            "name": "top",
-            "description": "Number of files that will be included after skipping.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/topQueryParameter"
           }
         ],
         "responses": {
@@ -5321,54 +2905,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
@@ -5408,11 +2951,7 @@
             "format": "uuid"
           },
           {
-            "in": "query",
-            "name": "sasValidityInSeconds",
-            "description": "The duration in seconds that an SAS url should be valid. The default duration is 12 hours.\r\n            When using BYOS (https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/speech-encryption-of-data-at-rest#bring-your-own-storage-byos-for-customization-and-logging): A value of 0 means that a plain blob URI without SAS token will be generated.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/sasValidityQueryParameter"
           }
         ],
         "responses": {
@@ -5422,54 +2961,13 @@
               "$ref": "#/definitions/File"
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get a file": {
             "$ref": "./examples/get_transcription_file.json"
@@ -5489,18 +2987,10 @@
         ],
         "parameters": [
           {
-            "in": "query",
-            "name": "skip",
-            "description": "Number of hooks that will be skipped.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/skipQueryParameter"
           },
           {
-            "in": "query",
-            "name": "top",
-            "description": "Number of hooks that will be included after skipping.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/topQueryParameter"
           }
         ],
         "responses": {
@@ -5516,47 +3006,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
@@ -5605,47 +3061,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Create a web hook": {
             "$ref": "./examples/create_web_hook.json"
@@ -5686,54 +3108,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get a web hook": {
             "$ref": "./examples/get_web_hook.json"
@@ -5786,54 +3167,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "409": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Update a web hook": {
             "$ref": "./examples/update_web_hook.json"
@@ -5863,54 +3203,13 @@
           "204": {
             "description": "The web hook was successfully deleted."
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Delete a web hook": {
             "$ref": "./examples/delete_web_hook.json"
@@ -5949,54 +3248,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Ping a web hook": {
             "$ref": "./examples/ping_web_hook.json"
@@ -6038,54 +3296,13 @@
           "204": {
             "description": "No entity could be found for any event type, so no test request is sent to the registered web hook."
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Test a web hook": {
             "$ref": "./examples/test_web_hook.json"
@@ -6110,46 +3327,13 @@
               "$ref": "#/definitions/ServiceHealth"
             }
           },
-          "401": {
-            "description": "In case the user isn't authorized.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "503": {
-            "description": "In case the service is temporarily not available.",
-            "schema": {
-              "$ref": "#/definitions/ServiceHealth"
             }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Gets the health status": {
             "$ref": "examples/get_healthstatus.json"
@@ -6174,18 +3358,7 @@
           "readOnly": true
         },
         "status": {
-          "description": "The health status.",
-          "enum": [
-            "Unhealthy",
-            "Degraded",
-            "Healthy"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "HealthStatus",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/HealthStatus"
         },
         "type": {
           "description": "The type of this component.",
@@ -6210,18 +3383,7 @@
           "$ref": "#/definitions/DatasetProperties"
         },
         "kind": {
-          "description": "The kind of the dataset.",
-          "enum": [
-            "Language",
-            "Acoustic",
-            "Pronunciation",
-            "AudioFiles"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DatasetKind",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/DatasetKind"
         },
         "self": {
           "format": "uri",
@@ -6263,19 +3425,7 @@
           "readOnly": true
         },
         "status": {
-          "description": "The status of the object.",
-          "enum": [
-            "NotStarted",
-            "Running",
-            "Succeeded",
-            "Failed"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "Status",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/Status"
         },
         "createdDateTime": {
           "format": "date-time",
@@ -6285,23 +3435,46 @@
         }
       }
     },
+    "DatasetKind": {
+      "title": "DatasetKind",
+      "description": "Type of data import.",
+      "enum": [
+        "Language",
+        "Acoustic",
+        "Pronunciation",
+        "AudioFiles"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DatasetKind",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "Language",
+            "description": "A language data import."
+          },
+          {
+            "value": "Acoustic",
+            "description": "An acoustic data import."
+          },
+          {
+            "value": "Pronunciation",
+            "description": "A pronunciation data import."
+          },
+          {
+            "value": "AudioFiles",
+            "description": "An audio files data import."
+          }
+        ]
+      }
+    },
     "DatasetLocales": {
       "title": "DatasetLocales",
       "type": "object",
       "additionalProperties": {
         "type": "array",
         "items": {
-          "enum": [
-            "Language",
-            "Acoustic",
-            "Pronunciation",
-            "AudioFiles"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DatasetKind",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/DatasetKind"
         }
       }
     },
@@ -6357,6 +3530,359 @@
             "type": "string"
           }
         }
+      }
+    },
+    "DetailedErrorCode": {
+      "title": "DetailedErrorCode",
+      "description": "Detailed error code enum.",
+      "enum": [
+        "InvalidParameterValue",
+        "InvalidRequestBodyFormat",
+        "EmptyRequest",
+        "MissingInputRecords",
+        "InvalidDocument",
+        "ModelVersionIncorrect",
+        "InvalidDocumentBatch",
+        "UnsupportedLanguageCode",
+        "DataImportFailed",
+        "InUseViolation",
+        "InvalidLocale",
+        "InvalidBaseModel",
+        "InvalidAdaptationMapping",
+        "InvalidDataset",
+        "InvalidTest",
+        "FailedDataset",
+        "InvalidModel",
+        "InvalidTranscription",
+        "InvalidPayload",
+        "InvalidParameter",
+        "EndpointWithoutLogging",
+        "InvalidPermissions",
+        "InvalidPrerequisite",
+        "InvalidProductId",
+        "InvalidSubscription",
+        "InvalidProject",
+        "InvalidProjectKind",
+        "InvalidRecordingsUri",
+        "OnlyOneOfUrlsOrContainerOrDataset",
+        "ExceededNumberOfRecordingsUris",
+        "ModelMismatch",
+        "ProjectGenderMismatch",
+        "ModelDeprecated",
+        "ModelExists",
+        "ModelNotDeployable",
+        "EndpointNotUpdatable",
+        "SingleDefaultEndpoint",
+        "EndpointCannotBeDefault",
+        "InvalidModelUri",
+        "SubscriptionNotFound",
+        "QuotaViolation",
+        "UnsupportedDelta",
+        "UnsupportedFilter",
+        "UnsupportedPagination",
+        "UnsupportedDynamicConfiguration",
+        "UnsupportedOrderBy",
+        "NoUtf8WithBom",
+        "ModelDeploymentNotCompleteState",
+        "SkuLimitsExist",
+        "DeployingFailedModel",
+        "UnsupportedTimeRange",
+        "InvalidLogDate",
+        "InvalidLogId",
+        "InvalidLogStartTime",
+        "InvalidLogEndTime",
+        "InvalidTopForLogs",
+        "InvalidSkipTokenForLogs",
+        "DeleteNotAllowed",
+        "Forbidden",
+        "DeployNotAllowed",
+        "UnexpectedError",
+        "InvalidCollection",
+        "InvalidCallbackUri",
+        "InvalidSasValidityDuration",
+        "InaccessibleCustomerStorage",
+        "UnsupportedClassBasedAdaptation",
+        "InvalidWebHookEventKind",
+        "InvalidTimeToLive"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DetailedErrorCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "InvalidParameterValue",
+            "description": "Invalid parameter value."
+          },
+          {
+            "value": "InvalidRequestBodyFormat",
+            "description": "Invalid request body format."
+          },
+          {
+            "value": "EmptyRequest",
+            "description": "Empty Request."
+          },
+          {
+            "value": "MissingInputRecords",
+            "description": "Missing Input Records."
+          },
+          {
+            "value": "InvalidDocument",
+            "description": "Invalid Document."
+          },
+          {
+            "value": "ModelVersionIncorrect",
+            "description": "Model Version Incorrect."
+          },
+          {
+            "value": "InvalidDocumentBatch",
+            "description": "Invalid Document Batch."
+          },
+          {
+            "value": "UnsupportedLanguageCode",
+            "description": "Unsupported language code."
+          },
+          {
+            "value": "DataImportFailed",
+            "description": "Data import failed."
+          },
+          {
+            "value": "InUseViolation",
+            "description": "In use violation."
+          },
+          {
+            "value": "InvalidLocale",
+            "description": "Invalid locale."
+          },
+          {
+            "value": "InvalidBaseModel",
+            "description": "Invalid base model."
+          },
+          {
+            "value": "InvalidAdaptationMapping",
+            "description": "Invalid adaptation mapping."
+          },
+          {
+            "value": "InvalidDataset",
+            "description": "Invalid dataset."
+          },
+          {
+            "value": "InvalidTest",
+            "description": "Invalid test."
+          },
+          {
+            "value": "FailedDataset",
+            "description": "Failed dataset."
+          },
+          {
+            "value": "InvalidModel",
+            "description": "Invalid model."
+          },
+          {
+            "value": "InvalidTranscription",
+            "description": "Invalid transcription."
+          },
+          {
+            "value": "InvalidPayload",
+            "description": "Invalid payload."
+          },
+          {
+            "value": "InvalidParameter",
+            "description": "Invalid parameter."
+          },
+          {
+            "value": "EndpointWithoutLogging",
+            "description": "Endpoint without logging."
+          },
+          {
+            "value": "InvalidPermissions",
+            "description": "Invalid permissions."
+          },
+          {
+            "value": "InvalidPrerequisite",
+            "description": "Invalid prerequisite."
+          },
+          {
+            "value": "InvalidProductId",
+            "description": "Invalid product id."
+          },
+          {
+            "value": "InvalidSubscription",
+            "description": "Invalid subscription."
+          },
+          {
+            "value": "InvalidProject",
+            "description": "Invalid project."
+          },
+          {
+            "value": "InvalidProjectKind",
+            "description": "Invalid project kind."
+          },
+          {
+            "value": "InvalidRecordingsUri",
+            "description": "Invalid recordings uri."
+          },
+          {
+            "value": "OnlyOneOfUrlsOrContainerOrDataset",
+            "description": "Only one of urls or container or dataset."
+          },
+          {
+            "value": "ExceededNumberOfRecordingsUris",
+            "description": "Exceeded number of recordings uris."
+          },
+          {
+            "value": "ModelMismatch",
+            "description": "Model mismatch."
+          },
+          {
+            "value": "ProjectGenderMismatch",
+            "description": "Project gender mismatch."
+          },
+          {
+            "value": "ModelDeprecated",
+            "description": "Model deprecated."
+          },
+          {
+            "value": "ModelExists",
+            "description": "Model exists."
+          },
+          {
+            "value": "ModelNotDeployable",
+            "description": "Model not deployable."
+          },
+          {
+            "value": "EndpointNotUpdatable",
+            "description": "Endpoint not updatable."
+          },
+          {
+            "value": "SingleDefaultEndpoint",
+            "description": "Single default endpoint."
+          },
+          {
+            "value": "EndpointCannotBeDefault",
+            "description": "Endpoint cannot be default."
+          },
+          {
+            "value": "InvalidModelUri",
+            "description": "Invalid model uri."
+          },
+          {
+            "value": "SubscriptionNotFound",
+            "description": "Subscription not found."
+          },
+          {
+            "value": "QuotaViolation",
+            "description": "Quota violation."
+          },
+          {
+            "value": "UnsupportedDelta",
+            "description": "Unsupported delta."
+          },
+          {
+            "value": "UnsupportedFilter",
+            "description": "Unsupported filter."
+          },
+          {
+            "value": "UnsupportedPagination",
+            "description": "Unsupported pagination."
+          },
+          {
+            "value": "UnsupportedDynamicConfiguration",
+            "description": "Unsupported dynamic configuration."
+          },
+          {
+            "value": "UnsupportedOrderBy",
+            "description": "Unsupported order by."
+          },
+          {
+            "value": "NoUtf8WithBom",
+            "description": "No utf8 with bom."
+          },
+          {
+            "value": "ModelDeploymentNotCompleteState",
+            "description": "Model deployment not complete state."
+          },
+          {
+            "value": "SkuLimitsExist",
+            "description": "Sku limits exist."
+          },
+          {
+            "value": "DeployingFailedModel",
+            "description": "Deploying failed model."
+          },
+          {
+            "value": "UnsupportedTimeRange",
+            "description": "Unsupported time range."
+          },
+          {
+            "value": "InvalidLogDate",
+            "description": "Invalid log date."
+          },
+          {
+            "value": "InvalidLogId",
+            "description": "Invalid log id."
+          },
+          {
+            "value": "InvalidLogStartTime",
+            "description": "Invalid log start time."
+          },
+          {
+            "value": "InvalidLogEndTime",
+            "description": "Invalid log end time."
+          },
+          {
+            "value": "InvalidTopForLogs",
+            "description": "Invalid top for logs."
+          },
+          {
+            "value": "InvalidSkipTokenForLogs",
+            "description": "Invalid skip token for logs."
+          },
+          {
+            "value": "DeleteNotAllowed",
+            "description": "Delete not allowed."
+          },
+          {
+            "value": "Forbidden",
+            "description": "Forbidden."
+          },
+          {
+            "value": "DeployNotAllowed",
+            "description": "Deploy not allowed."
+          },
+          {
+            "value": "UnexpectedError",
+            "description": "Unexpected error."
+          },
+          {
+            "value": "InvalidCollection",
+            "description": "Invalid collection."
+          },
+          {
+            "value": "InvalidCallbackUri",
+            "description": "Invalid callback uri."
+          },
+          {
+            "value": "InvalidSasValidityDuration",
+            "description": "Invalid sas validity duration."
+          },
+          {
+            "value": "InaccessibleCustomerStorage",
+            "description": "Inaccessible customer storage."
+          },
+          {
+            "value": "UnsupportedClassBasedAdaptation",
+            "description": "Unsupported class based adaptation."
+          },
+          {
+            "value": "InvalidWebHookEventKind",
+            "description": "Invalid web hook event kind."
+          },
+          {
+            "value": "InvalidTimeToLive",
+            "description": "Invalid time to live."
+          }
+        ]
       }
     },
     "Endpoint": {
@@ -6415,19 +3941,7 @@
           "readOnly": true
         },
         "status": {
-          "description": "The status of the object.",
-          "enum": [
-            "NotStarted",
-            "Running",
-            "Succeeded",
-            "Failed"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "Status",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/Status"
         },
         "createdDateTime": {
           "format": "date-time",
@@ -6582,29 +4096,7 @@
       "type": "object",
       "properties": {
         "code": {
-          "title": "ErrorCode",
-          "description": "High level error code.",
-          "enum": [
-            "InvalidRequest",
-            "InvalidArgument",
-            "InternalServerError",
-            "ServiceUnavailable",
-            "NotFound",
-            "PipelineError",
-            "Conflict",
-            "InternalCommunicationFailed",
-            "Forbidden",
-            "NotAllowed",
-            "Unauthorized",
-            "UnsupportedMediaType",
-            "TooManyRequests",
-            "UnprocessableEntity"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ErrorCode",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ErrorCode"
         },
         "details": {
           "description": "Additional supportive details regarding the error and/or expected policies.",
@@ -6624,6 +4116,89 @@
         "innerError": {
           "$ref": "#/definitions/InnerError"
         }
+      }
+    },
+    "ErrorCode": {
+      "title": "ErrorCode",
+      "description": "High level error codes.",
+      "enum": [
+        "InvalidRequest",
+        "InvalidArgument",
+        "InternalServerError",
+        "ServiceUnavailable",
+        "NotFound",
+        "PipelineError",
+        "Conflict",
+        "InternalCommunicationFailed",
+        "Forbidden",
+        "NotAllowed",
+        "Unauthorized",
+        "UnsupportedMediaType",
+        "TooManyRequests",
+        "UnprocessableEntity"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ErrorCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "InvalidRequest",
+            "description": "Representing the invalid request error code."
+          },
+          {
+            "value": "InvalidArgument",
+            "description": "Representing the invalid argument error code."
+          },
+          {
+            "value": "InternalServerError",
+            "description": "Representing the internal server error error code."
+          },
+          {
+            "value": "ServiceUnavailable",
+            "description": "Representing the service unavailable error code."
+          },
+          {
+            "value": "NotFound",
+            "description": "Representing the not found error code."
+          },
+          {
+            "value": "PipelineError",
+            "description": "Representing the pipeline error error code."
+          },
+          {
+            "value": "Conflict",
+            "description": "Representing the conflict error code."
+          },
+          {
+            "value": "InternalCommunicationFailed",
+            "description": "Representing the internal communication failed error code."
+          },
+          {
+            "value": "Forbidden",
+            "description": "Representing the forbidden error code."
+          },
+          {
+            "value": "NotAllowed",
+            "description": "Representing the not allowed error code."
+          },
+          {
+            "value": "Unauthorized",
+            "description": "Representing the unauthorized error code."
+          },
+          {
+            "value": "UnsupportedMediaType",
+            "description": "Representing the unsupported media type error code."
+          },
+          {
+            "value": "TooManyRequests",
+            "description": "Representing the too many requests error code."
+          },
+          {
+            "value": "UnprocessableEntity",
+            "description": "Representing the unprocessable entity error code."
+          }
+        ]
       }
     },
     "Evaluation": {
@@ -6674,19 +4249,7 @@
           "readOnly": true
         },
         "status": {
-          "description": "The status of the object.",
-          "enum": [
-            "NotStarted",
-            "Running",
-            "Succeeded",
-            "Failed"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "Status",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/Status"
         },
         "createdDateTime": {
           "format": "date-time",
@@ -6853,24 +4416,7 @@
       "type": "object",
       "properties": {
         "kind": {
-          "description": "The kind of this file.",
-          "enum": [
-            "DatasetReport",
-            "Audio",
-            "LanguageData",
-            "PronunciationData",
-            "AcousticDataArchive",
-            "AcousticDataTranscriptionV2",
-            "Transcription",
-            "TranscriptionReport",
-            "EvaluationDetails"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "FileKind",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/FileKind"
         },
         "links": {
           "$ref": "#/definitions/FileLinks"
@@ -6895,6 +4441,65 @@
           "type": "string",
           "readOnly": true
         }
+      }
+    },
+    "FileKind": {
+      "title": "FileKind",
+      "description": "Type of data.",
+      "enum": [
+        "DatasetReport",
+        "Audio",
+        "LanguageData",
+        "PronunciationData",
+        "AcousticDataArchive",
+        "AcousticDataTranscriptionV2",
+        "Transcription",
+        "TranscriptionReport",
+        "EvaluationDetails"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "FileKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "DatasetReport",
+            "description": "Type of data is dataset report."
+          },
+          {
+            "value": "Audio",
+            "description": "Type of data is audio."
+          },
+          {
+            "value": "LanguageData",
+            "description": "Type of data is language data."
+          },
+          {
+            "value": "PronunciationData",
+            "description": "Type of data is pronunciation data."
+          },
+          {
+            "value": "AcousticDataArchive",
+            "description": "Type of data is acoustic data archive."
+          },
+          {
+            "value": "AcousticDataTranscriptionV2",
+            "description": "Type of data is acoustic data transcription v2."
+          },
+          {
+            "value": "Transcription",
+            "description": "Type of data is transcription."
+          },
+          {
+            "value": "TranscriptionReport",
+            "description": "Type of data is transcription report."
+          },
+          {
+            "value": "EvaluationDetails",
+            "description": "Type of data is evaluation details."
+          }
+        ]
       }
     },
     "FileLinks": {
@@ -6926,88 +4531,42 @@
         }
       }
     },
+    "HealthStatus": {
+      "title": "HealthStatus",
+      "description": "Health status of the service.",
+      "enum": [
+        "Unhealthy",
+        "Degraded",
+        "Healthy"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "HealthStatus",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "Unhealthy",
+            "description": "Unhealthy."
+          },
+          {
+            "value": "Degraded",
+            "description": "Degraded."
+          },
+          {
+            "value": "Healthy",
+            "description": "Healthy."
+          }
+        ]
+      }
+    },
     "InnerError": {
       "title": "InnerError",
       "description": "New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.\r\nThis contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).",
       "type": "object",
       "properties": {
         "code": {
-          "description": "Detailed error code.",
-          "enum": [
-            "InvalidParameterValue",
-            "InvalidRequestBodyFormat",
-            "EmptyRequest",
-            "MissingInputRecords",
-            "InvalidDocument",
-            "ModelVersionIncorrect",
-            "InvalidDocumentBatch",
-            "UnsupportedLanguageCode",
-            "DataImportFailed",
-            "InUseViolation",
-            "InvalidLocale",
-            "InvalidBaseModel",
-            "InvalidAdaptationMapping",
-            "InvalidDataset",
-            "InvalidTest",
-            "FailedDataset",
-            "InvalidModel",
-            "InvalidTranscription",
-            "InvalidPayload",
-            "InvalidParameter",
-            "EndpointWithoutLogging",
-            "InvalidPermissions",
-            "InvalidPrerequisite",
-            "InvalidProductId",
-            "InvalidSubscription",
-            "InvalidProject",
-            "InvalidProjectKind",
-            "InvalidRecordingsUri",
-            "OnlyOneOfUrlsOrContainerOrDataset",
-            "ExceededNumberOfRecordingsUris",
-            "ModelMismatch",
-            "ProjectGenderMismatch",
-            "ModelDeprecated",
-            "ModelExists",
-            "ModelNotDeployable",
-            "EndpointNotUpdatable",
-            "SingleDefaultEndpoint",
-            "EndpointCannotBeDefault",
-            "InvalidModelUri",
-            "SubscriptionNotFound",
-            "QuotaViolation",
-            "UnsupportedDelta",
-            "UnsupportedFilter",
-            "UnsupportedPagination",
-            "UnsupportedDynamicConfiguration",
-            "UnsupportedOrderBy",
-            "NoUtf8WithBom",
-            "ModelDeploymentNotCompleteState",
-            "SkuLimitsExist",
-            "DeployingFailedModel",
-            "UnsupportedTimeRange",
-            "InvalidLogDate",
-            "InvalidLogId",
-            "InvalidLogStartTime",
-            "InvalidLogEndTime",
-            "InvalidTopForLogs",
-            "InvalidSkipTokenForLogs",
-            "DeleteNotAllowed",
-            "Forbidden",
-            "DeployNotAllowed",
-            "UnexpectedError",
-            "InvalidCollection",
-            "InvalidCallbackUri",
-            "InvalidSasValidityDuration",
-            "InaccessibleCustomerStorage",
-            "UnsupportedClassBasedAdaptation",
-            "InvalidWebHookEventKind",
-            "InvalidTimeToLive"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DetailedErrorCode",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/DetailedErrorCode"
         },
         "details": {
           "description": "Additional supportive details regarding the error and/or expected policies.",
@@ -7097,19 +4656,7 @@
           "readOnly": true
         },
         "status": {
-          "description": "The status of the object.",
-          "enum": [
-            "NotStarted",
-            "Running",
-            "Succeeded",
-            "Failed"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "Status",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/Status"
         },
         "createdDateTime": {
           "format": "date-time",
@@ -7418,6 +4965,39 @@
         }
       }
     },
+    "ProfanityFilterMode": {
+      "title": "ProfanityFilterMode",
+      "description": "Mode of profanity filtering.",
+      "enum": [
+        "None",
+        "Removed",
+        "Tags",
+        "Masked"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProfanityFilterMode",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "None",
+            "description": "Disable profanity filtering."
+          },
+          {
+            "value": "Removed",
+            "description": "Remove profanity."
+          },
+          {
+            "value": "Tags",
+            "description": "Add \"profanity\" XML tags&lt;/Profanity&gt;"
+          },
+          {
+            "value": "Masked",
+            "description": "Mask the profanity with * except of the first letter, e.g., f***"
+          }
+        ]
+      }
+    },
     "Project": {
       "title": "Project",
       "required": [
@@ -7558,23 +5138,45 @@
         }
       }
     },
+    "PunctuationMode": {
+      "title": "PunctuationMode",
+      "description": "The mode used for punctuation.",
+      "enum": [
+        "None",
+        "Dictated",
+        "Automatic",
+        "DictatedAndAutomatic"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PunctuationMode",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "None",
+            "description": "No punctuation."
+          },
+          {
+            "value": "Dictated",
+            "description": "Dictated punctuation marks only, i.e., explicit punctuation."
+          },
+          {
+            "value": "Automatic",
+            "description": "Automatic punctuation."
+          },
+          {
+            "value": "DictatedAndAutomatic",
+            "description": "Dictated punctuation marks or automatic punctuation."
+          }
+        ]
+      }
+    },
     "ServiceHealth": {
       "title": "ServiceHealth",
       "type": "object",
       "properties": {
         "status": {
-          "description": "The health status.",
-          "enum": [
-            "Unhealthy",
-            "Degraded",
-            "Healthy"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "HealthStatus",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/HealthStatus"
         },
         "message": {
           "description": "Additional messages about the current service health.",
@@ -7589,6 +5191,40 @@
           },
           "readOnly": true
         }
+      }
+    },
+    "Status": {
+      "title": "Status",
+      "description": "Describe the current state of the API",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "NotStarted",
+            "description": "The long running operation has not yet started."
+          },
+          {
+            "value": "Running",
+            "description": "The long running operation is currently processing."
+          },
+          {
+            "value": "Succeeded",
+            "description": "The long running operation has successfully completed."
+          },
+          {
+            "value": "Failed",
+            "description": "The long running operation has failed."
+          }
+        ]
       }
     },
     "Transcription": {
@@ -7659,19 +5295,7 @@
           "readOnly": true
         },
         "status": {
-          "description": "The status of the object.",
-          "enum": [
-            "NotStarted",
-            "Running",
-            "Succeeded",
-            "Failed"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "Status",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/Status"
         },
         "createdDateTime": {
           "format": "date-time",
@@ -7686,11 +5310,11 @@
       "type": "object",
       "properties": {
         "diarizationEnabled": {
-          "description": "A value indicating whether diarization (speaker separation) is requested.",
+          "description": "A value indicating whether diarization (speaker identification) is requested. The default value\r\nis `false`.",
           "type": "boolean"
         },
         "wordLevelTimestampsEnabled": {
-          "description": "A value indicating whether word level timestamps are requested.",
+          "description": "A value indicating whether word level timestamps are requested. The default value is\r\n`false`.",
           "type": "boolean"
         },
         "duration": {
@@ -7708,39 +5332,17 @@
         },
         "destinationContainerUrl": {
           "format": "uri",
-          "description": "The requested destination container.\r\n### Remarks ###\r\nWhen a destination container is used in combination with a {timeToLive}, the metadata of a transcription\r\nwill be deleted normally, but the stored data in the destination container will remain untouched, because no delete\r\npermissions are required for this container.<br />\r\nTo support automatic cleanup, either configure blob lifetimes on the container, or use \"Bring your own Storage (BYOS)\"\r\ninstead of {destinationContainerUrl}, where blobs can be cleaned up.",
+          "description": "The requested destination container.\r\n### Remarks ###\r\nWhen a destination container is used in combination with a `timeToLive`, the metadata of a\r\ntranscription will be deleted normally, but the data stored in the destination container, including\r\ntranscription results, will remain untouched, because no delete permissions are required for this\r\ncontainer.<br />\r\nTo support automatic cleanup, either configure blob lifetimes on the container, or use \"Bring your own Storage (BYOS)\"\r\ninstead of `destinationContainerUrl`, where blobs can be cleaned up.",
           "type": "string"
         },
         "punctuationMode": {
-          "description": "The requested punctuation mode.",
-          "enum": [
-            "None",
-            "Dictated",
-            "Automatic",
-            "DictatedAndAutomatic"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PunctuationMode",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/PunctuationMode"
         },
         "profanityFilterMode": {
-          "description": "The requested profanity filter mode.",
-          "enum": [
-            "None",
-            "Removed",
-            "Tags",
-            "Masked"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ProfanityFilterMode",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/ProfanityFilterMode"
         },
         "timeToLive": {
-          "description": "How long the transcription will be kept in the system. Once the transcription reaches the time to live\r\nafter completion (successful or failed) it will be automatically deleted. Not setting this value or setting\r\nto 0 will disable automatic deletion. The longest supported duration is 31 days.\r\nThe duration is encoded as ISO 8601 duration (\"PnYnMnDTnHnMnS\", see https://en.wikipedia.org/wiki/ISO_8601#Durations).",
+          "description": "How long the transcription will be kept in the system after it has completed. Once the\r\ntranscription reaches the time to live after completion (successful or failed) it will be automatically\r\ndeleted. Not setting this value or setting it to 0 will disable automatic deletion. The longest supported\r\nduration is 31 days.\r\nThe duration is encoded as ISO 8601 duration (\"PnYnMnDTnHnMnS\", see https://en.wikipedia.org/wiki/ISO_8601#Durations).",
           "type": "string"
         },
         "email": {
@@ -7811,77 +5413,7 @@
           "type": "string"
         },
         "events": {
-          "title": "WebHookEvents",
-          "description": "A value indicating the webhook event kinds.",
-          "type": "object",
-          "properties": {
-            "datasetCreation": {
-              "type": "boolean"
-            },
-            "datasetProcessing": {
-              "type": "boolean"
-            },
-            "datasetCompletion": {
-              "type": "boolean"
-            },
-            "datasetDeletion": {
-              "type": "boolean"
-            },
-            "modelCreation": {
-              "type": "boolean"
-            },
-            "modelProcessing": {
-              "type": "boolean"
-            },
-            "modelCompletion": {
-              "type": "boolean"
-            },
-            "modelDeletion": {
-              "type": "boolean"
-            },
-            "evaluationCreation": {
-              "type": "boolean"
-            },
-            "evaluationProcessing": {
-              "type": "boolean"
-            },
-            "evaluationCompletion": {
-              "type": "boolean"
-            },
-            "evaluationDeletion": {
-              "type": "boolean"
-            },
-            "transcriptionCreation": {
-              "type": "boolean"
-            },
-            "transcriptionProcessing": {
-              "type": "boolean"
-            },
-            "transcriptionCompletion": {
-              "type": "boolean"
-            },
-            "transcriptionDeletion": {
-              "type": "boolean"
-            },
-            "endpointCreation": {
-              "type": "boolean"
-            },
-            "endpointProcessing": {
-              "type": "boolean"
-            },
-            "endpointCompletion": {
-              "type": "boolean"
-            },
-            "endpointDeletion": {
-              "type": "boolean"
-            },
-            "ping": {
-              "type": "boolean"
-            },
-            "challenge": {
-              "type": "boolean"
-            }
-          }
+          "$ref": "#/definitions/WebHookEvents"
         },
         "createdDateTime": {
           "format": "date-time",
@@ -7896,19 +5428,7 @@
           "readOnly": true
         },
         "status": {
-          "description": "The status of the object.",
-          "enum": [
-            "NotStarted",
-            "Running",
-            "Succeeded",
-            "Failed"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "Status",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/Status"
         },
         "customProperties": {
           "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\r\nallowed value length is 256 characters and the count of allowed entries is 10.",
@@ -7916,6 +5436,78 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "WebHookEvents": {
+      "title": "WebHookEvents",
+      "type": "object",
+      "properties": {
+        "datasetCreation": {
+          "type": "boolean"
+        },
+        "datasetProcessing": {
+          "type": "boolean"
+        },
+        "datasetCompletion": {
+          "type": "boolean"
+        },
+        "datasetDeletion": {
+          "type": "boolean"
+        },
+        "modelCreation": {
+          "type": "boolean"
+        },
+        "modelProcessing": {
+          "type": "boolean"
+        },
+        "modelCompletion": {
+          "type": "boolean"
+        },
+        "modelDeletion": {
+          "type": "boolean"
+        },
+        "evaluationCreation": {
+          "type": "boolean"
+        },
+        "evaluationProcessing": {
+          "type": "boolean"
+        },
+        "evaluationCompletion": {
+          "type": "boolean"
+        },
+        "evaluationDeletion": {
+          "type": "boolean"
+        },
+        "transcriptionCreation": {
+          "type": "boolean"
+        },
+        "transcriptionProcessing": {
+          "type": "boolean"
+        },
+        "transcriptionCompletion": {
+          "type": "boolean"
+        },
+        "transcriptionDeletion": {
+          "type": "boolean"
+        },
+        "endpointCreation": {
+          "type": "boolean"
+        },
+        "endpointProcessing": {
+          "type": "boolean"
+        },
+        "endpointCompletion": {
+          "type": "boolean"
+        },
+        "endpointDeletion": {
+          "type": "boolean"
+        },
+        "ping": {
+          "type": "boolean"
+        },
+        "challenge": {
+          "type": "boolean"
         }
       }
     },
@@ -7978,77 +5570,7 @@
           "$ref": "#/definitions/WebHookPropertiesUpdate"
         },
         "events": {
-          "title": "WebHookEvents",
-          "description": "A value indicating the webhook event kinds.",
-          "type": "object",
-          "properties": {
-            "datasetCreation": {
-              "type": "boolean"
-            },
-            "datasetProcessing": {
-              "type": "boolean"
-            },
-            "datasetCompletion": {
-              "type": "boolean"
-            },
-            "datasetDeletion": {
-              "type": "boolean"
-            },
-            "modelCreation": {
-              "type": "boolean"
-            },
-            "modelProcessing": {
-              "type": "boolean"
-            },
-            "modelCompletion": {
-              "type": "boolean"
-            },
-            "modelDeletion": {
-              "type": "boolean"
-            },
-            "evaluationCreation": {
-              "type": "boolean"
-            },
-            "evaluationProcessing": {
-              "type": "boolean"
-            },
-            "evaluationCompletion": {
-              "type": "boolean"
-            },
-            "evaluationDeletion": {
-              "type": "boolean"
-            },
-            "transcriptionCreation": {
-              "type": "boolean"
-            },
-            "transcriptionProcessing": {
-              "type": "boolean"
-            },
-            "transcriptionCompletion": {
-              "type": "boolean"
-            },
-            "transcriptionDeletion": {
-              "type": "boolean"
-            },
-            "endpointCreation": {
-              "type": "boolean"
-            },
-            "endpointProcessing": {
-              "type": "boolean"
-            },
-            "endpointCompletion": {
-              "type": "boolean"
-            },
-            "endpointDeletion": {
-              "type": "boolean"
-            },
-            "ping": {
-              "type": "boolean"
-            },
-            "challenge": {
-              "type": "boolean"
-            }
-          }
+          "$ref": "#/definitions/WebHookEvents"
         },
         "displayName": {
           "description": "The name of the object.",
@@ -8068,12 +5590,47 @@
       }
     }
   },
+  "parameters": {
+    "Endpoint": {
+      "in": "path",
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
+      "required": true,
+      "type": "string",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
+    "skipQueryParameter": {
+      "in": "query",
+      "name": "skip",
+      "description": "Number of datasets that will be skipped.",
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "topQueryParameter": {
+      "in": "query",
+      "name": "top",
+      "description": "Number of datasets that will be included after skipping.",
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "sasValidityQueryParameter": {
+      "in": "query",
+      "name": "sasValidityInSeconds",
+      "description": "The duration in seconds that an SAS url should be valid. The default duration is 12 hours.\r\n            When using BYOS (https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/speech-encryption-of-data-at-rest#bring-your-own-storage-byos-for-customization-and-logging): A value of 0 means that a plain blob URI without SAS token will be generated.",
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    }
+  },
   "securityDefinitions": {
-    "subscription_key": {
+    "api_key": {
       "type": "apiKey",
       "name": "Ocp-Apim-Subscription-Key",
       "in": "header",
-      "description": "Provide your cognitive services subscription key here."
+      "description": "Provide your cognitive services account key here."
     },
     "token": {
       "type": "apiKey",
@@ -8082,6 +5639,14 @@
       "description": "Provide an access token from the JWT returned by the STS of this region. Make sure to add the management scope to the token by adding the following query string to the STS URL: ?scope=speechservicesmanagement"
     }
   },
+  "security": [
+    {
+      "api_key": []
+    },
+    {
+      "token": []
+    }
+  ],
   "schemes": [
     "https"
   ],
@@ -8093,16 +5658,5 @@
         "$ref": "#/parameters/Endpoint"
       }
     ]
-  },
-  "parameters": {
-    "Endpoint": {
-      "name": "Endpoint",
-      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
-      "x-ms-parameter-location": "client",
-      "required": true,
-      "type": "string",
-      "in": "path",
-      "x-ms-skip-url-encoding": true
-    }
   }
 }
