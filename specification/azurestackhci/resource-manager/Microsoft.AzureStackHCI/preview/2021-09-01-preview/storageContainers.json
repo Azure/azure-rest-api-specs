@@ -296,7 +296,7 @@
       "properties": {
         "path": {
           "type": "string",
-          "description": "location of the image the gallery image should be created from"
+          "description": "Path of the storage container on the disk"
         },
         "provisioningState": {
           "type": "string"
@@ -304,6 +304,18 @@
         "resourceName": {
           "type": "string",
           "description": "name of the object to be used in moc"
+        },
+        "availableSizeMB": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "Amount of space available on the disk in MB"
+        },
+        "containerSizeMB": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "Total size of the disk in MB"
         },
         "status": {
           "type": "object",
