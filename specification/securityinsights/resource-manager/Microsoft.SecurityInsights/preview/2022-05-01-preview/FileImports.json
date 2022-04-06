@@ -102,7 +102,7 @@
           "FileImports"
         ],
         "description": "Gets a file import.",
-        "operationId": "FileImport_Get",
+        "operationId": "FileImports_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -145,7 +145,7 @@
           "FileImports"
         ],
         "description": "Creates the file import.",
-        "operationId": "FileImport_Create",
+        "operationId": "FileImports_Create",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -428,7 +428,6 @@
         "importFile": {
           "description": "Represents the imported file.",
           "$ref": "#/definitions/FileMetadata",
-          "readOnly": true,
           "type": "object"
         },
         "ingestedRecordCount": {
@@ -525,12 +524,12 @@
     "ValidationError": {
       "description": "Describes an error encountered in the file during validation.",
       "properties": {
-        "RecordIndex": {
+        "recordIndex": {
           "description": "The number of the record that has the error.",
           "type": "integer",
           "format": "int32"
         },
-        "ErrorMessages": {
+        "errorMessages": {
           "description": "A list of descriptions of the error.",
           "items": {
             "type": "string"
