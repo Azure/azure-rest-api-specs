@@ -85,12 +85,12 @@
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "location",
-            "in": "path",
-            "required": true,
+            "name": "$filter",
+            "in": "query",
+            "required": false,
             "type": "string",
-            "description": "Name of the requested ExpressRoutePort peering location."
-          }
+            "description": "The filter to apply on the operation. For example, you can use $filter=location eq '{state}'."
+         },
         ],
         "responses": {
           "200": {
