@@ -910,11 +910,7 @@
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The location of the where the association is present."
+            "$ref": "#/parameters/LocationParameter"
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -998,7 +994,57 @@
         },
         "x-ms-examples": {
           "Post Check Members": {
-            "$ref": "./examples/NetworkSecurityPerimeterCheckMembersPost.json"
+            "$ref": "./examples/NSPCheckMembersPost.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Network/locations/{location}/queryNetworkSecurityPerimeter": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/LocationParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "QueryNetworkSecurityPerimeters"
+        ],
+        "operationId": "NetworkSecurityPerimeters_Query",
+        "description": "Action to query network security parameter",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueryNSPReqRes"
+            },
+            "description": "Parameter supplied to query network security parameter."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource Updated. Returns the network security perimeter.",
+            "schema": {
+              "$ref": "#/definitions/QueryNSPReqRes"
+            }
+          },
+          "201": {
+            "description": "Resource Created. Returns the network security perimeter.",
+            "schema": {
+              "$ref": "#/definitions/QueryNSPReqRes"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Post Check Members": {
+            "$ref": "./examples/QueryNSP.json"
           }
         }
       }
@@ -1440,6 +1486,30 @@
           "description": "Network security perimeter profile."
         }
       }
+    },
+    "QueryNSPReqRes": {
+      "type": "object",
+      "properties": {
+        "networkSecurityPerimeters": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/QueryNSPObj"}
+        }
+      },
+      "description": "Request object for query NSP."
+    },
+    "QueryNSPObj": {
+      "type": "object",
+      "properties": {
+        "perimeterGuid": {
+          "type": "string",
+          "description": "Perimeter guid of NSP."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Id of NSP."
+        }
+      }
     }
   },
   "parameters": {
@@ -1509,6 +1579,13 @@
       "type": "string",
       "description": "The name of the network security perimeter profile.",
       "x-ms-parameter-location": "method"
+    },
+    "LocationParameter": {
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The location of network security perimeter."
     }
   }
 }
