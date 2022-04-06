@@ -704,7 +704,7 @@
         "tags": [
           "NspAssociations"
         ],
-        "operationId": "NspAssociations_Get",
+        "operationId": "NspAssociationsProxy_Get",
         "description": "Gets the specified NSP association by name.",
         "responses": {
           "200": {
@@ -730,7 +730,7 @@
         "tags": [
           "NspAssociations"
         ],
-        "operationId": "NspAssociations_CreateOrUpdate",
+        "operationId": "NspAssociationsProxy_CreateOrUpdate",
         "description": "Creates or updates a NSP resource association.",
         "parameters": [
           {
@@ -773,14 +773,11 @@
         "tags": [
           "NspAssociations"
         ],
-        "operationId": "NspAssociations_Delete",
+        "operationId": "NspAssociationsProxy_Delete",
         "description": "Deletes an NSP association resource.",
         "responses": {
           "200": {
             "description": "Delete Succeed."
-          },
-          "202": {
-            "description": "Delete in progress."
           },
           "204": {
             "description": "Request successful. The resource does not exist."
@@ -833,7 +830,7 @@
           "200": {
             "description": "OK - Returns the list of NSP resource associations proxy.",
             "schema": {
-              "$ref": "#/definitions/NspAssociationsProxyListResult"
+              "$ref": "#/definitions/NspAssociationsListResult"
             }
           },
           "default": {
@@ -845,7 +842,7 @@
         },
         "x-ms-examples": {
           "NspAssociationList": {
-            "$ref": "./examples/NspAssociationProxyList.json"
+            "$ref": "./examples/NspAssociationList.json"
           }
         }
       }
@@ -855,7 +852,7 @@
         "tags": [
           "NspAssociationsProxy"
         ],
-        "operationId": "NspAssociationsProxy_List",
+        "operationId": "NspAssociations_List",
         "description": "Lists the NSP resource associations proxy.",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -884,7 +881,7 @@
           "200": {
             "description": "OK - Returns the list of NSP resource associations proxy.",
             "schema": {
-              "$ref": "#/definitions/NspAssociationsProxyListResult"
+              "$ref": "#/definitions/NspAssociationsListResult"
             }
           },
           "default": {
@@ -896,7 +893,7 @@
         },
         "x-ms-examples": {
           "NspAssociationList": {
-            "$ref": "./examples/NspAssociationProxyList.json"
+            "$ref": "./examples/NspAssociationList.json"
           }
         }
       }
@@ -959,7 +956,7 @@
           "$ref": "./network.json#/parameters/ApiVersionParameter"
         },
         {
-          "$ref": "#/parameters/networkSecurityPerimeterProfileParameter"
+          "$ref": "#/parameters/NetworkSecurityPerimeterProfileParameter"
         }
       ],
       "post": {
@@ -1016,7 +1013,13 @@
           "$ref": "#/definitions/NetworkSecurityPerimeterProperties",
           "description": "The network security perimeter properties"
         },
-        "etag": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
@@ -1075,6 +1078,10 @@
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the scope assignment resource."
+        },
+        "perimeterGuid": {
+          "type": "string",
+          "description": "perimeter guid of the network security perimeter."
         }
       },
       "description": "Properties of network security perimeter."
@@ -1484,6 +1491,14 @@
       "in": "query",
       "required": false,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "NetworkSecurityPerimeterProfileParameter": {
+      "name": "networkSecurityPerimeterProfile",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the network security perimeter profile.",
       "x-ms-parameter-location": "method"
     }
   }
