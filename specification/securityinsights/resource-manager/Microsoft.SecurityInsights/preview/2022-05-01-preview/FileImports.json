@@ -161,6 +161,9 @@
           },
           {
             "$ref": "#/parameters/FileImportId"
+          },
+          {
+            "$ref": "#/parameters/FileImport"
           }
         ],
         "responses": {
@@ -272,7 +275,8 @@
         },
         "fileContentUri": {
           "description": "A URI with a valid SAS token to allow uploading / downloading the file.",
-          "type": "string"
+          "type": "string",
+          "readonly":  true
         },
         "deleteStatus": {
           "description": "Indicates whether the file was deleted from the storage account.",
@@ -299,7 +303,8 @@
                 "value": "Unspecified"
               }
             ]
-          }
+          },
+          "readonly": true
         }
       },
       "type": "object"
@@ -307,7 +312,7 @@
     "FileImport": {
       "allOf": [
         {
-          "$ref": "../../../common/1.0/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ],
       "description": "Represents a file import in Azure Security Insights.",
