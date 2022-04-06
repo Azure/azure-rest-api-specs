@@ -557,6 +557,191 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans/{scalingPlanName}/pooledSchedules/{scalingPlanScheduleName}": {
+      "get": {
+        "tags": [
+          "ScalingPlanPooledSchedule"
+        ],
+        "operationId": "ScalingPlanPooledSchedule_Get",
+        "description": "Get a ScalingPlanPooledSchedule.",
+        "x-ms-examples": {
+          "ScalingPlanPooledSchedule_Get": {
+            "$ref": "./examples/ScalingPlanPooledSchedule_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanScheduleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved ScalingPlanPooledSchedule.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanPooledSchedule"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ScalingPlanPooledSchedule"
+        ],
+        "operationId": "ScalingPlanPooledSchedule_Delete",
+        "description": "Remove a ScalingPlanPooledSchedule.",
+        "x-ms-examples": {
+          "ScalingPlanPooledSchedule_Delete": {
+            "$ref": "./examples/ScalingPlanPooledSchedule_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanScheduleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully removed ScalingPlanPooledSchedule."
+          },
+          "204": {
+            "description": "ScalingPlanPooledSchedule does not exist."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ScalingPlanPooledSchedule"
+        ],
+        "operationId": "ScalingPlanPooledSchedule_Update",
+        "description": "Update a ScalingPlanPooledSchedule.",
+        "x-ms-examples": {
+          "ScalingPlanPooledSchedule_Update": {
+            "$ref": "./examples/ScalingPlanPooledSchedule_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanScheduleNameParameter"
+          },
+          {
+            "name": "scalingPlanPooledSchedule",
+            "description": "Object containing ScalingPlanPooledSchedule definitions.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanPooledSchedulePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated ScalingPlanPooledSchedule.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanPooledSchedule"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans/{scalingPlanName}/pooledSchedules": {
+      "get": {
+        "tags": [
+          "ScalingPlanPooledSchedule"
+        ],
+        "operationId": "ScalingPlanPooledSchedule_List",
+        "description": "List ScalingPlanPooledSchedules.",
+        "x-ms-examples": {
+          "ScalingPlanPooledSchedule_List": {
+            "$ref": "./examples/ScalingPlanPooledSchedule_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved ScalingPlanPooledSchedules.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanPooledScheduleList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DesktopVirtualization/scalingPlans": {
       "get": {
         "tags": [
@@ -5730,6 +5915,16 @@
       "description": "The name of the scaling plan.",
       "maxLength": 64,
       "minLength": 3,
+      "x-ms-parameter-location": "method"
+    },
+    "ScalingPlanScheduleNameParameter": {
+      "name": "scalingPlanPooledScheduleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the ScalingPlanPooledSchedule",
+      "maxLength": 1024,
+      "minLength": 1,
       "x-ms-parameter-location": "method"
     }
   }
