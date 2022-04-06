@@ -1769,6 +1769,10 @@
             "name": "WindowsPatchAssessmentMode",
             "modelAsString": true
           }
+        },
+        "automaticByPlatformSettings": {
+          "$ref": "#/definitions/WindowsAutomaticByPatchSettings",
+          "description": "Specifies additional settings for patch mode AutomaticByPlatform in VM Guest Patching on Windows."
         }
       },
       "description": "Specifies settings related to VM Guest Patching on Windows."
@@ -1798,9 +1802,49 @@
             "name": "LinuxPatchAssessmentMode",
             "modelAsString": true
           }
+        },
+        "automaticByPlatformSettings": {
+          "$ref": "#/definitions/LinuxAutomaticByPatchSettings",
+          "description": "Specifies additional settings for patch mode AutomaticByPlatform in VM Guest Patching on Linux."
         }
       },
       "description": "Specifies settings related to VM Guest Patching on Linux."
+    },
+    "WindowsAutomaticByPatchSettings": {
+      "properties": {
+        "rebootSetting": {
+          "type": "string",
+          "description": "Specifies reboot setting for all AutomaticByPlatform patch installation operations.",
+          "enum": [
+            "Unknown",
+            "IfRequired",
+            "Never",
+            "Always"
+          ],
+          "x-ms-enum": {
+            "name": "WindowsVMGuestPatchRebootSetting",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "LinuxAutomaticByPatchSettings": {
+      "properties": {
+        "rebootSetting": {
+          "type": "string",
+          "description": "Specifies reboot setting for all AutomaticByPlatform patch installation operations.",
+          "enum": [
+            "Unknown",
+            "IfRequired",
+            "Never",
+            "Always"
+          ],
+          "x-ms-enum": {
+            "name": "LinuxVMGuestPatchRebootSetting",
+            "modelAsString": true
+          }
+        }
+      }
     }
   }
 }
