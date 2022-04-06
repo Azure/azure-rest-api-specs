@@ -66,7 +66,7 @@ input-file:
 
 ### Tag: package-preview-2022-01-15
 
-These settings apply only when `--tag=package-preview-2022-01-15` is specified on the command line.
+These settings apply only when `--tag=package-preview-2022-01-15` is specified on the command line..
 
 ```yaml $(tag) == 'package-preview-2022-01-15'
 input-file:
