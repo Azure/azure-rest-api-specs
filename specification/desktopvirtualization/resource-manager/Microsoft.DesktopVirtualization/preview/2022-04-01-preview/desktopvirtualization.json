@@ -672,7 +672,7 @@
             "$ref": "#/parameters/ScalingPlanScheduleNameParameter"
           },
           {
-            "name": "scalingPlanPooledSchedule",
+            "name": "scalingPlanSchedule",
             "description": "Object containing ScalingPlanPooledSchedule definitions.",
             "in": "body",
             "required": false,
@@ -5398,7 +5398,7 @@
         },
         "schedules": {
           "type": "array",
-          "description": "List of ScalingSchedule definitions.",
+          "description": "List of ScalingPlanPooledSchedule definitions.",
           "items": {
             "$ref": "#/definitions/ScalingSchedule"
           }
@@ -5413,13 +5413,79 @@
       }
     },
     "ScalingSchedule": {
-      "description": "Scaling plan schedule.",
+      "description": "A ScalingPlanPooledSchedule.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScalingPlanPooledScheduleProperties"
+        }
+      ],
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the scaling schedule."
+          "description": "Name of the ScalingPlanPooledSchedule."
+        }
+      }
+    },
+    "ScalingPlanPooledSchedulePatch": {
+      "type": "object",
+      "description": "ScalingPlanPooledSchedule properties that can be patched.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Detailed properties for ScalingPlanPooledSchedule",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ScalingPlanPooledScheduleProperties"
+        }
+      }
+    },
+    "ScalingPlanPooledScheduleList": {
+      "type": "object",
+      "title": "ScalingPlanPooledScheduleList",
+      "description": "List of ScalingPlanPooledSchedule definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of ScalingPlanPooledSchedule definitions.",
+          "items": {
+            "$ref": "#/definitions/ScalingPlanPooledSchedule"
+          }
         },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "ScalingPlanPooledSchedule": {
+      "type": "object",
+      "description": "Represents a ScalingPlanPooledSchedule definition.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource."
+        },
+        "properties": {
+          "description": "Detailed properties for ScalingPlanPooledSchedule",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ScalingPlanPooledScheduleProperties"
+        }
+      }
+    },
+    "ScalingPlanPooledScheduleProperties": {
+      "description": "A ScalingPlanPooledSchedule.",
+      "type": "object",
+      "properties": {
         "daysOfWeek": {
           "type": "array",
           "description": "Set of days of the week on which this schedule is active.",
