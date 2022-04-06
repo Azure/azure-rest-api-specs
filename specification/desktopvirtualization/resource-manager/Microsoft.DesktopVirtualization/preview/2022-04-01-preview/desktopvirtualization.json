@@ -3794,8 +3794,7 @@
           "description": "List of maintenance windows. Maintenance windows are 2 hours long.",
           "items": {
             "$ref": "#/definitions/MaintenanceWindowProperties"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -3866,8 +3865,7 @@
           "description": "List of maintenance windows. Maintenance windows are 2 hours long.",
           "items": {
             "$ref": "#/definitions/MaintenanceWindowPatchProperties"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -5142,75 +5140,12 @@
         }
       }
     },
-    "Pet": {
-      "type": "object",
-      "discriminator": "petType",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "petType": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "name",
-        "petType"
-      ]
-    },
-    "Cat": {
-      "description": "A representation of a cat",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Pet"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "huntingSkill": {
-              "type": "string",
-              "description": "The measured skill for hunting",
-              "default": "lazy",
-              "enum": [
-                "clueless",
-                "lazy",
-                "adventurous",
-                "aggressive"
-              ]
-            }
-          },
-          "required": [
-            "huntingSkill"
-          ]
-        }
-      ]
-    },
-    "Dog": {
-      "description": "A representation of a dog",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Pet"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "packSize": {
-              "type": "integer",
-              "format": "int32",
-              "description": "the size of the pack the dog is from",
-              "default": 0,
-              "minimum": 0
-            }
-          },
-          "required": [
-            "packSize"
-          ]
-        }
-      ]
-    },
     "ScalingPlanProperties": {
       "type": "object",
       "description": "Scaling plan properties.",
+      "required": [
+        "timeZone"
+      ],
       "properties": {
         "objectId": {
           "type": "string",
@@ -5231,8 +5166,7 @@
         },
         "hostPoolType": {
           "enum": [
-            "Pooled",
-            "Personal"
+            "Pooled"
           ],
           "x-ms-enum": {
             "name": "ScalingHostPoolType",
@@ -5241,10 +5175,6 @@
               {
                 "value": "Pooled",
                 "description": "Users get a new (random) SessionHost every time it connects to the HostPool."
-              },
-              {
-                "value": "Personal",
-                "description": "For Personal HostPools and ScalingPlanSchedules."
               }
             ]
           },
@@ -5259,7 +5189,7 @@
             "Personal"
           ],
           "x-ms-enum": {
-            "name": "ScalingHostPoolType",
+            "name": "ScalingPlanType",
             "modelAsString": true,
             "values": [
               {
@@ -5274,16 +5204,12 @@
           },
           "default": "Pooled",
           "type": "string",
-          "description": "HostPool type for desktop.",
+          "description": "ScalingPlan type for HostPools and ScalingPlanSchedules.",
           "x-nullable": false
         },
         "exclusionTag": {
           "type": "string",
           "description": "Exclusion tag for scaling plan."
-        },
-        "pet": {
-          "description": "Pet for scaling plan.",
-          "$ref": "#/definitions/Pet"
         },
         "schedules": {
           "type": "array",
