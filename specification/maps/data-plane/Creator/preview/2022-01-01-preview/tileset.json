@@ -1,5 +1,5 @@
 {
-  "swagger": "2022-01-01-preview",
+  "swagger": "2.0",
   "info": {
     "title": "Azure Maps Tileset Service",
     "version": "2022-01-01-preview",
@@ -125,12 +125,18 @@
           },
           {
             "$ref": "#/parameters/DescriptionTileset"
+          },
+          {
+            "name": "TilesetRecipe",
+            "in": "body",
+            "description": "The custom tileset recipe to use.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/TilesetRecipe"
+            }
           }
         ],
         "responses": {
-          "200": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/200AsyncV2"
-          },
           "202": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/202AsyncV2"
           },
@@ -233,6 +239,81 @@
         }
       }
     },
+    "/tilesets/recipes": {
+      "get": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to get a default tileset recipe based on the dataset provided.",
+        "operationId": "Tileset_GetRecipe",
+        "x-ms-examples": {
+          "Gets the tileset recipe for a given dataset ontology": {
+            "$ref": "./examples/tileset/Tileset_GetRecipe.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/DatasetIdQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get tileset recipe request completed successfully. The response body contains a default tileset recipe generated for the given dataset ontology.",
+            "schema": {
+              "$ref": "#/definitions/TilesetRecipe"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/tilesets/recipes/validate": {
+      "post": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to validate a tileset recipe.",
+        "operationId": "Tileset_ValidateRecipe",
+        "x-ms-examples": {
+          "Validates the correctness of a tileset recipe": {
+            "$ref": "./examples/tileset/Tileset_ValidateRecipe.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/DatasetIdQuery"
+          },
+          {
+            "name": "TilesetRecipe",
+            "in": "body",
+            "description": "The custom tileset recipe to use.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/TilesetRecipe"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Validate tileset recipe request completed successfully. The response body contains the validation results.",
+            "schema": {
+              "$ref": "#/definitions/TilesetRecipeValidationResult"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
     "/tilesets/operations/{operationId}": {
       "get": {
         "description": "This path will be obtained from a call to /tilesets/create.  While in progress, an http200 will be returned with no extra headers -  followed by an http200 with Resource-Location header once successfully completed.",
@@ -319,6 +400,98 @@
         "bbox": {
           "description": "Bounding box which all features of the tileset lay within. Projection used - EPSG:3857. Format : 'minLon, minLat, maxLon, maxLat'.",
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/BoundingBox"
+        },
+        "tilesetRecipe": {
+          "description": "Tileset recipe which is used to build the tileset.",
+          "$ref": "#/definitions/TilesetRecipe"
+        }
+      }
+    },
+    "TilesetRecipe": {
+      "description": "A tileset recipe object. Please refer to [Tileset Recipe Specification]() for details.",
+      "type": "object",
+      "required": [
+        "version",
+        "layers"
+      ],
+      "properties": {
+        "version": {
+          "description": "The version of Azure Maps Tiling service recipe reference that the recipe uses.",
+          "type": "integer"
+        },
+        "layers": {
+          "description": "The names of the layers and their configuration options.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/LayerObject"
+          }
+        }
+      }
+    },
+    "LayerObject": {
+      "description": "Layer object for tileset recipe.",
+      "type": "object",
+      "required": [
+        "features",
+        "minzoom",
+        "maxzoom"
+      ],
+      "properties": {
+        "features": {
+          "description": "Specifies the output on a per feature basis.",
+          "$ref": "#/definitions/Feature"
+        },
+        "minzoom": {
+          "description": "The lowest zoom level for the layer to build.",
+          "type": "integer"
+        },
+        "maxzoom": {
+          "description": "The highest zoom level for the layer to build.",
+          "type": "integer"
+        }
+      }
+    },
+    "Feature": {
+      "description": "Feature configuration for tileset recipe.",
+      "type": "object",
+      "required": [
+        "featureClasses"
+      ],
+      "properties": {
+        "featureClasses": {
+          "description": "The list of featureClasses that will be used to build the layer.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filter": {
+          "description": "Removes features that do not match a pattern.",
+          "type": "object"
+        }
+      }
+    },
+    "TilesetRecipeValidationResult": {
+      "description": "Tileset recipe validation result.",
+      "type": "object",
+      "properties": {
+        "valid": {
+          "description": "Validation result.",
+          "type": "boolean"
+        },
+        "warnings": {
+          "description": "The list of validation warnings.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "errors": {
+          "description": "The list of validation errors",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     }
