@@ -10,7 +10,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.devops
   package-name: azure-mgmt-devops
-  package-version: 2019-07-01-preview
+  package-version: 2020-07-13-preview
   clear-output-folder: true
 ```
 

@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "clusterName": "cache1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-08-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1",
+        "location": "West US",
+        "sku": {
+          "name": "EnterpriseFlash_F300",
+          "capacity": 3
+        },
+        "zones": [
+          "1",
+          "2",
+          "3"
+        ],
+        "name": "cache1",
+        "type": "Microsoft.Cache/redisEnterprise",
+        "tags": {},
+        "properties": {
+          "hostName": "cache1.westus.something.azure.com",
+          "provisioningState": "Succeeded",
+          "resourceState": "Running",
+          "redisVersion": "6",
+          "minimumTlsVersion": "1.2",
+          "privateEndpointConnections": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/privateEndpointConnections/cachePec",
+              "properties": {
+                "privateEndpoint": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/cachePe"
+                },
+                "privateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "description": "Please approve my connection",
+                  "actionsRequired": "None"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

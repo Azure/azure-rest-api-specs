@@ -3,11 +3,18 @@
 These settings apply only when `--typescript` is specified on the command line.
 Please also specify `--typescript-sdks-folder=<path to root folder of your azure-sdk-for-js clone>`.
 
+### Rename OS
+```yaml
+modelerfour:
+  naming:
+    override:
+      OS: $DO_NOT_NORMALIZE$OS
+```
+
 ``` yaml $(typescript)
 input-file:
-  - Microsoft.ContainerRegistry/stable/2019-05-01/containerregistry.json
+  - Microsoft.ContainerRegistry/preview/2021-12-01-preview/containerregistry.json
   - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
-  - Microsoft.ContainerRegistry/preview/2019-05-01-preview/containerregistry_scopemap.json
 typescript:
   azure-arm: true
   package-name: "@azure/arm-containerregistry"

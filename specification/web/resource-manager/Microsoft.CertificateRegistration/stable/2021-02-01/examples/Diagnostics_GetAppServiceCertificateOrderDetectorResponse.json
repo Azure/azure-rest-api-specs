@@ -1,0 +1,90 @@
+{
+  "parameters": {
+    "subscriptionId": "5700fc96-77b4-4f8d-afce-c353d8c443bd",
+    "resourceGroupName": "Sample-WestUSResourceGroup",
+    "certificateOrderName": "SampleCertificateOrderName",
+    "detectorName": "AutoRenewStatus",
+    "api-version": "2021-02-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/5700fc96-77b4-4f8d-afce-c353d8c443bd/resourceGroups/Sample-WestUSResourceGroup/providers/Microsoft.CertificateRegistration/certificateOrders/SampleCertificateOrderName/detectors/AutoRenewStatus",
+        "name": "AutoRenewStatus",
+        "properties": {
+          "metadata": {
+            "id": "AutoRenewStatus",
+            "name": "AutoRenewStatus",
+            "description": "Check auto renew status",
+            "category": null,
+            "supportTopicList": [],
+            "type": "Detector",
+            "score": 0.0
+          },
+          "dataset": [
+            {
+              "table": {
+                "tableName": "",
+                "columns": [
+                  {
+                    "columnName": "Status",
+                    "dataType": "String",
+                    "columnType": null
+                  },
+                  {
+                    "columnName": "Message",
+                    "dataType": "String",
+                    "columnType": null
+                  },
+                  {
+                    "columnName": "Data.Name",
+                    "dataType": "String",
+                    "columnType": null
+                  },
+                  {
+                    "columnName": "Data.Value",
+                    "dataType": "String",
+                    "columnType": null
+                  },
+                  {
+                    "columnName": "Expanded",
+                    "dataType": "String",
+                    "columnType": null
+                  },
+                  {
+                    "columnName": "Solutions",
+                    "dataType": "String",
+                    "columnType": null
+                  }
+                ],
+                "rows": [
+                  [
+                    "Info",
+                    "App Service Certificate name SampleCertificateOrderName",
+                    "Certificate for",
+                    "<b>*.mysampledomain.com</b>",
+                    "False",
+                    "null"
+                  ],
+                  [
+                    "Info",
+                    "App Service Certificate name SampleCertificateOrderName",
+                    "Certificate Status",
+                    "<b>Issued</b>",
+                    "False",
+                    "null"
+                  ]
+                ]
+              },
+              "renderingProperties": {
+                "type": "Insights",
+                "title": null,
+                "description": null
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

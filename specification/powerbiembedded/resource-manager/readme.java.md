@@ -28,7 +28,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2016-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.powerbiembedded.v2016_01_29
-  output-folder: $(azure-libraries-for-java-folder)/powerbiembedded/resource-manager/v2016_01_29
+  output-folder: $(azure-libraries-for-java-folder)/sdk/powerbiembedded/mgmt-v2016_01_29
 regenerate-manager: true
 generate-interface: true
 ```

@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "ApiVersion": "v3.2-preview.1",
+    "Endpoint": "{Endpoint}",
+    "input": {
+      "documents": [
+        {
+          "id": "1",
+          "language": "en",
+          "text": "Microsoft was founded by Bill Gates and Paul Allen."
+        },
+        {
+          "id": "2",
+          "language": "en",
+          "text": "Pike place market is my favorite Seattle attraction."
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "documents": [
+          {
+            "entities": [
+              {
+                "category": "Organization",
+                "confidenceScore": 0.84,
+                "length": 9,
+                "offset": 0,
+                "text": "Microsoft"
+              },
+              {
+                "category": "Person",
+                "confidenceScore": 0.85,
+                "length": 10,
+                "offset": 25,
+                "text": "Bill Gates"
+              },
+              {
+                "category": "Person",
+                "confidenceScore": 0.9,
+                "length": 10,
+                "offset": 40,
+                "text": "Paul Allen"
+              }
+            ],
+            "id": "1",
+            "warnings": []
+          },
+          {
+            "entities": [
+              {
+                "category": "Location",
+                "confidenceScore": 0.55,
+                "length": 7,
+                "offset": 33,
+                "subcategory": "GPE",
+                "text": "Seattle"
+              }
+            ],
+            "id": "2",
+            "warnings": []
+          }
+        ],
+        "errors": [],
+        "modelVersion": "2020-04-01"
+      }
+    }
+  }
+}

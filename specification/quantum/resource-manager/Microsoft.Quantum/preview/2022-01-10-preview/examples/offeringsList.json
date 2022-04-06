@@ -1,0 +1,90 @@
+{
+  "parameters": {
+    "subscriptionId": "1C4B2828-7D49-494F-933D-061373BE28C2",
+    "api-version": "2022-01-10-preview",
+    "locationName": "westus2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "QIO",
+            "name": "Quantum Inspired Optimization",
+            "properties": {
+              "description": "Provide Quantum Inspired Optimization solvers",
+              "targets": [
+                {
+                  "name": "CPU annealer",
+                  "id": "p1",
+                  "description": "CPU annealer algorithm"
+                }
+              ],
+              "skus": [
+                {
+                  "name": "Standard",
+                  "id": "Standard",
+                  "version": "1.0",
+                  "description": "Provider CPU and FPGA QIO based solver.",
+                  "restrictedAccessUri": "https://endpoint",
+                  "autoAdd": true,
+                  "targets": [
+                    "p1"
+                  ],
+                  "quotaDimensions": [
+                    {
+                      "id": "quota1",
+                      "scope": "Workspace"
+                    }
+                  ],
+                  "pricingDetails": [
+                    {
+                      "id": "price",
+                      "value": "200 dollars"
+                    },
+                    {
+                      "id": "rate",
+                      "value": "10 hours/month"
+                    }
+                  ]
+                }
+              ],
+              "quotaDimensions": [
+                {
+                  "id": "job-count",
+                  "scope": "Workspace",
+                  "period": "Monthly",
+                  "quota": 30,
+                  "name": "Job count",
+                  "description": "The number of jobs you may submit per month",
+                  "unit": "job",
+                  "unitPlural": "jobs"
+                },
+                {
+                  "id": "job-hour",
+                  "scope": "Subscription",
+                  "period": "Monthly",
+                  "quota": 1000,
+                  "name": "Job hours",
+                  "description": "The number of hours of solver time you may use per month",
+                  "unit": "hour",
+                  "unitPlural": "hours"
+                }
+              ],
+              "pricingDimensions": [
+                {
+                  "id": "price",
+                  "name": "Pricing"
+                },
+                {
+                  "id": "rate",
+                  "name": "Minimum monthly rate"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

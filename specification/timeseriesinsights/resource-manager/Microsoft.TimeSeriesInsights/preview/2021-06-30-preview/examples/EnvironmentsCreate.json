@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "environmentName": "env1",
+    "parameters": {
+      "location": "West US",
+      "kind": "Gen1",
+      "sku": {
+        "name": "S1",
+        "capacity": 1
+      },
+      "properties": {
+        "dataRetentionTime": "P31D",
+        "partitionKeyProperties": [
+          {
+            "name": "DeviceId1",
+            "type": "String"
+          }
+        ]
+      }
+    },
+    "api-version": "2021-06-30-preview"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.TimeSeriesInsights/Environments/env1",
+        "location": "West US",
+        "name": "env1",
+        "type": "Microsoft.TimeSeriesInsights/Environments",
+        "kind": "Gen1",
+        "tags": {},
+        "properties": {
+          "dataRetentionTime": "P31D",
+          "provisioningState": "Creating",
+          "creationTime": "2017-04-18T19:20:33.2288820Z"
+        },
+        "sku": {
+          "name": "S1",
+          "capacity": 1
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.TimeSeriesInsights/Environments/env1",
+        "location": "West US",
+        "name": "env1",
+        "type": "Microsoft.TimeSeriesInsights/Environments",
+        "kind": "Gen1",
+        "tags": {},
+        "properties": {
+          "supportsCustomerManagedKey": true,
+          "dataRetentionTime": "P31D",
+          "provisioningState": "Succeeded",
+          "creationTime": "2017-04-18T19:20:33.2288820Z"
+        },
+        "sku": {
+          "name": "S1",
+          "capacity": 1
+        }
+      }
+    },
+    "404": {}
+  }
+}

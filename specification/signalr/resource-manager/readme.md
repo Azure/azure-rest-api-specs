@@ -26,7 +26,7 @@ These are the global settings for the SignalR API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-10-01
+tag: package-2022-02-01
 ```
 
 ### Suppression
@@ -35,12 +35,103 @@ tag: package-2018-10-01
 directive:
   - suppress: EnumInsteadOfBoolean
     from: signalr.json
-    where: $.definitions.NameAvailability.properties.nameAvailable
-    reason:  The boolean properties 'nameAvailable' is actually boolean value defined by Azure API spec
-  - suppress: EnumInsteadOfBoolean
+    where:
+    - $.definitions.NameAvailability.properties.nameAvailable
+    - $.definitions.Dimension.properties.toBeExportedForShoebox
+    - $.definitions.Operation.properties.isDataAction
+    - $.definitions.SignalRTlsSettings.properties.clientCertEnabled
+    - $.definitions.SignalRProperties.properties.disableLocalAuth
+    - $.definitions.SignalRProperties.properties.disableAadAuth
+    reason:  The boolean properties 'nameAvailable' and 'isDataAction' is standard property defined by Azure API spec. 'toBeExportedForShoebox' by Geneva metrics team. Keep 'clientCertEnabled' bool to be consistent with SignalR and not break existing customers. 'disableLocalAuth' and 'disableAadAuth' by Identity team.
+  - suppress: TrackedResourceListByImmediateParent
+    reason: Another list APIs naming approach is used over the specs
+  - suppress: AvoidNestedProperties
     from: signalr.json
-    where: $.definitions.Dimension.properties.toBeExportedForShoebox
-    reason:  The boolean properties 'toBeExportedForShoebox' is defined by Geneva metrics
+    where:
+    - $.definitions.SignalRFeature.properties.properties
+    - $.definitions.PrivateEndpointConnection.properties.properties
+    - $.definitions.ShareablePrivateLinkResourceType.properties.properties
+    reason:  The 'properties' is a user-defined dictionary, cannot be flattened.
+  - suppress: PutInOperationName
+    where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}"].put.operationId
+    reason: It's indeed an UPDATE operation, but PUT is required per NRP requirement.
+  - suppress: InvalidSkuModel
+    where:
+    - $.definitions.Sku
+    reason: It's required by spec of enumerating SKUs for an existing resource
+  - suppress: ParametersOrder
+    where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}"].get
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}"].put
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}"].delete
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}"].get
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}"].put
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}"].delete
+    reason: It can introduce a breaking change when updating parameter order, since SignalR service has already shipped public versions.
+```
+
+### Tag: package-2022-02-01
+
+These settings apply only when `--tag=package-2022-02-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-02-01'
+input-file:
+- Microsoft.SignalRService/stable/2022-02-01/signalr.json
+```
+
+### Tag: package-2021-09-01-preview
+
+These settings apply only when `--tag=package-2021-09-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-09-01-preview'
+input-file:
+- Microsoft.SignalRService/preview/2021-09-01-preview/signalr.json
+```
+
+### Tag: package-2021-10-01
+
+These settings apply only when `--tag=package-2021-10-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-10-01'
+input-file:
+- Microsoft.SignalRService/stable/2021-10-01/signalr.json
+```
+
+### Tag: package-2021-06-01-preview
+
+These settings apply only when `--tag=package-2021-06-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06-01-preview'
+input-file:
+- Microsoft.SignalRService/preview/2021-06-01-preview/signalr.json
+```
+
+### Tag: package-2021-04-01-preview
+
+These settings apply only when `--tag=package-2021-04-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04-01-preview'
+input-file:
+- Microsoft.SignalRService/preview/2021-04-01-preview/signalr.json
+```
+
+### Tag: package-2020-07-01-preview
+
+These settings apply only when `--tag=package-2020-07-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-07-01-preview'
+input-file:
+- Microsoft.SignalRService/preview/2020-07-01-preview/signalr.json
+```
+
+### Tag: package-2020-05-01
+
+These settings apply only when `--tag=package-2020-05-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-05-01'
+input-file:
+- Microsoft.SignalRService/stable/2020-05-01/signalr.json
 ```
 
 ### Tag: package-2018-10-01
@@ -73,16 +164,21 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_signalr']
+  - repo: azure-resource-manager-schemas
 ```
 
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
@@ -107,28 +203,5 @@ csharp:
   clear-output-folder: true
 ```
 
-## Multi-API/Profile support for AutoRest v3 generators 
 
-AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
-
-This block is updated by an automatic script. Edits may be lost!
-
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
-# include the azure profile definitions from the standard location
-require: $(this-folder)/../../../profiles/readme.md
-
-# all the input files across all versions
-input-file:
-  - $(this-folder)/Microsoft.SignalRService/stable/2018-10-01/signalr.json
-  - $(this-folder)/Microsoft.SignalRService/preview/2018-03-01-preview/signalr.json
-
-```
-
-If there are files that should not be in the `all-api-versions` set, 
-uncomment the  `exclude-file` section below and add the file paths.
-
-``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
-```
 

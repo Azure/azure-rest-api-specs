@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "Content-Type": "application/json",
+    "api-version": "2022-03-01-preview",
+    "body": {
+      "kind": "CustomConversation",
+      "analysisInput": {
+        "conversationItem": {
+          "language": "en-GB",
+          "text": "play a song from Phil Collins",
+          "participantId": "1",
+          "modality": "text",
+          "id": "1"
+        }
+      },
+      "parameters": {
+        "projectName": "{project-name}",
+        "deploymentName": "{deployment-name}",
+        "verbose": true,
+        "isLoggingEnabled": false,
+        "stringIndexType": "TextElement_V8"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "kind": "CustomConversationResult",
+        "results": {
+          "query": "play In the air tonight from Phil Collins",
+          "detectedLanguage": "en",
+          "prediction": {
+            "topIntent": "PlayMusic",
+            "projectKind": "conversation",
+            "intents": [
+              {
+                "category": "PlayMusic",
+                "confidenceScore": 1
+              },
+              {
+                "category": "SearchCreativeWork",
+                "confidenceScore": 0
+              },
+              {
+                "category": "AddToPlaylist",
+                "confidenceScore": 0
+              }
+            ],
+            "entities": [
+              {
+                "category": "Media.Artist",
+                "text": "Phil Collins",
+                "offset": 29,
+                "length": 12,
+                "confidenceScore": 1
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

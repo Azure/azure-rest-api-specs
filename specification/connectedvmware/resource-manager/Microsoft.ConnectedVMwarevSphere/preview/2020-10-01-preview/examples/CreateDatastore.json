@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2020-10-01-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "testrg",
+    "datastoreName": "HRDatastore",
+    "body": {
+      "location": "East US",
+      "extendedLocation": {
+        "type": "customLocation",
+        "name": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourceGroups/demoRG/providers/Microsoft.ExtendedLocation/customLocations/contoso"
+      },
+      "properties": {
+        "vCenterId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.ConnectedVMwarevSphere/VCenters/ContosoVCenter",
+        "moRefId": "aaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.ConnectedVMwarevSphere/Datastores/HRDatastore",
+        "name": "HRDatastore",
+        "type": "Microsoft.ConnectedVMwarevSphere/Datastores",
+        "location": "East US",
+        "extendedLocation": {
+          "type": "customLocation",
+          "name": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourceGroups/demoRG/providers/Microsoft.ExtendedLocation/customLocations/contoso"
+        },
+        "properties": {
+          "vCenterId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.ConnectedVMwarevSphere/VCenters/ContosoVCenter",
+          "moRefId": "aaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.ConnectedVMwarevSphere/Datastores/ContosoAgent",
+        "name": "ContosoAgent",
+        "type": "Microsoft.ConnectedVMwarevSphere/Datastores",
+        "location": "East US",
+        "extendedLocation": {
+          "type": "customLocation",
+          "name": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourceGroups/demoRG/providers/Microsoft.ExtendedLocation/customLocations/contoso"
+        },
+        "properties": {
+          "vCenterId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.ConnectedVMwarevSphere/VCenters/ContosoVCenter",
+          "moRefId": "aaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+          "provisioningState": "Created"
+        }
+      }
+    }
+  }
+}
