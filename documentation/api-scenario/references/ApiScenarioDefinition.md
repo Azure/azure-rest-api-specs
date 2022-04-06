@@ -259,7 +259,27 @@ See [Step Example Schema](./v1.2/schema.json#L389)
       - Path to the response field to be used as variable.
 
 **Conventions:**
-- When scope is `ResourceGroup` and the request is a PUT/PATCH, the **requestUpdate** JsonPatchOp items starting with body parameter name will be applied to the response body (if any) for all successful status codes, excluding those properties defined as `readOnly` or whose `x-ms-mutability` items don't contain `read`. After this, the **responseUpdate** is applied, providing option to override the behavior by convention.
+
+When the scope is `ResourceGroup` and the request is a PUT/PATCH, the **requestUpdate** JsonPatchOp items starting with body parameter name SHOULD be applied to the response body (if any) for all successful status codes, excluding writeOnly properties - `x-ms-secret: true` or `x-ms-mutability` doesn't contain `read`.
+
+The **responseUpdate** SHOULD be applied after the **requestUpdate**, providing option to override the behavior by convention.
+
+The behavior of applying **requestUpdate** to the response body should follow JSON merge-patch ([RFC 7396](https://tools.ietf.org/html/rfc7396)).
+
+The whole process is illustrated as below pseudo-code:
+```
+if (scope is 'ResourceGroup' && operation.verb in ('PUT', 'PATCH')) {
+  updatedRequestBody = apply_JsonPatchOp(initialRequestBody, requestUpdate.body);
+  mergePatch = generate_JsonMergePatch(initialRequestBody, updatedRequestBody);
+  for (each successful status code) {
+    if (response.body is not empty) {
+      updatedResponseBody = apply_JsonMergePatch(initialResponseBody, mergePatch);
+      updatedResponseBody = exclude_WriteOnly_Properties(updatedResponseBody);
+      updatedResponseBody = apply_JsonPatchOp(updatedResponseBody, responseUpdate.body);
+    }
+  }
+}
+```
 
 ### JsonPatchOp
 
