@@ -782,17 +782,36 @@
       "properties": {
         "assessmentMode": {
           "type": "string",
-          "description": "Specifies the assessment mode."
+          "description": "Specifies the assessment mode.",
+          "enum": [
+            "ImageDefault",
+            "AutomaticByPlatform"
+          ],
+          "x-ms-enum": {
+            "name": "AssessmentModeTypes",
+            "modelAsString": true
+          }
         },
         "patchMode": {
           "type": "string",
-          "description": "Specifies the patch mode."
+          "description": "Specifies the patch mode.",
+          "enum": [
+            "ImageDefault",
+            "AutomaticByPlatform",
+            "AutomaticByOS", 
+            "Manual"
+          ],
+          "x-ms-enum": {
+            "name": "PatchModeTypes",
+            "modelAsString": true
+          }
         }
       },
       "description": "Specifies the patch settings."
     },
     "AgentConfiguration": {
       "type": "object",
+      "readOnly": true,
       "properties": {
         "proxyUrl": {
           "type": "string",
