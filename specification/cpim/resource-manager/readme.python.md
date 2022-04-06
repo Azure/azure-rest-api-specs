@@ -8,7 +8,6 @@ license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-azureadexternalidentities
 package-version: 1.0.0b2
 no-namespace-folders: true
-python-base-folder: azureadexternalidentities/azure-mgmt-azureadexternalidentities/azure/mgmt/azureadexternalidentities
 ```
 
 ### Python multi-api
