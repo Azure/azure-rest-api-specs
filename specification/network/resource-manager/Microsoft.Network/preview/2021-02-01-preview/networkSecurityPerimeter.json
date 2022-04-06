@@ -1094,7 +1094,7 @@
       "properties": {
         "provisioningState": {
           "readOnly": true,
-          "$ref": "./network.json#/definitions/ProvisioningState",
+          "$ref": "#/definitions/NSPProvisioningState",
           "description": "The provisioning state of the resource  association resource."
         },
         "privateLinkResource": {
@@ -1205,6 +1205,23 @@
         }
       },
       "description": "Logging Category"
+    },
+    "NSPProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Accepted",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {
