@@ -478,7 +478,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/AseV3NetworkingConfiguration"
+              "$ref": "./CommonDefinitions.json#/definitions/AseV3NetworkingConfiguration"
             }
           },
           "default": {
@@ -512,7 +512,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AseV3NetworkingConfiguration"
+              "$ref": "./CommonDefinitions.json#/definitions/AseV3NetworkingConfiguration"
             }
           },
           {
@@ -526,7 +526,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/AseV3NetworkingConfiguration"
+              "$ref": "./CommonDefinitions.json#/definitions/AseV3NetworkingConfiguration"
             }
           },
           "default": {
@@ -2239,64 +2239,6 @@
           "$ref": "./CommonDefinitions.json#/definitions/AppServiceEnvironment",
           "description": "Core resource properties",
           "type": "object",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "AseV3NetworkingConfiguration": {
-      "description": "Full view of networking configuration for an ASE.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "AseV3NetworkingConfiguration resource specific properties",
-          "type": "object",
-          "properties": {
-            "windowsOutboundIpAddresses": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "readOnly": true
-            },
-            "linuxOutboundIpAddresses": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "readOnly": true
-            },
-            "externalInboundIpAddresses": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "readOnly": true
-            },
-            "internalInboundIpAddresses": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "readOnly": true
-            },
-            "allowNewPrivateEndpointConnections": {
-              "description": "Property to enable and disable new private endpoint connection creation on ASE",
-              "type": "boolean"
-            },
-            "ftpEnabled": {
-              "description": "Property to enable and disable FTP on ASEV3",
-              "type": "boolean"
-            },
-            "remoteDebugEnabled": {
-              "description": "Property to enable and disable Remote Debug on ASEV3",
-              "type": "boolean"
-            }
-          },
           "x-ms-client-flatten": true
         }
       }

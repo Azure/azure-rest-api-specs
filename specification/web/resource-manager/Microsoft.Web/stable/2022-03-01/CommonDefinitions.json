@@ -157,6 +157,9 @@
         "zoneRedundant": {
           "description": "Whether or not this App Service Environment is zone-redundant.",
           "type": "boolean"
+        },
+        "networkingConfiguration": {
+          "$ref": "#/definitions/AseV3NetworkingConfiguration"
         }
       }
     },
@@ -355,6 +358,78 @@
         "id": {
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "AseV3NetworkingConfiguration": {
+      "description": "Full view of networking configuration for an ASE.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "AseV3NetworkingConfiguration resource specific properties",
+          "type": "object",
+          "properties": {
+            "windowsOutboundIpAddresses": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "linuxOutboundIpAddresses": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "externalInboundIpAddresses": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "internalInboundIpAddresses": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "allowNewPrivateEndpointConnections": {
+              "description": "Property to enable and disable new private endpoint connection creation on ASE",
+              "type": "boolean"
+            },
+            "ftpEnabled": {
+              "description": "Property to enable and disable FTP on ASEV3",
+              "type": "boolean"
+            },
+            "remoteDebugEnabled": {
+              "description": "Property to enable and disable Remote Debug on ASEV3",
+              "type": "boolean"
+            },
+            "numberOfOutboundIpAddresses": {
+              "format": "int32",
+              "description": "Property to set the number of outbound ips on AseV3",
+              "type": "integer"
+            },
+            "inboundIpAddressOverride": {
+              "description": "Customer provided Inbound IP Address",
+              "type": "string"
+            },
+            "targetNumberOfOutboundIpAddresses": {
+              "format": "int32",
+              "type": "integer",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
