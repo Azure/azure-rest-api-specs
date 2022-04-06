@@ -159,7 +159,7 @@
         }
       }
     },
-    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/anyExistingOffersInTheStore": {
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/anyExistingOffersInTheCollections": {
       "parameters": [
         {
           "$ref": "#/parameters/ApiVersionParameter"
@@ -169,8 +169,8 @@
         "tags": [
           "PrivateStores"
         ],
-        "operationId": "PrivateStore_AnyExistingOffersInTheStore",
-        "description": "Query whether exists any offer in the store.",
+        "operationId": "PrivateStore_AnyExistingOffersInTheCollections",
+        "description": "Query whether exists any offer in the collections.",
         "parameters": [
           {
             "$ref": "#/parameters/PrivateStoreIdParameter"
@@ -180,7 +180,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AnyExistingOffersInTheStoreResponse"
+              "$ref": "#/definitions/AnyExistingOffersInTheCollectionsResponse"
             }
           },
           "default": {
@@ -191,8 +191,8 @@
           }
         },
         "x-ms-examples": {
-          "AnyActiveOffer": {
-            "$ref": "./examples/AnyExistingOffersInTheStore.json"
+          "AnyExistingOffersInTheCollections": {
+            "$ref": "./examples/AnyExistingOffersInTheCollections.json"
           }
         }
       }
@@ -1823,8 +1823,8 @@
         }
       }
     },
-    "AnyExistingOffersInTheStoreResponse": {
-      "description": "Response object of query if are there existing offers in the store.",
+    "AnyExistingOffersInTheCollectionsResponse": {
+      "description": "Response object of query if are there existing offers in the collections.",
       "type": "object",
       "properties": {
         "value": {
