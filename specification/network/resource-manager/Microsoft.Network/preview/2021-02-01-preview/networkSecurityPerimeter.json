@@ -1048,6 +1048,71 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules/{accessRuleName}/reconcile": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ProfileNameParameter"
+        },
+        {
+          "$ref": "#/parameters/AccessRuleNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "NspAccessRulesReconcile"
+        ],
+        "operationId": "NspAccessRulesReconcile_Post",
+        "description": "Reconcile NSP access rules",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NspAccessRuleReconcile"
+            },
+            "description": "Parameters for NSP access rule reconcile"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reconcile NSP access rule.",
+            "schema": {
+              "$ref": "#/definitions/NspAccessRuleReconcile"
+            }
+          },
+          "201": {
+            "description": "Reconcile NSP access rule.",
+            "schema": {
+              "$ref": "#/definitions/NspAccessRuleReconcile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspAccessRulePut": {
+            "$ref": "./examples/NspAccessRuleReconcile.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1510,6 +1575,12 @@
           "description": "Id of NSP."
         }
       }
+    },
+    "NspAccessRuleReconcile": {
+      "type": "object",
+      "properties": {
+      },
+      "description": "Request object for NSP reconcile."
     }
   },
   "parameters": {
