@@ -12,7 +12,7 @@
           "ClassificationPolicies"
         ],
         "summary": "Creates a new classification policy.",
-        "operationId": "JobRouter_CreateClassificationPolicyV2",
+        "operationId": "JobRouter_CreateClassificationPolicy",
         "consumes": [
           "application/json"
         ],
@@ -21,17 +21,19 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
             "in": "header",
             "name": "repeatability-request-id",
+            "description": "As described in https://docs.oasis-open.org/odata/repeatable-requests/v1.0/cs01/repeatable-requests-v1.0-cs01.html.",
             "type": "string"
           },
           {
             "in": "header",
             "name": "repeatability-first-sent",
+            "description": "As described in https://docs.oasis-open.org/odata/repeatable-requests/v1.0/cs01/repeatable-requests-v1.0-cs01.html.",
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -44,6 +46,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "201": {
             "description": "Success",
             "schema": {
@@ -80,6 +88,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -104,7 +118,7 @@
           "ClassificationPolicies"
         ],
         "summary": "Updates a classification policy.",
-        "operationId": "JobRouter_PatchClassificationPolicyV2",
+        "operationId": "JobRouter_UpdateClassificationPolicy",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -115,6 +129,7 @@
           {
             "in": "path",
             "name": "id",
+            "description": "The id of classification policy.",
             "required": true,
             "type": "string"
           },
@@ -124,13 +139,20 @@
           {
             "in": "body",
             "name": "patch",
-            "description": "JSON Document contained the partial update for the classification policy",
+            "description": "JSON Document contained the partial update for the classification policy.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/ClassificationPolicy"
             }
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -140,7 +162,7 @@
         },
         "x-ms-examples": {
           "Update a Classification policy": {
-            "$ref": "./examples/ClassificationPolicies_PatchClassificationPolicy.json"
+            "$ref": "./examples/ClassificationPolicies_UpdateClassificationPolicy.json"
           }
         }
       },
@@ -166,6 +188,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -185,6 +213,9 @@
         ],
         "summary": "Delete a classification policy by Id",
         "operationId": "JobRouter_DeleteClassificationPolicy",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -198,6 +229,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "204": {
             "description": "Success"
           }
@@ -215,7 +252,7 @@
           "DistributionPolicies"
         ],
         "summary": "Creates a new distribution policy.",
-        "operationId": "JobRouter_CreateDistributionPolicyV2",
+        "operationId": "JobRouter_CreateDistributionPolicy",
         "consumes": [
           "application/json"
         ],
@@ -224,17 +261,19 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
             "in": "header",
             "name": "repeatability-request-id",
+            "description": "As described in https://docs.oasis-open.org/odata/repeatable-requests/v1.0/cs01/repeatable-requests-v1.0-cs01.html.",
             "type": "string"
           },
           {
             "in": "header",
             "name": "repeatability-first-sent",
+            "description": "As described in https://docs.oasis-open.org/odata/repeatable-requests/v1.0/cs01/repeatable-requests-v1.0-cs01.html.",
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -247,6 +286,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "201": {
             "description": "Success",
             "schema": {
@@ -283,6 +328,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -307,7 +358,7 @@
           "DistributionPolicies"
         ],
         "summary": "Updates a distribution policy.",
-        "operationId": "JobRouter_PatchDistributionPolicy",
+        "operationId": "JobRouter_UpdateDistributionPolicy",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -335,6 +386,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -344,7 +401,7 @@
         },
         "x-ms-examples": {
           "Update a Distribution policy": {
-            "$ref": "./examples/DistributionPolicies_PatchDistributionPolicy.json"
+            "$ref": "./examples/DistributionPolicies_UpdateDistributionPolicy.json"
           }
         }
       },
@@ -370,6 +427,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -389,6 +452,9 @@
         ],
         "summary": "Delete a distribution policy by Id",
         "operationId": "JobRouter_DeleteDistributionPolicy",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -402,6 +468,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "204": {
             "description": "Success"
           }
@@ -419,7 +491,7 @@
           "ExceptionPolicies"
         ],
         "summary": "Creates an exception policy",
-        "operationId": "JobRouter_CreateExceptionPolicyV2",
+        "operationId": "JobRouter_CreateExceptionPolicy",
         "consumes": [
           "application/json"
         ],
@@ -428,17 +500,19 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
             "in": "header",
             "name": "repeatability-request-id",
+            "description": "As described in https://docs.oasis-open.org/odata/repeatable-requests/v1.0/cs01/repeatable-requests-v1.0-cs01.html.",
             "type": "string"
           },
           {
             "in": "header",
             "name": "repeatability-first-sent",
+            "description": "As described in https://docs.oasis-open.org/odata/repeatable-requests/v1.0/cs01/repeatable-requests-v1.0-cs01.html.",
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -451,6 +525,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "201": {
             "description": "Success",
             "schema": {
@@ -487,6 +567,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -511,7 +597,7 @@
           "ExceptionPolicies"
         ],
         "summary": "Updates an exception policy",
-        "operationId": "JobRouter_PatchExceptionPolicyV2",
+        "operationId": "JobRouter_UpdateExceptionPolicy",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -531,7 +617,7 @@
           },
           {
             "in": "body",
-            "name": "patchExceptionPolicy",
+            "name": "patch",
             "description": "Model of exception policy to be updated",
             "schema": {
               "$ref": "#/definitions/ExceptionPolicy"
@@ -539,6 +625,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -548,7 +640,7 @@
         },
         "x-ms-examples": {
           "Update a Exception policy": {
-            "$ref": "./examples/ExceptionPolicies_PatchExceptionPolicy.json"
+            "$ref": "./examples/ExceptionPolicies_UpdateExceptionPolicy.json"
           }
         }
       },
@@ -574,6 +666,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -593,6 +691,9 @@
         ],
         "summary": "Deletes a exception policy by Id",
         "operationId": "JobRouter_DeleteExceptionPolicy",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -606,6 +707,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "204": {
             "description": "Success"
           }
@@ -623,7 +730,7 @@
           "Jobs"
         ],
         "summary": "Creates a new job to be routed.",
-        "operationId": "JobRouter_CreateJobV2",
+        "operationId": "JobRouter_CreateJob",
         "consumes": [
           "application/json"
         ],
@@ -632,17 +739,19 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
             "in": "header",
             "name": "repeatability-request-id",
+            "description": "As described in https://docs.oasis-open.org/odata/repeatable-requests/v1.0/cs01/repeatable-requests-v1.0-cs01.html.",
             "type": "string"
           },
           {
             "in": "header",
             "name": "repeatability-first-sent",
+            "description": "As described in https://docs.oasis-open.org/odata/repeatable-requests/v1.0/cs01/repeatable-requests-v1.0-cs01.html.",
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -655,6 +764,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "201": {
             "description": "Success",
             "schema": {
@@ -725,6 +840,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -766,6 +887,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -800,13 +927,6 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "forceClassification",
-            "description": "If set to true, will force classification. Defaults to false.",
-            "type": "boolean",
-            "default": false
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -819,6 +939,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -838,6 +964,9 @@
         ],
         "summary": "Deletes a job and all of its traces.",
         "operationId": "JobRouter_DeleteJob",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -851,6 +980,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "204": {
             "description": "Success"
           }
@@ -858,6 +993,61 @@
         "x-ms-examples": {
           "Deletes a job and all of its traces": {
             "$ref": "./examples/Jobs_DeleteJob.json"
+          }
+        }
+      }
+    },
+    "/routing/jobs/{id}/reclassify": {
+      "post": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Reclassify a job.",
+        "operationId": "JobRouter_ReclassifyJob",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Id of the job",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "reclassifyJobRequest",
+            "schema": {
+              "$ref": "#/definitions/ReclassifyJobRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RouterJob"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a job": {
+            "$ref": "./examples/Jobs_ReclassifyJob.json"
           }
         }
       }
@@ -897,6 +1087,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -946,6 +1142,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -995,7 +1197,19 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CloseJobResponse"
+            }
+          },
+          "202": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/CloseJobResponse"
@@ -1032,6 +1246,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -1076,6 +1296,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -1120,6 +1346,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -1149,17 +1381,19 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
             "in": "header",
             "name": "repeatability-request-id",
+            "description": "As described in https://docs.oasis-open.org/odata/repeatable-requests/v1.0/cs01/repeatable-requests-v1.0-cs01.html.",
             "type": "string"
           },
           {
             "in": "header",
             "name": "repeatability-first-sent",
+            "description": "As described in https://docs.oasis-open.org/odata/repeatable-requests/v1.0/cs01/repeatable-requests-v1.0-cs01.html.",
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -1172,6 +1406,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "201": {
             "description": "Success",
             "schema": {
@@ -1208,6 +1448,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -1260,6 +1506,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -1295,6 +1547,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -1314,6 +1572,9 @@
         ],
         "summary": "Deletes a queue by Id",
         "operationId": "JobRouter_DeleteQueue",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -1327,6 +1588,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "204": {
             "description": "Success"
           }
@@ -1361,6 +1628,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -1390,17 +1663,19 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
             "in": "header",
             "name": "repeatability-request-id",
+            "description": "As described in https://docs.oasis-open.org/odata/repeatable-requests/v1.0/cs01/repeatable-requests-v1.0-cs01.html.",
             "type": "string"
           },
           {
             "in": "header",
             "name": "repeatability-first-sent",
+            "description": "As described in https://docs.oasis-open.org/odata/repeatable-requests/v1.0/cs01/repeatable-requests-v1.0-cs01.html.",
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -1413,6 +1688,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -1484,6 +1765,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -1539,6 +1826,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -1583,6 +1876,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -1602,6 +1901,9 @@
         ],
         "summary": "Deletes a worker and all of its traces.",
         "operationId": "JobRouter_DeleteWorker",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -1615,6 +1917,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
           "204": {
             "description": "Success"
           }
@@ -1622,55 +1930,6 @@
         "x-ms-examples": {
           "Delete a Worker and all of its traces": {
             "$ref": "./examples/Workers_DeleteWorker.json"
-          }
-        }
-      }
-    },
-    "/routing/workers/{workerId}/assignments/{assignmentId}:release": {
-      "post": {
-        "tags": [
-          "Workers"
-        ],
-        "summary": "Releases capacity consumed by an assignment within a workers socket collection.",
-        "operationId": "JobRouter_ReleaseAssignmentAction",
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "workerId",
-            "description": "Id of the worker to release assignment capacity",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "assignmentId",
-            "description": "Id of the assignment to release capacity",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "releaseAssignmentRequest",
-            "description": "Request to release assignment",
-            "schema": {
-              "$ref": "#/definitions/ReleaseAssignmentRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        },
-        "x-ms-examples": {
-          "Release a Worker's Assignment": {
-            "$ref": "./examples/Workers_ReleaseAssignment.json"
           }
         }
       }
@@ -1764,8 +2023,7 @@
           "readOnly": true
         },
         "scoringRule": {
-          "description": "(Optional)\r\nDefine a scoring rule to use, when calculating a score to determine the best worker.\r\nIf not set, will use a default scoring formula that uses the number of job labels that the worker\r\nlabels match, as well as the number of label selectors the worker labels match and/or exceed\r\nusing a logistic function (https://en.wikipedia.org/wiki/Logistic_function).",
-          "x-nullable": true
+          "$ref": "#/definitions/RouterRule"
         },
         "scoringRuleOptions": {
           "$ref": "#/definitions/ScoringRuleOptions"
@@ -1855,18 +2113,15 @@
         "queueSelectors": {
           "description": "The queue selectors to resolve a queue for a given job.",
           "type": "array",
-          "items": {},
-          "x-nullable": true
+          "items": { }
         },
         "prioritizationRule": {
-          "description": "The rule to determine a priority score for a given job.",
-          "x-nullable": true
+          "$ref": "#/definitions/RouterRule"
         },
         "workerSelectors": {
           "description": "The worker label selectors to attach to a given job.",
           "type": "array",
-          "items": {},
-          "x-nullable": true
+          "items": { }
         }
       }
     },
@@ -1908,11 +2163,10 @@
           "minLength": 0,
           "type": "string"
         },
-        "releaseTime": {
+        "closeTime": {
           "format": "date-time",
-          "description": "If not provided, capacity will be released immediately.\r\nIf provided, the future time at which to release the capacity.",
-          "type": "string",
-          "x-nullable": true
+          "description": "If not provided, worker capacity is released immediately along with a JobClosedEvent notification.\r\nIf provided, worker capacity is released along with a JobClosedEvent notification at a future time.",
+          "type": "string"
         },
         "note": {
           "description": "(Optional) A note that will be appended to the jobs' Notes collection with th current timestamp.",
@@ -1924,6 +2178,9 @@
     },
     "CloseJobResponse": {
       "type": "object"
+    },
+    "CommunicationErrorResponse": {
+      "$ref": "https://github.com/Azure/azure-rest-api-specs/blob/4b3d05177ad63685fbbb69f147ab104b85ecd7f4/specification/communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
     },
     "CompleteJobRequest": {
       "description": "Request payload for completing jobs",
@@ -1967,7 +2224,7 @@
           "readOnly": true
         },
         "condition": {
-          "description": "The condition that must be true for the label selectors to be attached"
+          "$ref": "#/definitions/RouterRule"
         },
         "labelSelectors": {
           "description": "The label selectors to attach",
@@ -1997,7 +2254,7 @@
           "readOnly": true
         },
         "condition": {
-          "description": "The condition that must be true for the label selectors to be attached"
+          "$ref": "#/definitions/RouterRule"
         },
         "labelSelectors": {
           "description": "The label selectors to attach",
@@ -2053,8 +2310,7 @@
         },
         "bypassSelectors": {
           "description": "(Optional)\r\nIf set to true, then router will match workers to jobs even if they don't match label selectors.\r\nWarning: You may get workers that are not qualified for the job they are matched with if you set this\r\nvariable to true. This flag is intended more for temporary usage.\r\nBy default, set to false.",
-          "type": "boolean",
-          "x-nullable": true
+          "type": "boolean"
         }
       },
       "discriminator": "kind"
@@ -2063,7 +2319,7 @@
       "description": "Policy governing how jobs are distributed to workers",
       "required": [
         "mode",
-        "offerTTL"
+        "offerTTLSeconds"
       ],
       "type": "object",
       "properties": {
@@ -2076,12 +2332,13 @@
           "description": "The human readable name of the policy.",
           "type": "string"
         },
-        "offerTTL": {
-          "description": "The expiry time of any offers created under this policy will be governed by the offer time to live. Requires input conforming to ISO8601 duration format.",
-          "type": "string"
+        "offerTTLSeconds": {
+          "format": "double",
+          "description": "The expiry time of any offers created under this policy will be governed by the offer time to live.",
+          "type": "number"
         },
         "mode": {
-          "description": "The policy governing the specific distribution method."
+          "$ref": "#/definitions/DistributionMode"
         }
       }
     },
@@ -2136,8 +2393,7 @@
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/ExceptionRule"
-          },
-          "x-nullable": true
+          }
         }
       }
     },
@@ -2169,7 +2425,7 @@
       "type": "object",
       "properties": {
         "trigger": {
-          "description": "The exception trigger for this exception rule"
+          "$ref": "#/definitions/JobExceptionTrigger"
         },
         "actions": {
           "description": "A dictionary collection of actions to perform once the exception is triggered. Key is the Id of each exception action.",
@@ -2240,14 +2496,12 @@
         "completeTime": {
           "format": "date-time",
           "description": "The time the job was marked as completed after being assigned.",
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         },
         "closeTime": {
           "format": "date-time",
           "description": "The time the job was marked as closed after being completed.",
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         }
       }
     },
@@ -2308,14 +2562,12 @@
         "offerTimeUtc": {
           "format": "date-time",
           "description": "The time the offer was created.",
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         },
         "expiryTimeUtc": {
           "format": "date-time",
           "description": "The time that the offer will expire.",
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         }
       }
     },
@@ -2378,8 +2630,7 @@
         "labels": {
           "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
           "type": "object",
-          "additionalProperties": {},
-          "x-nullable": true
+          "additionalProperties": { }
         },
         "exceptionPolicyId": {
           "description": "(Optional) The ID of the exception policy that determines various job escalation rules.",
@@ -2425,16 +2676,14 @@
         "priority": {
           "format": "int32",
           "description": "Updated Priority.",
-          "type": "integer",
-          "x-nullable": true
+          "type": "integer"
         },
         "workerSelectors": {
           "description": "Updated WorkerSelectors.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/WorkerSelector"
-          },
-          "x-nullable": true
+          }
         }
       },
       "x-ms-discriminator-value": "manual-reclassify"
@@ -2458,25 +2707,22 @@
         "queueSelectors": {
           "description": "The queue selectors to resolve a queue for a given job.",
           "type": "array",
-          "items": {},
-          "x-nullable": true
+          "items": { }
         },
         "prioritizationRule": {
-          "description": "The rule to determine a priority score for a given job.",
-          "x-nullable": true
+          "$ref": "#/definitions/RouterRule"
         },
         "workerSelectors": {
           "description": "The worker label selectors to attach to a given job.",
           "type": "array",
-          "items": {},
-          "x-nullable": true
+          "items": { }
         }
       }
     },
     "PagedDistributionPolicy": {
       "required": [
         "mode",
-        "offerTTL"
+        "offerTTLSeconds"
       ],
       "type": "object",
       "properties": {
@@ -2489,12 +2735,13 @@
           "description": "The human readable name of the policy.",
           "type": "string"
         },
-        "offerTTL": {
-          "description": "The expiry time of any offers created under this policy will be governed by the offer time to live. Requires input conforming to ISO8601 duration format.",
-          "type": "string"
+        "offerTTLSeconds": {
+          "format": "double",
+          "description": "The expiry time of any offers created under this policy will be governed by the offer time to live.",
+          "type": "number"
         },
         "mode": {
-          "description": "The policy governing the specific distribution method."
+          "$ref": "#/definitions/DistributionMode"
         }
       }
     },
@@ -2515,8 +2762,7 @@
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/ExceptionRule"
-          },
-          "x-nullable": true
+          }
         }
       }
     },
@@ -2557,8 +2803,7 @@
           "format": "date-time",
           "description": "The time a job was queued.",
           "type": "string",
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "channelId": {
           "description": "The channel identifier. eg. voice, chat, etc.",
@@ -2575,8 +2820,7 @@
         "priority": {
           "format": "int32",
           "description": "The priority of this job.",
-          "type": "integer",
-          "x-nullable": true
+          "type": "integer"
         },
         "dispositionCode": {
           "description": "Reason code for cancelled or closed jobs.",
@@ -2587,8 +2831,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/WorkerSelector"
-          },
-          "x-nullable": true
+          }
         },
         "attachedWorkerSelectors": {
           "description": "A collection of label selectors attached by a classification policy, which a worker must satisfy in order to process this job.",
@@ -2596,14 +2839,12 @@
           "items": {
             "$ref": "#/definitions/WorkerSelector"
           },
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "labels": {
           "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
           "type": "object",
-          "additionalProperties": {},
-          "x-nullable": true
+          "additionalProperties": { }
         },
         "assignments": {
           "description": "A collection of the assignments of the job.\r\nKey is AssignmentId.",
@@ -2611,22 +2852,19 @@
           "additionalProperties": {
             "$ref": "#/definitions/JobAssignment"
           },
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "tags": {
           "description": "A set of non-identifying attributes attached to this job",
           "type": "object",
-          "additionalProperties": {},
-          "x-nullable": true
+          "additionalProperties": { }
         },
         "notes": {
           "description": "Notes attached to a job, sorted by timestamp",
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          },
-          "x-nullable": true
+          }
         }
       }
     },
@@ -2652,8 +2890,7 @@
         "labels": {
           "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
           "type": "object",
-          "additionalProperties": {},
-          "x-nullable": true
+          "additionalProperties": { }
         },
         "exceptionPolicyId": {
           "description": "(Optional) The ID of the exception policy that determines various job escalation rules.",
@@ -2679,16 +2916,14 @@
             "inactive"
           ],
           "type": "string",
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "queueAssignments": {
           "description": "The queue(s) that this worker can receive work from.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/QueueAssignment"
-          },
-          "x-nullable": true
+          }
         },
         "totalCapacity": {
           "format": "int32",
@@ -2698,22 +2933,19 @@
         "labels": {
           "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
           "type": "object",
-          "additionalProperties": {},
-          "x-nullable": true
+          "additionalProperties": { }
         },
         "tags": {
           "description": "A set of non-identifying attributes attached to this worker.",
           "type": "object",
-          "additionalProperties": {},
-          "x-nullable": true
+          "additionalProperties": { }
         },
         "channelConfigurations": {
           "description": "The channel(s) this worker can handle and their impact on the workers capacity.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/ChannelConfiguration"
-          },
-          "x-nullable": true
+          }
         },
         "offers": {
           "description": "A list of active offers issued to this worker.",
@@ -2721,8 +2953,7 @@
           "items": {
             "$ref": "#/definitions/JobOffer"
           },
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "assignedJobs": {
           "description": "A list of assigned jobs attached to this worker.",
@@ -2730,20 +2961,17 @@
           "items": {
             "$ref": "#/definitions/WorkerAssignment"
           },
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "loadRatio": {
           "format": "double",
           "description": "A value indicating the workers capacity. A value of '1' means all capacity is consumed. A value of '0' means no capacity is currently consumed.",
           "type": "number",
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "availableForOffers": {
           "description": "A flag indicating this worker is open to receive offers or not.",
-          "type": "boolean",
-          "x-nullable": true
+          "type": "boolean"
         }
       }
     },
@@ -2828,10 +3056,10 @@
             "modelAsString": false
           }
         },
-        "ttl": {
-          "description": "Describes how long the attached label selector is valid. Requires input conforming to ISO8601 duration format.",
-          "type": "string",
-          "x-nullable": true
+        "ttlSeconds": {
+          "format": "double",
+          "description": "Describes how long the attached label selector is valid in seconds.",
+          "type": "number"
         }
       },
       "x-ms-discriminator-value": "pass-through"
@@ -2914,7 +3142,7 @@
         },
         "value": {
           "description": "The value to compare against the actual label value with the given operator",
-          "x-nullable": true
+          "type": "object"
         }
       }
     },
@@ -2954,8 +3182,12 @@
           "additionalProperties": {
             "format": "double",
             "type": "number"
-          },
-          "x-nullable": true
+          }
+        },
+        "longestJobWaitTimeMinutes": {
+          "format": "double",
+          "description": "The wait time of the job that has been enqueued in this queue for the longest.",
+          "type": "number"
         }
       }
     },
@@ -3002,33 +3234,13 @@
         "labelsToUpsert": {
           "description": "(optional) Dictionary containing the labels to update (or add if not existing) in key-value pairs",
           "type": "object",
-          "additionalProperties": {},
-          "x-nullable": true
+          "additionalProperties": { }
         }
       },
       "x-ms-discriminator-value": "reclassify"
     },
-    "ReleaseAssignmentRequest": {
-      "type": "object",
-      "properties": {
-        "releaseTime": {
-          "format": "date-time",
-          "description": "If not provided, capacity will be released immediately.\r\nIf provided, the future time at which to release the capacity.",
-          "type": "string",
-          "x-nullable": true
-        }
-      }
-    },
-    "RepeatabilityHeaders": {
-      "type": "object",
-      "properties": {
-        "repeatabilityRequestId": {
-          "type": "string"
-        },
-        "repeatabilityFirstSent": {
-          "type": "string"
-        }
-      }
+    "ReclassifyJobRequest": {
+      "type": "object"
     },
     "RoundRobinMode": {
       "description": "Jobs are distributed in order to workers, starting with the worker that is after the last worker to receive a job.",
@@ -3084,8 +3296,7 @@
           "format": "date-time",
           "description": "The time a job was queued.",
           "type": "string",
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "channelId": {
           "description": "The channel identifier. eg. voice, chat, etc.",
@@ -3102,8 +3313,7 @@
         "priority": {
           "format": "int32",
           "description": "The priority of this job.",
-          "type": "integer",
-          "x-nullable": true
+          "type": "integer"
         },
         "dispositionCode": {
           "description": "Reason code for cancelled or closed jobs.",
@@ -3114,8 +3324,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/WorkerSelector"
-          },
-          "x-nullable": true
+          }
         },
         "attachedWorkerSelectors": {
           "description": "A collection of label selectors attached by a classification policy, which a worker must satisfy in order to process this job.",
@@ -3123,14 +3332,12 @@
           "items": {
             "$ref": "#/definitions/WorkerSelector"
           },
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "labels": {
           "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
           "type": "object",
-          "additionalProperties": {},
-          "x-nullable": true
+          "additionalProperties": { }
         },
         "assignments": {
           "description": "A collection of the assignments of the job.\r\nKey is AssignmentId.",
@@ -3138,22 +3345,19 @@
           "additionalProperties": {
             "$ref": "#/definitions/JobAssignment"
           },
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "tags": {
           "description": "A set of non-identifying attributes attached to this job",
           "type": "object",
-          "additionalProperties": {},
-          "x-nullable": true
+          "additionalProperties": { }
         },
         "notes": {
           "description": "Notes attached to a job, sorted by timestamp",
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          },
-          "x-nullable": true
+          }
         }
       }
     },
@@ -3188,16 +3392,14 @@
             "inactive"
           ],
           "type": "string",
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "queueAssignments": {
           "description": "The queue(s) that this worker can receive work from.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/QueueAssignment"
-          },
-          "x-nullable": true
+          }
         },
         "totalCapacity": {
           "format": "int32",
@@ -3207,22 +3409,19 @@
         "labels": {
           "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
           "type": "object",
-          "additionalProperties": {},
-          "x-nullable": true
+          "additionalProperties": { }
         },
         "tags": {
           "description": "A set of non-identifying attributes attached to this worker.",
           "type": "object",
-          "additionalProperties": {},
-          "x-nullable": true
+          "additionalProperties": { }
         },
         "channelConfigurations": {
           "description": "The channel(s) this worker can handle and their impact on the workers capacity.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/ChannelConfiguration"
-          },
-          "x-nullable": true
+          }
         },
         "offers": {
           "description": "A list of active offers issued to this worker.",
@@ -3230,8 +3429,7 @@
           "items": {
             "$ref": "#/definitions/JobOffer"
           },
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "assignedJobs": {
           "description": "A list of assigned jobs attached to this worker.",
@@ -3239,20 +3437,17 @@
           "items": {
             "$ref": "#/definitions/WorkerAssignment"
           },
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "loadRatio": {
           "format": "double",
           "description": "A value indicating the workers capacity. A value of '1' means all capacity is consumed. A value of '0' means no capacity is currently consumed.",
           "type": "number",
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "availableForOffers": {
           "description": "A flag indicating this worker is open to receive offers or not.",
-          "type": "boolean",
-          "x-nullable": true
+          "type": "boolean"
         }
       }
     },
@@ -3272,7 +3467,7 @@
           "readOnly": true
         },
         "rule": {
-          "description": "A RouterRule that resolves a collection of LabelSelector to attach"
+          "$ref": "#/definitions/RouterRule"
         }
       },
       "x-ms-discriminator-value": "rule-engine"
@@ -3293,7 +3488,7 @@
           "readOnly": true
         },
         "rule": {
-          "description": "A RouterRule that resolves a collection of LabelSelector to attach"
+          "$ref": "#/definitions/RouterRule"
         }
       },
       "x-ms-discriminator-value": "rule-engine"
@@ -3305,8 +3500,7 @@
         "batchSize": {
           "format": "int32",
           "description": "(Optional) Set batch size when AllowScoringBatchOfWorkers is set to true",
-          "type": "integer",
-          "x-nullable": true
+          "type": "integer"
         },
         "scoringParameters": {
           "description": "(Optional) List of extra parameters from the job that will be sent as part of the payload to scoring rule.\r\nIf not set, the job's labels (sent in the payload as `job`) and the job's worker selectors (sent in the payload as `selectors`)\r\nare added to the payload of the scoring rule by default.\r\nNote: Worker labels are always sent with scoring payload.",
@@ -3315,25 +3509,22 @@
             "description": "Supported parameters for scoring workers",
             "enum": [
               "jobLabels",
-              "labelSelectors"
+              "workerSelectors"
             ],
             "type": "string",
             "x-ms-enum": {
               "name": "ScoringRuleParameterSelector",
               "modelAsString": false
             }
-          },
-          "x-nullable": true
+          }
         },
         "allowScoringBatchOfWorkers": {
           "description": "(Optional)\r\nIf set to true, will score workers in batches, and the parameter name of the worker labels will be sent as `workers`.\r\nBy default, set to false and the parameter name for the worker labels will be sent as `worker`.\r\nNote: If enabled, use BatchSize to set batch size.",
-          "type": "boolean",
-          "x-nullable": true
+          "type": "boolean"
         },
         "descendingOrder": {
           "description": "(Optional)\r\nIf false, will sort scores by ascending order. By default, set to true.",
-          "type": "boolean",
-          "x-nullable": true
+          "type": "boolean"
         }
       }
     },
@@ -3376,7 +3567,7 @@
           "description": "The static value this rule always returns.",
           "maxLength": 500,
           "minLength": 0,
-          "x-nullable": true
+          "type": "object"
         }
       },
       "x-ms-discriminator-value": "static-rule"
@@ -3557,12 +3748,12 @@
         },
         "value": {
           "description": "The value to compare against the actual label value with the given operator",
-          "x-nullable": true
+          "type": "object"
         },
-        "ttl": {
-          "description": "Describes how long this label selector is valid. Requires input conforming to ISO8601 duration format.",
-          "type": "string",
-          "x-nullable": true
+        "ttlSeconds": {
+          "format": "double",
+          "description": "Describes how long this label selector is valid in seconds.",
+          "type": "number"
         },
         "expedite": {
           "description": "Pushes the job to the front of the queue as long as this selector is active.",
@@ -3610,6 +3801,7 @@
       "in": "query",
       "name": "api-version",
       "description": "Version of API to invoke.",
+      "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
