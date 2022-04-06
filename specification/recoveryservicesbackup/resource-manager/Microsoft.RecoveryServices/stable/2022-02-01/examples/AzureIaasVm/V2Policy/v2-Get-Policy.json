@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "SwaggerTestRg",
+    "vaultName": "NetSDKTestRsVault",
+    "policyName": "v2-daily-sample",
+    "api-version": "2022-02-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupPolicies/v2-daily-sample",
+        "name": "v2-daily-sample",
+        "type": "Microsoft.RecoveryServices/vaults/backupPolicies",
+        "properties": {
+          "backupManagementType": "AzureIaasVM",
+          "instantRpRetentionRangeInDays": 30,
+          "policyType": "V2",
+          "schedulePolicy": {
+            "dailySchedule": {
+              "scheduleRunTimes": [
+                "2018-01-24T10:00:00Z"
+              ]
+            },
+            "schedulePolicyType": "SimpleSchedulePolicyV2",
+            "scheduleRunFrequency": "Daily"
+          },
+          "retentionPolicy": {
+            "retentionPolicyType": "LongTermRetentionPolicy",
+            "dailySchedule": {
+              "retentionTimes": [
+                "2018-01-24T02:00:00Z"
+              ],
+              "retentionDuration": {
+                "count": 1,
+                "durationType": "Days"
+              }
+            }
+          },
+          "timeZone": "Pacific Standard Time",
+          "protectedItemsCount": 0,
+          "resourceGuardOperationRequests": null
+        }
+      }
+    }
+  }
+}

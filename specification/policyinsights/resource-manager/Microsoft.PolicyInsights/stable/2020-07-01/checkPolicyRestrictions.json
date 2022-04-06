@@ -131,7 +131,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PendingField"
-          }
+          },
+          "x-ms-identifiers": [
+            "field"
+          ]
         }
       },
       "required": [
@@ -186,6 +189,9 @@
           "items": {
             "$ref": "#/definitions/FieldRestrictions"
           },
+          "x-ms-identifiers": [
+            "field"
+          ],
           "readOnly": true
         },
         "contentEvaluationResult": {
@@ -196,7 +202,13 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/PolicyEvaluationResult"
-              }
+              },
+              "x-ms-identifiers": [
+                "/policyInfo/policyDefinitionId",
+                "/policyInfo/policySetDefinitionId",
+                "/policyInfo/policyDefinitionReferenceId",
+                "/policyInfo/policyAssignmentId"
+              ]
             }
           },
           "readOnly": true
@@ -216,7 +228,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/FieldRestriction"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
