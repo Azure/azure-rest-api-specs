@@ -9,48 +9,82 @@
   "definitions": {
     "HealthcareFhirResourceCreatedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceCreated event.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/HealthcareFhirResourceEventBaseProperties"
-        }
-      ]
-    },
-    "HealthcareFhirResourceUpdatedEventData": {
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceUpdated event.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/HealthcareFhirResourceEventBaseProperties"
-        }
-      ]
-    },
-    "HealthcareFhirResourceDeletedEventData": {
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceDeleted event.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/HealthcareFhirResourceEventBaseProperties"
-        }
-      ]
-    },
-    "HealthcareFhirResourceEventBaseProperties": {
-      "description": "Schema of common properties of all FhirResource events",
       "type": "object",
       "properties": {
         "resourceType": {
           "description": "Type of HL7 FHIR resource.",
-          "$ref": "#/definitions/HealthcareFhirResourceType"
+          "$ref": "#/definitions/HealthcareFhirResourceType",
+          "x-ms-client-name": "FhirResourceType"
         },
         "resourceFhirAccount": {
           "description": "Domain name of FHIR account for this resource.",
-          "type": "string"
+          "type": "string",
+          "x-ms-client-name": "FhirServiceHostName"
         },
         "resourceFhirId": {
           "description": "Id of HL7 FHIR resource.",
-          "type": "string"
+          "type": "string",
+          "x-ms-client-name": "FhirResourceId"
         },
         "resourceVersionId": {
           "description": "VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion).",
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "x-ms-client-name": "FhirResourceVersionId"
+        }
+      }
+    },
+    "HealthcareFhirResourceUpdatedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceUpdated event.",
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "description": "Type of HL7 FHIR resource.",
+          "$ref": "#/definitions/HealthcareFhirResourceType",
+          "x-ms-client-name": "FhirResourceType"
+        },
+        "resourceFhirAccount": {
+          "description": "Domain name of FHIR account for this resource.",
+          "type": "string",
+          "x-ms-client-name": "FhirServiceHostName"
+        },
+        "resourceFhirId": {
+          "description": "Id of HL7 FHIR resource.",
+          "type": "string",
+          "x-ms-client-name": "FhirResourceId"
+        },
+        "resourceVersionId": {
+          "description": "VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion).",
+          "type": "integer",
+          "format": "int64",
+          "x-ms-client-name": "FhirResourceVersionId"
+        }
+      }
+    },
+    "HealthcareFhirResourceDeletedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceDeleted event.",
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "description": "Type of HL7 FHIR resource.",
+          "$ref": "#/definitions/HealthcareFhirResourceType",
+          "x-ms-client-name": "FhirResourceType"
+        },
+        "resourceFhirAccount": {
+          "description": "Domain name of FHIR account for this resource.",
+          "type": "string",
+          "x-ms-client-name": "FhirServiceHostName"
+        },
+        "resourceFhirId": {
+          "description": "Id of HL7 FHIR resource.",
+          "type": "string",
+          "x-ms-client-name": "FhirResourceId"
+        },
+        "resourceVersionId": {
+          "description": "VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion).",
+          "type": "integer",
+          "format": "int64",
+          "x-ms-client-name": "FhirResourceVersionId"
         }
       }
     },
@@ -873,3 +907,4 @@
     }
   }
 }
+  
