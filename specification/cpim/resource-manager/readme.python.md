@@ -54,3 +54,5 @@ These settings apply only when `--tag=package-2019-01-01-preview --python` is sp
 ```yaml $(tag) =='package-2019-01-01-preview'&& $(python)
 namespace: $(python-base-namespace).v2019_01_01_preview
 output-folder: $(python-sdks-folder)/azureadexternalidentities/azure-mgmt-azureadexternalidentities/azure/mgmt/azureadexternalidentities/v2019_01_01_preview
+```
+
