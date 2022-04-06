@@ -79,7 +79,7 @@ input-file:
 
 ```yaml $(tag) == 'package-preview-2022-01-15-only'
 input-file:
-  - Microsoft.KubernetesConfiguration/preview/2022-01-15-preview/extensionsTypes.json
+  - Microsoft.KubernetesConfiguration/preview/2022-01-15-preview/extensionTypes.json
 ```
 
 ### Tag: package-preview-2022-01
