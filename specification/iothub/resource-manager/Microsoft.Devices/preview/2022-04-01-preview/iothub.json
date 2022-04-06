@@ -2405,9 +2405,8 @@
           "description": "This property when set to true, will enable data residency, thus, disabling disaster recovery.",
           "type": "boolean"
         },
-        "enableRootCertificateV2": {
-          "description": "This property when set to true, hub will use G2 cert; while it's set to false, hub uses Baltimore Cert.",
-          "type": "boolean"
+        "rootCertificate": {
+          "$ref": "#/definitions/RootCertificateProperties"
         }
       }
     },
@@ -4461,6 +4460,16 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    }
+  },
+  "RootCertificateProperties": {
+    "description": "This property store root certificate related informaiton",
+    "type": "object",
+    "properties": {
+      "enableRootCertificateV2": {
+        "description": "This property when set to true, hub will use G2 cert; while it's set to false, hub uses Baltimore Cert.",
+        "type": "boolean"
+      }
     }
   }
 }
