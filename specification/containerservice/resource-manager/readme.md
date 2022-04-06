@@ -41,7 +41,7 @@ tag: package-2022-03
 
 These settings apply only when `--tag=package-2022-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-03'
+``` yaml $(tag) == 'package-2022-03'
 input-file:
   - Microsoft.ContainerService/stable/2022-03-01/managedClusters.json
 directive:
