@@ -371,6 +371,9 @@
           },
           "Get properties of a OS provider": {
             "$ref": "./examples/workloadmonitor/PrometheusOSProviderInstances_Get.json"
+          },
+          "Get properties of a Db2 provider": {
+            "$ref": "./examples/workloadmonitor/Db2ProviderInstances_Get.json"
           }
         },
         "produces": [
@@ -428,6 +431,9 @@
           },
           "Create a OS provider": {
             "$ref": "./examples/workloadmonitor/PrometheusOSProviderInstances_Create.json"
+          },
+          "Create a Db2 provider": {
+            "$ref": "./examples/workloadmonitor/Db2ProviderInstances_Create.json"
           }
         },
         "parameters": [
@@ -916,6 +922,43 @@
         }
       },
       "x-ms-discriminator-value": "PrometheusOS"
+    },
+    "DB2ProviderInstanceProperties": {
+      "description": "Gets or sets the DB2 provider properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProviderSpecificProperties"
+        }
+      ],
+      "properties": {
+        "hostname": {
+          "description": "Gets or sets the target virtual machine name.",
+          "type": "string"
+        },
+        "dbName": {
+          "description": "Gets or sets the db2 database name.",
+          "type": "string"
+        },
+        "dbPort": {
+          "description": "Gets or sets the db2 database sql port.",
+          "type": "string"
+        },
+        "dbUsername": {
+          "description": "Gets or sets the db2 database user name.",
+          "type": "string"
+        },
+        "dbPassword": {
+          "description": "Gets or sets the db2 database password.",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "sapSid": {
+          "description": "Gets or sets the SAP System Identifier",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "Db2"
     },
     "ProviderSpecificProperties": {
       "description": "Gets or sets the provider specific properties.",
