@@ -477,7 +477,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/CustomDnsSuffixConfiguration"
+              "$ref": "./CommonDefinitions.json#/definitions/CustomDnsSuffixConfiguration"
             }
           },
           "default": {
@@ -515,7 +515,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CustomDnsSuffixConfiguration"
+              "$ref": "./CommonDefinitions.json#/definitions/CustomDnsSuffixConfiguration"
             }
           },
           {
@@ -529,7 +529,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/CustomDnsSuffixConfiguration"
+              "$ref": "./CommonDefinitions.json#/definitions/CustomDnsSuffixConfiguration"
             }
           },
           "default": {
@@ -2429,54 +2429,6 @@
             "allowNewPrivateEndpointConnections": {
               "description": "Property to enable and disable new private endpoint connection creation on ASE",
               "type": "boolean"
-            }
-          },
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "CustomDnsSuffixConfiguration": {
-      "description": "Full view of the custom domain suffix configuration for ASEv3.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "CustomDnsSuffixConfiguration resource specific properties",
-          "type": "object",
-          "properties": {
-            "provisioningState": {
-              "enum": [
-                "Succeeded",
-                "Failed",
-                "Degraded",
-                "InProgress"
-              ],
-              "type": "string",
-              "readOnly": true,
-              "x-ms-enum": {
-                "name": "CustomDnsSuffixProvisioningState",
-                "modelAsString": false
-              }
-            },
-            "provisioningDetails": {
-              "type": "string",
-              "readOnly": true
-            },
-            "dnsSuffix": {
-              "description": "The default custom domain suffix to use for all sites deployed on the ASE.",
-              "type": "string"
-            },
-            "certificateUrl": {
-              "description": "The URL referencing the Azure Key Vault certificate secret that should be used as the default SSL/TLS certificate for sites with the custom domain suffix.",
-              "type": "string"
-            },
-            "keyVaultReferenceIdentity": {
-              "description": "The user-assigned identity to use for resolving the key vault certificate reference. If not specified, the system-assigned ASE identity will be used if available.",
-              "type": "string"
             }
           },
           "x-ms-client-flatten": true
