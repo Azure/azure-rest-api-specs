@@ -961,7 +961,7 @@
       ],
       "post": {
         "tags": [
-          "NetworkSecurityPerimeters"
+          "NetworkSecurityPerimetersCheckMembers"
         ],
         "operationId": "NetworkSecurityPerimeters_CheckMembers",
         "description": "Action to check members associated to an NSP Profile",
@@ -973,20 +973,20 @@
             "schema": {
               "$ref": "#/definitions/CheckMembers"
             },
-            "description": "Parameter supplied to create or update the network security perimeter."
+            "description": "Parameter supplied to create or update the network security perimeter check members."
           }
         ],
         "responses": {
           "200": {
             "description": "Resource Updated. Returns the network security perimeter.",
             "schema": {
-              "$ref": "#/definitions/NetworkSecurityPerimeter"
+              "$ref": "#/definitions/CheckMembers"
             }
           },
           "201": {
             "description": "Resource Created. Returns the network security perimeter.",
             "schema": {
-              "$ref": "#/definitions/NetworkSecurityPerimeter"
+              "$ref": "#/definitions/CheckMembers"
             }
           },
           "default": {
@@ -1417,20 +1417,29 @@
       "properties": {
         "memberDestinations": {
           "type": "array",
-          "items": {"$ref": "#/definitions/PrivateLinkResourceId"}
+          "items": {"$ref": "#/definitions/MemberDestination"}
         }
       },
       "description": "Request object for check members API."
     },
-    "PrivateLinkResourceId": {
+    "MemberDestination": {
       "type": "object",
       "properties": {
         "privateLinkResourceId": {
           "type": "string",
-          "description": "Private Link Resource Id."
+          "description": "Private link resource Id."
+        },
+        "isMember": {
+          "readOnly": true,
+          "type": "string",
+          "description": "yes/no, if it is member or not."
+        },
+        "profile": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Network security perimeter profile."
         }
-      },
-      "description": "Properties of network security perimeter."
+      }
     }
   },
   "parameters": {
