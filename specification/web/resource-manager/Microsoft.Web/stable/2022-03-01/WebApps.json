@@ -23581,6 +23581,35 @@
         }
       }
     },
+    "AzureResourceErrorInfo": {
+      "type": "object",
+      "description": "The azure resource error info.",
+      "additionalProperties": false,
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureResourceErrorInfo"
+          },
+          "x-ms-identifiers": [
+            "code"
+          ],
+          "description": "The error details."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ErrorInfo"
+        }
+      ]
+    },
     "AzureStaticWebApps": {
       "description": "The configuration settings of the Azure Static Web Apps provider.",
       "type": "object",
@@ -24113,6 +24142,51 @@
         }
       }
     },
+    "ContentLink": {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "The content link URI."
+        },
+        "contentVersion": {
+          "type": "string",
+          "description": "The content version.",
+          "readOnly": true
+        },
+        "contentSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The content size.",
+          "readOnly": true
+        },
+        "contentHash": {
+          "$ref": "#/definitions/ContentHash",
+          "description": "The content hash.",
+          "readOnly": true
+        },
+        "metadata": {
+          "$ref": "#/definitions/Object",
+          "description": "The metadata.",
+          "readOnly": true
+        }
+      },
+      "description": "The content link."
+    },
+    "ContentHash": {
+      "type": "object",
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "description": "The algorithm of the content hash."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the content hash."
+        }
+      },
+      "description": "The content hash."
+    },
     "ContinuousWebJob": {
       "description": "Continuous Web Job Information.",
       "type": "object",
@@ -24235,6 +24309,16 @@
           "type": "string"
         }
       }
+    },
+    "Correlation": {
+      "type": "object",
+      "properties": {
+        "clientTrackingId": {
+          "type": "string",
+          "description": "The client tracking id."
+        }
+      },
+      "description": "The correlation property."
     },
     "CsmPublishingCredentialsPoliciesEntity": {
       "description": "Publishing Credentials Policies parameters.",
@@ -24446,6 +24530,23 @@
         }
       }
     },
+    "DayOfWeek": {
+      "type": "string",
+      "description": "The day of the week.",
+      "enum": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "x-ms-enum": {
+        "name": "DayOfWeek",
+        "modelAsString": false
+      }
+    },
     "DefaultAuthorizationPolicy": {
       "description": "The configuration settings of the Azure Active Directory default authorization policy.",
       "type": "object",
@@ -24582,6 +24683,97 @@
         "enabled": {
           "description": "True if configuration is enabled, false if it is disabled and null if configuration is not set.",
           "type": "boolean"
+        }
+      }
+    },
+    "ErrorInfo": {
+      "type": "object",
+      "description": "The error info.",
+      "additionalProperties": false,
+      "required": [
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates Logic service is not able to process the incoming request. The error property contains the error details.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorProperties",
+          "description": "The error properties."
+        }
+      }
+    },
+    "ErrorProperties": {
+      "description": "Error properties indicate why the Logic service was not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "ExpressionTraces": {
+      "description": "The expression traces.",
+      "type": "object",
+      "properties": {
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressionRoot"
+          },
+          "x-ms-identifiers": [
+            "path"
+          ]
+        }
+      }
+    },
+    "ExpressionRoot": {
+      "description": "The expression root.",
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Expression"
+        }
+      ]
+    },
+    "Expression": {
+      "description": "The expression.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "description": "The text.",
+          "type": "string"
+        },
+        "value": {},
+        "subexpressions": {
+          "type": "array",
+          "description": "The sub expressions.",
+          "items": {
+            "$ref": "#/definitions/Expression"
+          },
+          "x-ms-identifiers": []
+        },
+        "error": {
+          "$ref": "#/definitions/AzureResourceErrorInfo"
         }
       }
     },
@@ -25284,6 +25476,20 @@
           "description": "The IP address range."
         }
       }
+    },    
+    "JsonSchema": {
+      "type": "object",
+      "description": "The JSON schema.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The JSON title."
+        },
+        "content": {
+          "type": "string",
+          "description": "The JSON content."
+        }
+      }
     },
     "JwtClaimChecks": {
       "description": "The configuration settings of the checks that should be made while validating the JWT Claims.",
@@ -25317,6 +25523,19 @@
           "description": "Key value",
           "type": "string"
         }
+      }
+    },
+    "KeyType": {
+      "type": "string",
+      "description": "The key type.",
+      "enum": [
+        "NotSpecified",
+        "Primary",
+        "Secondary"
+      ],
+      "x-ms-enum": {
+        "name": "KeyType",
+        "modelAsString": true
       }
     },
     "LegacyMicrosoftAccount": {
@@ -25735,6 +25954,69 @@
         }
       }
     },
+    "Object": {
+      "type": "object",
+      "properties": {}
+    },
+    "OpenAuthenticationAccessPolicies": {
+      "type": "object",
+      "description": "AuthenticationPolicy of type Open.",
+      "properties": {
+        "policies": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/OpenAuthenticationAccessPolicy"
+          },
+          "description": "Open authentication policies."
+        }
+      }
+    },
+    "OpenAuthenticationAccessPolicy": {
+      "type": "object",
+      "description": "Open authentication access policy defined by user.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/OpenAuthenticationProviderType",
+          "description": "Type of provider for OAuth."
+        },
+        "claims": {
+          "type": "array",
+          "description": "The access policy claims.",
+          "items": {
+            "$ref": "#/definitions/OpenAuthenticationPolicyClaim",
+            "description": "The access policy claim."
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "OpenAuthenticationProviderType": {
+      "type": "string",
+      "description": "Open authentication policy provider type.",
+      "enum": [
+        "AAD"
+      ],
+      "x-ms-enum": {
+        "name": "OpenAuthenticationProviderType",
+        "modelAsString": true
+      }
+    },
+    "OpenAuthenticationPolicyClaim": {
+      "type": "object",
+      "description": "Open authentication policy claim.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the claim."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the claim."
+        }
+      }
+    },
     "OpenIdConnectClientCredential": {
       "description": "The authentication client credentials of the custom Open ID Connect provider.",
       "type": "object",
@@ -25815,6 +26097,110 @@
           "$ref": "#/definitions/OpenIdConnectConfig",
           "description": "The configuration settings of the endpoints used for the custom Open ID Connect provider."
         }
+      }
+    },
+    "OperationResult": {
+      "type": "object",
+      "description": "The operation result definition.",
+      "additionalProperties": false,
+      "properties": {
+        "trackingId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the tracking id."
+        },
+        "inputs": {
+          "$ref": "#/definitions/Object",
+          "readOnly": true,
+          "description": "Gets the inputs."
+        },
+        "inputsLink": {
+          "$ref": "#/definitions/ContentLink",
+          "readOnly": true,
+          "description": "Gets the link to inputs."
+        },
+        "outputs": {
+          "$ref": "#/definitions/Object",
+          "readOnly": true,
+          "description": "Gets the outputs."
+        },
+        "outputsLink": {
+          "$ref": "#/definitions/ContentLink",
+          "readOnly": true,
+          "description": "Gets the link to outputs."
+        },
+        "trackedProperties": {
+          "$ref": "#/definitions/Object",
+          "readOnly": true,
+          "description": "Gets the tracked properties."
+        },
+        "retryHistory": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RetryHistory"
+          },
+          "x-ms-identifiers": [],
+          "description": "Gets the retry histories."
+        },
+        "iterationCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationResultProperties"
+        }
+      ]
+    },
+    "OperationResultProperties": {
+      "type": "object",
+      "x-abstract": true,
+      "description": "The run operation result properties.",
+      "additionalProperties": false,
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the workflow scope repetition."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the workflow scope repetition."
+        },
+        "correlation": {
+          "$ref": "#/definitions/RunActionCorrelation",
+          "description": "The correlation properties."
+        },
+        "status": {
+          "$ref": "#/definitions/WorkflowStatus",
+          "description": "The status of the workflow scope repetition."
+        },
+        "code": {
+          "type": "string",
+          "description": "The workflow scope repetition code."
+        },
+        "error": {}
+      }
+    },
+    "ParameterType": {
+      "type": "string",
+      "description": "The parameter type.",
+      "enum": [
+        "NotSpecified",
+        "String",
+        "SecureString",
+        "Int",
+        "Float",
+        "Bool",
+        "Array",
+        "Object",
+        "SecureObject"
+      ],
+      "x-ms-enum": {
+        "name": "ParameterType",
+        "modelAsString": true
       }
     },
     "PerfMonCounterCollection": {
@@ -26535,6 +26921,108 @@
         }
       }
     },
+    "RecurrenceSchedule": {
+      "type": "object",
+      "properties": {
+        "minutes": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": "The minutes."
+        },
+        "hours": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": "The hours."
+        },
+        "weekDays": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Sunday",
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
+            "x-ms-enum": {
+              "name": "DaysOfWeek",
+              "modelAsString": false
+            }
+          },
+          "description": "The days of the week."
+        },
+        "monthDays": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": "The month days."
+        },
+        "monthlyOccurrences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecurrenceScheduleOccurrence"
+          },
+          "x-ms-identifiers": [],
+          "description": "The monthly occurrences."
+        }
+      },
+      "description": "The recurrence schedule."
+    },
+    "RecurrenceScheduleOccurrence": {
+      "type": "object",
+      "properties": {
+        "day": {
+          "$ref": "#/definitions/DayOfWeek",
+          "description": "The day of the week."
+        },
+        "occurrence": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The occurrence."
+        }
+      },
+      "description": "The recurrence schedule occurrence."
+    },
+    "RegenerateActionParameter": {
+      "type": "object",
+      "properties": {
+        "keyType": {
+          "$ref": "#/definitions/KeyType",
+          "description": "The key type."
+        }
+      },
+      "description": "The access key regenerate action content."
+    },
+    "RepetitionIndex": {
+      "type": "object",
+      "description": "The workflow run action repetition index.",
+      "additionalProperties": false,
+      "required": [
+        "itemIndex"
+      ],
+      "properties": {
+        "scopeName": {
+          "type": "string",
+          "description": "The scope."
+        },
+        "itemIndex": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index."
+        }
+      }
+    },
     "RelayServiceConnectionEntity": {
       "description": "Hybrid Connection for an App Service app.",
       "type": "object",
@@ -26606,6 +27094,46 @@
       },
       "x-ms-azure-resource": true,
       "description": "The base resource type."
+    },
+    "Response": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "A response.",
+      "properties": {
+        "headers": {
+          "$ref": "#/definitions/Object",
+          "description": "A list of all the headers attached to the response."
+        },
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The status code of the response."
+        },
+        "bodyLink": {
+          "$ref": "#/definitions/ContentLink",
+          "description": "Details on the location of the body content."
+        }
+      }
+    },
+    "ResourceReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource id."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the resource name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the resource type."
+        }
+      },
+      "description": "The resource reference."
     },
     "RestoreRequest": {
       "description": "Description of a restore request.",
@@ -26690,6 +27218,149 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "Request": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "A request.",
+      "properties": {
+        "headers": {
+          "$ref": "#/definitions/Object",
+          "description": "A list of all the headers attached to the request."
+        },
+        "uri": {
+          "type": "string",
+          "description": "The destination for the request."
+        },
+        "method": {
+          "type": "string",
+          "description": "The HTTP method used for the request."
+        }
+      }
+    },
+    "RequestHistoryListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RequestHistory"
+          },
+          "description": "A list of workflow request histories."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "The list of workflow request histories."
+    },
+    "RequestHistory": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The request history.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RequestHistoryProperties",
+          "description": "The request history properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "RequestHistoryProperties": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The request history.",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the request started."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the request ended."
+        },
+        "request": {
+          "$ref": "#/definitions/Request",
+          "description": "The request."
+        },
+        "response": {
+          "$ref": "#/definitions/Response",
+          "description": "The response."
+        }
+      }
+    },
+    "RetryHistory": {
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the start time."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the end time."
+        },
+        "code": {
+          "type": "string",
+          "description": "Gets the status code."
+        },
+        "clientRequestId": {
+          "type": "string",
+          "description": "Gets the client request Id."
+        },
+        "serviceRequestId": {
+          "type": "string",
+          "description": "Gets the service request Id."
+        },
+        "error": {
+          "$ref": "#/definitions/ErrorResponse",
+          "description": "Gets the error response."
+        }
+      },
+      "description": "The retry history."
+    },
+    "RunActionCorrelation": {
+      "type": "object",
+      "description": "The workflow run action correlation properties.",
+      "additionalProperties": false,
+      "properties": {
+        "actionTrackingId": {
+          "type": "string",
+          "description": "The action tracking identifier."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunCorrelation"
+        }
+      ]
+    },
+    "RunCorrelation": {
+      "type": "object",
+      "description": "The correlation properties.",
+      "additionalProperties": false,
+      "properties": {
+        "clientTrackingId": {
+          "type": "string",
+          "description": "The client tracking identifier."
+        },
+        "clientKeywords": {
+          "type": "array",
+          "description": "The client keywords.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -27650,6 +28321,39 @@
         }
       }
     },
+    "Sku": {
+      "type": "object",
+      "description": "The sku type.",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/SkuName",
+          "description": "The name."
+        },
+        "plan": {
+          "$ref": "#/definitions/ResourceReference",
+          "description": "The reference to plan."
+        }
+      }
+    },
+    "SkuName": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Free",
+        "Shared",
+        "Basic",
+        "Standard",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "SkuName",
+        "modelAsString": true
+      },
+      "description": "The sku name."
+    },
     "SlotConfigNames": {
       "description": "Names for connection strings, application settings, and external Azure storage account configuration\nidentifiers to be marked as sticky to the deployment slot and not moved during a swap operation.\nThis is valid for all deployment slots in an app.",
       "type": "object",
@@ -27922,6 +28626,17 @@
           "x-ms-client-flatten": true
         }
       }
+    },
+    "SubResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource id."
+        }
+      },
+      "x-ms-azure-resource": true,
+      "description": "The sub resource type."
     },
     "SwiftVirtualNetwork": {
       "description": "Swift Virtual Network Contract. This is used to enable the new Swift way of doing virtual network integration.",
@@ -28379,6 +29094,28 @@
       },
       "description": "The workflow filter."
     },
+    "WorkflowParameter": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ParameterType",
+          "description": "The type."
+        },
+        "value": {
+          "$ref": "#/definitions/Object",
+          "description": "The value."
+        },
+        "metadata": {
+          "$ref": "#/definitions/Object",
+          "description": "The metadata."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description."
+        }
+      },
+      "description": "The workflow parameters."
+    },
     "WorkflowProperties": {
       "type": "object",
       "properties": {
@@ -28497,6 +29234,409 @@
       },
       "description": "The list of workflows."
     },
+    "WorkflowOutputParameter": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Object",
+          "readOnly": true,
+          "description": "Gets the error."
+        }
+      },
+      "description": "The workflow output parameter.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkflowParameter"
+        }
+      ]
+    },
+    "RecurrenceFrequency": {
+      "type": "string",
+      "description": "The recurrence frequency.",
+      "enum": [
+        "NotSpecified",
+        "Second",
+        "Minute",
+        "Hour",
+        "Day",
+        "Week",
+        "Month",
+        "Year"
+      ],
+      "x-ms-enum": {
+        "name": "RecurrenceFrequency",
+        "modelAsString": true
+      }
+    },
+    "WorkflowRun": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkflowRunProperties",
+          "description": "The workflow run properties."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow run name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow run type."
+        }
+      },
+      "description": "The workflow run.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ]
+    },
+    "WorkflowRunAction": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkflowRunActionProperties",
+          "description": "The workflow run action properties."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow run action name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow run action type."
+        }
+      },
+      "description": "The workflow run action.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ]
+    },
+    "WorkflowRunActionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkflowRunAction"
+          },
+          "description": "A list of workflow run actions."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "The list of workflow run actions."
+    },
+    "WorkflowRunActionProperties": {
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the start time."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the end time."
+        },
+        "status": {
+          "$ref": "#/definitions/WorkflowStatus",
+          "readOnly": true,
+          "description": "Gets the status."
+        },
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the code."
+        },
+        "error": {
+          "$ref": "#/definitions/Object",
+          "readOnly": true,
+          "description": "Gets the error."
+        },
+        "trackingId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the tracking id."
+        },
+        "correlation": {
+          "$ref": "#/definitions/RunActionCorrelation",
+          "description": "The correlation properties."
+        },
+        "inputsLink": {
+          "$ref": "#/definitions/ContentLink",
+          "readOnly": true,
+          "description": "Gets the link to inputs."
+        },
+        "outputsLink": {
+          "$ref": "#/definitions/ContentLink",
+          "readOnly": true,
+          "description": "Gets the link to outputs."
+        },
+        "trackedProperties": {
+          "$ref": "#/definitions/Object",
+          "readOnly": true,
+          "description": "Gets the tracked properties."
+        },
+        "retryHistory": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RetryHistory"
+          },
+          "x-ms-identifiers": [],
+          "description": "Gets the retry histories."
+        }
+      },
+      "description": "The workflow run action properties."
+    },
+    "WorkflowRunActionRepetitionDefinitionCollection": {
+      "type": "object",
+      "description": "A collection of workflow run action repetitions.",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of recommendations.",
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkflowRunActionRepetitionDefinition"
+          }
+        }
+      }
+    },
+    "WorkflowRunActionRepetitionDefinition": {
+      "type": "object",
+      "description": "The workflow run action repetition definition.",
+      "additionalProperties": false,
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkflowRunActionRepetitionProperties",
+          "description": "The workflow run action repetition properties definition.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "WorkflowRunActionRepetitionProperties": {
+      "type": "object",
+      "description": "The workflow run action repetition properties definition.",
+      "additionalProperties": false,
+      "properties": {
+        "repetitionIndexes": {
+          "type": "array",
+          "description": "The repetition indexes.",
+          "items": {
+            "$ref": "#/definitions/RepetitionIndex"
+          },
+          "x-ms-identifiers": [
+            "itemIndex"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationResult"
+        }
+      ]
+    },
+    "WorkflowRunListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkflowRun"
+          },
+          "description": "A list of workflow runs."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "The list of workflow runs."
+    },
+    "WorkflowRunProperties": {
+      "type": "object",
+      "properties": {
+        "waitEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the wait end time."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the start time."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the end time."
+        },
+        "status": {
+          "$ref": "#/definitions/WorkflowStatus",
+          "readOnly": true,
+          "description": "Gets the status."
+        },
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the code."
+        },
+        "error": {
+          "$ref": "#/definitions/Object",
+          "readOnly": true,
+          "description": "Gets the error."
+        },
+        "correlationId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the correlation id."
+        },
+        "correlation": {
+          "$ref": "#/definitions/Correlation",
+          "description": "The run correlation."
+        },
+        "workflow": {
+          "$ref": "#/definitions/ResourceReference",
+          "readOnly": true,
+          "description": "Gets the reference to workflow version."
+        },
+        "trigger": {
+          "$ref": "#/definitions/WorkflowRunTrigger",
+          "readOnly": true,
+          "description": "Gets the fired trigger."
+        },
+        "outputs": {
+          "type": "object",
+          "readOnly": true,
+          "additionalProperties": {
+            "$ref": "#/definitions/WorkflowOutputParameter",
+            "description": "The workflow output parameter."
+          },
+          "description": "Gets the outputs."
+        },
+        "response": {
+          "$ref": "#/definitions/WorkflowRunTrigger",
+          "readOnly": true,
+          "description": "Gets the response of the flow run."
+        }
+      },
+      "description": "The workflow run properties."
+    },
+    "WorkflowRunFilter": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/WorkflowStatus",
+          "description": "The status of workflow run."
+        }
+      },
+      "description": "The workflow run filter."
+    },
+    "WorkflowRunTrigger": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the name."
+        },
+        "inputs": {
+          "$ref": "#/definitions/Object",
+          "readOnly": true,
+          "description": "Gets the inputs."
+        },
+        "inputsLink": {
+          "$ref": "#/definitions/ContentLink",
+          "readOnly": true,
+          "description": "Gets the link to inputs."
+        },
+        "outputs": {
+          "$ref": "#/definitions/Object",
+          "readOnly": true,
+          "description": "Gets the outputs."
+        },
+        "outputsLink": {
+          "$ref": "#/definitions/ContentLink",
+          "readOnly": true,
+          "description": "Gets the link to outputs."
+        },
+        "scheduledTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the scheduled time."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the start time."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the end time."
+        },
+        "trackingId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the tracking id."
+        },
+        "correlation": {
+          "$ref": "#/definitions/Correlation",
+          "description": "The run correlation."
+        },
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the code."
+        },
+        "status": {
+          "$ref": "#/definitions/WorkflowStatus",
+          "readOnly": true,
+          "description": "Gets the status."
+        },
+        "error": {
+          "$ref": "#/definitions/Object",
+          "readOnly": true,
+          "description": "Gets the error."
+        },
+        "trackedProperties": {
+          "$ref": "#/definitions/Object",
+          "readOnly": true,
+          "description": "Gets the tracked properties."
+        }
+      },
+      "description": "The workflow run trigger."
+    },
     "WorkflowState": {
       "type": "string",
       "description": "The workflow state.",
@@ -28512,6 +29652,459 @@
         "name": "WorkflowState",
         "modelAsString": true
       }
+    },
+    "WorkflowStatus": {
+      "type": "string",
+      "description": "The workflow status.",
+      "enum": [
+        "NotSpecified",
+        "Paused",
+        "Running",
+        "Waiting",
+        "Succeeded",
+        "Skipped",
+        "Suspended",
+        "Cancelled",
+        "Failed",
+        "Faulted",
+        "TimedOut",
+        "Aborted",
+        "Ignored"
+      ],
+      "x-ms-enum": {
+        "name": "WorkflowStatus",
+        "modelAsString": true
+      }
+    },
+    "WorkflowTrigger": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkflowTriggerProperties",
+          "description": "The workflow trigger properties."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow trigger name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow trigger type."
+        }
+      },
+      "description": "The workflow trigger.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ]
+    },
+    "WorkflowTriggerCallbackUrl": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow trigger callback URL."
+        },
+        "method": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow trigger callback URL HTTP method."
+        },
+        "basePath": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow trigger callback URL base path."
+        },
+        "relativePath": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow trigger callback URL relative path."
+        },
+        "relativePathParameters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets the workflow trigger callback URL relative path parameters."
+        },
+        "queries": {
+          "$ref": "#/definitions/WorkflowTriggerListCallbackUrlQueries",
+          "description": "Gets the workflow trigger callback URL query parameters."
+        }
+      },
+      "description": "The workflow trigger callback URL."
+    },
+    "WorkflowTriggerListCallbackUrlQueries": {
+      "type": "object",
+      "properties": {
+        "api-version": {
+          "type": "string",
+          "description": "The api version."
+        },
+        "sp": {
+          "type": "string",
+          "description": "The SAS permissions."
+        },
+        "sv": {
+          "type": "string",
+          "description": "The SAS version."
+        },
+        "sig": {
+          "type": "string",
+          "description": "The SAS signature."
+        },
+        "se": {
+          "type": "string",
+          "description": "The SAS timestamp."
+        }
+      },
+      "description": "Gets the workflow trigger callback URL query parameters."
+    },
+    "WorkflowTriggerHistory": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkflowTriggerHistoryProperties",
+          "description": "Gets the workflow trigger history properties."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow trigger history name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow trigger history type."
+        }
+      },
+      "description": "The workflow trigger history.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ]
+    },
+    "WorkflowTriggerHistoryProperties": {
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the start time."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the end time."
+        },
+        "scheduledTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The scheduled time."
+        },
+        "status": {
+          "$ref": "#/definitions/WorkflowStatus",
+          "readOnly": true,
+          "description": "Gets the status."
+        },
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the code."
+        },
+        "error": {
+          "$ref": "#/definitions/Object",
+          "readOnly": true,
+          "description": "Gets the error."
+        },
+        "trackingId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the tracking id."
+        },
+        "correlation": {
+          "$ref": "#/definitions/Correlation",
+          "description": "The run correlation."
+        },
+        "inputsLink": {
+          "$ref": "#/definitions/ContentLink",
+          "readOnly": true,
+          "description": "Gets the link to input parameters."
+        },
+        "outputsLink": {
+          "$ref": "#/definitions/ContentLink",
+          "readOnly": true,
+          "description": "Gets the link to output parameters."
+        },
+        "fired": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "The value indicating whether trigger was fired."
+        },
+        "run": {
+          "$ref": "#/definitions/ResourceReference",
+          "readOnly": true,
+          "description": "Gets the reference to workflow run."
+        }
+      },
+      "description": "The workflow trigger history properties."
+    },
+    "WorkflowTriggerHistoryListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkflowTriggerHistory"
+          },
+          "description": "A list of workflow trigger histories."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "The list of workflow trigger histories."
+    },
+    "WorkflowTriggerProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/WorkflowTriggerProvisioningState",
+          "readOnly": true,
+          "description": "Gets the provisioning state."
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the created time."
+        },
+        "changedTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the changed time."
+        },
+        "state": {
+          "$ref": "#/definitions/WorkflowState",
+          "readOnly": true,
+          "description": "Gets the state."
+        },
+        "status": {
+          "$ref": "#/definitions/WorkflowStatus",
+          "readOnly": true,
+          "description": "Gets the status."
+        },
+        "lastExecutionTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the last execution time."
+        },
+        "nextExecutionTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the next execution time."
+        },
+        "recurrence": {
+          "$ref": "#/definitions/WorkflowTriggerRecurrence",
+          "readOnly": true,
+          "description": "Gets the workflow trigger recurrence."
+        },
+        "workflow": {
+          "$ref": "#/definitions/ResourceReference",
+          "readOnly": true,
+          "description": "Gets the reference to workflow."
+        }
+      },
+      "description": "The workflow trigger properties."
+    },
+    "WorkflowTriggerProvisioningState": {
+      "type": "string",
+      "description": "The workflow trigger provisioning state.",
+      "enum": [
+        "NotSpecified",
+        "Accepted",
+        "Running",
+        "Ready",
+        "Creating",
+        "Created",
+        "Deleting",
+        "Deleted",
+        "Canceled",
+        "Failed",
+        "Succeeded",
+        "Moving",
+        "Updating",
+        "Registering",
+        "Registered",
+        "Unregistering",
+        "Unregistered",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "WorkflowTriggerProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "WorkflowTriggerListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkflowTrigger"
+          },
+          "description": "A list of workflow triggers."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "The list of workflow triggers."
+    },
+    "WorkflowTriggerRecurrence": {
+      "type": "object",
+      "properties": {
+        "frequency": {
+          "$ref": "#/definitions/RecurrenceFrequency",
+          "description": "The frequency."
+        },
+        "interval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The interval."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The start time."
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The end time."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The time zone."
+        },
+        "schedule": {
+          "$ref": "#/definitions/RecurrenceSchedule",
+          "description": "The recurrence schedule."
+        }
+      },
+      "description": "The workflow trigger recurrence."
+    },
+    "WorkflowVersion": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkflowVersionProperties",
+          "description": "The workflow version properties."
+        }
+      },
+      "description": "The workflow version.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "WorkflowVersionProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/WorkflowProvisioningState",
+          "readOnly": true,
+          "description": "The provisioning state."
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the created time."
+        },
+        "changedTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the changed time."
+        },
+        "state": {
+          "$ref": "#/definitions/WorkflowState",
+          "description": "The state."
+        },
+        "version": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the version."
+        },
+        "accessEndpoint": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the access endpoint."
+        },
+        "endpointsConfiguration": {
+          "$ref": "#/definitions/FlowEndpointsConfiguration",
+          "description": "The endpoints configuration."
+        },
+        "accessControl": {
+          "$ref": "#/definitions/FlowAccessControlConfiguration",
+          "description": "The access control configuration."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "readOnly": true,
+          "description": "The sku."
+        },
+        "integrationAccount": {
+          "$ref": "#/definitions/ResourceReference",
+          "description": "The integration account."
+        },
+        "definition": {
+          "$ref": "#/definitions/Object",
+          "description": "The definition."
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/WorkflowParameter"
+          },
+          "description": "The parameters."
+        }
+      },
+      "description": "The workflow version properties."
+    },
+    "WorkflowVersionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkflowVersion",
+            "description": "The workflow version."
+          },
+          "description": "A list of workflow versions."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "The list of workflow versions."
     }
   },
   "parameters": {
