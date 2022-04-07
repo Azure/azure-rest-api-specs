@@ -72,7 +72,7 @@ These settings apply only when `--tag=package-2022-05-01` is specified on the co
 
 ```yaml $(tag) == 'package-2022-05-01'
 input-file:
-  - Microsoft.ServiceLinker/preview/2022-05-01/servicelinker.json
+  - Microsoft.ServiceLinker/stable/2022-05-01/servicelinker.json
 ```
 
 ## Suppression
