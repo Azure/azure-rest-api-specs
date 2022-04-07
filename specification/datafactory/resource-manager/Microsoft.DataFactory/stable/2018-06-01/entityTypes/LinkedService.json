@@ -3331,6 +3331,44 @@
         "apiToken"
       ]
     },
+    "TwilioLinkedService": {
+      "x-ms-discriminator-value": "Twilio",
+      "description": "Linked service for Twilio.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Twilio linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TwilioLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "TwilioLinkedServiceTypeProperties": {
+      "description": "Twilio linked service type properties.",
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "object",
+          "description": "The Account SID of Twilio service."
+        },
+        "password": {
+          "description": "The auth token of Twilio service.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+      },
+      "required": [
+        "userName",
+        "password"
+      ]
+    },
     "AmazonRedshiftLinkedService": {
       "x-ms-discriminator-value": "AmazonRedshift",
       "description": "Linked service for Amazon Redshift.",
