@@ -606,11 +606,13 @@
             "CspmMonitorAws",
             "DefenderForContainersAws",
             "DefenderForServersAws",
+            "DefenderForDatabasesAws",
             "InformationProtectionAws",
             "CspmMonitorGcp",
             "CspmMonitorGithub",
             "DefenderForServersGcp",
-            "DefenderForContainersGcp"
+            "DefenderForContainersGcp",
+            "DefenderForDatabasesGcp"
           ],
           "x-ms-enum": {
             "name": "offeringType",
@@ -726,6 +728,10 @@
               "type": "boolean",
               "description": "Is arc auto provisioning enabled"
             },
+            "cloudRoleArn": {
+              "type": "string",
+              "description": "The cloud role ARN in AWS for this feature"
+            },
             "servicePrincipalSecretMetadata": {
               "type": "object",
               "description": "Metadata of Service Principal secret for autoprovisioning",
@@ -803,6 +809,60 @@
               "x-ms-enum": {
                 "name": "subPlan",
                 "modelAsString": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "defenderFoDatabasesAwsOffering": {
+      "type": "object",
+      "description": "The Defender for Databases AWS offering",
+      "x-ms-discriminator-value": "DefenderForDatabasesAws",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {
+        "defenderForServers": {
+          "type": "object",
+          "description": "The Defender for servers connection configuration",
+          "properties": {
+            "cloudRoleArn": {
+              "type": "string",
+              "description": "The cloud role ARN in AWS for this feature"
+            }
+          }
+        },
+        "arcAutoProvisioning": {
+          "type": "object",
+          "description": "The ARC autoprovisioning configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is arc auto provisioning enabled"
+            },
+            "cloudRoleArn": {
+              "type": "string",
+              "description": "The cloud role ARN in AWS for this feature"
+            },
+            "servicePrincipalSecretMetadata": {
+              "type": "object",
+              "description": "Metadata of Service Principal secret for autoprovisioning",
+              "properties": {
+                "expiryDate": {
+                  "type": "string",
+                  "description": "expiration date of service principal secret"
+                },
+                "parameterStoreRegion": {
+                  "type": "string",
+                  "description": "region of parameter store where secret is kept"
+                },
+                "parameterNameInStore": {
+                  "type": "string",
+                  "description": "name of secret resource in parameter store"
+                }
               }
             }
           }
@@ -962,6 +1022,42 @@
               "x-ms-enum": {
                 "name": "subPlan",
                 "modelAsString": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "defenderForDatabasesGcpOffering": {
+      "type": "object",
+      "description": "The Defender for Databases GCP offering configurations",
+      "x-ms-discriminator-value": "DefenderForDatabasesGcp",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {
+        "arcAutoProvisioning": {
+          "type": "object",
+          "description": "The ARC autoprovisioning configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is arc auto provisioning enabled"
+            },
+            "configuration": {
+              "type": "object",
+              "description": "Configuration for ARC autoprovisioning",
+              "properties": {
+                "clientId": {
+                  "type": "string",
+                  "description": "The Azure service principal client id for agent onboarding"
+                },
+                "agentOnboardingServiceAccountNumericId": {
+                  "type": "string",
+                  "description": "The agent onboarding service account numeric id"
+                }
               }
             }
           }
