@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-01-01-preview",
+    "version": "2022-05-01-preview",
     "title": "AppPlatformManagementClient",
     "description": "REST API for Azure Spring Cloud"
   },
@@ -122,6 +122,9 @@
           },
           "Services_CreateOrUpdate_VNetInjection": {
             "$ref": "./examples/Services_CreateOrUpdate_VNetInjection.json"
+          },
+          "Services_CreateOrUpdate_Enterprise": {
+            "$ref": "./examples/Services_CreateOrUpdate_Enterprise.json"
           }
         }
       },
@@ -6173,6 +6176,10 @@
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "Sku of the Service resource"
+        },
+        "plan": {
+          "$ref": "#/definitions/Plan",
+          "description": "Purchasing 3rd party product of the Service resource."
         }
       }
     },
@@ -6364,12 +6371,39 @@
           }
         },
         "principalId": {
-          "description": "Principal Id",
+          "description": "Principal Id of system-assigned managed identity.",
           "type": "string"
         },
         "tenantId": {
-          "description": "Tenant Id",
+          "description": "Tenant Id of system-assigned managed identity.",
           "type": "string"
+        },
+        "userAssignedIdentities": {
+          "$ref": "#/definitions/UserAssignedManagedIdentities",
+          "description": "Properties of user-assigned managed identities"
+        }
+      }
+    },
+    "UserAssignedManagedIdentities": {
+      "description": "User-assigned managed identities in key-value map. The key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/UserAssignedManagedIdentity"
+      }
+    },
+    "UserAssignedManagedIdentity": {
+      "description": "The details of the user-assigned managed identity assigned to an App.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "Principal Id of user-assigned managed identity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientId": {
+          "description": "Client Id of user-assigned managed identity.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -6525,6 +6559,26 @@
         "triggeredBuildResult": {
           "$ref": "#/definitions/TriggeredBuildResult",
           "description": " The build result triggered by this build"
+        },
+        "resourceRequests": {
+          "$ref": "#/definitions/BuildResourceRequests",
+          "description": "The customized build resource for this build"
+        }
+      }
+    },
+    "BuildResourceRequests": {
+      "description": "Resource request payload of Build Resource.",
+      "type": "object",
+      "properties": {
+        "cpu": {
+          "description": "Optional Cpu allocated to the build resource. 1 core can be represented by 1 or 1000m. \r\nThe default value is 1, this should not exceed build service agent pool cpu size.",
+          "type": "string",
+          "default": "1"
+        },
+        "memory": {
+          "description": "Optional Memory allocated to the build resource. 1 GB can be represented by 1Gi or 1024Mi. \r\nThe default value is 2Gi, this should not exceed build service agent pool memory size.",
+          "type": "string",
+          "default": "2Gi"
         }
       }
     },
@@ -7283,6 +7337,24 @@
         }
       }
     },
+    "Plan": {
+      "description": "Purchasing 3rd Party product for one Azure Spring Cloud instance",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "A publisher defined name of the 3rd Party Artifact that is being procured.",
+          "type": "string"
+        },
+        "publisher": {
+          "description": "The publisher of the 3rd Party Artifact that is being bought.",
+          "type": "string"
+        },
+        "product": {
+          "description": "The 3rd Party artifact that is being procured.",
+          "type": "string"
+        }
+      }
+    },
     "ConfigServerSettingsValidateResult": {
       "description": "Validation result for config server settings",
       "type": "object",
@@ -7504,6 +7576,10 @@
           "items": {
             "$ref": "#/definitions/RequiredTraffic"
           }
+        },
+        "ingressConfig": {
+          "description": "Ingress configuration payload for Azure Spring Cloud instance.",
+          "$ref": "#/definitions/IngressConfig"
         }
       }
     },
@@ -7550,6 +7626,17 @@
             "name": "trafficDirection",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "IngressConfig": {
+      "description": "Ingress configuration payload for Azure Spring Cloud instance.",
+      "type": "object",
+      "properties": {
+        "readTimeoutInSeconds": {
+          "format": "int32",
+          "description": "Ingress read time out in seconds.",
+          "type": "integer"
         }
       }
     },
@@ -8112,6 +8199,22 @@
             "type": "string"
           },
           "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the Certificate",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Succeeded",
+            "Failed",
+            "Deleting"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CertificateResourceProvisioningState",
+            "modelAsString": true
+          }
         }
       },
       "discriminator": "type"
@@ -8429,6 +8532,22 @@
         "certName": {
           "description": "The bound certificate name of domain.",
           "type": "string"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the Domain",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Succeeded",
+            "Failed",
+            "Deleting"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CustomDomainResourceProvisioningState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -8707,6 +8826,10 @@
         "imageRegistryCredential": {
           "$ref": "#/definitions/ImageRegistryCredential",
           "description": "Credential of the image registry"
+        },
+        "languageFramework": {
+          "description": "Language framework of the container image uploaded",
+          "type": "string"
         }
       }
     },
