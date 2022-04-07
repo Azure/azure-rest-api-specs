@@ -5515,6 +5515,24 @@
       },
       "description": "Security profile for the container service cluster."
     },
+    "ManagedClusterStorageProfile": {
+      "type": "object",
+      "properties": {
+        "diskCSIDriver": {
+          "$ref": "#/definitions/ManagedClusterStorageProfileDiskCSIDriver",
+          "description": "AzureDisk CSI Driver settings for the storage profile."
+        },
+        "fileCSIDriver": {
+          "$ref": "#/definitions/ManagedClusterStorageProfileFileCSIDriver",
+          "description": "AzureFile CSI Driver settings for the storage profile."
+        },
+        "snapshotController": {
+          "$ref": "#/definitions/ManagedClusterStorageProfileSnapshotController",
+          "description": "Snapshot Controller settings for the storage profile."
+        }
+      },
+      "description": "Storage profile for the container service cluster."
+    },
     "ManagedClusterSecurityProfileAzureDefender": {
       "type": "object",
       "properties": {
@@ -5528,6 +5546,36 @@
         }
       },
       "description": "Azure Defender settings for the security profile."
+    },
+    "ManagedClusterStorageProfileDiskCSIDriver": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether to enable AzureDisk CSI Driver. The default value is true."
+        }
+      },
+      "description": "AzureDisk CSI Driver settings for the storage profile."
+    },
+    "ManagedClusterStorageProfileFileCSIDriver": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether to enable AzureFile CSI Driver. The default value is true."
+        }
+      },
+      "description": "AzureFile CSI Driver settings for the storage profile."
+    },
+    "ManagedClusterStorageProfileSnapshotController": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether to enable Snapshot Controller. The default value is true."
+        }
+      },
+      "description": "Snapshot Controller settings for the storage profile."
     },
     "CreationData": {
       "description": "Data used when creating a target resource from a source resource.",
