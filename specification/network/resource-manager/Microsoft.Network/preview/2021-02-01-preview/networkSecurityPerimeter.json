@@ -1530,7 +1530,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MemberDestination"
-          }
+          },
+          "x-ms-identifiers": [
+            "privateLinkResourceId"
+          ]
         }
       },
       "description": "Request object for check members API."
@@ -1659,7 +1662,8 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The location of network security perimeter."
+      "description": "The location of network security perimeter.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
