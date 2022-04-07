@@ -34,49 +34,13 @@
 		}
 	},
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/expressRouteProviderPorts": {
-      "get": {
-        "tags": [
-          "ExpressRouteProviderPorts"
-        ],
-        "operationId": "ExpressRouteProviderPorts_List",
-        "description": "Retrieves all the ExpressRouteProviderPorts in a subscription.",
-        "parameters": [
-          {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. The operation returns a list of ExpressRouteProviderPort resources. If there are no ports for the provider, an empty list is returned.",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteProviderPortListResult"
-            }
-          },
-          "default": { 
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ExpressRouteProviderPortList": {
-            "$ref": "./examples/ExpressRouteProviderPortList.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/expressRouteProviderPorts": {
+      "/subscriptions/{subscriptionId}/providers/Microsoft.Network/expressRouteProviderPorts": {
       "get": {
         "tags": [
           "ExpressRouteProviderPorts"
         ],
         "operationId": "ExpressRouteProviderPortsLocation_List",
-        "description": "Retrieves all the ExpressRouteProviderPorts in a subscription for a particular location.",
+        "description": "Retrieves all the ExpressRouteProviderPorts in a subscription.",
         "parameters": [
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -107,9 +71,12 @@
           }
         },
         "x-ms-examples": {
-          "ExpressRouteProviderPortList": {
+         "ExpressRouteProviderPortList": {
+            "$ref": "./examples/ExpressRouteProviderPortList.json"
+          },
+           "ExpressRouteProviderPortList": {
             "$ref": "./examples/ExpressRouteProviderPortLocationList.json"
-          }
+          },
         }
       }
     },
