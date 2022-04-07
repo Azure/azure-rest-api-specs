@@ -1771,7 +1771,7 @@
           }
         },
         "automaticByPlatformSettings": {
-          "$ref": "#/definitions/WindowsAutomaticByPatchSettings",
+          "$ref": "#/definitions/WindowsAutomaticByPlatformPatchSettings",
           "description": "Specifies additional settings for patch mode AutomaticByPlatform in VM Guest Patching on Windows."
         }
       },
@@ -1804,17 +1804,17 @@
           }
         },
         "automaticByPlatformSettings": {
-          "$ref": "#/definitions/LinuxAutomaticByPatchSettings",
+          "$ref": "#/definitions/LinuxAutomaticByPlatformPatchSettings",
           "description": "Specifies additional settings for patch mode AutomaticByPlatform in VM Guest Patching on Linux."
         }
       },
       "description": "Specifies settings related to VM Guest Patching on Linux."
     },
-    "WindowsAutomaticByPatchSettings": {
+    "WindowsAutomaticByPlatformPatchSettings": {
       "properties": {
         "rebootSetting": {
           "type": "string",
-          "description": "Specifies reboot setting for all AutomaticByPlatform patch installation operations.",
+          "description": "Specifies the reboot setting for all AutomaticByPlatform patch installation operations.",
           "enum": [
             "Unknown",
             "IfRequired",
@@ -1829,11 +1829,11 @@
       },
       "description": "Specifies additional settings to be applied when patch mode AutomaticByPlatform is selected in Windows patch settings."
     },
-    "LinuxAutomaticByPatchSettings": {
+    "LinuxAutomaticByPlatformPatchSettings": {
       "properties": {
         "rebootSetting": {
           "type": "string",
-          "description": "Specifies reboot setting for all AutomaticByPlatform patch installation operations.",
+          "description": "Specifies the reboot setting for all AutomaticByPlatform patch installation operations.",
           "enum": [
             "Unknown",
             "IfRequired",
