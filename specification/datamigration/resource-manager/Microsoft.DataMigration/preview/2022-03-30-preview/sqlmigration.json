@@ -1307,6 +1307,14 @@
           "$ref": "#/definitions/ErrorInfo",
           "description": "Error details in case of migration failure.",
           "readOnly": true
+        },
+        "targetDatabaseCollation": {
+          "description": "Database collation to be used for the target database.",
+          "type": "string"
+        },
+        "provisioningError": {
+          "description": "Error message for migration provisioning failure, if any.",
+          "type": "string"
         }
       },
       "discriminator": "kind"
@@ -1325,14 +1333,6 @@
           "$ref": "#/definitions/MigrationStatusDetails",
           "description": "Detailed migration status. Not included by default.",
           "readOnly": true
-        },
-        "targetDatabaseCollation": {
-          "description": "Database collation to be used for the target database.",
-          "type": "string"
-        },
-        "provisioningError": {
-          "description": "Error message for migration provisioning failure, if any.",
-          "type": "string"
         },
         "backupConfiguration": {
           "$ref": "#/definitions/BackupConfiguration",
@@ -1358,14 +1358,6 @@
           "$ref": "#/definitions/MigrationStatusDetails",
           "description": "Detailed migration status. Not included by default.",
           "readOnly": true
-        },
-        "targetDatabaseCollation": {
-          "description": "Database collation to be used for the target database.",
-          "type": "string"
-        },
-        "provisioningError": {
-          "description": "Error message for migration provisioning failure, if any.",
-          "type": "string"
         },
         "backupConfiguration": {
           "$ref": "#/definitions/BackupConfiguration",
@@ -1407,14 +1399,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "targetDatabaseCollation": {
-          "description": "Database collation to be used for the target database.",
-          "type": "string"
-        },
-        "provisioningError": {
-          "description": "Error message for migration provisioning failure, if any.",
-          "type": "string"
         }
       }
     },
