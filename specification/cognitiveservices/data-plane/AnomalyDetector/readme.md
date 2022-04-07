@@ -4,10 +4,10 @@
 
 Configuration for generating Anomaly Detector SDK.
 
-The current release is `release_1_1_preview.1`.
+The current release is `release_1_1_preview.2`.
 
 ``` yaml
-tag: release_1_1_preview.1
+tag: release_1_1_preview.2
 add-credentials: true
 openapi-type: data-plane
 ```
@@ -37,6 +37,16 @@ These settings apply only when `--tag=release_1_1_preview.1` is specified on the
 input-file: 
   - preview/v1.1-preview.1/AnomalyDetector.json
   - preview/v1.1-preview.1/MultivariateAnomalyDetector.json
+```
+
+### Release 1.1-preview.2
+These settings apply only when `--tag=release_1_1_preview.2` is specified on the command line.
+
+```yaml $(tag) == 'release_1_1_preview.2'
+input-file:
+  - preview/v1.1-preview.2/AnomalyDetector.json
+  - preview/v1.1-preview.2/MultivariateAnomalyDetector.json
+  - preview/v1.1-preview.2/RootCauseAnalysis.json
 ```
 
 ## Swagger to SDK
@@ -108,6 +118,9 @@ input-file:
   - $(this-folder)/stable/v1.0/AnomalyDetector.json
   - $(this-folder)/preview/v1.1-preview/MultivariateAnomalyDetector.json
   - $(this-folder)/preview/v1.1-preview.1/MultivariateAnomalyDetector.json
+  - $(this-folder)/preview/v1.1-preview.2/AnomalyDetector.json
+  - $(this-folder)/preview/v1.1-preview.2/MultivariateAnomalyDetector.json
+  - $(this-folder)/preview/v1.1-preview.2/RootCauseAnalysis.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
