@@ -40,7 +40,7 @@ perform-load: false
 These settings apply only when `--tag=package-preview-2022-03 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-preview-2022-03' && $(python) && $(track2)
+``` yaml $(tag) == 'package-preview-2022-03' && $(python)
 namespace: azure.mgmt.appplatform.v2022_03_01_preview
 output-folder: $(python-sdks-folder)/appplatform/azure-mgmt-appplatform/azure/mgmt/appplatform/v2022_03_01_preview
 ```
