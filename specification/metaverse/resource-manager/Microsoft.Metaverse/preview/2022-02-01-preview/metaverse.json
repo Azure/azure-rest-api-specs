@@ -1546,6 +1546,224 @@
             "$ref": "./examples/Template_Get.json"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "SpaceTemplates"
+        ],
+        "description": "Create a template resource.",
+        "operationId": "Template_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SpaceTemplateResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Template policy updated.",
+            "schema": {
+              "$ref": "#/definitions/SpaceTemplateResource"
+            }
+          },
+          "201": {
+            "description": "Template policy created.",
+            "schema": {
+              "$ref": "#/definitions/SpaceTemplateResource"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Template_Create": {
+            "$ref": "./examples/Template_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SpaceTemplates"
+        ],
+        "description": "Update a template resource.",
+        "operationId": "Template_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SpaceTemplateResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Template policy updated.",
+            "schema": {
+              "$ref": "#/definitions/SpaceTemplateResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Template_Update": {
+            "$ref": "./examples/Template_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/templates/{templateId}/publish": {
+      "post": {
+        "tags": [
+          "SpaceTemplates"
+        ],
+        "description": "Publish a template resource.",
+        "operationId": "Template_Publish",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Template published."
+          },
+          "202": {
+            "description": "Publish Accepted"
+          }
+        },
+        "x-ms-examples": {
+          "Template_Publish": {
+            "$ref": "./examples/Template_Publish.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/templates/{templateId}/unpublish": {
+      "post": {
+        "tags": [
+          "SpaceTemplates"
+        ],
+        "description": "Unpublish a template resource.",
+        "operationId": "Template_Unpublish",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MetaverseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Template unpublished."
+          },
+          "202": {
+            "description": "Unpublish Accepted"
+          }
+        },
+        "x-ms-examples": {
+          "Template_Unpublish": {
+            "$ref": "./examples/Template_Unpublish.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/templates/{templateId}/previewImage": {
@@ -2100,6 +2318,10 @@
             "type": "string"
           },
           "x-ms-identifiers": []
+        },
+        "displayName": {
+          "description": "The display name of the template.",
+          "type": "string"
         }
       }
     },
