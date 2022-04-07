@@ -3,7 +3,7 @@
   "info": {
     "title": "adp",
     "version": "2022-03-01-preview",
-    "description": "Microsoft Autonomous Development Platform"
+    "description": "Microsoft.AutonomousDevelopmentPlatform resource management API."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -48,7 +48,7 @@
     "/providers/Microsoft.AutonomousDevelopmentPlatform/operations": {
       "get": {
         "operationId": "Operations_List",
-        "summary": "List the operations for Microsoft.AutonomousDevelopmentPlatform",
+        "description": "List the operations for Microsoft.AutonomousDevelopmentPlatform",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -84,7 +84,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.AutonomousDevelopmentPlatform/checkNameAvailability": {
       "post": {
         "operationId": "checkNameAvailability_post",
-        "summary": "Checks the resource name is available.",
+        "description": "Checks the resource name is available.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -129,7 +129,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.AutonomousDevelopmentPlatform/workspaces": {
       "get": {
         "operationId": "workspaces_ListBySubscription",
-        "summary": "List Workspace resources by subscription ID",
+        "description": "List Workspace resources by subscription ID",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -168,7 +168,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AutonomousDevelopmentPlatform/workspaces": {
       "get": {
         "operationId": "workspaces_ListByResourceGroup",
-        "summary": "List Workspace resources by resource group",
+        "description": "List Workspace resources by resource group",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -210,7 +210,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AutonomousDevelopmentPlatform/workspaces/{workspaceName}": {
       "get": {
         "operationId": "workspaces_Get",
-        "summary": "Get a Workspace",
+        "description": "Get a Workspace",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -254,7 +254,7 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true,
-        "summary": "Create a Workspace",
+        "description": "Create a Workspace",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -309,7 +309,7 @@
       },
       "patch": {
         "operationId": "workspaces_Update",
-        "summary": "Update a Workspace",
+        "description": "Update a Workspace",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -372,7 +372,7 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true,
-        "summary": "Delete a Workspace",
+        "description": "Delete a Workspace",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -492,16 +492,6 @@
         ]
       }
     },
-    "Azure.ARM.ManagedServiceIdentity": {
-      "type": "object",
-      "properties": {
-        "identity": {
-          "$ref": "#/definitions/Azure.ARM.ManagedIdentityProperties",
-          "description": "The managed service identities assigned to this resource."
-        }
-      },
-      "description": "The managed service identities envelope."
-    },
     "Azure.ARM.UserAssignedIdentity": {
       "type": "object",
       "properties": {
@@ -602,6 +592,16 @@
         "userAssignedIdentityResourceId"
       ]
     },
+    "ManagedIdentity": {
+      "type": "object",
+      "properties": {},
+      "description": "The managed identity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ARM.ManagedIdentityProperties"
+        }
+      ]
+    },
     "ProvisioningState": {
       "type": "string",
       "description": "Provisioning State",
@@ -689,6 +689,10 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "System metadata for this resource.",
           "readOnly": true
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "description": "Microsoft.AutonomousDevelopmentPlatform Workspace",
@@ -725,6 +729,28 @@
     "WorkspaceProperties": {
       "type": "object",
       "properties": {
+        "autoGeneratedDomainNameLabelScope": {
+          "$ref": "#/definitions/AutoGeneratedDomainNameLabelScope",
+          "description": "The scope for the FQDN label generation. If not provided, defaults to TenantReuse."
+        },
+        "dataLocation": {
+          "type": "string",
+          "description": "The Workspace's data location. If not provided, defaults to the resource's location."
+        },
+        "encryption": {
+          "$ref": "#/definitions/Encryption",
+          "description": "The encryption configuration."
+        },
+        "storageSku": {
+          "$ref": "#/definitions/StorageSku",
+          "description": "The Storage SKU. If not provided, defaults to Standard_ZRS."
+        },
+        "storageAccountCount": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "description": "The amount of storage accounts provisioned per Workspace. If not provided, defaults to 5."
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
@@ -734,47 +760,11 @@
           "type": "string",
           "description": "The data-plane endpoint uri.",
           "readOnly": true
-        },
-        "autoGeneratedDomainNameLabelScope": {
-          "$ref": "#/definitions/AutoGeneratedDomainNameLabelScope",
-          "description": "The scope for the FQDN label generation. If not provided, defaults to TenantReuse."
-        },
-        "dataLocation": {
-          "type": "string",
-          "description": "The Workspace's data location. If not provided, defaults to the resource's location."
-        },
-        "identity": {
-          "$ref": "#/definitions/Azure.ARM.ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "encryption": {
-          "$ref": "#/definitions/Encryption",
-          "description": "The encryption configuration."
-        },
-        "storageSku": {
-          "$ref": "#/definitions/StorageSku",
-          "description": "The Storage SKU. If not provided, defaults to Standard_ZRS."
-        },
-        "storageAccountCount": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1,
-          "description": "The amount of storage accounts provisioned per Workspace. If not provided, defaults to 5."
         }
       },
       "description": "Workspace Properties"
     },
     "WorkspaceUpdate": {
-      "type": "object",
-      "description": "The updatable properties of the Workspace.",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/WorkspaceUpdateProperties"
-        }
-      }
-    },
-    "WorkspaceUpdateProperties": {
       "type": "object",
       "properties": {
         "tags": {
@@ -784,6 +774,20 @@
           },
           "description": "Resource tags."
         },
+        "properties": {
+          "$ref": "#/definitions/WorkspaceUpdateProperties",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "description": "The updatable properties of the Workspace."
+    },
+    "WorkspaceUpdateProperties": {
+      "type": "object",
+      "properties": {
         "autoGeneratedDomainNameLabelScope": {
           "$ref": "#/definitions/AutoGeneratedDomainNameLabelScope",
           "description": "The scope for the FQDN label generation. If not provided, defaults to TenantReuse."
@@ -791,10 +795,6 @@
         "dataLocation": {
           "type": "string",
           "description": "The Workspace's data location. If not provided, defaults to the resource's location."
-        },
-        "identity": {
-          "$ref": "#/definitions/Azure.ARM.ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
         },
         "encryption": {
           "$ref": "#/definitions/Encryption",
@@ -811,7 +811,7 @@
           "description": "The amount of storage accounts provisioned per Workspace. If not provided, defaults to 5."
         }
       },
-      "description": "The updatable properties of the Workspace."
+      "description": "The updatable properties of WorkspaceProperties"
     }
   },
   "parameters": {
@@ -821,8 +821,8 @@
       "in": "path",
       "required": true,
       "description": "The Workspace name.",
-      "pattern": "^[a-z0-9]+[-a-z0-9]{0,79}$",
-      "maxLength": 80,
+      "pattern": "^[a-z0-9][-a-z0-9]{0,45}$",
+      "maxLength": 46,
       "type": "string"
     }
   }
