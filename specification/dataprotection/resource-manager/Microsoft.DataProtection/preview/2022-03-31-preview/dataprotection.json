@@ -5592,6 +5592,46 @@
       },
       "x-ms-discriminator-value": "RangeBasedItemLevelRestoreCriteria"
     },
+    "KubernetesStorageClassRestoreCriteria": {
+      "description": "Item Level kubernetes storage class target info for restore operation",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ItemLevelRestoreCriteria"
+        }
+      ],
+      "properties": {
+        "selectedStorageClassName": {
+          "description": "Selected storage class name",
+          "type": "string"
+        },
+        "provisioner": {
+          "description": "Provisioner of the storage class",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "KubernetesStorageClassRestoreCriteria"
+    },
+    "KubernetesPVRestoreCriteria": {
+      "description": "Item Level kubernetes persistent volume target info for restore operation",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ItemLevelRestoreCriteria"
+        }
+      ],
+      "properties": {
+        "name": {
+          "description": "Selected persistent volume claim name",
+          "type": "string"
+        },
+        "storageClassName": {
+          "description": "Selected storage class name for restore operation",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "KubernetesPVRestoreCriteria"
+    },
     "RecoveryPointDataStoreDetails": {
       "description": "RecoveryPoint datastore details",
       "properties": {
