@@ -4373,7 +4373,7 @@
         }
       }
     },
-    "/devices/{deviceId}/relationships/": {
+    "/devices/{deviceId}/relationships": {
       "get": {
         "operationId": "Devices_ListRelationships",
         "summary": "Given the ID for an upstream device, will return the upstream and the downstream relationships associated with that gateway. These downstream relationships are only those associated with the direct downstream level (they don’t work recursively).",
@@ -5610,7 +5610,7 @@
     "Top": {
       "in": "query",
       "name": "$top",
-      "description": "Page size of returned results.",
+      "description": "The maximum number of resources to return from the collection.",
       "x-ms-parameter-location": "method",
       "type": "integer",
       "required": false
