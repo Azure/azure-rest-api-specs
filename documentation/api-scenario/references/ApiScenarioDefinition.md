@@ -28,7 +28,7 @@ scenarios:
 
 - **scope**
   - **Type:** Required, Enum
-  - **Enum:** ResourceGroup
+  - **Enum:** ResourceGroup, Subscription, Tenant
   - Now only "ResourceGroup" is supported.
     - **ResourceGroup:** All of the following API scenario and steps should be under some resourceGroup. It means:
       - The consumer (API scenario runner or anything consumes API scenario) SHOULD maintain the resource group itself. Usually it requires user to input the subscriptionId/location, then it creates the resource group before test running, and deletes the resource group after running
@@ -36,7 +36,7 @@ scenarios:
         - **subscriptionId**
         - **resourceGroupName**
         - **location**
-      - For details of how variables works please see [Variables](./Variables.md)
+      - For details of how variables work please see [Variables](./Variables.md)
 - **variables**
   - **Type:** Optional, Map of strings or variable containers
   - See [Variables](./Variables.md)
@@ -131,7 +131,6 @@ Step to deploy ARM template to the scope. Template parameters and outputs will a
 - **armTemplate**
   - **Type:** Required, String
   - Path to ARM template json file. See [ARM Template](https://docs.microsoft.com/azure/templates/).
-
 
 ## Step ARM Deployment Script
 
@@ -245,10 +244,10 @@ See [Step Example Schema](./v1.2/schema.json#L389)
   - Path to example file. Should be in format of "x-ms-example" files.
 - **requestUpdate**
   - **Type:** Optional, Array of [JsonPatchOp](#jsonpatchop)
-  - Updates that applies to the requestParameters before sending it.
+  - Updates that apply to the **requestParameters** before sending it, with `/parameters` in example as root of Json path.
 - **responseUpdate**
   - **Type:** Optional, Array of [JsonPatchOp](#jsonpatchop)
-  - Updates that applies to the responseExpected.
+  - Updates that apply to the **responseExpected**, with `/responses` in example as root of Json path.
 - **outputVariables**
   - **Type:** Optional, Map from variable name to object with property:
     - **type**: Required, String
@@ -258,6 +257,29 @@ See [Step Example Schema](./v1.2/schema.json#L389)
     - **fromResponse**
       - **Type:** Required, String
       - Path to the response field to be used as variable.
+
+**Conventions:**
+
+When the scope is `ResourceGroup` and the request is a PUT/PATCH, the **requestUpdate** JsonPatchOp items starting with body parameter name SHOULD be applied to the response body (if any) for all successful status codes, excluding writeOnly properties - `x-ms-secret: true` or `x-ms-mutability` doesn't contain `read`.
+
+The **responseUpdate** SHOULD be applied after the **requestUpdate**, providing option to override the behavior by convention.
+
+The behavior of applying **requestUpdate** to the response body should follow JSON merge-patch ([RFC 7396](https://tools.ietf.org/html/rfc7396)).
+
+The whole process is illustrated as below pseudo-code:
+```
+if (scope is 'ResourceGroup' && operation.verb in ('PUT', 'PATCH')) {
+  updatedRequestBody = apply_JsonPatchOp(initialRequestBody, requestUpdate.body);
+  mergePatch = generate_JsonMergePatch(initialRequestBody, updatedRequestBody);
+  for (each successful status code) {
+    if (response.body is not empty) {
+      updatedResponseBody = apply_JsonMergePatch(initialResponseBody, mergePatch);
+      updatedResponseBody = exclude_WriteOnly_Properties(updatedResponseBody);
+      updatedResponseBody = apply_JsonPatchOp(updatedResponseBody, responseUpdate.body);
+    }
+  }
+}
+```
 
 ### JsonPatchOp
 
