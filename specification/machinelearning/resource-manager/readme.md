@@ -51,7 +51,9 @@ These settings apply only when `--tag=package-2022-05` is specified on the comma
 
 ```yaml $(tag) == 'package-2022-05'
 input-file:
-  - Microsoft.MachineLearning/stable/2022-05-01/workspaces.json
+  - Microsoft.MachineLearning/stable/2022-05-01/mfe.json
+  - Microsoft.MachineLearning/stable/2022-05-01/machineLearningServices.json
+  - Microsoft.MachineLearning/stable/2022-05-01/workspaceFeatures.json
 ```
 ### Tag: package-webservices-2017-01
 
