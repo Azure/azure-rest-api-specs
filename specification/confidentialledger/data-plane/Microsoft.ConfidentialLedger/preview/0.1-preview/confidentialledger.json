@@ -122,6 +122,36 @@
         }
       }
     },
+    "/app/subLedgerIds": {
+    "get": {
+        "operationId": "ConfidentialLedger_GetSubLedgerIds",
+        "x-ms-examples": {
+            "GetSubLedgerIds": {
+                "$ref": "./examples/ledger/GetSubLedgerIds.json"
+            }
+        },
+        "summary": "Retrieves the ids of subledgers",
+        "description": "Sub-ledgers are user-created collections of ledger entries",
+        "parameters": [
+            {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+            }
+        ],
+        "responses": {
+            "200": {
+                "description": "List of subLedgerIds",
+                "schema": {
+                    "$ref": "#/definitions/SubLedgerIds"
+                }
+            },
+            "default": {
+                "description": "Error response describing why the operation failed",
+                "schema": {
+                    "$ref": "common.json#/definitions/ConfidentialLedgerError"
+                }
+            }
+        }
+    },
     "/app/transactions": {
       "get": {
         "operationId": "ConfidentialLedger_GetLedgerEntries",
@@ -348,36 +378,6 @@
           }
         }
       }
-    },
-    "/app/subLedgerIds": {
-    "get": {
-        "operationId": "ConfidentialLedger_GetSubLedgerIds",
-        "x-ms-examples": {
-            "GetSubLedgerIds": {
-                "$ref": "./examples/ledger/GetSubLedgerIds.json"
-            }
-        },
-        "summary": "Retrieves the ids of subledgers",
-        "description": "Subledgers are what we call the keys in our key-value storage.",
-        "parameters": [
-            {
-            "$ref": "common.json#/parameters/ApiVersionParameter"
-            }
-        ],
-        "responses": {
-            "200": {
-                "description": "List of subLedgerIds",
-                "schema": {
-                    "$ref": "#/definitions/SubLedgerIds"
-                }
-            },
-            "default": {
-                "description": "Error response describing why the operation failed",
-                "schema": {
-                    "$ref": "common.json#/definitions/ConfidentialLedgerError"
-                }
-            }
-        }
     },
     "/app/users/{userId}": {
       "delete": {
