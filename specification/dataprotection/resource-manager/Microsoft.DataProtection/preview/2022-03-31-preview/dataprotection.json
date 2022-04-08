@@ -1061,7 +1061,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List BackupInstances in a Vault": {
+          "List BackupInstances associated with an azure resource": {
             "$ref": "./examples/BackupInstanceOperations/ListBackupInstancesExtensionRouting.json"
           }
         }
@@ -6531,14 +6531,16 @@
       "in": "path",
       "description": "ResourceProvider for the resource to be protected using Microsoft.DataProtection",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "ResourceType": {
       "name": "resourceType",
       "in": "path",
       "description": "Type of the resource to be protected using Microsoft.DataProtection",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "ResourceName": {
       "name": "resourceName",
