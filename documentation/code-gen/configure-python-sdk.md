@@ -86,7 +86,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python                          // for track1 SDK
   - repo: azure-sdk-for-python-track2                   // for track2 SDK
   - ...
 
@@ -103,40 +102,14 @@ A typical readme.python.md is like this:
 ~~~
 // file: readme.python.md
 
-
 ## Python
 
 These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
-``` yaml !$(track2)                         // For track1: basic Python package information 
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.appconfiguration
-  package-name: azure-mgmt-appconfiguration
-  package-version: 0.1.0
-  clear-output-folder: true
-```
 
-``` yaml $(python-mode) == 'update' && !$(track2)
-python:                                     
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration/azure/mgmt/appconfiguration
-```
-
-``` yaml $(python-mode) == 'create' && !$(track2)
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration
-```
-
-These settings apply only when `--track2` is specified on the command line.
-
-``` yaml $(track2)                          // For track2: basic Python package information 
+``` yaml $(python)                          // For python: basic Python package information 
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-appconfiguration
@@ -144,12 +117,12 @@ no-namespace-folders: true
 package-version: 0.1.0
 ```
 
-``` yaml $(python-mode) == 'update' && $(track2)
+``` yaml $(python-mode) == 'update' && $(python)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration/azure/mgmt/appconfiguration
 ```
 
-``` yaml $(python-mode) == 'create' && $(track2)
+``` yaml $(python-mode) == 'create' && $(python)
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration
 ```
@@ -170,13 +143,7 @@ The batch is a tag list which are used in the multi-api package. For example:
 
 Generate all API versions currently shipped for this package
 
-```yaml $(multiapi) && !$(track2)           // For track1
-batch:
-  - tag: package-2020-06-01-only
-  - tag: package-2020-05-01-only
-```
-
-```yaml $(multiapi) && $(track2)            // For track2
+```yaml $(multiapi) && $(python)            // For track2
 clear-output-folder: true
 batch:
   - tag: package-2020-06-01-only
@@ -184,9 +151,8 @@ batch:
   - multiapiscript: true
 ```
 
-``` yaml $(multiapiscript) && $(track2)      // For track2
+``` yaml $(multiapiscript) && $(python)      // For track2
 output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/
-clear-output-folder: false
 perform-load: false
 ```
 ~~~
@@ -201,7 +167,7 @@ Then, the output folder and namespace should be configured for each of the tag. 
 These settings apply only when `--tag=package-2020-06-01-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2020-06-01-only' && $(track2)      // For track2
+``` yaml $(tag) == 'package-2020-06-01-only' && $(python)      // For track2
 namespace: azure.mgmt.compute.v2020_06_01
 output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/v2020_06_01
 ```
