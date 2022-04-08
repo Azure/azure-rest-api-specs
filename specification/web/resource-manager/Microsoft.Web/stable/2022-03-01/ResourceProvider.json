@@ -268,6 +268,9 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "$ref": "#/parameters/hostnameParameter"
+          },
+          {
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -288,6 +291,9 @@
         "x-ms-examples": {
           "Get custom hostnames under subscription": {
             "$ref": "./examples/ListCustomHostNameSites.json"
+          },
+          "Get specific custom hostname under subscription": {
+            "$ref": "./examples/ListCustomSpecificHostNameSites.json"
           }
         },
         "x-ms-pageable": {
@@ -1471,6 +1477,13 @@
       "in": "query",
       "description": "API Version",
       "required": true,
+      "type": "string"
+    },
+    "hostnameParameter": {
+      "name": "hostname",
+      "in": "query",
+      "description": "Specific hostname",
+      "required": false,
       "type": "string"
     }
   },
