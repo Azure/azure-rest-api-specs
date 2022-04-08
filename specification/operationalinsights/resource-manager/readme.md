@@ -24,7 +24,7 @@ To see additional help and options, run:
 ### Basic Information
 These are the global settings for the OperationalInsights API.
 
-```yaml !$(python) || !$(track2)
+```yaml !$(python)
 title: OperationalInsightsManagementClient
 ```
 ```yaml $(python)
