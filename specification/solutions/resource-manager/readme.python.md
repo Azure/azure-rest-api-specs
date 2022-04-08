@@ -26,7 +26,6 @@ batch:
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/managedapplication/azure-mgmt-managedapplication/azure/mgmt/managedapplication/
-clear-output-folder: false
 perform-load: false
 ```
 
