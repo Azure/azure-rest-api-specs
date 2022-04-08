@@ -1096,6 +1096,150 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/listAppServices": {
+      "post": {
+        "operationId": "Monitors_ListAppServices",
+        "summary": "Gets list of App Services with Dynatrace PaaS OneAgent enabled",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AppServiceListResponse"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Monitors"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Monitors_ListAppServices_MaximumSet_Gen": {
+            "$ref": "./examples/Monitors_ListAppServices_MaximumSet_Gen.json"
+          },
+          "Monitors_ListAppServices_MinimumSet_Gen": {
+            "$ref": "./examples/Monitors_ListAppServices_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/getSSODetails": {
+      "post": {
+        "operationId": "Monitors_GetSSODetails",
+        "summary": "Gets the SSO configuration details from the partner.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SSODetailsResponse"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Monitors"
+        ],
+        "x-ms-examples": {
+          "Monitors_GetSSODetails_MaximumSet_Gen": {
+            "$ref": "./examples/Monitors_GetSSODetails_MaximumSet_Gen.json"
+          },
+          "Monitors_GetSSODetails_MinimumSet_Gen": {
+            "$ref": "./examples/Monitors_GetSSODetails_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/listLinkableEnvironments": {
+      "post": {
+        "operationId": "Monitors_ListLinkableEnvironments",
+        "summary": "Gets all the Dynatrace environments that a user can link a azure resource to",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LinkableEnvRequestParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LinkableEnvironmentListResponse"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Monitors"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Monitors_ListLinkableEnvironments_MaximumSet_Gen": {
+            "$ref": "./examples/Monitors_ListLinkableEnvironments_MaximumSet_Gen.json"
+          },
+          "Monitors_ListLinkableEnvironments_MinimumSet_Gen": {
+            "$ref": "./examples/Monitors_ListLinkableEnvironments_MinimumSet_Gen.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1204,7 +1348,8 @@
           "items": {
             "$ref": "#/definitions/VMInfo"
           },
-          "description": "The items on this page"
+          "description": "The items on this page",
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
@@ -1212,6 +1357,70 @@
         }
       },
       "description": "Response of a list VM Host Operation.",
+      "required": [
+        "value",
+        "nextLink"
+      ]
+    },
+    "AppServiceInfo": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "App service resource ID"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the Dynatrace agent installed on the App Service."
+        },
+        "monitoringType": {
+          "$ref": "#/definitions/MonitoringType",
+          "description": "The monitoring mode of OneAgent"
+        },
+        "autoUpdateSetting": {
+          "$ref": "#/definitions/AutoUpdateSetting",
+          "description": "Update settings of OneAgent."
+        },
+        "updateStatus": {
+          "$ref": "#/definitions/UpdateStatus",
+          "description": "The current update status of OneAgent."
+        },
+        "availabilityState": {
+          "$ref": "#/definitions/AvailabilityState",
+          "description": "The availability state of OneAgent."
+        },
+        "logModule": {
+          "$ref": "#/definitions/LogModule",
+          "description": "Tells whether log modules are enabled or not"
+        },
+        "hostGroup": {
+          "type": "string",
+          "description": "The name of the host group"
+        },
+        "hostName": {
+          "type": "string",
+          "description": "The name of the host"
+        }
+      },
+      "description": "Details of App Services having Dynatrace OneAgent installed"
+    },
+    "AppServiceListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppServiceInfo"
+          },
+          "description": "The items on this page",
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "description": "Response of a list App Services Operation.",
       "required": [
         "value",
         "nextLink"
@@ -1343,6 +1552,10 @@
         "logRules": {
           "$ref": "#/definitions/LogRules",
           "description": "Set of rules for sending logs for the Monitor resource."
+        },
+        "metricRules": {
+          "$ref": "#/definitions/MetricRules",
+          "description": "Set of rules for sending metrics for the Monitor resource."
         }
       },
       "description": "The updatable properties of the TagRule."
@@ -1503,6 +1716,10 @@
         "hostGroup": {
           "type": "string",
           "description": "The name of the host group"
+        },
+        "hostName": {
+          "type": "string",
+          "description": "The name of the host"
         }
       },
       "description": "Details of VM Resource having Dynatrace OneAgent installed"
@@ -1693,18 +1910,15 @@
       "properties": {
         "userId": {
           "type": "string",
-          "description": "User id",
-          "readOnly": true
+          "description": "User id"
         },
         "accountInfo": {
           "$ref": "#/definitions/AccountInfo",
-          "description": "Dynatrace Account Information",
-          "readOnly": true
+          "description": "Dynatrace Account Information"
         },
         "environmentInfo": {
           "$ref": "#/definitions/EnvironmentInfo",
-          "description": "Dynatrace Environment Information",
-          "readOnly": true
+          "description": "Dynatrace Environment Information"
         },
         "singleSignOnProperties": {
           "$ref": "#/definitions/DynatraceSingleSignOnProperties",
@@ -1770,6 +1984,10 @@
           "$ref": "#/definitions/LogRules",
           "description": "Set of rules for sending logs for the Monitor resource."
         },
+        "metricRules": {
+          "$ref": "#/definitions/MetricRules",
+          "description": "Set of rules for sending metrics for the Monitor resource."
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource.",
@@ -1799,10 +2017,25 @@
             "$ref": "#/definitions/FilteringTag"
           },
           "x-cadl-name": "FilteringTag[]",
+          "x-ms-identifiers": [],
           "description": "List of filtering tags to be used for capturing logs. This only takes effect if SendActivityLogs flag is enabled. If empty, all resources will be captured.\nIf only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags."
         }
       },
       "description": "Set of rules for sending logs for the Monitor resource."
+    },
+    "MetricRules": {
+      "description": "Set of rules for sending metrics for the Monitor resource.",
+      "type": "object",
+      "properties": {
+        "filteringTags": {
+          "description": "List of filtering tags to be used for capturing metrics. If empty, all resources will be captured. If only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilteringTag"
+          },
+          "x-ms-identifiers": []
+        }
+      }
     },
     "DynatraceSingleSignOnProperties": {
       "type": "object",
@@ -1931,13 +2164,11 @@
       "properties": {
         "accountId": {
           "type": "string",
-          "description": "Account Id of the account this environment is linked to",
-          "readOnly": true
+          "description": "Account Id of the account this environment is linked to"
         },
         "regionId": {
           "type": "string",
-          "description": "Region in which the account is created",
-          "readOnly": true
+          "description": "Region in which the account is created"
         }
       },
       "description": "Dynatrace Account Information"
@@ -1947,26 +2178,113 @@
       "properties": {
         "environmentId": {
           "type": "string",
-          "description": "Id of the environment created",
-          "readOnly": true
+          "description": "Id of the environment created"
         },
         "ingestionKey": {
           "type": "string",
-          "description": "Ingestion key of the environment",
-          "readOnly": true
+          "description": "Ingestion key of the environment"
         },
         "logsIngestionEndpoint": {
           "type": "string",
-          "description": "Ingestion endpoint used for sending logs",
-          "readOnly": true
+          "description": "Ingestion endpoint used for sending logs"
         },
         "landingURL": {
           "type": "string",
-          "description": "Landing URL for Dynatrace environment",
-          "readOnly": true
+          "description": "Landing URL for Dynatrace environment"
         }
       },
       "description": "Dynatrace Environment Information"
+    },
+    "LinkableEnvironmentRequest": {
+      "description": "Request for getting all the linkable environments for a user",
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant Id of the user in which they want to link the environment"
+        },
+        "userPrincipal": {
+          "type": "string",
+          "description": "user principal id of the user"
+        },
+        "region": {
+          "type": "string",
+          "description": "Azure region in which we want to link the environment"
+        }
+      }
+    },
+    "LinkableEnvironmentResponse": {
+      "description": "Response for getting all the linkable environments",
+      "type": "object",
+      "properties": {
+        "environmentId": {
+          "type": "string",
+          "description": "environment id for which user is an admin"
+        },
+        "environmentName": {
+          "type": "string",
+          "description": "Name of the environment"
+        },
+        "planData": {
+          "$ref": "#/definitions/PlanData",
+          "description": "Billing plan information."
+        }
+      }
+    },
+    "LinkableEnvironmentListResponse": {
+      "description": "Response for getting all the linkable environments",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of environments for which user is an admin",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkableEnvironmentResponse"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "SSODetailsResponse": {
+      "type": "object",
+      "properties": {
+        "isSsoEnabled": {
+          "$ref": "#/definitions/SSOStatus",
+          "description": "Whether the SSO is enabled for this resource or not."
+        },
+        "metadataUrl": {
+          "type": "string",
+          "description": "URL for Azure AD metadata"
+        },
+        "singleSignOnUrl": {
+          "type": "string",
+          "description": "The login URL specific to this Dynatrace Environment"
+        },
+        "aadDomains": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "array of Aad(azure active directory) domains"
+        }
+      },
+      "description": "SSO details from the Dynatrace partner"
+    },
+    "SSOStatus": {
+      "type": "string",
+      "description": "Indicates whether SSO is enabled or not",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "SSOStatus",
+        "modelAsString": true
+      }
     },
     "MediumString": {
       "type": "string",
@@ -2093,6 +2411,16 @@
       "required": true,
       "description": "Single Sign On Configuration Name",
       "type": "string"
+    },
+    "LinkableEnvRequestParameter": {
+      "x-ms-parameter-location": "method",
+      "name": "request",
+      "in": "body",
+      "required": true,
+      "description": "The details of the linkable environment request.",
+      "schema": {
+        "$ref": "#/definitions/LinkableEnvironmentRequest"
+      }
     }
   }
 }
