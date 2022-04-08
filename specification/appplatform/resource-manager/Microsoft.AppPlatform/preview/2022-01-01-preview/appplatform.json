@@ -8219,7 +8219,11 @@
           "enum": [
             "StorageAccount"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageType",
+            "modelAsString": true
+          }
         }
       },
       "discriminator": "storageType"
@@ -8303,7 +8307,11 @@
           "enum": [
             "AzureFileVolume"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": true
+          }
         },
         "mountPath": {
           "description": "The mount path of the persistent disk.",
