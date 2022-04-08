@@ -1013,6 +1013,60 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}/providers/Microsoft.DataProtection/backupInstances": {
+      "get": {
+        "tags": [
+          "BackupInstancesExtensionRouting"
+        ],
+        "description": "Gets a list backup instances associated with a tracked resource",
+        "operationId": "BackupInstancesExtensionRouting_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/ResourceProviderNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupInstanceResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List BackupInstances in a Vault": {
+            "$ref": "./examples/BackupInstanceOperations/ListBackupInstancesExtensionRouting.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}": {
       "get": {
         "tags": [
@@ -6471,6 +6525,28 @@
       "description": "Client Api Version.",
       "required": true,
       "type": "string"
+    },
+    "ResourceProviderNamespace": {
+      "name": "resourceProviderNamespace",
+      "in": "path",
+      "description": "ResourceProvider for the resource to be protected using Microsoft.DataProtection",
+      "required": true,
+      "type": "string"
+    },
+    "ResourceType": {
+      "name": "resourceType",
+      "in": "path",
+      "description": "Type of the resource to be protected using Microsoft.DataProtection",
+      "required": true,
+      "type": "string"
+    },
+    "ResourceName": {
+      "name": "resourceName",
+      "in": "path",
+      "description": "The name of the resource to be protected using Microsoft.DataProtection",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
