@@ -636,7 +636,7 @@
           "200": {
             "description": "Gets the Namespace AuthorizationRule's Primary keys and Secondary keys along with the ConnectionStrings",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
+              "$ref": "#/definitions/ResourceListKeys"
             }
           }
         }
@@ -1501,7 +1501,10 @@
           "description": "List of NotificationHubs operations supported by the Microsoft.NotificationHubs resource provider.",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "readOnly": true,
@@ -1898,38 +1901,38 @@
       "properties": {
         "apnsCertificate": {
           "type": "string",
-          "description": "The APNS certificate."
+          "description": "The APNS certificate. Specify if using Certificate Authentication Mode."
         },
         "certificateKey": {
           "type": "string",
-          "description": "The certificate key."
+          "description": "The APNS certificate password if it exists."
         },
         "endpoint": {
           "type": "string",
-          "description": "The endpoint of this credential."
+          "description": "The APNS endpoint of this credential. If using Certificate Authentication Mode and Sandbox specify 'gateway.sandbox.push.apple.com'. If using Certificate Authentication Mode and Production specify 'gateway.push.apple.com'. If using Token Authentication Mode and Sandbox specify 'https://api.development.push.apple.com:443/3/device'. If using Token Authentication Mode and Production specify 'https://api.push.apple.com:443/3/device'."
         },
         "thumbprint": {
           "type": "string",
-          "description": "The APNS certificate Thumbprint"
+          "description": "The APNS certificate thumbprint. Specify if using Certificate Authentication Mode."
         },
         "keyId": {
           "type": "string",
-          "description": "A 10-character key identifier (kid) key, obtained from your developer account"
+          "description": "A 10-character key identifier (kid) key, obtained from your developer account. Specify if using Token Authentication Mode."
         },
         "appName": {
           "type": "string",
-          "description": "The name of the application"
+          "description": "The name of the application or BundleId. Specify if using Token Authentication Mode."
         },
         "appId": {
           "type": "string",
-          "description": "The issuer (iss) registered claim key, whose value is your 10-character Team ID, obtained from your developer account"
+          "description": "The issuer (iss) registered claim key. The value is a 10-character TeamId, obtained from your developer account. Specify if using Token Authentication Mode."
         },
         "token": {
           "type": "string",
-          "description": "Provider Authentication Token, obtained through your developer account"
+          "description": "Provider Authentication Token, obtained through your developer account. Specify if using Token Authentication Mode."
         }
       },
-      "description": "Description of a NotificationHub ApnsCredential."
+      "description": "Description of a NotificationHub ApnsCredential. Note that there is no explicit switch between Certificate and Token Authentication Modes. The mode is determined based on the properties passed in."
     },
     "ApnsCredential": {
       "properties": {
@@ -1972,7 +1975,7 @@
       "properties": {
         "gcmEndpoint": {
           "type": "string",
-          "description": "The GCM endpoint."
+          "description": "The FCM legacy endpoint. Default value is 'https://fcm.googleapis.com/fcm/send'"
         },
         "googleApiKey": {
           "type": "string",
@@ -2087,6 +2090,9 @@
           "items": {
             "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
           },
+          "x-ms-identifiers": [
+            "keyName"
+          ],
           "description": "The AuthorizationRules of the created NotificationHub"
         },
         "apnsCredential": {

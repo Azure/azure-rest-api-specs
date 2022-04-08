@@ -9,6 +9,7 @@ fluent: true
 namespace: com.microsoft.azure.management.postgresql
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
+tag: package-2020-01-01
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-postgresql
 ```
 
@@ -28,7 +29,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2017-12-01-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.postgresql.v2017_12_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/postgresql/resource-manager/v2017_12_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/postgresql/mgmt-v2017_12_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -41,7 +42,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2017-12-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.postgresql.v2017_12_01
-  output-folder: $(azure-libraries-for-java-folder)/postgresql/resource-manager/v2017_12_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/postgresql/mgmt-v2017_12_01
 regenerate-manager: true
 generate-interface: true
 ```

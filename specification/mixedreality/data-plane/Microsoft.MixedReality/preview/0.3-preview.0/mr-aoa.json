@@ -1,0 +1,636 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AOA front end APIs",
+    "description": "Azure Object Anchors front end APIs.",
+    "version": "0.3-preview.0"
+  },
+  "paths": {
+    "/accounts/{accountId}/jobs/{jobId}": {
+      "put": {
+        "tags": [
+          "IngestionJob"
+        ],
+        "summary": "Creates a job request.",
+        "operationId": "IngestionJob_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/JobIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestCorrelationVectorParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The Azure Object Anchors ingestion request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IngestionProperties"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IngestionProperties"
+            },
+            "headers": {
+              "ms-cv": {
+                "description": "The service response correlation vector, which will be a new value for every response.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IngestionJob_Create": {
+            "$ref": "examples/CreateAssetConversionJob.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "IngestionJob"
+        ],
+        "summary": "Gets the status of a job request.",
+        "operationId": "IngestionJob_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/JobIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestCorrelationVectorParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IngestionProperties"
+            },
+            "headers": {
+              "ms-cv": {
+                "description": "The service response correlation vector, which will be a new value for every response.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IngestionJob_Get": {
+            "$ref": "examples/GetAssetConversionJob.json"
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/blobUploadEndpoint": {
+      "get": {
+        "tags": [
+          "Storage"
+        ],
+        "summary": "Gets a blob upload uri.",
+        "operationId": "BlobUploadEndpoint_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/AccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestCorrelationVectorParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/UploadLocation"
+            },
+            "headers": {
+              "ms-cv": {
+                "description": "The service response correlation vector, which will be a new value for every response.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BlobUploadEndpoint_Get": {
+            "$ref": "examples/GetBlobUploadEndpoint.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ConversionErrorCode": {
+      "description": "The asset conversion error code.",
+      "enum": [
+        "UNKNOWN",
+        "NO_ERROR",
+        "SERVICE_ERROR",
+        "INVALID_ASSET_URI",
+        "INVALID_JOB_ID",
+        "INVALID_GRAVITY",
+        "INVALID_SCALE",
+        "ASSET_SIZE_TOO_LARGE",
+        "ASSET_DIMENSIONS_OUT_OF_BOUNDS",
+        "ZERO_FACES",
+        "INVALID_FACE_VERTICES",
+        "ZERO_TRAJECTORIES_GENERATED",
+        "TOO_MANY_RIG_POSES",
+        "ASSET_CANNOT_BE_CONVERTED"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ConversionErrorCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "UNKNOWN",
+            "description": "Unknown.",
+            "name": "Unknown"
+          },
+          {
+            "value": "NO_ERROR",
+            "description": "No error.",
+            "name": "NoError"
+          },
+          {
+            "value": "SERVICE_ERROR",
+            "description": "An unknown service error occurred.",
+            "name": "ServiceError"
+          },
+          {
+            "value": "INVALID_ASSET_URI",
+            "description": "The asset at the URI provided when starting the conversion job could not be found.",
+            "name": "InvalidAssetUri"
+          },
+          {
+            "value": "INVALID_JOB_ID",
+            "description": "The provided ID for the asset conversion job to be created was set to the default all-zero GUID.",
+            "name": "InvalidJobId"
+          },
+          {
+            "value": "INVALID_GRAVITY",
+            "description": "The gravity vector provided when creating the asset conversion job was a fully zeroed vector.",
+            "name": "InvalidGravity"
+          },
+          {
+            "value": "INVALID_SCALE",
+            "description": "The provided scale factor was not a positive non-zero value.",
+            "name": "InvalidScale"
+          },
+          {
+            "value": "ASSET_SIZE_TOO_LARGE",
+            "description": "The intermediate .PLY file generated from the asset or its serialized equivalent was too large.",
+            "name": "AssetSizeTooLarge"
+          },
+          {
+            "value": "ASSET_DIMENSIONS_OUT_OF_BOUNDS",
+            "description": "The dimensions of the asset exceeded the physical dimension limit. This can be a sign of an improperly set scale for the asset when creating a job.",
+            "name": "AssetDimensionsOutOfBounds"
+          },
+          {
+            "value": "ZERO_FACES",
+            "description": "The intermediate .PLY file generated from the asset was determined to have no faces, making it invalid for conversion.",
+            "name": "ZeroFaces"
+          },
+          {
+            "value": "INVALID_FACE_VERTICES",
+            "description": "The intermediate .PLY file generated from the asset contained faces that referenced nonexistent vertices.",
+            "name": "InvalidFaceVertices"
+          },
+          {
+            "value": "ZERO_TRAJECTORIES_GENERATED",
+            "description": "The camera trajectories generated from the uploaded asset were empty.",
+            "name": "ZeroTrajectoriesGenerated"
+          },
+          {
+            "value": "TOO_MANY_RIG_POSES",
+            "description": "The number of rig poses in the intermediate .PLY asset file exceeded service limits.",
+            "name": "TooManyRigPoses"
+          },
+          {
+            "value": "ASSET_CANNOT_BE_CONVERTED",
+            "description": "The provided asset was corrupted, malformed, or otherwise unable to be converted in its provided format.",
+            "name": "AssetCannotBeConverted"
+          }
+        ]
+      }
+    },
+    "JobStatus": {
+      "description": "Represents job status state.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Cancelled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "JobStatus",
+        "modelAsString": false
+      }
+    },
+    "Vector3": {
+      "description": "Represents a vector with three single-precision floating-point values.",
+      "required": [
+        "x",
+        "y",
+        "z"
+      ],
+      "type": "object",
+      "properties": {
+        "x": {
+          "format": "float",
+          "description": "The x component of the vector.",
+          "type": "number"
+        },
+        "y": {
+          "format": "float",
+          "description": "The y component of the vector.",
+          "type": "number"
+        },
+        "z": {
+          "format": "float",
+          "description": "The z component of the vector.",
+          "type": "number"
+        }
+      }
+    },
+    "Quaternion": {
+      "description": "Represents a vector that is used to encode three-dimensional physical rotations.",
+      "required": [
+        "x",
+        "y",
+        "z",
+        "w"
+      ],
+      "type": "object",
+      "properties": {
+        "x": {
+          "format": "float",
+          "description": "The x value of the vector component of the quaternion.",
+          "type": "number"
+        },
+        "y": {
+          "format": "float",
+          "description": "The y value of the vector component of the quaternion.",
+          "type": "number"
+        },
+        "z": {
+          "format": "float",
+          "description": "The z value of the vector component of the quaternion.",
+          "type": "number"
+        },
+        "w": {
+          "format": "float",
+          "description": "The rotation component of the quaternion.",
+          "type": "number"
+        },
+        "isIdentity": {
+          "description": "Gets a value that indicates whether the current instance is the identity quaternion",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "Pose": {
+      "description": "Represents a pose.",
+      "required": [
+        "rotation",
+        "translation"
+      ],
+      "type": "object",
+      "properties": {
+        "rotation": {
+          "description": "The pose's rotation.",
+          "$ref": "#/definitions/Quaternion"
+        },
+        "translation": {
+          "description": "The pose's translation.",
+          "$ref": "#/definitions/Vector3"
+        }
+      }
+    },
+    "Vector4": {
+      "description": "Represents a vector with four single-precision floating-point values.",
+      "required": [
+        "x",
+        "y",
+        "z",
+        "w"
+      ],
+      "type": "object",
+      "properties": {
+        "x": {
+          "format": "float",
+          "description": "The x component of the vector.",
+          "type": "number"
+        },
+        "y": {
+          "format": "float",
+          "description": "The y component of the vector.",
+          "type": "number"
+        },
+        "z": {
+          "format": "float",
+          "description": "The z component of the vector.",
+          "type": "number"
+        },
+        "w": {
+          "format": "float",
+          "description": "The w component of the vector.",
+          "type": "number"
+        }
+      }
+    },
+    "IngestionConfiguration": {
+      "description": "Represents an ingestion configuration.",
+      "required": [
+        "gravity",
+        "scale"
+      ],
+      "type": "object",
+      "properties": {
+        "dimensions": {
+          "description": "Dimensions of the asset.",
+          "$ref": "#/definitions/Vector3",
+          "x-nullable": true
+        },
+        "boundingBoxCenter": {
+          "description": "BoundingBoxCenter of the asset.",
+          "$ref": "#/definitions/Vector3",
+          "x-nullable": true
+        },
+        "gravity": {
+          "description": "Gravity vector with respect to object's nominal position.",
+          "$ref": "#/definitions/Vector3"
+        },
+        "keyFrameIndexes": {
+          "description": "Indices of Key Frames.",
+          "type": "array",
+          "x-nullable": true,
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "gtTrajectory": {
+          "description": "Ground truth trajectory.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Pose"
+          }
+        },
+        "principalAxis": {
+          "description": "Orientation of model's bounding box.",
+          "$ref": "#/definitions/Quaternion",
+          "x-nullable": true
+        },
+        "scale": {
+          "format": "float",
+          "description": "Scale of transformation of asset units into meter space.",
+          "type": "number"
+        },
+        "supportingPlane": {
+          "description": "Definition of supporting plane.",
+          "$ref": "#/definitions/Vector4",
+          "x-nullable": true
+        },
+        "testTrajectory": {
+          "description": "Test Trajectory.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Pose"
+          }
+        }
+      }
+    },
+    "IngestionProperties": {
+      "description": "Represents the status of an AOA asset conversion job.",
+      "type": "object",
+      "properties": {
+        "clientErrorDetails": {
+          "description": "Information about the cause of a ClientError JobStatus.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverErrorDetails": {
+          "description": "Information about the cause of a ServerError JobStatus.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorCode": {
+          "description": "The error code associated with the asset conversion job.",
+          "$ref": "#/definitions/ConversionErrorCode",
+          "readOnly": true
+        },
+        "jobId": {
+          "format": "uuid",
+          "description": "Identifier for the AOA asset conversion job.",
+          "type": "string",
+          "readOnly": true
+        },
+        "outputModelUri": {
+          "format": "uri",
+          "description": "The URI for downloading the generated AOA Model",
+          "type": "string",
+          "readOnly": true
+        },
+        "jobStatus": {
+          "description": "Status of the asset conversion job.",
+          "$ref": "#/definitions/JobStatus"
+        },
+        "assetFileType": {
+          "description": "The file type of the original 3D asset. Examples include: \"ply\", \"obj\", \"fbx\", \"glb\", \"gltf\", etc.",
+          "type": "string"
+        },
+        "inputAssetUri": {
+          "format": "uri",
+          "description": "The Uri to the Asset to be ingested by the AOA asset conversion service. This asset needs to have been uploaded to the service using an endpoint provided from a call to the GetUploadUri API.",
+          "type": "string"
+        },
+        "accountId": {
+          "format": "uuid",
+          "description": "Identifier for the Account owning the asset conversion job.",
+          "type": "string",
+          "readOnly": true
+        },
+        "ingestionConfiguration": {
+          "description": "Configuration settings for the asset conversion job.",
+          "$ref": "#/definitions/IngestionConfiguration"
+        }
+      }
+    },
+    "InnerError": {
+      "description": "Inner error.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "A more specific error code than was provided by the containing error.",
+          "type": "string"
+        },
+        "innererror": {
+          "description": "An object containing more specific information than the current object about the error.",
+          "$ref": "#/definitions/InnerError"
+        }
+      }
+    },
+    "ErrorDetail": {
+      "description": "Represents an error.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The target of the error.",
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          }
+        },
+        "innererror": {
+          "description": "An object containing more specific information than the current object about the error.",
+          "$ref": "#/definitions/InnerError"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Represents an error response.",
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The Error object.",
+          "$ref": "#/definitions/ErrorDetail"
+        }
+      }
+    },
+    "UploadLocation": {
+      "description": "Represents an upload location for model ingestion.",
+      "required": [
+        "inputAssetUri"
+      ],
+      "type": "object",
+      "properties": {
+        "inputAssetUri": {
+          "format": "uri",
+          "description": "The blob upload URI where a model should be uploaded to the service for ingestion.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "AccountIdParameter": {
+      "in": "path",
+      "name": "accountId",
+      "description": "Identifier for the Azure Object Anchors account.",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method"
+    },
+    "JobIdParameter": {
+      "in": "path",
+      "name": "jobId",
+      "description": "Identifier for the Azure Object Anchors ingestion job.",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method"
+    },
+    "ClientRequestCorrelationVectorParameter": {
+      "in": "header",
+      "name": "x-mrc-cv",
+      "description": "The client request correlation vector, which should be set to a new value for each request.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "in": "query",
+      "name": "api-version",
+      "description": "The API version.",
+      "required": true,
+      "type": "string"
+    }
+  }
+}

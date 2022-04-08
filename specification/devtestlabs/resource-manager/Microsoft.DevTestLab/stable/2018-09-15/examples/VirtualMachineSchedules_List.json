@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2018-09-15",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "resourceGroupName",
+    "labName": "{labName}",
+    "virtualMachineName": "{vmName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "status": "Enabled",
+              "taskType": "LabVmsShutdownTask",
+              "createdDate": "2020-12-31T18:40:48.1739018-07:00",
+              "provisioningState": "Succeeded",
+              "weeklyRecurrence": {
+                "weekdays": [
+                  "Friday",
+                  "Saturday",
+                  "Sunday"
+                ],
+                "time": "1700"
+              },
+              "dailyRecurrence": {
+                "time": "1900"
+              },
+              "hourlyRecurrence": {
+                "minute": 30
+              },
+              "timeZoneId": "Pacific Standard Time",
+              "notificationSettings": {
+                "status": "Enabled",
+                "timeInMinutes": 30,
+                "webhookUrl": "{webhookUrl}",
+                "emailRecipient": "{email}",
+                "notificationLocale": "EN"
+              },
+              "targetResourceId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/labName}/virtualMachines/{vmName}"
+            },
+            "location": "{location}",
+            "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualMachines/{vmName}/schedules/mySchedule",
+            "type": "Microsoft.DevTestLab/labs/virtualMachines/schedules",
+            "name": "LabVmsShutdown",
+            "tags": {
+              "tagName1": "tagValue1"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

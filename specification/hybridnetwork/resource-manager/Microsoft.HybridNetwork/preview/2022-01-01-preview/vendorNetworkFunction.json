@@ -1,0 +1,730 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HybridNetworkManagementClient",
+    "description": "The resources in this swagger specification will be used to manage the vendor network function deployment in the Microsoft.HybridNetwork resource provider.",
+    "version": "2022-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/locations/{locationName}/vendors/{vendorName}/networkFunctions/{serviceKey}": {
+      "get": {
+        "tags": [
+          "VendorNetworkFunctions"
+        ],
+        "operationId": "VendorNetworkFunctions_Get",
+        "description": "Gets information about the specified vendor network function.",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Azure region where the network function resource was created by the customer."
+          },
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "name": "serviceKey",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The GUID for the vendor network function."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the resulting vendor network function sub resource.",
+            "schema": {
+              "$ref": "#/definitions/VendorNetworkFunction"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get vendor network function sub resource by service key of network function.": {
+            "$ref": "./examples/VendorNfGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "VendorNetworkFunctions"
+        ],
+        "operationId": "VendorNetworkFunctions_CreateOrUpdate",
+        "description": "Creates or updates a vendor network function. This operation can take up to 6 hours to complete. This is expected service behavior.",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Azure region where the network function resource was created by the customer."
+          },
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "name": "serviceKey",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The GUID for the vendor network function."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VendorNetworkFunction"
+            },
+            "description": "Parameters supplied to the create or update vendor network function operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Creation or update is successful. The operation returns the resulting vendor network function sub resource.",
+            "schema": {
+              "$ref": "#/definitions/VendorNetworkFunction"
+            }
+          },
+          "201": {
+            "description": "Created. The operation returns the resulting vendor network function sub resource.",
+            "schema": {
+              "$ref": "#/definitions/VendorNetworkFunction"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update vendor network function sub resource": {
+            "$ref": "./examples/VendorNfCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/locations/{locationName}/vendors/{vendorName}/networkFunctions/{serviceKey}/roleInstances/{roleInstanceName}/start": {
+      "post": {
+        "tags": [
+          "RoleInstances"
+        ],
+        "operationId": "RoleInstances_Start",
+        "description": "Starts a role instance of a vendor network function.",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Azure region where the network function resource was created by customer."
+          },
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "name": "serviceKey",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The GUID for the vendor network function."
+          },
+          {
+            "name": "roleInstanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the role instance of the vendor network function."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start a role instance of a vendor network function": {
+            "$ref": "./examples/RoleInstanceStart.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/locations/{locationName}/vendors/{vendorName}/networkFunctions/{serviceKey}/roleInstances/{roleInstanceName}/stop": {
+      "post": {
+        "tags": [
+          "RoleInstances"
+        ],
+        "operationId": "RoleInstances_Stop",
+        "description": "Powers off (stop) a role instance of a vendor network function.",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Azure region where the network function resource was created by customer."
+          },
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "name": "serviceKey",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The GUID for the vendor network function."
+          },
+          {
+            "name": "roleInstanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the role instance of the vendor network function."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Stop a role instance of a vendor network function": {
+            "$ref": "./examples/RoleInstanceStop.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/locations/{locationName}/vendors/{vendorName}/networkFunctions/{serviceKey}/roleInstances/{roleInstanceName}/restart": {
+      "post": {
+        "tags": [
+          "RoleInstances"
+        ],
+        "operationId": "RoleInstances_Restart",
+        "description": "Restarts a role instance of a vendor network function.",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Azure region where the network function resource was created by customer."
+          },
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "name": "serviceKey",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The GUID for the vendor network function."
+          },
+          {
+            "name": "roleInstanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the role instance of the vendor network function."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Restart a role instance of a vendor network function": {
+            "$ref": "./examples/RoleInstanceRestart.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/locations/{locationName}/vendors/{vendorName}/networkFunctions/{serviceKey}/roleInstances/{roleInstanceName}": {
+      "get": {
+        "tags": [
+          "RoleInstances"
+        ],
+        "operationId": "RoleInstances_Get",
+        "description": "Gets the information of role instance of vendor network function.",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Azure region where the network function resource was created by customer."
+          },
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "name": "serviceKey",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The GUID for the vendor network function."
+          },
+          {
+            "name": "roleInstanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the role instance of the vendor network function."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/RoleInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the operational state of role instance of vendor network function": {
+            "$ref": "./examples/RoleInstanceGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/locations/{locationName}/vendors/{vendorName}/networkFunctions": {
+      "get": {
+        "tags": [
+          "VendorNetworkFunctions"
+        ],
+        "operationId": "VendorNetworkFunctions_List",
+        "description": "Lists all the vendor network function sub resources in an Azure region, filtered by skuType, skuName, vendorProvisioningState.",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Azure region where the network function resource was created by the customer."
+          },
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation. The properties you can use for eq (equals) are: skuType, skuName and vendorProvisioningState."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the resulting vendor network function sub resource.",
+            "schema": {
+              "$ref": "#/definitions/VendorNetworkFunctionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all nfs of vendor resource": {
+            "$ref": "./examples/VendorNfListByVendor.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/locations/{locationName}/vendors/{vendorName}/networkFunctions/{serviceKey}/roleInstances": {
+      "get": {
+        "tags": [
+          "RoleInstances"
+        ],
+        "operationId": "RoleInstances_List",
+        "description": "Lists the information of role instances of vendor network function.",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Azure region where the network function resource was created by customer."
+          },
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "name": "serviceKey",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The GUID for the vendor network function."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionRoleInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all role instances of vendor network function": {
+            "$ref": "./examples/RoleInstanceListByVendorNetworkFunction.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "VendorNetworkFunctionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VendorNetworkFunction"
+          },
+          "description": "A list of vendor network functions."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for vendors API service call."
+    },
+    "VendorNetworkFunction": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VendorNetworkFunctionPropertiesFormat",
+          "description": "Network function details."
+        },
+        "systemData": {
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Vendor network function sub resource."
+    },
+    "VendorNetworkFunctionPropertiesFormat": {
+      "type": "object",
+      "description": "Vendor network function properties.",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the vendor network function sub resource."
+        },
+        "vendorProvisioningState": {
+          "$ref": "./common.json#/definitions/VendorProvisioningState",
+          "description": "The vendor controlled provisioning state of the vendor network function."
+        },
+        "skuName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the sku. Once set, it cannot be updated."
+        },
+        "skuType": {
+          "$ref": "./common.json#/definitions/SkuType",
+          "description": "The sku type.",
+          "readOnly": true
+        },
+        "networkFunctionVendorConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkFunctionVendorConfiguration"
+          },
+          "description": "An array of network function vendor configurations."
+        }
+      }
+    },
+    "NetworkFunctionVendorConfiguration": {
+      "type": "object",
+      "properties": {
+        "roleName": {
+          "type": "string",
+          "description": "The name of the vendor network function role."
+        },
+        "osProfile": {
+          "description": "Specifies the operating system settings for the role instance.",
+          "$ref": "./common.json#/definitions/OsProfile"
+        },
+        "userDataParameters": {
+          "$ref": "./common.json#/definitions/UserDataParameters",
+          "readOnly": true,
+          "description": "The user parameters from the customer."
+        },
+        "networkInterfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/NetworkInterface"
+          },
+          "description": "The network interface configurations."
+        }
+      },
+      "description": "Network function vendor configuration."
+    },
+    "NetworkFunctionRoleInstanceListResult": {
+      "type": "object",
+      "description": "List of role instances of vendor network function.",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoleInstance"
+          },
+          "description": "A list of role instances."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      }
+    },
+    "RoleInstance": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The role instance name."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ARM ID of the resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RoleInstanceProperties",
+          "description": "The role instance properties."
+        },
+        "systemData": {
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      },
+      "description": "The role instance sub resource."
+    },
+    "RoleInstanceProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the RoleInstance resource."
+        },
+        "operationalState": {
+          "type": "string",
+          "description": "The operational state of the role instance.",
+          "enum": [
+            "Unknown",
+            "Stopped",
+            "Running",
+            "Stopping",
+            "Starting"
+          ],
+          "x-ms-enum": {
+            "name": "OperationalState",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The role instance properties of the network function."
+    }
+  }
+}

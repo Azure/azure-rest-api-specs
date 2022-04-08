@@ -54,10 +54,12 @@
         },
         "resultType": {
           "description": "Result type",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       },
+      "required": [
+        "resultType"
+      ],
       "discriminator": "resultType"
     },
     "MigrateMySqlAzureDbForMySqlSyncTaskOutputMigrationLevel": {
@@ -351,6 +353,13 @@
         "targetSetting": {
           "type": "object",
           "description": "Target settings to tune target endpoint migration behavior",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "tableMap": {
+          "type": "object",
+          "description": "Mapping of source to target tables",
           "additionalProperties": {
             "type": "string"
           }

@@ -1,0 +1,112 @@
+{
+  "parameters": {
+    "api-version": "2020-09-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Authorization/dataPolicyManifests/Microsoft.KeyVault.Data",
+            "type": "Microsoft.Authorization/dataPolicyManifests",
+            "name": "Microsoft.KeyVault.Data",
+            "properties": {
+              "namespaces": [
+                "Microsoft.KeyVault"
+              ],
+              "policyMode": "Microsoft.KeyVault.Data",
+              "isBuiltInOnly": true,
+              "resourceTypeAliases": [
+                {
+                  "resourceType": "vaults/certificates",
+                  "aliases": [
+                    {
+                      "name": "Microsoft.KeyVault.Data/vaults/certificates/keyProperties.keyType",
+                      "paths": [
+                        {
+                          "path": "keyProperties.keyType",
+                          "apiVersions": [
+                            "2019-01-01"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                {
+                  "name": "audit"
+                },
+                {
+                  "name": "deny"
+                }
+              ],
+              "fieldValues": [
+                "type"
+              ],
+              "resourceFunctions": {
+                "standard": [
+                  "subscription",
+                  "resourceGroup"
+                ],
+                "custom": [
+                  {
+                    "name": "vault",
+                    "fullyQualifiedResourceType": "Microsoft.KeyVault/vaults",
+                    "defaultProperties": [
+                      "location",
+                      "tags"
+                    ],
+                    "allowCustomProperties": false
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Authorization/dataPolicyManifests/Microsoft.Kubernetes.Data",
+            "type": "Microsoft.Authorization/dataPolicyManifests",
+            "name": "Microsoft.Kubernetes.Data",
+            "properties": {
+              "namespaces": [
+                "Microsoft.Kubernetes",
+                "Microsoft.ContainerService"
+              ],
+              "policyMode": "Microsoft.Kubernetes.Data",
+              "isBuiltInOnly": false,
+              "effects": [
+                {
+                  "name": "audit",
+                  "detailsSchema": {
+                    "type": "object",
+                    "properties": {
+                      "constraintTemplate": {
+                        "type": "string",
+                        "pattern": "^(?i)(https:\\/\\/raw\\.githubusercontent\\.com\\/){1}(.+)(\\.){1}(yaml|yml){1}$"
+                      },
+                      "constraint": {
+                        "type": "string",
+                        "pattern": "^(?i)(https:\\/\\/raw\\.githubusercontent\\.com\\/){1}(.+)(\\.){1}(yaml|yml){1}$"
+                      },
+                      "values": {
+                        "type": "object",
+                        "maxProperties": 10,
+                        "additionalProperties": {}
+                      }
+                    },
+                    "required": [
+                      "constraintTemplate"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
