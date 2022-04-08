@@ -88,9 +88,6 @@ input-file:
   - Microsoft.Network/stable/2021-08-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2021-08-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2021-08-01/webapplicationfirewall.json
-  - Microsoft.Network/stable/2021-08-01/expressRouteProviderPort.json
-  - Microsoft.Network/stable/2021-08-01/examples/expressRouteProviderPortLocationList.json
-  - Microsoft.Network/stable/2021-08-01/examples/expressRouteProviderPortList.json
 ```
 ### Tag: package-2021-05-preview
 
