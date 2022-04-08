@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=/home/leni/workspace/azure-rest-api-specs/documentation/api-scenario/references/v1.2/schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
 scope: ResourceGroup
 
 variables:
@@ -247,24 +247,34 @@ scenarios:
                 value: 2
               - replace: /properties/source/relativePath
                 value: $(relativePath)
-        outputVariables:
-          deploymentName:
-            type: string
-            fromResponse: /name
       - operationId: Apps_Update
         parameters:
           appResource:
             properties:
               activeDeploymentName: $(deploymentName)
       - operationId: Deployments_Restart
+        parameters:
+          deploymentName: blue
       - operationId: Deployments_Stop
+        parameters:
+          deploymentName: blue
       - operationId: Deployments_Start
+        parameters:
+          deploymentName: blue
       - operationId: Deployments_GetLogFileUrl
+        parameters:
+          deploymentName: blue
       - operationId: Deployments_List
+        parameters:
+          deploymentName: blue
       - operationId: Deployments_ListForCluster
+        parameters:
+          deploymentName: blue
       - operationId: Services_List
       - operationId: Services_ListBySubscription
       - operationId: Deployments_Delete
+        parameters:
+          deploymentName: blue
       - operationId: CustomDomains_Delete
       - operationId: Apps_Delete
       - operationId: Certificates_Delete
