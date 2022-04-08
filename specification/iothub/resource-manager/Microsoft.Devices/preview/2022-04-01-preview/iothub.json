@@ -4403,6 +4403,22 @@
           "description": "The timestamp of resource last modification (UTC)"
         }
       }
+    },
+    "RootCertificateProperties": {
+      "description": "This property store root certificate related informaiton",
+      "type": "object",
+      "properties": {
+        "enableRootCertificateV2": {
+          "description": "This property when set to true, hub will use G2 cert; while it's set to false, hub uses Baltimore Cert.",
+          "type": "boolean"
+        },
+        "lastUpdatedTimeUtc": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "the last update time to root certificate flag."
+        }
+      }
     }
   },
   "parameters": {
@@ -4460,16 +4476,6 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
-    }
-  },
-  "RootCertificateProperties": {
-    "description": "This property store root certificate related informaiton",
-    "type": "object",
-    "properties": {
-      "enableRootCertificateV2": {
-        "description": "This property when set to true, hub will use G2 cert; while it's set to false, hub uses Baltimore Cert.",
-        "type": "boolean"
-      }
     }
   }
 }
