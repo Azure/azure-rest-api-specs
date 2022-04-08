@@ -7655,6 +7655,12 @@
           },
           {
             "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/Marker"
+          },
+          {
+            "$ref": "#/parameters/MaxResults"
           }
         ],
         "responses": {
@@ -7713,6 +7719,9 @@
               "$ref": "#/definitions/StorageError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "NextMarker"
         }
       },
       "parameters": [
@@ -7780,6 +7789,12 @@
           },
           {
             "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/Marker"
+          },
+          {
+            "$ref": "#/parameters/MaxResults"
           }
         ],
         "responses": {
@@ -7838,6 +7853,9 @@
               "$ref": "#/definitions/StorageError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "NextMarker"
         }
       },
       "parameters": [
@@ -10606,6 +10624,9 @@
           "items": {
             "$ref": "#/definitions/ClearRange"
           }
+        },
+        "NextMarker": {
+          "type": "string"
         }
       }
     },
