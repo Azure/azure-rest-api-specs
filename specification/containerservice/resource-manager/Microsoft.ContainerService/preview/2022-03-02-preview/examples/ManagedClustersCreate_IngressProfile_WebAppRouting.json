@@ -25,7 +25,7 @@
             "osType": "Linux",
             "type": "VirtualMachineScaleSets",
             "enableNodePublicIP": true,
-            "hostGroupID": "/subscriptions/subid1/resourcegroups/rg/providers/Microsoft.Compute/hostGroups/hostgroup1"
+            "mode": "System"
           }
         ],
         "linuxProfile": {
@@ -47,22 +47,12 @@
             }
           }
         },
-        "autoScalerProfile": {
-          "scan-interval": "20s",
-          "scale-down-delay-after-add": "15m"
-        },
-        "windowsProfile": {
-          "adminUsername": "azureuser",
-          "adminPassword": "replacePassword1234$"
-        },
-        "servicePrincipalProfile": {
-          "clientId": "clientid",
-          "secret": "secret"
-        },
-        "addonProfiles": {},
-        "enableRBAC": true,
-        "diskEncryptionSetID": "/subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.Compute/diskEncryptionSets/des",
-        "enablePodSecurityPolicy": false
+        "ingressProfile": {
+          "webAppRouting": {
+            "enabled": true,
+            "dnsZoneResourceId": "/subscriptions/SUB_ID/resourceGroups/RG_NAME/providers/Microsoft.Network/dnszones/DNS_ZONE_NAME"
+          }
+        }
       }
     }
   },
@@ -91,11 +81,10 @@
               "osType": "Linux",
               "provisioningState": "Succeeded",
               "orchestratorVersion": "1.9.6",
-              "currentOrchestratorVersion": "1.9.6",
               "type": "VirtualMachineScaleSets",
               "enableNodePublicIP": true,
-              "nodeImageVersion": "AKSUbuntu:1604:2020.03.11",
-              "hostGroupID": "/subscriptions/subid1/resourcegroups/rg/providers/Microsoft.Compute/hostGroups/hostgroup1"
+              "mode": "System",
+              "nodeImageVersion": "AKSUbuntu:1604:2020.03.11"
             }
           ],
           "linuxProfile": {
@@ -117,7 +106,7 @@
           "nodeResourceGroup": "MC_rg1_clustername1_location1",
           "enableRBAC": true,
           "diskEncryptionSetID": "/subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.Compute/diskEncryptionSets/des",
-          "enablePodSecurityPolicy": false,
+          "enablePodSecurityPolicy": true,
           "fqdn": "dnsprefix1-abcd1234.hcp.eastus.azmk8s.io",
           "networkProfile": {
             "loadBalancerSku": "basic",
@@ -152,9 +141,11 @@
               ]
             }
           },
-          "autoScalerProfile": {
-            "scan-interval": "20s",
-            "scale-down-delay-after-add": "15m"
+          "ingressProfile": {
+            "webAppRouting": {
+              "enabled": true,
+              "dnsZoneResourceId": "/subscriptions/SUB_ID/resourceGroups/RG_NAME/providers/Microsoft.Network/dnszones/DNS_ZONE_NAME"
+            }
           }
         }
       }
@@ -183,10 +174,9 @@
               "osType": "Linux",
               "provisioningState": "Creating",
               "orchestratorVersion": "1.9.6",
-              "currentOrchestratorVersion": "1.9.6",
               "type": "VirtualMachineScaleSets",
               "enableNodePublicIP": true,
-              "hostGroupID": "/subscriptions/subid1/resourcegroups/rg/providers/Microsoft.Compute/hostGroups/hostgroup1"
+              "mode": "System"
             }
           ],
           "linuxProfile": {
@@ -208,7 +198,7 @@
           "nodeResourceGroup": "MC_rg1_clustername1_location1",
           "enableRBAC": true,
           "diskEncryptionSetID": "/subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.Compute/diskEncryptionSets/des",
-          "enablePodSecurityPolicy": false,
+          "enablePodSecurityPolicy": true,
           "networkProfile": {
             "networkPlugin": "kubenet",
             "podCidr": "10.244.0.0/16",
@@ -242,9 +232,11 @@
               ]
             }
           },
-          "autoScalerProfile": {
-            "scan-interval": "20s",
-            "scale-down-delay-after-add": "15m"
+          "ingressProfile": {
+            "webAppRouting": {
+              "enabled": true,
+              "dnsZoneResourceId": "/subscriptions/SUB_ID/resourceGroups/RG_NAME/providers/Microsoft.Network/dnszones/DNS_ZONE_NAME"
+            }
           }
         }
       }
