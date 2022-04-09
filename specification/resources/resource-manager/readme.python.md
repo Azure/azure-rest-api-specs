@@ -574,7 +574,6 @@ namespace: azure.mgmt.resource.templatespecs.v2021_05_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/templatespecs/v2021_05_01
 ```
 
-<<<<<<< stuartko/Jan22_TSBuiltInsWithApiVersionBump
 ### Tag: package-templatespecs-2022-02 and python
 
 These settings apply only when `--tag=package-templatespecs-2022-02` is specified on the command line.
@@ -585,10 +584,7 @@ namespace: azure.mgmt.resource.templatespecs.v2022_02_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/templatespecs/v2022_02_01
 ```
 
-``` yaml $(python) && $(track2)
-=======
 ``` yaml $(python)
->>>>>>> main
 modelerfour:
   lenient-model-deduplication: true
 ```
