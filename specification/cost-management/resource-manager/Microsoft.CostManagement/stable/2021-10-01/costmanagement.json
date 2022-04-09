@@ -1109,6 +1109,135 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/generateReservationDetailsReport": {
+      "post": {
+        "tags": [
+          "ReservedInstances"
+        ],
+        "operationId": "GenerateReservationDetailsReport_ByBillingAccountId",
+        "description": "Generates the reservations details report for provided date range asynchronously based on enrollment id.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ReservationDetails": {
+            "$ref": "./examples/GenerateReservationDetailsReportByBillingAccount.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/enrollmentIdParameter"
+          },
+          {
+            "$ref": "#/parameters/startDateParameter"
+          },
+          {
+            "$ref": "#/parameters/endDateParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request processing completed.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted. Request will be processed. Use the location header to check the status.",
+            "headers": {
+              "Location": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.CostManagement/generateReservationDetailsReport": {
+      "post": {
+        "tags": [
+          "ReservedInstances"
+        ],
+        "operationId": "GenerateReservationDetailsReport_ByBillingProfileId",
+        "description": "Generates the reservations details report for provided date range asynchronously by billing profile.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ReservationDetails": {
+            "$ref": "./examples/GenerateReservationDetailsReportByBillingProfile.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileIdParameter"
+          },
+          {
+            "$ref": "#/parameters/startDateParameter"
+          },
+          {
+            "$ref": "#/parameters/endDateParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request processing completed.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted. Request will be processed. Use the Location header to check the status.",
+            "headers": {
+              "Location": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.CostManagement/operations": {
       "get": {
         "tags": [
@@ -1236,6 +1365,9 @@
             "type": "object",
             "$ref": "#/definitions/ReportConfigAggregation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "maxItems": 2
         },
         "grouping": {
@@ -1244,6 +1376,10 @@
           "items": {
             "$ref": "#/definitions/ReportConfigGrouping"
           },
+          "x-ms-identifiers": [
+            "name",
+            "type"
+          ],
           "maxItems": 2
         },
         "sorting": {
@@ -1251,7 +1387,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ReportConfigSorting"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "filter": {
           "type": "object",
@@ -1308,7 +1445,11 @@
           "enum": [
             "Ascending",
             "Descending"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "ReportConfigSortingType",
+            "modelAsString": true
+          }
         },
         "name": {
           "description": "The name of the column to sort.",
@@ -1347,6 +1488,7 @@
           "items": {
             "$ref": "#/definitions/ReportConfigFilter"
           },
+          "x-ms-identifiers": [],
           "minItems": 2
         },
         "or": {
@@ -1355,11 +1497,8 @@
           "items": {
             "$ref": "#/definitions/ReportConfigFilter"
           },
+          "x-ms-identifiers": [],
           "minItems": 2
-        },
-        "not": {
-          "description": "The logical \"NOT\" expression.",
-          "$ref": "#/definitions/ReportConfigFilter"
         },
         "dimensions": {
           "description": "Has comparison expression for a dimension",
@@ -1545,7 +1684,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PivotProperties"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -1930,17 +2072,20 @@
             "resourceGroupFilter": {
               "description": "array of resourceGroups to filter by",
               "type": "array",
-              "items": {}
+              "items": {},
+              "x-ms-identifiers": []
             },
             "resourceFilter": {
               "description": "array of resources to filter by",
               "type": "array",
-              "items": {}
+              "items": {},
+              "x-ms-identifiers": []
             },
             "meterFilter": {
               "description": "array of meters to filter by",
               "type": "array",
-              "items": {}
+              "items": {},
+              "x-ms-identifiers": []
             },
             "tagFilter": {
               "description": "tags to filter by",
@@ -2115,15 +2260,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/QueryColumn"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "rows": {
           "description": "Array of rows",
           "type": "array",
           "items": {
             "type": "array",
-            "items": {}
-          }
+            "items": {},
+            "x-ms-identifiers": []
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2164,6 +2314,11 @@
       "description": "A Cost management REST API operation.",
       "type": "object",
       "properties": {
+        "id": {
+          "description": "Operation id: {provider}/{resource}/{operation}.",
+          "type": "string",
+          "readOnly": true
+        },
         "name": {
           "description": "Operation name: {provider}/{resource}/{operation}.",
           "type": "string",
@@ -2185,6 +2340,11 @@
             },
             "operation": {
               "description": "Operation type: Read, write, delete, etc.",
+              "type": "string",
+              "readOnly": true
+            },
+            "description": {
+              "description": "Operation description",
               "type": "string",
               "readOnly": true
             }
@@ -2385,12 +2545,56 @@
           "items": {
             "$ref": "#/definitions/QueryGrouping"
           },
+          "x-ms-identifiers": [
+            "name",
+            "type"
+          ],
           "maxItems": 2
         },
         "filter": {
           "type": "object",
           "description": "The filter expression to use in the query. Please reference our Query API REST documentation for how to properly format the filter.",
           "$ref": "#/definitions/QueryFilter"
+        }
+      }
+    },
+    "OperationStatus": {
+      "description": "The status of the long running operation.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The status of the long running operation.",
+          "type": "string",
+          "enum": [
+            "Running",
+            "Completed",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "OperationStatusType",
+            "modelAsString": true
+          }
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "description": "The properties of the resource generated.",
+          "$ref": "#/definitions/ReportURL"
+        }
+      }
+    },
+    "ReportURL": {
+      "description": "The URL to download the generated report.",
+      "type": "object",
+      "properties": {
+        "reportUrl": {
+          "description": "The URL to download the generated report.",
+          "type": "string"
+        },
+        "validUntil": {
+          "description": "The time at which report URL becomes invalid.",
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -2460,6 +2664,7 @@
           "items": {
             "$ref": "#/definitions/QueryFilter"
           },
+          "x-ms-identifiers": [],
           "minItems": 2
         },
         "or": {
@@ -2468,17 +2673,14 @@
           "items": {
             "$ref": "#/definitions/QueryFilter"
           },
+          "x-ms-identifiers": [],
           "minItems": 2
         },
-        "not": {
-          "description": "The logical \"NOT\" expression.",
-          "$ref": "#/definitions/QueryFilter"
-        },
-        "dimension": {
+        "dimensions": {
           "description": "Has comparison expression for a dimension",
           "$ref": "#/definitions/QueryComparisonExpression"
         },
-        "tag": {
+        "tags": {
           "description": "Has comparison expression for a tag",
           "$ref": "#/definitions/QueryComparisonExpression"
         }
@@ -2606,10 +2808,42 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
+    "startDateParameter": {
+      "name": "startDate",
+      "in": "query",
+      "description": "Start Date",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "endDateParameter": {
+      "name": "endDate",
+      "in": "query",
+      "description": "End Date",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "enrollmentIdParameter": {
+      "name": "billingAccountId",
+      "in": "path",
+      "description": "Enrollment ID (Legacy BillingAccount ID)",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "billingAccountIdParameter": {
       "name": "billingAccountId",
       "in": "path",
       "description": "BillingAccount ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "billingProfileIdParameter": {
+      "name": "billingProfileId",
+      "in": "path",
+      "description": "BillingProfile ID",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

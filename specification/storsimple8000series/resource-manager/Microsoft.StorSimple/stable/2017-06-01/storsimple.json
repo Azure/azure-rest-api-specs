@@ -5353,7 +5353,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AvailableProviderOperation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "The NextLink.",
@@ -5633,7 +5636,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/BackupElement"
-          }
+          },
+          "x-ms-identifiers": [
+            "elementId",
+            "volumeContainerId"
+          ]
         }
       }
     },
@@ -5741,7 +5748,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/BandwidthSchedule"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "volumeCount": {
           "format": "int32",
@@ -6076,7 +6084,14 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VmImage"
-          }
+          },
+          "x-ms-identifiers": [
+            "name",
+            "offer",
+            "publisher",
+            "sku",
+            "version"
+          ]
         }
       }
     },
@@ -6691,7 +6706,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VolumeContainerFailoverMetadata"
-          }
+          },
+          "x-ms-identifiers": [
+            "volumeContainerId"
+          ]
         },
         "eligibilityResult": {
           "$ref": "#/definitions/FailoverSetEligibilityResult",
@@ -6722,7 +6740,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/FailoverSet"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6806,7 +6825,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/FailoverTarget"
-          }
+          },
+          "x-ms-identifiers": [
+            "deviceId"
+          ]
         }
       }
     },
@@ -6859,7 +6881,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Feature"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -6962,7 +6987,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/HardwareComponent"
-          }
+          },
+          "x-ms-identifiers": [
+            "componentId"
+          ]
         }
       }
     },
@@ -7032,7 +7060,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/JobErrorItem"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "code": {
           "description": "The error code intended for programmatic access.",
@@ -7152,7 +7181,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/JobStage"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "deviceId": {
           "description": "The device ID in which the job ran.",
@@ -7507,14 +7537,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricAvailablity"
-          }
+          },
+          "x-ms-identifiers": [
+            "timeGrain"
+          ]
         },
         "dimensions": {
           "description": "The available metric dimensions.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricDimension"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "category": {
           "description": "The category of the metric.",
@@ -7535,7 +7571,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricDefinition"
-          }
+          },
+          "x-ms-identifiers": [
+            "unit",
+            "/name/value"
+          ]
         }
       }
     },
@@ -7597,7 +7637,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Metrics"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -7672,7 +7713,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricDimension"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "unit": {
           "description": "The unit of the metric data.",
@@ -7699,7 +7743,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricData"
-          }
+          },
+          "x-ms-identifiers": [
+            "timeStamp"
+          ]
         }
       }
     },
@@ -7715,7 +7762,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NetworkAdapters"
-          }
+          },
+          "x-ms-identifiers": [
+            "interfaceId"
+          ]
         }
       }
     },
@@ -8349,7 +8399,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/TargetEligibilityErrorMessage"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -8554,7 +8605,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VolumeFailoverMetadata"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
