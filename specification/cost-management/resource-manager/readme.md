@@ -33,7 +33,7 @@ azure-validator: false
 ---
 
 
-### Tag: package-preview-2022-02
+### Tag: package-preview-2022-04
 
 These settings apply only when `--tag=package-preview-2022-04` is specified on the command line.
 
