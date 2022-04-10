@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "CostManagementClient",
-    "version": "2022-02-01-preview"
+    "version": "2022-04-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -41,7 +41,7 @@
         "operationId": "ScheduledActions_List",
         "description": "List all private scheduled actions.",
         "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+          "url": "https://docs.microsoft.com/rest/api/cost-management/"
         },
         "x-ms-examples": {
           "PrivateScheduledActionsList": {
@@ -90,7 +90,7 @@
         "operationId": "ScheduledActions_ListByScope",
         "description": "List all shared scheduled actions within the given scope.",
         "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+          "url": "https://docs.microsoft.com/rest/api/cost-management/"
         },
         "x-ms-examples": {
           "ScheduledActionsListByScope": {
@@ -191,7 +191,7 @@
         "operationId": "ScheduledActions_Get",
         "description": "Get the private scheduled action by name.",
         "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+          "url": "https://docs.microsoft.com/rest/api/cost-management/"
         },
         "x-ms-examples": {
           "PrivateScheduledAction": {
@@ -228,7 +228,7 @@
         "operationId": "ScheduledActions_Delete",
         "description": "Delete a private scheduled action.",
         "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+          "url": "https://docs.microsoft.com/rest/api/cost-management/"
         },
         "x-ms-examples": {
           "PrivateScheduledActionDelete": {
@@ -319,7 +319,7 @@
         "operationId": "ScheduledActions_GetByScope",
         "description": "Get the shared scheduled action from the given scope by name.",
         "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+          "url": "https://docs.microsoft.com/rest/api/cost-management/"
         },
         "x-ms-examples": {
           "ScheduledActionByScope": {
@@ -359,7 +359,7 @@
         "operationId": "ScheduledActions_DeleteByScope",
         "description": "Delete a scheduled action within the given scope.",
         "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+          "url": "https://docs.microsoft.com/rest/api/cost-management/"
         },
         "x-ms-examples": {
           "ScheduledActionDeleteByScope": {
@@ -484,7 +484,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityRequest"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityRequest"
             }
           }
         ],
@@ -492,7 +492,7 @@
           "200": {
             "description": "Response of scheduled action name availability.",
             "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityResponse"
             }
           },
           "default": {
@@ -529,7 +529,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityRequest"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityRequest"
             }
           }
         ],
@@ -537,7 +537,7 @@
           "200": {
             "description": "Response of scheduled action name availability.",
             "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityResponse"
             }
           },
           "default": {
@@ -551,38 +551,6 @@
     }
   },
   "definitions": {
-    "CheckNameAvailabilityRequest": {
-      "type": "object",
-      "description": "The scheduled action check name availability request.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Scheduled action name."
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type. This is expected to be Microsoft.CostManagement/ScheduledActions."
-        }
-      }
-    },
-    "CheckNameAvailabilityResponse": {
-      "type": "object",
-      "description": "The scheduled action check name availability response.",
-      "properties": {
-        "nameAvailable": {
-          "type": "boolean",
-          "description": "Whether the scheduled action name is available."
-        },
-        "reason": {
-          "$ref": "#/definitions/Reason",
-          "description": "The reason for the response."
-        },
-        "message": {
-          "type": "string",
-          "description": "Message explaining whether the name is available or not."
-        }
-      }
-    },
     "DaysOfWeek": {
       "type": "string",
       "description": "Days of Week.",
