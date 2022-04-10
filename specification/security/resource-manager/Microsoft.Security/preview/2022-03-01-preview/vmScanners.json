@@ -249,9 +249,13 @@
             "modelAsString": true
           }
         },
-        "exclusionTag": {
-          "type": "string",
-          "description": "The tag used to exclude resources from being scanned. Resources tagged with this value will not be scanned."
+        "exclusionTags": {
+          "type": "array",
+          "description": "The tags used to exclude resources from being scanned. Resources tagged with one of these values will not be scanned.",
+          "items": {
+            "type": "string",
+            "description": "A tag used to exclude resources from being scanned."
+          }
         }
       }
     }
