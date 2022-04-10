@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "resourceGroupName": "rg1",
+    "api-version": "2022-02-15-preview",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/services/sqlDedicatedGateway",
+            "name": "sqlDedicatedGateway",
+            "type": "Microsoft.DocumentDB/databaseAccounts/services",
+            "properties": {
+              "status": "Running",
+              "creationTime": "2021-01-25T12:56:05.4622517Z",
+              "instanceSize": "Cosmos.D4s",
+              "instanceCount": 1,
+              "serviceType": "SqlDedicatedGateway",
+              "sqlDedicatedGatewayEndpoint": "https://sqlDedicatedGateway.sqlx.cosmos.windows-int.net/",
+              "locations": [
+                {
+                  "name": "sqlDedicatedGateway-westus2",
+                  "location": "West US 2",
+                  "status": "Running",
+                  "sqlDedicatedGatewayEndpoint": "https://sqlDedicatedGateway-westus.sqlx.cosmos.windows-int.net/"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
