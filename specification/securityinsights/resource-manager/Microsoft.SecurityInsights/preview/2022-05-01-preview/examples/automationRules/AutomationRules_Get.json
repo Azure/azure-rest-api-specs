@@ -31,6 +31,24 @@
                     "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/8deb8303-e94d-46ff-96e0-5fd94b33df1a"
                   ]
                 }
+              },
+              {
+                "conditionType": "PropertyChanged",
+                "conditionProperties": {
+                  "propertyName": "IncidentStatus",
+                  "changeType": "ChangedFrom",
+                  "operator": "Equals",
+                  "propertyValues": [
+                    "Closed"
+                  ]
+                }
+              },
+              {
+                "conditionType": "PropertyArrayChanged",
+                "conditionProperties": {
+                  "arrayType": "Alerts",
+                  "changeType": "Added"
+                }
               }
             ]
           },

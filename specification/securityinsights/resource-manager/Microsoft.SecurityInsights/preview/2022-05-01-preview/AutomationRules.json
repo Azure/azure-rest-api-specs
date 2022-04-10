@@ -425,6 +425,115 @@
         }
       }
     },
+    "AutomationRulePropertyArrayChangeConditionSupportedArrayType": {
+      "enum": [
+        "Alerts",
+        "Labels",
+        "Tactics",
+        "Comments"
+      ],
+      "type": "string",
+      "example": "Alerts",
+      "x-ms-enum": {
+        "name": "AutomationRulePropertyArrayChangeConditionSupportedArrayType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Alerts",
+            "description": "Evaluate the condition on the alerts"
+          },
+          {
+            "value": "Labels",
+            "description": "Evaluate the condition on the labels"
+          },
+          {
+            "value": "Tactics",
+            "description": "Evaluate the condition on the tactics"
+          },
+          {
+            "value": "Comments",
+            "description": "Evaluate the condition on the comments"
+          }
+        ]
+      }
+    },
+    "AutomationRulePropertyArrayChangeConditionSupportedChangeType": {
+      "enum": [
+        "Added"
+      ],
+      "type": "string",
+      "example": "Added",
+      "x-ms-enum": {
+        "name": "AutomationRulePropertyArrayChangeConditionSupportedChangeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Added",
+            "description": "Evaluate the condition on items added to the array"
+          }
+        ]
+      }
+    },
+    "AutomationRulePropertyArrayChangedValuesCondition": {
+      "type": "object",
+      "properties": {
+        "arrayType": {
+          "$ref": "#/definitions/AutomationRulePropertyArrayChangeConditionSupportedArrayType"
+        },
+        "changeType": {
+          "$ref": "#/definitions/AutomationRulePropertyArrayChangeConditionSupportedChangeType"
+        }
+      }
+    },
+    "AutomationRulePropertyChangedConditionSupportedChangedType": {
+      "enum": [
+        "ChangedFrom",
+        "ChangedTo"
+      ],
+      "type": "string",
+      "example": "ChangedFrom",
+      "x-ms-enum": {
+        "name": "AutomationRulePropertyChangedConditionSupportedChangedType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "ChangedFrom",
+            "description": "Evaluate the condition on the previous value of the property"
+          },
+          {
+            "value": "ChangedTo",
+            "description": "Evaluate the condition on the updated value of the property"
+          }
+        ]
+      }
+    },
+    "AutomationRulePropertyChangedConditionSupportedPropertyType": {
+      "enum": [
+        "IncidentSeverity",
+        "IncidentStatus",
+        "IncidentOwner"
+      ],
+      "type": "string",
+      "example": "IncidentSeverity",
+      "x-ms-enum": {
+        "name": "AutomationRulePropertyChangedConditionSupportedPropertyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "IncidentSeverity",
+            "description": "Evaluate the condition on the incident severity"
+          },
+          {
+            "value": "IncidentStatus",
+            "description": "Evaluate the condition on the incident status"
+          },
+          {
+            "value": "IncidentOwner",
+            "description": "Evaluate the condition on the incident owner"
+          }
+        ]
+      }
+    },
     "AutomationRulePropertyConditionSupportedOperator": {
       "enum": [
         "Equals",
@@ -760,6 +869,26 @@
         ]
       }
     },
+    "AutomationRulePropertyValuesChangedCondition": {
+      "type": "object",
+      "properties": {
+        "propertyName": {
+          "$ref": "#/definitions/AutomationRulePropertyChangedConditionSupportedPropertyType"
+        },
+        "changeType": {
+          "$ref": "#/definitions/AutomationRulePropertyChangedConditionSupportedChangedType"
+        },
+        "operator": {
+          "$ref": "#/definitions/AutomationRulePropertyConditionSupportedOperator"
+        },
+        "propertyValues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "AutomationRulePropertyValuesCondition": {
       "type": "object",
       "properties": {
@@ -892,7 +1021,6 @@
           "type": "string"
         },
         "owner": {
-          "type": "object",
           "$ref": "./common/IncidentTypes.json#/definitions/IncidentOwnerInfo"
         },
         "labels": {
@@ -935,6 +1063,40 @@
           "type": "string"
         }
       }
+    },
+    "PropertyArrayChangedConditionProperties": {
+      "description": "Describes an automation rule condition that evaluates an array property's value change",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutomationRuleCondition"
+        }
+      ],
+      "properties": {
+        "conditionProperties": {
+          "type": "object",
+          "$ref": "#/definitions/AutomationRulePropertyArrayChangedValuesCondition"
+        }
+      },
+      "x-ms-discriminator-value": "PropertyArrayChanged",
+      "x-ms-client-flatten": true
+    },
+    "PropertyChangedConditionProperties": {
+      "description": "Describes an automation rule condition that evaluates a property's value change",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutomationRuleCondition"
+        }
+      ],
+      "properties": {
+        "conditionProperties": {
+          "type": "object",
+          "$ref": "#/definitions/AutomationRulePropertyValuesChangedCondition"
+        }
+      },
+      "x-ms-discriminator-value": "PropertyChanged",
+      "x-ms-client-flatten": true
     },
     "PropertyConditionProperties": {
       "description": "Describes an automation rule condition that evaluates a property's value",
