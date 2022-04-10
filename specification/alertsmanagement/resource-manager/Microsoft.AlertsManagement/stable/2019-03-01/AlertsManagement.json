@@ -234,6 +234,9 @@
           },
           {
             "$ref": "#/parameters/newState"
+          },
+		  {
+            "$ref": "#/parameters/comment"
           }
         ],
         "responses": {
@@ -506,6 +509,14 @@
         "name": "AlertState",
         "modelAsString": true
       }
+    },
+	"comment": {
+      "description": "reason of change alert state",
+      "name": "comment",
+      "type": "string",
+      "in": "body",
+      "required": false,
+      "x-ms-parameter-location": "method"
     },
     "alertState": {
       "description": "Filter by state of the alert instance. Default value is to select all.",
