@@ -445,7 +445,8 @@
         "issuedCertificate": {
           "description": "The end-entity certificate issued to a client.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "example": "-----BEGIN CERTIFICATE-----MIIDDTCCArOgAwIBAgIUYc7n9QGjffolKnDoY9rUjf9EMqAwCgYIKoZIzj0EAwIwgZUxCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJXQTEQMA4GA1UEBxMHUmVkbW9uZDEYMBYGA1UECRMPMSBNaWNyb3NvZnQgV2F5MQ4wDAYDVQQREwU5ODA1MjESMBAGA1UEChMJTWljcm9zb2Z0MSkwJwYDVQQDEyBNaWNyb3NvZnQgVGVzdCBFQ0MgSXNzdWluZyBDQSBHMjAeFw0yMTExMTUyMTE1MzJaFw0yMTExMjUyMTE1MzJaMBIxEDAOBgNVBAMTB2RldmljZTUwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAROuomi9ENvCrv/xhcgG/ORFeIS8a4Wh/Vg1VXW+pJQIKxWr1hOiuYs+KmMHQS9W7Amlkfy0aBtiqinUJvvFj8Ao4IBYTCCAV0wDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQUIhLWIQhIBzcSbOxzb9U/u1asMGcwHwYDVR0jBBgwFoAU8PdCrRM0+H5pYeUVjkBBIvIa/wswDgYDVR0PAQH/BAQDAgPIMBYGA1UdJQEB/wQMMAoGCCsGAQUFBwMCMIGRBggrBgEFBQcBAQSBhDCBgTAtBggrBgEFBQcwAYYhaHR0cDovL29jc3AuZGVtby5vbmUuZGlnaWNlcnQuY29tMFAGCCsGAQUFBzAChkRodHRwOi8vY2FjZXJ0cy5kZW1vLm9uZS5kaWdpY2VydC5jb20vTWljcm9zb2Z0VGVzdEVDQ0lzc3VpbmdDQUcyLmNydDBRBgNVHR8ESjBIMEagRKBChkBodHRwOi8vY3JsLmRlbW8ub25lLmRpZ2ljZXJ0LmNvbS9NaWNyb3NvZnRUZXN0RUNDSXNzdWluZ0NBRzIuY3JsMAoGCCqGSM49BAMCA0gAMEUCIQDB0RbQNOA276IorQ20PYyioLh7Blm8JHzuUr4Vn/f2LQIgN+jv6dP/giMLKUfVNG2McCt3xtLL6zK9VipiQDN0Mts=-----END CERTIFICATE-----"
         },
         "certificateChain": {
           "description": "The issuing certificate authority chain.",
@@ -453,7 +454,8 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "example": "[\"-----BEGIN CERTIFICATE-----MIIDcTCCAxigAwIBAgIUYMzip+eDk0ZTFDvisRPcsabDc9EwCgYIKoZIzj0EAwIwgZIxCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJXQTEQMA4GA1UEBxMHUmVkbW9uZDEYMBYGA1UECRMPMSBNaWNyb3NvZnQgV2F5MQ4wDAYDVQQREwU5ODA1MjESMBAGA1UEChMJTWljcm9zb2Z0MSYwJAYDVQQDEx1NaWNyb3NvZnQgVGVzdCBFQ0MgUm9vdCBDQSBHMjAeFw0yMTA4MTExNzUwNDFaFw0yNTA4MTExNzQ5MDlaMIGVMQswCQYDVQQGEwJVUzELMAkGA1UECBMCV0ExEDAOBgNVBAcTB1JlZG1vbmQxGDAWBgNVBAkTDzEgTWljcm9zb2Z0IFdheTEOMAwGA1UEERMFOTgwNTIxEjAQBgNVBAoTCU1pY3Jvc29mdDEpMCcGA1UEAxMgTWljcm9zb2Z0IFRlc3QgRUNDIElzc3VpbmcgQ0EgRzIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAS2U81BoKyewWKBbi2Gq9NajvRi9GBv+E/5e2Uj9VNfU8gTMSOGJ0a1tsreRGmd56JJaLnccL/xLm7Wt/x6Lx5Io4IBRTCCAUEwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQU8PdCrRM0+H5pYeUVjkBBIvIa/wswHwYDVR0jBBgwFoAUtX69ekykBlE6wkKzc/6rQ0OgcM0wDgYDVR0PAQH/BAQDAgGGMIGNBggrBgEFBQcBAQSBgDB+MC0GCCsGAQUFBzABhiFodHRwOi8vb2NzcC5kZW1vLm9uZS5kaWdpY2VydC5jb20wTQYIKwYBBQUHMAKGQWh0dHA6Ly9jYWNlcnRzLmRlbW8ub25lLmRpZ2ljZXJ0LmNvbS9NaWNyb3NvZnRUZXN0RUNDUm9vdENBRzIuY3J0ME4GA1UdHwRHMEUwQ6BBoD+GPWh0dHA6Ly9jcmwuZGVtby5vbmUuZGlnaWNlcnQuY29tL01pY3Jvc29mdFRlc3RFQ0NSb290Q0FHMi5jcmwwCgYIKoZIzj0EAwIDRwAwRAIgba5CVls2lL7mc3Wrtz3BJKDz7uWNeS7K2+LAZEBN490CIFDaGqPdkwHwG9s7QTtejOSoj4CIadzPw03h16UBWyts-----END CERTIFICATE-----\"]"
         }
       }
     },
@@ -487,9 +489,10 @@
       "type": "object",
       "properties": {
         "operationId": {
-          "description": "Operation ID.",
+          "description": "An opaque operation ID string.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "example": "IjAwMDBlOGMyLTAwMDAtMDYwMC0wMDAwLTYxOGVkODYxMDAwMCI="
         },
         "status": {
           "description": "Device operation status.",
@@ -501,24 +504,31 @@
             "succeeded"
           ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "example": "running",
+          "x-ms-enum": {
+            "modelAsString": true
+          }
         },
         "createdDateTimeUtc": {
           "format": "date-time",
           "description": "Operation created timestamp in UTC.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "example": "2021-11-01T00:00:00"
         },
         "lastActionDateTimeUtc": {
           "format": "date-time",
           "description": "Optional operation status entered timestamp in UTC.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "example": "2021-11-01T00:01:00"
         },
         "resourceLocation": {
-          "description": "Optional resource location URI.",
+          "description": "Optional resource location URI. Present only when the operation terminates successfully.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "example": "https://global.azure-devices-provisioning.net/0NE123ABC/devices/contoso-registration-id/certificates/f679fd5a-a570-4d4b-b640-81753d47f820"
         }
       }
     },
@@ -530,8 +540,9 @@
       "type": "object",
       "properties": {
         "operationId": {
-          "description": "Operation ID.",
-          "type": "string"
+          "description": "An opaque operation ID string.",
+          "type": "string",
+          "example": "IjAwMDBlOGMyLTAwMDAtMDYwMC0wMDAwLTYxOGVkODYxMDAwMCI="
         },
         "status": {
           "description": "Device enrollment status.",
@@ -542,7 +553,11 @@
             "failed",
             "disabled"
           ],
-          "type": "string"
+          "type": "string",
+          "example": "assigning",
+          "x-ms-enum": {
+            "modelAsString": true
+          }
         },
         "registrationState": {
           "$ref": "#/definitions/DeviceRegistrationResult",
@@ -572,23 +587,27 @@
         "registrationId": {
           "description": "This id is used to uniquely identify a device registration of an enrollment.\r\nA case-insensitive string (up to 128 characters long) of alphanumeric characters plus certain special characters : . _ -. No special characters allowed at start or end.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "example": "contoso-registration-id"
         },
         "createdDateTimeUtc": {
           "format": "date-time",
           "description": "Registration create date time (in UTC).",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "example": "2021-11-01T00:00:00"
         },
         "assignedHub": {
           "description": "Assigned Azure IoT Hub.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "example": "contoso-iot-hub.azure-devices.net"
         },
         "deviceId": {
-          "description": "Device ID.",
+          "description": "DPS administrator configured device ID.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "example": "contoso-device-id"
         },
         "status": {
           "description": "Enrollment status.",
@@ -600,7 +619,11 @@
             "disabled"
           ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "example": "assigning",
+          "x-ms-enum": {
+            "modelAsString": true
+          }
         },
         "substatus": {
           "description": "Substatus for 'Assigned' devices. Possible values include - 'initialAssignment': Device has been assigned to an IoT hub for the first time, 'deviceDataMigrated': Device has been assigned to a different IoT hub and its device data was migrated from the previously assigned IoT hub. Device data was removed from the previously assigned IoT hub, 'deviceDataReset':  Device has been assigned to a different IoT hub and its device data was populated from the initial state stored in the enrollment. Device data was removed from the previously assigned IoT hub, 'reprovisionedToInitialAssignment': Device has been re-provisioned to a previously assigned IoT hub.",
@@ -611,16 +634,17 @@
             "reprovisionedToInitialAssignment"
           ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "example": "initialAssignment"
         },
         "errorCode": {
           "format": "int32",
-          "description": "Error code.",
+          "description": "An integer representation of the error code. For details regarding the error codes please see https://docs.microsoft.com/en-us/azure/iot-dps/how-to-troubleshoot-dps#common-error-codes",
           "type": "integer",
           "readOnly": true
         },
         "errorMessage": {
-          "description": "Error message.",
+          "description": "A description of the error details as a string.",
           "type": "string",
           "readOnly": true
         },
@@ -628,12 +652,14 @@
           "format": "date-time",
           "description": "Last updated date time (in UTC).",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "example": "2021-11-01T00:00:00"
         },
         "etag": {
-          "description": "The entity tag associated with the resource.",
+          "description": "The entity tag associated with the resource as a string.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "example": "IjAwMDBlOGMyLTAwMDAtMDYwMC0wMDAwLTYxOGVkODYxMDAwMCI="
         },
         "payload": {
           "description": "Custom allocation payload returned from the webhook to the device.",
@@ -656,12 +682,12 @@
           "readOnly": true
         },
         "deviceHostname": {
-          "description": "The configured hostname for the device.\r\nUsed for server certificate issuance.",
+          "description": "Optional configured hostname for the device.",
           "type": "string",
           "readOnly": true
         },
         "deviceIpAddress": {
-          "description": "The configured IP address for the device.\r\nUsed for server certificate issuance.",
+          "description": "Optional configured IP address for the device.",
           "type": "string",
           "readOnly": true
         }
@@ -672,7 +698,7 @@
       "type": "object",
       "properties": {
         "authenticationKey": {
-          "description": "Encrypted authentication key.",
+          "description": "Encrypted authentication key as a string.",
           "type": "string"
         }
       }
@@ -697,7 +723,9 @@
       "type": "object",
       "properties": {
         "enrollmentGroupId": {
-          "type": "string"
+          "description": "Enrollment group id.",
+          "type": "string",
+          "example": "conotso-enrollment-group"
         }
       }
     },
@@ -755,7 +783,10 @@
             "serverCertificate"
           ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "modelAsString": true
+          }
         }
       }
     },
@@ -809,8 +840,9 @@
       "type": "object",
       "properties": {
         "certificate": {
-          "description": "Certificates in PEM format enclosed within these headers:\r\n-----BEGIN CERTIFICATE-----\\r\\n\r\n-----END CERTIFICATE-----\\r\\n",
-          "type": "string"
+          "description": "Certificates in PEM format enclosed within these headers:\r\n-----BEGIN CERTIFICATE-----\r\n-----END CERTIFICATE-----",
+          "type": "string",
+          "example": "-----BEGIN CERTIFICATE-----MIIDDTCCArOgAwIBAgIUYc7n9QGjffolKnDoY9rUjf9EMqAwCgYIKoZIzj0EAwIwgZUxCzAJBgNV\\nBAYTAlVTMQswCQYDVQQIEwJXQTEQMA4GA1UEBxMHUmVkbW9uZDEYMBYGA1UECRMPMSBNaWNyb3Nv\\nZnQgV2F5MQ4wDAYDVQQREwU5ODA1MjESMBAGA1UEChMJTWljcm9zb2Z0MSkwJwYDVQQDEyBNaWNy\\nb3NvZnQgVGVzdCBFQ0MgSXNzdWluZyBDQSBHMjAeFw0yMTExMTUyMTE1MzJaFw0yMTExMjUyMTE1\\nMzJaMBIxEDAOBgNVBAMTB2RldmljZTUwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAROuomi9ENv\\nCrv/xhcgG/ORFeIS8a4Wh/Vg1VXW+pJQIKxWr1hOiuYs+KmMHQS9W7Amlkfy0aBtiqinUJvvFj8A\\no4IBYTCCAV0wDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQUIhLWIQhIBzcSbOxzb9U/u1asMGcwHwYD\\nVR0jBBgwFoAU8PdCrRM0+H5pYeUVjkBBIvIa/wswDgYDVR0PAQH/BAQDAgPIMBYGA1UdJQEB/wQM\\nMAoGCCsGAQUFBwMCMIGRBggrBgEFBQcBAQSBhDCBgTAtBggrBgEFBQcwAYYhaHR0cDovL29jc3Au\\nZGVtby5vbmUuZGlnaWNlcnQuY29tMFAGCCsGAQUFBzAChkRodHRwOi8vY2FjZXJ0cy5kZW1vLm9u\\nZS5kaWdpY2VydC5jb20vTWljcm9zb2Z0VGVzdEVDQ0lzc3VpbmdDQUcyLmNydDBRBgNVHR8ESjBI\\nMEagRKBChkBodHRwOi8vY3JsLmRlbW8ub25lLmRpZ2ljZXJ0LmNvbS9NaWNyb3NvZnRUZXN0RUND\\nSXNzdWluZ0NBRzIuY3JsMAoGCCqGSM49BAMCA0gAMEUCIQDB0RbQNOA276IorQ20PYyioLh7Blm8\\nJHzuUr4Vn/f2LQIgN+jv6dP/giMLKUfVNG2McCt3xtLL6zK9VipiQDN0Mts=-----END CERTIFICATE-----"
         },
         "metadata": {
           "$ref": "#/definitions/X509CertificateMetadata",
@@ -825,45 +857,53 @@
         "subjectName": {
           "description": "Distinguished name from the certificate.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "example": "CN=contoso-device"
         },
         "sha1Thumbprint": {
           "description": "SHA-1 hash value of the certificate as a hexadecimal string.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "example": "b6127ae34bc7877c9b8110125bb002ba7eb61764"
         },
         "sha256Thumbprint": {
           "description": "SHA-256 hash value of the certificate as a hexadecimal string.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "example": "3B351343697A88ED5F39FB2B45E35280CD0970588C1978CF8AB3B0C0E7ACFC55"
         },
         "issuerName": {
           "description": "Issuer distinguished name.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "example": "CN=CONTOSO INTERMEDIATE CA 01"
         },
         "notBeforeUtc": {
           "format": "date-time",
           "description": "The date on which the certificate becomes valid.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "example": "2021-08-11T17:50:41Z"
         },
         "notAfterUtc": {
           "format": "date-time",
           "description": "The date on which the certificate is no longer valid.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "example": "2022-08-11T17:50:41Z"
         },
         "serialNumber": {
           "description": "The serial number.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "example": "120020a33f4aa41b31f807e66900000020a33f"
         },
         "version": {
           "format": "int32",
           "description": "The X509 format version.",
           "type": "integer",
-          "readOnly": true
+          "readOnly": true,
+          "example": "3"
         }
       }
     },
@@ -881,11 +921,16 @@
             "none",
             "serverCertificate"
           ],
-          "type": "string"
+          "type": "string",
+          "example": "serverCertificate",
+          "x-ms-enum": {
+            "modelAsString": true
+          }
         },
         "csr": {
           "description": "The certificate signing request for the associated certificate type.\r\nFormat of the CSR is in PKCS 10.",
-          "type": "string"
+          "type": "string",
+          "example": "-----BEGIN CERTIFICATE REQUEST-----MIIBJzCBzQIBADAvMS0wKwYDVQQDDCQ3ZDVhZmNiMC04NGI4LTQyYzYtYWJkYS0yYTQ0MTI3N2Q0MzMwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARBafB5bAi8DKq8F0UFsuEy+y6AHpk8YvIGE5g4ReeZIOSQ30obp4tFB7IdJQawTq3YKp1zOv5c8G19aykuGosSoDwwOgYJKoZIhvcNAQkOMS0wKzAMBgNVHRMBAf8EAjAAMBsGA1UdEQQUMBKCCmNvbnN0by5jb22HBAoAAAEwCgYIKoZIzj0EAwIDSQAwRgIhAKgIRbM0o4dWuXaQfJAD1WzM+FtowB3zRUAnrGYdRHJmAiEA/NzniwfySRO8/6Fr04y24ZesbqwWET8OOXuRn7KPlTk=-----END CERTIFICATE REQUEST-----"
         }
       }
     },
@@ -895,11 +940,12 @@
       "properties": {
         "registrationId": {
           "description": "The registration ID is a case-insensitive string (up to 128 characters long) of alphanumeric characters plus certain special characters : . _ -. No special characters allowed at start or end.",
-          "type": "string"
+          "type": "string",
+          "example": "constoso-registration-id"
         },
         "tpm": {
           "$ref": "#/definitions/TpmAttestation",
-          "description": "Tpm."
+          "description": "Tpm attestation information."
         },
         "payload": {
           "description": "Custom allocation payload.",
@@ -907,7 +953,8 @@
         },
         "clientCertificateCsr": {
           "description": "Certificate signing request for device client certificate in PKCS 10 format which is used for authentication after provisioning.",
-          "type": "string"
+          "type": "string",
+          "example": "-----BEGIN CERTIFICATE REQUEST-----MIIBJzCBzQIBADAvMS0wKwYDVQQDDCQ3ZDVhZmNiMC04NGI4LTQyYzYtYWJkYS0yYTQ0MTI3N2Q0MzMwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARBafB5bAi8DKq8F0UFsuEy+y6AHpk8YvIGE5g4ReeZIOSQ30obp4tFB7IdJQawTq3YKp1zOv5c8G19aykuGosSoDwwOgYJKoZIhvcNAQkOMS0wKzAMBgNVHRMBAf8EAjAAMBsGA1UdEQQUMBKCCmNvbnN0by5jb22HBAoAAAEwCgYIKoZIzj0EAwIDSQAwRgIhAKgIRbM0o4dWuXaQfJAD1WzM+FtowB3zRUAnrGYdRHJmAiEA/NzniwfySRO8/6Fr04y24ZesbqwWET8OOXuRn7KPlTk=-----END CERTIFICATE REQUEST-----"
         }
       }
     },
