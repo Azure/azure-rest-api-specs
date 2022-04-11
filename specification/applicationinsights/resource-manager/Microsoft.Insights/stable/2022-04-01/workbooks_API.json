@@ -3,7 +3,7 @@
   "info": {
     "title": "ApplicationInsightsManagementClient",
     "description": "Azure workbook resource type.",
-    "version": "2021-08-01"
+    "version": "2022-04-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -439,18 +439,14 @@
           "type": "string",
           "description": "The kind of workbook. Only valid value is shared.",
           "enum": [
-            "user",
             "shared"
           ],
           "x-ms-enum": {
-            "name": "kind",
+            "name": "WorkbookSharedTypeKind",
             "modelAsString": true
           }
         },
         "etag": {
-          "additionalProperties": {
-            "type": "string"
-          },
           "type": "string",
           "description": "Resource etag"
         }
@@ -474,7 +470,7 @@
       "description": "Workbook list result."
     },
     "Workbook": {
-      "description": "An Application Insights workbook definition.",
+      "description": "A workbook definition.",
       "type": "object",
       "allOf": [
         {
@@ -567,11 +563,10 @@
           "type": "string",
           "description": "The kind of workbook. Only valid value is shared.",
           "enum": [
-            "user",
             "shared"
           ],
           "x-ms-enum": {
-            "name": "SharedTypeKind",
+            "name": "WorkbookUpdateSharedTypeKind",
             "modelAsString": true
           }
         },
@@ -683,7 +678,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the Application Insights component resource.",
+      "description": "The name of the resource.",
       "x-ms-parameter-location": "method"
     },
     "CategoryParameter": {
