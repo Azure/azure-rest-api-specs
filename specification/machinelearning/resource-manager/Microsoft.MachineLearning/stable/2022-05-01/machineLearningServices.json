@@ -4807,9 +4807,69 @@
           "$ref": "#/definitions/ComputePowerAction"
         },
         "schedule": {
-          "$ref": "mfe.json#/definitions/ScheduleBase"
+          "$ref": "#/definitions/ScheduleBase"
         }
       }
+    },
+    "ScheduleBase": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "provisioningStatus": {
+          "$ref": "#/definitions/ScheduleProvisioningState"
+        },
+        "status": {
+          "$ref": "#/definitions/ScheduleStatus"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ScheduleProvisioningState": {
+      "enum": [
+        "Completed",
+        "Provisioning",
+        "Failed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ScheduleProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Completed"
+          },
+          {
+            "value": "Provisioning"
+          },
+          {
+            "value": "Failed"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "ScheduleStatus": {
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ScheduleStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Enabled"
+          },
+          {
+            "value": "Disabled"
+          }
+        ]
+      },
+      "additionalProperties": false
     },
     "ComputePowerAction": {
       "type": "string",
