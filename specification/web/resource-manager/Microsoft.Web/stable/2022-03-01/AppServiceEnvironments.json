@@ -482,6 +482,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Move an App Service Environment to a different VNET.": {
+            "$ref": "./examples/AppServiceEnvironments_ChangeVnet.json"
+          }
+        },
         "x-ms-long-running-operation": true,
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -892,6 +897,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create or update a multi-role pool.": {
+            "$ref": "./examples/AppServiceEnvironments_CreateOrUpdateMultiRolePool.json"
+          }
+        },
         "x-ms-long-running-operation": true
       },
       "patch": {
@@ -946,6 +956,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a multi-role pool.": {
+            "$ref": "./examples/AppServiceEnvironments_CreateOrUpdateMultiRolePool.json"
           }
         }
       }
@@ -1147,6 +1162,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get usage metrics for a multi-role pool of an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListMultiRoleUsages.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1292,6 +1312,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Gets the list of private endpoints associated with a hosting environment.": {
+            "$ref": "./examples/AppServiceEnvironments_GetPrivateEndpointConnectionList.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1343,68 +1368,12 @@
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
-        }
-      },
-      "put": {
-        "tags": [
-          "AppServiceEnvironments"
-        ],
-        "summary": "Approves or rejects a private endpoint connection",
-        "description": "Description for Approves or rejects a private endpoint connection",
-        "operationId": "AppServiceEnvironments_ApproveOrRejectPrivateEndpointConnection",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the App Service Environment.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "privateEndpointWrapper",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/PrivateLinkConnectionApprovalRequestResource"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/RemotePrivateEndpointConnectionARMResource"
-            }
-          },
-          "202": {
-            "description": "Asynchronous operation in progress.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/RemotePrivateEndpointConnectionARMResource"
-            }
-          },
-          "default": {
-            "description": "App Service error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-examples": {
+          "Gets a private endpoint connection.": {
+            "$ref": "./examples/AppServiceEnvironments_GetPrivateEndpointConnection.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -1463,49 +1432,12 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Gets a private endpoint connection.": {
+            "$ref": "./examples/AppServiceEnvironments_DeletePrivateEndpointConnection.json"
+          }
+        },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/privateLinkResources": {
-      "get": {
-        "tags": [
-          "AppServiceEnvironments"
-        ],
-        "summary": "Gets the private link resources",
-        "description": "Description for Gets the private link resources",
-        "operationId": "AppServiceEnvironments_GetPrivateLinkResources",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the App Service Environment.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/PrivateLinkResourcesWrapper"
-            }
-          },
-          "default": {
-            "description": "App Service error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/reboot": {
@@ -1761,6 +1693,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Suspend an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_Suspend.json"
+          }
+        },
         "x-ms-long-running-operation": true,
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -1988,6 +1925,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get properties of a worker pool.": {
+            "$ref": "./examples/AppServiceEnvironments_CreateOrUpdateWorkerPool.json"
+          }
+        },
         "x-ms-long-running-operation": true
       },
       "patch": {
@@ -2050,6 +1992,11 @@
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get properties of a worker pool.": {
+            "$ref": "./examples/AppServiceEnvironments_CreateOrUpdateWorkerPool.json"
+          }
         }
       }
     },
@@ -2107,6 +2054,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get metric definitions for a specific instance of a worker pool of an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListWorkerPoolInstanceMetricDefinitions.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2157,6 +2109,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get metric definitions for a worker pool of an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListWebWorkerMetricDefinitions.json"
           }
         },
         "x-ms-pageable": {
@@ -2266,6 +2223,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get usage metrics for a worker pool of an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListWebWorkerUsages.json"
           }
         },
         "x-ms-pageable": {
