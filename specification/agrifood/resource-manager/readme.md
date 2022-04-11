@@ -3,7 +3,7 @@
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for agfood.
-
+test
 ## Getting Started
 
 To build the SDKs for My API, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
