@@ -354,12 +354,20 @@
           },
           "minItems": 1,
           "uniqueItems": true,
-          "description": "The user equipment address pool prefixes for the attached data network."
+          "description": "The user equipment address pool prefixes for the attached data network that are dynamically assigned by the core to UEs when they set up a PDU session.\nAt least one of userEquipmentAddressPoolPrefix and userEquipmentStaticAddressPoolPrefix must be defined. If both are defined then they must be the same size."
+        },
+        "userEquipmentStaticAddressPoolPrefix": {
+          "type": "array",
+          "items": {
+            "$ref": "./ts29571.json#/definitions/Ipv4AddrMask"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "The user equipment address pool prefixes for the attached data network that are statically assigned by the core to UEs when they set up a PDU session.\nThe mapping of static IP to sim is configured in staticIpConfiguration on the sim resource.\nAt least one of userEquipmentAddressPoolPrefix and userEquipmentStaticAddressPoolPrefix must be defined. If both are defined then they must be the same size."
         }
       },
       "required": [
-        "n6Interface",
-        "userEquipmentAddressPoolPrefix"
+        "n6Interface"
       ]
     },
     "AttachedDataNetworkListResult": {

@@ -1157,11 +1157,48 @@
         "simPolicy": {
           "$ref": "./common.json#/definitions/SimPolicyResourceId",
           "description": "The simPolicy used by this sim."
+        },
+        "staticIpConfiguration": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SimStaticIpProperties"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "A list of static IP addresses assigned to this sim. Each address is assigned at a defined network scope, made up of {attached data network, slice}.",
+          "x-ms-identifiers": [
+            "attachedDataNetwork",
+            "slice"
+          ]
         }
       },
       "required": [
         "internationalMobileSubscriberIdentity"
       ]
+    },
+    "SimStaticIpProperties": {
+      "type": "object",
+      "description": "Static IP configuration for a sim, scoped to a particular attached data network and slice.",
+      "properties": {
+        "attachedDataNetwork": {
+          "$ref": "./common.json#/definitions/AttachedDataNetworkResourceId",
+          "description": "The attached data network on which the static IP address will be used. The combination of attachedDataNetwork and slice defines the network scope of the IP address."
+        },
+        "slice": {
+          "$ref": "./common.json#/definitions/SliceResourceId",
+          "description": "The network slice on which the static IP address will be used. The combination of attachedDataNetwork and slice defines the network scope of the IP address."
+        },
+        "staticIp": {
+          "type": "object",
+          "description": "The static IP configuration for the sim to use at the defined network scope.",
+          "properties": {
+            "ipv4Address": {
+              "$ref": "./ts29571.json#/definitions/Ipv4Addr",
+              "description": "The IPv4 address assigned to the sim at this network scope. This address must be in the userEquipmentStaticAddressPoolPrefix defined in the attachedDataNetwork."
+            }
+          }
+        }
+      }
     },
     "SimIdListResult": {
       "type": "object",
