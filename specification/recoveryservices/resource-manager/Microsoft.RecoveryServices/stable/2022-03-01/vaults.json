@@ -426,6 +426,9 @@
           },
           "Create or Update Vault with CustomerManagedKeys": {
             "$ref": "./examples/PUTVault_WithCMK.json"
+          },
+          "Create or Update Vault With Monitoring Setting": {
+            "$ref": "./examples/PUTVault_WithMonitoringSettings.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -539,6 +542,9 @@
           },
           "Update Resource With CustomerManagedKeys3": {
             "$ref": "./examples/PATCHVault_WithCMK3.json"
+          },
+          "Update Vault With Monitoring Setting": {
+            "$ref": "./examples/PATCHVault_WithMonitoringSettings.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -809,6 +815,23 @@
     }
   },
   "definitions": {
+    "AzureMonitorAlertSettings": {
+      "description": "Settings for Azure Monitor based alerts",
+      "type": "object",
+      "properties": {
+        "alertsForAllJobFailures": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AlertsState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "CheckNameAvailabilityParameters": {
       "description": "Resource Name availability input parameters - Resource type and resource name",
       "type": "object",
@@ -835,6 +858,23 @@
         },
         "message": {
           "type": "string"
+        }
+      }
+    },
+    "ClassicAlertSettings": {
+      "description": "Settings for classic alerts",
+      "type": "object",
+      "properties": {
+        "alertsForCriticalOperations": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AlertsState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -937,6 +977,20 @@
         "properties": {
           "$ref": "#/definitions/ClientDiscoveryForProperties",
           "description": "ShoeBox properties for the given operation."
+        }
+      }
+    },
+    "MonitoringSettings": {
+      "description": "Monitoring Settings of the vault",
+      "type": "object",
+      "properties": {
+        "azureMonitorAlertSettings": {
+          "description": "Settings for Azure Monitor based alerts",
+          "$ref": "#/definitions/AzureMonitorAlertSettings"
+        },
+        "classicAlertSettings": {
+          "description": "Settings for classic alerts",
+          "$ref": "#/definitions/ClassicAlertSettings"
         }
       }
     },
@@ -1340,6 +1394,10 @@
               }
             }
           }
+        },
+        "monitoringSettings": {
+          "description": "Monitoring Settings of the vault",
+          "$ref": "#/definitions/MonitoringSettings"
         },
         "moveDetails": {
           "description": "The details of the latest move operation performed on the Azure Resource",
