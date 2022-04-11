@@ -3305,18 +3305,6 @@
                 }
               ]
             }
-          },
-          {
-            "in": "query",
-            "name": "scheduled",
-            "description": "Indicator whether the job is scheduled job.",
-            "type": "boolean"
-          },
-          {
-            "in": "query",
-            "name": "scheduleId",
-            "description": "The scheduled id for listing the job triggerred from",
-            "type": "string"
           }
         ],
         "responses": {
@@ -6624,27 +6612,6 @@
       },
       "additionalProperties": false
     },
-    "CronSchedule": {
-      "description": "Cron schedule definition",
-      "required": [
-        "expression"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ScheduleBase"
-        }
-      ],
-      "properties": {
-        "expression": {
-          "description": "[Required] Specifies cron expression of schedule.\r\nThe expression should follow NCronTab format.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "Cron",
-      "additionalProperties": false
-    },
     "CustomModelJobInput": {
       "type": "object",
       "allOf": [
@@ -6655,7 +6622,7 @@
           "$ref": "#/definitions/JobInput"
         }
       ],
-      "x-ms-discriminator-value": "CustomModel",
+      "x-ms-discriminator-value": "custom_model",
       "additionalProperties": false
     },
     "CustomModelJobOutput": {
@@ -6668,7 +6635,7 @@
           "$ref": "#/definitions/JobOutput"
         }
       ],
-      "x-ms-discriminator-value": "CustomModel",
+      "x-ms-discriminator-value": "custom_model",
       "additionalProperties": false
     },
     "DataContainer": {
@@ -6891,8 +6858,9 @@
     "DataType": {
       "description": "Enum to determine the type of data.",
       "enum": [
-        "UriFile",
-        "UriFolder"
+        "uri_file",
+        "uri_folder",
+        "mltable"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -6900,10 +6868,13 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "UriFile"
+            "value": "uri_file"
           },
           {
-            "value": "UriFolder"
+            "value": "uri_folder"
+          },
+          {
+            "value": "mltable"
           }
         ]
       },
@@ -7839,11 +7810,6 @@
             "read"
           ]
         },
-        "schedule": {
-          "description": "Schedule definition of job.\r\nIf no schedule is provided, the job is run once and immediately after submission.",
-          "$ref": "#/definitions/ScheduleBase",
-          "x-nullable": true
-        },
         "services": {
           "description": "List of JobEndpoints.\r\nFor local jobs, a job endpoint will have an endpoint value of FileStreamObject.",
           "type": "object",
@@ -7933,12 +7899,13 @@
     "JobInputType": {
       "description": "Enum to determine the Job Input Type.",
       "enum": [
-        "Literal",
-        "UriFile",
-        "UriFolder",
-        "CustomModel",
-        "MLFlowModel",
-        "TritonModel"
+        "literal",
+        "uri_file",
+        "uri_folder",
+        "mltable",
+        "custom_model",
+        "mlflow_model",
+        "triton_model"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -7946,22 +7913,25 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "Literal"
+            "value": "literal"
           },
           {
-            "value": "UriFile"
+            "value": "uri_file"
           },
           {
-            "value": "UriFolder"
+            "value": "uri_folder"
           },
           {
-            "value": "CustomModel"
+            "value": "mltable"
           },
           {
-            "value": "MLFlowModel"
+            "value": "custom_model"
           },
           {
-            "value": "TritonModel"
+            "value": "mlflow_model"
+          },
+          {
+            "value": "triton_model"
           }
         ]
       },
@@ -8036,11 +8006,12 @@
     "JobOutputType": {
       "description": "Enum to determine the Job Output Type.",
       "enum": [
-        "UriFile",
-        "UriFolder",
-        "CustomModel",
-        "MLFlowModel",
-        "TritonModel"
+        "uri_file",
+        "uri_folder",
+        "mltable",
+        "custom_model",
+        "mlflow_model",
+        "triton_model"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -8048,19 +8019,22 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "UriFile"
+            "value": "uri_file"
           },
           {
-            "value": "UriFolder"
+            "value": "uri_folder"
           },
           {
-            "value": "CustomModel"
+            "value": "mltable"
           },
           {
-            "value": "MLFlowModel"
+            "value": "custom_model"
           },
           {
-            "value": "TritonModel"
+            "value": "mlflow_model"
+          },
+          {
+            "value": "triton_model"
           }
         ]
       },
@@ -8144,8 +8118,7 @@
         "Canceled",
         "NotResponding",
         "Paused",
-        "Unknown",
-        "Scheduled"
+        "Unknown"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -8207,10 +8180,6 @@
           {
             "value": "Unknown",
             "description": "Default job status if not mapped to all other statuses"
-          },
-          {
-            "value": "Scheduled",
-            "description": "The job is in a scheduled state. Job is not in any active state."
           }
         ]
       },
@@ -8447,7 +8416,7 @@
           "type": "string"
         }
       },
-      "x-ms-discriminator-value": "Literal",
+      "x-ms-discriminator-value": "literal",
       "additionalProperties": false
     },
     "ManagedIdentity": {
@@ -8524,7 +8493,7 @@
           "$ref": "#/definitions/JobInput"
         }
       ],
-      "x-ms-discriminator-value": "MLFlowModel",
+      "x-ms-discriminator-value": "mlflow_model",
       "additionalProperties": false
     },
     "MLFlowModelJobOutput": {
@@ -8537,7 +8506,58 @@
           "$ref": "#/definitions/JobOutput"
         }
       ],
-      "x-ms-discriminator-value": "MLFlowModel",
+      "x-ms-discriminator-value": "mlflow_model",
+      "additionalProperties": false
+    },
+    "MLTableData": {
+      "description": "MLTable data definition",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataVersionBase"
+        }
+      ],
+      "properties": {
+        "referencedUris": {
+          "description": "Uris referenced in the MLTable definition (required for lineage)",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        }
+      },
+      "x-ms-discriminator-value": "mltable",
+      "additionalProperties": false
+    },
+    "MLTableJobInput": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetJobInput"
+        },
+        {
+          "$ref": "#/definitions/JobInput"
+        }
+      ],
+      "x-ms-discriminator-value": "mltable",
+      "additionalProperties": false
+    },
+    "MLTableJobOutput": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetJobOutput"
+        },
+        {
+          "$ref": "#/definitions/JobOutput"
+        }
+      ],
+      "x-ms-discriminator-value": "mltable",
       "additionalProperties": false
     },
     "ModelContainer": {
@@ -8588,31 +8608,6 @@
       },
       "additionalProperties": false
     },
-    "ModelType": {
-      "description": "The async operation state.",
-      "enum": [
-        "CustomModel",
-        "MLFlowModel",
-        "TritonModel"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ModelType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "CustomModel"
-          },
-          {
-            "value": "MLFlowModel"
-          },
-          {
-            "value": "TritonModel"
-          }
-        ]
-      },
-      "additionalProperties": false
-    },
     "ModelVersion": {
       "description": "Model asset version details.",
       "type": "object",
@@ -8638,8 +8633,8 @@
         },
         "modelType": {
           "description": "The storage format for this entity. Used for NCD.",
-          "default": "CustomModel",
-          "$ref": "#/definitions/ModelType"
+          "type": "string",
+          "x-nullable": true
         },
         "modelUri": {
           "description": "The URI path to the model contents.",
@@ -9753,110 +9748,6 @@
       },
       "additionalProperties": false
     },
-    "RecurrenceFrequency": {
-      "description": "Enum to describe the frequency of a recurrence schedule",
-      "enum": [
-        "Minute",
-        "Hour",
-        "Day",
-        "Week",
-        "Month"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "RecurrenceFrequency",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Minute",
-            "description": "Minute frequency"
-          },
-          {
-            "value": "Hour",
-            "description": "Hour frequency"
-          },
-          {
-            "value": "Day",
-            "description": "Day frequency"
-          },
-          {
-            "value": "Week",
-            "description": "Week frequency"
-          },
-          {
-            "value": "Month",
-            "description": "Month frequency"
-          }
-        ]
-      },
-      "additionalProperties": false
-    },
-    "RecurrencePattern": {
-      "description": "Recurrence schedule pattern definition",
-      "required": [
-        "hours",
-        "minutes"
-      ],
-      "type": "object",
-      "properties": {
-        "hours": {
-          "description": "[Required] List of hours for recurrence schedule pattern",
-          "type": "array",
-          "items": {
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "minutes": {
-          "description": "[Required] List of minutes for recurrence schedule pattern",
-          "type": "array",
-          "items": {
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "weekdays": {
-          "description": "List of weekdays for recurrence schedule pattern",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Weekday"
-          },
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": false
-    },
-    "RecurrenceSchedule": {
-      "description": "Recurrence schedule definition",
-      "required": [
-        "frequency",
-        "interval"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ScheduleBase"
-        }
-      ],
-      "properties": {
-        "frequency": {
-          "description": "[Required] Specifies frequency with with which to trigger schedule",
-          "$ref": "#/definitions/RecurrenceFrequency"
-        },
-        "interval": {
-          "format": "int32",
-          "description": "[Required] Specifies schedule interval in conjunction with frequency",
-          "type": "integer"
-        },
-        "pattern": {
-          "description": "Specifies the recurrence schedule pattern",
-          "$ref": "#/definitions/RecurrencePattern",
-          "x-nullable": true
-        }
-      },
-      "x-ms-discriminator-value": "Recurrence",
-      "additionalProperties": false
-    },
     "ReferenceType": {
       "description": "Enum to determine which reference method to use for an asset.",
       "enum": [
@@ -10084,93 +9975,6 @@
           },
           {
             "value": "TargetUtilization"
-          }
-        ]
-      },
-      "additionalProperties": false
-    },
-    "ScheduleBase": {
-      "description": "Base definition of a schedule",
-      "required": [
-        "scheduleType"
-      ],
-      "type": "object",
-      "properties": {
-        "endTime": {
-          "format": "date-time",
-          "description": "Specifies end time of schedule in ISO 8601 format.\r\nIf not present, the schedule will run indefinitely",
-          "type": "string",
-          "x-nullable": true
-        },
-        "scheduleStatus": {
-          "description": "Specifies the schedule's status",
-          "default": "Enabled",
-          "$ref": "#/definitions/ScheduleStatus"
-        },
-        "scheduleType": {
-          "description": "[Required] Specifies the schedule type",
-          "$ref": "#/definitions/ScheduleType",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "startTime": {
-          "format": "date-time",
-          "description": "Specifies start time of schedule in ISO 8601 format.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "timeZone": {
-          "description": "Specifies time zone in which the schedule runs.\r\nTimeZone should follow Windows time zone format.",
-          "default": "UTC",
-          "type": "string",
-          "x-nullable": true
-        }
-      },
-      "discriminator": "scheduleType"
-    },
-    "ScheduleStatus": {
-      "description": "Enum to describe status of schedule",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ScheduleStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Enabled",
-            "description": "Schedule is enabled"
-          },
-          {
-            "value": "Disabled",
-            "description": "Schedule is disabled"
-          }
-        ]
-      },
-      "additionalProperties": false
-    },
-    "ScheduleType": {
-      "description": "Enum to describe type of schedule",
-      "enum": [
-        "Cron",
-        "Recurrence"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ScheduleType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Cron",
-            "description": "Cron schedule type"
-          },
-          {
-            "value": "Recurrence",
-            "description": "Recurrence schedule type"
           }
         ]
       },
@@ -10680,7 +10484,7 @@
           "$ref": "#/definitions/JobInput"
         }
       ],
-      "x-ms-discriminator-value": "TritonModel",
+      "x-ms-discriminator-value": "triton_model",
       "additionalProperties": false
     },
     "TritonModelJobOutput": {
@@ -10693,7 +10497,7 @@
           "$ref": "#/definitions/JobOutput"
         }
       ],
-      "x-ms-discriminator-value": "TritonModel",
+      "x-ms-discriminator-value": "triton_model",
       "additionalProperties": false
     },
     "TruncationSelectionPolicy": {
@@ -10723,7 +10527,7 @@
           "$ref": "#/definitions/DataVersionBase"
         }
       ],
-      "x-ms-discriminator-value": "UriFile",
+      "x-ms-discriminator-value": "uri_file",
       "additionalProperties": false
     },
     "UriFileJobInput": {
@@ -10736,7 +10540,7 @@
           "$ref": "#/definitions/JobInput"
         }
       ],
-      "x-ms-discriminator-value": "UriFile",
+      "x-ms-discriminator-value": "uri_file",
       "additionalProperties": false
     },
     "UriFileJobOutput": {
@@ -10749,7 +10553,7 @@
           "$ref": "#/definitions/JobOutput"
         }
       ],
-      "x-ms-discriminator-value": "UriFile",
+      "x-ms-discriminator-value": "uri_file",
       "additionalProperties": false
     },
     "UriFolderDataVersion": {
@@ -10760,7 +10564,7 @@
           "$ref": "#/definitions/DataVersionBase"
         }
       ],
-      "x-ms-discriminator-value": "UriFolder",
+      "x-ms-discriminator-value": "uri_folder",
       "additionalProperties": false
     },
     "UriFolderJobInput": {
@@ -10773,7 +10577,7 @@
           "$ref": "#/definitions/JobInput"
         }
       ],
-      "x-ms-discriminator-value": "UriFolder",
+      "x-ms-discriminator-value": "uri_folder",
       "additionalProperties": false
     },
     "UriFolderJobOutput": {
@@ -10786,7 +10590,7 @@
           "$ref": "#/definitions/JobOutput"
         }
       ],
-      "x-ms-discriminator-value": "UriFolder",
+      "x-ms-discriminator-value": "uri_folder",
       "additionalProperties": false
     },
     "UserIdentity": {
@@ -10798,54 +10602,6 @@
         }
       ],
       "x-ms-discriminator-value": "UserIdentity",
-      "additionalProperties": false
-    },
-    "Weekday": {
-      "description": "Enum of weekdays",
-      "enum": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "Weekday",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Monday",
-            "description": "Monday weekday"
-          },
-          {
-            "value": "Tuesday",
-            "description": "Tuesday weekday"
-          },
-          {
-            "value": "Wednesday",
-            "description": "Wednesday weekday"
-          },
-          {
-            "value": "Thursday",
-            "description": "Thursday weekday"
-          },
-          {
-            "value": "Friday",
-            "description": "Friday weekday"
-          },
-          {
-            "value": "Saturday",
-            "description": "Saturday weekday"
-          },
-          {
-            "value": "Sunday",
-            "description": "Sunday weekday"
-          }
-        ]
-      },
       "additionalProperties": false
     }
   },
