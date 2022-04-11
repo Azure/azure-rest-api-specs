@@ -6141,12 +6141,20 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "create", 
+            "read"
+          ]
         },
         "storageAccountSubscriptionId": {
           "format": "uuid",
           "description": "Specifies the blob storage subscription Id.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create", 
+            "read"
+          ]
         },
         "isStorageSecondaryKeyInUse": {
           "description": "Specifies whether storageAccountAccessKey value is the storage's secondary key.",
