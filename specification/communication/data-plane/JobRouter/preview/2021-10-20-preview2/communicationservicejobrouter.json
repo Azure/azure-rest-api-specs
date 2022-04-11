@@ -1975,8 +1975,7 @@
       ],
       "properties": {
         "kind": {
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "functionUrl": {
           "format": "uri",
@@ -2023,8 +2022,7 @@
       ],
       "properties": {
         "kind": {
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "scoringRule": {
           "$ref": "#/definitions/RouterRule"
@@ -2330,8 +2328,7 @@
       ],
       "properties": {
         "kind": {
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "direct-map-rule"
@@ -2370,7 +2367,7 @@
       "description": "Policy governing how jobs are distributed to workers",
       "required": [
         "mode",
-        "offerTTLSeconds"
+        "offerTtlSeconds"
       ],
       "type": "object",
       "properties": {
@@ -2383,7 +2380,7 @@
           "description": "The human readable name of the policy.",
           "type": "string"
         },
-        "offerTTLSeconds": {
+        "offerTtlSeconds": {
           "format": "double",
           "description": "The expiry time of any offers created under this policy will be governed by the offer time to live.",
           "type": "number"
@@ -2501,8 +2498,7 @@
       ],
       "properties": {
         "kind": {
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "language": {
           "description": "The expression language to compile to and execute",
@@ -2699,8 +2695,7 @@
       ],
       "properties": {
         "kind": {
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "longest-idle"
@@ -2773,7 +2768,7 @@
     "PagedDistributionPolicy": {
       "required": [
         "mode",
-        "offerTTLSeconds"
+        "offerTtlSeconds"
       ],
       "type": "object",
       "properties": {
@@ -2786,7 +2781,7 @@
           "description": "The human readable name of the policy.",
           "type": "string"
         },
-        "offerTTLSeconds": {
+        "offerTtlSeconds": {
           "format": "double",
           "description": "The expiry time of any offers created under this policy will be governed by the offer time to live.",
           "type": "number"
@@ -2818,9 +2813,6 @@
       }
     },
     "PagedJob": {
-      "required": [
-        "channelId"
-      ],
       "type": "object",
       "properties": {
         "id": {
@@ -3151,8 +3143,7 @@
       ],
       "properties": {
         "kind": {
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "threshold": {
           "format": "int32",
@@ -3306,8 +3297,7 @@
       ],
       "properties": {
         "kind": {
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "round-robin"
@@ -3413,6 +3403,7 @@
       }
     },
     "RouterRule": {
+      "description": "A rule of one of the following types:\r\n            \r\nStaticRule:  A rule providing static rules that always return the same result, regardless of input.\r\nDirectMapRule:  A rule that return the same labels as the input labels.\r\nExpressionRule: A rule providing inline expression rules.\r\nAzureFunctionRule: A rule providing a binding to an HTTP Triggered Azure Function.",
       "required": [
         "kind"
       ],
@@ -3611,8 +3602,7 @@
       ],
       "properties": {
         "kind": {
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "value": {
           "description": "The static value this rule always returns.",
@@ -3658,8 +3648,7 @@
       ],
       "properties": {
         "kind": {
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "threshold": {
           "description": "Threshold for wait time for this trigger. Requires input conforming to ISO8601 duration format.",
