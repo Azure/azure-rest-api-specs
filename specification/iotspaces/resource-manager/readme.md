@@ -16,7 +16,7 @@ batch:
 ### Tag: package-2017-10-preview and java
 
 These settings apply only when `--tag=package-2017-10-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.test
 
 ``` yaml $(tag) == 'package-2017-10-preview' && $(java) && $(multiapi)
 java:
