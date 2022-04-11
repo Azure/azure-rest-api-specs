@@ -5644,6 +5644,14 @@
           },
           "description": "The endpoints that should not go through proxy."
         },
+        "effectiveNoProxy": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "A read-only list of all endpoints for which traffic should not be sent to the proxy. This list is a superset of noProxy and values injected by AKS."
+        },
         "trustedCa": {
           "type": "string",
           "description": "Alternative CA cert to use for connecting to proxy servers."
