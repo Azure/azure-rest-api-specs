@@ -5317,7 +5317,11 @@
       "properties": {
         "tier": {
           "type": "string",
-          "description": "The service tier"
+          "description": "The service tier",
+          "x-ms-mutability": [
+            "create", 
+            "update"
+          ]
         },
         "name": {
           "type": "string",
@@ -5369,7 +5373,11 @@
         "restorePointInTime": {
           "type": "string",
           "description": "Snapshot time to restore",
-          "format": "date-time"
+          "format": "date-time",
+          "x-ms-mutability": [
+            "create", 
+            "read"
+          ]
         },
         "createMode": {
           "type": "string",
@@ -6902,7 +6910,11 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "create", 
+            "read"
+          ]
         },
         "emailAddresses": {
           "description": "Specifies an array of e-mail addresses to which the alert is sent.",
