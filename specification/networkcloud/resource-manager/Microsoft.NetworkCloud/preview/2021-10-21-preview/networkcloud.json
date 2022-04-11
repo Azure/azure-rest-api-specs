@@ -155,46 +155,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkCloud/locations/{location}/operationStatuses/{operationId}": {
-      "get": {
-        "description": "Get the latest details of the long running operation.",
-        "summary": "Get the long running operation status.",
-        "operationId": "OperationStatuses_Get",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/OperationIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationStatusResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get log running operation status": {
-            "$ref": "./examples/OperationStatuses_Get.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkCloud/rackManifests": {
       "get": {
         "description": "Get a list of all rack manifests for a specific subscription. The API returns 200 OK when the API is successful.",
