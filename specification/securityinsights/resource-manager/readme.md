@@ -54,6 +54,7 @@ input-file:
   - Microsoft.SecurityInsights/preview/2022-05-01-preview/SourceControls.json
   - Microsoft.SecurityInsights/preview/2022-05-01-preview/ThreatIntelligence.json
   - Microsoft.SecurityInsights/preview/2022-05-01-preview/Watchlists.json
+  - Microsoft.SecurityInsights/preview/2022-05-01-preview/ConfidentialWatchlists.json
   - Microsoft.SecurityInsights/preview/2022-05-01-preview/dataConnectors.json
   - Microsoft.SecurityInsights/preview/2022-05-01-preview/operations.json
 ```

@@ -34,18 +34,18 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/confidentialWatchlists": {
       "get": {
         "x-ms-examples": {
-          "Get all watchlists.": {
-            "$ref": "./examples/watchlists/GetWatchlists.json"
+          "Get all confidential watchlists.": {
+            "$ref": "./examples/confidentialWatchlists/GetConfidentialWatchlists.json"
           }
         },
         "tags": [
           "Watchlists"
         ],
-        "description": "Gets all watchlists, without watchlist items.",
-        "operationId": "Watchlists_List",
+        "description": "Gets all confidential watchlists, without watchlist items.",
+        "operationId": "ConfidentialWatchlists_List",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -82,18 +82,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/confidentialWatchlists/{watchlistAlias}": {
       "get": {
         "x-ms-examples": {
-          "Get a watchlist.": {
-            "$ref": "./examples/watchlists/GetWatchlistByAlias.json"
+          "Get a confidential watchlist.": {
+            "$ref": "./examples/confidentialWatchlists/GetConfidentialWatchlistByAlias.json"
           }
         },
         "tags": [
-          "Watchlists"
+          "ConfidentialWatchlists"
         ],
-        "description": "Gets a watchlist, without its watchlist items.",
-        "operationId": "Watchlists_Get",
+        "description": "Gets a confidential watchlist, without its watchlist items.",
+        "operationId": "ConfidentialWatchlists_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -128,15 +128,15 @@
       },
       "delete": {
         "x-ms-examples": {
-          "Delete a watchlist.": {
-            "$ref": "./examples/watchlists/DeleteWatchlist.json"
+          "Delete a confidential watchlist.": {
+            "$ref": "./examples/confidentialWatchlists/DeleteConfidentialWatchlist.json"
           }
         },
         "tags": [
-          "Watchlists"
+          "ConfidentialWatchlists"
         ],
-        "description": "Delete a watchlist.",
-        "operationId": "Watchlists_Delete",
+        "description": "Delete a confidential watchlist.",
+        "operationId": "ConfidentialWatchlists_Delete",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -177,18 +177,18 @@
       },
       "put": {
         "x-ms-examples": {
-          "Creates or updates a watchlist.": {
-            "$ref": "./examples/watchlists/CreateWatchlist.json"
+          "Creates or updates a confidential watchlist.": {
+            "$ref": "./examples/confidentialWatchlists/CreateConfidentialWatchlist.json"
           },
-          "Creates or updates a watchlist and bulk creates watchlist items.": {
-            "$ref": "./examples/watchlists/CreateWatchlistAndWatchlistItems.json"
+          "Creates or updates a confidential watchlist and bulk creates watchlist items.": {
+            "$ref": "./examples/confidentialWatchlists/CreateConfidentialWatchlistAndWatchlistItems.json"
           }
         },
         "tags": [
-          "Watchlists"
+          "ConfidentialWatchlists"
         ],
-        "description": "Create or update a Watchlist and its Watchlist Items (bulk creation, e.g. through text/csv content type). To create a Watchlist and its Items, we should call this endpoint with either rawContent or a valid SAR URI and contentType properties. The rawContent is mainly used for small watchlist (content size below 3.8 MB). The SAS URI enables the creation of large watchlist, where the content size can go up to 500 MB. The status of processing such large file can be polled through the URL returned in Azure-AsyncOperation header.",
-        "operationId": "Watchlists_CreateOrUpdate",
+        "description": "Create or update a confidential Watchlist and its Watchlist Items (bulk creation, e.g. through text/csv content type). To create a Watchlist and its Items, we should call this endpoint with either rawContent or a valid SAR URI and contentType properties. The rawContent is mainly used for small watchlist (content size below 3.8 MB). The SAS URI enables the creation of large watchlist, where the content size can go up to 500 MB. The status of processing such large file can be polled through the URL returned in Azure-AsyncOperation header.",
+        "operationId": "ConfidentialWatchlists_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -237,18 +237,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}/watchlistItems": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/confidentialWatchlists/{watchlistAlias}/watchlistItems": {
       "get": {
         "x-ms-examples": {
-          "Get all watchlist Items.": {
-            "$ref": "./examples/watchlists/GetWatchlistItems.json"
+          "Get all confidential watchlist Items.": {
+            "$ref": "./examples/confidentialWatchlists/GetConfidentialWatchlistItems.json"
           }
         },
         "tags": [
-          "WatchlistItems"
+          "ConfidentialWatchlistItems"
         ],
-        "description": "Gets all watchlist Items.",
-        "operationId": "WatchlistItems_List",
+        "description": "Gets all confidential watchlist Items.",
+        "operationId": "ConfidentialWatchlistItems_List",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -288,18 +288,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}/watchlistItems/{watchlistItemId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/confidentialWatchlists/{watchlistAlias}/watchlistItems/{watchlistItemId}": {
       "get": {
         "x-ms-examples": {
-          "Get a watchlist item.": {
-            "$ref": "./examples/watchlists/GetWatchlistItemById.json"
+          "Get a confidential watchlist item.": {
+            "$ref": "./examples/confidentialWatchlists/GetConfidentialWatchlistItemById.json"
           }
         },
         "tags": [
-          "WatchlistItems"
+          "ConfidentialWatchlistItems"
         ],
-        "description": "Gets a watchlist, without its watchlist items.",
-        "operationId": "WatchlistItems_Get",
+        "description": "Gets a confidential watchlist item.",
+        "operationId": "ConfidentialWatchlistItems_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -337,15 +337,15 @@
       },
       "delete": {
         "x-ms-examples": {
-          "Delete a watchlist Item.": {
-            "$ref": "./examples/watchlists/DeleteWatchlistItem.json"
+          "Delete a confidential watchlist Item.": {
+            "$ref": "./examples/confidentialWatchlists/DeleteConfidentialWatchlistItem.json"
           }
         },
         "tags": [
-          "WatchlistItems"
+          "ConfidentialWatchlistItems"
         ],
-        "description": "Delete a watchlist item.",
-        "operationId": "WatchlistItems_Delete",
+        "description": "Delete a confidential watchlist item.",
+        "operationId": "ConfidentialWatchlistItems_Delete",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -383,15 +383,15 @@
       },
       "put": {
         "x-ms-examples": {
-          "Creates or updates a watchlist item.": {
-            "$ref": "./examples/watchlists/CreateWatchlistItem.json"
+          "Creates or updates a confidential watchlist item.": {
+            "$ref": "./examples/confidentialWatchlists/CreateConfidentialWatchlistItem.json"
           }
         },
         "tags": [
           "WatchlistItems"
         ],
         "description": "Creates or updates a watchlist item.",
-        "operationId": "WatchlistItems_CreateOrUpdate",
+        "operationId": "ConfidentialWatchlistItems_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
