@@ -1013,7 +1013,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}/providers/Microsoft.DataProtection/backupInstances": {
+    "/{resourceId}/providers/Microsoft.DataProtection/backupInstances": {
       "get": {
         "tags": [
           "BackupInstancesExtensionRouting"
@@ -1028,19 +1028,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/ResourceProviderNamespace"
-          },
-          {
-            "$ref": "#/parameters/ResourceType"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
+            "$ref": "#/parameters/ResourceId"
           }
         ],
         "responses": {
@@ -6542,26 +6530,10 @@
       "required": true,
       "type": "string"
     },
-    "ResourceProviderNamespace": {
-      "name": "resourceProviderNamespace",
+    "ResourceId": {
+      "name": "resourceId",
       "in": "path",
-      "description": "ResourceProvider for the resource to be protected using Microsoft.DataProtection",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ResourceType": {
-      "name": "resourceType",
-      "in": "path",
-      "description": "Type of the resource to be protected using Microsoft.DataProtection",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ResourceName": {
-      "name": "resourceName",
-      "in": "path",
-      "description": "The name of the resource to be protected using Microsoft.DataProtection",
+      "description": "ARM path of the resource to be protected using Microsoft.DataProtection",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
