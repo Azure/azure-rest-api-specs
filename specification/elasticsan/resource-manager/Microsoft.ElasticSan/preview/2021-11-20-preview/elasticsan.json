@@ -48,10 +48,6 @@
     {
       "name": "Volumes",
       "description": "APIs for Volume operations."
-    },
-    {
-      "name": "Snapshots",
-      "description": "APIs for Snapshot operations."
     }
   ],
   "paths": {
@@ -175,9 +171,6 @@
         "x-ms-examples": {
           "ElasticSans_ListBySubscription_MaximumSet_Gen": {
             "$ref": "./examples/ElasticSans_ListBySubscription_MaximumSet_Gen.json"
-          },
-          "ElasticSans_ListBySubscription_MinimumSet_Gen": {
-            "$ref": "./examples/ElasticSans_ListBySubscription_MinimumSet_Gen.json"
           }
         }
       }
@@ -220,9 +213,6 @@
         "x-ms-examples": {
           "ElasticSans_ListByResourceGroup_MaximumSet_Gen": {
             "$ref": "./examples/ElasticSans_ListByResourceGroup_MaximumSet_Gen.json"
-          },
-          "ElasticSans_ListByResourceGroup_MinimumSet_Gen": {
-            "$ref": "./examples/ElasticSans_ListByResourceGroup_MinimumSet_Gen.json"
           }
         }
       }
@@ -284,9 +274,6 @@
         "x-ms-examples": {
           "ElasticSans_Create_MaximumSet_Gen": {
             "$ref": "./examples/ElasticSans_Create_MaximumSet_Gen.json"
-          },
-          "ElasticSans_Create_MinimumSet_Gen": {
-            "$ref": "./examples/ElasticSans_Create_MinimumSet_Gen.json"
           }
         }
       },
@@ -343,9 +330,6 @@
         "x-ms-examples": {
           "ElasticSans_Update_MaximumSet_Gen": {
             "$ref": "./examples/ElasticSans_Update_MaximumSet_Gen.json"
-          },
-          "ElasticSans_Update_MinimumSet_Gen": {
-            "$ref": "./examples/ElasticSans_Update_MinimumSet_Gen.json"
           }
         }
       },
@@ -439,9 +423,6 @@
         "x-ms-examples": {
           "ElasticSans_Get_MaximumSet_Gen": {
             "$ref": "./examples/ElasticSans_Get_MaximumSet_Gen.json"
-          },
-          "ElasticSans_Get_MinimumSet_Gen": {
-            "$ref": "./examples/ElasticSans_Get_MinimumSet_Gen.json"
           }
         }
       }
@@ -642,7 +623,7 @@
             "$ref": "#/parameters/VolumeGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ForceDeleteVolumesSnapshotsParameter"
+            "$ref": "#/parameters/ForceDeleteVolumesParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -882,9 +863,6 @@
             "$ref": "#/parameters/VolumeNameParameter"
           },
           {
-            "$ref": "#/parameters/ForceDeleteSnapshotsParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -1018,384 +996,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/snapshots": {
-      "get": {
-        "tags": [
-          "Snapshots"
-        ],
-        "description": "List Snapshots in a VolumeGroup.",
-        "operationId": "Snapshots_ListByVolumeGroup",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ElasticSanNameParameter"
-          },
-          {
-            "$ref": "#/parameters/VolumeGroupNameParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "Specify $filter='volumeName eq <volume name>' to filter on volume.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Operation completed successfully; retrieved volumes in a volume group.",
-            "schema": {
-              "$ref": "#/definitions/SnapshotList"
-            }
-          },
-          "default": {
-            "description": "Error from the RP",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Snapshots_ListByVolumeGroup_MaximumSet_Gen": {
-            "$ref": "./examples/Snapshots_ListByVolumeGroup_MaximumSet_Gen.json"
-          },
-          "Snapshots_ListByVolumeGroup_MinimumSet_Gen": {
-            "$ref": "./examples/Snapshots_ListByVolumeGroup_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/snapshots/{snapshotName}": {
-      "put": {
-        "tags": [
-          "Snapshots"
-        ],
-        "description": "Create a Volume Snapshot.",
-        "operationId": "Snapshots_Create",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ElasticSanNameParameter"
-          },
-          {
-            "$ref": "#/parameters/VolumeGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SnapshotNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Snapshot"
-            },
-            "description": "Snapshot object."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- Returned when the create operation is successfully completed.",
-            "schema": {
-              "$ref": "#/definitions/Snapshot"
-            }
-          },
-          "202": {
-            "description": "Accepted -- Create request accepted; operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/Snapshot"
-            }
-          },
-          "default": {
-            "description": "Error from the RP.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-examples": {
-          "Snapshots_Create_MaximumSet_Gen": {
-            "$ref": "./examples/Snapshots_Create_MaximumSet_Gen.json"
-          },
-          "Snapshots_Create_MinimumSet_Gen": {
-            "$ref": "./examples/Snapshots_Create_MinimumSet_Gen.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "Snapshots"
-        ],
-        "description": "Update a Volume Snapshot.",
-        "operationId": "Snapshots_Update",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ElasticSanNameParameter"
-          },
-          {
-            "$ref": "#/parameters/VolumeGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SnapshotNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SnapshotUpdate"
-            },
-            "description": "Snapshot object."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- Returned when the create operation is successfully completed.",
-            "schema": {
-              "$ref": "#/definitions/Snapshot"
-            }
-          },
-          "202": {
-            "description": "Accepted -- Create request accepted; operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/Snapshot"
-            }
-          },
-          "default": {
-            "description": "Error from the RP.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-examples": {
-          "Snapshots_Update_MaximumSet_Gen": {
-            "$ref": "./examples/Snapshots_Update_MaximumSet_Gen.json"
-          },
-          "Snapshots_Update_MinimumSet_Gen": {
-            "$ref": "./examples/Snapshots_Update_MinimumSet_Gen.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Snapshots"
-        ],
-        "description": "Delete an Volume.",
-        "operationId": "Snapshots_Delete",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ElasticSanNameParameter"
-          },
-          {
-            "$ref": "#/parameters/VolumeGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SnapshotNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- Delete operation completed successfully."
-          },
-          "204": {
-            "description": "NoContent -- Resource does not exist in the subscription."
-          },
-          "default": {
-            "description": "Error from the RP",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-examples": {
-          "Snapshots_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/Snapshots_Delete_MaximumSet_Gen.json"
-          },
-          "Snapshots_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/Snapshots_Delete_MinimumSet_Gen.json"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Snapshots"
-        ],
-        "description": "Get a Volume Snapshot.",
-        "operationId": "Snapshots_Get",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ElasticSanNameParameter"
-          },
-          {
-            "$ref": "#/parameters/VolumeGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SnapshotNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- Returned when the create operation is successfully completed.",
-            "schema": {
-              "$ref": "#/definitions/Snapshot"
-            }
-          },
-          "202": {
-            "description": "Accepted -- Create request accepted; operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/Snapshot"
-            }
-          },
-          "default": {
-            "description": "Error from the RP.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-long-running-operation": false,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-examples": {
-          "Snapshots_Get_MaximumSet_Gen": {
-            "$ref": "./examples/Snapshots_Get_MaximumSet_Gen.json"
-          },
-          "Snapshots_Get_MinimumSet_Gen": {
-            "$ref": "./examples/Snapshots_Get_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/snapshots/{snapshotName}/export": {
-      "post": {
-        "tags": [
-          "Snapshots"
-        ],
-        "description": "Export a volume to a different Volume Group in same San account or different San account",
-        "operationId": "Snapshots_Export",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ElasticSanNameParameter"
-          },
-          {
-            "$ref": "#/parameters/VolumeGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SnapshotNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ExportSnapshot"
-            },
-            "description": "Snapshot object."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- Returned when the create operation is successfully completed.",
-            "schema": {
-              "$ref": "#/definitions/Snapshot"
-            }
-          },
-          "202": {
-            "description": "Accepted -- Create request accepted; operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/Snapshot"
-            }
-          },
-          "default": {
-            "description": "Error from the RP.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-examples": {
-          "Snapshots_Export_MaximumSet_Gen": {
-            "$ref": "./examples/Snapshots_Export_MaximumSet_Gen.json"
-          },
-          "Snapshots_Export_MinimumSet_Gen": {
-            "$ref": "./examples/Snapshots_Export_MinimumSet_Gen.json"
-          }
-        }
-      }
     }
   },
   "parameters": {
@@ -1459,19 +1059,10 @@
       "maxLength": 63,
       "x-ms-parameter-location": "method"
     },
-    "ForceDeleteSnapshotsParameter": {
-      "name": "x-ms-delete-snapshots",
-      "x-ms-client-name": "forceDeleteSnapshots",
-      "description": "Required if the Volume has associated snapshots",
-      "x-ms-parameter-location": "method",
-      "in": "header",
-      "required": false,
-      "type": "boolean"
-    },
-    "ForceDeleteVolumesSnapshotsParameter": {
-      "name": "x-ms-delete-volumes-snapshots",
-      "x-ms-client-name": "forceDeleteVolumesAndSnapshots",
-      "description": "Required if the Volume Group has associated volumes and snapshots",
+    "ForceDeleteVolumesParameter": {
+      "name": "x-ms-delete-volumes",
+      "x-ms-client-name": "forceDeleteVolumes",
+      "description": "Required if the Volume Group has associated volumes",
       "x-ms-parameter-location": "method",
       "in": "header",
       "required": false,
@@ -1485,17 +1076,6 @@
       "in": "header",
       "required": false,
       "type": "boolean"
-    },
-    "SnapshotNameParameter": {
-      "name": "snapshotName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the snapshot within the given subscription, resource and volume group.",
-      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$",
-      "minLength": 1,
-      "maxLength": 80,
-      "x-ms-parameter-location": "method"
     }
   },
   "definitions": {
@@ -1531,9 +1111,7 @@
     "ElasticSanRPOperation": {
       "type": "object",
       "required": [
-        "name",
-        "isDataAction",
-        "display"
+        "name"
       ],
       "description": "Description of a ElasticSan RP Operation",
       "additionalProperties": false,
@@ -1544,11 +1122,13 @@
         },
         "isDataAction": {
           "type": "boolean",
-          "description": "Indicates whether the operation applies to data-plane."
+          "description": "Indicates whether the operation applies to data-plane.",
+          "readOnly": true
         },
         "display": {
           "description": "Additional metadata about RP operation.",
-          "$ref": "#/definitions/ElasticSanOperationDisplay"
+          "$ref": "#/definitions/ElasticSanOperationDisplay",
+          "readOnly": true
         }
       }
     },
@@ -1622,8 +1202,8 @@
       "description": "Elastic San response properties.",
       "required": [
         "availabilityZones",
-        "baseSizeTB",
-        "extendedSizeTB"
+        "baseSizeTiB",
+        "extendedSizeTiB"
       ],
       "properties": {
         "sku": {
@@ -1642,8 +1222,8 @@
           "$ref": "#/definitions/ProvisioningState",
           "readOnly": true
         },
-        "baseSizeTB": {
-          "description": "Base size of the Elastic San appliance in TB.",
+        "baseSizeTiB": {
+          "description": "Base size of the Elastic San appliance in TiB.",
           "type": "integer",
           "format": "int64",
           "x-ms-mutability": [
@@ -1651,8 +1231,8 @@
             "create"
           ]
         },
-        "extendedSizeTB": {
-          "description": "Extended size of the Elastic San appliance in TB.",
+        "extendedCapacitySizeTiB": {
+          "description": "Extended size of the Elastic San appliance in TiB.",
           "type": "integer",
           "format": "int64",
           "x-ms-mutability": [
@@ -1660,14 +1240,26 @@
             "create"
           ]
         },
-        "totalSizeTB": {
-          "description": "Total size of the Elastic San appliance in TB.",
+        "totalVolumeSizeGiB": {
+          "description": "Total size of the provisioned Volumes in GiB.",
           "type": "integer",
           "format": "int64",
           "readOnly": true
         },
-        "provisionedIops": {
-          "description": "Provisioned IOPS of the Elastic San appliance.",
+        "volumeGroupCount": {
+          "description": "Total number of volume groups in this Elastic San appliance.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "totalIops": {
+          "description": "Total Provisioned IOPS of the Elastic San appliance.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "totalMBps": {
+          "description": "Total Provisioned MBps Elastic San appliance.",
           "type": "integer",
           "format": "int64",
           "readOnly": true
@@ -1702,12 +1294,12 @@
       "type": "object",
       "description": "Elastic San update properties.",
       "required": [
-        "baseSizeTB",
-        "extendedSizeTB"
+        "baseSizeTiB",
+        "extendedCapacitySizeTiB"
       ],
       "properties": {
-        "baseSizeTB": {
-          "description": "Base size of the Elastic San appliance in TB.",
+        "baseSizeTiB": {
+          "description": "Base size of the Elastic San appliance in TiB.",
           "type": "integer",
           "format": "int64",
           "x-ms-mutability": [
@@ -1715,8 +1307,8 @@
             "create"
           ]
         },
-        "extendedSizeTB": {
-          "description": "Extended size of the Elastic San appliance in TB.",
+        "extendedCapacitySizeTiB": {
+          "description": "Extended size of the Elastic San appliance in TiB.",
           "type": "integer",
           "format": "int64",
           "x-ms-mutability": [
@@ -1788,34 +1380,34 @@
       "description": "San scalability target",
       "type": "object",
       "properties": {
-        "maxSizeTB": {
+        "maxSizeTiB": {
           "type": "integer",
           "format": "int64",
-          "description": "Maximum San account capacity in TB",
+          "description": "Maximum San account capacity in TiB",
           "readOnly": true
         },
-        "minSizeTB": {
+        "minSizeTiB": {
           "type": "integer",
           "format": "int64",
-          "description": "Minimum San account capacity in TB",
+          "description": "Minimum San account capacity in TiB",
           "readOnly": true
         },
-        "minIncrementSizeTB": {
+        "minIncrementSizeTiB": {
           "type": "integer",
           "format": "int64",
-          "description": "Increment the San capacity in TB",
+          "description": "Increment the San capacity in TiB",
           "readOnly": true
         },
-        "maxIopsPerTB": {
+        "iopsPerBaseTiB": {
           "type": "integer",
           "format": "int64",
-          "description": "Maximum IOPS",
+          "description": "Maximum IOPS per BaseTiB",
           "readOnly": true
         },
-        "maxMBpsPerTB": {
+        "mbpsPerBaseTiB": {
           "type": "integer",
           "format": "int64",
-          "description": "Maximum MBps",
+          "description": "Maximum MBps per BaseTiB",
           "readOnly": true
         },
         "maxIops": {
@@ -1847,12 +1439,6 @@
           "format": "int64",
           "description": "Maximum number of Volumes per Volume Groups per San account",
           "readOnly": true
-        },
-        "maxSnapshotCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Maximum number of Snapshots per Volume Groups per San account",
-          "readOnly": true
         }
       }
     },
@@ -1860,31 +1446,31 @@
       "description": "Volume scalability target",
       "type": "object",
       "properties": {
-        "maxSizeGB": {
+        "maxSizeGiB": {
           "type": "integer",
           "format": "int64",
-          "description": "Maximum San account capacity in GB",
+          "description": "Maximum volume capacity in GiB",
           "readOnly": true
         },
-        "minSizeGB": {
+        "minSizeGiB": {
           "type": "integer",
           "format": "int64",
-          "description": "Minimum San account capacity in GB",
+          "description": "Minimum volume capacity in GiB",
           "readOnly": true
         },
-        "minIncrementSizeGB": {
+        "minIncrementSizeGiB": {
           "type": "integer",
           "format": "int64",
-          "description": "Increment the San capacity in TB",
+          "description": "Increment volume capacity in GiB",
           "readOnly": true
         },
-        "maxIopsPerGB": {
+        "maxIopsPerGiB": {
           "type": "integer",
           "format": "int64",
-          "description": "Maximum IOPS",
+          "description": "Maximum IOPS per GiB",
           "readOnly": true
         },
-        "maxMBpsPerGB": {
+        "maxMBpsPerGiB": {
           "type": "integer",
           "format": "int64",
           "description": "Maximum MBps",
@@ -1900,12 +1486,6 @@
           "type": "integer",
           "format": "int64",
           "description": "Maximum MBps",
-          "readOnly": true
-        },
-        "maxSnapshotCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Maximum number of Snapshots per Volume",
           "readOnly": true
         },
         "maxConnectedClientCount": {
@@ -2003,6 +1583,17 @@
           "description": "iSCSI Target IQN (iSCSI Qualified Name); example: \"iqn.2005-03.org.iscsi:server\".",
           "readOnly": true
         },
+        "targetPortalHostname": {
+          "type": "string",
+          "description": "iSCSI Target Portal Host Name",
+          "readOnly": true
+        },
+        "targetPortalPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "iSCSI Target Portal Port",
+          "readOnly": true
+        },
         "provisioningState": {
           "description": "State of the operation on the resource.",
           "$ref": "#/definitions/ProvisioningState"
@@ -2010,13 +1601,6 @@
         "status": {
           "$ref": "#/definitions/OperationalStatus",
           "description": "Operational status of the iSCSI Target."
-        },
-        "endpoints": {
-          "description": "List of private IPv4 addresses to connect to the storage Target.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
@@ -2193,7 +1777,7 @@
           "description": "State of the operation on the resource.",
           "$ref": "#/definitions/SourceCreationData"
         },
-        "sizeGB": {
+        "sizeGiB": {
           "description": "Volume size.",
           "type": "integer",
           "format": "int64"
@@ -2226,145 +1810,10 @@
       "type": "object",
       "description": "Volume response properties.",
       "properties": {
-        "sizeGB": {
+        "sizeGiB": {
           "description": "Volume size.",
           "type": "integer",
           "format": "int64"
-        }
-      }
-    },
-    "Snapshot": {
-      "type": "object",
-      "description": "Response for Volume Snapshot request.",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Properties of Volume Snapshot.",
-          "$ref": "#/definitions/SnapshotProperties"
-        },
-        "systemData": {
-          "description": "Resource metadata required by ARM RPC",
-          "readOnly": true,
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "ExportSnapshot": {
-      "type": "object",
-      "description": "Response for Volume Snapshot request to export.",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Properties of Export Volume Snapshot.",
-          "$ref": "#/definitions/ExportSnapshotProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
-    },
-    "SnapshotSku": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "enum": [
-            "Standard_LRS",
-            "Standard_ZRS"
-          ],
-          "x-ms-enum": {
-            "name": "SnapshotStorageAccountTypes",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Standard_LRS",
-                "description": "Standard HDD locally redundant storage"
-              },
-              {
-                "value": "Standard_ZRS",
-                "description": "Standard zone redundant storage"
-              }
-            ]
-          },
-          "description": "The sku name."
-        }
-      },
-      "description": "The snapshots sku name. Can be Standard_LRS, Premium_LRS, or Standard_ZRS. This is an optional parameter for incremental snapshot and the default behavior is the SKU will be set to the same sku as the previous snapshot"
-    },
-    "SnapshotList": {
-      "type": "object",
-      "required": [
-        "value"
-      ],
-      "description": "List of Snapshots",
-      "additionalProperties": false,
-      "properties": {
-        "value": {
-          "description": "An array of Snapshot objects.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Snapshot"
-          }
-        },
-        "nextLink": {
-          "description": "URI to fetch the next section of the paginated response.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "SnapshotProperties": {
-      "type": "object",
-      "description": "Properties for Snapshot.",
-      "properties": {
-        "creationData": {
-          "description": "State of the operation on the resource.",
-          "$ref": "#/definitions/SnapshotCreationData"
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The snapshot provisioning state."
-        }
-      }
-    },
-    "SnapshotUpdate": {
-      "type": "object",
-      "description": "Snapshot request.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
-        }
-      }
-    },
-    "ExportSnapshotProperties": {
-      "type": "object",
-      "description": "Properties for Snapshot.",
-      "properties": {
-        "creationData": {
-          "description": "State of the operation on the resource.",
-          "$ref": "#/definitions/TargetCreationData"
-        }
-      }
-    },
-    "SnapshotCreationData": {
-      "type": "object",
-      "description": "Data used when creating a disk.",
-      "properties": {
-        "sourceUri": {
-          "type": "string",
-          "description": "If createOption is Copy, this is the ARM id of the source snapshot or disk. If createOption is Restore, this is the ARM-like id of the source disk restore point."
         }
       }
     },
@@ -2380,15 +1829,14 @@
           "enum": [
             "None",
             "FromVolume",
-            "FromVolumeSnapshot",
             "FromDiskSnapshot",
             "Export"
           ],
           "x-ms-enum": {
-            "name": "VolumeOrSnapshotCreateOption",
+            "name": "VolumeCreateOption",
             "modelAsString": false
           },
-          "description": "This enumerates the possible sources of a volume or snapshot's creation."
+          "description": "This enumerates the possible sources of a volume creation."
         },
         "sourceUri": {
           "type": "string",
@@ -2482,15 +1930,15 @@
         "values": [
           {
             "value": "EncryptionAtRestWithPlatformKey",
-            "description": "Volume/Snapshot is encrypted at rest with Platform managed key. It is the default encryption type. This is not a valid encryption type for disk encryption sets."
+            "description": "Volume is encrypted at rest with Platform managed key. It is the default encryption type. This is not a valid encryption type for disk encryption sets."
           },
           {
             "value": "EncryptionAtRestWithCustomerKey",
-            "description": "Volume/Snapshot is encrypted at rest with Customer managed key that can be changed and revoked by a customer."
+            "description": "Volume is encrypted at rest with Customer managed key that can be changed and revoked by a customer."
           },
           {
             "value": "EncryptionAtRestWithPlatformAndCustomerKeys",
-            "description": "Volume/Snapshot is encrypted at rest with 2 layers of encryption. One of the keys is Customer managed and the other key is Platform managed."
+            "description": "Volume is encrypted at rest with 2 layers of encryption. One of the keys is Customer managed and the other key is Platform managed."
           }
         ]
       }
