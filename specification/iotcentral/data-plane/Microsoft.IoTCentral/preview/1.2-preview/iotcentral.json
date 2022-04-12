@@ -28,6 +28,7 @@
   ],
   "definitions": {
     "ADGroupUser": {
+      "description": "The active directory gorup user definition.",
       "x-ms-discriminator-value": "adGroup",
       "allOf": [
         {
@@ -54,6 +55,7 @@
       "description": "Can be anything: string, number, array, object, etc. (except `null`)"
     },
     "ApiToken": {
+      "description": "The access token definition for public API.",
       "allOf": [
         {
           "$ref": "#/definitions/Permission"
@@ -98,6 +100,7 @@
       ]
     },
     "Attestation": {
+      "description": "The device attestation information.",
       "type": "object",
       "properties": {
         "type": {
@@ -111,6 +114,7 @@
       "discriminator": "type"
     },
     "BlobStorageV1Destination": {
+      "description": "The blob storage destination.",
       "x-ms-discriminator-value": "blobstorage@v1",
       "allOf": [
         {
@@ -128,6 +132,7 @@
       ]
     },
     "BlobStorageV1DestinationAuth": {
+      "description": "The authentication definition of blob storage destination.",
       "type": "object",
       "properties": {
         "type": {
@@ -141,6 +146,7 @@
       "discriminator": "type"
     },
     "BlobStorageV1DestinationConnectionStringAuth": {
+      "description": "The authentication definition with connection string of blob storage destination.",
       "x-ms-discriminator-value": "connectionString",
       "allOf": [
         {
@@ -164,6 +170,7 @@
       ]
     },
     "BlobStorageV1DestinationSystemAssignedManagedIdentityAuth": {
+      "description": "The authentication definition with system assigned managed identity of blob storage destination.",
       "x-ms-discriminator-value": "systemAssignedManagedIdentity",
       "allOf": [
         {
@@ -187,6 +194,7 @@
       ]
     },
     "CapabilityJobData": {
+      "description": "The capability job data definition.",
       "type": "object",
       "properties": {
         "target": {
@@ -209,6 +217,7 @@
       ]
     },
     "CloudPropertyJobData": {
+      "description": "The cloud property job data definition.",
       "x-ms-discriminator-value": "cloudProperty",
       "allOf": [
         {
@@ -239,6 +248,7 @@
       ]
     },
     "CommandJobData": {
+      "description": "The command job data definition.",
       "x-ms-discriminator-value": "command",
       "allOf": [
         {
@@ -250,6 +260,7 @@
       ]
     },
     "DataExplorerV1Destination": {
+      "description": "The azure data explorer destination.",
       "x-ms-discriminator-value": "dataexplorer@v1",
       "allOf": [
         {
@@ -282,6 +293,7 @@
       ]
     },
     "DataExplorerV1DestinationAuth": {
+      "description": "The authentication definition of azure data explorer destination.",
       "type": "object",
       "properties": {
         "type": {
@@ -295,6 +307,7 @@
       "discriminator": "type"
     },
     "DataExplorerV1DestinationServicePrincipalAuth": {
+      "description": "The authentication definition with service principal of azure data explorer destination.",
       "x-ms-discriminator-value": "servicePrincipal",
       "allOf": [
         {
@@ -323,6 +336,7 @@
       ]
     },
     "DataExplorerV1DestinationSystemAssignedManagedIdentityAuth": {
+      "description": "The authentication definition with system assigned managed identity of azure data explorer destination.",
       "x-ms-discriminator-value": "systemAssignedManagedIdentity",
       "allOf": [
         {
@@ -346,6 +360,7 @@
       }
     },
     "DataExportStatus": {
+      "description": "The data export status definition.",
       "type": "object",
       "properties": {
         "status": {
@@ -370,6 +385,7 @@
       }
     },
     "Destination": {
+      "description": "The destination definition.",
       "allOf": [
         {
           "$ref": "#/definitions/DataExportStatus"
@@ -417,6 +433,7 @@
       ]
     },
     "DestinationExport": {
+      "description": "The destination export definition.",
       "allOf": [
         {
           "$ref": "#/definitions/Export"
@@ -431,6 +448,7 @@
       }
     },
     "DestinationReference": {
+      "description": "The destination reference definition.",
       "type": "object",
       "properties": {
         "id": {
@@ -447,6 +465,7 @@
       ]
     },
     "Device": {
+      "description": "The device definition.",
       "type": "object",
       "properties": {
         "id": {
@@ -509,6 +528,7 @@
       ]
     },
     "DeviceCommand": {
+      "description": "The device command definition.",
       "type": "object",
       "properties": {
         "id": {
@@ -562,6 +582,7 @@
       ]
     },
     "DeviceCredentials": {
+      "description": "The device credentials definition.",
       "type": "object",
       "properties": {
         "idScope": {
@@ -586,6 +607,7 @@
       ]
     },
     "DeviceGroup": {
+      "description": "The device group definition.",
       "type": "object",
       "properties": {
         "id": {
@@ -690,6 +712,7 @@
       ]
     },
     "DeviceTelemetry": {
+      "description": "The device telemetry definition.",
       "type": "object",
       "properties": {
         "value": {
@@ -703,6 +726,7 @@
       }
     },
     "DeviceTemplate": {
+      "description": "The device template definition.",
       "type": "object",
       "properties": {
         "@id": {
@@ -763,6 +787,7 @@
       ]
     },
     "DeviceTemplateMigrationJobData": {
+      "description": "The device template migration job data definition.",
       "x-ms-discriminator-value": "deviceTemplateMigration",
       "allOf": [
         {
@@ -782,6 +807,7 @@
       ]
     },
     "EmailUser": {
+      "description": "The email user definition.",
       "x-ms-discriminator-value": "email",
       "allOf": [
         {
@@ -801,6 +827,7 @@
       ]
     },
     "Enrichment": {
+      "description": "The enrichment definition for data export.",
       "type": "object",
       "properties": {
         "target": {
@@ -817,6 +844,7 @@
       }
     },
     "Error": {
+      "description": "The error model definition.",
       "type": "object",
       "properties": {
         "error": {
@@ -826,6 +854,7 @@
       }
     },
     "ErrorDetails": {
+      "description": "The error details definition.",
       "type": "object",
       "properties": {
         "code": {
@@ -847,6 +876,7 @@
       }
     },
     "EventHubsV1Destination": {
+      "description": "The event hub destination definition.",
       "x-ms-discriminator-value": "eventhubs@v1",
       "allOf": [
         {
@@ -864,6 +894,7 @@
       ]
     },
     "EventHubsV1DestinationAuth": {
+      "description": "The authentication definition for event hub destination.",
       "type": "object",
       "properties": {
         "type": {
@@ -877,6 +908,7 @@
       "discriminator": "type"
     },
     "EventHubsV1DestinationConnectionStringAuth": {
+      "description": "The authentication definition with connection string for event hub destination.",
       "x-ms-discriminator-value": "connectionString",
       "allOf": [
         {
@@ -895,6 +927,7 @@
       ]
     },
     "EventHubsV1DestinationSystemAssignedManagedIdentityAuth": {
+      "description": "The authentication definition with system assigned managed identity for event hub destination.",
       "x-ms-discriminator-value": "systemAssignedManagedIdentity",
       "allOf": [
         {
@@ -918,6 +951,7 @@
       ]
     },
     "Export": {
+      "description": "The data export definition.",
       "allOf": [
         {
           "$ref": "#/definitions/DataExportStatus"
@@ -1026,6 +1060,7 @@
       ]
     },
     "ExportDestination": {
+      "description": "The export destination definition.",
       "allOf": [
         {
           "$ref": "#/definitions/Destination"
@@ -1040,6 +1075,7 @@
       }
     },
     "FileUpload": {
+      "description": "The file upload configuration for application.",
       "type": "object",
       "properties": {
         "account": {
@@ -1107,6 +1143,7 @@
       ]
     },
     "Job": {
+      "description": "The job definition.",
       "type": "object",
       "properties": {
         "id": {
@@ -1163,6 +1200,7 @@
       ]
     },
     "JobBatch": {
+      "description": "The job batch definition for job.",
       "type": "object",
       "properties": {
         "type": {
@@ -1200,6 +1238,7 @@
       ]
     },
     "JobCancellationThreshold": {
+      "description": "The job cancellation threshold definition for job.",
       "type": "object",
       "properties": {
         "type": {
@@ -1260,6 +1299,7 @@
       ]
     },
     "JobData": {
+      "description": "The job data definition.",
       "type": "object",
       "properties": {
         "type": {
@@ -1273,6 +1313,7 @@
       "discriminator": "type"
     },
     "JobDeviceStatus": {
+      "description": "The job status definition.",
       "properties": {
         "id": {
           "description": "ID of the device whose job status is being provided.",
@@ -1306,6 +1347,7 @@
       ]
     },
     "Organization": {
+      "description": "The organization definition.",
       "type": "object",
       "properties": {
         "id": {
@@ -1343,6 +1385,7 @@
       ]
     },
     "Permission": {
+      "description": "The permission definition.",
       "type": "object",
       "properties": {
         "roles": {
@@ -1359,6 +1402,7 @@
       ]
     },
     "PropertyJobData": {
+      "description": "The property job data definition.",
       "x-ms-discriminator-value": "property",
       "allOf": [
         {
@@ -1370,6 +1414,7 @@
       ]
     },
     "QueryRequest": {
+      "description": "The query request payload definition.",
       "type": "object",
       "properties": {
         "query": {
@@ -1382,6 +1427,7 @@
       ]
     },
     "QueryResponse": {
+      "description": "The query response payload definition.",
       "type": "object",
       "properties": {
         "results": {
@@ -1396,6 +1442,7 @@
       ]
     },
     "Role": {
+      "description": "The user role definition.",
       "type": "object",
       "properties": {
         "id": {
@@ -1410,6 +1457,7 @@
       }
     },
     "RoleAssignment": {
+      "description": "The user role assignment definition associated with user.",
       "type": "object",
       "properties": {
         "role": {
@@ -1445,6 +1493,7 @@
       ]
     },
     "ServiceBusQueueV1Destination": {
+      "description": "The service bus queue destination definition.",
       "x-ms-discriminator-value": "servicebusqueue@v1",
       "allOf": [
         {
@@ -1462,6 +1511,7 @@
       ]
     },
     "ServiceBusQueueV1DestinationAuth": {
+      "description": "The authentication definition for service bus queue destination.",
       "type": "object",
       "properties": {
         "type": {
@@ -1475,6 +1525,7 @@
       "discriminator": "type"
     },
     "ServiceBusQueueV1DestinationConnectionStringAuth": {
+      "description": "The authentication definition with connection string for service bus queue destination.",
       "x-ms-discriminator-value": "connectionString",
       "allOf": [
         {
@@ -1493,6 +1544,7 @@
       ]
     },
     "ServiceBusQueueV1DestinationSystemAssignedManagedIdentityAuth": {
+      "description": "The authentication definition with system assigned managed identity for service bus queue destination.",
       "x-ms-discriminator-value": "systemAssignedManagedIdentity",
       "allOf": [
         {
@@ -1516,6 +1568,7 @@
       ]
     },
     "ServiceBusTopicV1Destination": {
+      "description": "The service bus topic destination definition.",
       "x-ms-discriminator-value": "servicebustopic@v1",
       "allOf": [
         {
@@ -1533,6 +1586,7 @@
       ]
     },
     "ServiceBusTopicV1DestinationAuth": {
+      "description": "The authentication definition for service bus topic destination.",
       "type": "object",
       "properties": {
         "type": {
@@ -1546,6 +1600,7 @@
       "discriminator": "type"
     },
     "ServiceBusTopicV1DestinationConnectionStringAuth": {
+      "description": "The authentication definition with connection string for service bus topic destination.",
       "x-ms-discriminator-value": "connectionString",
       "allOf": [
         {
@@ -1564,6 +1619,7 @@
       ]
     },
     "ServiceBusTopicV1DestinationSystemAssignedManagedIdentityAuth": {
+      "description": "The authentication definition with system assigned managed identity for service bus topic destination.",
       "x-ms-discriminator-value": "systemAssignedManagedIdentity",
       "allOf": [
         {
@@ -1587,6 +1643,7 @@
       ]
     },
     "ServicePrincipalUser": {
+      "description": "The serivce principal user destination.",
       "x-ms-discriminator-value": "servicePrincipal",
       "allOf": [
         {
@@ -1610,6 +1667,7 @@
       ]
     },
     "SymmetricKey": {
+      "description": "The symmetric key definition.",
       "type": "object",
       "properties": {
         "primaryKey": {
@@ -1627,6 +1685,7 @@
       ]
     },
     "SymmetricKeyAttestation": {
+      "description": "The symmetric key attestation definition.",
       "x-ms-discriminator-value": "symmetricKey",
       "allOf": [
         {
@@ -1645,6 +1704,7 @@
       ]
     },
     "Tpm": {
+      "description": "The trusted platform module definition.",
       "type": "object",
       "properties": {
         "endorsementKey": {
@@ -1657,6 +1717,7 @@
       ]
     },
     "TpmAttestation": {
+      "description": "The trusted platform module attestation definition.",
       "x-ms-discriminator-value": "tpm",
       "allOf": [
         {
@@ -1675,6 +1736,7 @@
       ]
     },
     "User": {
+      "description": "The user definition.",
       "allOf": [
         {
           "$ref": "#/definitions/Permission"
@@ -1717,6 +1779,7 @@
       ]
     },
     "WebhookV1Destination": {
+      "description": "The webhook destination definition.",
       "x-ms-discriminator-value": "webhook@v1",
       "allOf": [
         {
@@ -1752,6 +1815,7 @@
       ]
     },
     "WebhookV1DestinationAuth": {
+      "description": "The authentication definition for webhook destination.",
       "type": "object",
       "properties": {
         "type": {
@@ -1765,6 +1829,7 @@
       "discriminator": "type"
     },
     "WebhookV1DestinationCustomization": {
+      "description": "The customization definition for webhook destination.",
       "type": "object",
       "properties": {
         "value": {
@@ -1781,6 +1846,7 @@
       ]
     },
     "WebhookV1DestinationHeaderAuth": {
+      "description": "The authentication definition with header for webhook destination.",
       "x-ms-discriminator-value": "header",
       "allOf": [
         {
@@ -1799,6 +1865,7 @@
       ]
     },
     "WebhookV1DestinationOAuthAuth": {
+      "description": "The authentication definition with OAuth for webhook destination.",
       "x-ms-discriminator-value": "oauth",
       "allOf": [
         {
@@ -1865,6 +1932,7 @@
       ]
     },
     "X509": {
+      "description": "The X509 definition.",
       "type": "object",
       "properties": {
         "clientCertificates": {
@@ -1874,6 +1942,7 @@
       }
     },
     "X509Attestation": {
+      "description": "The X509 attestation definition.",
       "x-ms-discriminator-value": "x509",
       "allOf": [
         {
@@ -1892,6 +1961,7 @@
       ]
     },
     "X509Certificate": {
+      "description": "The X509 certificate definition.",
       "type": "object",
       "properties": {
         "certificate": {
@@ -1906,6 +1976,7 @@
       }
     },
     "X509CertificateInfo": {
+      "description": "The X509 certificate information definition.",
       "type": "object",
       "properties": {
         "sha1Thumbprint": {
@@ -1918,6 +1989,7 @@
       ]
     },
     "X509Certificates": {
+      "description": "The X509 certificates definition.",
       "type": "object",
       "properties": {
         "primary": {
