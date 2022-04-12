@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "v2.0-preview1",
+    "subscriptionId": "EA19050C-51FC-4B55-84E5-9EA7283601DA",
+    "resourceGroupName": "TestResourceGroup",
+    "endpoint": "{endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "body": {
+      "sourceContainerUrl": {
+        "url": "https://myblob.blob.core.windows.net/sourceContainer",
+        "filters": [
+          {
+            "prefix": "pre",
+            "suffix": ".txt"
+          }
+        ],
+        "language": "en"
+      },
+      "properties": {
+        "experimental": false,
+        "pdfOutputAdditionalFormat": "OpenXmlWord",
+        "category": "generalnn",
+        "glossaries": [
+          {
+            "glossaryUrl": "https://myblob.blob.core.windows.net/myglossary/en_fr_glossary.xlf",
+            "format": "XLIFF"
+          }
+        ]
+      },
+      "targets": [
+        {
+          "targetUrl": "https://myblob.blob.core.windows.net/destinationContainer1",
+          "language": "fr"
+        },
+        {
+          "targetUrl": "https://myblob.blob.core.windows.net/destinationContainer2",
+          "language": "es"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "https://westus.cognitiveservices.azure.com/translator/document/v2.0-preview1/batches/0FA2822F-4C2A-4317-9C20-658C801E0E55"
+      }
+    }
+  }
+}
