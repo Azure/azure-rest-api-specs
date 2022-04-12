@@ -51,7 +51,7 @@
           "200": {
             "description": "Operation details.",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -685,6 +685,7 @@
           "items": {
             "$ref": "#/definitions/ErrorDefinition"
           },
+          "x-ms-identifiers": [],
           "description": "A list of additional details about the error."
         }
       }
@@ -794,67 +795,6 @@
         }
       },
       "description": "Tags object for patch operations."
-    },
-    "OperationListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/OperationValue"
-          },
-          "description": "The list of operations"
-        }
-      },
-      "description": "The List Operation response."
-    },
-    "OperationValue": {
-      "type": "object",
-      "properties": {
-        "origin": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The origin of the operation."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The name of the operation."
-        },
-        "display": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/OperationValueDisplay",
-          "description": "Describes the properties of a Operation Value Display."
-        }
-      },
-      "description": "Describes the properties of a Operation value."
-    },
-    "OperationValueDisplay": {
-      "type": "object",
-      "properties": {
-        "operation": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The display name of the operation."
-        },
-        "resource": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The display name of the resource the operation applies to."
-        },
-        "description": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The description of the operation."
-        },
-        "provider": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The resource provider for the operation."
-        }
-      },
-      "description": "Describes the properties of a Operation Value Display."
     }
   },
   "parameters": {
