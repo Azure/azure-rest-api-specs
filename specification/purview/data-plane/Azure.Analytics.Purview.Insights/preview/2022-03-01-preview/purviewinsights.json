@@ -27,6 +27,7 @@
             "in": "query",
             "name": "kind",
             "description": "The asset type.",
+            "required": true,
             "type": "string",
             "enum": [
               "AssetFilesAggregation",
@@ -36,7 +37,9 @@
               "AllAssetsDistribution",
               "AssetCurationDistribution",
               "DeletedAssetsDistribution",
-              "NetNewAssetsDistribution"
+              "MostViewedAssets",
+              "NetNewAssetsDistribution",
+              "TopSearchedKeywords"
             ],
             "x-ms-enum": {
               "name": "AssetType",
@@ -85,8 +88,31 @@
         "parameters": [
           {
             "in": "query",
+            "name": "orderBy",
+            "description": "The order of the entries.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "The number of entries that should be ignored at the beginning of a collection.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "The maximum number of entries that should be returned.",
+            "type": "integer",
+            "format": "int32",
+            "maximum": 1000,
+            "minimum": 1
+          },
+          {
+            "in": "query",
             "name": "kind",
             "description": "The type of asset.",
+            "required": true,
             "type": "string",
             "enum": [
               "AssetFilesAggregation",
@@ -96,7 +122,9 @@
               "AllAssetsDistribution",
               "AssetCurationDistribution",
               "DeletedAssetsDistribution",
-              "NetNewAssetsDistribution"
+              "MostViewedAssets",
+              "NetNewAssetsDistribution",
+              "TopSearchedKeywords"
             ],
             "x-ms-enum": {
               "name": "AssetType",
@@ -114,15 +142,6 @@
             "name": "classificationCategory",
             "description": "The classification category.",
             "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "collectionNames",
-            "description": "The collection names.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
           },
           {
             "in": "query",
@@ -144,23 +163,12 @@
           },
           {
             "in": "query",
-            "name": "$orderby",
-            "description": "",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$skip",
-            "description": "",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "in": "query",
-            "name": "$top",
-            "description": "",
-            "type": "integer",
-            "format": "int32"
+            "name": "collectionNames",
+            "description": "The collection names.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -209,6 +217,7 @@
             "in": "query",
             "name": "kind",
             "description": "The asset type/",
+            "required": true,
             "type": "string",
             "enum": [
               "AssetFilesAggregation",
@@ -218,7 +227,9 @@
               "AllAssetsDistribution",
               "AssetCurationDistribution",
               "DeletedAssetsDistribution",
-              "NetNewAssetsDistribution"
+              "MostViewedAssets",
+              "NetNewAssetsDistribution",
+              "TopSearchedKeywords"
             ],
             "x-ms-enum": {
               "name": "AssetType",
@@ -610,7 +621,9 @@
             "AllAssetsDistribution",
             "AssetCurationDistribution",
             "DeletedAssetsDistribution",
-            "NetNewAssetsDistribution"
+            "MostViewedAssets",
+            "NetNewAssetsDistribution",
+            "TopSearchedKeywords"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -637,10 +650,6 @@
           "items": {
             "$ref": "#/definitions/SnapshotRecord"
           }
-        },
-        "totalResultCount": {
-          "format": "int32",
-          "type": "integer"
         }
       }
     },
@@ -694,7 +703,9 @@
             "AllAssetsDistribution",
             "AssetCurationDistribution",
             "DeletedAssetsDistribution",
-            "NetNewAssetsDistribution"
+            "MostViewedAssets",
+            "NetNewAssetsDistribution",
+            "TopSearchedKeywords"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1216,6 +1227,10 @@
         },
         "dataOwnerAssigned": {
           "type": "boolean"
+        },
+        "unclassifiedCount": {
+          "format": "int64",
+          "type": "integer"
         }
       },
       "x-ms-discriminator-value": "AllAssetsDistribution"
@@ -1327,6 +1342,52 @@
       },
       "x-ms-discriminator-value": "AssetFilesAggregation"
     },
+    "DataEstateHealthSnapshotRecord": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SnapshotRecord"
+        }
+      ],
+      "properties": {
+        "collectionName": {
+          "type": "string"
+        },
+        "total": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "financialClssifiedAssets": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "fullyCuratedAssets": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "dataOwnerAssigned": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "netNewAssets": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "staleAssets": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "unclassified": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "updated": {
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "DataEstateHealth"
+    },
     "DeletedAssetsDistributionSnapshotRecord": {
       "type": "object",
       "allOf": [
@@ -1350,6 +1411,10 @@
         },
         "dataOwnerAssigned": {
           "type": "boolean"
+        },
+        "unclassifiedCount": {
+          "format": "int64",
+          "type": "integer"
         }
       },
       "x-ms-discriminator-value": "DeletedAssetsDistribution"
@@ -1382,6 +1447,33 @@
       },
       "x-ms-discriminator-value": "FilesWithoutResourceSet"
     },
+    "MostViewedAssetsSnapshotRecord": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SnapshotRecord"
+        }
+      ],
+      "properties": {
+        "assetDisplayName": {
+          "type": "string"
+        },
+        "curationLevel": {
+          "type": "string"
+        },
+        "guid": {
+          "type": "string"
+        },
+        "numberOfViews": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "qualifiedName": {
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "MostViewedAssets"
+    },
     "NetNewAssetsDistributionSnapshotRecord": {
       "type": "object",
       "allOf": [
@@ -1405,11 +1497,15 @@
         },
         "dataOwnerAssigned": {
           "type": "boolean"
+        },
+        "unclassifiedCount": {
+          "format": "int64",
+          "type": "integer"
         }
       },
       "x-ms-discriminator-value": "NetNewAssetsDistribution"
     },
-    "DataEstateHealthSnapshotRecord": {
+    "TopSearchedKeywordsSnapshotRecord": {
       "type": "object",
       "allOf": [
         {
@@ -1417,43 +1513,18 @@
         }
       ],
       "properties": {
-        "collectionName": {
+        "numberOfSearches": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "searchTerm": {
           "type": "string"
         },
-        "total": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "financialClassifiedAssets": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "fullyCuratedAssets": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "dataOwnerAssigned": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "netNewAssets": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "staleAssets": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "unclassified": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "updated": {
-          "format": "int64",
-          "type": "integer"
+        "searchWithResults": {
+          "type": "boolean"
         }
       },
-      "x-ms-discriminator-value": "DataEstateHealth"
+      "x-ms-discriminator-value": "TopSearchedKeywords"
     }
   },
   "parameters": {
