@@ -1,0 +1,102 @@
+{
+  "parameters": {
+    "api-version": "2022-04-01-preview",
+    "subscriptionId": "subscriptionId1",
+    "resourceGroupName": "resourceGroup1",
+    "resourceName": "workflow1",
+    "parameters": {
+      "location": "location1",
+      "tags": {
+        "appname": "testApp"
+      },
+      "repositoryOwner": "owner1",
+      "repositoryName": "repo1",
+      "branchName": "branch1",
+      "dockerfile": "repo1/images/Dockerfile",
+      "dockerBuildContext": "repo1/src/",
+      "deploymentProperties": {
+        "manifestType": "kube",
+        "kubeManifestLocations": [
+          "/src/manifests/"
+        ],
+        "overrides": {
+          "key1": "value1"
+        }
+      },
+      "acr": "/subscription/subscriptionId1/resourceGroups/resourceGroup1/providers/Microsoft.ContainerRegistry/registries/registry1/connectedRegistries/acr1",
+      "oidcCredentials": {
+        "azureClientId": "12345678-3456-7890-5678-012345678901",
+        "azureTenantId": "66666666-3456-7890-5678-012345678901"
+      },
+      "aksResourceId": "/subscriptions/subscriptionId1/resourcegroups/resourceGroup1/providers/Microsoft.ContainerService/managedClusters/cluster1"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscription/subscriptionId1/resourceGroups/resourceGroup1/providers/Microsoft.DevHub/workflow/workflow1",
+        "location": "location1",
+        "name": "workflow1",
+        "type": "Micfosoft.DevHub/Workflow",
+        "tags": {
+          "appname": "testapp"
+        },
+        "properties": {
+          "repositoryOwner": "owner1",
+          "repositoryName": "repo2",
+          "branchName": "branch2",
+          "dockerfile": "repo2/images/Dockerfile",
+          "dockerBuildContext": "repo2/src/",
+          "deploymentProperties": {
+            "manifestType": "helm",
+            "helmChartPath": "/src/charts",
+            "helmValues": "/src/chars/values.yaml",
+            "overrides": {
+              "key1": "value1"
+            }
+          },
+          "acr": "/subscription/subscriptionId1/resourceGroups/resourceGroup1/providers/Microsoft.ContainerRegistry/registries/registry1/connectedRegistries/acr2",
+          "oidcCredentials": {
+            "azureClientId": "12345678-3456-7890-5678-012345678901",
+            "azureTenantId": "66666666-3456-7890-5678-012345678901"
+          },
+          "aksResourceId": "/subscriptions/subscriptionId1/resourcegroups/resourceGroup1/providers/Microsoft.ContainerService/managedClusters/cluster1",
+          "prURL": "https://github.com/User/repo2/pull/6567",
+          "prStatus": "submitted"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscription/subscriptionId1/resourceGroups/resourceGroup1/providers/Microsoft.DevHub/workflow/workflow1",
+        "location": "location1",
+        "name": "workflow1",
+        "type": "Micfosoft.DevHub/Workflow",
+        "tags": {
+          "appname": "testapp"
+        },
+        "properties": {
+          "repositoryOwner": "owner1",
+          "repositoryName": "repo1",
+          "branchName": "branch1",
+          "dockerfile": "repo1/images/Dockerfile",
+          "dockerBuildContext": "repo1/src/",
+          "deploymentProperties": {
+            "manifestType": "kube",
+            "overrides": {
+              "key1": "value1"
+            }
+          },
+          "acr": "/subscription/subscriptionId1/resourceGroups/resourceGroup1/providers/Microsoft.ContainerRegistry/registries/registry1/connectedRegistries/acr1",
+          "oidcCredentials": {
+            "azureClientId": "12345678-3456-7890-5678-012345678901",
+            "azureTenantId": "66666666-3456-7890-5678-012345678901"
+          },
+          "aksResourceId": "/subscriptions/subscriptionId1/resourcegroups/resourceGroup1/providers/Microsoft.ContainerService/managedClusters/cluster1",
+          "prURL": "https://github.com/owner1/repo1/pull/6567",
+          "prStatus": "submitted"
+        }
+      }
+    }
+  }
+}

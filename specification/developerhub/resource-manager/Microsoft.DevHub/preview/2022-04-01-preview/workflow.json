@@ -34,6 +34,42 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.DevHub/operations": {
+      "get": {
+        "tags": [
+          "Workflow"
+        ],
+        "operationId": "Operations_List",
+        "summary": "Gets a list of operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "List available operations for the container service resource provider": {
+            "$ref": "./examples/Operation_List.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.DevHub/github/oauth": {
       "get": {
         "tags": [
@@ -278,10 +314,7 @@
         },
         "x-ms-examples": {
           "Create Workflow": {
-            "$ref": "./examples/Workflow_Create.json"
-          },
-          "Update Workflow": {
-            "$ref": "./examples/Workflow_Update.json"
+            "$ref": "./examples/Workflow_CreateOrUpdate.json"
           }
         }
       },
@@ -387,10 +420,18 @@
         }
       ],
       "properties": {
-        "systemData": {
-          "$ref": "#/definitions/SystemData"
-        },
-        "repoOwner": {
+        "properties": {
+          "description": "Properties of a workflow.",
+          "$ref": "#/definitions/WorkflowProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "WorkflowProperties": {
+      "type": "object",
+      "description": "Workflow properties",
+      "properties": {
+        "repositoryOwner": {
           "type": "string",
           "title": "The owner of the repository the workflow is associated with.",
           "description": "Repository Owner"
@@ -461,6 +502,7 @@
       }
     },
     "WorkflowListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -564,28 +606,32 @@
     },
     "WorkflowRun": {
       "type": "object",
-      "readOnly": true,
       "properties": {
         "succeeded": {
           "type": "boolean",
+          "readOnly": true,
           "description": "Describes if the workflow run succeeded."
         },
         "workflowRunURL": {
           "type": "string",
+          "readOnly": true,
           "description": "URL to the run of the workflow."
         },
         "lastRunAt": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
           "description": "The timestamp of the last workflow run."
         },
         "authorized": {
           "type": "boolean",
+          "readOnly": true,
           "description": "Describes if the caller was authorized to fetch the latest workflow run."
         }
       }
     },
     "GitHubAuthURLResponse": {
+      "type": "object",
       "description": "URL used to authorize the Developer Hub GitHub App",
       "properties": {
         "authURL": {
@@ -595,6 +641,7 @@
       }
     },
     "GitHubAuthTokenResponse": {
+      "type": "object",
       "description": "Response containing OAuth token from GitHub",
       "properties": {
         "token": {
@@ -604,7 +651,9 @@
       }
     },
     "ErrorResponse": {
+      "x-ms-external": true,
       "description": "Error response.",
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorDefinition",
@@ -613,7 +662,9 @@
       }
     },
     "ErrorDefinition": {
+      "x-ms-external": true,
       "description": "Error definition.",
+      "type": "object",
       "properties": {
         "code": {
           "description": "Service specific error code which serves as the substatus for the HTTP error code.",
@@ -637,6 +688,7 @@
     },
     "Resource": {
       "description": "The Resource model definition.",
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -728,6 +780,7 @@
       }
     },
     "TagsObject": {
+      "type": "object",
       "properties": {
         "tags": {
           "type": "object",
@@ -738,6 +791,64 @@
         }
       },
       "description": "Tags object for patch operations."
+    },
+    "OperationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/OperationValue"
+          },
+          "description": "The list of operations"
+        }
+      },
+      "description": "The List Operation response."
+    },
+    "OperationValue": {
+      "properties": {
+        "origin": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The origin of the operation."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the operation."
+        },
+        "display": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OperationValueDisplay",
+          "description": "Describes the properties of a Operation Value Display."
+        }
+      },
+      "description": "Describes the properties of a Operation value."
+    },
+    "OperationValueDisplay": {
+      "properties": {
+        "operation": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The display name of the operation."
+        },
+        "resource": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The display name of the resource the operation applies to."
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The description of the operation."
+        },
+        "provider": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource provider for the operation."
+        }
+      },
+      "description": "Describes the properties of a Operation Value Display."
     }
   },
   "parameters": {
@@ -753,7 +864,8 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "The ManagedCluster resource associated with the workflows."
+      "description": "The ManagedCluster resource associated with the workflows.",
+      "x-ms-parameter-location": "client"
     },
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
@@ -796,7 +908,8 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "The code response from authenticating the GitHub App."
+      "description": "The code response from authenticating the GitHub App.",
+      "x-ms-parameter-location": "client"
     }
   }
 }
