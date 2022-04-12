@@ -26,6 +26,7 @@ These are the global settings for the MachineLearning API.
 
 ``` yaml
 openapi-type: arm
+tag: package-2022-05
 ```
 
 ``` yaml $(package-webservices)
