@@ -788,6 +788,14 @@
             "appLogsConfiguration": {
               "$ref": "#/definitions/AppLogsConfiguration",
               "description": "Cluster configuration which enables the log daemon to export\napp logs to a destination. Currently only \"log-analytics\" is\nsupported"
+            },
+            "zoneRedundant": {
+              "description": "Whether or not this Managed Environment is zone-redundant.",
+              "type": "boolean",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
             }
           },
           "x-ms-client-flatten": true
