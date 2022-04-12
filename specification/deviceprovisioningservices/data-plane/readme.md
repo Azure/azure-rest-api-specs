@@ -30,11 +30,11 @@ tag: package-preview-2021-11
 ```
 
 
-### Tag: package-preview-2021-11
+### Tag: package-preview-2021-11-01
 
-These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
+These settings apply only when `--tag=package-preview-2021-11-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-11'
+```yaml $(tag) == 'package-preview-2021-11-01'
 input-file:
   - Microsoft.Devices/preview/2021-11-01-preview/service.json
   - Microsoft.Devices/preview/2021-11-01-preview/device.json
