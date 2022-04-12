@@ -6,12 +6,14 @@ This is the AutoRest configuration file the Cognitive Services Language SDK.
 
 ## Releases
 
-The current preview release of Conversational Language Understanding and Text Analytics is 2022-03-01-preview.
-
 The current stable release of Question Answering is 2021-10-01.
 
+The current stable release of Language is 2022-05-01.
+
+The current preview release of Conversational Language Understanding and Text Analytics is 2022-03-01-preview.
+
 ```yaml
-tag: release_2022_03_01_preview
+tag: release_2022_05_01
 add-credentials: true
 clear-output-folder: true
 openapi-type: data-plane
@@ -20,40 +22,18 @@ directive:
     reason: The validation tools do not properly recognize 202 as a supported response code.
 ```
 
-```yaml
-tag: release_2022_02_01_preview
-add-credentials: true
-clear-output-folder: true
-openapi-type: data-plane
-directive:
-  - suppress: LongRunningResponseStatusCode
-    reason: The validation tools do not properly recognize 202 as a supported response code.
-```
+### Release 2022-05-01
 
-```yaml
-tag: release_2021_11_01_preview
-add-credentials: true
-clear-output-folder: true
-openapi-type: data-plane
-directive:
-  - suppress: LongRunningResponseStatusCode
-    reason: The validation tools do not properly recognize 202 as a supported response code.
-```
+These settings apply only when `--tag=release_2022_05_01` is specified on the command line.
 
-```yaml
-tag: release_2021_10_01
-add-credentials: true
-clear-output-folder: true
-openapi-type: data-plane
+``` yaml $(tag) == 'release_2022_05_01'
+input-file:
+  - stable/2022-05-01/textanalytics.json
+title:
+  Microsoft Cognitive Language Service
+modelerfour:
+  lenient-model-deduplication: true
 ```
-
-```yaml
-tag: release_2021_07_15_preview
-add-credentials: true
-clear-output-folder: true
-openapi-type: data-plane
-```
-
 ### Release 2022-03-01-preview
 
 These settings apply only when `--tag=release_2022_03_01_preview` is specified on the command line.
