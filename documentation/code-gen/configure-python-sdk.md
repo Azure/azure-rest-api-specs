@@ -109,24 +109,24 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
 
-``` yaml $(python)                          // For python: basic Python package information 
+## Python
+
+These settings apply only when `--python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-appconfiguration
-no-namespace-folders: true
-package-version: 0.1.0
+package-name: azure-mgmt-[[ServiceName]]
+namespace: azure.mgmt.[[ServiceName]]
+package-version: 1.0.0b1
+clear-output-folder: true
 ```
 
-``` yaml $(python-mode) == 'update' && $(python)
+``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration/azure/mgmt/appconfiguration
+output-folder: $(python-sdks-folder)/[[ServiceName]]/azure-mgmt-[[ServiceName]]/azure/mgmt/[[ServiceName]]
 ```
-
-``` yaml $(python-mode) == 'create' && $(python)
-basic-setup-py: true
-output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration
-```
-~~~
 
 ## Multi-API
 Multi-API SDK is a package that support multiple REST api-versions. With Python multi-api SDK, the end user can assign api-version for REST calls explicitly; nevertheless, they can also use the default api-version which is choosed as the latest stable api-version.
@@ -174,28 +174,9 @@ output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compu
 ~~~
 
 
-### multi-api init script
-For track1, multi-api init script need to be configured in readme.md. For example:
-
-~~~
-// file: readme.md
-
-swagger-to-sdk:
-  - repo: azure-sdk-for-python
-    after_scripts:
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-compute
-~~~
-
-
 ## Run codegen
 After configure all the readme files, autorest can be used to generate SDK.
 
-### Track1 (for Autorest V2)
-Track1 SDK is based on AutoRest version V2 that's going to be replaced by version V3.
-
-~~~
-> autorest --keep-version-file --multiapi --no-async --python --python-mode=update --python-sdks-folder=C:\ZZ\projects\codegen\azure-sdk-for-python\sdk --use=@microsoft.azure/autorest.python@~4.0.71 --version=V2 ..\azure-rest-api-specs\specification\appconfiguration\resource-manager\readme.md
-~~~
 
 ### Track2 (for latest Autorest)
 Track 2 is based on the latest AutoRest code generator
