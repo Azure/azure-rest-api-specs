@@ -1630,69 +1630,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections": {
-      "get": {
-        "tags": [
-          "WorkspaceConnections"
-        ],
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "x-ms-examples": {
-          "ListWorkspaceConnections": {
-            "$ref": "./examples/WorkspaceConnection/list.json"
-          }
-        },
-        "operationId": "WorkspaceConnections_List",
-        "description": "List all connections under a AML workspace.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/TargetParameter"
-          },
-          {
-            "$ref": "#/parameters/CategoryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The response includes a paginated array of Workspace connections and a URI to the next set of results, if any. For the more information the limits of the number of items in a resource group, see https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/.",
-            "schema": {
-              "$ref": "#/definitions/PaginatedWorkspaceConnectionsList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}": {
       "put": {
         "tags": [
-          "WorkspaceConnections"
+          "V2WorkspaceConnectionResource"
         ],
         "operationId": "WorkspaceConnections_Create",
-        "description": "Add a new workspace connection.",
-        "x-ms-examples": {
-          "CreateWorkspaceConnection": {
-            "$ref": "./examples/WorkspaceConnection/create.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1701,7 +1644,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/WorkspaceNameParameter"
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "$ref": "#/parameters/ConnectionName"
@@ -1715,36 +1658,35 @@
             "description": "The object for creating or updating a new workspace connection",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/WorkspaceConnection"
+              "$ref": "#/definitions/WorkspaceConnectionPropertiesV2BasicResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully created the workspace connection.",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/WorkspaceConnection"
+              "$ref": "#/definitions/WorkspaceConnectionPropertiesV2BasicResource"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CreateWorkspaceConnection": {
+            "$ref": "./examples/WorkspaceConnection/create.json"
           }
         }
       },
       "get": {
         "tags": [
-          "WorkspaceConnections"
+          "V2WorkspaceConnectionResource"
         ],
         "operationId": "WorkspaceConnections_Get",
-        "description": "Get the detail of a workspace connection.",
-        "x-ms-examples": {
-          "GetWorkspaceConnection": {
-            "$ref": "./examples/WorkspaceConnection/get.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1753,7 +1695,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/WorkspaceNameParameter"
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "$ref": "#/parameters/ConnectionName"
@@ -1764,30 +1706,29 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the detail of the linked workspace.",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/WorkspaceConnection"
+              "$ref": "#/definitions/WorkspaceConnectionPropertiesV2BasicResource"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetWorkspaceConnection": {
+            "$ref": "./examples/WorkspaceConnection/get.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "WorkspaceConnections"
+          "V2WorkspaceConnectionResource"
         ],
         "operationId": "WorkspaceConnections_Delete",
-        "description": "Delete a workspace connection.",
-        "x-ms-examples": {
-          "DeleteWorkspaceConnection": {
-            "$ref": "./examples/WorkspaceConnection/delete.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1796,7 +1737,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/WorkspaceNameParameter"
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "$ref": "#/parameters/ConnectionName"
@@ -1806,18 +1747,73 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          },
           "200": {
-            "description": "Successfully deleted the workspace connection."
+            "description": "Success"
           },
           "204": {
-            "description": "Specific workspace connection not found."
+            "description": "Success"
+          }
+        },
+        "x-ms-examples": {
+          "DeleteWorkspaceConnection": {
+            "$ref": "./examples/WorkspaceConnection/delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections": {
+      "get": {
+        "tags": [
+          "V2WorkspaceConnectionResource"
+        ],
+        "operationId": "WorkspaceConnections_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetParameter"
+          },
+          {
+            "$ref": "#/parameters/CategoryParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceConnectionPropertiesV2BasicResourceArmPaginatedResult"
+            }
           },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "ListWorkspaceConnections": {
+            "$ref": "./examples/WorkspaceConnection/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -5221,55 +5217,141 @@
         }
       }
     },
-    "PaginatedWorkspaceConnectionsList": {
-      "type": "object",
-      "description": "Paginated list of Workspace connection objects.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "An array of Workspace connection objects.",
-          "items": {
-            "$ref": "#/definitions/WorkspaceConnection"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "A continuation link (absolute URI) to the next page of results in the list."
-        }
+    "ConnectionAuthType": {
+      "enum": [
+        "PAT",
+        "ManagedIdentity",
+        "UsernamePassword",
+        "None",
+        "SAS"
+      ],
+      "type": "string",
+      "description": "Authentication type of the connection target",
+      "x-ms-enum": {
+        "name": "ConnectionAuthType",
+        "modelAsString": true
       }
     },
-    "WorkspaceConnection": {
-      "x-ms-azure-resource": true,
-      "description": "Workspace connection.",
+    "ConnectionCategory": {
+      "enum": [
+        "PythonFeed",
+        "ContainerRegistry",
+        "Git"
+      ],
+      "type": "string",
+      "description": "Category of the connection",
+      "x-ms-enum": {
+        "name": "ConnectionCategory",
+        "modelAsString": true
+      }
+    },
+    "UsernamePassword": {
+      "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "#/definitions/Credentials"
         }
+      ],
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PersonalAccessToken": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Credentials"
+        }
+      ],
+      "properties": {
+        "pat": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PATAuthTypeWorkspaceConnectionProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkspaceConnectionPropertiesV2"
+        }
+      ],
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/PersonalAccessToken"
+        }
+      },
+      "additionalProperties": false,
+      "x-ms-discriminator-value": "PAT"
+    },
+    "SharedAccessSignature": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Credentials"
+        }
+      ],
+      "properties": {
+        "sas": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "SASAuthTypeWorkspaceConnectionProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkspaceConnectionPropertiesV2"
+        }
+      ],
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/SharedAccessSignature"
+        }
+      },
+      "additionalProperties": false,
+      "x-ms-discriminator-value": "SAS"
+    },
+    "UsernamePasswordAuthTypeWorkspaceConnectionProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkspaceConnectionPropertiesV2"
+        }
+      ],
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/UsernamePassword"
+        }
+      },
+      "additionalProperties": false,
+      "x-ms-discriminator-value": "UsernamePassword"
+    },
+    "Credentials": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "WorkspaceConnectionPropertiesV2": {
+      "required": [
+        "authType"
       ],
       "type": "object",
       "properties": {
-        "properties": {
-          "type": "object",
-          "description": "Properties of workspace connection.",
-          "$ref": "#/definitions/WorkspaceConnectionProps",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "WorkspaceConnectionProps": {
-      "type": "object",
-      "description": "Workspace Connection specific properties.",
-      "properties": {
+        "authType": {
+          "$ref": "#/definitions/ConnectionAuthType"
+        },
         "category": {
-          "description": "Category of the workspace connection.",
-          "type": "string"
+          "$ref": "#/definitions/ConnectionCategory"
         },
         "target": {
-          "description": "Target of the workspace connection.",
-          "type": "string"
-        },
-        "authType": {
-          "description": "Authorization type of the workspace connection.",
           "type": "string"
         },
         "value": {
@@ -5287,7 +5369,84 @@
             "modelAsString": true
           }
         }
-      }
+      },
+      "additionalProperties": false,
+      "discriminator": "authType"
+    },
+    "NoneAuthTypeWorkspaceConnectionProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkspaceConnectionPropertiesV2"
+        }
+      ],
+      "additionalProperties": false,
+      "x-ms-discriminator-value": "None"
+    },
+    "ManagedIdentity": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Credentials"
+        }
+      ],
+      "properties": {
+        "resourceId": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ManagedIdentityAuthTypeWorkspaceConnectionProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkspaceConnectionPropertiesV2"
+        }
+      ],
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/ManagedIdentity"
+        }
+      },
+      "additionalProperties": false,
+      "x-ms-discriminator-value": "ManagedIdentity"
+    },
+    "WorkspaceConnectionPropertiesV2BasicResource": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkspaceConnectionPropertiesV2"
+        }
+      },
+      "additionalProperties": false
+    },
+    "WorkspaceConnectionPropertiesV2BasicResourceArmPaginatedResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkspaceConnectionPropertiesV2BasicResource"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
     },
     "SetupScripts": {
       "type": "object",
