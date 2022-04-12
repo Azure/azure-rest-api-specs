@@ -4,7 +4,6 @@
 
 This is the AutoRest configuration file for portal.
 
-
 ## Getting Started
 
 To build the SDKs for My API, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
