@@ -6,6 +6,7 @@ This is the AutoRest configuration file for Kusto.
 
 ---
 
+
 ## Getting Started
 
 To build the SDK for Kusto, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
