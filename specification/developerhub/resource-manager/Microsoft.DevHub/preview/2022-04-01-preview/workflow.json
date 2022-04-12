@@ -37,9 +37,10 @@
     "/providers/Microsoft.DevHub/operations": {
       "get": {
         "tags": [
-          "Workflow"
+          "Operations"
         ],
         "operationId": "Operations_List",
+        "description": "Returns list of operations.",
         "summary": "Gets a list of operations.",
         "parameters": [
           {
@@ -60,6 +61,7 @@
             }
           }
         },
+        "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": null
         },
@@ -651,7 +653,6 @@
       }
     },
     "ErrorResponse": {
-      "x-ms-external": true,
       "description": "Error response.",
       "type": "object",
       "properties": {
@@ -662,27 +663,28 @@
       }
     },
     "ErrorDefinition": {
-      "x-ms-external": true,
       "description": "Error definition.",
       "type": "object",
+      "x-ms-external": true,
       "properties": {
         "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
           "type": "string",
-          "readOnly": true
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
         },
         "message": {
-          "description": "Description of the error.",
           "type": "string",
-          "readOnly": true
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
         },
         "details": {
-          "description": "Internal error details.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorDefinition"
           },
-          "readOnly": true
+          "description": "A list of additional details about the error."
         }
       }
     },
@@ -793,6 +795,7 @@
       "description": "Tags object for patch operations."
     },
     "OperationListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -806,6 +809,7 @@
       "description": "The List Operation response."
     },
     "OperationValue": {
+      "type": "object",
       "properties": {
         "origin": {
           "type": "string",
@@ -826,6 +830,7 @@
       "description": "Describes the properties of a Operation value."
     },
     "OperationValueDisplay": {
+      "type": "object",
       "properties": {
         "operation": {
           "type": "string",
