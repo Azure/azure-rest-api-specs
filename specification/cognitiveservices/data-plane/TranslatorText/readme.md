@@ -39,6 +39,11 @@ input-file: stable/v1.0/TranslatorBatch.json
 This setting is for batch document translator and only applied when `--tag=release_1_1` is specified on the command line.
 ``` yaml $(tag) == 'release_1_1'
 input-file: stable/v1.1/TranslatorBatch.json
+
+### 2.0 Batch Preview 1
+This setting is for batch document translator and only applied when `--tag=release_2_0_preview1` is specified on the command line.
+``` yaml $(tag) == 'release_2_0_preview1'
+input-file: stable/v2.0-preview1/TranslatorBatch.json
 ```
 
 ### Release 3.0
