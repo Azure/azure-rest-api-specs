@@ -21335,7 +21335,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/workflows": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows": {
       "get": {
         "tags": [
           "Workflows"
@@ -21352,11 +21352,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/siteNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -21397,7 +21396,7 @@
         "x-ms-odata": "#/definitions/WorkflowFilter"
       }
     },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/workflows/{workflowName}": {
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows/{workflowName}": {
       "get": {
         "tags": [
           "Workflows"
@@ -21414,11 +21413,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/siteNameParameter"
           },
           {
             "name": "workflowName",
@@ -21462,11 +21460,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/siteNameParameter"
           },
           {
             "name": "workflowName",
@@ -21525,11 +21522,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/siteNameParameter"
           },
           {
             "name": "workflowName",
@@ -21573,11 +21569,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/siteNameParameter"
           },
           {
             "name": "workflowName",
@@ -21606,7 +21601,7 @@
         }
       }
     },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/workflows/{workflowName}/regenerateAccessKey": {
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows/{workflowName}/regenerateAccessKey": {
       "post": {
         "tags": [
           "Workflows"
@@ -21623,11 +21618,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/siteNameParameter"
           },
           {
             "name": "workflowName",
@@ -21662,7 +21656,7 @@
         }
       }
     },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/workflows/{workflowName}/runs": {
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows/{workflowName}/runs": {
       "get": {
         "tags": [
           "WorkflowRuns"
@@ -21679,11 +21673,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/siteNameParameter"
           },
           {
             "name": "workflowName",
@@ -21731,7 +21724,7 @@
         "x-ms-odata": "#/definitions/WorkflowRunFilter"
       }
     },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/workflows/{workflowName}/runs/{runName}": {
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows/{workflowName}/runs/{runName}": {
       "get": {
         "tags": [
           "WorkflowRuns"
@@ -21748,11 +21741,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/siteNameParameter"
           },
           {
             "name": "workflowName",
@@ -21788,7 +21780,7 @@
         }
       }
     },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/workflows/{workflowName}/runs/{runName}/actions": {
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows/{workflowName}/runs/{runName}/actions": {
       "get": {
         "tags": [
           "WorkflowRunActions"
@@ -21805,11 +21797,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/siteNameParameter"
           },
           {
             "name": "workflowName",
@@ -21864,7 +21855,7 @@
         "x-ms-odata": "#/definitions/WorkflowRunActionFilter"
       }
     },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/workflows/{workflowName}/runs/{runName}/actions/{actionName}": {
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows/{workflowName}/runs/{runName}/actions/{actionName}": {
       "get": {
         "tags": [
           "WorkflowRunActions"
@@ -21881,11 +21872,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/siteNameParameter"
           },
           {
             "name": "workflowName",
@@ -21928,7 +21918,7 @@
         }
       }
     },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/workflows/{workflowName}/runs/{runName}/actions/{actionName}/listExpressionTraces": {
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows/{workflowName}/runs/{runName}/actions/{actionName}/listExpressionTraces": {
       "post": {
         "tags": [
           "WorkflowRunActions"
@@ -21945,11 +21935,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/siteNameParameter"
           },
           {
             "name": "workflowName",
@@ -21996,7 +21985,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/workflows/{workflowName}/runs/{runName}/actions/{actionName}/repetitions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows/{workflowName}/runs/{runName}/actions/{actionName}/repetitions": {
       "get": {
         "tags": [
           "WorkflowRunActions"
@@ -22013,11 +22002,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/siteNameParameter"
           },
           {
             "name": "workflowName",
@@ -22063,7 +22051,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/workflows/{workflowName}/runs/{runName}/actions/{actionName}/repetitions/{repetitionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows/{workflowName}/runs/{runName}/actions/{actionName}/repetitions/{repetitionName}": {
       "get": {
         "tags": [
           "WorkflowRunActions"
@@ -22080,11 +22068,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/siteNameParameter"
           },
           {
             "name": "workflowName",
@@ -22134,7 +22121,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/workflows/{workflowName}/runs/{runName}/actions/{actionName}/repetitions/{repetitionName}/listExpressionTraces": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows/{workflowName}/runs/{runName}/actions/{actionName}/repetitions/{repetitionName}/listExpressionTraces": {
       "post": {
         "tags": [
           "WorkflowRunActions"
@@ -22151,11 +22138,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/siteNameParameter"
           },
           {
             "name": "workflowName",
@@ -22209,7 +22195,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/workflows/{workflowName}/runs/{runName}/actions/{actionName}/repetitions/{repetitionName}/requestHistories": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows/{workflowName}/runs/{runName}/actions/{actionName}/repetitions/{repetitionName}/requestHistories": {
       "get": {
         "tags": [
           "WorkflowRunActions"
@@ -22226,11 +22212,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/siteNameParameter"
           },
           {
             "name": "workflowName",
@@ -22283,7 +22268,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/workflows/{workflowName}/runs/{runName}/actions/{actionName}/repetitions/{repetitionName}/requestHistories/{requestHistoryName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows/{workflowName}/runs/{runName}/actions/{actionName}/repetitions/{repetitionName}/requestHistories/{requestHistoryName}": {
       "get": {
         "tags": [
           "WorkflowRunActions"
@@ -22300,11 +22285,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/siteNameParameter"
           },
           {
             "name": "workflowName",
@@ -22361,7 +22345,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/workflows/{workflowName}/runs/{runName}/actions/{actionName}/scopeRepetitions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows/{workflowName}/runs/{runName}/actions/{actionName}/scopeRepetitions": {
       "get": {
         "tags": [
           "WorkflowRunActions"
@@ -22378,11 +22362,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/siteNameParameter"
           },
           {
             "name": "workflowName",
@@ -22428,7 +22411,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/workflows/{workflowName}/runs/{runName}/actions/{actionName}/scopeRepetitions/{repetitionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows/{workflowName}/runs/{runName}/actions/{actionName}/scopeRepetitions/{repetitionName}": {
       "get": {
         "tags": [
           "WorkflowRunActions"
@@ -22445,11 +22428,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/siteNameParameter"
           },
           {
             "name": "workflowName",
@@ -22499,7 +22481,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/workflows/{workflowName}/runs/{runName}/cancel": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows/{workflowName}/runs/{runName}/cancel": {
       "post": {
         "tags": [
           "WorkflowRuns"
@@ -22516,11 +22498,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/siteNameParameter"
           },
           {
             "name": "workflowName",
@@ -22553,7 +22534,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/workflows/{workflowName}/triggers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows/{workflowName}/triggers": {
       "get": {
         "tags": [
           "WorkflowTriggers"
@@ -22570,11 +22551,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/siteNameParameter"
           },
           {
             "name": "workflowName",
@@ -22622,7 +22602,7 @@
         "x-ms-odata": "#/definitions/WorkflowTriggerFilter"
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/workflows/{workflowName}/triggers/{triggerName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows/{workflowName}/triggers/{triggerName}": {
       "get": {
         "tags": [
           "WorkflowTriggers"
@@ -22639,11 +22619,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/siteNameParameter"
           },
           {
             "name": "workflowName",
@@ -22679,7 +22658,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/workflows/{workflowName}/triggers/{triggerName}/histories": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows/{workflowName}/triggers/{triggerName}/histories": {
       "get": {
         "tags": [
           "WorkflowTriggerHistories"
@@ -22696,11 +22675,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/siteNameParameter"
           },
           {
             "name": "workflowName",
@@ -22755,7 +22733,7 @@
         "x-ms-odata": "#/definitions/WorkflowTriggerHistoryFilter"
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/workflows/{workflowName}/triggers/{triggerName}/histories/{historyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows/{workflowName}/triggers/{triggerName}/histories/{historyName}": {
       "get": {
         "tags": [
           "WorkflowTriggerHistories"
@@ -22772,11 +22750,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/siteNameParameter"
           },
           {
             "name": "workflowName",
@@ -22819,7 +22796,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/workflows/{workflowName}/triggers/{triggerName}/histories/{historyName}/resubmit": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows/{workflowName}/triggers/{triggerName}/histories/{historyName}/resubmit": {
       "post": {
         "tags": [
           "WorkflowTriggerHistories"
@@ -22836,11 +22813,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/siteNameParameter"
           },
           {
             "name": "workflowName",
@@ -22880,7 +22856,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/workflows/{workflowName}/triggers/{triggerName}/listCallbackUrl": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows/{workflowName}/triggers/{triggerName}/listCallbackUrl": {
       "post": {
         "tags": [
           "WorkflowTriggers"
@@ -22897,11 +22873,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/siteNameParameter"
           },
           {
             "name": "workflowName",
@@ -22937,7 +22912,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/workflows/{workflowName}/triggers/{triggerName}/run": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows/{workflowName}/triggers/{triggerName}/run": {
       "post": {
         "tags": [
           "WorkflowTriggers"
@@ -22954,11 +22929,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/siteNameParameter"
           },
           {
             "name": "workflowName",
@@ -22994,7 +22968,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/workflows/{workflowName}/triggers/{triggerName}/schemas/json": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows/{workflowName}/triggers/{triggerName}/schemas/json": {
       "get": {
         "tags": [
           "WorkflowTriggers"
@@ -23011,11 +22985,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/siteNameParameter"
           },
           {
             "name": "workflowName",
@@ -23114,7 +23087,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/workflows/{workflowName}/versions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows/{workflowName}/versions": {
       "get": {
         "tags": [
           "WorkflowVersions"
@@ -23131,11 +23104,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/siteNameParameter"
           },
           {
             "name": "workflowName",
@@ -23175,7 +23147,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/workflows/{workflowName}/versions/{versionId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflows/{workflowName}/versions/{versionId}": {
       "get": {
         "tags": [
           "WorkflowVersions"
@@ -23192,11 +23164,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/siteNameParameter"
           },
           {
             "name": "workflowName",
@@ -30108,6 +30079,13 @@
     }
   },
   "parameters": {
+    "siteNameParameter": {
+      "name": "name",
+      "in": "path",
+      "description": "Site name.",
+      "required": true,
+      "type": "string"
+    },
     "subscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
