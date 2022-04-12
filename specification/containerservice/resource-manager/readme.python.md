@@ -405,7 +405,7 @@ namespace: azure.mgmt.containerservice.v2017_07_01
 output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2017_07_01
 ```
 
-``` yaml $(track2)
+``` yaml $(python)
 directive:
   - from: swagger-document
     where: $.definitions.ManagedClusterLoadBalancerProfile.properties.managedOutboundIPs.properties["countIPv6"]
