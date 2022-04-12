@@ -143,7 +143,7 @@ The batch is a tag list which are used in the multi-api package. For example:
 
 Generate all API versions currently shipped for this package
 
-```yaml $(multiapi) && $(python)            // For track2
+```yaml $(multiapi) && $(python)
 clear-output-folder: true
 batch:
   - tag: package-2020-06-01-only
@@ -151,7 +151,7 @@ batch:
   - multiapiscript: true
 ```
 
-``` yaml $(multiapiscript) && $(python)      // For track2
+``` yaml $(multiapiscript) && $(python)
 output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/
 perform-load: false
 ```
@@ -167,7 +167,7 @@ Then, the output folder and namespace should be configured for each of the tag. 
 These settings apply only when `--tag=package-2020-06-01-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2020-06-01-only' && $(python)      // For track2
+``` yaml $(tag) == 'package-2020-06-01-only' && $(python)
 namespace: azure.mgmt.compute.v2020_06_01
 output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/v2020_06_01
 ```
