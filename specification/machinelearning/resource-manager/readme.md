@@ -26,7 +26,6 @@ These are the global settings for the MachineLearning API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-05
 ```
 
 ``` yaml $(package-webservices)
@@ -60,6 +59,7 @@ input-file:
   - Microsoft.MachineLearning/stable/2022-05-01/machineLearningServices.json
   - Microsoft.MachineLearning/stable/2022-05-01/workspaceFeatures.json
 ```
+
 ### Tag: package-webservices-2017-01
 
 These settings apply only when `--tag=package-webservices-2017-01` is specified on the command line.
