@@ -132,6 +132,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "List Workflows": {
             "$ref": "./examples/Workflow_List.json"
@@ -173,6 +176,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List Workflows": {
@@ -567,6 +573,15 @@
         "workflowRunURL": {
           "type": "string",
           "description": "URL to the run of the workflow."
+        },
+        "lastRunAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the last workflow run."
+        },
+        "authorized": {
+          "type": "boolean",
+          "description": "Describes if the caller was authorized to fetch the latest workflow run."
         }
       }
     },
