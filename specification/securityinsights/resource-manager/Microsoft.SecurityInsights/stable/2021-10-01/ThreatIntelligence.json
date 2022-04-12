@@ -471,12 +471,15 @@
       "allOf": [
         {
           "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
-        },
-        {
-          "$ref": "#/definitions/ThreatIntelligenceResourceKind"
         }
       ],
       "description": "Threat intelligence information object.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/ThreatIntelligenceResourceInnerKind",
+          "description": "The kind of the entity."
+        }
+      },
       "discriminator": "kind",
       "type": "object",
       "required": [
@@ -521,41 +524,6 @@
       },
       "type": "object",
       "x-ms-discriminator-value": "indicator"
-    },
-    "ThreatIntelligenceIndicatorModelForRequestBody": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/ThreatIntelligenceResourceKind"
-        }
-      ],
-      "description": "Threat intelligence indicator entity used in request body.",
-      "properties": {
-        "etag": {
-          "description": "Etag of the azure resource",
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/ThreatIntelligenceIndicatorProperties",
-          "description": "Threat Intelligence Entity properties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-discriminator-value": "indicator"
-    },
-    "ThreatIntelligenceResourceKind": {
-      "description": "Describes an entity with kind.",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/ThreatIntelligenceResourceInnerKind",
-          "description": "The kind of the entity."
-        }
-      },
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ],
-      "type": "object"
     },
     "ThreatIntelligenceResourceInnerKind": {
       "description": "The kind of the threat intelligence entity",
@@ -1083,7 +1051,7 @@
       "name": "ThreatIntelligenceProperties",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/ThreatIntelligenceIndicatorModelForRequestBody"
+        "$ref": "#/definitions/ThreatIntelligenceIndicatorModel"
       },
       "x-ms-parameter-location": "method"
     },
@@ -1093,7 +1061,7 @@
       "name": "ThreatIntelligenceReplaceTags",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/ThreatIntelligenceIndicatorModelForRequestBody"
+        "$ref": "#/definitions/ThreatIntelligenceIndicatorModel"
       },
       "x-ms-parameter-location": "method"
     },

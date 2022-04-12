@@ -182,6 +182,9 @@
           },
           "Creates or updates a watchlist and bulk creates watchlist items.": {
             "$ref": "./examples/watchlists/CreateWatchlistAndWatchlistItems.json"
+          },
+          "Create or update a watchlist and bulk creates watchlist items from SAL URI.": {
+            "$ref": "./examples/watchlists/CreateWatchlistAndWatchlistItemsFromSasUri.json"
           }
         },
         "tags": [
@@ -568,6 +571,11 @@
           "description": "The raw content that represents to watchlist items to create. In case of csv/tsv content type, it's the content of the file that will parsed by the endpoint",
           "type": "string"
         },
+        "sasUri": {
+          "x-ms-secret": true,
+          "description": "The Shared Access Signature (SAS) URI under which the large csv watchlist file is located and from which the watchlist and its items will be created",
+          "type": "string"
+        },
         "itemsSearchKey": {
           "description": "The search key is used to optimize query performance when using watchlists for joins with other data. For example, enable a column with IP addresses to be the designated SearchKey field, then use this field as the key field when joining to other event data by IP address.",
           "type": "string"
@@ -579,6 +587,11 @@
         "uploadStatus": {
           "description": "The status of the Watchlist upload : New, InProgress or Complete. Pls note : When a Watchlist upload status is equal to InProgress, the Watchlist cannot be deleted",
           "type": "string"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the watchlist resource."
         }
       },
       "required": [
@@ -665,17 +678,38 @@
         },
         "itemsKeyValue": {
           "description": "key-value pairs for a watchlist item",
-          "type": "object"
+          "type": "object",
+          "additionalProperties": {}
         },
         "entityMapping": {
           "description": "key-value pairs for a watchlist item entity mapping",
-          "type": "object"
+          "type": "object",
+          "additionalProperties": {}
         }
       },
       "required": [
         "itemsKeyValue"
       ],
       "type": "object"
+    },
+    "Label": {
+      "description": "Label that will be used to tag and filter on.",
+      "type": "string"
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "InProgress"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {

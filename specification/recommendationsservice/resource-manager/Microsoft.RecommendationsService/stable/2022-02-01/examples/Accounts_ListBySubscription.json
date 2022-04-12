@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "api-version": "2022-02-01",
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/rg/providers/Microsoft.RecommendationsService/accounts/sampleAccount1",
+            "name": "sampleAccount1",
+            "type": "Microsoft.RecommendationsService/accounts",
+            "location": "West US",
+            "tags": {
+              "Environment": "Prod"
+            },
+            "properties": {
+              "configuration": "Capacity",
+              "endpointAuthentications": [
+                {
+                  "aadTenantID": "tenant",
+                  "principalID": "oid",
+                  "principalType": "User"
+                },
+                {
+                  "aadTenantID": "tenant",
+                  "principalID": "oid2",
+                  "principalType": "User"
+                }
+              ],
+              "cors": [
+                {
+                  "allowedOrigins": [
+                    "http://siteA.com"
+                  ],
+                  "allowedMethods": [
+                    "GET",
+                    "PUT",
+                    "POST"
+                  ],
+                  "allowedHeaders": [
+                    "X-Custom-Header",
+                    "X-Custom-Header2"
+                  ]
+                }
+              ],
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/rg2/providers/Microsoft.RecommendationsService/accounts/sampleAccount2",
+            "name": "sampleAccount2",
+            "type": "Microsoft.RecommendationsService/accounts",
+            "location": "West US",
+            "tags": {
+              "Environment": "Prod"
+            },
+            "properties": {
+              "configuration": "Capacity",
+              "endpointAuthentications": [
+                {
+                  "aadTenantID": "tenant",
+                  "principalID": "oid2",
+                  "principalType": "User"
+                }
+              ],
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
