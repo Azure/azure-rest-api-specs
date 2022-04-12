@@ -19,7 +19,7 @@ directive:
     where: $.definitions.Cluster.properties.systemData
     transform: $['x-ms-client-flatten'] = false
     reason: systemData should not be flattened
-  - from: arcSettings.json
+  - from: extensions.json
     where: $.definitions.Extension.properties.systemData
     transform: $['x-ms-client-flatten'] = false
     reason: systemData should not be flattened
