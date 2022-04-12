@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD:specification/cost-management/resource-manager/Microsoft.CostManagement/preview/2022-04-01-preview/examples/scheduledActions-listWithFilter-private.json
   "parameters": {
     "api-version": "2022-04-01-preview",
     "$filter": "properties/viewId eq '/providers/Microsoft.CostManagement/views/swaggerExample'"
@@ -39,29 +38,6 @@
                 "hourOfDay": 10,
                 "startDate": "2020-06-19T22:21:51.1287144Z",
                 "endDate": "2021-06-19T22:21:51.1287144Z"
-=======
-    "parameters": {
-      "api-version": "2022-02-01-preview",
-      "$filter": "properties/viewId eq '/providers/Microsoft.CostManagement/views/swaggerExample'"
-    },
-    "responses": {
-      "200": {
-        "body": {
-          "value": [
-            {
-              "id": "providers/Microsoft.CostManagement/scheduledActions/monthlyCostByResource",
-              "name": "monthlyCostByResource",
-              "type": "Microsoft.CostManagement/ScheduledActions",
-              "kind": "Email",
-              "eTag": "\"1d4ff9fe66f1d10\"",
-              "systemData": {
-                "createdBy": "testuser",
-                "createdByType": "user",
-                "createdAt": "2020-06-18T22:21:51.1287144Z",
-                "lastModifiedBy": "testuser",
-                "lastModifiedByType": "user",
-                "lastModifiedAt": "2020-06-18T22:21:51.1287144Z"
->>>>>>> parent of d9650f3ad1 (Prettifying remaining examples):specification/cost-management/resource-manager/Microsoft.CostManagement/preview/2022-02-01-preview/examples/scheduledActions-listWithFilter-private.json
               },
               "properties": {
                 "displayName": "Monthly Cost By Resource",
@@ -89,44 +65,45 @@
                   "subject": "Cost by resource this month"
                 }
               }
+            }
+          },
+          {
+            "id": "providers/Microsoft.CostManagement/scheduledActions/dailyCostByResource",
+            "name": "dailyCostByResource",
+            "type": "Microsoft.CostManagement/ScheduledActions",
+            "kind": "Email",
+            "eTag": "\"1d4ff9fe66f1d15\"",
+            "systemData": {
+              "createdBy": "testuser",
+              "createdByType": "user",
+              "createdAt": "2020-06-18T22:21:51.1287144Z",
+              "lastModifiedBy": "testuser",
+              "lastModifiedByType": "user",
+              "lastModifiedAt": "2020-06-18T22:21:51.1287144Z"
             },
-            {
-              "id": "providers/Microsoft.CostManagement/scheduledActions/dailyCostByResource",
-              "name": "dailyCostByResource",
-              "type": "Microsoft.CostManagement/ScheduledActions",
-              "kind": "Email",
-              "eTag": "\"1d4ff9fe66f1d15\"",
-              "systemData": {
-                "createdBy": "testuser",
-                "createdByType": "user",
-                "createdAt": "2020-06-18T22:21:51.1287144Z",
-                "lastModifiedBy": "testuser",
-                "lastModifiedByType": "user",
-                "lastModifiedAt": "2020-06-18T22:21:51.1287144Z"
+            "properties": {
+              "displayName": "Daily Cost By Resource",
+              "scope": "",
+              "status": "Disabled",
+              "viewId": "/providers/Microsoft.CostManagement/views/swaggerExample",
+              "schedule": {
+                "frequency": "Daily",
+                "hourOfDay": 12,
+                "startDate": "2020-06-19T22:21:51.1287144Z",
+                "endDate": "2021-06-19T22:21:51.1287144Z"
               },
-              "properties": {
-                "displayName": "Daily Cost By Resource",
-                "scope": "",
-                "status": "Disabled",
-                "viewId": "/providers/Microsoft.CostManagement/views/swaggerExample",
-                "schedule": {
-                  "frequency": "Daily",
-                  "hourOfDay": 12,
-                  "startDate": "2020-06-19T22:21:51.1287144Z",
-                  "endDate": "2021-06-19T22:21:51.1287144Z"
-                },
-                "notification": {
-                  "to": [
-                    "user@gmail.com",
-                    "team@gmail.com"
-                  ],
-                  "subject": "Daily Cost By Resource"
-                }
+              "notification": {
+                "to": [
+                  "user@gmail.com",
+                  "team@gmail.com"
+                ],
+                "subject": "Daily Cost By Resource"
               }
             }
-          ],
-          "nextLink": null
-        }
+          }
+        ],
+        "nextLink": null
       }
     }
   }
+}
