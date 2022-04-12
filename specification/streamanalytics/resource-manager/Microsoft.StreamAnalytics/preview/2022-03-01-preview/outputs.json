@@ -73,6 +73,12 @@
           },
           "Create an Azure Data Lake Store output with JSON serialization": {
             "$ref": "./examples/Output_Create_AzureDataLakeStore_JSON.json"
+          },
+          "Create a Gateway Message Bus output": {
+            "$ref": "./examples/Output_Create_GatewayMessageBus.json"
+          },
+          "Create a PostgreSQL output": {
+            "$ref": "./examples/Output_Create_PostgreSQL.json"
           }
         },
         "parameters": [
@@ -526,6 +532,19 @@
           "readOnly": true,
           "type": "string",
           "description": "The current entity tag for the output. This is an opaque string. You can use it to detect whether the resource has changed between requests. You can also use it in the If-Match or If-None-Match headers for write operations for optimistic concurrency."
+        },
+        "lastOutputEventTimestamps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LastOutputEventTimestamp"
+          },
+          "readOnly": true,
+          "description": "A list of the last output event times for each output partition. The index of the array corresponds to the partition number.",
+          "x-ms-identifiers": []
+        },
+        "watermarkSettings": {
+          "$ref": "#/definitions/OutputWatermarkProperties",
+          "description": "Settings which determine whether to send watermarks to downstream."
         }
       }
     },
@@ -594,7 +613,29 @@
         {
           "$ref": "./inputs.json#/definitions/BlobDataSourceProperties"
         }
-      ]
+      ],
+      "properties": {
+        "blobPathPrefix": {
+          "type": "string",
+          "description": "Blob path prefix."
+        },
+        "blobWriteMode": {
+          "$ref": "#/definitions/BlobWriteMode",
+          "description": "Blob write mode."
+        }
+      }
+    },
+    "BlobWriteMode": {
+      "type": "string",
+      "description": "Determines whether blob blocks are either committed automatically or appended.",
+      "enum": [
+        "Append",
+        "Once"
+      ],
+      "x-ms-enum": {
+        "name": "BlobWriteMode",
+        "modelAsString": true
+      }
     },
     "AzureTableOutputDataSource": {
       "type": "object",
@@ -786,6 +827,72 @@
           "type": "string",
           "description": "The password that will be used to connect to the Azure SQL database. Required on PUT (CreateOrReplace) requests.",
           "x-ms-secret": true
+        },
+        "authenticationMode": {
+          "$ref": "../../common/v1/definitions.json#/definitions/AuthenticationMode",
+          "description": "Authentication Mode."
+        }
+      }
+    },
+    "PostgreSQLOutputDataSource": {
+      "type": "object",
+      "description": "Describes a PostgreSQL output data source.",
+      "x-ms-discriminator-value": "Microsoft.DBForPostgreSQL/servers/databases",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PostgreSQLOutputDataSourceProperties",
+          "description": "The properties that are associated with a PostgreSQL output data source. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PostgreSQLOutputDataSourceProperties": {
+      "type": "object",
+      "description": "The properties that are associated with a PostgreSQL output.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PostgreSQLDataSourceProperties"
+        }
+      ],
+      "properties": {}
+    },
+    "PostgreSQLDataSourceProperties": {
+      "type": "object",
+      "description": "The properties that are associated with an Azure SQL database data source.",
+      "properties": {
+        "server": {
+          "type": "string",
+          "description": "The name of the SQL server containing the Azure SQL database. Required on PUT (CreateOrReplace) requests."
+        },
+        "database": {
+          "type": "string",
+          "description": "The name of the Azure SQL database. Required on PUT (CreateOrReplace) requests."
+        },
+        "table": {
+          "type": "string",
+          "description": "The name of the table in the Azure SQL database. Required on PUT (CreateOrReplace) requests."
+        },
+        "user": {
+          "type": "string",
+          "description": "The user name that will be used to connect to the Azure SQL database. Required on PUT (CreateOrReplace) requests."
+        },
+        "password": {
+          "type": "string",
+          "description": "The password that will be used to connect to the Azure SQL database. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-secret": true
+        },
+        "maxWriterCount": {
+          "type": "number",
+          "description": "Max Writer count, currently only 1(single writer) and 0(based on query partition) are available. Optional on PUT requests."
+        },
+        "authenticationMode": {
+          "$ref": "../../common/v1/definitions.json#/definitions/AuthenticationMode",
+          "description": "Authentication Mode."
         }
       }
     },
@@ -834,6 +941,10 @@
         "documentId": {
           "type": "string",
           "description": "The name of the field in output events used to specify the primary key which insert or update operations are based on."
+        },
+        "authenticationMode": {
+          "$ref": "../../common/v1/definitions.json#/definitions/AuthenticationMode",
+          "description": "Authentication Mode."
         }
       }
     },
@@ -1069,6 +1180,32 @@
         }
       }
     },
+    "GatewayMessageBusOutputDataSource": {
+      "type": "object",
+      "description": "Describes a Gateway Message Bus output data source.",
+      "x-ms-discriminator-value": "GatewayMessageBus",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GatewayMessageBusOutputDataSourceProperties",
+          "description": "The properties that are associated with a Gateway Message Bus output. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "GatewayMessageBusOutputDataSourceProperties": {
+      "type": "object",
+      "description": "The properties that are associated with a Gateway Message Bus.",
+      "allOf": [
+        {
+          "$ref": "./inputs.json#/definitions/GatewayMessageBusSourceProperties"
+        }
+      ]
+    },
     "OutputListResult": {
       "type": "object",
       "properties": {
@@ -1142,6 +1279,47 @@
           "type": "string",
           "description": "The user display name of the user that was used to obtain the refresh token. Use this property to help remember which user was used to obtain the refresh token."
         }
+      }
+    },
+    "LastOutputEventTimestamp": {
+      "type": "object",
+      "description": "An output event timestamp.",
+      "properties": {
+        "lastOutputEventTime": {
+          "type": "string",
+          "description": "The last output event time."
+        },
+        "lastUpdateTime": {
+          "type": "string",
+          "description": "The time that the last update happened."
+        }
+      }
+    },
+    "OutputWatermarkProperties": {
+      "type": "object",
+      "description": "Settings which determine whether to send watermarks to downstream.",
+      "properties": {
+        "watermarkMode": {
+          "$ref": "#/definitions/OutputWatermarkMode",
+          "description": "The output watermark mode."
+        },
+        "maxWatermarkDifferenceAcrossPartitions": {
+          "type": "string",
+          "description": "Describes the maximal delta between the fastest and slowest partitions, so the out of order window that catches all necessary events in downstream jobs is well defined."
+        }
+      }
+    },
+    "OutputWatermarkMode": {
+      "type": "string",
+      "description": "The output watermark mode.",
+      "enum": [
+        "None",
+        "SendCurrentPartitionWatermark",
+        "SendLowestWatermarkAcrossPartitions"
+      ],
+      "x-ms-enum": {
+        "name": "OutputWatermarkMode",
+        "modelAsString": true
       }
     },
     "SubResource": {
