@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "api-version": "2017-04-01-preview",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d",
+    "location": "West US",
+    "testQuery": {
+      "diagnostics": {
+        "writeUri": "http://myoutput.com",
+        "path": "/pathto/subdirectory"
+      },
+      "streamingJob": {
+        "properties": {
+          "sku": {
+            "name": "Standard"
+          },
+          "eventsOutOfOrderPolicy": "Drop",
+          "outputErrorPolicy": "Drop",
+          "eventsOutOfOrderMaxDelayInSeconds": 0,
+          "eventsLateArrivalMaxDelayInSeconds": 5,
+          "dataLocale": "en-US",
+          "compatibilityLevel": "1.0",
+          "inputs": [
+            {
+              "properties": {
+                "type": "Stream",
+                "datasource": {
+                  "type": "Raw",
+                  "properties": {
+                    "payloadUri": "http://myinput.com"
+                  }
+                },
+                "serialization": {
+                  "type": "Json",
+                  "properties": {
+                    "encoding": "UTF8"
+                  }
+                }
+              },
+              "name": "inputtest"
+            }
+          ],
+          "transformation": {
+            "properties": {
+              "streamingUnits": 1,
+              "query": "Select Id, Name from inputtest"
+            },
+            "name": "transformationtest"
+          },
+          "outputs": [
+            {
+              "properties": {
+                "datasource": {
+                  "type": "Raw",
+                  "properties": {
+                    "payloadUri": "http://myoutput.com"
+                  }
+                },
+                "serialization": {
+                  "type": "Json"
+                }
+              },
+              "name": "outputtest"
+            }
+          ],
+          "functions": []
+        },
+        "location": "West US",
+        "tags": {
+          "key1": "value1",
+          "randomKey": "randomValue",
+          "key3": "value3"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "Success",
+        "outputUri": "http://myoutput.com"
+      }
+    },
+    "202": {}
+  }
+}

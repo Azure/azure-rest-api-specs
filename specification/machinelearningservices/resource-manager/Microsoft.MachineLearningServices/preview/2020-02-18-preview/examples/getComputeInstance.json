@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testrg123",
+    "workspaceName": "workspaces123",
+    "computeName": "compute123",
+    "api-version": "2020-02-18-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123",
+        "type": "Microsoft.MachineLearningServices/workspaces/computes",
+        "name": "compute123",
+        "location": "eastus2",
+        "properties": {
+          "description": "some compute",
+          "computeType": "ComputeInstance",
+          "createdOn": "2017-09-26T22:28:08.327Z",
+          "provisioningState": "Succeeded",
+          "properties": {
+            "vmSize": "STANDARD_NC6",
+            "subnet": "test-subnet-resource-id",
+            "applicationSharingPolicy": "Shared",
+            "sshSettings": {
+              "sshPublicAccess": "Enabled",
+              "adminUserName": "azureuser",
+              "sshPort": 22
+            },
+            "computeInstanceAuthorizationType": "personal",
+            "personalComputeInstanceSettings": {
+              "assignedUser": {
+                "objectId": "00000000-0000-0000-0000-000000000000",
+                "tenantId": "00000000-0000-0000-0000-000000000000"
+              }
+            },
+            "createdBy": {
+              "userName": "foobar@microsoft.com",
+              "userOrgId": "00000000-0000-0000-0000-000000000000",
+              "userId": "00000000-0000-0000-0000-000000000000"
+            },
+            "connectivityEndpoints": {
+              "publicIpAddress": "10.0.0.1",
+              "privateIpAddress": "10.0.0.1"
+            },
+            "applications": [
+              {
+                "displayName": "Jupyter",
+                "endpointUri": "https://compute123.eastus2.azureml.net/jupyter"
+              }
+            ],
+            "errors": null,
+            "state": "Running"
+          }
+        }
+      }
+    }
+  }
+}

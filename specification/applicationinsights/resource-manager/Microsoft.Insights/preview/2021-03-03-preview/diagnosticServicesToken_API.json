@@ -1,0 +1,134 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApplicationInsightsManagementClient",
+    "description": "Azure Application Insights client for application insights diagnostic services token.",
+    "version": "2021-03-03-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{resourceUri}/providers/Microsoft.Insights/generateDiagnosticServiceReadOnlyToken": {
+      "post": {
+        "tags": [
+          "generateDiagnosticServiceReadOnlyToken"
+        ],
+        "operationId": "DiagnosticServiceToken_GetReadOnly",
+        "description": "Gets an read-only access token for application insights diagnostic service data.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed .",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful response containing the application insights diagnostic services token.",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticServicesTokenResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get diagnostic services read-only token for resource": {
+            "$ref": "./examples/DiagnosticServicesReadOnlyTokenPost.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Insights/generateDiagnosticServiceReadWriteToken": {
+      "post": {
+        "tags": [
+          "generateDiagnosticServiceReadWriteToken"
+        ],
+        "operationId": "DiagnosticServiceToken_GetReadWrite",
+        "description": "Gets an read-write access token for application insights diagnostic service data.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed .",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful response containing the application insights diagnostic services token.",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticServicesTokenResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get diagnostic services read-write token for resource": {
+            "$ref": "./examples/DiagnosticServicesReadWriteTokenPost.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DiagnosticServicesTokenResponse": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "x-ms-secret": true,
+          "type": "string",
+          "description": "JWT token for accessing application insights diagnostic service data."
+        }
+      },
+      "description": "The response to a diagnostic services token query."
+    }
+  },
+  "parameters": {
+    "ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The identifier of the resource.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}

@@ -9,18 +9,21 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/aadB2C",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/AadB2C",
         "type": "Microsoft.ApiManagement/service/identityProviders",
-        "name": "aadB2C",
+        "name": "AadB2C",
         "properties": {
-          "clientId": "315c8e2b-29fc-413d-822f-4efab7f43c42",
-          "clientSecret": "SnE4laLjmxc2QKWTPoRxOiwvSnnwMCFN+jLYDpBCUXw=",
+          "clientId": "f02dafe2-b8b8-48ec-a38e-27e5c16c51e5",
+          "clientSecret": "XXXXXXX",
           "type": "aadB2C",
+          "authority": "login.microsoftonline.com",
+          "signinTenant": "contosoaadb2c.onmicrosoft.com",
           "allowedTenants": [
-            "samirtestbc.onmicrosoft.com"
+            "contosoaadb2c.onmicrosoft.com",
+            "contoso2aadb2c.onmicrosoft.com"
           ],
-          "signupPolicyName": "B2C_1_Signup_Default",
-          "signinPolicyName": "B2C_1_signup-policy"
+          "signupPolicyName": "B2C_1_policy-signup",
+          "signinPolicyName": "B2C_1_policy-signin"
         }
       }
     }

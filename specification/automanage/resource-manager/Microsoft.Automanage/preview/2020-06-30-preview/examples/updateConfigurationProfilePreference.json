@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroupName",
+    "configurationProfilePreferenceName": "defaultProfilePreference",
+    "api-version": "2020-06-30-preview",
+    "parameters": {
+      "tags": {
+        "Organization": "Administration"
+      },
+      "properties": {
+        "vmBackup": {
+          "timeZone": "Pacific Standard Time"
+        },
+        "antiMalware": {
+          "enableRealTimeProtection": "True"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Automanage/configurationProfilePreferences/defaultProfilePreference",
+        "name": "defaultProfilePreference",
+        "type": "Microsoft.Automanage/configurationProfilePreferences",
+        "location": "East US",
+        "tags": {
+          "Organization": "Administration"
+        },
+        "properties": {
+          "vmBackup": {
+            "timeZone": "Pacific Standard Time"
+          },
+          "antiMalware": {
+            "enableRealTimeProtection": "True"
+          }
+        }
+      }
+    }
+  }
+}

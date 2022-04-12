@@ -1,0 +1,30 @@
+{
+  "operationId": "StartApplicationUpgrade",
+  "description": "This example shows how to start upgrading an application in a Service Fabric cluster.",
+  "parameters": {
+    "api-version": "6.0",
+    "applicationId": "samples~CalculatorApp",
+    "ApplicationUpgradeDescription": {
+      "Name": "fabric:/samples/CalculatorApp",
+      "TargetApplicationTypeVersion": "2.0",
+      "Parameters": [
+        {
+          "Key": "CalculatorAppParameter1",
+          "Value": "314"
+        },
+        {
+          "Key": "CalculatorAppParameter2",
+          "Value": "271"
+        }
+      ],
+      "UpgradeKind": "Rolling",
+      "RollingUpgradeMode": "Monitored",
+      "MonitoringPolicy": {
+        "FailureAction": "Rollback"
+      }
+    }
+  },
+  "responses": {
+    "200": {}
+  }
+}

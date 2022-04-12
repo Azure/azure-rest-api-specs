@@ -4,11 +4,10 @@
 
 Configuration for generating Anomaly Detector SDK.
 
-The current release is `release_1_0`.
+The current release is `release_1_1_preview.2`.
 
 ``` yaml
-
-tag: release_1_0
+tag: release_1_1_preview.2
 add-credentials: true
 openapi-type: data-plane
 ```
@@ -19,7 +18,35 @@ openapi-type: data-plane
 These settings apply only when `--tag=release_1_0` is specified on the command line.
 
 ``` yaml $(tag) == 'release_1_0'
-input-file: preview/v1.0/AnomalyDetector.json
+input-file: stable/v1.0/AnomalyDetector.json
+```
+
+### Release 1.1-preview
+These settings apply only when `--tag=release_1_1_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_1_1_preview'
+input-file: 
+  - preview/v1.1-preview/AnomalyDetector.json
+  - preview/v1.1-preview/MultivariateAnomalyDetector.json
+```
+
+### Release 1.1-preview.1
+These settings apply only when `--tag=release_1_1_preview.1` is specified on the command line.
+
+``` yaml $(tag) == 'release_1_1_preview.1'
+input-file: 
+  - preview/v1.1-preview.1/AnomalyDetector.json
+  - preview/v1.1-preview.1/MultivariateAnomalyDetector.json
+```
+
+### Release 1.1-preview.2
+These settings apply only when `--tag=release_1_1_preview.2` is specified on the command line.
+
+```yaml $(tag) == 'release_1_1_preview.2'
+input-file:
+  - preview/v1.1-preview.2/AnomalyDetector.json
+  - preview/v1.1-preview.2/MultivariateAnomalyDetector.json
+  - preview/v1.1-preview.2/RootCauseAnalysis.json
 ```
 
 ## Swagger to SDK
@@ -30,6 +57,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -42,14 +70,13 @@ swagger-to-sdk:
 
 These settings apply only when `--csharp` is specified on the command line.
 
-``` yaml $(csharp)
-csharp:
-  sync-methods: None
-  license-header: MICROSOFT_MIT_NO_VERSION
-  azure-arm: false
-  namespace: Microsoft.Azure.CognitiveServices.AnomalyDetector
-  output-folder: $(csharp-sdks-folder)/cognitiveservices/AnomalyDetector/src/Generated
-  clear-output-folder: true
+```yaml $(csharp)
+sync-methods: None
+license-header: MICROSOFT_MIT_NO_VERSION
+azure-arm: false
+namespace: Microsoft.Azure.CognitiveServices.AnomalyDetector
+output-folder: $(csharp-sdks-folder)/cognitiveservices/AnomalyDetector/src/Generated
+clear-output-folder: true
 ```
 
 ## Python
@@ -65,15 +92,15 @@ See configuration in [readme.go.md](./readme.go.md)
 These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
-``` yaml $(java)
-java:
-  azure-arm: true
-  namespace: com.microsoft.azure.cognitiveservices.anomalydetector
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/anomalydetector
-  with-optional-parameters: true
-  with-single-async-method: true
+```yaml $(java)
+azure-arm: true
+namespace: com.microsoft.azure.cognitiveservices.anomalydetector
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/anomalydetector
+with-optional-parameters: true
+with-single-async-method: true
+regenerate-manager: true
 ```
 
 ## Multi-API/Profile support for AutoRest v3 generators 
@@ -88,8 +115,12 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/preview/v1.0/AnomalyDetector.json
-
+  - $(this-folder)/stable/v1.0/AnomalyDetector.json
+  - $(this-folder)/preview/v1.1-preview/MultivariateAnomalyDetector.json
+  - $(this-folder)/preview/v1.1-preview.1/MultivariateAnomalyDetector.json
+  - $(this-folder)/preview/v1.1-preview.2/AnomalyDetector.json
+  - $(this-folder)/preview/v1.1-preview.2/MultivariateAnomalyDetector.json
+  - $(this-folder)/preview/v1.1-preview.2/RootCauseAnalysis.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
@@ -99,4 +130,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-

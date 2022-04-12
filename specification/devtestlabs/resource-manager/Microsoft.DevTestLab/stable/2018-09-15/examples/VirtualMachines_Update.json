@@ -1,15 +1,11 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "myResourceGroup",
-    "labName": "{devtestlab-name}",
-    "name": "{virtualmachine-name}",
     "api-version": "2018-09-15",
-    "labVirtualMachine": {
-      "properties": {
-        "notes": "Updated notes"
-      }
-    }
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "resourceGroupName",
+    "labName": "{labName}",
+    "name": "{vmName}",
+    "labVirtualMachine": {}
   },
   "responses": {
     "200": {
@@ -20,12 +16,12 @@
           "createdByUserId": "",
           "createdByUser": "",
           "createdDate": "2018-10-01T16:53:02.4830866-07:00",
-          "computeId": "/subscriptions/{subscription-id}/resourceGroups/{devtestlab-name}-{virtualmachine-name}-{random-suffix}/providers/Microsoft.Compute/virtualMachines/{virtualmachine-name}",
+          "computeId": "/subscriptions/{subscriptionId}/resourceGroups/{labName}-{vmName}-{randomSuffix}/providers/Microsoft.Compute/virtualMachines/{vmName}",
           "osType": "Linux",
           "size": "Standard_A2_v2",
-          "userName": "{user-name}",
-          "labSubnetName": "{virtualnetwork-name}Subnet",
-          "labVirtualNetworkId": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/microsoft.devtestlab/labs/{devtestlab-name}/virtualnetworks/{virtualnetwork-name}",
+          "userName": "{userName}",
+          "labSubnetName": "{virtualNetworkName}Subnet",
+          "labVirtualNetworkId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualnetworks/{virtualNetworkName}",
           "disallowPublicIpAddress": true,
           "artifactDeploymentStatus": {
             "artifactsApplied": 0,
@@ -44,14 +40,14 @@
           "virtualMachineCreationSource": "FromGalleryImage",
           "dataDiskParameters": [],
           "provisioningState": "Succeeded",
-          "uniqueIdentifier": "{unique-identifier}"
+          "uniqueIdentifier": "{uniqueIdentifier}"
         },
-        "id": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/microsoft.devtestlab/labs/{devtestlab-name}/virtualmachines/{virtualmachine-name}",
-        "name": "{virtualmachine-name}",
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualmachines/{vmName}",
+        "name": "{vmName}",
         "type": "Microsoft.DevTestLab/labs/virtualMachines",
-        "location": "{azure-location}",
+        "location": "{location}",
         "tags": {
-          "MyTag": "MyValue"
+          "tagName1": "tagValue1"
         }
       }
     }

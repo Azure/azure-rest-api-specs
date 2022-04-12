@@ -34,9 +34,323 @@ These are the global settings for the ContainerServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-08
+tag: package-2022-02
 ```
 
+
+### Tag: package-2022-02
+
+These settings apply only when `--tag=package-2022-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-02'
+input-file:
+  - Microsoft.ContainerService/stable/2022-02-01/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
+```
+
+### Tag: package-preview-2022-02
+
+These settings apply only when `--tag=package-preview-2022-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-02'
+input-file:
+  - Microsoft.ContainerService/preview/2022-02-02-preview/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
+```
+
+### Tag: package-2022-01
+
+These settings apply only when `--tag=package-2022-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-01'
+input-file:
+  - Microsoft.ContainerService/stable/2022-01-01/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
+```
+
+### Tag: package-preview-2022-01
+
+These settings apply only when `--tag=package-preview-2022-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-01'
+input-file:
+  - Microsoft.ContainerService/preview/2022-01-02-preview/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
+```
+
+### Tag: package-preview-2021-11
+
+These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-11'
+input-file:
+  - Microsoft.ContainerService/preview/2021-11-01-preview/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
+```
+
+### Tag: package-2021-10
+
+These settings apply only when `--tag=package-2021-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-10'
+input-file:
+  - Microsoft.ContainerService/stable/2021-10-01/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
+```
+
+### Tag: package-2021-09
+
+These settings apply only when `--tag=package-2021-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-09'
+input-file:
+  - Microsoft.ContainerService/stable/2021-09-01/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
+```
+
+### Tag: package-2021-08
+
+These settings apply only when `--tag=package-2021-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-08'
+input-file:
+  - Microsoft.ContainerService/stable/2021-08-01/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
+```
+
+### Tag: package-2021-07
+
+These settings apply only when `--tag=package-2021-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-07'
+input-file:
+  - Microsoft.ContainerService/stable/2021-07-01/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
+```
+
+### Tag: package-2021-05
+
+These settings apply only when `--tag=package-2021-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-05'
+input-file:
+  - Microsoft.ContainerService/stable/2021-05-01/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
+```
+
+### Tag: package-2021-03
+
+These settings apply only when `--tag=package-2021-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03'
+input-file:
+  - Microsoft.ContainerService/stable/2021-03-01/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
+```
+
+### Tag: package-2021-02
+
+These settings apply only when `--tag=package-2021-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-02'
+input-file:
+  - Microsoft.ContainerService/stable/2021-02-01/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
+```
+
+### Tag: package-2020-12
+
+These settings apply only when `--tag=package-2020-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-12'
+input-file:
+  - Microsoft.ContainerService/stable/2020-12-01/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
+```
+
+### Tag: package-2020-11
+
+These settings apply only when `--tag=package-2020-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-11'
+input-file:
+  - Microsoft.ContainerService/stable/2020-11-01/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
+```
+
+### Tag: package-2020-09
+
+These settings apply only when `--tag=package-2020-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-09'
+input-file:
+  - Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/stable/2019-08-01/location.json
+  - Microsoft.ContainerService/stable/2020-09-01/managedClusters.json
+```
+
+### Tag: package-2020-07
+
+These settings apply only when `--tag=package-2020-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-07'
+input-file:
+  - Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/stable/2019-08-01/location.json
+  - Microsoft.ContainerService/stable/2020-07-01/managedClusters.json
+```
+
+### Tag: package-2020-06
+
+These settings apply only when `--tag=package-2020-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-06'
+input-file:
+  - Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/stable/2019-08-01/location.json
+  - Microsoft.ContainerService/stable/2020-06-01/managedClusters.json
+```
+
+### Tag: package-2020-04
+
+These settings apply only when `--tag=package-2020-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-04'
+input-file:
+  - Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/stable/2019-08-01/location.json
+  - Microsoft.ContainerService/stable/2020-04-01/managedClusters.json
+```
+
+### Tag: package-2020-03
+
+These settings apply only when `--tag=package-2020-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-03'
+input-file:
+  - Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/stable/2019-08-01/location.json
+  - Microsoft.ContainerService/stable/2020-03-01/managedClusters.json
+```
+
+### Tag: package-2020-02
+
+These settings apply only when `--tag=package-2020-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-02'
+input-file:
+  - Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/stable/2019-08-01/location.json
+  - Microsoft.ContainerService/stable/2020-02-01/managedClusters.json
+```
+
+### Tag: package-2020-01
+
+These settings apply only when `--tag=package-2020-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-01'
+input-file:
+  - Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/stable/2019-08-01/location.json
+  - Microsoft.ContainerService/stable/2020-01-01/managedClusters.json
+```
+
+### Tag: package-2019-11
+
+These settings apply only when `--tag=package-2019-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-11'
+input-file:
+  - Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/stable/2019-08-01/location.json
+  - Microsoft.ContainerService/stable/2019-11-01/managedClusters.json
+```
+
+### Tag: package-2019-10-27-preview
+
+These settings apply only when `--tag=package-2019-10-27-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-10-27-preview'
+input-file:
+  - Microsoft.ContainerService/preview/2019-10-27-preview/openShiftManagedClusters.json
+  - Microsoft.ContainerService/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/stable/2019-08-01/location.json
+  - Microsoft.ContainerService/stable/2020-01-01/managedClusters.json
+```
+
+### Tag: package-2019-09-30-preview
+
+These settings apply only when `--tag=package-2019-09-30-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-09-30-preview'
+input-file:
+  - Microsoft.ContainerService/preview/2019-09-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/stable/2019-08-01/managedClusters.json
+  - Microsoft.ContainerService/stable/2019-08-01/location.json
+```
+
+### Tag: package-2019-10
+
+These settings apply only when `--tag=package-2019-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-10'
+input-file:
+  - Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/stable/2019-08-01/location.json
+  - Microsoft.ContainerService/stable/2019-10-01/managedClusters.json
+```
 
 ### Tag: package-2019-08
 
@@ -49,6 +363,7 @@ input-file:
   - Microsoft.ContainerService/stable/2019-08-01/location.json
   - Microsoft.ContainerService/stable/2019-08-01/managedClusters.json
 ```
+
 ### Tag: package-2019-06
 
 These settings apply only when `--tag=package-2019-06` is specified on the command line.
@@ -148,6 +463,146 @@ These settings apply only when `--tag=package-2017-07` is specified on the comma
 ``` yaml $(tag) == 'package-2017-07'
 input-file:
 - Microsoft.ContainerService/stable/2017-07-01/containerService.json
+
+```
+
+### Tag: package-2019-09-preview-only
+
+These settings apply only when `--tag=package-2019-09-preview-only` is specified on the command line.
+
+This is a special tag used only by python sdk generation. To avoid introducing breaking changes in compatibility to the
+v2019_09_30_preview namespace of python SDK, DO NOT MODIFY THIS TAG.
+
+``` yaml $(tag) == 'package-2019-09-preview-only'
+input-file:
+- Microsoft.ContainerService/preview/2019-09-30/openShiftManagedClusters.json
+```
+
+### Tag: package-2017-07-only-extended
+
+These settings apply only when `--tag=package-2017-07-only-extended` is specified on the command line.
+
+This is a special tag used only by python sdk generation. To avoid introducing breaking changes in compatibility to the
+v2017_07_01 namespace of python SDK, DO NOT MODIFY THIS TAG.
+
+``` yaml $(tag) == 'package-2017-07-only-extended'
+input-file:
+- Microsoft.ContainerService/stable/2017-07-01/containerService.json
+- Microsoft.ContainerService/stable/2019-04-01/location.json
+```
+
+### Tag: package-2020-09-01-only
+
+These settings apply only when `--tag=package-2020-09-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-09-01-only'
+input-file:
+- Microsoft.ContainerService/stable/2020-09-01/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
+```
+
+### Tag: package-2020-07-01-only
+
+These settings apply only when `--tag=package-2020-07-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-07-01-only'
+input-file:
+- Microsoft.ContainerService/stable/2020-07-01/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
+```
+
+### Tag: package-2020-06-01-only
+
+These settings apply only when `--tag=package-2020-06-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-06-01-only'
+input-file:
+- Microsoft.ContainerService/stable/2020-06-01/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
+```
+
+### Tag: package-2020-04-01-only
+
+These settings apply only when `--tag=package-2020-04-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-04-01-only'
+input-file:
+- Microsoft.ContainerService/stable/2020-04-01/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
+```
+
+### Tag: package-2020-03-01-only
+
+These settings apply only when `--tag=package-2020-03-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-03-01-only'
+input-file:
+- Microsoft.ContainerService/stable/2020-03-01/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
+```
+
+### Tag: package-2020-02-01-only
+
+These settings apply only when `--tag=package-2020-02-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-02-01-only'
+input-file:
+- Microsoft.ContainerService/stable/2020-02-01/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
+```
+
+### Tag: package-2020-01-01-only
+
+These settings apply only when `--tag=package-2020-01-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-01-01-only'
+input-file:
+- Microsoft.ContainerService/stable/2020-01-01/managedClusters.json
+```
+
+### Tag: package-2019-11-01-only
+
+These settings apply only when `--tag=package-2019-11-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-11-01-only'
+input-file:
+- Microsoft.ContainerService/stable/2019-11-01/managedClusters.json
+```
+
+### Tag: package-2019-10-27-preview-only
+
+These settings apply only when `--tag=package-2019-10-27-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-10-27-preview-only'
+input-file:
+- Microsoft.ContainerService/preview/2019-10-27-preview/openShiftManagedClusters.json
+```
+
+### Tag: package-2019-10-01-only
+
+These settings apply only when `--tag=package-2019-10-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-10-01-only'
+input-file:
+- Microsoft.ContainerService/stable/2019-10-01/managedClusters.json
 ```
 
 ### Tag: package-2019-08-01-only
@@ -195,15 +650,6 @@ input-file:
 - Microsoft.ContainerService/stable/2019-02-01/managedClusters.json
 ```
 
-### Tag: package-2018-08-preview-only
-
-These settings apply only when `--tag=package-2018-08-preview-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-08-preview-only'
-input-file:
-- Microsoft.ContainerService/preview/2018-08-01-preview/managedClusters.json
-```
-
 ### Tag: package-2018-09-preview-only
 
 These settings apply only when `--tag=package-2018-09-preview-only` is specified on the command line.
@@ -211,6 +657,15 @@ These settings apply only when `--tag=package-2018-09-preview-only` is specified
 ``` yaml $(tag) == 'package-2018-09-preview-only'
 input-file:
 - Microsoft.ContainerService/preview/2018-09-30-preview/openShiftManagedClusters.json
+```
+
+### Tag: package-2018-08-preview-only
+
+These settings apply only when `--tag=package-2018-08-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-08-preview-only'
+input-file:
+- Microsoft.ContainerService/preview/2018-08-01-preview/managedClusters.json
 ```
 
 ### Tag: package-2018-03-only
@@ -222,18 +677,13 @@ input-file:
 - Microsoft.ContainerService/stable/2018-03-31/managedClusters.json
 ```
 
-### Tag: package-2017-07-only-extended
+### Tag: package-2017-09-only
 
-These settings apply only when `--tag=package-2017-07-only-extended` is specified on the command line.
+These settings apply only when `--tag=package-2017-09-only` is specified on the command line.
 
-This tag is special, since it brings together two API version that belongs
-to the same operation group, since Python does not know how to handle
-multi-api operation group for now.
-
-``` yaml $(tag) == 'package-2017-07-only-extended'
+``` yaml $(tag) == 'package-2017-09-only'
 input-file:
-- Microsoft.ContainerService/stable/2017-07-01/containerService.json
-- Microsoft.ContainerService/stable/2019-04-01/location.json
+- Microsoft.ContainerService/stable/2017-09-30/location.json
 ```
 
 ### Tag: package-2017-08-only
@@ -243,15 +693,6 @@ These settings apply only when `--tag=package-2017-08-only` is specified on the 
 ``` yaml $(tag) == 'package-2017-08-only'
 input-file:
 - Microsoft.ContainerService/stable/2017-08-31/managedClusters.json
-```
-
-### Tag: package-2017-09-only
-
-These settings apply only when `--tag=package-2017-09-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-09-only'
-input-file:
-- Microsoft.ContainerService/stable/2017-09-30/location.json
 ```
 
 ### Tag: package-2017-01-only
@@ -281,6 +722,18 @@ input-file:
 - Microsoft.ContainerService/stable/2016-03-30/containerService.json
 ```
 
+### Tag: profile-hybrid-2020-09-01
+
+These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on the command line.
+Creating this tag to pick proper resources from the hybrid profile.
+
+``` yaml $(tag) == 'profile-hybrid-2020-09-01'
+input-file:
+- Microsoft.ContainerService/stable/2020-11-01/managedClusters.json
+- Microsoft.ContainerService/stable/2019-04-01/location.json
+- Microsoft.ContainerService/stable/2017-07-01/containerService.json
+```
+
 ---
 
 # Code Generation
@@ -292,17 +745,18 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
-    after_scripts:
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-containerservice
+
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_container_service']
+  - repo: azure-resource-manager-schemas
 ```
 
 ## C#
@@ -324,6 +778,10 @@ csharp:
 
 See configuration in [readme.go.md](./readme.go.md)
 
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
@@ -339,44 +797,3 @@ directive:
     from: containerService.json
     reason: ACS service is deprecated so a PATCH endpoint won't be implemented
 ```
-
-## Multi-API/Profile support for AutoRest v3 generators 
-
-AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
-
-This block is updated by an automatic script. Edits may be lost!
-
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
-# include the azure profile definitions from the standard location
-require: $(this-folder)/../../../profiles/readme.md
-
-# all the input files across all versions
-input-file:
-  - $(this-folder)/Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
-  - $(this-folder)/Microsoft.ContainerService/stable/2017-07-01/containerService.json
-  - $(this-folder)/Microsoft.ContainerService/stable/2019-08-01/location.json
-  - $(this-folder)/Microsoft.ContainerService/stable/2019-08-01/managedClusters.json
-  - $(this-folder)/Microsoft.ContainerService/stable/2019-06-01/location.json
-  - $(this-folder)/Microsoft.ContainerService/stable/2019-06-01/managedClusters.json
-  - $(this-folder)/Microsoft.ContainerService/stable/2019-04-01/managedClusters.json
-  - $(this-folder)/Microsoft.ContainerService/stable/2019-04-01/location.json
-  - $(this-folder)/Microsoft.ContainerService/preview/2018-09-30-preview/openShiftManagedClusters.json
-  - $(this-folder)/Microsoft.ContainerService/stable/2019-02-01/managedClusters.json
-  - $(this-folder)/Microsoft.ContainerService/stable/2017-09-30/location.json
-  - $(this-folder)/Microsoft.ContainerService/preview/2018-08-01-preview/managedClusters.json
-  - $(this-folder)/Microsoft.ContainerService/stable/2018-03-31/managedClusters.json
-  - $(this-folder)/Microsoft.ContainerService/stable/2017-08-31/managedClusters.json
-  - $(this-folder)/Microsoft.ContainerService/stable/2017-01-31/containerService.json
-  - $(this-folder)/Microsoft.ContainerService/stable/2016-09-30/containerService.json
-  - $(this-folder)/Microsoft.ContainerService/stable/2016-03-30/containerService.json
-
-```
-
-If there are files that should not be in the `all-api-versions` set, 
-uncomment the  `exclude-file` section below and add the file paths.
-
-``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
-```
-

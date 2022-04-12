@@ -43,10 +43,10 @@
         "description": "Gets service administrator, account administrator, and co-administrators for the subscription.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -55,13 +55,19 @@
             "schema": {
               "$ref": "#/definitions/ClassicAdministratorListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "GetConfigurations": {
+          "List classic administrators": {
             "$ref": "./examples/GetClassicAdministrators.json"
           }
         }
@@ -80,6 +86,7 @@
           "description": "The role of the administrator."
         }
       },
+      "type": "object",
       "description": "Classic Administrator properties."
     },
     "ClassicAdministrator": {
@@ -102,6 +109,7 @@
           "description": "Properties for the classic administrator."
         }
       },
+      "type": "object",
       "description": "Classic Administrators"
     },
     "ClassicAdministratorListResult": {
@@ -118,23 +126,9 @@
           "description": "The URL to use for getting the next set of results."
         }
       },
+      "type": "object",
       "description": "ClassicAdministrator list result information."
     }
   },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The ID of the target subscription."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to use for this operation."
-    }
-  }
+  "parameters": {}
 }

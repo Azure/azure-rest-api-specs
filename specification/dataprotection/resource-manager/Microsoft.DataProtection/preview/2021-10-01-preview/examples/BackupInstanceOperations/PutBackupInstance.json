@@ -1,0 +1,162 @@
+{
+  "parameters": {
+    "subscriptionId": "04cf684a-d41f-4550-9f70-7708a3a2283b",
+    "resourceGroupName": "000pikumar",
+    "vaultName": "PratikPrivatePreviewVault1",
+    "api-version": "2021-10-01-preview",
+    "backupInstanceName": "testInstance1",
+    "parameters": {
+      "properties": {
+        "objectType": "BackupInstance",
+        "friendlyName": "harshitbi2",
+        "dataSourceSetInfo": {
+          "objectType": "DatasourceSet",
+          "resourceID": "/subscriptions/f75d8d8b-6735-4697-82e1-1a7a3ff0d5d4/resourceGroups/viveksipgtest/providers/Microsoft.DBforPostgreSQL/servers/viveksipgtest",
+          "resourceName": "viveksipgtest",
+          "resourceType": "Microsoft.DBforPostgreSQL/servers",
+          "resourceUri": "",
+          "resourceLocation": "",
+          "datasourceType": "OssDB"
+        },
+        "dataSourceInfo": {
+          "objectType": "Datasource",
+          "resourceID": "/subscriptions/f75d8d8b-6735-4697-82e1-1a7a3ff0d5d4/resourceGroups/viveksipgtest/providers/Microsoft.DBforPostgreSQL/servers/viveksipgtest/databases/testdb",
+          "resourceName": "testdb",
+          "resourceType": "Microsoft.DBforPostgreSQL/servers/databases",
+          "resourceUri": "",
+          "resourceLocation": "",
+          "datasourceType": "OssDB",
+          "resourceProperties": {
+            "instanceUuid": "502fda25-edf2-4e11-5211-4e96cf9e1145",
+            "objectType": "VmwareVMProperties"
+          }
+        },
+        "datasourceAuthCredentials": {
+          "secretStoreResource": {
+            "uri": "https://samplevault.vault.azure.net/secrets/credentials",
+            "secretStoreType": "AzureKeyVault"
+          },
+          "objectType": "SecretStoreBasedAuthCredentials"
+        },
+        "policyInfo": {
+          "policyId": "/subscriptions/04cf684a-d41f-4550-9f70-7708a3a2283b/resourceGroups/000pikumar/providers/Microsoft.DataProtection/Backupvaults/PratikPrivatePreviewVault1/backupPolicies/PratikPolicy1",
+          "policyParameters": {
+            "dataStoreParametersList": [
+              {
+                "objectType": "AzureOperationalStoreParameters",
+                "dataStoreType": "OperationalStore",
+                "resourceGroupId": "/subscriptions/f75d8d8b-6735-4697-82e1-1a7a3ff0d5d4/resourceGroups/viveksipgtest"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/04cf684a-d41f-4550-9f70-7708a3a2283b/providers/Microsoft.DataProtection/locations/westus/operationStatus/ZTA4YjQ0ZGYtYmNkNS00YTk1LWFjZTMtOTc1MjNmZWIxYWZlO2Y1ODg1MzA3LWJkNjItNDQ2OC05ZjZlLTJkMGM2NjNiNmJmNg==?api-version=2021-07-01",
+        "Retry-After": "60"
+      },
+      "body": {
+        "id": "/subscriptions/04cf684a-d41f-4550-9f70-7708a3a2283b/resourceGroups/000pikumar/providers/Microsoft.DataProtection/backupVaults/PratikPrivatePreviewVault1/backupInstances/harshitbi2",
+        "name": "harshitbi2",
+        "type": "Microsoft.DataProtection/backupVaults/backupInstances",
+        "properties": {
+          "friendlyName": "harshitbi2",
+          "dataSourceInfo": {
+            "resourceID": "/subscriptions/f75d8d8b-6735-4697-82e1-1a7a3ff0d5d4/resourceGroups/viveksipgtest/providers/Microsoft.DBforPostgreSQL/servers/viveksipgtest/databases/testdb",
+            "resourceUri": "",
+            "datasourceType": "OssDB",
+            "resourceName": "testdb",
+            "resourceType": "OssDB",
+            "resourceLocation": "",
+            "objectType": "Datasource",
+            "resourceProperties": {
+              "instanceUuid": "502fda25-edf2-4e11-5211-4e96cf9e1145",
+              "objectType": "VmwareVMProperties"
+            }
+          },
+          "dataSourceSetInfo": {
+            "resourceID": "/subscriptions/f75d8d8b-6735-4697-82e1-1a7a3ff0d5d4/resourceGroups/viveksipgtest/providers/Microsoft.DBforPostgreSQL/servers/viveksipgtest",
+            "resourceUri": "",
+            "datasourceType": "OssDB",
+            "resourceName": "viveksipgtest",
+            "resourceType": "OssDB",
+            "resourceLocation": "",
+            "objectType": "DatasourceSet"
+          },
+          "policyInfo": {
+            "policyId": "/subscriptions/04cf684a-d41f-4550-9f70-7708a3a2283b/resourceGroups/000pikumar/providers/Microsoft.DataProtection/backupVaults/PratikPrivatePreviewVault1/backupPolicies/PratikPolicy1",
+            "policyVersion": "3.2",
+            "policyParameters": {
+              "dataStoreParametersList": [
+                {
+                  "objectType": "AzureOperationalStoreParameters",
+                  "dataStoreType": "OperationalStore",
+                  "resourceGroupId": "/subscriptions/f75d8d8b-6735-4697-82e1-1a7a3ff0d5d4/resourceGroups/viveksipgtest"
+                }
+              ]
+            }
+          },
+          "protectionStatus": {
+            "status": "NotProtected"
+          },
+          "provisioningState": "Provisioning",
+          "objectType": "BackupInstance"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/04cf684a-d41f-4550-9f70-7708a3a2283b/resourceGroups/000pikumar/providers/Microsoft.DataProtection/backupVaults/PratikPrivatePreviewVault1/backupInstances/harshitbi2",
+        "name": "harshitbi2",
+        "type": "Microsoft.DataProtection/backupVaults/backupInstances",
+        "properties": {
+          "friendlyName": "harshitbi2",
+          "dataSourceInfo": {
+            "resourceID": "/subscriptions/f75d8d8b-6735-4697-82e1-1a7a3ff0d5d4/resourceGroups/viveksipgtest/providers/Microsoft.DBforPostgreSQL/servers/viveksipgtest/databases/testdb",
+            "resourceUri": "",
+            "datasourceType": "OssDB",
+            "resourceName": "testdb",
+            "resourceType": "OssDB",
+            "resourceLocation": "",
+            "objectType": "Datasource",
+            "resourceProperties": {
+              "instanceUuid": "502fda25-edf2-4e11-5211-4e96cf9e1145",
+              "objectType": "VmwareVMProperties"
+            }
+          },
+          "dataSourceSetInfo": {
+            "resourceID": "/subscriptions/f75d8d8b-6735-4697-82e1-1a7a3ff0d5d4/resourceGroups/viveksipgtest/providers/Microsoft.DBforPostgreSQL/servers/viveksipgtest",
+            "resourceUri": "",
+            "datasourceType": "OssDB",
+            "resourceName": "viveksipgtest",
+            "resourceType": "OssDB",
+            "resourceLocation": "",
+            "objectType": "DatasourceSet"
+          },
+          "policyInfo": {
+            "policyId": "/subscriptions/04cf684a-d41f-4550-9f70-7708a3a2283b/resourceGroups/000pikumar/providers/Microsoft.DataProtection/backupVaults/PratikPrivatePreviewVault1/backupPolicies/PratikPolicy1",
+            "policyVersion": "3.2",
+            "policyParameters": {
+              "dataStoreParametersList": [
+                {
+                  "objectType": "AzureOperationalStoreParameters",
+                  "dataStoreType": "OperationalStore",
+                  "resourceGroupId": "/subscriptions/f75d8d8b-6735-4697-82e1-1a7a3ff0d5d4/resourceGroups/viveksipgtest"
+                }
+              ]
+            }
+          },
+          "protectionStatus": {
+            "status": "NotProtected"
+          },
+          "provisioningState": "Provisioned",
+          "objectType": "BackupInstance"
+        }
+      }
+    }
+  }
+}

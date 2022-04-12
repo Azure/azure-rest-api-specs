@@ -1,0 +1,107 @@
+{
+  "parameters": {
+    "api-version": "2019-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "script-rg",
+    "scriptName": "MyDeploymentScript",
+    "deploymentScript": {
+      "kind": "AzurePowerShell",
+      "location": "westus",
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scriptRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uai": {}
+        }
+      },
+      "properties": {
+        "azPowerShellVersion": "1.7.0",
+        "scriptContent": "Param([string]$Location,[string]$Name) $deploymentScriptOutputs['test'] = 'value' Get-AzResourceGroup -Location $Location -Name $Name",
+        "arguments": "-Location 'westus' -Name \"*rg2\"",
+        "supportingScriptUris": [
+          "https://uri1.to.supporting.script",
+          "https://uri2.to.supporting.script"
+        ],
+        "retentionInterval": "PT7D",
+        "timeout": "PT1H",
+        "cleanupPreference": "Always"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "kind": "AzurePowerShell",
+        "location": "westus",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scriptRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uai": {}
+          }
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2020-02-01T01:01:01.1075056Z"
+        },
+        "properties": {
+          "provisioningState": "Creating",
+          "azPowerShellVersion": "1.7.0",
+          "scriptContent": "Param([string]$Location,[string]$Name) $deploymentScriptOutputs['test'] = 'value' Get-AzResourceGroup -Location $Location -Name $Name",
+          "arguments": "-Location 'westus' -Name \"*rg2\"",
+          "supportingScriptUris": [
+            "https://uri1.to.supporting.script",
+            "https://uri2.to.supporting.script"
+          ],
+          "retentionInterval": "P7D",
+          "timeout": "PT1H",
+          "cleanupPreference": "Always",
+          "status": {
+            "containerInstanceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scriptRG/providers/Microsoft.ContainerInstance/containerGroups/scriptContainer",
+            "storageAccountId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scriptRG/providers/Microsoft.Storage/storageAccounts/scriptStorage",
+            "startTime": "2018-11-13T15:19:45-08:00",
+            "endTime": "2018-11-13T15:19:45-08:00",
+            "expirationTime": "2018-11-13T15:19:45-08:00"
+          }
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "kind": "AzurePowerShell",
+        "location": "westus",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scriptRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uai": {}
+          }
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "azPowerShellVersion": "1.7.0",
+          "scriptContent": "Param([string]$Location,[string]$Name) $deploymentScriptOutputs['test'] = 'value' Get-AzResourceGroup -Location $Location -Name $Name",
+          "arguments": "-Location 'westus' -Name \"*rg2\"",
+          "supportingScriptUris": [
+            "https://uri1.to.supporting.script",
+            "https://uri2.to.supporting.script"
+          ],
+          "retentionInterval": "P7D",
+          "timeout": "PT1H",
+          "cleanupPreference": "Always",
+          "status": {
+            "containerInstanceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scriptRG/providers/Microsoft.ContainerInstance/containerGroups/scriptContainer",
+            "storageAccountId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scriptRG/providers/Microsoft.Storage/storageAccounts/scriptStorage",
+            "startTime": "2018-11-13T15:19:45-08:00",
+            "endTime": "2018-11-13T15:19:45-08:00",
+            "expirationTime": "2018-11-13T15:19:45-08:00"
+          },
+          "outputs": {
+            "output1": "value1"
+          }
+        }
+      }
+    }
+  }
+}

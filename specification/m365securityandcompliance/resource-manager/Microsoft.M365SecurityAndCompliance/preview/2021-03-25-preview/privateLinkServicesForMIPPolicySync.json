@@ -1,0 +1,664 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-03-25-preview",
+    "title": "M365SecurityAndComplianceAPIs",
+    "description": "Use this API to manage Microsoft M365SecurityAndCompliance services in your Azure subscription."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.M365SecurityAndCompliance/privateLinkServicesForMIPPolicySync/{resourceName}": {
+      "get": {
+        "tags": [
+          "Resource"
+        ],
+        "description": "Get the metadata of a privateLinkServicesForMIPPolicySync resource.",
+        "operationId": "privateLinkServicesForMIPPolicySync_Get",
+        "x-ms-examples": {
+          "Get metadata": {
+            "$ref": "./examples/MIPPolicySyncServiceGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./common-types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/resourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains all of the properties of the privateLinkServicesForMIPPolicySync instance.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkServicesForMIPPolicySyncDescription"
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "./common-types.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "Resource"
+        ],
+        "description": "Create or update the metadata of a privateLinkServicesForMIPPolicySync instance.",
+        "operationId": "privateLinkServicesForMIPPolicySync_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create or Update a service with all parameters": {
+            "$ref": "./examples/MIPPolicySyncServiceCreate.json"
+          },
+          "Create or Update a service with minimum parameters": {
+            "$ref": "./examples/MIPPolicySyncServiceCreateMinimum.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "./common-types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/resourceName"
+          },
+          {
+            "name": "PrivateLinkServicesForMIPPolicySyncDescription",
+            "in": "body",
+            "description": "The service instance metadata.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkServicesForMIPPolicySyncDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Updated - Put request accepted and an existing resource is being updated; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkServicesForMIPPolicySyncDescription"
+            }
+          },
+          "201": {
+            "description": "Created - Put request accepted and a new resource was created; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkServicesForMIPPolicySyncDescription"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "./common-types.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "Resource"
+        ],
+        "description": "Update the metadata of a privateLinkServicesForMIPPolicySync instance.",
+        "operationId": "privateLinkServicesForMIPPolicySync_Update",
+        "x-ms-examples": {
+          "Patch service": {
+            "$ref": "./examples/MIPPolicySyncServicePatch.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "./common-types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/resourceName"
+          },
+          {
+            "name": "servicePatchDescription",
+            "in": "body",
+            "description": "The service instance metadata and security metadata.",
+            "required": true,
+            "schema": {
+              "$ref": "./common-types.json#/definitions/ServicesPatchDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The resource was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkServicesForMIPPolicySyncDescription"
+            }
+          },
+          "202": {
+            "description": "The resource was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkServicesForMIPPolicySyncDescription"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "./common-types.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "Resource"
+        ],
+        "description": "Delete a service instance.",
+        "operationId": "privateLinkServicesForMIPPolicySync_Delete",
+        "x-ms-examples": {
+          "Delete service": {
+            "$ref": "./examples/MIPPolicySyncServiceDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "./common-types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/resourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Accepted - Delete request accepted; the operation will complete."
+          },
+          "202": {
+            "description": "Accepted - Delete request accepted; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The resource does not exist."
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "./common-types.json#/definitions/ErrorDetails"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.M365SecurityAndCompliance/privateLinkServicesForMIPPolicySync": {
+      "get": {
+        "tags": [
+          "Collection"
+        ],
+        "description": "Get all the privateLinkServicesForMIPPolicySync instances in a subscription.",
+        "operationId": "privateLinkServicesForMIPPolicySync_List",
+        "x-ms-examples": {
+          "List all services in subscription": {
+            "$ref": "./examples/MIPPolicySyncServiceList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "./common-types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the privateLinkServicesForMIPPolicySync instances in the subscription.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkServicesForMIPPolicySyncDescriptionListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "./common-types.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.M365SecurityAndCompliance/privateLinkServicesForMIPPolicySync": {
+      "get": {
+        "tags": [
+          "Collection"
+        ],
+        "description": "Get all the service instances in a resource group.",
+        "operationId": "privateLinkServicesForMIPPolicySync_ListByResourceGroup",
+        "x-ms-examples": {
+          "List all services in resource group": {
+            "$ref": "./examples/MIPPolicySyncServiceListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "./common-types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/resourceGroupName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the privateLinkServicesForMIPPolicySync instances in the resource group.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkServicesForMIPPolicySyncDescriptionListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "./common-types.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.M365SecurityAndCompliance/privateLinkServicesForMIPPolicySync/{resourceName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnectionsForMIPPolicySync_ListByService",
+        "description": "Lists all private endpoint connections for a service.",
+        "parameters": [
+          {
+            "$ref": "./common-types.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/resourceName"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "./common-types.json#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "./common-types.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnection_List": {
+            "$ref": "./examples/MIPPolicySyncServiceListPrivateEndpointConnections.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.M365SecurityAndCompliance/privateLinkServicesForMIPPolicySync/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnectionsForMIPPolicySync_Get",
+        "description": "Gets the specified private endpoint connection associated with the service.",
+        "parameters": [
+          {
+            "$ref": "./common-types.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/resourceName"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "./common-types.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "./common-types.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnection_GetConnection": {
+            "$ref": "./examples/MIPPolicySyncServiceGetPrivateEndpointConnection.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnectionsForMIPPolicySync_CreateOrUpdate",
+        "description": "Update the state of the specified private endpoint connection associated with the service.",
+        "parameters": [
+          {
+            "$ref": "./common-types.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/resourceName"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/PrivateEndpointConnectionName"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common-types.json#/definitions/PrivateEndpointConnection"
+            },
+            "description": "The private endpoint connection properties."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "./common-types.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "201": {
+            "description": "Created. The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "./common-types.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "./common-types.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnection_CreateOrUpdate": {
+            "$ref": "./examples/MIPPolicySyncServiceCreatePrivateEndpointConnection.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Deletes a private endpoint connection.",
+        "operationId": "PrivateEndpointConnectionsForMIPPolicySync_Delete",
+        "parameters": [
+          {
+            "$ref": "./common-types.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/resourceName"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "No Content - The private endpoint connection does not exist."
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "./common-types.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Delete": {
+            "$ref": "./examples/MIPPolicySyncServiceDeletePrivateEndpointConnection.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.M365SecurityAndCompliance/privateLinkServicesForMIPPolicySync/{resourceName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "operationId": "PrivateLinkResourcesForMIPPolicySync_ListByService",
+        "description": "Gets the private link resources that need to be created for a service.",
+        "parameters": [
+          {
+            "$ref": "./common-types.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/resourceName"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "./common-types.json#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "./common-types.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_ListGroupIds": {
+            "$ref": "./examples/MIPPolicySyncPrivateLinkResourcesListByService.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.M365SecurityAndCompliance/privateLinkServicesForMIPPolicySync/{resourceName}/privateLinkResources/{groupName}": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "operationId": "PrivateLinkResourcesForMIPPolicySync_Get",
+        "description": "Gets a private link resource that need to be created for a service.",
+        "parameters": [
+          {
+            "$ref": "./common-types.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/resourceName"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "The name of the private link resource group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "./common-types.json#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "./common-types.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_Get": {
+            "$ref": "./examples/MIPPolicySyncPrivateLinkResourceGet.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PrivateLinkServicesForMIPPolicySyncDescription": {
+      "description": "The description of the service.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "description": "The common properties of a service.",
+          "$ref": "./common-types.json#/definitions/ServicesProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common-types.json#/definitions/ServicesResource"
+        }
+      ]
+    },
+    "PrivateLinkServicesForMIPPolicySyncDescriptionListResult": {
+      "description": "A list of service description objects with a next link.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of service description objects.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "A list of service description objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkServicesForMIPPolicySyncDescription"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

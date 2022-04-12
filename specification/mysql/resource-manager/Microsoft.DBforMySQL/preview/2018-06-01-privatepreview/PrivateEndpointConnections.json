@@ -1,0 +1,465 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-06-01-privatepreview",
+    "title": "MySQLManagementClient",
+    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Gets a private endpoint connection.",
+        "operationId": "PrivateEndpointConnections_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved a specified private endpoint connection.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets private endpoint connection.": {
+            "$ref": "./examples/PrivateEndpointConnectionGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Approve or reject a private endpoint connection with a given name.",
+        "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully approved or rejected private endpoint connection.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Approve or reject a private endpoint connection with a given name.": {
+            "$ref": "./examples/PrivateEndpointConnectionUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Deletes a private endpoint connection with a given name.",
+        "operationId": "PrivateEndpointConnections_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted private endpoint connection."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Private endpoint connection does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Deletes a private endpoint connection with a given name.": {
+            "$ref": "./examples/PrivateEndpointConnectionDelete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_UpdateTags",
+        "summary": "Updates tags on private endpoint connection.",
+        "description": "Updates private endpoint connection with the specified tags.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to the Update private endpoint connection Tags operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update private endpoint connection Tags": {
+            "$ref": "./examples/PrivateEndpointConnectionUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Gets all private endpoint connections on a server.",
+        "operationId": "PrivateEndpointConnections_ListByServer",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved private endpoint connections.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets list of private endpoint connections on a server.": {
+            "$ref": "./examples/PrivateEndpointConnectionList.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PrivateEndpointConnectionProperties": {
+      "description": "Properties of a private endpoint connection.",
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpointProperty",
+          "description": "Private endpoint which the connection belongs to."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
+          "description": "Connection state of the private endpoint connection."
+        },
+        "provisioningState": {
+          "description": "State of the private endpoint connection.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointProperty": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource id of the private endpoint.",
+          "type": "string"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "PrivateLinkServiceConnectionStateProperty": {
+      "required": [
+        "status",
+        "description"
+      ],
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The private link service connection status.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The private link service connection description.",
+          "type": "string"
+        },
+        "actionsRequired": {
+          "description": "The actions required for private link service connection.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "description": "A private endpoint connection",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionListResult": {
+      "description": "A list of private endpoint connections.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "description": "An error response from the Batch service."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the Batch service."
+    },
+    "TagsObject": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "description": "Tags object for patch operations."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription ID that identifies an Azure subscription.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for the request.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

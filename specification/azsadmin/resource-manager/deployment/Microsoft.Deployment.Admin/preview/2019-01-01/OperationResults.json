@@ -1,0 +1,150 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-01-01",
+    "title": "DeploymentAdminClient",
+    "description": "Deployment Admin Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations/{location}/operationresults/{operationResultId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get the operation details.": {
+            "$ref": "./examples/OperationResults/Get.json"
+          }
+        },
+        "description": "Retrieves the specific operation results.",
+        "tags": [
+          "OperationResults"
+        ],
+        "operationId": "OperationResults_Get",
+        "parameters": [
+          {
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationResultIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationResult"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OperationResult": {
+      "description": "Operation Result Entity.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "description": "ID of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "readOnly": true,
+          "description": "Name of the resource.",
+          "type": "string"
+        },
+        "status": {
+          "description": "status of the Operation result.",
+          "$ref": "#/definitions/Status"
+        },
+        "startTime": {
+          "description": "The deployment start time",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "description": "The deployment end time",
+          "type": "string",
+          "format": "date-time"
+        },
+        "percentComplete": {
+          "type": "number",
+          "format": "double",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Percentage completed."
+        }
+      }
+    },
+    "Status": {
+      "description": "Specifies the state of the Operation result.",
+      "type": "string",
+      "enum": [
+        "Bootstrapping",
+        "Creating",
+        "ExecutingRunner",
+        "Updating",
+        "Deleting",
+        "Deploying",
+        "Removing",
+        "RotatingSecrets",
+        "Canceled",
+        "Failed",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "Status"
+      }
+    }
+  },
+  "parameters": {
+    "OperationResultIdParameter": {
+      "description": "The operation result identifier.",
+      "name": "operationResultId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

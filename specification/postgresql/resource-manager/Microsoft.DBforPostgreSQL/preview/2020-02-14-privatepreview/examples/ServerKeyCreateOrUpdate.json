@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "testrg",
+    "serverName": "testserver",
+    "keyName": "someVault_someKey_01234567890123456789012345678901",
+    "api-version": "2020-02-14-privatepreview",
+    "parameters": {
+      "properties": {
+        "serverKeyType": "AzureKeyVault",
+        "uri": "https://someVault.vault.azure.net/keys/someKey/01234567890123456789012345678901"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/testserver/keys/someVault_someKey_01234567890123456789012345678901",
+        "name": "omeVault_someKey_01234567890123456789012345678901",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers/keys",
+        "kind": "azurekeyvault",
+        "properties": {
+          "serverKeyType": "AzureKeyVault",
+          "uri": "https://someVault.vault.azure.net/keys/someKey/01234567890123456789012345678901",
+          "creationDate": "2017-05-01T00:00:00.0Z"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/testserver/keys/someVault_someKey_01234567890123456789012345678901",
+        "name": "omeVault_someKey_01234567890123456789012345678901",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers/keys",
+        "kind": "azurekeyvault",
+        "properties": {
+          "serverKeyType": "AzureKeyVault",
+          "uri": "https://someVault.vault.azure.net/keys/someKey/01234567890123456789012345678901",
+          "creationDate": "2017-05-01T00:00:00.0Z"
+        }
+      }
+    }
+  }
+}

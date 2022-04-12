@@ -26,12 +26,12 @@ These are the global settings for the AzureMachineLearning API.
 title: Azure Machine Learning Service
 description: These APIs allow end users to manage Azure Machine Learning Services.
 openapi-type: data-plane
-tag: package-2019-08-preview
+tag: package-2019-09-preview
 use-internal-constructors: true
 add-credentials: true
 ```
 
-## Suppression
+### Suppression
 
 ``` yaml
 directive:
@@ -48,6 +48,20 @@ directive:
     reason: Existing service; would be a breaking change
 ```
 
+### Tag: package-2019-09-preview
+
+These settings apply only when `--tag=package-2019-09-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-09-preview'
+input-file:
+  - Microsoft.MachineLearningServices\preview\2019-09-30\execution.json
+  - Microsoft.MachineLearningServices\preview\2019-09-30\modelManagement.json
+  - Microsoft.MachineLearningServices\preview\2019-09-30\runHistory.json
+  - Microsoft.MachineLearningServices\preview\2019-09-30\datastore.json
+  - Microsoft.MachineLearningServices\preview\2019-09-30\artifact.json
+  - Microsoft.MachineLearningServices\preview\2019-09-30\hyperdrive.json
+```
+
 ### Tag: package-2019-08-preview
 
 These settings apply only when `--tag=package-2019-08-preview` is specified on the command line.
@@ -61,7 +75,6 @@ input-file:
   - Microsoft.MachineLearningServices/preview/2019-08-01/artifact.json
   - Microsoft.MachineLearningServices/preview/2019-08-01/hyperdrive.json
 ```
-
 
 ---
 # Code Generation
@@ -116,6 +129,12 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.MachineLearningServices\preview\2019-09-30\execution.json
+  - $(this-folder)/Microsoft.MachineLearningServices\preview\2019-09-30\modelManagement.json
+  - $(this-folder)/Microsoft.MachineLearningServices\preview\2019-09-30\runHistory.json
+  - $(this-folder)/Microsoft.MachineLearningServices\preview\2019-09-30\datastore.json
+  - $(this-folder)/Microsoft.MachineLearningServices\preview\2019-09-30\artifact.json
+  - $(this-folder)/Microsoft.MachineLearningServices\preview\2019-09-30\hyperdrive.json
   - $(this-folder)/Microsoft.MachineLearningServices/preview/2019-08-01/execution.json
   - $(this-folder)/Microsoft.MachineLearningServices/preview/2019-08-01/modelManagement.json
   - $(this-folder)/Microsoft.MachineLearningServices/preview/2019-08-01/runHistory.json

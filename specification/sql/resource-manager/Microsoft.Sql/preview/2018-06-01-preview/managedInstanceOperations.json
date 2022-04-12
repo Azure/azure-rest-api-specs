@@ -1,0 +1,454 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-06-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/operations": {
+      "get": {
+        "tags": [
+          "ManagedInstanceOperations"
+        ],
+        "description": "Gets a list of operations performed on the managed instance.",
+        "operationId": "ManagedInstanceOperations_ListByManagedInstance",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request for getting managed instance operations has been executed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceOperationListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List the managed instance management operations": {
+            "$ref": "./examples/ListManagedInstanceOperations.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/operations/{operationId}": {
+      "get": {
+        "tags": [
+          "ManagedInstanceOperations"
+        ],
+        "description": "Gets a management operation on a managed instance.",
+        "operationId": "ManagedInstanceOperations_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified managed instance operation.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceOperation"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-examples": {
+          "Gets the managed instance management operation": {
+            "$ref": "./examples/GetManagedInstanceOperation.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ManagedInstanceOperationListResult": {
+      "description": "The response to a list managed instance operations request",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedInstanceOperation"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedInstanceOperationProperties": {
+      "description": "The properties of a managed instance operation.",
+      "type": "object",
+      "properties": {
+        "managedInstanceName": {
+          "description": "The name of the managed instance the operation is being performed on.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "description": "The name of operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operationFriendlyName": {
+          "description": "The friendly name of operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "percentComplete": {
+          "format": "int32",
+          "description": "The percentage of the operation completed.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "The operation start time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "state": {
+          "description": "The operation state.",
+          "enum": [
+            "Pending",
+            "InProgress",
+            "Succeeded",
+            "Failed",
+            "CancelInProgress",
+            "Cancelled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ManagementOperationState",
+            "modelAsString": true
+          }
+        },
+        "errorCode": {
+          "format": "int32",
+          "description": "The operation error code.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "errorDescription": {
+          "description": "The operation error description.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorSeverity": {
+          "format": "int32",
+          "description": "The operation error severity.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "isUserError": {
+          "description": "Whether or not the error is a user error.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "estimatedCompletionTime": {
+          "format": "date-time",
+          "description": "The estimated completion time of the operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The operation description.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isCancellable": {
+          "description": "Whether the operation can be cancelled.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "operationParameters": {
+          "$ref": "#/definitions/ManagedInstanceOperationParametersPair",
+          "description": "The operation parameters.",
+          "readOnly": true
+        },
+        "operationSteps": {
+          "$ref": "#/definitions/ManagedInstanceOperationSteps",
+          "description": "The operation steps.",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedInstanceOperationParametersPair": {
+      "description": "The parameters of a managed instance operation.",
+      "type": "object",
+      "properties": {
+        "currentParameters": {
+          "$ref": "#/definitions/UpsertManagedServerOperationParameters",
+          "description": "The current parameters.",
+          "readOnly": true
+        },
+        "requestedParameters": {
+          "$ref": "#/definitions/UpsertManagedServerOperationParameters",
+          "description": "The requested parameters.",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedInstanceOperationSteps": {
+      "description": "The steps of a managed instance operation.",
+      "type": "object",
+      "properties": {
+        "totalSteps": {
+          "description": "The total number of operation steps.",
+          "type": "string",
+          "readOnly": true
+        },
+        "currentStep": {
+          "format": "int32",
+          "description": "The number of current operation steps.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "stepsList": {
+          "description": "The operation steps list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpsertManagedServerOperationStep"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "Resource": {
+      "description": "ARM resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource type.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "UpsertManagedServerOperationParameters": {
+      "type": "object",
+      "properties": {
+        "family": {
+          "type": "string"
+        },
+        "tier": {
+          "type": "string"
+        },
+        "vCores": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "storageSizeInGB": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "UpsertManagedServerOperationStep": {
+      "type": "object",
+      "properties": {
+        "order": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "SlowedDown",
+            "Completed",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "ProxyResource": {
+      "description": "ARM proxy resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {}
+    },
+    "ManagedInstanceOperation": {
+      "description": "A managed instance operation.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedInstanceOperationProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription ID that identifies an Azure subscription.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for the request.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ManagedInstanceNameParameter": {
+      "name": "managedInstanceName",
+      "in": "path",
+      "description": "The name of the managed instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "BlobAuditingPolicyNameParameter": {
+      "name": "blobAuditingPolicyName",
+      "in": "path",
+      "description": "The name of the blob auditing policy.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "default"
+      ],
+      "x-ms-parameter-location": "method"
+    },
+    "SqlVirtualMachineInstanceNameParameter": {
+      "name": "sqlVirtualMachineInstanceName",
+      "in": "path",
+      "description": "The name of the SqlVirtualMachineInstance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SqlVirtualMachineContainerNameParameter": {
+      "name": "sqlVirtualMachineContainerName",
+      "in": "path",
+      "description": "The name of the SqlVirtualMachineContainer.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "VirtualClusterNameParameter": {
+      "name": "virtualClusterName",
+      "in": "path",
+      "description": "The name of the virtual cluster.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

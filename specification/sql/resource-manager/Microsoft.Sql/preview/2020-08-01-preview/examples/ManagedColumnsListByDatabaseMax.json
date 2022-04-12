@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "myRG",
+    "managedInstanceName": "serverName",
+    "databaseName": "myDatabase",
+    "api-version": "2020-08-01-preview",
+    "schema": [
+      "dbo"
+    ],
+    "table": [
+      "customer",
+      "address"
+    ],
+    "column": [
+      "username"
+    ],
+    "orderBy": [
+      "schema asc",
+      "table",
+      "column desc"
+    ],
+    "$skip": "5",
+    "$top": "50"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "columnType": "nvarchar",
+              "temporalType": "NonTemporalTable",
+              "memoryOptimized": false,
+              "isComputed": false
+            },
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myRG/providers/Microsoft.Sql/managedInstances/serverName/databases/myDatabase/schemas/dbo/tables/customer/columns/username",
+            "name": "username",
+            "type": "Microsoft.Sql/managedInstances/databases/schemas/tables/columns"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2021-10-01",
+    "billingScope": "providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-00000000:00000000-0000-0000-0000-00000000/billingProfiles/00000000-0000-0000-0000-00000000",
+    "lookBackPeriod": "Last7Days",
+    "product": "Standard_B2s",
+    "region": "australiaeast",
+    "scope": "Shared",
+    "term": "P1Y"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-00000000:00000000-0000-0000-0000-00000000/billingProfiles/00000000-0000-0000-0000-00000000/providers/microsoft.consumption/reservationrecommendationdetails",
+        "name": "reservationRecommendationDetails",
+        "type": "Microsoft.Consumption/ReservationRecommendationDetails",
+        "properties": {
+          "currency": "AUD",
+          "resource": {
+            "appliedScopes": [
+              "00000000-0000-0000-0000-00000000"
+            ],
+            "onDemandRate": 0.0725,
+            "product": "Standard_B2s",
+            "region": "australiaeast",
+            "reservationRate": 0.044141665317880413,
+            "resourceType": "virtualmachines"
+          },
+          "resourceGroup": null,
+          "savings": {
+            "calculatedSavings": [
+              {
+                "onDemandCost": 632.884472049689441,
+                "overageCost": 0.0,
+                "quantity": 1,
+                "reservationCost": 387.740388152261739,
+                "totalReservationCost": 387.740388152261739,
+                "savings": 245.144083897427702
+              }
+            ],
+            "lookBackPeriod": 7,
+            "recommendedQuantity": 1.0,
+            "reservationOrderTerm": "P1Y",
+            "savingsType": "instance",
+            "unitOfMeasure": "hour"
+          },
+          "scope": "Shared",
+          "usage": {
+            "firstConsumptionDate": "2020-01-19T00:00:00",
+            "lastConsumptionDate": "2020-01-25T17:00:00",
+            "lookBackUnitType": "virtualMachine quantity",
+            "usageData": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              0.0
+            ],
+            "usageGrain": "hourly"
+          }
+        }
+      }
+    },
+    "204": {}
+  }
+}

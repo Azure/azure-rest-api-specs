@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "instanceId": "11111111-2222-3333-4444-000000000000",
+    "modelId": "11223344-5555-6666-7777-000000000000",
+    "inferenceId": "11111111-1111-1111-1111-000000000000"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "inferenceId": "11111111-1111-1111-1111-000000000000",
+        "instanceId": "11111111-2222-3333-4444-000000000000",
+        "modelId": "11223344-5555-6666-7777-000000000000",
+        "kind": "multidimensional",
+        "status": "succeeded",
+        "createdDateTime": "2021-12-01T00:00:00.000Z",
+        "lastModifiedDateTime": "2021-12-01T00:00:00.000Z",
+        "result": {
+          "rootCauses": [
+            {
+              "dimension": {
+                "Region": "CN",
+                "Version": "iOS"
+              },
+              "score": 0.9543864,
+              "measures": [
+                {
+                  "dataSetId": "01234567-8901-2345-6789-012345678901",
+                  "displayName": "Total Count",
+                  "trendType": "rise",
+                  "contributionScore": 0.853
+                }
+              ]
+            }
+          ]
+        },
+        "parameter": {
+          "timestamp": "2021-06-04T00:00:00.000Z",
+          "dimensionScope": {}
+        }
+      }
+    }
+  }
+}
