@@ -61,11 +61,11 @@ directive:
     from: WebApps.json
     where: $.definitions.AzureActiveDirectoryLogin.properties.disableWWWAuthenticate
     reason: Property name contains WWW which is an acronym, so camel case does not apply here.
-  - supress: XMS_EXAMPLE_NOTFOUND_ERROR
+  - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
     from: AppServiceEnvironments.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/privateLinkResources"].get
     reason: API will be removed soon so examples is not necessary
-  - supress: XMS_EXAMPLE_NOTFOUND_ERROR
+  - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
     from: AppServiceEnvironments.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/privateEndpointConnections/{privateEndpointConnectionName}"].put
     reason: API will be removed soon so examples is not necessary
