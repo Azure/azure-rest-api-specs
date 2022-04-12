@@ -60,6 +60,7 @@ input-file:
   - Microsoft.MachineLearning/stable/2022-05-01/machineLearningServices.json
   - Microsoft.MachineLearning/stable/2022-05-01/workspaceFeatures.json
 ```
+
 ### Tag: package-webservices-2017-01
 
 These settings apply only when `--tag=package-webservices-2017-01` is specified on the command line.
