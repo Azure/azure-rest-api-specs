@@ -357,6 +357,58 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "BatchEndpoint"
+        ],
+        "summary": "Check that the provided endpoint name is available and valid, otherwise return result with validation issues.",
+        "operationId": "BatchEndpoints_CheckNameAvailability",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Online Endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NameAvailabilityResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CheckNameAvailability Batch Endpoint.": {
+            "$ref": "./examples/BatchEndpoint/checkNameAvailability.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/deployments": {
       "get": {
         "tags": [
@@ -3547,7 +3599,7 @@
         "tags": [
           "Job"
         ],
-        "summary": "Cancels a Job.",
+        "summary": "Cancels a Job (asynchronous).",
         "operationId": "Jobs_Cancel",
         "produces": [
           "application/json"
@@ -3580,6 +3632,22 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
           "200": {
             "description": "Success"
           }
@@ -3588,6 +3656,10 @@
           "Cancel Job.": {
             "$ref": "./examples/Job/cancel.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -4568,6 +4640,58 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "OnlineEndpoint"
+        ],
+        "summary": "Check that the provided endpoint name is available and valid, otherwise return result with validation issues.",
+        "operationId": "OnlineEndpoints_CheckNameAvailability",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Online Endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NameAvailabilityResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CheckNameAvailability Online Endpoint.": {
+            "$ref": "./examples/OnlineEndpoint/checkNameAvailability.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments": {
@@ -6578,9 +6702,7 @@
         "Certificate",
         "None",
         "Sas",
-        "ServicePrincipal",
-        "KerberosKeytab",
-        "KerberosPassword"
+        "ServicePrincipal"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -6601,12 +6723,6 @@
           },
           {
             "value": "ServicePrincipal"
-          },
-          {
-            "value": "KerberosKeytab"
-          },
-          {
-            "value": "KerberosPassword"
           }
         ]
       },
@@ -6828,8 +6944,7 @@
         "AzureBlob",
         "AzureDataLakeGen1",
         "AzureDataLakeGen2",
-        "AzureFile",
-        "Hdfs"
+        "AzureFile"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -6847,9 +6962,6 @@
           },
           {
             "value": "AzureFile"
-          },
-          {
-            "value": "Hdfs"
           }
         ]
       },
@@ -7580,50 +7692,6 @@
       "x-ms-discriminator-value": "Grid",
       "additionalProperties": false
     },
-    "HdfsDatastore": {
-      "required": [
-        "nameNodeAddress"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Datastore"
-        }
-      ],
-      "properties": {
-        "hdfsServerCertificate": {
-          "description": "The TLS cert of the HDFS server. Needs to be a base64 encoded string. Required if \"Https\" protocol is selected.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "nameNodeAddress": {
-          "description": "[Required] IP Address or DNS HostName.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "protocol": {
-          "description": "Protocol used to communicate with the storage account (Https/Http).",
-          "default": "http",
-          "type": "string",
-          "example": "https",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
-          "x-nullable": true
-        }
-      },
-      "x-ms-discriminator-value": "Hdfs",
-      "additionalProperties": false
-    },
     "IdAssetReference": {
       "description": "Reference to an asset via its ARM resource ID.",
       "required": [
@@ -8210,132 +8278,6 @@
       },
       "additionalProperties": false
     },
-    "KerberosCredentials": {
-      "required": [
-        "kerberosKdcAddress",
-        "kerberosPrincipal",
-        "kerberosRealm"
-      ],
-      "type": "object",
-      "properties": {
-        "kerberosKdcAddress": {
-          "description": "[Required] IP Address or DNS HostName.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "kerberosPrincipal": {
-          "description": "[Required] Kerberos Username",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "kerberosRealm": {
-          "description": "[Required] Domain over which a Kerberos authentication server has the authority to authenticate a user, host or service.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
-      "additionalProperties": false
-    },
-    "KerberosKeytabCredentials": {
-      "required": [
-        "secrets"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/KerberosCredentials"
-        },
-        {
-          "$ref": "#/definitions/DatastoreCredentials"
-        }
-      ],
-      "properties": {
-        "secrets": {
-          "description": "[Required] Keytab secrets.",
-          "$ref": "#/definitions/KerberosKeytabSecrets",
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ],
-          "x-ms-secret": true
-        }
-      },
-      "x-ms-discriminator-value": "KerberosKeytab",
-      "additionalProperties": false
-    },
-    "KerberosKeytabSecrets": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatastoreSecrets"
-        }
-      ],
-      "properties": {
-        "kerberosKeytab": {
-          "description": "Kerberos keytab secret.",
-          "type": "string",
-          "x-nullable": true
-        }
-      },
-      "x-ms-discriminator-value": "KerberosKeytab",
-      "additionalProperties": false
-    },
-    "KerberosPasswordCredentials": {
-      "required": [
-        "secrets"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/KerberosCredentials"
-        },
-        {
-          "$ref": "#/definitions/DatastoreCredentials"
-        }
-      ],
-      "properties": {
-        "secrets": {
-          "description": "[Required] Kerberos password secrets.",
-          "$ref": "#/definitions/KerberosPasswordSecrets",
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ],
-          "x-ms-secret": true
-        }
-      },
-      "x-ms-discriminator-value": "KerberosPassword",
-      "additionalProperties": false
-    },
-    "KerberosPasswordSecrets": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatastoreSecrets"
-        }
-      ],
-      "properties": {
-        "kerberosPassword": {
-          "description": "Kerberos password secret.",
-          "type": "string",
-          "x-nullable": true
-        }
-      },
-      "x-ms-discriminator-value": "KerberosPassword",
-      "additionalProperties": false
-    },
     "KeyType": {
       "enum": [
         "Primary",
@@ -8706,6 +8648,27 @@
       "x-ms-discriminator-value": "Mpi",
       "additionalProperties": false
     },
+    "NameAvailabilityResult": {
+      "description": "Whether or not an endpoint name is available or not. If not available, the reason will be provided.",
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "Specific message for why name is unavailable. Only set when NameAvailable = false.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "nameAvailable": {
+          "description": "Whether or not an endpoint name is available or not. If it is available, it is valid and unique in the region.",
+          "default": true,
+          "type": "boolean"
+        },
+        "reason": {
+          "description": "Reason for why name is unavailable. Only set when NameAvailable = false. For example: NameExists,Invalid.",
+          "$ref": "#/definitions/UnavailabilityReason"
+        }
+      },
+      "additionalProperties": false
+    },
     "NoneDatastoreCredentials": {
       "description": "Empty/none datastore credentials.",
       "type": "object",
@@ -8780,11 +8743,6 @@
           "description": "The path to mount the model in custom container.",
           "type": "string",
           "x-nullable": true
-        },
-        "privateNetworkConnection": {
-          "description": "If true, enable private network connection.",
-          "default": false,
-          "type": "boolean"
         },
         "provisioningState": {
           "description": "Provisioning state for the endpoint deployment.",
@@ -8877,15 +8835,6 @@
           "type": "string",
           "x-nullable": true
         },
-        "mirrorTraffic": {
-          "description": "Percentage of traffic to be mirrored to each deployment without using returned scoring. Traffic values need to sum to utmost 50.",
-          "type": "object",
-          "additionalProperties": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "x-nullable": true
-        },
         "provisioningState": {
           "description": "Provisioning state for the endpoint.",
           "$ref": "#/definitions/EndpointProvisioningState",
@@ -8893,11 +8842,6 @@
           "x-ms-mutability": [
             "read"
           ]
-        },
-        "publicNetworkAccess": {
-          "description": "Set to \"Enabled\" for endpoints that should allow public access when Private Link is enabled.",
-          "default": "Enabled",
-          "$ref": "#/definitions/PublicNetworkAccessType"
         },
         "traffic": {
           "description": "Percentage of traffic from endpoint to divert to each deployment. Traffic values need to sum to 100.",
@@ -9448,19 +9392,6 @@
       "description": "Mutable online endpoint configuration",
       "type": "object",
       "properties": {
-        "mirrorTraffic": {
-          "description": "Percentage of traffic to be mirrored to each deployment without using returned scoring. Traffic values need to sum to utmost 50.",
-          "type": "object",
-          "additionalProperties": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "x-nullable": true
-        },
-        "publicNetworkAccess": {
-          "description": "Set to \"Enabled\" for endpoints that should allow public access when Private Link is enabled.",
-          "$ref": "#/definitions/PublicNetworkAccessType"
-        },
         "traffic": {
           "description": "Percentage of traffic from endpoint to divert to each deployment. Traffic values need to sum to 100.",
           "type": "object",
@@ -9660,27 +9591,6 @@
           "default": "PT2S",
           "type": "string"
         }
-      },
-      "additionalProperties": false
-    },
-    "PublicNetworkAccessType": {
-      "description": "Enum to determine whether PublicNetworkAccess is Enabled or Disabled.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "PublicNetworkAccessType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Enabled"
-          },
-          {
-            "value": "Disabled"
-          }
-        ]
       },
       "additionalProperties": false
     },
@@ -9986,9 +9896,7 @@
         "AccountKey",
         "Certificate",
         "Sas",
-        "ServicePrincipal",
-        "KerberosPassword",
-        "KerberosKeytab"
+        "ServicePrincipal"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -10006,12 +9914,6 @@
           },
           {
             "value": "ServicePrincipal"
-          },
-          {
-            "value": "KerberosPassword"
-          },
-          {
-            "value": "KerberosKeytab"
           }
         ]
       },
@@ -10517,6 +10419,26 @@
         }
       },
       "x-ms-discriminator-value": "TruncationSelection",
+      "additionalProperties": false
+    },
+    "UnavailabilityReason": {
+      "enum": [
+        "Invalid",
+        "AlreadyExists"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "UnavailabilityReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Invalid"
+          },
+          {
+            "value": "AlreadyExists"
+          }
+        ]
+      },
       "additionalProperties": false
     },
     "UriFileDataVersion": {
