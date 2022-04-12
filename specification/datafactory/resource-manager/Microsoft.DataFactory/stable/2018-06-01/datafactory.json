@@ -4485,7 +4485,7 @@
                   "$ref": "#/parameters/api-version"
               },
               {
-                  "name": "globalParameter",
+                  "name": "default",
                   "description": "Global parameter resource definition.",
                   "in": "body",
                   "required": true,
@@ -5027,6 +5027,26 @@
       "required": [
         "runId"
       ]
+    },
+    "GlobalParametersListResponse": {
+      "description": "A list of Global parameters.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of global parameters.",
+          "items": {
+            "$ref": "#/definitions/GlobalParameterResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
     },
     "CloudError": {
       "x-ms-external": true,
@@ -5570,6 +5590,23 @@
         "properties": {
           "$ref": "./entityTypes/Trigger.json#/definitions/Trigger",
           "description": "Properties of the trigger."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "GlobalParameterResource": {
+      "description": "Global parameters resource type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/GlobalParameter.json#/definitions/GlobalParameter",
+          "description": "Properties of the global parameter."
         }
       },
       "required": [
@@ -7438,6 +7475,17 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "globalParameterName": {
+      "name": "globalParameterName",
+      "description": "The global parameter name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+      "minLength": 1,
+      "maxLength": 260,
       "x-ms-parameter-location": "method"
     }
   }
