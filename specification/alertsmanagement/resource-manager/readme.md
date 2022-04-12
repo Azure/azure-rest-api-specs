@@ -148,16 +148,6 @@ input-file:
 - Microsoft.AlertsManagement/preview/2018-05-05-preview/AlertsManagement.json
 ```
 
-### Tag: package-2020-08-04-preview
-
-These settings apply only when `--tag=package-2020-08-04` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-08-04-preview'
-input-file:
-- Microsoft.AlertsManagement/preview/2020-08-04-preview/AlertsManagement.json
-- Microsoft.AlertsManagement/preview/2020-08-04-preview/ResourceHealthAlertRules.json
-```
-
 ---
 
 # Code Generation

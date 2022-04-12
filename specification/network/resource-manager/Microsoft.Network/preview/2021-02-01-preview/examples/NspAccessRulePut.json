@@ -1,0 +1,58 @@
+{
+  "title": "Create/Update NSP access rule",
+  "parameters": {
+    "api-version": "2021-02-01-preview",
+    "subscriptionId": "subId",
+    "resourceGroupName": "rg1",
+    "networkSecurityPerimeterName": "nsp1",
+    "profileName": "profile1",
+    "accessRuleName": "accessRule1",
+    "parameters": {
+      "properties": {
+        "direction": "Inbound",
+        "addressPrefixes": [
+          "10.11.0.0/16",
+          "10.10.1.0/24"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "accessRule1",
+        "id": "/subscriptions/subId/resourceGroup/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/profile1/accessRules/accessRule1",
+        "type": "Microsoft.Network/networkSecurityPerimeters/profiles/accessRules",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "direction": "Inbound",
+          "addressPrefixes": [
+            "10.11.0.0/16",
+            "10.10.1.0/24"
+          ],
+          "fullyQualifiedDomainNames": [],
+          "subscriptions": [],
+          "networkSecurityPerimeters": []
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "accessRule1",
+        "id": "/subscriptions/subId/resourceGroup/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/profile1/accessRules/accessRule1",
+        "type": "Microsoft.Network/networkSecurityPerimeters/profiles/accessRules",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "direction": "Inbound",
+          "addressPrefixes": [
+            "10.11.0.0/16",
+            "10.10.1.0/24"
+          ],
+          "fullyQualifiedDomainNames": [],
+          "subscriptions": [],
+          "networkSecurityPerimeters": []
+        }
+      }
+    }
+  }
+}

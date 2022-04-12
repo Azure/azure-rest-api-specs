@@ -232,8 +232,29 @@
     }
   },
   "definitions": {
+    "AuthConfigCollection": {
+      "description": "AuthConfig collection ARM resource.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AuthConfig"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "AuthConfig": {
-      "description": "Configuration settings for the Azure ContainerApp Authentication / Authorization feature.",
+      "description": "Configuration settings for the Azure ContainerApp Service Authentication / Authorization feature.",
       "type": "object",
       "allOf": [
         {
@@ -242,44 +263,50 @@
       ],
       "properties": {
         "properties": {
-          "description": "Auth configuration resource specific properties",
+          "description": "AuthConfig resource specific properties",
           "type": "object",
           "properties": {
-            "state": {
-              "description": "<code>Enabled</code> if the Authentication / Authorization feature is enabled for the current app; otherwise, <code>Disabled</code>.",
-              "type": "string",
-              "enum": [
-                "Enabled",
-                "Disabled"
-              ],
-              "x-ms-enum": {
-                "name": "AuthConfigState",
-                "modelAsString": true
-              }
+            "platform": {
+              "$ref": "#/definitions/AuthPlatform",
+              "description": "The configuration settings of the platform of ContainerApp Service Authentication/Authorization."
             },
             "globalValidation": {
               "$ref": "#/definitions/GlobalValidation",
-              "description": "The configuration settings that determines the validation flow of users using ContainerApp Authentication/Authorization."
+              "description": "The configuration settings that determines the validation flow of users using  Service Authentication/Authorization."
             },
             "identityProviders": {
               "$ref": "#/definitions/IdentityProviders",
-              "description": "The configuration settings of each of the identity providers used to configure ContainerApp Authentication/Authorization."
+              "description": "The configuration settings of each of the identity providers used to configure ContainerApp Service Authentication/Authorization."
             },
             "login": {
               "$ref": "#/definitions/Login",
-              "description": "The configuration settings of the login flow of users using ContainerApp Authentication/Authorization."
+              "description": "The configuration settings of the login flow of users using ContainerApp Service Authentication/Authorization."
             },
             "httpSettings": {
               "$ref": "#/definitions/HttpSettings",
-              "description": "The configuration settings of the HTTP requests for authentication and authorization requests made against ContainerApp Authentication/Authorization."
+              "description": "The configuration settings of the HTTP requests for authentication and authorization requests made against ContainerApp Service Authentication/Authorization."
             }
           },
           "x-ms-client-flatten": true
         }
       }
     },
+    "AuthPlatform": {
+      "description": "The configuration settings of the platform of ContainerApp Service Authentication/Authorization.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "<code>true</code> if the Authentication / Authorization feature is enabled for the current app; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "runtimeVersion": {
+          "description": "The RuntimeVersion of the Authentication / Authorization feature in use for the current app.\nThe setting in this value can control the behavior of certain features in the Authentication / Authorization module.",
+          "type": "string"
+        }
+      }
+    },
     "GlobalValidation": {
-      "description": "The configuration settings that determines the validation flow of users using ContainerApp Authentication/Authorization.",
+      "description": "The configuration settings that determines the validation flow of users using ContainerApp Service Authentication/Authorization.",
       "type": "object",
       "properties": {
         "unauthenticatedClientAction": {
@@ -292,38 +319,16 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "UnauthenticatedClientAction",
-            "modelAsString": true
+            "name": "UnauthenticatedClientActionV2",
+            "modelAsString": false
           }
         },
         "redirectToProvider": {
           "description": "The default authentication provider to use when multiple providers are configured.\nThis setting is only needed if multiple providers are configured and the unauthenticated client\naction is set to \"RedirectToLoginPage\".",
           "type": "string"
-        }
-      }
-    },
-    "Login": {
-      "description": "The configuration settings of the login flow of users using ContainerApp Authentication/Authorization.",
-      "type": "object",
-      "properties": {
-        "route": {
-          "$ref": "#/definitions/LoginRoute",
-          "description": "The route that specify the endpoint used for login and logout requests."
         },
-        "preserveUrlFragmentsForLogins": {
-          "description": "<code>True</code> if the fragments from the request are preserved after the login request is made; otherwise, <code>False</code>.",
-          "type": "string",
-          "enum": [
-            "True",
-            "False"
-          ],
-          "x-ms-enum": {
-            "name": "PreserveUrlFragmentsForLoginsMode",
-            "modelAsString": true
-          }
-        },
-        "allowedExternalRedirectUrls": {
-          "description": "External URLs that can be redirected to as part of logging in or logging out of the app. Note that the query string part of the URL is ignored.\nThis is an advanced setting typically only needed by Windows Store application backends.\nNote that URLs within the current domain are always implicitly allowed.",
+        "excludedPaths": {
+          "description": "The paths for which unauthenticated flow would not be redirected to the login page.",
           "type": "array",
           "items": {
             "type": "string"
@@ -331,39 +336,25 @@
         }
       }
     },
-    "LoginRoute": {
-      "description": "The route that specify the endpoint used for login and logout requests.",
-      "type": "object",
-      "properties": {
-        "logoutEndpoint": {
-          "description": "The endpoint at which a logout request should be made.",
-          "type": "string"
-        }
-      }
-    },
     "HttpSettings": {
-      "description": "The configuration settings of the HTTP requests for authentication and authorization requests made against ContainerApp Authentication/Authorization.",
+      "description": "The configuration settings of the HTTP requests for authentication and authorization requests made against ContainerApp Service Authentication/Authorization.",
       "type": "object",
       "properties": {
         "requireHttps": {
           "description": "<code>false</code> if the authentication/authorization responses not having the HTTPS scheme are permissible; otherwise, <code>true</code>.",
-          "type": "string",
-          "enum": [
-            "True",
-            "False"
-          ],
-          "x-ms-enum": {
-            "name": "RequireHttpsMode",
-            "modelAsString": true
-          }
+          "type": "boolean"
         },
-        "route": {
-          "$ref": "#/definitions/HttpSettingsRoute",
+        "routes": {
+          "$ref": "#/definitions/HttpSettingsRoutes",
           "description": "The configuration settings of the paths HTTP requests."
+        },
+        "forwardProxy": {
+          "$ref": "#/definitions/ForwardProxy",
+          "description": "The configuration settings of a forward proxy used to make the requests."
         }
       }
     },
-    "HttpSettingsRoute": {
+    "HttpSettingsRoutes": {
       "description": "The configuration settings of the paths HTTP requests.",
       "type": "object",
       "properties": {
@@ -373,8 +364,110 @@
         }
       }
     },
+    "ForwardProxy": {
+      "description": "The configuration settings of a forward proxy used to make the requests.",
+      "type": "object",
+      "properties": {
+        "convention": {
+          "description": "The convention used to determine the url of the request made.",
+          "enum": [
+            "NoProxy",
+            "Standard",
+            "Custom"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ForwardProxyConvention",
+            "modelAsString": false
+          }
+        },
+        "customHostHeaderName": {
+          "description": "The name of the header containing the host of the request.",
+          "type": "string"
+        },
+        "customProtoHeaderName": {
+          "description": "The name of the header containing the scheme of the request.",
+          "type": "string"
+        }
+      }
+    },
+    "Login": {
+      "description": "The configuration settings of the login flow of users using ContainerApp Service Authentication/Authorization.",
+      "type": "object",
+      "properties": {
+        "routes": {
+          "$ref": "#/definitions/LoginRoutes",
+          "description": "The routes that specify the endpoints used for login and logout requests."
+        },
+        "preserveUrlFragmentsForLogins": {
+          "description": "<code>true</code> if the fragments from the request are preserved after the login request is made; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "allowedExternalRedirectUrls": {
+          "description": "External URLs that can be redirected to as part of logging in or logging out of the app. Note that the query string part of the URL is ignored.\nThis is an advanced setting typically only needed by Windows Store application backends.\nNote that URLs within the current domain are always implicitly allowed.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cookieExpiration": {
+          "$ref": "#/definitions/CookieExpiration",
+          "description": "The configuration settings of the session cookie's expiration."
+        },
+        "nonce": {
+          "$ref": "#/definitions/Nonce",
+          "description": "The configuration settings of the nonce used in the login flow."
+        }
+      }
+    },
+    "LoginRoutes": {
+      "description": "The routes that specify the endpoints used for login and logout requests.",
+      "type": "object",
+      "properties": {
+        "logoutEndpoint": {
+          "description": "The endpoint at which a logout request should be made.",
+          "type": "string"
+        }
+      }
+    },
+    "CookieExpiration": {
+      "description": "The configuration settings of the session cookie's expiration.",
+      "type": "object",
+      "properties": {
+        "convention": {
+          "description": "The convention used when determining the session cookie's expiration.",
+          "enum": [
+            "FixedTime",
+            "IdentityProviderDerived"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CookieExpirationConvention",
+            "modelAsString": false
+          }
+        },
+        "timeToExpiration": {
+          "description": "The time after the request is made when the session cookie should expire.",
+          "type": "string"
+        }
+      }
+    },
+    "Nonce": {
+      "description": "The configuration settings of the nonce used in the login flow.",
+      "type": "object",
+      "properties": {
+        "validateNonce": {
+          "description": "<code>false</code> if the nonce should not be validated while completing the login flow; otherwise, <code>true</code>.",
+          "type": "boolean"
+        },
+        "nonceExpirationInterval": {
+          "description": "The time after the request is made when the nonce should expire.",
+          "type": "string"
+        }
+      }
+    },
     "IdentityProviders": {
-      "description": "The configuration settings of each of the identity providers used to configure ContainerApp Authentication/Authorization.",
+      "description": "The configuration settings of each of the identity providers used to configure ContainerApp Service Authentication/Authorization.",
       "type": "object",
       "properties": {
         "azureActiveDirectory": {
@@ -401,8 +494,8 @@
           "$ref": "#/definitions/Apple",
           "description": "The configuration settings of the Apple provider."
         },
-        "azureStaticWebApp": {
-          "$ref": "#/definitions/AzureStaticWebApp",
+        "azureStaticWebApps": {
+          "$ref": "#/definitions/AzureStaticWebApps",
           "description": "The configuration settings of the Azure Static Web Apps provider."
         },
         "customOpenIdConnectProviders": {
@@ -414,13 +507,364 @@
         }
       }
     },
+    "AzureActiveDirectory": {
+      "description": "The configuration settings of the Azure Active directory provider.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "<code>false</code> if the Azure Active Directory provider should not be enabled despite the set registration; otherwise, <code>true</code>.",
+          "type": "boolean"
+        },
+        "registration": {
+          "$ref": "#/definitions/AzureActiveDirectoryRegistration",
+          "description": "The configuration settings of the Azure Active Directory app registration."
+        },
+        "login": {
+          "$ref": "#/definitions/AzureActiveDirectoryLogin",
+          "description": "The configuration settings of the Azure Active Directory login flow."
+        },
+        "validation": {
+          "$ref": "#/definitions/AzureActiveDirectoryValidation",
+          "description": "The configuration settings of the Azure Active Directory token validation flow."
+        },
+        "isAutoProvisioned": {
+          "description": "Gets a value indicating whether the Azure AD configuration was auto-provisioned using 1st party tooling.\nThis is an internal flag primarily intended to support the Azure Management Portal. Users should not\nread or write to this property.",
+          "type": "boolean"
+        }
+      }
+    },
+    "AzureActiveDirectoryLogin": {
+      "description": "The configuration settings of the Azure Active Directory login flow.",
+      "type": "object",
+      "properties": {
+        "loginParameters": {
+          "description": "Login parameters to send to the OpenID Connect authorization endpoint when\na user logs in. Each parameter must be in the form \"key=value\".",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "disableWWWAuthenticate": {
+          "description": "<code>true</code> if the www-authenticate provider should be omitted from the request; otherwise, <code>false</code>.",
+          "type": "boolean"
+        }
+      }
+    },
+    "AzureActiveDirectoryRegistration": {
+      "description": "The configuration settings of the Azure Active Directory app registration.",
+      "type": "object",
+      "properties": {
+        "openIdIssuer": {
+          "description": "The OpenID Connect Issuer URI that represents the entity which issues access tokens for this application.\nWhen using Azure Active Directory, this value is the URI of the directory tenant, e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/.\nThis URI is a case-sensitive identifier for the token issuer.\nMore information on OpenID Connect Discovery: http://openid.net/specs/openid-connect-discovery-1_0.html",
+          "type": "string"
+        },
+        "clientId": {
+          "description": "The Client ID of this relying party application, known as the client_id.\nThis setting is required for enabling OpenID Connection authentication with Azure Active Directory or \nother 3rd party OpenID Connect providers.\nMore information on OpenID Connect: http://openid.net/specs/openid-connect-core-1_0.html",
+          "type": "string"
+        },
+        "clientSecretSettingName": {
+          "description": "The app setting name that contains the client secret of the relying party application.",
+          "type": "string"
+        },
+        "clientSecretCertificateThumbprint": {
+          "description": "An alternative to the client secret, that is the thumbprint of a certificate used for signing purposes. This property acts as\na replacement for the Client Secret. It is also optional.",
+          "type": "string"
+        },
+        "clientSecretCertificateSubjectAlternativeName": {
+          "description": "An alternative to the client secret thumbprint, that is the subject alternative name of a certificate used for signing purposes. This property acts as\na replacement for the Client Secret Certificate Thumbprint. It is also optional.",
+          "type": "string"
+        },
+        "clientSecretCertificateIssuer": {
+          "description": "An alternative to the client secret thumbprint, that is the issuer of a certificate used for signing purposes. This property acts as\na replacement for the Client Secret Certificate Thumbprint. It is also optional.",
+          "type": "string"
+        }
+      }
+    },
+    "AzureActiveDirectoryValidation": {
+      "description": "The configuration settings of the Azure Active Directory token validation flow.",
+      "type": "object",
+      "properties": {
+        "jwtClaimChecks": {
+          "$ref": "#/definitions/JwtClaimChecks",
+          "description": "The configuration settings of the checks that should be made while validating the JWT Claims."
+        },
+        "allowedAudiences": {
+          "description": "The list of audiences that can make successful authentication/authorization requests.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "defaultAuthorizationPolicy": {
+          "$ref": "#/definitions/DefaultAuthorizationPolicy",
+          "description": "The configuration settings of the default authorization policy."
+        }
+      }
+    },
+    "JwtClaimChecks": {
+      "description": "The configuration settings of the checks that should be made while validating the JWT Claims.",
+      "type": "object",
+      "properties": {
+        "allowedGroups": {
+          "description": "The list of the allowed groups.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowedClientApplications": {
+          "description": "The list of the allowed client applications.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DefaultAuthorizationPolicy": {
+      "description": "The configuration settings of the Azure Active Directory default authorization policy.",
+      "type": "object",
+      "properties": {
+        "allowedPrincipals": {
+          "$ref": "#/definitions/AllowedPrincipals",
+          "description": "The configuration settings of the Azure Active Directory allowed principals."
+        },
+        "allowedApplications": {
+          "description": "The configuration settings of the Azure Active Directory allowed applications.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AllowedPrincipals": {
+      "description": "The configuration settings of the Azure Active Directory allowed principals.",
+      "type": "object",
+      "properties": {
+        "groups": {
+          "description": "The list of the allowed groups.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "identities": {
+          "description": "The list of the allowed identities.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Facebook": {
+      "description": "The configuration settings of the Facebook provider.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "<code>false</code> if the Facebook provider should not be enabled despite the set registration; otherwise, <code>true</code>.",
+          "type": "boolean"
+        },
+        "registration": {
+          "$ref": "#/definitions/AppRegistration",
+          "description": "The configuration settings of the app registration for the Facebook provider."
+        },
+        "graphApiVersion": {
+          "description": "The version of the Facebook api to be used while logging in.",
+          "type": "string"
+        },
+        "login": {
+          "$ref": "#/definitions/LoginScopes",
+          "description": "The configuration settings of the login flow."
+        }
+      }
+    },
+    "AppRegistration": {
+      "description": "The configuration settings of the app registration for providers that have app ids and app secrets",
+      "type": "object",
+      "properties": {
+        "appId": {
+          "description": "The App ID of the app used for login.",
+          "type": "string"
+        },
+        "appSecretSettingName": {
+          "description": "The app setting name that contains the app secret.",
+          "type": "string"
+        }
+      }
+    },
+    "LoginScopes": {
+      "description": "The configuration settings of the login flow, including the scopes that should be requested.",
+      "type": "object",
+      "properties": {
+        "scopes": {
+          "description": "A list of the scopes that should be requested while authenticating.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GitHub": {
+      "description": "The configuration settings of the GitHub provider.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "<code>false</code> if the GitHub provider should not be enabled despite the set registration; otherwise, <code>true</code>.",
+          "type": "boolean"
+        },
+        "registration": {
+          "$ref": "#/definitions/ClientRegistration",
+          "description": "The configuration settings of the app registration for the GitHub provider."
+        },
+        "login": {
+          "$ref": "#/definitions/LoginScopes",
+          "description": "The configuration settings of the login flow."
+        }
+      }
+    },
+    "ClientRegistration": {
+      "description": "The configuration settings of the app registration for providers that have client ids and client secrets",
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "description": "The Client ID of the app used for login.",
+          "type": "string"
+        },
+        "clientSecretSettingName": {
+          "description": "The app setting name that contains the client secret.",
+          "type": "string"
+        }
+      }
+    },
+    "Google": {
+      "description": "The configuration settings of the Google provider.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "<code>false</code> if the Google provider should not be enabled despite the set registration; otherwise, <code>true</code>.",
+          "type": "boolean"
+        },
+        "registration": {
+          "$ref": "#/definitions/ClientRegistration",
+          "description": "The configuration settings of the app registration for the Google provider."
+        },
+        "login": {
+          "$ref": "#/definitions/LoginScopes",
+          "description": "The configuration settings of the login flow."
+        },
+        "validation": {
+          "$ref": "#/definitions/AllowedAudiencesValidation",
+          "description": "The configuration settings of the Azure Active Directory token validation flow."
+        }
+      }
+    },
+    "AllowedAudiencesValidation": {
+      "description": "The configuration settings of the Allowed Audiences validation flow.",
+      "type": "object",
+      "properties": {
+        "allowedAudiences": {
+          "description": "The configuration settings of the allowed list of audiences from which to validate the JWT token.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Twitter": {
+      "description": "The configuration settings of the Twitter provider.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "<code>false</code> if the Twitter provider should not be enabled despite the set registration; otherwise, <code>true</code>.",
+          "type": "boolean"
+        },
+        "registration": {
+          "$ref": "#/definitions/TwitterRegistration",
+          "description": "The configuration settings of the app registration for the Twitter provider."
+        }
+      }
+    },
+    "TwitterRegistration": {
+      "description": "The configuration settings of the app registration for the Twitter provider.",
+      "type": "object",
+      "properties": {
+        "consumerKey": {
+          "description": "The OAuth 1.0a consumer key of the Twitter application used for sign-in.\nThis setting is required for enabling Twitter Sign-In.\nTwitter Sign-In documentation: https://dev.twitter.com/web/sign-in",
+          "type": "string"
+        },
+        "consumerSecretSettingName": {
+          "description": "The app setting name that contains the OAuth 1.0a consumer secret of the Twitter\napplication used for sign-in.",
+          "type": "string"
+        }
+      }
+    },
+    "Apple": {
+      "description": "The configuration settings of the Apple provider.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "<code>false</code> if the Apple provider should not be enabled despite the set registration; otherwise, <code>true</code>.",
+          "type": "boolean"
+        },
+        "registration": {
+          "$ref": "#/definitions/AppleRegistration",
+          "description": "The configuration settings of the Apple registration."
+        },
+        "login": {
+          "$ref": "#/definitions/LoginScopes",
+          "description": "The configuration settings of the login flow."
+        }
+      }
+    },
+    "AppleRegistration": {
+      "description": "The configuration settings of the registration for the Apple provider",
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "description": "The Client ID of the app used for login.",
+          "type": "string"
+        },
+        "clientSecretSettingName": {
+          "description": "The app setting name that contains the client secret.",
+          "type": "string"
+        }
+      }
+    },
+    "AzureStaticWebApps": {
+      "description": "The configuration settings of the Azure Static Web Apps provider.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "<code>false</code> if the Azure Static Web Apps provider should not be enabled despite the set registration; otherwise, <code>true</code>.",
+          "type": "boolean"
+        },
+        "registration": {
+          "$ref": "#/definitions/AzureStaticWebAppsRegistration",
+          "description": "The configuration settings of the Azure Static Web Apps registration."
+        }
+      }
+    },
+    "AzureStaticWebAppsRegistration": {
+      "description": "The configuration settings of the registration for the Azure Static Web Apps provider",
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "description": "The Client ID of the app used for login.",
+          "type": "string"
+        }
+      }
+    },
     "CustomOpenIdConnectProvider": {
       "description": "The configuration settings of the custom Open ID Connect provider.",
       "type": "object",
       "properties": {
-        "state": {
-          "$ref": "#/definitions/IdentityProviderState",
-          "description": "<code>Disabled</code> if the custom Open ID Connect provider should not be enabled despite the set registration; otherwise, <code>Enabled</code>."
+        "enabled": {
+          "description": "<code>false</code> if the custom Open ID provider provider should not be enabled; otherwise, <code>true</code>.",
+          "type": "boolean"
         },
         "registration": {
           "$ref": "#/definitions/OpenIdConnectRegistration",
@@ -454,7 +898,18 @@
       "description": "The authentication client credentials of the custom Open ID Connect provider.",
       "type": "object",
       "properties": {
-        "clientSecretRefName": {
+        "method": {
+          "description": "The method that should be used to authenticate the user.",
+          "enum": [
+            "ClientSecretPost"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ClientCredentialMethod",
+            "modelAsString": false
+          }
+        },
+        "clientSecretSettingName": {
           "description": "The app setting that contains the client secret for the custom Open ID Connect provider.",
           "type": "string"
         }
@@ -502,329 +957,6 @@
           }
         }
       }
-    },
-    "AzureActiveDirectory": {
-      "description": "The configuration settings of the Azure Active directory provider.",
-      "type": "object",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/IdentityProviderState",
-          "description": "<code>Disabled</code> if the Azure Active Directory provider should not be enabled despite the set registration; otherwise, <code>Enabled</code>."
-        },
-        "registration": {
-          "$ref": "#/definitions/AzureActiveDirectoryRegistration",
-          "description": "The configuration settings of the Azure Active Directory app registration."
-        },
-        "login": {
-          "$ref": "#/definitions/AzureActiveDirectoryLogin",
-          "description": "The configuration settings of the Azure Active Directory login flow."
-        },
-        "validation": {
-          "$ref": "#/definitions/AzureActiveDirectoryValidation",
-          "description": "The configuration settings of the Azure Active Directory token validation flow."
-        }
-      }
-    },
-    "AzureActiveDirectoryRegistration": {
-      "description": "The configuration settings of the Azure Active Directory app registration.",
-      "type": "object",
-      "properties": {
-        "openIdIssuer": {
-          "description": "The OpenID Connect Issuer URI that represents the entity which issues access tokens for this application.\nWhen using Azure Active Directory, this value is the URI of the directory tenant, e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/.\nThis URI is a case-sensitive identifier for the token issuer.\nMore information on OpenID Connect Discovery: http://openid.net/specs/openid-connect-discovery-1_0.html",
-          "type": "string"
-        },
-        "clientId": {
-          "description": "The Client ID of this relying party application, known as the client_id.\nThis setting is required for enabling OpenID Connection authentication with Azure Active Directory or \nother 3rd party OpenID Connect providers.\nMore information on OpenID Connect: http://openid.net/specs/openid-connect-core-1_0.html",
-          "type": "string"
-        },
-        "clientSecretRefName": {
-          "description": "The app secret ref name that contains the client secret of the relying party application.",
-          "type": "string"
-        },
-        "clientSecretCertificateThumbprint": {
-          "description": "An alternative to the client secret, that is the thumbprint of a certificate used for signing purposes. This property acts as\na replacement for the Client Secret. It is also optional.",
-          "type": "string"
-        },
-        "clientSecretCertificateSubjectAlternativeName": {
-          "description": "An alternative to the client secret thumbprint, that is the subject alternative name of a certificate used for signing purposes. This property acts as\na replacement for the Client Secret Certificate Thumbprint. It is also optional.",
-          "type": "string"
-        },
-        "clientSecretCertificateIssuer": {
-          "description": "An alternative to the client secret thumbprint, that is the issuer of a certificate used for signing purposes. This property acts as\na replacement for the Client Secret Certificate Thumbprint. It is also optional.",
-          "type": "string"
-        }
-      }
-    },
-    "AzureActiveDirectoryLogin": {
-      "description": "The configuration settings of the Azure Active Directory login flow.",
-      "type": "object",
-      "properties": {
-        "loginParameters": {
-          "description": "Login parameters to send to the OpenID Connect authorization endpoint when\na user logs in. Each parameter must be in the form \"key=value\".",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "disableWwwAuthenticate": {
-          "description": "<code>true</code> if the www-authenticate provider should be omitted from the request; otherwise, <code>false</code>.",
-          "type": "string",
-          "enum": [
-            "True",
-            "False"
-          ],
-          "x-ms-enum": {
-            "name": "DisableWwwAuthenticateMode",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "AzureActiveDirectoryValidation": {
-      "description": "The configuration settings of the Azure Active Directory token validation flow.",
-      "type": "object",
-      "properties": {
-        "allowedAudiences": {
-          "description": "The list of audiences that can make successful authentication/authorization requests.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "Facebook": {
-      "description": "The configuration settings of the Facebook provider.",
-      "type": "object",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/IdentityProviderState",
-          "description": "<code>Disabled</code> if the Facebook provider should not be enabled despite the set registration; otherwise, <code>Enabled</code>."
-        },
-        "registration": {
-          "$ref": "#/definitions/AppRegistration",
-          "description": "The configuration settings of the app registration for the Facebook provider."
-        },
-        "graphApiVersion": {
-          "description": "The version of the Facebook api to be used while logging in.",
-          "type": "string"
-        },
-        "login": {
-          "$ref": "#/definitions/LoginScopes",
-          "description": "The configuration settings of the login flow."
-        }
-      }
-    },
-    "AppRegistration": {
-      "description": "The configuration settings of the app registration for providers that have app ids and app secrets",
-      "type": "object",
-      "properties": {
-        "appId": {
-          "description": "The App ID of the app used for login.",
-          "type": "string"
-        },
-        "appSecretRefName": {
-          "description": "The app secret ref name that contains the app secret.",
-          "type": "string"
-        }
-      }
-    },
-    "LoginScopes": {
-      "description": "The configuration settings of the login flow, including the scopes that should be requested.",
-      "type": "object",
-      "properties": {
-        "scopes": {
-          "description": "A list of the scopes that should be requested while authenticating.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "GitHub": {
-      "description": "The configuration settings of the GitHub provider.",
-      "type": "object",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/IdentityProviderState",
-          "description": "<code>Disabled</code> if the GitHub provider should not be enabled despite the set registration; otherwise, <code>Enabled</code>."
-        },
-        "registration": {
-          "$ref": "#/definitions/ClientRegistration",
-          "description": "The configuration settings of the app registration for the GitHub provider."
-        },
-        "login": {
-          "$ref": "#/definitions/LoginScopes",
-          "description": "The configuration settings of the login flow."
-        }
-      }
-    },
-    "ClientRegistration": {
-      "description": "The configuration settings of the app registration for providers that have client ids and client secrets",
-      "type": "object",
-      "properties": {
-        "clientId": {
-          "description": "The Client ID of the app used for login.",
-          "type": "string"
-        },
-        "clientSecretRefName": {
-          "description": "The app secret ref name that contains the client secret.",
-          "type": "string"
-        }
-      }
-    },
-    "Google": {
-      "description": "The configuration settings of the Google provider.",
-      "type": "object",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/IdentityProviderState",
-          "description": "<code>Disabled</code> if the Google provider should not be enabled despite the set registration; otherwise, <code>Enabled</code>."
-        },
-        "registration": {
-          "$ref": "#/definitions/ClientRegistration",
-          "description": "The configuration settings of the app registration for the Google provider."
-        },
-        "login": {
-          "$ref": "#/definitions/LoginScopes",
-          "description": "The configuration settings of the login flow."
-        },
-        "validation": {
-          "$ref": "#/definitions/AllowedAudiencesValidation",
-          "description": "The configuration settings of the Azure Active Directory token validation flow."
-        }
-      }
-    },
-    "AllowedAudiencesValidation": {
-      "description": "The configuration settings of the Allowed Audiences validation flow.",
-      "type": "object",
-      "properties": {
-        "allowedAudiences": {
-          "description": "The configuration settings of the allowed list of audiences from which to validate the JWT token.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "Twitter": {
-      "description": "The configuration settings of the Twitter provider.",
-      "type": "object",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/IdentityProviderState",
-          "description": "<code>Disabled</code> if the Twitter provider should not be enabled despite the set registration; otherwise, <code>Enabled</code>."
-        },
-        "registration": {
-          "$ref": "#/definitions/TwitterRegistration",
-          "description": "The configuration settings of the app registration for the Twitter provider."
-        }
-      }
-    },
-    "TwitterRegistration": {
-      "description": "The configuration settings of the app registration for the Twitter provider.",
-      "type": "object",
-      "properties": {
-        "consumerKey": {
-          "description": "The OAuth 1.0a consumer key of the Twitter application used for sign-in.\nThis setting is required for enabling Twitter Sign-In.\nTwitter Sign-In documentation: https://dev.twitter.com/web/sign-in",
-          "type": "string"
-        },
-        "consumerSecretRefName": {
-          "description": "The app secret ref name that contains the OAuth 1.0a consumer secret of the Twitter\napplication used for sign-in.",
-          "type": "string"
-        }
-      }
-    },
-    "Apple": {
-      "description": "The configuration settings of the Apple provider.",
-      "type": "object",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/IdentityProviderState",
-          "description": "<code>Disabled</code> if the Apple provider should not be enabled despite the set registration; otherwise, <code>Enabled</code>."
-        },
-        "registration": {
-          "$ref": "#/definitions/AppleRegistration",
-          "description": "The configuration settings of the Apple registration."
-        },
-        "login": {
-          "$ref": "#/definitions/LoginScopes",
-          "description": "The configuration settings of the login flow."
-        }
-      }
-    },
-    "AzureStaticWebApp": {
-      "description": "The configuration settings of the Azure Static Web Apps provider.",
-      "type": "object",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/IdentityProviderState",
-          "description": "<code>Disabled</code> if the Azure Static Web Apps provider should not be enabled despite the set registration; otherwise, <code>Enabled</code>."
-        },
-        "registration": {
-          "$ref": "#/definitions/AzureStaticWebAppRegistration",
-          "description": "The configuration settings of the Azure Static Web Apps registration."
-        }
-      }
-    },
-    "AzureStaticWebAppRegistration": {
-      "description": "The configuration settings of the registration for the Azure Static Web Apps provider",
-      "type": "object",
-      "properties": {
-        "clientId": {
-          "description": "The Client ID of the app used for login.",
-          "type": "string"
-        }
-      }
-    },
-    "AppleRegistration": {
-      "description": "The configuration settings of the registration for the Apple provider",
-      "type": "object",
-      "properties": {
-        "clientId": {
-          "description": "The Client ID of the app used for login.",
-          "type": "string"
-        },
-        "clientSecretRefName": {
-          "description": "The app secret ref name that contains the client secret.",
-          "type": "string"
-        }
-      }
-    },
-    "AuthConfigCollection": {
-      "description": "AuthConfig collection ARM resource.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AuthConfig"
-          }
-        },
-        "nextLink": {
-          "description": "Link to next page of resources.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "IdentityProviderState": {
-      "type": "string",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "IdentityProviderState",
-        "modelAsString": true
-      },
-      "description": "Indicate whether identity provider is enabled or disabled."
     }
   },
   "securityDefinitions": {

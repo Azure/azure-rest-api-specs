@@ -66,7 +66,22 @@
             "name": "outputtest"
           }
         ],
-        "functions": []
+        "functions": [],
+        "externals": {
+          "storageAccount": {
+            "accountName": "mystorageaccount",
+            "accountKey": "mykey"
+          },
+          "container": "mycontainer",
+          "path": "UserCustomCode.zip",
+          "refreshConfiguration": {
+            "pathPattern": "{date}\\\\{time}",
+            "dateFormat": "yyyy-dd-MM",
+            "timeFormat": "HH",
+            "refreshInterval": "00:01:00",
+            "refreshType": "Nonblocking"
+          }
+        }
       },
       "location": "West US",
       "tags": {
