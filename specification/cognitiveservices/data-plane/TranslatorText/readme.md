@@ -8,6 +8,8 @@ The current release is `release_3_0`.
 
 The current document batch release is `release_1_1'`.
 
+The preview document batch release is `release_2_0_preview1'`.
+
 ``` yaml
 
 tag: release_3_0
@@ -21,6 +23,14 @@ tag: release_1_1
 add-credentials: true
 openapi-type: data-plane
 ```
+
+``` yaml
+
+tag: release_2_0_preview1
+add-credentials: true
+openapi-type: data-plane
+```
+
 # Releases
 
 ### Preview 1.0
@@ -39,11 +49,12 @@ input-file: stable/v1.0/TranslatorBatch.json
 This setting is for batch document translator and only applied when `--tag=release_1_1` is specified on the command line.
 ``` yaml $(tag) == 'release_1_1'
 input-file: stable/v1.1/TranslatorBatch.json
+```
 
-### 2.0 Batch Preview 1
+### 2.0 Preview 1 Batch API
 This setting is for batch document translator and only applied when `--tag=release_2_0_preview1` is specified on the command line.
 ``` yaml $(tag) == 'release_2_0_preview1'
-input-file: stable/v2.0-preview1/TranslatorBatch.json
+input-file: preview/v2.0-preview1/TranslatorBatch.json
 ```
 
 ### Release 3.0
