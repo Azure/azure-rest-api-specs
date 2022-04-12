@@ -26,6 +26,7 @@ These are the global settings for the MachineLearning API.
 
 ``` yaml
 openapi-type: arm
+tag: package-2022-05
 ```
 
 ``` yaml $(package-webservices)
@@ -38,6 +39,10 @@ tag: package-commitmentPlans-2016-05-preview
 
 ``` yaml $(package-workspaces)
 tag: package-workspaces-2016-04
+```
+
+``` yaml $(package-workspaces)
+tag: package-workspaces-2019-10
 ```
 
 ``` yaml $(package-workspaces)
