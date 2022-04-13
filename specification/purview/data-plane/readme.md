@@ -46,14 +46,13 @@ tag: package-2018-12-01-preview
 title: PurviewScanningClient
 ```
 
+### Tag: package-2022-02-01-preview
 
-### Tag: package-2018-12-01-preview
+These settings apply only when `--tag=package-2022-02-01-preview` is specified on the command line.
 
-These settings apply only when `--tag=package-2018-12-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-12-01-preview'
+``` yaml $(tag) == 'package-2022-02-01-preview'
 input-file:
-- Azure.Analytics.Purview.Scanning/preview/2018-12-01-preview/scanningService.json
+- Azure.Analytics.Purview.Scanning/preview/2022-02-01-preview/scanningService.json
 modelerfour:
   lenient-model-deduplication: true
 ```
@@ -69,13 +68,13 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
-### Tag: package-2022-02-01-preview
+### Tag: package-2018-12-01-preview
 
-These settings apply only when `--tag=package-2022-02-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2018-12-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-02-01-preview'
+``` yaml $(tag) == 'package-2018-12-01-preview'
 input-file:
-- Azure.Analytics.Purview.Scanning/preview/2022-02-01-preview/scanningService.json
+- Azure.Analytics.Purview.Scanning/preview/2018-12-01-preview/scanningService.json
 modelerfour:
   lenient-model-deduplication: true
 ```
