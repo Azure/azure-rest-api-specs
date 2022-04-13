@@ -318,7 +318,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/TagsTimeSeriesResponse"
+              "$ref": "#/definitions/TagsTimeSeries"
             }
           },
           "default": {
@@ -375,6 +375,44 @@
         "x-ms-examples": {
           "AssetFilesAggregationTimeSeries_List": {
             "$ref": "./examples/AssetFilesAggregationTimeSeries_List.json"
+          }
+        }
+      }
+    },
+    "/assets/snapshots/tags": {
+      "get": {
+        "tags": [
+          "Assets"
+        ],
+        "summary": "List tags of a snapshot",
+        "description": "List tags of a snapshot",
+        "operationId": "AssetSnapshotsTags_List",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TagsSnapshot"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Insights Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AssetSnapshotsTags_List": {
+            "$ref": "./examples/AssetSnapshotsTags_List.json"
           }
         }
       }
@@ -592,10 +630,10 @@
         }
       }
     },
-    "TagsTimeSeriesResponse": {
+    "TagsTimeSeries": {
       "type": "object",
       "properties": {
-        "records": {
+        "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/TagsTimesSeriesRecord"
@@ -644,6 +682,57 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/FilesAggregationTimesSeriesRecord"
+          }
+        }
+      }
+    },
+    "TagsSnapshotRecord": {
+      "type": "object",
+      "properties": {
+        "sourceType": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "group": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "subscriptions": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "sources": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "files": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "tables": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "snapshotTime": {
+          "type": "string"
+        }
+      }
+    },
+    "TagsSnapshot": {
+      "type": "object",
+      "properties": {
+        "snapshotTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagsSnapshotRecord"
           }
         }
       }
