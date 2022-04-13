@@ -33,12 +33,6 @@ openapi-type: data-plane
 
 # Releases
 
-### Preview 1.0
-This setting is for batch document translator and only applied when `--tag=release_1_0_preview.1` is specified on the command line.
-``` yaml $(tag) == 'release_1_0_preview.1'
-input-file: preview/v1.0-preview.1/TranslatorBatch.json
-```
-
 ### 1.0 Batch API
 This setting is for batch document translator and only applied when `--tag=release_1_0` is specified on the command line.
 ``` yaml $(tag) == 'release_1_0'
@@ -126,14 +120,6 @@ nodejs:
   generate-readme-md: false
 ```
 
-### Tag: release_1_0_preview.1 and nodejs
-
-These settings apply only when `--tag=release_1_0_preview.1 --nodejs` is specified on the command line.
-
-``` yaml $(tag) == 'release_1_0_preview.1' && $(nodejs)
-  package-version: 1.0.1
-```
-
 ### Tag: release_1_0 and nodejs
 
 These settings apply only when `--tag=release_1_0 --nodejs` is specified on the command line.
@@ -162,7 +148,8 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/preview/v1.0-preview.1/TranslatorBatch.json
+  - $(this-folder)/stable/1.1/TranslatorBatch.json
+  - $(this-folder)/preview/v2.0-preview1/TranslatorBatch.json
   - $(this-folder)/stable/v3.0/TranslatorText.json
 
 ```
