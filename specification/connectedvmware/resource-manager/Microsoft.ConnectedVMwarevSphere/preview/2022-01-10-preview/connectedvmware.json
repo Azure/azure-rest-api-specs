@@ -4811,6 +4811,26 @@
         }
       }
     },
+    "UefiSettings": {
+      "type": "object",
+      "properties": {
+        "secureBootEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether secure boot should be enabled on the virtual machine."
+        }
+      },
+      "description": "Specifies the security settings like secure boot used while creating the virtual machine."
+    },
+    "SecurityProfile": {
+      "type": "object",
+      "properties": {
+        "uefiSettings": {
+          "$ref": "#/definitions/UefiSettings",
+          "description": "Specifies the security settings like secure boot used while creating the virtual machine."
+        }
+      },
+      "description": "Specifies the Security profile settings for the virtual machine."
+    },
     "ExtendedLocation": {
       "type": "object",
       "description": "The extended location.",
@@ -4864,6 +4884,10 @@
         "guestAgentProfile": {
           "description": "Guest agent status properties.",
           "$ref": "#/definitions/GuestAgentProfile"
+        },
+        "securityProfile": {
+          "$ref": "#/definitions/SecurityProfile",
+          "description": "Gets the security profile."
         },
         "moRefId": {
           "description": "Gets or sets the vCenter MoRef (Managed Object Reference) ID for the virtual machine.",
