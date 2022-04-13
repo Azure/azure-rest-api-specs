@@ -24,7 +24,7 @@ These are the global settings for the Azure Purview Catalog API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2021-05-01-preview
+tag: package-2022-02-01-preview
 ```
 
 
