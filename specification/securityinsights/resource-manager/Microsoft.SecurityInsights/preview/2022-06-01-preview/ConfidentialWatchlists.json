@@ -1,0 +1,441 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2022-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/confidentialWatchlists": {
+      "get": {
+        "x-ms-examples": {
+          "Get all confidential watchlists.": {
+            "$ref": "./examples/confidentialWatchlists/GetConfidentialWatchlists.json"
+          }
+        },
+        "tags": [
+          "Watchlists"
+        ],
+        "description": "Gets all confidential watchlists, without watchlist items.",
+        "operationId": "ConfidentialWatchlists_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./common/WatchlistTypes.json#/definitions/WatchlistList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/confidentialWatchlists/{watchlistAlias}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a confidential watchlist.": {
+            "$ref": "./examples/confidentialWatchlists/GetConfidentialWatchlistByAlias.json"
+          }
+        },
+        "tags": [
+          "ConfidentialWatchlists"
+        ],
+        "description": "Gets a confidential watchlist, without its watchlist items.",
+        "operationId": "ConfidentialWatchlists_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "./common/WatchlistTypes.json#/parameters/WatchlistAlias"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./common/WatchlistTypes.json#/definitions/Watchlist"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a confidential watchlist.": {
+            "$ref": "./examples/confidentialWatchlists/DeleteConfidentialWatchlist.json"
+          }
+        },
+        "tags": [
+          "ConfidentialWatchlists"
+        ],
+        "description": "Delete a confidential watchlist.",
+        "operationId": "ConfidentialWatchlists_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "./common/WatchlistTypes.json#/parameters/WatchlistAlias"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Contains the status URL on which clients are expected to poll the status of the delete operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates a confidential watchlist.": {
+            "$ref": "./examples/confidentialWatchlists/CreateConfidentialWatchlist.json"
+          },
+          "Creates or updates a confidential watchlist and bulk creates watchlist items.": {
+            "$ref": "./examples/confidentialWatchlists/CreateConfidentialWatchlistAndWatchlistItems.json"
+          }
+        },
+        "tags": [
+          "ConfidentialWatchlists"
+        ],
+        "description": "Create or update a confidential Watchlist and its Watchlist Items (bulk creation, e.g. through text/csv content type). To create a Watchlist and its Items, we should call this endpoint with either rawContent or a valid SAR URI and contentType properties. The rawContent is mainly used for small watchlist (content size below 3.8 MB). The SAS URI enables the creation of large watchlist, where the content size can go up to 500 MB. The status of processing such large file can be polled through the URL returned in Azure-AsyncOperation header.",
+        "operationId": "ConfidentialWatchlists_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "./common/WatchlistTypes.json#/parameters/WatchlistAlias"
+          },
+          {
+            "$ref": "./common/WatchlistTypes.json#/parameters/Watchlist"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./common/WatchlistTypes.json#/definitions/Watchlist"
+            }
+          },
+          "201": {
+            "description": "Created. The response includes the Provisioning State and the Azure-AsyncOperation header. To get the progress of the operation, call GET operation on the URL in Azure-AsyncOperation header field.",
+            "schema": {
+              "$ref": "./common/WatchlistTypes.json#/definitions/Watchlist"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Contains the status URL on which clients are expected to poll the status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/confidentialWatchlists/{watchlistAlias}/watchlistItems": {
+      "get": {
+        "x-ms-examples": {
+          "Get all confidential watchlist Items.": {
+            "$ref": "./examples/confidentialWatchlists/GetConfidentialWatchlistItems.json"
+          }
+        },
+        "tags": [
+          "ConfidentialWatchlistItems"
+        ],
+        "description": "Gets all confidential watchlist Items.",
+        "operationId": "ConfidentialWatchlistItems_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+          },
+          {
+            "$ref": "./common/WatchlistTypes.json#/parameters/WatchlistAlias"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./common/WatchlistTypes.json#/definitions/WatchlistItemList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/confidentialWatchlists/{watchlistAlias}/watchlistItems/{watchlistItemId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a confidential watchlist item.": {
+            "$ref": "./examples/confidentialWatchlists/GetConfidentialWatchlistItemById.json"
+          }
+        },
+        "tags": [
+          "ConfidentialWatchlistItems"
+        ],
+        "description": "Gets a confidential watchlist item.",
+        "operationId": "ConfidentialWatchlistItems_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "./common/WatchlistTypes.json#/parameters/WatchlistAlias"
+          },
+          {
+            "$ref": "./common/WatchlistTypes.json#/parameters/WatchlistItemId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./common/WatchlistTypes.json#/definitions/WatchlistItem"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a confidential watchlist Item.": {
+            "$ref": "./examples/confidentialWatchlists/DeleteConfidentialWatchlistItem.json"
+          }
+        },
+        "tags": [
+          "ConfidentialWatchlistItems"
+        ],
+        "description": "Delete a confidential watchlist item.",
+        "operationId": "ConfidentialWatchlistItems_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "./common/WatchlistTypes.json#/parameters/WatchlistAlias"
+          },
+          {
+            "$ref": "./common/WatchlistTypes.json#/parameters/WatchlistItemId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates a confidential watchlist item.": {
+            "$ref": "./examples/confidentialWatchlists/CreateConfidentialWatchlistItem.json"
+          }
+        },
+        "tags": [
+          "WatchlistItems"
+        ],
+        "description": "Creates or updates a watchlist item.",
+        "operationId": "ConfidentialWatchlistItems_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "./common/WatchlistTypes.json#/parameters/WatchlistAlias"
+          },
+          {
+            "$ref": "./common/WatchlistTypes.json#/parameters/WatchlistItemId"
+          },
+          {
+            "$ref": "./common/WatchlistTypes.json#/parameters/WatchlistItem"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./common/WatchlistTypes.json#/definitions/WatchlistItem"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "./common/WatchlistTypes.json#/definitions/WatchlistItem"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  }
+}
