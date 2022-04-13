@@ -88,7 +88,7 @@
         "parameters": [
           {
             "in": "query",
-            "name": "orderBy",
+            "name": "orderby",
             "description": "The order of the entries.",
             "type": "string"
           },
@@ -216,7 +216,7 @@
           {
             "in": "query",
             "name": "kind",
-            "description": "The asset type/",
+            "description": "The type of asset.",
             "required": true,
             "type": "string",
             "enum": [
@@ -356,7 +356,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/FilesAggregationTimeSeriesResponse"
+              "$ref": "#/definitions/FilesAggregationTimeSeries"
             }
           },
           "default": {
@@ -463,19 +463,19 @@
           "items": {
             "$ref": "#/definitions/SnapshotRecord"
           }
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
     "ErrorModel": {
       "type": "object",
       "properties": {
-        "errorCode": {
+        "code": {
           "type": "string"
         },
         "message": {
-          "type": "string"
-        },
-        "exceptionCulprit": {
           "type": "string"
         },
         "target": {
@@ -552,10 +552,6 @@
         },
         "nextLink": {
           "type": "string"
-        },
-        "count": {
-          "format": "int32",
-          "type": "integer"
         }
       }
     },
@@ -638,6 +634,9 @@
           "items": {
             "$ref": "#/definitions/TagsTimesSeriesRecord"
           }
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -675,10 +674,10 @@
         }
       }
     },
-    "FilesAggregationTimeSeriesResponse": {
+    "FilesAggregationTimeSeries": {
       "type": "object",
       "properties": {
-        "records": {
+        "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/FilesAggregationTimesSeriesRecord"
@@ -734,6 +733,9 @@
           "items": {
             "$ref": "#/definitions/TagsSnapshotRecord"
           }
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
