@@ -83,7 +83,7 @@
       "get": {
         "x-ms-examples": {
           "Get a Anomaly Security ML Analytics Settings.": {
-            "$ref": "./examples/securityMLAnalyticsSettings/GetAnomalySecurityMLAnalyticsSettings.json"
+            "$ref": "./examples/securityMLAnalyticsSettings/GetAnomalySecurityMLAnalyticsSetting.json"
           }
         },
         "tags": [
@@ -112,7 +112,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SecurityMLAnalyticsSettings"
+              "$ref": "#/definitions/SecurityMLAnalyticsSetting"
             }
           },
           "default": {
@@ -126,7 +126,7 @@
       "put": {
         "x-ms-examples": {
           "Creates or updates a Anomaly Security ML Analytics Settings.": {
-            "$ref": "./examples/securityMLAnalyticsSettings/CreateAnomalySecurityMLAnalyticsSettings.json"
+            "$ref": "./examples/securityMLAnalyticsSettings/CreateAnomalySecurityMLAnalyticsSetting.json"
           }
         },
         "tags": [
@@ -158,13 +158,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SecurityMLAnalyticsSettings"
+              "$ref": "#/definitions/SecurityMLAnalyticsSetting"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/SecurityMLAnalyticsSettings"
+              "$ref": "#/definitions/SecurityMLAnalyticsSetting"
             }
           },
           "default": {
@@ -178,7 +178,7 @@
       "delete": {
         "x-ms-examples": {
           "Delete a Security ML Analytics Settings.": {
-            "$ref": "./examples/securityMLAnalyticsSettings/DeleteSecurityMLAnalyticsSettings.json"
+            "$ref": "./examples/securityMLAnalyticsSettings/DeleteSecurityMLAnalyticsSetting.json"
           }
         },
         "tags": [
@@ -221,13 +221,13 @@
     }
   },
   "parameters": {
-    "SecurityMLAnalyticsSettings": {
-      "description": "The security ML Analytics settings",
+    "SecurityMLAnalyticsSetting": {
+      "description": "The security ML Analytics setting",
       "in": "body",
-      "name": "securityMLAnalyticsSettings",
+      "name": "securityMLAnalyticsSetting",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/SecurityMLAnalyticsSettings"
+        "$ref": "#/definitions/SecurityMLAnalyticsSetting"
       },
       "x-ms-parameter-location": "method"
     },
@@ -241,13 +241,13 @@
     }
   },
   "definitions": {
-    "SecurityMLAnalyticsSettings": {
+    "SecurityMLAnalyticsSetting": {
       "allOf": [
         {
           "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
         }
       ],
-      "description": "Security ML Analytics Settings",
+      "description": "Security ML Analytics Setting",
       "properties": {
         "kind": {
           "$ref": "#/definitions/SecurityMLAnalyticsSettingsKindEnum",
@@ -287,7 +287,7 @@
         "value": {
           "description": "Array of SecurityMLAnalyticsSettings",
           "items": {
-            "$ref": "#/definitions/SecurityMLAnalyticsSettings"
+            "$ref": "#/definitions/SecurityMLAnalyticsSetting"
           },
           "type": "array"
         }
@@ -300,7 +300,7 @@
     "AnomalySecurityMLAnalyticsSettings": {
       "allOf": [
         {
-          "$ref": "#/definitions/SecurityMLAnalyticsSettings"
+          "$ref": "#/definitions/SecurityMLAnalyticsSetting"
         }
       ],
       "description": "Represents Anomaly Security ML Analytics Settings",
