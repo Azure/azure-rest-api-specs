@@ -664,9 +664,6 @@
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/NoPodDisruptionBudgetParameter"
           }
         ],
         "responses": {
@@ -1124,7 +1121,7 @@
             "description": "The name of the agent pool."
           },
           {
-            "$ref": "#/parameters/NoPodDisruptionBudgetParameter"
+            "$ref": "#/parameters/IgnorePodDisruptionBudgetParameter"
           }
         ],
         "responses": {
@@ -6308,12 +6305,12 @@
       "description": "Only apply to AAD clusters, specifies the format of returned kubeconfig. Format 'azure' will return azure auth-provider kubeconfig; format 'exec' will return exec format kubeconfig, which requires kubelogin binary in the path.",
       "x-ms-parameter-location": "method"
     },
-    "NoPodDisruptionBudgetParameter": {
-      "name": "no-poddisruptionbudget",
+    "IgnorePodDisruptionBudgetParameter": {
+      "name": "ignore-pod-disruption-budget",
       "in": "query",
       "required": false,
       "type": "boolean",
-      "description": "no-poddisruptionbudget=true to delete those pods on a node without considering Pod Disruption Budget",
+      "description": "ignore-pod-disruption-budget=true to delete those pods on a node without considering Pod Disruption Budget",
       "x-ms-parameter-location": "method"
     }
   }
