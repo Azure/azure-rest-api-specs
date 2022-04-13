@@ -567,15 +567,63 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/privateLinkResources": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/privateLinkResources/{privateLinkResourceName}": {
       "get": {
         "tags": [
           "Namespaces PrivateLinkResources"
         ],
         "operationId": "PrivateLinkResources_Get",
         "x-ms-examples": {
+          "NameSpacePrivateEndPointConnectionGet": {
+            "$ref": "./examples/PrivateEndpointConnections/PrivateLinkResourcesGet.json"
+          }
+        },
+        "description": "Gets a description for the specified Private Endpoint Connection name.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/PrivateLinkResourceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Private Endpoint Connection  successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v2/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "Namespaces PrivateLinkResources"
+        ],
+        "operationId": "PrivateLinkResources_List",
+        "x-ms-examples": {
           "NameSpacePrivateLinkResourcesGet": {
-            "$ref": "./examples/PrivateEndpointConnections/ListPrivateLinkResources.json"
+            "$ref": "./examples/PrivateEndpointConnections/PrivateLinkResourcesList.json"
           }
         },
         "description": "Gets lists of resources that supports Privatelinks.",
@@ -708,6 +756,27 @@
           "type": "string",
           "readOnly": true,
           "description": "Identifier for Azure Insights metrics."
+        },
+        "privateEndpointConnections": {
+          "description": "List of private endpoint connections.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "publicNetworkAccess": {
+          "description": "This determines if traffic is allowed over public network. By default it is enabled.",
+          "enum": [
+            "Enabled",
+            "Disabled",
+            "SecuredByPerimeter"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          },
+          "default": "Enabled"
         }
       },
       "description": "Properties of the namespace."
