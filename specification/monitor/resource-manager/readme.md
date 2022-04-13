@@ -28,7 +28,7 @@ These are the global settings for the MonitorClient API.
 title: MonitorClient
 ```
 
-``` yaml $(python) && $(track2)
+``` yaml $(python)
 title: MonitorManagementClient
 ```
 
