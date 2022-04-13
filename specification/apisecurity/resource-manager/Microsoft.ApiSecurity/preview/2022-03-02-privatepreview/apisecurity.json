@@ -5,7 +5,7 @@
     "title": "Azure Security API Security Resource Provider (v2)",
     "description": "PP2 RP service OpenAPI Specification (CAS Resource Provider v2)"
   },
-  "host": "apisecuritypp2rp.trafficmanager.net",
+  "host": "management.azure.com",
   "basePath": "/",
   "securityDefinitions": {
     "azure_auth": {
@@ -391,7 +391,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ApiCollectionRequest"
+              "$ref": "#/definitions/ApiCollectionsRequest"
             }
           }
         ],
@@ -405,7 +405,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ApiCollectionResponse"
+              "$ref": "#/definitions/ApiCollectionsResponse"
             }
           },
           "400": {
@@ -418,6 +418,63 @@
           },
           "404": {
             "description": "Collections URI resource page does not exist",
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ApiSecurity/apiCollectionsMeta": {
+      "post": {
+        "description": "Upon user requesting collection details for a subscription, return the collection details data to UI",
+        "summary": "Upon user requesting collection details for a subscription, return the collection details data to UI",
+        "tags": [
+          "ApiCollections"
+        ],
+        "operationId": "V2ApiCollectionsMeta_Get",
+        "x-ms-examples": {
+          "V2ApiCollectionsMeta_Get_PropertySet": {
+            "$ref": "./examples/V2ApiCollectionsMeta_Get_PropertySet.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiCollectionsMetaRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ApiCollectionsMetaResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request to retrieve the metadata of collections",
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "Access token in API key header is missing or invalid",
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "Collections metadata resource page does not exist",
             "x-ms-error-response": true
           }
         }
@@ -581,8 +638,25 @@
         "subscriptionId"
       ]
     },
-    "ApiCollectionRequest": {
-      "title": "ApiCollectionRequest",
+    "ApiCollectionsRequest": {
+      "title": "ApiCollectionsRequest",
+      "type": "object",
+      "properties": {
+        "subscriptionIds": {
+          "description": "list of subscription Ids of customer",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "required": [
+        "subscriptionIds"
+      ]
+    },
+    "ApiCollectionsMetaRequest": {
+      "title": "ApiCollectionsMetaRequest",
       "type": "object",
       "properties": {
         "subscriptionIds": {
@@ -863,10 +937,6 @@
           "type": "integer",
           "format": "int32"
         },
-        "numberOfApimResources": {
-          "type": "integer",
-          "format": "int32"
-        },
         "suspectedPII": {
           "description": "number of API endpoints that contain suspected PII",
           "type": "integer",
@@ -921,8 +991,8 @@
         }
       }
     },
-    "ApiCollectionResponse": {
-      "title": "ApiCollectionResponse",
+    "ApiCollectionsResponse": {
+      "title": "ApiCollectionsResponse",
       "type": "object",
       "properties": {
         "value": {
@@ -936,18 +1006,22 @@
         }
       }
     },
-    "EndpointTypes": {
-      "title": "EndpointTypes",
-      "description": "enum to describe the type of an API endpoint",
-      "example": "DOCUMENTED",
-      "type": "string",
-      "enum": [
-        "DOCUMENTED",
-        "NON_DOCUMENTED"
-      ],
-      "x-ms-enum": {
-        "name": "EndpointTypes",
-        "modelAsString": true
+    "ApiCollectionsMetaResponse": {
+      "title": "ApiCollectionsMetaResponse",
+      "type": "object",
+      "properties": {
+        "numberOfApimResources": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numberOfApiCollections": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numberOfTotalApiEndpoints": {
+          "type": "integer",
+          "format": "int32"
+        }
       }
     },
     "PiiDataClassificationItem": {
@@ -997,9 +1071,6 @@
         "triggerDate": {
           "type": "string",
           "format": "date-time"
-        },
-        "endpointType": {
-          "$ref": "#/definitions/EndpointTypes"
         },
         "isEndpointActive": {
           "type": "boolean"
