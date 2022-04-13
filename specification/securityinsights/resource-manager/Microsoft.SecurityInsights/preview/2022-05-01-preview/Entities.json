@@ -771,7 +771,8 @@
           "items": {
             "$ref": "#/definitions/EntityInsightItem"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         }
       },
       "type": "object"
@@ -829,14 +830,16 @@
               "items": {
                 "$ref": "./common/EntityTypes.json#/definitions/Entity"
               },
-              "type": "array"
+              "type": "array",
+              "x-ms-identifiers": []
             },
             "edges": {
               "description": "Array of edges that connects the entity to the list of entities.",
               "items": {
                 "$ref": "#/definitions/EntityEdges"
               },
-              "type": "array"
+              "type": "array",
+              "x-ms-identifiers": []
             }
           },
           "type": "object"
@@ -929,7 +932,8 @@
           "items": {
             "$ref": "#/definitions/EntityTimelineItem"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         }
       },
       "type": "object"
@@ -1041,7 +1045,8 @@
               }
             },
             "type": "object"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "inputEntityType": {
           "description": "The type of the entity",
@@ -1082,7 +1087,8 @@
               }
             },
             "type": "object"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "rows": {
           "type": "array",
@@ -1167,11 +1173,13 @@
                   }
                 },
                 "type": "object"
-              }
+              },
+              "x-ms-identifiers": []
             },
             "queriesDefinitions": {
               "type": "array",
               "description": "List of insight queries definitions.",
+              "x-ms-identifiers": [],
               "items": {
                 "properties": {
                   "filter": {
@@ -1189,6 +1197,7 @@
                   "linkColumnsDefinitions": {
                     "type": "array",
                     "description": "Insight column header.",
+                    "x-ms-identifiers": [],
                     "items": {
                       "properties": {
                         "projectedName": {
@@ -1267,7 +1276,8 @@
           "items": {
             "$ref": "#/definitions/GetInsightsError"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -1283,7 +1293,16 @@
           "type": "string",
           "enum": [
             "Insight"
-          ]
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "GetInsightsError",
+            "values": [
+              {
+                "value": "Insight"
+              }
+            ]
+          }
         },
         "queryId": {
           "description": "the query id",
@@ -1408,14 +1427,16 @@
           "items": {
             "$ref": "#/definitions/TimelineAggregation"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         },
         "errors": {
           "description": "information about the failure queries",
           "items": {
             "$ref": "#/definitions/TimelineError"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         }
       },
       "required": [
