@@ -133,14 +133,14 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/scopeUsageDetailsParameter"
+          },
+          {
             "name": "operationId",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The target operation Id."
-          },
-          {
-            "$ref": "#/parameters/scopeUsageDetailsParameter"
           },
           {
             "$ref": "common-types.json#/parameters/apiVersionParameter"
@@ -179,14 +179,14 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/scopeUsageDetailsParameter"
+          },
+          {
             "name": "operationId",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The target operation Id."
-          },
-          {
-            "$ref": "#/parameters/scopeUsageDetailsParameter"
           },
           {
             "$ref": "common-types.json#/parameters/apiVersionParameter"
@@ -297,7 +297,7 @@
           "x-ms-client-flatten": true,
           "type": "object",
           "description": "The properties of the resource generated.",
-          "$ref": "#/definitions/DownloadURL"
+          "$ref": "#/definitions/DownloadLocation"
         }
       }
     },
@@ -320,11 +320,11 @@
           "x-ms-client-flatten": true,
           "type": "object",
           "description": "The properties of the resource generated.",
-          "$ref": "#/definitions/DownloadURL"
+          "$ref": "#/definitions/DownloadLocation"
         }
       }
     },
-    "DownloadURL": {
+    "DownloadLocation": {
       "description": "The URL to download the generated report.",
       "properties": {
         "downloadUrl": {
