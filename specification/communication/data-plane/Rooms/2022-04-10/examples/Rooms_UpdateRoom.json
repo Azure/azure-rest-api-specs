@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.communication.azure.com/",
+    "api-version": "2022-04-10",
+    "roomId": "999126454",
+    "updateRoomRequest": {
+      "validFrom": "2021-10-16T10:00:00+00:00",
+      "validUntil": "2021-10-23T00:00:00+00:00"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "room": {
+          "id": "999126454",
+          "createdDateTime": "2021-08-28T01:38:19.0359921+00:00",
+          "validFrom": "2021-10-16T10:00:00+00:00",
+          "validUntil": "2021-10-23T00:00:00+00:00",
+          "roomType": "open",
+          "participants": [{
+            "communicationIdentifier": {
+              "rawId": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10b",
+              "communicationUser": {
+                "id": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10b"
+              }
+            },
+            "roleId": "Organizer"
+          }]
+        }
+      }
+    },
+    "401": {
+      "body": {
+        "error": {
+          "code": "Unauthorized",
+          "message": "Request is not authorized."
+        }
+      }
+    },
+    "500": {
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "Error happened at server side."
+        }
+      }
+    }
+  }
+}
