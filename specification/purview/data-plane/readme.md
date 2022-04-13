@@ -46,7 +46,7 @@ tag: package-2018-12-01-preview
 title: PurviewScanningClient
 ```
 
-<!-- ### Tag: package-2022-02-01-preview
+### Tag: package-2022-02-01-preview
 
 These settings apply only when `--tag=package-2022-02-01-preview` is specified on the command line.
 
@@ -77,7 +77,7 @@ input-file:
 - Azure.Analytics.Purview.Scanning/preview/2018-12-01-preview/scanningService.json
 modelerfour:
   lenient-model-deduplication: true
-``` -->
+```
 
 These are the global settings for the Purview API.
 
