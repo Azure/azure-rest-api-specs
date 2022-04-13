@@ -776,12 +776,12 @@
     "SourceContainerInput": {
       "description": "Source of the input documents",
       "required": [
-        "url"
+        "containerUrl"
       ],
       "type": "object",
       "properties": {
-        "url": {
-          "description": "Location of the folder / container or single file with your documents",
+        "containerUrl": {
+          "description": "Location of the folder / container",
           "type": "string",
           "example": "https://myblob.blob.core.windows.net/Container/"
         },
@@ -802,11 +802,11 @@
     "SourceInput": {
       "description": "Source of the input document",
       "required": [
-        "url"
+        "blobUrl"
       ],
       "type": "object",
       "properties": {
-        "url": {
+        "blobUrl": {
           "description": "Location of the a single document",
           "type": "string",
           "example": "https://myblob.blob.core.windows.net/Container/myblob.txt"
@@ -881,10 +881,10 @@
     "BatchRequestOptions": {
       "type": "object",
       "properties": {
-        "experimental": {
-          "description": "Whether this request will use experimental feature (if applicable)",
-          "type": "boolean",
-          "example": true
+        "flight": {
+          "description": "Any flight feature for experimentation",
+          "type": "string",
+          "example": "experimental"
         },
         "pdfOutputAdditionalFormat": {
           "$ref": "#/definitions/AdditionalOutputFileFormat"
@@ -927,10 +927,10 @@
       "description": "Translation job submission batch request",
       "type": "object",
       "properties": {
-        "sourceContainerUrl": {
+        "source": {
           "$ref": "#/definitions/SourceContainerInput"
         },
-        "sourceUrls": {
+        "sources": {
           "description": "The list of input urls",
           "type": "array",
           "items": {
@@ -1138,17 +1138,17 @@
     "TargetStatus": {
       "description": "Target Status Response",
       "required": [
+        "blobUrl",
         "id",
+        "language",
         "lastActionDateTimeUtc",
-        "path",
         "progress",
         "self",
-        "status",
-        "to"
+        "status"
       ],
       "type": "object",
       "properties": {
-        "path": {
+        "blobUrl": {
           "description": "Location of the document or folder",
           "type": "string",
           "example": "https://myblob.blob.core.windows.net/mycontainer/fr/mydoc.txt"
@@ -1162,8 +1162,8 @@
         "status": {
           "$ref": "#/definitions/Status"
         },
-        "to": {
-          "description": "To language",
+        "language": {
+          "description": "Target language",
           "type": "string"
         },
         "error": {
@@ -1198,9 +1198,9 @@
     "DocumentStatus": {
       "description": "Document Status Response",
       "required": [
+        "blobUrl",
         "createdDateTimeUtc",
         "id",
-        "path",
         "self",
         "targets"
       ],
@@ -1211,7 +1211,7 @@
           "type": "string",
           "example": "https://myresource.cognitiveservices/translator/document/v2.0-preview.1/batches/36724748-f7a0-4db7-b7fd-f041ddc75033?documentId=123"
         },
-        "path": {
+        "blobUrl": {
           "description": "Location of the source document",
           "type": "string",
           "example": "https://myblob.blob.core.windows.net/mycontainer/fr/mydoc.txt"
