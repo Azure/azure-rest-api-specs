@@ -626,9 +626,21 @@
         "description": "Use this API to translate a single document. the request body should contain the document content and the 'Content-Type' header should contain the document type",
         "operationId": "DocumentTranslation_TranslateDocument",
         "consumes": [
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "text/plain",
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "application/msword",
+          "application/vnd.ms-powerpoint",
+          "application/vnd.ms-excel",
+          "application/vnd.oasis.opendocument.text",
+          "application/vnd.oasis.opendocument.presentation",
+          "application/vnd.oasis.opendocument.spreadsheet",
+          "application/vnd.ms-outlook",
+          "text/html",
+          "multipart/related",
+          "application/x-mimearchive",
+          "application/vnd.openxmlformats-officedocument"
         ],
         "produces": [
           "text/plain",
@@ -643,7 +655,6 @@
           "application/vnd.oasis.opendocument.spreadsheet",
           "application/vnd.ms-outlook",
           "text/html",
-          "message/rfc823",
           "multipart/related",
           "application/x-mimearchive",
           "application/vnd.openxmlformats-officedocument",
@@ -674,9 +685,7 @@
             "name": "body",
             "description": "Request body.  Binary of the document",
             "schema": {
-              "format": "byte",
-              "description": "Request body.  Binary of the document",
-              "type": "string"
+              "$ref": "#/definitions/Stream"
             }
           }
         ],
@@ -684,7 +693,7 @@
           "200": {
             "description": "Successful request and the document is translated.  The translated document is returned in the body",
             "schema": {
-              "format": "byte",
+              "format": "binary",
               "type": "string"
             }
           },
@@ -1364,6 +1373,44 @@
           "items": {
             "$ref": "#/definitions/FileFormat"
           }
+        }
+      }
+    },
+    "Stream": {
+      "type": "object",
+      "properties": {
+        "canRead": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "canSeek": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "canTimeout": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "canWrite": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "length": {
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        },
+        "position": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "readTimeout": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "writeTimeout": {
+          "format": "int32",
+          "type": "integer"
         }
       }
     },
