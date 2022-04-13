@@ -1633,7 +1633,11 @@
       "enum": [
         "Primary",
         "Secondary",
-        "Unknown"
+        "Unknown",
+        "ASCS",
+        "ERSInactive",
+        "ERS",
+        "Standby"
       ],
       "type": "string",
       "readOnly": true,
@@ -1674,6 +1678,22 @@
       },
       "x-ms-mutability": [
         "create",
+        "read"
+      ]
+    },
+    "EnqueueReplicationServerType": {
+      "description": "Defines the type of Enqueue Replication Server.",
+      "enum": [
+        "EnqueueReplicator1",
+        "EnqueueReplicator2"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "EnqueueReplicationServerType",
+        "modelAsString": true
+      },
+      "x-ms-mutability": [
         "read"
       ]
     },
@@ -2947,6 +2967,45 @@
         }
       }
     },
+    "EnqueueReplicationServerProperties": {
+      "description": "Defines the SAP ERS Server properties.",
+      "type": "object",
+      "properties": {
+        "ersVersion": {
+          "$ref": "#/definitions/EnqueueReplicationServerType",
+          "readOnly": true
+        },
+        "instanceNo": {
+          "type": "string",
+          "description": "The ERS server instance id.",
+          "readOnly": true
+        },
+        "hostname": {
+          "type": "string",
+          "description": "The ERS server SAP host name.",
+          "readOnly": true
+        },
+        "kernelVersion": {
+          "type": "string",
+          "description": "The ERS server SAP kernel version.",
+          "readOnly": true
+        },
+        "kernelPatch": {
+          "type": "string",
+          "description": "The ERS server SAP kernel patch.",
+          "readOnly": true
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "The ERS server SAP IP Address.",
+          "readOnly": true
+        },
+        "health": {
+          "$ref": "#/definitions/HealthState",
+          "readOnly": true
+        }
+      }
+    },
     "SAPCentralServerProperties": {
       "description": "Defines the SAP Central Server properties.",
       "type": "object",
@@ -2969,6 +3028,9 @@
         },
         "gatewayServerProperties": {
           "$ref": "#/definitions/GatewayServerProperties"
+        },
+        "enqueueReplicationServerProperties": {
+          "$ref": "#/definitions/EnqueueReplicationServerProperties"
         },
         "kernelVersion": {
           "type": "string",
