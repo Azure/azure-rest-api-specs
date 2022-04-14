@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.communication.azure.com/",
+    "api-version": "2021-04-07",
+    "roomId": "999126454"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "999126454",
+        "createdDateTime": "2021-08-28T01:38:19.0359921+00:00",
+        "validFrom": "2021-10-16T00:00:00+00:00",
+        "validUntil": "2021-10-22T00:00:00+00:00",
+        "participants": {
+          "8:acs:a595092b-73c9-48ce-858f-e97083e4cb34_8b2b781b-bdde-491e-a2b0-cb6b825ccb10": {
+            "role": "Presenter"
+          },
+          "8:acs:6bf34271-5075-4dc4-883b-93f6cb6ae949_70ee58d4-18a2-4284-b9da-aa54b51efdad": {
+            "role": "Attendee"
+          }
+        }
+      }
+    },
+    "401": {
+      "body": {
+        "error": {
+          "code": "Unauthorized",
+          "message": "Request is not authorized."
+        }
+      }
+    },
+    "403": {
+      "body": {
+        "error": {
+          "code": "Forbidden",
+          "message": "Method not allowed for the user."
+        }
+      }
+    },
+    "500": {
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "Error happened at server side."
+        }
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 {
   "parameters": {
     "endpoint": "https://contoso.communication.azure.com/",
-    "api-version": "2022-04-10",
+    "api-version": "2021-04-07",
     "roomId": "999126454",
     "updateRoomRequest": {
       "validFrom": "2021-10-16T10:00:00+00:00",
@@ -16,16 +16,14 @@
           "createdDateTime": "2021-08-28T01:38:19.0359921+00:00",
           "validFrom": "2021-10-16T10:00:00+00:00",
           "validUntil": "2021-10-23T00:00:00+00:00",
-          "roomType": "open",
-          "participants": [{
-            "communicationIdentifier": {
-              "rawId": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10b",
-              "communicationUser": {
-                "id": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10b"
-              }
+          "participants": {
+            "8:acs:a595092b-73c9-48ce-858f-e97083e4cb34_8b2b781b-bdde-491e-a2b0-cb6b825ccb10": {
+              "role": "Presenter"
             },
-            "roleId": "Organizer"
-          }]
+            "8:acs:6bf34271-5075-4dc4-883b-93f6cb6ae949_70ee58d4-18a2-4284-b9da-aa54b51efdad": {
+              "role": "Attendee"
+            }
+          }
         }
       }
     },
@@ -34,6 +32,14 @@
         "error": {
           "code": "Unauthorized",
           "message": "Request is not authorized."
+        }
+      }
+    },
+    "403": {
+      "body": {
+        "error": {
+          "code": "Forbidden",
+          "message": "Method not allowed for the user."
         }
       }
     },
