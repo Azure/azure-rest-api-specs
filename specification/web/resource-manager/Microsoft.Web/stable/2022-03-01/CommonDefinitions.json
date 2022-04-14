@@ -149,6 +149,22 @@
           "type": "boolean",
           "readOnly": true
         },
+        "upgradePreference": {
+            "description": "Upgrade Preference",
+            "default": "None",
+            "enum": [
+                "None",
+                "Early",
+                "Late",
+                "Manual"
+            ],
+            "type": "string",
+            "nullable": true,
+            "x-ms-enum": {
+                "name": "UpgradePreference",
+                "modelAsString": true
+            }
+        },
         "dedicatedHostCount": {
           "format": "int32",
           "description": "Dedicated Host Count",
@@ -160,6 +176,11 @@
         },
         "networkingConfiguration": {
           "$ref": "#/definitions/AseV3NetworkingConfiguration"
+        },
+        "upgradeAvailable": {
+            "description": "Whether an upgrade is available for this hosting environment",
+            "type": "boolean",
+            "readOnly": true
         }
       }
     },
