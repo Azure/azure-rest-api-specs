@@ -635,8 +635,7 @@
         },
         "createdBy": {
           "$ref": "../../../common/2.0/types.json#/definitions/UserInfo",
-          "description": "Describes a user that created the bookmark",
-          "type": "object"
+          "description": "Describes a user that created the bookmark"
         },
         "labels": {
           "description": "List of labels relevant to this bookmark",
@@ -881,7 +880,8 @@
           "items": {
             "$ref": "#/definitions/InsightsTableResult",
             "description": "Query results for table insights query."
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1022,7 +1022,6 @@
         },
         "kind": {
           "$ref": "./common/EntityTypes.json#/definitions/EntityQueryKind",
-          "type": "string",
           "description": "The kind of the entity query"
         }
       },

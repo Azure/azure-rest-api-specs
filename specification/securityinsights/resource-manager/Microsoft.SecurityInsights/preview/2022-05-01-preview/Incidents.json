@@ -943,6 +943,80 @@
       "type": "object",
       "x-ms-discriminator-value": "Bookmark"
     },
+    "AnomalyTimelineItem": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityTimelineItem"
+        }
+      ],
+      "description": "Represents anomaly timeline item.",
+      "properties": {
+        "azureResourceId": {
+          "type": "string",
+          "description": "The anomaly azure resource id."
+        },
+        "productName": {
+          "type": "string",
+          "description": "The anomaly product name."
+        },
+        "description": {
+          "type": "string",
+          "description": "The anomaly description."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The anomaly name."
+        },
+        "endTimeUtc": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The anomaly end time."
+        },
+        "startTimeUtc": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The anomaly start time."
+        },
+        "timeGenerated": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The anomaly generated time."
+        },
+        "vendor": {
+          "type": "string",
+          "description": "The name of the anomaly vendor."
+        },
+        "intent": {
+          "type": "string",
+          "description": "The intent of the anomaly."
+        },
+        "techniques": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "technique of the anomaly"
+          },
+          "description": "The techniques of the anomaly."
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Reason of the anomaly"
+          },
+          "description": "The reasons that cause the anomaly."
+        }
+      },
+      "required": [
+        "azureResourceId",
+        "displayName",
+        "endTimeUtc",
+        "startTimeUtc",
+        "timeGenerated"
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "Anomaly"
+    },
     "EntityTimelineItem": {
       "description": "Entity timeline Item.",
       "discriminator": "kind",
@@ -962,7 +1036,8 @@
       "enum": [
         "Activity",
         "Bookmark",
-        "SecurityAlert"
+        "SecurityAlert",
+        "Anomaly"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -980,6 +1055,10 @@
           {
             "description": "security alerts",
             "value": "SecurityAlert"
+          },
+          {
+            "description": "anomaly",
+            "value": "Anomaly"
           }
         ]
       }
