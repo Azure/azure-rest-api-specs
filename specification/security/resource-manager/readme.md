@@ -511,9 +511,6 @@ These settings apply only when `--tag=package-2021-10-preview-only` is specified
 ``` yaml $(tag) == 'package-2021-10-preview-only'
 input-file:
   - Microsoft.Security/preview/2021-10-01-preview/mdeOnboardings.json
-# Needed when there is more than one input file
-override-info:
-title: SecurityCenter
 ``` 
 
 ### Tag: package-2021-06-only
