@@ -6146,6 +6146,58 @@
         "servicePrincipalId",
         "servicePrincipalKey"
       ]
+    },
+    "SharePointOnlineFileLinkedService": {
+      "x-ms-discriminator-value": "SharePointOnlineFile",
+      "description": "SharePoint Online File linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "SharePoint Online File linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SharePointOnlineFileLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SharePointOnlineFileLinkedServiceTypeProperties": {
+      "description": "SharePoint Online File linked service properties.",
+      "type": "object",
+      "properties": {
+        "siteUrl": {
+          "type": "object",
+          "description": "The URL of the sharepoint online site. Type: string (or Expression with resultType string)."
+        },
+        "tenantId": {
+          "type": "object",
+          "description": "The tenantId which your application resides in. It could be found in Azure AAD homepage. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalId": {
+          "type": "object",
+          "description": "The application id of your application registered in Azure Active Directory. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalKey": {
+          "description": "The secret of your application registered in Azure Active Directory. Type: string (or Expression with resultType string).",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "siteUrl",
+        "tenantId",
+        "servicePrincipalId",
+        "servicePrincipalKey"
+      ]
     }
   }
 }
