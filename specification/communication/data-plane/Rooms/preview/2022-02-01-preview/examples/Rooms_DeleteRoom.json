@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.communication.azure.com/",
+    "api-version": "2021-04-07",
+    "roomId": "999126454"
+  },
+  "responses": {
+    "204": {},
+    "401": {
+      "body": {
+        "error": {
+          "code": "Unauthorized",
+          "message": "Request is not authorized."
+        }
+      }
+    },
+    "403": {
+      "body": {
+        "error": {
+          "code": "Forbidden",
+          "message": "Method not allowed for the user."
+        }
+      }
+    },
+    "500": {
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "Error happened at server side."
+        }
+      }
+    }
+  }
+}

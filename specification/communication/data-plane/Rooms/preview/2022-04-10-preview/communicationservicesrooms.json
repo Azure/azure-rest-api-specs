@@ -325,14 +325,7 @@
             },
             "x-ms-error-response": true
           },
-          "429": {
-            "description": "Too many requests.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "503": {
+          "500": {
             "description": "Service unavailable.",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
@@ -353,7 +346,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink",
-          "itemName": "value"
+          "itemName": "participants"
         }
       }
     },
@@ -412,14 +405,7 @@
             },
             "x-ms-error-response": true
           },
-          "429": {
-            "description": "Too many requests.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "503": {
+          "500": {
             "description": "Service unavailable.",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
@@ -495,14 +481,7 @@
             },
             "x-ms-error-response": true
           },
-          "429": {
-            "description": "Too many requests.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "503": {
+          "500": {
             "description": "Service unavailable.",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
@@ -578,14 +557,7 @@
             },
             "x-ms-error-response": true
           },
-          "429": {
-            "description": "Too many requests.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "503": {
+          "500": {
             "description": "Service unavailable.",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
@@ -609,10 +581,10 @@
   },
   "definitions": {
     "CommunicationError": {
-      "$ref": "../../Common/stable/2021-03-07/common.json#/definitions/CommunicationError"
+      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationError"
     },
     "CommunicationErrorResponse": {
-      "$ref": "../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
     },
     "ErrorResponse": {
       "type": "object",
@@ -714,16 +686,16 @@
       }
     },
     "CommunicationUserIdentifierModel": {
-      "$ref": "../../Common/stable/2021-03-07/common.json#/definitions/CommunicationUserIdentifierModel"
+      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationUserIdentifierModel"
     },
     "CommunicationCloudEnvironment": {
-      "$ref": "../../Common/stable/2021-03-07/common.json#/definitions/CommunicationCloudEnvironmentModel"
+      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationCloudEnvironmentModel"
     },
     "MicrosoftTeamsUserIdentifierModel": {
-      "$ref": "../../Common/stable/2021-03-07/common.json#/definitions/MicrosoftTeamsUserIdentifierModel"
+      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/MicrosoftTeamsUserIdentifierModel"
     },
     "CommunicationIdentifierModel": {
-      "$ref": "../../Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
     },
     "RoomModel": {
       "description": "The meeting room.",
@@ -889,7 +861,7 @@
       ],
       "type": "object",
       "properties": {
-        "value": {
+        "participants": {
           "description": "Room participants.",
           "type": "array",
           "items": {
