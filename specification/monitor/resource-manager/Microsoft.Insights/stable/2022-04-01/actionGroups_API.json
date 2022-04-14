@@ -248,9 +248,6 @@
                 "type": "string",
                 "description": "The location header that has the polling uri."
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/TestNotificationResponse"
             }
           },
           "default": {
@@ -303,9 +300,6 @@
                 "type": "string",
                 "description": "The location header that has the polling uri."
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/TestNotificationResponse"
             }
           },
           "default": {
@@ -567,29 +561,6 @@
       "type": "object",
       "x-ms-azure-resource": true,
       "description": "An azure resource object"
-    },
-    "TestNotificationResponse": {
-      "description": "The response when test notification succeeded",
-      "type": "object",
-      "properties": {
-        "notificationId": {
-          "type": "string",
-          "description": "The notification id"
-        },
-        "correlationId": {
-          "type": "string",
-          "description": "The correlation id"
-        },
-        "createdTime": {
-          "type": "string",
-          "description": "The created time"
-        }
-      },
-      "required": [
-        "notificationId",
-        "correlationId",
-        "createdTime"
-      ]
     },
     "TestNotificationDetailsResponse": {
       "description": "The details of the test notification results.",
