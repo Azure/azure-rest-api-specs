@@ -21,7 +21,9 @@ Generate all API versions currently shipped for this package
 ```yaml $(multiapi)
 clear-output-folder: true
 batch: 
+  - tag: package-preview-2022-04-only
   - tag: package-2022-03
+  - tag: package-preview-2022-01-15
   - tag: package-preview-2022-01
   - tag: package-preview-2021-11
   - tag: package-2021-09
@@ -38,6 +40,15 @@ output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernet
 perform-load: false
 ```
 
+### Tag: package-preview-2022-04-only and python
+
+These settings apply only when `--tag=package-preview-2022-04-only --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-04-only'
+namespace: azure.mgmt.kubernetesconfiguration.v2022_04_02_preview
+output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/v2022_04_02_preview
+```
+
 ### Tag: package-2022-03 and python
 
 These settings apply only when `--tag=package-2022-03 --python` is specified on the command line.
@@ -45,6 +56,15 @@ These settings apply only when `--tag=package-2022-03 --python` is specified on 
 ``` yaml $(tag) == 'package-2022-03'
 namespace: azure.mgmt.kubernetesconfiguration.v2022_03_01
 output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/v2022_03_01
+```
+
+### Tag: package-preview-2022-01-15 and python
+
+These settings apply only when `--tag=package-preview-2022-01-15 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-01-15'
+namespace: azure.mgmt.kubernetesconfiguration.v2022_01_15_preview
+output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/v2022_01_15_preview
 ```
 
 ### Tag: package-preview-2022-01 and python
@@ -117,4 +137,9 @@ These settings apply only when `--tag=package-2019-11-01-preview  --python` is s
 ``` yaml $(tag) == 'package-2019-11-01-preview '
 namespace: azure.mgmt.kubernetesconfiguration.v2019_11_01_preview
 output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/v2019_11_01_preview
+```
+
+``` yaml $(python)
+modelerfour:
+  lenient-model-deduplication: true
 ```
