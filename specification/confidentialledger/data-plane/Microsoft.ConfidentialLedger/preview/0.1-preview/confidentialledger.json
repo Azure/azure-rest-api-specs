@@ -723,28 +723,28 @@
     "ReceiptContents": {
       "properties": {
         "cert": {
-          "$ref": "#/components/schemas/string"
+          "type": "string"
         },
         "leaf": {
-          "$ref": "#/components/schemas/string"
+          "type": "string"
         },
         "leaf_components": {
-          "$ref": "#/components/schemas/Receipt__LeafComponents"
+          "$ref": "#/definitions/ReceiptLeafComponents"
         },
         "node_id": {
-          "$ref": "#/components/schemas/NodeId"
+          "$ref": "#/definitions/EntityId"
         },
         "proof": {
-          "$ref": "#/components/schemas/Receipt__Element_array"
+          "$ref": "#/definitions/ReceiptElement_array"
         },
         "root": {
-          "$ref": "#/components/schemas/string"
+          "type": "string"
         },
         "service_endorsements": {
           "$ref": "#/components/schemas/Pem_array"
         },
         "signature": {
-          "$ref": "#/components/schemas/string"
+          "type": "string"
         }
       },
       "required": [
@@ -752,6 +752,37 @@
         "proof",
         "node_id"
       ],
+      "type": "object"
+    },
+    "ReceiptElement": {
+      "properties": {
+        "left": {
+          "type": "string"
+        },
+        "right": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ReceiptElement_array": {
+      "items": {
+        "$ref": "#/definitions/ReceiptElement"
+      },
+      "type": "array"
+    },
+    "ReceiptLeafComponents": {
+      "properties": {
+        "claims_digest": {
+          "type": "string"
+        },
+        "commit_evidence": {
+          "type": "string"
+        },
+        "write_set_digest": {
+          "type": "string"
+        }
+      },
       "type": "object"
     },
     "RoleAssignment": {
@@ -769,6 +800,15 @@
         }
       },
       "type": "object"
+    },
+    "Pem": {
+      "type": "string"
+    },
+    "Pem_array": {
+      "items": {
+        "$ref": "#/definitions/Pem"
+      },
+      "type": "array"
     },
     "SubLedgerId": {
       "description": "Identifier for sub-ledgers.",
