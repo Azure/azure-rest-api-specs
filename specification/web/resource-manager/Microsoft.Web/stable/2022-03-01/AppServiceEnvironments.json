@@ -45,6 +45,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get all App Service Environments for a subscription.": {
+            "$ref": "./examples/AppServiceEnvironments_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -81,6 +86,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get all App Service Environments in a resource group.": {
+            "$ref": "./examples/AppServiceEnvironments_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -126,6 +136,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get the properties of an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_Get.json"
           }
         }
       },
@@ -189,6 +204,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create or update an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_CreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -234,6 +254,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_Delete.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -297,6 +322,11 @@
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create or update an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_Update.json"
+          }
         }
       }
     },
@@ -338,6 +368,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get the used, available, and total worker capacity an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListCapacities.json"
           }
         },
         "x-ms-pageable": {
@@ -383,6 +418,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get IP addresses assigned to an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_GetVipInfo.json"
           }
         }
       }
@@ -440,6 +480,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Move an App Service Environment to a different VNET.": {
+            "$ref": "./examples/AppServiceEnvironments_ChangeVnet.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -620,7 +665,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/AseV3NetworkingConfiguration"
+              "$ref": "./CommonDefinitions.json#/definitions/AseV3NetworkingConfiguration"
             }
           },
           "default": {
@@ -628,6 +673,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get networking configuration of an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_GetAseV3NetworkingConfiguration.json"
           }
         }
       },
@@ -654,7 +704,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AseV3NetworkingConfiguration"
+              "$ref": "./CommonDefinitions.json#/definitions/AseV3NetworkingConfiguration"
             }
           },
           {
@@ -668,7 +718,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/AseV3NetworkingConfiguration"
+              "$ref": "./CommonDefinitions.json#/definitions/AseV3NetworkingConfiguration"
             }
           },
           "default": {
@@ -676,6 +726,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Update networking configuration of an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_UpdateAseNetworkingConfiguration.json"
           }
         }
       }
@@ -721,6 +776,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get diagnostic information for an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListDiagnostics.json"
           }
         }
       }
@@ -771,6 +831,11 @@
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get a diagnostics item for an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_GetDiagnosticsItem.json"
+          }
         }
       }
     },
@@ -815,7 +880,7 @@
           }
         },
         "x-ms-examples": {
-          "Get Inbound Network Dependencies Endpoints": {
+          "Get the network endpoints of all inbound dependencies of an App Service Environment.": {
             "$ref": "./examples/GetInboundNetworkDependenciesEndpoints.json"
           }
         },
@@ -864,6 +929,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get all multi-role pools.": {
+            "$ref": "./examples/AppServiceEnvironments_ListMultiRolePools.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -907,6 +977,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get properties of a multi-role pool.": {
+            "$ref": "./examples/AppServiceEnvironments_GetMultiRolePool.json"
           }
         }
       },
@@ -964,6 +1039,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create or update a multi-role pool.": {
+            "$ref": "./examples/AppServiceEnvironments_CreateOrUpdateMultiRolePool.json"
+          }
+        },
         "x-ms-long-running-operation": true
       },
       "patch": {
@@ -1019,6 +1099,11 @@
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create or update a multi-role pool.": {
+            "$ref": "./examples/AppServiceEnvironments_CreateOrUpdateMultiRolePool.json"
+          }
         }
       }
     },
@@ -1069,6 +1154,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get metric definitions for a specific instance of a multi-role pool of an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListMultiRolePoolInstanceMetricDefinitions.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1112,6 +1202,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get metric definitions for a multi-role pool of an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListMultiRoleMetricDefinitions.json"
           }
         },
         "x-ms-pageable": {
@@ -1159,6 +1254,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get available SKUs for scaling a multi-role pool.": {
+            "$ref": "./examples/AppServiceEnvironments_ListMultiRolePoolSkus.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1202,6 +1302,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get usage metrics for a multi-role pool of an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListMultiRoleUsages.json"
           }
         },
         "x-ms-pageable": {
@@ -1251,6 +1356,11 @@
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "List all currently running operations on the App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListOperations.json"
+          }
         }
       }
     },
@@ -1295,7 +1405,7 @@
           }
         },
         "x-ms-examples": {
-          "Get Outbound Network Dependencies Endpoints": {
+          "Get the network endpoints of all outbound dependencies of an App Service Environment.": {
             "$ref": "./examples/GetOutboundNetworkDependenciesEndpoints.json"
           }
         },
@@ -1342,6 +1452,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the list of private endpoints associated with a hosting environment.": {
+            "$ref": "./examples/AppServiceEnvironments_GetPrivateEndpointConnectionList.json"
           }
         },
         "x-ms-pageable": {
@@ -1394,6 +1509,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a private endpoint connection.": {
+            "$ref": "./examples/AppServiceEnvironments_GetPrivateEndpointConnection.json"
           }
         }
       },
@@ -1456,6 +1576,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Approves or rejects a private endpoint connection.": {
+            "$ref": "./examples/AppServiceEnvironments_ApproveOrRejectPrivateEndpointConnection.json"
+          }
+        },
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -1515,6 +1640,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Deletes a private endpoint connection.": {
+            "$ref": "./examples/AppServiceEnvironments_DeletePrivateEndpointConnection.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -1557,6 +1687,11 @@
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Gets the private link resources.": {
+            "$ref": "./examples/AppServiceEnvironments_GetPrivateLinkResources.json"
+          }
         }
       }
     },
@@ -1595,6 +1730,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Reboot all machines in an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_Reboot.json"
           }
         }
       }
@@ -1645,6 +1785,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Resume an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_Resume.json"
+          }
+        },
         "x-ms-long-running-operation": true,
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -1689,6 +1834,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get all App Service plans in an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListAppServicePlans.json"
           }
         },
         "x-ms-pageable": {
@@ -1742,6 +1892,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get all apps in an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListWebApps.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1791,6 +1946,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Suspend an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_Suspend.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1846,6 +2006,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get global usage metrics of an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListUsages.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1889,6 +2054,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get all worker pools of an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListWorkerPools.json"
           }
         },
         "x-ms-pageable": {
@@ -1941,6 +2111,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get properties of a worker pool.": {
+            "$ref": "./examples/AppServiceEnvironments_GetWorkerPool.json"
           }
         }
       },
@@ -2005,6 +2180,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get properties of a worker pool.": {
+            "$ref": "./examples/AppServiceEnvironments_CreateOrUpdateWorkerPool.json"
+          }
+        },
         "x-ms-long-running-operation": true
       },
       "patch": {
@@ -2067,6 +2247,11 @@
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get properties of a worker pool.": {
+            "$ref": "./examples/AppServiceEnvironments_CreateOrUpdateWorkerPool.json"
+          }
         }
       }
     },
@@ -2124,6 +2309,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get metric definitions for a specific instance of a worker pool of an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListWorkerPoolInstanceMetricDefinitions.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2174,6 +2364,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get metric definitions for a worker pool of an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListWebWorkerMetricDefinitions.json"
           }
         },
         "x-ms-pageable": {
@@ -2228,6 +2423,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get available SKUs for scaling a worker pool.": {
+            "$ref": "./examples/AppServiceEnvironments_ListWorkerPoolSkus.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2278,6 +2478,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get usage metrics for a worker pool of an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListWebWorkerUsages.json"
           }
         },
         "x-ms-pageable": {
@@ -2381,56 +2586,6 @@
           "$ref": "./CommonDefinitions.json#/definitions/AppServiceEnvironment",
           "description": "Core resource properties",
           "type": "object",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "AseV3NetworkingConfiguration": {
-      "description": "Full view of networking configuration for an ASE.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "AseV3NetworkingConfiguration resource specific properties",
-          "type": "object",
-          "properties": {
-            "windowsOutboundIpAddresses": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "readOnly": true
-            },
-            "linuxOutboundIpAddresses": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "readOnly": true
-            },
-            "externalInboundIpAddresses": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "readOnly": true
-            },
-            "internalInboundIpAddresses": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "readOnly": true
-            },
-            "allowNewPrivateEndpointConnections": {
-              "description": "Property to enable and disable new private endpoint connection creation on ASE",
-              "type": "boolean"
-            }
-          },
           "x-ms-client-flatten": true
         }
       }

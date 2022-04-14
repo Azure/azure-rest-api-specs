@@ -160,6 +160,9 @@
         },
         "customDnsSuffixConfiguration": {
           "$ref": "#/definitions/CustomDnsSuffixConfiguration"
+        },
+        "networkingConfiguration": {
+          "$ref": "#/definitions/AseV3NetworkingConfiguration"
         }
       }
     },
@@ -358,6 +361,78 @@
         "id": {
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "AseV3NetworkingConfiguration": {
+      "description": "Full view of networking configuration for an ASE.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "AseV3NetworkingConfiguration resource specific properties",
+          "type": "object",
+          "properties": {
+            "windowsOutboundIpAddresses": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "linuxOutboundIpAddresses": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "externalInboundIpAddresses": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "internalInboundIpAddresses": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "allowNewPrivateEndpointConnections": {
+              "description": "Property to enable and disable new private endpoint connection creation on ASE",
+              "type": "boolean"
+            },
+            "ftpEnabled": {
+              "description": "Property to enable and disable FTP on ASEV3",
+              "type": "boolean"
+            },
+            "remoteDebugEnabled": {
+              "description": "Property to enable and disable Remote Debug on ASEV3",
+              "type": "boolean"
+            },
+            "numberOfOutboundIpAddresses": {
+              "format": "int32",
+              "description": "Property to set the number of outbound ips on AseV3",
+              "type": "integer"
+            },
+            "inboundIpAddressOverride": {
+              "description": "Customer provided Inbound IP Address",
+              "type": "string"
+            },
+            "targetNumberOfOutboundIpAddresses": {
+              "format": "int32",
+              "type": "integer",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -2775,6 +2850,18 @@
               "description": "Last time the app was modified, in UTC. Read-only.",
               "type": "string",
               "readOnly": true
+            },
+            "vnetRouteAllEnabled": {
+              "description": "Virtual Network Route All enabled. This causes all outbound traffic to have Virtual Network Security Groups and User Defined Routes applied.",
+              "type": "boolean"
+            },
+            "vnetImagePullEnabled": {
+              "description": "To enable pulling image over Virtual Network",
+              "type": "boolean"
+            },
+            "vnetContentShareEnabled": {
+              "description": "To enable accessing content over virtual network",
+              "type": "boolean"
             },
             "siteConfig": {
               "$ref": "#/definitions/SiteConfig",
