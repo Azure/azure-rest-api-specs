@@ -53,7 +53,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "$filter",
@@ -105,7 +105,7 @@
             "$ref": "#/parameters/scopeParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "$filter",
@@ -151,7 +151,7 @@
             "$ref": "#/parameters/scheduledActionNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "scheduledAction",
@@ -203,7 +203,7 @@
             "$ref": "#/parameters/scheduledActionNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -240,7 +240,7 @@
             "$ref": "#/parameters/scheduledActionNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -279,7 +279,7 @@
             "$ref": "#/parameters/scheduledActionNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "scheduledAction",
@@ -334,7 +334,7 @@
             "$ref": "#/parameters/scheduledActionNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -374,7 +374,7 @@
             "$ref": "#/parameters/scheduledActionNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -410,7 +410,7 @@
             "$ref": "#/parameters/scheduledActionNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -446,7 +446,7 @@
             "$ref": "#/parameters/scheduledActionNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -476,7 +476,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "checkNameAvailabilityRequest",
@@ -521,7 +521,7 @@
             "$ref": "#/parameters/scopeParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "checkNameAvailabilityRequest",
@@ -568,9 +568,19 @@
         "modelAsString": true
       }
     },
-    "ErrorDetails": {
+    "ErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"x-ms-ratelimit-microsoft.consumption-retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header.",
       "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "ErrorDetails": {
       "description": "The details of the error.",
+      "type": "object",
       "properties": {
         "code": {
           "description": "Error code.",
@@ -581,16 +591,6 @@
           "description": "Error message indicating why the operation failed.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "ErrorResponse": {
-      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"x-ms-ratelimit-microsoft.consumption-retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "The details of the error.",
-          "$ref": "#/definitions/ErrorDetails"
         }
       }
     },
@@ -649,36 +649,16 @@
     "ScheduledActionProxyResource": {
       "description": "The Resource model definition.",
       "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
-        },
         "kind": {
           "$ref": "#/definitions/ScheduledActionKind",
           "description": "Kind of the scheduled action."
-        },
-        "eTag": {
-          "type": "string",
-          "description": "eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not."
-        },
-        "systemData": {
-          "readOnly": true,
-          "type": "object",
-          "description": "Resource metadata properties.",
-          "$ref": "#/definitions/SystemDataDefinition"
         }
       },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/AzureEntityResource"
+        }
+      ],
       "type": "object",
       "x-ms-azure-resource": true
     },
@@ -891,45 +871,6 @@
         }
       }
     },
-    "SystemDataDefinition": {
-      "description": "System metadata definition.",
-      "properties": {
-        "createdBy": {
-          "readOnly": true,
-          "type": "string",
-          "description": "String identifier for the identity that created the resource."
-        },
-        "createdByType": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of identity that created the resource: user, application, managedIdentity"
-        },
-        "createdAt": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)."
-        },
-        "lastModifiedBy": {
-          "readOnly": true,
-          "type": "string",
-          "description": "String identifier for the identity that last modified the resource."
-        },
-        "lastModifiedByType": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of identity that last modified the resource: user, application, managedIdentity"
-        },
-        "lastModifiedAt": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource last modification (UTC)"
-        }
-      },
-      "readOnly": true,
-      "type": "object"
-    },
     "WeeksOfMonth": {
       "type": "string",
       "description": "Weeks of month.",
@@ -947,13 +888,6 @@
     }
   },
   "parameters": {
-    "apiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Version of the API to be used with the client request (e.g. '2022-02-01-preview')."
-    },
     "scopeParameter": {
       "name": "scope",
       "in": "path",
