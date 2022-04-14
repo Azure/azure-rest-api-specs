@@ -649,6 +649,11 @@
     "ScheduledActionProxyResource": {
       "description": "The Resource model definition.",
       "properties": {
+        "eTag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Etag."
+        },
         "kind": {
           "$ref": "#/definitions/ScheduledActionKind",
           "description": "Kind of the scheduled action."
@@ -656,7 +661,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/AzureEntityResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ],
       "type": "object",
