@@ -5,8 +5,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
 
-``` yaml $(python) && $(track2)
-python-mode: update
+``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.redis
@@ -15,17 +14,12 @@ package-version: 12.0.0b1
 clear-output-folder: true
 ```
 
-``` yaml $(python) && $(python-mode) == 'update' && $(track2)
+``` yaml $(python)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/redis/azure-mgmt-redis/azure/mgmt/redis
 ```
 
-``` yaml $(python) && $(python-mode) == 'create' && $(track2)
-basic-setup-py: true
-output-folder: $(python-sdks-folder)/redis/azure-mgmt-redis
-```
-
-``` yaml $(python) && $(track2)
+``` yaml $(python)
 modelerfour:
   lenient-model-deduplication: true
 ```

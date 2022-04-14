@@ -1,0 +1,446 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2022-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/settings": {
+      "get": {
+        "x-ms-examples": {
+          "Get all settings.": {
+            "$ref": "./examples/settings/GetAllSettings.json"
+          }
+        },
+        "tags": [
+          "Settings"
+        ],
+        "description": "List of all the settings",
+        "operationId": "ProductSettings_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SettingList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/settings/{settingsName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get EyesOn settings.": {
+            "$ref": "./examples/settings/GetEyesOnSetting.json"
+          }
+        },
+        "tags": [
+          "Settings"
+        ],
+        "description": "Gets a setting.",
+        "operationId": "ProductSettings_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/SettingsName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Settings"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete EyesOn settings.": {
+            "$ref": "./examples/settings/DeleteEyesOnSetting.json"
+          }
+        },
+        "tags": [
+          "Settings"
+        ],
+        "description": "Delete setting of the product.",
+        "operationId": "ProductSettings_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/SettingsName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Update EyesOn settings.": {
+            "$ref": "./examples/settings/UpdateEyesOnSetting.json"
+          }
+        },
+        "tags": [
+          "Settings"
+        ],
+        "description": "Updates setting.",
+        "operationId": "ProductSettings_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/SettingsName"
+          },
+          {
+            "$ref": "#/parameters/Settings"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Settings"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SettingList": {
+      "description": "List of all the settings.",
+      "properties": {
+        "value": {
+          "description": "Array of settings.",
+          "items": {
+            "$ref": "#/definitions/Settings"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "type": "object"
+    },
+    "Settings": {
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "The Setting.",
+      "properties": {
+        "kind": {
+          "description": "The kind of the setting",
+          "enum": [
+            "Anomalies",
+            "EyesOn",
+            "EntityAnalytics",
+            "Ueba"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "SettingKind"
+          }
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "discriminator": "kind",
+      "type": "object"
+    },
+    "Anomalies": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Settings"
+        }
+      ],
+      "description": "Settings with single toggle.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AnomaliesSettingsProperties",
+          "description": "Anomalies properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Anomalies"
+    },
+    "AnomaliesSettingsProperties": {
+      "description": "Anomalies property bag.",
+      "properties": {
+        "isEnabled": {
+          "description": "Determines whether the setting is enable or disabled.",
+          "readOnly": true,
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "EyesOn": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Settings"
+        }
+      ],
+      "description": "Settings with single toggle.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EyesOnSettingsProperties",
+          "description": "EyesOn properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "EyesOn"
+    },
+    "EyesOnSettingsProperties": {
+      "description": "EyesOn property bag.",
+      "properties": {
+        "isEnabled": {
+          "description": "Determines whether the setting is enable or disabled.",
+          "readOnly": true,
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "EntityAnalytics": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Settings"
+        }
+      ],
+      "description": "Settings with single toggle.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EntityAnalyticsProperties",
+          "description": "EntityAnalytics properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "EntityAnalytics"
+    },
+    "EntityAnalyticsProperties": {
+      "description": "EntityAnalytics property bag.",
+      "properties": {
+        "entityProviders": {
+          "description": "The relevant entity providers that are synced",
+          "items": {
+            "$ref": "#/definitions/EntityProviders"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "EntityProviders": {
+      "description": "The entity provider that is synced.",
+      "enum": [
+        "ActiveDirectory",
+        "AzureActiveDirectory"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "EntityProviders"
+      }
+    },
+    "Ueba": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Settings"
+        }
+      ],
+      "description": "Settings with single toggle.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UebaProperties",
+          "description": "Ueba properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Ueba"
+    },
+    "UebaProperties": {
+      "description": "Ueba property bag.",
+      "properties": {
+        "dataSources": {
+          "description": "The relevant data sources that enriched by ueba",
+          "items": {
+            "$ref": "#/definitions/UebaDataSources"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "UebaDataSources": {
+      "description": "The data source that enriched by ueba.",
+      "enum": [
+        "AuditLogs",
+        "AzureActivity",
+        "SecurityEvent",
+        "SigninLogs"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "UebaDataSources"
+      }
+    },
+    "Sku": {
+      "description": "The pricing tier of the solution",
+      "properties": {
+        "name": {
+          "description": "The kind of the tier",
+          "enum": [
+            "PerGB",
+            "CapacityReservation"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "SkuKind"
+          }
+        },
+        "capacityReservationLevel": {
+          "description": "The amount of reservation level",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "parameters": {
+    "Settings": {
+      "description": "The setting",
+      "in": "body",
+      "name": "settings",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Settings"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "SettingsName": {
+      "description": "The setting name. Supports - Anomalies, EyesOn, EntityAnalytics, Ueba",
+      "in": "path",
+      "name": "settingsName",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

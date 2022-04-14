@@ -1,0 +1,179 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApiManagementClient",
+    "description": "Use these REST APIs for performing operations in Azure API Management deployment.",
+    "version": "2021-12-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/deletedservices": {
+      "get": {
+        "tags": [
+          "DeletedService"
+        ],
+        "operationId": "DeletedServices_ListBySubscription",
+        "description": "Lists all soft-deleted services available for undelete for the given subscription.",
+        "x-ms-examples": {
+          "ApiManagementDeletedServicesListBySubscription": {
+            "$ref": "./examples/ApiManagementDeletedServicesListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all soft-deleted services available for undelete for the given subscription.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/DeletedServicesCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/locations/{location}/deletedservices/{serviceName}": {
+      "get": {
+        "tags": [
+          "DeletedService"
+        ],
+        "operationId": "DeletedServices_GetByName",
+        "description": "Get soft-deleted Api Management Service by name.",
+        "x-ms-examples": {
+          "ApiManagementGetDeletedServiceByName": {
+            "$ref": "./examples/ApiManagementGetDeletedServiceByName.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location of the deleted API Management service."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Soft-deleted Api Management Service.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/DeletedServiceContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DeletedService"
+        ],
+        "operationId": "DeletedServices_Purge",
+        "description": "Purges Api Management Service (deletes it with no option to undelete).",
+        "x-ms-examples": {
+          "ApiManagementDeletedServicesPurge": {
+            "$ref": "./examples/ApiManagementDeletedServicesPurge.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location of the deleted API Management service."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Api Service was successfully purged."
+          },
+          "202": {
+            "description": "Api Service purge started.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/DeletedServiceContract"
+            }
+          },
+          "204": {
+            "description": "The service does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {}
+}
