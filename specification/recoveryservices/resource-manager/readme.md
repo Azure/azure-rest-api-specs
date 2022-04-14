@@ -1,14 +1,14 @@
-# RecoveryServices
+# DataProtection
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for RecoveryServices.
+This is the AutoRest configuration file for DataProtection.
 
 ---
 
 ## Getting Started
 
-To build the SDK for RecoveryServices, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for DataProtection, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -22,13 +22,17 @@ To see additional help and options, run:
 
 ### Basic Information
 
-These are the global settings for the RecoveryServices API.
+These are the global settings for the DataProtection API.
 
 ``` yaml
-title: RecoveryServicesClient
-description: Recovery Services Client
+title: Data Protection Client
+description: Open API 2.0 Specs for Azure Data Protection service
 openapi-type: arm
-tag: package-2022-02
+tag: package-preview-2022-02
+csharp-sdks-folder: ./Generated/CSharp
+python-sdks-folder: ./Generated/Python
+go-sdk-folder: ./Generated/Golang
+license-header: MICROSOFT_MIT
 ```
 
 ### Validations
@@ -43,16 +47,13 @@ message-format: json
 ```
 
 
-### Tag: package-2022-02
+### Tag: package-preview-2022-02
 
-These settings apply only when `--tag=package-2022-02` is specified on the command line.
+These settings apply only when `--tag=package-preview-2022-02` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-02'
+```yaml $(tag) == 'package-preview-2022-02'
 input-file:
-  - Microsoft.RecoveryServices/stable/2022-02-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2022-02-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2022-02-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2022-02-01/vaultusages.json
+  - Microsoft.DataProtection/preview/2022-02-01-preview/dataprotection.json
 ```
 ### Tag: package-2022-01
 
@@ -60,46 +61,16 @@ These settings apply only when `--tag=package-2022-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-01'
 input-file:
-  - Microsoft.RecoveryServices/stable/2022-01-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2022-01-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2022-01-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2022-01-01/vaultusages.json
+  - Microsoft.DataProtection/stable/2022-01-01/dataprotection.json
 ```
 
-### Tag: package-2021-12
+### Tag: package-2021-10-preview
 
-These settings apply only when `--tag=package-2021-12` is specified on the command line.
+These settings apply only when `--tag=package-2021-10-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-12'
+``` yaml $(tag) == 'package-2021-10-preview'
 input-file:
-  - Microsoft.RecoveryServices/stable/2021-12-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2021-12-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2021-12-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2021-12-01/vaultusages.json
-```
-
-### Tag: package-preview-2021-11
-
-These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2021-11'
-input-file:
-  - Microsoft.RecoveryServices/preview/2021-11-01-preview/registeredidentities.json
-  - Microsoft.RecoveryServices/preview/2021-11-01-preview/replicationusages.json
-  - Microsoft.RecoveryServices/preview/2021-11-01-preview/vaults.json
-  - Microsoft.RecoveryServices/preview/2021-11-01-preview/vaultusages.json
-```
-
-### Tag: package-2021-08
-
-These settings apply only when `--tag=package-2021-08` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-08'
-input-file:
-  - Microsoft.RecoveryServices/stable/2021-08-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2021-08-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2021-08-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2021-08-01/vaultusages.json
+- Microsoft.DataProtection/preview/2021-10-01-preview/dataprotection.json
 ```
 
 ### Tag: package-2021-07
@@ -108,94 +79,7 @@ These settings apply only when `--tag=package-2021-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-07'
 input-file:
-  - Microsoft.RecoveryServices/stable/2021-07-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2021-07-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2021-07-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2021-07-01/vaultusages.json
-```
-
-### Tag: package-2021-06
-
-These settings apply only when `--tag=package-2021-06` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-06'
-input-file:
-  - Microsoft.RecoveryServices/stable/2021-06-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2021-06-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2021-06-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2021-06-01/vaultusages.json
-```
-
-### Tag: package-2021-04
-
-These settings apply only when `--tag=package-2021-04` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-04'
-input-file:
-  - Microsoft.RecoveryServices/stable/2021-04-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2021-04-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2021-04-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2021-04-01/vaultusages.json
-```
-
-### Tag: package-2021-03
-
-These settings apply only when `--tag=package-2021-03` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-03'
-input-file:
-  - Microsoft.RecoveryServices/stable/2021-03-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2021-03-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2021-03-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2021-03-01/vaultusages.json
-```
-
-### Tag: package-2021-02
-
-These settings apply only when `--tag=package-2021-02` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-02'
-input-file:
-  - Microsoft.RecoveryServices/stable/2021-02-10/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2021-02-10/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2021-02-10/vaults.json
-  - Microsoft.RecoveryServices/stable/2021-02-10/vaultusages.json
-```
-
-### Tag: package-2016-06
-
-These settings apply only when `--tag=package-2016-06` is specified on the command line.
-
-``` yaml $(tag) == 'package-2016-06'
-input-file:
-- Microsoft.RecoveryServices/stable/2016-06-01/registeredidentities.json
-- Microsoft.RecoveryServices/stable/2016-06-01/replicationusages.json
-- Microsoft.RecoveryServices/stable/2016-06-01/vaults.json
-- Microsoft.RecoveryServices/stable/2016-06-01/vaultusages.json
-```
-
-### Tag: package-2020-02
-
-These settings apply only when `--tag=package-2020-02` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-02'
-input-file:
-- Microsoft.RecoveryServices/stable/2020-02-02/registeredidentities.json
-- Microsoft.RecoveryServices/stable/2020-02-02/replicationusages.json
-- Microsoft.RecoveryServices/stable/2020-02-02/vaults.json
-- Microsoft.RecoveryServices/stable/2020-02-02/vaultusages.json
-```
-
-### Tag: package-2020-10
-
-These settings apply only when `--tag=package-2020-10` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-10'
-input-file:
-- Microsoft.RecoveryServices/stable/2020-10-01/registeredidentities.json
-- Microsoft.RecoveryServices/stable/2020-10-01/replicationusages.json
-- Microsoft.RecoveryServices/stable/2020-10-01/vaults.json
-- Microsoft.RecoveryServices/stable/2020-10-01/vaultusages.json
+- Microsoft.DataProtection/stable/2021-07-01/dataprotection.json
 ```
 
 ### Tag: package-2021-01
@@ -204,10 +88,44 @@ These settings apply only when `--tag=package-2021-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-01'
 input-file:
-- Microsoft.RecoveryServices/stable/2021-01-01/registeredidentities.json
-- Microsoft.RecoveryServices/stable/2021-01-01/replicationusages.json
-- Microsoft.RecoveryServices/stable/2021-01-01/vaults.json
-- Microsoft.RecoveryServices/stable/2021-01-01/vaultusages.json
+- Microsoft.DataProtection/stable/2021-01-01/dataprotection.json
+```
+
+### Tag: package-2021-02-preview
+
+These settings apply only when `--tag=package-2021-02-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-02-preview'
+input-file:
+- Microsoft.DataProtection/preview/2021-02-01-preview/dataprotection.json
+```
+
+### Tag: package-2021-06-preview
+
+These settings apply only when `--tag=package-2021-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06-preview'
+input-file:
+- Microsoft.DataProtection/preview/2021-06-01-preview/dataprotection.json
+```
+
+### Tag: package-2021-12-preview
+
+These settings apply only when `--tag=package-2021-12-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-12-preview'
+input-file:
+- Microsoft.DataProtection/preview/2021-12-01-preview/dataprotection.json
+```
+
+
+### Tag: package-2022-03
+
+These settings apply only when `--tag=package-2022-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-03'
+input-file:
+- Microsoft.DataProtection/stable/2022-03-01/dataprotection.json
 ```
 
 ---
@@ -230,8 +148,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_recovery_services']
-  - repo: azure-resource-manager-schemas
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_data_protection']
 ```
 
 ## C#
@@ -242,51 +159,21 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 ``` yaml $(csharp)
 csharp:
   azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 1
-  namespace: Microsoft.Azure.Management.RecoveryServices
-  output-folder: $(csharp-sdks-folder)/recoveryservices/Microsoft.Azure.Management.RecoveryServices/src/Generated
+  license-header: MICROSOFT_MIT_NO_VERSION
+  namespace: Microsoft.Azure.Management.DataProtection
+  output-folder: $(csharp-sdks-folder)/dataprotection/Microsoft.Azure.Management.DataProtection/src/Generated
   clear-output-folder: true
 ```
-
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
 
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
 
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
+
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.recoveryservices
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-recoveryservices
-```
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2020-10
-```
-
-### Tag: package-2020-10 and java
-
-These settings apply only when `--tag=package-2020-10 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2020-10' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.recoveryservices.v2020_10_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/recoveryservices/mgmt-v2020_10_01
-regenerate-manager: true
-generate-interface: true
-```
+See configuration in [readme.java.md](./readme.java.md)

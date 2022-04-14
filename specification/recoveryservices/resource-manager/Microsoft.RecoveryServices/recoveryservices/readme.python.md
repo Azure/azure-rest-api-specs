@@ -7,13 +7,13 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-namespace: azure.mgmt.dataprotection
-package-name: azure-mgmt-dataprotection
+namespace: azure.mgmt.recoveryservices
+package-name: azure-mgmt-recoveryservices
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/dataprotection/azure-mgmt-dataprotection/azure/mgmt/dataprotection
+output-folder: $(python-sdks-folder)/recoveryservices/azure-mgmt-recoveryservices/azure/mgmt/recoveryservices
 ```
