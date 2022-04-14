@@ -71,6 +71,7 @@ input-file:
 - Microsoft.Insights/preview/2021-09-01-preview/dataCollectionEndpoints_API.json
 - Microsoft.Insights/preview/2021-09-01-preview/dataCollectionRuleAssociations_API.json
 - Microsoft.Insights/preview/2021-09-01-preview/dataCollectionRules_API.json
+```
 
 ### Tag: package-2016-03-preview-monitorlegacy
 
