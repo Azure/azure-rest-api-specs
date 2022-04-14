@@ -26,7 +26,7 @@ These are the global settings for the Resource API.
 
 ``` yaml
 openapi-type: arm
-tag: package-resources-2021-04
+tag: package-changes-2022-03
 ```
 
 ``` yaml $(package-privatelinks)
