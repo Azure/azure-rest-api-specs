@@ -1770,18 +1770,7 @@
           "$ref": "#/definitions/GalleryIdentifier"
         },
         "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "title": "The current state of the gallery.",
-          "description": "The provisioning state, which only appears in the response.",
-          "enum": [
-            "Creating",
-            "Updating",
-            "Failed",
-            "Succeeded",
-            "Deleting",
-            "Migrating"
-          ]
+          "$ref": "#/definitions/ProvisioningState"
         },
         "sharingProfile": {
           "$ref": "#/definitions/SharingProfile"
@@ -2067,18 +2056,7 @@
           "$ref": "#/definitions/GalleryApplicationVersionPublishingProfile"
         },
         "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "title": "The current state of the gallery Application Version.",
-          "description": "The provisioning state, which only appears in the response.",
-          "enum": [
-            "Creating",
-            "Updating",
-            "Failed",
-            "Succeeded",
-            "Deleting",
-            "Migrating"
-          ]
+          "$ref": "#/definitions/ProvisioningState"
         },
         "replicationStatus": {
           "readOnly": true,
@@ -2249,18 +2227,7 @@
           "$ref": "./galleryRPCommon.json#/definitions/ImagePurchasePlan"
         },
         "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "title": "The current state of the gallery image definition.",
-          "description": "The provisioning state, which only appears in the response.",
-          "enum": [
-            "Creating",
-            "Updating",
-            "Failed",
-            "Succeeded",
-            "Deleting",
-            "Migrating"
-          ]
+          "$ref": "#/definitions/ProvisioningState"
         },
         "features": {
           "type": "array",
@@ -2317,18 +2284,7 @@
           "$ref": "#/definitions/GalleryImageVersionPublishingProfile"
         },
         "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "title": "The current state of the gallery image version.",
-          "description": "The provisioning state, which only appears in the response.",
-          "enum": [
-            "Creating",
-            "Updating",
-            "Failed",
-            "Succeeded",
-            "Deleting",
-            "Migrating"
-          ]
+          "$ref": "#/definitions/ProvisioningState"
         },
         "storageProfile": {
           "$ref": "#/definitions/GalleryImageVersionStorageProfile"
@@ -2926,6 +2882,24 @@
         "operationType"
       ],
       "x-ms-azure-resource": true
+    },
+    "ProvisioningState": {
+      "readOnly": true,
+      "type": "string",
+      "title": "The current state of the gallery or gallery artifact.",
+      "description": "The provisioning state, which only appears in the response.",
+      "enum": [
+        "Creating",
+        "Updating",
+        "Failed",
+        "Succeeded",
+        "Deleting",
+        "Migrating"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {
