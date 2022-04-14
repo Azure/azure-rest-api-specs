@@ -720,6 +720,15 @@
         }
       }
     },
+    "Pem": {
+      "type": "string"
+    },
+    "PemArray": {
+      "items": {
+        "$ref": "#/definitions/Pem"
+      },
+      "type": "array"
+    },
     "ReceiptContents": {
       "properties": {
         "cert": {
@@ -728,20 +737,20 @@
         "leaf": {
           "type": "string"
         },
-        "leaf_components": {
+        "leafComponents": {
           "$ref": "#/definitions/ReceiptLeafComponents"
         },
         "nodeId": {
           "type": "string"
         },
         "proof": {
-          "$ref": "#/definitions/ReceiptElement_array"
+          "$ref": "#/definitions/ReceiptElementArray"
         },
         "root": {
           "type": "string"
         },
-        "service_endorsements": {
-          "$ref": "#/definitions/Pem_array"
+        "serviceEndorsements": {
+          "$ref": "#/definitions/PemArray"
         },
         "signature": {
           "type": "string"
@@ -765,7 +774,7 @@
       },
       "type": "object"
     },
-    "ReceiptElement_array": {
+    "ReceiptElementArray": {
       "items": {
         "$ref": "#/definitions/ReceiptElement"
       },
@@ -773,13 +782,13 @@
     },
     "ReceiptLeafComponents": {
       "properties": {
-        "claims_digest": {
+        "claimsDigest": {
           "type": "string"
         },
-        "commit_evidence": {
+        "commitEvidence": {
           "type": "string"
         },
-        "write_set_digest": {
+        "writeSetDigest": {
           "type": "string"
         }
       },
@@ -800,15 +809,6 @@
         }
       },
       "type": "object"
-    },
-    "Pem": {
-      "type": "string"
-    },
-    "Pem_array": {
-      "items": {
-        "$ref": "#/definitions/Pem"
-      },
-      "type": "array"
     },
     "SubLedgerId": {
       "description": "Identifier for sub-ledgers.",
