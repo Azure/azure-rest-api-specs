@@ -40,7 +40,6 @@ batch:
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/
-clear-output-folder: false
 perform-load: false
 
 ```

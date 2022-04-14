@@ -175,6 +175,9 @@
           "items": {
             "$ref": "#/definitions/ResourceSkuCapabilities"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "A list of capabilities that are available for the SKU in the specified list of zones."
         }
       },
@@ -275,6 +278,9 @@
           "items": {
             "$ref": "#/definitions/ResourceSkuLocationInfo"
           },
+          "x-ms-identifiers": [
+            "location"
+          ],
           "description": "A list of locations and availability zones in those locations where the SKU is available."
         },
         "apiVersions": {
@@ -291,6 +297,7 @@
           "items": {
             "$ref": "#/definitions/ResourceSkuCosts"
           },
+          "x-ms-identifiers": [],
           "description": "Metadata for retrieving price info."
         },
         "capabilities": {
@@ -299,6 +306,9 @@
           "items": {
             "$ref": "#/definitions/ResourceSkuCapabilities"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "A name value pair to describe the capability."
         },
         "restrictions": {
@@ -307,6 +317,7 @@
           "items": {
             "$ref": "#/definitions/ResourceSkuRestrictions"
           },
+          "x-ms-identifiers": [],
           "description": "The restrictions because of which SKU cannot be used. This is empty if there are no restrictions."
         }
       },
@@ -333,6 +344,9 @@
           "items": {
             "$ref": "#/definitions/ResourceSkuZoneDetails"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "Details of capabilities available to a SKU in specific zones."
         },
         "extendedLocations": {
@@ -386,6 +400,10 @@
           "items": {
             "$ref": "#/definitions/ResourceSku"
           },
+          "x-ms-identifiers": [
+            "name",
+            "resourceType"
+          ],
           "description": "The list of skus available for the subscription."
         },
         "nextLink": {

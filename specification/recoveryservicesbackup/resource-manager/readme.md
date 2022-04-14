@@ -28,7 +28,7 @@ These are the global settings for the RecoveryServicesBackup API.
 title: Recovery Services Backup Client
 description: Open API 2.0 Specs for Azure RecoveryServices Backup service
 openapi-type: arm
-tag: package-2021-10
+tag: package-2021-12
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
@@ -39,8 +39,8 @@ license-header: MICROSOFT_MIT
 tag: package-passivestamp-2021-11-15
 ```
 
-```yaml $(package-activestamp)
-tag: package-2021-10
+``` yaml $(package-activestamp)
+tag: package-2022-02
 ```
 
 ### Validations
@@ -54,6 +54,31 @@ semantic-validator: true
 message-format: json
 ```
 
+### Tag: package-2022-02
+
+These settings apply only when `--tag=package-2022-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-02'
+input-file:
+  - Microsoft.RecoveryServices/stable/2022-02-01/bms.json
+```
+
+### Tag: package-2022-01
+
+These settings apply only when `--tag=package-2022-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-01'
+input-file:
+  - Microsoft.RecoveryServices/stable/2022-01-01/bms.json
+```
+### Tag: package-2021-12
+
+These settings apply only when `--tag=package-2021-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-12'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-12-01/bms.json
+```
 
 ### Tag: package-passivestamp-2021-11-15
 
@@ -63,6 +88,7 @@ These settings apply only when `--tag=package-passivestamp-2021-11-15` is specif
 input-file:
 -  Microsoft.RecoveryServices/stable/2021-11-15/bms.json
 ```
+
 ### Tag: package-passivestamp-2018-12-20
 
 These settings apply only when `--tag=package-passivestamp-2018-12-20` is specified on the command line.
@@ -297,7 +323,7 @@ csharp:
   payload-flattening-threshold: 1
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.RecoveryServices.Backup
-  output-folder: $(csharp-sdks-folder)/recoveryservices-backup/Microsoft.Azure.Management.RecoveryServices.Backup/src/Generated
+  output-folder: $(csharp-sdks-folder)/recoveryservices-backup/Microsoft.Azure.Management.RecoveryServices.Backup/src/recoveryservicesbackup/Generated
   clear-output-folder: true
 ```
 

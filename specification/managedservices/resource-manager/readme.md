@@ -26,18 +26,27 @@ These are the global settings for the ManagedServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-02-preview
+tag: package-preview-2022-01
 ```
 
 
+### Tag: package-preview-2022-01
+
+These settings apply only when `--tag=package-preview-2022-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-01'
+input-file:
+  - Microsoft.ManagedServices/preview/2022-01-01-preview/managedservices.json
+```
 ### Tag: package-2020-02-preview
 
 These settings apply only when `--tag=package-2020-02-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-02-preview'
+``` yaml $(tag) == 'package-2020-02-preview'
 input-file:
   - Microsoft.ManagedServices/preview/2020-02-01-preview/managedservices.json
 ```
+
 ### Tag: package-2019-09
 
 These settings apply only when `--tag=package-2019-09` is specified on the command line.
@@ -116,6 +125,3 @@ csharp:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
-
-
-
