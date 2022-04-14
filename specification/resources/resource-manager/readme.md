@@ -70,7 +70,7 @@ tag: package-templatespecs-2021-05
 ```
 
 ``` yaml $(package-changes)
-tag: package-changes-2022-03-01
+tag: package-changes-2022-03-01-preview
 ```
 
 ### Tag: package-changes-2022-03-01-preview
