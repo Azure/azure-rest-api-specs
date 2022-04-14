@@ -70,6 +70,15 @@ batch:
   - tag: package-templatespecs-2021-03-preview
   - tag: package-templatespecs-2019-06-preview
   - multiapiscript-templatespecs: true
+  - tag: package-changes-2022-03
+  - multiapiscript-changes: true
+```
+
+```yaml $(multiapiscript-changes)
+package-name: azure-mgmt-resource#changes
+multiapiscript: true
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/changes
+perform-load: false
 ```
 
 ```yaml $(multiapiscript-privatelinks)
@@ -135,6 +144,19 @@ package-name: azure-mgmt-resource#links
 multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/links
 perform-load: false
+```
+
+### Tag: package-changes-2022-03 and python
+
+These settings apply only when `--tag=package-changes-2022-03 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-changes-2022-03'
+namespace: azure.mgmt.resource.changes.v2022_03_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/changes/v2022_03_01
+python:
+  namespace: azure.mgmt.resource.changes.v2020_05_01
+  output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/changes/v2022_03_01
 ```
 
 ### Tag: package-privatelinks-2020-05 and python
