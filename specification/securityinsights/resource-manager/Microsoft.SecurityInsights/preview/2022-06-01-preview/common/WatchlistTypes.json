@@ -135,6 +135,11 @@
           "description": "The raw content that represents to watchlist items to create. In case of csv/tsv content type, it's the content of the file that will parsed by the endpoint",
           "type": "string"
         },
+        "sasUri": {
+          "x-ms-secret": true,
+          "description": "The Shared Access Signature (SAS) URI under which the large csv watchlist file is located and from which the watchlist and its items will be created",
+          "type": "string"
+        },
         "itemsSearchKey": {
           "description": "The search key is used to optimize query performance when using watchlists for joins with other data. For example, enable a column with IP addresses to be the designated SearchKey field, then use this field as the key field when joining to other event data by IP address.",
           "type": "string"
@@ -147,7 +152,12 @@
           "description": "The status of the Watchlist upload : New, InProgress or Complete. Pls note : When a Watchlist upload status is equal to InProgress, the Watchlist cannot be deleted",
           "type": "string"
         },
-        "watchlistCategory": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the watchlist resource."
+        },
+	 "watchlistCategory": {
           "description": "The watchlist category (normal or confidential). It's read only property, calculated by the API during PUT operation",
           "readOnly": true,
           "type": "string"
@@ -250,6 +260,21 @@
         "itemsKeyValue"
       ],
       "type": "object"
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "InProgress"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {
