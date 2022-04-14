@@ -5,6 +5,14 @@
     "description": "Azure Communication Room Service",
     "version": "2022-04-10"
   },
+  "securityDefinitions": {
+    "Authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "An ACS (Azure Communication Services) user access token."
+    }
+  },
   "paths": {
     "/rooms": {
       "post": {
@@ -60,6 +68,12 @@
               "$ref": "#/definitions/CommunicationErrorResponse"
             },
             "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -75,7 +89,7 @@
           "Rooms"
         ],
         "summary": "Retrieves an existing room by Id.",
-        "operationId": "Rooms_GetRoom",
+        "operationId": "Room_Get",
         "produces": [
           "application/json"
         ],
@@ -118,6 +132,12 @@
               "$ref": "#/definitions/CommunicationErrorResponse"
             },
             "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -131,7 +151,7 @@
           "Rooms"
         ],
         "summary": "Update a room with given changes.",
-        "operationId": "Rooms_UpdateRoom",
+        "operationId": "Room_Update",
         "consumes": [
           "application/json"
         ],
@@ -152,6 +172,7 @@
           {
             "in": "body",
             "name": "patchRoomRequest",
+            "description": "The path room request",
             "schema": {
               "$ref": "#/definitions/UpdateRoomRequest"
             }
@@ -161,7 +182,7 @@
           "200": {
             "description": "Request successful. The action returns a updated `Room`.",
             "schema": {
-              "$ref": "#/definitions/UpdateRoomResponse"
+              "$ref": "#/definitions/RoomModel"
             }
           },
           "401": {
@@ -184,6 +205,12 @@
               "$ref": "#/definitions/CommunicationErrorResponse"
             },
             "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -197,7 +224,7 @@
           "Rooms"
         ],
         "summary": "Delete a room.",
-        "operationId": "Rooms_DeleteRoom",
+        "operationId": "Room_Delete",
         "produces": [
           "application/json"
         ],
@@ -205,7 +232,7 @@
           {
             "in": "path",
             "name": "roomId",
-            "description": "The id of the room requested",
+            "description": "The id of the room to be deleted",
             "required": true,
             "type": "string"
           },
@@ -214,8 +241,11 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The room was successfully deleted."
+          },
           "204": {
-            "description": "Request successful."
+            "description": "The room was successfully deleted."
           },
           "401": {
             "description": "Unauthorized",
@@ -237,6 +267,12 @@
               "$ref": "#/definitions/CommunicationErrorResponse"
             },
             "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -302,6 +338,12 @@
               "$ref": "#/definitions/CommunicationErrorResponse"
             },
             "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -321,7 +363,7 @@
           "Participants"
         ],
         "summary": "Adds participants to a room. If participants already exist, no change occurs.",
-        "operationId": "Room_AddParticipants",
+        "operationId": "Room_AddParticipant",
         "consumes": [
           "application/json"
         ],
@@ -383,6 +425,12 @@
               "$ref": "#/definitions/CommunicationErrorResponse"
             },
             "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -460,6 +508,12 @@
               "$ref": "#/definitions/CommunicationErrorResponse"
             },
             "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -537,6 +591,12 @@
               "$ref": "#/definitions/CommunicationErrorResponse"
             },
             "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -553,6 +613,41 @@
     },
     "CommunicationErrorResponse": {
       "$ref": "../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error response",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details"
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "type": "object",
+      "description": "Error definition",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        }
+      }
     },
     "CreateRoomRequest": {
       "description": "Request payload for creating new room.",
@@ -584,7 +679,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RoomParticipant"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -673,7 +769,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RoomParticipant"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -702,19 +799,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RoomParticipant"
-          }
-        }
-      }
-    },
-    "UpdateRoomResponse": {
-      "description": "Response payload for update room operation.",
-      "required": [
-        "room"
-      ],
-      "type": "object",
-      "properties": {
-        "room": {
-          "$ref": "#/definitions/RoomModel"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -730,7 +816,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RoomParticipant"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -755,7 +842,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RoomParticipant"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -780,7 +868,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RoomParticipant"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -800,12 +889,13 @@
       ],
       "type": "object",
       "properties": {
-        "participants": {
+        "value": {
           "description": "Room participants.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RoomParticipant"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "If there are more room participants that can be retrieved, the next link will be populated.",
