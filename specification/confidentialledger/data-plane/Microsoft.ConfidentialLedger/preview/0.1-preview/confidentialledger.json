@@ -721,37 +721,38 @@
       }
     },
     "ReceiptContents": {
-      "description": "A receipt certifying the transaction at the specified id.",
-      "required": [
-        "leaf",
-        "nodeId",
-        "proof",
-        "root",
-        "signature"
-      ],
-      "type": "object",
       "properties": {
-        "leaf": {
-          "description": "Merkle tree leaf for this transaction.",
-          "type": "string"
+        "cert": {
+          "$ref": "#/components/schemas/string"
         },
-        "nodeId": {
-          "description": "Id of the node returning the receipt.",
-          "$ref": "#/definitions/EntityId"
+        "leaf": {
+          "$ref": "#/components/schemas/string"
+        },
+        "leaf_components": {
+          "$ref": "#/components/schemas/Receipt__LeafComponents"
+        },
+        "node_id": {
+          "$ref": "#/components/schemas/NodeId"
         },
         "proof": {
-          "description": "Merkle proof.",
-          "$ref": "#/definitions/MerkleProof"
+          "$ref": "#/components/schemas/Receipt__Element_array"
         },
         "root": {
-          "description": "Root of the Merkle tree at the time the transaction was recorded.",
-          "type": "string"
+          "$ref": "#/components/schemas/string"
+        },
+        "service_endorsements": {
+          "$ref": "#/components/schemas/Pem_array"
         },
         "signature": {
-          "description": "Signature by the node, with its certificate, over the Merkle root.",
-          "type": "string"
+          "$ref": "#/components/schemas/string"
         }
-      }
+      },
+      "required": [
+        "signature",
+        "proof",
+        "node_id"
+      ],
+      "type": "object"
     },
     "RoleAssignment": {
       "description": "Object for assigning a role to a user.",
