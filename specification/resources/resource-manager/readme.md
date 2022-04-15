@@ -26,7 +26,7 @@ These are the global settings for the Resource API.
 
 ``` yaml
 openapi-type: arm
-tag: package-resources-2021-04
+tag: package-changes-2022-03-01-preview
 ```
 
 ``` yaml $(package-privatelinks)
@@ -70,14 +70,14 @@ tag: package-templatespecs-2021-05
 ```
 
 ``` yaml $(package-changes)
-tag: package-changes-2022-03
+tag: package-changes-2022-03-01-preview
 ```
 
-### Tag: package-changes-2022-03
+### Tag: package-changes-2022-03-01-preview
 
 These settings apply only when `--tag=package-changes-2022-03-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-changes-2022-03'
+``` yaml $(tag) == 'package-changes-2022-03-01-preview'
 input-file:
 - Microsoft.Resources/preview/2022-03-01-preview/changes.json
 ```
