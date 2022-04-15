@@ -156,9 +156,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-changes-2022-03'
 namespace: azure.mgmt.resource.changes.v2022_03_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/changes/v2022_03_01
-python:
-  namespace: azure.mgmt.resource.changes.v2020_05_01
-  output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/changes/v2022_03_01
 ```
 
 ### Tag: package-privatelinks-2020-05 and python
@@ -169,9 +166,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-privatelinks-2020-05'
 namespace: azure.mgmt.resource.privatelinks.v2020_05_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/privatelinks/v2020_05_01
-python:
-  namespace: azure.mgmt.resource.privatelinks.v2020_05_01
-  output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/privatelinks/v2020_05_01
 ```
 
 ### Tag: package-features-2021-07 and python
@@ -182,9 +176,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-features-2021-07'
 namespace: azure.mgmt.resource.features.v2021_07_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/features/v2021_07_01
-python:
-  namespace: azure.mgmt.resource.features.v2021_07_01
-  output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/features/v2021_07_01
 ```
 
 ### Tag: package-features-2015-12 and python
