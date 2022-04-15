@@ -205,9 +205,62 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Delete network manager security admin configuration": {
             "$ref": "./examples/NetworkManagerSecurityAdminConfigurationDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/operationResults/{operationResultId}": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/SecurityConfigurationParameter"
+        },
+        {
+          "$ref": "./networkManager.json#/parameters/OperationResultIdParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "OperationResults"
+        ],
+        "summary": "Get a network manager security admin configuration operation result.",
+        "description": "Returns an operation result.",
+        "operationId": "SecurityAdminConfigurationOperationResults_Get",
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the operation result.",
+            "schema": {
+              "$ref": "./networkManager.json#/definitions/OperationResult"
+            }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "getSecurityAdminConfigurationOperationResult": {
+            "$ref": "./examples/NetworkManagerSecurityAdminConfigurationOperationResultGet.json"
           }
         }
       }
@@ -390,9 +443,65 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Deletes an admin rule collection": {
             "$ref": "./examples/NetworkManagerAdminRuleCollectionDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/operationResults/{operationResultId}": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/SecurityConfigurationParameter"
+        },
+        {
+          "$ref": "#/parameters/RuleCollectionParameter"
+        },
+        {
+          "$ref": "./networkManager.json#/parameters/OperationResultIdParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "OperationResults"
+        ],
+        "summary": "Get a network manager security admin rule collection operation result.",
+        "description": "Returns an operation result.",
+        "operationId": "SecurityAdminRuleCollectionOperationResults_Get",
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the operation result.",
+            "schema": {
+              "$ref": "./networkManager.json#/definitions/OperationResult"
+            }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "getSecurityAdminRuleCollectionOperationResult": {
+            "$ref": "./examples/NetworkManagerAdminRuleCollectionOperationResultGet.json"
           }
         }
       }
@@ -590,6 +699,61 @@
         "x-ms-examples": {
           "Deletes an admin rule": {
             "$ref": "./examples/NetworkManagerAdminRuleDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules/{ruleName}/operationResults/{operationResultId}": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/SecurityConfigurationParameter"
+        },
+        {
+          "$ref": "#/parameters/RuleCollectionParameter"
+        },
+        {
+          "$ref": "#/parameters/SecurityConfigurationsRuleParameter"
+        },
+        {
+          "$ref": "./networkManager.json#/parameters/OperationResultIdParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "OperationResults"
+        ],
+        "summary": "Get a network manager security admin rule operation result.",
+        "description": "Returns an operation result.",
+        "operationId": "SecurityAdminRuleOperationResults_Get",
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the operation result.",
+            "schema": {
+              "$ref": "./networkManager.json#/definitions/OperationResult"
+            }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "getSecurityAdminRuleOperationResult": {
+            "$ref": "./examples/NetworkManagerAdminRuleOperationResultGet.json"
           }
         }
       }
