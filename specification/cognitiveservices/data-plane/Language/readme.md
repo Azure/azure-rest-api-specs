@@ -6,50 +6,29 @@ This is the AutoRest configuration file the Cognitive Services Language SDK.
 
 ## Releases
 
+The current preview release of Conversational Language Understanding is 2022-03-01-preview.
+
+The current preview release of Text Analytics is 2022-04-01-preview.
+
 The current stable release of Question Answering is 2021-10-01.
 
-The current stable release of Conversational Language Understanding and Language is 2022-05-01.
-
 ```yaml
-tag: release_2022_05_15_preview
+tag: release_2022_04_01_preview
 add-credentials: true
 clear-output-folder: true
 openapi-type: data-plane
 directive:
   - suppress: LongRunningResponseStatusCode
     reason: The validation tools do not properly recognize 202 as a supported response code.
-  - suppress: R3016
-    where: $.definitions.CurrencyResolution.properties.ISO4217
-    reason: ISO should be upper case.
 ```
 
-### Release 2022-05-15-preview
+### Release 2022-04-01-preview
 
-These settings apply only when `--tag=release_2022_05_15_preview` is specified on the command line.
+These settings apply only when `--tag=release_2022_04_01_preview` is specified on the command line.
 
-``` yaml $(tag) == 'release_2022_05_15_preview'
+``` yaml $(tag) == 'release_2022_03_01_preview'
 input-file:
-  - preview/2022-05-15-preview/textanalytics.json
-  - preview/2022-05-15-preview/analyzeconversations.json
-  - preview/2022-05-15-preview/analyzetext-authoring.json
-  - preview/2022-05-15-preview/analyzeconversations-authoring.json
-title:
-  Microsoft Cognitive Language Service
-modelerfour:
-  lenient-model-deduplication: true
-
-```
-
-### Release 2022-05-01
-
-These settings apply only when `--tag=release_2022_05_01` is specified on the command line.
-
-``` yaml $(tag) == 'release_2022_05_01'
-input-file:
-  - stable/2022-05-01/textanalytics.json
-  - stable/2022-05-01/analyzetext-authoring.json
-  - stable/2022-05-01/analyzeconversations-authoring.json
-  - stable/2022-05-01/analyzeconversations.json
+  - preview/2022-04-01-preview/textanalytics.json
 title:
   Microsoft Cognitive Language Service
 modelerfour:
@@ -155,13 +134,11 @@ directive:
   - suppress: MISSING_APIS_IN_DEFAULT_TAG
     reason: Not every service will ship new versions within the Language pillar.
 ```
-### Tag: package-preview-2022-04
 
-These settings apply only when `--tag=package-preview-2022-04` is specified on the command line.
+## Suppression
 
-```yaml $(tag) == 'package-preview-2022-04'
-input-file:
-  - preview/2022-04-01-preview/common.json
-  - preview/2022-04-01-preview/textanalytics.json
+``` yaml
+directive:
+  - suppress: MISSING_APIS_IN_DEFAULT_TAG
+    reason: Not every service will ship new versions within the Language pillar.
 ```
-

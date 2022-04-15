@@ -16,12 +16,15 @@
           "description": "The error object.",
           "$ref": "#/definitions/Error"
         }
-      }
+      },
+      "required": [
+        "error"
+      ]
     },
     "Error": {
       "type": "object",
       "description": "The error object.",
-      "additionalProperties": false,
+      "additionalProperties": true,
       "required": [
         "code",
         "message"
