@@ -12,6 +12,6 @@ typescript:
   rest-level-client: true
   add-credentials: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  generate-metadata: false
+  generate-metadata: true
   credential-scopes: https://api.adu.microsoft.com/.default
 ```
