@@ -2605,7 +2605,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DirectConnection"
-          }
+          },
+          "x-ms-identifiers": [
+            "connectionIdentifier"
+          ]
         },
         "useForPeeringService": {
           "description": "The flag that indicates whether or not the peering is used for peering service.",
@@ -2644,7 +2647,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExchangeConnection"
-          }
+          },
+          "x-ms-identifiers": [
+            "connectionIdentifier"
+          ]
         },
         "peerAsn": {
           "$ref": "#/definitions/SubResource",
@@ -2900,7 +2906,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "The link to fetch the next page of peering API operations.",
@@ -2982,6 +2991,9 @@
           "items": {
             "$ref": "#/definitions/MetricSpecification"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         }
       }
@@ -3029,6 +3041,9 @@
           "items": {
             "$ref": "#/definitions/MetricDimension"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         }
       }
@@ -3079,7 +3094,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ContactDetail"
-          }
+          },
+          "x-ms-identifiers": [
+            "email"
+          ]
         },
         "peerName": {
           "description": "The name of the peer.",
@@ -3234,14 +3252,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DirectPeeringFacility"
-          }
+          },
+          "x-ms-identifiers": [
+            "address"
+          ]
         },
         "bandwidthOffers": {
           "description": "The list of bandwidth offers available at the peering location.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringBandwidthOffer"
-          }
+          },
+          "x-ms-identifiers": [
+            "offerName"
+          ]
         }
       }
     },
@@ -3254,7 +3278,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExchangePeeringFacility"
-          }
+          },
+          "x-ms-identifiers": [
+            "exchangeName"
+          ]
         }
       }
     },
@@ -3521,7 +3548,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringReceivedRoute"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of received routes for the peering.",
@@ -3800,6 +3828,9 @@
           "items": {
             "$ref": "#/definitions/PeeringServicePrefixEvent"
           },
+          "x-ms-identifiers": [
+            "eventTimestamp"
+          ],
           "readOnly": true
         },
         "peeringServicePrefixKey": {

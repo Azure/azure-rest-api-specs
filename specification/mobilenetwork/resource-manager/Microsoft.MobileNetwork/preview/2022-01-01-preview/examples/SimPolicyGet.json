@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "mobileNetworkName": "testMobileNetwork",
+    "simPolicyName": "testPolicy"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testPolicy",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/simPolicies/testPolicy",
+        "type": "Microsoft.MobileNetwork/simPolicy",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "location": "eastus",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Accepted",
+          "registrationTimer": 3240,
+          "ueAmbr": {
+            "uplink": "500 Mbps",
+            "downlink": "1 Gbps"
+          },
+          "defaultSlice": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/slices/testSlice"
+          },
+          "sliceConfigurations": [
+            {
+              "slice": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/slices/testSlice"
+              },
+              "defaultDataNetwork": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/dataNetworks/testdataNetwork"
+              },
+              "dataNetworkConfigurations": [
+                {
+                  "dataNetwork": {
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/dataNetworks/testdataNetwork"
+                  },
+                  "sessionAmbr": {
+                    "uplink": "500 Mbps",
+                    "downlink": "1 Gbps"
+                  },
+                  "5qi": 9,
+                  "allocationAndRetentionPriorityLevel": 9,
+                  "preemptionCapability": "NotPreempt",
+                  "preemptionVulnerability": "Preemptable",
+                  "defaultSessionType": "IPv4",
+                  "additionalAllowedSessionTypes": [],
+                  "allowedServices": [
+                    {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/services/testService"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

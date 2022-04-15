@@ -1,10 +1,13 @@
 # Managed Service Identity
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Managed Service Identity.
 
 ---
+
 ## Getting Started
+
 To build the SDK for Managed Service Identity, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -12,19 +15,29 @@ To build the SDK for Managed Service Identity, simply [Install AutoRest](https:/
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
 ### Basic Information
+
 These are the global settings for the Managed Service Identity API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-11-30
+tag: package-preview-2021-09
 ```
 
+
+### Tag: package-preview-2021-09
+
+These settings apply only when `--tag=package-preview-2021-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-09'
+input-file:
+  - Microsoft.ManagedIdentity/preview/2021-09-30-preview/ManagedIdentity.json
+```
 ### Tag: package-2018-11-30
 
 These settings apply only when `--tag=package-2018-11-30` is specified on the command line.
@@ -44,17 +57,20 @@ input-file:
 ```
 
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: TrackedResourcePatchOperation
     from: ManagedIdentity.json
     where: $.definitions.SystemAssignedIdentity
     reason: The identity type exposed under any scope is not a tracked resource since it is an extension.
+  - suppress: RequiredReadOnlySystemData
+    reason: User-assigned and system-assigned identities do not support systemData. 
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -145,8 +161,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-
-
-
-

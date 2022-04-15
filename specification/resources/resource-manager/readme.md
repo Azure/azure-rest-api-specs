@@ -26,6 +26,11 @@ These are the global settings for the Resource API.
 
 ``` yaml
 openapi-type: arm
+tag: package-resources-2021-04
+```
+
+``` yaml $(package-privatelinks)
+tag: package-privatelinks-2020-05
 ```
 
 ``` yaml $(package-features)
@@ -62,6 +67,19 @@ tag: package-deploymentscripts-2020-10
 
 ``` yaml $(package-templatespecs)
 tag: package-templatespecs-2021-05
+```
+
+``` yaml $(package-changes)
+tag: package-changes-2022-03
+```
+
+### Tag: package-changes-2022-03
+
+These settings apply only when `--tag=package-changes-2022-03-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-changes-2022-03'
+input-file:
+- Microsoft.Resources/preview/2022-03-01-preview/changes.json
 ```
 
 ### Tag: package-policy-2021-06
@@ -831,6 +849,16 @@ directive:
   - suppress: TopLevelResourcesListByResourceGroup
     from: privateLinks.json
     reason: The resource is managed in a management group level (instead of inside a resource group)
+  - suppress: TopLevelResourcesListBySubscription
+    from: changes.json
+    reason: We will be pushing customers to use Azure Resource Graph for those at scale scenarios. 
+  - from: changes.json
+    suppress: OperationsAPIImplementation
+    where: $.paths
+    reason: 'Duplicate Operations API causes generation issues'
+  - suppress: RequiredReadOnlySystemData
+    from: changes.json
+    reason: System Metadata from a change resource perspective is irrelevant
 ```
 
 ---
@@ -880,6 +908,7 @@ batch:
   - package-managedapplications: true
   - package-deploymentscripts: true
   - package-templatespecs: true
+  - package-changes: true
 ```
 
 ### Tag: profile-hybrid-2019-03-01
