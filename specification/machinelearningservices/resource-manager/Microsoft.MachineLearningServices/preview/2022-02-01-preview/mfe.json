@@ -7654,6 +7654,27 @@
       },
       "additionalProperties": false
     },
+    "EgressPublicNetworkAccessType": {
+      "description": "Enum to determine whether PublicNetworkAccess is Enabled or Disabled for egress of a deployment.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "EgressPublicNetworkAccessType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Enabled"
+          },
+          {
+            "value": "Disabled"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
     "EndpointAuthKeys": {
       "description": "Keys for endpoint authentication.",
       "type": "object",
@@ -10832,6 +10853,11 @@
           "default": false,
           "type": "boolean"
         },
+        "egressPublicNetworkAccess": {
+          "description": "If Enabled, allow egress public network access. If Disabled, this will create secure egress. Default: Enabled.",
+          "default": "Enabled",
+          "$ref": "#/definitions/EgressPublicNetworkAccessType"
+        },
         "endpointComputeType": {
           "description": "[Required] The compute type of the endpoint.",
           "$ref": "#/definitions/EndpointComputeType"
@@ -10861,7 +10887,7 @@
           "x-nullable": true
         },
         "privateNetworkConnection": {
-          "description": "If true, enable private network connection.",
+          "description": "If true, enable private network connection.\r\nDEPRECATED for future API versions. Use EgressPublicNetworkAccess.",
           "default": false,
           "type": "boolean"
         },
