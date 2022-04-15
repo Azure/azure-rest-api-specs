@@ -501,6 +501,25 @@
         "baseUrl": {
           "type": "string",
           "description": "Specifies Claims Provider URL."
+        },
+        "enablePrivateEndpointConnection": {
+          "type": "boolean",
+          "default": false,
+          "description": "Specifies whether the platform account should access the claims provider resource through a private endpoint connection. The privateLinkResource property must not be null if this is set to true."
+        },
+        "privateLinkResource": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Resource Id of an Azure resource that supports private link."
+            },
+            "groupId": {
+              "type": "string",
+              "description": "The Id of the group obtained from the remote resource that this private endpoint should connect to."
+            }
+          },
+          "description": "If present, specifies the private link resource to which the platform account creates a private endpoint to call the claims provider."
         }
       },
       "required": [
