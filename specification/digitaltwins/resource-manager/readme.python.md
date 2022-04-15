@@ -3,7 +3,7 @@
 These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-```yaml $(python) && $(track2)
+```yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-digitaltwins
@@ -15,7 +15,7 @@ no-namespace-folders: true
 
 Generate all API versions currently shipped for this package
 
-```yaml $(python) && $(multiapi) && $(track2)
+```yaml $(python) && $(multiapi)
 clear-output-folder: true
 batch:
   - tag: package-2021-06-30-preview
@@ -27,7 +27,6 @@ batch:
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/digitaltwins/azure-mgmt-digitaltwins/azure/mgmt/digitaltwins/
-clear-output-folder: false
 perform-load: false
 ```
 
@@ -72,7 +71,7 @@ output-folder: $(python-sdks-folder)/digitaltwins/azure-mgmt-digitaltwins/azure/
 ```
 
 
-```yaml $(python) && $(track2)
+```yaml $(python)
 modelerfour:
   lenient-model-deduplication: true
 ```

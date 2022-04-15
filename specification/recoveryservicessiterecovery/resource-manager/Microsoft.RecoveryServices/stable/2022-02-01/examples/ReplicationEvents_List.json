@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "api-version": "2022-02-01",
+    "resourceName": "vault1",
+    "resourceGroupName": "resourceGroupPS1",
+    "subscriptionId": "c183865e-6077-46f2-a3b1-deb0f4f4650a"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "type": "Microsoft.RecoveryServices/vaults/replicationEvents",
+            "id": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationEvents/JobStatusMonitoringEvent;9091989892524070155_4ed6f1a6-9b6d-4048-9079-1307dd24b814",
+            "name": "JobStatusMonitoringEvent;9091989892524070155_4ed6f1a6-9b6d-4048-9079-1307dd24b814",
+            "properties": {
+              "eventCode": "d32574f6-f59e-4545-b5ac-bc88d545f089",
+              "description": "TestFailover - Failed",
+              "eventType": "JobStatus",
+              "affectedObjectFriendlyName": "vm1",
+              "severity": "Critical",
+              "timeOfOccurrence": "2017-05-02T16:00:33.0705652Z",
+              "fabricId": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/cloud1",
+              "providerSpecificDetails": {
+                "instanceType": "HyperVReplicaAzure"
+              },
+              "eventSpecificDetails": {
+                "instanceType": "JobStatus"
+              },
+              "healthErrors": [
+                {
+                  "errorCode": "499",
+                  "errorMessage": "An internal error occurred.",
+                  "possibleCauses": "The operation failed due to an internal error.",
+                  "recommendedAction": "Retry the last action. If the issue persists, contact Support."
+                }
+              ]
+            }
+          },
+          {
+            "type": "Microsoft.RecoveryServices/vaults/replicationEvents",
+            "id": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationEvents/VmMonitoringEvent;9091989947769704276_516de684-0079-48f7-b44b-882923268654",
+            "name": "VmMonitoringEvent;9091989947769704276_516de684-0079-48f7-b44b-882923268654",
+            "properties": {
+              "eventCode": "d9a07b07-c7b5-49ca-ab6c-6926596dfe47",
+              "description": "Virtual machine health is OK",
+              "eventType": "VmHealth",
+              "affectedObjectFriendlyName": "vm1",
+              "severity": "OK",
+              "timeOfOccurrence": "2017-05-02T14:28:28.5071531Z",
+              "fabricId": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/cloud1",
+              "providerSpecificDetails": {
+                "instanceType": "HyperVReplicaAzure"
+              },
+              "eventSpecificDetails": {
+                "instanceType": "JobStatus"
+              },
+              "healthErrors": []
+            }
+          }
+        ]
+      }
+    }
+  }
+}

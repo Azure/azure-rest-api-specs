@@ -29,15 +29,15 @@ openapi-type: arm
 tag: package-preview-2020-10
 ```
 
+### Tag: package-2022-02-preview 
 
-### Tag: package-preview-2020-10
+These settings apply only when `--tag=package-2022-02-preview` is specified on the command line.
 
-These settings apply only when `--tag=package-preview-2020-10` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2020-10'
+```yaml $(tag) == 'package-2022-02-preview'
 input-file:
-  - Microsoft.Advisor/preview/2020-10-28/advisor.json
+  - Microsoft.Advisor/preview/2022-02-01-preview/predictRecommendation.json
 ```
+
 ### Tag: package-2020-07-preview
 
 These settings apply only when `--tag=package-2020-07-preview` is specified on the command line.

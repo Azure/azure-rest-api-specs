@@ -14,7 +14,9 @@
         "name": "current",
         "type": "Microsoft.App/containerapps/authconfigs",
         "properties": {
-          "state": "Enabled",
+          "platform": {
+            "enabled": true
+          },
           "globalValidation": {
             "unauthenticatedClientAction": "AllowAnonymous"
           },
@@ -22,7 +24,7 @@
             "facebook": {
               "registration": {
                 "appId": "123",
-                "appSecretRefName": "facebook-secret"
+                "appSecretSettingName": "facebook-secret"
               }
             }
           }

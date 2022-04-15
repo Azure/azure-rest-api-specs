@@ -2,7 +2,7 @@
 
 These settings apply only when `--python` is specified on the command line.
 
-``` yaml $(track2)
+``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-resource
@@ -15,7 +15,7 @@ no-namespace-folders: true
 Generate all API versions currently shipped for this package
 
 
-```yaml $(multiapi) && $(track2)
+```yaml $(multiapi) && $(python)
 clear-output-folder: true
 batch:
   - tag: package-privatelinks-2020-05
@@ -573,7 +573,7 @@ namespace: azure.mgmt.resource.templatespecs.v2021_05_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/templatespecs/v2021_05_01
 ```
 
-``` yaml $(python) && $(track2)
+``` yaml $(python)
 modelerfour:
   lenient-model-deduplication: true
 ```
