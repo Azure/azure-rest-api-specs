@@ -1474,7 +1474,7 @@
           "200": {
             "description": "The body contains the private endpoint connection properties",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionResult"
+              "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -1529,13 +1529,13 @@
           "201": {
             "description": "This is a long running operation. The operation returns a 201 if the validation is complete. The response includes an Azure-AsyncOperation header that contains a status URL. Clients are expected to poll the status URL for the status of the operation. If successful, the operation returns HTTP status code of 201 (OK).",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionResult"
+              "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
           "200": {
             "description": "This is returned as a response to the status polling request for the update operation.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionResult"
+              "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -1581,13 +1581,27 @@
           "202": {
             "description": "This is a long running operation. The operation returns a 202 if the validation is complete. The response includes an Azure-AsyncOperation header that contains a status URL. Clients are expected to poll the status URL for the status of the operation.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionResult"
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "Operation Status Location URI"
+              },
+              "Location": {
+                "type": "string",
+                "description": "Operation Status Location URI"
+              },
+              "Retry-After": {
+                "description": "Retry After",
+                "type": "string"
+              }
             }
           },
           "200": {
             "description": "This is returned as a response to the status polling request for the delete operation.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionResult"
+              "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
           "204": {
@@ -2073,57 +2087,6 @@
           "readOnly": true,
           "type": "string",
           "description": "The resource type."
-        },
-        "properties": {
-          "description": "The properties of a private endpoint connection",
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "properties"
-      ]
-    },
-    "PrivateEndpointConnectionResult": {
-      "description": "The private endpoint connection of a provisioning service",
-      "x-ms-azure-resource": true,
-      "type": "object",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource identifier."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource name.",
-          "pattern": "^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{2,49}[a-zA-Z0-9]$"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource type."
-        },
-        "headers": {
-          "Azure-AsyncOperation": {
-            "readOnly": true,
-            "type": "string",
-            "description": "Operation Status Location URI"
-          },
-          "Location": {
-            "readOnly": true,
-            "type": "string",
-            "description": "Operation Status Location URI"
-          },
-          "Retry-After": {
-            "readOnly": true,
-            "description": "Retry After",
-            "type": "string"
-          }
         },
         "properties": {
           "description": "The properties of a private endpoint connection",
