@@ -186,6 +186,43 @@
           }
         }
       }
+    },
+    "/analyze-text/jobs/{jobId}:cancel": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "description": "Cancel a long-running Text Analysis job.",
+        "operationId": "AnalyzeText_CancelJob",
+        "summary": "Cancel a long-running Text Analysis job",
+        "parameters": [
+          {
+            "$ref": "#/parameters/JobId"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Cancel Job request has been received.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Job Delete Request": {
+            "$ref": ".//examples//SuccessfulAnalyzeTextJobsCancelRequest.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -217,8 +254,8 @@
         "Healthcare",
         "ExtractiveSummarization",
         "CustomEntityRecognition",
-        "CustomSingleClassification",
-        "CustomMultiClassification"
+        "CustomSingleLabelClassification",
+        "CustomMultiLabelClassification"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextLROTaskKind",
@@ -253,8 +290,8 @@
         "HealthcareLROResults",
         "ExtractiveSummarizationLROResults",
         "CustomEntityRecognitionLROResults",
-        "CustomSingleClassificationLROResults",
-        "CustomMultiClassificationLROResults"
+        "CustomSingleLabelClassificationLROResults",
+        "CustomMultiLabelClassificationLROResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextLROResultsKind",
@@ -594,7 +631,7 @@
         "documents"
       ]
     },
-    "CustomSingleClassificationTaskParameters": {
+    "CustomSingleLabelClassificationTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a Custom Single Classification task.",
       "allOf": [
@@ -603,12 +640,12 @@
         }
       ]
     },
-    "CustomSingleClassificationLROTask": {
+    "CustomSingleLabelClassificationLROTask": {
       "type": "object",
       "description": "Use custom models to classify text into single label taxonomy",
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/CustomSingleClassificationTaskParameters"
+          "$ref": "#/definitions/CustomSingleLabelClassificationTaskParameters"
         }
       },
       "allOf": [
@@ -616,9 +653,9 @@
           "$ref": "#/definitions/AnalyzeTextLROTask"
         }
       ],
-      "x-ms-discriminator-value": "CustomSingleClassification"
+      "x-ms-discriminator-value": "CustomSingleLabelClassification"
     },
-    "CustomSingleClassificationResult": {
+    "CustomSingleLabelClassificationResult": {
       "type": "object",
       "properties": {
         "documents": {
@@ -645,7 +682,7 @@
     "SingleClassificationDocumentResult": {
       "type": "object",
       "properties": {
-        "classification": {
+        "class": {
           "$ref": "#/definitions/ClassificationResult"
         }
       },
@@ -655,7 +692,7 @@
         }
       ],
       "required": [
-        "classification"
+        "class"
       ]
     },
     "ClassificationResult": {
@@ -672,11 +709,11 @@
         "confidenceScore": {
           "type": "number",
           "format": "double",
-          "description": "Confidence score between 0 and 1 of the recognized classification."
+          "description": "Confidence score between 0 and 1 of the recognized class."
         }
       }
     },
-    "CustomMultiClassificationTaskParameters": {
+    "CustomMultiLabelClassificationTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a Custom Multi Classification task.",
       "allOf": [
@@ -685,12 +722,12 @@
         }
       ]
     },
-    "CustomMultiClassificationLROTask": {
+    "CustomMultiLabelClassificationLROTask": {
       "type": "object",
       "description": "Use custom models to classify text into multi label taxonomy",
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/CustomMultiClassificationTaskParameters"
+          "$ref": "#/definitions/CustomMultiLabelClassificationTaskParameters"
         }
       },
       "allOf": [
@@ -698,9 +735,9 @@
           "$ref": "#/definitions/AnalyzeTextLROTask"
         }
       ],
-      "x-ms-discriminator-value": "CustomMultiClassification"
+      "x-ms-discriminator-value": "CustomMultiLabelClassification"
     },
-    "CustomMultiClassificationResult": {
+    "CustomMultiLabelClassificationResult": {
       "type": "object",
       "properties": {
         "documents": {
@@ -727,7 +764,7 @@
     "MultiClassificationDocumentResult": {
       "type": "object",
       "properties": {
-        "classifications": {
+        "class": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClassificationResult"
@@ -740,7 +777,7 @@
         }
       ],
       "required": [
-        "classifications"
+        "class"
       ]
     },
     "HealthcareTaskParameters": {
@@ -1411,6 +1448,9 @@
           "$ref": "#/definitions/AnalyzeTextTaskResult"
         }
       ],
+      "required": [
+        "results"
+      ],
       "x-ms-discriminator-value": "EntityRecognitionResults"
     },
     "EntitiesResult": {
@@ -1536,6 +1576,9 @@
         {
           "$ref": "#/definitions/AnalyzeTextTaskResult"
         }
+      ],
+      "required": [
+        "results"
       ],
       "x-ms-discriminator-value": "EntityLinkingResults"
     },
@@ -1702,6 +1745,9 @@
         {
           "$ref": "#/definitions/AnalyzeTextTaskResult"
         }
+      ],
+      "required": [
+        "results"
       ],
       "x-ms-discriminator-value": "PiiEntityRecognitionResults"
     },
@@ -2137,6 +2183,9 @@
           "$ref": "#/definitions/AnalyzeTextTaskResult"
         }
       ],
+      "required": [
+        "results"
+      ],
       "x-ms-discriminator-value": "KeyPhraseExtractionResults"
     },
     "KeyPhraseResult": {
@@ -2203,6 +2252,9 @@
         {
           "$ref": "#/definitions/AnalyzeTextTaskResult"
         }
+      ],
+      "required": [
+        "results"
       ],
       "x-ms-discriminator-value": "LanguageDetectionResults"
     },
@@ -2524,11 +2576,11 @@
       ],
       "x-ms-discriminator-value": "CustomEntityRecognitionLROResults"
     },
-    "CustomSingleClassificationLROResult": {
+    "CustomSingleLabelClassificationLROResult": {
       "type": "object",
       "properties": {
         "results": {
-          "$ref": "#/definitions/CustomSingleClassificationResult"
+          "$ref": "#/definitions/CustomSingleLabelClassificationResult"
         }
       },
       "allOf": [
@@ -2539,13 +2591,13 @@
       "required": [
         "results"
       ],
-      "x-ms-discriminator-value": "CustomSingleClassificationLROResults"
+      "x-ms-discriminator-value": "CustomSingleLabelClassificationLROResults"
     },
-    "CustomMultiClassificationLROResult": {
+    "CustomMultiLabelClassificationLROResult": {
       "type": "object",
       "properties": {
         "results": {
-          "$ref": "#/definitions/CustomMultiClassificationResult"
+          "$ref": "#/definitions/CustomMultiLabelClassificationResult"
         }
       },
       "allOf": [
@@ -2556,7 +2608,7 @@
       "required": [
         "results"
       ],
-      "x-ms-discriminator-value": "CustomMultiClassificationLROResults"
+      "x-ms-discriminator-value": "CustomMultiLabelClassificationLROResults"
     },
     "EntityLinkingLROResult": {
       "type": "object",
