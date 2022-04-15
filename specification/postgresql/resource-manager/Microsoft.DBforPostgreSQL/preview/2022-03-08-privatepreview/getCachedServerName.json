@@ -130,6 +130,85 @@
                 }
             },
             "description": "An error response from the Batch service."
+        },
+        "FastProvisioningCapability": {
+            "type": "object",
+            "properties": {
+                "supportedSku": {
+                    "type": "string",
+                    "description": "Server sku name",
+                    "readOnly": true
+                },
+                "supportedStorageGb": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Max storage allowed for a server.",
+                    "readOnly": true
+                },
+                "supportedServerVersion": {
+                    "type": "string",
+                    "description": "The server versions supported by this server configuration.",
+                    "readOnly": true
+                }
+            },
+            "description": "The combination of configurations available for fast provisioning"
+        },
+        "CapabilityProperties": {
+            "properties": {
+                "zone": {
+                    "type": "string",
+                    "description": "zone name",
+                    "readOnly": true
+                },
+                "geoBackupSupported": {
+                    "type": "boolean",
+                    "description": "A value indicating whether a new server in this region can have geo-backups to paired region.",
+                    "readOnly": true
+                },
+                "zoneRedundantHaSupported": {
+                    "type": "boolean",
+                    "description": "A value indicating whether a new server in this region can support multi zone HA.",
+                    "readOnly": true
+                },
+                "zoneRedundantHaAndGeoBackupSupported": {
+                    "type": "boolean",
+                    "description": "A value indicating whether a new server in this region can have geo-backups to paired region.",
+                    "readOnly": true
+                },
+                "fastProvisioningSupported": {
+                    "type": "boolean",
+                    "description": "A value indicating whether fast provisioning feature is supported in this region",
+                    "readOnly": true
+                },
+                "supportedFlexibleServerEditions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FlexibleServerEditionCapability"
+                    },
+                    "readOnly": true
+                },
+                "supportedHyperscaleNodeEditions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/HyperscaleNodeEditionCapability"
+                    },
+                    "readOnly": true
+                },
+                "supportedFastProvisioningEditions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FastProvisioningCapability"
+                    },
+                    "x-ms-identifiers": [],
+                    "readOnly": true
+                },
+                "status": {
+                    "type": "string",
+                    "description": "The status",
+                    "readOnly": true
+                }
+            },
+            "description": "Location capabilities."
         }
     }
 }
