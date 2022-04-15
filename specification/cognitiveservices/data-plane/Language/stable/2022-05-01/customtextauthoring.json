@@ -1,30 +1,32 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Language - Custom Text Authoring APIs (2022-05-01)",
+    "title": "Language - Text Analysis Authoring",
+    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.0",
     "version": "2022-05-01"
   },
-  "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/language/authoring/analyze-text/projects",
-    "useSchemePrefix": false,
-    "parameters": [
-      {
-        "$ref": "#/parameters/Endpoint"
-      }
-    ]
-  },
   "securityDefinitions": {
-    "apiKeyHeader": {
+    "apim_key": {
       "type": "apiKey",
+      "description": "A subscription key for a Language service resource.",
       "name": "Ocp-Apim-Subscription-Key",
       "in": "header"
     }
   },
   "security": [
     {
-      "apiKeyHeader": []
+      "apim_key": []
     }
   ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/language/authoring/analyze-text/projects",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "common.json#/parameters/Endpoint"
+      }
+    ]
+  },
   "paths": {
     "/": {
       "get": {
@@ -1040,7 +1042,7 @@
     "/{projectName}/train/jobs/{jobId}/:cancel": {
       "post": {
         "summary": "Cancel training",
-        "description": "Triggers a cancelation for a running training job.",
+        "description": "Triggers a cancellation for a running training job.",
         "operationId": "CancelTrainingJob",
         "produces": [
           "application/json"
@@ -1062,7 +1064,7 @@
         ],
         "responses": {
           "204": {
-            "description": "The job was succesfully canceled."
+            "description": "The job was successfully canceled."
           },
           "default": {
             "description": "Error response.",
@@ -1940,6 +1942,9 @@
       }
     },
     "ExportedProjectAssets": {
+      "required": [
+        "projectKind"
+      ],
       "type": "object",
       "properties": {
         "projectKind": {
@@ -2452,7 +2457,7 @@
           "type": "string"
         },
         "modelId": {
-          "description": "Represents the ID of this model. The model ID has the format \"{version}-{yyyyMMddThhmmss}-{Guid.NewGuid()}\".",
+          "description": "Represents the ID of this model.",
           "type": "string"
         },
         "lastTrainedDateTime": {
@@ -2865,15 +2870,6 @@
     }
   },
   "parameters": {
-    "Endpoint": {
-      "name": "Endpoint",
-      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
-      "x-ms-parameter-location": "client",
-      "required": true,
-      "type": "string",
-      "in": "path",
-      "x-ms-skip-url-encoding": true
-    },
     "StringIndexTypeInQuery": {
       "in": "query",
       "name": "stringIndexType",
