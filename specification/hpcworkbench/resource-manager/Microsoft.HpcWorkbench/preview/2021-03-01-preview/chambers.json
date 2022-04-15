@@ -381,22 +381,10 @@
           },
           {
             "in": "body",
-            "name": "licenseService",
-            "description": "the license service name.",
-            "required": true,
+            "name": "body",
+            "description": "Restart License body",
             "schema": {
-              "type": "string",
-              "enum": [
-                "ansys",
-                "cadence",
-                "siemens",
-                "synopsys",
-                "all"
-              ],
-              "x-ms-enum": {
-                "name": "LicenseService",
-                "modelAsString": true
-              }
+              "$ref": "#/definitions/RestartLicenseParameters"
             }
           }
         ],
@@ -779,13 +767,23 @@
         }
       }
     },
-    "GetUploadUri": {
-      "description": "Datasync file upload SAS token",
+    "RestartLicenseParameters": {
+      "description": "File Upload Parameters DTO.",
       "type": "object",
       "properties": {
-        "result": {
+        "licenseService": {
+          "description": "Gets or sets the license service to update.",
           "type": "string",
-          "description": "Datasync file upload SAS token"
+          "enum": [
+            "ansys",
+            "cadence",
+            "siemens",
+            "synopsys"
+          ],
+          "x-ms-enum": {
+            "name": "LicenseService",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -939,6 +937,16 @@
         }
       },
       "description": "Chamber properties."
+    },
+    "GetUploadUri": {
+      "description": "Datasync file upload SAS token",
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "string",
+          "description": "Datasync file upload SAS token"
+        }
+      }
     },
     "Chamber": {
       "description": "Chamber resource",
