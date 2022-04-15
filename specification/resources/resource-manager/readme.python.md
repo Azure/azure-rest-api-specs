@@ -9,6 +9,7 @@ package-name: azure-mgmt-resource
 package-version: 1.0.0b1
 no-namespace-folders: true
 reformat-next-link: false
+combine-operation-files: true
 ```
 
 ### Python multi-api
