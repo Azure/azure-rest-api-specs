@@ -1,0 +1,2905 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Language - Conversational Language Understanding Authoring APIs (2022-05-01)",
+    "version": "2022-05-01"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/language/authoring/analyze-conversations/projects",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "securityDefinitions": {
+    "apiKeyHeader": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiKeyHeader": []
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "List projects",
+        "description": "Lists the existing projects.",
+        "operationId": "ListProjects",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/MaxPageSizeParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The metadata of projects.",
+            "schema": {
+              "$ref": "#/definitions/ProjectsMetadata"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        }
+      }
+    },
+    "/{projectName}": {
+      "patch": {
+        "summary": "Create project",
+        "description": "Creates a new project or updates an existing one.",
+        "operationId": "CreateProject",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "in": "body",
+            "name": "projectCreateObject",
+            "description": "The project parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateProjectOptions"
+            }
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The metadata of the updated project, if it already exists.",
+            "schema": {
+              "$ref": "#/definitions/ProjectMetadata"
+            }
+          },
+          "201": {
+            "description": "The metadata of the created project.",
+            "schema": {
+              "$ref": "#/definitions/ProjectMetadata"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Get project details",
+        "description": "Gets the details of a project.",
+        "operationId": "GetProject",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The metadata of the project.",
+            "schema": {
+              "$ref": "#/definitions/ProjectMetadata"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete project",
+        "description": "Deletes a project.",
+        "operationId": "DeleteProject",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Successfully triggered the project deletion operation.",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the created job.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{projectName}/:export": {
+      "post": {
+        "summary": "Export project",
+        "description": "Triggers a job to export a project's data.",
+        "operationId": "Export",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "#/parameters/FormatInQuery"
+          },
+          {
+            "$ref": "#/parameters/StringIndexTypeInQuery"
+          },
+          {
+            "in": "query",
+            "name": "assetKind",
+            "description": "Kind of asset to export.",
+            "type": "string"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the created job.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{projectName}/:import": {
+      "post": {
+        "summary": "Import project",
+        "description": "Triggers a job to import a project. If a project with the same name already exists, the data of that project is replaced.",
+        "operationId": "Import",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "#/parameters/FormatInQuery"
+          },
+          {
+            "in": "body",
+            "name": "projectFileImportObject",
+            "description": "The project data to import.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExportedProject"
+            }
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "operation-location header for the status of the job.",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the created job.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{projectName}/:train": {
+      "post": {
+        "summary": "Train project",
+        "description": "Triggers a training job for a project.",
+        "operationId": "Train",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "in": "body",
+            "name": "trainingJobCreateObject",
+            "description": "The training input parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TrainingJobOptions"
+            }
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "operation-location header for the status of the job.",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the created job.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{projectName}/deployments": {
+      "get": {
+        "summary": "List deployments",
+        "description": "Lists the deployments belonging to a project.",
+        "operationId": "ListDeployments",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/MaxPageSizeParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all deployments.",
+            "schema": {
+              "$ref": "#/definitions/ProjectDeployments"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        }
+      }
+    },
+    "/{projectName}/deployments/:swap": {
+      "post": {
+        "summary": "Swap deployments",
+        "description": "Swaps two existing deployments with each other.",
+        "operationId": "SwapDeployments",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "in": "body",
+            "name": "swappingDeploymentJobObject",
+            "description": "The job object to swap two deployments.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SwapDeploymentsOptions"
+            }
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "operation-location header for the status of the job.",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the created job.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{projectName}/deployments/{deploymentName}": {
+      "get": {
+        "summary": "Get deployment details",
+        "description": "Gets the details of a deployment.",
+        "operationId": "GetDeployment",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/DeploymentNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Deployment info.",
+            "schema": {
+              "$ref": "#/definitions/ProjectDeployment"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update deployment",
+        "description": "Creates a new deployment or replaces an existing one.",
+        "operationId": "DeployProject",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/DeploymentNamePathParameter"
+          },
+          {
+            "in": "body",
+            "name": "createOrReplaceDeploymentJobObject",
+            "description": "The new deployment info.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateDeploymentOptions"
+            }
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "operation-location header for the status of the job.",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the created job.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "summary": "Delete deployment",
+        "description": "Deletes a project deployment.",
+        "operationId": "DeleteDeployment",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/DeploymentNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "operation-location header for the status of the job.",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the created job.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{projectName}/deployments/{deploymentName}/jobs/{jobId}": {
+      "get": {
+        "summary": "Get deployment status",
+        "description": "Gets the status of an existing deployment job.",
+        "operationId": "GetDeploymentStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/DeploymentNamePathParameter"
+          },
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deployment job result.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentJobState"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{projectName}/deployments/swap/jobs/{jobId}": {
+      "get": {
+        "summary": "Gets swap deployments status",
+        "description": "Gets the status of an existing swap deployment job.",
+        "operationId": "GetSwapDeploymentsStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The swap deployment job result.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentJobState"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{projectName}/export/jobs/{jobId}": {
+      "get": {
+        "summary": "Get export status",
+        "description": "Gets the status of an export job. Once job completes, returns the project metadata, and assets.",
+        "operationId": "GetExportStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The status of the long running operation.",
+            "schema": {
+              "$ref": "#/definitions/ExportProjectJobState"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{projectName}/export/jobs/{jobId}/result": {
+      "get": {
+        "summary": "Get export result",
+        "description": "Gets the result of an export job.",
+        "operationId": "GetExportResult",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The exported json project object.",
+            "schema": {
+              "$ref": "#/definitions/ExportedProject"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{projectName}/import/jobs/{jobId}": {
+      "get": {
+        "summary": "Get import status",
+        "description": "Gets the status for an import.",
+        "operationId": "GetImportStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The details of the long running operation.",
+            "schema": {
+              "$ref": "#/definitions/ImportProjectJobState"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{projectName}/models": {
+      "get": {
+        "summary": "List trained models",
+        "description": "Lists the trained models belonging to a project.",
+        "operationId": "ListTrainedModels",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/MaxPageSizeParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all trained models.",
+            "schema": {
+              "$ref": "#/definitions/ProjectTrainedModels"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        }
+      }
+    },
+    "/{projectName}/models/{trainedModelLabel}": {
+      "get": {
+        "summary": "Get trained model details",
+        "description": "Gets the details of a trained model.",
+        "operationId": "GetTrainedModel",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "in": "path",
+            "name": "trainedModelLabel",
+            "description": "The trained model name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trained model info",
+            "schema": {
+              "$ref": "#/definitions/ProjectTrainedModel"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete trained model",
+        "description": "Deletes an existing trained model.",
+        "operationId": "DeleteTrainedModel",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "in": "path",
+            "name": "trainedModelLabel",
+            "description": "The trained model name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted successfully."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{projectName}/models/{trainedModelLabel}/evaluation/result": {
+      "get": {
+        "summary": "Get trained model evaluation result",
+        "description": "Gets the detailed results of the evaluation for a trained model. This includes the raw inference results for the data included in the evaluation process.",
+        "operationId": "GetModelEvaluationResults",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "in": "path",
+            "name": "trainedModelLabel",
+            "description": "The trained model name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/StringIndexTypeInQuery"
+          },
+          {
+            "$ref": "common.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/MaxPageSizeParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of the evaluation predictions.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationResults"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        }
+      }
+    },
+    "/{projectName}/models/{trainedModelLabel}/evaluation/summary-result": {
+      "get": {
+        "summary": "Get trained model evaluation summary",
+        "description": "Gets the evaluation summary of a trained model. The summary includes high level performance measurements of the model (E.g. F1, Precision, Recall, ..etc).",
+        "operationId": "GetModelEvaluationSummary",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "in": "path",
+            "name": "trainedModelLabel",
+            "description": "The trained model name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all evaluation results.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationSummary"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{projectName}/train/jobs": {
+      "get": {
+        "summary": "List training jobs",
+        "description": "Lists the non-expired training jobs created for a project.",
+        "operationId": "ListTrainingJobs",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/MaxPageSizeParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of the training jobs.",
+            "schema": {
+              "$ref": "#/definitions/TrainingJobs"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        }
+      }
+    },
+    "/{projectName}/train/jobs/{jobId}": {
+      "get": {
+        "summary": "Get training status",
+        "description": "Gets the status for a training job.",
+        "operationId": "GetTrainingStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The training job result.",
+            "schema": {
+              "$ref": "#/definitions/TrainingJobState"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{projectName}/train/jobs/{jobId}/:cancel": {
+      "post": {
+        "summary": "Cancel training",
+        "description": "Triggers a cancelation for a running training job.",
+        "operationId": "CancelTrainingJob",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The job was succesfully canceled."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/global/deletion-jobs/{jobId}": {
+      "get": {
+        "summary": "Get project deletion status",
+        "description": "Gets the status for a project deletion job.",
+        "operationId": "GetProjectDeletionStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The project deletion job result.",
+            "schema": {
+              "$ref": "#/definitions/ProjectDeletionJobState"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/global/languages": {
+      "get": {
+        "summary": "List supported languages",
+        "description": "Lists the supported languages for the given project type.",
+        "operationId": "GetSupportedLanguages",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ProjectKindInQuery"
+          },
+          {
+            "$ref": "common.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/MaxPageSizeParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of supported languages.",
+            "schema": {
+              "$ref": "#/definitions/SupportedLanguages"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        }
+      }
+    },
+    "/global/prebuilt-entities": {
+      "get": {
+        "summary": "List supported prebuilt entities",
+        "description": "Lists the supported prebuilt entities that can be used while creating composed entities.",
+        "operationId": "GetSupportedPrebuiltEntities",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "language",
+            "description": "The language to get supported prebuilt entities for. Required if multilingual is false.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "multilingual",
+            "description": "Whether to get the support prebuilt entities for multilingual or monolingual projects. If true, the language parameter is ignored.",
+            "type": "string"
+          },
+          {
+            "$ref": "common.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/MaxPageSizeParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of supported prebuilt entities.",
+            "schema": {
+              "$ref": "#/definitions/PrebuiltEntities"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        }
+      }
+    },
+    "/global/training-config-versions": {
+      "get": {
+        "summary": "List training config versions",
+        "description": "Lists the support training config version for a given project type.",
+        "operationId": "ListTrainingConfigVersions",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ProjectKindInQuery"
+          },
+          {
+            "$ref": "common.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/MaxPageSizeParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of config versions.",
+            "schema": {
+              "$ref": "#/definitions/TrainingConfigVersions"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CompositionSetting": {
+      "enum": [
+        "returnLongestOverlap",
+        "requireExactOverlap",
+        "separateComponents",
+        "combineComponents"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CompositionSetting",
+        "modelAsString": true
+      }
+    },
+    "ConfusionMatrix": {
+      "required": [
+        "normalizedValue",
+        "rawValue"
+      ],
+      "type": "object",
+      "properties": {
+        "normalizedValue": {
+          "format": "float",
+          "description": "Represents normalized value in percentages.",
+          "type": "number"
+        },
+        "rawValue": {
+          "format": "float",
+          "description": "Represents raw value.",
+          "type": "number"
+        }
+      }
+    },
+    "CreateDeploymentOptions": {
+      "required": [
+        "trainedModelLabel"
+      ],
+      "type": "object",
+      "properties": {
+        "trainedModelLabel": {
+          "description": "Represents the trained model label.",
+          "type": "string"
+        }
+      }
+    },
+    "CreateProjectOptions": {
+      "required": [
+        "projectKind",
+        "settings",
+        "projectName",
+        "language"
+      ],
+      "type": "object",
+      "properties": {
+        "projectKind": {
+          "description": "Represents the project kind.",
+          "$ref": "#/definitions/ProjectKind"
+        },
+        "settings": {
+          "description": "Gets or sets the project settings.",
+          "$ref": "#/definitions/ProjectSettings"
+        },
+        "projectName": {
+          "description": "Gets or sets the new project name.",
+          "type": "string"
+        },
+        "multilingual": {
+          "description": "Gets or sets a value indicating whether gets or sets whether the project is multilingual or not.",
+          "type": "boolean"
+        },
+        "description": {
+          "description": "Gets or sets the new project description.",
+          "type": "string"
+        },
+        "language": {
+          "description": "Gets or sets the project language.",
+          "type": "string"
+        }
+      }
+    },
+    "DeploymentJobState": {
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "expirationDateTime",
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "jobId": {
+          "description": "Gets or sets the job ID.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the created time.",
+          "type": "string"
+        },
+        "lastUpdatedDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the last updated time.",
+          "type": "string"
+        },
+        "expirationDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the expiration time.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Gets or sets the job status.",
+          "$ref": "#/definitions/JobStatus"
+        },
+        "warnings": {
+          "description": "Gets or sets the warnings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "errors": {
+          "description": "Gets or sets the errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        }
+      }
+    },
+    "EntitiesEvaluationSummary": {
+      "required": [
+        "confusionMatrix",
+        "entities",
+        "microF1",
+        "microPrecision",
+        "microRecall",
+        "macroF1",
+        "macroPrecision",
+        "macroRecall"
+      ],
+      "type": "object",
+      "properties": {
+        "confusionMatrix": {
+          "description": "Represents the confusion matrix between two entities (the two entities can be the same entity)\n            the matrix is between the actual entity that was labelled and the entity that was predicted.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/definitions/ConfusionMatrix"
+            }
+          }
+        },
+        "entities": {
+          "description": "Represents the entities evaluation",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/EntityEvaluationSummary"
+          }
+        },
+        "microF1": {
+          "format": "float",
+          "description": "Represents the micro F1",
+          "type": "number"
+        },
+        "microPrecision": {
+          "format": "float",
+          "description": "Represents the micro precision",
+          "type": "number"
+        },
+        "microRecall": {
+          "format": "float",
+          "description": "Represents the micro recall",
+          "type": "number"
+        },
+        "macroF1": {
+          "format": "float",
+          "description": "Represents the macro F1",
+          "type": "number"
+        },
+        "macroPrecision": {
+          "format": "float",
+          "description": "Represents the macro precision",
+          "type": "number"
+        },
+        "macroRecall": {
+          "format": "float",
+          "description": "Represents the macro recall",
+          "type": "number"
+        }
+      }
+    },
+    "EntityEvaluationSummary": {
+      "required": [
+        "f1",
+        "precision",
+        "recall",
+        "truePositiveCount",
+        "trueNegativeCount",
+        "falsePositiveCount",
+        "falseNegativeCount"
+      ],
+      "type": "object",
+      "properties": {
+        "f1": {
+          "format": "double",
+          "description": "Represents the model precision",
+          "type": "number"
+        },
+        "precision": {
+          "format": "double",
+          "description": "Represents the model recall",
+          "type": "number"
+        },
+        "recall": {
+          "format": "double",
+          "description": "Represents the model F1 score",
+          "type": "number"
+        },
+        "truePositiveCount": {
+          "format": "int32",
+          "description": "Represents the count of true positive",
+          "type": "integer"
+        },
+        "trueNegativeCount": {
+          "format": "int32",
+          "description": "Represents the count of true negative",
+          "type": "integer"
+        },
+        "falsePositiveCount": {
+          "format": "int32",
+          "description": "Represents the count of false positive",
+          "type": "integer"
+        },
+        "falseNegativeCount": {
+          "format": "int32",
+          "description": "Represents the count of false negative",
+          "type": "integer"
+        }
+      }
+    },
+    "Error": {
+      "description": "Represents the definition of the error that occurred.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "$ref": "#/definitions/ErrorCode"
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The target that caused the error, if applicable.",
+          "type": "string"
+        },
+        "details": {
+          "description": "An array of details about specific errors that led to this reported error.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        }
+      }
+    },
+    "ErrorCode": {
+      "enum": [
+        "InvalidRequest",
+        "InvalidArgument",
+        "Forbidden",
+        "NotFound",
+        "Unauthorized",
+        "Timeout",
+        "QuotaExceeded",
+        "Conflict",
+        "Warning",
+        "InternalServerError"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ErrorCode",
+        "modelAsString": true
+      }
+    },
+    "ErrorResponse": {
+      "description": "Represents the error that occurred.",
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "EvaluationKind": {
+      "enum": [
+        "percentage",
+        "manual"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "EvaluationKind",
+        "modelAsString": true
+      }
+    },
+    "EvaluationOptions": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Represents the evaluation kind. By default, the evaluation kind is set to percentage.",
+          "$ref": "#/definitions/EvaluationKind"
+        },
+        "trainingSplitPercentage": {
+          "format": "int32",
+          "description": "Represents the training dataset split percentage. Only needed in case the evaluation kind is percentage.",
+          "type": "integer"
+        },
+        "testingSplitPercentage": {
+          "format": "int32",
+          "description": "Represents the testing dataset split percentage. Only needed in case the evaluation kind is percentage.",
+          "type": "integer"
+        }
+      }
+    },
+    "EvaluationResults": {
+      "required": [
+        "value",
+        "nextLink"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the utterances predictions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UtteranceEvaluationResult"
+          }
+        },
+        "nextLink": {
+          "description": "Gets or sets the next page link.",
+          "type": "string"
+        }
+      }
+    },
+    "EvaluationSummary": {
+      "required": [
+        "entitiesEvaluation",
+        "intentsEvaluation"
+      ],
+      "type": "object",
+      "properties": {
+        "entitiesEvaluation": {
+          "description": "Contains the data related to entities evaluation.",
+          "$ref": "#/definitions/EntitiesEvaluationSummary"
+        },
+        "intentsEvaluation": {
+          "description": "Contains the data related to intents evaluation.",
+          "$ref": "#/definitions/IntentsEvaluation"
+        },
+        "evaluationOptions": {
+          "$ref": "#/definitions/EvaluationOptions"
+        }
+      }
+    },
+    "ExportedCluOrchestration": {
+      "required": [
+        "projectName",
+        "deploymentName"
+      ],
+      "type": "object",
+      "properties": {
+        "projectName": {
+          "type": "string"
+        },
+        "deploymentName": {
+          "type": "string"
+        }
+      }
+    },
+    "ExportedCluOrchestrationOptions": {
+      "required": [
+        "cluOrchestration"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExportedOrchestrationOptions"
+        }
+      ],
+      "properties": {
+        "cluOrchestration": {
+          "$ref": "#/definitions/ExportedCluOrchestration"
+        }
+      },
+      "x-ms-discriminator-value": "clu"
+    },
+    "ExportedEntity": {
+      "required": [
+        "category"
+      ],
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "string"
+        },
+        "compositionSetting": {
+          "$ref": "#/definitions/CompositionSetting"
+        },
+        "list": {
+          "$ref": "#/definitions/ExportedEntityList"
+        },
+        "prebuilts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExportedPrebuiltEntity"
+          }
+        }
+      }
+    },
+    "ExportedEntityList": {
+      "type": "object",
+      "properties": {
+        "sublists": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExportedEntitySublist"
+          }
+        }
+      }
+    },
+    "ExportedEntityListSynonym": {
+      "type": "object",
+      "properties": {
+        "language": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ExportedEntitySublist": {
+      "type": "object",
+      "properties": {
+        "listKey": {
+          "type": "string"
+        },
+        "synonyms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExportedEntityListSynonym"
+          }
+        }
+      }
+    },
+    "ExportedIntent": {
+      "required": [
+        "category"
+      ],
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "string"
+        },
+        "orchestration": {
+          "$ref": "#/definitions/ExportedOrchestrationOptions"
+        }
+      }
+    },
+    "ExportedLuisOrchestration": {
+      "required": [
+        "appId"
+      ],
+      "type": "object",
+      "properties": {
+        "appId": {
+          "format": "uuid",
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
+        },
+        "appVersion": {
+          "type": "string"
+        },
+        "slotName": {
+          "type": "string"
+        }
+      }
+    },
+    "ExportedLuisOrchestrationOptions": {
+      "required": [
+        "luisOrchestration"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExportedOrchestrationOptions"
+        }
+      ],
+      "properties": {
+        "luisOrchestration": {
+          "$ref": "#/definitions/ExportedLuisOrchestration"
+        }
+      },
+      "x-ms-discriminator-value": "luis"
+    },
+    "ExportedOrchestrationOptions": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/OrchestrationKind"
+        }
+      },
+      "discriminator": "kind"
+    },
+    "ExportedPrebuiltEntity": {
+      "required": [
+        "category"
+      ],
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "string"
+        }
+      }
+    },
+    "ExportedProject": {
+      "required": [
+        "api-version",
+        "stringIndexType",
+        "metadata"
+      ],
+      "type": "object",
+      "properties": {
+        "api-version": {
+          "type": "string"
+        },
+        "stringIndexType": {
+          "description": "Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.",
+          "$ref": "#/definitions/StringIndexType"
+        },
+        "metadata": {
+          "description": "Represents the project metadata.",
+          "$ref": "#/definitions/CreateProjectOptions"
+        },
+        "assets": {
+          "description": "Represents the project assets.",
+          "$ref": "#/definitions/ExportedProjectAssets"
+        }
+      }
+    },
+    "ExportedProjectAssets": {
+      "type": "object",
+      "properties": {
+        "intents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExportedIntent"
+          }
+        },
+        "entities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExportedEntity"
+          }
+        },
+        "utterances": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExportedUtterance"
+          }
+        }
+      }
+    },
+    "ExportedProjectFormat": {
+      "enum": [
+        "clu",
+        "luis"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ExportedProjectFormat",
+        "modelAsString": true
+      }
+    },
+    "ExportedQnaOrchestration": {
+      "required": [
+        "projectName"
+      ],
+      "type": "object",
+      "properties": {
+        "projectName": {
+          "type": "string"
+        }
+      }
+    },
+    "ExportedQnaOrchestrationOptions": {
+      "required": [
+        "qnaOrchestration"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExportedOrchestrationOptions"
+        }
+      ],
+      "properties": {
+        "qnaOrchestration": {
+          "$ref": "#/definitions/ExportedQnaOrchestration"
+        }
+      },
+      "x-ms-discriminator-value": "qna"
+    },
+    "ExportedUtterance": {
+      "required": [
+        "text",
+        "intent"
+      ],
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "intent": {
+          "type": "string"
+        },
+        "entities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExportedUtteranceEntityLabel"
+          }
+        },
+        "dataset": {
+          "description": "The dataset for this utterance. Allowed values are 'Train' and 'Test'.",
+          "type": "string"
+        }
+      }
+    },
+    "ExportedUtteranceEntityLabel": {
+      "required": [
+        "category",
+        "offset",
+        "length"
+      ],
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "string"
+        },
+        "offset": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "length": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "ExportProjectJobState": {
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "expirationDateTime",
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "resultUrl": {
+          "type": "string"
+        },
+        "jobId": {
+          "description": "Gets or sets the job ID.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the created time.",
+          "type": "string"
+        },
+        "lastUpdatedDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the last updated time.",
+          "type": "string"
+        },
+        "expirationDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the expiration time.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Gets or sets the job status.",
+          "$ref": "#/definitions/JobStatus"
+        },
+        "warnings": {
+          "description": "Gets or sets the warnings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "errors": {
+          "description": "Gets or sets the errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        }
+      }
+    },
+    "ImportProjectJobState": {
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "expirationDateTime",
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "jobId": {
+          "description": "Gets or sets the job ID.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the created time.",
+          "type": "string"
+        },
+        "lastUpdatedDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the last updated time.",
+          "type": "string"
+        },
+        "expirationDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the expiration time.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Gets or sets the job status.",
+          "$ref": "#/definitions/JobStatus"
+        },
+        "warnings": {
+          "description": "Gets or sets the warnings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "errors": {
+          "description": "Gets or sets the errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        }
+      }
+    },
+    "IntentEvaluation": {
+      "required": [
+        "f1",
+        "precision",
+        "recall",
+        "truePositiveCount",
+        "trueNegativeCount",
+        "falsePositiveCount",
+        "falseNegativeCount"
+      ],
+      "type": "object",
+      "properties": {
+        "f1": {
+          "format": "double",
+          "description": "Represents the model precision",
+          "type": "number"
+        },
+        "precision": {
+          "format": "double",
+          "description": "Represents the model recall",
+          "type": "number"
+        },
+        "recall": {
+          "format": "double",
+          "description": "Represents the model F1 score",
+          "type": "number"
+        },
+        "truePositiveCount": {
+          "format": "int32",
+          "description": "Represents the count of true positive",
+          "type": "integer"
+        },
+        "trueNegativeCount": {
+          "format": "int32",
+          "description": "Represents the count of true negative",
+          "type": "integer"
+        },
+        "falsePositiveCount": {
+          "format": "int32",
+          "description": "Represents the count of false positive",
+          "type": "integer"
+        },
+        "falseNegativeCount": {
+          "format": "int32",
+          "description": "Represents the count of false negative",
+          "type": "integer"
+        }
+      }
+    },
+    "IntentsEvaluation": {
+      "required": [
+        "confusionMatrix",
+        "intents",
+        "microF1",
+        "microPrecision",
+        "microRecall",
+        "macroF1",
+        "macroPrecision",
+        "macroRecall"
+      ],
+      "type": "object",
+      "properties": {
+        "confusionMatrix": {
+          "description": "Represents the confusion matrix between two intents (the two intents can be the same intent)\n            the matrix is between the actual intent that was labelled and the intent that was predicted.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/definitions/ConfusionMatrix"
+            }
+          }
+        },
+        "intents": {
+          "description": "Represents the intents evaluation.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/IntentEvaluation"
+          }
+        },
+        "microF1": {
+          "format": "float",
+          "description": "Represents the micro F1",
+          "type": "number"
+        },
+        "microPrecision": {
+          "format": "float",
+          "description": "Represents the micro precision",
+          "type": "number"
+        },
+        "microRecall": {
+          "format": "float",
+          "description": "Represents the micro recall",
+          "type": "number"
+        },
+        "macroF1": {
+          "format": "float",
+          "description": "Represents the macro F1",
+          "type": "number"
+        },
+        "macroPrecision": {
+          "format": "float",
+          "description": "Represents the macro precision",
+          "type": "number"
+        },
+        "macroRecall": {
+          "format": "float",
+          "description": "Represents the macro recall",
+          "type": "number"
+        }
+      }
+    },
+    "JobStatus": {
+      "enum": [
+        "unknown",
+        "notStarted",
+        "running",
+        "succeeded",
+        "failed",
+        "cancelled",
+        "cancelling",
+        "partiallyCompleted"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "JobStatus",
+        "modelAsString": true
+      }
+    },
+    "OrchestrationKind": {
+      "enum": [
+        "luis",
+        "clu",
+        "qna"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "OrchestrationKind",
+        "modelAsString": true
+      }
+    },
+    "PrebuiltEntities": {
+      "required": [
+        "value",
+        "nextLink"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The supported prebuilt entities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrebuiltEntity"
+          }
+        },
+        "nextLink": {
+          "description": "The next page link.",
+          "type": "string"
+        }
+      }
+    },
+    "PrebuiltEntity": {
+      "required": [
+        "category",
+        "description",
+        "examples"
+      ],
+      "type": "object",
+      "properties": {
+        "category": {
+          "description": "The prebuilt entity category.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description.",
+          "type": "string"
+        },
+        "examples": {
+          "description": "English examples for the entity.",
+          "type": "string"
+        }
+      }
+    },
+    "ProjectDeletionJobState": {
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "expirationDateTime",
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "jobId": {
+          "description": "Gets or sets the job ID.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the created time.",
+          "type": "string"
+        },
+        "lastUpdatedDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the last updated time.",
+          "type": "string"
+        },
+        "expirationDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the expiration time.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Gets or sets the job status.",
+          "$ref": "#/definitions/JobStatus"
+        },
+        "warnings": {
+          "description": "Gets or sets the warnings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "errors": {
+          "description": "Gets or sets the errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        }
+      }
+    },
+    "ProjectDeployment": {
+      "required": [
+        "deploymentName",
+        "modelId",
+        "lastTrainedDateTime",
+        "lastDeployedDateTime",
+        "deploymentExpirationDate",
+        "modelTrainingConfigVersion"
+      ],
+      "type": "object",
+      "properties": {
+        "deploymentName": {
+          "description": "Represents deployment name.",
+          "type": "string"
+        },
+        "modelId": {
+          "description": "Represents deployment modelId.",
+          "type": "string"
+        },
+        "lastTrainedDateTime": {
+          "format": "date-time",
+          "description": "Represents deployment last trained time.",
+          "type": "string"
+        },
+        "lastDeployedDateTime": {
+          "format": "date-time",
+          "description": "Represents deployment last deployed time.",
+          "type": "string"
+        },
+        "deploymentExpirationDate": {
+          "format": "date-time",
+          "description": "Represents deployment expiration date in the runtime.",
+          "type": "string"
+        },
+        "modelTrainingConfigVersion": {
+          "description": "Represents model training config version.",
+          "type": "string"
+        }
+      }
+    },
+    "ProjectDeployments": {
+      "required": [
+        "value",
+        "nextLink"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the deployments.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProjectDeployment"
+          }
+        },
+        "nextLink": {
+          "description": "Gets or sets the next page link.",
+          "type": "string"
+        }
+      }
+    },
+    "ProjectKind": {
+      "enum": [
+        "conversation",
+        "orchestration"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProjectKind",
+        "modelAsString": true
+      }
+    },
+    "ProjectMetadata": {
+      "required": [
+        "createdDateTime",
+        "lastModifiedDateTime",
+        "lastTrainedDateTime",
+        "lastDeployedDateTime",
+        "projectKind",
+        "settings",
+        "projectName",
+        "language"
+      ],
+      "type": "object",
+      "properties": {
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Represents the project creation datetime.",
+          "type": "string"
+        },
+        "lastModifiedDateTime": {
+          "format": "date-time",
+          "description": "Represents the project creation datetime.",
+          "type": "string"
+        },
+        "lastTrainedDateTime": {
+          "format": "date-time",
+          "description": "Represents the project last trained datetime.",
+          "type": "string"
+        },
+        "lastDeployedDateTime": {
+          "format": "date-time",
+          "description": "Represents the project last deployed datetime.",
+          "type": "string"
+        },
+        "projectKind": {
+          "description": "Represents the project kind.",
+          "$ref": "#/definitions/ProjectKind"
+        },
+        "settings": {
+          "description": "Gets or sets the project settings.",
+          "$ref": "#/definitions/ProjectSettings"
+        },
+        "projectName": {
+          "description": "Gets or sets the new project name.",
+          "type": "string"
+        },
+        "multilingual": {
+          "description": "Gets or sets a value indicating whether gets or sets whether the project is multilingual or not.",
+          "type": "boolean"
+        },
+        "description": {
+          "description": "Gets or sets the new project description.",
+          "type": "string"
+        },
+        "language": {
+          "description": "Gets or sets the project language.",
+          "type": "string"
+        }
+      }
+    },
+    "ProjectSettings": {
+      "required": [
+        "confidenceThreshold"
+      ],
+      "type": "object",
+      "properties": {
+        "confidenceThreshold": {
+          "format": "float",
+          "type": "number"
+        }
+      }
+    },
+    "ProjectsMetadata": {
+      "required": [
+        "value",
+        "nextLink"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the projects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProjectMetadata"
+          }
+        },
+        "nextLink": {
+          "description": "Gets or sets the next page link.",
+          "type": "string"
+        }
+      }
+    },
+    "ProjectTrainedModel": {
+      "required": [
+        "label",
+        "modelId",
+        "lastTrainedDateTime",
+        "lastTrainingDurationInSeconds",
+        "modelExpirationDate",
+        "modelTrainingConfigVersion"
+      ],
+      "type": "object",
+      "properties": {
+        "label": {
+          "description": "Represents trained model label.",
+          "type": "string"
+        },
+        "modelId": {
+          "description": "Represents the ID of this model. The model ID has the format \"{version}-{yyyyMMddThhmmss}-{Guid.NewGuid()}\".",
+          "type": "string"
+        },
+        "lastTrainedDateTime": {
+          "format": "date-time",
+          "description": "Represents trained model last trained time.",
+          "type": "string"
+        },
+        "lastTrainingDurationInSeconds": {
+          "format": "int32",
+          "description": "Represents trained model last training duration in seconds.",
+          "type": "integer"
+        },
+        "modelExpirationDate": {
+          "format": "date-time",
+          "description": "Represents model expiration date.",
+          "type": "string"
+        },
+        "modelTrainingConfigVersion": {
+          "description": "Represents the model training config version.",
+          "type": "string"
+        }
+      }
+    },
+    "ProjectTrainedModels": {
+      "required": [
+        "value",
+        "nextLink"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the jobs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProjectTrainedModel"
+          }
+        },
+        "nextLink": {
+          "description": "Gets or sets the next page link.",
+          "type": "string"
+        }
+      }
+    },
+    "StringIndexType": {
+      "enum": [
+        "Utf16CodeUnit"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "StringIndexType",
+        "modelAsString": true
+      }
+    },
+    "SubTrainingJobState": {
+      "required": [
+        "percentComplete",
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "percentComplete": {
+          "format": "int32",
+          "description": "Represents progress percentage.",
+          "type": "integer"
+        },
+        "startDateTime": {
+          "format": "date-time",
+          "description": "Represents the start date time.",
+          "type": "string"
+        },
+        "endDateTime": {
+          "format": "date-time",
+          "description": "Represents the end date time.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Represents the status of the job.",
+          "$ref": "#/definitions/JobStatus"
+        }
+      }
+    },
+    "SupportedLanguage": {
+      "required": [
+        "languageName",
+        "languageCode"
+      ],
+      "type": "object",
+      "properties": {
+        "languageName": {
+          "description": "Gets or sets the language name.",
+          "type": "string"
+        },
+        "languageCode": {
+          "description": "Gets or sets the language code.",
+          "type": "string"
+        }
+      }
+    },
+    "SupportedLanguages": {
+      "required": [
+        "value",
+        "nextLink"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of supported objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SupportedLanguage"
+          }
+        },
+        "nextLink": {
+          "description": "The next page link.",
+          "type": "string"
+        }
+      }
+    },
+    "SwapDeploymentsOptions": {
+      "required": [
+        "firstDeploymentName",
+        "secondDeploymentName"
+      ],
+      "type": "object",
+      "properties": {
+        "firstDeploymentName": {
+          "description": "Represents the first deployment name.",
+          "type": "string"
+        },
+        "secondDeploymentName": {
+          "description": "Represents the second deployment name.",
+          "type": "string"
+        }
+      }
+    },
+    "TrainingConfigVersion": {
+      "required": [
+        "trainingConfigVersion",
+        "modelExpirationDate"
+      ],
+      "type": "object",
+      "properties": {
+        "trainingConfigVersion": {
+          "description": "Represents the training config version.",
+          "type": "string"
+        },
+        "modelExpirationDate": {
+          "format": "date-time",
+          "description": "Represents the training config version expiration date in the format of (\"yyyy-MM-dd\").",
+          "type": "string"
+        }
+      }
+    },
+    "TrainingConfigVersions": {
+      "required": [
+        "value",
+        "nextLink"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the training config versions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrainingConfigVersion"
+          }
+        },
+        "nextLink": {
+          "description": "Gets or sets the next page link.",
+          "type": "string"
+        }
+      }
+    },
+    "TrainingJobOptions": {
+      "required": [
+        "modelLabel",
+        "trainingMode"
+      ],
+      "type": "object",
+      "properties": {
+        "modelLabel": {
+          "description": "Represents training model label.",
+          "type": "string"
+        },
+        "trainingConfigVersion": {
+          "description": "Represents training config version.\n            By default, \"latest\" value is used which uses the latest released training config version.",
+          "type": "string"
+        },
+        "trainingMode": {
+          "description": "Represents the training mode of the training operation.",
+          "$ref": "#/definitions/TrainingMode"
+        },
+        "evaluationOptions": {
+          "description": "Represents the evaluation options. By default, the evaluation kind is percentage, with training split percentage as 80, and testing split percentage as 20.",
+          "$ref": "#/definitions/EvaluationOptions"
+        }
+      }
+    },
+    "TrainingJobResult": {
+      "required": [
+        "modelLabel",
+        "trainingConfigVersion",
+        "trainingStatus"
+      ],
+      "type": "object",
+      "properties": {
+        "modelLabel": {
+          "description": "Represents trained model label.",
+          "type": "string"
+        },
+        "trainingConfigVersion": {
+          "description": "Represents training config version.",
+          "type": "string"
+        },
+        "trainingMode": {
+          "description": "Represents the training mode of the training operation.",
+          "$ref": "#/definitions/TrainingMode"
+        },
+        "trainingStatus": {
+          "description": "Represents model train status.",
+          "$ref": "#/definitions/SubTrainingJobState"
+        },
+        "evaluationStatus": {
+          "description": "Represents model evaluation status.",
+          "$ref": "#/definitions/SubTrainingJobState"
+        },
+        "estimatedEndDateTime": {
+          "format": "date-time",
+          "description": "Represents the estimate end date time for training and evaluation.",
+          "type": "string"
+        }
+      }
+    },
+    "TrainingJobs": {
+      "required": [
+        "value",
+        "nextLink"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the jobs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrainingJobState"
+          }
+        },
+        "nextLink": {
+          "description": "Gets or sets the next page link.",
+          "type": "string"
+        }
+      }
+    },
+    "TrainingJobState": {
+      "required": [
+        "result",
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "expirationDateTime",
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "result": {
+          "description": "Represents training tasks detailed result.",
+          "$ref": "#/definitions/TrainingJobResult"
+        },
+        "jobId": {
+          "description": "Gets or sets the job ID.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the created time.",
+          "type": "string"
+        },
+        "lastUpdatedDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the last updated time.",
+          "type": "string"
+        },
+        "expirationDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the expiration time.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Gets or sets the job status.",
+          "$ref": "#/definitions/JobStatus"
+        },
+        "warnings": {
+          "description": "Gets or sets the warnings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "errors": {
+          "description": "Gets or sets the errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        }
+      }
+    },
+    "TrainingMode": {
+      "enum": [
+        "advanced",
+        "standard"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TrainingMode",
+        "modelAsString": true
+      }
+    },
+    "UtteranceEntitiesEvaluationResult": {
+      "required": [
+        "expectedEntities",
+        "actualEntities"
+      ],
+      "type": "object",
+      "properties": {
+        "expectedEntities": {
+          "description": "Represents the entity labels.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UtteranceEntityEvaluationResult"
+          }
+        },
+        "actualEntities": {
+          "description": "Represents the predicted entity labels.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UtteranceEntityEvaluationResult"
+          }
+        }
+      }
+    },
+    "UtteranceEntityEvaluationResult": {
+      "required": [
+        "category",
+        "offset",
+        "length"
+      ],
+      "type": "object",
+      "properties": {
+        "category": {
+          "description": "Represents the entity category.",
+          "type": "string"
+        },
+        "offset": {
+          "format": "int32",
+          "description": "Represents the entity offset index relative to the original text.",
+          "type": "integer"
+        },
+        "length": {
+          "format": "int32",
+          "description": "Represents the entity length.",
+          "type": "integer"
+        }
+      }
+    },
+    "UtteranceEvaluationResult": {
+      "required": [
+        "text",
+        "language",
+        "entitiesResult",
+        "intentsResult"
+      ],
+      "type": "object",
+      "properties": {
+        "text": {
+          "description": "Represents the utterance text.",
+          "type": "string"
+        },
+        "language": {
+          "description": "Represents the utterance language.",
+          "type": "string"
+        },
+        "entitiesResult": {
+          "description": "Represents the entities results for the utterance.",
+          "$ref": "#/definitions/UtteranceEntitiesEvaluationResult"
+        },
+        "intentsResult": {
+          "description": "Represents the intents results for the utterance.",
+          "$ref": "#/definitions/UtteranceIntentsEvaluationResult"
+        }
+      }
+    },
+    "UtteranceIntentsEvaluationResult": {
+      "required": [
+        "expectedIntent",
+        "actualIntent"
+      ],
+      "type": "object",
+      "properties": {
+        "expectedIntent": {
+          "description": "Represents the utterance's labeled intent.",
+          "type": "string"
+        },
+        "actualIntent": {
+          "description": "Represents the utterance's predicted intent.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    },
+    "FormatInQuery": {
+      "in": "query",
+      "name": "format",
+      "description": "The format of the project to export. The currently supported format is `clu`.",
+      "type": "string",
+      "enum": [
+        "clu",
+        "luis"
+      ],
+      "x-ms-enum": {
+        "name": "ExportedProjectFormat",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "StringIndexTypeInQuery": {
+      "in": "query",
+      "name": "stringIndexType",
+      "description": "Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "Utf16CodeUnit"
+      ],
+      "x-ms-enum": {
+        "name": "StringIndexType",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "ProjectKindInQuery": {
+      "in": "query",
+      "name": "projectKind",
+      "description": "The project kind to get the supported languages for.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "conversation",
+        "orchestration"
+      ],
+      "x-ms-enum": {
+        "name": "ProjectKind",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
