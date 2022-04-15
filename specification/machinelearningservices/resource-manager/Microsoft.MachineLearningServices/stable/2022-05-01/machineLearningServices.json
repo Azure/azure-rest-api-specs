@@ -5445,7 +5445,7 @@
         "modelAsString": true
       }
     },
-    "UsernamePassword": {
+    "WorkspaceConnectionUsernamePassword": {
       "type": "object",
       "allOf": [
         {
@@ -5462,7 +5462,7 @@
       },
       "additionalProperties": false
     },
-    "PersonalAccessToken": {
+    "WorkspaceConnectionPersonalAccessToken": {
       "type": "object",
       "allOf": [
         {
@@ -5485,13 +5485,13 @@
       ],
       "properties": {
         "credentials": {
-          "$ref": "#/definitions/PersonalAccessToken"
+          "$ref": "#/definitions/WorkspaceConnectionPersonalAccessToken"
         }
       },
       "additionalProperties": false,
       "x-ms-discriminator-value": "PAT"
     },
-    "SharedAccessSignature": {
+    "WorkspaceConnectionSharedAccessSignature": {
       "type": "object",
       "allOf": [
         {
@@ -5514,7 +5514,7 @@
       ],
       "properties": {
         "credentials": {
-          "$ref": "#/definitions/SharedAccessSignature"
+          "$ref": "#/definitions/WorkspaceConnectionSharedAccessSignature"
         }
       },
       "additionalProperties": false,
@@ -5529,7 +5529,7 @@
       ],
       "properties": {
         "credentials": {
-          "$ref": "#/definitions/UsernamePassword"
+          "$ref": "#/definitions/WorkspaceConnectionUsernamePassword"
         }
       },
       "additionalProperties": false,
@@ -5583,7 +5583,7 @@
       "additionalProperties": false,
       "x-ms-discriminator-value": "None"
     },
-    "ManagedIdentity": {
+    "WorkspaceConnectionManagedIdentity": {
       "type": "object",
       "allOf": [
         {
@@ -5609,7 +5609,7 @@
       ],
       "properties": {
         "credentials": {
-          "$ref": "#/definitions/ManagedIdentity"
+          "$ref": "#/definitions/WorkspaceConnectionManagedIdentity"
         }
       },
       "additionalProperties": false,
