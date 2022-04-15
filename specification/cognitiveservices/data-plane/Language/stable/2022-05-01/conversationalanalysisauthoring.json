@@ -1289,6 +1289,97 @@
         }
       }
     },
+    "ConversationExportedEntity": {
+      "required": [
+        "category"
+      ],
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "string"
+        },
+        "compositionSetting": {
+          "$ref": "#/definitions/CompositionSetting"
+        },
+        "list": {
+          "$ref": "#/definitions/ExportedEntityList"
+        },
+        "prebuilts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExportedPrebuiltEntity"
+          }
+        }
+      }
+    },
+    "ConversationExportedIntent": {
+      "required": [
+        "category"
+      ],
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "string"
+        }
+      }
+    },
+    "ConversationExportedProjectAssets": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExportedProjectAssets"
+        }
+      ],
+      "properties": {
+        "intents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConversationExportedIntent"
+          }
+        },
+        "entities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConversationExportedEntity"
+          }
+        },
+        "utterances": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConversationExportedUtterance"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "conversation"
+    },
+    "ConversationExportedUtterance": {
+      "required": [
+        "text",
+        "intent"
+      ],
+      "type": "object",
+      "properties": {
+        "entities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExportedUtteranceEntityLabel"
+          }
+        },
+        "text": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "intent": {
+          "type": "string"
+        },
+        "dataset": {
+          "description": "The dataset for this utterance. Allowed values are 'Train' and 'Test'.",
+          "type": "string"
+        }
+      }
+    },
     "CreateDeploymentOptions": {
       "required": [
         "trainedModelLabel"
@@ -1658,29 +1749,6 @@
       },
       "x-ms-discriminator-value": "clu"
     },
-    "ExportedEntity": {
-      "required": [
-        "category"
-      ],
-      "type": "object",
-      "properties": {
-        "category": {
-          "type": "string"
-        },
-        "compositionSetting": {
-          "$ref": "#/definitions/CompositionSetting"
-        },
-        "list": {
-          "$ref": "#/definitions/ExportedEntityList"
-        },
-        "prebuilts": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExportedPrebuiltEntity"
-          }
-        }
-      }
-    },
     "ExportedEntityList": {
       "type": "object",
       "properties": {
@@ -1717,20 +1785,6 @@
           "items": {
             "$ref": "#/definitions/ExportedEntityListSynonym"
           }
-        }
-      }
-    },
-    "ExportedIntent": {
-      "required": [
-        "category"
-      ],
-      "type": "object",
-      "properties": {
-        "category": {
-          "type": "string"
-        },
-        "orchestration": {
-          "$ref": "#/definitions/ExportedOrchestrationOptions"
         }
       }
     },
@@ -1819,27 +1873,16 @@
       }
     },
     "ExportedProjectAssets": {
+      "required": [
+        "projectKind"
+      ],
       "type": "object",
       "properties": {
-        "intents": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExportedIntent"
-          }
-        },
-        "entities": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExportedEntity"
-          }
-        },
-        "utterances": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExportedUtterance"
-          }
+        "projectKind": {
+          "$ref": "#/definitions/ProjectKind"
         }
-      }
+      },
+      "discriminator": "projectKind"
     },
     "ExportedProjectFormat": {
       "enum": [
@@ -1879,34 +1922,6 @@
         }
       },
       "x-ms-discriminator-value": "qna"
-    },
-    "ExportedUtterance": {
-      "required": [
-        "text",
-        "intent"
-      ],
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string"
-        },
-        "language": {
-          "type": "string"
-        },
-        "intent": {
-          "type": "string"
-        },
-        "entities": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExportedUtteranceEntityLabel"
-          }
-        },
-        "dataset": {
-          "description": "The dataset for this utterance. Allowed values are 'Train' and 'Test'.",
-          "type": "string"
-        }
-      }
     },
     "ExportedUtteranceEntityLabel": {
       "required": [
@@ -2156,6 +2171,65 @@
       "x-ms-enum": {
         "name": "JobStatus",
         "modelAsString": true
+      }
+    },
+    "OrchestrationExportedIntent": {
+      "required": [
+        "category"
+      ],
+      "type": "object",
+      "properties": {
+        "orchestration": {
+          "$ref": "#/definitions/ExportedOrchestrationOptions"
+        },
+        "category": {
+          "type": "string"
+        }
+      }
+    },
+    "OrchestrationExportedProjectAssets": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExportedProjectAssets"
+        }
+      ],
+      "properties": {
+        "intents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OrchestrationExportedIntent"
+          }
+        },
+        "utterances": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OrchestrationExportedUtterance"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "orchestration"
+    },
+    "OrchestrationExportedUtterance": {
+      "required": [
+        "text",
+        "intent"
+      ],
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "intent": {
+          "type": "string"
+        },
+        "dataset": {
+          "description": "The dataset for this utterance. Allowed values are 'Train' and 'Test'.",
+          "type": "string"
+        }
       }
     },
     "OrchestrationKind": {
