@@ -19,7 +19,7 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/language/authoring/analyze-conversations/projects",
+    "hostTemplate": "{Endpoint}/language",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -28,11 +28,11 @@
     ]
   },
   "paths": {
-    "/": {
+    "/authoring/analyze-conversations/projects": {
       "get": {
         "summary": "List projects",
         "description": "Lists the existing projects.",
-        "operationId": "ListProjects",
+        "operationId": "ConversationalAnalysisAuthoring_ListProjects",
         "produces": [
           "application/json"
         ],
@@ -70,11 +70,11 @@
         }
       }
     },
-    "/{projectName}": {
+    "/authoring/analyze-conversations/projects/{projectName}": {
       "patch": {
         "summary": "Create project",
         "description": "Creates a new project or updates an existing one.",
-        "operationId": "CreateProject",
+        "operationId": "ConversationalAnalysisAuthoring_CreateProject",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -122,7 +122,7 @@
       "get": {
         "summary": "Get project details",
         "description": "Gets the details of a project.",
-        "operationId": "GetProject",
+        "operationId": "ConversationalAnalysisAuthoring_GetProject",
         "produces": [
           "application/json"
         ],
@@ -152,7 +152,7 @@
       "delete": {
         "summary": "Delete project",
         "description": "Deletes a project.",
-        "operationId": "DeleteProject",
+        "operationId": "ConversationalAnalysisAuthoring_DeleteProject",
         "produces": [
           "application/json"
         ],
@@ -184,11 +184,11 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/{projectName}/:export": {
+    "/authoring/analyze-conversations/projects/{projectName}/:export": {
       "post": {
         "summary": "Export project",
         "description": "Triggers a job to export a project's data.",
-        "operationId": "Export",
+        "operationId": "ConversationalAnalysisAuthoring_Export",
         "produces": [
           "application/json"
         ],
@@ -232,11 +232,11 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/{projectName}/:import": {
+    "/authoring/analyze-conversations/projects/{projectName}/:import": {
       "post": {
         "summary": "Import project",
         "description": "Triggers a job to import a project. If a project with the same name already exists, the data of that project is replaced.",
-        "operationId": "Import",
+        "operationId": "ConversationalAnalysisAuthoring_Import",
         "consumes": [
           "application/json"
         ],
@@ -283,11 +283,11 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/{projectName}/:train": {
+    "/authoring/analyze-conversations/projects/{projectName}/:train": {
       "post": {
         "summary": "Train project",
         "description": "Triggers a training job for a project.",
-        "operationId": "Train",
+        "operationId": "ConversationalAnalysisAuthoring_Train",
         "consumes": [
           "application/json"
         ],
@@ -331,11 +331,11 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/{projectName}/deployments": {
+    "/authoring/analyze-conversations/projects/{projectName}/deployments": {
       "get": {
         "summary": "List deployments",
         "description": "Lists the deployments belonging to a project.",
-        "operationId": "ListDeployments",
+        "operationId": "ConversationalAnalysisAuthoring_ListDeployments",
         "produces": [
           "application/json"
         ],
@@ -376,11 +376,11 @@
         }
       }
     },
-    "/{projectName}/deployments/:swap": {
+    "/authoring/analyze-conversations/projects/{projectName}/deployments/:swap": {
       "post": {
         "summary": "Swap deployments",
         "description": "Swaps two existing deployments with each other.",
-        "operationId": "SwapDeployments",
+        "operationId": "ConversationalAnalysisAuthoring_SwapDeployments",
         "consumes": [
           "application/json"
         ],
@@ -424,11 +424,11 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/{projectName}/deployments/{deploymentName}": {
+    "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}": {
       "get": {
         "summary": "Get deployment details",
         "description": "Gets the details of a deployment.",
-        "operationId": "GetDeployment",
+        "operationId": "ConversationalAnalysisAuthoring_GetDeployment",
         "produces": [
           "application/json"
         ],
@@ -461,7 +461,7 @@
       "put": {
         "summary": "Update deployment",
         "description": "Creates a new deployment or replaces an existing one.",
-        "operationId": "DeployProject",
+        "operationId": "ConversationalAnalysisAuthoring_DeployProject",
         "consumes": [
           "application/json"
         ],
@@ -510,7 +510,7 @@
       "delete": {
         "summary": "Delete deployment",
         "description": "Deletes a project deployment.",
-        "operationId": "DeleteDeployment",
+        "operationId": "ConversationalAnalysisAuthoring_DeleteDeployment",
         "produces": [
           "application/json"
         ],
@@ -545,11 +545,11 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/{projectName}/deployments/{deploymentName}/jobs/{jobId}": {
+    "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}": {
       "get": {
         "summary": "Get deployment status",
         "description": "Gets the status of an existing deployment job.",
-        "operationId": "GetDeploymentStatus",
+        "operationId": "ConversationalAnalysisAuthoring_GetDeploymentStatus",
         "produces": [
           "application/json"
         ],
@@ -587,11 +587,11 @@
         }
       }
     },
-    "/{projectName}/deployments/swap/jobs/{jobId}": {
+    "/authoring/analyze-conversations/projects/{projectName}/deployments/swap/jobs/{jobId}": {
       "get": {
         "summary": "Gets swap deployments status",
         "description": "Gets the status of an existing swap deployment job.",
-        "operationId": "GetSwapDeploymentsStatus",
+        "operationId": "ConversationalAnalysisAuthoring_GetSwapDeploymentsStatus",
         "produces": [
           "application/json"
         ],
@@ -626,11 +626,11 @@
         }
       }
     },
-    "/{projectName}/export/jobs/{jobId}": {
+    "/authoring/analyze-conversations/projects/{projectName}/export/jobs/{jobId}": {
       "get": {
         "summary": "Get export status",
         "description": "Gets the status of an export job. Once job completes, returns the project metadata, and assets.",
-        "operationId": "GetExportStatus",
+        "operationId": "ConversationalAnalysisAuthoring_GetExportStatus",
         "produces": [
           "application/json"
         ],
@@ -665,11 +665,11 @@
         }
       }
     },
-    "/{projectName}/export/jobs/{jobId}/result": {
+    "/authoring/analyze-conversations/projects/{projectName}/export/jobs/{jobId}/result": {
       "get": {
         "summary": "Get export result",
         "description": "Gets the result of an export job.",
-        "operationId": "GetExportResult",
+        "operationId": "ConversationalAnalysisAuthoring_GetExportResult",
         "produces": [
           "application/json"
         ],
@@ -704,11 +704,11 @@
         }
       }
     },
-    "/{projectName}/import/jobs/{jobId}": {
+    "/authoring/analyze-conversations/projects/{projectName}/import/jobs/{jobId}": {
       "get": {
         "summary": "Get import status",
         "description": "Gets the status for an import.",
-        "operationId": "GetImportStatus",
+        "operationId": "ConversationalAnalysisAuthoring_GetImportStatus",
         "produces": [
           "application/json"
         ],
@@ -743,11 +743,11 @@
         }
       }
     },
-    "/{projectName}/models": {
+    "/authoring/analyze-conversations/projects/{projectName}/models": {
       "get": {
         "summary": "List trained models",
         "description": "Lists the trained models belonging to a project.",
-        "operationId": "ListTrainedModels",
+        "operationId": "ConversationalAnalysisAuthoring_ListTrainedModels",
         "produces": [
           "application/json"
         ],
@@ -788,11 +788,11 @@
         }
       }
     },
-    "/{projectName}/models/{trainedModelLabel}": {
+    "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}": {
       "get": {
         "summary": "Get trained model details",
         "description": "Gets the details of a trained model.",
-        "operationId": "GetTrainedModel",
+        "operationId": "ConversationalAnalysisAuthoring_GetTrainedModel",
         "produces": [
           "application/json"
         ],
@@ -829,7 +829,7 @@
       "delete": {
         "summary": "Delete trained model",
         "description": "Deletes an existing trained model.",
-        "operationId": "DeleteTrainedModel",
+        "operationId": "ConversationalAnalysisAuthoring_DeleteTrainedModel",
         "produces": [
           "application/json"
         ],
@@ -861,11 +861,11 @@
         }
       }
     },
-    "/{projectName}/models/{trainedModelLabel}/evaluation/result": {
+    "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluation/result": {
       "get": {
         "summary": "Get trained model evaluation result",
         "description": "Gets the detailed results of the evaluation for a trained model. This includes the raw inference results for the data included in the evaluation process.",
-        "operationId": "GetModelEvaluationResults",
+        "operationId": "ConversationalAnalysisAuthoring_GetModelEvaluationResults",
         "produces": [
           "application/json"
         ],
@@ -916,11 +916,11 @@
         }
       }
     },
-    "/{projectName}/models/{trainedModelLabel}/evaluation/summary-result": {
+    "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluation/summary-result": {
       "get": {
         "summary": "Get trained model evaluation summary",
         "description": "Gets the evaluation summary of a trained model. The summary includes high level performance measurements of the model (E.g. F1, Precision, Recall, ..etc).",
-        "operationId": "GetModelEvaluationSummary",
+        "operationId": "ConversationalAnalysisAuthoring_GetModelEvaluationSummary",
         "produces": [
           "application/json"
         ],
@@ -955,11 +955,11 @@
         }
       }
     },
-    "/{projectName}/train/jobs": {
+    "/authoring/analyze-conversations/projects/{projectName}/train/jobs": {
       "get": {
         "summary": "List training jobs",
         "description": "Lists the non-expired training jobs created for a project.",
-        "operationId": "ListTrainingJobs",
+        "operationId": "ConversationalAnalysisAuthoring_ListTrainingJobs",
         "produces": [
           "application/json"
         ],
@@ -1000,11 +1000,11 @@
         }
       }
     },
-    "/{projectName}/train/jobs/{jobId}": {
+    "/authoring/analyze-conversations/projects/{projectName}/train/jobs/{jobId}": {
       "get": {
         "summary": "Get training status",
         "description": "Gets the status for a training job.",
-        "operationId": "GetTrainingStatus",
+        "operationId": "ConversationalAnalysisAuthoring_GetTrainingStatus",
         "produces": [
           "application/json"
         ],
@@ -1039,11 +1039,11 @@
         }
       }
     },
-    "/{projectName}/train/jobs/{jobId}/:cancel": {
+    "/authoring/analyze-conversations/projects/{projectName}/train/jobs/{jobId}/:cancel": {
       "post": {
         "summary": "Cancel training",
         "description": "Triggers a cancellation for a running training job.",
-        "operationId": "CancelTrainingJob",
+        "operationId": "ConversationalAnalysisAuthoring_CancelTrainingJob",
         "produces": [
           "application/json"
         ],
@@ -1075,11 +1075,11 @@
         }
       }
     },
-    "/global/deletion-jobs/{jobId}": {
+    "/authoring/analyze-conversations/projects/global/deletion-jobs/{jobId}": {
       "get": {
         "summary": "Get project deletion status",
         "description": "Gets the status for a project deletion job.",
-        "operationId": "GetProjectDeletionStatus",
+        "operationId": "ConversationalAnalysisAuthoring_GetProjectDeletionStatus",
         "produces": [
           "application/json"
         ],
@@ -1111,11 +1111,11 @@
         }
       }
     },
-    "/global/languages": {
+    "/authoring/analyze-conversations/projects/global/languages": {
       "get": {
         "summary": "List supported languages",
         "description": "Lists the supported languages for the given project type.",
-        "operationId": "GetSupportedLanguages",
+        "operationId": "ConversationalAnalysisAuthoring_GetSupportedLanguages",
         "produces": [
           "application/json"
         ],
@@ -1156,11 +1156,11 @@
         }
       }
     },
-    "/global/prebuilt-entities": {
+    "/authoring/analyze-conversations/projects/global/prebuilt-entities": {
       "get": {
         "summary": "List supported prebuilt entities",
         "description": "Lists the supported prebuilt entities that can be used while creating composed entities.",
-        "operationId": "GetSupportedPrebuiltEntities",
+        "operationId": "ConversationalAnalysisAuthoring_GetSupportedPrebuiltEntities",
         "produces": [
           "application/json"
         ],
@@ -1210,11 +1210,11 @@
         }
       }
     },
-    "/global/training-config-versions": {
+    "/authoring/analyze-conversations/projects/global/training-config-versions": {
       "get": {
         "summary": "List training config versions",
         "description": "Lists the support training config version for a given project type.",
-        "operationId": "ListTrainingConfigVersions",
+        "operationId": "ConversationalAnalysisAuthoring_ListTrainingConfigVersions",
         "produces": [
           "application/json"
         ],
