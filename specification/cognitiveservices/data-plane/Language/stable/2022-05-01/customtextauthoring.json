@@ -1614,66 +1614,6 @@
         }
       }
     },
-    "Error": {
-      "description": "Represents the definition of the error that occurred.",
-      "required": [
-        "code",
-        "message"
-      ],
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "The error code.",
-          "$ref": "#/definitions/ErrorCode"
-        },
-        "message": {
-          "description": "The error message.",
-          "type": "string"
-        },
-        "target": {
-          "description": "The target that caused the error, if applicable.",
-          "type": "string"
-        },
-        "details": {
-          "description": "An array of details about specific errors that led to this reported error.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Error"
-          }
-        }
-      }
-    },
-    "ErrorCode": {
-      "enum": [
-        "InvalidRequest",
-        "InvalidArgument",
-        "Forbidden",
-        "NotFound",
-        "Unauthorized",
-        "Timeout",
-        "QuotaExceeded",
-        "Conflict",
-        "Warning",
-        "InternalServerError"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ErrorCode",
-        "modelAsString": true
-      }
-    },
-    "ErrorResponse": {
-      "description": "Represents the error that occurred.",
-      "required": [
-        "error"
-      ],
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Error"
-        }
-      }
-    },
     "EvaluationKind": {
       "enum": [
         "percentage",
