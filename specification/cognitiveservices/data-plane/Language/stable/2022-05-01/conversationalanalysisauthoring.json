@@ -1800,7 +1800,7 @@
         },
         "stringIndexType": {
           "description": "Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.",
-          "$ref": "#/definitions/StringIndexType"
+          "$ref": "common.json#/definitions/StringIndexType"
         },
         "metadata": {
           "description": "Represents the project metadata.",
@@ -2497,16 +2497,6 @@
         }
       }
     },
-    "StringIndexType": {
-      "enum": [
-        "Utf16CodeUnit"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "StringIndexType",
-        "modelAsString": true
-      }
-    },
     "SubTrainingJobState": {
       "required": [
         "percentComplete",
@@ -2887,6 +2877,8 @@
       "required": true,
       "type": "string",
       "enum": [
+        "TextElements_v8",
+        "UnicodeCodePoint",
         "Utf16CodeUnit"
       ],
       "x-ms-enum": {
