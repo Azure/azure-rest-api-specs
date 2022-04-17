@@ -231,6 +231,59 @@
         },
         "x-ms-long-running-operation": false
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents/{name}/listSecrets": {
+      "post": {
+        "tags": [
+          "DaprComponents"
+        ],
+        "summary": "List secrets for a dapr component",
+        "operationId": "DaprComponents_ListSecrets",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "Name of the Managed Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the Dapr Component.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DaprSecretsCollection"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Container Apps Secrets": {
+            "$ref": "./examples/DaprComponents_ListSecrets.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -331,6 +384,25 @@
         "secretRef": {
           "description": "Name of the Dapr Component secret from which to pull the metadata property value.",
           "type": "string"
+        }
+      }
+    },
+    "DaprSecretsCollection": {
+      "description": "Dapr component Secrets Collection ARM resource.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of secrets used by a Dapr component",
+          "type": "array",
+          "items": {
+            "$ref": "./CommonDefinitions.json#/definitions/Secret"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     }
