@@ -8547,14 +8547,14 @@
           "type": "string",
           "description": "ThroughputPolicy to apply for throughput redistribution"
         },
-        "targetPartitionInfo": {
+        "targetPhysicalPartitionThroughputInfo": {
           "type": "array",
           "description": "Array of PhysicalPartitionThroughputInfoResource objects.",
           "items": {
             "$ref": "#/definitions/PhysicalPartitionThroughputInfoResource"
           }
         },
-        "sourcePartitionInfo": {
+        "sourcePhysicalPartitionThroughputInfo": {
           "type": "array",
           "description": "Array of PhysicalPartitionThroughputInfoResource objects.",
           "items": {
@@ -8564,8 +8564,8 @@
       },
       "required": [
         "throughputPolicy",
-        "targetPartitionInfo",
-        "sourcePartitionInfo"
+        "targetPhysicalPartitionThroughputInfo",
+        "sourcePhysicalPartitionThroughputInfo"
       ]
     },
     "RetrieveThroughputParameters": {
@@ -10404,7 +10404,7 @@
       "description": "The properties of an Azure Cosmos DB merge operations",
       "type": "object",
       "properties": {
-        "IsDryRun": {
+        "isDryRun": {
           "type": "boolean",
           "description": "Specifies whether the operation is a real merge operation or a simulation."
         }
