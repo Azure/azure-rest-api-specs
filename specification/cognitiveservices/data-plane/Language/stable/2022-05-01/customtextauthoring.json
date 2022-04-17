@@ -256,7 +256,7 @@
             "description": "The project data to import.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ExportedDocument"
+              "$ref": "#/definitions/ExportedProject"
             }
           },
           {
@@ -692,7 +692,7 @@
           "200": {
             "description": "The exported json project object.",
             "schema": {
-              "$ref": "#/definitions/ExportedDocument"
+              "$ref": "#/definitions/ExportedProject"
             }
           },
           "default": {
@@ -1717,6 +1717,11 @@
     },
     "ExportedCustomMultiLabelClassificationProjectAssets": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExportedProjectAssets"
+        }
+      ],
       "properties": {
         "classes": {
           "type": "array",
@@ -1730,7 +1735,8 @@
             "$ref": "#/definitions/ExportedCustomMultiLabelClassificationDocument"
           }
         }
-      }
+      },
+      "x-ms-discriminator-value": "customMultiLabelClassification"
     },
     "ExportedCustomNamedEntityRecognitionDocument": {
       "type": "object",
@@ -1755,6 +1761,11 @@
     },
     "ExportedCustomNamedEntityRecognitionProjectAssets": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExportedProjectAssets"
+        }
+      ],
       "properties": {
         "entities": {
           "type": "array",
@@ -1768,7 +1779,8 @@
             "$ref": "#/definitions/ExportedCustomNamedEntityRecognitionDocument"
           }
         }
-      }
+      },
+      "x-ms-discriminator-value": "customNamedEntityRecognition"
     },
     "ExportedCustomSingleLabelClassificationDocument": {
       "type": "object",
@@ -1790,6 +1802,11 @@
     },
     "ExportedCustomSingleLabelClassificationProjectAssets": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExportedProjectAssets"
+        }
+      ],
       "properties": {
         "classes": {
           "type": "array",
@@ -1803,32 +1820,8 @@
             "$ref": "#/definitions/ExportedCustomSingleLabelClassificationDocument"
           }
         }
-      }
-    },
-    "ExportedDocument": {
-      "required": [
-        "project-file-version",
-        "stringIndexType",
-        "metadata"
-      ],
-      "type": "object",
-      "properties": {
-        "project-file-version": {
-          "type": "string"
-        },
-        "stringIndexType": {
-          "description": "Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.",
-          "$ref": "#/definitions/StringIndexType"
-        },
-        "metadata": {
-          "description": "Represents the project metadata.",
-          "$ref": "#/definitions/CreateProjectOptions"
-        },
-        "assets": {
-          "description": "Represents the project assets.",
-          "$ref": "#/definitions/ExportedProjectAssets"
-        }
-      }
+      },
+      "x-ms-discriminator-value": "customSingleLabelClassification"
     },
     "ExportedDocumentClass": {
       "type": "object",
@@ -1878,6 +1871,31 @@
       "properties": {
         "category": {
           "type": "string"
+        }
+      }
+    },
+    "ExportedProject": {
+      "required": [
+        "project-file-version",
+        "stringIndexType",
+        "metadata"
+      ],
+      "type": "object",
+      "properties": {
+        "project-file-version": {
+          "type": "string"
+        },
+        "stringIndexType": {
+          "description": "Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.",
+          "$ref": "#/definitions/StringIndexType"
+        },
+        "metadata": {
+          "description": "Represents the project metadata.",
+          "$ref": "#/definitions/CreateProjectOptions"
+        },
+        "assets": {
+          "description": "Represents the project assets.",
+          "$ref": "#/definitions/ExportedProjectAssets"
         }
       }
     },
