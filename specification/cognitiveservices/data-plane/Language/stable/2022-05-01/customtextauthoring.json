@@ -665,45 +665,6 @@
         }
       }
     },
-    "/authoring/analyze-text/projects/{projectName}/export/jobs/{jobId}/result": {
-      "get": {
-        "summary": "Get export result",
-        "description": "Gets the result of an export job.",
-        "operationId": "TextAnalysisAuthoring_GetExportResult",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "common.json#/parameters/ProjectNamePathParameter"
-          },
-          {
-            "in": "path",
-            "name": "jobId",
-            "description": "The job ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "common.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The exported json project object.",
-            "schema": {
-              "$ref": "#/definitions/ExportedProject"
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "common.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/authoring/analyze-text/projects/{projectName}/import/jobs/{jobId}": {
       "get": {
         "summary": "Get import status",
@@ -1455,21 +1416,21 @@
     "DocumentEntityRegionEvaluationResult": {
       "required": [
         "expectedEntities",
-        "actualEntities",
+        "predictedEntities",
         "regionOffset",
         "regionLength"
       ],
       "type": "object",
       "properties": {
         "expectedEntities": {
-          "description": "Represents the region's labeled entities.",
+          "description": "Represents the region's expected entity labels.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DocumentEntityLabelEvaluationResult"
           }
         },
-        "actualEntities": {
-          "description": "Represents the region's predicted entities.",
+        "predictedEntities": {
+          "description": "Represents the region's predicted entity labels.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DocumentEntityLabelEvaluationResult"
@@ -1513,18 +1474,18 @@
     "DocumentMultiLabelClassificationEvaluationResult": {
       "required": [
         "expectedClasses",
-        "actualClasses"
+        "predictedClasses"
       ],
       "type": "object",
       "properties": {
         "expectedClasses": {
-          "description": "Represents the document's labeled classes.",
+          "description": "Represents the document's expected classes.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
-        "actualClasses": {
+        "predictedClasses": {
           "description": "Represents the document's predicted classes.",
           "type": "array",
           "items": {
@@ -1551,15 +1512,15 @@
     "DocumentSingleLabelClassificationEvaluationResult": {
       "required": [
         "expectedClass",
-        "actualClass"
+        "predictedClass"
       ],
       "type": "object",
       "properties": {
         "expectedClass": {
-          "description": "Represents the document's labeled class.",
+          "description": "Represents the document's expected class.",
           "type": "string"
         },
-        "actualClass": {
+        "predictedClass": {
           "description": "Represents the document's predicted class.",
           "type": "string"
         }
@@ -2143,7 +2104,7 @@
       "type": "object",
       "properties": {
         "confusionMatrix": {
-          "description": "Represents the confusion matrix between two entities (the two entities can be the same)\n            the matrix is between the actual entity that was labelled and the entity that was predicted.",
+          "description": "Represents the confusion matrix between two entities (the two entities can be the same). The matrix is between the entity that was labelled and the entity that was predicted.",
           "type": "object",
           "additionalProperties": {
             "type": "object",
@@ -2522,7 +2483,7 @@
       "type": "object",
       "properties": {
         "confusionMatrix": {
-          "description": "Represents the confusion matrix between two classifiers (the two classifiers can be the same entity)\n            the matrix is between the actual classifier that was labelled and the classifier that was predicted.",
+          "description": "Represents the confusion matrix between two classes (the two classes can be the same). The matrix is between the class that was labelled and the class that was predicted.",
           "type": "object",
           "additionalProperties": {
             "type": "object",

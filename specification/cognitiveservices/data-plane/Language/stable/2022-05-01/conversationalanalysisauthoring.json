@@ -665,45 +665,6 @@
         }
       }
     },
-    "/authoring/analyze-conversations/projects/{projectName}/export/jobs/{jobId}/result": {
-      "get": {
-        "summary": "Get export result",
-        "description": "Gets the result of an export job.",
-        "operationId": "ConversationalAnalysisAuthoring_GetExportResult",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "common.json#/parameters/ProjectNamePathParameter"
-          },
-          {
-            "in": "path",
-            "name": "jobId",
-            "description": "The job ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "common.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The exported json project object.",
-            "schema": {
-              "$ref": "#/definitions/ExportedProject"
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "common.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/authoring/analyze-conversations/projects/{projectName}/import/jobs/{jobId}": {
       "get": {
         "summary": "Get import status",
@@ -1490,7 +1451,7 @@
       "type": "object",
       "properties": {
         "confusionMatrix": {
-          "description": "Represents the confusion matrix between two entities (the two entities can be the same entity)\n            the matrix is between the actual entity that was labelled and the entity that was predicted.",
+          "description": "Represents the confusion matrix between two entities (the two entities can be the same). The matrix is between the entity that was labelled and the entity that was predicted.",
           "type": "object",
           "additionalProperties": {
             "type": "object",
@@ -2048,7 +2009,7 @@
       "type": "object",
       "properties": {
         "confusionMatrix": {
-          "description": "Represents the confusion matrix between two intents (the two intents can be the same intent)\n            the matrix is between the actual intent that was labelled and the intent that was predicted.",
+          "description": "Represents the confusion matrix between two intents (the two intents can be the same). The matrix is between the intent that was labelled and the intent that was predicted.",
           "type": "object",
           "additionalProperties": {
             "type": "object",
@@ -2639,7 +2600,7 @@
           "type": "string"
         },
         "trainingConfigVersion": {
-          "description": "Represents training config version.\n            By default, \"latest\" value is used which uses the latest released training config version.",
+          "description": "Represents training config version. By default, \"latest\" value is used which uses the latest released training config version.",
           "type": "string"
         },
         "trainingMode": {
@@ -2775,18 +2736,18 @@
     "UtteranceEntitiesEvaluationResult": {
       "required": [
         "expectedEntities",
-        "actualEntities"
+        "predictedEntities"
       ],
       "type": "object",
       "properties": {
         "expectedEntities": {
-          "description": "Represents the entity labels.",
+          "description": "Represents the expected entity labels.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/UtteranceEntityEvaluationResult"
           }
         },
-        "actualEntities": {
+        "predictedEntities": {
           "description": "Represents the predicted entity labels.",
           "type": "array",
           "items": {
@@ -2849,15 +2810,15 @@
     "UtteranceIntentsEvaluationResult": {
       "required": [
         "expectedIntent",
-        "actualIntent"
+        "predictedIntent"
       ],
       "type": "object",
       "properties": {
         "expectedIntent": {
-          "description": "Represents the utterance's labeled intent.",
+          "description": "Represents the utterance's expected intent.",
           "type": "string"
         },
-        "actualIntent": {
+        "predictedIntent": {
           "description": "Represents the utterance's predicted intent.",
           "type": "string"
         }
