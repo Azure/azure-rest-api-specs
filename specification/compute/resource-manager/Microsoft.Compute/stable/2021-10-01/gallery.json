@@ -2098,16 +2098,6 @@
         "manageActions": {
           "$ref": "#/definitions/UserArtifactManage"
         },
-        "settings": {
-          "$ref": "#/definitions/UserArtifactSettings"
-        },
-        "advancedSettings": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Optional. Additional settings to pass to the VMApp extension. For advanced used only."
-        },
         "enableHealthCheck": {
           "type": "boolean",
           "description": "Optional. Whether or not this application reports health."
@@ -2158,18 +2148,6 @@
         "install",
         "remove"
       ]
-    },
-    "UserArtifactSettings": {
-      "properties": {
-        "packageFileName": {
-          "type": "string",
-          "description": "Optional. The file to rename the downloaded package to on the VM. If not present, then the file will be called <appname>. This is limited to 4096 characters."
-        },
-        "configFileName": {
-          "type": "string",
-          "description": "Optional. The file to rename the downloaded config to on the VM. If not present, then the file will be called <appname>_config. This is limited to 4096 characters."
-        }
-      }
     },
     "GalleryImage": {
       "properties": {
