@@ -6401,8 +6401,7 @@
     },
     "TrustedAccessRoleRule": {
       "type": "object",
-      "title": "Rule for trusted access role",
-      "description": "Rules define the access scope of a rol",
+      "description": "Rule for trusted access role",
       "properties": {
         "verbs": {
           "type": "array",
@@ -6443,14 +6442,17 @@
     },
     "TrustedAccessRole": {
       "type": "object",
+      "description": "Trusted access role definition",
       "properties": {
         "sourceResourceType": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Resource type of Azure resource"
         },
         "name": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Name of role, name is unique under a source resource type"
         },
         "rules": {
           "type": "array",
@@ -6458,12 +6460,14 @@
           "items": {
             "$ref": "#/definitions/TrustedAccessRoleRule"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [],
+          "description": "List of rules for the role"
         }
       }
     },
     "TrustedAccessRoleListResult": {
       "type": "object",
+      "description": "List of trusted access roles",
       "properties": {
         "value": {
           "type": "array",
@@ -6474,7 +6478,8 @@
           "x-ms-identifiers": [
             "sourceResourceType",
             "name"
-          ]
+          ],
+          "description": "Role list"
         }
       }
     },
