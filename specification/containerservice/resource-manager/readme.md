@@ -42,10 +42,15 @@ tag: package-2022-04
 
 These settings apply only when `--tag=package-2022-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-04'
+``` yaml $(tag) == 'package-2022-04'
 input-file:
   - Microsoft.ContainerService/stable/2022-04-01/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
 ```
+
 ### Tag: package-2022-03
 
 These settings apply only when `--tag=package-2022-03` is specified on the command line.
