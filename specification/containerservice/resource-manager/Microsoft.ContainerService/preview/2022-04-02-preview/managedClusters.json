@@ -3343,6 +3343,10 @@
           "$ref": "#/definitions/NetworkPlugin",
           "description": "Network plugin used for building the Kubernetes network."
         },
+        "networkPluginMode": {
+          "$ref": "#/definitions/NetworkPluginMode",
+          "description": "Network plugin mode used for building the Kubernetes network."
+        },
         "networkPolicy": {
           "$ref": "#/definitions/NetworkPolicy",
           "description": "Network policy used for building the Kubernetes network."
@@ -6040,6 +6044,10 @@
           "$ref": "#/definitions/NetworkPlugin",
           "description": "networkPlugin for managed cluster snapshot."
         },
+        "networkPluginMode": {
+          "$ref": "#/definitions/NetworkPluginMode",
+          "description": "networkPluginMode for managed cluster snapshot."
+        },
         "networkPolicy": {
           "$ref": "#/definitions/NetworkPolicy",
           "description": "networkPolicy for managed cluster snapshot."
@@ -6082,6 +6090,33 @@
         ]
       },
       "description": "Network plugin used for building the Kubernetes network."
+    },
+    "NetworkPluginMode": {
+      "type": "string",
+      "enum": [
+        "PodSubnet",
+        "NodeSubnet",
+        "Overlay"
+      ],
+      "x-ms-enum": {
+        "name": "networkPluginMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "PodSubnet",
+            "description": "Pods receive IPs from a separate VNET subnet apart from the subnet the nodes are using. See [Dynamic allocation of IPs](https://docs.microsoft.com/en-us/azure/aks/configure-azure-cni#dynamic-allocation-of-ips-and-enhanced-subnet-support-preview) for more information."
+          },
+          {
+            "value": "NodeSubnet",
+            "description": "Pods receive IPs from the same subnet as the nodes (default behavior of Azure CNI). See [Azure CNI (advanced) networking](https://docs.microsoft.com/azure/aks/concepts-network#azure-cni-advanced-networking) for more information."
+          },
+          {
+            "value": "Overlay",
+            "description": "Pods are given IPs from the PodCIDR address space but use Azure Routing Domains rather than Kubenet reference plugins host-local and bridge."
+          }
+        ]
+      },
+      "description": "The mode the network plugin should use."
     },
     "NetworkPolicy": {
       "type": "string",
