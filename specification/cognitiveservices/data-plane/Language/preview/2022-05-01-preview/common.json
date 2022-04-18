@@ -297,6 +297,84 @@
         }
       },
       "type": "object"
+    },
+    "InputError": {
+      "type": "object",
+      "description": "Contains details of errors encountered during a job execution.",
+      "required": [
+        "id",
+        "error"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the input."
+        },
+        "error": {
+          "type": "object",
+          "description": "Error encountered.",
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "InputWarning": {
+      "type": "object",
+      "description": "Contains details of warnings encountered during a job execution.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Warning code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Warning message."
+        },
+        "targetRef": {
+          "type": "string",
+          "description": "A JSON pointer reference indicating the target object."
+        }
+      }
+    },
+    "RequestStatistics": {
+      "type": "object",
+      "required": [
+        "transactionsCount"
+      ],
+      "properties": {
+        "transactionsCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of transactions for the request."
+        }
+      },
+      "additionalProperties": true,
+      "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+    },
+    "PreBuiltResult": {
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/InputError"
+          }
+        },
+        "statistics": {
+          "$ref": "common.json#/definitions/RequestStatistics"
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
+        }
+      },
+      "required": [
+        "errors",
+        "modelVersion"
+      ]
     }
   },
   "parameters": {

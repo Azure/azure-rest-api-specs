@@ -164,7 +164,7 @@
             }
           },
           "default": {
-            "description": "Unexpected error",
+            "description": "Error encountered.",
             "schema": {
               "$ref": "common.json#/definitions/ErrorResponse"
             }
@@ -323,8 +323,8 @@
           "description": "The override language of a conversation item in BCP 47 language representation.",
           "type": "string"
         },
-        "inputModality": {
-          "$ref": "#/definitions/InputModality"
+        "modality": {
+          "$ref": "#/definitions/Modality"
         },
         "role": {
           "type": "string",
@@ -1629,11 +1629,11 @@
     "Conversation": {
       "type": "object",
       "description": "A complete ordered set of utterances (spoken or written), by one or more speakers to be used for analysis.",
-      "discriminator": "inputModality",
+      "discriminator": "modality",
       "required": [
         "id",
         "language",
-        "inputModality"
+        "modality"
       ],
       "properties": {
         "id": {
@@ -1644,23 +1644,23 @@
           "description": "The language of the conversation item in BCP-47 format.",
           "type": "string"
         },
-        "inputModality": {
-          "$ref": "#/definitions/InputModality"
+        "modality": {
+          "$ref": "#/definitions/Modality"
         },
         "domain": {
           "$ref": "#/definitions/ConversationDomain"
         }
       }
     },
-    "InputModality": {
+    "Modality": {
       "type": "string",
       "description": "Enumeration of supported conversational modalities.",
       "enum": [
-        "Transcript",
-        "Text"
+        "transcript",
+        "text"
       ],
       "x-ms-enum": {
-        "name": "InputModality",
+        "name": "Modality",
         "modelAsString": true
       }
     },
@@ -1678,7 +1678,7 @@
       }
     },
     "TextConversation": {
-      "x-ms-discriminator-value": "Text",
+      "x-ms-discriminator-value": "text",
       "required": [
         "conversationItems"
       ],
@@ -1698,7 +1698,7 @@
       }
     },
     "TranscriptConversation": {
-      "x-ms-discriminator-value": "Transcript",
+      "x-ms-discriminator-value": "transcript",
       "required": [
         "conversationItems"
       ],
@@ -1874,25 +1874,6 @@
       ],
       "x-ms-discriminator-value": "ConversationalPIIResults"
     },
-    "PreBuiltResult": {
-      "properties": {
-        "errors": {
-          "type": "array",
-          "description": "Errors by conversation id.",
-          "items": {
-            "$ref": "#/definitions/ConversationError"
-          }
-        },
-        "modelVersion": {
-          "type": "string",
-          "description": "This field indicates which model is used for scoring."
-        }
-      },
-      "required": [
-        "errors",
-        "modelVersion"
-      ]
-    },
     "ConversationPIIResults": {
       "type": "object",
       "description": "The result from PII detection and redaction operation for each conversation.",
@@ -1916,7 +1897,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltResult"
+          "$ref": "common.json#/definitions/PreBuiltResult"
         }
       ]
     },
@@ -2080,7 +2061,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltResult"
+          "$ref": "common.json#/definitions/PreBuiltResult"
         }
       ]
     },
@@ -2220,52 +2201,11 @@
           "type": "array",
           "description": "Warnings encountered while processing document.",
           "items": {
-            "$ref": "#/definitions/ConversationWarning"
+            "$ref": "common.json#/definitions/InputWarning"
           }
         },
         "statistics": {
           "$ref": "#/definitions/ConversationStatistics"
-        }
-      }
-    },
-    "ConversationError": {
-      "type": "object",
-      "description": "Contains details of errors encountered during a job execution.",
-      "required": [
-        "id",
-        "error"
-      ],
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of the conversation."
-        },
-        "error": {
-          "type": "object",
-          "description": "Conversation Error.",
-          "$ref": "common.json#/definitions/Error"
-        }
-      }
-    },
-    "ConversationWarning": {
-      "type": "object",
-      "description": "Contains details of warnings encountered during a job execution.",
-      "required": [
-        "code",
-        "message"
-      ],
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Warning code."
-        },
-        "message": {
-          "type": "string",
-          "description": "Warning message."
-        },
-        "targetRef": {
-          "type": "string",
-          "description": "A JSON pointer reference indicating the target object."
         }
       }
     },
@@ -2289,8 +2229,7 @@
       "required": [
         "conversationsCount",
         "validConversationsCount",
-        "erroneousConversationsCount",
-        "transactionsCount"
+        "erroneousConversationsCount"
       ],
       "properties": {
         "conversationsCount": {
@@ -2307,13 +2246,13 @@
           "type": "integer",
           "format": "int32",
           "description": "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents."
-        },
-        "transactionsCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of text units for the request."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/RequestStatistics"
+        }
+      ]
     }
   },
   "parameters": {
