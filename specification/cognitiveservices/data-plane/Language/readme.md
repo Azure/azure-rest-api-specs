@@ -20,50 +20,6 @@ directive:
     reason: The validation tools do not properly recognize 202 as a supported response code.
 ```
 
-```yaml
-tag: release_2022_03_01_preview
-add-credentials: true
-clear-output-folder: true
-openapi-type: data-plane
-directive:
-  - suppress: LongRunningResponseStatusCode
-    reason: The validation tools do not properly recognize 202 as a supported response code.
-```
-
-```yaml
-tag: release_2022_02_01_preview
-add-credentials: true
-clear-output-folder: true
-openapi-type: data-plane
-directive:
-  - suppress: LongRunningResponseStatusCode
-    reason: The validation tools do not properly recognize 202 as a supported response code.
-```
-
-```yaml
-tag: release_2021_11_01_preview
-add-credentials: true
-clear-output-folder: true
-openapi-type: data-plane
-directive:
-  - suppress: LongRunningResponseStatusCode
-    reason: The validation tools do not properly recognize 202 as a supported response code.
-```
-
-```yaml
-tag: release_2021_10_01
-add-credentials: true
-clear-output-folder: true
-openapi-type: data-plane
-```
-
-```yaml
-tag: release_2021_07_15_preview
-add-credentials: true
-clear-output-folder: true
-openapi-type: data-plane
-```
-
 ### Release 2022-05-01-preview
 
 These settings apply only when `--tag=release_2022_05_01_preview` is specified on the command line.
