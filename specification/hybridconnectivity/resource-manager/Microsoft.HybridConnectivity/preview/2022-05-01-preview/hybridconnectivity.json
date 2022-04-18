@@ -350,52 +350,6 @@
         "deprecated": false
       }
     },
-    "/{resourceUri}/providers/Microsoft.HybridConnectivity/endpoints/{endpointName}/listIngressGatewayCredentials": {
-      "post": {
-        "tags": [
-          "Endpoints"
-        ],
-        "description": "Gets the ingress gateway endpoint credentials ",
-        "operationId": "Endpoints_ListIngressGatewayCredentials",
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "HybridConnectivityEndpointsPostListIngressGatewayCredentials": {
-            "$ref": "./examples/EndpointsPostListIngressGatewayCredentials.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceUriParameter"
-          },
-          {
-            "$ref": "#/parameters/EndpointNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AccessTokenExpirationParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Ingress gateway access",
-            "schema": {
-              "$ref": "#/definitions/IngressGatewayResource"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
     "/{resourceUri}/providers/Microsoft.HybridConnectivity/endpoints/{endpointName}/listManagedProxyDetails": {
       "post": {
         "tags": [
