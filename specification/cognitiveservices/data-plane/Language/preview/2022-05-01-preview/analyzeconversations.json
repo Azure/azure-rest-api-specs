@@ -309,7 +309,6 @@
     },
     "ConversationItemBase": {
       "type": "object",
-      "discriminator": "inputModality",
       "description": "The abstract base for a user input formatted conversation (e.g., Text, Transcript).",
       "properties": {
         "id": {
@@ -1700,7 +1699,7 @@
           "description": "Ordered list of text conversation items in the conversation.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TextConversationItemInput"
+            "$ref": "#/definitions/TextConversationItem"
           }
         }
       }
@@ -1725,28 +1724,14 @@
         }
       }
     },
-    "TextConversationItemInput": {
-      "description": "The conversation item in text modality.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConversationItemBase"
-        }
-      ],
-      "properties": {
-        "text": {
-          "description": "The input text.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "Text"
-      ]
-    },
     "TranscriptConversationItem": {
       "type": "object",
       "description": "Additional properties for supporting transcript conversation.",
       "required": [
-        "content"
+        "text",
+        "lexical",
+        "itn",
+        "maskedItn"
       ],
       "allOf": [
         {
