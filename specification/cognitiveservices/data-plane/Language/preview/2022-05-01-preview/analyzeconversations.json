@@ -309,37 +309,41 @@
     },
     "ConversationItemBase": {
       "type": "object",
-      "discriminator": "modality",
+      "discriminator": "inputModality",
       "description": "The abstract base for a user input formatted conversation (e.g., Text, Transcript).",
       "properties": {
-        "participantId": {
-          "description": "The participant ID of a ConversationItem",
+        "id": {
+          "description": "The ID of a conversation item.",
           "type": "string"
         },
-        "id": {
-          "description": "The ID of a ConversationItem",
+        "participantId": {
+          "description": "The participant ID of a conversation item.",
           "type": "string"
         },
         "language": {
-          "description": "The input language of a ConversationItem in BCP 47 language representation.",
+          "description": "The override language of a conversation item in BCP 47 language representation.",
           "type": "string"
         },
         "modality": {
-          "description": "The modality (format) of ConversationItem (e.g., Text, Transcript)",
+          "$ref": "#/definitions/InputModality"
+        },
+        "role": {
           "type": "string",
+          "description": "The role of the participant.",
           "enum": [
-            "text"
+            "agent",
+            "customer",
+            "generic"
           ],
           "x-ms-enum": {
-            "name": "modality",
+            "name": "role",
             "modelAsString": true
           }
         }
       },
       "required": [
         "participantId",
-        "id",
-        "modality"
+        "id"
       ]
     },
     "TextConversationItem": {
@@ -1626,11 +1630,12 @@
     "Conversation": {
       "type": "object",
       "description": "A complete ordered set of utterances (spoken or written), by one or more speakers to be used for analysis.",
-      "discriminator": "modality",
+      "discriminator": "inputModality",
       "required": [
         "id",
         "language",
-        "modality"
+        "inputModality",
+        "conversationItems"
       ],
       "properties": {
         "id": {
@@ -1641,56 +1646,31 @@
           "description": "The language of the conversation item in BCP-47 format.",
           "type": "string"
         },
-        "modality": {
-          "$ref": "#/definitions/Modality"
+        "inputModality": {
+          "$ref": "#/definitions/InputModality"
         },
         "domain": {
           "$ref": "#/definitions/ConversationDomain"
+        },
+        "conversationItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConversationItemBase"
+          }
         }
       }
     },
-    "Modality": {
+    "InputModality": {
       "type": "string",
       "description": "Enumeration of supported conversational modalities.",
       "enum": [
-        "transcript",
-        "text"
+        "Transcript",
+        "Text"
       ],
       "x-ms-enum": {
-        "name": "Modality",
+        "name": "InputModality",
         "modelAsString": true
       }
-    },
-    "ConversationItem": {
-      "type": "object",
-      "description": "The abase class for conversation item.",
-      "properties": {
-        "id": {
-          "description": "The ID of a conversation item.",
-          "type": "string"
-        },
-        "participantId": {
-          "description": "The participant ID of a conversation item.",
-          "type": "string"
-        },
-        "role": {
-          "type": "string",
-          "description": "The role of the participant.",
-          "enum": [
-            "agent",
-            "customer",
-            "generic"
-          ],
-          "x-ms-enum": {
-            "name": "role",
-            "modelAsString": true
-          }
-        }
-      },
-      "required": [
-        "participantId",
-        "id"
-      ]
     },
     "ConversationDomain": {
       "type": "string",
@@ -1726,7 +1706,7 @@
       }
     },
     "TranscriptConversation": {
-      "x-ms-discriminator-value": "transcript",
+      "x-ms-discriminator-value": "Transcript",
       "required": [
         "conversationItems"
       ],
@@ -1749,7 +1729,7 @@
       "description": "The conversation item in text modality.",
       "allOf": [
         {
-          "$ref": "#/definitions/ConversationItem"
+          "$ref": "#/definitions/ConversationItemBase"
         }
       ],
       "properties": {
@@ -1759,7 +1739,7 @@
         }
       },
       "required": [
-        "text"
+        "Text"
       ]
     },
     "TranscriptConversationItem": {
@@ -1770,19 +1750,9 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConversationItem"
+          "$ref": "#/definitions/ConversationItemBase"
         }
       ],
-      "properties": {
-        "content": {
-          "type": "object",
-          "$ref": "#/definitions/TranscriptContent"
-        }
-      }
-    },
-    "TranscriptContent": {
-      "type": "object",
-      "description": "The content generated by a speech to text provider.",
       "properties": {
         "itn": {
           "type": "string",
