@@ -2559,6 +2559,174 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/trustedAccessRoles": {
+      "get": {
+        "tags": [
+          "TrustedAccess"
+        ],
+        "operationId": "TrustedAccessRoles_List",
+        "summary": "Get a list of supported trusted access roles.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TrustedAccessRoleListResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/trustedAccessRoleBindings": {
+      "get": {
+        "tags": [
+          "TrustedAccess"
+        ],
+        "operationId": "TrustedAccessRoleBindings_List",
+        "summary": "Get a list trusted access role bindings.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TrustedAccessRoleBindingListResult"
+            }
+          },
+          "default": {
+            "description": "Error details",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/trustedAccessRoleBindings/{trustedAccessRoleBindingName}": {
+      "get": {
+        "tags": [
+          "TrustedAccess"
+        ],
+        "operationId": "TrustedAccessRoleBindings_Get",
+        "summary": "Get a trusted access role binding.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TrustedAccessRoleBindingNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TrustedAccessRoleBinding"
+            }
+          },
+          "default": {
+            "description": "Error details",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TrustedAccess"
+        ],
+        "operationId": "TrustedAccessRoleBindings_CreateOrUpdate",
+        "summary": "Create or update a trusted access role binding",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TrustedAccessRoleBindingNameParameter"
+          },
+          {
+            "name": "TrustedAccessRoleBinding",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TrustedAccessRoleBinding"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error details",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TrustedAccess"
+        ],
+        "operationId": "TrustedAccessRoleBindings_Delete",
+        "summary": "Delete a trusted access role binding.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TrustedAccessRoleBindingNameParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error details",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -6177,6 +6345,128 @@
     "CapacityReservationGroupID": {
       "description": "Capacity Reservation Group ID for AgentPool to associate",
       "type": "string"
+    },
+    "TrustedAccessRoleRule": {
+      "type": "object",
+      "properties": {
+        "verbs": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "apiGroups": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "resources": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "resourceNames": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "nonResourceURLs": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TrustedAccessRole": {
+      "type": "object",
+      "properties": {
+        "sourceResourceType": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "rules": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/TrustedAccessRoleRule"
+          }
+        }
+      }
+    },
+    "TrustedAccessRoleListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/TrustedAccessRole"
+          }
+        }
+      }
+    },
+    "TrustedAccessRoleBindingProperties": {
+      "type": "object",
+      "required": [
+        "sourceResourceId",
+        "roles"
+      ],
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        },
+        "sourceResourceId": {
+          "type": "string"
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TrustedAccessRoleBinding": {
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TrustedAccessRoleBindingProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "TrustedAccessRoleBindingListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrustedAccessRoleBinding"
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -6239,6 +6529,16 @@
       "required": false,
       "type": "boolean",
       "description": "ignore-pod-disruption-budget=true to delete those pods on a node without considering Pod Disruption Budget",
+      "x-ms-parameter-location": "method"
+    },
+    "TrustedAccessRoleBindingNameParameter": {
+      "name": "trustedAccessRoleBindingName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of trusted access role binding.",
+      "minLength": 1,
+      "maxLength": 5,
       "x-ms-parameter-location": "method"
     }
   }
