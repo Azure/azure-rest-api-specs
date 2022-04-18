@@ -150,10 +150,10 @@ perform-load: false
 
 ### Tag: package-changes-2022-03-01-preview and python
 
-These settings apply only when `--tag=package-changes-2022-03 --python` is specified on the command line.
+These settings apply only when `--tag=package-changes-2022-03-01-preview --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-changes-2022-03-preview'
+``` yaml $(tag) == 'package-changes-2022-03-01-preview'
 namespace: azure.mgmt.resource.changes.v2022_03_01_preview
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/changes/v2022_03_01_preview
 ```
