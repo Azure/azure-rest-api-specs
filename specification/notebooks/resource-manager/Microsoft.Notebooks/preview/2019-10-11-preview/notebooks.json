@@ -656,7 +656,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/GroupConnectivityInformation"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -795,7 +796,10 @@
           "description": "[DEPRECATED] An array of error detail objects.",
           "items": {
             "$ref": "#/definitions/ErrorDetail"
-          }
+          },
+          "x-ms-identifiers": [
+            "code"
+          ]
         }
       }
     },
@@ -820,7 +824,10 @@
           "description": "An array of error detail objects.",
           "items": {
             "$ref": "#/definitions/ErrorDetail"
-          }
+          },
+          "x-ms-identifiers": [
+            "code"
+          ]
         }
       },
       "required": [
@@ -889,6 +896,9 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of Notebook Proxy operations supported by the Azure Notebooks resource provider."
         }
       }

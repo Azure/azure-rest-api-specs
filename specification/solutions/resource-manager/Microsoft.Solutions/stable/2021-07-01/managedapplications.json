@@ -1097,6 +1097,10 @@
           "items": {
             "$ref": "#/definitions/ApplicationAuthorization"
           },
+          "x-ms-identifiers": [
+            "principalId",
+            "roleDefinitionId"
+          ],
           "readOnly": true
         },
         "managementMode": {
@@ -1120,6 +1124,10 @@
           "items": {
             "$ref": "#/definitions/ApplicationArtifact"
           },
+          "x-ms-identifiers": [
+            "name",
+            "uri"
+          ],
           "readOnly": true
         },
         "createdBy": {
@@ -1183,14 +1191,22 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationAuthorization"
-          }
+          },
+          "x-ms-identifiers": [
+            "principalId",
+            "roleDefinitionId"
+          ]
         },
         "artifacts": {
           "description": "The collection of managed application artifacts. The portal will use the files specified as artifacts to construct the user experience of creating a managed application from a managed application definition.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationDefinitionArtifact"
-          }
+          },
+          "x-ms-identifiers": [
+            "name",
+            "uri"
+          ]
         },
         "provisioningState": {
           "readOnly": true,
@@ -1238,7 +1254,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationPolicy"
-          }
+          },
+          "x-ms-identifiers": [
+            "name",
+            "policyDefinitionId"
+          ]
         }
       },
       "required": [
@@ -1622,6 +1642,9 @@
           "items": {
             "$ref": "#/definitions/ApplicationNotificationEndpoint"
           },
+          "x-ms-identifiers": [
+            "uri"
+          ],
           "description": "The managed application notification endpoint."
         }
       },
@@ -1859,7 +1882,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/JitAuthorizationPolicies"
-          }
+          },
+          "x-ms-identifiers": [
+            "principalId",
+            "roleDefinitionId"
+          ]
         },
         "jitSchedulingPolicy": {
           "$ref": "#/definitions/JitSchedulingPolicy",

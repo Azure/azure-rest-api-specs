@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for azureadb2c.
+This is the AutoRest configuration file for azureadexternalidentities.
 
 ## Getting Started
 
@@ -22,13 +22,13 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the azureadb2c APIs.
+These are the global settings for the external identities APIs.
 
 ```yaml
-title: CPIMConfigurationClient
-description: CPIM Configuration Client 
+title: ExternalIdentitiesConfigurationClient
+description: External Identities Configuration Client 
 openapi-type: arm
-tag: package-2019-01-01-preview
+tag: package-2021-04-01
 ```
 
 ### Tag: package-2019-01-01-preview
@@ -49,6 +49,16 @@ input-file:
   - Microsoft.AzureActiveDirectory/preview/2020-05-01-preview/cpim.json
 ```
 
+### Tag: package-2021-04-01
+
+These settings apply only when `--tag=package-2021-04-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-04-01'
+input-file:
+  - Microsoft.AzureActiveDirectory/stable/2021-04-01/externalIdentities.json
+```
+
+
 ---
 
 # Code Generation
@@ -62,6 +72,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python-track2  
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
 ```
 
 ## Go

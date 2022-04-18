@@ -1,0 +1,168 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "sourceControlId": "789e0c1f-4a3d-43ad-809c-e713b677b04a",
+    "sourceControl": {
+      "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+      "properties": {
+        "displayName": "My Source Control",
+        "description": "This is a source control",
+        "repoType": "Github",
+        "contentTypes": [
+          "AnalyticRules",
+          "Workbook"
+        ],
+        "repository": {
+          "url": "https://github.com/user/repo",
+          "branch": "master",
+          "displayUrl": "https://github.com/user/repo",
+          "pathMapping": [
+            {
+              "contentType": "AnalyticRules",
+              "path": "path/to/rules"
+            },
+            {
+              "contentType": "Workbook",
+              "path": "path/to/workbooks"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/sourcecontrols/789e0c1f-4a3d-43ad-809c-e713b677b04a",
+        "version": "V2",
+        "name": "789e0c1f-4a3d-43ad-809c-e713b677b04a",
+        "type": "Microsoft.SecurityInsights/SourceControls",
+        "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+        "properties": {
+          "id": "789e0c1f-4a3d-43ad-809c-e713b677b04a",
+          "displayName": "My Source Control",
+          "description": "this is a source control",
+          "repoType": "Github",
+          "contentTypes": [
+            "AnalyticRules",
+            "Workbook"
+          ],
+          "repository": {
+            "url": "https://github.com/user/repo",
+            "branch": "master",
+            "displayUrl": "https://github.com/user/repo",
+            "deploymentLogsUrl": "https://github.com/user/repo/actions",
+            "pathMapping": [
+              {
+                "contentType": "AnalyticRules",
+                "path": "path/to/rules"
+              },
+              {
+                "contentType": "Workbook",
+                "path": "path/to/workbooks"
+              }
+            ]
+          },
+          "repositoryResourceInfo": {
+            "webhook": {
+              "webhookId": "342768323",
+              "webhookUrl": "https://cac.sentinel.azure.com/workspaces/b7c525e9-1bfa-4435-88c0-817e13abb088/webhooks/ado/sourceControl/789e0c1f-4a3d-43ad-809c-e713b677b04a",
+              "webhookSecretUpdateTime": "2021-01-01T17:18:19.1234567Z"
+            },
+            "gitHubResourceInfo": {
+              "appInstallationId": "123"
+            },
+            "azureDevOpsResourceInfo": null
+          },
+          "lastDeploymentInfo": {
+            "deploymentFetchStatus": "Success",
+            "deployment": {
+              "deploymentId": "4985046420",
+              "deploymentState": "Completed",
+              "deploymentResult": "Success",
+              "deploymentTime": "2021-01-01T17:18:19.1234567Z",
+              "deploymentLogsUrl": "https://github.com/user/repo/actions"
+            },
+            "message": "Successful deployment"
+          }
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2021-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-01-02T17:18:19.1234567Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/sourcecontrols/789e0c1f-4a3d-43ad-809c-e713b677b04a",
+        "version": "V2",
+        "name": "789e0c1f-4a3d-43ad-809c-e713b677b04a",
+        "type": "Microsoft.SecurityInsights/SourceControls",
+        "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+        "properties": {
+          "id": "789e0c1f-4a3d-43ad-809c-e713b677b04a",
+          "displayName": "My Source Control",
+          "description": "this is a source control",
+          "repoType": "Github",
+          "contentTypes": [
+            "AnalyticRules",
+            "Workbook"
+          ],
+          "repository": {
+            "url": "https://github.com/user/repo",
+            "branch": "master",
+            "displayUrl": "https://github.com/user/repo",
+            "deploymentLogsUrl": "https://github.com/user/repo/actions",
+            "pathMapping": [
+              {
+                "contentType": "AnalyticRules",
+                "path": "path/to/rules"
+              },
+              {
+                "contentType": "Workbook",
+                "path": "path/to/workbooks"
+              }
+            ]
+          },
+          "repositoryResourceInfo": {
+            "webhook": {
+              "webhookId": "342768323",
+              "webhookUrl": "https://cac.sentinel.azure.com/workspaces/b7c525e9-1bfa-4435-88c0-817e13abb088/webhooks/ado/sourceControl/789e0c1f-4a3d-43ad-809c-e713b677b04a",
+              "webhookSecretUpdateTime": "2021-01-01T17:18:19.1234567Z"
+            },
+            "gitHubResourceInfo": {
+              "appInstallationId": "123"
+            },
+            "azureDevOpsResourceInfo": null
+          },
+          "lastDeploymentInfo": {
+            "deploymentFetchStatus": "Success",
+            "deployment": {
+              "deploymentId": "4985046420",
+              "deploymentState": "Completed",
+              "deploymentResult": "Success",
+              "deploymentTime": "2021-01-01T17:18:19.1234567Z",
+              "deploymentLogsUrl": "https://github.com/user/repo/actions"
+            },
+            "message": "Successful deployment"
+          }
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2021-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-01-02T17:18:19.1234567Z"
+        }
+      }
+    }
+  }
+}
