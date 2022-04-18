@@ -5447,11 +5447,6 @@
     },
     "WorkspaceConnectionUsernamePassword": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Credentials"
-        }
-      ],
       "properties": {
         "username": {
           "type": "string"
@@ -5464,11 +5459,6 @@
     },
     "WorkspaceConnectionPersonalAccessToken": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Credentials"
-        }
-      ],
       "properties": {
         "pat": {
           "type": "string"
@@ -5493,11 +5483,6 @@
     },
     "WorkspaceConnectionSharedAccessSignature": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Credentials"
-        }
-      ],
       "properties": {
         "sas": {
           "type": "string"
@@ -5534,10 +5519,6 @@
       },
       "additionalProperties": false,
       "x-ms-discriminator-value": "UsernamePassword"
-    },
-    "Credentials": {
-      "type": "object",
-      "additionalProperties": false
     },
     "WorkspaceConnectionPropertiesV2": {
       "required": [
@@ -5585,11 +5566,6 @@
     },
     "WorkspaceConnectionManagedIdentity": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Credentials"
-        }
-      ],
       "properties": {
         "resourceId": {
           "type": "string"
