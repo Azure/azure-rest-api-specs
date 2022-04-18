@@ -1,14 +1,13 @@
 ## Generate autorest code
 
-``` yaml
+``` yaml $(java)
 batch:
   - package-metadata: true
   - package-account: true
 ```
 
 ``` yaml $(package-metadata)
-input-file:
-  - Azure.Analytics.Purview.MetadataPolicies/preview/2021-07-01-preview/purviewMetadataPolicy.json
+tag: package-2021-07-01-preview
 output-folder: $(java-sdks-folder)/sdk/purview/azure-analytics-purview-administration
 
 java: true
@@ -22,9 +21,12 @@ service-name: PurviewMetadata
 artifact-id: azure-analytics-purview-administration
 service-versions:
   - 2021-07-01-preview
+
+generate-builder-per-client: false
 ```
 
 ``` yaml $(package-account)
+tag: 2019-11-01-preview
 input-file:
   - Azure.Analytics.Purview.Account/preview/2019-11-01-preview/account.json
 output-folder: $(java-sdks-folder)/sdk/purview/azure-analytics-purview-administration
@@ -41,4 +43,6 @@ artifact-id: azure-analytics-purview-administration
 service-name: PurviewAccount
 service-versions:
   - 2019-11-01-preview
+
+generate-builder-per-client: false
 ```
