@@ -3,39 +3,41 @@
     "Endpoint": "{Endpoint}",
     "Ocp-Apim-Subscription-Key": "{API key}",
     "Content-Type": "application/json",
-    "api-version": "2021-11-01-preview",
+    "api-version": "2022-05-01-preview",
     "body": {
       "kind": "CustomConversation",
       "analysisInput": {
         "conversationItem": {
-          "participantId": "1",
-          "id": "1",
-          "modality": "text",
           "language": "en-GB",
-          "text": "How do I integrate QnA Maker and LUIS?"
-        },
-        "directTarget": "qnaTargetApp",
-        "parameters": {
-          "qnaTargetApp": {
-            "targetKind": "question_answering",
-            "apiVersion": "v5.1",
-            "callingOptions": {
-              "question": "Ports and connectors",
-              "top": 3,
-              "userId": "Default",
-              "isTest": true,
-              "context": {
-                "previousQuery": "Meet Surface Pro 4",
-                "previousQnAId": 4
-              }
-            }
-          }
+          "text": "play a song from Phil Collins",
+          "participantId": "1",
+          "modality": "text",
+          "id": "1"
         }
       },
       "parameters": {
-        "projectName": "{project-name}",
-        "deploymentName": "{deployment-name}",
-        "verbose": true
+        "projectName": "prj1",
+        "deploymentName": "dep1",
+        "isLoggingEnabled": false,
+        "verbose": true,
+        "stringIndexType": "TextElement_V8",
+        "directTarget": "qnaProject",
+        "targetProjectParameters": {
+          "qnaProject": {
+            "targetKind": "question_answering",
+            "callingOptions": {
+              "context": {
+                "previousQuery": "Meet Surface Pro 4",
+                "previousQnAId": 4
+              },
+              "top": 3,
+              "isTest": true,
+              "userId": "Default",
+              "question": "Ports and connectors"
+            },
+            "apiVersion": "v5.1"
+          }
+        }
       }
     }
   },
