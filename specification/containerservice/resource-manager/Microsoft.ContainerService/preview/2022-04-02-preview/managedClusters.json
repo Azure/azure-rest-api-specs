@@ -2760,6 +2760,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "204": {
             "description": "NoContent"
           },
@@ -6500,6 +6503,11 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "readOnly": true,
+          "description": "The system metadata relating to this resource."
+        },
         "properties": {
           "$ref": "#/definitions/TrustedAccessRoleBindingProperties",
           "x-ms-client-flatten": true
