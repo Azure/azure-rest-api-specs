@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "name": "testcontainerApp0",
+    "api-version": "2022-03-01",
+    "containerAppEnvelope": {
+      "location": "East US",
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      },
+      "properties": {
+        "configuration": {
+          "ingress": {
+            "external": true,
+            "targetPort": 3000,
+            "customDomains": [
+              {
+                "name": "www.my-name.com",
+                "bindingType": "SniEnabled",
+                "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube/certificates/my-certificate-for-my-name-dot-com"
+              },
+              {
+                "name": "www.my-other-name.com",
+                "bindingType": "SniEnabled",
+                "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube/certificates/my-certificate-for-my-other-name-dot-com"
+              }
+            ],
+            "traffic": [
+              {
+                "weight": 100,
+                "revisionName": "testcontainerApp0-ab1234",
+                "label": "production"
+              }
+            ]
+          },
+          "dapr": {
+            "enabled": true,
+            "appPort": 3000,
+            "appProtocol": "http"
+          }
+        },
+        "template": {
+          "containers": [
+            {
+              "image": "repo/testcontainerApp0:v1",
+              "name": "testcontainerApp0",
+              "probes": [
+                {
+                  "type": "liveness",
+                  "httpGet": {
+                    "path": "/health",
+                    "port": 8080,
+                    "httpHeaders": [
+                      {
+                        "name": "Custom-Header",
+                        "value": "Awesome"
+                      }
+                    ]
+                  },
+                  "initialDelaySeconds": 3,
+                  "periodSeconds": 3
+                }
+              ]
+            }
+          ],
+          "scale": {
+            "minReplicas": 1,
+            "maxReplicas": 5,
+            "rules": [
+              {
+                "name": "httpscalingrule",
+                "custom": {
+                  "type": "http",
+                  "metadata": {
+                    "concurrentRequests": "50"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/providers/Microsoft.App/locations/eastus/containerappOperationResults/62e4d893-d233-4005-988e-a428d9f77076?api-version=2022-03-01"
+      }
+    }
+  }
+}

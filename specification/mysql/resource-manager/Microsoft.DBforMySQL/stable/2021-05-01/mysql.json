@@ -49,6 +49,9 @@
           },
           "Create a replica server": {
             "$ref": "./examples/ServerCreateReplica.json"
+          },
+          "Create a server with byok": {
+            "$ref": "./examples/ServerCreateWithBYOK.json"
           }
         },
         "description": "Creates a new server or updates an existing server. The update action will overwrite the existing server.",
@@ -111,6 +114,9 @@
           },
           "Update server customer maintenance window": {
             "$ref": "./examples/ServerUpdateWithCustomerMaintenanceWindow.json"
+          },
+          "Update server with byok": {
+            "$ref": "./examples/ServerUpdateWithBYOK.json"
           }
         },
         "description": "Updates an existing server. The request body can contain one to many of the properties present in the normal server definition.",
@@ -1489,6 +1495,40 @@
       },
       "description": "The replication role."
     },
+    "DataEncryption": {
+      "type": "object",
+      "description": "The date encryption for cmk.",
+      "properties": {
+        "primaryUserAssignedIdentityId": {
+          "type": "string",
+          "description": "Primary user identity resource id"
+        },
+        "primaryKeyUri": {
+          "type": "string",
+          "description": "Primary key uri"
+        },
+        "geoBackupUserAssignedIdentityId": {
+          "type": "string",
+          "description": "Geo backup user identity resource id as identity can't cross region, need identity in same region as geo backup"
+        },
+        "geoBackupKeyUri": {
+          "type": "string",
+          "description": "Geo backup key uri as key vault can't cross region, need cmk in same region as geo backup"
+        },
+        "type": {
+          "type": "string",
+          "description": "The key type, AzureKeyVault for enable cmk, SystemManaged for disable cmk.",
+          "enum": [
+            "AzureKeyVault",
+            "SystemManaged"
+          ],
+          "x-ms-enum": {
+            "name": "DataEncryptionType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
     "MaintenanceWindow": {
       "type": "object",
       "description": "Maintenance window of a server.",
@@ -1722,6 +1762,10 @@
           "readOnly": true,
           "description": "The maximum number of replicas that a primary server can have."
         },
+        "dataEncryption": {
+          "$ref": "#/definitions/DataEncryption",
+          "description": "The Data Encryption for CMK."
+        },
         "state": {
           "type": "string",
           "readOnly": true,
@@ -1779,6 +1823,10 @@
     "Server": {
       "type": "object",
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The cmk identity for the server."
+        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The SKU (pricing tier) of the server."
@@ -1829,6 +1877,10 @@
         "replicationRole": {
           "$ref": "#/definitions/ReplicationRole",
           "description": "The replication role of the server."
+        },
+        "dataEncryption": {
+          "$ref": "#/definitions/DataEncryption",
+          "description": "The Data Encryption for CMK."
         }
       },
       "description": "The properties that can be updated for a server."
@@ -1836,6 +1888,10 @@
     "ServerForUpdate": {
       "type": "object",
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The cmk identity for the server."
+        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The SKU (pricing tier) of the server."
@@ -2463,6 +2519,63 @@
         }
       },
       "description": "Represents a resource name availability."
+    },
+    "Identity": {
+      "x-ms-client-flatten": true,
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "ObjectId from the KeyVault",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "TenantId from the KeyVault",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of managed service identity.",
+          "enum": [
+            "UserAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "ManagedServiceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "description": "",
+            "items": {
+              "$ref": "#/definitions/UserAssignedIdentity"
+            }
+          },
+          "description": "Metadata of user assigned identity."
+        }
+      },
+      "description": "Properties to configure Identity for Bring your Own Keys"
+    },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "Principal Id of user assigned identity",
+          "type": "string",
+          "x-ms-client-name": "PrincipalId",
+          "readOnly": true
+        },
+        "clientId": {
+          "description": "Client Id of user assigned identity",
+          "type": "string",
+          "x-ms-client-name": "ClientId",
+          "readOnly": true
+        }
+      },
+      "description": "Metadata of user assigned identity."
     },
     "OperationDisplay": {
       "type": "object",

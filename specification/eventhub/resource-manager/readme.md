@@ -26,7 +26,7 @@ These are the global settings for the EventHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-06-preview
+tag: package-2021-11
 ```
 
 ### Suppression
@@ -131,6 +131,26 @@ input-file:
 - Microsoft.EventHub/preview/2018-01-01-preview/sku.json
 ```
 
+### Tag: package-2021-11
+
+These settings apply only when `--tag=package-2021-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-11'
+input-file:
+- Microsoft.EventHub/stable/2021-11-01/AvailableClusterRegions-preview.json
+- Microsoft.EventHub/stable/2021-11-01/Clusters-preview.json
+- Microsoft.EventHub/stable/2021-11-01/quotaConfiguration-preview.json
+- Microsoft.EventHub/stable/2021-11-01/namespaces-preview.json
+- Microsoft.EventHub/stable/2021-11-01/operations.json
+- Microsoft.EventHub/stable/2021-11-01/eventhubs.json
+- Microsoft.EventHub/stable/2021-11-01/disasterRecoveryConfigs.json
+- Microsoft.EventHub/stable/2021-11-01/networkrulessets-preview.json
+- Microsoft.EventHub/stable/2021-11-01/AuthorizationRules.json
+- Microsoft.EventHub/stable/2021-11-01/consumergroups.json
+- Microsoft.EventHub/stable/2021-11-01/CheckNameAvailability.json
+- Microsoft.EventHub/stable/2021-11-01/SchemaRegistry.json
+```
+
 ### Tag: profile-hybrid-2020-09-01
 
 These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on the command line.
@@ -161,9 +181,6 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
-    after_scripts:
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-eventhub
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

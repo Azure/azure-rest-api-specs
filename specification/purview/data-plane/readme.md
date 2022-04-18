@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Purview.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Purview, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,19 +15,29 @@ To build the SDK for Purview, simply [Install AutoRest](https://aka.ms/autorest/
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
 ### Basic Information
+
 These are the global settings for the Azure Purview Catalog API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2021-05-01-preview
+tag: package-preview-2022-03
 ```
 
 
+### Tag: package-preview-2022-03
+
+These settings apply only when `--tag=package-preview-2022-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-03'
+input-file:
+  - Azure.Analytics.Purview.Catalog/preview/2022-03-01-preview/purviewcatalog.json
+```
 ### Tag: package-2021-05-01-preview
 
 These settings apply only when `--tag=package-2021-05-01-preview` is specified on the command line.
@@ -37,15 +47,13 @@ input-file:
 - Azure.Analytics.Purview.Catalog/preview/2021-05-01-preview/purviewcatalog.json
 ```
 
-
-These are the global settings for the Purview API.
+These are the global settings for the Purview Scanning API.
 
 ``` yaml
 openapi-type: data-plane
 tag: package-2018-12-01-preview
 title: PurviewScanningClient
 ```
-
 
 ### Tag: package-2018-12-01-preview
 
@@ -58,27 +66,36 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
+These settings apply only when `--tag=package-2021-10-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-10-01-preview'
+input-file:
+- Azure.Analytics.Purview.Scanning/preview/2021-10-01-preview/scanningService.json
+modelerfour:
+  lenient-model-deduplication: true
+```
+
 These are the global settings for the Purview API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2021-07-01
+tag: package-2021-07-01-preview
 title: PurviewMetadataPolicyClient
 ```
 
+### Tag: package-2021-07-01-preview
 
-### Tag: package-2021-07-01
+These settings apply only when `--tag=package-2021-07-01-preview` is specified on the command line.
 
-These settings apply only when `--tag=package-2021-07-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-07-01'
+``` yaml $(tag) == 'package-2021-07-01-preview'
 input-file:
-- Azure.Analytics.Purview.MetadataPolicies/preview/2021-07-01/purviewMetadataPolicy.json
+- Azure.Analytics.Purview.MetadataPolicies/preview/2021-07-01-preview/purviewMetadataPolicy.json
 modelerfour:
   lenient-model-deduplication: true
 ```
 
 ---
+
 # Code Generation
 
 ## C#
