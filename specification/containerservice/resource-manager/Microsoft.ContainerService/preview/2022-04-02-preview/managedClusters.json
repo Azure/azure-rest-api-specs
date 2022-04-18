@@ -6408,35 +6408,40 @@
           "readOnly": true,
           "items": {
             "type": "string"
-          }
+          },
+          "description": "List of allowed verbs"
         },
         "apiGroups": {
           "type": "array",
           "readOnly": true,
           "items": {
             "type": "string"
-          }
+          },
+          "description": "List of allowed apiGroups"
         },
         "resources": {
           "type": "array",
           "readOnly": true,
           "items": {
             "type": "string"
-          }
+          },
+          "description": "List of allowed resources"
         },
         "resourceNames": {
           "type": "array",
           "readOnly": true,
           "items": {
             "type": "string"
-          }
+          },
+          "description": "List of allowed names"
         },
         "nonResourceURLs": {
           "type": "array",
           "readOnly": true,
           "items": {
             "type": "string"
-          }
+          },
+          "description": "List of allowed nonResourceURLs"
         }
       }
     },
@@ -6485,6 +6490,7 @@
     },
     "TrustedAccessRoleBindingProperties": {
       "type": "object",
+      "description": "Properties for trusted access role binding",
       "required": [
         "sourceResourceId",
         "roles"
@@ -6510,6 +6516,7 @@
     },
     "TrustedAccessRoleBinding": {
       "type": "object",
+      "description": "Defines binding between a resource and role",
       "required": [
         "properties"
       ],
@@ -6527,12 +6534,14 @@
     },
     "TrustedAccessRoleBindingListResult": {
       "type": "object",
+      "description": "List of trusted access role bindings",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/TrustedAccessRoleBinding"
-          }
+          },
+          "description": "Role binding list"
         }
       }
     }
