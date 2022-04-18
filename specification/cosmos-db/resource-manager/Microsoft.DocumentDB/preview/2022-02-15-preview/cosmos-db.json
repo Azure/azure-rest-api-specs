@@ -8349,6 +8349,10 @@
           "$ref": "#/definitions/ConflictResolutionPolicy",
           "description": "The conflict resolution policy for the container."
         },
+        "clientEncryptionPolicy": {
+          "$ref": "#/definitions/ClientEncryptionPolicy",
+          "description": "The client encryption policy for the container."
+        },
         "analyticalStorageTtl": {
           "type": "integer",
           "format": "int64",
@@ -8631,6 +8635,57 @@
           "description": "The procedure to resolve conflicts in the case of custom mode."
         }
       }
+    },
+    "ClientEncryptionPolicy": {
+      "type": "object",
+      "description": "Cosmos DB client encryption policy.",
+      "properties": {
+        "includedPaths": {
+          "description": "Paths of the item that need encryption along with path-specific settings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClientEncryptionIncludedPath"
+          },
+          "x-ms-identifiers": []
+        },
+        "policyFormatVersion": {
+          "description": "Version of the client encryption policy definition. Please note, user passed value is ignored. Default policy version is 1.",
+          "type": "integer",
+          "format": "int32",
+          "default": 1
+        }
+      },
+      "required": [
+        "includedPaths"
+      ]
+    },
+    "ClientEncryptionIncludedPath": {
+      "type": "object",
+      "description": ".",
+      "properties": {
+        "path": {
+          "description": "Path that needs to be encrypted.",
+          "type": "string"
+        },
+        "clientEncryptionKeyId": {
+          "description": "The identifier of the Client Encryption Key to be used to encrypt the path.",
+          "type": "string"
+        },
+        "encryptionType": {
+          "description": "The type of encryption to be performed. Eg - Deterministic, Randomized.",
+          "type": "string"
+        },
+        "encryptionAlgorithm": {
+          "description": "The encryption algorithm which will be used. Eg - AEAD_AES_256_CBC_HMAC_SHA256.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "clientEncryptionKeyId",
+        "encryptionType",
+        "encryptionAlgorithm"
+      ]
     },
     "SqlStoredProcedureResource": {
       "type": "object",

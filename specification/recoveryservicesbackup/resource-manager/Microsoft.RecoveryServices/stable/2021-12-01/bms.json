@@ -4735,6 +4735,9 @@
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
           },
+          "x-ms-identifiers": [
+            "code"
+          ],
           "description": "A list of additional details about the error."
         },
         "additionalInfo": {
@@ -4743,6 +4746,7 @@
           "items": {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorAdditionalInfo"
           },
+          "x-ms-identifiers": [],
           "description": "The error additional info."
         }
       },
@@ -4775,6 +4779,9 @@
               "items": {
                 "$ref": "#/definitions/NewErrorResponse"
               },
+              "x-ms-identifiers": [
+                "/error/code"
+              ],
               "description": "The error details."
             },
             "additionalInfo": {
@@ -4783,6 +4790,7 @@
               "items": {
                 "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorAdditionalInfo"
               },
+              "x-ms-identifiers": [],
               "description": "The error additional info."
             }
           }
@@ -4968,7 +4976,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RestoreFileSpecs"
-          }
+          },
+          "x-ms-identifiers": [
+            "path"
+          ]
         },
         "targetDetails": {
           "$ref": "#/definitions/TargetAFSRestoreInfo",
@@ -5020,7 +5031,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubProtectionPolicy"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "makePolicyConsistent": {
           "description": "Fix the policy inconsistency",
@@ -5202,7 +5214,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AzureIaaSVMErrorInfo"
-          }
+          },
+          "x-ms-identifiers": [
+            "errorCode"
+          ]
         },
         "virtualMachineVersion": {
           "description": "Specifies whether the backup item is a Classic or an Azure Resource Manager VM.",
@@ -5262,7 +5277,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AzureIaaSVMErrorInfo"
-          }
+          },
+          "x-ms-identifiers": [
+            "errorCode"
+          ]
         },
         "virtualMachineVersion": {
           "description": "Specifies whether the backup item is a Classic or an Azure Resource Manager VM.",
@@ -5284,7 +5302,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AzureIaaSVMJobTaskDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "taskId"
+          ]
         },
         "propertyBag": {
           "description": "Job properties.",
@@ -5413,7 +5434,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AzureIaaSVMHealthDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "code"
+          ]
         },
         "kpisHealths": {
           "description": "Health details of different KPIs",
@@ -5451,7 +5475,22 @@
       "properties": {
         "oldestRecoveryPoint": {
           "format": "date-time",
-          "description": "The oldest backup copy available for this backup item.",
+          "description": "The oldest backup copy available for this backup item across all tiers.",
+          "type": "string"
+        },
+        "oldestRecoveryPointInVault": {
+          "format": "date-time",
+          "description": "The oldest backup copy available for this backup item in vault tier",
+          "type": "string"
+        },
+        "oldestRecoveryPointInArchive": {
+          "format": "date-time",
+          "description": "The oldest backup copy available for this backup item in archive tier",
+          "type": "string"
+        },
+        "newestRecoveryPointInArchive": {
+          "format": "date-time",
+          "description": "The latest backup copy available for this backup item in archive tier",
           "type": "string"
         },
         "recoveryPointCount": {
@@ -5484,6 +5523,13 @@
         "retentionPolicy": {
           "$ref": "#/definitions/RetentionPolicy",
           "description": "Retention policy with the details on backup copy retention ranges."
+        },
+        "tieringPolicy": {
+          "description": "Tiering policy to automatically move RPs to another tier\r\nKey is Target Tier, defined in RecoveryPointTierType enum.\r\nTiering policy specifies the criteria to move RP to the target tier.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/TieringPolicy"
+          }
         },
         "instantRpRetentionRangeInDays": {
           "format": "int32",
@@ -5638,7 +5684,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AzureStorageErrorInfo"
-          }
+          },
+          "x-ms-identifiers": [
+            "errorCode"
+          ]
         },
         "storageAccountName": {
           "description": "Specifies friendly name of the storage account.",
@@ -5668,7 +5717,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AzureStorageJobTaskDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "taskId"
+          ]
         },
         "propertyBag": {
           "description": "Job properties.",
@@ -5804,7 +5856,22 @@
       "properties": {
         "oldestRecoveryPoint": {
           "format": "date-time",
-          "description": "The oldest backup copy available for this backup item.",
+          "description": "The oldest backup copy available for this backup item across all tiers.",
+          "type": "string"
+        },
+        "oldestRecoveryPointInVault": {
+          "format": "date-time",
+          "description": "The oldest backup copy available for this backup item in vault tier",
+          "type": "string"
+        },
+        "oldestRecoveryPointInArchive": {
+          "format": "date-time",
+          "description": "The oldest backup copy available for this backup item in archive tier",
+          "type": "string"
+        },
+        "newestRecoveryPointInArchive": {
+          "format": "date-time",
+          "description": "The latest backup copy available for this backup item in archive tier",
           "type": "string"
         },
         "recoveryPointCount": {
@@ -5921,7 +5988,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AzureWorkloadErrorInfo"
-          }
+          },
+          "x-ms-identifiers": [
+            "errorCode"
+          ]
         },
         "extendedInfo": {
           "$ref": "#/definitions/AzureWorkloadJobExtendedInfo",
@@ -5939,7 +6009,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AzureWorkloadJobTaskDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "taskId"
+          ]
         },
         "propertyBag": {
           "description": "Job properties.",
@@ -5982,7 +6055,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PointInTimeRange"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "x-ms-discriminator-value": "AzureWorkloadPointInTimeRecoveryPoint"
@@ -6038,7 +6112,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RecoveryPointTierInformationV2"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "recoveryPointMoveReadinessInfo": {
           "description": "Eligibility of RP to be moved to another tier",
@@ -6170,7 +6245,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PointInTimeRange"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "x-ms-discriminator-value": "AzureWorkloadSQLPointInTimeRecoveryPoint"
@@ -6222,7 +6298,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SQLDataDirectory"
-          }
+          },
+          "x-ms-identifiers": [
+            "path"
+          ]
         }
       }
     },
@@ -6248,7 +6327,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SQLDataDirectoryMapping"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "x-ms-discriminator-value": "AzureWorkloadSQLRestoreRequest"
@@ -6388,7 +6468,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClientDiscoveryForLogSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -6401,7 +6484,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClientDiscoveryValueForSingleApi"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "Link to the next chunk of Response.",
@@ -6453,7 +6539,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Day"
-          }
+          },
+          "x-ms-identifiers": [
+            "date"
+          ]
         }
       }
     },
@@ -6558,7 +6647,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DpmErrorInfo"
-          }
+          },
+          "x-ms-identifiers": [
+            "errorString"
+          ]
         },
         "extendedInfo": {
           "$ref": "#/definitions/DpmJobExtendedInfo",
@@ -6669,7 +6761,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DpmJobTaskDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "taskId"
+          ]
         },
         "propertyBag": {
           "description": "The job properties.",
@@ -6930,7 +7025,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubProtectionPolicy"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "timeZone": {
           "description": "TimeZone optional input as string. For example: TimeZone = \"Pacific Standard Time\".",
@@ -7181,7 +7277,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RecoveryPointTierInformationV2"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "isManagedVirtualMachine": {
           "description": "Whether VM is with Managed Disks",
@@ -7760,7 +7857,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MabErrorInfo"
-          }
+          },
+          "x-ms-identifiers": [
+            "errorString"
+          ]
         },
         "extendedInfo": {
           "$ref": "#/definitions/MabJobExtendedInfo",
@@ -7778,7 +7878,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MabJobTaskDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "taskId"
+          ]
         },
         "propertyBag": {
           "description": "The job properties.",
@@ -7939,7 +8042,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceHealthDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "code"
+          ]
         }
       }
     },
@@ -8567,14 +8673,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DiskInformation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "excludedDiskList": {
           "description": "Information of disks excluded from backup",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DiskInformation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -9001,6 +9113,13 @@
         "retentionPolicy": {
           "$ref": "#/definitions/RetentionPolicy",
           "description": "Retention policy with the details on backup copy retention ranges."
+        },
+        "tieringPolicy": {
+          "description": "Tiering policy to automatically move RPs to another tier.\r\nKey is Target Tier, defined in RecoveryPointTierType enum.\r\nTiering policy specifies the criteria to move RP to the target tier.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/TieringPolicy"
+          }
         }
       }
     },
@@ -9140,7 +9259,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorDetail"
-          }
+          },
+          "x-ms-identifiers": [
+            "code"
+          ]
         }
       }
     },
@@ -9451,7 +9573,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VaultJobErrorInfo"
-          }
+          },
+          "x-ms-identifiers": [
+            "errorCode"
+          ]
         },
         "extendedInfo": {
           "$ref": "#/definitions/VaultJobExtendedInfo",
@@ -9920,7 +10045,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SQLDataDirectory"
-          }
+          },
+          "x-ms-identifiers": [
+            "path"
+          ]
         }
       },
       "x-ms-discriminator-value": "SQLInstance"
@@ -10142,7 +10270,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/BackupManagementUsage"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -10605,7 +10736,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DistributedNodesInfo"
-          }
+          },
+          "x-ms-identifiers": [
+            "nodeName"
+          ]
         }
       }
     },
@@ -11346,7 +11480,7 @@
           "type": "string"
         }
       },
-      "x-ms-discriminator-value": "IaaSVMContainer"
+      "x-ms-discriminator-value": "IaasVMContainer"
     },
     "IaasVMILRRegistrationRequest": {
       "description": "Restore files/folders from a backup copy of IaaS VM.",
@@ -11445,7 +11579,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/WorkloadInquiryDetails"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -11477,7 +11612,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClientScriptForConnect"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -11517,7 +11653,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MABContainerHealthDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "code"
+          ]
         },
         "containerHealthState": {
           "description": "Health state of mab container.",
@@ -11936,7 +12075,10 @@
             "VMAppContainer",
             "SQLAGWorkLoadContainer",
             "StorageContainer",
-            "GenericContainer"
+            "GenericContainer",
+            "AzureWorkloadContainer",
+            "Microsoft.ClassicCompute/virtualMachines",
+            "Microsoft.Compute/virtualMachines"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -12393,7 +12535,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceGuardOperationDetail"
-          }
+          },
+          "x-ms-identifiers": [
+            "vaultCriticalOperation"
+          ]
         },
         "lastUpdatedTime": {
           "type": "string"
@@ -12431,6 +12576,46 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceGuardProxyBaseResource"
+          }
+        }
+      }
+    },
+    "TieringPolicy": {
+      "description": "Tiering Policy for a target tier.\r\nIf the policy is not specified for a given target tier, service retains the existing configured tiering policy for that tier",
+      "type": "object",
+      "properties": {
+        "tieringMode": {
+          "description": "Tiering Mode to control automatic tiering of recovery points. Supported values are:\r\n1. TierRecommended: Tier all recovery points recommended to be tiered\r\n2. TierAfter: Tier all recovery points after a fixed period, as specified in duration + durationType below.\r\n3. DoNotTier: Do not tier any recovery points",
+          "enum": [
+            "Invalid",
+            "TierRecommended",
+            "TierAfter",
+            "DoNotTier"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TieringMode",
+            "modelAsString": true
+          }
+        },
+        "duration": {
+          "format": "int32",
+          "description": "Number of days/weeks/months/years to retain backups in current tier before tiering.\r\nUsed only if TieringMode is set to TierAfter",
+          "type": "integer"
+        },
+        "durationType": {
+          "description": "Retention duration type: days/weeks/months/years\r\nUsed only if TieringMode is set to TierAfter",
+          "enum": [
+            "Invalid",
+            "Days",
+            "Weeks",
+            "Months",
+            "Years"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RetentionDurationType",
+            "modelAsString": true
           }
         }
       }
