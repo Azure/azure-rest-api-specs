@@ -194,66 +194,6 @@
         "consumes": [
           "application/json"
         ]
-      },
-      "patch": {
-        "tags": [
-          "Accounts"
-        ],
-        "operationId": "Accounts_Update",
-        "description": "Updates an Automanage Account",
-        "x-ms-examples": {
-          "Update Automanage account": {
-            "$ref": "./examples/updateAccount.json"
-          }
-        },
-        "parameters": [
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the Automanage account."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AccountUpdate"
-            },
-            "description": "Parameters supplied to update Automanage account."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The Automanage account was updated successfully.",
-            "schema": {
-              "$ref": "#/definitions/Account"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": false,
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/accounts": {
@@ -772,66 +712,6 @@
           },
           "204": {
             "description": "OK"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": false,
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      },
-      "patch": {
-        "tags": [
-          "ConfigurationProfilePreferences"
-        ],
-        "operationId": "ConfigurationProfilePreferences_Update",
-        "description": "Updates a configuration profile preference",
-        "x-ms-examples": {
-          "Create or update configuration profile preference": {
-            "$ref": "./examples/updateConfigurationProfilePreference.json"
-          }
-        },
-        "parameters": [
-          {
-            "name": "configurationProfilePreferenceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the configuration profile preference."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfilePreferenceUpdate"
-            },
-            "description": "Parameters supplied to create or update configuration profile preference."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The configuration profile preference was updated successfully.",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfilePreference"
-            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
