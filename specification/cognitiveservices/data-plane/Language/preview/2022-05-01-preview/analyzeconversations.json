@@ -343,11 +343,11 @@
       "required": [
         "participantId",
         "id"
-      ]
+      ],
+      "additionalProperties": true
     },
     "TextConversationItem": {
       "description": "The text modality of an input conversation.",
-      "x-ms-discriminator-value": "Text",
       "allOf": [
         {
           "$ref": "#/definitions/ConversationItemBase"
@@ -1633,8 +1633,7 @@
       "required": [
         "id",
         "language",
-        "inputModality",
-        "conversationItems"
+        "inputModality"
       ],
       "properties": {
         "id": {
@@ -1650,12 +1649,6 @@
         },
         "domain": {
           "$ref": "#/definitions/ConversationDomain"
-        },
-        "conversationItems": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ConversationItemBase"
-          }
         }
       }
     },
