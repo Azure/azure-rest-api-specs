@@ -106,23 +106,7 @@ csharp:
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-java:
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Purview.CatalogClient
-  add-credentials: true
-  output-folder: $(azure-libraries-for-java-folder)/purview/Microsoft.Azure.Analytics.Purview.Catalog/src/Generated
-  clear-output-folder: true
-output-folder: $(csharp-sdks-folder)/Purview/ScanningClient/Generated
-add-credentials: true
-sync-methods: all
-license-header: MICROSOFT_MIT_NO_VERSION
-namespace: Azure.Analytics.Purview.Scanning
-clear-output-folder: true
-```
+See configuration in [readme.java.md](./readme.java.md)
 
 ## Python
 
