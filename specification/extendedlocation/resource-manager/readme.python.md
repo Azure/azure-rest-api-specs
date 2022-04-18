@@ -2,7 +2,7 @@
 
 These settings apply only when `--track2` is specified on the command line.
 
-```yaml $(python) && $(track2)
+```yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-extendedlocation
@@ -12,7 +12,7 @@ no-namespace-folders: true
 
 ### Python multi-api
 
-``` yaml $(python) && $(multiapi) && $(track2)
+``` yaml $(python) && $(multiapi)
 clear-output-folder: true
 batch:
   - tag: package-2021-03-15-preview
@@ -23,7 +23,6 @@ batch:
 
 ```yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/extendedlocation/azure-mgmt-extendedlocation/azure/mgmt/extendedlocation/
-clear-output-folder: false
 perform-load: false
 ```
 

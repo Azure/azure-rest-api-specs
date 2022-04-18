@@ -26,9 +26,19 @@ These are the global settings for the Reservations API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-07-01
+tag: package-2022-03
 ```
 
+
+### Tag: package-2022-03
+
+These settings apply only when `--tag=package-2022-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-03'
+input-file:
+  - Microsoft.Capacity/stable/2022-03-01/reservations.json
+  - Microsoft.Capacity/stable/2020-10-25/quota.json
+```
 ### Tag: package-2021-07-01
 
 These settings apply only when `--tag=package-2021-07-01` is specified on the command line.
@@ -53,7 +63,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-11-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-11-preview'
+``` yaml $(tag) == 'package-2020-11-preview'
 input-file:
   - Microsoft.Capacity/preview/2019-07-19/quota.json
   - Microsoft.Capacity/preview/2020-10-01-preview/reservations.json
@@ -64,7 +74,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-10-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-10-preview'
+``` yaml $(tag) == 'package-2020-10-preview'
 input-file:
   - Microsoft.Capacity/preview/2019-07-19/quota.json
   - Microsoft.Capacity/preview/2020-10-01-preview/reservations.json
@@ -74,7 +84,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2019-07-19` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2019-07-19'
+``` yaml $(tag) == 'package-preview-2019-07-19'
 input-file:
   - Microsoft.Capacity/preview/2019-07-19/quota.json
   - Microsoft.Capacity/preview/2019-04-01/reservations.json
@@ -84,7 +94,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2019-04` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2019-04'
+``` yaml $(tag) == 'package-preview-2019-04'
 input-file:
   - Microsoft.Capacity/preview/2019-04-01/reservations.json
 ```
@@ -152,11 +162,8 @@ See configuration in [readme.cli.md](./readme.cli.md)
 
 ## AZ
 
- See configuration in [readme.az.md](./readme.az.md)
+See configuration in [readme.az.md](./readme.az.md)
 
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
-
-
-

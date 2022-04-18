@@ -62,6 +62,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-cli-extensions
+  - repo: azure-sdk-for-python-track2
   - repo: azure-resource-manager-schemas
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-go-track2

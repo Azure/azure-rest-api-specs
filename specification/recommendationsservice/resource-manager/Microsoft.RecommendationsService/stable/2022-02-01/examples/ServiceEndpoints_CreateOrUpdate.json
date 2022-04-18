@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2022-02-01",
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "resourceGroupName": "rg",
+    "accountName": "sampleAccount",
+    "serviceEndpointName": "s1",
+    "body": {
+      "location": "West US",
+      "tags": {
+        "Environment": "Prod"
+      },
+      "properties": {
+        "preAllocatedCapacity": 100
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/rg/providers/Microsoft.RecommendationsService/accounts/sampleAccount/serviceEndpoints/s1",
+        "name": "s1",
+        "type": "Microsoft.RecommendationsService/accounts/serviceEndpoints",
+        "location": "West US",
+        "tags": {
+          "Environment": "Prod"
+        },
+        "systemData": {},
+        "properties": {
+          "preAllocatedCapacity": 100,
+          "pairedLocation": "East US",
+          "url": "sampleAccount-s1.microsoft.com",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/rg/providers/Microsoft.RecommendationsService/accounts/sampleAccount/serviceEndpoints/s1",
+        "name": "s1",
+        "type": "Microsoft.RecommendationsService/accounts/serviceEndpoints",
+        "location": "West US",
+        "tags": {
+          "Environment": "Prod"
+        },
+        "systemData": {},
+        "properties": {
+          "preAllocatedCapacity": 100,
+          "pairedLocation": "East US",
+          "url": "sampleAccount-s1.microsoft.com",
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  }
+}
