@@ -2566,7 +2566,7 @@
           "TrustedAccess"
         ],
         "operationId": "TrustedAccessRoles_List",
-        "summary": "Get a list of supported trusted access roles.",
+        "summary": "List supported trusted access roles.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2593,7 +2593,7 @@
           }
         },
         "x-ms-examples": {
-          "Create or update Role Binding": {
+          "List trusted access roles": {
             "$ref": "./examples/TrustedAccessRoles_List.json"
           }
         }
@@ -2605,7 +2605,7 @@
           "TrustedAccess"
         ],
         "operationId": "TrustedAccessRoleBindings_List",
-        "summary": "Get a list trusted access role bindings.",
+        "summary": "List trusted access role bindings.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2635,7 +2635,7 @@
           }
         },
         "x-ms-examples": {
-          "Create or update Role Binding": {
+          "List trusted access role bindings": {
             "$ref": "./examples/TrustedAccessRoleBindings_List.json"
           }
         }
@@ -2680,7 +2680,7 @@
           }
         },
         "x-ms-examples": {
-          "Create or update Role Binding": {
+          "Get a trusted access role binding": {
             "$ref": "./examples/TrustedAccessRoleBindings_Get.json"
           }
         }
@@ -2731,7 +2731,7 @@
           }
         },
         "x-ms-examples": {
-          "Create or update Role Binding": {
+          "Create or update a trusted access role binding": {
             "$ref": "./examples/TrustedAccessRoleBindings_CreateOrUpdate.json"
           }
         }
@@ -2774,7 +2774,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete Trusted Access Role Binding": {
+          "Delete a trusted access role binding": {
             "$ref": "./examples/TrustedAccessRoleBindings_Delete.json"
           }
         }
@@ -6454,7 +6454,8 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/TrustedAccessRoleRule"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6466,7 +6467,11 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/TrustedAccessRole"
-          }
+          },
+          "x-ms-identifiers": [
+            "sourceResourceType",
+            "name"
+          ]
         }
       }
     },
