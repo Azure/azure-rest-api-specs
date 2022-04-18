@@ -32,6 +32,20 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
+            "in": "header",
+            "name": "Repeatability-Request-ID",
+            "description": "Repeatability Request ID for repeatable requests",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "header",
+            "name": "Repeatability-First-Sent",
+            "description": "Repeatability First Sent for repeatable requests",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
             "in": "body",
             "name": "createRoomRequest",
             "description": "The create room request body.",
@@ -45,8 +59,15 @@
           "201": {
             "description": "Request successful. The action returns a new `Room`.",
             "schema": {
-              "$ref": "#/definitions/CreateRoomResponse"
+              "$ref": "#/definitions/RoomModel"
             }
+          },
+          "400": {  
+            "description": "Bad Request", 
+            "schema": { 
+              "$ref": "#/definitions/CommunicationErrorResponse"  
+            },  
+            "x-ms-error-response": true 
           },
           "401": {
             "description": "Unauthorized",
@@ -62,12 +83,26 @@
             },
             "x-ms-error-response": true
           },
+          "412": {  
+            "description": "Precondition Failed", 
+            "schema": { 
+              "$ref": "#/definitions/CommunicationErrorResponse"  
+            },  
+            "x-ms-error-response": true 
+          },
           "500": {
             "description": "InternalServerError",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
             },
             "x-ms-error-response": true
+          },
+          "501": {  
+            "description": "Not Implemented", 
+            "schema": { 
+              "$ref": "#/definitions/CommunicationErrorResponse"  
+            },  
+            "x-ms-error-response": true 
           },
           "default": {
             "description": "Error response describing why the operation failed",
@@ -111,6 +146,13 @@
             "schema": {
               "$ref": "#/definitions/RoomModel"
             }
+          },
+          "400": {  
+            "description": "Bad Request", 
+            "schema": { 
+              "$ref": "#/definitions/CommunicationErrorResponse"  
+            },  
+            "x-ms-error-response": true 
           },
           "401": {
             "description": "Unauthorized",
@@ -185,6 +227,13 @@
               "$ref": "#/definitions/RoomModel"
             }
           },
+          "400": {  
+            "description": "Bad Request", 
+            "schema": { 
+              "$ref": "#/definitions/CommunicationErrorResponse"  
+            },  
+            "x-ms-error-response": true 
+          },
           "401": {
             "description": "Unauthorized",
             "schema": {
@@ -246,6 +295,13 @@
           },
           "204": {
             "description": "The room was successfully deleted."
+          },
+          "400": {  
+            "description": "Bad Request", 
+            "schema": { 
+              "$ref": "#/definitions/CommunicationErrorResponse"  
+            },  
+            "x-ms-error-response": true 
           },
           "401": {
             "description": "Unauthorized",
@@ -650,18 +706,6 @@
             "$ref": "#/definitions/RoomParticipant"
           },
           "x-ms-identifiers": []
-        }
-      }
-    },
-    "CreateRoomResponse": {
-      "description": "Response payload for create room operation.",
-      "required": [
-        "room"
-      ],
-      "type": "object",
-      "properties": {
-        "room": {
-          "$ref": "#/definitions/RoomModel"
         }
       }
     },
