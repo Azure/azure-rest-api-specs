@@ -2921,10 +2921,10 @@
           }
         },
         "cosmosDBSqlCollections": {
-          "description": "The list of cosmos DB collection endpoints that IoT hub routes messages to, based on the routing rules.",
+          "description": "The list of Cosmos DB collection endpoints that IoT hub routes messages to, based on the routing rules.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/RoutingCosmosDBSqlCollectionProperties"
+            "$ref": "#/definitions/RoutingCosmosDBSqlApiProperties"
           }
         }
       }
@@ -3173,8 +3173,8 @@
         "containerName"
       ]
     },
-    "RoutingCosmosDBSqlCollectionProperties": {
-      "description": "The properties related to a cosmos DB collection endpoint.",
+    "RoutingCosmosDBSqlApiProperties": {
+      "description": "The properties related to a cosmos DB sql collection endpoint.",
       "type": "object",
       "properties": {
         "name": {
@@ -3183,7 +3183,7 @@
           "pattern": "^[A-Za-z0-9-._]{1,64}$"
         },
         "id": {
-          "description": "Id of the cosmos DB collection endpoint",
+          "description": "Id of the cosmos DB sql collection endpoint",
           "type": "string"
         },
         "subscriptionId": {
@@ -3199,7 +3199,7 @@
           "type": "string"
         },
         "authenticationType": {
-          "description": "Method used to authenticate against the cosmos DB collection endpoint",
+          "description": "Method used to authenticate against the cosmos DB sql collection endpoint",
           "enum": [
             "keyBased",
             "identityBased"
@@ -3231,16 +3231,17 @@
           "type": "string"
         },
         "PartitionKeyName": {
-          "description": "The name of the partition key associated with this cosmos DB collection if one exists. This is an optional parameter.",
+          "description": "The name of the partition key associated with this cosmos DB sql collection if one exists. This is an optional parameter.",
           "type": "string"
         },
         "PartitionKeyTemplate": {
-          "description": "The template for generating a synthetic partition key value for use with this cosmos DB collection. The template must include at least one of the following placeholders: {iothub}, {deviceid}, {DD}, {MM}, and {YYYY}. Any one placeholder may be specified at most once, but order and non-placeholder components are arbitrary. This parameter is only required if PartitionKeyName is specified.",
+          "description": "The template for generating a synthetic partition key value for use with this cosmos DB sql collection. The template must include at least one of the following placeholders: {iothub}, {deviceid}, {DD}, {MM}, and {YYYY}. Any one placeholder may be specified at most once, but order and non-placeholder components are arbitrary. This parameter is only required if PartitionKeyName is specified.",
           "type": "string"
         }
       },
       "required": [
         "name",
+        "endpointUri",
         "databaseName",
         "collectionName"
       ]
