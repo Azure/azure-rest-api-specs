@@ -168,6 +168,213 @@
           }
         ]
       }
+    },
+    "TaskState": {
+      "description": "Returns the current state of the task.",
+      "properties": {
+        "lastUpdateDateTime": {
+          "description": "The last updated time in UTC for the task.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the task at the mentioned last update time.",
+          "enum": [
+            "notStarted",
+            "running",
+            "succeeded",
+            "failed",
+            "cancelled",
+            "cancelling"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "TaskState"
+          }
+        }
+      },
+      "required": [
+        "status",
+        "lastUpdateDateTime"
+      ],
+      "type": "object"
+    },
+    "TaskIdentifier": {
+      "type": "object",
+      "description": "Base task object.",
+      "properties": {
+        "taskName": {
+          "type": "string"
+        }
+      }
+    },
+    "TaskParameters": {
+      "type": "object",
+      "description": "Base parameters object for a text analysis task.",
+      "properties": {
+        "loggingOptOut": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "PreBuiltTaskParameters": {
+      "type": "object",
+      "description": "Parameters object for a text analysis task using pre-built models.",
+      "properties": {
+        "modelVersion": {
+          "type": "string",
+          "default": "latest"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskParameters"
+        }
+      ]
+    },
+    "JobState": {
+      "properties": {
+        "displayName": {
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "expirationDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "jobId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "lastUpdateDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "notStarted",
+            "running",
+            "succeeded",
+            "partiallySucceeded",
+            "failed",
+            "cancelled",
+            "cancelling"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "JobState"
+          }
+        },
+        "errors": {
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "type": "array"
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "jobId",
+        "lastUpdateDateTime",
+        "createdDateTime",
+        "status"
+      ]
+    },
+    "JobErrors": {
+      "properties": {
+        "errors": {
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "InputError": {
+      "type": "object",
+      "description": "Contains details of errors encountered during a job execution.",
+      "required": [
+        "id",
+        "error"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the input."
+        },
+        "error": {
+          "type": "object",
+          "description": "Error encountered.",
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "InputWarning": {
+      "type": "object",
+      "description": "Contains details of warnings encountered during a job execution.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Warning code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Warning message."
+        },
+        "targetRef": {
+          "type": "string",
+          "description": "A JSON pointer reference indicating the target object."
+        }
+      }
+    },
+    "RequestStatistics": {
+      "type": "object",
+      "required": [
+        "transactionsCount"
+      ],
+      "properties": {
+        "transactionsCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of transactions for the request."
+        }
+      },
+      "additionalProperties": true,
+      "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+    },
+    "PreBuiltResult": {
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/InputError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics"
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
+        }
+      },
+      "required": [
+        "errors",
+        "modelVersion"
+      ]
     }
   },
   "parameters": {
@@ -242,6 +449,23 @@
       "description": "The maximum number of resources to include in a single response.",
       "type": "integer",
       "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "ShowStats": {
+      "name": "showStats",
+      "in": "query",
+      "description": "(Optional) if set to true, response will contain request and document level statistics.",
+      "type": "boolean",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "JobId": {
+      "description": "Job ID",
+      "format": "uuid",
+      "in": "path",
+      "name": "jobId",
+      "required": true,
+      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }
