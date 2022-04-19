@@ -5418,8 +5418,23 @@
           "example": 128.22
         },
         "encryptionKeySource": {
-          "description": "Encryption Key Source. Possible values are: 'Microsoft.NetApp'",
-          "type": "string"
+          "description": "Source of key used to encrypt data in volume. Applicable if NetApp account has encryption.keySource = 'Microsoft.KeyVault'. Possible values (case-insensitive) are: 'Microsoft.NetApp, Microsoft.KeyVault'",
+          "type": "string",
+          "enum": [
+            "Microsoft.NetApp",
+            "Microsoft.KeyVault"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionKeySource",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Microsoft.NetApp",
+                "description": "Microsoft-managed key encryption"
+              }
+            ]
+          },
+          "default": "Microsoft.NetApp"
         },
         "ldapEnabled": {
           "type": "boolean",
