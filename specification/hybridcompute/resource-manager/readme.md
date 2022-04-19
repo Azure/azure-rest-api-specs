@@ -26,19 +26,30 @@ These are the global settings for the HybridCompute API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2021-12
+tag: package-2022-03
 ```
 
+
+### Tag: package-2022-03
+
+These settings apply only when `--tag=package-2022-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-03'
+input-file:
+  - Microsoft.HybridCompute/stable/2022-03-10/HybridCompute.json
+  - Microsoft.HybridCompute/stable/2022-03-10/privateLinkScopes.json
+```
 
 ### Tag: package-preview-2021-12
 
 These settings apply only when `--tag=package-preview-2021-12` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-12'
+``` yaml $(tag) == 'package-preview-2021-12'
 input-file:
   - Microsoft.HybridCompute/preview/2021-12-10-preview/HybridCompute.json
   - Microsoft.HybridCompute/preview/2021-12-10-preview/privateLinkScopes.json
 ```
+
 ### Tag: package-preview-2021-06
 
 These settings apply only when `--tag=package-preview-2021-06` is specified on the command line.
