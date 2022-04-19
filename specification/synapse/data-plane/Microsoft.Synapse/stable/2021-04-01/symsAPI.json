@@ -1266,41 +1266,41 @@
       "description": "Defines the response for create/publish operation on DDL payload.",
       "type": "object",
       "properties": {
-        "DDLType": {
+        "ddlType": {
           "$ref": "#/definitions/DDLType"
         },
-        "EntityName": {
+        "entityName": {
           "description": "Entity name.",
           "type": "string"
         },
-        "EntityType": {
+        "entityType": {
           "$ref": "#/definitions/ArtifactType"
         },
-        "PublishStatus": {
+        "publishStatus": {
           "$ref": "#/definitions/PublishStatus"
         },
-        "OriginObjectId": {
+        "originObjectId": {
           "description": "Object id maintained by Origin Catalog.",
           "type": "string"
         },
-        "ObjectId": {
+        "objectId": {
           "description": "Object id maintained by SyMS.",
           "type": "string"
         },
-        "ObjectVersion": {
+        "objectVersion": {
           "description": "Object version maintained by SyMS.",
           "type": "integer",
           "format": "int64"
         }
       },
       "required": [
-        "DDLType",
-        "EntityName",
-        "EntityType",
-        "PublishStatus",
-        "OriginObjectId",
-        "ObjectId",
-        "ObjectVersion"
+        "dDLType",
+        "entityName",
+        "entityType",
+        "publishStatus",
+        "originObjectId",
+        "objectId",
+        "objectVersion"
       ]
     },
     "SyMSAPIDDLResponses": {
@@ -1323,15 +1323,15 @@
       "description": "Data source properties.",
       "type": "object",
       "properties": {
-        "Provider": {
+        "provider": {
           "description": "Data source provider information.",
           "type": "string"
         },
-        "Location": {
+        "location": {
           "description": "Data source location.",
           "type": "string"
         },
-        "Properties": {
+        "properties": {
           "description": "Property bag.",
           "type": "object",
           "additionalProperties": {
@@ -1340,20 +1340,20 @@
         }
       },
       "required": [
-        "Location"
+        "location"
       ]
     },
     "Namespace": {
       "description": "Namespace.",
       "type": "object",
       "properties": {
-        "DatabaseName": {
+        "databaseName": {
           "description": "Database name.",
           "type": "string"
         }
       },
       "required": [
-        "DatabaseName"
+        "databaseName"
       ]
     },
     "TableNamespace": {
@@ -1365,7 +1365,7 @@
         }
       ],
       "properties": {
-        "SchemaName": {
+        "schemaName": {
           "description": "Schema name.",
           "type": "string"
         }
@@ -1393,76 +1393,76 @@
       "description": "Format information.",
       "type": "object",
       "properties": {
-        "InputFormat": {
+        "inputFormat": {
           "description": "Input Format to be used",
           "type": "string"
         },
-        "OutputFormat": {
+        "outputFormat": {
           "description": "Input Format to be used",
           "type": "string"
         },
-        "FormatType": {
+        "formatType": {
           "$ref": "#/definitions/FormatType"
         },
-        "Properties": {
+        "properties": {
           "description": "Property bag.",
           "type": "object",
           "additionalProperties": {
             "type": "object"
           }
         },
-        "SerDeName": {
+        "serDeName": {
           "description": "SerDe name.",
           "type": "string"
         },
-        "SerializeLib": {
+        "serializeLib": {
           "$ref": "#/definitions/SerializeLib"
         }
       },
       "required": [
-        "InputFormat",
-        "OutputFormat",
-        "FormatType",
-        "SerializeLib"
+        "inputFormat",
+        "outputFormat",
+        "formatType",
+        "serializeLib"
       ]
     },
     "Sorting": {
       "description": "Column sorting.",
       "type": "object",
       "properties": {
-        "KeyName": {
+        "keyName": {
           "description": "Name of column.",
           "type": "string"
         },
-        "SortOrder": {
+        "sortOrder": {
           "$ref": "#/definitions/SortOrder"
         }
       },
       "required": [
-        "KeyName",
-        "SortOrder"
+        "keyName",
+        "sortOrder"
       ]
     },
     "DistributionInfo": {
       "description": "Distribution information.",
       "type": "object",
       "properties": {
-        "Type": {
+        "type": {
           "description": "Distribution type.",
           "type": "string"
         },
-        "Keys": {
+        "keys": {
           "description": "Distribution keys.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
-        "Count": {
+        "count": {
           "description": "Distribution count.",
           "type": "integer"
         },
-        "SortKeys": {
+        "sortKeys": {
           "description": "Distribution sort keys.",
           "type": "array",
           "items": {
@@ -1475,39 +1475,39 @@
       "description": "Type information",
       "type": "object",
       "properties": {
-        "TypeFamily": {
+        "typeFamily": {
           "description": "Type family.",
           "type": "string"
         },
-        "TypeName": {
+        "typeName": {
           "description": "Type name.",
           "type": "string"
         },
-        "IsTableType": {
+        "isTableType": {
           "description": "Is Table type.",
           "type": "boolean"
         },
-        "IsComplexType": {
+        "isComplexType": {
           "description": "Is Complex type.",
           "type": "boolean"
         },
-        "IsNullable": {
+        "isNullable": {
           "description": "Is Nullable.",
           "type": "boolean"
         },
-        "Length": {
+        "length": {
           "description": "Length.",
           "type": "integer"
         },
-        "Precision": {
+        "precision": {
           "description": "Precision.",
           "type": "integer"
         },
-        "Scale": {
+        "scale": {
           "description": "Scale.",
           "type": "integer"
         },
-        "Properties": {
+        "properties": {
           "description": "Property bag.",
           "type": "object",
           "additionalProperties": {
@@ -1516,7 +1516,7 @@
         }
       },
       "required": [
-        "TypeName"
+        "typeName"
       ]
     },
     "ScalarTypeInfo": {
@@ -1532,58 +1532,58 @@
       "description": "Data column.",
       "type": "object",
       "properties": {
-        "Name": {
+        "name": {
           "description": "Column name.",
           "type": "string"
         },
-        "OriginDataTypeName": {
+        "originDataTypeName": {
           "$ref": "#/definitions/TypeInfo"
         }
       },
       "required": [
-        "Name",
-        "OriginDataTypeName"
+        "name",
+        "originDataTypeName"
       ]
     },
     "StorageDescriptor": {
       "description": "Storage descriptor",
       "type": "object",
       "properties": {
-        "Distribution": {
+        "distribution": {
           "description": "Storage descriptor information.",
           "$ref": "#/definitions/DistributionInfo"
         },
-        "Columns": {
+        "columns": {
           "description": "Column information.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataColumn"
           }
         },
-        "Format": {
+        "format": {
           "description": "Storage descriptor format information.",
           "$ref": "#/definitions/FormatInfo"
         },
-        "Source": {
+        "source": {
           "description": "Storage descriptor data source information.",
           "$ref": "#/definitions/DataSource"
         },
-        "Properties": {
+        "properties": {
           "description": "Property bag.",
           "type": "object",
           "additionalProperties": {
             "type": "object"
           }
         },
-        "SerDeInfo": {
+        "serDeInfo": {
           "description": "SerDe information.",
           "type": "object"
         }
       },
       "required": [
-        "Columns",
-        "Format",
-        "Source"
+        "columns",
+        "format",
+        "source"
       ]
     },
     "MDEntity": {
@@ -1615,25 +1615,25 @@
       "description": "Defines the artifact entity.",
       "type": "object",
       "properties": {
-        "OriginObjectId": {
+        "originObjectId": {
           "description": "Entity object id maintained by the caller.",
           "type": "string"
         },
-        "ObjectId": {
+        "objectId": {
           "description": "Entity object id maintained by SyMS.",
           "type": "string",
           "readOnly": true
         },
-        "ObjectVersion": {
+        "objectVersion": {
           "description": "Entity object version maintained by SyMS.",
           "type": "integer",
           "format": "int64",
           "readOnly": true
         },
-        "PublishStatus": {
+        "publishStatus": {
           "$ref": "#/definitions/PublishStatus"
         },
-        "Properties": {
+        "properties": {
           "description": "Property bag",
           "type": "object",
           "additionalProperties": {
@@ -1651,16 +1651,16 @@
         }
       ],
       "properties": {
-        "Source": {
+        "source": {
           "$ref": "#/definitions/DataSource"
         },
-        "Description": {
+        "description": {
           "description": "Description of the database.",
           "type": "string"
         }
       },
       "required": [
-        "Source"
+        "source"
       ]
     },
     "PartitionInfoProperties": {
@@ -1672,13 +1672,13 @@
         }
       ],
       "properties": {
-        "Namespace": {
+        "namespace": {
           "$ref": "#/definitions/PartitionInfoNamespace"
         },
-        "StorageDescriptor": {
+        "storageDescriptor": {
           "$ref": "#/definitions/StorageDescriptor"
         },
-        "PartitionKeyValues": {
+        "partitionKeyValues": {
           "description": "Partition key values.",
           "type": "array",
           "items": {
@@ -1687,9 +1687,9 @@
         }
       },
       "required": [
-        "Namespace",
-        "StorageDescriptor",
-        "PartitionKeyValues"
+        "namespace",
+        "storageDescriptor",
+        "partitionKeyValues"
       ]
     },
     "SchemaProperties": {
@@ -1701,12 +1701,12 @@
         }
       ],
       "properties": {
-        "Namespace": {
+        "namespace": {
           "$ref": "#/definitions/Namespace"
         }
       },
       "required": [
-        "Namespace"
+        "namespace"
       ]
     },
     "ViewEntityProperties": {
@@ -1718,35 +1718,35 @@
         }
       ],
       "properties": {
-        "Namespace": {
+        "namespace": {
           "$ref": "#/definitions/TableNamespace"
         },
-        "Partitioning": {
+        "partitioning": {
           "$ref": "#/definitions/TablePartitioning"
         },
-        "StorageDescriptor": {
+        "storageDescriptor": {
           "$ref": "#/definitions/StorageDescriptor"
         },
-        "ViewOriginalText": {
+        "viewOriginalText": {
           "description": "View original text.",
           "type": "string"
         },
-        "ViewExpandedText": {
+        "viewExpandedText": {
           "description": "View expanded text.",
           "type": "string"
         },
-        "Temporary": {
+        "temporary": {
           "description": "Temporary.",
           "type": "boolean"
         },
-        "IsRewriteEnabled": {
+        "isRewriteEnabled": {
           "description": "Is rewrite enabled.",
           "type": "boolean"
         }
       },
       "required": [
-        "Namespace",
-        "StorageDescriptor"
+        "namespace",
+        "storageDescriptor"
       ]
     },
     "RelationshipProperties": {
@@ -1758,31 +1758,31 @@
         }
       ],
       "properties": {
-        "Namespace": {
+        "namespace": {
           "$ref": "#/definitions/Namespace"
         },
-        "FromTableId": {
+        "fromTableId": {
           "description": "From Table Id",
           "type": "string",
           "readOnly": true
         },
-        "FromTableName": {
+        "fromTableName": {
           "description": "From Table Name",
           "type": "string"
         },
-        "ToTableId": {
+        "toTableId": {
           "description": "To Table Id",
           "type": "string",
           "readOnly": true
         },
-        "ToTableName": {
+        "toTableName": {
           "description": "To Table Name",
           "type": "string"
         },
-        "RelationshipType": {
+        "relationshipType": {
           "$ref": "#/definitions/RelationshipType"
         },
-        "ColumnRelationshipInformations": {
+        "columnRelationshipInformations": {
           "description": "List of Column Relationships.",
           "type": "array",
           "items": {
@@ -1791,10 +1791,10 @@
         }
       },
       "required": [
-        "Namespace",
-        "FromTableName",
-        "ToTableName",
-        "ColumnRelationshipInformations"
+        "namespace",
+        "fromTableName",
+        "toTableName",
+        "columnRelationshipInformations"
       ]
     },
     "TableProperties": {
@@ -1806,35 +1806,35 @@
         }
       ],
       "properties": {
-        "Namespace": {
+        "namespace": {
           "$ref": "#/definitions/TableNamespace"
         },
-        "Partitioning": {
+        "partitioning": {
           "$ref": "#/definitions/TablePartitioning"
         },
-        "TableType": {
+        "tableType": {
           "$ref": "#/definitions/TableType"
         },
-        "StorageDescriptor": {
+        "storageDescriptor": {
           "$ref": "#/definitions/StorageDescriptor"
         },
-        "Temporary": {
+        "temporary": {
           "description": "Temporary.",
           "type": "boolean"
         },
-        "IsRewriteEnabled": {
+        "isRewriteEnabled": {
           "description": "Is rewrite enabled.",
           "type": "boolean"
         }
       },
       "required": [
-        "Namespace",
-        "TableType",
-        "StorageDescriptor"
+        "namespace",
+        "tableType",
+        "storageDescriptor"
       ]
     },
-    "PartitionInfo": {
-      "description": "Partition information.",
+    "partitionInfo": {
+      "description": "partition information.",
       "type": "object",
       "allOf": [
         {
@@ -1851,20 +1851,20 @@
       "description": "Table partitioning information.",
       "type": "object",
       "properties": {
-        "Keys": {
+        "keys": {
           "description": "Table partitioning keys.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
-        "PartitionFunctionType": {
+        "partitionFunctionType": {
           "$ref": "#/definitions/PartitionFunctionType"
         }
       },
       "required": [
-        "Keys",
-        "PartitionFunctionType"
+        "keys",
+        "partitionFunctionType"
       ]
     },
     "DatabaseEntity": {
@@ -1885,7 +1885,7 @@
       ]
     },
     "SchemaEntity": {
-      "description": "Schema entity.",
+      "description": "schema entity.",
       "type": "object",
       "allOf": [
         {
@@ -1956,25 +1956,25 @@
       "description": "DDL payload",
       "type": "object",
       "properties": {
-        "ActionType": {
+        "actionType": {
           "$ref": "#/definitions/DDLType"
         },
-        "OldEntity": {
+        "oldEntity": {
           "$ref": "#/definitions/MDEntity"
         },
-        "NewEntity": {
+        "newEntity": {
           "$ref": "#/definitions/MDEntity"
         }
       },
       "required": [
-        "ActionType"
+        "actionType"
       ]
     },
     "DDLBatch": {
       "description": "DDL batch.",
       "type": "object",
       "properties": {
-        "DDLs": {
+        "ddls": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/DDLPayload"
@@ -1982,21 +1982,21 @@
         }
       },
       "required": [
-        "DDLs"
+        "ddls"
       ]
     },
     "QueryArtifactsResponse": {
       "description": "Query artifacts response.",
       "type": "object",
       "properties": {
-        "Items": {
+        "items": {
           "type": "array",
           "items": {
             "description": "MDEntity (Database/Table/Schema/View/PartitionInfo/PermissionAssignment",
             "type": "object"
           }
         },
-        "ContinuationToken": {
+        "continuationToken": {
           "description": "Continuation token to get next page.",
           "type": "string"
         }
@@ -2006,18 +2006,18 @@
       "description": "Column information for relationship",
       "type": "object",
       "properties": {
-        "FromColumnName": {
+        "fromColumnName": {
           "description": "From Column Name",
           "type": "string"
         },
-        "ToColumnName": {
+        "toColumnName": {
           "description": "To Column Name",
           "type": "string"
         }
       },
       "required": [
-        "FromColumnName",
-        "ToColumnName"
+        "fromColumnName",
+        "toColumnName"
       ]
     },
     "DDLType": {
