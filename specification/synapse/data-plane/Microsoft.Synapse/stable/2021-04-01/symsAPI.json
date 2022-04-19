@@ -1398,11 +1398,12 @@
           "type": "string"
         },
         "outputFormat": {
-          "description": "Input Format to be used",
+          "description": "Output Format to be used",
           "type": "string"
         },
         "formatType": {
-          "$ref": "#/definitions/FormatType"
+          "description": "Format Type to be used to be used (csv, parquet, etc.)",
+          "type": "string"
         },
         "properties": {
           "description": "Property bag.",
@@ -1416,7 +1417,8 @@
           "type": "string"
         },
         "serializeLib": {
-          "$ref": "#/definitions/SerializeLib"
+          "description": "Serialization Library to be used by Spark (org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe, org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe)",
+          "type": "string"
         }
       },
       "required": [
@@ -1859,7 +1861,8 @@
           }
         },
         "partitionFunctionType": {
-          "$ref": "#/definitions/PartitionFunctionType"
+          "description": "Partition Function Type (ex. value)",
+          "type": "string"
         }
       },
       "required": [
@@ -2082,41 +2085,6 @@
       ],
       "x-ms-enum": {
         "name": "SortOrder",
-        "modelAsString": false
-      }
-    },
-    "FormatType": {
-      "description": "Format Type to be used",
-      "type": "string",
-      "enum": [
-        "csv",
-        "parquet"
-      ],
-      "x-ms-enum": {
-        "name": "FormatType",
-        "modelAsString": false
-      }
-    },
-    "SerializeLib": {
-      "description": "Serialization Library to be used by Spark",
-      "type": "string",
-      "enum": [
-        "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
-        "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe"
-      ],
-      "x-ms-enum": {
-        "name": "SerializeLib",
-        "modelAsString": false
-      }
-    },
-    "PartitionFunctionType": {
-      "description": "Partition Function Type",
-      "type": "string",
-      "enum": [
-        "value"
-      ],
-      "x-ms-enum": {
-        "name": "PartitionFunctionType",
         "modelAsString": false
       }
     },
