@@ -41,6 +41,7 @@ input-file:
   - Microsoft.App/stable/2022-05-01/ContainerApps.json
   - Microsoft.App/stable/2022-05-01/ContainerAppsRevisions.json
   - Microsoft.App/stable/2022-05-01/DaprComponents.json
+  - Microsoft.App/stable/2022-05-01/Diagnostics.json
   - Microsoft.App/stable/2022-05-01/Global.json
   - Microsoft.App/stable/2022-05-01/ManagedEnvironments.json
   - Microsoft.App/stable/2022-05-01/ManagedEnvironmentsStorages.json
@@ -57,7 +58,6 @@ input-file:
   - Microsoft.App/stable/2022-03-01/ContainerApps.json
   - Microsoft.App/stable/2022-03-01/ContainerAppsRevisions.json
   - Microsoft.App/stable/2022-03-01/DaprComponents.json
-  - Microsoft.App/stable/2022-03-01/Diagnostics.json
   - Microsoft.App/stable/2022-03-01/Global.json
   - Microsoft.App/stable/2022-03-01/ManagedEnvironments.json
   - Microsoft.App/stable/2022-03-01/ManagedEnvironmentsStorages.json
