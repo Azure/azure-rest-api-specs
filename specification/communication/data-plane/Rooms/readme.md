@@ -29,6 +29,17 @@ openapi-type: data-plane
 tag: package-rooms-2022-04-10-preview
 ```
 
+### Tag: package-rooms-2022-02-01-preview
+
+These settings apply only when `--tag=package-2022-02-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-02-01-preview'
+input-file:
+  - preview/2022-02-01-preview/communicationservicesrooms.json
+title:
+  Azure Communication Services
+```
+
 ### Tag: package-rooms-2022-04-10-preview
 
 These settings apply only when `--tag=package-2022-04-10-preview` is specified on the command line.
