@@ -22,7 +22,7 @@
           "Diagnostics"
         ],
         "summary": "Get the list of diagnostics for a given Container App.",
-        "operationId": "ContainerAppsDiagnotics_ListDetectors",
+        "operationId": "ContainerAppsDiagnostics_ListDetectors",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -461,7 +461,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -677,7 +677,7 @@
             "description": "Property details",
             "type": "object",
             "properties": {
-              "key": {
+              "name": {
                 "description": "Property name",
                 "type": "string"
               },
@@ -686,7 +686,10 @@
                 "type": "string"
               }
             }
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     }
