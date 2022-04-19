@@ -8544,8 +8544,17 @@
       "description": "Resource to redistribute throughput for Azure Cosmos DB resource",
       "properties": {
         "throughputPolicy": {
+          "description": "ThroughputPolicy to apply for throughput redistribution",
           "type": "string",
-          "description": "ThroughputPolicy to apply for throughput redistribution"
+          "enum": [
+            "none",
+            "equal",
+            "custom"
+          ],
+          "x-ms-enum": {
+            "name": "ThroughputPolicyType",
+            "modelAsString": true
+          }
         },
         "targetPhysicalPartitionThroughputInfo": {
           "type": "array",
