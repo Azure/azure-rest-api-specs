@@ -668,6 +668,15 @@
           "200": {
             "description": "Delete Succeed."
           },
+          "202": {
+            "description": "Delete in progress.",
+            "headers": {
+              "location": {
+                "description": "location header",
+                "type": "string"
+              }
+            }
+          },
           "204": {
             "description": "Request successful. The resource does not exist."
           },
@@ -678,6 +687,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "NspAssociationDelete": {
             "$ref": "./examples/NspAssociationDelete.json"
@@ -1173,7 +1183,7 @@
       "properties": {
         "provisioningState": {
           "readOnly": true,
-          "$ref": "./network.json#/definitions/ProvisioningState",
+          "$ref": "#/definitions/NSPProvisioningState",
           "description": "The provisioning state of the scope assignment resource."
         },
         "perimeterGuid": {
@@ -1237,6 +1247,16 @@
           "readOnly": true,
           "type": "string",
           "description": "Version number that increases with every update to access rules within the profile."
+        },
+        "enabledLogCategories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoggingCategory"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "Gets the enabled log categories."
         }
       },
       "description": "Properties of NSP profile."
@@ -1293,7 +1313,7 @@
       "properties": {
         "provisioningState": {
           "readOnly": true,
-          "$ref": "./network.json#/definitions/ProvisioningState",
+          "$ref": "#/definitions/NSPProvisioningState",
           "description": "The provisioning state of the scope assignment resource."
         },
         "direction": {
@@ -1411,7 +1431,7 @@
       "properties": {
         "provisioningState": {
           "readOnly": true,
-          "$ref": "./network.json#/definitions/ProvisioningState",
+          "$ref": "#/definitions/NSPProvisioningState",
           "description": "The provisioning state of the resource  association resource."
         },
         "privateLinkResource": {
@@ -1425,16 +1445,20 @@
         "accessMode": {
           "type": "string",
           "enum": [
-            "Unspecified",
-            "EnforceMode",
-            "LearningMode",
-            "DryRunMode"
+            "Learning",
+            "Enforced",
+            "Audit"
           ],
           "x-ms-enum": {
             "name": "AssociationAccessMode",
             "modelAsString": true
           },
           "description": "Access mode on the association."
+        },
+        "hasProvisioningIssues": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies if there are provisioning issues"
         }
       }
     },
@@ -1573,6 +1597,33 @@
       "type": "object",
       "properties": {},
       "description": "Request object for NSP reconcile."
+    },
+    "LoggingCategory": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the logging category."
+        }
+      },
+      "description": "Logging Category"
+    },
+    "NSPProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Accepted",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "nspProvisioningState",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {
