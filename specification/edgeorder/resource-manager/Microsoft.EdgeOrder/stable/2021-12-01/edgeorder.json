@@ -20,8 +20,8 @@
         "tags": [
           "Operations"
         ],
-        "description": "List all the supported operations.",
-        "operationId": "Operations_List",
+        "description": "This method gets all the operations that are exposed for customer.",
+        "operationId": "ListOperations",
         "consumes": [
           "application/json"
         ],
@@ -35,7 +35,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The supported operations list.",
+            "description": "Success",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
             }
@@ -62,8 +62,8 @@
         "tags": [
           "Addresses"
         ],
-        "description": "List all the addresses available under the subscription.",
-        "operationId": "Addresses_ListAtSubscriptionLevel",
+        "description": "Lists all the addresses available under the subscription.",
+        "operationId": "ListAddressesAtSubscriptionLevel",
         "consumes": [
           "application/json"
         ],
@@ -121,8 +121,8 @@
         "tags": [
           "ProductsAndConfigurations"
         ],
-        "description": "List product families for the given subscription.",
-        "operationId": "ProductFamilies_List",
+        "description": "This method provides the list of product families for the given subscription.",
+        "operationId": "ListProductFamilies",
         "consumes": [
           "application/json"
         ],
@@ -162,7 +162,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The list of available product families for the given subscription.",
+            "description": "The list of available product families under subscription.",
             "schema": {
               "$ref": "#/definitions/ProductFamilies"
             }
@@ -189,8 +189,8 @@
         "tags": [
           "ProductsAndConfigurations"
         ],
-        "description": "List configurations for the given product family, product line and product for the given subscription.",
-        "operationId": "Configurations_List",
+        "description": "This method provides the list of configurations for the given product family, product line and product under subscription.",
+        "operationId": "ListConfigurations",
         "consumes": [
           "application/json"
         ],
@@ -223,7 +223,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The list of configurations for the given product family, product line and product for the given subscription.",
+            "description": "The list of configurations for the given product family, product line and product under subscription.",
             "schema": {
               "$ref": "#/definitions/Configurations"
             }
@@ -250,8 +250,8 @@
         "tags": [
           "ProductFamilyMetadata"
         ],
-        "description": "List product families metadata for the given subscription.",
-        "operationId": "ProductFamiliesMetadata_List",
+        "description": "This method provides the list of product families metadata for the given subscription.",
+        "operationId": "ListProductFamiliesMetadata",
         "consumes": [
           "application/json"
         ],
@@ -275,7 +275,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The list of available product families for the given subscription.",
+            "description": "The list of available product families under subscription.",
             "schema": {
               "$ref": "#/definitions/ProductFamiliesMetadata"
             }
@@ -300,10 +300,10 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/orders": {
       "get": {
         "tags": [
-          "Order"
+          "Orders"
         ],
-        "description": "List orders at subscription level.",
-        "operationId": "Orders_ListAtSubscriptionLevel",
+        "description": "Lists order at subscription level.",
+        "operationId": "ListOrderAtSubscriptionLevel",
         "consumes": [
           "application/json"
         ],
@@ -320,14 +320,14 @@
           {
             "name": "$skipToken",
             "in": "query",
-            "description": "$skipToken is supported on Get list of orders, which provides the next page in the list of orders.",
+            "description": "$skipToken is supported on Get list of order, which provides the next page in the list of order.",
             "required": false,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "List of orders available under the subscription.",
+            "description": "Order object",
             "schema": {
               "$ref": "#/definitions/OrderResourceList"
             }
@@ -354,8 +354,8 @@
         "tags": [
           "OrderItems"
         ],
-        "description": "List order items at subscription level.",
-        "operationId": "OrderItems_ListAtSubscriptionLevel",
+        "description": "Lists order item at subscription level.",
+        "operationId": "ListOrderItemsAtSubscriptionLevel",
         "consumes": [
           "application/json"
         ],
@@ -393,7 +393,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of order items available under the subscription.",
+            "description": "List of Order item object",
             "schema": {
               "$ref": "#/definitions/OrderItemResourceList"
             }
@@ -420,8 +420,8 @@
         "tags": [
           "Addresses"
         ],
-        "description": "List all the addresses available under the given resource group.",
-        "operationId": "Addresses_ListAtResourceGroupLevel",
+        "description": "Lists all the addresses available under the given resource group.",
+        "operationId": "ListAddressesAtResourceGroupLevel",
         "consumes": [
           "application/json"
         ],
@@ -448,7 +448,7 @@
           {
             "name": "$skipToken",
             "in": "query",
-            "description": "$skipToken is supported on Get list of addresses, which provides the next page in the list of addresses.",
+            "description": "$skipToken is supported on Get list of addresses, which provides the next page in the list of address.",
             "required": false,
             "type": "string"
           }
@@ -482,8 +482,8 @@
         "tags": [
           "Addresses"
         ],
-        "description": "Get information about the specified address.",
-        "operationId": "Addresses_GetByName",
+        "description": "Gets information about the specified address.",
+        "operationId": "GetAddressByName",
         "consumes": [
           "application/json"
         ],
@@ -506,7 +506,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Address object.",
+            "description": "Address object",
             "schema": {
               "$ref": "#/definitions/AddressResource"
             }
@@ -528,8 +528,8 @@
         "tags": [
           "Addresses"
         ],
-        "description": "Creates a new address with the specified parameters. Existing address can be updated with this API.",
-        "operationId": "Addresses_Create",
+        "description": "Creates a new address with the specified parameters. Existing address can be updated with this API",
+        "operationId": "CreateAddress",
         "consumes": [
           "application/json"
         ],
@@ -587,8 +587,8 @@
         "tags": [
           "Addresses"
         ],
-        "description": "Delete an address.",
-        "operationId": "Addresses_DeleteByName",
+        "description": "Deletes an address.",
+        "operationId": "DeleteAddressByName",
         "consumes": [
           "application/json"
         ],
@@ -637,8 +637,8 @@
         "tags": [
           "Addresses"
         ],
-        "description": "Update the properties of an existing address.",
-        "operationId": "Addresses_Update",
+        "description": "Updates the properties of an existing address.",
+        "operationId": "UpdateAddress",
         "consumes": [
           "application/json"
         ],
@@ -703,10 +703,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/orders": {
       "get": {
         "tags": [
-          "Order"
+          "Orders"
         ],
-        "description": "List orders at resource group level.",
-        "operationId": "Orders_ListAtResourceGroupLevel",
+        "description": "Lists order at resource group level.",
+        "operationId": "ListOrderAtResourceGroupLevel",
         "consumes": [
           "application/json"
         ],
@@ -726,14 +726,14 @@
           {
             "name": "$skipToken",
             "in": "query",
-            "description": "$skipToken is supported on Get list of orders, which provides the next page in the list of orders.",
+            "description": "$skipToken is supported on Get list of order, which provides the next page in the list of order.",
             "required": false,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "List of orders available under the resource group.",
+            "description": "Order object",
             "schema": {
               "$ref": "#/definitions/OrderResourceList"
             }
@@ -758,10 +758,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/locations/{location}/orders/{orderName}": {
       "get": {
         "tags": [
-          "Order"
+          "Orders"
         ],
-        "description": "Get an order.",
-        "operationId": "Orders_GetByName",
+        "description": "Gets an order.",
+        "operationId": "GetOrderByName",
         "consumes": [
           "application/json"
         ],
@@ -787,7 +787,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Order resource object.",
+            "description": "Order object",
             "schema": {
               "$ref": "#/definitions/OrderResource"
             }
@@ -811,8 +811,8 @@
         "tags": [
           "OrderItems"
         ],
-        "description": "List order items at resource group level.",
-        "operationId": "OrderItems_ListAtResourceGroupLevel",
+        "description": "Lists order item at resource group level.",
+        "operationId": "ListOrderItemsAtResourceGroupLevel",
         "consumes": [
           "application/json"
         ],
@@ -853,7 +853,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of order items available under the resource group.",
+            "description": "List of Order item object",
             "schema": {
               "$ref": "#/definitions/OrderItemResourceList"
             }
@@ -880,8 +880,8 @@
         "tags": [
           "OrderItems"
         ],
-        "description": "Get an order item.",
-        "operationId": "OrderItems_GetByName",
+        "description": "Gets an order item.",
+        "operationId": "GetOrderItemByName",
         "consumes": [
           "application/json"
         ],
@@ -911,7 +911,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Order item object.",
+            "description": "Order item object",
             "schema": {
               "$ref": "#/definitions/OrderItemResource"
             }
@@ -933,8 +933,8 @@
         "tags": [
           "OrderItems"
         ],
-        "description": "Create an order item. Existing order item cannot be updated with this api and should instead be updated with the Update order item\r\nAPI.",
-        "operationId": "OrderItems_Create",
+        "description": "Creates an order item. Existing order item cannot be updated with this api and should instead be updated with the Update order item API.",
+        "operationId": "CreateOrderItem",
         "consumes": [
           "application/json"
         ],
@@ -966,7 +966,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Order resource object.",
+            "description": "Returns order item object",
             "schema": {
               "$ref": "#/definitions/OrderItemResource"
             }
@@ -992,8 +992,8 @@
         "tags": [
           "OrderItems"
         ],
-        "description": "Delete an order item.",
-        "operationId": "OrderItems_DeleteByName",
+        "description": "Deletes an order item.",
+        "operationId": "DeleteOrderItemByName",
         "consumes": [
           "application/json"
         ],
@@ -1016,13 +1016,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Order item deleted."
+            "description": "Order item Deleted"
           },
           "202": {
-            "description": "Accepted delete request for an order item."
+            "description": "Accepted delete request for an order item"
           },
           "204": {
-            "description": "No content. Order item deleted."
+            "description": "No content. Order item deleted"
           },
           "default": {
             "description": "Error response describing reason for operation failure.",
@@ -1042,8 +1042,8 @@
         "tags": [
           "OrderItems"
         ],
-        "description": "Update the properties of an existing order item.",
-        "operationId": "OrderItems_Update",
+        "description": "Updates the properties of an existing order item.",
+        "operationId": "UpdateOrderItem",
         "consumes": [
           "application/json"
         ],
@@ -1073,7 +1073,7 @@
           {
             "name": "orderItemUpdateParameter",
             "in": "body",
-            "description": "Order item update parameters from request body.",
+            "description": "order item update parameters from request body.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/OrderItemUpdateParameter"
@@ -1111,7 +1111,7 @@
           "OrderItems"
         ],
         "description": "Cancel order item.",
-        "operationId": "OrderItems_Cancel",
+        "operationId": "CancelOrderItem",
         "consumes": [
           "application/json"
         ],
@@ -1143,10 +1143,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Order item cancelled."
+            "description": "Success"
           },
           "204": {
-            "description": "No content."
+            "description": "\"No content\""
           },
           "default": {
             "description": "Error response describing reason for operation failure.",
@@ -1168,7 +1168,7 @@
           "OrderItems"
         ],
         "description": "Return order item.",
-        "operationId": "OrderItems_Return",
+        "operationId": "ReturnOrderItem",
         "consumes": [
           "application/json"
         ],
@@ -1191,7 +1191,7 @@
           {
             "name": "returnOrderItemDetails",
             "in": "body",
-            "description": "Return order item details.",
+            "description": "Return order item CurrentStatus.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ReturnOrderItemDetails"
@@ -1200,10 +1200,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Success."
+            "description": "Success"
           },
           "202": {
-            "description": "Return order item request accepted."
+            "description": "\"Return order item request accepted.\""
           },
           "default": {
             "description": "Error response describing reason for operation failure.",
@@ -1231,17 +1231,17 @@
       "properties": {
         "forwardAddress": {
           "$ref": "#/definitions/AddressProperties",
-          "description": "Customer address and contact details."
+          "description": "Customer address and contact details. It should be address resource"
         },
         "returnAddress": {
           "$ref": "#/definitions/AddressProperties",
-          "description": "Return shipping address.",
+          "description": "Return shipping address",
           "readOnly": true
         }
       }
     },
     "AddressProperties": {
-      "description": "Address Properties.",
+      "description": "Address Properties",
       "required": [
         "contactDetails"
       ],
@@ -1249,14 +1249,14 @@
       "properties": {
         "shippingAddress": {
           "$ref": "#/definitions/ShippingAddress",
-          "description": "Shipping details for the address."
+          "description": "Shipping details for the address"
         },
         "contactDetails": {
           "$ref": "#/definitions/ContactDetails",
-          "description": "Contact details for the address."
+          "description": "Contact details for the address"
         },
         "addressValidationStatus": {
-          "description": "Status of address validation.",
+          "description": "Status of address validation",
           "enum": [
             "Valid",
             "Invalid",
@@ -1304,13 +1304,13 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "Represents resource creation and update time.",
+          "description": "Represents resource creation and update time",
           "readOnly": true
         }
       }
     },
     "AddressResourceList": {
-      "description": "Address Resource Collection.",
+      "description": "Address Resource Collection",
       "type": "object",
       "properties": {
         "value": {
@@ -1329,12 +1329,12 @@
       }
     },
     "AddressUpdateParameter": {
-      "description": "The Address update parameters.",
+      "description": "The Address update parameters",
       "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/AddressUpdateProperties",
-          "description": "Properties of an address to be updated.",
+          "description": "Properties of a address to be updated.",
           "x-ms-client-flatten": true
         },
         "tags": {
@@ -1347,16 +1347,16 @@
       }
     },
     "AddressUpdateProperties": {
-      "description": "Address Update Properties.",
+      "description": "Address Properties",
       "type": "object",
       "properties": {
         "shippingAddress": {
           "$ref": "#/definitions/ShippingAddress",
-          "description": "Shipping details for the address."
+          "description": "Shipping details for the address"
         },
         "contactDetails": {
           "$ref": "#/definitions/ContactDetails",
-          "description": "Contact details for the address."
+          "description": "Contact details for the address"
         }
       }
     },
@@ -1365,7 +1365,7 @@
       "type": "object",
       "properties": {
         "availabilityStage": {
-          "description": "Current availability stage of the product.",
+          "description": "Current availability stage of the product. Availability stage",
           "enum": [
             "Available",
             "ComingSoon",
@@ -1468,7 +1468,7 @@
       }
     },
     "BasicInformation": {
-      "description": "Basic information for any product system.",
+      "description": "Basic information for any product system",
       "type": "object",
       "properties": {
         "displayName": {
@@ -1521,7 +1521,7 @@
       }
     },
     "CommonProperties": {
-      "description": "Represents common properties across product hierarchy.",
+      "description": "Represents common properties across product hierarchy",
       "type": "object",
       "allOf": [
         {
@@ -1530,7 +1530,7 @@
       ],
       "properties": {
         "filterableProperties": {
-          "description": "List of filters supported for a product.",
+          "description": "list of filters supported for a product",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -1546,14 +1546,14 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ConfigurationProperties",
-          "description": "Properties of configuration.",
+          "description": "Properties of configuration",
           "readOnly": true,
           "x-ms-client-flatten": true
         }
       }
     },
     "ConfigurationFilters": {
-      "description": "Configuration filters.",
+      "description": "Configuration filters",
       "required": [
         "hierarchyInformation"
       ],
@@ -1561,10 +1561,10 @@
       "properties": {
         "hierarchyInformation": {
           "$ref": "#/definitions/HierarchyInformation",
-          "description": "Product hierarchy information."
+          "description": "Product hierarchy information"
         },
         "filterableProperty": {
-          "description": "Filters specific to product.",
+          "description": "Filters specific to product",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -1574,7 +1574,7 @@
       }
     },
     "ConfigurationProperties": {
-      "description": "Properties of configuration.",
+      "description": "Properties of configuration",
       "type": "object",
       "allOf": [
         {
@@ -1583,7 +1583,7 @@
       ],
       "properties": {
         "specifications": {
-          "description": "Specifications of the configuration.",
+          "description": "Specifications of the configuration",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -1593,7 +1593,7 @@
         },
         "dimensions": {
           "$ref": "#/definitions/Dimensions",
-          "description": "Dimensions for the configuration.",
+          "description": "Dimensions of the configuration",
           "readOnly": true
         }
       }
@@ -1634,7 +1634,7 @@
         },
         "customerSubscriptionDetails": {
           "$ref": "#/definitions/CustomerSubscriptionDetails",
-          "description": "Customer subscription properties. Clients can display available products to unregistered customers by explicitly passing subscription details."
+          "description": "Customer subscription properties. Clients can display available products to unregistered customers by explicitly passing subscription details"
         }
       }
     },
@@ -1674,7 +1674,7 @@
       }
     },
     "CostInformation": {
-      "description": "Cost information for the product system.",
+      "description": "Cost information for the product system",
       "type": "object",
       "properties": {
         "billingMeterDetails": {
@@ -1687,28 +1687,28 @@
           "readOnly": true
         },
         "billingInfoUrl": {
-          "description": "Default url to display billing information.",
+          "description": "Default url to display billing information",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "BillingMeterDetails": {
-      "description": "Holds billing meter details for each type of billing.",
+      "description": "Holds billing meter details for each type of billing",
       "type": "object",
       "properties": {
         "name": {
-          "description": "Represents Billing type name.",
+          "description": "Represents Billing type name",
           "type": "string",
           "readOnly": true
         },
         "meterDetails": {
           "$ref": "#/definitions/MeterDetails",
-          "description": "Represents MeterDetails.",
+          "description": "Represents MeterDetails",
           "readOnly": true
         },
         "meteringType": {
-          "description": "Represents Metering type (eg one-time or recurrent).",
+          "description": "Represents Metering type (eg one-time or recurrent)",
           "enum": [
             "OneTime",
             "Recurring",
@@ -1736,7 +1736,7 @@
           }
         },
         "frequency": {
-          "description": "Frequency of recurrence.",
+          "description": "Frequency of recurrence",
           "type": "string",
           "readOnly": true
         }
@@ -1808,17 +1808,17 @@
       "type": "object",
       "properties": {
         "serialNumber": {
-          "description": "Device serial number.",
+          "description": "device serial number",
           "type": "string",
           "readOnly": true
         },
         "managementResourceId": {
-          "description": "Management Resource Id.",
+          "description": "Management Resource Id",
           "type": "string",
           "readOnly": true
         },
         "managementResourceTenantId": {
-          "description": "Management Resource Tenant ID.",
+          "description": "Management Resource Tenant ID",
           "type": "string",
           "readOnly": true
         }
@@ -1828,7 +1828,7 @@
       "description": "Dimensions of a configuration.",
       "type": "object",
       "properties": {
-        "length": { 
+        "length": {
           "description": "Length of the device.",
           "type": "number",
           "format": "double",
@@ -1876,7 +1876,7 @@
           "readOnly": true
         },
         "depth": {
-          "description": "Depth of the device..",
+          "description": "Depth of the device.",
           "type": "number",
           "format": "double",
           "readOnly": true
@@ -1907,23 +1907,23 @@
       }
     },
     "DisplayInfo": {
-      "description": "Describes product display information.",
+      "description": "Describes product display information",
       "type": "object",
       "properties": {
         "productFamilyDisplayName": {
-          "description": "Product family display name.",
+          "description": "Product family display name",
           "type": "string",
           "readOnly": true
         },
         "configurationDisplayName": {
-          "description": "Configuration display name.",
+          "description": "Configuration display name",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "EncryptionPreferences": {
-      "description": "Preferences related to the double encryption.",
+      "description": "Preferences related to the double encryption",
       "type": "object",
       "properties": {
         "doubleEncryptionStatus": {
@@ -1939,11 +1939,11 @@
             "values": [
               {
                 "value": "Disabled",
-                "description": "Double encryption is disabled."
+                "description": "Double encryption is disabled"
               },
               {
                 "value": "Enabled",
-                "description": "Double encryption is enabled."
+                "description": "Double encryption is enabled"
               }
             ]
           }
@@ -1971,11 +1971,11 @@
             "values": [
               {
                 "value": "ShipToCountries",
-                "description": "Ship to country."
+                "description": "Ship to country"
               },
               {
                 "value": "DoubleEncryptionStatus",
-                "description": "Double encryption status."
+                "description": "Double encryption status"
               }
             ]
           }
@@ -2005,7 +2005,7 @@
           "readOnly": true
         },
         "trackingId": {
-          "description": "TrackingId of the package.",
+          "description": "TrackingId of the package",
           "type": "string",
           "readOnly": true
         },
@@ -2017,33 +2017,33 @@
       }
     },
     "HierarchyInformation": {
-      "description": "Holds details about product hierarchy information.",
+      "description": "Holds details about product hierarchy information",
       "type": "object",
       "properties": {
         "productFamilyName": {
-          "description": "Represents product family name that uniquely identifies product family.",
+          "description": "Represents product family name that uniquely identifies product family",
           "type": "string"
         },
         "productLineName": {
-          "description": "Represents product line name that uniquely identifies product line.",
+          "description": "Represents product line name that uniquely identifies product line",
           "type": "string"
         },
         "productName": {
-          "description": "Represents product name that uniquely identifies product.",
+          "description": "Represents product name that uniquely identifies product",
           "type": "string"
         },
         "configurationName": {
-          "description": "Represents configuration name that uniquely identifies configuration.",
+          "description": "Represents configuration name that uniquely identifies configuration",
           "type": "string"
         }
       }
     },
     "ImageInformation": {
-      "description": "Image for the product.",
+      "description": "Image for the product",
       "type": "object",
       "properties": {
         "imageType": {
-          "description": "Type of the image.",
+          "description": "Type of the image",
           "enum": [
             "MainImage",
             "BulletImage",
@@ -2071,18 +2071,18 @@
           }
         },
         "imageUrl": {
-          "description": "Url of the image.",
+          "description": "Url of the image",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "Link": {
-      "description": "Returns link related to the product.",
+      "description": "Returns link related to the product",
       "type": "object",
       "properties": {
         "linkType": {
-          "description": "Type of link.",
+          "description": "Type of link",
           "enum": [
             "Generic",
             "TermsAndConditions",
@@ -2111,38 +2111,38 @@
               },
               {
                 "value": "Documentation",
-                "description": "Link to product documentation."
+                "description": "Link to product documentation"
               },
               {
                 "value": "KnowMore",
-                "description": "Link to know more."
+                "description": "Link to know more"
               },
               {
                 "value": "SignUp",
-                "description": "Link to sign up for products."
+                "description": "Link to sign up for products"
               }
             ]
           }
         },
         "linkUrl": {
-          "description": "Url of the link.",
+          "description": "Url of the link",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "ManagementResourcePreferences": {
-      "description": "Management resource preference to link device.",
+      "description": "Management resource preference to link device",
       "type": "object",
       "properties": {
         "preferredManagementResourceId": {
-          "description": "Customer preferred Management resource ARM ID.",
+          "description": "Customer preferred Management resource ARM ID",
           "type": "string"
         }
       }
     },
     "MeterDetails": {
-      "description": "Holds details about billing type and its meter guids.",
+      "description": "Holds details about billing type and its meter guids",
       "required": [
         "billingType"
       ],
@@ -2172,7 +2172,7 @@
         },
         "multiplier": {
           "format": "double",
-          "description": "Billing unit applicable for Pav2 billing.",
+          "description": "Billing unit applicable for Pav2 billing",
           "type": "number",
           "readOnly": true
         },
@@ -2281,18 +2281,18 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/OrderProperties",
-          "description": "Order properties.",
+          "description": "Order properties",
           "x-ms-client-flatten": true
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "Represents resource creation and update time.",
+          "description": "Represents resource creation and update time",
           "readOnly": true
         }
       }
     },
     "OrderItemResourceList": {
-      "description": "List of order items.",
+      "description": "List of orderItems.",
       "type": "object",
       "properties": {
         "value": {
@@ -2311,7 +2311,7 @@
       }
     },
     "OrderItemDetails": {
-      "description": "Order item details.",
+      "description": "Order item details",
       "required": [
         "productDetails",
         "orderItemType"
@@ -2346,11 +2346,11 @@
         },
         "currentStage": {
           "$ref": "#/definitions/StageDetails",
-          "description": "Current Order item Status.",
+          "description": "Current Order item Status",
           "readOnly": true
         },
         "orderItemStageHistory": {
-          "description": "Order item status history.",
+          "description": "Order item status history",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -2360,20 +2360,20 @@
         },
         "preferences": {
           "$ref": "#/definitions/Preferences",
-          "description": "Customer notification Preferences."
+          "description": "Customer notification Preferences"
         },
         "forwardShippingDetails": {
           "$ref": "#/definitions/ForwardShippingDetails",
-          "description": "Forward Package Shipping details.",
+          "description": "Forward Package Shipping details",
           "readOnly": true
         },
         "reverseShippingDetails": {
           "$ref": "#/definitions/ReverseShippingDetails",
-          "description": "Reverse Package Shipping details.",
+          "description": "Reverse Package Shipping details",
           "readOnly": true
         },
         "notificationEmailList": {
-          "description": "Additional notification email list.",
+          "description": "Additional notification email list",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -2469,6 +2469,11 @@
             ]
           }
         },
+        "managementRpDetails": {
+          "$ref": "#/definitions/ResourceProviderDetails",
+          "description": "Parent RP details - this returns only the first or default parent RP from the entire list",
+          "readOnly": true
+        },
         "managementRpDetailsList": {
           "description": "List of parent RP details supported for configuration.",
           "uniqueItems": false,
@@ -2486,7 +2491,7 @@
       }
     },
     "OrderItemProperties": {
-      "description": "Represents order item properties.",
+      "description": "Represents order item details.",
       "required": [
         "orderItemDetails",
         "addressDetails",
@@ -2500,22 +2505,22 @@
         },
         "addressDetails": {
           "$ref": "#/definitions/AddressDetails",
-          "description": "Represents shipping and return address for order item."
+          "description": "Represents shipping and return address for order item"
         },
         "startTime": {
           "format": "date-time",
-          "description": "Start time of order item.",
+          "description": "Start time of order item",
           "type": "string",
           "readOnly": true
         },
         "orderId": {
-          "description": "Id of the order to which order item belongs to.",
+          "description": "Id of the order to which order item belongs to",
           "type": "string"
         }
       }
     },
     "OrderItemResource": {
-      "description": "Represents order item resource.",
+      "description": "Represents order item contract",
       "required": [
         "properties"
       ],
@@ -2528,12 +2533,12 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/OrderItemProperties",
-          "description": "Order item properties.",
+          "description": "Order item properties",
           "x-ms-client-flatten": true
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "Represents resource creation and update time.",
+          "description": "Represents resource creation and update time",
           "readOnly": true
         }
       }
@@ -2605,7 +2610,7 @@
           }
         },
         "stageName": {
-          "description": "Stage name.",
+          "description": "Stage name",
           "enum": [
             "Placed",
             "InReview",
@@ -2628,31 +2633,31 @@
             "values": [
               {
                 "value": "Placed",
-                "description": "Currently in draft mode and can still be cancelled."
+                "description": "Currently in draft mode and can still be cancelled"
               },
               {
                 "value": "InReview",
-                "description": "Order is currently in draft mode and can still be cancelled."
+                "description": "Order is currently in draft mode and can still be cancelled"
               },
               {
                 "value": "Confirmed",
-                "description": "Order is confirmed."
+                "description": "Order is confirmed"
               },
               {
                 "value": "ReadyToShip",
-                "description": "Order is ready to ship."
+                "description": "Order is ready to ship"
               },
               {
                 "value": "Shipped",
-                "description": "Order is in transit to customer."
+                "description": "Order is in transit to customer"
               },
               {
                 "value": "Delivered",
-                "description": "Order is delivered to customer."
+                "description": "Order is delivered to customer"
               },
               {
                 "value": "InUse",
-                "description": "Order is in use at customer site."
+                "description": "Order is in use at customer site"
               },
               {
                 "value": "ReturnInitiated",
@@ -2660,11 +2665,11 @@
               },
               {
                 "value": "ReturnPickedUp",
-                "description": "Order is in transit from customer to Microsoft."
+                "description": "Order is in transit from customer to microsoft."
               },
               {
                 "value": "ReturnedToMicrosoft",
-                "description": "Order has been received back to Microsoft."
+                "description": "Order has been received back to microsoft."
               },
               {
                 "value": "ReturnCompleted",
@@ -2684,7 +2689,7 @@
         },
         "startTime": {
           "format": "date-time",
-          "description": "Stage start time.",
+          "description": "Stage start time",
           "type": "string",
           "readOnly": true
         }
@@ -2696,7 +2701,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/OrderItemUpdateProperties",
-          "description": "Order item update properties.",
+          "description": "Order item update properties",
           "x-ms-client-flatten": true
         },
         "tags": {
@@ -2731,7 +2736,7 @@
       }
     },
     "Pav2MeterDetails": {
-      "description": "Billing type PAV2 meter details.",
+      "description": "Billing type PAV2 meter details",
       "required": [
         "billingType"
       ],
@@ -2751,7 +2756,7 @@
       "x-ms-discriminator-value": "Pav2"
     },
     "Preferences": {
-      "description": "Preferences related to the order.",
+      "description": "Preferences related to the order",
       "type": "object",
       "properties": {
         "notificationPreferences": {
@@ -2777,19 +2782,19 @@
       }
     },
     "Product": {
-      "description": "Represents a product.",
+      "description": "List of Products",
       "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ProductProperties",
-          "description": "Properties of product.",
+          "description": "Properties of product",
           "readOnly": true,
           "x-ms-client-flatten": true
         }
       }
     },
     "ProductDetails": {
-      "description": "Represents product details.",
+      "description": "Represents product details",
       "required": [
         "hierarchyInformation"
       ],
@@ -2797,15 +2802,15 @@
       "properties": {
         "displayInfo": {
           "$ref": "#/definitions/DisplayInfo",
-          "description": "Display details of the product."
+          "description": "Display details of the product"
         },
         "hierarchyInformation": {
           "$ref": "#/definitions/HierarchyInformation",
-          "description": "Hierarchy of the product which uniquely identifies the product."
+          "description": "Hierarchy of the product which uniquely identifies the product"
         },
         "count": {
           "format": "int32",
-          "description": "Quantity of the product.",
+          "description": "Quantity of the product",
           "type": "integer",
           "readOnly": true
         },
@@ -2823,17 +2828,17 @@
             "values": [
               {
                 "value": "Disabled",
-                "description": "Double encryption is disabled."
+                "description": "Double encryption is disabled"
               },
               {
                 "value": "Enabled",
-                "description": "Double encryption is enabled."
+                "description": "Double encryption is enabled"
               }
             ]
           }
         },
         "deviceDetails": {
-          "description": "List of device details.",
+          "description": "list of device details",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -2863,7 +2868,7 @@
       }
     },
     "ProductFamiliesMetadata": {
-      "description": "Holds details about product family metadata.",
+      "description": "Holds details about product family metadata",
       "type": "object",
       "properties": {
         "value": {
@@ -2888,7 +2893,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ProductFamilyProperties",
-          "description": "Product family properties.",
+          "description": "Product family properties",
           "readOnly": true,
           "x-ms-client-flatten": true
         }
@@ -2914,24 +2919,24 @@
         },
         "customerSubscriptionDetails": {
           "$ref": "#/definitions/CustomerSubscriptionDetails",
-          "description": "Customer subscription properties. Clients can display available products to unregistered customers by explicitly passing subscription details."
+          "description": "Customer subscription properties. Clients can display available products to unregistered customers by explicitly passing subscription details"
         }
       }
     },
     "ProductFamily": {
-      "description": "Product Family.",
+      "description": "Product Family",
       "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ProductFamilyProperties",
-          "description": "Properties of product family.",
+          "description": "Properties of product family",
           "readOnly": true,
           "x-ms-client-flatten": true
         }
       }
     },
     "ProductFamilyProperties": {
-      "description": "Properties of product family.",
+      "description": "Properties of product family",
       "type": "object",
       "allOf": [
         {
@@ -2940,7 +2945,7 @@
       ],
       "properties": {
         "productLines": {
-          "description": "List of product lines supported in the product family.",
+          "description": "List of product lines supported in the product family",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -2949,7 +2954,7 @@
           "readOnly": true
         },
         "resourceProviderDetails": {
-          "description": "Contains details related to resource provider.",
+          "description": "Contains details related to resource provider",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -2959,19 +2964,19 @@
       }
     },
     "ProductLine": {
-      "description": "Product line.",
+      "description": "Product line",
       "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ProductLineProperties",
-          "description": "Properties of product line.",
+          "description": "Properties of product line",
           "readOnly": true,
           "x-ms-client-flatten": true
         }
       }
     },
     "ProductLineProperties": {
-      "description": "Properties of product line.",
+      "description": "Properties of product line",
       "type": "object",
       "allOf": [
         {
@@ -2980,7 +2985,7 @@
       ],
       "properties": {
         "products": {
-          "description": "List of products in the product line.",
+          "description": "List of products in the product line",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -2991,7 +2996,7 @@
       }
     },
     "ProductProperties": {
-      "description": "Properties of product.",
+      "description": "Properties of products",
       "type": "object",
       "allOf": [
         {
@@ -3000,7 +3005,7 @@
       ],
       "properties": {
         "configurations": {
-          "description": "List of configurations for the product.",
+          "description": "List of configurations for the product",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -3011,7 +3016,7 @@
       }
     },
     "PurchaseMeterDetails": {
-      "description": "Billing type Purchase meter details.",
+      "description": "Billing type Purchase meter details",
       "required": [
         "billingType"
       ],
@@ -3023,17 +3028,17 @@
       ],
       "properties": {
         "productId": {
-          "description": "Product Id.",
+          "description": "Product Id",
           "type": "string",
           "readOnly": true
         },
         "skuId": {
-          "description": "Sku Id.",
+          "description": "Sku Id",
           "type": "string",
           "readOnly": true
         },
         "termId": {
-          "description": "Term Id.",
+          "description": "Term Id",
           "type": "string",
           "readOnly": true
         }
@@ -3061,18 +3066,18 @@
       }
     },
     "ResourceProviderDetails": {
-      "description": "Management RP details.",
+      "description": "Management RP details",
       "type": "object",
       "properties": {
         "resourceProviderNamespace": {
-          "description": "Resource provider namespace.",
+          "description": "Resource provider namespace",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "ReturnOrderItemDetails": {
-      "description": "Return order item request body.",
+      "description": "Return order item request body",
       "required": [
         "returnReason"
       ],
@@ -3080,18 +3085,18 @@
       "properties": {
         "returnAddress": {
           "$ref": "#/definitions/AddressProperties",
-          "description": "Customer return address."
+          "description": "customer return address."
         },
         "returnReason": {
           "description": "Return Reason.",
           "type": "string"
         },
         "serviceTag": {
-          "description": "Service tag (located on the bottom-right corner of the device).",
+          "description": "Service tag (located on the bottom-right corner of the device)",
           "type": "string"
         },
         "shippingBoxRequired": {
-          "description": "Shipping Box required.",
+          "description": "Shipping Box required",
           "default": false,
           "type": "boolean"
         }
@@ -3117,7 +3122,7 @@
           "readOnly": true
         },
         "trackingId": {
-          "description": "TrackingId of the package.",
+          "description": "TrackingId of the package",
           "type": "string",
           "readOnly": true
         },
@@ -3202,7 +3207,7 @@
       }
     },
     "ShippingDetails": {
-      "description": "Package shipping details.",
+      "description": "Package shipping details",
       "type": "object",
       "properties": {
         "carrierName": {
@@ -3216,7 +3221,7 @@
           "readOnly": true
         },
         "trackingId": {
-          "description": "TrackingId of the package.",
+          "description": "TrackingId of the package",
           "type": "string",
           "readOnly": true
         },
@@ -3228,23 +3233,23 @@
       }
     },
     "Specification": {
-      "description": "Specification of the configurations.",
+      "description": "Specifications of the configurations",
       "type": "object",
       "properties": {
         "name": {
-          "description": "Name of the specification.",
+          "description": "Name of the specification",
           "type": "string",
           "readOnly": true
         },
         "value": {
-          "description": "Value of the specification.",
+          "description": "Value of the specification",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "CustomerSubscriptionDetails": {
-      "description": "Holds Customer subscription details. Clients can display available products to unregistered customers by explicitly passing subscription details.",
+      "description": "Holds Customer subscription details. Clients can display available products to unregistered customers by explicitly passing subscription details",
       "required": [
         "quotaId"
       ],
@@ -3252,38 +3257,38 @@
       "properties": {
         "registeredFeatures": {
           "uniqueItems": false,
-          "description": "List of registered feature flags for subscription.",
+          "description": "List of registered feature flags for subscription",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CustomerSubscriptionRegisteredFeatures"
           }
         },
         "locationPlacementId": {
-          "description": "Location placement Id of a subscription.",
+          "description": "Location placement Id of a subscription",
           "type": "string"
         },
         "quotaId": {
-          "description": "Quota ID of a subscription.",
+          "description": "Quota ID of a subscription",
           "type": "string"
         }
       }
     },
     "CustomerSubscriptionRegisteredFeatures": {
-      "description": "Represents subscription registered features.",
+      "description": "Represents subscription registered features",
       "type": "object",
       "properties": {
         "name": {
-          "description": "Name of subscription registered feature.",
+          "description": "Name of subscription registered feature",
           "type": "string"
         },
         "state": {
-          "description": "State of subscription registered feature.",
+          "description": "State of subscription registered feature",
           "type": "string"
         }
       }
     },
     "TransportPreferences": {
-      "description": "Preferences related to the shipment logistics of the sku.",
+      "description": "Preferences related to the shipment logistics of the sku",
       "required": [
         "preferredShipmentType"
       ],
@@ -3318,7 +3323,7 @@
     "addressNameParameter": {
       "name": "addressName",
       "in": "path",
-      "description": "The name of the address Resource within the specified resource group. address names must be between 3 and 24 characters in length and use any alphanumeric and underscore only.",
+      "description": "The name of the address Resource within the specified resource group. address names must be between 3 and 24 characters in length and use any alphanumeric and underscore only",
       "required": true,
       "type": "string",
       "maxLength": 24,
@@ -3329,7 +3334,7 @@
     "locationParameter": {
       "name": "location",
       "in": "path",
-      "description": "The location of the resource.",
+      "description": "The location of the resource",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -3337,7 +3342,7 @@
     "orderNameParameter": {
       "name": "orderName",
       "in": "path",
-      "description": "The name of the order.",
+      "description": "The name of the order",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -3345,7 +3350,7 @@
     "orderItemNameParameter": {
       "name": "orderItemName",
       "in": "path",
-      "description": "The name of the order item.",
+      "description": "The name of the order item",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
