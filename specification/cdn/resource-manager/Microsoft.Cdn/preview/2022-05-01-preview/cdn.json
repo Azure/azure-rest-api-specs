@@ -360,7 +360,7 @@
           {
             "description": "Properties needed to check if cdn profile or classic frontdoor can be migrated.",
             "in": "body",
-            "name": "canmigrateParameters",
+            "name": "canMigrateParameters",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CanMigrateParameters"
@@ -416,7 +416,7 @@
           }
         ],
         "responses": {
-          "202": {
+          "200": {
             "description": "Accepted and the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/MigrateResult"
@@ -2782,7 +2782,7 @@
       "type": "object",
       "description": "Request body for CanMigrate operation.",
       "properties": {
-        "ClassicResourceReference": {
+        "classicResourceReference": {
           "description": "Resource reference of the classic cdn profile or classic frontdoor that need to be migrated.",
           "$ref": "#/definitions/ResourceReference"
         }
@@ -2793,7 +2793,7 @@
       "type": "object",
       "description": "Request body for Migrate operation.",
       "properties": {
-        "Sku": {
+        "sku": {
           "description": "Sku for the migration",
           "type": "string",
           "enum": [
@@ -2805,15 +2805,15 @@
             "modelAsString": true
           }
         },
-        "ClassicResourceReference": {
+        "classicResourceReference": {
           "description": "Resource reference of the classic cdn profile or classic frontdoor that need to be migrated.",
           "$ref": "#/definitions/ResourceReference"
         },
-        "ProfileName": {
+        "profileName": {
           "description": "Name of the new profile that need to be created.",
           "type": "string"
         },
-        "MigrationWafMappings": {
+        "migrationWafMappings": {
           "description": "Waf mapping for the migrated profile",
           "type": "array",
           "items": {
@@ -2828,11 +2828,11 @@
       "description": "Waf mapping",
       "type":"object",
       "properties": {
-        "MigratedFrom": {
+        "migratedFrom": {
           "description": "Migration From Waf policy",
           "$ref": "#/definitions/ResourceReference"
         },
-        "MigratedTo": {
+        "migratedTo": {
           "description": "Migration to Waf policy",
           "$ref": "#/definitions/ResourceReference"
         }
@@ -2842,7 +2842,7 @@
       "type": "object",
       "description": "Result for canMigrate operation.",
       "properties": {
-        "MigratedProfileArmResourceId": {
+        "migratedProfileArmResourceId": {
           "readOnly": true,
           "description": "Arm resource id of the migrated profile",
           "$ref": "#/definitions/ResourceReference"

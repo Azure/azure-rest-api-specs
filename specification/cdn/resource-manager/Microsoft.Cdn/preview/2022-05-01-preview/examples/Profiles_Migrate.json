@@ -3,19 +3,17 @@
     "api-version": "2021-06-01",
     "subscriptionId": "subid",
     "resourceGroupName": "RG",
-    "profileName": "profile1",
-    "properties":{
-      "sku": "Standard_AzureFrontDoor"
+    "migrationParameters":{
+      "sku": "Standard_AzureFrontDoor",
+      "classicResourceReference": {"id":"/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Network/frontdoors/frontdoorname"},
+      "profileName": ""
     }
   },
   "responses": {
     "200": {
       "body": {
-        "properties": {
-          "MigratedProfileArmResourceId": {"id":"/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/migratedprofile1"},
-          "MigratedWafArmResourceIds": null,
-          "errors": null
-        }
+        "migratedProfileArmResourceId": {"id":"/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/migratedprofile1"},
+        "errors": null
       }
     }
   }

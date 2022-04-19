@@ -3,16 +3,17 @@
     "api-version": "2021-06-01",
     "subscriptionId": "subid",
     "resourceGroupName": "RG",
-    "profileName": "profile1"
+    "profileName": "profile1",
+    "canMigrateParameters": {
+      "classicResourceReference": {"id":"/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Network/frontdoors/frontdoorname"}
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "properties": {
-          "canMigrate": true,
-          "defaultSku": "Standard_AzureFrontDoor",
-          "errors": null
-        }
+        "canMigrate": true,
+        "defaultSku": "Standard_AzureFrontDoor",
+        "errors": null
       }
     }
   }
