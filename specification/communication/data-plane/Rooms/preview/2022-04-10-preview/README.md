@@ -1,1 +1,0 @@
-//Rooms 2022-04-10 Preview API README
