@@ -6,39 +6,33 @@ This is the AutoRest configuration file the Cognitive Services Language SDK.
 
 ## Releases
 
+The current preview release of Conversational Language Understanding and Text Analytics is 2022-05-01-preview.
+
 The current stable release of Question Answering is 2021-10-01.
 
-The current stable release of Language is 2022-05-01.
-
-The current preview release of Conversational Language Understanding and Text Analytics is 2022-03-01-preview.
-
 ```yaml
-tag: release_2022_05_01
+tag: release_2022_05_01_preview
 add-credentials: true
 clear-output-folder: true
 openapi-type: data-plane
 directive:
   - suppress: LongRunningResponseStatusCode
     reason: The validation tools do not properly recognize 202 as a supported response code.
-  - suppress: R3016
-    where: $.definitions.CurrencyResolution.properties.ISO4217
-    reason: ISO should be upper case.
 ```
 
-### Release 2022-05-01
+### Release 2022-05-01-preview
 
-These settings apply only when `--tag=release_2022_05_01` is specified on the command line.
+These settings apply only when `--tag=release_2022_05_01_preview` is specified on the command line.
 
-``` yaml $(tag) == 'release_2022_05_01'
+``` yaml $(tag) == 'release_2022_05_01_preview'
 input-file:
-  - stable/2022-05-01/textanalytics.json
-  - stable/2022-05-01/analyzetext-authoring.json
-  - stable/2022-05-01/analyzeconversations-authoring.json
-  - stable/2022-05-01/analyzeconversations.json
+  - preview/2022-05-01-preview/textanalytics.json
+  - preview/2022-05-01-preview/analyzeconversations.json
 title:
   Microsoft Cognitive Language Service
 modelerfour:
   lenient-model-deduplication: true
+
 ```
 ### Release 2022-03-01-preview
 
@@ -132,6 +126,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python
 ```
+
 ### Tag: package-preview-2022-03
 
 These settings apply only when `--tag=package-preview-2022-03` is specified on the command line.
